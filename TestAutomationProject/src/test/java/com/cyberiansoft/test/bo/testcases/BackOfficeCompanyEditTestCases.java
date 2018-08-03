@@ -353,8 +353,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		srlistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
 		srlistpage.clickAddServiceRequestButton();
 
-		srlistpage.clickServiceEditButton();
-		Assert.assertEquals(srlistpage.countAvailableServices(), 2);
+        ServiceRequestListServiceDialog serviceDialog = srlistpage.clickServiceEditButton();
+		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
 
@@ -369,8 +369,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		srlistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
 		srlistpage.clickAddServiceRequestButton();
 
-		srlistpage.clickServiceEditButton();
-		Assert.assertEquals(srlistpage.getAllAvailableServices(), "52");
+        srlistpage.clickServiceEditButton();
+        Assert.assertEquals(serviceDialog.getAllAvailableServices(), "52");
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
 

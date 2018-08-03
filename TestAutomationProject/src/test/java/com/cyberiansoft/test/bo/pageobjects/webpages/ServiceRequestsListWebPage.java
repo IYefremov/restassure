@@ -413,7 +413,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         clickAndWait(findbtn);
 	}
 
-	public void clickAddServiceRequestButton() {
+	public ServiceRequestsListWebPage clickAddServiceRequestButton() {
 		waitABit(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(addservicerequestbtn)).click();
 		waitForLoading();
@@ -422,7 +422,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.switchTo().frame(editServiceRequestPanelFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
 		waitABit(3000);
-	}
+	    return this;
+    }
 
 	public WebElement getFirstServiceRequestFromList() {
 		if (servicerequestslist.findElements(By.xpath("./div[contains(@class,'item')]")).size() > 0) {
@@ -431,15 +432,16 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return null;
 	}
 
-	public void selectFirstServiceRequestFromList() {
+	public ServiceRequestsListWebPage selectFirstServiceRequestFromList() {
         Actions actions = new Actions(driver);
         try {
             actions.moveToElement(firstServiceRequestDetails).click().build().perform();
         } catch (NoSuchElementException | StaleElementReferenceException e) {
             ((JavascriptExecutor)driver).executeScript("arguments[0].click();", firstServiceRequestDetails);
         }
-        waitABit(2000);
+        waitForLoading();
         switchToServiceRequestInfoFrame();
+        return this;
 	}
 
 	public void closeFirstServiceRequestFromTheList()  {
@@ -600,7 +602,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		try {
 		    wait.until(ExpectedConditions.attributeContains(editVehicleInfoBlock, "display", "block"));
         } catch (TimeoutException e) {
-		    Assert.fail("THe edit Vehicle Info block has not been opened.", e);
+		    Assert.fail("The edit Vehicle Info block has not been opened.", e);
         }
 	}
 
@@ -609,9 +611,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("Card_divCliamInfoAll")))).click();
 	}
 
-	public void clickServiceEditButton() {
+	public ServiceRequestListServiceDialog clickServiceEditButton() {
 		wait.until(ExpectedConditions.visibilityOf(servicesEditButton));
         clickWithJS(servicesEditButton);
+        return PageFactory.initElements(driver, ServiceRequestListServiceDialog.class);
 	}
 
 	public List<WebElement> getServiceRequestServicesToSelect() {
@@ -721,14 +724,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean saveNewServiceRequest() {
 		try {
-			waitABit(5000);
+			waitABit(1000);
 			wait.until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
 			click(saveservicerequestbutton);
-			waitABit(3000);
-			driver.switchTo().defaultContent();
 			waitForLoading();
-			waitABit(2000);
-			return true;
+            driver.switchTo().defaultContent();
+            return true;
 		} catch (Exception e) {
 			return false;
 		}
@@ -812,7 +813,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				driver.findElement(By.xpath("//div[@class='infoBlock-item infoBlock-edit servicesBlock']"))));
 	}
 
-	public void addServicesToServiceRequest(String...services) {
+	public ServiceRequestsListWebPage addServicesToServiceRequest(String...services) {
 		WebElement servicespopup = clickAddServicesIcon();
 		for (String srv : services) {
 			System.out.println("+++" + srv);
@@ -825,6 +826,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			waitABit(500);
 		}
 		servicespopup.findElement(By.xpath(".//div[@class='infoBlock-list-doneBtn rp-btn-blue']")).click();
+		return this;
 	}
 
 	public void setServiePriceAndQuantity(String serviceName, String price, String quantity) {
@@ -1074,7 +1076,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public void selectAddServiceRequestDropDown(String string) {
+	public ServiceRequestsListWebPage selectAddServiceRequestDropDown(String string) {
 			addServiceRequestDropDown.click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 					.findElements(By.className("rcbItem")).stream().filter(e -> e
@@ -1082,6 +1084,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
                     .equals(string))
                     .findFirst()
                     .ifPresent(WebElement::click);
+			return this;
 	}
 
 	public void setCustomer(String customer) throws InterruptedException {
@@ -1983,19 +1986,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         }
 	}
 
-	public int countAvailableServices() {
-		waitABit(2500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Card_comboService_Arrow")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Card_comboService_Arrow"))).click();
-		waitABit(1000);
-		return wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-				.findElements(By.tagName("li")).size();
-	}
-
-	public void clickDoneButtonAtAddServiceWindow() {
-		driver.findElement(By.linkText("Done")).click();
-	}
-
 	public void scrollWindow(String pixels) {
 		driver.switchTo().defaultContent();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -2020,15 +2010,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			waitForLoading();
 			return false;
 		}
-	}
-
-	public String getAllAvailableServices() throws InterruptedException {
-		Thread.sleep(1500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Card_comboService_Arrow")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Card_comboService_Arrow"))).click();
-		Thread.sleep(2500);
-		return driver.findElement(By.id("Card_comboService_MoreResultsBox")).findElements(By.tagName("b")).get(2)
-				.getText();
 	}
 
 	public boolean checkSRcreationMenuAtributes() {

@@ -29,9 +29,9 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     public void testOperationWorkOrdersTimeframeSearch(String rowID, String description, JSONObject testData) {
 
         BOOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsTimeFrameData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 		WorkOrdersWebPage workOrdersPage = operationsPage.clickWorkOrdersLink();
 		workOrdersPage.selectSearchStatus(data.getStatusAll());
 		workOrdersPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
@@ -63,9 +63,9 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     public void testOperationInspectionsTimeframeSearch(String rowID, String description, JSONObject testData) {
 
         BOOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsTimeFrameData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		InspectionsWebPage inspectionspage =  operationspage.clickInspectionsLink();
 		
 		inspectionspage.selectSearchStatus(data.getStatusAll());
@@ -98,9 +98,9 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     public void testOperationVendorBillsTimeframeSearch(String rowID, String description, JSONObject testData) {
 
         BOOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsTimeFrameData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 		VendorBillsWebPage vendorBillsPage = operationsPage.clickVendorBillsLink();
 		vendorBillsPage.selectSearchStatus(data.getStatusAll());
 		vendorBillsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
@@ -132,9 +132,9 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
     public void testOperationInvoicesTimeframeSearch(String rowID, String description, JSONObject testData) {
 
         BOOperationsTimeFrameData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsTimeFrameData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicesPage =  operationsPage.clickInvoicesLink();
 		
 		invoicesPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);

@@ -4,5 +4,44 @@
       "rowID": "testReportsTechnicianCommissions.01",
       "description": "Test Case 16189:Reports - Technician Commissions"
     }
+  ],
+
+  "verifyAPADStatementReportIsGeneratedForDefaultSearchValues": [
+    {
+      "rowID": "verifyAPADStatementReportIsGeneratedForDefaultSearchValues.01",
+      "description": "Test Case 77585:Reports - verify APAD Statement Report is Generated For Default Search Values",
+      "defaultValue": "All",
+      "areaParameter": "Area:",
+      "teamParameter": "Team:",
+      "employeeParameter": "Employee:",
+      "customerParameter": "Customer:",
+      "invoice": "Invoice #",
+      "year": "YEAR MAKE MODEL",
+      "stock": "STOCK #",
+      "VIN": "VIN",
+      "RO": "RO #",
+      "service": "Service(s)",
+      "amount": "AMOUNT",
+      "billed": "BILLED"
+    }
+  ],
+
+  "verifyAPADStatementReportIsGeneratedForSpecifiedSearchValues": [
+    {
+      "rowID": "verifyAPADStatementReportIsGeneratedForSpecifiedSearchValues.01",
+      "description": "Test Case 77609:Reports - Verify APAD Statement Report is Generated For Specified Search Values",
+      "area": "Default area",
+      "team": "Default team",
+      "employee": "111 111",
+      "customer": "002 - Test Company",
+      "invoice": "Invoice #",
+      "year": "YEAR MAKE MODEL",
+      "stock": "STOCK #",
+      "VIN": "VIN",
+      "RO": "RO #",
+      "service": "Service(s)",
+      "amount": "AMOUNT",
+      "billed": "BILLED"
+    }
   ]
 }

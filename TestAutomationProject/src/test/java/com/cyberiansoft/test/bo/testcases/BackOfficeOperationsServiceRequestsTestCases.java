@@ -41,9 +41,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testOperationNewServiceRequestAppointmentWholesale(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 
         ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
         servicerequestslistpage.makeSearchPanelVisible();
@@ -93,9 +93,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testOperationNewServiceRequestAppointmentRetail(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -145,9 +145,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testOperationNewServiceRequestAppointmentLocationTypeCustom(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -217,9 +217,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testOperationNewServiceRequestAppointmentLocationTypeCustomer(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -281,9 +281,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testOperationNewServiceRequestAppointmentLocationTypeOwner(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -341,9 +341,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testOperationNewServiceRequestAppointmentLocationTypeRepairLocation(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -405,12 +405,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testOperationsCLUserItNotPossibleToAcceptSR_OptionIsNotPresent(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		backofficeHeader.clickLogout();
+		backOfficeHeader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
         loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
-		HomeWebPage homepage = backofficeHeader.clickHomeLink();
+		HomeWebPage homepage = backOfficeHeader.clickHomeLink();
 		ServiceRequestsListWebPage servicerequestslistpage = homepage.clickNewServiceRequestLink();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
@@ -434,13 +434,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit(String rowID, String description, JSONObject testData) throws InterruptedException {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        backofficeHeader.clickLogout();
+        backOfficeHeader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
-		backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		HomeWebPage homepage = backofficeHeader.clickHomeLink();
+		backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		HomeWebPage homepage = backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);
 		ServiceRequestsListWebPage servicerequestslistpage = homepage.clickNewServiceRequestLink();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -453,11 +453,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		servicerequestslistpage.saveNewServiceRequest();
 
-		backofficeHeader.clickLogout();
+		backOfficeHeader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
-		backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.setSearchFreeText(data.getVIN());
@@ -466,12 +466,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 
-		backofficeHeader.clickLogout();
+		backOfficeHeader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 
         loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
-        backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		homepage = backofficeHeader.clickHomeLink();
+        backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		homepage = backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);
 		servicerequestslistpage = homepage.clickNewServiceRequestLink();
 		Thread.sleep(2000);
@@ -491,13 +491,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testOperationsCLUserItNotPossibleToAddLabelsWhenCreateSR(String rowID, String description, JSONObject testData) throws InterruptedException {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        backofficeHeader.clickLogout();
+        backOfficeHeader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
         loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
-		backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		HomeWebPage homepage = backofficeHeader.clickHomeLink();
+		backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		HomeWebPage homepage = backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);
 		ServiceRequestsListWebPage servicerequestslistpage = homepage.clickNewServiceRequestLink();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -515,9 +515,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testOperationsSRListVerifyThatCheckInButtonIsNotPresentWhenCreateSR(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -543,9 +543,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testOperationsVerifyThatCheckInButtonAppearsWhenSRIsSaved(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -575,9 +575,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testOperationsSRListVerifyThatCheckInButtonIsChangedToUndoCheckInAfterPressingAndViceVersa(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -611,9 +611,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testServiceRequestDescription(String rowID, String description, JSONObject testData) {
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -627,9 +627,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequest(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
         serviceRequestsWebPage.clickAddServiceRequestButton();
         serviceRequestsWebPage.addTags(data.getTags());
@@ -645,9 +645,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testServiceRequestDescriptionInExistingSR(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[0]);
@@ -661,9 +661,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testShownSRDuringCreation(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		Assert.assertFalse(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
@@ -673,9 +673,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testCreatingSRWithDifferentDescriptions(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[0]);
@@ -690,9 +690,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkDescriptionDocument(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
@@ -708,9 +708,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkMultiTechInSR(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -730,9 +730,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkMultiTechInSRshowHideTech(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -751,9 +751,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkMultiTechInSideScrollbar(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -772,9 +772,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkSRappointmentSchedulerWeek(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.checkSchedulerByDateWeek(data.getFirstDay(), data.isDateShifted());
 		serviceRequestsWebPage.goToSRmenu();
@@ -791,9 +791,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkSRappointmentSchedulerMonth(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationsPage.clickNewServiceRequestList();
 		int prevRequestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(data.getFirstDay());
 		serviceRequestsWebPage.goToSRmenu();
@@ -814,9 +814,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkSRappointmentSchedulerMultiTechniciansFilterOf5(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToMonthInScheduler();
 		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
@@ -828,9 +828,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkSchedulerTechniciansFilter(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
@@ -854,9 +854,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkSRmultiTechReset(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
@@ -879,9 +879,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkSRcreation(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
@@ -898,9 +898,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkSRLCnoEntry(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -911,9 +911,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void checkSRLCestimate(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
@@ -934,9 +934,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkSRLCafterCreation(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
@@ -957,9 +957,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkSRLCwoAutoCreation(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.goToSRmenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
@@ -980,9 +980,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkSRLCapproved(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1004,9 +1004,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         public void checkSRLCrejected(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1028,9 +1028,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void checkSRLCclosed(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.makeSearchPanelVisible();
 		Assert.assertTrue(serviceRequestsWebPage.checkSRsearchCriterias());
@@ -1054,13 +1054,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testMiscellaneousEventsServiceRequestAccepted(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWordWasCreated())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1069,7 +1069,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getEmailNotification());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1085,7 +1085,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 	}
@@ -1094,13 +1094,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	public void testMiscellaneousEventsSRCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWord())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1110,7 +1110,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getEmailNotification());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1126,7 +1126,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWord());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
@@ -1136,13 +1136,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void  testMiscellaneousEventsServiceRequestCheckedIn(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWord())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1152,7 +1152,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getNotificationDropDown());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1173,7 +1173,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWord());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.deleteSelectedEvent();
@@ -1183,13 +1183,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsAppointmentCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWordWasCreated())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1199,7 +1199,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getSelected());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1216,7 +1216,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getAlert());
 		// eventsWebPage.deleteSelectedEvent();
@@ -1226,13 +1226,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsAppointmentFailed(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWordWasCreated())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1242,7 +1242,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getSelected());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1258,7 +1258,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getAlert());
 		// eventsWebPage.deleteSelectedEvent();
@@ -1268,13 +1268,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsServiceRequestAppointmentCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWord())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1283,7 +1283,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getSelected());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1301,7 +1301,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWord());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
@@ -1311,13 +1311,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsServiceRequestAcceptedByTech(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWord())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1326,7 +1326,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getSelected());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1344,7 +1344,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWord());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
@@ -1354,13 +1354,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsServiceRequestEstimationCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWordWasCreated())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1369,7 +1369,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getSelected());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1386,7 +1386,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.deleteSelectedEvent();
@@ -1396,13 +1396,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsServiceRequestIsMonitored(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWordRemainder())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1411,7 +1411,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getSelected());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1428,7 +1428,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWordRemainder());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
@@ -1438,13 +1438,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsServiceRequestOrderCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWordWasCreated())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1453,7 +1453,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getSelected());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1470,7 +1470,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
@@ -1480,13 +1480,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsServiceRequestRejected(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWordWasCreated())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
@@ -1495,7 +1495,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.setEmailNotificationDropDownForSelected(data.getSelected());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1512,7 +1512,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		// eventsWebPage.deleteSelectedEvent();
@@ -1522,13 +1522,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testMiscellaneousEventsServiceRequestCheckIn(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
                 .withSubject(data.getEmailKeyWord())
                 .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-        MiscellaneousWebPage miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
         EventsWebPage eventsWebPage = miscellaneouspage.clickEventsLink();
         eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getNotificationDropDown());
@@ -1536,7 +1536,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(eventsWebPage.saveNewEvent());
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1558,7 +1558,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
                 "Could not find email message with subject containing " + data.getEmailKeyWord());
 
-        miscellaneouspage = backofficeHeader.clickMiscellaneousLink();
+        miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
 		eventsWebPage = miscellaneouspage.clickEventsLink();
 		eventsWebPage.selectEventRowByName(data.getEventNewName());
 	}
@@ -1567,16 +1567,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestTypeDuplicateSearchIssue(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickServiceEditButton();
-		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+        ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
+        Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		serviceRequestsWebPage.scrollWindow("-300");
-		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		serviceRequestTypesPage.openGeneralSettingsTab();
@@ -1594,7 +1594,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		settingsPage.clickUpdateButton();
 		settingsPage.closeNewTab(currentWindow);
 		serviceRequestTypesPage.switchToSecondWindow(currentWindow);
-		operationspage = backofficeHeader.clickOperationsLink();
+		operationspage = backOfficeHeader.clickOperationsLink();
 		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
@@ -1603,7 +1603,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickVehicleEditButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		companyPage = backofficeHeader.clickCompanyLink();
+		companyPage = backOfficeHeader.clickCompanyLink();
 		serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		serviceRequestTypesPage.openGeneralSettingsTab();
@@ -1624,16 +1624,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestTypeDuplicateNotificationRO(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickServiceEditButton();
-		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		serviceRequestsWebPage.scrollWindow("-300");
-		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		serviceRequestTypesPage.openGeneralSettingsTab();
@@ -1643,7 +1643,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectOption(data.getRoNum());
 		serviceRequestTypesPage.unselectOption(data.getStockNum());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
-		operationspage = backofficeHeader.clickOperationsLink();
+		operationspage = backOfficeHeader.clickOperationsLink();
 		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
@@ -1677,16 +1677,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestTypeDuplicateErrorVIN(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickServiceEditButton();
-		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		serviceRequestsWebPage.scrollWindow("-300");
-		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		serviceRequestTypesPage.openGeneralSettingsTab();
@@ -1695,7 +1695,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectOption(data.getVIN());
 		serviceRequestTypesPage.unselectOption(data.getStockNum());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
-		operationspage = backofficeHeader.clickOperationsLink();
+		operationspage = backOfficeHeader.clickOperationsLink();
 		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
@@ -1723,16 +1723,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestTypeDuplicateErrorRO(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
         serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickServiceEditButton();
-		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		serviceRequestsWebPage.scrollWindow("-300");
-		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		serviceRequestTypesPage.openGeneralSettingsTab();
@@ -1741,7 +1741,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectOption(data.getRoNum());
 		serviceRequestTypesPage.unselectOption(data.getStockNum());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
-		operationspage = backofficeHeader.clickOperationsLink();
+		operationspage = backOfficeHeader.clickOperationsLink();
 		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
@@ -1775,16 +1775,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestTypeDuplicateNotificationVIN(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
         serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickServiceEditButton();
-		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		serviceRequestsWebPage.scrollWindow("-300");
-		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		serviceRequestTypesPage.openGeneralSettingsTab();
@@ -1793,7 +1793,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectOption(data.getVIN());
 		serviceRequestTypesPage.unselectOption(data.getStockNum());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
-		operationspage = backofficeHeader.clickOperationsLink();
+		operationspage = backOfficeHeader.clickOperationsLink();
 		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
@@ -1820,16 +1820,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestTypeDuplicateErrorStock(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
         serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickServiceEditButton();
-		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		serviceRequestsWebPage.scrollWindow("-300");
-		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		serviceRequestTypesPage.openGeneralSettingsTab();
@@ -1838,7 +1838,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectOption(data.getStockNum());
 		serviceRequestTypesPage.unselectOption(data.getRoNum());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
-		operationspage = backofficeHeader.clickOperationsLink();
+		operationspage = backOfficeHeader.clickOperationsLink();
 		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
@@ -1866,16 +1866,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestTypeDuplicateNotificationStock(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
         serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickServiceEditButton();
-		Assert.assertEquals(serviceRequestsWebPage.countAvailableServices(), 2);
+		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
+		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		serviceRequestsWebPage.scrollWindow("-300");
-		CompanyWebPage companyPage = backofficeHeader.clickCompanyLink();
+		CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		serviceRequestTypesPage.openGeneralSettingsTab();
@@ -1884,7 +1884,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectOption(data.getStockNum());
 		serviceRequestTypesPage.unselectOption(data.getVIN());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
-		operationspage = backofficeHeader.clickOperationsLink();
+		operationspage = backOfficeHeader.clickOperationsLink();
 		serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
@@ -1912,14 +1912,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestUndoReject(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeHeader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage serviceRequestTypesPage = companypage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
 		Assert.assertTrue(serviceRequestTypesPage.isAllowUndoRejectChecked());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
-		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 		serviceRequestsWebPage.makeSearchPanelVisible();
 		Assert.assertTrue(serviceRequestsWebPage.checkSRsearchCriterias());
@@ -1954,9 +1954,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     public void testServiceRequestAdviserListing(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
         ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
         serviceRequestsWebPage.clickAddServiceRequestButton();
         serviceRequestsWebPage.clickCustomerEditButton();
@@ -1970,17 +1970,249 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(serviceRequestsWebPage.getServiceAdviserName(), data.getCustomer());
 	}
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyVehiclePartCanBeAssignedToServicesInSR(String rowID, String description, JSONObject testData) {
+
+        BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+        ServiceRequestsListWebPage serviceRequestsListPage = operationsPage
+                .clickNewServiceRequestList()
+                .selectAddServiceRequestDropDown(data.getServiceRequestType())
+                .clickAddServiceRequestButton();
+        ServiceRequestListServiceDialog serviceDialog = serviceRequestsListPage
+                .clickServiceEditButton()
+                .openServicesDropDown()
+                .checkRandomServiceOption()
+                .clickAddServiceOption();
+        Assert.assertTrue(serviceDialog.isSelectedServiceContainerDisplayed(), "The service container is not displayed");
+        ServiceRequestListServiceVehiclePartDialog vehiclePartDialog = serviceDialog.clickVehiclePart();
+        int availableVehiclePartOptions = vehiclePartDialog.getAvailableVehiclePartOptions();
+        int assignedVehiclePartOptions = vehiclePartDialog.getAssignedVehiclePartOptions();
+        vehiclePartDialog
+                .selectRandomAvailableVehiclePartOption()
+                .clickMoveToTheRight();
+        Assert.assertEquals(availableVehiclePartOptions - 1, vehiclePartDialog.getAvailableVehiclePartOptions(),
+                "The available vehicle Part Options have not been reduced after moving to the right");
+        Assert.assertEquals(assignedVehiclePartOptions + 1, vehiclePartDialog.getAssignedVehiclePartOptions(),
+                "The assigned vehicle Part Options have not been increased after moving to the right");
+        vehiclePartDialog
+                .clickServiceVehiclePartOkButton()
+                .verifyOneServiceContainerIsDisplayed()
+                .clickDoneServicesButton()
+                .saveNewServiceRequest();
+
+        serviceRequestsListPage
+                .selectFirstServiceRequestFromList()
+                .clickServiceEditButton()
+                .verifyOneServiceContainerIsDisplayed()
+                .clickCancelServicesButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyVehiclePartCanBeUnassignedFromServicesInSR(String rowID, String description, JSONObject testData) {
+
+        BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+        ServiceRequestsListWebPage serviceRequestsListPage = operationsPage
+                .clickNewServiceRequestList()
+                .selectAddServiceRequestDropDown(data.getServiceRequestType())
+                .clickAddServiceRequestButton();
+        ServiceRequestListServiceDialog serviceDialog = serviceRequestsListPage
+                .clickServiceEditButton()
+                .openServicesDropDown()
+                .checkRandomServiceOption()
+                .clickAddServiceOption();
+        Assert.assertTrue(serviceDialog.isSelectedServiceContainerDisplayed(), "The service container is not displayed");
+        ServiceRequestListServiceVehiclePartDialog vehiclePartDialog = serviceDialog.clickVehiclePart();
+        int availableVehiclePartOptions = vehiclePartDialog.getAvailableVehiclePartOptions();
+        int assignedVehiclePartOptions = vehiclePartDialog.getAssignedVehiclePartOptions();
+        vehiclePartDialog
+                .selectRandomAvailableVehiclePartOption()
+                .clickMoveToTheRight()
+                .clickServiceVehiclePartOkButton()
+                .clickVehiclePart();
+        Assert.assertEquals(availableVehiclePartOptions - 1, vehiclePartDialog.getAvailableVehiclePartOptions(),
+                "The available vehicle Part Options have not been reduced after moving to the right");
+        Assert.assertEquals(assignedVehiclePartOptions + 1, vehiclePartDialog.getAssignedVehiclePartOptions(),
+                "The assigned vehicle Part Options have not been increased after moving to the right");
+        vehiclePartDialog
+                .clickServiceVehiclePartOkButton()
+                .verifyOneServiceContainerIsDisplayed()
+                .clickVehiclePart();
+
+        vehiclePartDialog
+                .selectRandomAssignedVehiclePartOption()
+                .clickMoveToTheLeft()
+                .clickServiceVehiclePartOkButton()
+                .clickVehiclePart();
+
+        Assert.assertEquals(availableVehiclePartOptions, vehiclePartDialog.getAvailableVehiclePartOptions(),
+                "The available vehicle Part Options have not been increased after moving to the left");
+        Assert.assertEquals(assignedVehiclePartOptions, vehiclePartDialog.getAssignedVehiclePartOptions(),
+                "The assigned vehicle Part Options have not been reduced after moving to the left");
+
+        vehiclePartDialog
+                .clickServiceVehiclePartCancelButton()
+                .verifyOneServiceContainerIsDisplayed()
+                .clickDoneServicesButton()
+                .saveNewServiceRequest();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyAllVehiclePartsCanBeAssignedToServicesInSR(String rowID, String description, JSONObject testData) {
+
+        BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+        ServiceRequestsListWebPage serviceRequestsListPage = operationsPage
+                .clickNewServiceRequestList()
+                .selectAddServiceRequestDropDown(data.getServiceRequestType())
+                .clickAddServiceRequestButton();
+        ServiceRequestListServiceDialog serviceDialog = serviceRequestsListPage
+                .clickServiceEditButton()
+                .openServicesDropDown()
+                .checkRandomServiceOption()
+                .clickAddServiceOption();
+        Assert.assertTrue(serviceDialog.isSelectedServiceContainerDisplayed(), "The service container is not displayed");
+        ServiceRequestListServiceVehiclePartDialog vehiclePartDialog = serviceDialog.clickVehiclePart();
+        int availableVehiclePartOptions = vehiclePartDialog.getAvailableVehiclePartOptions();
+        int assignedVehiclePartOptions = vehiclePartDialog.getAssignedVehiclePartOptions();
+        vehiclePartDialog.clickMoveAllToTheRight();
+        Assert.assertEquals(vehiclePartDialog.getAvailableVehiclePartOptions(), assignedVehiclePartOptions,
+                "The available vehicle Part Options have not been reduced by the number of assigned options " +
+                        "after moving all options to the right");
+        Assert.assertEquals(vehiclePartDialog.getAssignedVehiclePartOptions(), availableVehiclePartOptions,
+                "The assigned vehicle Part Options have not been increased by the number of available options" +
+                        "after moving all options to the right");
+        vehiclePartDialog.clickServiceVehiclePartOkButton();
+        Assert.assertEquals(serviceDialog.getNumberOfSelectedServiceContainersDisplayed(), availableVehiclePartOptions,
+                "The number of service displayed containers differs from the number of assigned options");
+        serviceDialog
+                .clickDoneServicesButton()
+                .saveNewServiceRequest();
+
+        serviceRequestsListPage
+                .selectFirstServiceRequestFromList()
+                .clickServiceEditButton();
+
+        Assert.assertEquals(serviceDialog.getNumberOfSelectedServiceContainersDisplayed(), availableVehiclePartOptions,
+                "The number of service displayed containers differs from the number of assigned options");
+        serviceDialog.clickCancelServicesButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyAllVehiclePartsCanBeUnassignedFromServicesInSR(String rowID, String description, JSONObject testData) {
+
+        BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+        ServiceRequestsListWebPage serviceRequestsListPage = operationsPage
+                .clickNewServiceRequestList()
+                .selectAddServiceRequestDropDown(data.getServiceRequestType())
+                .clickAddServiceRequestButton();
+        ServiceRequestListServiceDialog serviceDialog = serviceRequestsListPage
+                .clickServiceEditButton()
+                .openServicesDropDown()
+                .checkRandomServiceOption()
+                .clickAddServiceOption();
+        Assert.assertTrue(serviceDialog.isSelectedServiceContainerDisplayed(), "The service container is not displayed");
+        ServiceRequestListServiceVehiclePartDialog vehiclePartDialog = serviceDialog.clickVehiclePart();
+        int availableVehiclePartOptions = vehiclePartDialog.getAvailableVehiclePartOptions();
+        int assignedVehiclePartOptions = vehiclePartDialog.getAssignedVehiclePartOptions();
+        vehiclePartDialog.clickMoveAllToTheRight();
+        Assert.assertEquals(vehiclePartDialog.getAvailableVehiclePartOptions(), 0,
+                "The available vehicle Part Options have not been reduced by the number of assigned options " +
+                        "after moving all options to the right");
+        Assert.assertEquals(vehiclePartDialog.getAssignedVehiclePartOptions(), availableVehiclePartOptions,
+                "The assigned vehicle Part Options have not been increased by the number of available options" +
+                        "after moving all options to the right");
+
+        vehiclePartDialog.clickMoveAllToTheLeft();
+        Assert.assertEquals(vehiclePartDialog.getAvailableVehiclePartOptions(), availableVehiclePartOptions,
+                "The available vehicle Part Options have not been increased by the number of assigned options " +
+                        "after moving all options to the left");
+        Assert.assertEquals(vehiclePartDialog.getAssignedVehiclePartOptions(), 0,
+                "The assigned vehicle Part Options have not been reduced by the number of available options" +
+                        "after moving all options to the left");
+
+        vehiclePartDialog
+                .clickServiceVehiclePartOkButton()
+                .verifyOneServiceContainerIsDisplayed()
+                .clickDoneServicesButton()
+                .saveNewServiceRequest();
+
+        serviceRequestsListPage
+                .selectFirstServiceRequestFromList()
+                .clickServiceEditButton()
+                .verifyOneServiceContainerIsDisplayed()
+                .clickCancelServicesButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyVehiclePartWillRemainUnassignedToServicesInSRAfterClickingTheCancelButton(String rowID, String description, JSONObject testData) {
+
+        BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+        ServiceRequestsListWebPage serviceRequestsListPage = operationsPage
+                .clickNewServiceRequestList()
+                .selectAddServiceRequestDropDown(data.getServiceRequestType())
+                .clickAddServiceRequestButton();
+        ServiceRequestListServiceDialog serviceDialog = serviceRequestsListPage
+                .clickServiceEditButton()
+                .openServicesDropDown()
+                .checkRandomServiceOption()
+                .clickAddServiceOption();
+        Assert.assertTrue(serviceDialog.isSelectedServiceContainerDisplayed(), "The service container is not displayed");
+        ServiceRequestListServiceVehiclePartDialog vehiclePartDialog = serviceDialog.clickVehiclePart();
+        int availableVehiclePartOptions = vehiclePartDialog.getAvailableVehiclePartOptions();
+        int assignedVehiclePartOptions = vehiclePartDialog.getAssignedVehiclePartOptions();
+        vehiclePartDialog
+                .selectRandomAvailableVehiclePartOption()
+                .clickMoveToTheRight();
+        Assert.assertEquals(availableVehiclePartOptions - 1, vehiclePartDialog.getAvailableVehiclePartOptions(),
+                "The available vehicle Part Options have not been reduced after moving to the right");
+        Assert.assertEquals(assignedVehiclePartOptions + 1, vehiclePartDialog.getAssignedVehiclePartOptions(),
+                "The assigned vehicle Part Options have not been increased after moving to the right");
+
+        vehiclePartDialog
+                .clickServiceVehiclePartCancelButton()
+                .clickVehiclePart();
+        Assert.assertEquals(availableVehiclePartOptions, vehiclePartDialog.getAvailableVehiclePartOptions(),
+                "The available vehicle Part Options have been changed after clicking the 'Cancel' button");
+        Assert.assertEquals(assignedVehiclePartOptions, vehiclePartDialog.getAssignedVehiclePartOptions(),
+                "The assigned vehicle Part Options have been changed after clicking the 'Cancel' button");
+        vehiclePartDialog
+                .clickServiceVehiclePartOkButton()
+                .verifyOneServiceContainerIsDisplayed()
+                .clickDoneServicesButton()
+                .saveNewServiceRequest();
+
+        serviceRequestsListPage
+                .selectFirstServiceRequestFromList()
+                .clickServiceEditButton()
+                .verifyOneServiceContainerIsDisplayed()
+                .clickCancelServicesButton();
+    }
+
 //	//TODO
 //	//@Test(testName = "Test Case 65521:Operation - Service Request - Services add notes")
 //	public void testServicerequestServicesAddNotes() {
-//		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		OperationsWebPage operationspage = backofficeHeader.clickOperationsLink();
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+//		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 //		ServiceRequestsListWebPage serviceRequestsWebPage = operationspage.clickNewServiceRequestList();
 //		serviceRequestsWebPage.selectAddServiceRequestsComboboxValue(data.getServiceRequestType());
 //		serviceRequestsWebPage.clickAddServiceRequestButton();
-//		serviceRequestsWebPage.clickServiceEditButton();
+//		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
 //		serviceRequestsWebPage.addServicesToServiceRequest("Zak_Money_Multiple","Zak_Labor_Multiple");
-//		serviceRequestsWebPage.clickServiceEditButton();
+//		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
 //		Assert.assertTrue(serviceRequestsWebPage.checkAddedServices("Zak_Money_Multiple","Zak_Labor_Multiple"));
 //	}
 }

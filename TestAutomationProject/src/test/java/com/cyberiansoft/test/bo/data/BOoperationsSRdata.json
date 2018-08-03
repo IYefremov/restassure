@@ -868,5 +868,45 @@
       "roNum": "RO",
       "stock123": "123"
     }
+  ],
+
+  "verifyVehiclePartCanBeAssignedToServicesInSR": [
+    {
+      "rowID": "verifyVehiclePartCanBeAssignedToServicesInSR.01",
+      "description": "Test Case 77393:Operations: Verify Vehicle Part Can Be Assigned to Services in SR",
+      "serviceRequestType": "01_Alex2SRT"
+    }
+  ],
+
+  "verifyVehiclePartCanBeUnassignedFromServicesInSR": [
+    {
+      "rowID": "verifyVehiclePartCanBeUnassignedFromServicesInSR.01",
+      "description": "Test Case 77402:Operations: Verify Vehicle Part Can Be Unassigned From Services in SR",
+      "serviceRequestType": "01_Alex2SRT"
+    }
+  ],
+
+  "verifyAllVehiclePartsCanBeAssignedToServicesInSR": [
+    {
+      "rowID": "verifyAllVehiclePartsCanBeAssignedToServicesInSR.01",
+      "description": "Test Case 77403:Operations: Verify All Vehicle Parts Can Be Assigned to Services in SR",
+      "serviceRequestType": "01_Alex2SRT"
+    }
+  ],
+
+  "verifyAllVehiclePartsCanBeUnassignedFromServicesInSR": [
+    {
+      "rowID": "verifyAllVehiclePartsCanBeUnassignedFromServicesInSR.01",
+      "description": "Test Case 77404:Operations: Verify All Vehicle Parts Can Be Unassigned from Services in SR",
+      "serviceRequestType": "01_Alex2SRT"
+    }
+  ],
+
+  "verifyVehiclePartWillRemainUnassignedToServicesInSRAfterClickingTheCancelButton": [
+    {
+      "rowID": "verifyVehiclePartWillRemainUnassignedToServicesInSRAfterClickingTheCancelButton.01",
+      "description": "Test Case 77404:Operations: Verify All Vehicle Parts Can Be Unassigned from Services in SR",
+      "serviceRequestType": "01_Alex2SRT"
+    }
   ]
 }

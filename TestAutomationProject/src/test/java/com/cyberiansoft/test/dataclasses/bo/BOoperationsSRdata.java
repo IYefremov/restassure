@@ -158,6 +158,9 @@ public class BOoperationsSRdata {
     @JsonProperty("testDescription")
     private String testDescription;
 
+    @JsonProperty("service")
+    private String service;
+
     public String getTestDescription() {
         return testDescription;
     }
@@ -388,6 +391,9 @@ public class BOoperationsSRdata {
                 || LocalDate.now().getDayOfWeek().equals(DayOfWeek.SATURDAY);
     }
 
+    public String getService() {
+        return service;
+    }
 //    public String getSRdataForSchedulerMonth() {
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 //        LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));

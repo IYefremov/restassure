@@ -240,7 +240,7 @@ public abstract class BaseWebPage {
         }
     }
 
-    protected BaseWebPage clickWithJS(WebElement element) {
+    BaseWebPage clickWithJS(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         return this;
     }

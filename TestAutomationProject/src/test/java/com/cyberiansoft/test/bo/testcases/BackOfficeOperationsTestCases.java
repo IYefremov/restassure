@@ -27,9 +27,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testOperationTechnicianCommissionSearch(String rowID, String description, JSONObject testData) {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 
         TechnicianCommissionsWebPage techCommissionPage = operationsPage.clickTechnicianCommissionsLink();
         techCommissionPage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
@@ -75,9 +75,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testOperationWorkOrdersSearch(String rowID, String description, JSONObject testData) {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 
         WorkOrdersWebPage wopage = operationsPage.clickWorkOrdersLink();
         wopage.clickFindButton();
@@ -124,9 +124,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testOperationServiceContract(String rowID, String description, JSONObject testData) throws Exception {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 
         ServiceContractsWebPage serviceContractsPage = operationsPage.clickServiceContactsLink();
         Thread.sleep(2000);
@@ -153,9 +153,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testOperationInspection(String rowID, String description, JSONObject testData) throws Exception {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 
         InspectionsWebPage inpectionsPage = operationsPage.clickInspectionsLink();
         inpectionsPage.makeSearchPanelVisible();
@@ -206,9 +206,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testOperationVendorBill(String rowID, String description, JSONObject testData) {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 
         VendorBillsWebPage vendorBillsPage = operationsPage.clickVendorBillsLink();
         vendorBillsPage.verifyVendorBillsTableColumnsAreVisible();
@@ -221,9 +221,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testOperationNewServiceRequest(String rowID, String description, JSONObject testData) {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 
         ServiceRequestsListWebPage serviceRequestsListPage = operationsPage.clickNewServiceRequestList();
         serviceRequestsListPage.makeSearchPanelVisible();
@@ -280,9 +280,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testWorkOrderSearchOperation(String rowID, String description, JSONObject testData) {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
         WorkOrdersWebPage workOrderPage = operationsPage.clickWorkOrdersLink();
 
         Assert.assertTrue(workOrderPage.checkWorkOrdersInfo());
@@ -295,9 +295,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testEditDuplicateByRO(String rowID, String description, JSONObject testData) {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
         InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
         inspectionsWebPage.makeSearchPanelVisible()
                 .selectSearchTimeframe(data.getTimeFrame())
@@ -316,9 +316,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testEditDuplicateByVIN(String rowID, String description, JSONObject testData) {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
         InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
         inspectionsWebPage.makeSearchPanelVisible()
                 .selectSearchTimeframe(data.getTimeFrame())
@@ -339,9 +339,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
     public void testEditDuplicateByVINandRO(String rowID, String description, JSONObject testData) {
 
         BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationsPage = backofficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
         InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
         inspectionsWebPage.makeSearchPanelVisible()
                 .selectSearchTimeframe(data.getTimeFrame())

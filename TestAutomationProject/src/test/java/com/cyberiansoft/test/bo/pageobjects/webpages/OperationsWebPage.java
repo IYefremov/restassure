@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 public class OperationsWebPage extends BaseWebPage {
 	
@@ -87,8 +88,13 @@ public class OperationsWebPage extends BaseWebPage {
 	}
 	
 	public ServiceRequestsListWebPage clickNewServiceRequestList() {
-	    waitABit(3000);
-		wait.until(ExpectedConditions.elementToBeClickable(newservicerequestlink)).click();
+	    try {
+            waitABit(3000);
+            wait.until(ExpectedConditions.elementToBeClickable(newservicerequestlink)).click();
+        } catch (Exception e) {
+            Assert.fail("The Service Requests List link has not been displayed");
+        }
+
 		return PageFactory.initElements(
 				driver, ServiceRequestsListWebPage.class);
 	}
