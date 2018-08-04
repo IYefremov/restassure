@@ -187,6 +187,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
     @FindBy(xpath = "//a[@class='rmLink']//span[text()='Payments']")
     private WebElement paymentsOption;
 
+    @FindBy(xpath = "//div[@id='ctl00_Content_gv']//td")
+    private List<WebElement> emailActivityTable;
+
     public InvoicesWebPage(WebDriver driver) {
 		super(driver);
 		// driver.findElement(By.className("header")).shouldHave("MainPage");
@@ -946,19 +949,44 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		}
 		try {
 			int size = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("tr"))).size();
-			driver.close();
-			driver.switchTo().window(mainWindow);
-			waitABit(1000);
+            switchToMainWindow(mainWindow);
 			return size;
 		} catch (TimeoutException e) {
-			driver.close();
-			driver.switchTo().window(mainWindow);
-            waitABit(1000);
+            switchToMainWindow(mainWindow);
 			return 0;
 		}
 	}
 
-	public boolean isSendEmailBoxOpened() {
+	public boolean isEmailDisplayed(String emailWindow, String email) {
+        String mainWindow = "";
+        Set<String> windows = driver.getWindowHandles();
+        for (String window : windows) {
+            if (window.equals(emailWindow))
+                driver.switchTo().window(window);
+            else {
+                mainWindow = window;
+            }
+        }
+        try {
+            boolean present = wait.until(ExpectedConditions
+                    .visibilityOfAllElements(emailActivityTable))
+                    .stream()
+                    .anyMatch(e -> e.getText().equals(email));
+            switchToMainWindow(mainWindow);
+            return present;
+        } catch (TimeoutException e) {
+            switchToMainWindow(mainWindow);
+            return false;
+        }
+    }
+
+    private void switchToMainWindow(String mainWindow) {
+        driver.close();
+        driver.switchTo().window(mainWindow);
+        waitABit(1000);
+    }
+
+    public boolean isSendEmailBoxOpened() {
 		try {
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")));

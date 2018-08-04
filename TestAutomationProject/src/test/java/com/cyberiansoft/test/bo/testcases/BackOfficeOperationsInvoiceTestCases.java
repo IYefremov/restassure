@@ -763,19 +763,15 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
-		String emailWindow = invoicespage.selectEmailActivityOption();
-        int emailActivities = invoicespage.countEmailActivities(emailWindow);
-		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.clickFindButton();
 		invoicespage.selectSendEmailOption();
 		Assert.assertTrue(invoicespage.isSendEmailBoxOpened());
-		invoicespage.setEmailAndSend("test123@domain.com");
+        String email = data.getEmail();
+        invoicespage.setEmailAndSend(email);
 		invoicespage.refreshPage();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
-		emailWindow = invoicespage.selectEmailActivityOption();
-		Assert.assertTrue(emailActivities < invoicespage.countEmailActivities(emailWindow));
+		String emailWindow = invoicespage.selectEmailActivityOption();
+        Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
 	}
 
 	//todo fails. To be fixed

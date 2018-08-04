@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class BOOperationsInvoiceData {
 
@@ -72,5 +73,9 @@ public class BOOperationsInvoiceData {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getEmail() {
+        return "test" + RandomStringUtils.randomAlphanumeric(3) + "@domain.com";
     }
 }
