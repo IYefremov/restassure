@@ -774,30 +774,24 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
         Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
 	}
 
-	//todo fails. To be fixed
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void checkOperationInvoiceSentCustomMailInMailActivity(String rowID, String description, JSONObject testData) {
 
         BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+        InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+        invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+        invoicespage.clickFindButton();
+        String email = data.getEmail();
+        String emailWindow = invoicespage.selectSendCustomEmailOption();
+        invoicespage.setCustomEmailAndSend(email, emailWindow);
+        invoicespage.refreshPage();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
-		String emailActivityWindow = invoicespage.selectEmailActivityOption();
-		int emailActivities = invoicespage.countEmailActivities(emailActivityWindow);
-		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.clickFindButton();
-		String emailWindow = invoicespage.selectSendCustomEmailOption();
-		invoicespage.setCustomEmailAndSend("test123@domain.com", emailWindow);
-		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.clickFindButton();
-		emailActivityWindow = invoicespage.selectEmailActivityOption();
-		int emailActivitiesAfter = invoicespage.countEmailActivities(emailActivityWindow);
-		Assert.assertTrue(emailActivities < emailActivitiesAfter);
+        emailWindow = invoicespage.selectEmailActivityOption();
+        Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
