@@ -30,16 +30,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	        String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InsuranceCompaniesWePpage insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
 		if (insurancecompaniespage.insuranceCompanyExists(data.getInsuranceCompanyName())) {
 			insurancecompaniespage.deleteInsuranceCompany(data.getInsuranceCompanyName());
 		}
 		insurancecompaniespage.clickAddInsuranceCompanyButton();
 		insurancecompaniespage.createNewInsuranceCompany(data.getInsuranceCompanyName());
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 
 		servicerequestslistpage.clickAddServiceRequestButton();
@@ -51,7 +51,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertTrue(
 				servicerequestslistpage.isInsuranceCompanyPresentForFirstServiceRequestFromList(data.getInsuranceCompanyName()));
 
-		companypage = backofficeheader.clickCompanyLink();
+		companypage = backOfficeHeader.clickCompanyLink();
 		insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
 		insurancecompaniespage.deleteInsuranceCompany(data.getInsuranceCompanyName());
 	}
@@ -60,9 +60,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyUsersEdit(String rowID, String description, JSONObject testData) throws Exception {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 
 		UsersWebPage userspage = companypage.clickUsersLink();
 
@@ -141,9 +141,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyClientsUsersEdit(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 
 		clientspage.searchClientByName(data.getClientFirstName());
@@ -206,9 +206,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyEmployeesEdit(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		EmployeesWebPage employeespage = companypage.clickEmployeesLink();
 
 		employeespage.makeSearchPanelVisible();
@@ -284,9 +284,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyServicesEdit(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ServicesWebPage servicespage = companypage.clickServicesLink();
 	//	servicespage.makeSearchPanelVisible();
 		servicespage.setServiceSearchCriteria(data.getServiceName());
@@ -334,9 +334,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyServiceRequestTypeServiceTypeAtServiceRequestEdit(String rowID, String description, JSONObject testData) throws Exception {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage servicerequesttypespage = companypage.clickServiceRequestTypesLink();
 		if (servicerequesttypespage.isServiceRequestTypeExists(data.getServiceType())) {
 			servicerequesttypespage.deleteServiceRequestType(data.getServiceType());
@@ -348,7 +348,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.selectNewServiceRequestTypePackage(data.getServiceTypePackage());
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
 
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage srlistpage = operationspage.clickNewServiceRequestList();
 		srlistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
 		srlistpage.clickAddServiceRequestButton();
@@ -358,13 +358,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
 
-		companypage = backofficeheader.clickCompanyLink();
+		companypage = backOfficeHeader.clickCompanyLink();
 		servicerequesttypespage = companypage.clickServiceRequestTypesLink();
 		servicerequesttypespage.clickEditServiceRequestType(data.getServiceType());
 		servicerequesttypespage.selectNewServiceRequestTypePackage(data.getServiceTypePackageNew());
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
 
-		operationspage = backofficeheader.clickOperationsLink();
+		operationspage = backOfficeHeader.clickOperationsLink();
 		srlistpage = operationspage.clickNewServiceRequestList();
 		srlistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
 		srlistpage.clickAddServiceRequestButton();
@@ -374,7 +374,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
 
-		companypage = backofficeheader.clickCompanyLink();
+		companypage = backOfficeHeader.clickCompanyLink();
 		servicerequesttypespage = companypage.clickServiceRequestTypesLink();
 		servicerequesttypespage.deleteServiceRequestType(data.getServiceType());
 	}
@@ -383,9 +383,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyInvoiceTypeClientEdit(String rowID, String description, JSONObject testData) throws Exception {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InvoiceTypesWebPage invoicestypespage = companypage.clickInvoiceTypesLink();
 		if (invoicestypespage.invoiceTypeExists(data.getInvoiceType())) {
 			invoicestypespage.deleteInvoiceType(data.getInvoiceType());
@@ -431,9 +431,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyClientsServicesUpdate(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 
 		clientspage.makeSearchPanelVisible();
@@ -463,9 +463,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyClientsClientUsersSearch(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.setClientSearchCriteria(data.getClientName());
@@ -487,9 +487,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanySharingWorkOrder(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -529,9 +529,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanySharingWorkOrderAddRuleTeams(String rowID, String description, JSONObject testData) throws InterruptedException {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -597,9 +597,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanySharingWorkOrderAddRuleEmployees(String rowID, String description, JSONObject testData) throws InterruptedException {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -669,9 +669,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanySharingWorkOrderAddRuleClients(String rowID, String description, JSONObject testData) throws InterruptedException {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -739,9 +739,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanySharingWorkOrderAddRuleServices (String rowID, String description, JSONObject testData) throws InterruptedException {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -810,9 +810,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanySharingWorkOrderAddRuleVehicleParts(String rowID, String description, JSONObject testData) throws InterruptedException {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -881,9 +881,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyExchangeConfigurationSharingEstimate(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -923,9 +923,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyExchangeConfigurationSharingEstimateAddRuleClients(String rowID, String description, JSONObject testData) throws InterruptedException{
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -994,9 +994,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyExchangeConfigurationSharingEstimateAddRuleTeams(String rowID, String description, JSONObject testData) throws InterruptedException{
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -1062,9 +1062,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyExchangeConfigurationSharingEstimateAddRuleEmployees(String rowID, String description, JSONObject testData) throws InterruptedException{
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -1133,9 +1133,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyExchangeConfigurationSharingEstimateAddRuleServices(String rowID, String description, JSONObject testData) throws InterruptedException{
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -1203,9 +1203,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyExchangeConfigurationSharingEstimateAddRuleVehicleParts(String rowID, String description, JSONObject testData) throws InterruptedException{
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -1274,9 +1274,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyExchangeConfigurationMappingWorkOrder(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -1316,9 +1316,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     public void testCompanyExchangeConfigurationMappingWorkOrderAddRuleClients(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InterApplicationExchangeWebPage interApplicationExchangePage = companypage.clickInterApplicationExchangeLink();
 		interApplicationExchangePage.clickTab(data.getTabName());
 		interApplicationExchangePage.expandFirstCreatedCompany();
@@ -1785,8 +1785,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 //        final String lastname = "test123CDF";
 //        final String role = "SalesPerson";
 //
-//        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+//        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //        ServiceAdvisorsWebPage serviceadvisorspage = companypage.clickServiceAdvisorsLink();
 //        serviceadvisorspage.makeSearchPanelVisible();
 //        serviceadvisorspage.setUserSearchCriteria(firstname + " " + lastname);
@@ -1799,7 +1799,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 //        String usermail = "test.cyberiansoft+" + currtime + "@gmail.com";
 //        serviceadvisorspage.createNewServiceAdvisor(usermail, firstname, lastname, customer, role);
 //
-//        backofficeheader.clickLogout();
+//        backOfficeHeader.clickLogout();
 //
 //        boolean search = false;
 //        String mailmessage = "";
@@ -1830,11 +1830,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 //
 //        BackOfficeLoginWebPage loginpage = confirmpasswordpage.confirmUserPassword(confirmpsw);
 //        loginpage.UserLogin(userName, userPassword);
-//        backofficeheader.clickHomeLink();
+//        backOfficeHeader.clickHomeLink();
 //
-//        backofficeheader.clickLogout();
+//        backOfficeHeader.clickLogout();
 //        loginpage.UserLogin(userName, userPassword);
-//        companypage = backofficeheader.clickCompanyLink();
+//        companypage = backOfficeHeader.clickCompanyLink();
 //        serviceadvisorspage = companypage.clickServiceAdvisorsLink();
 //        serviceadvisorspage.makeSearchPanelVisible();
 //        serviceadvisorspage.setUserSearchCriteria(firstname + " " + lastname);

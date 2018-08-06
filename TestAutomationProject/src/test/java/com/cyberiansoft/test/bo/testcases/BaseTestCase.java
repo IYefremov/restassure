@@ -125,9 +125,9 @@ public class BaseTestCase {
     @AfterMethod
     public void BackOfficeLogout(ITestResult result) {
         if (result.isSuccess()) {
-            BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+            BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
             try {
-                backofficeheader.clickLogout();
+                backOfficeHeader.clickLogout();
             } catch (WebDriverException ignored) {}
         }
         //todo delete from here after the problem with skips will be solved

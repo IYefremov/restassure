@@ -27,10 +27,10 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void testCompanyClientsSearch(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
                 BackOfficeHeaderPanel.class);
 
-        ClientsWebPage clientspage = backofficeheader
+        ClientsWebPage clientspage = backOfficeHeader
                 .clickCompanyLink()
                 .clickClientsLink();
 
@@ -74,9 +74,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
             String rowID, String description, JSONObject testData) {
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
@@ -106,9 +106,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
             String rowID, String description, JSONObject testData) {
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
 
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
@@ -142,10 +142,10 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
             String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(data.getCompanyName());
@@ -172,9 +172,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	        String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(data.getCompanyName());
@@ -195,9 +195,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void testCompanyClientsArchive(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(data.getCompanyName());
@@ -223,9 +223,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void testCompanyClientsClientUsersUpdate(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.verifyEmployeesTableColumnsAreVisible();
 		clientspage.searchClientByName(data.getClientName());
@@ -289,9 +289,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
     public void testCompanyClientsHoursOfOperationAddWholesale(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        ClientsWebPage clientspage = backofficeheader
+        ClientsWebPage clientspage = backOfficeHeader
                 .clickCompanyLink()
                 .clickClientsLink();
 		clientspage.verifyEmployeesTableColumnsAreVisible();
@@ -321,9 +321,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void testCompanyClientsHoursOfOperationAddRetail(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.verifyEmployeesTableColumnsAreVisible();
         NewClientDialogWebPage newClientDialogWebPage = clientspage.clickAddClientButton();
@@ -342,9 +342,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void testCompanyClientsContactsVerificationDisable (String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.verifyEmployeesTableColumnsAreVisible();
 		clientspage.searchClientByName(data.getClientName());
@@ -411,9 +411,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void testCompanyClientsContactsUpdate(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.verifyEmployeesTableColumnsAreVisible();
 		clientspage.searchClientByName(data.getClientName());
@@ -472,9 +472,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
     public void testClientUserAddClient(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        ClientUsersWebPage  clientUsersWebPage = backofficeheader
+        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
                 .clickCompanyLink()
                 .clickClientsLink()
                 .makeSearchPanelVisible()
@@ -505,9 +505,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void testClientUserSalesPersonMonitorManager(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        ClientUsersWebPage  clientUsersWebPage = backofficeheader
+        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
                 .clickCompanyLink()
                 .clickClientsLink()
                 .makeSearchPanelVisible()
@@ -538,9 +538,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
     public void testClientUserSalesPerson(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        ClientUsersWebPage  clientUsersWebPage = backofficeheader
+        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
                 .clickCompanyLink()
                 .clickClientsLink()
                 .makeSearchPanelVisible()
@@ -569,9 +569,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
     public void testClientUserClientInspector(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        ClientUsersWebPage  clientUsersWebPage = backofficeheader
+        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
                 .clickCompanyLink()
                 .clickClientsLink()
                 .makeSearchPanelVisible()
@@ -600,9 +600,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
     public void testClientUserClientMonitorManager(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        ClientUsersWebPage  clientUsersWebPage = backofficeheader
+        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
                 .clickCompanyLink()
                 .clickClientsLink()
                 .makeSearchPanelVisible()
@@ -631,9 +631,9 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	public void testClientUserClientAccountant(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        ClientUsersWebPage  clientUsersWebPage = backofficeheader
+        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
                 .clickCompanyLink()
                 .clickClientsLink()
                 .makeSearchPanelVisible()

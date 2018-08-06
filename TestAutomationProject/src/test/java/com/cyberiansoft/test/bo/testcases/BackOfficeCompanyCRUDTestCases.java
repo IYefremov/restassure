@@ -27,9 +27,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyInsuranceCompanyCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 
 		InsuranceCompaniesWePpage insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
         insurancecompaniespage.verifyInsuranceCompaniesDoNotExist(data.getInsuranceCompany(), data.getInsuranceCompanyEdited());
@@ -77,9 +77,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyTeamsCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 
 		TeamsWebPage teamspage = companypage.clickTeamsLink();
 		teamspage.makeSearchPanelVisible().setTeamLocationSearchCriteria(data.getTeam()).clickFindButton();
@@ -147,9 +147,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyJobsCRUD(String rowID, String description, JSONObject testData) throws Exception {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companyPage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
 
         JobsWebPage jobsPage = companyPage.clickJobsLink();
         if (jobsPage.isJobPresent(data.getJob())) {
@@ -204,9 +204,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyServiceAdvisorsCRUD(String rowID, String description, JSONObject testData) throws Exception {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ServiceAdvisorsWebPage serviceadvisorspage = companypage.clickServiceAdvisorsLink();
 		serviceadvisorspage.makeSearchPanelVisible();
 		serviceadvisorspage.setUserSearchCriteria(data.getFirstName() + " " + data.getLastName());
@@ -265,9 +265,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyServiceContractTypesCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ServiceContractTypesWebPage servicecontracttypespage = companypage.clickServiceContractTypesLink();
 		servicecontracttypespage.verifyServiceContractTypesDoNotExist(data.getContractType(), data.getContractTypeEdited());
 
@@ -317,9 +317,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyPriceMatrixCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		PriceMatricesWebPage pricematricespage = companypage.clickPriceMatricesLink();
 		pricematricespage.verifyPriceMatricesDoNotExist(data.getPriceMatrixName(), data.getPriceMatrixNameEdited());
 
@@ -354,9 +354,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyInvoiceTypeCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		InvoiceTypesWebPage invoicestypespage = companypage.clickInvoiceTypesLink();
 
 		invoicestypespage.verifyInvoiceTypesDoNotExist(data.getInvoiceType(), data.getInvoiceTypeEdited());
@@ -385,9 +385,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyServiceRequestTypeCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage servicerequesttypespage= companypage.clickServiceRequestTypesLink();
 		servicerequesttypespage.verifyServiceRequestsTypesDonNotExist(data.getServiceType(), data.getServiceTypeEdited());
 		servicerequesttypespage.clickAddServiceRequestTypeButton();
@@ -418,9 +418,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyEmailTemplatesCRUD(String rowID, String description, JSONObject testData) throws Exception {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		EmailTemplatesWebPage emailtemplatespage = companypage.clickEmailTemplatesLink();
 		emailtemplatespage.verifyEmailTemplatesDoNoExist(data.getTemplateName(), data.getTemplateNameEdited());
 
@@ -449,9 +449,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyPrintServerCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		PrintServersWebPage printserverspage = companypage.clickPrintServersLink();
 		printserverspage.verifyPrintServersDoNotExist(data.getPrintServerName(), data.getPrintServerNameEdited());
 
@@ -478,9 +478,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyLicenceCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ManageLicencesWebPage managelicencespage = companypage.clickManageLicencesLink();
 		managelicencespage.makeSearchPanelVisible();
 		managelicencespage.selectLicenceSearchApplicationParameter(data.getLicenceApp());
@@ -514,9 +514,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyTimesheetTypesCRUD(String rowID, String description, JSONObject testData) throws Exception {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		TimesheetTypesWebPage timesheettypespage = companypage.clickTimesheetTypesLink();
         timesheettypespage.verifyTimeSheetsTypeDoNoExist(data.getTimeSheetType(), data.getTimeSheetTypeEdited());
 
@@ -549,9 +549,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	public void testCompanyServicePackagesCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ServicePackagesWebPage servicepackagespage = companypage.clickServicePackagesLink();
         servicepackagespage.verifyServicePackagesDoNotExist(data.getServicePackageName(), data.getServicePackageNameEdited());
 
@@ -605,9 +605,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
         final String[] wotypeoptions = {"Approval Required", "Allow Delete", "Block Identical VIN", "Block Identical Services",
                 "Vehicle History Enforced", "Total Sale Field Required", "Status Reason Required"};
 
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
                 BackOfficeHeaderPanel.class);
-        CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
         WorkOrderTypesWebPage workordertypespage = companypage.clickWorkOrderTypesLink();
         if (workordertypespage.isWorkOrderTypeExists(wotype)) {
             workordertypespage.deleteWorkOrderType(wotype);

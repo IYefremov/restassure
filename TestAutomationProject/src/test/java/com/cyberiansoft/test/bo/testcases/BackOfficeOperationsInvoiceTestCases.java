@@ -743,8 +743,6 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-
-		operationspage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());

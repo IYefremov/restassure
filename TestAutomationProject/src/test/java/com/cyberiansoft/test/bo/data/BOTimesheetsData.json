@@ -1,0 +1,14 @@
+{
+  "checkMondaySundaySwitch": [
+    {
+    "rowID": "checkMondaySundaySwitch.01",
+    "description": "Test Case 65561:Timesheets - Timesheets Monday Sunday switch",
+    "fromDate": "10/02/17",
+    "toDate": "10/08/17",
+    "team": "01_TimeRep_team",
+    "startingDayMon": "Mon",
+    "fromDate2": "10/03/17",
+    "startingDayTue": "Tue"
+    }
+  ]
+}

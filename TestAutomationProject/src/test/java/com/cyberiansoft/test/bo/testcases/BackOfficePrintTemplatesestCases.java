@@ -56,8 +56,8 @@
 //
 //	@Test(testName = "Test Case 35010:Login as Setup Engineer in BO application",  description = "Login as Setup Engineer in BO application")
 //	public void testLoginAsSetupEngineerInBOApplication() {
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		companypage.clickPrintTemplatesConfigurationsLink();
 //	}
 //
@@ -68,15 +68,15 @@
 //		String pttype = "ReconPro Default Package.Default";
 //		String ptname = "Default_package_test";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		InvoiceTypesWebPage invoicetypespage = companypage.clickInvoiceTypesLink();
 //		if (invoicetypespage.invoiceTypeExists(invoicetypename)) {
 //			invoicetypespage.deleteInvoiceType(invoicetypename);
 //		}
 //
-//		companypage = backofficeheader.clickCompanyLink();
+//		companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -99,9 +99,9 @@
 //		String pttype = "DentWizard Package.DentWizard_CarMax";
 //		String ptname = "DentWizard_CarMax_test";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -124,9 +124,9 @@
 //		String pttype = "DentWizard Package.DentWizard_Default";
 //		String ptname = "DentWizard_Default_test";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -149,9 +149,9 @@
 //		String pttype = "DentWizard Package.DentWizard_Hail";
 //		String ptname = "DentWizard_Hail_test";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -174,9 +174,9 @@
 //		String pttype = "ReconPro Default Package.Custom1";
 //		String ptname = "Custom1_package_test";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -199,15 +199,15 @@
 //		String pttype = "ReconPro Default Package.Default";
 //		String ptname = "Default_package_test";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		InspectionTypesWebPage inspectiontypespage= companypage.clickInspectionTypesLink();
 //		if (inspectiontypespage.isInspectionTypeExists(insptypename)) {
 //			inspectiontypespage.deleteInspectionType(insptypename);
 //		}
 //
-//		companypage = backofficeheader.clickCompanyLink();
+//		companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInspectionsPrintTemplatesGroup();
@@ -230,9 +230,9 @@
 //		String pttype = "ReconPro Default Package.Custom1";
 //		String ptname = "Custom1_package_test";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInspectionsPrintTemplatesGroup();
@@ -269,9 +269,9 @@
 //		final String immediateattentionanswer = "Immediate Attention Required";
 //		final String answerservice = "Tires";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		QuestionsFormsWebPage questionsformspage = companypage.clickQuestionsFormsLink();
 //		questionsformspage.createQuestionSection(questionsectionname, true);
 //		String mainWindowHandle = webdriver.getWindowHandle();
@@ -330,9 +330,9 @@
 //
 //		final String questionformname = "AT_print_form";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		QuestionsFormsWebPage questionsformspage = companypage.clickQuestionsFormsLink();
 //		if (questionsformspage.isQuestionFormExists(questionformname)) {
 //			questionsformspage.deleteQuestionForm(questionformname);
@@ -359,15 +359,15 @@
 //		String pttype = "ReconPro Default Package.Default";
 //		String ptname = "Default_package_test";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		InspectionTypesWebPage inspectiontypespage= companypage.clickInspectionTypesLink();
 //		if (inspectiontypespage.isInspectionTypeExists(insptypename)) {
 //			inspectiontypespage.deleteInspectionType(insptypename);
 //		}
 //
-//		companypage = backofficeheader.clickCompanyLink();
+//		companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInspectionsPrintTemplatesGroup();
@@ -380,7 +380,7 @@
 //		printtemplateswebpage.expandInspectionsPrintTemplatesGroup();
 //		Assert.assertTrue(printtemplateswebpage.isInspectionsPrintTemplatesGroupContainsPackage(ptname));
 //
-//		companypage = backofficeheader.clickCompanyLink();
+//		companypage = backOfficeHeader.clickCompanyLink();
 //		inspectiontypespage= companypage.clickInspectionTypesLink();
 //		NewInspectionTypeDialogWebPage newinspectiontypedialog = inspectiontypespage.clickAddInspectionTypeButton();
 //		newinspectiontypedialog.setNewInspectionTypeName(insptypename);
@@ -411,14 +411,14 @@
 //		String ptname = "Default_package_test";
 //		String questionformname = "AT_print_form";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		InvoiceTypesWebPage invoicetypespage = companypage.clickInvoiceTypesLink();
 //		if (invoicetypespage.invoiceTypeExists(invoicetypename))
 //			invoicetypespage.deleteInvoiceType(invoicetypename);
 //
-//		companypage = backofficeheader.clickCompanyLink();
+//		companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -431,7 +431,7 @@
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
 //		Assert.assertTrue(printtemplateswebpage.isInvoicesPrintTemplatesGroupContainsPackage(ptname));
 //
-//		companypage = backofficeheader.clickCompanyLink();
+//		companypage = backOfficeHeader.clickCompanyLink();
 //		invoicetypespage = companypage.clickInvoiceTypesLink();
 //		NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicetypespage.clickAddInvoiceTypeButton();
 //		newinvoicetypedialog.setInvoiceTypeName(invoicetypename);
@@ -456,9 +456,9 @@
 //		final String questionformtoassign = "AT_print_form";
 //		final String invoicetypetoassign = "AT_print_invoice";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		WorkOrderTypesWebPage workordertypespage = companypage.clickWorkOrderTypesLink();
 //		if (workordertypespage.isWorkOrderTypeExists(wotype))
 //			workordertypespage.deleteWorkOrderType(wotype);
@@ -487,9 +487,9 @@
 //		final String inspectedby = "tauser";
 //		final String headertext = "Header Text";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInspectionsPrintTemplatesGroup();
@@ -499,7 +499,7 @@
 //		printtemplateswebpage.setInspectionLabelsPrintTemplateOptions(taglabel, estimation, inspectedby, headertext);
 //		printtemplateswebpage.clickSavePrintTemplateOptionsButton();
 //
-//		OperationsWebPage operationspage= backofficeheader.clickOperationsLink();
+//		OperationsWebPage operationspage= backOfficeHeader.clickOperationsLink();
 //		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 //		inspectionspage.makeSearchPanelVisible();
 //		inspectionspage.setInspectionNumberSearchCriteria(inspectionnum);
@@ -527,9 +527,9 @@
 //		final String inspectedby = "";
 //		final String headertext = "";
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInspectionsPrintTemplatesGroup();
@@ -539,7 +539,7 @@
 //		printtemplateswebpage.setInspectionLabelsPrintTemplateOptions(taglabel, estimation, inspectedby, headertext);
 //		printtemplateswebpage.clickSavePrintTemplateOptionsButton();
 //
-//		OperationsWebPage operationspage= backofficeheader.clickOperationsLink();
+//		OperationsWebPage operationspage= backOfficeHeader.clickOperationsLink();
 //		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 //		inspectionspage.makeSearchPanelVisible();
 //		inspectionspage.setInspectionNumberSearchCriteria(inspectionnum);
@@ -571,9 +571,9 @@
 //				"Show Exterior Splat", "Show Footer", "Show Stock", "Show Customer Signature", "Show Estimation Notes", "Show Line Items",
 //				"Show Retail Price", "Show Mileage" };
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInspectionsPrintTemplatesGroup();
@@ -584,7 +584,7 @@
 //		printtemplateswebpage.setInspectionLabelsPrintTemplateOptions(taglabel, estimation, inspectedby, headertext);
 //		printtemplateswebpage.clickSavePrintTemplateOptionsButton();
 //
-//		OperationsWebPage operationspage= backofficeheader.clickOperationsLink();
+//		OperationsWebPage operationspage= backOfficeHeader.clickOperationsLink();
 //		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 //		inspectionspage.makeSearchPanelVisible();
 //		inspectionspage.setInspectionNumberSearchCriteria(inspectionnum);
@@ -618,9 +618,9 @@
 //		final String[] addtoavailablecolumns = { "Year", "Tag", "Color", "Mileage", "Stock" };
 //
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -631,7 +631,7 @@
 //		printtemplateswebpage.selectInvoiceColumnsPrintTemplateOptions(addtodisplayedcolumns, addtoavailablecolumns);
 //		printtemplateswebpage.clickSavePrintTemplateOptionsButton();
 //
-//		OperationsWebPage operationspage= backofficeheader.clickOperationsLink();
+//		OperationsWebPage operationspage= backOfficeHeader.clickOperationsLink();
 //		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 //		invoicespage.setSearchInvoiceNumber(invoicenum);
 //		invoicespage.clickFindButton();
@@ -664,9 +664,9 @@
 //		final String[] addtoavailablecolumns = { "Year", "Tag", "Color", "Mileage", "Stock" };
 //
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -677,7 +677,7 @@
 //		printtemplateswebpage.selectInvoiceColumnsPrintTemplateOptions(addtodisplayedcolumns, addtoavailablecolumns);
 //		printtemplateswebpage.clickSavePrintTemplateOptionsButton();
 //
-//		OperationsWebPage operationspage= backofficeheader.clickOperationsLink();
+//		OperationsWebPage operationspage= backOfficeHeader.clickOperationsLink();
 //		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 //		invoicespage.setSearchInvoiceNumber(invoicenum);
 //		invoicespage.clickFindButton();
@@ -714,9 +714,9 @@
 //				"Show PO", "Show Tax Items Below", "Claim - Policy#", "Show Claim Info", "Show Owner Info",
 //				"Show Customer Info", "Show \"Price X Quantity\" for services", "Show Order Notes", "Show Page Numbers" };
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -728,7 +728,7 @@
 //		printtemplateswebpage.selectInvoiceColumnsPrintTemplateOptions(addtodisplayedcolumns, addtoavailablecolumns);
 //		printtemplateswebpage.clickSavePrintTemplateOptionsButton();
 //
-//		OperationsWebPage operationspage= backofficeheader.clickOperationsLink();
+//		OperationsWebPage operationspage= backOfficeHeader.clickOperationsLink();
 //		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 //		invoicespage.setSearchInvoiceNumber(invoicenum);
 //		invoicespage.clickFindButton();
@@ -760,9 +760,9 @@
 //		final String[] addtodisplayedcolumns = { "Owner", "OrderNo", "Make", "Technician", "Model", "Amount", "Total_Sale", "Vin", "RO" };
 //		final String[] addtoavailablecolumns = { "Year", "Tag", "Color", "Mileage", "Stock" };
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		PrintTemplatesWebPage printtemplateswebpage = companypage.clickPrintTemplatesConfigurationsLink();
 //
 //		printtemplateswebpage.expandInvoicesPrintTemplatesGroup();
@@ -773,7 +773,7 @@
 //		printtemplateswebpage.selectInvoiceColumnsPrintTemplateOptions(addtodisplayedcolumns, addtoavailablecolumns);
 //		printtemplateswebpage.clickSavePrintTemplateOptionsButton();
 //
-//		OperationsWebPage operationspage= backofficeheader.clickOperationsLink();
+//		OperationsWebPage operationspage= backOfficeHeader.clickOperationsLink();
 //		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 //		invoicespage.setSearchInvoiceNumber(invoicenum);
 //		invoicespage.clickFindButton();
@@ -796,13 +796,13 @@
 //		final String[] pricematrixservices = { "Body Shop 1", "Bumper Scuff", "Serv Price Policy Panel" };
 //
 //
-//		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+//		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
 //				BackOfficeHeaderPanel.class);
-//		backofficeheader.clickLogout();
+//		backOfficeHeader.clickLogout();
 //		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 //				BackOfficeLoginWebPage.class);
 //		loginpage.UserLogin(userName, userPassword);
-//		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+//		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		ActiveDevicesWebPage activedevicespage = companypage.clickManageDevicesLink();
 //		activedevicespage.setSearchCriteriaByName(licensename);
 //		String regCode = activedevicespage.getFirstRegCodeInTable();

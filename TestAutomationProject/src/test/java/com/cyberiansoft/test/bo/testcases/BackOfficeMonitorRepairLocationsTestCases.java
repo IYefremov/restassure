@@ -29,9 +29,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsSearch(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 
@@ -45,9 +45,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsAdd(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
@@ -67,9 +67,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationInTeamDefaultRepairLocationEdit(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
@@ -77,14 +77,14 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
 
-		monitorpage = backofficeheader.clickMonitorLink();
+		monitorpage = backOfficeHeader.clickMonitorLink();
 		VendorsTeamsWebPage vendorsteamspage = monitorpage.clickVendorsTeamsLink();
 		vendorsteamspage.makeSearchPanelVisible().setSearchTeamLocation(data.getVendorTeam()).clickFindButton();
 		NewVendorTeamDialogWebPage newvendordialog = vendorsteamspage.clickEditVendorTeam(data.getVendorTeam());
 		newvendordialog.selectNewVendorTeamDefaultRepairLocation(data.getRepairLocationName());
 		newvendordialog.clickCancelButton();
 
-		monitorpage = backofficeheader.clickMonitorLink();
+		monitorpage = backOfficeHeader.clickMonitorLink();
 		repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocation(data.getRepairLocationName());
@@ -94,9 +94,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsDepartmentEdit(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
@@ -133,9 +133,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsPhasesEdit(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
@@ -199,9 +199,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsClientsEdit(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
@@ -235,9 +235,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsServicesEdit(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-		MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
@@ -285,9 +285,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsManagersEdit(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
@@ -326,9 +326,9 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsUserSettingsEdit(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
@@ -368,36 +368,36 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
     public void testMonitorRepairLocationsNotActiveStatusForDefaultRepairLocation(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        MonitorWebPage monitorpage = backofficeheader.clickMonitorLink();
+        MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
 
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
+		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		TeamsWebPage teamspage = companypage.clickTeamsLink();
 		teamspage.makeSearchPanelVisible().setTeamLocationSearchCriteria(data.getTeamName()).clickFindButton();
 		teamspage.deleteTeamIfExists(data.getTeamName());
 		NewTeamsDialogWebPage newteamsdialog = teamspage.clickAddTeamButton();
 		newteamsdialog.setNewTeamName(data.getTeamName()).selectTeamDefaultRepairLocation(data.getTeamDefaultLocation()).clickAddTeamOKButton();
 
-		monitorpage = backofficeheader.clickMonitorLink();
+		monitorpage = backOfficeHeader.clickMonitorLink();
 		repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		NewRepairLocationDialogWebPage newlocationdialog = repairlocationspage.clickEditRepairLocation(data.getRepairLocationName());
 		newlocationdialog.selectNewRepairLocationStatus(data.getRepairLocationStatusNotActive()).clickOKButton();
 
-		companypage = backofficeheader.clickCompanyLink();
+		companypage = backOfficeHeader.clickCompanyLink();
 		teamspage = companypage.clickTeamsLink();
 		teamspage.makeSearchPanelVisible().setTeamLocationSearchCriteria(data.getTeamName()).clickFindButton();
 		newteamsdialog = teamspage.clickEditTeam(data.getTeamName());
 		newteamsdialog.selectTeamDefaultRepairLocation(data.getTeamDefaultLocation()).clickAddTeamOKButton();
 		teamspage.deleteTeam(data.getTeamName());
 
-		monitorpage = backofficeheader.clickMonitorLink();
+		monitorpage = backOfficeHeader.clickMonitorLink();
 		repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
 		repairlocationspage.deleteRepairLocation(data.getRepairLocationName());
