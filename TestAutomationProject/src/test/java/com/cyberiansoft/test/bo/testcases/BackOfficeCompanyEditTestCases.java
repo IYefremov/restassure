@@ -57,7 +57,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyUsersEdit(String rowID, String description, JSONObject testData) throws Exception {
+    public void testCompanyUsersEdit(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -331,7 +331,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyServiceRequestTypeServiceTypeAtServiceRequestEdit(String rowID, String description, JSONObject testData) throws Exception {
+    public void testCompanyServiceRequestTypeServiceTypeAtServiceRequestEdit(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -353,8 +353,10 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		srlistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
 		srlistpage.clickAddServiceRequestButton();
 
-        ServiceRequestListServiceDialog serviceDialog = srlistpage.clickServiceEditButton();
-		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
+        ServiceRequestListServiceDialog serviceDialog = srlistpage
+                .clickServiceEditButton()
+                .openServicesDropDown();
+        Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
 		srlistpage.clickDoneButton();
 		srlistpage.cancelNewServiceRequest();
 

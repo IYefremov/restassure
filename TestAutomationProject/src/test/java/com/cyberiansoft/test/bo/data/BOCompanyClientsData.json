@@ -196,6 +196,14 @@
     }
   ],
 
+  "verifyWorkOrderCanBeAssignedToWholesaleClients": [
+    {
+      "rowID": "verifyWorkOrderCanBeAssignedToWholesaleClients.01",
+      "description": "Test Case 77704:Company - Clients: Verify Work Order Can Be Assigned to Wholesale Clients",
+      "clientType": "Wholesale"
+    }
+  ],
+
   "testCompanyClientsHoursOfOperationAddWholesale": [
     {
       "rowID": "testCompanyClientsHoursOfOperationAddWholesale.01",

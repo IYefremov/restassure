@@ -205,10 +205,11 @@ public class ClientsWebPage extends WebPageWithPagination {
         return this;
     }
 
-	public void searchClientByName(String companyname) {
+	public ClientsWebPage searchClientByName(String companyname) {
 		makeSearchPanelVisible();
 		setClientSearchCriteria(companyname);
 		clickFindButton();
+		return this;
 	}
 
 	public void deleteUserViaSearch(String clientname) {
@@ -229,8 +230,9 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return PageFactory.initElements(driver, NewClientDialogWebPage.class);
 	}
 
-	public void selectSearchType(String _type) {
+	public ClientsWebPage selectSearchType(String _type) {
 		selectComboboxValue(searchtypecbx, searchtypedd, _type);
+		return this;
 	}
 
 	public void deleteClient(String clientname) {

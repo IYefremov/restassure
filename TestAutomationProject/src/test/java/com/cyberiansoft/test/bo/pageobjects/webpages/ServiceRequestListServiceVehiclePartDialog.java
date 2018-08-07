@@ -60,7 +60,6 @@ public class ServiceRequestListServiceVehiclePartDialog extends BaseWebPage {
     public ServiceRequestListServiceVehiclePartDialog selectRandomAvailableVehiclePartOption() {
         selectRandomVehiclePartOption(availableVehiclePart);
         return this;
-
     }
 
     public ServiceRequestListServiceVehiclePartDialog selectRandomAssignedVehiclePartOption() {
@@ -135,7 +134,7 @@ public class ServiceRequestListServiceVehiclePartDialog extends BaseWebPage {
     private int getNumberOfOptions(WebElement vehiclePart, List<WebElement> vehiclePartOptions) {
         try {
             wait.until(ExpectedConditions.visibilityOf(vehiclePart));
-            return vehiclePartOptions.size();
+            return wait.until(ExpectedConditions.visibilityOfAllElements(vehiclePartOptions)).size();
         } catch (Exception ignored) {
             return 0;
         }

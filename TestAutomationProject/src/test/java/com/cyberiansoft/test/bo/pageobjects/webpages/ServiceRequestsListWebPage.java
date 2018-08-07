@@ -360,6 +360,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(xpath = "//div[contains(@id, 'RadToolTipWrapper')]")
 	private WebElement appointmentDialog;
 
+	@FindBy(id = "lbViewChangeScheduler")
+	private WebElement scheduler;
+
     public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -1459,7 +1462,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public int checkSchedulerByDateWeek(String startDate, boolean isDateShifted) {
 		driver.switchTo().defaultContent();
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
+		try {
+            wait.until(ExpectedConditions.elementToBeClickable(scheduler)).click();
+        } catch (Exception e ) {
+		    Assert.fail("The scheduler has not been clickable", e);
+        }
         waitForLoading();
 
         if (!isDateShifted) {

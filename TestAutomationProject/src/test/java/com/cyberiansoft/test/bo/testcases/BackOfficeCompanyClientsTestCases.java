@@ -658,4 +658,29 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.clickDeleteClientUser(data.getUserName());
 		clientUsersWebPage1.closePage();
 	}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyWorkOrderCanBeAssignedToWholesaleClients(String rowID, String description, JSONObject testData) {
+
+        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        String randomClientName = data.getRandomName();
+        backOfficeHeader
+                .clickCompanyLink()
+                .clickClientsLink()
+                .clickAddClientButton()
+                .switchToWholesaleCustomer()
+                .setCompanyName(randomClientName)
+                .clickOtherTab()
+                .clickSingleWOtypeCheckbox()
+                .selectRandomSingleWOtype()
+                .clickOKButton()
+                .makeSearchPanelVisible()
+                .selectSearchType(data.getClientType())
+                .setClientSearchCriteria(randomClientName)
+                .clickFindButton();
+        //todo finish
+
+    }
 }

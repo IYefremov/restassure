@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class BOCompanyClientsData {
 
@@ -240,5 +241,9 @@ public class BOCompanyClientsData {
 
     public String getUserName() {
         return userName;
+    }
+
+    public String getRandomName() {
+        return "test-" + RandomStringUtils.randomAlphabetic(5);
     }
 }
