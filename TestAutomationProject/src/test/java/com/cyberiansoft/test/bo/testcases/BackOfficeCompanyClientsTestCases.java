@@ -666,9 +666,10 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
         String randomClientName = data.getRandomName();
-        backOfficeHeader
+        ClientsWebPage clientsWebPage = backOfficeHeader
                 .clickCompanyLink()
-                .clickClientsLink()
+                .clickClientsLink();
+        clientsWebPage
                 .clickAddClientButton()
                 .switchToWholesaleCustomer()
                 .setCompanyName(randomClientName)
@@ -680,7 +681,12 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
                 .selectSearchType(data.getClientType())
                 .setClientSearchCriteria(randomClientName)
                 .clickFindButton();
-        //todo finish
-
+        Assert.assertTrue(clientsWebPage.isClientPresentInTable(randomClientName), "The client has not been found");
+        clientsWebPage.verifyOneClientIsFound();
+        Assert.assertTrue(clientsWebPage.isFirstWholeSaleCheckboxChecked(),
+                "The Wholesale checkbox is not checked for the created company");
+        Assert.assertTrue(clientsWebPage.isFirstSingleWOtypeCheckboxChecked(),
+                "The single WO type checkbox is not checked for the created company");
+        clientsWebPage.archiveFirstClient();
     }
 }

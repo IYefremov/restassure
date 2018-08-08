@@ -244,6 +244,6 @@ public class BOCompanyClientsData {
     }
 
     public String getRandomName() {
-        return "test-" + RandomStringUtils.randomAlphabetic(5);
+        return "test-" + RandomStringUtils.randomAlphabetic(7);
     }
 }

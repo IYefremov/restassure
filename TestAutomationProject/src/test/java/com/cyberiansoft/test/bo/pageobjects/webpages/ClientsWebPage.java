@@ -35,7 +35,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 	private WebElement importbtn;
 
 	@FindBy(xpath = "//input[@title='Archive']")
-	private WebElement deletemarker;
+	private WebElement archiveButton;
 
 	@FindBy(xpath = "//span[@class='rtsIn']/span[text()='Active']")
 	private WebElement activetab;
@@ -103,6 +103,12 @@ public class ClientsWebPage extends WebPageWithPagination {
     @FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbSearch")
     private WebElement searchEmployeeFld;
 
+    @FindBy(xpath = "(//td/span/input[contains(@id, 'ctl00_ctl00_Content_Main_gv')])[1]")
+    private WebElement wholesaleCheckbox;
+
+    @FindBy(xpath = "(//td/span/input[contains(@id, 'ctl00_ctl00_Content_Main_gv')])[2]")
+    private WebElement singleWOtypeCheckbox;
+
     public ClientsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -120,6 +126,14 @@ public class ClientsWebPage extends WebPageWithPagination {
 		}
         return this;
 	}
+
+	public boolean isFirstWholeSaleCheckboxChecked() {
+        return isCheckboxChecked(wholesaleCheckbox);
+    }
+
+	public boolean isFirstSingleWOtypeCheckboxChecked() {
+        return isCheckboxChecked(singleWOtypeCheckbox);
+    }
 
 	public void verifyEmployeesTableColumnsAreVisible() {
 
@@ -217,15 +231,18 @@ public class ClientsWebPage extends WebPageWithPagination {
 		setClientSearchCriteria(clientname);
 		clickFindButton();
 		waitForLoading();
-		//Thread.sleep(3000);
-		deletemarker.click();
-		wait.until(ExpectedConditions.alertIsPresent());
-		driver.switchTo().alert().accept();
-		waitForLoading();
-		//Thread.sleep(3000);
+        archiveFirstClient();
 	}
 
-	public NewClientDialogWebPage clickAddClientButton() {
+    public ClientsWebPage archiveFirstClient() {
+        wait.until(ExpectedConditions.elementToBeClickable(archiveButton)).click();
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().accept();
+        waitForLoading();
+        return this;
+    }
+
+    public NewClientDialogWebPage clickAddClientButton() {
 		click(addclientbtn);
 		return PageFactory.initElements(driver, NewClientDialogWebPage.class);
 	}
@@ -501,6 +518,10 @@ public class ClientsWebPage extends WebPageWithPagination {
             restoreClient(companyname);
             clickActiveTab();
         }
+    }
+
+    public void verifyOneClientIsFound() {
+        Assert.assertEquals(1, getClientsTableRowsCount(), "The client is not unique");
     }
 
     public void verifyClientIsNotPresentInActiveTab(String retailcompanyname, String retailcompanynameed) {
