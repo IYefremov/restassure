@@ -115,6 +115,9 @@ public class NewClientDialogWebPage extends BaseWebPage {
     @FindBy(id = "ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboOrderType_DropDown")
     private DropDown singleWOtypeDropDown;
 
+    @FindBy(id = "ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboOrderType_Input")
+    private WebElement singleWOtypeInput;
+
 	public NewClientDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -346,8 +349,10 @@ public class NewClientDialogWebPage extends BaseWebPage {
         return PageFactory.initElements(driver, ClientsWebPage.class);
 	}
 
-	public void clickCancelButton() {
+	public ClientsWebPage clickCancelButton() {
 		click(cancelbtn);
+		wait.until(ExpectedConditions.titleContains("Customers"));
+        return PageFactory.initElements(driver, ClientsWebPage.class);
 	}
 
 	public void clickToLinkInClientsEdit(String name) {
@@ -377,6 +382,10 @@ public class NewClientDialogWebPage extends BaseWebPage {
     public NewClientDialogWebPage selectRandomSingleWOtype() {
         selectRandomComboboxValue(singleWOtypeCombobox, singleWOtypeDropDown);
         return this;
+    }
+
+    public String getSingleWOtype() {
+        return wait.until(ExpectedConditions.visibilityOf(singleWOtypeInput)).getAttribute("value");
     }
 
 	public boolean isSundayStartTimeVisible() {

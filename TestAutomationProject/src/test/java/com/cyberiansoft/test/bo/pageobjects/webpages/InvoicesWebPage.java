@@ -686,157 +686,37 @@ public class InvoicesWebPage extends WebPageWithFilter {
         Actions actions = new Actions(driver);
         actions.moveToElement(selectButton).click().build().perform();
 
+        try {
+            wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
+            wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+        } catch (Exception e) {
+//            try {
+//                actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
+//            } catch (Exception ignored) {} todo delete, if works fine
             try {
-                wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
-                wait.until(ExpectedConditions.elementToBeClickable(button)).click();
-            } catch (Exception e) {
-                try {
-                    actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
-                } catch (Exception ignored) {}
-                try {
-                    actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
-                    wait.until(ExpectedConditions.visibilityOf(button)).click();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
+                wait.until(ExpectedConditions.visibilityOf(button)).click();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        try {
+            Set frames = driver.getWindowHandles();
+            waitABit(10000);
+            frames.remove(mainWindow);
+            driver.switchTo().window((String) frames.iterator().next());
+            return (String) frames.iterator().next();
+        } catch (Exception ignored) {
+            waitABit(3000);
+            Set<String> windows = driver.getWindowHandles();
+            if (windows.size() > 1) {
+                for (String window : windows) {
+                    if (!window.equals(mainWindow))
+                        return window;
                 }
             }
-            try {
-                Set frames = driver.getWindowHandles();
-                waitABit(10000);
-                frames.remove(mainWindow);
-                driver.switchTo().window((String) frames.iterator().next());
-                return (String) frames.iterator().next();
-            } catch (Exception ignored) {
-                waitABit(3000);
-                Set<String> windows = driver.getWindowHandles();
-                if (windows.size() > 1) {
-                    for (String window : windows) {
-                        if (!window.equals(mainWindow))
-                            return window;
-                    }
-                }
-                return mainWindow;
-            }
-	}
-
-	public String selectActionForFirstInvoice(String string, boolean switchArrow) {
-		String mainWindow = driver.getWindowHandle();
-		scrollWindowDown(300);
-		Actions act = new Actions(driver);
-		
-		if (string.equals("Edit") || string.equals("Print preview (server)")) {
-			act.moveToElement(selectButton).click().build().perform();
-			ivoiceOptions.findElement(By.linkText(string)).click();
-			Set<String> frames = driver.getWindowHandles();
-			waitABit(10000);
-			frames.remove(mainWindow);
-			driver.switchTo().window(frames.iterator().next());
-			return frames.iterator().next();
-		} else if (string.equals("Pay")) {
-			 act.moveToElement(selectButton).click().build().perform();
-			 try {
-				ivoiceOptions.findElement(By.linkText(string)).click();
-				waitABit(1000);
-			 } catch(Exception e) {
-			     act.moveToElement(selectButton).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-			     ivoiceOptions.findElement(By.linkText(string)).click();
-			 }
-			 waitForLoading();
-                return mainWindow;
-			} else if (string.equals("Mark as Paid") || string.equals("Mark as Unpaid")) {
-				act.moveToElement(selectButton).click().build().perform();
-				try{
-				wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
-				}catch(Exception e){
-					try {
-					act.moveToElement(selectButton).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-					} catch(Exception ignored){}
-					wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rmVertical"))).findElement(By.linkText(string)).click();
-				}
-            waitForLoading();
-
-				if(string.equals("Mark as Paid")){
-				wait.until(ExpectedConditions.visibilityOf(paymentNote));
-				paymentTextField.sendKeys("test");
-				markAsPaidButton.click();
-				driver.switchTo().alert().accept();
-				waitForLoading();
-				driver.navigate().refresh();
-				}
-				return mainWindow;
-			}
-			else if((string.equals("Email Activity") && !switchArrow)){
-            selectButton.click();
-            try{
-                wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
-                act.moveToElement(wait.until(ExpectedConditions
-                        .visibilityOf(slideDisplayed
-                                .findElement((By.xpath("//span[contains(text(), '" + string + "')]"))))))
-                        .click().build().perform();
-				} catch (Exception e) {
-                Assert.fail("The \"Email Activity\" button has not been displayed.", e);
-            }
-                Set frames = driver.getWindowHandles();
-                waitABit(10000);
-                frames.remove(mainWindow);
-                driver.switchTo().window((String) frames.iterator().next());
-                return (String) frames.iterator().next();
-			}
-		 else if (string.equals("Download JSON")) {
-		    selectButton.click();
-            try {
-                wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
-                act.moveToElement(wait.until(ExpectedConditions
-                        .visibilityOf(slideDisplayed
-                                .findElement((By.xpath("//span[contains(text(), '" + string + "')]"))))))
-                        .click().build().perform();
-            } catch (Exception e) {
-                Assert.fail("The \"Download JSON\" button has not been displayed.", e);
-            }
-			return mainWindow;
-		} else if ((string.equals("Send Email") && switchArrow) || (string.equals("Send Custom Email") && switchArrow)) {
-			act.moveToElement(selectButton).click().build().perform();
-			waitABit(1000);
-			try {
-				act.moveToElement(selectButton).moveToElement(driver.findElement(By.className("rmTopArrow"))).perform();
-			} catch (Exception e) {
-			}
-			try {
-				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]")));
-				waitABit(500);
-				driver.findElement(By.xpath("//span[contains(text(), '" + string + "')]")).click();
-			} catch (TimeoutException ignored) {}
-			if (string.equals("Send Email"))
-				return mainWindow;
-			else {
-				Set frames = driver.getWindowHandles();
-				waitABit(10000);
-				frames.remove(mainWindow);
-				driver.switchTo().window((String) frames.iterator().next());
-				return (String) frames.iterator().next();
-			}
-		} else {
-			act.moveToElement(selectButton).click().build().perform();
-			waitABit(2000);
-			try {
-				act.moveToElement(selectButton).moveToElement(driver.findElement(By.className("rmBottomArrow"))).perform();
-			} catch (Exception ignored) {}
-			try {
-				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath("//span[contains(text(), '" + string + "')]"))).click();
-			} catch (TimeoutException e) {
-			}
-			waitABit(3000);
-			Set<String> windows = driver.getWindowHandles();
-			if (windows.size() > 1) {
-				for (String window : windows) {
-					if (!window.equals(mainWindow))
-						return window;
-				}
-			}
-			return mainWindow;
-		}
+            return mainWindow;
+        }
 	}
 
 	public void scrollWindowDown(int pix) {

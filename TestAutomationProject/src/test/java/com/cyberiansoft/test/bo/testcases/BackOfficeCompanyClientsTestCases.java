@@ -689,4 +689,72 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
                 "The single WO type checkbox is not checked for the created company");
         clientsWebPage.archiveFirstClient();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyWorkOrderTypeIsNotChangedAfterClickingTheCancelButton(String rowID, String description, JSONObject testData) {
+
+        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        String randomClientName = data.getRandomName();
+        ClientsWebPage clientsWebPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickClientsLink();
+        clientsWebPage
+                .clickAddClientButton()
+                .switchToWholesaleCustomer()
+                .setCompanyName(randomClientName)
+                .clickOtherTab()
+                .clickSingleWOtypeCheckbox()
+                .selectRandomSingleWOtype()
+                .clickOKButton()
+                .makeSearchPanelVisible()
+                .selectSearchType(data.getClientType())
+                .setClientSearchCriteria(randomClientName)
+                .clickFindButton();
+        Assert.assertTrue(clientsWebPage.isClientPresentInTable(randomClientName), "The client has not been found");
+        NewClientDialogWebPage newClientDialogPage = clientsWebPage
+                .verifyOneClientIsFound()
+                .clickEditClient(randomClientName)
+                .clickOtherTab();
+        String singleWOtypeBefore = newClientDialogPage.getSingleWOtype();
+        newClientDialogPage
+                .selectRandomSingleWOtype()
+                .clickCancelButton()
+                .clickEditClient(randomClientName)
+                .clickOtherTab();
+        Assert.assertEquals(singleWOtypeBefore, newClientDialogPage.getSingleWOtype(),
+                "The single WO type has been changed after clicking the 'Cancel' button");
+        newClientDialogPage.clickCancelButton();
+        clientsWebPage.archiveFirstClient();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyWOtypesOptionIsNotShownForTheSingleWOTypeClient(String rowID, String description, JSONObject testData) {
+
+        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        String randomClientName = data.getRandomName();
+        ClientsWebPage clientsWebPage = backOfficeHeader
+                .clickCompanyLink()
+                .clickClientsLink();
+        clientsWebPage
+                .clickAddClientButton()
+                .switchToWholesaleCustomer()
+                .setCompanyName(randomClientName)
+                .clickOtherTab()
+                .clickSingleWOtypeCheckbox()
+                .selectRandomSingleWOtype()
+                .clickOKButton()
+                .makeSearchPanelVisible()
+                .selectSearchType(data.getClientType())
+                .setClientSearchCriteria(randomClientName)
+                .clickFindButton();
+        Assert.assertTrue(clientsWebPage.isClientPresentInTable(randomClientName), "The client has not been found");
+        clientsWebPage.verifyOneClientIsFound();
+        Assert.assertFalse(clientsWebPage.isWOtypeForFirstClientDisplayed(),
+                "WO Types option is displayed for the single WO type Wholesale client");
+        clientsWebPage.archiveFirstClient();
+    }
 }

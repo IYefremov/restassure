@@ -204,6 +204,22 @@
     }
   ],
 
+  "verifyWorkOrderTypeIsNotChangedAfterClickingTheCancelButton": [
+    {
+      "rowID": "verifyWorkOrderTypeIsNotChangedAfterClickingTheCancelButton.01",
+      "description": "Test Case 77702:Company - Clients: Verify Work Order Type is Not Changed After Clicking the Cancel Button",
+      "clientType": "Wholesale"
+    }
+  ],
+
+  "verifyWOtypesOptionIsNotShownForTheSingleWOTypeClient": [
+    {
+      "rowID": "verifyWOtypesOptionIsNotShownForTheSingleWOTypeClient.01",
+      "description": "Test Case 77922:Company - Clients: Verify the WO Types Option Is Not Shown For the Single WO Type Client",
+      "clientType": "Wholesale"
+    }
+  ],
+
   "testCompanyClientsHoursOfOperationAddWholesale": [
     {
       "rowID": "testCompanyClientsHoursOfOperationAddWholesale.01",

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -109,6 +110,18 @@ public class ClientsWebPage extends WebPageWithPagination {
     @FindBy(xpath = "(//td/span/input[contains(@id, 'ctl00_ctl00_Content_Main_gv')])[2]")
     private WebElement singleWOtypeCheckbox;
 
+    @FindBy(linkText = "Select")
+    private WebElement selectButton;
+
+    @FindBy(xpath = "//div[@class='rmSlide' and contains(@style, 'block')]")
+    private WebElement slideDisplayed;
+
+    @FindBy(className = "rmBottomArrow")
+    private WebElement bottomArrow;
+
+    @FindBy(xpath = "//span[text()='WO Types']")
+    private WebElement woTypesOption;
+
     public ClientsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -158,8 +171,8 @@ public class ClientsWebPage extends WebPageWithPagination {
 
 	public ClientsWebPage clickFindButton() {
 		clickAndWait(wait.until(ExpectedConditions.elementToBeClickable(findbtn)));
-		waitABit(3000);
-        return this;
+        waitForLoading();
+		return this;
 	}
 
     public void verifyEmployeeIsActive(String clientName) {
@@ -237,7 +250,9 @@ public class ClientsWebPage extends WebPageWithPagination {
     public ClientsWebPage archiveFirstClient() {
         wait.until(ExpectedConditions.elementToBeClickable(archiveButton)).click();
         wait.until(ExpectedConditions.alertIsPresent());
-        driver.switchTo().alert().accept();
+        Alert alert = driver.switchTo().alert();
+        Assert.assertEquals(alert.getText(), "Are you sure you want archive client?");
+        alert.accept();
         waitForLoading();
         return this;
     }
@@ -299,18 +314,18 @@ public class ClientsWebPage extends WebPageWithPagination {
 
 	private WebElement getTableRowWithClient(String clientname) {
 		List<WebElement> clientsTableRows = getClientsTableRows();
-			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[text()='Client']")));
-			try {
-                return clientsTableRows
-                        .stream()
-                        .filter(e -> e.findElement(By
-                                .xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
-                                .getText()
-                                .equals(clientname))
-                        .findFirst()
-                        .get();
-            } catch (NoSuchElementException ignored) {}
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[text()='Client']")));
+        try {
+            return clientsTableRows
+                    .stream()
+                    .filter(e -> e.findElement(By
+                            .xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
+                            .getText()
+                            .equals(clientname))
+                    .findFirst()
+                    .get();
+        } catch (NoSuchElementException ignored) {}
 	    return null;
     }
 
@@ -329,7 +344,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	public NewClientDialogWebPage clickEditClient(String clientname) {
-		waitABit(8000);
+//		waitABit(8000);
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();
@@ -363,6 +378,27 @@ public class ClientsWebPage extends WebPageWithPagination {
 		}
 		return row;
 	}
+
+    public boolean isWOtypeForFirstClientDisplayed() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(selectButton).click().build().perform();
+
+        try {
+            wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
+            if (woTypesOption.isDisplayed()) {
+                return true;
+            }
+        } catch (Exception e) {
+            try {
+                actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
+                wait.until(ExpectedConditions.visibilityOf(woTypesOption));
+                return true;
+            } catch (Exception ex) {
+                return false;
+            }
+        }
+        return false;
+    }
 
 	public void clickInspectionSelectExpandableMenu(String clientName, String menuItem) {
 		WebElement row = clickSelectButtonForClient(clientName);
@@ -520,8 +556,9 @@ public class ClientsWebPage extends WebPageWithPagination {
         }
     }
 
-    public void verifyOneClientIsFound() {
+    public ClientsWebPage verifyOneClientIsFound() {
         Assert.assertEquals(1, getClientsTableRowsCount(), "The client is not unique");
+        return this;
     }
 
     public void verifyClientIsNotPresentInActiveTab(String retailcompanyname, String retailcompanynameed) {
