@@ -158,6 +158,8 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void clickEditPopup() {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Edit")));
 		editmenu.click();
 		BaseWizardScreen.typeContext = INVOICECONTEXT;
 	}
@@ -206,6 +208,8 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void clickDoneButton() {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Done")));
 		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("Done")).click();
 	}
 	
@@ -226,6 +230,9 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void clickSendEmail() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Send Email")));
+
 		appiumdriver.findElementByAccessibilityId("Send Email").click();
 	}
 	

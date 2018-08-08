@@ -58,6 +58,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
+		appiumdriver.findElementByAccessibilityId("Available").click();
 	}
 
 	public void clickCancelButton() {
@@ -153,7 +154,7 @@ public class RegularServicesScreen extends RegularBaseWizardScreen {
 	}
 
 	public void selectServicePanel(String servicePanel) {
-		MobileElement panelTable = (MobileElement) appiumdriver.findElementByAccessibilityId("ServiceGroupServicePartsTable");
+		MobileElement panelTable = (MobileElement) appiumdriver.findElementByAccessibilityId("AvailableGroupItemList");
 		if (!panelTable.findElement(MobileBy.AccessibilityId(servicePanel)).isDisplayed())
 			swipeToElement(appiumdriver.
 					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicePanel + "']/XCUIElementTypeStaticText[@name='" + servicePanel + "']/..")));

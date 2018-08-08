@@ -8,9 +8,7 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.email.EmailUtils;
-import com.cyberiansoft.test.email.emaildata.EmailFolder;
-import com.cyberiansoft.test.email.emaildata.EmailHost;
+import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
@@ -35,6 +33,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -2425,7 +2424,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(visualinteriorscreen.getSubTotalAmaunt(), "$140.00");
 		QuestionsScreen questionsscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
-		visualinteriorscreen = questionsscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		visualinteriorscreen = questionsscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
 		VisualInteriorScreen.tapExteriorWithCoords(100, 500);
 		Assert.assertEquals(visualinteriorscreen.getTotalAmaunt(), "$570.00");
@@ -3444,13 +3443,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.clickHomeButton();
 
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
-		System.out.println("++++++" + ReconProIOSStageInfo.getInstance().getTestMail());
-		System.out.println("++++++" + ReconProIOSStageInfo.getInstance().getTestMailPassword());
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, ReconProIOSStageInfo.getInstance().getTestMail(),
-				ReconProIOSStageInfo.getInstance().getTestMailPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find invoice: " + invpoicereportfilenname);
+
+		NadaEMailService nada = new NadaEMailService();
+		nada.setEmailId("test.cyberiansoft@amail.club");
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname);
+		Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + invoicenumber +
+				" in mail box " + nada.getEmailId() + ". At time " +
+				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		nada.deleteMessageWithSubject(invoicenumber);
 
 		File pdfdoc = new File(invpoicereportfilenname);
 		String pdftext = PDFReader.getPDFText(pdfdoc);
@@ -3507,11 +3508,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, ReconProIOSStageInfo.getInstance().getTestMail(),
-				ReconProIOSStageInfo.getInstance().getTestMailPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find invoice: " + invpoicereportfilenname);
+		NadaEMailService nada = new NadaEMailService();
+		nada.setEmailId("test.cyberiansoft@amail.club");
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname);
+		Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + invoicenumber +
+				" in mail box " + nada.getEmailId() + ". At time " +
+				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		nada.deleteMessageWithSubject(invoicenumber);
 
 		File pdfdoc = new File(invpoicereportfilenname);
 		String pdftext = PDFReader.getPDFText(pdfdoc);
@@ -5530,8 +5534,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 27741:Invoices: HD - Verify that payment is send to BO when PO# is changed under Team invoice", 
 			description = "Invoices: HD - Verify that payment is send to BO when PO# is changed under Team invoice")
-	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice()
-			throws Exception {
+	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";

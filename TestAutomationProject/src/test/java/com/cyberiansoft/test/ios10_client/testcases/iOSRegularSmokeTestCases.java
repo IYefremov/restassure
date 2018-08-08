@@ -1043,7 +1043,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			
 		homescreen = new RegularHomeScreen();
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+
 		final String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
+		System.out.println("+++++" +  srnumber);
+
+
+
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		RegularVehicleScreen vehiclescreen = servicerequestsscreen.selectInspectionType(InspectionsTypes.INSP_FOR_SR_INSPTYPE);
@@ -1768,7 +1773,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		SinglePageInspectionScreen singlepageinspectionscreen = new SinglePageInspectionScreen();
 		questionsscreen.swipeScreenUp();
 		Assert.assertTrue(singlepageinspectionscreen.isSignaturePresent());
-		questionsscreen = questionsscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, "BATTERY PERFORMANCE");
+		questionsscreen = questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "BATTERY PERFORMANCE");
 		questionsscreen.swipeScreenUp();
 		questionsscreen.swipeScreenUp();
 		Assert.assertTrue(singlepageinspectionscreen.isAnswerPresent("Test Answer 1"));
@@ -3705,10 +3710,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		srlistwebpage.saveNewServiceRequest();
 		srlistwebpage.acceptFirstServiceRequestFromList();
 		
-		DriverBuilder.getInstance().getDriver().quit();
-		DriverBuilder.getInstance().getAppiumDriver().closeApp();
-		DriverBuilder.getInstance().getAppiumDriver().launchApp();
-		RegularMainScreen mainscr = new RegularMainScreen();
+		//DriverBuilder.getInstance().getDriver().quit();
+		//DriverBuilder.getInstance().getAppiumDriver().closeApp();
+		//DriverBuilder.getInstance().getAppiumDriver().launchApp();
+		//RegularMainScreen mainscr = new RegularMainScreen();
+		//mainscr.updateDatabase();
+		//RegularHomeScreen homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularMainScreen mainscr = homescreen.clickLogoutButton();
 		mainscr.updateDatabase();
 		RegularHomeScreen homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
@@ -4187,7 +4195,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		for (int i = 0; i < 4; i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
-			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.indexOf("' require"));
+			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.lastIndexOf("'"));
 			RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = servicesscreen.openSelectedServiceDetails(servicedetails);
 			
 			selectedservicedetailsscreen.clickVehiclePartsCell();
@@ -4267,7 +4275,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		for (int i = 0; i < 4; i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
-			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.indexOf("' require"));
+			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.lastIndexOf("'"));
 			RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = servicesscreen.openSelectedServiceDetails(servicedetails);
 			
 			selectedservicedetailsscreen.clickVehiclePartsCell();

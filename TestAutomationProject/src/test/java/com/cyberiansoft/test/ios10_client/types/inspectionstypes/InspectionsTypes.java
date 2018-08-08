@@ -88,6 +88,8 @@ public enum InspectionsTypes implements IInspectionsTypes {
             case INSP_SMOKE_TEST:
                 if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
                     return (T) new VehicleScreen();
+                if (BaseTestCase.inspSinglePageMode)
+                    return (T) new SinglePageInspectionScreen();
                 else
                     return (T) new RegularVehicleScreen();
             case INSP_CHANGE_INSPTYPE:

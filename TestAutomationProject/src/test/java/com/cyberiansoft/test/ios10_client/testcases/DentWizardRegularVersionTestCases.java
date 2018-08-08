@@ -224,7 +224,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-			servicesscreen.selectService(UtilConstants.PDR_SERVICE);
+			servicesscreen.selectServicePanel(UtilConstants.PDR_SERVICE);
 			servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));

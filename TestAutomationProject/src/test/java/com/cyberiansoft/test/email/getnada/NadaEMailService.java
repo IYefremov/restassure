@@ -24,7 +24,7 @@ public class NadaEMailService {
     private static final String ATTACH_ID_ROUTE_PARAM = "attach-id";
     private static final String NADA_EMAIL_INBOX_API = "https://getnada.com/api/v1/inboxes/{email-id}";
     private static final String NADA_EMAIL_MESSAGE_API = "https://getnada.com/api/v1/messages/{message-id}";
-    private static final String NADA_EMAIL_MESSAGE_ATTACH_API = "https://getnada.com/api/v1/messages/{message-id}/{attach-id}";
+    private static final String NADA_EMAIL_MESSAGE_ATTACH_API = "https://getnada.com/api/v1/file/{message-id}/{attach-id}";
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final int EMAIL_CHARS_LENGTH = 10;
     private static final int DEFAULT_WAIT_MINUTES = 5;
@@ -95,6 +95,10 @@ public class NadaEMailService {
         this.emailId = RandomStringUtils.randomAlphanumeric(EMAIL_CHARS_LENGTH).toLowerCase().concat(NADA_EMAIL_DOMAIN);
     }
 
+    public void setEmailId(String nadaEmailAddress){
+        this.emailId = nadaEmailAddress;
+    }
+
     //generates a random email for the first time.
     //call reset for a new random email
     public String getEmailId(){
@@ -141,6 +145,18 @@ public class NadaEMailService {
         return null;
     }
 
+    private String deleteMessageById(final String messageId)
+    {
+        String msg = null;
+        try {
+            msg = Unirest.delete(NADA_EMAIL_MESSAGE_API)
+                    .routeParam(MESSAGE_ID_ROUTE_PARAM, messageId).asString().getBody();
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+        return msg;
+    }
+
     private void getAttachmentByMessageIdAndAttachmentId(final String messageId, final String attachid,
                                                          final String attachmentFileName) throws IOException {
         String msgs = null;
@@ -161,10 +177,10 @@ public class NadaEMailService {
 
     }
 
-    private EmailMessage getMessageWithSubjectStartsWith(final String emailSubject) throws IOException, UnirestException {
+    private EmailMessage getMessageWithSubject(final String emailSubject) throws IOException, UnirestException {
         return  this.getInbox()
                 .stream()
-                .filter(ie -> ie.getSubject().startsWith(emailSubject))
+                .filter(ie -> ie.getSubject().contains(emailSubject))
                 .findFirst()
                 .map(InboxEmail::getMessageId)
                 .map(this::getMessageById)
@@ -174,7 +190,7 @@ public class NadaEMailService {
     private boolean isMessageWithSubjectPresent(NadaEMailService.MailSearchParametersBuilder mailSearchParameters) throws IOException, UnirestException {
         return  this.getInbox()
                 .stream()
-                .filter(ie -> ie.getSubject().startsWith(mailSearchParameters.getSubjectKeyword()))
+                .filter(ie -> ie.getSubject().contains(mailSearchParameters.getSubjectKeyword()))
                 .findFirst()
                 .map(InboxEmail::getMessageId).isPresent();
     }
@@ -182,7 +198,7 @@ public class NadaEMailService {
     private List<MailAttachment> getMessageAttachments(NadaEMailService.MailSearchParametersBuilder mailSearchParameters) throws IOException, UnirestException {
         return  this.getInbox()
                 .stream()
-                .filter(ie -> ie.getSubject().startsWith(mailSearchParameters.getSubjectKeyword()))
+                .filter(ie -> ie.getSubject().contains(mailSearchParameters.getSubjectKeyword()))
                 .findFirst()
                 .map(InboxEmail::getMessageAttachments)
                 .orElseThrow(IllegalArgumentException::new);
@@ -202,7 +218,7 @@ public class NadaEMailService {
         if (waitForMessage(mailSearchParameters)) {
             InboxEmail inboxEmail = this.getInbox()
                     .stream()
-                    .filter(ie -> ie.getSubject().startsWith(mailSearchParameters.getSubjectKeyword()))
+                    .filter(ie -> ie.getSubject().contains(mailSearchParameters.getSubjectKeyword()))
                     .findFirst().get();
             MailAttachment attachment = getMessageAttachments(mailSearchParameters)
                     .stream()
@@ -232,5 +248,15 @@ public class NadaEMailService {
             if (mailSearchParameters.attachmentFileName != null)
                 found = isMessageWithSubjectAndAttachmentPresent(mailSearchParameters);
         return found;
+    }
+
+    public void deleteMessageWithSubject(final String emailSubject) throws IOException, UnirestException {
+          this.getInbox()
+                .stream()
+                .filter(ie -> ie.getSubject().contains(emailSubject))
+                .findFirst()
+                .map(InboxEmail::getMessageId)
+                .map(this::deleteMessageById)
+                .orElseThrow(IllegalArgumentException::new);
     }
 }
