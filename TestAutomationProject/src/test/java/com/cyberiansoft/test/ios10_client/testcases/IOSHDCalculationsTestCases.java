@@ -1222,8 +1222,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 42183:Invoices: HD - Verify that message is shown total is over limitation 999,999,999.999", 
 			description = "Verify that message is shown total is over limitation 999,999,999.999")
-	public void testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation()
-			throws Exception {
+	public void testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		

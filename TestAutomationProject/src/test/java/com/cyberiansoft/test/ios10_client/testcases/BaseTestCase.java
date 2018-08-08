@@ -25,6 +25,7 @@ public class BaseTestCase {
 	protected DesiredCapabilities webcap;
 	protected static BrowserType browsertype;
 	public static MobilePlatform mobilePlatform;
+	public static boolean inspSinglePageMode = false;
 	protected TestUser testuser;
 	protected String userpsw;
 

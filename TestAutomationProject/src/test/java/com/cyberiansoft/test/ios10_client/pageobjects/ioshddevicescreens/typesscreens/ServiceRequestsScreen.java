@@ -16,6 +16,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,9 +40,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	@iOSFindBy(accessibility  = "Refresh")
     private IOSElement refreshbtn;
 	
-	@iOSFindBy(accessibility  = "Create Inspection")
-    private IOSElement createinspectionmenu;
-	
 	@iOSFindBy(accessibility  = "Create Work Order")
     private IOSElement createworkordermenu;
 	
@@ -50,8 +48,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	@iOSFindBy(accessibility  = "Check In") 
     private IOSElement checkinmenu;
-	
-	
+
 	@iOSFindBy(accessibility  = "Undo Check In")
     private IOSElement undocheckinmenu;
 	
@@ -121,6 +118,9 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;*/
+
+	@iOSFindBy(accessibility  = "Create Inspection")
+	private IOSElement createinspectionmenu;
 	
 	public ServiceRequestsScreen() {
 		super();
@@ -198,7 +198,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 
 	public <T extends IBaseWizardScreen> T createInspectionFromServiceReques(String serviceRequestNumber, InspectionsTypes inspType) {
 		selectServiceRequest(serviceRequestNumber);
-		appiumdriver.findElementByAccessibilityId("Create Inspection").click();
+		createinspectionmenu.click();
 		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
 		inspectionTypesPopup.selectInspectionType(inspType);
 		return inspType.getFirstVizardScreen();

@@ -9,7 +9,9 @@ import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,9 +71,6 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	@iOSFindBy(accessibility = "To")
     private IOSElement tofld;
 	
-	@iOSFindBy(accessibility = "Done")
-    private IOSElement donebtn;
-	
 	@iOSFindBy(accessibility = "Subject")
     private IOSElement subjectfld;
 	
@@ -92,6 +91,9 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;*/
+
+	@iOSFindBy(accessibility = "Done")
+	private IOSElement donebtn;
 	
 	public RegularServiceRequestsScreen() {
 		super();
@@ -360,7 +362,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 	
 	public void clickDoneCloseReasonDialog() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
+		donebtn.click();
 	}
 	
 	public void selectDoneReason(String selectreason) {

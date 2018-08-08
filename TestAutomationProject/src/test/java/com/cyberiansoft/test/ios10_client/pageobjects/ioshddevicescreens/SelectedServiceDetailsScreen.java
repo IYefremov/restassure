@@ -90,7 +90,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public String getServicePriceValue() {
 		IOSElement pricecell = null;
-		List<WebElement> priceflds = appiumdriver.findElementsByAccessibilityId("Price");
+		List<WebElement> priceflds = appiumdriver.findElements(MobileBy.iOSNsPredicateString("name = 'Price' and type = 'XCUIElementTypeCell'"));
 		for (WebElement prc : priceflds)
 			if (prc.isDisplayed()) {
 				pricecell = (IOSElement) prc;

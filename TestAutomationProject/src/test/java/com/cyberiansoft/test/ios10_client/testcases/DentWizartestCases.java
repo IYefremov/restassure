@@ -211,6 +211,10 @@ public class DentWizartestCases extends BaseTestCase {
 				"Roof" };
 		final String[] vehiclepartswheels = { "Left Front Wheel",
 				"Right Front Wheel" };
+
+		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen.setInsvoicesCustomLayoutOff();
+		settingsscreen.clickHomeButton();
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(customer);
@@ -1886,6 +1890,7 @@ public class DentWizartestCases extends BaseTestCase {
         OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		String wonumber = ordersummaryscreen.getWorkOrderNumber();
 		ordersummaryscreen.clickSave();
+		myworkordersscreen = new MyWorkOrdersScreen();
 		homescreen = myworkordersscreen.clickHomeButton();
 		
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3397,8 +3402,7 @@ public class DentWizartestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 10263:Send Multiple Emails", description = "Send Multiple Emails")
-	public void testSendMultipleEmails()
-			throws Exception {		
+	public void testSendMultipleEmails() {
 		 
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();

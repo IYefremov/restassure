@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens;
 
+import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -31,12 +32,14 @@ public class SettingsScreen extends BaseAppScreen {
 		IOSElement singlepagetoggle = (IOSElement) appiumdriver.findElement(inspectionsinglepagetoggle);
 		if (singlepagetoggle.getAttribute("value").equals("0"))
 			singlepagetoggle.click();
+		BaseTestCase.inspSinglePageMode = true;
 	}
 
 	public void setInspectionToNonSinglePageInspection() {
 		IOSElement singlepagetoggle = (IOSElement) appiumdriver.findElement(inspectionsinglepagetoggle);
 		if (singlepagetoggle.getAttribute("value").equals("1"))
 			singlepagetoggle.click();
+		BaseTestCase.inspSinglePageMode = false;
 	}
 
 	public void setInsvoicesCustomLayoutOff() {
