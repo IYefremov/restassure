@@ -21,7 +21,7 @@ public class TeamPortalPricingPageTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testUserCanAddNewOrganisationRules(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanAddNewEdition(String rowID, String description, JSONObject testData) {
         TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         PricingPage pricingPage = leftMenuPanel
