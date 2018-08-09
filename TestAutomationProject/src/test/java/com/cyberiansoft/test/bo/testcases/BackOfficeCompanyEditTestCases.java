@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-@Listeners(VideoListener.class)
+//@Listeners(VideoListener.class)
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
     
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyEditData.json";

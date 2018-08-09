@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
@@ -10,12 +9,11 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.time.format.DateTimeFormatter;
 
-@Listeners(VideoListener.class)
+//@Listeners(VideoListener.class)
 public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsTimeFrameData.json";

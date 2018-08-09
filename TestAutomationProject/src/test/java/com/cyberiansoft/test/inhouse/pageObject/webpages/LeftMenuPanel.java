@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.inhouse.pageObject;
+package com.cyberiansoft.test.inhouse.pageObject.webpages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +19,9 @@ public class LeftMenuPanel extends BasePage {
 
     @FindBy(xpath = "//span[text()='Sales Quotes']")
     private WebElement salesQuotes;
+
+    @FindBy(xpath = "//span[text()='Pricing']")
+    private WebElement pricing;
 
 
     /** Submenu */
@@ -103,6 +106,17 @@ public class LeftMenuPanel extends BasePage {
     public LeftMenuPanel clickFinancialMapping() {
         clickMenu(financialMapping);
         return this;
+    }
+
+    @Step
+    public PricingPage clickPricing() {
+        clickMenu(pricing);
+        try {
+            wait.until(ExpectedConditions.titleContains("Pricing"));
+        } catch (Exception e) {
+            Assert.fail("The Pricing page has not been opened", e);
+        }
+        return PageFactory.initElements(driver, PricingPage.class);
     }
 
     /**

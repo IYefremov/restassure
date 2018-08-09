@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
@@ -12,10 +11,9 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(VideoListener.class)
+//@Listeners(VideoListener.class)
 public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInvoiceData.json";

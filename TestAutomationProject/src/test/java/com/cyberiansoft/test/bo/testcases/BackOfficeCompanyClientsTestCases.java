@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.dataclasses.bo.BOCompanyClientsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -9,11 +8,10 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("LossyEncoding")
-@Listeners(VideoListener.class)
+//@Listeners(VideoListener.class)
 public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json";

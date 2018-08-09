@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.inhouse.pageObject;
+package com.cyberiansoft.test.inhouse.pageObject.webpages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

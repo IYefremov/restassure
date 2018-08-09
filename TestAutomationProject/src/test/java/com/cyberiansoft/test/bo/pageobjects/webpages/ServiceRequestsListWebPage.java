@@ -719,8 +719,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
                     donebtn.click();
                     break;
                 }
-            } catch (WebDriverException e) {
-                e.printStackTrace();
+            } catch (WebDriverException ignored) {
+                try {
+                    clickWithJS(donebtn);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 		    }
 		}
 	}
@@ -1848,7 +1852,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.findElement(By.id("Card_vehicleVin")).sendKeys(vin);
 	}
 
-	public boolean goToWOfromLC() {
+	public boolean goToWOfromLifeCycle() {
         waitForLoading();
         try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]")))
@@ -1870,8 +1874,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
             wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(loading)));
             wait.until(ExpectedConditions.attributeToBe(loading, "", ""));
             waitABit(1000);
+            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(loading)));
             wait.until(ExpectedConditions.attributeContains(loading, "style", "display: none;"));
-        } catch(TimeoutException e){
+        } catch(Exception e){
             waitABit(5000);
         }
     }

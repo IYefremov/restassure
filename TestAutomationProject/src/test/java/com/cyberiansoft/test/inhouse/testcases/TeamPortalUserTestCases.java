@@ -1,25 +1,23 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseUserData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.inhouse.pageObject.AgreementApprovePage;
-import com.cyberiansoft.test.inhouse.pageObject.AgreementDetailPage;
-import com.cyberiansoft.test.inhouse.pageObject.SignedAgreements;
-import com.cyberiansoft.test.inhouse.pageObject.LeftMenuPanel;
+import com.cyberiansoft.test.inhouse.pageObject.webpages.AgreementApprovePage;
+import com.cyberiansoft.test.inhouse.pageObject.webpages.AgreementDetailPage;
+import com.cyberiansoft.test.inhouse.pageObject.webpages.LeftMenuPanel;
+import com.cyberiansoft.test.inhouse.pageObject.webpages.SignedAgreements;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(VideoListener.class)
+//@Listeners(VideoListener.class)
 public class TeamPortalUserTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseUser.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseUserData.json";
     private MailChecker mailChecker;
 
     @BeforeClass()

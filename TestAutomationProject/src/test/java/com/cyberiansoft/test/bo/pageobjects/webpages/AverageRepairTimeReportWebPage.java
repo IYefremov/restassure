@@ -113,8 +113,9 @@ public class AverageRepairTimeReportWebPage extends BaseWebPage {
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + year + "']")).isDisplayed());
 	}
 	
-	public boolean isLocationResultsPresent(String location) {
-	    return driver.findElements(By.xpath("//tr/td/div[text()='" + location + "']")).size() > 0;
+	public boolean areLocationResultsPresent(String location) {
+	    return wait.until(ExpectedConditions.visibilityOfAllElements(
+	            driver.findElements(By.xpath("//tr/td/div[text()='" + location + "']")))).size() > 0;
 	}
 	
 	public void checkShowDetails() {

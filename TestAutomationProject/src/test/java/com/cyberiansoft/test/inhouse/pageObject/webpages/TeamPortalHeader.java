@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.inhouse.pageObject;
+package com.cyberiansoft.test.inhouse.pageObject.webpages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;

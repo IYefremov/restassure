@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.inhouse.pageObject;
+package com.cyberiansoft.test.inhouse.pageObject.webpages;
 
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import io.qameta.allure.Step;

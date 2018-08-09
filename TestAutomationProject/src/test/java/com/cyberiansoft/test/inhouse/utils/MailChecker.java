@@ -19,7 +19,7 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.cyberiansoft.test.inhouse.pageObject.BasePage.waitABit;
+import static com.cyberiansoft.test.inhouse.pageObject.webpages.BasePage.waitABit;
 
 public class MailChecker {
 

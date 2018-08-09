@@ -1,0 +1,10 @@
+{
+  "testUserCanAddNewOrganisationRules": [
+    {
+      "rowID": "testUserCanAddNewOrganisationRules.01",
+      "description": "Test Case 76922:Verify user can add new Edition",
+      "editionName": "Auto Edition",
+      "price": "100"
+    }
+  ]
+}

@@ -1,24 +1,22 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseCategoriesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.inhouse.pageObject.CategoriesPage;
-import com.cyberiansoft.test.inhouse.pageObject.SignedAgreements;
-import com.cyberiansoft.test.inhouse.pageObject.ClientSegmentsPage;
-import com.cyberiansoft.test.inhouse.pageObject.LeftMenuPanel;
+import com.cyberiansoft.test.inhouse.pageObject.webpages.CategoriesPage;
+import com.cyberiansoft.test.inhouse.pageObject.webpages.ClientSegmentsPage;
+import com.cyberiansoft.test.inhouse.pageObject.webpages.LeftMenuPanel;
+import com.cyberiansoft.test.inhouse.pageObject.webpages.SignedAgreements;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(VideoListener.class)
+//@Listeners(VideoListener.class)
 public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseCategories.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseCategoriesData.json";
 
     @BeforeClass()
     public void settingUp() {

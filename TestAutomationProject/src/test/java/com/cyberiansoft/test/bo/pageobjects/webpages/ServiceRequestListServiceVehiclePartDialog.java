@@ -29,16 +29,16 @@ public class ServiceRequestListServiceVehiclePartDialog extends BaseWebPage {
     @FindBy(xpath = "//select[@class='listBoxVP']/option")
     private List<WebElement> assignedVehiclePartOptions;
 
-    @FindBy(xpath = "//input[@value='›']")
+    @FindBy(xpath = "//div[@class='serviceVehiclePartPopup']//input[2]")
     private WebElement moveToTheRightButton;
 
-    @FindBy(xpath = "//input[@value='‹']")
+    @FindBy(xpath = "//div[@class='serviceVehiclePartPopup']//input[3]")
     private WebElement moveToTheLeftButton;
 
-    @FindBy(xpath = "//input[@value='»']")
+    @FindBy(xpath = "//div[@class='serviceVehiclePartPopup']//input[1]")
     private WebElement moveAllToTheRightButton;
 
-    @FindBy(xpath = "//input[@value='«']")
+    @FindBy(xpath = "//div[@class='serviceVehiclePartPopup']//input[4]")
     private WebElement moveAllToTheLeftButton;
 
     @FindBy(id = "serviceVehiclePartOk")

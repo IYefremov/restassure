@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -13,12 +12,11 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.Random;
 
-@Listeners(VideoListener.class)
+//@Listeners(VideoListener.class)
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOoperationsSRdata.json";
@@ -955,7 +953,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void checkSRLCwoAutoCreation(String rowID, String description, JSONObject testData) {
+	public void checkSRLifeCycleWOAutoCreation(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -974,7 +972,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
-		Assert.assertTrue(serviceRequestsWebPage.goToWOfromLC());
+		Assert.assertTrue(serviceRequestsWebPage.goToWOfromLifeCycle());
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

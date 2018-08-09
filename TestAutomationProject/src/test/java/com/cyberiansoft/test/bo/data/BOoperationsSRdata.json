@@ -422,9 +422,9 @@
     }
   ],
 
-  "checkSRLCwoAutoCreation": [
+  "checkSRLifeCycleWOAutoCreation": [
     {
-      "rowID": "checkSRLCwoAutoCreation.01",
+      "rowID": "checkSRLifeCycleWOAutoCreation.01",
       "description": "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation",
       "clientName": "Alex SASHAZ",
       "status": "Scheduled",

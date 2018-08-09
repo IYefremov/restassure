@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ibs.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
@@ -14,10 +13,9 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(VideoListener.class)
+//@Listeners(VideoListener.class)
 public class IbsLicenceAddingNotification extends BaseTestCase {
 
     private static final String DATA_FILE =

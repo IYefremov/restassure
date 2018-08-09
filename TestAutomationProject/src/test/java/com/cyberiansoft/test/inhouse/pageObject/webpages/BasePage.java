@@ -1,14 +1,18 @@
-package com.cyberiansoft.test.inhouse.pageObject;
+package com.cyberiansoft.test.inhouse.pageObject.webpages;
 
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
@@ -101,5 +105,25 @@ public class BasePage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(successNotificationCloseButton)).click();
         } catch (Exception ignored) {}
+    }
+
+    public void clearAndType(WebElement nameTextField, String name) {
+        wait.until(ExpectedConditions.elementToBeClickable(nameTextField)).clear();
+        nameTextField.sendKeys(name);
+    }
+
+    public void clickButton(WebElement addEditionButton) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(addEditionButton)).click();
+        } catch (Exception e) {
+            Assert.fail("The button has been not clicked", e);
+        }
+    }
+
+    public void selectRandomValue(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        Select selection = new Select(element);
+        List<WebElement> allSelectedOptions = selection.getAllSelectedOptions();
+        selection.selectByIndex(RandomUtils.nextInt(1, allSelectedOptions.size()));
     }
 }
