@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.factories;
+package com.cyberiansoft.test.vnext.factories.inspectiontypes;
 
 public class InspectionTypeData {
 
@@ -22,9 +22,11 @@ public class InspectionTypeData {
             case INSP_TYPE_APPROV_REQUIRED:
                 inspTypeID = "";
                 canBeFinalDraft= false;
-            case ANASTASIA_TEAM:
+                break;
+            case O_KRAMAR_NO_SHARING:
                 inspTypeID = "";
                 canBeFinalDraft= false;
+                break;
         }
     }
 

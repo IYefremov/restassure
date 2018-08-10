@@ -161,7 +161,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertEquals(informationdialog.clickInformationDialogVoidButtonAndGetMessage(), 
 				String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoicenumber));
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
-		Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
+		invoicesscreen.waitUntilInvoiceDisappearsFromList(invoicenumber);
 		homescreen = invoicesscreen.clickBackButton();
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
@@ -633,6 +633,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		homescreen = workordersscreen.clickBackButton();
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		invoicesscreen.switchToMyInvoicesView();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
@@ -645,9 +646,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen = invoiceinfoscreen.saveInvoice();
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		invoicesscreen.switchToTeamInvoicesView();
-		Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
+		Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber), "Invoice shouldn't exists: " + invoicenumber);
 		invoicesscreen.switchToMyInvoicesView();
-		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber));
+		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber), "Can't find invoice: " + invoicenumber);
 		invoicesscreen.clickBackButton();
 	}
 

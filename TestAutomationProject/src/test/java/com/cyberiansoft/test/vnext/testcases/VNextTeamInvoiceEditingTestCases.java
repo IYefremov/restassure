@@ -463,12 +463,14 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
                 VNextAlertMessages.YOU_CANNOT_DEATTACH_THE_LAST_WORK_ORDER_FROM_INVOICE);
         invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
         invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+
         invoiceMenuScreen.clickVoidInvoiceMenuItem();
         VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
         Assert.assertEquals(informationdialog.clickInformationDialogVoidButtonAndGetMessage(),
                 String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoicenumber));
         invoicesscreen = new VNextInvoicesScreen(appiumdriver);
-        Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber), "Invoice still exists: " + invoicenumber);
+        invoicesscreen.waitUntilInvoiceDisappearsFromList(invoicenumber);
+
         homescreen = invoicesscreen.clickBackButton();
         workordersscreen = homescreen.clickWorkOrdersMenuItem();
         for (String woNumber : workOrdersToAdd)
@@ -479,6 +481,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
     public String createWorkOrder(WorkOrderData woData) {
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToMyWorkordersView();
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
         customersscreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);

@@ -12,14 +12,17 @@ public class JSonDataParser {
 		Gson gson = new Gson();
 		return gson.fromJson(jsondata.toString(), classOfT);
 	}
+
+	public static <T>T getTestDataFromJson(String jsondata, Class<T> classOfT) {
+		Gson gson = new Gson();
+		return gson.fromJson(jsondata, classOfT);
+	}
 	
-	public static <T>T getTestDataFromJson(String jsonFilePath, Class<T> classOfT) throws IOException {
+	public static <T>T getTestDataFromJson(File filejson, Class<T> classOfT) throws IOException {
 		
 		ObjectMapper obj = new ObjectMapper();
 		Reader reader = null;
 		try {
-			File filejson =
-	                new File(jsonFilePath);
 	    	reader = new FileReader(filejson);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

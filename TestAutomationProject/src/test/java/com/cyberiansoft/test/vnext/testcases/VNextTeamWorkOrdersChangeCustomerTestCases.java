@@ -20,6 +20,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeamEditionRegistration {
@@ -154,7 +155,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
                                                                              String description, JSONObject testData) throws IOException {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json", WholesailCustomer.class);
+        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json"), WholesailCustomer.class);
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -178,7 +179,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
                                                                       String description, JSONObject testData) throws IOException {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json", WholesailCustomer.class);
+        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json"), WholesailCustomer.class);
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -200,7 +201,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
 
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 
-        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json", WholesailCustomer.class);
+        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json"), WholesailCustomer.class);
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -230,7 +231,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json", WholesailCustomer.class);
+        WholesailCustomer testwholesailcustomer = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json"), WholesailCustomer.class);
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
         workordersscreen.switchToTeamWorkordersView();

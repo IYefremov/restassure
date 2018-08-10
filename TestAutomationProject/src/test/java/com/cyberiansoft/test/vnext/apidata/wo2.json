@@ -1,0 +1,46 @@
+{
+
+  "ClientId":"{{ClientId}}",
+  "OrderTypeId":"{{OrderTypeId}}",
+  "OrderId":"{{OrderId}}",
+  "OrderStatusID":2,
+  "Approved":true,
+  "EmployeeId":"{{EmployeeId}}",
+  "VehicleID":"{{VehicleID}}",
+  "LicenceId":"{{LicenceId}}",
+  "UTCTime":"{{UTCTime}}",
+  "OrderDate":"{{OrderDate}}",
+  "TeamId":"ce349208-9aab-4be6-a1a4-0399e2e3f690",
+  "TimeZoneOffset":120,
+  "LocalNo":1220,
+  "Amount":0.0,
+  "ServiceGroupId":"b36c4dcf-cd00-43ba-96b0-4bf0b0b22616",
+  "StockNo":"",
+  "RONo":"",
+  "OrderEmployees":[{
+    "OrderId":"{{OrderId}}",
+    "EmployeeId":"{{EmployeeId}}",
+    "Amount":100,
+    "additionalProperties":{}}],
+  "OrderServices":[],
+  "Vehicle":{
+    "VehicleID": "{{VehicleID}}",
+    "VIN":"77777777777777777",
+    "Make": "Acura",
+    "Model":"1.6 EL",
+    "Color":"",
+    "Year":2007,
+    "PlateNo":"",
+    "Milage":"",
+    "additionalProperties":{}},
+  "Device":{
+    "DeviceId":"{{DeviceId}}",
+    "LicenceId":"{{LicenceId}}",
+    "OSTypeId":5,
+    "UTCTime":"{{UTCTime}}",
+    "TimeZoneOffset":3,
+    "EmployeeId":"{{EmployeeId}}",
+    "additionalProperties":{}},
+  "additionalProperties":{}
+
+}

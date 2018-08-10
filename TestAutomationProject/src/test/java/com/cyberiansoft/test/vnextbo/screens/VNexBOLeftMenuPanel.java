@@ -17,7 +17,7 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	@FindBy(id = "mainMenu")
 	private WebElement mainmenu;
 	
-	@FindBy(xpath = "//span[@data-id='inspections']")
+	@FindBy(xpath = "//span[@data-id='inspectiontypes']")
 	private WebElement inspectionsmenu;
 	
 	@FindBy(xpath = "//span[@data-id='invoices']")

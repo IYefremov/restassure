@@ -9,7 +9,7 @@ public class VNextAppUtils {
 	public static void resetApp() {
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		DriverBuilder.getInstance().getAppiumDriver().resetApp();
-		BaseUtils.waitABit(30*1000);
+		BaseUtils.waitABit(15*1000);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 	}
 	

@@ -29,8 +29,8 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	
     @Override
 	public synchronized void onStart(ITestContext context) {
-    	ExtentManager.createInstance(VNextConfigInfo.getInstance().geReportFolderPath() +
-    			VNextConfigInfo.getInstance().geReportFileName());
+    	ExtentManager.createInstance(VNextConfigInfo.getInstance().getReportFolderPath() +
+    			VNextConfigInfo.getInstance().getReportFileName());
     	//ExtentTest parent = extent.createTest(getClass().getName());
         //parentTest.set(parent);
 	}
@@ -79,7 +79,7 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
 		try {
 			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot(VNextConfigInfo.getInstance().geReportFolderPath(), "fail")).build());
+			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot(VNextConfigInfo.getInstance().getReportFolderPath(), "fail")).build());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

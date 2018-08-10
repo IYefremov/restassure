@@ -36,7 +36,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsApproveButton']")
 	private WebElement approveinspectionicon;
 	
-	@FindBy(id = "inspections-search")
+	@FindBy(id = "inspectiontypes-search")
 	private WebElement searchinspectionspanel;
 	
 	@FindBy(id = "advSearchEstimation-freeText")

@@ -16,8 +16,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
 
@@ -31,7 +33,6 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
-
 
 
     public void setServiceAmountValue(String serviceName, String amount) {
@@ -189,6 +190,25 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     public WebElement getSelectedServicesList() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         return wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//div[@data-autotests-id='all-services']"))));
+    }
+
+    public boolean isPriceMatrixValuePresentForSelectedServicesByName(String serviceName, String matrixservicename) {
+        boolean exists = false;
+        List<WebElement> servcells = getServicesListItems().stream().
+                filter(elemnt -> elemnt.findElement(By.xpath(".//div[@class='checkbox-item-title']")).
+                        getText().trim().equals(serviceName)).collect(Collectors.toCollection(ArrayList::new));
+        for (WebElement srv : servcells) {
+            if (srv.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).
+                    getText().trim().equals(matrixservicename))
+                return true;
+        }
+        return exists;
+    }
+
+    public int getNumberOfServicesSelectedByName(String serviceName) {
+        return getServicesListItems().stream().
+                filter(elemnt -> elemnt.findElement(By.xpath(".//div[@class='checkbox-item-title']")).
+                        getText().trim().equals(serviceName)).collect(Collectors.toCollection(ArrayList::new)).size();
     }
 
     public String getSelectedPriceMatrixValueForPriceMatrixService(String matrixservicename) {

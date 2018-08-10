@@ -12,8 +12,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NadaEMailService {
 
@@ -214,6 +217,14 @@ public class NadaEMailService {
         return  present;
     }
 
+    public String getMailMessageBySybjectKeywords(NadaEMailService.MailSearchParametersBuilder mailSearchParameters) throws Exception {
+        EmailMessage message = null;
+        if (waitForMessage(mailSearchParameters)) {
+            message = getMessageWithSubject(mailSearchParameters.getSubjectKeyword());
+        }
+        return message.getHtml();
+    }
+
     public boolean downloadMessageAttachment(NadaEMailService.MailSearchParametersBuilder mailSearchParameters) throws Exception {
         if (waitForMessage(mailSearchParameters)) {
             InboxEmail inboxEmail = this.getInbox()
@@ -258,5 +269,23 @@ public class NadaEMailService {
                 .map(InboxEmail::getMessageId)
                 .map(this::deleteMessageById)
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public List<String> getUrlsFromMessage(String message, String linkText) {
+        List<String> allMatches = new ArrayList<String>();
+        Matcher matcher = Pattern.compile("(<a [^>]+>)" + linkText + "<.a>").matcher(message);
+        while (matcher.find()) {
+            String aTag = matcher.group(1);
+            allMatches.add(aTag.substring(aTag.indexOf("http"), aTag.indexOf("\">")));
+        }
+        return allMatches;
+    }
+
+    public void deleteAllMessages() throws IOException, UnirestException {
+       List<InboxEmail> InboxEmails =  getInbox();
+       for (InboxEmail mail : InboxEmails) {
+           deleteMessageById(mail.getMessageId());
+       }
+
     }
 }

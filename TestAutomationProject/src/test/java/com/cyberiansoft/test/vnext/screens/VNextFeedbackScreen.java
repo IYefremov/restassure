@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,19 +18,19 @@ import java.util.List;
 
 public class VNextFeedbackScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[@class='view view-main' and @data-page='form']")
+	@FindBy(xpath="//div[@data-page='feedback-form']")
 	private WebElement feedbackscreen;
 	
 	@FindBy(xpath="//*[@action='type']/input[2]")
 	private WebElement feedbacktypefld;
 	
-	@FindBy(xpath="//*[@data-page='types']")
+	@FindBy(xpath="//*[@data-page='feedback-types']")
 	private WebElement typeslist;
 	
 	@FindBy(xpath="//*[@action='sections']/input[2]")
 	private WebElement areafld;
 	
-	@FindBy(xpath="//*[@data-page='sections']")
+	@FindBy(xpath="//*[@data-page='feedback-sections']")
 	private WebElement areaslist;
 	
 	@FindBy(id="FeedbackSubject")
@@ -44,7 +44,7 @@ public class VNextFeedbackScreen extends VNextBaseScreen {
 	
 	public VNextFeedbackScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		BaseUtils.waitABit(3000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(feedbackscreen));
@@ -66,6 +66,10 @@ public class VNextFeedbackScreen extends VNextBaseScreen {
 	}
 	
 	public void setFeedbackSubject(String subject) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(subjectfld));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("FeedbackSubject")));
 		subjectfld.clear();
 		subjectfld.sendKeys(subject);
 	}

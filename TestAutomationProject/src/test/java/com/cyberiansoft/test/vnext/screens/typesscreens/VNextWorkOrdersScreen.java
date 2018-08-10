@@ -132,6 +132,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 	
 	public void switchToMyWorkordersView() {
 		switchToMyView();
+
 	}
 	
 	public boolean isMyWorkordersViewActive() {

@@ -35,7 +35,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	@FindBy(xpath="//a[@handler='_refreshPictures']")
 	private WebElement invoicerfreshpicturesbtn;
 
-	@FindBy(xpath="//a[@data-name='pay']")
+	@FindBy(xpath="//a[@data-name='payMulti']")
 	private WebElement invoicepaymenubtn;
 
 	@FindBy(xpath="//a[@data-name='cancel']")
@@ -97,7 +97,8 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 
 	public VNextPayInvoicesScreen clickPayInvoiceMenuItem() {
 		clickMenuItem(invoicepaymenubtn);
-		return new VNextPayInvoicesScreen(appiumdriver);
+        VNextPayMenu payMenu = new VNextPayMenu(appiumdriver);
+        return payMenu.clickPayCreditCardMenuItem();
 	}
 
 	public boolean isInvoiceChangePONumberMenuItemExists() {

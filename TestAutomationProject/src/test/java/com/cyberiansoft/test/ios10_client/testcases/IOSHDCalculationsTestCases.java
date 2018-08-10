@@ -880,8 +880,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	String inspectionnumber32286 = null;
 	
-	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount", 
-			description = "Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount")
+	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
+			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
 	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1() throws Exception {
 
 		final String VIN = "111111111111111";
@@ -946,8 +946,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 	}
 	
-	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount", 
-			description = "Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount")
+	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
+			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
 	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2() throws Exception {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
@@ -970,8 +970,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	String inspectionnumber32287 = null;
 	
-	@Test(testName = "Test Case 32287:Inspections: HD - Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount", 
-			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount")
+	@Test(testName = "Test Case 32287:Inspections: HD - Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount",
+			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount")
 	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1() throws Exception {
 		
 		final String VIN  = "1D7HW48NX6S507810";
@@ -1024,8 +1024,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 	}
 	
-	@Test(testName = "Test Case 32287:Inspections: HD - Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount", 
-			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspections list > column ApprovedAmount")
+	@Test(testName = "Test Case 32287:Inspections: HD - Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount",
+			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount")
 	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2() throws Exception {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -2675,8 +2675,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
-	@Test(testName="Test Case 49856:SR: HD - Verify ALM flow when approve both inspections", 
-			description = "SR: Verify ALM flow when approve both inspections")
+	@Test(testName="Test Case 49856:SR: HD - Verify ALM flow when approve both inspectiontypes",
+			description = "SR: Verify ALM flow when approve both inspectiontypes")
 	public void testSRVerifyALMFlowWhenApproveBothInspections()
 			throws Exception {
 		
@@ -2915,8 +2915,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen.clickHomeButton();	
 	}
 	
-	@Test(testName="Test Case 49896:SR: HD - Verify ALM flow when decline both inspections", 
-			description = "SR: Verify ALM flow when decline both inspections")
+	@Test(testName="Test Case 49896:SR: HD - Verify ALM flow when decline both inspectiontypes",
+			description = "SR: Verify ALM flow when decline both inspectiontypes")
 	public void testSRVerifyALMFlowWhenDeclineBothInspections()
 			throws Exception {
 		

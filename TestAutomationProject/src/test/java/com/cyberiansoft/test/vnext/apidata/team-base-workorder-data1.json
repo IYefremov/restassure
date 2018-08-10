@@ -1,0 +1,27 @@
+{
+
+  "ClientId":"{{ClientId}}",
+  "OrderTypeId":"{{OrderTypeId}}",
+  "OrderId":"{{OrderId}}",
+  "OrderStatusID":2,
+  "Approved":1,
+  "EmployeeId":"{{EmployeeId}}",
+  "VehicleID":"{{VehicleID}}",
+  "LicenceId":"{{LicenceId}}",
+  "UTCTime":"{{UTCTime}}",
+  "OrderDate":"{{OrderDate}}",
+  "TeamId":"ce349208-9aab-4be6-a1a4-0399e2e3f690",
+  "TimeZoneOffset":120,
+  "LocalNo":1220,
+  "Amount":0,
+  "ServiceGroupId":"b36c4dcf-cd00-43ba-96b0-4bf0b0b22616",
+  "StockNo":"",
+  "RONo":"",
+  "OrderEmployees":[{
+    "OrderId":"{{OrderId}}",
+    "EmployeeId":"{{EmployeeId}}",
+    "Amount":100}],
+  "OrderServices":[],
+  "Vehicle":{},
+  "Vehicle":{}
+}

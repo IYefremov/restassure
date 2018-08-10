@@ -71,11 +71,11 @@ public class VNextConfigInfo {
 	      return props.getProperty("build.production");
 	}
 	
-	public String geReportFolderPath() {
+	public String getReportFolderPath() {
 	      return props.getProperty("report.folder");
 	}
 	
-	public String geReportFileName() { return props.getProperty("report.filename"); }
+	public String getReportFileName() { return props.getProperty("report.filename"); }
 
 	public boolean installNewBuild() {
     	boolean installNewBuild = false;

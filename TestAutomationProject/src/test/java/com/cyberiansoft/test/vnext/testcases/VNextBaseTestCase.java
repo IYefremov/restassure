@@ -56,9 +56,11 @@ public class VNextBaseTestCase {
 	protected static boolean buildproduction;
 	protected static BrowserType browsertype;
 	protected static MobilePlatform mobilePlatform;
-	protected static String appID;
+
 	protected static String deviceID;
 	protected static String licenseID;
+	protected static String appID;
+	protected static String appLicenseEntity;
 	
 	@BeforeSuite
 	public void startServer()  {
@@ -228,9 +230,6 @@ public class VNextBaseTestCase {
 
 		devicespage.setSearchCriteriaByName(licensename);
 		final String regCode = devicespage.getFirstRegCodeInTable();
-		appID = getApplicationID();
-		deviceID = getDeviceID();
-		licenseID = getLicenseID();
 		webdriver.quit();
 		
 		//AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
@@ -244,7 +243,6 @@ public class VNextBaseTestCase {
 		appiumdriver.launchApp();
 
 		switchToWebViewContext();*/
-		
 		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		verificationscreen.setDeviceRegistrationCode(regCode);
 		verificationscreen.clickVerifyButton(); 
@@ -256,32 +254,37 @@ public class VNextBaseTestCase {
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		VNextDownloadDataScreen downloaddatascreen = new VNextDownloadDataScreen(appiumdriver);
+
+
+        DriverBuilder.getInstance().setDriver(browsertype);
+        webdriver = DriverBuilder.getInstance().getDriver();
+        WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
+
+        loginpage = PageFactory.initElements(webdriver,
+                BackOfficeLoginWebPage.class);
+        loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
+                VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
+        backofficeheader = PageFactory.initElements(webdriver,
+                BackOfficeHeaderPanel.class);
+        companypage = backofficeheader.clickCompanyLink();
+        devicespage = companypage.clickManageDevicesLink();;
+
+        devicespage.setSearchCriteriaByName(licensename);
+
+		deviceID = devicespage.getDeviceID();
+		licenseID = devicespage.getLicenseID();
+        appID = devicespage.getApplicationID();
+        appLicenseEntity = devicespage.getLicenseEntityName();
+        webdriver.quit();
+
+
 		downloaddatascreen.waitUntilDatabasesDownloaded();
-		//WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 240);
-		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
+
 		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationdlg.clickInformationDialogOKButton();
 	}
 
-	private String getApplicationID() {
-		final String appLogoStart = "/AppLogo/";
-		final String appIDEnd = ".png";
-		String appid = webdriver.findElement(By.id("ctl00_ctl00_AppLogo2_LogoImage")).getAttribute("src");
-		return  appid.substring(appid.indexOf(appLogoStart) + appLogoStart.length() , appid.indexOf(appIDEnd));
-	}
 
-	private String getDeviceID() {
-		final String appcontext = webdriver.findElement(By.xpath("//a[contains(@id, 'ctl00_ctl00_Content_Main_devices_ctl00')]")).getAttribute("href");
-		final String deviceIDStart = "deviceId=";
-		final String deviceIDEnd = "&licenceId=";
-		return appcontext.substring(appcontext.indexOf(deviceIDStart) + deviceIDStart.length(), appcontext.indexOf(deviceIDEnd));
-	}
-
-	private String getLicenseID() {
-		final String appcontext = webdriver.findElement(By.xpath("//a[contains(@id, 'ctl00_ctl00_Content_Main_devices_ctl00')]")).getAttribute("href");
-		final String licenseIDStart = "&licenceId=";
-		return appcontext.substring(appcontext.indexOf(licenseIDStart) + licenseIDStart.length(), appcontext.length());
-	}
 	
 	/////////////////////////////
 	/*@SuppressWarnings("unchecked")

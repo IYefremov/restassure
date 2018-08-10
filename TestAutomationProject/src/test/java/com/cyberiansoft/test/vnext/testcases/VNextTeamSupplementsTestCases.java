@@ -5,14 +5,14 @@ import com.cyberiansoft.test.dataclasses.InspectionStatuses;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnext.factories.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -214,42 +214,147 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 	public void testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection(String rowID,
             String description, JSONObject testData) throws Exception {
 
-		/*final String DATA_FILE1 = "src/test/java/com/cyberiansoft/test/vnext/data/team-base-inspection-data.json";
+		/*employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/team-device-employee.json"), Employee.class);
 
+		deviceID = "2d0d9673-47db-4afb-a256-177d1bbc2aa4";
+		licenseID = "30dba201-c20a-4b54-849c-27a371525bb4";
+		//device.setUTCTime(GlobalUtils.getDeviceTime());
+
+		//device.setEmployeeId(employee.getEmployeeID());
+		appID = "f6a0d1a8-0d5d-4850-9930-5670dfa26403";
+		appLicenseEntity = "357";
+
+
+		final String apiPath = VNextDataInfo.getInstance().getPathToAPIDataFiles();
+		final String dataPath = VNextDataInfo.getInstance().getPathToDataFiles();
+		final String DATA_FILE1 = "team-base-workorder-data1.json";
+		WorkOrderDTO workOrderDTO = JsonUtils.getWorkOrderDTO(new File(apiPath + DATA_FILE1),
+				new File(apiPath + VNextDataInfo.getInstance().getDefaultVehicleInfoDataFileName()),
+				new File(apiPath + VNextDataInfo.getInstance().getDefaultDeviceInfoDataFileName()));
+
+
+
+		GenericObjectPoolConfig config = new GenericObjectPoolConfig();
+		config.setMaxIdle(1);
+		config.setMaxTotal(10);
+
+
+		config.setTestOnBorrow(true);
+		config.setTestOnReturn(true);
+		WOPool woPool = new WOPool(new WorkOrderFactory(workOrderDTO, WorkOrderTypes.O_KRAMAR,
+				employee.getEmployeeID(), licenseID, deviceID, appID, appLicenseEntity), config);
+
+
+
+		final GenericObjectPool<WorkOrderDTO> inspectionGenericObjectPool = new GenericObjectPool<WorkOrderDTO>(new WorkOrderFactory(WorkOrderTypes.O_KRAMAR, DATA_FILE1, device, employee, appID, appLicenseEntity), config);
+		System.out.println("+++++" + inspectionGenericObjectPool.getMaxTotal());
+		for (int i = 0; i < inspectionGenericObjectPool.getMaxTotal(); i++)
+			inspectionGenericObjectPool.addObject();
+
+
+		for (int i = 0; i < inspectionGenericObjectPool.getMaxTotal(); i++) {
+			WorkOrderDTO workOrder1 = inspectionGenericObjectPool.borrowObject();
+			System.out.println("Active [" + inspectionGenericObjectPool.getNumActive() + "]"); //Return the number of instances currently borrowed from this pool
+			System.out.println("Idle [" + inspectionGenericObjectPool.getNumIdle() + "]"); //The number of instances currently idle in this pool
+			System.out.println("Total Created [" + inspectionGenericObjectPool.getCreatedCount() + "]");
+			System.out.println("Number! [" + workOrder1.getLocalNo());
+					inspectionGenericObjectPool.invalidateObject(workOrder1);
+		}*/
+
+
+/*
+		final String DATA_FILE0 = "src/test/java/com/cyberiansoft/test/vnext/data/team-base-inspection-data1.json";
+		jso = JSONDataProvider.extractData_JSON(DATA_FILE0);
+		gson = new Gson();
+		Inspection inspection = gson.fromJson(jso.toString(), Inspection.class);
+
+		GenericObjectPoolConfig config1 = new GenericObjectPoolConfig();
+		config.setMaxIdle(1);
+		config.setMaxTotal(10);
+
+
+		config.setTestOnBorrow(true);
+		config.setTestOnReturn(true);
+		final GenericObjectPool<Inspection> inspectionGenericObjectPool1 = new GenericObjectPool<Inspection>(new InspectionFactory(InspectionTypes.O_KRAMAR, inspection, device, employee, appID, appLicenseEntity), config1);
+		for (int i = 0; i < inspectionGenericObjectPool1.getMaxTotal(); i++)
+			inspectionGenericObjectPool1.addObject();
+
+
+
+		for (int i = 0; i < inspectionGenericObjectPool1.getMaxTotal(); i++) {
+			Inspection inspectionq = inspectionGenericObjectPool1.borrowObject();
+			System.out.println("Active [" + inspectionGenericObjectPool1.getNumActive() + "]"); //Return the number of instances currently borrowed from this pool
+			System.out.println("Idle [" + inspectionGenericObjectPool1.getNumIdle() + "]"); //The number of instances currently idle in this pool
+			System.out.println("Total Created [" + inspectionGenericObjectPool1.getCreatedCount() + "]");
+			System.out.println("Number! [" + inspectionq.getLocalNo());
+			inspectionGenericObjectPool1.invalidateObject(inspectionq);
+		}*/
+
+
+		/*InspPool pool1 = new InspPool(new com.cyberiansoft.test.objectpoolsi.InspectionFactory(InspectionTypes.O_KRAMAR,inspection, device, employee, appID, appLicenseEntity), config);
+for (int i = 0; i < pool1.getMaxTotal(); i++) {
+	pool1.borrowObject();
+	System.out.println("Active [" + pool1.getNumActive() + "]"); //Return the number of instances currently borrowed from this pool
+	System.out.println("Idle [" + pool1.getNumIdle() + "]"); //The number of instances currently idle in this pool
+	System.out.println("Total Created [" + pool1.getCreatedCount() + "]");
+}*/
+
+
+
+
+
+		/*final String DATA_FILE1 = "src/test/java/com/cyberiansoft/test/vnext/data/team-base-workorder-data1.json";
 		JSONObject jso = JSONDataProvider.extractData_JSON(DATA_FILE1);
 		Gson gson = new Gson();
-        Inspection inspection = gson.fromJson(jso.toString(), Inspection.class);
+		WorkOrder workOrder = gson.fromJson(jso.toString(), WorkOrder.class);
 
-		System.out.println("+++++" + inspection.getDevice().getLicenceId());
-		System.out.println("+++++" + inspection.getDevice().getEmployeeId());
-		System.out.println("+++++" + inspection.getDevice().getDeviceId());
-		appID = "f6a0d1a8-0d5d-4850-9930-5670dfa26403";
-		System.out.println("+++++" + appID);
+		Pool<WorkOrder> pool =
+				new BoundedPool< WorkOrder >(
+						10,
+						new TypeValidator(),
+						new WOFactory(WorkOrderTypes.O_KRAMAR, workOrder, device, employee, appID, appLicenseEntity)
+				);
+		System.out.println("==============================================");
+
+		for (int i = 0; i < 9; i++) {
+			System.out.println("+++++" + pool.size());
+			WorkOrder wo = pool.get();
+			System.out.println("++++++++=" + wo.getLocalNo());
+		}*/
+		/*Iterator it = pool.iterator();
+		while (it.hasNext()) {
+			System.out.println("+++++" + pool.size());
+			WorkOrder wo = pool.get();
+			System.out.println("++++++++=" + wo.getLocalNo());
+		}*/
 
 
-		String estimationId =  UUID.randomUUID().toString();
-		String vehicleID =  UUID.randomUUID().toString();
-		inspection.setEstimationId(estimationId);
-		inspection.setVehicleID(vehicleID);
-		inspection.getVehicle().setVehicleID(vehicleID);
 
-        ApplicationEndpoints app = new RestClient().createClient();
-		System.out.println("++++=================" + vehicleID);
-		System.out.println("!!!!=================" + inspection.getVehicleID());
-		System.out.println("!!!!=================" + inspection.getVehicle().getVehicleID());
+		/*Pool< Inspection > pool =
+				new BoundedBlockingPool< Inspection >(
+						10,
+						new InspectionValidator(),
+						new InspectionFactory(InspectionTypes.O_KRAMAR,inspection, device, employee, appID, appLicenseEntity)
+				);
+        System.out.println("==============================================");
+		Iterator it = pool.iterator();
+		while (it.hasNext()) {
+			System.out.println("+++++" + pool.size());
+			Inspection insp = pool.get();
+			System.out.println("++++++++=" + insp.getEstimationId());
+            System.out.println("++++++++=" + insp.getLocalNo());
+		}*/
 
 
 
-		Response<BasicResponse> res = app.saveInspection(estimationId, inspection.getDevice().getLicenceId(), inspection.getDevice().getDeviceId(),
-             appID, inspection.getDevice().getEmployeeId(), true, inspection).execute();
+		//VNextAPIHelper.createInspection(InspectionTypes.O_KRAMAR,inspection, device, employee, appID, appLicenseEntity);
 
-		System.out.println("=================" + res.body().getErrorCode());
-		System.out.println("=================" + res.body().getResult());
-		System.out.println("=================" + res.body().getErrorDescription());*/
+
 		InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);

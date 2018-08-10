@@ -28,9 +28,10 @@ import java.util.Map;
         "EstimationServices",
         "InspectionDetails",
         "EstimationAnswers",
-        "Device"
+        "Device",
+        "ApprovedAmount"
 })
-public class Inspection {
+public class InspectionDTO {
 
     @JsonProperty("ClientId")
     private String ClientId;
@@ -55,7 +56,9 @@ public class Inspection {
     @JsonProperty("LocalNo")
     private Integer LocalNo;
     @JsonProperty("Amount")
-    private Integer Amount;
+    private Double Amount;
+    @JsonProperty("ApprovedAmount")
+    private Double ApprovedAmount;
     @JsonProperty("EStatusID")
     private Integer EStatusID;
     @JsonProperty("StockNo")
@@ -65,7 +68,7 @@ public class Inspection {
     @JsonProperty("OtherInsuranceName")
     private Object OtherInsuranceName;
     @JsonProperty("Vehicle")
-    private Vehicle Vehicle;
+    private VehicleDTO Vehicle;
     @JsonProperty("EstimationServices")
     private List<Object> EstimationServices = null;
     @JsonProperty("InspectionDetails")
@@ -73,7 +76,7 @@ public class Inspection {
     @JsonProperty("EstimationAnswers")
     private List<Object> EstimationAnswers = null;
     @JsonProperty("Device")
-    private Device Device;
+    private DeviceDTO Device;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -188,13 +191,24 @@ public class Inspection {
     }
 
     @JsonProperty("Amount")
-    public Integer getAmount() {
+    public Double getAmount() {
         return Amount;
     }
 
     @JsonProperty("Amount")
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.Amount = amount;
+    }
+
+
+    @JsonProperty("ApprovedAmount")
+    public Double getApprovedAmount() {
+        return ApprovedAmount;
+    }
+
+    @JsonProperty("ApprovedAmount")
+    public void setApprovedAmount(Double approvedAmount) {
+        this.ApprovedAmount = approvedAmount;
     }
 
     @JsonProperty("EStatusID")
@@ -238,12 +252,12 @@ public class Inspection {
     }
 
     @JsonProperty("Vehicle")
-    public Vehicle getVehicle() {
+    public VehicleDTO getVehicle() {
         return Vehicle;
     }
 
     @JsonProperty("Vehicle")
-    public void setVehicle(Vehicle vehicle) {
+    public void setVehicle(VehicleDTO vehicle) {
         this.Vehicle = vehicle;
     }
 
@@ -278,12 +292,12 @@ public class Inspection {
     }
 
     @JsonProperty("Device")
-    public Device getDevice() {
+    public DeviceDTO getDevice() {
         return Device;
     }
 
     @JsonProperty("Device")
-    public void setDevice(Device device) {
+    public void setDevice(DeviceDTO device) {
         this.Device = device;
     }
 

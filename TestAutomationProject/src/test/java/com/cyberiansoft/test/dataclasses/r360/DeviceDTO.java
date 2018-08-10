@@ -14,7 +14,7 @@ import java.util.Map;
         "TimeZoneOffset",
         "EmployeeId"
 })
-public class Device {
+public class DeviceDTO {
 
     @JsonProperty("DeviceId")
     private String DeviceId;

@@ -9,6 +9,9 @@ public class RetailCustomer implements AppCustomer {
 	
 	@JsonProperty("lastName")
 	private String lastName;
+
+	@JsonProperty("clientId")
+	private String clientId;
 	
 	private String companyName;
 	private String mailAddress;
@@ -74,7 +77,11 @@ public class RetailCustomer implements AppCustomer {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;		
 	}
-	
+
+	public void setClientId(String clientId) { this.clientId = clientId; }
+
+	public String getClientId() { return clientId; }
+
 	public String getCustomerPhone() {
 		return customerPhone;
 	}

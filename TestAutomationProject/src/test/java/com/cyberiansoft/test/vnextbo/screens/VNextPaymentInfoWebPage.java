@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.concurrent.TimeUnit;
 
 public class VNextPaymentInfoWebPage extends VNextBOBaseWebPage {
 	
@@ -48,16 +47,16 @@ public class VNextPaymentInfoWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//*[@data-automation-id='paymentFormZipCode']")
 	private WebElement zipfld;
 	
-	@FindBy(xpath = "//*[@aria-owns='companyInfo-country_listbox']")
+	@FindBy(xpath = "//*[@aria-owns='payment-view-country_listbox']")
 	private WebElement countrycmbx;
 	
-	@FindBy(id = "companyInfo-country_listbox")
+	@FindBy(id = "payment-view-country_listbox")
 	private WebElement paymentcountrylistbox;
 	
-	@FindBy(xpath = "//*[@aria-owns='companyInfo-state_listbox']")
+	@FindBy(xpath = "//*[@aria-owns='payment-view-state_listbox']")
 	private WebElement statecmbx;
 	
-	@FindBy(id = "companyInfo-state_listbox")
+	@FindBy(id = "payment-view-state_listbox")
 	private WebElement paymentcstatelistbox;
 	
 	@FindBy(xpath = "//*[@data-automation-id='paymentFormtermsAndConditions']")
@@ -152,6 +151,7 @@ public class VNextPaymentInfoWebPage extends VNextBOBaseWebPage {
 	
 	public void selectBillingCountry(String billingcountry) {
 		countrycmbx.click();
+        countrycmbx.sendKeys(billingcountry);
 		new WebDriverWait(driver, 5)
 		  .until(ExpectedConditions.elementToBeClickable(paymentcountrylistbox));
 		paymentcountrylistbox.findElement(By.xpath("./li[text()='" + billingcountry + "']")).click();
@@ -161,6 +161,7 @@ public class VNextPaymentInfoWebPage extends VNextBOBaseWebPage {
 	
 	public void selectBillingState(String billingstate) {
 		statecmbx.click();
+        statecmbx.sendKeys(billingstate);
 		new WebDriverWait(driver, 5)
 		  .until(ExpectedConditions.elementToBeClickable(paymentcstatelistbox));
 		paymentcstatelistbox.findElement(By.xpath("./li[text()='" + billingstate + "']")).click();
@@ -191,5 +192,14 @@ public class VNextPaymentInfoWebPage extends VNextBOBaseWebPage {
 	public void clickSaveButton() {
 		savebtn.click();
 	}
+
+    public void clickSaveAndCloseCongratsModal() {
+        clickSaveButton();
+        WebElement el = new WebDriverWait(driver, 15)
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("paymentCongratsModal")));
+		new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.visibilityOf(el.findElement(By.xpath(".//button[@class='close']"))));
+        el.findElement(By.xpath(".//button[@class='close']")).click();
+    }
 
 }

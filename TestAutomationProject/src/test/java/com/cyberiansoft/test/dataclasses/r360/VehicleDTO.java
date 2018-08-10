@@ -16,7 +16,7 @@ import java.util.Map;
         "PlateNo",
         "Milage"
 })
-public class Vehicle {
+public class VehicleDTO {
 
     @JsonProperty("VehicleID")
     private String VehicleID;

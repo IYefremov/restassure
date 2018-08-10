@@ -76,7 +76,7 @@ public class ActiveDevicesWebPage extends BasePage {
 			replacemarker.click();
 		else {
 			devicestable.getWrappedElement().findElement(By.xpath(".//a[text()='x']")).click();
-			waitABit(3000);
+			//waitABit(3000);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));
 			replacemarker.click();
 		}
@@ -159,4 +159,30 @@ public class ActiveDevicesWebPage extends BasePage {
         }
         return null;
     }
+
+	public String getLicenseEntityName() {
+		final String entitysrart = "&entityName=0002-0";;
+		String href = driver.findElement(By.xpath("//a[@title='Audit Log']")).getAttribute("href");
+		return  href.substring(href.indexOf(entitysrart) + entitysrart.length() , href.indexOf(entitysrart) + entitysrart.length() + 3);
+	}
+
+	public String getApplicationID() {
+		final String appLogoStart = "/AppLogo/";
+		final String appIDEnd = ".png";
+		String appid = driver.findElement(By.id("ctl00_ctl00_AppLogo2_LogoImage")).getAttribute("src");
+		return  appid.substring(appid.indexOf(appLogoStart) + appLogoStart.length() , appid.indexOf(appIDEnd));
+	}
+
+	public String getDeviceID() {
+		final String appcontext = driver.findElement(By.xpath("//a[contains(@id, 'ctl00_ctl00_Content_Main_devices_ctl00')]")).getAttribute("href");
+		final String deviceIDStart = "deviceId=";
+		final String deviceIDEnd = "&licenceId=";
+		return appcontext.substring(appcontext.indexOf(deviceIDStart) + deviceIDStart.length(), appcontext.indexOf(deviceIDEnd));
+	}
+
+	public String getLicenseID() {
+		final String appcontext = driver.findElement(By.xpath("//a[contains(@id, 'ctl00_ctl00_Content_Main_devices_ctl00')]")).getAttribute("href");
+		final String licenseIDStart = "&licenceId=";
+		return appcontext.substring(appcontext.indexOf(licenseIDStart) + licenseIDStart.length(), appcontext.length());
+	}
 }

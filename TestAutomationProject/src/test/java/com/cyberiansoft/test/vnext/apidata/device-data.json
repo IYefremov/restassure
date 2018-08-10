@@ -1,0 +1,8 @@
+{
+    "DeviceId": "{{DeviceId}}",
+    "LicenceId":"{{LicenceId}}",
+    "OSTypeId":5,
+    "UTCTime":"{{UTCTime}}",
+    "TimeZoneOffset":3,
+    "EmployeeId":"{{EmployeeId}}"
+}

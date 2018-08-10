@@ -24,8 +24,8 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		homescreen.clickQueueMessageIcon();
 	}
 
-	@Test(testName= "Test Case 36312:vNext - Manual - Verify outgoing sync message is pushed into queue when save several inspections", 
-			description = "Manual - Verify outgoing sync message is pushed into queue when save several inspections")
+	@Test(testName= "Test Case 36312:vNext - Manual - Verify outgoing sync message is pushed into queue when save several inspectiontypes",
+			description = "Manual - Verify outgoing sync message is pushed into queue when save several inspectiontypes")
 	public void testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveSeveralInspection() {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
