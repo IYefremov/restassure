@@ -32,7 +32,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
         @Override
         public synchronized void onStart(ITestContext context) {
         ExtentManager.createInstance("report/" +
-                VNextConfigInfo.getInstance().geReportFileName());
+                VNextConfigInfo.getInstance().getReportFileName());
             try {
                 FileUtils.cleanDirectory(new File("report"));
             } catch (IOException e) {

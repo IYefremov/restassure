@@ -8,6 +8,8 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
 
 
 public class AppiumConfiguration {
@@ -25,7 +28,7 @@ public class AppiumConfiguration {
                 DateTimeFormatter.ofPattern("MMdd");
 		//LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
 		LocalDate date = LocalDate.now();
-		//date = date.minusDays(1);
+		date = date.minusDays(1);
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:
@@ -36,8 +39,8 @@ public class AppiumConfiguration {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				//File app = new File(appDir, "Repair360AndroidTeam.apk");
-				File app = new File(appDir, "Repair360Android.apk");
+				File app = new File(appDir, "Repair360AndroidTeam.apk");
+				//File app = new File(appDir, "Repair360Android.apk");
 				appiumcap = new DesiredCapabilities();
 
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 
@@ -50,6 +53,9 @@ public class AppiumConfiguration {
 	    		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
 	    		//appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.APPIUM);
 	    		appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+				LoggingPreferences logPrefs = new LoggingPreferences();
+				logPrefs.enable(LogType.BROWSER, Level.ALL);
+				appiumcap.setCapability(MobileCapabilityType.LOGGING_PREFS, logPrefs);
 	    		//appiumcap.setCapability(MobileCapabilityType.APP,
 	    		//		"http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_0618.app.zip");
 	     

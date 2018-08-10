@@ -326,7 +326,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         DuplicateInspectionsWebPage duplicateInspectionsWebPage = inspectionsWebPage.clickDuplicateByVINLink();
         duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
         Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayed(data.getVIN()), "The VIN has not been displayed");
-        //todo uncomment after the inspections with unique VIN numbers will be created
+        //todo uncomment after the inspectiontypes with unique VIN numbers will be created
 //        Assert.assertTrue(duplicateInspectionsWebPage.isInspectionDisplayed(data.getInspectionNum1()),
 //                "The inspection #1 has not been displayed for duplicate by VIN");
 //        Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayedForInspection(data.getInspectionNum2(), data.getVIN()),

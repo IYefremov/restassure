@@ -10,7 +10,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
-import com.cyberiansoft.test.vnext.factories.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
@@ -23,6 +23,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -123,8 +124,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.clickBackButton();
 	}
 	
-	@Test(testName= "Test Case 66286:Verify when user go back from inspections screen to Home we save last selected mode", 
-			description = "Verify when user go back from inspections screen to Home we save last selected mode")
+	@Test(testName= "Test Case 66286:Verify when user go back from inspectiontypes screen to Home we save last selected mode",
+			description = "Verify when user go back from inspectiontypes screen to Home we save last selected mode")
 	public void testVerifyWhenUserGoBackFromInspectionsScreenToHomeWeSaveLastSelectedMode() {
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -158,9 +159,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(InspectionTypes.ANASTASIA_TEAM);
-		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(appiumdriver);
-		servicesScreen.changeScreen("Vehicle Info");
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
@@ -179,8 +178,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.clickBackButton();
 	}
 	
-	@Test(testName= "Test Case 66284:Verify only when user tap 'search' button we perform search and refresh team inspections list",
-			description = "Verify only when user tap 'search' button we perform search and refresh team inspections list")
+	@Test(testName= "Test Case 66284:Verify only when user tap 'search' button we perform search and refresh team inspectiontypes list",
+			description = "Verify only when user tap 'search' button we perform search and refresh team inspectiontypes list")
 	public void testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList() {
 
 		final String vinnumber = "TEST";
@@ -398,8 +397,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
 	
-	@Test(testName= "Test Case 67331:Verify user can edit 'My inspections' if we have no internet connection", 
-			description = "Verify user can edit 'My inspections' if we have no internet connection")
+	@Test(testName= "Test Case 67331:Verify user can edit 'My inspectiontypes' if we have no internet connection",
+			description = "Verify user can edit 'My inspectiontypes' if we have no internet connection")
 	public void testVerifyUserCanEditMyInspectionsIfWeHaveNoInternetConnection() {
 
 		final String vinnumber = "123";
@@ -596,6 +595,36 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();	
+	}
+
+	@Test(testName= "Verify it is not possible to edit Team Inspection with device on Fly-mode",
+			description = "Verify it is not possible to edit Team Inspection with device on Fly-mode")
+	public void testVerifyItIsNotPossibleToEditTeamInspectionWithDeviceOnFlyMode() {
+
+		final String vinnumber = "TEST";
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToMyInspectionsView();
+		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(testwholesailcustomer);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+
+		vehicleinfoscreen.saveInspectionAsDraft();
+		inspectionscreen.switchToTeamInspectionsView();
+		AppiumUtils.setNetworkOff();
+		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextInformationDialog informationDialog = inspectionsMenuScreen.clickEditInspectionMenuItemWithAlert();
+		Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+				VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
+		AppiumUtils.setNetworkOn();
+		inspectionscreen.switchToMyInspectionsView();
+		inspectionscreen.clickBackButton();
 	}
 	
 	public String createSimpleInspection(AppCustomer inspcustomer, InspectionTypes insptype, String vinnumber) {

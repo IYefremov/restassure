@@ -1,10 +1,11 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -24,7 +25,7 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 	
 	public VNextRegistrationLineOfBusinessScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("business-type-view")));
 		BaseUtils.waitABit(1000);
@@ -40,10 +41,16 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 		tap(businesstypefld);
 		BaseUtils.waitABit(500);
 		tap(appiumdriver.findElement(By.xpath("//ul/li/a/span[text()='" + lineofbusiness + "']")));
+		tap(appiumdriver.findElement(By.id("selection-list-view")).findElement(By.xpath(".//span[contains(@data-bind, 'click: onSubmit')]")));
 	}
 	
 	public void clickDoneButton() {
-		tap(businesstypescreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]/span/i")));
+		try {
+			tap(businesstypescreen.findElement(By.xpath(".//div[@class='pull-right']/div[contains(@data-bind, 'navigateNext')]")));
+		} catch (UnhandledAlertException e) {
+			BaseUtils.waitABit(1000);
+			tap(businesstypescreen.findElement(By.xpath(".//div[@class='pull-right']/div[contains(@data-bind, 'navigateNext')]")));
+		}
 	}
 	
 }

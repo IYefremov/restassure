@@ -4,10 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -127,6 +124,12 @@ public class VNextBaseScreen {
 	
 	public void clickScreenTitleCaption() {
 		tap(appiumdriver.findElement(By.xpath("//span[@class='page-title']")));
+		BaseUtils.waitABit(1000);
+		try {
+			appiumdriver.findElement(By.xpath("//span[@class='page-title']")).click();
+		} catch (WebDriverException e) {
+
+		}
 	}
 	
 	public boolean elementExists(String xpath) {

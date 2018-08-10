@@ -9,13 +9,20 @@ public class Employee {
 	
 	@JsonProperty("employeePassword")
 	private String employeePassword;
-	
+
+	@JsonProperty("employeeId")
+	private String employeeId;
+
 	public String getEmployeeName() {
 		return employeeName;
 	}
 	
 	public String getEmployeePassword() {
 		return employeePassword;
+	}
+
+	public String getEmployeeID() {
+		return employeeId;
 	}
 
 }

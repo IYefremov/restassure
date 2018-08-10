@@ -102,6 +102,11 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	public boolean isInvoiceExists(String invoicenumber) {
 		return invoiceslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoicenumber + "']")).size() > 0;
 	}
+
+	public void waitUntilInvoiceDisappearsFromList(String invoiceNumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 3);
+		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.xpath("//div[@class='checkbox-item-title' and text()='" + invoiceNumber + "']"), 1));
+	}
 	
 	public void unselectAllSelectedInvoices() {
 		if (cancelselectedinvoices.isDisplayed())

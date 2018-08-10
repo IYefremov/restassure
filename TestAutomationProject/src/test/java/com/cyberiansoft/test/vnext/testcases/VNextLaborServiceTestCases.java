@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnext.factories.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;

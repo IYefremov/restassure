@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,7 +50,7 @@ public class VNextRegistrationOverviewScreen extends VNextBaseScreen {
 	
 	public VNextRegistrationOverviewScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(registrationoverviewscreen));
 	}
@@ -100,7 +100,7 @@ public class VNextRegistrationOverviewScreen extends VNextBaseScreen {
 	}
 	
 	public void clickDoneButton() {
-		tap(registrationoverviewscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]/span/i")));
+		tap(registrationoverviewscreen.findElement(By.xpath(".//div[@class='pull-right']/div[contains(@data-bind, 'navigateNext')]")));
 	}
 
 }

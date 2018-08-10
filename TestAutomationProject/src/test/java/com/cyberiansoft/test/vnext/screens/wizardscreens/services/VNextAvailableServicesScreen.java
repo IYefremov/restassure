@@ -94,6 +94,18 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 			Assert.assertTrue(false, "Can't find service: " + serviceName);
 	}
 
+	public int getServiceAmountSelectedValue(String serviceName) {
+		int amaount = 0;
+		WebElement servicerow = getServiceListItem(serviceName);
+		amaount = Integer.valueOf(servicerow.findElement(By.xpath(".//input[@action='select-item']")).getAttribute("data-counter"));
+		if (servicerow != null) {
+			amaount = Integer.valueOf(servicerow.findElement(By.xpath(".//input[@action='select-item']")).getAttribute("data-counter"));
+		}
+		else
+			Assert.assertTrue(false, "Can't find service: " + serviceName);
+		return amaount;
+	}
+
 	public VNextLaborServiceDetailsScreen selectLaborService(String laborServiceName) {
 		WebElement servicerow = getServiceListItem(laborServiceName);
 		if (servicerow != null) {
@@ -178,7 +190,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 	public void selectMatrixService(String matrixservicename) {
 		WebElement servicerow = getServiceListItem(matrixservicename);
 		if (servicerow != null)
-			tap(servicerow.findElement(By.xpath(".//input[@action='select']")));
+			tap(servicerow.findElement(By.xpath(".//input[@action='select-item']")));
 		else
 			Assert.assertTrue(false, "Can't find service: " + matrixservicename);
 	}

@@ -2378,10 +2378,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
-	//Test Case 23966:Inspections: Test saving inspections with three matrix
+	//Test Case 23966:Inspections: Test saving inspectiontypes with three matrix
 	//Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price
-	@Test(testName="Test Case 23966:Inspections: Test saving inspections with three matrix, "
-			+ "Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price", description = "'Inspections: Test saving inspections with three matrix")
+	@Test(testName="Test Case 23966:Inspections: Test saving inspectiontypes with three matrix, "
+			+ "Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price", description = "'Inspections: Test saving inspectiontypes with three matrix")
 	public void testSavingInspectionsWithThreeMatrix() throws Exception {
 			
 		final String VIN = "111111111111111";
@@ -4774,7 +4774,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 	}
 	
-	@Test(testName = "Test Case 33116:Inspections: HD - Verify that text notes are copied to new inspections when use copy action", description = "Verify that text notes are copied to new inspections when use copy action")
+	@Test(testName = "Test Case 33116:Inspections: HD - Verify that text notes are copied to new inspectiontypes when use copy action", description = "Verify that text notes are copied to new inspectiontypes when use copy action")
 	public void testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction() throws Exception {
 			
 		final String VIN  = "1D7HW48NX6S507810";
@@ -5139,8 +5139,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		teaminspectionsscreen.clickHomeButton();
 	}
 	
-	@Test(testName = "Test Case 30013:Inspections: HD - Verify that Approve option is present in multi-select mode only one or more not approved inspections are selected", 
-			description = "Verify that Approve option is present in multi-select mode only one or more not approved inspections are selected")
+	@Test(testName = "Test Case 30013:Inspections: HD - Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected",
+			description = "Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected")
 	public void testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected() throws Exception {
 			
 		final String VIN  = "1D7HW48NX6S507810";
@@ -5246,8 +5246,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		teaminspectionsscreen.clickHomeButton();
 	}
 	
-	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount", 
-			description = "Verify that amount of approved services are shown on BO > inspections list > column ApprovedAmount")
+	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
+			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
 	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount() throws Exception {
 		
 		final String VIN  = "1D7HW48NX6S507810";
@@ -5731,8 +5731,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 	
-	@Test(testName="Test Case 45251:SR: HD - Verify multiple inspections and multiple work orders to be tied to a Service Request", 
-			description = "SR: HD - Verify multiple inspections and multiple work orders to be tied to a Service Request")
+	@Test(testName="Test Case 45251:SR: HD - Verify multiple inspectiontypes and multiple work orders to be tied to a Service Request",
+			description = "SR: HD - Verify multiple inspectiontypes and multiple work orders to be tied to a Service Request")
 	public void testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest()
 			throws Exception {
 		

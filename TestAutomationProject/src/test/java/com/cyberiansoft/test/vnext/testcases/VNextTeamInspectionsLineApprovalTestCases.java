@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnext.factories.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
@@ -203,7 +203,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
+		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
@@ -215,11 +215,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspmenu = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
-		inspmenu.clickApproveInspectionMenuItem();		
-		
-		VNextApproveServicesScreen approveservicesscreen = new VNextApproveServicesScreen(appiumdriver);
-		approveservicesscreen.clickApproveAllButton();
-		approveservicesscreen.clickSaveButton();
+		inspmenu.clickApproveInspectionMenuItem();
 
 		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();

@@ -118,7 +118,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
             if (searchfld.getAttribute("value").length() > 1) {
                 //searchfld.clear();
                 tap(clearsearchicon);
-                WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
+                WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspectiontypes']"));
             }
             clickCancelSearchButton();
         }

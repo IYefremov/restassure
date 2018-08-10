@@ -114,7 +114,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
 
-	@FindBy(xpath = "//a[contains(text(), 'RO')]") //todo change the locator to verify only 'by RO' duplicates (after the inspections will be corrected)
+	@FindBy(xpath = "//a[contains(text(), 'RO')]") //todo change the locator to verify only 'by RO' duplicates (after the inspectiontypes will be corrected)
 	private WebElement duplicateByRO;
 
 	@FindBy(xpath = "//a[contains(text(), 'by VIN')]")

@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.factories;
+package com.cyberiansoft.test.vnext.factories.inspectiontypes;
 
 public enum InspectionTypes {
 
@@ -6,7 +6,7 @@ public enum InspectionTypes {
     O_KRAMAR2("O_Kramar2"),
     O_KRAMAR3("O_Kramar3"),
     INSP_TYPE_APPROV_REQUIRED("Insp_type_approv_req"),
-    ANASTASIA_TEAM("Anastasia_team");
+    O_KRAMAR_NO_SHARING("O_Kramar_No_Sharing");
 
     private final String inspType;
 
@@ -25,6 +25,6 @@ public enum InspectionTypes {
             }
         }
 
-        throw new IllegalArgumentException(inspType + " is not a valid DentWizardInvoiceTypes");
+        throw new IllegalArgumentException(inspType + " is not a valid Inspection Type");
     }
 }

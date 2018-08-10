@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
@@ -13,11 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static io.appium.java_client.touch.WaitOptions.waitOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-import static io.appium.java_client.touch.offset.PointOption.point;
-import static java.time.Duration.ofSeconds;
 
 
 public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen {
@@ -55,7 +48,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	
 	public VNextRegistrationNewUserPersonalInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal-info-view")));
 	}
@@ -137,11 +130,15 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[contains(@data-bind, 'data.stateText')]")));
 	}
-	
+
+	public void clickBackButton() {
+		personalinfouserscreen.findElement(By.xpath(".//a[@data-role='button']")).click();
+	}
+
 	public void clickDoneButton() {
 		System.out.println(personalinfouserscreen.findElements(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]")).size());
-		tap(personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]")));
-		personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]")).click();
+		tap(personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/div[contains(@data-bind, 'navigateNext')]")));
+		/*personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]")).click();
 		WebElement el = personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]"));
 		new TouchAction(appiumdriver).tap(TapOptions.tapOptions().withElement(element (el, el.getLocation().getX()+3, el.getLocation().getY()+3)))
                 .waitAction(waitOptions(ofSeconds(2))).perform();
@@ -175,7 +172,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 
 		el = personalinfouserscreen.findElement(By.xpath(".//div[@class='pull-right']/a[contains(@data-bind, 'navigateNext')]/span/i"));
 		if (appiumdriver instanceof JavascriptExecutor)
-			((JavascriptExecutor)appiumdriver).executeScript("arguments[0].click();", el);
+			((JavascriptExecutor)appiumdriver).executeScript("arguments[0].click();", el);*/
 	}
 
 

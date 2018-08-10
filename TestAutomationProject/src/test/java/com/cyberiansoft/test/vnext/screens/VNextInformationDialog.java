@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -29,6 +30,9 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	}
 	
 	public String getInformationDialogMessage() {
+		BaseUtils.waitABit(300);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='modal-text']")));
 		return modaldlgmsg.getText();
 	}
 	

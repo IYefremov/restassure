@@ -1,0 +1,32 @@
+{
+  "ClientId": "7b1554aa-215e-4c99-a079-540561c8b1cb",
+  "EstimationTypeId": "{{EstimationTypeId}}",
+  "EstimationId": "{{EstimationId}}",
+  "EmployeeId": "6a837231-b9cf-40d9-9d7c-7e37c4cf367f",
+  "VehicleID": "{{VehicleID}}",
+  "LicenceID": "{{}}",
+  "UTCTime": "{{EstimationDateTime}}",
+  "EstimationDate": "{{EstimationDate}}",
+  "TeamId": "ce349208-9aab-4be6-a1a4-0399e2e3f690",
+  "TimeZoneOffset": 120,
+  "LocalNo": 0,
+  "Amount": 0,
+  "EStatusID": 0,
+  "StockNo": "",
+  "RONo": "",
+  "OtherInsuranceName": null,
+  "Vehicle": {
+    "VehicleID": "{{VehicleID}}",
+    "VIN": "77777777777777777",
+    "Make": "Acura",
+    "Model": "1.6 EL",
+    "Color": "",
+    "Year": 2007,
+    "PlateNo": "",
+    "Milage": ""
+  },
+  "EstimationServices": [],
+  "InspectionDetails": [],
+  "EstimationAnswers": []
+
+}

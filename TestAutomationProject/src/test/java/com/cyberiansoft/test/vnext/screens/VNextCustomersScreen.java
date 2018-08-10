@@ -54,8 +54,9 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(1500);
 		if (checkHelpPopupPresence())		
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-		if (cancelsearchbtn.isDisplayed())
-			tap(cancelsearchbtn);
+		if (elementExists("//*[@data-autotests-id='search-cancel']"))
+			if (cancelsearchbtn.isDisplayed())
+				tap(cancelsearchbtn);
 	}
 	
 	public void selectCustomer(AppCustomer customer) {
@@ -90,17 +91,19 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	
 	public VNextNewCustomerScreen clickAddCustomerButton() {
 		tap(customersscreen.findElement(By.xpath(".//a[@class='floating-button color-red']")));
-		/*List<WebElement> addbtns = customersscreen.findElements(By.xpath(".//a[@action='add' and @data-text='Create new customer']"));
-		for (WebElement addbtn : addbtns) {
-			if (addbtn.isDisplayed())
-				tap(addbtn);
-		}*/
+		tap(customersscreen.findElement(By.xpath(".//a[@action='add_customer' and @class='customers-button']")));
+		//tap(customersscreen.findElement(By.xpath(".//a[@action='add' and @class='customers-button']")));
+		return new VNextNewCustomerScreen(appiumdriver);
+	}
+
+	public VNextNewCustomerScreen clickAddR360CustomerButton() {
+		tap(customersscreen.findElement(By.xpath(".//a[@class='floating-button color-red']")));
 		tap(customersscreen.findElement(By.xpath(".//a[@action='add' and @class='customers-button']")));
 		return new VNextNewCustomerScreen(appiumdriver);
 	}
 	
 	public boolean isAddCustomerButtonDisplayed() {
-		return customersscreen.findElement(By.xpath(".//a[@action='add']")).isDisplayed();
+		return customersscreen.findElements(By.xpath(".//a[@action='add']")).size() > 0;
 	}
 
 	public boolean isAddCustomerButtonExists() {

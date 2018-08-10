@@ -92,7 +92,7 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	public void setUserPaymentSecurityCode(String securitycode) {
 		tap(securitycodefld);
 		appiumdriver.getKeyboard().sendKeys(securitycode);
-		//appiumdriver.hideKeyboard();
+		appiumdriver.hideKeyboard();
 	}
 	
 	public void clickUseRegistrationAddress() {
@@ -101,7 +101,7 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void clickDoneButton() {
-		tap(paymentinfoscreen.findElement(By.xpath(".//a[contains(@data-bind, 'navigateNext')]/span/i")));
+		tap(paymentinfoscreen.findElement(By.xpath(".//div[contains(@data-bind, 'navigateNext')]")));
 	}
 	
 	public String getUserAddress1Value() {

@@ -1,8 +1,9 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.factories.InspectionTypeData;
-import com.cyberiansoft.test.vnext.factories.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypeData;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
@@ -12,6 +13,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -77,6 +79,13 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickFinalButton();
 	}
+
+	public VNextInspectionsScreen saveInspectionAsDraft() {
+		clickSaveInspectionMenuButton();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickDraftButton();
+		return new VNextInspectionsScreen(appiumdriver);
+	}
 	
 	public VNextInspectionsScreen saveInspectionViaMenu() {
 		clickSaveInspectionMenuButton();
@@ -92,8 +101,16 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 	
 	public void clickMenuButton() {
 		tap(menubtn);
-	}
-	
+
+        BaseUtils.waitABit(1000);
+        if (elementExists("//*[@action='more_actions']"))
+        	try {
+				menubtn.click();
+			} catch (WebDriverException e) {
+
+			}
+}
+
 	public void clickSaveInspectionMenuButton() {
 		clickMenuButton();
 		tap(saveinspectionmenu);

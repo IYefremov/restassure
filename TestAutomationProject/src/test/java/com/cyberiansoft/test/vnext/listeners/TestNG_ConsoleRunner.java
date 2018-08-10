@@ -265,7 +265,7 @@ public class TestNG_ConsoleRunner extends TestListenerAdapter {
     public void writeTestngLog(String logFile,String line) {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date date = new Date();
-        File directory = new File(VNextConfigInfo.getInstance().geReportFolderPath());
+        File directory = new File(VNextConfigInfo.getInstance().getReportFolderPath());
         File file = new File(logFile);
 
         try {

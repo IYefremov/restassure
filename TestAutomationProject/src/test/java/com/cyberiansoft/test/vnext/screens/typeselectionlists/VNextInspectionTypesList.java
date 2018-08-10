@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typeselectionlists;
 
-import com.cyberiansoft.test.vnext.factories.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextTypeScreenContext;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import io.appium.java_client.AppiumDriver;

@@ -30,7 +30,7 @@ public class iOSHDClientListener extends TestListenerAdapter implements IInvoked
     @Override
 	public synchronized void onStart(ITestContext context) {
     	ExtentManager.createInstance("report/" +
-    			VNextConfigInfo.getInstance().geReportFileName());
+    			VNextConfigInfo.getInstance().getReportFileName());
     	//ExtentTest parent = extent.createTest(getClass().getName());
         //parentTest.set(parent);
 	}

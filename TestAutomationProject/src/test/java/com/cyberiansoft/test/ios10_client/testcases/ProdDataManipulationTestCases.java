@@ -31,6 +31,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 public class ProdDataManipulationTestCases extends BaseTestCase {
@@ -38,7 +39,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
     private String regCode;
     private RegularHomeScreen homescreen;
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/ios10_client/data/data-manipulation-testcases-data.json";
-    Employee employee = JSonDataParser.getTestDataFromJson("src/test/java/com/cyberiansoft/test/ios10_client/data/data-manipulation-device-employee-data.json", Employee.class);
+    Employee employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/ios10_client/data/data-manipulation-device-employee-data.json"), Employee.class);
 
     public ProdDataManipulationTestCases() throws IOException {
     }

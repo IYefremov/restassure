@@ -4,21 +4,19 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.email.EmailUtils;
-import com.cyberiansoft.test.email.emaildata.EmailFolder;
-import com.cyberiansoft.test.email.emaildata.EmailHost;
+import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,35 +28,35 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
 
 public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
-	
-	private String fromEmail = "ReconPro@cyberiansoft.com";
-	private String bodySearchText = "Dear ";
-	
-	final private String usermailprefix = "test.cyberiansoft+";
-	final private String usermailpostbox = "@gmail.com";
-	private String userregmail = "";
+
+
+	private String userregmail = "test.cyberiansoft@amail.club";
 	final private String confirmpsw = "111111";
 	
-	final private String userregphone = "6267477803";
-	final private String  userregphoneformatted = "(626) 747-7803";
+	final private String userregphone = "6267477836";
 	final private String userphonecountrycode = "1";
 	
 	@BeforeClass(description = "Setting up new suite")
-	public void settingUp() throws IOException {		
+	public void settingUp() {
 		setUp();
 		AppiumUtils.setNetworkOn();		
 	}
 	
 	@AfterClass(description = "Setting up new suite")
-	public void tearDown() throws Exception {
+	public void tearDown()  {
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		//appiumdriver.resetApp();	
 	}
 	
 	@BeforeMethod(description = "Setting up new suite")
-	public void resetApk() {
+	public void resetApk() throws IOException, UnirestException {
+        NadaEMailService nada = new NadaEMailService();
+        nada.setEmailId(userregmail);
+        nada.deleteAllMessages();
 		VNextAppUtils.resetApp();
 		setUp();
 	}
@@ -74,7 +72,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
+
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
@@ -94,10 +93,12 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		appiumdriver.switchTo().defaultContent();
 		BaseUtils.waitABit(5000);*/
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+		BaseUtils.waitABit(2000);
 		VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen =  new VNextRegistrationNewUserPersonalInfoScreen(appiumdriver);
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		BaseUtils.waitABit(2000);
 		newuserpersonalinfoscreen.clickDoneButton();
+
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
 		reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
@@ -118,18 +119,18 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		NadaEMailService nada = new NadaEMailService();
+		nada.setEmailId(userregmail);
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+				new NadaEMailService.MailSearchParametersBuilder()
+				.withSubject("Repair360 Free: REGISTRATION");
+		String mailmessage =  nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        nada.deleteMessageWithSubject("Repair360 Free: REGISTRATION");
+		String linkText= "Click here";
+		List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("Repair360 Free: REGISTRATION")
-				.unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+		String newbourl =  allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
 
-		String newbourl = "";
-		if (!mailmessage.equals(""))
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(newbourl);
 		VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
@@ -167,7 +168,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String bolineofbusiness = "PDR";
 		
 
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
@@ -225,22 +226,20 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		BaseUtils.waitABit(1000);
 		Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 60.00");
 		registrationoverviewlegalinfoscreen.clickPayNowButton();
-		/*
-		verificationscreen = new VNextVerificationScreen(appiumdriver);
-		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
-		verificationscreen.setDeviceRegistrationCode(regcode);
-		verificationscreen.clickVerifyButton();*/
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("PDR: REGISTRATION").unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
 
-		String newbourl = "";
-		if (!mailmessage.equals(""))
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
+        NadaEMailService nada = new NadaEMailService();
+        nada.setEmailId(userregmail);
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+                new NadaEMailService.MailSearchParametersBuilder()
+                        .withSubject("PDR: REGISTRATION");
+        String mailmessage =  nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
 
+        String linkText= "Click here";
+        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
+
+
+        String newbourl =  allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(newbourl);
@@ -266,7 +265,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
@@ -312,19 +311,22 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
-		regscreen.setLastName(userlastname);	
-		regscreen.setEmail(userregmail);
+		regscreen.setLastName(userlastname);
 		regscreen.setPhoneNumber("3182324555");
+        regscreen.setEmail(userregmail);
 		regscreen.clickDoneButton();
 		VNextPhoneMismatchDialog phonemismatchdlg = new VNextPhoneMismatchDialog(appiumdriver);
 		Assert.assertTrue(phonemismatchdlg.getInformationDialogBodyMessage().contains("Phone doesn't match this email"));
 		phonemismatchdlg.clickEmailMeMyPhoneButton();
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("Phone Number Reminder").unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+
+		NadaEMailService nada = new NadaEMailService();
+		nada.setEmailId(userregmail);
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+				new NadaEMailService.MailSearchParametersBuilder()
+						.withSubject("Phone Number Reminder");
+		String mailmessage =  nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+		//nada.deleteMessageWithSubject("Phone Number Reminder");
 
 		String userphone = "";
 		if (!mailmessage.equals(""))
@@ -343,7 +345,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
@@ -389,9 +391,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
-		regscreen.setLastName(userlastname);	
-		regscreen.setEmail("nonexistent@gmail.com");
+		regscreen.setLastName(userlastname);
 		regscreen.setPhoneNumber(userregphone);
+		regscreen.setEmail("nonexistent@gmail.com");
 		regscreen.clickDoneButton();
 		VNextEmailMismatchDialog mailmismatchdlg = new VNextEmailMismatchDialog(appiumdriver);
 		Assert.assertTrue(mailmismatchdlg.getInformationDialogBodyMessage().contains("Email doesn't match this phone"));
@@ -409,7 +411,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
@@ -455,9 +457,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
-		regscreen.setLastName(userlastname);	
-		regscreen.setEmail("mpstart@gmail.com");
+		regscreen.setLastName(userlastname);
 		regscreen.setPhoneNumber("3182324584");
+		regscreen.setEmail("mpstart@gmail.com");
 		regscreen.clickDoneButton();
 		VNextEmailMismatchDialog mailmismatchdlg = new VNextEmailMismatchDialog(appiumdriver);
 		Assert.assertTrue(mailmismatchdlg.getInformationDialogBodyMessage().contains("Email doesn't match this phone"));
@@ -485,7 +487,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String ibsEndSearchPhrase = " title=\"Client profile";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
@@ -525,15 +527,18 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		registrationoverviewlegalinfoscreen.clickSubmitButton();
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("Repair360 Free: REGISTRATION").unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
 
-		String newbourl = "";
-		if (!mailmessage.equals(""))
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));		
+        NadaEMailService nada = new NadaEMailService();
+        nada.setEmailId(userregmail);
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+                new NadaEMailService.MailSearchParametersBuilder()
+                        .withSubject("Repair360 Free: REGISTRATION");
+        String mailmessage =  nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String linkText= "Click here";
+        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
+
+        String newbourl =  allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
+
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(newbourl);
@@ -547,13 +552,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertFalse(leftmenu.isUsersMenuItemExists());
 		webdriver.quit();
 
-		emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("Welcome to Client Portal").unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage1 = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
 
-		String ibsurl = mailmessage1.substring(mailmessage1.indexOf(ibsStartSearchPhrase) + ibsStartSearchPhrase.length() + 1, mailmessage1.indexOf(ibsEndSearchPhrase) - 1);
+        searchParametersBuilder =
+                new NadaEMailService.MailSearchParametersBuilder()
+                        .withSubject("Welcome to Client Portal");
+        mailmessage =  nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+
+
+		String ibsurl = mailmessage.substring(mailmessage.indexOf(ibsStartSearchPhrase) + ibsStartSearchPhrase.length() + 1, mailmessage.indexOf(ibsEndSearchPhrase) - 1);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ibsurl);
@@ -594,7 +600,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String customeraddress = "Stryis'ka, 223";
 		final String customercity = "L'viv";
 		final String customerzip = "79051";
-		final String customeremail = "osmak.oksana+408222@gmail.com";
+		final String customeremail = "test.cyberiansoft+408222@gmail.com";
 		
 		final String testVIN = "1FMCU0DG4BK830800";
 		final String matrixservice = "Hail Dent Repair";
@@ -603,7 +609,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String vehiclepartsize = "Dime";	
 		final String[] vehiclepartseverities = { "6-15", "Light 6 to 15", "Light 6 to 15" };	
 		
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
@@ -672,7 +678,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+		VNextNewCustomerScreen newcustomerscreen = customersscreen. clickAddCustomerButton();
 		newcustomerscreen.setCustomerFirstName(firstname);
 		newcustomerscreen.setCustomerLastName(lastname);
 		newcustomerscreen.setCustomerEmail(customeremail);
@@ -697,7 +703,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 			vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 			inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 			VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
-			Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrixes[i]);
+			Assert.assertTrue(selectedServicesScreen.isPriceMatrixValuePresentForSelectedServicesByName(matrixservice, availablepricematrixes[i]));
 			inspservicesscreen = selectedServicesScreen.switchToAvalableServicesView();
 		}
 		inspectionsscreen = inspservicesscreen.cancelInspection();
@@ -729,14 +735,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String customeraddress = "Stryis'ka, 223";
 		final String customercity = "L'viv";
 		final String customerzip = "79051";
-		final String customeremail = "osmak.oksana+408222@gmail.com";
+		final String customeremail = "test.cyberiansoft+408222@gmail.com";
 		
 		final String testVIN = "1FMCU0DG4BK830800";
 		final String matrixservice = "Hail Dent Repair";
 		final String availablepricematrix = "State Farm";
 		
 		
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
@@ -839,7 +845,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
@@ -894,11 +900,13 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		feedbackscreen.setFeedbackDescription(feedbackDesc);
 		feedbackscreen.clickSendButton();
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("Test Feedback Repair360").unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters));
+		NadaEMailService nada = new NadaEMailService();
+		nada.setEmailId(userregmail);
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+				new NadaEMailService.MailSearchParametersBuilder()
+						.withSubject("Test Feedback Repair360");
+		Assert.assertTrue(nada.waitForMessage(searchParametersBuilder));
+
 	}
 	
 	@Test(testName= "Test Case 64407:R360: submit Customer Feedback from Repair360 ediition (upgraded from free)", 
@@ -914,14 +922,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		final String edition = "Repair360";
 		final String userfullname = "Oleksandr Kramar";
-		final String cardnumber = "4859103055178574";
+		final String cardnumber = "4242424242424242";
 		final String expirationmonth = "09";
 		final String expirationyear = "2021";
 		final String cvccode = "122";
 		final String billindaddressline1 = "First street 21/13";
 		final String billindcity = "New York";
 		final String billindzip = "79031";
-		final String billingcountry = "United States";
+		final String billingcountry = "United States of America";
 		final String billingstate = "California";
 		
 		final String feedbackType = "Feature Request";
@@ -932,7 +940,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
@@ -982,17 +990,20 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		//homescreen.clickUpgrateToProBanner();
 		VNextStatusScreen statuscsreen = homescreen.clickStatusMenuItem();
 		VNextEmailVerificationScreen emailverificationscren = statuscsreen.goToBackOfficeButton();
+		emailverificationscren.setEmailAddress(userregmail);
 		emailverificationscren.clickActivateButton();
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, VNextConfigInfo.getInstance().getUserCapiMail(),
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("Repair360 Free: REGISTRATION").unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+		NadaEMailService nada = new NadaEMailService();
+		nada.setEmailId(userregmail);
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+				new NadaEMailService.MailSearchParametersBuilder()
+						.withSubject("Repair360 Free: REGISTRATION");
+		String mailmessage =  nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+		nada.deleteMessageWithSubject("Repair360 Free: REGISTRATION");
+		String linkText= "Click here";
+		List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
 
-		String newbourl = "";
-		if (!mailmessage.equals(""))
-			newbourl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
+		String newbourl =  allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(newbourl);
@@ -1009,18 +1020,25 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		paymentinfopage.setUserPaymentsInfo(edition, userfullname, cardnumber, 
 				expirationmonth, expirationyear, cvccode, billindaddressline1, 
 				billindcity, billindzip, billingcountry, billingstate);
-		
-		paymentinfopage.waitABit(6000);
-		//todo: Bug here
-		
-		/*VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
+
+		paymentinfopage.clickSaveAndCloseCongratsModal();
+		webdriver.quit();
+
+		VNextStatusScreen statusscreen = new VNextStatusScreen(appiumdriver);
 		VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
 		feedbackscreen.selectFeedbackType(feedbackType);
 		feedbackscreen.selectArea(feedbackArea, subArea);
 		feedbackscreen.setFeedbackSubject(feedbackSubject);
 		feedbackscreen.setFeedbackDescription(feedbackDesc);
 		statusscreen = feedbackscreen.clickSendButton();
-		homescreen = statusscreen.clickBackButton();*/
+		statusscreen.clickBackButton();
+
+		nada = new NadaEMailService();
+		nada.setEmailId(userregmail);
+		searchParametersBuilder =
+				new NadaEMailService.MailSearchParametersBuilder()
+						.withSubject("Test Feedback Repair360").waitTimeForMessage(Duration.ofMinutes(10), Duration.ofSeconds(30));
+		Assert.assertTrue(nada.waitForMessage(searchParametersBuilder));
 	}
 	
 	@Test(testName= "Test Case 64408:R360: submit Customer Feedback from Repair360 ediition", 
@@ -1051,7 +1069,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String feedbackSubject = "Test Feedback Repair360";
 		final String feedbackDesc = "Testing kayako ticket creation from feedback send from Repair360 Free";
 
-		userregmail = usermailprefix + "99999111" + usermailpostbox;
+		//userregmail = usermailprefix + "99999111" + usermailpostbox;
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname , userphonecountrycode, userregphone, userregmail);
@@ -1124,6 +1142,6 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		feedbackscreen.setFeedbackSubject(feedbackSubject);
 		feedbackscreen.setFeedbackDescription(feedbackDesc);
 		statusscreen = feedbackscreen.clickSendButton();
-		homescreen = statusscreen.clickBackButton();
+		statusscreen.clickBackButton();
 	}
 }
