@@ -28,7 +28,7 @@ public class AppiumConfiguration {
                 DateTimeFormatter.ofPattern("MMdd");
 		//LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
 		LocalDate date = LocalDate.now();
-		//date = date.minusDays(1);
+		date = date.minusDays(1);
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:
@@ -39,8 +39,8 @@ public class AppiumConfiguration {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				//File app = new File(appDir, "Repair360AndroidTeam.apk");
-				File app = new File(appDir, "Repair360Android.apk");
+				File app = new File(appDir, "Repair360AndroidTeam.apk");
+				//File app = new File(appDir, "Repair360Android.apk");
 				appiumcap = new DesiredCapabilities();
 
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 
