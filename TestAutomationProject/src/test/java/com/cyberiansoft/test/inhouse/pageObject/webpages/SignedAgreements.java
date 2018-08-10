@@ -257,21 +257,37 @@ public class SignedAgreements extends BasePage {
         try {
             while(wait.until(ExpectedConditions
                     .visibilityOfElementLocated(By.xpath("//td[text()='" + deleteParameter + "']"))).isDisplayed()) {
-                wait.until(ExpectedConditions
-                        .elementToBeClickable(By.xpath("//a[@class='btn-delete btn-delete-potential-client']")))
-                        .click();
-                driver.switchTo().alert().accept();
-                try {
-                    wait.until(ExpectedConditions.visibilityOf(closeNotificationButton)).click();
-                } catch (Exception ignored) {}
-                waitABit(1500);
-                try {
-                    if (emptyDataTable.isDisplayed())
-                        break;
-                } catch (Exception ignored) {}
+                deleteClient();
+                if (isTableIsEmpty()) {
+                    break;
+                }
             }
         } catch (Exception ignored) {}
         return this;
+    }
+
+    private boolean isTableIsEmpty() {
+        try {
+            if (emptyDataTable.isDisplayed())
+                return true;
+        } catch (Exception ignored) {}
+        return false;
+    }
+
+    private void deleteClient() {
+        wait.until(ExpectedConditions
+                .elementToBeClickable(By.xpath("//a[@class='btn-delete btn-delete-potential-client']")))
+                .click();
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().accept();
+        clickCloseNotificationButton();
+    }
+
+    private void clickCloseNotificationButton() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(closeNotificationButton)).click();
+        } catch (Exception ignored) {}
+        waitABit(1500);
     }
 
     @Step

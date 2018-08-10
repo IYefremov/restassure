@@ -30,6 +30,33 @@ public class AddEditionDialog extends BasePage {
     @FindBy(xpath = "//div[@id='add-edition-dialog']//button[@class='btn btn-outline btn-submit']")
     private WebElement addEditionSubmitButton;
 
+    @FindBy(xpath = "//div[@id='add-edition-dialog']//button[@class='btn btn-sm blue btn-add-edition-discount']")
+    private WebElement addDiscountButton;
+
+    @FindBy(xpath = "//div[@id='add-edition-dialog']//div[@class='dropup open']")
+    private WebElement discountDropupOpen;
+
+    @FindBy(xpath = "//div[@id='add-edition-dialog']//div[@class='dropup']")
+    private WebElement discountDropupClosed;
+
+    @FindBy(xpath = "//div[@id='add-edition-dialog']//input[@name='MinCommitment']")
+    private WebElement discountMinimumLicenses;
+
+    @FindBy(xpath = "//div[@id='add-edition-dialog']//input[@name='NewPrice']")
+    private WebElement discountNewPrice;
+
+    @FindBy(xpath = "//div[@id='add-edition-dialog']//button[@class='cancel btn-cancel']")
+    private WebElement discountCancelButton;
+
+    @FindBy(xpath = "//div[@id='add-edition-dialog']//button[@class='submit btn-save-add-edition-discount']")
+    private WebElement discountSubmitButton;
+
+    @FindBy(xpath = "//table[@id='table-add-edition-discounts']//td[@class]")
+    private WebElement minimumLicensesValue;
+
+    @FindBy(xpath = "//table[@id='table-add-edition-discounts']//td[2]")
+    private WebElement newPriceValue;
+
     public AddEditionDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -58,6 +85,65 @@ public class AddEditionDialog extends BasePage {
     public AddEditionDialog clickRecommendedCheckbox() {
         wait.until(ExpectedConditions.elementToBeClickable(recommendedCheckbox)).click();
         return this;
+    }
+
+    public AddEditionDialog clickAddDiscountButton() {
+        clickButton(addDiscountButton);
+        try {
+            wait.until(ExpectedConditions.visibilityOf(discountDropupOpen));
+        } catch (Exception e) {
+            Assert.fail("The discount dropup has not been opened", e);
+        }
+        return this;
+    }
+
+    public AddEditionDialog typeMinimumLicenses(String license) {
+        clearAndType(discountMinimumLicenses, license);
+        return this;
+    }
+
+    public AddEditionDialog typeNewPrice(String price) {
+        clearAndType(discountNewPrice, price);
+        return this;
+    }
+
+    public AddEditionDialog clickCancelDiscountButton() {
+        clickButton(discountCancelButton);
+        verifyDiscountDropupIsClosed();
+        return this;
+    }
+
+    public AddEditionDialog clickSubmitDiscountButton() {
+        clickButton(discountSubmitButton);
+        verifyDiscountDropupIsClosed();
+        return this;
+    }
+
+    private void verifyDiscountDropupIsClosed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(discountDropupClosed));
+        } catch (Exception e) {
+            Assert.fail("The discount dropup has not been closed", e);
+        }
+    }
+
+    private boolean isValueDisplayed(WebElement value, String text) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(value));
+            wait.until(ExpectedConditions.textToBePresentInElement(value, text));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean isMinimumCommitmentValueDisplayed(String text) {
+        return isValueDisplayed(minimumLicensesValue, text);
+    }
+
+    public boolean isNewPriceValueDisplayed(String text) {
+        return isValueDisplayed(newPriceValue, text);
     }
 
     public PricingPage clickAddEditionSubmitButton() {

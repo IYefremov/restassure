@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseUserData;
+import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.TeamPortalUserData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.inhouse.pageObject.webpages.AgreementApprovePage;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class TeamPortalUserTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseUserData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/TeamPortalUserData.json";
     private MailChecker mailChecker;
 
     @BeforeClass()
@@ -29,7 +29,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddNewClient(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        TeamPortalUserData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
@@ -47,7 +47,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanEditClientInformation(String rowID, String description, JSONObject testData)  {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        TeamPortalUserData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
@@ -68,7 +68,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddAgreement(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        TeamPortalUserData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         SignedAgreements signedAgreements = leftMenuPanel
                 .clickSalesQuotes()
@@ -97,7 +97,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanSendNotifications(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        TeamPortalUserData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
@@ -146,7 +146,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanVerifyDatesWhenOpenMailWithLink(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        TeamPortalUserData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         AgreementApprovePage agreementApprovePage = PageFactory.initElements(webdriver, AgreementApprovePage.class);
 
@@ -200,7 +200,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanPayAgreementFromMailLink(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        TeamPortalUserData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         AgreementApprovePage agreementApprovePage = PageFactory.initElements(webdriver, AgreementApprovePage.class);
 
@@ -274,7 +274,7 @@ public class TeamPortalUserTestCases extends BaseTestCase {
     //todo fails S. Zakaulov
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class")
     public void testUserCanSelectServiceInAgreement(String rowID, String description, JSONObject testData) {
-        InHouseUserData data = JSonDataParser.getTestDataFromJson(testData, InHouseUserData.class);
+        TeamPortalUserData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalUserData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         SignedAgreements signedAgreements = leftMenuPanel
                 .clickSalesQuotes()

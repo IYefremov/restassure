@@ -6,5 +6,18 @@
       "editionName": "Auto Edition",
       "price": "100"
     }
+  ],
+
+  "verifyUserCanAddDiscountToEdition": [
+    {
+      "rowID": "verifyUserCanAddDiscountToEdition.01",
+      "description": "Test Case 76923:Verify User can add discount to Edition.",
+      "editionName": "Test Auto",
+      "price": "100",
+      "minCommitment": "1",
+      "newPrice": "15",
+      "minCommitment2": "3",
+      "newPrice2": "50"
+    }
   ]
 }

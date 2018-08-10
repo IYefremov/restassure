@@ -11,6 +11,7 @@
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalCategoriesTestCases"/>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalFinancialMappingTestCases"/>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalPricingPageTestCases"/>
         </classes>
     </test>
 </suite>

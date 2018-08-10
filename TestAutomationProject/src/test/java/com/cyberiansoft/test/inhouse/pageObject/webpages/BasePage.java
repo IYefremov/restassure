@@ -25,6 +25,7 @@ public class BasePage {
 
     public WebDriver driver;
     public static WebDriverWait wait;
+    public static WebDriverWait waitShortly;
 
     private static final long SLEEP_TIMEOUT_IN_SEC = 15;
 
@@ -35,6 +36,7 @@ public class BasePage {
         driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC * 2, TimeUnit.SECONDS);
 
         wait = new WebDriverWait(driver, 60, 250);
+        waitShortly = new WebDriverWait(driver, 5, 250);
     }
 
     @Step

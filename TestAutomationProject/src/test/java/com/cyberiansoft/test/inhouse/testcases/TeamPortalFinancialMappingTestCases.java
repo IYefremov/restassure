@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseRulesData;
+import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.TeamPortalRulesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.inhouse.pageObject.webpages.AccountsRulesPage;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class TeamPortalFinancialMappingTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseRulesData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/TeamPortalRulesData.json";
 
     @BeforeClass()
     public void settingUp() {
@@ -24,7 +24,7 @@ public class TeamPortalFinancialMappingTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddNewOrganisationRules(String rowID, String description, JSONObject testData) {
-        InHouseRulesData data = JSonDataParser.getTestDataFromJson(testData, InHouseRulesData.class);
+        TeamPortalRulesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalRulesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         OrganizationsRulesPage organizationsRulesPage = leftMenuPanel
                 .clickFinancialMapping()
@@ -39,7 +39,7 @@ public class TeamPortalFinancialMappingTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanSelectOrganisationFromList(String rowID, String description, JSONObject testData) {
-        InHouseRulesData data = JSonDataParser.getTestDataFromJson(testData, InHouseRulesData.class);
+        TeamPortalRulesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalRulesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         OrganizationsRulesPage organizationsRulesPage = leftMenuPanel
                 .clickFinancialMapping()
@@ -58,7 +58,7 @@ public class TeamPortalFinancialMappingTestCases extends BaseTestCase {
     //todo needs test data update from S. Zakaulov - ruleName2 cannot be updated
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanEditOrganisationRules(String rowID, String description, JSONObject testData) {
-        InHouseRulesData data = JSonDataParser.getTestDataFromJson(testData, InHouseRulesData.class);
+        TeamPortalRulesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalRulesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         OrganizationsRulesPage organizationsRulesPage = leftMenuPanel
                 .clickFinancialMapping()
@@ -83,7 +83,7 @@ public class TeamPortalFinancialMappingTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddNewAccountsRules(String rowID, String description, JSONObject testData) {
-        InHouseRulesData data = JSonDataParser.getTestDataFromJson(testData, InHouseRulesData.class);
+        TeamPortalRulesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalRulesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         AccountsRulesPage accountsRulesPage = leftMenuPanel
                 .clickFinancialMapping()
@@ -98,7 +98,7 @@ public class TeamPortalFinancialMappingTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddSelectAccountFromList(String rowID, String description, JSONObject testData) {
-        InHouseRulesData data = JSonDataParser.getTestDataFromJson(testData, InHouseRulesData.class);
+        TeamPortalRulesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalRulesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         AccountsRulesPage accountsRulesPage = leftMenuPanel
                 .clickFinancialMapping()
@@ -116,7 +116,7 @@ public class TeamPortalFinancialMappingTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanEditAccountsRules(String rowID, String description, JSONObject testData) {
-        InHouseRulesData data = JSonDataParser.getTestDataFromJson(testData, InHouseRulesData.class);
+        TeamPortalRulesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalRulesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         AccountsRulesPage accountsRulesPage = leftMenuPanel
                 .clickFinancialMapping()

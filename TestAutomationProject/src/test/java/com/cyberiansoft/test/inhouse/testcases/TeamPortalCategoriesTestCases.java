@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.inhouse.testcases;
 
-import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.InHouseCategoriesData;
+import com.cyberiansoft.test.dataclasses.inHouseTeamPortal.TeamPortalCategoriesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.inhouse.pageObject.webpages.CategoriesPage;
@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/InHouseCategoriesData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/inhouse/data/TeamPortalCategoriesData.json";
 
     @BeforeClass()
     public void settingUp() {
@@ -25,7 +25,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddNewCategories(String rowID, String description, JSONObject testData) {
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
@@ -40,7 +40,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddAttributeToCategories(String rowID, String description, JSONObject testData) {
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         CategoriesPage categoriesPage = leftMenuPanel
@@ -59,7 +59,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanSearchByKeyWord(String rowID, String description, JSONObject testData) {
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         ClientSegmentsPage clientSegmentsPage = leftMenuPanel
@@ -73,7 +73,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanManualAttribute(String rowID, String description, JSONObject testData) {
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
@@ -121,7 +121,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanAddAutomatedAttributeToCategories(String rowID, String description, JSONObject testData) {
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
 
         CategoriesPage categoriesPage = leftMenuPanel
                 .clickClients()
@@ -145,7 +145,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanSearchCategories(String rowID, String description, JSONObject testData) {
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
@@ -195,7 +195,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
     //the test case is similar to 59887, because of its preconditions
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCategoriesAreDisplayedWithAttributes(String rowID, String description, JSONObject testData) {
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
@@ -244,7 +244,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCategoriesCanBeSelectedAndDeselected(String rowID, String description, JSONObject testData) {
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel
@@ -290,7 +290,7 @@ public class TeamPortalCategoriesTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testValueCanBeAddedToAttribute(String rowID, String description, JSONObject testData) {
-        InHouseCategoriesData data = JSonDataParser.getTestDataFromJson(testData, InHouseCategoriesData.class);
+        TeamPortalCategoriesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalCategoriesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 
         SignedAgreements signedAgreements = leftMenuPanel

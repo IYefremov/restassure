@@ -2,7 +2,7 @@ package com.cyberiansoft.test.dataclasses.inHouseTeamPortal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class InHouseRulesData {
+public class TeamPortalRulesData {
 
     @JsonProperty("ruleName")
     private String ruleName;
