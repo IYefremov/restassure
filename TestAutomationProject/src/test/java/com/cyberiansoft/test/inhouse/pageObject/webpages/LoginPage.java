@@ -75,6 +75,7 @@ public class LoginPage extends BasePage {
                 }
             }
         }
+        waitABit(2000);
     }
 
     private void confirmMainGmail() {

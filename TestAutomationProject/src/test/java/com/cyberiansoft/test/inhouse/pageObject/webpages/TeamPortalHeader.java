@@ -6,13 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TeamPortalHeader extends BasePage {
 
-    @FindBy(id = "logoutForm")
-    List<WebElement> logoutBTN;
+    @FindBy(xpath = "//li/form[@id='logoutForm']")
+    private WebElement logoutButton;
 
     public TeamPortalHeader(WebDriver driver) {
         super(driver);
@@ -29,9 +28,6 @@ public class TeamPortalHeader extends BasePage {
         driver.switchTo().defaultContent();
         JavascriptExecutor jse = (JavascriptExecutor)driver;
         jse.executeScript("window.scrollBy(0,-400)", "");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {}
-        logoutBTN.get(1).click();
+        wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
-} 
+}

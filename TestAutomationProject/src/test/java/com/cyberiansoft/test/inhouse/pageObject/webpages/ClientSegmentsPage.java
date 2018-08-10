@@ -93,7 +93,7 @@ public class ClientSegmentsPage extends BasePage {
 
     @Step
     public ClientSegmentsPage deselectAttribute() {
-        waitABit(500);
+        waitABit(1500);
         wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
         wait.until(ExpectedConditions.visibilityOf(categoriesSelectionOpened));
         int sizeBeforeDeselection = wait.until(ExpectedConditions.visibilityOfAllElements(emptyAttributeValuesList)).size();
