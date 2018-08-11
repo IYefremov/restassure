@@ -9,6 +9,7 @@ import com.cyberiansoft.test.inhouse.pageObject.webpages.TeamPortalHeader;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.File;
@@ -50,17 +51,20 @@ public class BaseTestCase {
         }
         webdriver = DriverBuilder.getInstance().getDriver();
         webdriver.navigate().refresh();
+        try {
+            goToWebPage(InHouseConfigInfo.getInstance().getInHouseURL());
+            LoginPage loginPage = PageFactory.initElements(webdriver, LoginPage.class);
+            loginPage.loginByGmail();
+        } catch (Exception e) {
+            Assert.fail("The login has failed", e);
+        }
 
-        goToWebPage(InHouseConfigInfo.getInstance().getInHouseURL());
-        LoginPage loginPage = PageFactory.initElements(webdriver, LoginPage.class);
-        loginPage.loginByGmail();
     }
 
     @AfterMethod
     public void teamPortalLogout() {
-        TeamPortalHeader headerPanel = PageFactory.initElements(webdriver,
-                TeamPortalHeader.class);
         try {
+            TeamPortalHeader headerPanel = PageFactory.initElements(webdriver, TeamPortalHeader.class);
             headerPanel.clickLogoutButton();
             webdriver.get(InHouseConfigInfo.getInstance().getInHouseURL());
             webdriver.manage().deleteAllCookies();

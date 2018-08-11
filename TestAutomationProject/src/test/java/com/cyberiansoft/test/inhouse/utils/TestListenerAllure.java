@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.inhouse.utils;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.codehaus.plexus.util.FileUtils;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
@@ -33,8 +32,6 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
 //        AllureUtils.attachVideo();
-
-        DriverBuilder.getInstance().quitDriver();
     }
 
     @Override
@@ -43,8 +40,6 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
 //        AllureUtils.attachVideo();
-
-        DriverBuilder.getInstance().quitDriver();
     }
 
     @Override

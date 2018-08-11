@@ -77,8 +77,7 @@ public class ClientSegmentsPage extends BasePage {
 
     @Step
     public ClientSegmentsPage selectAttribute(String attributeName, String attributeValue) {
-        wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
-        wait.until(ExpectedConditions.visibilityOf(categoriesSelectionOpened));
+        clickCategoriesSelection();
         wait.until(ExpectedConditions
                 .elementToBeClickable(categoriesSelectionDropDown
                         .findElement(By.xpath("//span[contains(text(), '"+ attributeName + " ')]"))
@@ -93,9 +92,7 @@ public class ClientSegmentsPage extends BasePage {
 
     @Step
     public ClientSegmentsPage deselectAttribute() {
-        waitABit(1500);
-        wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
-        wait.until(ExpectedConditions.visibilityOf(categoriesSelectionOpened));
+        clickCategoriesSelection();
         int sizeBeforeDeselection = wait.until(ExpectedConditions.visibilityOfAllElements(emptyAttributeValuesList)).size();
         wait.until(ExpectedConditions.elementToBeClickable(attributeClearButton)).click();
         Assert.assertTrue(wait.until(e -> emptyAttributeValuesList.size() != sizeBeforeDeselection),
@@ -103,6 +100,17 @@ public class ClientSegmentsPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(attributeCloseButton)).click();
         wait.until(ExpectedConditions.visibilityOf(categoriesSelectionHidden));
         return this;
+    }
+
+    private void clickCategoriesSelection() {
+        try {
+            waitABit(1500);
+            wait.until(ExpectedConditions.elementToBeClickable(categoriesSelection)).click();
+            wait.until(ExpectedConditions.visibilityOf(categoriesSelectionOpened));
+        } catch (Exception e) {
+            Assert.fail("The categories selection has not been clicked", e);
+        }
+
     }
 
     @Step
@@ -115,7 +123,7 @@ public class ClientSegmentsPage extends BasePage {
     @Step
     public ClientSegmentsPage expandAttributesList(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//td[text()='" + name +
-                    "']/preceding::td[contains(@class, 'details-control')]")))).click(); //td[text()='CompanyAutomation']/preceding::td[contains(@class, 'details-control')]
+                    "']/preceding::td[contains(@class, 'details-control')]")))).click();
         wait.until(ExpectedConditions.visibilityOf(detailsShown));
         return this;
     }
