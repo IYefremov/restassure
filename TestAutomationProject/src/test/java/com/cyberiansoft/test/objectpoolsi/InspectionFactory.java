@@ -1,9 +1,7 @@
 package com.cyberiansoft.test.objectpoolsi;
 
-import com.cyberiansoft.test.dataclasses.Employee;
-import com.cyberiansoft.test.dataclasses.r360.DeviceDTO;
 import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
-import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.globalutils.GlobalUtils;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypeData;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -14,59 +12,67 @@ import com.google.gson.Gson;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
-import org.json.simple.JSONObject;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 import retrofit2.Response;
 
 import java.io.IOException;
 
 public class InspectionFactory extends BasePooledObjectFactory<InspectionDTO> {
 
+    private InspectionDTO inspectionDTO;
     private InspectionTypes inspectionType;
-    private String inspectionTemplateFilePath;
-    private DeviceDTO device;
-    private Employee employee;
+    private String customerID;
+    private String employeeID;
+    private String licenseID;
+    private String deviceID;
     private String appID;
     private String appLicenseEntity;
 
-    public InspectionFactory(InspectionTypes inspectionType, String inspectionTemplateFilePath,
-                             DeviceDTO device, Employee employee, String appID,
+    public InspectionFactory(InspectionDTO inspectionDTO, InspectionTypes inspectionType, String customerID,
+                             String employeeID, String licenseID, String deviceID, String appID,
                              String appLicenseEntity) {
         super();
 
+        this.inspectionDTO = inspectionDTO;
         this.inspectionType = inspectionType;
-        this.inspectionTemplateFilePath = inspectionTemplateFilePath;
-        this.device = device;
-        this.employee = employee;
+        this.customerID = customerID;
+        this.employeeID = employeeID;
+        this.licenseID = licenseID;
+        this.deviceID = deviceID;
         this.appID = appID;
         this.appLicenseEntity = appLicenseEntity;
     }
 
     @Override
     public InspectionDTO create() throws Exception {
-        int inspnumber = Integer.valueOf(getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, GlobalUtils.getInspectionSymbol() + appLicenseEntity).getLocalNo());
-        device.setEmployeeId(employee.getEmployeeID());
+        int inspnumber = Integer.valueOf(getLastInspectionNumber(licenseID, deviceID, appID,
+                employeeID, true, GlobalUtils.getInspectionSymbol() + appLicenseEntity).getLocalNo());
 
-        String estimationId = GlobalUtils.getUUID();
-        String vehicleID =  GlobalUtils.getUUID();
-        JSONObject jso = JSONDataProvider.extractData_JSON(inspectionTemplateFilePath);
         Gson gson = new Gson();
-        InspectionDTO inspection = gson.fromJson(jso.toString(), InspectionDTO.class);
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(gson.toJson(inspectionDTO));
+        JtwigModel model = JtwigModel.newModel()
+                .with("VehicleID", GlobalUtils.getUUID())
+                .with("EstimationId", GlobalUtils.getUUID())
+                .with("ClientId", customerID)
+                .with("EmployeeId", employeeID)
+                .with("LicenceId", licenseID)
+                .with("DeviceId", deviceID)
+                .with("EstimationTypeId", new InspectionTypeData(inspectionType).getInspTypeID())
+                .with("UTCTime", GlobalUtils.getVNextInspectionCreationTime())
+                .with("EstimationDate", GlobalUtils.getVNextInspectionDate());
 
-        inspection.setVehicleID(vehicleID);
-        inspection.setEstimationId(estimationId);
-        inspection.setEstimationTypeId(new InspectionTypeData(inspectionType).getInspTypeID());
-        inspection.setUTCTime(GlobalUtils.getVNextInspectionCreationTime());
-        inspection.setEstimationDate(GlobalUtils.getVNextInspectionDate());
-        inspection.setLocalNo(inspnumber+1);
-        inspection.setDevice(device);
-        inspection.getVehicle().setVehicleID(vehicleID);
+        String json = template.render(model);
 
-        Response<BasicResponse> res = ApiUtils.getAPIService().saveInspection(estimationId, device.getLicenceId(),
-                device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, inspection).execute();
+        InspectionDTO newInspection = JSonDataParser.getTestDataFromJson(json, InspectionDTO.class);
+        newInspection.setLocalNo(++inspnumber);
 
-        return inspection;
+        Response<BasicResponse> res = ApiUtils.getAPIService().saveInspection(newInspection.getEstimationId(),
+                newInspection.getLicenceID(),newInspection.getDevice().getDeviceId(), appID,
+                newInspection.getEmployeeId(), true, newInspection).execute();
+
+
+        return newInspection;
     }
 
     @Override

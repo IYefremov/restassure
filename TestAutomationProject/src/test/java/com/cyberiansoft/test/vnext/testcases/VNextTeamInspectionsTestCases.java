@@ -16,13 +16,13 @@ import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScree
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import org.openqa.selenium.WebElement;
@@ -623,6 +623,69 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
 				VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
 		AppiumUtils.setNetworkOn();
+		inspectionscreen.switchToMyInspectionsView();
+		inspectionscreen.clickBackButton();
+	}
+
+	@Test(testName= "Automate Verify user can edit team Work Order (add and remove services)",
+			description = "Automate Verify user can edit team Work Order (add and remove services)")
+	public void testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices() {
+
+		final String workorderType = "O_Kramar";
+		final String vinnumber = "TEST";
+		final String moneyservice = "Battery Installation";
+		final String percentageservice = "Aluminum Panel";
+
+		final int amountToSelect = 3;
+		final int defaultCountForMoneyService = 1;
+
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
+		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.switchToTeamInspectionsView();
+        inspectionscreen.searchInpectionByFreeText(inspnumber);
+		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		VNextVehicleInfoScreen vehicleinfoscreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+		vehicleinfoscreen.swipeScreenLeft();
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		for (int i = 0; i < amountToSelect; i++)
+			availableServicesScreen.selectService(moneyservice);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), defaultCountForMoneyService);
+		for (int i = 0; i < amountToSelect; i++)
+			availableServicesScreen.selectService(percentageservice);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
+		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
+
+		selectedServicesScreen.saveInspectionViaMenu();
+		inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+		vehicleinfoscreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+		vehicleinfoscreen.swipeScreenLeft();
+		vehicleinfoscreen.swipeScreenLeft();
+		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
+		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
+		selectedServicesScreen.uselectService(percentageservice);
+		selectedServicesScreen.uselectService(percentageservice);
+		selectedServicesScreen.uselectService(moneyservice);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), defaultCountForMoneyService);
+		selectedServicesScreen.switchToAvalableServicesView();
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), 0);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), defaultCountForMoneyService);
+		availableServicesScreen.selectService(percentageservice);
+		availableServicesScreen.selectService(percentageservice);
+		availableServicesScreen.selectService(moneyservice);
+
+		availableServicesScreen.switchToSelectedServicesView();
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
+		availableServicesScreen.saveInspection();
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}

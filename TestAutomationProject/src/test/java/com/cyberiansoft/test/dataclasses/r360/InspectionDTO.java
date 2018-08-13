@@ -13,7 +13,7 @@ import java.util.Map;
         "EstimationId",
         "EmployeeId",
         "VehicleID",
-        "LicenceID",
+        "LicenceId",
         "UTCTime",
         "EstimationDate",
         "TeamId",
@@ -43,8 +43,8 @@ public class InspectionDTO {
     private String EmployeeId;
     @JsonProperty("VehicleID")
     private String VehicleID;
-    @JsonProperty("LicenceID")
-    private String LicenceID;
+    @JsonProperty("LicenceId")
+    private String LicenceId;
     @JsonProperty("UTCTime")
     private String UTCTime;
     @JsonProperty("EstimationDate")
@@ -132,12 +132,12 @@ public class InspectionDTO {
 
     @JsonProperty("LicenceID")
     public String getLicenceID() {
-        return LicenceID;
+        return LicenceId;
     }
 
     @JsonProperty("LicenceID")
     public void setLicenceID(String licenceID) {
-        this.LicenceID = licenceID;
+        this.LicenceId = licenceID;
     }
 
     @JsonProperty("UTCTime")
@@ -301,13 +301,4 @@ public class InspectionDTO {
         this.Device = device;
     }
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 }
