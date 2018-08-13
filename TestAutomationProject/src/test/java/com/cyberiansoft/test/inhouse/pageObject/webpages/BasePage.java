@@ -36,7 +36,7 @@ public class BasePage {
         driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC * 2, TimeUnit.SECONDS);
 
         wait = new WebDriverWait(driver, 60, 250);
-        waitShortly = new WebDriverWait(driver, 5, 250);
+        waitShortly = new WebDriverWait(driver, 10, 250);
     }
 
     @Step
@@ -109,11 +109,17 @@ public class BasePage {
         } catch (Exception ignored) {}
     }
 
-    public void clearAndType(WebElement nameTextField, String name) {
-        wait.until(ExpectedConditions.elementToBeClickable(nameTextField)).clear();
-        nameTextField.sendKeys(name);
+    @Step
+    public void clearAndType(WebElement textField, String name) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(textField)).clear();
+        } catch (Exception e) {
+            Assert.fail("The text field has not been displayed");
+        }
+        textField.sendKeys(name);
     }
 
+    @Step
     public void clickButton(WebElement addEditionButton) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(addEditionButton)).click();
@@ -122,10 +128,34 @@ public class BasePage {
         }
     }
 
-    public void selectRandomValue(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        Select selection = new Select(element);
-        List<WebElement> allSelectedOptions = selection.getAllSelectedOptions();
-        selection.selectByIndex(RandomUtils.nextInt(1, allSelectedOptions.size()));
+    @Step
+    void selectRandomValue(WebElement element) {
+        Select selection = getSelection(element);
+        List<WebElement> allOptions = selection.getOptions();
+        selection.selectByIndex(RandomUtils.nextInt(1, allOptions.size()));
+    }
+
+    @Step
+    void selectValue(WebElement element, String value) {
+        Select selection = getSelection(element);
+        selection.selectByVisibleText(value);
+    }
+
+    @Step
+    private Select getSelection(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("The selection element has not been found", e);
+        }
+        return new Select(element);
+    }
+
+    @Step
+    public void acceptAlert() {
+        wait.until(ExpectedConditions.alertIsPresent()).accept();
+        waitForLoading();
+        waitABit(2000);
     }
 }

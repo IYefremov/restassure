@@ -2,6 +2,8 @@ package com.cyberiansoft.test.dataclasses.inHouseTeamPortal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class TeamPortalPricingData {
 
     @JsonProperty("editionName")
@@ -10,17 +12,28 @@ public class TeamPortalPricingData {
     @JsonProperty("price")
     private String price;
 
-    @JsonProperty("minCommitment")
-    private String minCommitment;
+    @JsonProperty("minCommitments")
+    private List<String> minCommitments;
 
-    @JsonProperty("newPrice")
-    private String newPrice;
+    @JsonProperty("prices")
+    private List<String> prices;
 
-    @JsonProperty("minCommitment2")
-    private String minCommitment2;
+    @JsonProperty("featureGroupName")
+    private String featureGroupName;
 
-    @JsonProperty("newPrice2")
-    private String newPrice2;
+    @JsonProperty("featureGroupState")
+    private String featureGroupState;
+
+    @JsonProperty("featureGroupMarketingInfo")
+    private String featureGroupMarketingInfo;
+
+    public List<String> getMinCommitments() {
+        return minCommitments;
+    }
+
+    public List<String> getPrices() {
+        return prices;
+    }
 
     public String getEditionName() {
         return editionName;
@@ -30,19 +43,15 @@ public class TeamPortalPricingData {
         return price;
     }
 
-    public String getMinCommitment() {
-        return minCommitment;
+    public String getFeatureGroupName() {
+        return featureGroupName;
     }
 
-    public String getNewPrice() {
-        return newPrice;
+    public String getFeatureGroupState() {
+        return featureGroupState;
     }
 
-    public String getMinCommitment2() {
-        return minCommitment2;
-    }
-
-    public String getNewPrice2() {
-        return newPrice2;
+    public String getFeatureGroupMarketingInfo() {
+        return featureGroupMarketingInfo;
     }
 }

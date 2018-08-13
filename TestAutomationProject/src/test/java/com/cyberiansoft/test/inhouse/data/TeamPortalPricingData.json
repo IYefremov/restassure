@@ -11,13 +11,52 @@
   "verifyUserCanAddDiscountToEdition": [
     {
       "rowID": "verifyUserCanAddDiscountToEdition.01",
-      "description": "Test Case 76923:Verify User can add discount to Edition.",
+      "description": "Test Case 76923:Verify User can add discount to Edition",
       "editionName": "Test Auto",
       "price": "100",
-      "minCommitment": "1",
-      "newPrice": "15",
-      "minCommitment2": "3",
-      "newPrice2": "50"
+      "prices": [
+        "15",
+        "50"
+      ],
+      "minCommitments": [
+        "1",
+        "3"
+      ]
+    }
+  ],
+
+  "verifyUserCanAddSeveralDiscountsToEdition": [
+    {
+      "rowID": "verifyUserCanAddSeveralDiscountsToEdition.01",
+      "description": "Test Case 76926:Verify adding several Discounts to Edition",
+      "editionName": "Test Auto",
+      "price": "100",
+
+      "prices": [
+        "100",
+        "40",
+        "80",
+        "30",
+        "99.9"
+      ],
+
+      "minCommitments": [
+        "1",
+        "50",
+        "12",
+        "6",
+        "99"
+      ]
+    }
+  ],
+
+  "verifyUserCanAddNewFeatureGroup": [
+    {
+      "rowID": "verifyUserCanAddNewFeatureGroup.01",
+      "description": "Test Case 76927:Verify user can add new feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes"
     }
   ]
 }

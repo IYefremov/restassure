@@ -1,11 +1,15 @@
 package com.cyberiansoft.test.inhouse.pageObject.webpages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddEditionDialog extends BasePage {
 
@@ -52,10 +56,10 @@ public class AddEditionDialog extends BasePage {
     private WebElement discountSubmitButton;
 
     @FindBy(xpath = "//table[@id='table-add-edition-discounts']//td[@class]")
-    private WebElement minimumLicensesValue;
+    private List<WebElement> minimumLicensesValues;
 
     @FindBy(xpath = "//table[@id='table-add-edition-discounts']//td[2]")
-    private WebElement newPriceValue;
+    private List<WebElement> newPriceValues;
 
     public AddEditionDialog(WebDriver driver) {
         super(driver);
@@ -67,26 +71,31 @@ public class AddEditionDialog extends BasePage {
         }
     }
 
+    @Step
     public AddEditionDialog typeEditionName(String name) {
         clearAndType(nameTextField, name);
         return this;
     }
 
+    @Step
     public AddEditionDialog typePrice(String price) {
         clearAndType(priceTextField, price);
         return this;
     }
 
+    @Step
     public AddEditionDialog selectRandomMappingIBSservice() {
         selectRandomValue(mappingIBSservice);
         return this;
     }
 
+    @Step
     public AddEditionDialog clickRecommendedCheckbox() {
         wait.until(ExpectedConditions.elementToBeClickable(recommendedCheckbox)).click();
         return this;
     }
 
+    @Step
     public AddEditionDialog clickAddDiscountButton() {
         clickButton(addDiscountButton);
         try {
@@ -97,28 +106,33 @@ public class AddEditionDialog extends BasePage {
         return this;
     }
 
+    @Step
     public AddEditionDialog typeMinimumLicenses(String license) {
         clearAndType(discountMinimumLicenses, license);
         return this;
     }
 
+    @Step
     public AddEditionDialog typeNewPrice(String price) {
         clearAndType(discountNewPrice, price);
         return this;
     }
 
+    @Step
     public AddEditionDialog clickCancelDiscountButton() {
         clickButton(discountCancelButton);
         verifyDiscountDropupIsClosed();
         return this;
     }
 
+    @Step
     public AddEditionDialog clickSubmitDiscountButton() {
         clickButton(discountSubmitButton);
         verifyDiscountDropupIsClosed();
         return this;
     }
 
+    @Step
     private void verifyDiscountDropupIsClosed() {
         try {
             wait.until(ExpectedConditions.visibilityOf(discountDropupClosed));
@@ -127,29 +141,68 @@ public class AddEditionDialog extends BasePage {
         }
     }
 
-    private boolean isValueDisplayed(WebElement value, String text) {
+    @Step
+    private boolean areValuesDisplayed(List<String> values, List<String> listText) {
         try {
-            wait.until(ExpectedConditions.visibilityOf(value));
-            wait.until(ExpectedConditions.textToBePresentInElement(value, text));
-            return true;
+            return values
+                    .stream()
+                    .limit(3)
+                    .collect(Collectors.toList())
+                    .stream()
+                    .anyMatch(listText::contains);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public boolean isMinimumCommitmentValueDisplayed(String text) {
-        return isValueDisplayed(minimumLicensesValue, text);
+    @Step
+    public boolean areMinimumCommitmentValuesDisplayed(List<String> textList) {
+        return areValuesDisplayed(getValues(minimumLicensesValues), textList);
     }
 
-    public boolean isNewPriceValueDisplayed(String text) {
-        return isValueDisplayed(newPriceValue, text);
+    @Step
+    public boolean areNewPriceValuesDisplayed(List<String> textList) {
+        List<String> valuesDisplayed = getValues(newPriceValues)
+                .stream()
+                .map(e -> e.replace("$", "")
+                        .replaceAll("[.]\\d{2}", ""))
+                .collect(Collectors.toList());
+        return areValuesDisplayed(valuesDisplayed, getEditedInputTestData(textList));
     }
 
+    @Step
+    private List<String> getValues(List<WebElement> newPriceValues) {
+        return newPriceValues
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
+    @Step
+    private List<String> getEditedInputTestData(List<String> textList) {
+        return textList
+                .stream()
+                .map(e -> e.replaceFirst("[.]\\d*", ""))
+                .collect(Collectors.toList());
+    }
+
+    @Step
     public PricingPage clickAddEditionSubmitButton() {
         clickButton(addEditionSubmitButton);
         waitForLoading();
         wait.until(ExpectedConditions.visibilityOf(addEditionDialogClosed));
         return PageFactory.initElements(driver, PricingPage.class);
+    }
+
+    @Step
+    public void addDiscounts(List<String> minCommitments, List<String> newPrices) {
+        for (int i = 0; i < minCommitments.size(); i++) {
+            clickAddDiscountButton()
+                    .typeMinimumLicenses(minCommitments.get(i))
+                    .typeNewPrice(newPrices.get(i))
+                    .clickSubmitDiscountButton();
+            waitABit(2000);
+        }
     }
 }

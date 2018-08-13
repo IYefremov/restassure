@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.pageObject.webpages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -22,11 +23,18 @@ public class PricingPage extends BasePage {
     @FindBy(xpath = "//span[@class='btn-add-addition btn-add-edition']")
     private WebElement addEditionButton;
 
+    @FindBy(xpath = "//span[@class='btn-add-feature']")
+    private WebElement addFeatureGroupButton;
+
+    @FindBy(xpath = "//h3[@class='box-title']")
+    private WebElement tablePricingConfigurator;
+
     public PricingPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
+    @Step
     public PricingPage enableEditMode() {
         if (isEditModeDisabled()) {
             clickButton(editModeButton);
@@ -34,15 +42,17 @@ public class PricingPage extends BasePage {
         return this;
     }
 
+    @Step
     public boolean isEditModeEnabled() {
         try {
-            waitShortly.until(ExpectedConditions.visibilityOf(editModeEnabled));
+            wait.until(ExpectedConditions.visibilityOf(editModeEnabled));
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    @Step
     public boolean isEditModeDisabled() {
         try {
             waitShortly.until(ExpectedConditions.visibilityOf(editModeDisabled));
@@ -52,12 +62,21 @@ public class PricingPage extends BasePage {
         }
     }
 
+    @Step
     public AddEditionDialog clickAddEditionButton() {
         clickButton(addEditionButton);
         waitForLoading();
         return PageFactory.initElements(driver, AddEditionDialog.class);
     }
 
+    @Step
+    public AddFeatureGroupDialog clickAddFeatureGroupButton() {
+        clickButton(addFeatureGroupButton);
+        waitForLoading();
+        return PageFactory.initElements(driver, AddFeatureGroupDialog.class);
+    }
+
+    @Step
     public boolean isRecommendedEditionDisplayed(String editionName) {
         By edition = By.xpath("//p[@class='recommended']/following-sibling::h3[text()='" + editionName + "']");
         try {
@@ -75,6 +94,7 @@ public class PricingPage extends BasePage {
         }
     }
 
+    @Step
     public PricingPage deleteEditionIfDisplayed(String editionName) {
         try {
             WebElement edition = driver.findElement(By.xpath(".//h3[text()='" +
@@ -86,6 +106,7 @@ public class PricingPage extends BasePage {
         return this;
     }
 
+    @Step
     private boolean isEditionDisplayed(WebElement edition) {
         try {
             return wait
@@ -97,11 +118,38 @@ public class PricingPage extends BasePage {
         }
     }
 
+    @Step
     private void deleteEdition(WebElement edition) {
         wait.until(ExpectedConditions.elementToBeClickable(edition)).click();
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
         waitForLoading();
         waitABit(2000);
+    }
+
+    @Step
+    public boolean isFeatureGroupDisplayed(String featureGroupName) {
+        try {
+            waitShortly.until(ExpectedConditions.visibilityOf(tablePricingConfigurator));
+        } catch (Exception ignored) {}
+        try {
+            return waitShortly
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOfElementLocated(By
+                            .xpath("//span[@title='" + featureGroupName + "']")))
+                    .isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Step
+    public PricingPage deleteFeatureGroupIfDisplayed(String featureGroupName) {
+        if (isFeatureGroupDisplayed(featureGroupName)) {
+            clickButton(driver.findElement(By.xpath("//span[@title='" + featureGroupName +
+                    "']//following::a[@class='btn-delete btn-delete-feature-group'][1]")));
+            acceptAlert();
+        }
+        return this;
     }
 }
