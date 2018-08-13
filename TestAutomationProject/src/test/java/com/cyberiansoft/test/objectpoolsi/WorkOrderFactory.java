@@ -1,13 +1,19 @@
 package com.cyberiansoft.test.objectpoolsi;
 
 import com.cyberiansoft.test.dataclasses.r360.WorkOrderDTO;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.globalutils.GlobalUtils;
+import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypeData;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.restclient.ApiUtils;
+import com.cyberiansoft.test.vnext.restclient.BasicResponse;
 import com.cyberiansoft.test.vnext.restclient.WorkOrdersListResponse;
+import com.google.gson.Gson;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -16,6 +22,7 @@ public class WorkOrderFactory extends BasePooledObjectFactory<WorkOrderDTO> {
 
     private WorkOrderDTO workOrderDTO;
     private WorkOrderTypes workOrderType;
+    private String customerID;
     private String employeeID;
     private String licenseID;
     private String deviceID;
@@ -23,13 +30,14 @@ public class WorkOrderFactory extends BasePooledObjectFactory<WorkOrderDTO> {
     private String appLicenseEntity;
     private int lastWONumber;
 
-    public WorkOrderFactory(WorkOrderDTO workOrderDTO, WorkOrderTypes workOrderType, String employeeID,
-                            String licenseID, String deviceID, String appID,
+    public WorkOrderFactory(WorkOrderDTO workOrderDTO, WorkOrderTypes workOrderType, String customerID,
+                            String employeeID, String licenseID, String deviceID, String appID,
                             String appLicenseEntity) {
         super();
 
         this.workOrderDTO = workOrderDTO;
         this.workOrderType = workOrderType;
+        this.customerID = customerID;
         this.employeeID = employeeID;
         this.licenseID = licenseID;
         this.deviceID = deviceID;
@@ -43,49 +51,30 @@ public class WorkOrderFactory extends BasePooledObjectFactory<WorkOrderDTO> {
             lastWONumber = getLastWorkOrderNumber(licenseID, deviceID, appID,
                     employeeID, true, GlobalUtils.getWorkOrderSymbol() + appLicenseEntity).getLocalNo();
 
-        /*Gson gson = new Gson();
-        System.out.println("===================" + gson.toJson(workOrderDTO));
-
-        JtwigTemplate template = JtwigTemplate. (gson.toJson(workOrderDTO)));
+        Gson gson = new Gson();
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(gson.toJson(workOrderDTO));
         JtwigModel model = JtwigModel.newModel()
-                .with("faker", "");
+                .with("VehicleID", GlobalUtils.getUUID())
+                .with("OrderId", GlobalUtils.getUUID())
+                .with("ClientId", customerID)
+                .with("EmployeeId", employeeID)
+                .with("OrderTypeId", new WorkOrderTypeData(workOrderType).getWorkOrderTypeID())
+                .with("LicenceId", licenseID)
+                .with("DeviceId", deviceID)
+                .with("UTCTime", GlobalUtils.getVNextInspectionCreationTime())
+                .with("OrderDate", GlobalUtils.getVNextInspectionDate());
 
         String json = template.render(model);
 
-        RetailCustomer retailCustomer = JSonDataParser.getTestDataFromJson(new File(VNextDataInfo.getInstance().getPathToDataFiles() +
-                VNextDataInfo.getInstance().getDefaultRetaiCustomerDataFileName()), RetailCustomer.class);
-        System.out.println("===================" + retailCustomer.getClientId());
-        Gson gson = new Gson();
-        WorkOrderDTO workOrder1 = gson.fromJson(json, WorkOrderDTO.class);
+        WorkOrderDTO newWorkOrder = JSonDataParser.getTestDataFromJson(json, WorkOrderDTO.class);
+        newWorkOrder.setLocalNo(++lastWONumber);
 
-        System.out.println("===================" + workOrder1.getClientId());
-        System.out.println(json);
+        Response<BasicResponse> res = ApiUtils.getAPIService().saveWorkOrder(newWorkOrder.getOrderId(),
+                newWorkOrder.getLicenceId(),
+                newWorkOrder.getDevice().getDeviceId(), appID,
+                newWorkOrder.getEmployeeId(), true, newWorkOrder).execute();
 
-        device.setEmployeeId(employee.getEmployeeID());
-
-        String orderId = GlobalUtils.getUUID();
-        String vehicleID =  GlobalUtils.getUUID();
-        JSONObject jso = JSONDataProvider.extractData_JSON(workOrderTemplateFilePath);
-
-
-        WorkOrderDTO workOrder = JSonDataParser.getTestDataFromJson(new File(workOrderTemplateFilePath), WorkOrderDTO.class);
-        String orderId = GlobalUtils.getUUID();
-        String vehicleID =  GlobalUtils.getUUID();
-        workOrder.setVehicleID(vehicleID);
-        workOrder.setOrderId(orderId);
-        workOrder.setOrderTypeId(new WorkOrderTypeData(workOrderType).getWorkOrderTypeID());
-        workOrder.setUTCTime(GlobalUtils.getVNextInspectionCreationTime());
-        workOrder.setOrderDate(GlobalUtils.getVNextInspectionDate());
-        workOrder.setLocalNo(++lastWONumber);
-        workOrder.setDevice(device);
-        workOrder.getVehicle().setVehicleID(vehicleID);
-        workOrder.getOrderEmployees().get(0).setEmployeeId(employee.getEmployeeID());
-        workOrder.getOrderEmployees().get(0).setOrderId(orderId);
-
-        Response<BasicResponse> res = ApiUtils.getAPIService().saveWorkOrder(orderId, device.getLicenceId(),
-                device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, workOrder).execute();*/
-        return null;
+        return newWorkOrder;
     }
 
     @Override

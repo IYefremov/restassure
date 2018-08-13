@@ -448,4 +448,53 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workordersscreen.switchToMyWorkordersView();
 		workordersscreen.clickBackButton();
 	}
+
+	@Test(testName= "Verify it is possible to add service by opening service details screen and save",
+			description = "Verify it is possible to add service by opening service details screen and save")
+	public void testVerifyItIsPossibleToAddServiceByOpeningServiceDetailsScreenAndSave() {
+
+		final String workorderType = "Kramar_auto";
+		final String vinnumber = "TEST";
+		final String moneyservice = "Battery Installation";
+		final String moneyserviceamaunt = "9.99";
+		final String moneyservicequantity = "0.99";
+		final String percentageservice = "Aluminum Panel";
+		final String percentageserviceamaunt = "1.99";
+		final String totalprice = "$10.09";
+
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		workordersscreen.switchToMyWorkordersView();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.switchToRetailMode();
+		customersscreen.selectCustomer(testcustomer);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		wotypes.selectWorkOrderType(workorderType);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+
+		workordersscreen.switchToTeamWorkordersView();
+
+		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+		vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextServiceDetailsScreen serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(moneyservice);
+		serviceDetailsScreen.setServiceAmountValue(moneyserviceamaunt);
+		serviceDetailsScreen.setServiceQuantityValue(moneyservicequantity);
+		serviceDetailsScreen.clickServiceDetailsDoneButton();
+		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(percentageservice);
+		serviceDetailsScreen.setServiceAmountValue(percentageserviceamaunt);
+		serviceDetailsScreen.clickServiceDetailsDoneButton();
+		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), totalprice);
+		availableServicesScreen.saveWorkOrderViaMenu();
+		Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(woNumber), totalprice);
+		workordersscreen.clickBackButton();
+	}
 }

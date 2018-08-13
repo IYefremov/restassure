@@ -44,6 +44,8 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     }
 
     protected WebElement getListCell(WebElement typesList, String cellValue) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@action='check-item']")));
         List<WebElement> listCells = typesList.findElements(By.xpath(".//*[contains(@class, 'entity-item accordion-item')]"));
 
         WebElement tableCell = listCells.stream().
