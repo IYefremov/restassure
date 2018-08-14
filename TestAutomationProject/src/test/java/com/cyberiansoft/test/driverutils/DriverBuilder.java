@@ -8,12 +8,13 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.EdgeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
-import org.openqa.selenium.SessionNotCreatedException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import org.awaitility.Duration;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -70,9 +71,18 @@ public class DriverBuilder {
 			webcap = new IEConfiguration().getInternetExplorerCapabilities();
 			webDriver.set(new RemoteWebDriver(webcap));
 			break;
+        case EDGE:
+			EdgeDriverManager.getInstance().arch64().setup();
+			webcap = DesiredCapabilities.edge();
+            try {
+                webDriver.set(new EdgeDriver());
+            } catch (SessionNotCreatedException ignored) {
+                new ThreadLocal<WebDriver>().set(new EdgeDriver());
+            }
+			break;
 		case CHROME:
 			ChromeDriverManager.getInstance().setup();
-			webcap =  DesiredCapabilities.chrome();
+			webcap = DesiredCapabilities.chrome();
 			try {
                 webDriver.set(new ChromeDriver());
             } catch (SessionNotCreatedException ignored) {
@@ -98,11 +108,33 @@ public class DriverBuilder {
         } catch (WebDriverException e) {
             e.printStackTrace();
         } finally {
-            getDriver().manage().window().maximize();
+            try {
+                getDriver().manage().window().setPosition(new Point(0, 0));
+                getDriver().manage().window().setSize(new Dimension(1920,1080));
+            } catch (Exception e) {
+                setWindowSizeAfterDelay();
+            }
         }
 	}
-	
-	public void setDriver(WebDriver driver) {
+
+    private void setWindowSizeAfterDelay() {
+        int i = 0;
+        do {
+            try {
+                System.out.println("Retrying to set the window size after delay");
+                await().atMost(Duration.FIVE_SECONDS);
+                getDriver().manage().window().setPosition(new Point(0, 0));
+                getDriver().manage().window().setSize(new Dimension(1920,1080));
+                break;
+            }
+            catch(Exception ee) {
+                i++;
+            }
+        }
+        while (i != 5);
+    }
+
+    public void setDriver(WebDriver driver) {
 		webDriver.set(driver);
 		sessionId.set(((RemoteWebDriver) webDriver.get())
 		    .getSessionId().toString());

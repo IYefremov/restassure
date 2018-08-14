@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.EventsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.MiscellaneousWebPage;
@@ -10,7 +9,6 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 //@Listeners(VideoListener.class)
