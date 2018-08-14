@@ -60,7 +60,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
-		homescreen = statusscreen.clickBackButton();
+		//homescreen = statusscreen.clickBackButton();
 		workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber));
 		workordersscreen.clickBackButton();

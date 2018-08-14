@@ -314,7 +314,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
-		homescreen = statusscreen.clickBackButton();
+		//homescreen = statusscreen.clickBackButton();
 		
 		inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
@@ -352,7 +352,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
-		homescreen = statusscreen.clickBackButton();
+		//homescreen = statusscreen.clickBackButton();
 		
 		inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();

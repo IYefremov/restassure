@@ -165,7 +165,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		homescreen = invoicesscreen.clickBackButton();
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
-		homescreen = statusscreen.clickBackButton();
+		//homescreen = statusscreen.clickBackButton();
 		
 		invoicesscreen = homescreen.clickInvoicesMenuItem();
 		Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
@@ -483,7 +483,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
-		homescreen = statusscreen.clickBackButton();
+		//homescreen = statusscreen.clickBackButton();
 		
 		invoicesscreen = homescreen.clickInvoicesMenuItem();
 		invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
