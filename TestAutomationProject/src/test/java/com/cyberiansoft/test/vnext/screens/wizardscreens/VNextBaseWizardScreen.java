@@ -89,8 +89,9 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen saveInspectionViaMenu() {
 		clickSaveInspectionMenuButton();
-		if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
-			clcikSaveInspectionViaMenuAsFinal();
+		if (inspectionType != null)
+			if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
+				clcikSaveInspectionViaMenuAsFinal();
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
