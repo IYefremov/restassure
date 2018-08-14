@@ -9,6 +9,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -56,6 +57,8 @@ public class VNextBaseTestCase {
 	protected static boolean buildproduction;
 	protected static BrowserType browsertype;
 	protected static MobilePlatform mobilePlatform;
+	protected static Employee employee;
+
 
 	protected static String deviceID;
 	protected static String licenseID;
@@ -88,6 +91,10 @@ public class VNextBaseTestCase {
 			buildproduction = true;
 		else
 			buildproduction = false;
+	}
+
+	public Employee getDeviceEmployee() {
+		return employee;
 	}
 	
 	public void setUp() {

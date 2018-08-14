@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionRegistration {
 	
 	@BeforeClass(description="Wholesale Customers Test Cases")
-	public void beforeClass() throws Exception {
+	public void beforeClass() {
 	}
 	
 	@Test(testName= "Test Case 63620:Verify created on BO Wholesale customer displays in the list", 

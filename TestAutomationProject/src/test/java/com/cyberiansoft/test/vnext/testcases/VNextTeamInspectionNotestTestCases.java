@@ -70,7 +70,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		homescreen = inspectionscreen.clickBackButton();
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
-		homescreen = statusscreen.clickBackButton();
+		//homescreen = statusscreen.clickBackButton();
 		inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
