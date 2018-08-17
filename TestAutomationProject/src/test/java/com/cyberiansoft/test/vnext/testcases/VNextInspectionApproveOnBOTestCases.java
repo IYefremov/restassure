@@ -23,7 +23,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextConfirmationDialog;
 
-public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceRegistrationAndExistingUserLogin {
+public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
 	String inspnumber = "";
 	final String VIN = "3N1AB7AP3HY327077";
@@ -232,9 +232,9 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
 		selectedServicesScreen.setServiceAmountValue(moneyservices, moneyserviceprice);
 		selectedServicesScreen.setServiceQuantityValue(moneyservices, moneyservicequant);
-
-		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
+		inspservicesscreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(archivedinspnumber), PricesCalculations.getPriceRepresentation(insppriceexp));
+
 		inspectionsscreen.archiveInspection(archivedinspnumber);
 		inspectionsscreen.clickBackButton();
 		

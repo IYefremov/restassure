@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,8 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseWizardScreen {
 	
 	public void clickWorkOrderSaveButton() {
 		tap(savebtn);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickFinalButton();
 	}
 
 }

@@ -26,7 +26,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -174,52 +173,7 @@ public class VNextBaseTestCase {
 		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationdlg.clickInformationDialogOKButton();
 	}
-	
-	public void registerDevice(String userMail, String userPhone) throws Exception {
 
-		String phonecountrycode = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneCountryCode();
-		
-		if (buildproduction) {
-			phonecountrycode = VNextUserRegistrationInfo.getInstance().getProductionDeviceRegistrationUserPhoneCountryCode();
-			/*initiateWebDriver();
-			webdriver.get("http://receivefreesms.com/");
-			phonenumber = webdriver.findElement(By.xpath("//strong/a[contains(text(), '+1')]")).getText();
-			webdriver.quit();*/
-		} 
-
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		//String userregmail = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserMail();
-		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		
-		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
-				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
-				phonecountrycode, userPhone, userMail);
-		BaseUtils.waitABit(7000);
-		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
-		if (buildproduction) 
-			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonecountrycode + userPhone));
-		else
-			//verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phonecountrycode + userPhone));
-			verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userMail).replaceAll("\"", ""));		
-		verificationscreen.clickVerifyButton(); 
-		
-		VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(DriverBuilder.getInstance().getAppiumDriver());
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-		BaseUtils.waitABit(10*1000);
-		
-		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
-		DriverBuilder.getInstance().getAppiumDriver().closeApp();
-		DriverBuilder.getInstance().getAppiumDriver().launchApp();
-
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		
-		
-		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 90);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
-		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-		informationdlg.clickInformationDialogOKButton();
-	}
-	
 	public void registerTeamEdition(String licensename) {
 		
 		DriverBuilder.getInstance().setDriver(browsertype);
