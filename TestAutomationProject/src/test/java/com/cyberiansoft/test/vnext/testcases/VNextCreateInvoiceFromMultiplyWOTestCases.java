@@ -63,9 +63,10 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 	public void testVerifyUserCantCreateInvoiceWithMultipleWOAndDifferentCustomers() {
 		
 		final String ponumber = "123po";
-		ArrayList<String> workOrders = new ArrayList<String>();
+		ArrayList<String> workOrders = new ArrayList<>();
 		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
-				
+		final  String invoicedetails = "1FMCU0DG4BK830800";
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		for (RetailCustomer customer : testcustomers) {
@@ -104,7 +105,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		ArrayList<String> wonumbers = invoicesscreen.getInvoiceWorkOrders(invoiceNumber);
 		Assert.assertEquals(wonumbers.size(), 1);
 		for (String wonumber : wonumbers) {
-			Assert.assertTrue(workOrders.contains(wonumber));
+			System.out.println("++++" + wonumber);
+			Assert.assertTrue(wonumber.contains(invoicedetails));
 		} 
 		invoicesscreen.clickBackButton();
 	}

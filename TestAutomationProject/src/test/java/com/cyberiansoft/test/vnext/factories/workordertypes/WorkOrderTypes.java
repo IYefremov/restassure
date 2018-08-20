@@ -2,7 +2,11 @@ package com.cyberiansoft.test.vnext.factories.workordertypes;
 
 public enum WorkOrderTypes {
 
-    O_KRAMAR("O_Kramar");
+    O_KRAMAR("O_Kramar"),
+    O_KRAMAR2("O_Kramar2"),
+    KRAMAR_AUTO("Kramar_auto"),
+    KRAMAR_AUTO2("Kramar_auto2"),
+    ALL_AUTO_PHASES("All_auto_Phases");
 
     private final String woType;
 

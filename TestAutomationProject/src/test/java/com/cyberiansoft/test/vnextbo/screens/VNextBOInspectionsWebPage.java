@@ -1,8 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,11 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	
@@ -230,7 +228,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	
 	public void clickExpandAdvancedSearchPanel() {
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchinspectionspanel.findElement(By.xpath(".//i[@data-bind='click: showSearchDropdown']")))).click();
+		  .until(ExpectedConditions.elementToBeClickable((WebElement) driver.findElement(By.id("advSearchEstimation-caret")))).click();
 	}
 	
 	public boolean isSavedAdvancedSearchFilterExists(String filterName) {

@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
@@ -45,7 +46,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
         customersscreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
-        wotypes.selectWorkOrderType(workOrderData.getWorkOrderType());
+        wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
@@ -70,7 +71,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
         customersscreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
-        wotypes.selectWorkOrderType(workOrderData.getWorkOrderType());
+        wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
@@ -97,7 +98,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
         customersscreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
-        wotypes.selectWorkOrderType(workOrderData.getWorkOrderType());
+        wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
@@ -145,7 +146,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 
         VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
-        wotypes.selectWorkOrderType(inspectionData.getInspectionType());
+        wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR2);
         vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
         VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -190,7 +191,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 
         VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
-        wotypes.selectWorkOrderType(inspectionData.getInspectionType());
+        wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR2);
         vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
         VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();

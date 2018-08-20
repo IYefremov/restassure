@@ -4,9 +4,13 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.dataclasses.Employee;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.extentreportproviders.ExtentTestManager;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
+import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -90,6 +94,10 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
 		AppiumUtils.setNetworkOn();
 		VNextAppUtils.restartApp();
+
+		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+		Employee employee = ((VNextBaseTestCase) result.getInstance()).getDeviceEmployee();
+		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 	}
 
 	@Override

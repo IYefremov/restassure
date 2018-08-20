@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -45,7 +46,14 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
              BaseUtils.waitABit(500);
             tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
-            keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), amount);
+            String defAmaunt = servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value");
+            keyboard.setFieldValue(defAmaunt, amount);
+            WaitUtils.click(servicecell.findElement(By.xpath(".//*[@class='checkbox-item-title']")));
+            if (elementExists("//div[@class='modal-text']")) {
+                VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+                informationDialog.clickInformationDialogNoButton();
+            }
+
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,28 +9,28 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.concurrent.TimeUnit;
 
 public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	
 	@FindBy(id = "mainMenu")
 	private WebElement mainmenu;
 	
-	@FindBy(xpath = "//span[@data-id='inspectiontypes']")
+	@FindBy(xpath = "//*[@data-automation-id='inspections']")
 	private WebElement inspectionsmenu;
-	
-	@FindBy(xpath = "//span[@data-id='invoices']")
+
+	@FindBy(xpath = "//*[@data-automation-id='invoices']")
 	private WebElement invoicesmenu;
-	
-	@FindBy(xpath = "//span[@data-id='services']")
+
+	@FindBy(xpath = "//*[@data-automation-id='services']")
 	private WebElement servicesmenu;
-	
-	@FindBy(xpath = "//span[@data-id='company-info']")
+
+	@FindBy(xpath = "//*[@data-automation-id='company-info']")
 	private WebElement companyinfomenu;
-	
-	@FindBy(xpath = "//span[@data-id='users']")
+
+	@FindBy(xpath = "//*[@data-automation-id='users']")
 	private WebElement usersmenu;
-	
+
 	@FindBy(xpath = "//*[@data-automation-id='orders']")
 	private WebElement repairordersmenu;
 	

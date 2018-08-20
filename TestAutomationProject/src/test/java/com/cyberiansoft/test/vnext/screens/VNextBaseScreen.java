@@ -134,7 +134,7 @@ public class VNextBaseScreen {
 	
 	public boolean elementExists(String xpath) {
 		boolean exists = false;
-		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		appiumdriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		exists =  appiumdriver.findElementsByXPath(xpath).size() > 0;
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;

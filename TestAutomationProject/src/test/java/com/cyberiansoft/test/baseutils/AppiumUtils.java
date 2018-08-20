@@ -4,7 +4,8 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -75,7 +76,7 @@ public class AppiumUtils {
 	
 	public static void clickHardwareBackButton() {
 		switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		((AndroidDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver()).pressKeyCode(AndroidKeyCode.KEYCODE_BACK);
+		((AndroidDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver()).pressKey(new KeyEvent().withKey(AndroidKey.BACK));
 		//DriverBuilder.getInstance().getAppiumDriver().navigate().back();
 		switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 	}

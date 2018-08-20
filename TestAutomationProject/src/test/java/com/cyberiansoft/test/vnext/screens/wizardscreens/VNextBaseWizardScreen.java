@@ -2,6 +2,8 @@ package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypeData;
+import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypeData;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
@@ -24,6 +26,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 
 	public static VNextTypeScreenContext typeScreenContext;
 	public static InspectionTypes inspectionType;
+	public static WorkOrderTypes workOrderType;
 	
 	@FindBy(xpath="//div[@class='estimation-number']")
 	private WebElement inspectionnumber;
@@ -75,7 +78,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		tap(cancelinspectionmenu);
 	}
 
-	public void clcikSaveInspectionViaMenuAsFinal() {
+	public void clcikSaveViaMenuAsFinal() {
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickFinalButton();
 	}
@@ -89,13 +92,17 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 	
 	public VNextInspectionsScreen saveInspectionViaMenu() {
 		clickSaveInspectionMenuButton();
-		if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
-			clcikSaveInspectionViaMenuAsFinal();
+		if (inspectionType != null)
+			if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
+				clcikSaveViaMenuAsFinal();
 		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
 	public VNextWorkOrdersScreen saveWorkOrderViaMenu() {
 		clickSaveWorkOrderMenuButton();
+		if (workOrderType != null)
+			if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
+				clcikSaveViaMenuAsFinal();
 		return new VNextWorkOrdersScreen(appiumdriver);
 	}
 	

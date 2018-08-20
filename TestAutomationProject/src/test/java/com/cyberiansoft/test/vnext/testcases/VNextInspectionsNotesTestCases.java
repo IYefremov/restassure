@@ -637,8 +637,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			notesscreen.clickNotesBackButton();
 			vehiclepartinfoscreen = new VNextVehiclePartInfoPage(appiumdriver);
 			vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+			vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 		}
-		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 		inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 
 		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();

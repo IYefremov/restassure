@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.Invoice;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
@@ -485,7 +486,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
         customersscreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
-        workOrderTypesList.selectWorkOrderType(woData.getWorkOrderType());
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(woData.getVinNumber());
         final String workOrderNumber = vehicleinfoscreen.getNewInspectionNumber();
