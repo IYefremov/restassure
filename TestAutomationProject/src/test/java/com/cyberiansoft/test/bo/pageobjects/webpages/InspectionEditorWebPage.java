@@ -1,0 +1,136 @@
+package com.cyberiansoft.test.bo.pageobjects.webpages;
+
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
+import java.util.List;
+
+public class InspectionEditorWebPage extends BaseWebPage {
+
+    @FindBy(xpath = "//span[@class='editable-field date-field']")
+    private WebElement dateInput;
+
+    @FindBy(xpath = "//div[@id='ui-datepicker-div']")
+    private WebElement dateWidget;
+
+    @FindBy(xpath = "//a[@data-handler='prev']")
+    private WebElement previousMonthButton;
+
+    @FindBy(xpath = "//a[@data-handler='next']")
+    private WebElement nextMonthButton;
+
+    @FindBy(xpath = "//td[@data-handler='selectDay']/a")
+    private List<WebElement> days;
+
+    @FindBy(xpath = "//div[@title='Save']")
+    private WebElement saveInspectionButton;
+
+    @FindBy(id = "ajaxSpinner")
+    private WebElement updateSpinner;
+
+    public InspectionEditorWebPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+    }
+
+    public InspectionEditorWebPage clickDateInput() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(dateInput)).click();
+        } catch (Exception e) {
+            Assert.fail("The date input field has not been displayed");
+        }
+        Assert.assertTrue(isDateWidgetOpened(), "The date widget has not been opened");
+        return this;
+    }
+
+    private boolean isDateWidgetOpened() {
+        try {
+            return wait.until(ExpectedConditions.attributeContains(dateWidget, "display", "block"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean isDateWidgetClosed() {
+        try {
+            return wait.until(ExpectedConditions.attributeContains(dateWidget, "display", "none"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean isInspectionEditorOpened(String inspection) {
+        try {
+            return isTitleDisplayed(inspection);
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    private Boolean isTitleDisplayed(String inspection) {
+        return wait.until(ExpectedConditions.titleContains(inspection));
+    }
+
+    public InspectionEditorWebPage clickPreviousMonthButton() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(previousMonthButton)).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+    public boolean isNextMonthButtonEnabled() {
+        try {
+            return wait.until(ExpectedConditions.elementToBeClickable(nextMonthButton)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isNextMonthButtonDisabled() {
+        try {
+            return !waitShortly.until(ExpectedConditions.elementToBeClickable(nextMonthButton)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public InspectionEditorWebPage selectDay(int day) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(days.get(day - 1))).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Assert.assertTrue(isDateWidgetClosed(), "The date widget has not been closed");
+        return this;
+    }
+
+    public InspectionEditorWebPage clickSaveInspectionButton() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(saveInspectionButton)).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        waitForInspectionToBeSaved();
+        return this;
+    }
+
+    private void waitForInspectionToBeSaved() {
+        try {
+            wait.until(ExpectedConditions.attributeContains(updateSpinner, "display", "block"));
+            wait.until(ExpectedConditions.attributeContains(updateSpinner, "display", "none"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            waitABit(2000);
+        }
+
+    }
+}

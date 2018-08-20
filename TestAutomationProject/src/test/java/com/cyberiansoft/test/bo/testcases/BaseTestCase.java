@@ -12,17 +12,17 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
+import org.awaitility.Duration;
 import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import java.io.File;
-import java.lang.reflect.Method;
+
+import static org.awaitility.Awaitility.await;
 
 public class BaseTestCase {
 
@@ -105,13 +105,13 @@ public class BaseTestCase {
 	}
 
     @BeforeMethod
-    public void BackOfficeLogin(Method method) throws InterruptedException {
+    public void BackOfficeLogin() {
         //todo delete from here after the problem with skips will be solved
         browsertype = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
         try {
             DriverBuilder.getInstance().setDriver(browsertype);
         } catch (SessionNotCreatedException e) {
-            Thread.sleep(10000);
+            await().atMost(Duration.TEN_SECONDS);
             DriverBuilder.getInstance().setDriver(browsertype);
         }
         webdriver = DriverBuilder.getInstance().getDriver();

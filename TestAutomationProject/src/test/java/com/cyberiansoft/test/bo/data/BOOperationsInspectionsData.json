@@ -1,0 +1,84 @@
+{
+  "verifyOpeningInspectionEditorForNewStatus": [
+    {
+      "rowID": "verifyOpeningInspectionEditorForNewStatus.01",
+      "description": "78094:Open Inspection Editor",
+      "status": "New"
+    }
+  ],
+
+  "verifyOpeningInspectionEditorForDraftStatus": [
+    {
+      "rowID": "verifyOpeningInspectionEditorForDraftStatus.01",
+      "description": "78094:Open Inspection Editor",
+      "status": "Draft"
+    }
+  ],
+
+  "editEstimationDetailsForInspectionWithNewStatus": [
+    {
+      "rowID": "editEstimationDetailsForInspectionWithNewStatus.01",
+      "description": "Test Case 77753:Operations - Inspections: Edit Estimation Details For Inspection With New Status",
+      "status": "New",
+      "day": 15
+    }
+  ],
+
+  "testOperationInspection": [
+    {
+      "rowID": "testOperationInspection.01",
+      "description": "Test Case 17281:Operations - Inspection",
+      "page1": "1",
+      "page2": "2",
+      "pageInt50": "50",
+      "timeFrame": "Last Year",
+      "inspNum": "E-062-00119",
+      "customer": "000 My Company",
+      "status": "Approved",
+      "technician": "Serhii Toropov",
+      "technicianFull": "Serhii Toropov",
+      "tableRowCount1": 1
+    }
+  ],
+
+  "testEditDuplicateByRO": [
+    {
+      "rowID": "testEditDuplicateByRO.01",
+      "description": "Test Case 75811:Operation - Inspection: Edit - Duplicate by RO",
+      "inspectionNum1": "E-010-00060",
+      "inspectionNum2": "E-010-00061",
+      "timeFrame": "Custom",
+      "fromTime": "6/18/2018",
+      "toTime": "6/22/2018",
+      "ROnum": "QWERTY"
+    }
+  ],
+
+  "testEditDuplicateByVIN": [
+    {
+      "rowID": "testEditDuplicateByVIN.01",
+      "description": "Test Case 75812:Operation - Inspection: Edit - Duplicate by VIN",
+      "inspectionNum1": "E-010-00062",
+      "inspectionNum2": "E-010-00063",
+      "timeFrame": "Custom",
+      "fromTime": "6/18/2018",
+      "toTime": "6/22/2018",
+      "VIN": "77777777777777777"
+    }
+  ],
+
+
+  "testEditDuplicateByVINandRO": [
+    {
+      "rowID": "testEditDuplicateByVINandRO.01",
+      "description": "Test Case 75813:Operation - Inspection: Edit - Duplicate by RO and VIN",
+      "inspectionNum1": "E-010-00064",
+      "inspectionNum2": "E-010-00065",
+      "timeFrame": "Custom",
+      "fromTime": "6/18/2018",
+      "toTime": "6/22/2018",
+      "VIN": "1FMRU1865XLA21263",
+      "ROnum": "POINT"
+    }
+  ]
+}

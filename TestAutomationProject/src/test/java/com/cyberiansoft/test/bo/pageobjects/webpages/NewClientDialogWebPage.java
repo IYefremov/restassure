@@ -4,10 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -361,7 +358,9 @@ public class NewClientDialogWebPage extends BaseWebPage {
 
 	public NewClientDialogWebPage clickOtherTab() {
 	    try {
-            wait.until(ExpectedConditions.elementToBeClickable(otherTab)).click();
+            wait.ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(otherTab))
+                    .click();
             wait.until(ExpectedConditions.visibilityOf(singleWOtypeCheckbox));
         } catch (Exception e) {
             Assert.fail("The 'Other' tab has not been clicked", e);

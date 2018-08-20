@@ -76,7 +76,7 @@ public class DriverBuilder {
 			webcap = DesiredCapabilities.edge();
             try {
                 webDriver.set(new EdgeDriver());
-            } catch (SessionNotCreatedException ignored) {
+            } catch (WebDriverException ignored) {
                 new ThreadLocal<WebDriver>().set(new EdgeDriver());
             }
 			break;

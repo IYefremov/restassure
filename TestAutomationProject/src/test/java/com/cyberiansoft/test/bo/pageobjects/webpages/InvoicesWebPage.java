@@ -690,9 +690,6 @@ public class InvoicesWebPage extends WebPageWithFilter {
             wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
             wait.until(ExpectedConditions.elementToBeClickable(button)).click();
         } catch (Exception e) {
-//            try {
-//                actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
-//            } catch (Exception ignored) {} todo delete, if works fine
             try {
                 actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
                 wait.until(ExpectedConditions.visibilityOf(button)).click();

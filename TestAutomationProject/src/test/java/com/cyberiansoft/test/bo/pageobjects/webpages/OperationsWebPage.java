@@ -98,12 +98,4 @@ public class OperationsWebPage extends BaseWebPage {
 		return PageFactory.initElements(
 				driver, ServiceRequestsListWebPage.class);
 	}
-	
-	public NewInspectionWebPage clickNewInspectionLink() {
-		//Thread.sleep(2000);
-		wait.until(ExpectedConditions.elementToBeClickable(newinspectionlink)).click();
-		return PageFactory.initElements(
-				driver, NewInspectionWebPage.class);
-	}
-
 }

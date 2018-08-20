@@ -411,7 +411,12 @@ public class AgreementDetailPage extends BasePage {
 
     @Step
     public boolean checkSetupFee(String fee) {
-        return wait.until(s -> totalSetUpFee.getAttribute("data-total-setup-fee").contains(fee));
+        try {
+            return wait.until(s -> totalSetUpFee.getAttribute("data-total-setup-fee").contains(fee));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Step

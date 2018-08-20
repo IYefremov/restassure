@@ -135,10 +135,14 @@ public class InspectionsWebPage extends WebPageWithFilter {
     @FindBy(xpath = "//input[contains(@id, 'filterer_dpTo_dateInput_ClientState')]")
     private WebElement toDateClientsField;
 
+	public InspectionsWebPage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+	}
+
     public InspectionsWebPage setTimeFrame(String from, String to) {
         wait.until(ExpectedConditions.elementToBeClickable(fromDateField)).clear();
         fromDateField.sendKeys(from);
-//        wait.until(ExpectedConditions.attributeContains(fromDateClientsField, "value", from));
         wait.until(ExpectedConditions.elementToBeClickable(toDateField)).clear();
         toDateField.sendKeys(to);
         try {
@@ -147,11 +151,6 @@ public class InspectionsWebPage extends WebPageWithFilter {
         } catch (Exception ignored) {}
         return this;
     }
-
-	public InspectionsWebPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-	}
 
 	public boolean searchPanelIsExpanded() {
 		wait.until(ExpectedConditions.visibilityOf(searchtab));
@@ -166,7 +165,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		return this;
 	}
 
-	public void verifyInspectionsTableColumnsAreVisible() {
+	public InspectionsWebPage verifyInspectionsTableColumnsAreVisible() {
 		wait.until(ExpectedConditions.visibilityOf(inspectionstable.getWrappedElement()));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInspections")));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Status"));
@@ -176,12 +175,16 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		Assert.assertTrue(inspectionstable.tableColumnExists("RO#"));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Type"));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Vehicle Info"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Mileage"));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Customer"));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Technician"));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Advisor"));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Amount"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Approved"));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Archived"));
+		Assert.assertTrue(inspectionstable.tableColumnExists("Duplicates"));
 		Assert.assertTrue(inspectionstable.tableColumnExists("Action"));
+		return this;
 	}
 
 	public void verifySearchFieldsAreVisible() {
@@ -206,8 +209,8 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		return inspectionstable;
 	}
 
-	public int getInspectionsTableRowCount() throws InterruptedException {
-		Thread.sleep(3000);
+	public int getInspectionsTableRowCount() {
+		waitABit(3000);
 		return inspectionstable.getTableRowCount();
 	}
 
@@ -248,11 +251,13 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		selectComboboxValueWithTyping(searchtechniciancmb, searchtechniciandd, technician, technicianfull);
 	}
 
-	public void selectSearchStatus(String status) {
+	public InspectionsWebPage selectSearchStatus(String status) {
 		selectComboboxValue(searchstatuscmb, searchstatusdd, status);
+		return this;
 	}
 
 	public boolean inspectionExists(String inspectionnumber) {
+        waitABit(2000);
 	    wait.until(ExpectedConditions.visibilityOf(inspectionstable.getWrappedElement()));
         return inspectionstable.getWrappedElement()
 //                .findElements(By.xpath(".//tr/td[text()='" + inspectionnumber + "']")).size() > 0;
@@ -285,9 +290,10 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		waitForLoading();
 	}
 
-	public void clickFindButton() {
+	public InspectionsWebPage clickFindButton() {
 		clickAndWait(findbtn);
 		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		return this;
 	}
 
 	public void assertInspectionPrice(String inspnumber, String expectedprice) {
@@ -670,7 +676,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 				act.moveToElement(getTableRowWithInspection(inspectionnumber)
 						.findElement(By.xpath(".//a[@class='rmBottomArrow']"))).perform();
 			}
-			wait.until(ExpectedConditions.elementToBeClickable((WebElement) getTableRowWithInspection(inspectionnumber)
+			wait.until(ExpectedConditions.elementToBeClickable(getTableRowWithInspection(inspectionnumber)
 					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))));
 			act.click(getTableRowWithInspection(inspectionnumber)
 					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
@@ -680,13 +686,16 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public boolean sendInspectionEmail(String inspectionnumber, String email) {
-		boolean emailsended = false;
-		clickInspectionSelectExpandableMenu(inspectionnumber, "Send Email");
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).sendKeys(email);
-		clickAndWait(driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")));
-		emailsended = true;
-		return emailsended;
+	    try {
+            clickInspectionSelectExpandableMenu(inspectionnumber, "Send Email");
+            driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).clear();
+            driver.findElement(By.id("ctl00_ctl00_Content_Main_popupEmailRecipients")).sendKeys(email);
+            clickAndWait(driver.findElement(By.id("ctl00_ctl00_Content_Main_btnSendEmail")));
+            return true;
+        } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+        }
 	}
 
 	public SendInspectionCustomEmailTabWebPage clickSendCustomEmail(String inspectionnumber) {
@@ -701,9 +710,24 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		return PageFactory.initElements(driver, SendInspectionCustomEmailTabWebPage.class);
 	}
 
-    public String findInspectionFromList() {
-        clickFindButton();
-        waitForLoading();
-        return wait.until(ExpectedConditions.visibilityOfAllElements(inspectionsList)).get(0).getText();
+	public InspectionEditorWebPage clickEditInspection(String inspectionnumber) {
+		String mainWindowHandle = driver.getWindowHandle();
+		clickInspectionSelectExpandableMenu(inspectionnumber, "Edit");
+		waitForNewTab();
+		for (String activeHandle : driver.getWindowHandles()) {
+			if (!activeHandle.equals(mainWindowHandle)) {
+				driver.switchTo().window(activeHandle);
+			}
+		}
+		waitForLoading();
+		return PageFactory.initElements(driver, InspectionEditorWebPage.class);
+	}
+
+    public String getFirstInspectionNumber() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfAllElements(inspectionsList)).get(0).getText();
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

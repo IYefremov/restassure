@@ -1,20 +1,16 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
 public class SendInspectionCustomEmailTabWebPage extends BaseWebPage {
 	
@@ -38,7 +34,7 @@ public class SendInspectionCustomEmailTabWebPage extends BaseWebPage {
 	
 	public SendInspectionCustomEmailTabWebPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 	
 	public void setEmailToValue(String emailto) {

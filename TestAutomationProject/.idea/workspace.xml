@@ -5,51 +5,123 @@
     <option name="CUSTOM_SCOPE_NAME" value="Current File" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d198bb8d-93cc-4e99-8b0f-3def05f76db8" name="Default" comment="#BO: TC 63139 automated">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_nodep_3_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_automation_remarks_video_recorder_core_1_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_automation_remarks_video_recorder_testng_1_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mashape_unirest_unirest_java_1_4_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aeonbits_owner_owner_1_0_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aeonbits_owner_owner_java8_1_0_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpasyncclient_4_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_nio_4_4_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_awaitility_awaitility_2_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20160212.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_zeroturnaround_zt_exec_1_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/data/team-workorders-list-testcases-data.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_appium_java_client_6_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_appium_java_client_6_1_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_websocket_javax_websocket_api_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_grizzly_grizzly_framework_2_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_grizzly_grizzly_http_2_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_grizzly_grizzly_http_server_2_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_grizzly_grizzly_rcm_2_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_client_1_13_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_container_grizzly_1_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_core_1_13_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_tyrus_tyrus_spi_1_13_1.xml" beforeDir="false" />
+    <list default="true" id="d198bb8d-93cc-4e99-8b0f-3def05f76db8" name="Default" comment="#TP: TC 76926, 76927 automated, tests support and update. BO: Edge added">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_concurrentlinkedhashmap_concurrentlinkedhashmap_lru_1_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_retrofit2_converter_gson_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_retrofit2_retrofit_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jtwig_jtwig_core_5_87_0_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jtwig_jtwig_reflection_5_87_0_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_analysis_5_0_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_tree_5_0_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_util_5_0_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_parboiled_parboiled_core_1_1_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_parboiled_parboiled_java_1_1_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInspectionsData.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionEditorWebPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInspectionsTestCases.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/dataclasses/bo/BOOperationsInspectionsData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/bb.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/src/main/java/Account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/src/main/java/Calculation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bb/src/main/java/TestClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_nodep_2_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_beust_jcommander_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_17_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_inject_guice_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_relevantcodes_extentreports_2_40_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_8_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_validator_commons_validator_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_appium_java_client_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_appium_java_client_3_3_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_3_5_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_3_5_7_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javassist_javassist_3_12_1_GA.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_javax_mail_api_1_5_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_java_dev_jna_jna_4_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_java_dev_jna_jna_platform_4_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_htmlunit_htmlunit_2_17.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_beanshell_bsh_2_0b4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_io_9_2_11_v20150529.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_jetty_util_9_2_11_v20150529.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_api_9_2_11_v20150529.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_client_9_2_11_v20150529.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_common_9_2_11_v20150529.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_8_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_reflections_reflections_0_9_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_api_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_chrome_driver_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_edge_driver_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_edge_driver_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_firefox_driver_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_firefox_driver_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_firefox_driver_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_htmlunit_driver_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_htmlunit_driver_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_ie_driver_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_ie_driver_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_ie_driver_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_java_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_java_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_java_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_leg_rc_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_leg_rc_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_leg_rc_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_remote_driver_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_remote_driver_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_remote_driver_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_safari_driver_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_safari_driver_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_safari_driver_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_support_2_46_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_support_2_50_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_seleniumhq_selenium_selenium_support_2_53_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_testng_testng_6_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_webbitserver_webbit_0_4_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xerial_sqlite_jdbc_3_8_11_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_6.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestAutomationProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TestAutomationProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Repair360Android.apk" beforeDir="false" afterPath="$PROJECT_DIR$/data/Repair360Android.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Repair360Android1.apk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/driverutils/AppiumConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/driverutils/AppiumConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/config/vnextenvironment.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/config/vnextenvironment.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationLineOfBusinessScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationLineOfBusinessScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationNewUserPersonalInfoScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationNewUserPersonalInfoScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationPersonalInfoScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationPersonalInfoScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextBasicTypeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextBasicTypeScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextInspectionsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextInspectionsScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextWorkOrdersScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextWorkOrdersScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextUserRegistrationTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextUserRegistrationTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vnextpcloudysuite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vnextpcloudysuite.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vnextpcloudysuite2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vnextpcloudysuite2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/backofice.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/backofice.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/NewClientDialogWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/NewClientDialogWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/OperationsWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/OperationsWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/SendInspectionCustomEmailTabWebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/SendInspectionCustomEmailTabWebPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BaseTestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BaseTestCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/driverutils/DriverBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/driverutils/DriverBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/AgreementDetailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/AgreementDetailPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/CategoriesPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/CategoriesPage.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -65,93 +137,119 @@
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/TestAutomationProject$D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml.ic" NAME="$PROJECT_DIR$/vnextpcloudysuite2.xml Coverage Results" MODIFIED="1532352757852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TestAutomationProject$D__Work_AQC_TestAutomationProject_vnextteameditionsuite_xml.ic" NAME="$PROJECT_DIR$/vnextteameditionsuite.xml Coverage Results" MODIFIED="1532016794482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TestAutomationProject$BackOfficeOperationsServiceRequestsTestCases.ic" NAME="BackOfficeOperationsServiceRequestsTestCases Coverage Results" MODIFIED="1522890401661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cyberiansoft.test.bo.testcases.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TestAutomationProject$D__Work_AQC_TestAutomationProject_vnextpcloudysuite_xml.ic" NAME="$PROJECT_DIR$/vnextpcloudysuite.xml Coverage Results" MODIFIED="1532095940710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TestAutomationProject$TeamPortalUserTestCases_testUserCanSendNotifications.ic" NAME="TeamPortalUserTestCases.testUserCanSendNotifications Coverage Results" MODIFIED="1527153025331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.cyberiansoft.test.inhouse.testcases.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TestAutomationProject$TeamPortalCategoriesTestCases_testUserCanAddAutomatedAttributeToCategories.ic" NAME="TeamPortalCategoriesTestCases.testUserCanAddAutomatedAttributeToCategories Coverage Results" MODIFIED="1526462013925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.cyberiansoft.test.inhouse.testcases.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/TestAutomationProject$BackOfficeOperationsServiceRequestsTestCases.ic" NAME="BackOfficeOperationsServiceRequestsTestCases Coverage Results" MODIFIED="1522890401661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.cyberiansoft.test.bo.testcases.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TestAutomationProject$D__Work_AQC_TestAutomationProject_vnextpcloudysuite_xml.ic" NAME="$PROJECT_DIR$/vnextpcloudysuite.xml Coverage Results" MODIFIED="1532095940710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TestAutomationProject$D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml.ic" NAME="$PROJECT_DIR$/vnextpcloudysuite2.xml Coverage Results" MODIFIED="1532352757852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CoverageOptionsProvider">
     <option name="myAddOrReplace" value="2" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="vnextpcloudysuite.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vnextpcloudysuite.xml">
+      <file leaf-file-name="BackOfficeOperationsInspectionsTestCases.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInspectionsTestCases.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="92" column="68" selection-start-line="92" selection-start-column="68" selection-end-line="92" selection-end-column="68" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vnextpcloudysuite2.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vnextpcloudysuite2.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="92" column="63" selection-start-line="92" selection-start-column="63" selection-end-line="92" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VNextTeamWorkOrdersList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+            <state relative-caret-position="409">
+              <caret line="86" column="59" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#479#480#0" expanded="true" />
-                <element signature="e#532#533#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VNextWorkOrdersScreen.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextWorkOrdersScreen.java">
+      <file leaf-file-name="BaseTestCase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BaseTestCase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="27" />
+            <state relative-caret-position="295">
+              <caret line="136" column="9" lean-forward="true" selection-start-line="136" selection-start-column="9" selection-end-line="136" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="backofice.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/backofice.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InspectionsWebPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="451">
+              <caret line="720" column="9" lean-forward="true" selection-start-line="720" selection-start-column="9" selection-end-line="720" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SendInspectionCustomEmailTabWebPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/SendInspectionCustomEmailTabWebPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="36" column="75" lean-forward="true" selection-start-line="36" selection-start-column="75" selection-end-line="36" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InspectionEditorWebPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionEditorWebPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="120" column="9" lean-forward="true" selection-start-line="120" selection-start-column="9" selection-end-line="120" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7307#7308#0" expanded="true" />
-                <element signature="e#7342#7343#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VNextBasicTypeScreen.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextBasicTypeScreen.java">
+      <file leaf-file-name="BaseWebPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="112" column="9" selection-start-line="112" selection-start-column="9" selection-end-line="112" selection-end-column="11" />
+            <state relative-caret-position="509">
+              <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseTestCaseTeamEditionRegistration.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/BaseTestCaseTeamEditionRegistration.java">
+      <file leaf-file-name="BOOperationsInspectionsData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/dataclasses/bo/BOOperationsInspectionsData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="13" column="48" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="48" />
+            <state relative-caret-position="400">
+              <caret line="121" column="25" selection-start-line="121" selection-start-column="25" selection-end-line="121" selection-end-column="25" />
+              <folding>
+                <element signature="e#2283#2284#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="team-workorders-list-testcases-data.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/data/team-workorders-list-testcases-data.json">
+      <file leaf-file-name="BasePage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/BasePage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="55" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="55" />
+            <state relative-caret-position="317">
+              <caret line="27" column="44" lean-forward="true" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BOOperationsInspectionsData.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInspectionsData.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="268">
+              <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -167,41 +265,38 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addworkordersbtn</find>
-      <find>clickVoidInvoiceMenuItem</find>
-      <find>You cannot detach the last work order from invoice.</find>
-      <find>testVerifyUserSeeOnlyTotalAmountForSelectedMatrixWhenApproveInspectionWithLineApprovalEqualsON</find>
-      <find>testVerifyCorrectTotalIsShownForMyInspectionWithFewMoneyServices</find>
-      <find>testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen</find>
-      <find>clickChangeCustomerMenuItem</find>
-      <find>Inspe</find>
-      <find>clickDeleteWorkOrderMenuButton</find>
-      <find>isDeleteWorkOrderMenuButtonExists</find>
-      <find>clickCloseInspectionMenuButton</find>
-      <find>clickEditInspectionMenuItem</find>
-      <find>isChangeCustomerMenuPresent</find>
-      <find>clickCreateInvoiceMenuItem</find>
-      <find>clos</find>
-      <find>createinvoicemenuitem</find>
-      <find>viewinspectionbtn</find>
-      <find>clickCloseMenuButton</find>
-      <find>createinvoicemenu</find>
-      <find>SubjectTerm</find>
-      <find>getText</find>
-      <find>attachm</find>
-      <find>downloadMessageAttachment</find>
-      <find>75339</find>
-      <find>68374</find>
-      <find>6837</find>
-      <find>68397</find>
-      <find>Sys</find>
-      <find>team</find>
-      <find>testVerifyCreatedWOWithTeamSharingDisplaysInTeamWOList</find>
+      <find>BOOperationsData</find>
+      <find>testEditDuplicateByVINandRO</find>
+      <find>ROnum</find>
+      <find>VIN</find>
+      <find>searchcustomercmb</find>
+      <find>first</find>
+      <find>Select</find>
+      <find>SelectBu</find>
+      <find>SelectButton</find>
+      <find>inspectionnumber</find>
+      <find>selectOptionForFirstInvoice</find>
+      <find>inspectionsList</find>
+      <find>Edit</find>
+      <find>verifyOpeningInspectionEditor</find>
+      <find>77702</find>
+      <find>77704</find>
+      <find>78094</find>
+      <find>77753</find>
+      <find>verifyOpeningInspectionEditorForDraftStatus</find>
+      <find>waitShortly</find>
+      <find>verifyWorkOrderTypeIsNotChangedAfterClickingTheCancelButton</find>
+      <find>77922</find>
+      <find>verifyWOtypesOptionIsNotShownForTheSingleWOTypeClient</find>
+      <find>77752</find>
+      <find>Dashboard</find>
+      <find>Production Dashboard</find>
+      <find>ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl08_Label1</find>
+      <find>dateWidget</find>
+      <find>toolbar-button save-button</find>
+      <find>editEstimationDetailsForInspectionWithNewStatus</find>
     </findStrings>
     <replaceStrings>
-      <replace>data.getServiceTypeEdited()</replace>
-      <replace>data.getServiceDescEdited()</replace>
-      <replace>data.getUserLastName()</replace>
       <replace>data.getServiceAccIdEdited()</replace>
       <replace>data.getServiceType()</replace>
       <replace>data.getServiceTypeDesc()</replace>
@@ -229,6 +324,9 @@
       <replace>data.getRule()</replace>
       <replace>data.getUpdateButton()</replace>
       <replace>wait</replace>
+      <replace>ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();</replace>
+      <replace>backOfficeHeader</replace>
+      <replace>//@Listeners(VideoListener.class)</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\D\AMT\projects\testAutomationFramework\TestAutomationProject</dir>
@@ -240,57 +338,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextSelectedServicesScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextInspectionServicesScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextCustomersScreen.java" />
-        <option value="$PROJECT_DIR$/vnextteameditionsuite.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextInspectionsScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamInspectionsTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextWorkOrdersScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextWorkOrdersTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/menuscreens/VNextBasicMenuScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/menuscreens/VNextInvoiceMenuScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/menuscreens/VNextCustomersMenuScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/menuscreens/VNextWorkOrdersMenuScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/menuscreens/VNextInspectionsMenuScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersChangeCustomerTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamInvoiceEditingTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextInvoicesScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/emaildata/InboxEmail.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/emaildata/EmailMessage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalFinancialMappingTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalUserTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/OrganizationsRulesPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/Pricing.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalPricingTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/LeftMenuPanel.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/SignedAgreements.java" />
+        <option value="$PROJECT_DIR$/testnginhousetests.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/utils/TestListenerAllure.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ibs/utils/TestListenerAllure.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/LoginPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/TeamPortalHeader.java" />
         <option value="$PROJECT_DIR$/mainpom.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/NadaEMailService.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/OutlookMail.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/EmailFolder.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/EmailHost.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/config/VNextConfigInfo.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/baseutils/BaseUtils.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/GmailPropertiesProvider.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/OutlookPropertiesProvider.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/emaildata/MailSearchParameters.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamInvoicesTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextInvoicesTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextInspectionsSendMailTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextCreateInspectionOnTheClientTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnextbo/testcases/VNextBOSmokeTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/ClientQuotesDetailPage.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/iOSRegularCalculationsTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/EmailUtils.java" />
-        <option value="$PROJECT_DIR$/vnextpcloudysuite.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationLineOfBusinessScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationPersonalInfoScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextUserRegistrationTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationNewUserPersonalInfoScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWOList.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersTestCases.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/data/team-workorders-list-testcases-data.json" />
-        <option value="$PROJECT_DIR$/vnextpcloudysuite2.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersList.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextBasicTypeScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextInspectionsScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextWorkOrdersScreen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/config/vnextenvironment.properties" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/ClientSegmentsPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/utils/TestListenerAllure.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/BaseTestCase.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/data/TeamPortalPricingData.json" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/dataclasses/inHouseTeamPortal/TeamPortalPricingData.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalPricingPageTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/BasePage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/AddEditionDialog.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/AddFeatureGroupDialog.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/PricingPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/config/inhouse.properties" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorEventsTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/EventsWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/TestClass.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/driverutils/DriverBuilder.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/AgreementDetailPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/CategoriesPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/NewClientDialogWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/OperationsWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/dataclasses/bo/BOOperationsData.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.java" />
+        <option value="$PROJECT_DIR$/testngbackooficetests.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BaseTestCase.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BackOfficeHeaderPanel.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/SendInspectionCustomEmailTabWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/EditInspectionWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionEditorWebPage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInspectionsData.json" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/dataclasses/bo/BOOperationsInspectionsData.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInspectionsTestCases.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/backofice.properties" />
       </list>
     </option>
   </component>
@@ -313,9 +411,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="width" value="975" />
-    <option name="height" value="1050" />
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -325,6 +423,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -365,7 +464,7 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="vnext" type="462c0819:PsiDirectoryNode" />
+              <item name="baseutils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
@@ -374,7 +473,16 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="vnext" type="462c0819:PsiDirectoryNode" />
+              <item name="bo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="bo" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -384,7 +492,7 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="vnext" type="462c0819:PsiDirectoryNode" />
+              <item name="bo" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -394,8 +502,8 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="vnext" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
+              <item name="bo" type="462c0819:PsiDirectoryNode" />
+              <item name="webpages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
@@ -404,18 +512,7 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="vnext" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
-              <item name="typesscreens" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="vnext" type="462c0819:PsiDirectoryNode" />
+              <item name="bo" type="462c0819:PsiDirectoryNode" />
               <item name="testcases" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -425,7 +522,75 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="vnext" type="462c0819:PsiDirectoryNode" />
+              <item name="dataclasses" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="dataclasses" type="462c0819:PsiDirectoryNode" />
+              <item name="bo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="inhouse" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="inhouse" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="inhouse" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="inhouse" type="462c0819:PsiDirectoryNode" />
+              <item name="webpages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="inhouse" type="462c0819:PsiDirectoryNode" />
+              <item name="testcases" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TestAutomationProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TestAutomationProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="inhouse" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -433,23 +598,25 @@
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="ServicesWebPage&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServicesWebPage.java&#10;BackOfficeLogout&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.testcases.BaseTestCase#BackOfficeLogout&#10;BasePage&#9;PSI&#9;JAVA://com.cyberiansoft.test.inhouse.pageObject.BasePage&#10;LeftMenu&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/inhouse/pageObject/LeftMenuPanel.java&#10;json&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/data/BO-data.json&#10;BO-data.json&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/data/BO-data.json&#10;ServiceRequestTypesVehicleInfoSettingsPage&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesVehicleInfoSettingsPage&#10;src/test/java/com/cyberiansoft/test/vnext/data/team-calculations-data.json&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/vnext/data/team-calculations-data.json&#10;team-c&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/vnext/data/team-calculations-data.json&#10;VendorOrderServicesWebPage&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage&#10;NewServicePackageDialogWebPage&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/NewServicePackageDialogWebPage.java&#10;getWra&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.webelements.IWebElement#getWrappedElement&#10;averagerpairtimewonubers&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/data/averagerpairtimewonubers.txt&#10;BOConfigInfo&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/config/BOConfigInfo.java&#10;BackOfficeOperationsServiceRequestsTestCases&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java&#10;Base&#9;PSI&#9;JAVA://com.cyberiansoft.test.inhouse.pageObject.BasePage&#10;ServiceRequests&#9;PSI&#9;JAVA://com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestsScreen" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="BOMonitorRepairLocationsData&#9;PSI&#9;JAVA://com.cyberiansoft.test.dataclasses.bo.BOMonitorRepairLocationsData&#10;TeamPortalPricingData&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/inhouse/data/TeamPortalPricingData.json&#10;TeamPortalPricingData.json&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/inhouse/data/TeamPortalPricingData.json&#10;BOOperationsData.json&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json&#10;RepairOrdersWebPage&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.pageobjects.webpages.RepairOrdersWebPage&#10;ServicesWebPage&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServicesWebPage.java&#10;BackOfficeLogout&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.testcases.BaseTestCase#BackOfficeLogout&#10;BasePage&#9;PSI&#9;JAVA://com.cyberiansoft.test.inhouse.pageObject.BasePage&#10;LeftMenu&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/inhouse/pageObject/LeftMenuPanel.java&#10;json&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/data/BO-data.json&#10;BO-data.json&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/data/BO-data.json&#10;ServiceRequestTypesVehicleInfoSettingsPage&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestTypesVehicleInfoSettingsPage&#10;src/test/java/com/cyberiansoft/test/vnext/data/team-calculations-data.json&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/vnext/data/team-calculations-data.json&#10;team-c&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/vnext/data/team-calculations-data.json&#10;VendorOrderServicesWebPage&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.pageobjects.webpages.VendorOrderServicesWebPage&#10;NewServicePackageDialogWebPage&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/NewServicePackageDialogWebPage.java&#10;getWra&#9;PSI&#9;JAVA://com.cyberiansoft.test.bo.webelements.IWebElement#getWrappedElement&#10;averagerpairtimewonubers&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/data/averagerpairtimewonubers.txt&#10;BOConfigInfo&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/config/BOConfigInfo.java&#10;BackOfficeOperationsServiceRequestsTestCases&#9;FILE&#9;file://C:/D/AMT/projects/testAutomationFramework/TestAutomationProject/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java&#10;Base&#9;PSI&#9;JAVA://com.cyberiansoft.test.inhouse.pageObject.BasePage&#10;ServiceRequests&#9;PSI&#9;JAVA://com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestsScreen" />
     <property name="extract.method.default.visibility" value="public" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.idea/workspace.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../docker-selenium-samples" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.cyberiansoft.test.bo.pageobjects.webpages" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Work\AQC\TestAutomationProject\src\test\java\com\cyberiansoft\test\ios10_client\data" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\D\AMT\projects\testAutomationFramework\TestAutomationProject\src\test\java\com\cyberiansoft\test\inhouse" />
@@ -457,8 +624,8 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.cyberiansoft.test.inhouse.dataClasses" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Work\AQC\TestAutomationProject\src\test\java\com\cyberiansoft\test\ios10_client\data" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.cyberiansoft.test.bo.pageobjects.webpages" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -473,7 +640,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml">
+  <component name="RunManager" selected="TestNG.BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -496,7 +663,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimate" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="BackOfficeOperationsInspectionsTestCases" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestAutomationProject" />
       <extension name="coverage">
         <pattern>
@@ -508,8 +675,37 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
-      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases" />
-      <option name="METHOD_NAME" value="testCompanyExchangeConfigurationSharingEstimate" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInspectionsTestCases" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="TestAutomationProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInspectionsTestCases" />
+      <option name="METHOD_NAME" value="editEstimationDetailsForInspectionWithNewStatus" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -525,7 +721,7 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="BackOfficeCompanyEditTestCases.testCompanyInterApplicationExchangeConfigMappingEstimation" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="BackOfficeOperationsInspectionsTestCases.verifyOpeningInspectionEditorForDraftStatus" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestAutomationProject" />
       <extension name="coverage">
         <pattern>
@@ -537,8 +733,8 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
-      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyEditTestCases" />
-      <option name="METHOD_NAME" value="testCompanyInterApplicationExchangeConfigMappingEstimation" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInspectionsTestCases" />
+      <option name="METHOD_NAME" value="verifyOpeningInspectionEditorForDraftStatus" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -554,16 +750,22 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="BackOfficeOperationsInspectionsTestCases.verifyOpeningInspectionEditorForNewStatus" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestAutomationProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/vnextpcloudysuite2.xml" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInspectionsTestCases" />
+      <option name="METHOD_NAME" value="verifyOpeningInspectionEditorForNewStatus" />
       <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="SUITE" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -577,16 +779,22 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite.xml" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="BackOfficeOperationsTestCases" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestAutomationProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cyberiansoft.test.bo.testcases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/vnextpcloudysuite.xml" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.cyberiansoft.test.bo.testcases" />
+      <option name="MAIN_CLASS_NAME" value="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTestCases" />
       <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="SUITE" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -660,17 +868,19 @@
     </configuration>
     <list>
       <item itemvalue="TestNG.D:/Work/AQC/TestAutomationProject/vnextteameditionsuite.xml" />
-      <item itemvalue="TestNG.D:/Work/AQC/TestAutomationProject/vnextpcloudysuite.xml" />
-      <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyInterApplicationExchangeConfigMappingEstimation" />
-      <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimate" />
-      <item itemvalue="TestNG.D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" />
+      <item itemvalue="TestNG.BackOfficeOperationsInspectionsTestCases" />
+      <item itemvalue="TestNG.BackOfficeOperationsTestCases" />
+      <item itemvalue="TestNG.BackOfficeOperationsInspectionsTestCases.verifyOpeningInspectionEditorForNewStatus" />
+      <item itemvalue="TestNG.BackOfficeOperationsInspectionsTestCases.verifyOpeningInspectionEditorForDraftStatus" />
+      <item itemvalue="TestNG.BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" />
-        <item itemvalue="TestNG.D:/Work/AQC/TestAutomationProject/vnextpcloudysuite.xml" />
-        <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyExchangeConfigurationSharingEstimate" />
-        <item itemvalue="TestNG.BackOfficeCompanyEditTestCases.testCompanyInterApplicationExchangeConfigMappingEstimation" />
+        <item itemvalue="TestNG.BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" />
+        <item itemvalue="TestNG.BackOfficeOperationsInspectionsTestCases.verifyOpeningInspectionEditorForDraftStatus" />
+        <item itemvalue="TestNG.BackOfficeOperationsInspectionsTestCases.verifyOpeningInspectionEditorForNewStatus" />
+        <item itemvalue="TestNG.BackOfficeOperationsInspectionsTestCases" />
+        <item itemvalue="TestNG.BackOfficeOperationsTestCases" />
       </list>
     </recent_temporary>
   </component>
@@ -895,39 +1105,144 @@
       <option name="project" value="LOCAL" />
       <updated>1527683169659</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="#BO: TC 77393, 77402, 77403, 77404, 77436, 77585, 77609 automated. Tests update">
+      <created>1533307532388</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1533307532388</updated>
+    </task>
+    <task id="LOCAL-00032" summary="#TP: tests setup update">
+      <created>1533307709204</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1533307709204</updated>
+    </task>
+    <task id="LOCAL-00033" summary="#BO: TC 28594 updated">
+      <created>1533396882534</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1533396882534</updated>
+    </task>
+    <task id="LOCAL-00034" summary="#BO: TC 28596 fixed and updated">
+      <created>1533487558287</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1533487558287</updated>
+    </task>
+    <task id="LOCAL-00035" summary="#BO: JSON for Timesheets test cases added, minor refactoring">
+      <created>1533528257819</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1533528257819</updated>
+    </task>
+    <task id="LOCAL-00036" summary="#BO: TC 77704 in progress. Tests support/fix. Mail Utils temporarily excluded">
+      <created>1533676953619</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1533676953619</updated>
+    </task>
+    <task id="LOCAL-00037" summary="#BO: TC 77704 done, WebElementsBot updated">
+      <created>1533716766683</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1533716766683</updated>
+    </task>
+    <task id="LOCAL-00038" summary="#BO: TC 77702, 77922 automated">
+      <created>1533753240715</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1533753240715</updated>
+    </task>
+    <task id="LOCAL-00039" summary="#BO: tests fix, videoListener temporarily turned off">
+      <created>1533850721139</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1533850721139</updated>
+    </task>
+    <task id="LOCAL-00040" summary="#TP: TC 76922 automated">
+      <created>1533851741377</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1533851741377</updated>
+    </task>
+    <task id="LOCAL-00041" summary="#TP: TC 76923 automated, verifies to TC 76922 added, files renamed">
+      <created>1533914868328</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1533914868329</updated>
+    </task>
+    <task id="LOCAL-00042" summary="#TP: testListener and webDriver configuration changed, TP login/logout updated">
+      <created>1533923966354</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1533923966354</updated>
+    </task>
+    <task id="LOCAL-00043" summary="#TP: project configurations changed, login/logout updated">
+      <created>1533965663950</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1533965663950</updated>
+    </task>
+    <task id="LOCAL-00044" summary="#TP: TC 76926, 76927 automated, tests support and update">
+      <created>1534173029956</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1534173029957</updated>
+    </task>
+    <task id="LOCAL-00045" summary="#TP: edge browser tests run configuration">
+      <created>1534232625420</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1534232625421</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite_xml - 2018.07.20 at 17h 12m 00s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_editEstimationDetailsForInspectionWithNewStatus - 2018.08.20 at 09h 51m 08s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite_xml - 2018.07.20 at 17h 14m 44s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_editEstimationDetailsForInspectionWithNewStatus - 2018.08.20 at 09h 53m 55s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml - 2018.07.23 at 11h 47m 06s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_editEstimationDetailsForInspectionWithNewStatus - 2018.08.20 at 09h 55m 37s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml - 2018.07.23 at 11h 56m 21s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_editEstimationDetailsForInspectionWithNewStatus - 2018.08.20 at 09h 57m 47s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml - 2018.07.23 at 11h 58m 49s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_editEstimationDetailsForInspectionWithNewStatus - 2018.08.20 at 09h 59m 58s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml - 2018.07.23 at 12h 34m 10s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_verifyOpeningInspectionEditorForDraftStatus - 2018.08.20 at 16h 33m 58s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.verifyOpeningInspectionEditorForDraftStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml - 2018.07.23 at 12h 41m 47s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_verifyOpeningInspectionEditorForDraftStatus - 2018.08.20 at 16h 36m 40s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.verifyOpeningInspectionEditorForDraftStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml - 2018.07.23 at 13h 29m 45s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_editEstimationDetailsForInspectionWithNewStatus - 2018.08.20 at 17h 06m 02s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml - 2018.07.23 at 13h 32m 11s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_editEstimationDetailsForInspectionWithNewStatus - 2018.08.20 at 17h 07m 29s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Work_AQC_TestAutomationProject_vnextpcloudysuite2_xml - 2018.07.23 at 16h 39m 32s.xml">
-      <configuration name="D:/Work/AQC/TestAutomationProject/vnextpcloudysuite2.xml" configurationId="TestNG" />
+    <history-entry file="BackOfficeOperationsInspectionsTestCases_editEstimationDetailsForInspectionWithNewStatus - 2018.08.20 at 17h 08m 51s.xml">
+      <configuration name="BackOfficeOperationsInspectionsTestCases.editEstimationDetailsForInspectionWithNewStatus" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -940,36 +1255,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.36819172" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978678" weight="0.2881356" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978678" weight="0.23093683" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5021322" side_tool="true" weight="0.32934782" />
-      <window_info anchor="right" id="Maven Projects" order="6" sideWeight="0.4949495" visible="true" weight="0.12013423" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.23856209" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30084747" />
-      <window_info active="true" anchor="right" id="Coverage" order="7" sideWeight="0.5050505" side_tool="true" visible="true" weight="0.12013423" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3943355" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5021322" side_tool="true" weight="0.33877996" />
+      <window_info anchor="right" id="Maven Projects" order="6" sideWeight="0.4949495" weight="0.119936034" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" weight="0.3148148" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33551198" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32135075" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49891067" visible="true" weight="0.28389263" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.19067797" />
-      <window_info id="Learn" order="6" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49891067" visible="true" weight="0.20522387" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.31045753" />
       <window_info id="Structure" order="1" sideWeight="0.50108933" side_tool="true" weight="0.1977612" />
       <window_info anchor="right" id="Ant Build" order="1" sideWeight="0.497307" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.48446327" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.26906317" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" anchor="right" id="Coverage" order="7" sideWeight="0.5050505" side_tool="true" visible="true" weight="0.12013423" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.32893288" />
+      <window_info anchor="bottom" id="Inspection Results" order="10" weight="0.32893288" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info id="Learn" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
@@ -985,6 +1299,17 @@
               </option>
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="text">
+                    <value>
+                      <list>
+                        <option value="" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
               </option>
               <option name="COLUMN_ORDER">
                 <list>
@@ -1005,21 +1330,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_UNVERSIONED_FILES_WHILE_COMMIT" value="false" />
-    <MESSAGE value="#BO BackOfficeOperationsTestCases ready" />
-    <MESSAGE value="#BO BackOfficeSuperUserTestCases ready; 24854 fixed; refactoring" />
-    <MESSAGE value="#BO fixing authorization fails, BackOfficeOperationsServiceRequestsTestCases fix" />
-    <MESSAGE value="#BO tests review and fix after fail in report" />
-    <MESSAGE value="#BO tests fix after fail in report" />
-    <MESSAGE value="#BO MonitorReportsTestCases some tests fixed" />
-    <MESSAGE value="#BO tests analyze and fix, InHouse fix and update" />
-    <MESSAGE value="#BO tests support, InHouse tests update" />
-    <MESSAGE value="#BO tests support" />
-    <MESSAGE value="#BO tests fix, start with Json" />
-    <MESSAGE value="#BO: tests fix, test data updated. InHouse: page asserts in progress" />
-    <MESSAGE value="#BO: tests fix. InHouse in progress" />
-    <MESSAGE value="#BO: tests fix" />
-    <MESSAGE value="#BO: json added, tc43693 fix" />
-    <MESSAGE value="#BO: InHouse tests fix, JSON configured" />
     <MESSAGE value="#BO: json file renamed" />
     <MESSAGE value="#BO: InHouse: tests update and fix, json used" />
     <MESSAGE value="#BO: 74893 ready, 74894 in progress. InHouse: UserTestCases fix in progress" />
@@ -1030,20 +1340,35 @@
     <MESSAGE value="#BO: TC 74918 in progress." />
     <MESSAGE value="#BO: TC 74918, 68544 automated" />
     <MESSAGE value="#BO: test cases 74918, 68544 automated" />
-    <option name="LAST_COMMIT_MESSAGE" value="#BO: test cases 74918, 68544 automated" />
+    <MESSAGE value="#BO: TC 77393, 77402, 77403, 77404, 77436, 77585, 77609 automated. Tests update" />
+    <MESSAGE value="#TP: tests setup update" />
+    <MESSAGE value="#BO: TC 28594 updated" />
+    <MESSAGE value="#BO: TC 28596 fixed and updated" />
+    <MESSAGE value="#BO: JSON for Timesheets test cases added, minor refactoring" />
+    <MESSAGE value="#BO: TC 77704 in progress. Tests support/fix. Mail Utils temporarily excluded" />
+    <MESSAGE value="#BO: TC 77704 done, WebElementsBot updated" />
+    <MESSAGE value="#BO: TC 77702, 77922 automated" />
+    <MESSAGE value="#BO: tests fix, videoListener temporarily turned off" />
+    <MESSAGE value="#TP: TC 76922 automated" />
+    <MESSAGE value="#TP: TC 76923 automated, verifies to TC 76922 added, files renamed" />
+    <MESSAGE value="#TP: testListener and webDriver configuration changed, TP login/logout updated" />
+    <MESSAGE value="#TP: project configurations changed, login/logout updated" />
+    <MESSAGE value="#TP: TC 76926, 76927 automated, tests support and update" />
+    <MESSAGE value="#TP: edge browser tests run configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="#TP: edge browser tests run configuration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ClientsWebPage.java</url>
-          <line>332</line>
+          <line>366</line>
           <properties />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java</url>
-          <line>318</line>
+          <line>321</line>
           <properties />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
@@ -1055,49 +1380,49 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
-          <line>867</line>
+          <line>869</line>
           <properties />
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
-          <line>726</line>
+          <line>728</line>
           <properties />
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
-          <line>804</line>
+          <line>806</line>
           <properties />
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
-          <line>795</line>
+          <line>797</line>
           <properties />
           <option name="timeStamp" value="114" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
-          <line>788</line>
+          <line>790</line>
           <properties />
           <option name="timeStamp" value="116" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
-          <line>763</line>
+          <line>765</line>
           <properties />
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
-          <line>1103</line>
+          <line>1105</line>
           <properties />
           <option name="timeStamp" value="235" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java</url>
-          <line>960</line>
+          <line>962</line>
           <properties />
           <option name="timeStamp" value="244" />
         </line-breakpoint>
@@ -1109,57 +1434,51 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>1503</line>
+          <line>1517</line>
           <properties />
           <option name="timeStamp" value="279" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>1123</line>
+          <line>1122</line>
           <properties />
           <option name="timeStamp" value="281" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>2042</line>
+          <line>2035</line>
           <properties />
           <option name="timeStamp" value="284" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>1152</line>
+          <line>1151</line>
           <properties />
           <option name="timeStamp" value="307" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>1141</line>
+          <line>1140</line>
           <properties />
           <option name="timeStamp" value="308" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>1244</line>
+          <line>1243</line>
           <properties />
           <option name="timeStamp" value="309" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>1154</line>
+          <line>1153</line>
           <properties />
           <option name="timeStamp" value="312" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>329</line>
+          <line>328</line>
           <properties />
           <option name="timeStamp" value="373" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorReportsTestCases.java</url>
-          <line>142</line>
-          <properties />
-          <option name="timeStamp" value="376" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationsWebPage.java</url>
@@ -1235,7 +1554,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorTestCases.java</url>
-          <line>257</line>
+          <line>255</line>
           <properties />
           <option name="timeStamp" value="662" />
         </line-breakpoint>
@@ -1259,13 +1578,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>1141</line>
+          <line>1151</line>
           <properties />
           <option name="timeStamp" value="719" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>1115</line>
+          <line>1114</line>
           <properties />
           <option name="timeStamp" value="739" />
         </line-breakpoint>
@@ -1277,67 +1596,55 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>1244</line>
+          <line>1254</line>
           <properties />
           <option name="timeStamp" value="772" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>1971</line>
+          <line>1986</line>
           <properties />
           <option name="timeStamp" value="781" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.java</url>
-          <line>108</line>
-          <properties />
-          <option name="timeStamp" value="787" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.java</url>
-          <line>110</line>
-          <properties />
-          <option name="timeStamp" value="788" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>656</line>
+          <line>654</line>
           <properties />
           <option name="timeStamp" value="801" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
-          <line>42</line>
+          <line>40</line>
           <properties />
           <option name="timeStamp" value="818" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>1114</line>
+          <line>1113</line>
           <properties />
           <option name="timeStamp" value="833" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorTestCases.java</url>
-          <line>136</line>
+          <line>134</line>
           <properties />
           <option name="timeStamp" value="898" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>976</line>
+          <line>985</line>
           <properties />
           <option name="timeStamp" value="993" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>341</line>
+          <line>340</line>
           <properties />
           <option name="timeStamp" value="1004" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsServiceRequestsTestCases.java</url>
-          <line>340</line>
+          <line>339</line>
           <properties />
           <option name="timeStamp" value="1006" />
         </line-breakpoint>
@@ -1349,73 +1656,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorEventsTestCases.java</url>
-          <line>142</line>
+          <line>140</line>
           <properties />
           <option name="timeStamp" value="1075" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>454</line>
+          <line>459</line>
           <properties />
           <option name="timeStamp" value="1077" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>715</line>
-          <properties />
-          <option name="timeStamp" value="1114" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>716</line>
-          <properties />
-          <option name="timeStamp" value="1115" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java</url>
-          <line>718</line>
-          <properties />
-          <option name="timeStamp" value="1116" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalUserTestCases.java</url>
-          <line>229</line>
+          <line>227</line>
           <properties />
           <option name="timeStamp" value="1129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalCategoriesTestCases.java</url>
-          <line>181</line>
+          <line>179</line>
           <properties />
           <option name="timeStamp" value="1436" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalCategoriesTestCases.java</url>
-          <line>180</line>
+          <line>178</line>
           <properties />
           <option name="timeStamp" value="1437" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/ClientSegmentsPage.java</url>
-          <line>79</line>
-          <properties />
-          <option name="timeStamp" value="1438" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/ClientSegmentsPage.java</url>
-          <line>81</line>
-          <properties />
-          <option name="timeStamp" value="1439" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/ClientSegmentsPage.java</url>
-          <line>91</line>
-          <properties />
-          <option name="timeStamp" value="1441" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalUserTestCases.java</url>
-          <line>169</line>
+          <line>167</line>
           <properties />
           <option name="timeStamp" value="1442" />
         </line-breakpoint>
@@ -1427,25 +1698,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalUserTestCases.java</url>
-          <line>138</line>
+          <line>136</line>
           <properties />
           <option name="timeStamp" value="1457" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalUserTestCases.java</url>
-          <line>133</line>
+          <line>131</line>
           <properties />
           <option name="timeStamp" value="1460" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>1494</line>
+          <line>1508</line>
           <properties />
           <option name="timeStamp" value="1495" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ServiceRequestsListWebPage.java</url>
-          <line>1496</line>
+          <line>1510</line>
           <properties />
           <option name="timeStamp" value="1496" />
         </line-breakpoint>
@@ -1473,8 +1744,38 @@
           <properties />
           <option name="timeStamp" value="1547" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/ClientSegmentsPage.java</url>
+          <line>96</line>
+          <properties />
+          <option name="timeStamp" value="1590" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalCategoriesTestCases.java</url>
+          <line>278</line>
+          <properties />
+          <option name="timeStamp" value="1593" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalCategoriesTestCases.java</url>
+          <line>281</line>
+          <properties />
+          <option name="timeStamp" value="1594" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="1596" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java</url>
+          <line>431</line>
+          <properties />
+          <option name="timeStamp" value="1599" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1552" />
+      <option name="time" value="1601" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1531,428 +1832,395 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.5.6/javax.mail-1.5.6.jar!/javax/mail/search/SearchTerm.class">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/AddEditionDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        <state relative-caret-position="230">
+          <caret line="198" column="4" selection-start-line="198" selection-start-column="4" selection-end-line="198" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.5.6/javax.mail-1.5.6.jar!/javax/mail/Folder.class">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/AddFeatureGroupDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-202">
-          <caret line="286" column="21" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.5.6/javax.mail-1.5.6.jar!/javax/mail/search/StringTerm.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.5.6/javax.mail-1.5.6.jar!/javax/mail/search/SubjectTerm.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextBaseTestCase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/listeners/ExtentTestNGIReporterListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/OutlookMail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-680">
-          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/NadaEMailService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="97" column="4" selection-start-line="97" selection-start-column="4" selection-end-line="110" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="394">
+          <caret line="49" column="20" lean-forward="true" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/baseutils/BaseUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+        <state relative-caret-position="260">
+          <caret line="36" column="52" lean-forward="true" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/emaildata/InboxEmail.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/config/inhouse.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state>
+          <caret column="22" lean-forward="true" selection-start-column="22" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/emaildata/EmailMessage.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/driverutils/IEConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="98">
+          <caret line="13" column="72" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="72" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/System.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/BaseTestCase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="626" column="29" selection-start-line="626" selection-start-column="29" selection-end-line="626" selection-end-column="29" />
+        <state relative-caret-position="98">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/mailpropertieproveders/OutlookPropertiesProvider.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalPricingPageTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="729">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/emaildata/MailSearchParameters.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyCRUDTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="31" />
-          <folding>
-            <element signature="e#649#650#0" expanded="true" />
-            <element signature="e#699#700#0" expanded="true" />
-            <element signature="e#930#931#0" expanded="true" />
-            <element signature="e#984#985#0" expanded="true" />
-            <element signature="e#1188#1189#0" expanded="true" />
-            <element signature="e#1234#1235#0" expanded="true" />
-            <element signature="e#1436#1437#0" expanded="true" />
-            <element signature="e#1483#1484#0" expanded="true" />
-            <element signature="e#1753#1754#0" expanded="true" />
-            <element signature="e#1797#1798#0" expanded="true" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1894#1895#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="144">
+          <caret line="25" column="9" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/utils/MailChecker.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        <state relative-caret-position="117">
+          <caret line="26" column="9" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mainpom.xml">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/PricingPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="156" column="21" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
+        <state relative-caret-position="2214">
+          <caret line="89" column="35" selection-start-line="89" selection-start-column="35" selection-end-line="89" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamInspectionsLineApprovalTestCases.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/BOConfigInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="266" selection-start-line="266" selection-end-line="266" />
+        <state relative-caret-position="1242">
+          <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamInspectionNotestTestCases.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/EventsWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-151">
-          <caret line="115" selection-start-line="115" selection-end-line="115" />
+        <state relative-caret-position="3483">
+          <caret line="148" selection-start-line="148" selection-end-line="148" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/emaildata/EmailFolder.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyEditTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="7" />
+        <state relative-caret-position="513">
+          <caret line="34" column="73" selection-start-line="34" selection-start-column="73" selection-end-line="34" selection-end-column="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/emaildata/EmailHost.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/TestClass.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ActiveDevicesWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        <state relative-caret-position="147">
+          <caret line="63" column="5" lean-forward="true" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextInspectionsSendMailTestCases.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorEventsTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="273" column="51" selection-start-line="273" selection-start-column="51" selection-end-line="273" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="406">
+          <caret line="172" column="52" lean-forward="true" selection-start-line="172" selection-start-column="52" selection-end-line="172" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextCreateInspectionOnTheClientTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1734">
-          <caret line="102" column="152" selection-start-line="102" selection-start-column="152" selection-end-line="102" selection-end-column="152" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="110" column="19" selection-start-line="110" selection-start-column="19" selection-end-line="110" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnextbo/testcases/VNextBOSmokeTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="388" column="61" selection-start-line="388" selection-start-column="61" selection-end-line="388" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/ClientQuotesDetailPage.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/driverutils/DriverBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
-          <caret line="232" column="99" selection-start-line="232" selection-start-column="99" selection-end-line="232" selection-end-column="99" />
+          <caret line="80" column="13" lean-forward="true" selection-start-line="80" selection-start-column="13" selection-end-line="80" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/iOSRegularCalculationsTestCases.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/ClientsWebPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="3351" column="50" selection-start-line="3351" selection-start-column="50" selection-end-line="3351" selection-end-column="50" />
+        <state relative-caret-position="14202">
+          <caret line="553" column="39" selection-start-line="553" selection-start-column="39" selection-end-line="553" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/ios10_client/testcases/IOSSmokeTestCases.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalUserTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="3628" column="53" selection-start-line="3628" selection-start-column="53" selection-end-line="3628" selection-end-column="53" />
+        <state relative-caret-position="5508">
+          <caret line="216" column="60" selection-start-line="216" selection-start-column="60" selection-end-line="216" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextInvoicesTestCases.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/AgreementDetailPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="197" column="69" selection-start-line="197" selection-start-column="69" selection-end-line="197" selection-end-column="69" />
+        <state relative-caret-position="10476">
+          <caret line="420" selection-start-line="420" selection-end-line="420" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-api/3.12.0/selenium-api-3.12.0.jar!/org/openqa/selenium/JavascriptExecutor.class">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/testcases/TeamPortalCategoriesTestCases.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="24" />
+        <state relative-caret-position="5643">
+          <caret line="222" column="50" selection-start-line="222" selection-start-column="50" selection-end-line="222" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextBaseScreen.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/CategoriesPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="104" />
+        <state relative-caret-position="4671">
+          <caret line="181" column="13" selection-start-line="181" selection-start-column="13" selection-end-line="181" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationNewUserPersonalInfoScreen.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/NewClientDialogWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7749">
+          <caret line="363" column="78" selection-start-line="363" selection-start-column="78" selection-end-line="363" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/OperationsWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2511">
+          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/RepairLocationsWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6399">
+          <caret line="250" column="9" selection-start-line="250" selection-start-column="9" selection-end-line="250" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/dataclasses/bo/BOMonitorRepairLocationsData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOMonitorRepairLocationsData.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="26" column="59" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/NewRepairLocationDialogWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1755">
+          <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInvoiceTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11313">
+          <caret line="432" column="49" selection-start-line="432" selection-start-column="49" selection-end-line="432" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/WorkOrdersWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1566">
+          <caret line="71" column="79" selection-start-line="71" selection-start-column="79" selection-end-line="71" selection-end-column="79" />
+          <folding>
+            <element signature="e#7025#7026#0" expanded="true" />
+            <element signature="e#7073#7074#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeMonitorRepairLocationsTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="82" column="58" selection-start-line="82" selection-start-column="58" selection-end-line="82" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/dataclasses/bo/BOOperationsData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4779">
+          <caret line="244" column="24" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
+          <folding>
+            <element signature="e#2503#2504#0" expanded="true" />
+            <element signature="e#2531#2532#0" expanded="true" />
+            <element signature="e#2563#2564#0" expanded="true" />
+            <element signature="e#2591#2592#0" expanded="true" />
+            <element signature="e#2624#2625#0" expanded="true" />
+            <element signature="e#2656#2657#0" expanded="true" />
+            <element signature="e#2975#2976#0" expanded="true" />
+            <element signature="e#3012#3013#0" expanded="true" />
+            <element signature="e#3184#3185#0" expanded="true" />
+            <element signature="e#3216#3217#0" expanded="true" />
+            <element signature="e#3250#3251#0" expanded="true" />
+            <element signature="e#3280#3281#0" expanded="true" />
+            <element signature="e#3315#3316#0" expanded="true" />
+            <element signature="e#3346#3347#0" expanded="true" />
+            <element signature="e#3383#3384#0" expanded="true" />
+            <element signature="e#3416#3417#0" expanded="true" />
+            <element signature="e#3457#3458#0" expanded="true" />
+            <element signature="e#3494#3495#0" expanded="true" />
+            <element signature="e#4385#4386#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
+            <element signature="e#4463#4464#0" expanded="true" />
+            <element signature="e#4500#4501#0" expanded="true" />
+            <element signature="e#4535#4536#0" expanded="true" />
+            <element signature="e#4566#4567#0" expanded="true" />
+            <element signature="e#4599#4600#0" expanded="true" />
+            <element signature="e#4628#4629#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/awaitility/awaitility/2.0.0/awaitility-2.0.0.jar!/org/awaitility/Duration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testngbackooficetests.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="15" column="59" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/core/BrowserType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
-          <caret line="115" column="8" lean-forward="true" selection-start-line="115" selection-start-column="8" selection-end-line="115" selection-end-column="8" />
+          <caret line="4" column="21" lean-forward="true" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InvoicesWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17010">
+          <caret line="681" selection-start-line="681" selection-end-line="681" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BackOfficeHeaderPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="73" column="4" lean-forward="true" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BaseTestCase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="136" column="9" lean-forward="true" selection-start-line="136" selection-start-column="9" selection-end-line="136" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/SendInspectionCustomEmailTabWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="36" column="75" lean-forward="true" selection-start-line="36" selection-start-column="75" selection-end-line="36" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/inhouse/pageObject/webpages/BasePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="27" column="44" lean-forward="true" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/BaseWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionsWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="720" column="9" lean-forward="true" selection-start-line="720" selection-start-column="9" selection-end-line="720" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeCompanyClientsTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="757" column="1" lean-forward="true" selection-start-line="757" selection-start-column="1" selection-end-line="757" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="214" column="60" lean-forward="true" selection-start-line="214" selection-start-column="60" selection-end-line="214" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/pageobjects/webpages/InspectionEditorWebPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="120" column="9" lean-forward="true" selection-start-line="120" selection-start-column="9" selection-end-line="120" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/EmailUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInspectionsData.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="37" column="69" selection-start-line="37" selection-start-column="69" selection-end-line="37" selection-end-column="69" />
+        <state relative-caret-position="268">
+          <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/dataclasses/bo/BOOperationsInspectionsData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="121" column="25" selection-start-line="121" selection-start-column="25" selection-end-line="121" selection-end-column="25" />
+          <folding>
+            <element signature="e#2283#2284#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/testcases/BackOfficeOperationsInspectionsTestCases.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="86" column="59" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationLineOfBusinessScreen.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/bo/config/backofice.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="28" column="89" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamInvoicesTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="422" selection-start-line="422" selection-end-line="422" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/email/mailpropertieproveders/GmailPropertiesProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationScreensModalDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/VNextRegistrationPersonalInfoScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-          <folding>
-            <element signature="e#4943#4944#0" expanded="true" />
-            <element signature="e#4967#4968#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextUserRegistrationTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="29" column="71" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/data/team-workorders-change-customer-testcases-data.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="9" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersChangeCustomerTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="68" column="5" lean-forward="true" selection-start-line="49" selection-start-column="4" selection-end-line="68" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersTestCases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vnextpcloudysuite.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="92" column="68" selection-start-line="92" selection-start-column="68" selection-end-line="92" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/BaseTestCaseTeamEditionRegistration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="13" column="48" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/data/team-workorders-list-testcases-data.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="55" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vnextpcloudysuite2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="92" column="63" selection-start-line="92" selection-start-column="63" selection-end-line="92" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextInspectionsScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8817#8818#0" expanded="true" />
-            <element signature="e#8840#8841#0" expanded="true" />
-            <element signature="e#8607#8608#0" expanded="true" />
-            <element signature="e#8648#8649#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextInvoicesScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextWorkOrdersScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7307#7308#0" expanded="true" />
-            <element signature="e#7342#7343#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/testcases/VNextTeamWorkOrdersList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#479#480#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/config/vnextenvironment.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/cyberiansoft/test/vnext/screens/typesscreens/VNextBasicTypeScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="112" column="9" selection-start-line="112" selection-start-column="9" selection-end-line="112" selection-end-column="11" />
+        <state relative-caret-position="270">
+          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -2033,11 +2301,11 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>data</last-edited>
+          <last-edited>Maven: org.apache.poi:poi-ooxml-schemas:3.12</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.34028435" />
               </list>
             </option>
           </splitter-proportions>

@@ -51,11 +51,16 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
-		newrepairlocdialog.setNewRepairLocationName(data.getRepairLocationName()).selectNewRepairLocationStatus(data.getRepairLocationStatus())
-			.setNewRepairLocationApproxRepairTime(data.getRepairLocationApproxRepairTime())
-			.setNewRepairLocationWorkingHours(data.getRepairLocationWorkDay1(), data.getRepairLocationStartTime1(), data.getRepairLocationEndTime1())
-			.setNewRepairLocationWorkingHours(data.getRepairLocationWorkDay2(), data.getRepairLocationStartTime2(), data.getRepairLocationEndTime2())
-			.selectPhaseEnforcementOption().selectAddressInfoTab().selectWorkingHoursTab().clickOKButton();
+		newrepairlocdialog
+                .setNewRepairLocationName(data.getRepairLocationName())
+                .selectNewRepairLocationStatus(data.getRepairLocationStatus())
+                .setNewRepairLocationApproxRepairTime(data.getRepairLocationApproxRepairTime())
+                .setNewRepairLocationWorkingHours(data.getRepairLocationWorkDay1(), data.getRepairLocationStartTime1(), data.getRepairLocationEndTime1())
+                .setNewRepairLocationWorkingHours(data.getRepairLocationWorkDay2(), data.getRepairLocationStartTime2(), data.getRepairLocationEndTime2())
+                .selectPhaseEnforcementOption()
+                .selectAddressInfoTab()
+                .selectWorkingHoursTab()
+                .clickOKButton();
 
 		repairlocationspage.deleteRepairLocationAndCancelDeleting(data.getRepairLocationName());
 		repairlocationspage.deleteRepairLocation(data.getRepairLocationName());
