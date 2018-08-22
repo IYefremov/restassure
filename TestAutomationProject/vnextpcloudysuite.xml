@@ -8,7 +8,7 @@
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-    <!--<class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
+    <class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
         <methods>                   
           <include name="testLogInSuccessCase" />
         </methods>
@@ -89,7 +89,7 @@
       <class name="com.cyberiansoft.test.vnext.testcases.VNextCreateInvoiceFromMultiplyWOTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionApproveOnBOTestCases">
-      </class>-->
+      </class>
      <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
      <methods>                   
           <include name="testVerifyCreatingBOWithJumpStartEdition_PDR" />
