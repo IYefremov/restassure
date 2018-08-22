@@ -798,8 +798,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		informationdlg.clickInformationDialogOKButton();
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		Assert.assertTrue(homescreen.isUpgrateToProBannerVisible());
-		
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+
+
+		//todo: Test Case 63613:Verify Repair 360 Free Edition user can select only one matrix type not valid anymore
+		/*VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.setCustomerFirstName(firstname);
@@ -824,7 +826,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);
 		
 		inspectionsscreen = selectedServicesScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();*/
 	}
 	
 	@Test(testName= "Test Case 64228:R360: Submit Customer Feedback from Repair360 Free ediition", 
