@@ -126,4 +126,9 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 		clickCloseMenuButton();
 		return new VNextInspectionsScreen(appiumdriver);
 	}
+
+    public VNextCustomersScreen clickChangeCustomerMenuItem() {
+        clickMenuItem(changecustomerbtn);
+        return new VNextCustomersScreen(appiumdriver);
+    }
 }

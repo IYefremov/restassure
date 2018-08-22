@@ -1,0 +1,26 @@
+{
+
+  "testVerifyUserCanChangeCustomerForInspection": [
+    {
+      "rowID": "testVerifyUserCanChangeCustomerForInspection.01",
+      "description": "Automate Test Case Verify User Can Change Customer for Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyIfChangedCustomerIsSavedAfterEditInspection": [
+    {
+      "rowID": "testVerifyIfChangedCustomerIsSavedAfterEditInspection.01",
+      "description": "Automate Test case Verify If Changed Customer Is Saved After Edit Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "service": {"serviceName": "Battery Installation"
+      },
+      "inspPrice": "$9.00"
+    }
+  ]
+
+}

@@ -211,4 +211,14 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 		customersscreen.selectCustomer(customer);
 		return new VNextApproveInspectionsScreen(appiumdriver);
 	}
+
+	public VNextInspectionsScreen changeCustomerForInspection(String inspectionNumber, AppCustomer newCustomer) {
+		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
+		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		customersscreen.selectCustomer(newCustomer);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickInformationDialogYesButton();
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving work order customer...']"));
+		return this;
+	}
 }
