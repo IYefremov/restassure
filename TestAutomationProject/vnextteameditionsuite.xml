@@ -36,6 +36,8 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoiceEditingTestCases">
       </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersList">
+      </class>
     </classes>
   </test>
 </suite>

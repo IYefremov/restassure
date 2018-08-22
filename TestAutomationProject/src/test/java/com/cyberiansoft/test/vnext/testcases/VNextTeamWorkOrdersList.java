@@ -216,7 +216,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
         VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
         statusScreen.updateMainDB();
-        statusScreen.clickBackButton();
+        //statusScreen.clickBackButton();
         homescreen.clickWorkOrdersMenuItem();
         workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
         vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
