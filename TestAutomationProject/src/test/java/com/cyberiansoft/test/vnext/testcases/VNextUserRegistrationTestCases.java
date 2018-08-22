@@ -86,8 +86,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		/*BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -181,8 +181,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -278,8 +278,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -358,8 +358,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -424,8 +424,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -500,8 +500,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -622,8 +622,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -755,8 +755,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -861,8 +861,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -956,8 +956,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
@@ -1084,8 +1084,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
-		registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
-		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
+		//registrationinformationdlg = new VNextRegistrationScreensModalDialog(appiumdriver);
+		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		BaseUtils.waitABit(2000);
 		appiumdriver.switchTo().defaultContent();
