@@ -603,7 +603,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String customeremail = "test.cyberiansoft+408222@gmail.com";
 		
 		final String testVIN = "1FMCU0DG4BK830800";
-		final String matrixservice = "Hail Dent Repair";
+		final String matrixservice = "Hail Repair";
 		final String[] availablepricematrixes = { "Nationwide Insurance", "Progressive", "State Farm" };
 		final String vehiclepartname = "Hood";
 		final String vehiclepartsize = "Dime";	
@@ -738,7 +738,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String customeremail = "test.cyberiansoft+408222@gmail.com";
 		
 		final String testVIN = "1FMCU0DG4BK830800";
-		final String matrixservice = "Hail Dent Repair";
+		final String matrixservice = "Hail Repair";
 		final String availablepricematrix = "State Farm";
 		
 		
