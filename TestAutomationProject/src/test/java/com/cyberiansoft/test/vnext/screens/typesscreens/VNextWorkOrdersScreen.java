@@ -157,6 +157,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 		customersscreen.selectCustomer(newCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
 		return this;
 	}
 

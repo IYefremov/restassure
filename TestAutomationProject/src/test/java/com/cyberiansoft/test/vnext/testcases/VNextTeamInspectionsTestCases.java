@@ -634,7 +634,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String workorderType = "O_Kramar";
 		final String vinnumber = "TEST";
 		final String moneyservice = "Battery Installation";
-		final String percentageservice = "Aluminum Panel";
+		final String percentageservice = "Bundle Discount";
 
 		final int amountToSelect = 3;
 		final int defaultCountForMoneyService = 1;

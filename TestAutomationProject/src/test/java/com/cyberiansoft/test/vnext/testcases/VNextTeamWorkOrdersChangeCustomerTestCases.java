@@ -112,7 +112,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
-        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        workordersscreen = vehicleinfoscreen.saveWorkOrderAsDraft();
         workordersscreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);

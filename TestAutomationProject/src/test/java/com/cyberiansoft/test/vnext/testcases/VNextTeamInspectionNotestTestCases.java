@@ -162,7 +162,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
+ 		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
 			
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);

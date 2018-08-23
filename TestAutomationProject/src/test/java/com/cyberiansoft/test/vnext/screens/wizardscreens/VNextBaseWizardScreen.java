@@ -105,7 +105,14 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 				clcikSaveViaMenuAsFinal();
 		return new VNextWorkOrdersScreen(appiumdriver);
 	}
-	
+
+	public VNextWorkOrdersScreen saveWorkOrderAsDraft() {
+		clickSaveWorkOrderMenuButton();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickDraftButton();
+		return new VNextWorkOrdersScreen(appiumdriver);
+	}
+
 	public void clickMenuButton() {
 		tap(menubtn);
 
