@@ -204,7 +204,12 @@ public class VNextBaseTestCase {
 		appiumdriver.launchApp();
 
 		switchToWebViewContext();*/
-		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
+		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360 Team Edition");
+		VNextTeamEditionVerificationScreen verificationscreen = environmentSelectionScreen.selectEnvironment("Development");
+
+		//VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		verificationscreen.setDeviceRegistrationCode(regCode);
 		verificationscreen.clickVerifyButton(); 
 		
