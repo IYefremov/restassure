@@ -168,7 +168,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
         workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
         workordersscreen.changeCustomerToWholesailForWorkOrder(woNumber, testwholesailcustomer);
-        Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber), "Can't fins work order: " + woNumber);
+        Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
         workordersscreen.switchToTeamWorkordersView();
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testwholesailcustomer.getFullName());
         workordersscreen.switchToMyWorkordersView();

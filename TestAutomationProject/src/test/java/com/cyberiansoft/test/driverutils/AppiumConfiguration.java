@@ -39,8 +39,8 @@ public class AppiumConfiguration {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				//File app = new File(appDir, "Repair360AndroidTeam.apk");
-				File app = new File(appDir, "Repair360Android.apk");
+				File app = new File(appDir, "Repair360AndroidTeam.apk");
+				//File app = new File(appDir, "Repair360Android.apk");
 				appiumcap = new DesiredCapabilities();
 
 	    		appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19"); 

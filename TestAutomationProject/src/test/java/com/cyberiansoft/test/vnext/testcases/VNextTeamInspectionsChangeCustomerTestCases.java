@@ -100,4 +100,28 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestCaseTea
 
         inspectionsScreen.clickBackButton();
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen(String rowID,
+                                                             String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer1);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(appiumdriver);
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspectionNumber = vehicleinfoscreen.getNewInspectionNumber();
+        inspectionsScreen = vehicleinfoscreen.saveInspectionViaMenu();
+        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
+        customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+        Assert.assertFalse(customersscreen.isAddCustomerButtonDisplayed());
+        customersscreen.clickBackButton();
+        inspectionsScreen = new VNextInspectionsScreen(appiumdriver);
+        inspectionsScreen.clickBackButton();
+    }
 }

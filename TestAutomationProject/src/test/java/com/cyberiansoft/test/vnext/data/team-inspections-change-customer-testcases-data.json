@@ -21,6 +21,26 @@
       },
       "inspPrice": "$9.00"
     }
+  ],
+
+  "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen": [
+    {
+      "rowID": "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen.01",
+      "description": "Verify user can't create new Customer on Change customer screen",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCanChangeRetailCustomerToWholesaleForInspection": [
+    {
+      "rowID": "testVerifyUserCanChangeRetailCustomerToWholesaleForInspection.01",
+      "description": "Verify user can change Retail customer to Wholesale for Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
   ]
 
 }
