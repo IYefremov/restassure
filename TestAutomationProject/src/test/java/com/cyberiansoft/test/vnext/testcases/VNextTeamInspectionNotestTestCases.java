@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionRegistration {
 
-	final String quicknote = "Test Quick Note 1";
+	final private String quicknote = "Test Quick Note 1";
 
 	@BeforeClass(description="Team Inspection Notest Test Cases")
 	public void beforeClass() {
@@ -53,7 +53,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addQuickNote(quicknote);
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), quicknote);
@@ -61,7 +61,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addQuickNote(quicknotenew);
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknotenew);
@@ -73,13 +73,14 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		statusscreen.updateMainDB();
 		//homescreen = statusscreen.clickBackButton();
 		inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknotenew);
 		
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, "
@@ -116,6 +117,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 		inspectionscreen.switchToTeamInspectionsView();
 			
@@ -125,7 +127,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, "
@@ -165,6 +167,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
  		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
 			
@@ -174,7 +177,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67751:Verify quick notes are added as new lines of text",
@@ -209,7 +212,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-			
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		String notesfinal = notetext + "\n";
@@ -218,7 +221,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notesfinal.trim());
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67754:Verify user can add several Quick notes",
@@ -249,14 +252,14 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-			
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		for (String quicknote: addednotes)
 			Assert.assertTrue(notesscreen.getSelectedNotes().contains(quicknote));
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67749:Verify saving text note on tapping hardware 'Back' button",
@@ -291,6 +294,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		AppiumUtils.clickHardwareBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 			
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -299,7 +303,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 67752:Verify user can remove pictures from Notes",
@@ -337,7 +341,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.switchToMyInspectionsView();
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 	
 }
