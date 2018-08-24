@@ -119,7 +119,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}
@@ -198,7 +199,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		inspectionscreen.searchInpectionByFreeText(testwholesailcustomer.getFullName());
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		List<WebElement> inspections = inspectionscreen.getInspectionsList();
@@ -237,7 +239,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		
 		inspectionscreen.switchToTeamInspectionsView();
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		VNextViewScreen viewscreen = inspmenuscreen.clickViewInspectionMenuItem();
 		viewscreen.clickScreenBackButton();
@@ -265,7 +268,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));			
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		homescreen = inspectionscreen.clickBackButton();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
@@ -307,7 +311,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 		inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));	
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		inspectionscreen.switchToMyInspectionsView();
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));	
 		homescreen = inspectionscreen.clickBackButton();
@@ -318,7 +323,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		inspectionscreen.switchToMyInspectionsView();
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
 		inspectionscreen.clickBackButton();
@@ -345,7 +351,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		inspectionscreen.switchToMyInspectionsView();
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
 		homescreen = inspectionscreen.clickBackButton();
@@ -356,7 +363,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}
@@ -379,7 +387,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();		
+		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		vehicleinfoscreen = inspmenuscreen.clickEditInspectionMenuItem();
 		AppiumUtils.setNetworkOff();
@@ -460,7 +470,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);;
 		
 		vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspnumber);
 		vehicleinfoscreen.setVIN(newVIN);
@@ -473,7 +484,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
 		claiminfoscreen.saveInspectionViaMenu();
-		
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+
 		vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspnumber);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), newVIN);
 		Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
@@ -617,6 +630,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
 		vehicleinfoscreen.saveInspectionAsDraft();
 		inspectionscreen.switchToTeamInspectionsView();
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		AppiumUtils.setNetworkOff();
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		VNextInformationDialog informationDialog = inspectionsMenuScreen.clickEditInspectionMenuItemWithAlert();

@@ -164,7 +164,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
-		return inspectionslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")).size() > 0;
+		return inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']")).size() > 0;
 	}
 	
 	public void switchToTeamInspectionsView() {
