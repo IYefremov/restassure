@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens;
 
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -44,7 +45,8 @@ public class SettingsScreen extends BaseAppScreen {
 
 	public void setInsvoicesCustomLayoutOff() {
 		swipeScreenUp();
-		IOSElement singlepagetoggle = (IOSElement) appiumdriver.findElement(invoicescustomlayout);
+		IOSElement par = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[@name='Use in invoices']/.."));
+		IOSElement singlepagetoggle = (IOSElement) par.findElement(MobileBy.className("XCUIElementTypeSwitch"));
 		if (singlepagetoggle.getAttribute("value").equals("1"))
 			singlepagetoggle.click();
 	}

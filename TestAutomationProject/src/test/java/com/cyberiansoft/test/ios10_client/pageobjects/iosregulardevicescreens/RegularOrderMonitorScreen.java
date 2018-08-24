@@ -140,8 +140,10 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 	
-	public RegularOrderMonitorScreen clickServiceDetailsDoneButton() throws InterruptedException {
+	public RegularOrderMonitorScreen clickServiceDetailsDoneButton() {
 		servicedetailsdonebtn.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 40);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Saving...")));
 		return this;
 	}
 	
@@ -157,9 +159,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		servicesbtn.click();
 	}
 	
-	public void verifyServiceStartDateIsSet(String servicedisplayname, String startdate) {
-		Assert.assertTrue(appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicedisplayname + "']/XCUIElementTypeStaticText[contains(@name, \""
-						+ startdate + "\")]")).size() > 0);
+	public String getServiceFinishDate(String servicedisplayname) {
+		return monitorserviceslist.findElementByAccessibilityId(servicedisplayname).findElementByAccessibilityId("lblStartFinishDate").getAttribute("value");
 	}
 	
 	public boolean isStartServiceDissapeared() {

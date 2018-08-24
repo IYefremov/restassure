@@ -8,6 +8,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -39,11 +40,10 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
     private IOSElement technitianscustomview;
 	
 	@iOSFindBy(xpath = "//UIASegmentedControl[1]/UIAButton[@name=\"Evenly\"]")
-    private IOSElement technitiansevenlyview;
+    private IOSElement technitiansevenlyview;*/
 	
 	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
-	*/
 	
 	
 	public RegularSelectedServiceDetailsScreen() {
@@ -153,6 +153,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		par = getTableParentCell("Quantity");
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		Helpers.waitABit(300);
 	}
 	
 	public void setServiceTimeValue(String _timevalue)
@@ -391,7 +392,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void cancelSelectedServiceDetails() {
-		appiumdriver.findElementByName("Cancel").click();
+		cancelbtn.click();
 	}
 
 	public void clickAdjustments() {

@@ -105,6 +105,7 @@ public abstract class iOSBaseScreen {
 	}
 	
 	public void swipeScreenLeft() {
+		Helpers.waitABit(300);
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.20);
 		int endx = (int) (size.width * 0.80);

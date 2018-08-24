@@ -14,6 +14,7 @@ public enum DentWizardInspectionsTypes implements IInspectionsTypes {
     wizprotrackerrouteunspectiontype("WizardPro Tracker Route"),
     servicedriveinspectiondertype("Service Drive"),
     economicalinspectiondertype("Economical"),
+    wizprotrackerrouteinspectiontype("WizardPro Tracker Route"),
     wizardprotrackerrouteinspectiondertype("WizardPro Tracker Service");
 
     private final String inspType;
@@ -40,13 +41,13 @@ public enum DentWizardInspectionsTypes implements IInspectionsTypes {
         DentWizardInspectionsTypes type = getInspectionType();
         switch (type) {
             case carmaxinspectiontype:
-            case routecanadainspectiontype:
             case routeinspectiontype:
             case wizprotrackerrouteunspectiontype:
             case servicedriveinspectiondertype:
             case economicalinspectiondertype:
             case wizardprotrackerrouteinspectiondertype:
-
+            case routecanadainspectiontype:
+            case wizprotrackerrouteinspectiontype:
                 if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
                     return (T) new VehicleScreen();
                 else
