@@ -153,7 +153,7 @@ public class ServicesScreen extends BaseWizardScreen {
 		appiumdriver.getKeyboard().sendKeys(servicename);
 		appiumdriver.hideKeyboard();
 
-		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.AccessibilityId(servicename)).click();
+		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeTable")).findElement(MobileBy.AccessibilityId(servicename)).click();
 	}
 	
 	public void selectGroupServiceItem(String servicename) {

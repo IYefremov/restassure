@@ -191,7 +191,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 		appiumdriver.findElementByAccessibilityId(customer).click();
 		if (appiumdriver.findElementsByAccessibilityId("Customer changing...").size() > 0) {
-			wait = new WebDriverWait(appiumdriver, 10);
+			wait = new WebDriverWait(appiumdriver, 20);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
 		}
 	}

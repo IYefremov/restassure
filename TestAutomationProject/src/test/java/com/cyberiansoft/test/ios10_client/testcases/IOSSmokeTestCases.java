@@ -2510,7 +2510,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR
 	@Test(testName="Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR", description = "Test that selected services on SR are copied to Inspection based on SR")
-	public void testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR() throws Exception {
+	public void testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR() {
 		final String VIN  = "1D7HW48NX6S507810";
 
 				
@@ -3608,14 +3608,13 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28476:Invoices: HD - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature", 
 			description = "Invoices: HD - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature")
-	public void testHDVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature()
-			throws Exception {
+	public void testHDVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
-		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
-		MainScreen mainscreen = new MainScreen();
-		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		//AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
+		//MainScreen mainscreen = new MainScreen();
+		//homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		
 		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
