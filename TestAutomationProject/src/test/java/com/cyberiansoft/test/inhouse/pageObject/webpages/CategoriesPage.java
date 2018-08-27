@@ -180,8 +180,8 @@ public class CategoriesPage extends BasePage {
     @Step
     private void expandAttributesList(String category) {
         try {
-            waitABit(500);
-            wait.until(ExpectedConditions.visibilityOfAllElements(categoryDetailsControlList));
+            wait.ignoring(Exception.class).until(ExpectedConditions
+                    .visibilityOfAllElements(categoryDetailsControlList));
             for (WebElement control : categoryDetailsControlList) {
                 if (wait.ignoring(StaleElementReferenceException.class)
                         .until(ExpectedConditions.elementToBeClickable(control))

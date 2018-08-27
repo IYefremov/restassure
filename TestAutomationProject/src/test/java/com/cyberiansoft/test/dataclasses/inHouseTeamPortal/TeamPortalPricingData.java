@@ -27,6 +27,18 @@ public class TeamPortalPricingData {
     @JsonProperty("featureGroupMarketingInfo")
     private String featureGroupMarketingInfo;
 
+    @JsonProperty("featureState")
+    private String featureState;
+
+    @JsonProperty("featureNames")
+    private List<String> featureNames;
+
+    @JsonProperty("featureDescriptions")
+    private List<String> featureDescriptions;
+
+    @JsonProperty("featureMarketingInfoList")
+    private List<String> featureMarketingInfoList;
+
     public List<String> getMinCommitments() {
         return minCommitments;
     }
@@ -53,5 +65,21 @@ public class TeamPortalPricingData {
 
     public String getFeatureGroupMarketingInfo() {
         return featureGroupMarketingInfo;
+    }
+
+    public String getFeatureState() {
+        return featureState;
+    }
+
+    public List<String> getFeatureNames() {
+        return featureNames;
+    }
+
+    public List<String> getFeatureDescriptions() {
+        return featureDescriptions;
+    }
+
+    public List<String> getFeatureMarketingInfoList() {
+        return featureMarketingInfoList;
     }
 }

@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
+import java.util.List;
 
 public class PricingPage extends BasePage {
 
@@ -144,6 +147,20 @@ public class PricingPage extends BasePage {
     }
 
     @Step
+    public AddFeatureDialog clickAddForFeatureGroupDisplayed(String featureGroupName) {
+        try {
+            waitShortly
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(By
+                                .xpath("//span[@title='" + featureGroupName + "']/following::a[@class='btn-add']")))
+                    .click();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return PageFactory.initElements(driver, AddFeatureDialog.class);
+    }
+
+    @Step
     public PricingPage deleteFeatureGroupIfDisplayed(String featureGroupName) {
         if (isFeatureGroupDisplayed(featureGroupName)) {
             clickButton(driver.findElement(By.xpath("//span[@title='" + featureGroupName +
@@ -151,5 +168,46 @@ public class PricingPage extends BasePage {
             acceptAlert();
         }
         return this;
+    }
+
+    @Step
+    public PricingPage addFeaturesToFeatureGroup(String featureGroupName, List<String> featureNames, String featureState, List<String> marketingInfoList) {
+        for (int i = 0; i < featureNames.size(); i++) {
+        clickAddForFeatureGroupDisplayed(featureGroupName)
+                    .typeFeatureName(featureNames.get(i))
+                    .selectFeatureState(featureState)
+                    .typeMarketingInfo(marketingInfoList.get(i))
+                    .clickAddFeatureButton();
+        Assert.assertTrue(isFeatureDisplayed(featureNames.get(i)),
+                    "The feature " + featureNames.get(i) + "is not displayed");
+        }
+        return this;
+    }
+
+    private boolean isFeatureDisplayed(String feature) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(By
+                    .xpath("//span[@title='Auto feature group']//following::span[text()='" + feature + "']")))
+                    .isDisplayed();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean isFeatureDeleted(String feature) {
+        try {
+            return waitShortly.until(ExpectedConditions.invisibilityOfElementLocated(By
+                        .xpath("//span[@title='Auto feature group']//following::span[text()='" + feature + "']")));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void verifyFeaturesAreDeleted(List<String> features) {
+        for (String feature: features) {
+            Assert.assertTrue(isFeatureDeleted(feature), "The feature " + feature + "has not been deleted");
+        }
     }
 }

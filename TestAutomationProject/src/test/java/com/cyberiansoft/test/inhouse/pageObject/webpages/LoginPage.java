@@ -50,7 +50,7 @@ public class LoginPage extends BasePage {
     public void loginByGmail() {
         wait.until(ExpectedConditions.elementToBeClickable(loginGmailBTN)).click();
         if (!driver.getCurrentUrl().contains("Dashboard")) {
-            emailField.sendKeys(InHouseConfigInfo.getInstance().getUserEmail());
+            wait.until(ExpectedConditions.visibilityOf(emailField)).sendKeys(InHouseConfigInfo.getInstance().getUserEmail());
             wait.until(ExpectedConditions.elementToBeClickable(loginNextButton)).click();
             try {
                 wait.until(ExpectedConditions.visibilityOf(passwordBlock.findElement(By.tagName("input"))))

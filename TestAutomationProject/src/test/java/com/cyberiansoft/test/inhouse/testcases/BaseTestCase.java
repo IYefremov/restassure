@@ -56,7 +56,7 @@ public class BaseTestCase {
             LoginPage loginPage = PageFactory.initElements(webdriver, LoginPage.class);
             loginPage.loginByGmail();
         } catch (Exception e) {
-            Assert.fail("The login has failed", e);
+            Assert.fail("The login attempt has failed", e);
         }
 
     }

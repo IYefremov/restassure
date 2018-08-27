@@ -114,4 +114,88 @@ public class TeamPortalPricingPageTestCases extends BaseTestCase {
         Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
         pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupName());
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanAddSeveralFeaturesToFeatureGroup(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupName())
+                .clickAddFeatureGroupButton()
+                .typeFeatureGroupName(data.getFeatureGroupName())
+                .selectFeatureGroupState(data.getFeatureGroupState())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfo())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+        pricingPage.addFeaturesToFeatureGroup(data.getFeatureGroupName(), data.getFeatureNames(),
+                data.getFeatureState(), data.getFeatureMarketingInfoList());
+        pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupName());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanDeleteFeatureGroup(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupName())
+                .clickAddFeatureGroupButton()
+                .typeFeatureGroupName(data.getFeatureGroupName())
+                .selectFeatureGroupState(data.getFeatureGroupState())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfo())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+        pricingPage.addFeaturesToFeatureGroup(data.getFeatureGroupName(), data.getFeatureNames(),
+                data.getFeatureState(), data.getFeatureMarketingInfoList());
+        pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupName());
+        pricingPage.verifyFeaturesAreDeleted(data.getFeatureNames());
+        Assert.assertFalse(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectDraftStatusForFeatureGroup(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupName())
+                .clickAddFeatureGroupButton()
+                .typeFeatureGroupName(data.getFeatureGroupName())
+                .selectFeatureGroupState(data.getFeatureGroupState())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfo())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+        pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupName());
+        Assert.assertFalse(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectInternalStatusForFeatureGroup(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupName())
+                .clickAddFeatureGroupButton()
+                .typeFeatureGroupName(data.getFeatureGroupName())
+                .selectFeatureGroupState(data.getFeatureGroupState())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfo())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+        pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupName());
+        Assert.assertFalse(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+    }
 }

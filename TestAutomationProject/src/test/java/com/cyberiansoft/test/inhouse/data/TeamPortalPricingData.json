@@ -58,5 +58,83 @@
       "featureGroupState": "Public",
       "featureGroupMarketingInfo": "Test notes"
     }
+  ],
+
+  "verifyUserCanAddSeveralFeaturesToFeatureGroup": [
+    {
+      "rowID": "verifyUserCanAddSeveralFeaturesToFeatureGroup.01",
+      "description": "Test Case 76928:Verify user can add several features to feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureNames": [
+        "Auto feature for features group",
+        "Auto feature for features group2",
+        "Auto feature for features group3"
+      ],
+
+      "featureState": "Public View",
+
+      "featureDescriptions": [
+        "My test Notes",
+        "My test Notes2",
+        "My test Notes3"
+      ],
+
+      "featureMarketingInfoList": [
+        "Marketing_info",
+        "Marketing_info2",
+        "Marketing_info3"
+      ]
+    }
+  ],
+
+  "verifyUserCanDeleteFeatureGroup": [
+    {
+      "rowID": "verifyUserCanDeleteFeatureGroup.01",
+      "description": "Test Case 76929:Verify user can delete feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureNames": [
+        "Auto feature for features group",
+        "Auto feature for features group2",
+        "Auto feature for features group3"
+      ],
+
+      "featureState": "Public View",
+
+      "featureDescriptions": [
+        "My test Notes",
+        "My test Notes2",
+        "My test Notes3"
+      ],
+
+      "featureMarketingInfoList": [
+        "Marketing_info",
+        "Marketing_info2",
+        "Marketing_info3"
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectDraftStatusForFeatureGroup": [
+    {
+      "rowID": "verifyUserCanSelectDraftStatusForFeatureGroup.01",
+      "description": "Test Case 76933:Verify user can select \"Draft\" status for feature group",
+      "featureGroupName": "Auto feature group Draft",
+      "featureGroupState": "Draft",
+      "featureGroupMarketingInfo": "Test notes"
+    }
+  ],
+
+  "verifyUserCanSelectInternalStatusForFeatureGroup": [
+    {
+      "rowID": "verifyUserCanSelectInternalStatusForFeatureGroup.01",
+      "description": "Test Case 76934:Verify user can select \"Internal\" status for feature group",
+      "featureGroupName": "Auto feature group Internal",
+      "featureGroupState": "Internal",
+      "featureGroupMarketingInfo": "Test notes"
+    }
   ]
 }
