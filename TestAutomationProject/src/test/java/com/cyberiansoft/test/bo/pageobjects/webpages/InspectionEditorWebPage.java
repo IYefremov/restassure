@@ -33,6 +33,9 @@ public class InspectionEditorWebPage extends BaseWebPage {
     @FindBy(id = "ajaxSpinner")
     private WebElement updateSpinner;
 
+    @FindBy(xpath = "//p[text()='Inspection was sent to saving queue!']")
+    private WebElement successfulSaveNotification;
+
     public InspectionEditorWebPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -119,18 +122,28 @@ public class InspectionEditorWebPage extends BaseWebPage {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        waitForSpinnerToDisappear();
         waitForInspectionToBeSaved();
         return this;
     }
 
-    private void waitForInspectionToBeSaved() {
+    private void waitForSpinnerToDisappear() {
         try {
-            wait.until(ExpectedConditions.attributeContains(updateSpinner, "display", "block"));
-            wait.until(ExpectedConditions.attributeContains(updateSpinner, "display", "none"));
+            waitForDisappearance(updateSpinner);
         } catch (Exception e) {
             e.printStackTrace();
             waitABit(2000);
         }
+    }
 
+    private void waitForInspectionToBeSaved() {
+        try {
+            waitForDisappearance(successfulSaveNotification);
+        } catch (Exception ignored) {}
+    }
+
+    private void waitForDisappearance(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.invisibilityOf(element));
     }
 }

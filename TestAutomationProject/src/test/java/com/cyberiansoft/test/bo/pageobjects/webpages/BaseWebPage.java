@@ -96,13 +96,12 @@ public abstract class BaseWebPage {
             wait.until(ExpectedConditions.numberOfWindowsToBe(2));
         } catch (TimeoutException e) {
 	        waitABit(5000);
-            wait.until(ExpectedConditions.numberOfWindowsToBe(2));
         }
 		waitABit(5000);
-		wait.until((ExpectedCondition<Boolean>) d -> (d.getWindowHandles().size() != 1));
+		wait.until((ExpectedCondition<Boolean>) d -> (d.getWindowHandles().size() > 1));
 	}
 
-	// Bot actions
+    // Bot actions
 
 	/* Wait For */
 	public void waitABit(int milliseconds) {
@@ -182,17 +181,11 @@ public abstract class BaseWebPage {
 	}
 
 	public void clickEditTableRow(WebElement row) {
-        try {
-            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(row.findElement(By.xpath(".//*[@title='Edit']")))));
-            wait.until(ExpectedConditions.elementToBeClickable(row.findElement(By.xpath(".//*[@title='Edit']")))).click();
-        } catch (Exception e) {
-            waitABit(3000);
-            row.findElement(By.xpath(".//*[@title='Edit']")).click();
-        }
+	    wait.ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(row.findElement(By.xpath(".//*[@title='Edit']"))))
+                    .click();
         waitForLoading();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ModalDialog")));
-//        waitForLoading();
-//        waitABit(3000);
 	}
 
 	public void checkboxSelect(String checkboxvalue) {

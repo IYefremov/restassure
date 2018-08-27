@@ -24,6 +24,15 @@
     }
   ],
 
+  "editEstimationDetailsForInspectionWithDraftStatus": [
+    {
+      "rowID": "editEstimationDetailsForInspectionWithDraftStatus.01",
+      "description": "Test Case 77756:Operations - Inspections: Edit Estimation Details For Inspection With Draft Status",
+      "status": "Draft",
+      "day": 12
+    }
+  ],
+
   "testOperationInspection": [
     {
       "rowID": "testOperationInspection.01",

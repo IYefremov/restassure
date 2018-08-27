@@ -29,10 +29,14 @@
         <parameter name="selenium.browser" value="chrome"/>
         <classes>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInvoiceTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeOperationsTimeFrameTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorRepairLocationsTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyClientsTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeCompanyCRUDTestCases"/>
             <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorReportsTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorProductionDashboardTestCases"/>
+            <class name="com.cyberiansoft.test.bo.testcases.BackOfficeMonitorVendorTeamsTestCases"/>
         </classes>
     </test>
 </suite>

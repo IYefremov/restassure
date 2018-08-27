@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -11,6 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -110,6 +114,9 @@ public class InspectionsWebPage extends WebPageWithFilter {
 
 	@FindBy(xpath = "//table[@id='ctl00_ctl00_Content_Main_gv_ctl00']//a[@data-entitytype]")
 	private List<WebElement> inspectionsList;
+
+	@FindBy(xpath = "//table[@id='ctl00_ctl00_Content_Main_gv_ctl00']//a[@data-entitytype]/following::td[1]")
+	private List<WebElement> inspectionsDataList;
 
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
@@ -218,8 +225,9 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		return inspectionstable.getTableRows();
 	}
 
-	public void setInspectionNumberSearchCriteria(String inspnumber) {
+	public InspectionsWebPage setInspectionNumberSearchCriteria(String inspnumber) {
 		clearAndType(inspectionnumberfld, inspnumber);
+		return this;
 	}
 
 	public void setStockSearchCriteria(String stock) {
@@ -260,7 +268,6 @@ public class InspectionsWebPage extends WebPageWithFilter {
         waitABit(2000);
 	    wait.until(ExpectedConditions.visibilityOf(inspectionstable.getWrappedElement()));
         return inspectionstable.getWrappedElement()
-//                .findElements(By.xpath(".//tr/td[text()='" + inspectionnumber + "']")).size() > 0;
                 .findElements(By.xpath(".//tr/td/a[contains(text(), '" + inspectionnumber + "')]")).size() > 0;
 	}
 
@@ -300,8 +307,6 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		makeSearchPanelVisible();
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
-		waitABit(400);
-		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 		Assert.assertEquals(expectedprice,
 				inspectionstable.getWrappedElement().findElement(By.xpath(".//tr/td[14]")).getText());
 	}
@@ -318,19 +323,11 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		return approved;
 	}
 
-	public boolean isInspectionExists(String inspnumber) {
-		searchInspectionByNumber(inspnumber);
-		boolean exists = inspectionstable.getWrappedElement()
-				.findElements(By.xpath(".//tr/td/a[@title='" + inspnumber + "']")).size() > 0;
-		return exists;
-	}
-
 	public void searchInspectionByNumber(String inspection) {
 		makeSearchPanelVisible();
 		setInspectionNumberSearchCriteria(inspection);
 		clickFindButton();
-		waitABit(400);
-		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		waitForLoading();
 	}
 
 	public int getTableRowWithInspectionsNumbers() {
@@ -724,10 +721,29 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
     public String getFirstInspectionNumber() {
+        return getFirstInspection(inspectionsList);
+    }
+
+    public String getFirstInspectionDate() {
+        return getFirstInspection(inspectionsDataList);
+    }
+
+    private String getFirstInspection(List<WebElement> inspectionsDataList) {
         try {
-            return wait.until(ExpectedConditions.visibilityOfAllElements(inspectionsList)).get(0).getText();
+            return wait.until(ExpectedConditions.visibilityOfAllElements(inspectionsDataList)).get(0).getText();
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public String getChangedInspectionDate(int day) {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(BackOfficeUtils.getFullDateFormat());
+        LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of("US/Pacific")));
+        localDate = localDate.minusMonths(1);
+        return localDate.withDayOfMonth(day).format(dateFormat);
+    }
+
+    public String getInspectionsWindowHandle() {
+        return driver.getWindowHandle();
     }
 }

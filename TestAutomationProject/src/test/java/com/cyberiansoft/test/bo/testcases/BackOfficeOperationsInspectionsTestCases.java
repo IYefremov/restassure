@@ -74,6 +74,9 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
                 .clickFindButton()
                 .verifyInspectionsTableColumnsAreVisible();
         String firstInspection = inspectionsPage.getFirstInspectionNumber();
+        String windowHandle = inspectionsPage.getInspectionsWindowHandle();
+        String changedInspectionDate = inspectionsPage.getChangedInspectionDate(data.getDay());
+
         InspectionEditorWebPage inspectionEditorPage = inspectionsPage.clickEditInspection(firstInspection);
         Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
                 "The Inspection Editor has not been opened for inspection with New status");
@@ -84,7 +87,52 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
                 "The Next month button has not been enabled after clicking the Previous month button");
         inspectionEditorPage
                 .selectDay(data.getDay())
-                .clickSaveInspectionButton(); //todo finish
+                .clickSaveInspectionButton()
+                .closeNewTab(windowHandle);
+        inspectionsPage.makeSearchPanelVisible()
+                .selectSearchStatus(data.getStatus())
+                .setInspectionNumberSearchCriteria(firstInspection)
+                .clickFindButton();
+        Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
+        Assert.assertEquals(changedInspectionDate, inspectionsPage.getFirstInspectionDate());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void editEstimationDetailsForInspectionWithDraftStatus(String rowID, String description, JSONObject testData) {
+
+        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+
+        InspectionsWebPage inspectionsPage = operationsPage
+                .clickInspectionsLink()
+                .makeSearchPanelVisible()
+                .selectSearchStatus(data.getStatus())
+                .clickFindButton()
+                .verifyInspectionsTableColumnsAreVisible();
+        String firstInspection = inspectionsPage.getFirstInspectionNumber();
+        String windowHandle = inspectionsPage.getInspectionsWindowHandle();
+        String changedInspectionDate = inspectionsPage.getChangedInspectionDate(data.getDay());
+
+        InspectionEditorWebPage inspectionEditorPage = inspectionsPage.clickEditInspection(firstInspection);
+        Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
+                "The Inspection Editor has not been opened for inspection with New status");
+        inspectionEditorPage
+                .clickDateInput()
+                .clickPreviousMonthButton();
+        Assert.assertTrue(inspectionEditorPage.isNextMonthButtonEnabled(),
+                "The Next month button has not been enabled after clicking the Previous month button");
+        inspectionEditorPage
+                .selectDay(data.getDay())
+                .clickSaveInspectionButton()
+                .closeNewTab(windowHandle);
+        inspectionsPage.makeSearchPanelVisible()
+                .selectSearchStatus(data.getStatus())
+                .setInspectionNumberSearchCriteria(firstInspection)
+                .clickFindButton();
+        Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
+        Assert.assertEquals(changedInspectionDate, inspectionsPage.getFirstInspectionDate());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

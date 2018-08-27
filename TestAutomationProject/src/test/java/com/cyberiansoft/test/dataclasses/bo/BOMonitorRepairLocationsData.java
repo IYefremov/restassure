@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class BOMonitorRepairLocationsData {
 
@@ -129,6 +130,9 @@ public class BOMonitorRepairLocationsData {
 
     @JsonProperty("repairLocationStatusNotActive")
     private String repairLocationStatusNotActive;
+
+    @JsonProperty("phase")
+    private String phase;
 
     public String getLocationName() {
         return locationName;
@@ -296,5 +300,13 @@ public class BOMonitorRepairLocationsData {
 
     public String getRepairLocationStatusNotActive() {
         return repairLocationStatusNotActive;
+    }
+
+    public String getRandomLocationName() {
+        return "test-" + RandomStringUtils.randomAlphanumeric(7);
+    }
+
+    public String getPhase() {
+        return phase;
     }
 }

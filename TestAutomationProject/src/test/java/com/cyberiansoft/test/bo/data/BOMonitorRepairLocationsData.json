@@ -134,5 +134,13 @@
       "teamDefaultLocation": "Not active Loc",
       "repairLocationStatusNotActive": "Not Active"
     }
+  ],
+
+  "verifyCompletionOfRepairOrderPhaseAfterInspectionApproval": [
+    {
+      "rowID": "verifyCompletionOfRepairOrderPhaseAfterInspectionApproval.01",
+      "description": "Test Case 77752:Monitor - Repair Locations: Configure Auto-completion of Repair Order Phase After Inspection Approval",
+      "phase": "QC"
+    }
   ]
 }

@@ -1,22 +1,17 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	
@@ -43,6 +38,12 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_Content_ctl01_ctl01_Card_comboCheckOutTypes_DropDown")
 	private DropDown newphasecheckouttypedd;
+
+	@FindBy(xpath = "//div[@id='ctl00_Content_ctl01_ctl01_Card_comboCheckOutTypes']/table[@class='rcbDisabled']")
+	private WebElement checkoutOptionDisabled;
+
+	@FindBy(xpath = "//div[@id='ctl00_Content_ctl01_ctl01_Card_comboCheckOutTypes']/table[not(@class='rcbDisabled')]")
+	private WebElement checkoutOptionEnabled;
 	
 	@FindBy(id = "ctl00_Content_ctl01_ctl01_Card_comboDepartments_Input")
 	private ComboBox newphasedepartmentcmb;
@@ -61,6 +62,12 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	
 	@FindBy(xpath = "//label[@for='ctl00_Content_ctl01_ctl01_Card_cbStartServiceRequired']")
 	private WebElement startservicerequiredchkbox;
+
+	@FindBy(xpath = "//input[@id='ctl00_Content_ctl01_ctl01_Card_cbStartServiceRequired' and @disabled]")
+	private WebElement startServiceRequiredDisabled;
+
+	@FindBy(xpath = "//label[@for='ctl00_Content_ctl01_ctl01_Card_cbStartServiceRequired' and not(@class='rfdInputDisabled')]")
+	private WebElement startServiceRequiredEnabled;
 	
 	@FindBy(xpath = "//label[@for='ctl00_Content_ctl01_ctl01_Card_cbQCRequired']")
 	private WebElement qcrequiredcheckbox;
@@ -70,6 +77,9 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_Content_ctl01_ctl02_BtnCancel")
 	private WebElement newphasecancelBtn;
+
+	@FindBy(id = "ctl00_Content_ctl01_ctl01_Card_chbAutoComplete")
+	private WebElement autoCompleteCheckbox;
 	
 	public RepairLocationPhasesTabWebPage(WebDriver driver) {
 		super(driver);
@@ -108,12 +118,14 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 		}
 	}
 	
-	public void clickEditRepairLocationPhase(String repairlocationphase) {
+	public RepairLocationPhasesTabWebPage clickEditRepairLocationPhase(String repairlocationphase) {
 		WebElement row = getTableRowWithRepairLocationPhase(repairlocationphase);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + repairlocationphase + " repair location phase");
+		} else {
+            Assert.fail("Can't find " + repairlocationphase + " repair location phase");
+        }
+		return this;
 	}
 	
 	//New Phase
@@ -173,12 +185,14 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 		return newphaseppproxrepairtimefld.getValue();
 	}
 	
-	public void clickNewRepairLocationPhaseOKButton() {
+	public RepairLocationPhasesTabWebPage clickNewRepairLocationPhaseOKButton() {
 		clickAndWait(newphaseOKBtn);
+		return this;
 	}
 	
-	public void clickNewRepairLocationPhaseCancelButton() {
+	public RepairLocationPhasesTabWebPage clickNewRepairLocationPhaseCancelButton() {
 		click(newphasecancelBtn);
+		return this;
 	}
 	
 	public void selectDoNotTrackIndividualServiceStatuses() {
@@ -212,8 +226,37 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	public void unselectQCRequired() {
 		checkboxUnselect(qcrequiredcheckbox);
 	}
+
+	public RepairLocationPhasesTabWebPage selectAutoComplete() {
+		checkboxSelect(autoCompleteCheckbox);
+		return this;
+	}
 	
 	public boolean isQCRequiredSelected() {
 		return isCheckboxChecked(qcrequiredcheckbox);
 	}
+
+	public boolean isCheckoutOptionEnabled() {
+        return isOptionDisplayed(checkoutOptionEnabled);
+    }
+
+	public boolean isCheckoutOptionDisabled() {
+        return isOptionDisplayed(checkoutOptionDisabled);
+    }
+
+	public boolean isStartServiceRequiredEnabled() {
+        return isOptionDisplayed(startServiceRequiredEnabled);
+    }
+
+	public boolean isStartServiceRequiredDisabled() {
+        return isOptionDisplayed(startServiceRequiredDisabled);
+    }
+
+    public boolean isOptionDisplayed(WebElement checkoutOptionDisabled) {
+        try {
+            return waitShortly.until(ExpectedConditions.visibilityOf(checkoutOptionDisabled)).isDisplayed();
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
 }

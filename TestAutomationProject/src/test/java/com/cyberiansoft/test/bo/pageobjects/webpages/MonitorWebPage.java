@@ -41,10 +41,13 @@ public class MonitorWebPage extends BaseWebPage {
 	private WebElement whiteBoardLink;
 	
 	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl14_Label1")
-	private WebElement serviceCountlink;
+	private WebElement serviceCountLink;
 	
 	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl13_Label1")
-	private WebElement activeVehiclesByPhaselink;
+	private WebElement activeVehiclesByPhaseLink;
+
+	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl08_Label1")
+	private WebElement productionDashboardLink;
 	
 	public MonitorWebPage(WebDriver driver) {
 		super(driver);
@@ -115,14 +118,20 @@ public class MonitorWebPage extends BaseWebPage {
 				driver, WhiteBoardWebPage.class);
 	}
 
+	public ProductionDashboardWebPage clickProductionDashboardLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(productionDashboardLink)).click();
+		return PageFactory.initElements(
+				driver, ProductionDashboardWebPage.class);
+	}
+
 	public ServiceCountWebPage clickServiceCountLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(serviceCountlink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(serviceCountLink)).click();
 		return PageFactory.initElements(
 				driver, ServiceCountWebPage.class);
 	}
 	
 	public ActiveVechicleByPhaseWebPage clickActiveVehiclesByPhaseLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(activeVehiclesByPhaselink)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(activeVehiclesByPhaseLink)).click();
 		return PageFactory.initElements(
 				driver, ActiveVechicleByPhaseWebPage.class);
 	}

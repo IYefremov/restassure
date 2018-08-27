@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.impl.TextFieldImpl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,13 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.impl.TextFieldImpl;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class NewRepairLocationDialogWebPage extends BaseWebPage {
 	
@@ -64,7 +60,7 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 	private TextField locationphonefld;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnOk")
-	private WebElement repairlocationnOKBtn;
+	private WebElement repairLocationOkButton;
 	
 	public NewRepairLocationDialogWebPage(WebDriver driver) {
 		super(driver);
@@ -151,7 +147,8 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 				driver, NewRepairLocationDialogWebPage.class);
 	}
 	
-	public void clickOKButton() {
-		clickAndWait(repairlocationnOKBtn);
+	public RepairLocationsWebPage clickOKButton() {
+		clickAndWait(repairLocationOkButton);
+		return PageFactory.initElements(driver, RepairLocationsWebPage.class);
 	}
 }
