@@ -103,6 +103,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 	public String createSimpleInspection(AppCustomer inspcustomer, InspectionTypes inspectionTypes, String vinnumber) {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToMyInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(inspcustomer);

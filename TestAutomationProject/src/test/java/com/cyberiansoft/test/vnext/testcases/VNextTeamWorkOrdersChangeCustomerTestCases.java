@@ -105,6 +105,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
 
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToMyWorkordersView();
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
         customersscreen.selectCustomer(testcustomer1);
         VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
@@ -112,7 +113,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
-        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        workordersscreen = vehicleinfoscreen.saveWorkOrderAsDraft();
         workordersscreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
@@ -168,7 +169,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
         workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
         workordersscreen.changeCustomerToWholesailForWorkOrder(woNumber, testwholesailcustomer);
-        Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber), "Can't fins work order: " + woNumber);
+        Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
         workordersscreen.switchToTeamWorkordersView();
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testwholesailcustomer.getFullName());
         workordersscreen.switchToMyWorkordersView();

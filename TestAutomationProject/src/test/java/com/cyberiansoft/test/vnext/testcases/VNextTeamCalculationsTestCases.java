@@ -51,7 +51,6 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.selectService(inspdata.getServiceName());
@@ -69,7 +68,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         }
 
         inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -88,7 +87,6 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.selectService(inspdata.getServiceName());
@@ -105,7 +103,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         }
 
         inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -124,7 +122,6 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.selectService(inspdata.getMoneyServiceName());
@@ -138,7 +135,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.TOTAL_AMOUNT_OF_INSPECTION_CANT_BE_LESS_THAN_0);
         inspectionscreen = availableservicesscreen.cancelInspection();
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -157,13 +154,12 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);;
+        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.selectService(inspdata.getMoneyServiceName());
         availableservicesscreen.selectService(inspdata.getPercentageServiceName());
 
-        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();;
+        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
         selectedServicesScreen.setServiceAmountValue(inspdata.getMoneyServiceName(), inspdata.getMoneyServicePrice());
         selectedServicesScreen.setServiceQuantityValue(inspdata.getMoneyServiceName(), inspdata.getMoneyServiceQuantity());
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
@@ -172,7 +168,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.TOTAL_AMOUNT_OF_INSPECTION_EXCEEDS_THE_MAXIMUM_ALLOWED);
         inspectionscreen = availableservicesscreen.cancelInspection();
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -191,7 +187,6 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreensLeft(2);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.selectService(inspdata.getServiceName());
@@ -209,7 +204,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         }
 
         inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -244,7 +239,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
         inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -277,7 +272,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
         inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -320,7 +315,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         Assert.assertEquals(availableservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
         inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -363,7 +358,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         Assert.assertEquals(availableservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
         inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -406,6 +401,6 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         Assert.assertEquals(availableservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
         inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 }

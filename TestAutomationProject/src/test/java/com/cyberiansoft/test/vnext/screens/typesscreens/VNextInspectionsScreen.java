@@ -164,7 +164,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
-		return inspectionslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")).size() > 0;
+		return inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']")).size() > 0;
 	}
 	
 	public void switchToTeamInspectionsView() {
@@ -210,5 +210,15 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 		VNextCustomersScreen customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(customer);
 		return new VNextApproveInspectionsScreen(appiumdriver);
+	}
+
+	public VNextInspectionsScreen changeCustomerForInspection(String inspectionNumber, AppCustomer newCustomer) {
+		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
+		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		customersscreen.selectCustomer(newCustomer);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickInformationDialogYesButton();
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving work order customer...']"));
+		return this;
 	}
 }

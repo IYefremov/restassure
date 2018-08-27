@@ -153,6 +153,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		
 		inspectionscreen.switchToTeamInspectionsView();
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);;
+
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
 		
@@ -227,13 +230,16 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		for (String service : servicesToSelect)
 			inspservicesscreen.selectService(service);
 		inspservicesscreen.saveInspection();
-		
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);;
+
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickApproveInspectionMenuItem();
 		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		approvescreen.clickSaveButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+        inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
 		
@@ -272,13 +278,16 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();				
 		vehicleinfoscreen.saveInspectionViaMenu();
-		
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);;
+
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickApproveInspectionMenuItem();
 		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
 		approvescreen.drawSignature();
 		approvescreen.clickSaveButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
 		
@@ -375,7 +384,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 
 		final String vinnumber = "TEST";
 		final String moneyservice = "Battery Installation";
-		final String percentageservice = "Aluminum Panel";
+		final String percentageservice = "Bundle Discount";
 
 		final int amountToSelect = 3;
 		final int defaultCountForMoneyService = 1;

@@ -316,8 +316,9 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		RegularVehicleScreen vehiclescreen = servicerequestsscreen.selectInspectionType(InspectionsTypes.INSP_SMOKE_TEST);
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		for (String serviceName : services)
-			Assert.assertTrue(servicesscreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
+			Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
 					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));
 		servicesscreen.saveWizard();
 		servicerequestsscreen.clickHomeButton();

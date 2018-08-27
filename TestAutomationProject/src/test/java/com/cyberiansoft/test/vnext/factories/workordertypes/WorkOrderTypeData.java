@@ -12,7 +12,7 @@ public class WorkOrderTypeData {
                 break;
             case O_KRAMAR2:
                 workOrderTypeID = "5db7c5ec-42c6-4e78-bab2-3f4edfc089b0";
-                canBeFinalDraft= true;
+                canBeFinalDraft= false;
                 break;
             case KRAMAR_AUTO:
                 workOrderTypeID = "5db7c5ec-42c6-4e78-bab2-3f4edfc089b0";

@@ -7,9 +7,11 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
@@ -34,6 +36,9 @@ public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void selectInvoice(String invoice) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(invoice)));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= \""
 								+ invoice + "\"]").click();
 	}
