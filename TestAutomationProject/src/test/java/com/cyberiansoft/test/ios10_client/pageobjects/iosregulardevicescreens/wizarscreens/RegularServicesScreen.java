@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularServicesScreen extends RegularBaseServicesScreen {
 
-	final static String defaultServiceValue = "Test Tax";
 	final static String servicesscreencapt = "Services";
 	
 	/*@iOSFindBy(accessibility = "Save")
@@ -62,11 +61,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 
 	public void clickCancelButton() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
-	}
-
-	public boolean isDefaultServiceIsSelected() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='"
-						+ defaultServiceValue + "']/XCUIElementTypeButton[@name='selected']").isDisplayed();
 	}
 
 	

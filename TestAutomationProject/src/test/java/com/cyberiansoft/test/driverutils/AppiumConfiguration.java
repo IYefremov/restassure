@@ -28,7 +28,7 @@ public class AppiumConfiguration {
                 DateTimeFormatter.ofPattern("MMdd");
 		//LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
 		LocalDate date = LocalDate.now();
-
+		//date = date.minusDays(2);
 		//LocalDate date = LocalDate.now();
 		switch (mplatform) {
 			case ANDROID:
@@ -92,7 +92,7 @@ public class AppiumConfiguration {
 				appiumcap.setCapability(IOSMobileCapabilityType.LAUNCH_TIMEOUT, 500000);
 			
 				appiumcap.setCapability("waitForAppScript", "$.delay(5000); $.acceptAlert();");
-				appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, IOSRegularDeviceInfo.getInstance().getNewCommandTimeout());
+				appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 600);
 	
 				appiumcap.setCapability("bundleId", IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 	    		//appiumcap.setCapability(MobileCapabilityType.UDID, IOSRegularDeviceInfo.getInstance().getDeviceUDID());

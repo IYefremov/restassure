@@ -476,9 +476,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomer(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.SPECIFIC_CLIENT_TEST_WO1);
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		Assert.assertTrue(servicesscreen.isDefaultServiceIsSelected());
 		servicesscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
+		Assert.assertTrue(selectedServicesScreen.isDefaultServiceIsSelected());
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.WHEEL_SERVICE));
 		RegularOrderSummaryScreen ordersummaryscreen = selectedServicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(summ));
@@ -3741,8 +3741,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29083:SR: Regular - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech", 
 			description = "SR: Regular - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech")
-	public void testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech()
-			throws Exception {
+	public void testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
@@ -3778,7 +3777,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		DriverBuilder.getInstance().getDriver().quit();
 		
-		homescreen = new RegularHomeScreen();
+		//homescreen = new RegularHomeScreen();
 		RegularMainScreen mainscr = homescreen.clickLogoutButton();
 		mainscr.updateDatabase();
 		RegularHomeScreen homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -3816,6 +3815,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		srlistwebpage.acceptFirstServiceRequestFromList();
 		
 		DriverBuilder.getInstance().getDriver().quit();
+
 		homescreen = new RegularHomeScreen();
 		mainscr = homescreen.clickLogoutButton();
 		mainscr.updateDatabase();
@@ -6913,8 +6913,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 36004:SR: Regular - Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON", 
 			description = "Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON")
-	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON()
-			throws Exception {
+	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";

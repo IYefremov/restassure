@@ -15,6 +15,8 @@ import java.util.List;
 
 public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
 
+    final static String defaultServiceValue = "Test Tax";
+
     @iOSFindBy(accessibility = "SelectedServicesView")
     private IOSElement selectedservicestable;
 
@@ -142,6 +144,11 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     public boolean isServiceDeclinedSkipped(String srvname) {
         return selectedservicestable.findElement(MobileBy.iOSNsPredicateString("name CONTAINS '" +
                 srvname + "' and type = 'XCUIElementTypeCell'")).findElements(MobileBy.AccessibilityId("SelectedServiceIcon_Declined")).size() > 0;
+    }
+
+    public boolean isDefaultServiceIsSelected() {
+        return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='"
+                + defaultServiceValue + "']/XCUIElementTypeButton[@name='selected']").isDisplayed();
     }
 
 }
