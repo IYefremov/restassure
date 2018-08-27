@@ -104,8 +104,10 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public void setVINValue(String vin)  {
 		clickVINField();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		getVINField().sendKeys(vin);
+		getVINField().sendKeys("\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public void setVIN(String vin)  {

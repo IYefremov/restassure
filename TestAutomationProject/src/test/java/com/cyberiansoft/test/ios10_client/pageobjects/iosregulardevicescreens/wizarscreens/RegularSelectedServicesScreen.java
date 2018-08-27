@@ -147,8 +147,8 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public boolean isDefaultServiceIsSelected() {
-        return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='"
-                + defaultServiceValue + "']/XCUIElementTypeButton[@name='selected']").isDisplayed();
+        return selectedservicestable.findElement(MobileBy.iOSNsPredicateString("name = '" +
+                defaultServiceValue + "' and type = 'XCUIElementTypeCell'")).isDisplayed();
     }
 
 }
