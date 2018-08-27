@@ -26,7 +26,7 @@
   "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen": [
     {
       "rowID": "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen.01",
-      "description": "Verify user can't create new Customer on Change customer screen",
+      "description": "Verify user can't create new customer on Change Customer screen",
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
@@ -37,6 +37,16 @@
     {
       "rowID": "testVerifyUserCanChangeRetailCustomerToWholesaleForInspection.01",
       "description": "Verify user can change Retail customer to Wholesale for Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCanSelectCustomerUsingSearch": [
+    {
+      "rowID": "testVerifyUserCanSelectCustomerUsingSearch.01",
+      "description": "Verify user can select customer using search",
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }

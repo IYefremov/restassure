@@ -94,7 +94,8 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToMyInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
@@ -104,7 +105,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -127,6 +127,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}
 	

@@ -474,7 +474,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
 
         homescreen = invoicesscreen.clickBackButton();
         workordersscreen = homescreen.clickWorkOrdersMenuItem();
-        for (String woNumber : workOrdersToAdd)
+        final List<String> workOrdersDeleted = workOrders.subList(0, workOrders.size()-1);
+        for (String woNumber : workOrdersDeleted)
             Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
         workordersscreen.clickBackButton();
     }

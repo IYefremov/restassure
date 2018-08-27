@@ -395,10 +395,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		AppiumUtils.setNetworkOff();
 		vehicleinfoscreen.setVIN(newvinnumber);
 		vehicleinfoscreen.clickSaveInspectionMenuButton();
-		BaseUtils.waitABit(4000);
+		BaseUtils.waitABit(5000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.switchToMyInspectionsView();
 		homescreen = inspectionscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
