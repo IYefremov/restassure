@@ -113,6 +113,8 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 	}
 	
 	public void clickCreateInvoiceMenuItem() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(createinvoicemenu));
 		WaitUtils.click(createinvoicemenu);
 		//tap(createinvoicemenu);
 	}
@@ -168,6 +170,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 		customersscreen.selectCustomer(newWholesailCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
 		return this;
 	}
 
