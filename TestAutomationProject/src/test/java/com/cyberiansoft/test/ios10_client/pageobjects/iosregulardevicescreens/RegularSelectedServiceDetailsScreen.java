@@ -70,9 +70,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public void setServicePriceValue(String _price) {
 		WebElement pricecell = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/	XCUIElementTypeStaticText[@name='Price']/.."));
 		pricecell.findElement(MobileBy.xpath("//XCUIElementTypeTextField[1]")).clear();
-		
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		pricecell.findElement(MobileBy.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_price + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(_price);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public void clickVehiclePartsCell() {
@@ -146,13 +146,17 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Quantity")));
 		WebElement par = getTableParentCell("Quantity");
-		
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_quantity + "\n");
+
+
+		/*par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
 		par = getTableParentCell("Quantity");
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
 		par = getTableParentCell("Quantity");
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");*/
 		Helpers.waitABit(300);
 	}
 	
@@ -163,11 +167,14 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
         WebElement par = getTableParentCell("Time");
 		
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
-		par = getTableParentCell("Time");
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_timevalue + "\n");
+
+		/*par = getTableParentCell("Time");
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
 		par = getTableParentCell("Time");
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_timevalue);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");*/
 	}
 	
 	public void setServiceRateValue(String _ratevalue)
@@ -175,13 +182,16 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Rate")));	
         WebElement par = getTableParentCell("Rate");
-		
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_ratevalue + "\n");
+
+
+		/*par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
 		par = getTableParentCell("Rate");
 		if (par.findElements(By.xpath("//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).size() > 0)
 			par.findElement(By.xpath("//XCUIElementTypeTextField[1]/XCUIElementTypeButton")).click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_ratevalue);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");*/
 	}
 
 	public String getAdjustmentValue(String adjustment) {
@@ -250,17 +260,17 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public void setTechnicianCustomPriceValue(String technician,
 			String _quantity) {
 		
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
-						+ technician + "\")]/XCUIElementTypeStaticText[1]")).click();
+		WebElement tech = appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
+						+ technician + "\")]/XCUIElementTypeStaticText[1]"));
+		tech.click();
 		if (appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
 						+ technician + "\")]/XCUIElementTypeTextField[1]/XCUIElementTypeButton[@name=\"Clear text\"]")).size() > 0) {
 			appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
 					+ technician + "\")]/XCUIElementTypeTextField[1]/XCUIElementTypeButton[@name=\"Clear text\"]")).click();
-			//appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
-			//		+ technician + "\")]/XCUIElementTypeTextField[1]")).clear();
+
 		}
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		tech.sendKeys(_quantity + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public String getAdjustmentsValue() {
@@ -350,8 +360,10 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 			appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
 			+ technician + "\")]/XCUIElementTypeTextField[1]/XCUIElementTypeButton[@name=\"Clear text\"]")).click();
 		}
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(percentage);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
+				+ technician + "\")]/XCUIElementTypeTextField[1]")).sendKeys(percentage + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(percentage);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public void changeAmountOfBundleService(String newamount) {
@@ -363,7 +375,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 			}
 		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
 		amountfld.clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(newamount);
+		amountfld.sendKeys(newamount);
 		appiumdriver.findElementByAccessibilityId("Override").click();
 	}
 
@@ -380,7 +392,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectVehiclePart(String vehiclepart) {		
-		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
+		MobileElement table  = (MobileElement) appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
 		if (!table.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
 			swipeToElement(table.findElement(MobileBy.AccessibilityId(vehiclepart)));
 			//table.findElementByAccessibilityId(vehiclepart).click();

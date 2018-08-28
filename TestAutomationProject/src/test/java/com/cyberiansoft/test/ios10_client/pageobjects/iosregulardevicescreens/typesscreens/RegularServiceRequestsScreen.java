@@ -303,24 +303,23 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	public void setSubjectAppointmet(String _subject)  {
 		appiumdriver.findElementByAccessibilityId("Subject").click();
-		appiumdriver.getKeyboard().sendKeys(_subject+"\n");
+		appiumdriver.findElementByAccessibilityId("Subject").sendKeys(_subject);
+		//appiumdriver.getKeyboard().sendKeys(_subject+"\n");
 		//Helpers.keyboadrType(_subject+"\n");
 	}
 	
 	public void setAddressAppointmet(String _address)  {
 		appiumdriver.findElementByAccessibilityId("Address").click();
-		appiumdriver.getKeyboard().sendKeys(_address+"\n");
+		appiumdriver.findElementByAccessibilityId("Address").sendKeys(_address);
+		//appiumdriver.getKeyboard().sendKeys(_address+"\n");
 		//Helpers.keyboadrType(_address+"\n");
 	}
 	
 	public void setCityAppointmet(String _city)  {
 		appiumdriver.findElementByAccessibilityId("City").click();
-		appiumdriver.getKeyboard().sendKeys(_city+"\n");
+		appiumdriver.findElementByAccessibilityId("City").sendKeys(_city);
+		//appiumdriver.getKeyboard().sendKeys(_city+"\n");
 		//Helpers.keyboadrType(_city+"\n");
-	}
-	
-	public void selectSummaryRequestAction() {
-		appiumdriver.findElementByAccessibilityId("Summary").click();
 	}
 	
 	public void selectDetailsRequestAction() {

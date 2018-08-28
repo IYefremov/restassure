@@ -170,18 +170,17 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		getVINField().click();
 	}
 
-	public void setVINAndAndSearch(String vin)
-			throws InterruptedException {
+	public void setVINAndAndSearch(String vin) {
 
 		getVINField().click();
-		appiumdriver.getKeyboard().sendKeys(vin + "\n");
+		getVINField().sendKeys(vin + "\n");
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("No vehicle invoice history found")));
 		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("No vehicle invoice history found").isDisplayed());
 		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
 	
-	public void verifyExistingWorkOrdersDialogAppears() throws InterruptedException {
+	public void verifyExistingWorkOrdersDialogAppears() {
 		Assert.assertTrue(appiumdriver.findElements(MobileBy.iOSNsPredicateString("value BEGINSWITH 'Existing work orders were found'")).size() > 0);
 		appiumdriver.findElementByAccessibilityId("Close")
 				.click();
@@ -256,22 +255,25 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public void setMileage(String mileage) {
 		appiumdriver.findElementByAccessibilityId("Mileage").click();
-		appiumdriver.getKeyboard().sendKeys(mileage);
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Mileage' and type = 'XCUIElementTypeCell'")).sendKeys(mileage);
+		//appiumdriver.getKeyboard().sendKeys(mileage);
 	}
 	
 	public void setFuelTankLevel(String fueltanklevel) {
 		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").click();
-		appiumdriver.getKeyboard().sendKeys(fueltanklevel);
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Fuel Tank Level' and type = 'XCUIElementTypeCell'")).sendKeys(fueltanklevel);
+		//appiumdriver.getKeyboard().sendKeys(fueltanklevel);
 		//element(
 			//	MobileBy.name("Fuel Tank Level")).setValue(fueltanklevel);
 	}
 	
 	public void setLicensePlate(String licplate) {
 		appiumdriver.findElementByAccessibilityId("License Plate").click();
-		appiumdriver.getKeyboard().sendKeys(licplate);
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'License Plate' and type = 'XCUIElementTypeCell'")).sendKeys(licplate);
+		//appiumdriver.getKeyboard().sendKeys(licplate);
 	}
 
-	public void setTech(String _tech) throws InterruptedException {
+	public void setTech(String _tech) {
 		clickTech();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_tech)));
@@ -328,22 +330,24 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
 	public void setStock(String stock) {
 		appiumdriver.findElementByAccessibilityId("Stock#").click();
-		//appiumdriver.findElementByAccessibilityId("RO#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Stock#' and type = 'XCUIElementTypeCell'")).sendKeys(stock + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		
 	}
 
 	public void setRO(String ro) {
 		appiumdriver.findElementByAccessibilityId("RO#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'RO#' and type = 'XCUIElementTypeCell'")).sendKeys(ro + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
-	public void setPO(String po) throws InterruptedException {
+	public void setPO(String po) {
 		appiumdriver.findElementByAccessibilityId("PO#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'")).sendKeys(po + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public String getWorkOrderCustomer() {

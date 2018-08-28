@@ -97,7 +97,8 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	public void searchServiceByName(String servicename) {
 		clearSearchServiceParameters();
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").click();
-		appiumdriver.getKeyboard().sendKeys(servicename + "\n");
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(servicename + "\n");
+		//appiumdriver.getKeyboard().sendKeys(servicename + "\n");
 
 	}
 
