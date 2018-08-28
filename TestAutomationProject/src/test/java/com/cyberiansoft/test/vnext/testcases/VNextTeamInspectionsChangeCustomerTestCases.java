@@ -172,4 +172,30 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestCaseTea
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
         inspectionsScreen.clickBackButton();
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanChangeCustomerForTeamInspection(String rowID,
+                                                             String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer1);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(appiumdriver);
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspectionNumber = vehicleinfoscreen.getNewInspectionNumber();
+        inspectionsScreen = vehicleinfoscreen.saveInspectionViaMenu();
+        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testcustomer2);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        inspectionsScreen.switchToTeamInspectionsView();
+        inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        inspectionsScreen.switchToMyInspectionsView();
+        inspectionsScreen.clickBackButton();
+    }
 }

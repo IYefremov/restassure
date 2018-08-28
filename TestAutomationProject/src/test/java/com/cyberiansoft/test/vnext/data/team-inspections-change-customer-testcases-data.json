@@ -51,6 +51,15 @@
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
-  ]
+  ],
 
+  "testVerifyUserCanChangeCustomerForTeamInspection": [
+    {
+      "rowID": "testVerifyUserCanChangeCustomerForTeamInspection.01",
+      "description": "Verify user can change customer for Team Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ]
 }
