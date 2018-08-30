@@ -215,6 +215,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			final String[] vehiclepartswheels = { "Left Front Wheel",
 					"Right Front Wheel" };
 
+			RegularSettingsScreen settingsScreen = homescreen.clickSettingsButton();
+			settingsScreen.setInsvoicesCustomLayoutOff();
+			settingsScreen.clickHomeButton();
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
 			myworkordersscreen.clickAddOrderButton();
@@ -1263,6 +1266,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			questionsscreen.acceptForReminderNoDrilling();
 
 			RegularVehicleScreen vehiclescreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+			vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
         	vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
 			questionsscreen.selectOutsideQuestions();
