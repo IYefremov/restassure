@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.WebConstants;
@@ -5817,6 +5818,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		singlepageinspectionscreen.expandToFullScreeenSevicesSection();
 		ServicesScreen servicesscreen = new ServicesScreen();
+		BaseUtils.waitABit(2000);
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectServicePriceMatrices("PM_New");
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen();
@@ -6112,11 +6114,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.click();
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
 		invoiceinfoscreen.setPO("23");
-		invoiceinfoscreen.addWorkOrder(wonumber1);
 		final String invoicenum = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.addWorkOrder(wonumber1);
 		invoiceinfoscreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
-		Helpers.waitABit(10*1000);
+		Helpers.waitABit(30*1000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
@@ -6129,6 +6131,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
+		System.out.println("++++" + invoicenum);
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));

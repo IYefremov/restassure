@@ -106,7 +106,7 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	
-	public void addWorkOrder(String wonumber) {
+	public InvoiceInfoScreen addWorkOrder(String wonumber) {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByAccessibilityId("Insert").click();
 		IOSElement invoicesOrdersTable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'InvoiceOrdersView' and type = 'XCUIElementTypeTable'"));
 		invoicesOrdersTable.findElementByAccessibilityId(wonumber).findElementByAccessibilityId("unselected").click();
@@ -114,6 +114,9 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 		//appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name='"
 		//				+ wonumber + "']/XCUIElementTypeButton[@name=\"unselected\"]").click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Done")));
+		return this;
 	}
 	
 	public String getInvoiceNumber() {

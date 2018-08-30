@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PrintSelectorPopup;
@@ -114,7 +115,8 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		PrintSelectorPopup printselectorpopup = clickPrintPopup();
 		printselectorpopup.checkRemotePrintServerAndSelectPrintServer(printserver);
 		printselectorpopup.clickPrintSelectorPrintButton();
-		printselectorpopup.clickPrintOptionsPrintButton();
+		BaseUtils.waitABit(500);
+		//printselectorpopup.clickPrintOptionsPrintButton();
 	}
 	
 	public MyInvoicesScreen changeCustomerForInvoice(String invoice, String customer) {
