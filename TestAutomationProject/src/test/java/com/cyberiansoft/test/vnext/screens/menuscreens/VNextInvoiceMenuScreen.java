@@ -95,10 +95,14 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 		informationdlg.clickInformationDialogOKButton();
 	}
 
-	public VNextPayInvoicesScreen clickPayInvoiceMenuItem() {
+	public VNextPayMenu clickPayInvoiceMenuItem() {
 		clickMenuItem(invoicepaymenubtn);
-        VNextPayMenu payMenu = new VNextPayMenu(appiumdriver);
-        return payMenu.clickPayCreditCardMenuItem();
+        return new VNextPayMenu(appiumdriver);
+	}
+
+	public VNextPayInvoicesScreen clickPayCreditCardMenuItem() {
+		VNextPayMenu payMenu = clickPayInvoiceMenuItem();
+		return payMenu.clickPayCreditCardMenuItem();
 	}
 
 	public boolean isInvoiceChangePONumberMenuItemExists() {

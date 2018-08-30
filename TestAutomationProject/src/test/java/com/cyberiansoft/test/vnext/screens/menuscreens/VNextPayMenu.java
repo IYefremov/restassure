@@ -20,7 +20,7 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
     private WebElement paycheckbtn;
 
     @FindBy(xpath="//a[@data-name='payPORO']")
-    private WebElement payporobtn;
+    private WebElement invoicepayporomenubtn;
 
     public VNextPayMenu(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
@@ -30,6 +30,10 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
     public VNextPayInvoicesScreen clickPayCreditCardMenuItem() {
         clickMenuItem(paycreditcardbtn);
         return new VNextPayInvoicesScreen(appiumdriver);
+    }
+
+    public boolean isInvoicePayPOROMenuItemExists() {
+        return invoicepayporomenubtn.isDisplayed();
     }
 
 }

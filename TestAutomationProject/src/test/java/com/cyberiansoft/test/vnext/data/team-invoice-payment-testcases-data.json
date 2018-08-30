@@ -84,5 +84,38 @@
         "expirationYear" : "2022",  "cvc" : "123"
       }
     }
+  ],
+
+  "testVerifyUserSeePOROPaymentMethodIfPOROMethodEqualsON": [
+    {
+      "rowID": "testVerifyUserSeePOROPaymentMethodIfPOROMethodEqualsON.01",
+      "description": "Test Case 78447:Verify user see PO/RO payment method if PO/RO method = ON",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserSeePOROPaymentActionForPaidInvoices": [
+    {
+      "rowID": "testVerifyUserSeePOROPaymentActionForPaidInvoices.01",
+      "description": "Test Case 78448:Verify user see PO/RO payment action for paid Invoices",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
   ]
 }
