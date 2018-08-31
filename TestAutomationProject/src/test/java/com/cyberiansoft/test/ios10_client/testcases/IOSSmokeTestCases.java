@@ -4652,7 +4652,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 42388:Inspections: HD - Verify that it is possible to save as Final inspection linked to SR", description = "Verify that it is possible to save as Final inspection linked to SR")
-	public void testHDVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR() throws Exception {
+	public void testHDVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR() {
 		final String VIN  = "1D7HW48NX6S507810";
 		
 		homescreen = new HomeScreen();

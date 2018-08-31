@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
@@ -142,14 +143,18 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public void selectService(String servicename) {
-
-		IOSElement grouplist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableGroupItemList']/.."));
+		IOSElement tablelist = null;
+		if (typeContext.equals(TypeScreenContext.SERVICEREQUEST))
+			if (!(elementExists("AvailableGroupItemList")))
+				tablelist =  (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+		else
+			tablelist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableGroupItemList']/.."));
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		if (grouplist.findElementsByAccessibilityId("Clear text").size() > 0) {
-			grouplist.findElementByAccessibilityId("Clear text").click();
+		if (tablelist.findElementsByAccessibilityId("Clear text").size() > 0) {
+			tablelist.findElementByAccessibilityId("Clear text").click();
 
 		}
-		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
+		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
 		appiumdriver.getKeyboard().sendKeys(servicename);
 		appiumdriver.hideKeyboard();
 
