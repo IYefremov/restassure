@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -89,6 +90,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public String getInspectionStatusValue(String inspectionnumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionnumber + "']")));
 		WebElement inspcell = getInspectionCell(inspectionnumber);
 		return inspcell.findElement(By.xpath(".//div[@action='select']/div/*[contains(@class, 'entity-item-status-')]")).getText();
 	}
@@ -164,7 +167,16 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
-		return inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']")).size() > 0;
+		try {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
+			return true;
+		} catch (NoSuchElementException e) {
+			//System.out.println("++++++++++++++" + e.getMessage());
+		}
+		System.out.println("++++++++++++++" + "//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']");
+
+		return false;//inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']")).size() > 0;
 	}
 	
 	public void switchToTeamInspectionsView() {

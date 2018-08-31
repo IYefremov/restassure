@@ -122,13 +122,13 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void switchToRetailMode() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(retailcustomertab));
 		tap(retailcustomertab);
 	}
 	
 	public void switchToWholesaleMode() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(wholesalecustomertab));
 		tap(wholesalecustomertab);
 	}

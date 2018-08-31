@@ -90,7 +90,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
     public void testVerifyUserCanEditDraftInvoice(String rowID,
                                                                      String description, JSONObject testData) {
         LocalDate date = LocalDate.now();
-        date = date.plusDays(1);
+        if (date.plusDays(1).getDayOfMonth() != 1)
+            date = date.plusDays(1);
         DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern("MMM dd");
         DateTimeFormatter dateFormatlong =

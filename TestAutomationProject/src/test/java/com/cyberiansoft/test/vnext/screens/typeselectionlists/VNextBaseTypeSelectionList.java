@@ -27,6 +27,8 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
     public void selectType(String typeName) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
+        wait = new WebDriverWait(appiumdriver, 20);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
         tap(typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")));
     }
 }
