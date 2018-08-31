@@ -93,10 +93,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable"))); 
 	}
 
-	public static String getVehicleScreenCaption() {
-		return vehiclescreencapt;
-	}
-
 	public String clickSaveWithAlert() {
 		clickSave();
 		return Helpers.getAlertTextAndAccept();
@@ -170,20 +166,23 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		getVINField().click();
 	}
 
-	public void setVINAndAndSearch(String vin) {
+	public String setVINAndAndSearch(String vin) {
 
 		getVINField().click();
 		getVINField().sendKeys(vin + "\n");
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("No vehicle invoice history found")));
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("No vehicle invoice history found").isDisplayed());
+		String alertText = appiumdriver.findElementByClassName("XCUIElementTypeTextView").getText();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("No vehicle invoice history found")));
+		//Assert.assertTrue(appiumdriver.findElementByAccessibilityId("No vehicle invoice history found").isDisplayed());
 		appiumdriver.findElementByAccessibilityId("Close").click();
+		return alertText;
 	}
 	
-	public void verifyExistingWorkOrdersDialogAppears() {
-		Assert.assertTrue(appiumdriver.findElements(MobileBy.iOSNsPredicateString("value BEGINSWITH 'Existing work orders were found'")).size() > 0);
+	public String getExistingWorkOrdersDialogMessage() {
+		String alertText = appiumdriver.findElementByClassName("XCUIElementTypeTextView").getText();
 		appiumdriver.findElementByAccessibilityId("Close")
 				.click();
+		return alertText;
 	}
 	
 	public String getWorkOrderNumber() {
@@ -235,7 +234,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public String getTechnician() {
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Tech']/XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
-	
+
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {
 		Assert.assertEquals(getMake(), exp_make);
 		Assert.assertEquals(getModel(), exp_model);

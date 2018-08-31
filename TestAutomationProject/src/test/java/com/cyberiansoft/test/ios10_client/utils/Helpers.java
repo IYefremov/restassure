@@ -117,7 +117,7 @@ public abstract class Helpers {
 	}
 
 	public static void waitForAlert() {
-		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		//WebDriverWait wait = new WebDriverWait(driver, 300);
 		//wait.until(ExpectedConditions.alertIsPresent());
 		FluentWait<WebDriver> wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 300);

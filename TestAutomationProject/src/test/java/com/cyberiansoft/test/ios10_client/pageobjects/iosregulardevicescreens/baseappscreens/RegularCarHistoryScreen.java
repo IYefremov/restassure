@@ -24,7 +24,7 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	@iOSFindBy(accessibility = "Close")
     private IOSElement closesearchbtn;
 	
-	@iOSFindBy(accessibility = "Switch to web")
+	@iOSFindBy(accessibility = "Switch to online")
     private IOSElement switchtowebbtn;
 	
 	public RegularCarHistoryScreen() {

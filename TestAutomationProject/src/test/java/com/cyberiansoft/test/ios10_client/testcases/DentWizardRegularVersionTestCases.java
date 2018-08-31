@@ -148,11 +148,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			myworkordersscreen.clickAddOrderButton();
 			RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(DentWizardWorkOrdersTypes.routeusworkordertype);
-			vehiclescreen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
+			String searchresult = vehiclescreen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
 					0, 11));
-			Thread.sleep(2000);
+			Assert.assertEquals(searchresult, "No vehicle invoice history found");
 			vehiclescreen.setVINValue(ExcelUtils.getVIN(tcrow).substring(11, 17));
-			vehiclescreen.verifyExistingWorkOrdersDialogAppears();	
+			String msg = vehiclescreen.getExistingWorkOrdersDialogMessage();
+			Assert.assertTrue(msg.contains("Existing work orders were found"), msg);
 			if (DriverBuilder.getInstance().getAppiumDriver().findElementsByAccessibilityId("Close").size() > 0)
 				DriverBuilder.getInstance().getAppiumDriver().findElementByAccessibilityId("Close").click();
 			vehiclescreen.saveWizard();
@@ -177,8 +178,8 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			myworkordersscreen.clickAddOrderButton();
 			RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(DentWizardWorkOrdersTypes.routeusworkordertype);
-			vehiclescreen.setVINAndAndSearch(ExcelUtils.getVIN(testcaserow));
-			//Assert.assertEquals(searchresult, "Search Complete No vehicle invoice history found");
+			String searchresult = vehiclescreen.setVINAndAndSearch(ExcelUtils.getVIN(testcaserow));
+			Assert.assertEquals(searchresult, "No vehicle invoice history found");
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3825,7 +3826,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			vehiclescreen.setStock(ExcelUtils.getStock(testcaserow));
 			vehiclescreen.setRO(ExcelUtils.getRO(testcaserow));
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-			servicesscreen.selectService(UtilConstants.INTERIORPLASTIC_SERVICE);
+			servicesscreen.selectServicePanel(UtilConstants.INTERIORPLASTIC_SERVICE);
 			servicesscreen.selectService(UtilConstants.SCRTCH_1_SECTPLSTC_SERVICE);
 			servicesscreen.clickBackServicesButton();
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
