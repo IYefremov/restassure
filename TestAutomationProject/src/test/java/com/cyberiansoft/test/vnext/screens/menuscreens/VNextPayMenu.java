@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextPayCashCheckScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPayInvoicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextPayPOROScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.WebElement;
@@ -34,6 +36,16 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
 
     public boolean isInvoicePayPOROMenuItemExists() {
         return invoicepayporomenubtn.isDisplayed();
+    }
+
+    public VNextPayCashCheckScreen clickPayCachCheckMenuItem() {
+        clickMenuItem(paycheckbtn);
+        return new VNextPayCashCheckScreen(appiumdriver);
+    }
+
+    public VNextPayPOROScreen clickPayPOROMenuItem() {
+        clickMenuItem(invoicepayporomenubtn);
+        return new VNextPayPOROScreen(appiumdriver);
     }
 
 }

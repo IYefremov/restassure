@@ -105,6 +105,11 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 		return payMenu.clickPayCreditCardMenuItem();
 	}
 
+	public VNextPayCashCheckScreen clickPayCachCheckMenuItem() {
+		VNextPayMenu payMenu = clickPayInvoiceMenuItem();
+		return payMenu.clickPayCachCheckMenuItem();
+	}
+
 	public boolean isInvoiceChangePONumberMenuItemExists() {
 		return invoicechangeponumbtn.isDisplayed();
 	}
