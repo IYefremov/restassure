@@ -240,14 +240,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Compose")).click();
 	}
 	
-	public void clickVehiclePartsButton() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Vehicle Part")).click();
-	}
-
-	public static String getServicesScreenCaption() {
-		return servicesscreencapt;
-	}
-	
 	public RegularServicesScreen clickBackServicesButton() {
 		BaseUtils.waitABit(500);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

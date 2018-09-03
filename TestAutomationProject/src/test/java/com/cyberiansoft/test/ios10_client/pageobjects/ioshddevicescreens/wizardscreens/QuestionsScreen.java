@@ -270,10 +270,6 @@ public class QuestionsScreen extends BaseWizardScreen {
 	public void answerAllIsGoodQuestion() {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeTable/XCUIElementTypeCell[2]")).click();
 	}
-	
-	public void answerTrafficLight1Question() {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeTable/XCUIElementTypeCell[2]")).click();
-	}
 
 	public String getInvoiceNumber() {
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");

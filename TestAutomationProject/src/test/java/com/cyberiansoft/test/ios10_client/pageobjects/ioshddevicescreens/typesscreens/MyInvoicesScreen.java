@@ -116,7 +116,7 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		printselectorpopup.checkRemotePrintServerAndSelectPrintServer(printserver);
 		printselectorpopup.clickPrintSelectorPrintButton();
 		BaseUtils.waitABit(500);
-		//printselectorpopup.clickPrintOptionsPrintButton();
+		printselectorpopup.clickPrintOptionsPrintButton();
 	}
 	
 	public MyInvoicesScreen changeCustomerForInvoice(String invoice, String customer) {

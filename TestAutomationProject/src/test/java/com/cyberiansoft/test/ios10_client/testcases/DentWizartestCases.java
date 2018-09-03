@@ -2904,8 +2904,10 @@ public class DentWizartestCases extends BaseTestCase {
         QuestionsScreen questionsscreen = new QuestionsScreen();
         questionsscreen = questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
 		questionsscreen.chooseAVISCode("Rental-921");
-		final String invoicenumber = questionsscreen.getInvoiceNumber();
-		questionsscreen.clickSaveAsFinal();
+		InvoiceInfoScreen invoiceInfoScreen = questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+
+		final String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
+		invoiceInfoScreen.clickSaveAsFinal();
 		teamworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenumber);

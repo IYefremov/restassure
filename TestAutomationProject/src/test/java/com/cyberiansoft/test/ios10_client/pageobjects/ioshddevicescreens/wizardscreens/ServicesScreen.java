@@ -144,10 +144,11 @@ public class ServicesScreen extends BaseWizardScreen {
 
 	public void selectService(String servicename) {
 		IOSElement tablelist = null;
-		if (typeContext.equals(TypeScreenContext.SERVICEREQUEST))
-			if (!(elementExists("AvailableGroupItemList")))
-				tablelist =  (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
-		else
+		if (typeContext.equals(TypeScreenContext.SERVICEREQUEST)) {
+			if (!(elementExists("AvailableGroupItemList"))) {
+				tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+			}
+		} else
 			tablelist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableGroupItemList']/.."));
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		if (tablelist.findElementsByAccessibilityId("Clear text").size() > 0) {

@@ -26,7 +26,7 @@ public class CarHistoryScreen extends BaseAppScreen {
 	@iOSFindBy(accessibility = "Close")
     private IOSElement closesearchbtn;
 	
-	@iOSFindBy(accessibility  = "Switch to web")
+	@iOSFindBy(accessibility  = "Switch to online")
     private IOSElement switchtowebbtn;
 	
 	@iOSFindBy(accessibility  = "Invoices")
