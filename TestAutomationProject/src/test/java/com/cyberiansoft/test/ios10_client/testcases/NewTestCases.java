@@ -218,14 +218,11 @@ public class NewTestCases extends BaseTestCase {
 		//vehiclescreen.setLicensePlate(licplate);
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServiceQuantityValue("3");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.selectService("SR_Money_Vehicle");
 		servicesscreen.selectService("SR_S4_Bundle");
-		
-		servicesscreen.clickAddServicesButton();
 		
 		servicesscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndCancel();

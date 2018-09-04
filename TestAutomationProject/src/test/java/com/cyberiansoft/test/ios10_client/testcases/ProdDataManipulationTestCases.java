@@ -194,7 +194,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         claimscreen.setAccidentDate();
 
         RegularServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
             selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
@@ -202,7 +201,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.clickAddServicesButton();
         servicesScreen.saveWizard();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
@@ -227,7 +225,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         final String inspNumber = vehiclescreen.getInspectionNumber();
 
         RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
             selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
@@ -235,7 +232,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.clickAddServicesButton();
         servicesScreen.saveWizard();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
@@ -260,7 +256,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         final String inspNumber = vehiclescreen.getInspectionNumber();
 
         RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
             selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
@@ -268,7 +263,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.clickAddServicesButton();
         servicesScreen.saveWizard();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
@@ -293,7 +287,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         final String inspNumber = vehiclescreen.getInspectionNumber();
 
         RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
             selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
@@ -301,7 +294,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.clickAddServicesButton();
         servicesScreen.saveWizard();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
@@ -326,7 +318,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         final String inspNumber = vehiclescreen.getInspectionNumber();
 
         RegularServicesScreen servicesScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        servicesScreen.clickToolButton();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
             selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
@@ -334,7 +325,6 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.clickAddServicesButton();
         servicesScreen.saveWizard();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();

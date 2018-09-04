@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -84,6 +83,9 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;*/
+
+	@iOSFindBy(accessibility = "VehicleInfoTable")
+	private IOSElement vehicleinfotbl;
 	
 	public RegularVehicleScreen() {
 		super();
@@ -151,9 +153,9 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public void clearVINCode() {
 		appiumdriver.findElementByAccessibilityId("VIN#").click();
+		WebElement deleteBtn  = appiumdriver.findElementByClassName("XCUIElementTypeKeyboard").findElement(MobileBy.AccessibilityId("delete"));
 		for (int i = 0; i < 17; i++)
-			((IOSDriver) appiumdriver).getKeyboard().sendKeys(Keys.DELETE);
-		
+			deleteBtn.click();
 	}
 	
 	public WebElement getVINField() {
@@ -210,29 +212,28 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public String getMake() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("VehicleInfoTable")));
-		IOSElement table = (IOSElement) appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
-		return table.findElement(By.xpath("//XCUIElementTypeCell[@name='Make']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		IOSElement table = (IOSElement)wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("VehicleInfoTable")));
+		return table.findElementByAccessibilityId("Make").findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
 	}
 
 	public String getModel() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Model']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Model")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 
 	public String getYear() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Year']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Year")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public String getTrim() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Trim']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Trim")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public String getEst() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Est#']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Est#'")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public String getTechnician() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Tech']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Tech'")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {
@@ -364,10 +365,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Compose")));
 		appiumdriver.findElementByAccessibilityId("Compose").click();
 		return new RegularNotesScreen();
-	}
-	
-	public WebElement getVehicleInfoTableParentNode(String wonumber) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='" + wonumber + "']/.."));
 	}
 
 	public String getWorkOrderTypeValue() {

@@ -5573,6 +5573,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
 		homescreen = myworkordersscreen.clickHomeButton();
+		BaseUtils.waitABit(5*1000);
 		TeamInvoicesScreen teaminvoicesscreen = homescreen.clickTeamInvoices();
 		teaminvoicesscreen.selectInvoice(invoicenumber);
 		
@@ -6131,7 +6132,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
-		System.out.println("++++" + invoicenum);
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));

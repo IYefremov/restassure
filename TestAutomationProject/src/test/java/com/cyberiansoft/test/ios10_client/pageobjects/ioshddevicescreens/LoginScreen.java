@@ -9,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class LoginScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility = "CodeField1")
@@ -33,10 +31,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
-	public void registeriOSDevice(String regCode)
-			throws InterruptedException {
-		
-		appiumdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	public void registeriOSDevice(String regCode) {
 		//firstcode.setValue(regCode.substring(0, 4));
 		firstcode.click();
 

@@ -55,7 +55,8 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	
 	public RegularCarHistoryWOsAndInvoicesScreen clickCarHistoryRowByVehicleInfo(String vehicleinfo) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(vehicleinfo)));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(vehicleinfo)));
+		swipeToElement(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + vehicleinfo + "']")));
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + vehicleinfo + "']")).click();
 		return new RegularCarHistoryWOsAndInvoicesScreen();
 	}

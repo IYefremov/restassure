@@ -148,6 +148,8 @@ public class ServicesScreen extends BaseWizardScreen {
 			if (!(elementExists("AvailableGroupItemList"))) {
 				tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
 			}
+			else
+				tablelist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableGroupItemList']/.."));
 		} else
 			tablelist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableGroupItemList']/.."));
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
@@ -155,7 +157,7 @@ public class ServicesScreen extends BaseWizardScreen {
 			tablelist.findElementByAccessibilityId("Clear text").click();
 
 		}
-		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
+        tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
 		appiumdriver.getKeyboard().sendKeys(servicename);
 		appiumdriver.hideKeyboard();
 

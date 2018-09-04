@@ -5,7 +5,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wi
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -313,7 +312,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public void searchTechnician(String technician) {
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Search']").click();
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(technician);
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(technician);
 	}
 	
 	public void cancelSearchTechnician() {

@@ -11,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class PriceMatrixScreen extends BaseWizardScreen {
 	
 	//Sizes
@@ -67,7 +65,6 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	public PriceMatrixScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectPriceMatrix(String pricematrix) {
