@@ -169,11 +169,11 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
 		claiminfoscreen.setClaimNumber(claimNumber);
 		claiminfoscreen.setPolicyNumber(policyNumber);
-		
 		inspectionscreen = claiminfoscreen.saveInspectionViaMenu();
 		
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
+		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Team inspection exists: " + inspnumber);
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();

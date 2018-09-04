@@ -33,6 +33,11 @@ public class VNextPayPOROScreen extends VNextBasicMenuScreen {
         poroNumberfld.sendKeys(pOROValue);
     }
 
+    public String getPaymentPOROValue() {
+        return poroNumberfld.getCssValue("value");
+
+    }
+
     public void setPaymentNotes(String notes) {
         paymentNotesfld.clear();
         paymentNotesfld.sendKeys(notes);

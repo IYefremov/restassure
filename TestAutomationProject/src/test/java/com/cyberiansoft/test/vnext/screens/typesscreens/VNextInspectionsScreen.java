@@ -168,7 +168,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	
 	public boolean isInspectionExists(String inspnumber) {
 		try {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
 			return true;
 		} catch (NoSuchElementException e) {

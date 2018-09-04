@@ -135,5 +135,23 @@
         "expirationYear" : "2022",  "cvc" : "123"
       }
     }
+  ],
+
+  "testVerifyPaymentPOROIsEqualToInvoicePONumber": [
+    {
+      "rowID": "testVerifyPaymentPOROIsEqualToInvoicePONumber.01",
+      "description": "Test Case 78450:Verify payment PO/RO is equal to invoice PO#",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "90"
+      },
+      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
   ]
 }
