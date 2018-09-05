@@ -115,6 +115,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public WebElement getInspectionCell(String inspectionnumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 		return getListCell(inspectionslist, inspectionnumber);
 	}
 	
@@ -166,6 +168,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
+		if (elementExists("//div[@class='searchlist-nothing-found']"))
+			return false;
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 		return inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']")).size() > 0;

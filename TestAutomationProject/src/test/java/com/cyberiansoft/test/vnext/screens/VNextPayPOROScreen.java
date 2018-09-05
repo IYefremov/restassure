@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextBasicMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -9,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class VNextPayPOROScreen extends VNextBasicMenuScreen {
+public class VNextPayPOROScreen extends VNextBaseScreen {
 
     @FindBy(xpath="//div[@data-page='details']")
     private WebElement paycachcheckscreeen;
@@ -43,8 +42,12 @@ public class VNextPayPOROScreen extends VNextBasicMenuScreen {
         paymentNotesfld.sendKeys(notes);
     }
 
-    public VNextInvoicesScreen clickPayButton() {
+    public void clickPayButton() {
         tap(paybtn);
+    }
+
+    public VNextInvoicesScreen clickPayForInvoice() {
+        clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         System.out.println("+++++++++" + informationDialog.clickInformationDialogOKButtonAndGetMessage());
         return new VNextInvoicesScreen(appiumdriver);
