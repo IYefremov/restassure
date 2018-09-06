@@ -7,6 +7,8 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -483,6 +485,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
 		claiminfoscreen.saveInspectionViaMenu();
+
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 
@@ -500,8 +503,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertEquals(claiminfoscreen.getInsuranceCompany(), insuranceCompany);
 		claiminfoscreen.cancelInspection();
 		inspectionscreen.clickBackButton();
-		
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -512,7 +514,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
-		inspectionspage.searchInspectionByNumber(inspnumber);
+		inspectionspage.makeSearchPanelVisible()
+				.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName())
+				.setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted())
+				.searchInspectionByNumber(inspnumber);
 		inspectionspage.verifyVINIsPresentForInspection(inspnumber, newVIN);
 		webdriver.quit();
 	}
