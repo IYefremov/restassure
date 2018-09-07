@@ -46,7 +46,7 @@ public class VNextPayPOROScreen extends VNextBaseScreen {
         tap(paybtn);
     }
 
-    public VNextInvoicesScreen clickPayForInvoice() {
+    public VNextInvoicesScreen payForInvoice() {
         clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         System.out.println("+++++++++" + informationDialog.clickInformationDialogOKButtonAndGetMessage());

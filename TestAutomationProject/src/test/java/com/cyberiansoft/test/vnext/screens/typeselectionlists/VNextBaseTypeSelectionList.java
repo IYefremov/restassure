@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typeselectionlists;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -29,6 +30,7 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
         wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
+        BaseUtils.waitABit(500);
         tap(typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")));
     }
 }

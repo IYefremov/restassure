@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -92,7 +93,8 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		tap(workorderslist);
 		return new VNextWorkOrdersScreen(appiumdriver);
 	}
-	
+
+	@Step
 	public VNextInspectionsScreen clickInspectionsMenuItem() {
 		tap(inspectionslist);
 		return new VNextInspectionsScreen(appiumdriver);
@@ -132,7 +134,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	}
 	
 	public void waitUntilQueueMessageInvisible() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 180);
 		wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByXPath("//*[@action='messager-send']")));
 	}
 	

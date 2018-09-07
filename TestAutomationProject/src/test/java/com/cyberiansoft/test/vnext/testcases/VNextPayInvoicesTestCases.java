@@ -460,12 +460,12 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayPOROScreen poroScreen = invoicemenuscreen.clickPayPOROMenuItem();
-        poroScreen.clickPayButton();
+        VNextPayPOROScreen payPOROScreen = invoicemenuscreen.clickPayPOROMenuItem();
+        payPOROScreen.clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.PORO_FIELDIS_REQUIRED);
-        poroScreen.clickScreenBackButton();
+        payPOROScreen.clickScreenBackButton();
 
         invoicesscreen = new VNextInvoicesScreen(appiumdriver);
         invoicesscreen.clickBackButton();
@@ -501,11 +501,56 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayPOROScreen poroScreen = invoicemenuscreen.clickPayPOROMenuItem();
-        poroScreen.setPaymentPOROValue(invoice.getInvoiceData().getInvoicePONumber());
-        invoicesscreen = poroScreen.clickPayForInvoice();
+        VNextPayPOROScreen payPOROScreen = invoicemenuscreen.clickPayPOROMenuItem();
+        payPOROScreen.setPaymentPOROValue(invoice.getInvoiceData().getInvoicePONumber());
+        invoicesscreen = payPOROScreen.payForInvoice();
         Assert.assertTrue(invoicesscreen.isInvoiceHasPaymentIcon(invoiceNumber));
         Assert.assertFalse(invoicesscreen.isInvoiceHasNotesIcon(invoiceNumber));
+        invoicesscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanGoBackToInvoiceListWithoutSavePayment(String rowID,
+                                                             String description, JSONObject testData) {
+
+        Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToTeamWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
+        vehicleinfoscreen.changeScreen("Services");
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.changeScreen("Summary");
+        VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+        wosummaryscreen.clickCreateInvoiceOption();
+        wosummaryscreen.clickWorkOrderSaveButton();
+
+        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
+        VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        VNextPayPOROScreen payPOROScreen = invoicemenuscreen.clickPayPOROMenuItem();
+        payPOROScreen.setPaymentPOROValue(invoice.getInvoiceData().getInvoicePONumber());
+        payPOROScreen.clickScreenBackButton();
+
+        invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+        Assert.assertFalse(invoicesscreen.isInvoiceHasPaymentIcon(invoiceNumber));
+        Assert.assertFalse(invoicesscreen.isInvoiceHasNotesIcon(invoiceNumber));
+        invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        VNextPayMenu payMenu = invoicemenuscreen.clickPayInvoiceMenuItem();
+        Assert.assertTrue(payMenu.isInvoicePayPOROMenuItemExists());
+        invoicemenuscreen.clickCloseInvoiceMenuButton();
+
         invoicesscreen.clickBackButton();
     }
 }

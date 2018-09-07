@@ -84,6 +84,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
@@ -222,6 +223,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
@@ -310,6 +312,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		invoicesscreen.switchToMyInvoicesView();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
@@ -595,6 +598,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);

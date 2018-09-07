@@ -180,5 +180,20 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "90"
       }
     }
+  ],
+
+  "testVerifyUserCanGoBackToInvoiceListWithoutSavePayment": [
+    {
+      "rowID": "testVerifyUserCanGoBackToInvoiceListWithoutSavePayment.01",
+      "description": "Test Case 78453:Verify user can go back to invoice list without save payment",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "90"
+      }
+    }
   ]
 }
