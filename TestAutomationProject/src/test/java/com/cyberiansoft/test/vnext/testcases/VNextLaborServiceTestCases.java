@@ -122,7 +122,7 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
         vehiclepartinfoscreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
 
-        vehiclepartinfoscreen.selectVehiclePartAdditionalService(matrixPartData.getMatrixAdditionalLaborService().getServiceName());
+        vehiclepartinfoscreen.openVehiclePartAdditionalServiceDetails(matrixPartData.getMatrixAdditionalLaborService().getServiceName());
         VNextLaborServicePartsList laborServicePartsList = vehiclepartinfoscreen.clickSelectPanelsAndPartsForLaborService(matrixPartData.getMatrixAdditionalLaborService());
         Assert.assertTrue(laborServicePartsList.isPartsTabEnabled());
         laborServicePartsList.clickBackButton();
@@ -163,7 +163,7 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
         vehiclepartinfoscreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
 
-        vehiclepartinfoscreen.selectVehiclePartAdditionalService(matrixPartData.getMatrixAdditionalLaborService().getServiceName());
+        vehiclepartinfoscreen.openVehiclePartAdditionalServiceDetails(matrixPartData.getMatrixAdditionalLaborService().getServiceName());
         VNextLaborServicePartsList laborServicePartsList = vehiclepartinfoscreen.clickSelectPanelsAndPartsForLaborService(matrixPartData.getMatrixAdditionalLaborService());
         Assert.assertTrue(laborServicePartsList.isPartsTabEnabled());
         laborServicePartsList.selectServiceLaborPart(matrixPartData.getMatrixAdditionalLaborService().getLaborServicePart());

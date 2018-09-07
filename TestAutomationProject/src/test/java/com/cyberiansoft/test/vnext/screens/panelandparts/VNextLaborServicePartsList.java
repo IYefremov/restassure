@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.panelandparts;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextLaborServiceDetailsScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -26,7 +27,12 @@ public class VNextLaborServicePartsList extends VNextBasePanelPartsList {
     }
 
     public void selectServiceLaborPart(String partName) {
-        tap(partslist.findElement(By.xpath(".//*[@action='select-item']/span[text()='" + partName + "']")));
+        tap(partslist.findElement(By.xpath(".//*[@action='select-item']/div/div[contains(text(), '" + partName + "')]")));
+    }
+
+    public VNextLaborServiceDetailsScreen saveLaborServiceParts() {
+        clickSaveButton();
+        return new VNextLaborServiceDetailsScreen(appiumdriver);
     }
 
 }

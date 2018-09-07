@@ -26,7 +26,7 @@ public class VNextLaborServicePanelsList extends VNextBasePanelPartsList {
     }
 
     public VNextLaborServicePartsList selectServiceLaborPanel(String panelName) {
-        tap(panelslist.findElement(By.xpath(".//*[@action='select-item']/span[text()='" + panelName + "']")));
+        tap(panelslist.findElement(By.xpath(".//*[@action='select-item']/div/div[contains(text(), '" + panelName + "')]")));
         return  new VNextLaborServicePartsList(appiumdriver);
     }
 
