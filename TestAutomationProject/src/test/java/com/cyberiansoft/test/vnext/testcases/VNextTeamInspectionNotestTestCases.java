@@ -32,7 +32,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		final String vinnumber = "123";
 		final String notetext = "new notes";
-		final String quicknotenew = "Z note";
+		final String quicknotenew = "AB note 555";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -188,7 +188,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		final String vinnumber = "123";
 		
-		final String[] quicknotes = { quicknote, "Z note" };
+		final String[] quicknotes = { quicknote, "AB note 555" };
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
