@@ -92,7 +92,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 	
 	public MonitorWebPage clickMonitorLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(monitortab)).click();
+	    wait.until(ExpectedConditions.elementToBeClickable(monitortab)).click();
 		return PageFactory.initElements(
 				driver, MonitorWebPage.class);
 	}

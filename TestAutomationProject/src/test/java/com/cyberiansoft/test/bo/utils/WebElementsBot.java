@@ -50,10 +50,12 @@ public class WebElementsBot {
         WebDriverWait wait = clickCombobox(combobox, droplist);
 		try {
 		    List<WebElement> items = droplist.getWrappedElement().findElements(By.tagName("li"));
-		    wait.until(ExpectedConditions.visibilityOfAllElements(items));
+            try {
+                wait.until(ExpectedConditions.visibilityOfAllElements(items));
+            } catch (Exception ignored) {}
             items.stream().filter(w -> w.getText().equals(value)).findFirst().ifPresent(WebElement::click);
         } catch (Exception e) {
-            System.err.println("The value has not been found! " + e);
+		    System.err.println("The value has not been found! " + e);
         }
         waitUntilDropListDisappears(droplist, wait);
     }
@@ -97,7 +99,9 @@ public class WebElementsBot {
         combobox.clearAndType(value);
         waitABit(1000);
         combobox.sendKeys(Keys.ENTER);
-        waitUntilDropListDisappears(droplist, new WebDriverWait(driver, 50));
+        try {
+            waitUntilDropListDisappears(droplist, new WebDriverWait(driver, 50));
+        } catch (Exception ignored) {}
     }
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String typevalue, String selectvalue) {
@@ -169,12 +173,27 @@ public class WebElementsBot {
         } catch (Exception ignored) {}
     }
 
+    private static void waitUntilDropListDisappears(ComboBox comboBox, DropDown droplist, WebDriverWait wait) {
+        try {
+            if (!DriverBuilder.getInstance().getBrowser().contains("Edge")) {
+                waitUntilDropListDisappears(droplist, wait);
+            } else {
+                WebDriver driver = DriverBuilder.getInstance().getDriver();
+                ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
+                        comboBox.getWrappedElement(), "display", 0);
+                wait.until(ExpectedConditions.attributeContains(comboBox.getWrappedElement(), "display", "0"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private static WebDriverWait clickCombobox(ComboBox combobox, DropDown droplist) {
         WebDriver driver = DriverBuilder.getInstance().getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 70);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement())).click();
-        } catch (TimeoutException e) {
+        } catch (WebDriverException e) {
             ((JavascriptExecutor)driver).executeScript("arguments[0].click();", combobox.getWrappedElement());
         }
         try {

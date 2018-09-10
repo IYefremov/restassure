@@ -107,6 +107,12 @@ public class BOCompanyClientsData {
     @JsonProperty("workHoursFinish")
     private String workHoursFinish;
 
+    @JsonProperty("red")
+    private String red;
+
+    @JsonProperty("green")
+    private String green;
+
     public String getClientName() {
         return clientName;
     }
@@ -245,5 +251,13 @@ public class BOCompanyClientsData {
 
     public String getRandomName() {
         return "test-" + RandomStringUtils.randomAlphabetic(7);
+    }
+
+    public String getRed() {
+        return red;
+    }
+
+    public String getGreen() {
+        return green;
     }
 }

@@ -30,12 +30,11 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
         ClientsWebPage clientspage = backOfficeHeader
                 .clickCompanyLink()
-                .clickClientsLink();
-
-        clientspage.verifyEmployeesTableColumnsAreVisible();
+                .clickClientsLink()
+                .verifyEmployeesTableColumnsAreVisible();
 
         Assert.assertEquals("1", clientspage.getCurrentlySelectedPageNumber());
-        org.testng.Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
+        Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
 
         clientspage.setPageSize("1");
         Assert.assertEquals(1, clientspage.getClientsTableRowsCount());
@@ -157,7 +156,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		newclientdlg.clickOKButton();
 
 		clientspage.searchClientByName(data.getCompanyName());
-		String notext = clientspage.mouseMoveToClientNotesGridAndGetNoteContent(data.getCompanyName());
+		String notext = clientspage.moveToClientNotesGridAndGetNoteContent(data.getCompanyName());
 		Assert.assertEquals(data.getCompanyNote(), notext);
 
 		clientspage.deleteClient(data.getCompanyName());
@@ -181,7 +180,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		}
 		clientspage.importClients(data.getImportFile());
 		clientspage.searchClientByName(data.getCompanyName());
-		String notetxt = clientspage.mouseMoveToClientNotesGridAndGetNoteContent(data.getCompanyName());
+		String notetxt = clientspage.moveToClientNotesGridAndGetNoteContent(data.getCompanyName());
 		Assert.assertEquals(data.getCompanyNote(), notetxt);
 
 		clientspage.deleteClient(data.getCompanyName());
@@ -310,7 +309,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
 		newClientDialogWebPage.clickOKButton();
 		clientspage.searchClientByName(data.getTimeFrame());
-//		Assert.assertEquals(data.getTimeFrame(), clientspage.mouseMoveToClientNotesGridAndGetNoteContent(data.getTimeFrame())); todo uncomment, if timeframe appears
+//		Assert.assertEquals(data.getTimeFrame(), clientspage.moveToClientNotesGridAndGetNoteContent(data.getTimeFrame())); todo uncomment, if timeframe appears
 		clientspage.deleteClient(data.getTimeFrame());
 		Assert.assertFalse(clientspage.isClientPresentInTable(data.getTimeFrame()));
 	}
@@ -372,9 +371,13 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		// verify message text and color for contact1
 		Assert.assertEquals(data.getNotVerifiedMess(),
                 clientContactsWebPage1.getClientStatusText(data.getContactFirstName()));
-		Assert.assertEquals(data.getColorRed(),
-                clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
-		clientContactsWebPage1.closeNewTab(mainwindow);
+        if (browsertype.getBrowserTypeString().equalsIgnoreCase("edge")) {
+            Assert.assertEquals(data.getColorRed(), clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
+        } else {
+            Assert.assertEquals(data.getRed(), clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
+        }
+
+        clientContactsWebPage1.closeNewTab(mainwindow);
 
 		//Click on Contact Verification Disable and create contact 2 for client
 		clientspage.clickContactVerifDisableChkbox();
@@ -382,7 +385,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 				clickContactsLinkForClientOpenDialogWindow(data.getClientName());
 
 		//delete contact2 if such exists
-		if (clientContactsWebPage2.isClientContactPresentInTable(data.getContactFirstName2(), data.getContactLastName2())){
+		if (clientContactsWebPage2.isClientContactPresentInTable(data.getContactFirstName2(), data.getContactLastName2())) {
 			clientContactsWebPage2.clickDeleteClientContact(data.getContactFirstName2());
 		}
 
@@ -393,7 +396,12 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
 		// verify message text and color for contact2
 		Assert.assertEquals(data.getVerifiedMess(), clientContactsWebPage3.getClientStatusText(data.getContactFirstName2()));
-		Assert.assertEquals(data.getColorGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
+        if (browsertype.getBrowserTypeString().equalsIgnoreCase("edge")) {
+            Assert.assertEquals(data.getColorGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
+        } else {
+            Assert.assertEquals(data.getGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
+        }
+//        Assert.assertEquals(data.getColorGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
 
 		//delete all created contacts
 		clientContactsWebPage3.clickDeleteClientContact(data.getContactFirstName());
@@ -405,7 +413,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.unclickContactVerifDisableChkbox();
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsContactsUpdate(String rowID, String description, JSONObject testData) {
 
         BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);

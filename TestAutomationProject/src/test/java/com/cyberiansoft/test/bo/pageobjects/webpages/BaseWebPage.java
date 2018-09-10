@@ -147,9 +147,7 @@ public abstract class BaseWebPage {
 	}
 
 	public void dismissAlertAndWait() {
-		wait.until(ExpectedConditions.alertIsPresent());
-		Alert alert = driver.switchTo().alert();
-		alert.dismiss();
+		wait.until(ExpectedConditions.alertIsPresent()).dismiss();
 		waitForLoading();
 	}
 

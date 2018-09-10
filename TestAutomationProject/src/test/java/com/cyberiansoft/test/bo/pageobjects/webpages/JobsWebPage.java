@@ -114,63 +114,40 @@ public class JobsWebPage extends WebPageWithPagination {
 	}	
 	
 	public String getTableJobDescription(String job) {
-		String jobdesc = "";
-		WebElement row = getTableRowWithJob(job);
-		if (row != null) {
-			jobdesc = row.findElement(By.xpath(".//td[4]")).getText();
-		} else
-            Assert.fail("Can't find " + job + " job");
-		return jobdesc;
+        return getJob(job, ".//td[4]");
 	}
-	
-	public String getTableJobClient(String job) {
-		String jobclient = "";
-		WebElement row = getTableRowWithJob(job);
-		if (row != null) {
-			jobclient = row.findElement(By.xpath(".//td[5]")).getText();
-		} else
+
+    public String getJob(String job, String jobLocator) {
+        String jobdesc = "";
+        WebElement row = getTableRowWithJob(job);
+        if (row != null) {
+            jobdesc = row.findElement(By.xpath(jobLocator))
+                    .getText()
+                    .replaceAll("\\u00A0", "")
+                    .trim();
+        } else
             Assert.fail("Can't find " + job + " job");
-		return jobclient;
+        return jobdesc;
+    }
+
+    public String getTableJobClient(String job) {
+        return getJob(job, ".//td[5]");
 	}
 	
 	public String getTableJobStartDate(String job) {
-		String jobstartdate = "";
-		WebElement row = getTableRowWithJob(job);
-		if (row != null) {
-			jobstartdate = row.findElement(By.xpath(".//td[6]")).getText();
-		} else
-            Assert.fail("Can't find " + job + " job");
-		return jobstartdate;
+        return getJob(job, ".//td[6]");
 	}
 	
 	public String getTableJobEndDate(String job) {
-		String jobenddate = "";
-		WebElement row = getTableRowWithJob(job);
-		if (row != null) {
-			jobenddate = row.findElement(By.xpath(".//td[7]")).getText();
-		} else
-            Assert.fail("Can't find " + job + " job");
-		return jobenddate;
+        return getJob(job, ".//td[7]");
 	}
 	
 	public String getTableJobAccountingID(String job) {
-		String jobaccid = "";
-		WebElement row = getTableRowWithJob(job);
-		if (row != null) {
-			jobaccid = row.findElement(By.xpath(".//td[8]")).getText();
-		} else
-            Assert.fail("Can't find " + job + " job");
-		return jobaccid;
+        return getJob(job, ".//td[8]");
 	}
 	
 	public String getTableJobAccountingID2(String job) {
-		String jobaccid2 = "";
-		WebElement row = getTableRowWithJob(job);
-		if (row != null) {
-			jobaccid2 = row.findElement(By.xpath(".//td[9]")).getText();
-		} else
-            Assert.fail("Can't find " + job + " job");
-		return jobaccid2;
+        return getJob(job, ".//td[9]");
 	}
 	
 	public void clickFindButton() { 
@@ -298,7 +275,7 @@ public class JobsWebPage extends WebPageWithPagination {
             Assert.fail("Can't find " + job + " job");
 	}
 	
-	public void deleteJobAndCancelDeleting(String job) throws InterruptedException {
+	public void deleteJobAndCancelDeleting(String job) {
 		WebElement row = getTableRowWithJob(job);
 		if (row != null) {
 			cancelDeletingTableRow(row);

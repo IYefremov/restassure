@@ -407,7 +407,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyCompletionOfRepairOrderPhaseAfterInspectionApproval(String rowID, String description, JSONObject testData) {
+    public void verifyCompletionOfRepairOrderQCPhaseAfterInspectionApproval(String rowID, String description, JSONObject testData) {
 
         BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -435,8 +435,8 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 
         phasesTab.clickEditRepairLocationPhase(data.getPhase());
 
-//        Assert.assertTrue(phasesTab.isCheckoutOptionEnabled(), //todo uncomment after bug fix (#70208)
-//                "The checkout option is not enabled after clicking the Cancel button");
+        Assert.assertTrue(phasesTab.isCheckoutOptionDisabled(),
+                "The checkout option is not disabled after clicking the Cancel button");
         Assert.assertTrue(phasesTab.isStartServiceRequiredEnabled(),
                 "The start service required option is not enabled after clicking the Cancel button");
 
@@ -445,7 +445,57 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
                 .clickEditRepairLocationPhase(data.getPhase());
 
         Assert.assertTrue(phasesTab.isCheckoutOptionDisabled(),
-                "The checkout option is not disabled after clicking the Cancel button");
+                "The checkout option is not disabled after clicking the Ok button");
+        Assert.assertTrue(phasesTab.isStartServiceRequiredDisabled(),
+                "The start service required option is not disabled after clicking the Ok button");
+
+        phasesTab.clickNewRepairLocationPhaseCancelButton();
+        repairLocationsPage.closeNewTab(mainWindowHandle);
+        repairLocationsPage.deleteRepairLocation(randomLocationName);
+	}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyAutoCompletionOfRepairOrderNewlyCreatedPhaseAfterInspectionApproval(String rowID, String description, JSONObject testData) {
+
+        BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        String randomLocationName = data.getRandomLocationName();
+
+        RepairLocationsWebPage repairLocationsPage = backOfficeHeader
+                .clickMonitorLink()
+                .clickRepairLocationsLink()
+                .clickAddRepairLocationButton()
+                .setNewRepairLocationName(randomLocationName)
+                .clickOKButton();
+        String mainWindowHandle = webdriver.getWindowHandle();
+
+        repairLocationsPage
+                .makeSearchPanelVisible()
+                .setSearchLocation(randomLocationName)
+                .clickFindButton();
+        Assert.assertTrue(repairLocationsPage.repairLocationExists(randomLocationName));
+        RepairLocationPhasesTabWebPage phasesTab = repairLocationsPage
+                .clickRepairLocationPhasesLink(randomLocationName)
+                .clickAddPhasesButton()
+                .setNewRepairLocationPhaseName(data.getPhase())
+                .clickNewRepairLocationPhaseOKButton()
+                .clickEditRepairLocationPhase(data.getPhase())
+                .selectAutoComplete()
+                .clickNewRepairLocationPhaseCancelButton()
+                .clickEditRepairLocationPhase(data.getPhase());
+
+        Assert.assertTrue(phasesTab.isCheckoutOptionEnabled(),
+                "The checkout option is not enabled after clicking the Cancel button");
+        Assert.assertTrue(phasesTab.isStartServiceRequiredEnabled(),
+                "The start service required option is not enabled after clicking the Cancel button");
+
+        phasesTab.selectAutoComplete()
+                .clickNewRepairLocationPhaseOKButton()
+                .clickEditRepairLocationPhase(data.getPhase());
+
+        Assert.assertTrue(phasesTab.isCheckoutOptionDisabled(),
+                "The checkout option is not disabled after clicking the Ok button");
         Assert.assertTrue(phasesTab.isStartServiceRequiredDisabled(),
                 "The start service required option is not disabled after clicking the Ok button");
 

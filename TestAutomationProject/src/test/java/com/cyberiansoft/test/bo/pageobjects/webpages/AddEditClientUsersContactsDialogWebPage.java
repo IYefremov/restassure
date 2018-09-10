@@ -1,24 +1,18 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage{
 	
@@ -45,6 +39,9 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage{
 	
 	@FindBy(xpath = "//input[contains(@id, 'Card_tbCity')]")
 	private TextField contactcityfld;
+
+	@FindBy(xpath = "//span[contains(@id, 'Card_countryState_labelCountry')]")
+	private WebElement country;
 	
 	@FindBy(xpath = "//input[@id='ctl00_Content_ctl01_ctl01_Card_countryState_ddlCountry_Input']")
 	private ComboBox contactcountrycmb;
@@ -75,9 +72,13 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage{
 
 	public AddEditClientUsersContactsDialogWebPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(buttoncnsl));
-	}
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+        try {
+            wait.until(ExpectedConditions.visibilityOf(buttoncnsl));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
 
 	public void setContactFirstName(String contactfirstname) {
@@ -145,7 +146,35 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage{
 	}
 	
 	public void selectCountry(String country) {
-		selectComboboxValue(contactcountrycmb, contactcountrydd, country);
+        if (!getBrowserType().contains("Edge")) {
+            selectComboboxValue(contactcountrycmb, contactcountrydd, country);
+        } else {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(contactcountrycmb.getWrappedElement())).click();
+            } catch (WebDriverException e) {
+                ((JavascriptExecutor)driver).executeScript("arguments[0].click();", contactcountrycmb.getWrappedElement());
+            }
+            try {
+                wait.until(ExpectedConditions.visibilityOf(contactcountrydd.getWrappedElement()));
+            } catch (Exception e) {
+                Assert.fail("The droplist has not been displayed!", e);
+            }
+            try {
+                List<WebElement> items = contactcountrydd.getWrappedElement().findElements(By.tagName("li"));
+                wait.until(ExpectedConditions.visibilityOfAllElements(items));
+                items.stream().filter(w -> w.getText().equals(country)).findFirst().ifPresent(WebElement::click);
+            } catch (Exception e) {
+                System.err.println("The value has not been found! " + e);
+            }
+            try {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
+                        contactcountrycmb.getWrappedElement(), "display", "none");
+                wait.until(ExpectedConditions.attributeContains(contactcountrydd.getWrappedElement(), "display", "none"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
 	}
 	
 	public String getCountry() {

@@ -128,63 +128,40 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	}
 	
 	public String getTableServiceAdvisorFullName(String firstname, String lastname) {
-		String serviceadvisorfullname = "";
-		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
-		if (row != null) {
-			serviceadvisorfullname = row.findElement(By.xpath(".//td[4]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
-		return serviceadvisorfullname;
+        return getTableServiceAdvisor(firstname, lastname, ".//td[4]");
 	}
 	
 	public String getTableServiceAdvisorEmail(String firstname, String lastname) {
-		String serviceadvisoremail = "";
-		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
-		if (row != null) {
-			serviceadvisoremail = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
-		return serviceadvisoremail;
+        return getTableServiceAdvisor(firstname, lastname, ".//td[5]");
 	}
-	
-	public String getTableServiceAdvisorAddress(String firstname, String lastname) {
-		String serviceadvisoraddress = "";
-		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
-		if (row != null) {
-			serviceadvisoraddress = row.findElement(By.xpath(".//td[6]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
-		return serviceadvisoraddress;
+
+    private String getTableServiceAdvisor(String firstname, String lastname, String s) {
+        String serviceadvisoremail = "";
+        WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
+        if (row != null) {
+            serviceadvisoremail = row.findElement(By.xpath(s))
+                    .getText()
+                    .replaceAll("\\u00A0", "")
+                    .trim();
+        } else
+            Assert.fail("Can't find " + firstname + " " + lastname + " service advisor");
+        return serviceadvisoremail;
+    }
+
+    public String getTableServiceAdvisorAddress(String firstname, String lastname) {
+        return getTableServiceAdvisor(firstname, lastname, ".//td[6]");
 	}
 	
 	public String getTableServiceAdvisorPhone(String firstname, String lastname) {
-		String serviceadvisorphone = "";
-		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
-		if (row != null) {
-			serviceadvisorphone = row.findElement(By.xpath(".//td[7]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
-		return serviceadvisorphone;
+        return getTableServiceAdvisor(firstname, lastname, ".//td[7]");
 	}
 	
 	public String getTableServiceAdvisorRoles(String firstname, String lastname) {
-		String serviceadvisorroles = "";
-		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
-		if (row != null) {
-			serviceadvisorroles = row.findElement(By.xpath(".//td[8]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
-		return serviceadvisorroles;
+        return getTableServiceAdvisor(firstname, lastname, ".//td[8]");
 	}
 	
 	public String getTableServiceAdvisorAccountingID(String firstname, String lastname) {
-		String teamtimesheettype = "";
-		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
-		if (row != null) {
-			teamtimesheettype = row.findElement(By.xpath(".//td[9]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
-		return teamtimesheettype;
+        return getTableServiceAdvisor(firstname, lastname, ".//td[9]");
 	}
 	
 	public void clickServiceAdvisorAddButton() {

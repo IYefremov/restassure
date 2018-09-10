@@ -91,23 +91,25 @@ public class PrintServersWebPage extends BaseWebPage {
 		String serverdesc = "";
 		WebElement row = getTableRowWithPrintServer(servername);
 		if (row != null) {
-			serverdesc = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servername + " print server");
+			serverdesc = row.findElement(By.xpath(".//td[5]"))
+                    .getText()
+                    .replaceAll("\\u00A0", "")
+                    .trim();
+		} else
+            Assert.fail("Can't find " + servername + " print server");
 		return serverdesc;
 	}
 	
 	public boolean printServerExists(String servername) {
-		boolean exists =  printserverstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servername + "']")).size() > 0;
-		return exists;
+        return printserverstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servername + "']")).size() > 0;
 	}
 	
 	public void clickEditPrintServer(String servername) {
 		WebElement row = getTableRowWithPrintServer(servername);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + servername + " print server");
+		} else
+            Assert.fail("Can't find " + servername + " print server");
 	}
 	
 	public void deletePrintServer(String servername) {
@@ -115,7 +117,7 @@ public class PrintServersWebPage extends BaseWebPage {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + servername + " print server");	
+            Assert.fail("Can't find " + servername + " print server");
 		}
 	}
 	
@@ -124,7 +126,7 @@ public class PrintServersWebPage extends BaseWebPage {
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + servername + " print server");	
+            Assert.fail("Can't find " + servername + " print server");
 		}
 	}
 

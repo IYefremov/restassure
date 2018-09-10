@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.bo.BOCompanyCRUDData;
@@ -10,7 +9,6 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 //@Listeners(VideoListener.class)
@@ -47,9 +45,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		insurancecompaniespage.setNewInsuranceCompanyAccountingID2(data.getInsuranceCompanyAccountingId2());
 		insurancecompaniespage.clickAddInsuranceCompanyCancelButton();
 
-		Assert.assertEquals("", insurancecompaniespage.getTableInsuranceCompanyAddress(data.getInsuranceCompany()).trim());
-		Assert.assertEquals("", insurancecompaniespage.getTableInsuranceCompanyEmail(data.getInsuranceCompany()).trim());
-		Assert.assertEquals("", insurancecompaniespage.getTableInsuranceCompanyPhone(data.getInsuranceCompany()).trim());
+		Assert.assertEquals("", insurancecompaniespage.getTableInsuranceCompanyAddress(data.getInsuranceCompany()));
+		Assert.assertEquals("", insurancecompaniespage.getTableInsuranceCompanyEmail(data.getInsuranceCompany()));
+		Assert.assertEquals("", insurancecompaniespage.getTableInsuranceCompanyPhone(data.getInsuranceCompany()));
 
 		insurancecompaniespage.clickEditInsuranceCompany(data.getInsuranceCompany());
 		Assert.assertEquals(data.getInsuranceCompany(), insurancecompaniespage.getNewInsuranceCompanyName());
@@ -188,12 +186,12 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		jobsPage.setNewJobAccountingID2(data.getJobAcc2Id());
 		jobsPage.clickAddJobOKButton();
 
-		Assert.assertEquals(data.getJobDesc(), jobsPage.getTableJobDescription(data.getJobEdited()).trim());
-		Assert.assertEquals(data.getCustomer(), jobsPage.getTableJobClient(data.getJobEdited()).trim());
-		Assert.assertEquals(BackOfficeUtils.getShortCurrentDateFormatted(), jobsPage.getTableJobStartDate(data.getJobEdited()).trim());
-		Assert.assertEquals(BackOfficeUtils.getShortTomorrowDateFormatted(), jobsPage.getTableJobEndDate(data.getJobEdited()).trim());
-		Assert.assertEquals(data.getJobAccId(), jobsPage.getTableJobAccountingID(data.getJobEdited()).trim());
-		Assert.assertEquals(data.getJobAcc2Id(), jobsPage.getTableJobAccountingID2(data.getJobEdited()).trim());
+		Assert.assertEquals(data.getJobDesc(), jobsPage.getTableJobDescription(data.getJobEdited()));
+		Assert.assertEquals(data.getCustomer(), jobsPage.getTableJobClient(data.getJobEdited()));
+		Assert.assertEquals(BackOfficeUtils.getShortCurrentDateFormatted(), jobsPage.getTableJobStartDate(data.getJobEdited()));
+		Assert.assertEquals(BackOfficeUtils.getShortTomorrowDateFormatted(), jobsPage.getTableJobEndDate(data.getJobEdited()));
+		Assert.assertEquals(data.getJobAccId(), jobsPage.getTableJobAccountingID(data.getJobEdited()));
+		Assert.assertEquals(data.getJobAcc2Id(), jobsPage.getTableJobAccountingID2(data.getJobEdited()));
 
 		jobsPage.deleteJobAndCancelDeleting(data.getJobEdited());
 		jobsPage.deleteJob(data.getJobEdited());
@@ -282,11 +280,11 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		servicecontracttypespage.setNewServiceContractTypeSalesPrice(data.getContractTypeSalesPrice());
 		servicecontracttypespage.clickNewServiceContractTypeCancelButton();
 
-		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypeDescription(data.getContractType()).trim());
-		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypePrice(data.getContractType()).trim());
-		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypeSalesPrice(data.getContractType()).trim());
-		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypeAccID(data.getContractType()).trim());
-		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypeAccID2(data.getContractType()).trim());
+		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypeDescription(data.getContractType()));
+		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypePrice(data.getContractType()));
+		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypeSalesPrice(data.getContractType()));
+		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypeAccID(data.getContractType()));
+		Assert.assertEquals("", servicecontracttypespage.getTableServiceContractTypeAccID2(data.getContractType()));
 
 		servicecontracttypespage.clickEditServiceContractType(data.getContractType());
 		servicecontracttypespage.setNewServiceContractTypeName(data.getContractTypeEdited());
@@ -367,14 +365,14 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		newinvoicetypedialog.setInvoiceTypeName(data.getInvoiceTypeEdited());
 		newinvoicetypedialog.setInvoiceTypeDescription(data.getInvoiceTypeDesc());
 		newinvoicetypedialog.clickCancelAddInvoiceTypeButton();
-		Assert.assertEquals("", invoicestypespage.getTableInvoiceTypeDescription(data.getInvoiceType()).trim());
+		Assert.assertEquals("", invoicestypespage.getTableInvoiceTypeDescription(data.getInvoiceType()));
 
 		newinvoicetypedialog = invoicestypespage.clickEditInvoiceType(data.getInvoiceType());
 		newinvoicetypedialog.setInvoiceTypeName(data.getInvoiceTypeEdited());
 		newinvoicetypedialog.setInvoiceTypeDescription(data.getInvoiceTypeDesc());
 		newinvoicetypedialog.clickOKAddInvoiceTypeButton();
 		Assert.assertEquals(data.getInvoiceTypeDesc(),
-                invoicestypespage.getTableInvoiceTypeDescription(data.getInvoiceTypeEdited()).trim());
+                invoicestypespage.getTableInvoiceTypeDescription(data.getInvoiceTypeEdited()));
 
 		invoicestypespage.deleteInvoiceTypeAndCancelDeleting(data.getInvoiceTypeEdited());
 		invoicestypespage.deleteInvoiceType(data.getInvoiceTypeEdited());
@@ -389,7 +387,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
         CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 		ServiceRequestTypesWebPage servicerequesttypespage= companypage.clickServiceRequestTypesLink();
-		servicerequesttypespage.verifyServiceRequestsTypesDonNotExist(data.getServiceType(), data.getServiceTypeEdited());
+		servicerequesttypespage.verifyServiceRequestsTypesDoNotExist(data.getServiceType(), data.getServiceTypeEdited());
 		servicerequesttypespage.clickAddServiceRequestTypeButton();
 		servicerequesttypespage.createNewServiceRequestType(data.getServiceType());
 
@@ -398,7 +396,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		servicerequesttypespage.setNewServiceRequestTypeDescription(data.getServiceTypeDesc());
 		servicerequesttypespage.selectNewServiceRequestTypeTeam(data.getServiceTypeTeam());
 		servicerequesttypespage.clickNewServiceRequestTypeCancelButton();
-		Assert.assertEquals("", servicerequesttypespage.getTableServiceRequestTypeDescription(data.getServiceType()).trim());
+		Assert.assertEquals("", servicerequesttypespage.getTableServiceRequestTypeDescription(data.getServiceType()));
 
 
 		servicerequesttypespage.clickEditServiceRequestType(data.getServiceType());
@@ -462,7 +460,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		printserverspage.setPrintServerName(data.getPrintServerNameEdited());
 		printserverspage.setPrintServerDescription(data.getPrintServerDesc());
 		printserverspage.clickNewPrintServerCancelButton();
-		Assert.assertEquals("", printserverspage.getTablePrintServerDescription(data.getPrintServerName()).trim());
+		Assert.assertEquals("", printserverspage.getTablePrintServerDescription(data.getPrintServerName()));
 
 		printserverspage.clickEditPrintServer(data.getPrintServerName());
 		printserverspage.addNewPrintServer(data.getPrintServerNameEdited(), data.getPrintServerDesc());

@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.dataclasses.bo.BOCompanyEditData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -10,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -248,7 +246,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		newemployeedialog.selectNewEmployeeHomeTeam(data.getEmployeeHomeTeamEdited());
 		newemployeedialog.setNewEmployeeAddress(data.getEmployeeAddressEdited());
 		newemployeedialog.setNewEmployeeCity(data.getEmployeeCityEdited());
-		newemployeedialog.selectNewEmployeeCountry(data.getEmployeeCountryEdited());
+		newemployeedialog.selectNewEmployeeCountry(data.getEmployeeCountryEdited()); //todo fails for Edge because of StaleReference exc.
 		newemployeedialog.setNewEmployeeZip(data.getEmployeeZipEdited());
 		newemployeedialog.setNewEmployeePhone(data.getEmployeePhoneEdited());
 		newemployeedialog.setNewEmployeeMail(data.getEmployeeEmailEdited());
@@ -266,7 +264,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		Assert.assertEquals(newemployeedialog.getNewEmployeeHomeTeam(), data.getEmployeeHomeTeamEdited());
 		Assert.assertEquals(newemployeedialog.getNewEmployeeAddress(), data.getEmployeeAddressEdited());
 		Assert.assertEquals(newemployeedialog.getNewEmployeeCity(), data.getEmployeeCityEdited());
-		Assert.assertEquals(newemployeedialog.getNewEmployeeCountry().trim(), data.getEmployeeCountryEdited());
+		Assert.assertEquals(newemployeedialog.getNewEmployeeCountry(), data.getEmployeeCountryEdited());
 		Assert.assertEquals(newemployeedialog.getNewEmployeeZip(), data.getEmployeeZipEdited());
 		Assert.assertEquals(newemployeedialog.getNewEmployeePhone(), data.getEmployeePhoneEdited());
 		Assert.assertEquals(newemployeedialog.getNewEmployeeMail(), data.getEmployeeEmailEdited());
@@ -1061,7 +1059,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyExchangeConfigurationSharingEstimateAddRuleEmployees(String rowID, String description, JSONObject testData) throws InterruptedException{
+    public void testCompanyExchangeConfigurationSharingEstimateAddRuleEmployees(String rowID, String description, JSONObject testData) {
 
         BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

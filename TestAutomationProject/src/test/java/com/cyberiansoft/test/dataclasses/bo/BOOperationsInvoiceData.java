@@ -35,6 +35,12 @@ public class BOOperationsInvoiceData {
     @JsonProperty("message")
     private String message;
 
+    @JsonProperty("dateFrom")
+    private String dateFrom;
+
+    @JsonProperty("dateTo")
+    private String dateTo;
+
     public String getCustomer() {
         return customer;
     }
@@ -77,5 +83,13 @@ public class BOOperationsInvoiceData {
 
     public String getEmail() {
         return "test" + RandomStringUtils.randomAlphanumeric(3) + "@domain.com";
+    }
+
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
     }
 }

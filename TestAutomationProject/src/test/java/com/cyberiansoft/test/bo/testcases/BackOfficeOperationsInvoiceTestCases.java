@@ -723,15 +723,13 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
         BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-
-		operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		invoicespage.clickFindButton();
-		String newTab = invoicespage.selectTechInfoOption();
-		Assert.assertTrue(invoicespage.isWindowOpened());
-		invoicespage.closeTab(newTab);
+        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.clickFindButton();
+		String newTab = invoicesPage.selectTechInfoOption();
+		Assert.assertTrue(invoicesPage.isWindowOpened());
+		invoicesPage.closeTab(newTab);
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -918,7 +916,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkInvoiceTableInfo());
 		Assert.assertTrue(invoicespage.checkInvoiceTablePagination());
 		Assert.assertTrue(invoicespage.checkInvoicesSearchFields());
-		Assert.assertTrue(invoicespage.checkInvoicesSearchResults());
+		Assert.assertTrue(invoicespage.isInvoiceFound(
+		        data.getInvoiceNumber(), data.getCustomer(), data.getDateFrom(), data.getDateTo()));
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

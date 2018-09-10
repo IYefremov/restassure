@@ -136,11 +136,19 @@
     }
   ],
 
-  "verifyCompletionOfRepairOrderPhaseAfterInspectionApproval": [
+  "verifyCompletionOfRepairOrderQCPhaseAfterInspectionApproval": [
     {
-      "rowID": "verifyCompletionOfRepairOrderPhaseAfterInspectionApproval.01",
-      "description": "Test Case 77752:Monitor - Repair Locations: Configure Auto-completion of Repair Order Phase After Inspection Approval",
+      "rowID": "verifyCompletionOfRepairOrderQCPhaseAfterInspectionApproval.01",
+      "description": "Test Case 77752:Monitor - Repair Locations: Configure Auto-completion of QC Repair Order Phase After Inspection Approval",
       "phase": "QC"
+    }
+  ],
+
+  "verifyAutoCompletionOfRepairOrderNewlyCreatedPhaseAfterInspectionApproval": [
+    {
+      "rowID": "verifyAutoCompletionOfRepairOrderNewlyCreatedPhaseAfterInspectionApproval.01",
+      "description": "Test Case 78652:Monitor - Repair Locations: Configure Auto-Completion For the Newly Created Repair Order Phase After Inspection Approval",
+      "phase": "AutoTest"
     }
   ]
 }

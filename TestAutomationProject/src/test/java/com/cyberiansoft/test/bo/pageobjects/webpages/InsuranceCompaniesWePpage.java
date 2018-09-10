@@ -80,37 +80,32 @@ public class InsuranceCompaniesWePpage extends BaseWebPage {
 		Assert.assertTrue(insurancecompaniestable.tableColumnExists("Order"));
 	}
 	
-	public String getTableInsuranceCompanyAddress(String insurancecompany) {
-		String insurancecompanyaddress = "";
-		WebElement row = getTableRowWithInsuranceCompany(insurancecompany);
-		if (row != null) {
-			insurancecompanyaddress = row.findElement(By.xpath(".//td[4]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + insurancecompany + " insurance company");
-		return insurancecompanyaddress;
+	public String getTableInsuranceCompanyAddress(String insuranceCompany) {
+        return getInsurance(insuranceCompany, ".//td[4]");
 	}
 	
-	public String getTableInsuranceCompanyEmail(String insurancecompany) {
-		String insurancecompanyemail = "";
-		WebElement row = getTableRowWithInsuranceCompany(insurancecompany);
-		if (row != null) {
-			insurancecompanyemail = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + insurancecompany + " insurance company");
-		return insurancecompanyemail;
+	public String getTableInsuranceCompanyEmail(String insuranceCompany) {
+        return getInsurance(insuranceCompany, ".//td[5]");
 	}
 	
-	public String getTableInsuranceCompanyPhone(String insurancecompany) {
-		String insurancecompanyphone = "";
-		WebElement row = getTableRowWithInsuranceCompany(insurancecompany);
-		if (row != null) {
-			insurancecompanyphone = row.findElement(By.xpath(".//td[6]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + insurancecompany + " insurance company");
-		return insurancecompanyphone;
+	public String getTableInsuranceCompanyPhone(String insuranceCompany) {
+        return getInsurance(insuranceCompany, ".//td[6]");
 	}
-		
-	private WebElement getTableRowWithInsuranceCompany(String insurancecompany) {
+
+    private String getInsurance(String insuranceCompany, String cellLocator) {
+        String insurancecompanyphone = "";
+        WebElement row = getTableRowWithInsuranceCompany(insuranceCompany);
+        if (row != null) {
+            insurancecompanyphone = row.findElement(By.xpath(cellLocator))
+                    .getText()
+                    .replaceAll("\\u00A0", "")
+                    .trim();
+        } else
+            Assert.fail("Can't find " + insuranceCompany + " insurance company");
+        return insurancecompanyphone;
+    }
+
+    private WebElement getTableRowWithInsuranceCompany(String insurancecompany) {
         List<WebElement> rows = getInsuranceCompaniesTableRows();
         for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[3]")).getText().contains(insurancecompany)) {

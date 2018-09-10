@@ -95,8 +95,10 @@
       "pendingSendEmailMess": "Pending (sending email)",
       "notVerifiedMess": "Not verified (email was sent)",
       "verifiedMess": "Verified",
-      "colorRed": "red",
-      "colorGreen": "green"
+      "colorRed": "color:red",
+      "colorGreen": "color:green",
+      "red": "red",
+      "green": "green"
     }
   ],
 

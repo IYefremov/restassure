@@ -125,23 +125,24 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	}
 	
 	public String getTableServicePackageType(String servicepackagename) {
-		String servicepkgtype = "";
-		WebElement row = getTableRowWithServicePackage(servicepackagename);
-		if (row != null) {
-			servicepkgtype = row.findElement(By.xpath(".//td[6]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
-		return servicepkgtype;
+        return getTableServicePackage(servicepackagename, ".//td[6]");
 	}
-	
-	public String getTableServicePackageFormType(String servicepackagename) {
-		String servicepkgfromtype = "";
-		WebElement row = getTableRowWithServicePackage(servicepackagename);
-		if (row != null) {
-			servicepkgfromtype = row.findElement(By.xpath(".//td[7]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
-		return servicepkgfromtype;
+
+    public String getTableServicePackage(String servicepackagename, String s) {
+        String servicepkgtype = "";
+        WebElement row = getTableRowWithServicePackage(servicepackagename);
+        if (row != null) {
+            servicepkgtype = row.findElement(By.xpath(s))
+                    .getText()
+                    .replaceAll("\\u00A0", "")
+                    .trim();
+        } else
+            Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
+        return servicepkgtype;
+    }
+
+    public String getTableServicePackageFormType(String servicepackagename) {
+        return getTableServicePackage(servicepackagename, ".//td[7]");
 	}
 	
 	public Set<String> clickServicesLinkForServicePackage(String servicepackagename) {

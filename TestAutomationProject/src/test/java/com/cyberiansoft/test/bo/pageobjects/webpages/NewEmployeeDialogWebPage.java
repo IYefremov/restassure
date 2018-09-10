@@ -104,8 +104,7 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	public NewEmployeeDialogWebPage selectNewEmployeeTeam(String employeeteam) {
 		selectComboboxValue(employeeteamcmb, employeeteamdd, employeeteam);
 		Assert.assertEquals(employeeteamcmb.getSelectedValue(), employeeteam);
-        return PageFactory.initElements(
-                driver, NewEmployeeDialogWebPage.class);
+        return this;
 	}
 	
 	public String getNewEmployeeTeam() {
@@ -138,7 +137,6 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	
 	public void selectNewEmployeeHomeTeam(String employeeteam) {
 		selectComboboxValue(employeehometeamcmb, employeehometeamdd, employeeteam);
-
 	}
 	
 	public String getNewEmployeeHomeTeam() {
@@ -164,10 +162,13 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	public void selectNewEmployeeCountry(String employeecountry) {
 		selectComboboxValue(employeecountrycmb, employeecountrydd, employeecountry);
 		waitForLoading();
-	}
+        Assert.assertEquals(employeecountrycmb.getSelectedValue(), employeecountry);
+    }
 	
 	public String getNewEmployeeCountry() {
-		return employeecountrycmb.getSelectedValue();
+		return employeecountrycmb.getSelectedValue()
+                .replaceAll("\\u00A0", "")
+                .trim();
 	}
 	
 	public void selectNewEmployeeState(String employeestate) {

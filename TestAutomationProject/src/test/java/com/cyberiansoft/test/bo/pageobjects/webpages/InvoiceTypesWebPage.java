@@ -70,15 +70,17 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		String invoicetypedesc = "";
 		WebElement row = getTableRowWithInvoiceType(invoicetype);
 		if (row != null) {
-			invoicetypedesc = row.findElement(By.xpath(".//td[6]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + invoicetype + " invoice type");
+			invoicetypedesc = row.findElement(By.xpath(".//td[6]"))
+                    .getText()
+                    .replaceAll("\\u00A0", "")
+                    .trim();
+		} else
+            Assert.fail("Can't find " + invoicetype + " invoice type");
 		return invoicetypedesc;
 	}
 	
 	public boolean invoiceTypeExists(String invoicetype) {
-		boolean exists =  invoicestypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + invoicetype + "']")).size() > 0;
-		return exists;
+        return invoicestypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + invoicetype + "']")).size() > 0;
 	}
 	
 	public NewInvoiceTypeDialogWebPage clickEditInvoiceType(String invoicetype) {

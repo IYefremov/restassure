@@ -86,8 +86,9 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public void clickAddPhasesButton() {
+	public RepairLocationPhasesTabWebPage clickAddPhasesButton() {
 		clickAndWait(addphasebtn);
+		return this;
 	}
 	
 	public List<WebElement>  getRepairLocationPhasesTableRows() {
@@ -128,9 +129,9 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 		return this;
 	}
 	
-	//New Phase
-	public void setNewRepairLocationPhaseName(String repairlocationphase) {
+	public RepairLocationPhasesTabWebPage setNewRepairLocationPhaseName(String repairlocationphase) {
 		clearAndType(newphasenamefld, repairlocationphase);
+		return this;
 	}
 	
 	public String getNewRepairLocationPhaseName() {

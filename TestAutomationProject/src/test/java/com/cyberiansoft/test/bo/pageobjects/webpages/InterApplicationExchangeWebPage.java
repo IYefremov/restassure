@@ -214,9 +214,9 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 
 	public void clickProfileEditBox(String button) {
 		if (button.equals("Cancel"))
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnCancel')]"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
 		else if (button.equals("Update"))
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnUpdate')]"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(updateButton)).click();
 		waitForLoading();
 	}
 
@@ -290,9 +290,11 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 		waitForLoading();
 	}
 
-	public void clickAddRuleToFirstProfile() throws InterruptedException {
-		Thread.sleep(2000);
-		entriesTable.findElement(By.xpath(".//table[@class='rgDetailTable detail-table']")).findElement(By.xpath(".//input[contains(@id, 'AddNewRecordButton')]")).click();
+	public void clickAddRuleToFirstProfile() {
+		waitABit(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(entriesTable))
+                .findElement(By.xpath(".//table[@class='rgDetailTable detail-table']")).findElement(By
+                .xpath(".//input[contains(@id, 'AddNewRecordButton')]")).click();
 		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'AddNewRecordButton')]"))).click();
 		waitForLoading();
 	}
@@ -335,9 +337,16 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
         Select unselectedUsersSelection = new Select(addRuleUnselectedUsersList);
         Select selectedUsersSelection = new Select(addRuleSelectedUsersList);
         while (unselectedUsersSelection.getOptions().size() > 0 && usersToAdd != 0) {
+            System.out.println("In while");
             int selectedSize = selectedUsersSelection.getOptions().size();
             unselectedUsersSelection.selectByIndex(RandomUtils.nextInt(0, unselectedUsersSelection.getOptions().size()));
-            wait.until(driver -> selectedUsersSelection.getOptions().size() != selectedSize);
+            if (!getBrowserType().equalsIgnoreCase("Edge")) {
+                try {
+                    wait.until(driver -> selectedUsersSelection.getOptions().size() != selectedSize);
+                } catch (Exception ignored) {}
+            } else {
+                waitABit(2000);
+            }
             Assert.assertEquals(selectedSize + 1, selectedUsersSelection.getOptions().size(),
                     "The user has not been selected");
             usersToAdd--;
@@ -349,21 +358,21 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
         return new Select(addRuleUnselectedUsersList).getOptions().size();
     }
 
-	public void clickAddRuleBox(String button) throws InterruptedException {
+	public void clickAddRuleBox(String button) {
 		if (button.equals("Cancel"))
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnCancel')]"))).click();
+			wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
 		else if (button.equals("Insert"))
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@id, 'EditFormControl_btnUpdate')]"))).click();
-		Thread.sleep(5000);
+			wait.until(ExpectedConditions.elementToBeClickable(insertButton)).click();
+		waitABit(5000);
 		waitForLoading();
 	}
 
-	public boolean checkRuleByName(String name) throws InterruptedException {
+	public boolean checkRuleByName(String name) {
 		waitABit(4000);
 		try {
 			wait.until(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(), '" + name + "')]")));
-			Thread.sleep(2000);
+			waitABit(2000);
 			return true;
 		} catch (TimeoutException e) {
 			return false;

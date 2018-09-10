@@ -246,8 +246,12 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public InvoicesWebPage clickFindButton() {
-        waitABit(1000);
-	    wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
+        } catch (Exception ignored) {
+            waitABit(2000);
+            wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
+        }
         waitForLoading();
         return this;
 	}
@@ -682,7 +686,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 
     private String selectOptionForFirstInvoice(WebElement button) {
         String mainWindow = driver.getWindowHandle();
-        scrollWindowDown(300);
+//        scrollWindowDown(300);
         Actions actions = new Actions(driver);
         actions.moveToElement(selectButton).click().build().perform();
 
@@ -789,12 +793,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public boolean isWindowOpened() {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return driver.getWindowHandles().size() > 1;
+		waitABit(3000);
+		return wait.until(e -> driver.getWindowHandles().size() > 1);
 	}
 
 	public void closeTab(String newTab) {
@@ -1115,7 +1115,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		return true;
 	}
 
-	public boolean checkInvoicesSearchResults() {
+	public boolean isInvoiceFound(String invoice, String customer, String dateFrom, String dateTo) {
 		try {
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_comboTeam_Input")))
@@ -1132,20 +1132,20 @@ public class InvoicesWebPage extends WebPageWithFilter {
 					.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlTimeframe_Input"))).click();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
 					.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom"))
-					.findFirst().get().click();
+					.findFirst().ifPresent(WebElement::click);
 
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")))
 					.clear();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateFrom_dateInput")))
-					.sendKeys("3/6/2017");
+					.sendKeys(dateFrom);
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")))
 					.clear();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_calDateTo_dateInput")))
-					.sendKeys("4/6/2017");
+					.sendKeys(dateTo);
 
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")))
@@ -1156,7 +1156,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 					.click();
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")))
-					.sendKeys("000 1111");
+					.sendKeys(customer);
 
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));
@@ -1165,8 +1165,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 					.click();
             waitForLoading();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'I-000-00283')]")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), '" + invoice + "')]")));
 		} catch (TimeoutException e) {
+		    e.printStackTrace();
 			return false;
 		}
 		return true;

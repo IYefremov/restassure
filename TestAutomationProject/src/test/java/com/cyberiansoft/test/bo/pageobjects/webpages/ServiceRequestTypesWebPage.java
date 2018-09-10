@@ -115,13 +115,16 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		return null;
 	}
 
-	public String getTableServiceRequestTypeDescription(String srtype) {
+	public String getTableServiceRequestTypeDescription(String srType) {
 		String srtypedesc = "";
-		WebElement row = getTableRowWithServiceRequestType(srtype);
+		WebElement row = getTableRowWithServiceRequestType(srType);
 		if (row != null) {
-			srtypedesc = row.findElement(By.xpath(".//td[6]")).getText();
+			srtypedesc = row.findElement(By.xpath(".//td[6]"))
+                    .getText()
+                    .replaceAll("\\u00A0", "")
+                    .trim();
 		} else
-			Assert.assertTrue(false, "Can't find " + srtype + " service request type");
+            Assert.fail("Can't find " + srType + " service request type");
 		return srtypedesc;
 	}
 
@@ -253,7 +256,7 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
         return Boolean.parseBoolean(allowUndoCheckBox.getAttribute("checked"));
     }
 
-    public void verifyServiceRequestsTypesDonNotExist(String srtype, String srtypeedited) {
+    public void verifyServiceRequestsTypesDoNotExist(String srtype, String srtypeedited) {
         while (isServiceRequestTypeExists(srtype)) {
             deleteServiceRequestType(srtype);
         }

@@ -13,6 +13,7 @@ import org.testng.Assert;
 import java.util.List;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
+import static com.cyberiansoft.test.inhouse.testcases.BaseTestCase.browsertype;
 
 public class ClientContactsWebPage extends BaseWebPage{
 	
@@ -130,5 +131,12 @@ public class ClientContactsWebPage extends BaseWebPage{
 		driver.switchTo().window(mainWindow);
 		driver.switchTo().defaultContent();
 	}
-	
+
+    public void verifyColorForContact(ClientContactsWebPage clientContactsWebPage, String colorForEdge, String color, String contact) {
+        if (browsertype.getBrowserTypeString().contains("Edge")) {
+            Assert.assertEquals(colorForEdge, clientContactsWebPage.getClientStatusTextColor(contact));
+        } else {
+            Assert.assertEquals(color, clientContactsWebPage.getClientStatusTextColor(contact));
+        }
+    }
 }

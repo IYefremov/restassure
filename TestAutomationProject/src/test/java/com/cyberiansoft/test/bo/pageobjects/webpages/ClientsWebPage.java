@@ -148,7 +148,7 @@ public class ClientsWebPage extends WebPageWithPagination {
         return isCheckboxChecked(singleWOtypeCheckbox);
     }
 
-	public void verifyEmployeesTableColumnsAreVisible() {
+	public ClientsWebPage verifyEmployeesTableColumnsAreVisible() {
 
 		Assert.assertTrue(clientstable.tableColumnExists("Client"));
 		Assert.assertTrue(clientstable.tableColumnExists("Address"));
@@ -159,6 +159,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		Assert.assertTrue(clientstable.tableColumnExists("PO# req."));
 		Assert.assertTrue(clientstable.tableColumnExists("Commission"));
 		Assert.assertTrue(clientstable.tableColumnExists("Action"));
+		return this;
 	}
 
 	public void clickArchivedTab() {
@@ -288,7 +289,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		}
 	}
 
-	public String mouseMoveToClientNotesGridAndGetNoteContent(String clientname) {
+	public String moveToClientNotesGridAndGetNoteContent(String clientname) {
 		String notetxt = "";
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
@@ -301,7 +302,10 @@ public class ClientsWebPage extends WebPageWithPagination {
 			List<WebElement> notes = driver.findElements(By.xpath("//div[contains(@id, 'RadToolTipNote')]"));
 			for (WebElement note : notes) {
 				if (note.isDisplayed()) {
-					notetxt = note.getText().trim();
+					notetxt = note
+                            .getText()
+                            .replaceAll("\\u00A0", "")
+                            .trim();
 					break;
 				}
 			}

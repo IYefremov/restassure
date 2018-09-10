@@ -60,53 +60,36 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 	}
 	
 	public String getTableServiceContractTypeDescription(String servicecontacttype) {
-		String servicecontracttypedesc = "";
-		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
-		if (row != null) {
-			servicecontracttypedesc = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");
-		return servicecontracttypedesc;
+        return getTableServiceContractType(servicecontacttype, ".//td[5]");
 	}
-	
-	public String getTableServiceContractTypePrice(String servicecontacttype) {
-		String servicecontracttypeprice = "";
-		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
-		if (row != null) {
-			servicecontracttypeprice = row.findElement(By.xpath(".//td[6]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");
-		return servicecontracttypeprice;
+
+    public String getTableServiceContractType(String serviceContactType, String cellLocator) {
+        String servicecontracttypedesc = "";
+        WebElement row = getTableRowWithServiceContractType(serviceContactType);
+        if (row != null) {
+            servicecontracttypedesc = row.findElement(By.xpath(cellLocator))
+                    .getText()
+                    .replaceAll("\\u00A0", "")
+                    .trim();
+        } else
+            Assert.fail("Can't find " + serviceContactType + " service contact type");
+        return servicecontracttypedesc;
+    }
+
+    public String getTableServiceContractTypePrice(String servicecontacttype) {
+        return getTableServiceContractType(servicecontacttype, ".//td[6]");
 	}
 	
 	public String getTableServiceContractTypeSalesPrice(String servicecontacttype) {
-		String servicecontracttypesalesprice = "";
-		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
-		if (row != null) {
-			servicecontracttypesalesprice = row.findElement(By.xpath(".//td[7]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");
-		return servicecontracttypesalesprice;
+        return getTableServiceContractType(servicecontacttype, ".//td[7]");
 	}
 	
 	public String getTableServiceContractTypeAccID(String servicecontacttype) {
-		String servicecontracttypeaccid = "";
-		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
-		if (row != null) {
-			servicecontracttypeaccid = row.findElement(By.xpath(".//td[8]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");
-		return servicecontracttypeaccid;
+        return getTableServiceContractType(servicecontacttype, ".//td[8]");
 	}
 	
 	public String getTableServiceContractTypeAccID2(String servicecontacttype) {
-		String servicecontracttypeaccid2 = "";
-		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
-		if (row != null) {
-			servicecontracttypeaccid2 = row.findElement(By.xpath(".//td[9]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");
-		return servicecontracttypeaccid2;
+        return getTableServiceContractType(servicecontacttype, ".//td[9]");
 	}
 	
 	public void clickAddServiceContractTypeButton() {

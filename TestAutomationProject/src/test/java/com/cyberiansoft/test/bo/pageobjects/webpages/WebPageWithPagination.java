@@ -73,11 +73,11 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 	
 	public void setPageSize(String pageSize) {
-		pagesizefld.clear();
-		waitABit(1000);
-		pagesizefld.sendKeys(pageSize + "\n");
+		wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).clear();
+        wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).sendKeys(pageSize);
+        pagesizefld.sendKeys(Keys.ENTER);
 		waitForLoading();
-	}
+    }
 	
 	public void clickGoToLastPage() {
 	    wait.until(ExpectedConditions.elementToBeClickable(gotolastpage));
@@ -96,10 +96,7 @@ public class WebPageWithPagination extends BaseWebPage {
 		}
 		wait.until(ExpectedConditions.visibilityOf(updateProcess));
 		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		//Thread.sleep(300);
-		if (driver.findElements(By.xpath("//div[contains(text(), 'Loading...')]")).size() > 0) {
-            waitForLoading();
-        }
+		waitForLoading();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 		wait.withTimeout(30, TimeUnit.SECONDS);
 	}
@@ -138,8 +135,8 @@ public class WebPageWithPagination extends BaseWebPage {
 
 	public void waitForLoading(){
 		try {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+		    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
 		} catch (TimeoutException e) {
 		    waitABit(3000);
         }

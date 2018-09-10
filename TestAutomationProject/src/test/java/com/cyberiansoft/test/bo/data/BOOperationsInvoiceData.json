@@ -208,7 +208,11 @@
   "checkOperationInvoiceSearchOperation": [
     {
       "rowID": "checkOperationInvoiceSearchOperation.01",
-      "description": "Test Case 60615:Operation - Invoice: Search operation"
+      "description": "Test Case 60615:Operation - Invoice: Search operation",
+      "invoiceNumber": "I-444-00004",
+      "customer": "0000000000test",
+      "dateFrom": "8/22/2018",
+      "dateTo": "8/23/2018"
     }
   ],
 
