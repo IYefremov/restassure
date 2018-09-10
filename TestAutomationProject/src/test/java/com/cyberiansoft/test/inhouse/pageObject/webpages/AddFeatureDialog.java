@@ -21,6 +21,9 @@ public class AddFeatureDialog extends BasePage {
     @FindBy(xpath = "//div[@class='form-dialog add-feature-dialog active']//textarea[@id='MarketingInfo']")
     private WebElement featureMarketingInfo;
 
+    @FindBy(xpath = "//div[@class='form-dialog add-feature-dialog active']//textarea[@id='Description']")
+    private WebElement featureDescription;
+
     @FindBy(xpath = "//div[@class='form-dialog add-feature-dialog active']//button[@class='btn btn-outline btn-submit']")
     private WebElement addFeatureButton;
 
@@ -50,6 +53,12 @@ public class AddFeatureDialog extends BasePage {
     @Step
     public AddFeatureDialog typeMarketingInfo(String marketingInfoValue) {
         clearAndType(featureMarketingInfo, marketingInfoValue);
+        return this;
+    }
+
+    @Step
+    public AddFeatureDialog typeDescription(String descriptionValue) {
+        clearAndType(featureDescription, descriptionValue);
         return this;
     }
 

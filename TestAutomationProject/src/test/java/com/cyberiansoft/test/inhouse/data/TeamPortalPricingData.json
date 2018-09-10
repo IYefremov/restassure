@@ -89,6 +89,72 @@
     }
   ],
 
+  "verifyUserCanDeleteFeatureFromFeatureGroup": [
+    {
+      "rowID": "verifyUserCanAddSeveralFeaturesToFeatureGroup.01",
+      "description": "Test Case 76930:Verify user can delete feature from feature group.",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureNames": [
+        "Auto feature for features group",
+        "Auto feature for features group2",
+        "Auto feature for features group3"
+      ],
+
+      "featureState": "Public View",
+
+      "featureDescriptions": [
+        "My test Notes",
+        "My test Notes2",
+        "My test Notes3"
+      ],
+
+      "featureMarketingInfoList": [
+        "Marketing_info",
+        "Marketing_info2",
+        "Marketing_info3"
+      ]
+    }
+  ],
+
+  "verifyUserCanAddSetupFeeToFeature": [
+    {
+      "rowID": "verifyUserCanAddSetupFeeToFeature.01",
+      "description": "Test Case 76931:Verify user can add setup fee to feature.",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureNames": [
+        "Auto feature for features group",
+        "Auto feature for features group2",
+        "Auto feature for features group3"
+      ],
+
+      "featureState": "Public View",
+
+      "featureDescriptions": [
+        "My test Notes",
+        "My test Notes2",
+        "My test Notes3"
+      ],
+
+      "featureMarketingInfoList": [
+        "Marketing_info",
+        "Marketing_info2",
+        "Marketing_info3"
+      ],
+      "setupFeeName": "First Setup fee",
+      "setupFeeQuantity": "10",
+      "setupFeePrice": "20",
+      "setupFeeEstimatedHours": "8",
+      "setupFeeName2": "Second setup fee",
+      "setupFeeQuantity2": "12",
+      "setupFeePrice2": "40",
+      "setupFeeEstimatedHours2": "5"
+    }
+  ],
+
   "verifyUserCanDeleteFeatureGroup": [
     {
       "rowID": "verifyUserCanDeleteFeatureGroup.01",
@@ -135,6 +201,43 @@
       "featureGroupName": "Auto feature group Internal",
       "featureGroupState": "Internal",
       "featureGroupMarketingInfo": "Test notes"
+    }
+  ],
+
+  "verifyUserCanSelectPublicStatusForFeatureGroup": [
+    {
+      "rowID": "verifyUserCanSelectPublicStatusForFeatureGroup.01",
+      "description": "Test Case 76935:Verify user can select \"Public\" status for feature group",
+      "featureGroupName": "Auto feature group Public",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes"
+    }
+  ],
+
+  "verifyUserCanSelectDraftStatusForFeature": [
+    {
+      "rowID": "verifyUserCanSelectDraftStatusForFeature.01",
+      "description": "Test Case 76936:Verify user can select \"Draft\" status for feature",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureState": "Draft",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureName": "Auto feature for features group",
+      "marketingInfo": "Marketing_info"
+    }
+  ],
+
+  "verifyUserCanSelectPrivateViewStatusForFeatureGroup": [
+    {
+      "rowID": "verifyUserCanSelectPrivateViewStatusForFeatureGroup.01",
+      "description": "Test Case 76937:Verify user select \"Private View\" status for feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureState": "Private View",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureName": "Auto feature for features group",
+      "marketingInfo": "Marketing_info",
+      "featureDescription": "My test Notes"
     }
   ]
 }

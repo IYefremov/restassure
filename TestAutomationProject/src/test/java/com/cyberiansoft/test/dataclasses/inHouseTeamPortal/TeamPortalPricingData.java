@@ -2,6 +2,7 @@ package com.cyberiansoft.test.dataclasses.inHouseTeamPortal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TeamPortalPricingData {
@@ -29,6 +30,39 @@ public class TeamPortalPricingData {
 
     @JsonProperty("featureState")
     private String featureState;
+
+    @JsonProperty("setupFeeName")
+    private String setupFeeName;
+
+    @JsonProperty("setupFeeQuantity")
+    private String setupFeeQuantity;
+
+    @JsonProperty("setupFeePrice")
+    private String setupFeePrice;
+
+    @JsonProperty("setupFeeEstimatedHours")
+    private String setupFeeEstimatedHours;
+
+    @JsonProperty("setupFeeName2")
+    private String setupFeeName2;
+
+    @JsonProperty("setupFeeQuantity2")
+    private String setupFeeQuantity2;
+
+    @JsonProperty("setupFeePrice2")
+    private String setupFeePrice2;
+
+    @JsonProperty("setupFeeEstimatedHours2")
+    private String setupFeeEstimatedHours2;
+
+    @JsonProperty("featureName")
+    private String featureName;
+
+    @JsonProperty("marketingInfo")
+    private String marketingInfo;
+
+    @JsonProperty("featureDescription")
+    private String featureDescription;
 
     @JsonProperty("featureNames")
     private List<String> featureNames;
@@ -69,6 +103,54 @@ public class TeamPortalPricingData {
 
     public String getFeatureState() {
         return featureState;
+    }
+
+    public String getSetupFeeName() {
+        return setupFeeName;
+    }
+
+    public String getSetupFeeQuantity() {
+        return setupFeeQuantity;
+    }
+
+    public String getSetupFeePrice() {
+        return setupFeePrice;
+    }
+
+    public String getSetupFeeEstimatedHours() {
+        return setupFeeEstimatedHours;
+    }
+
+    public String getSetupFeeName2() {
+        return setupFeeName2;
+    }
+
+    public String getSetupFeeQuantity2() {
+        return setupFeeQuantity2;
+    }
+
+    public String getSetupFeePrice2() {
+        return setupFeePrice2;
+    }
+
+    public String getSetupFeeEstimatedHours2() {
+        return setupFeeEstimatedHours2;
+    }
+
+    public String getMarketingInfo() {
+        return marketingInfo;
+    }
+
+    public String getFeatureDescription() {
+        return featureDescription;
+    }
+
+    public String getFeatureName() {
+        return featureName;
+    }
+
+    public List<String> getSetupFeeData2() {
+        return Arrays.asList(setupFeeName2, setupFeeQuantity2, setupFeePrice2, setupFeeEstimatedHours2);
     }
 
     public List<String> getFeatureNames() {
