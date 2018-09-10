@@ -2639,7 +2639,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickChangeCustomerPopupMenu();
 		customersscreen.swtchToRetailMode();
 		customersscreen.selectCustomer("19319");;
-		Assert.assertFalse(myworkordersscreen.woExists(wonumber2));
+		Assert.assertFalse(myworkordersscreen.woExists(wonumber2), "Can't find work order: " + wonumber2);
 		myworkordersscreen.clickHomeButton();
 		
 		customersscreen = homescreen.clickCustomersButton();

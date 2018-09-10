@@ -85,7 +85,7 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	
 	public void clickSendEmailsButton() {
 		tap(sendbtn);
-		BaseUtils.waitABit(2000);
+		BaseUtils.waitABit(3000);
 		try {
 			tap(sendbtn);
 		} catch (WebDriverException e) {

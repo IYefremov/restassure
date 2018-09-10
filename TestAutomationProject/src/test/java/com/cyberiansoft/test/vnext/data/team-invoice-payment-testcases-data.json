@@ -195,5 +195,33 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "90"
       }
     }
+  ],
+
+  "testVerifyEnteredPOOnPOROPaymentScreenIsSavedForInvoice": [
+    {
+      "rowID": "testVerifyEnteredPOOnPOROPaymentScreenIsSavedForInvoice.01",
+      "description": "Test Case 78454:Verify entered PO on PO/RO payment screen is saved for Invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "100"
+      }
+    }
+  ],
+
+  "testVerifyUserCantSeePaymentTypePOROForInvoiceIfAmountIsZero": [
+    {
+      "rowID": "testVerifyEnteredPOOnPOROPaymentScreenIsSavedForInvoice.01",
+      "description": "Test Case 78455:Verify user can't see Payment type PO/RO for Invoice if amount is zero",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 }
