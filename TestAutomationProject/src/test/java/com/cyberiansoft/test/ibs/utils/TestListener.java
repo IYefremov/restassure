@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ibs.utils;
 
+import com.cyberiansoft.test.baseutils.AllureUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;

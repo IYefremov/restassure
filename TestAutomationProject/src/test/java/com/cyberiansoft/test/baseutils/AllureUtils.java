@@ -30,7 +30,7 @@ public class AllureUtils {
     }
 
     @Attachment(value = "Unable to save screenshot")
-    static String failToSaveScreenshot(Exception e) {
+    public static String failToSaveScreenshot(Exception e) {
         return String.format("%s\n%s\n%s", "Failed to save screenshot",
                 e.getMessage(), Arrays.toString(e.getStackTrace()));
     }
@@ -42,7 +42,7 @@ public class AllureUtils {
     }
 
     @Attachment(value = "Video record", type = "video/avi")
-    static byte[] attachVideo() {
+    public static byte[] attachVideo() {
         try {
             File video = VideoRecorder.getLastRecording();
             await().atMost(5, TimeUnit.SECONDS)
