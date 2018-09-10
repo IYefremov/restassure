@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.inhouse.utils;
 
+import com.cyberiansoft.test.baseutils.AllureUtils;
 import org.codehaus.plexus.util.FileUtils;
 import org.testng.*;
 import org.testng.xml.XmlSuite;

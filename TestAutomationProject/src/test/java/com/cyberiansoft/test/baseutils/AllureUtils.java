@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.bo.utils;
+package com.cyberiansoft.test.baseutils;
 
 import com.automation.remarks.video.recorder.VideoRecorder;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -18,7 +18,7 @@ import static org.awaitility.Awaitility.await;
 public class AllureUtils {
 
     @Attachment(value = "Page screenshot", type = "image/png")
-    static byte[] attachScreenshot() {
+    public static byte[] attachScreenshot() {
         byte[] screenshotAs = null;
         try {
             WebDriver augmentedDriver = new Augmenter().augment(DriverBuilder.getInstance().getDriver());
@@ -57,7 +57,7 @@ public class AllureUtils {
     }
 
     @Attachment(value = "Log", type = "text/html")
-    static String attachLog(String text) {
+    public static String attachLog(String text) {
         return String.format("%s\n", text);
     }
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.utils;
 
+import com.cyberiansoft.test.baseutils.AllureUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.codehaus.plexus.util.FileUtils;
 import org.testng.*;
