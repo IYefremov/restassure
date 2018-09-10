@@ -100,6 +100,10 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
         return new VNextPayMenu(appiumdriver);
 	}
 
+	public boolean isPayInvoiceMenuItemExists() {
+		return invoicepaymenubtn.isDisplayed();
+	}
+
 	public VNextPayInvoicesScreen clickPayCreditCardMenuItem() {
 		VNextPayMenu payMenu = clickPayInvoiceMenuItem();
 		return payMenu.clickPayCreditCardMenuItem();

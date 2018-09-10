@@ -46,6 +46,10 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 		changeponumberfld.sendKeys(poNumber);
 		appiumdriver.hideKeyboard();
 	}
+
+	public String getInvoicePreviousPONumber() {
+		return changeponumberfld.getAttribute("value");
+	}
 	
 	public void clickSaveButton() {
 		tap(savebtn);
