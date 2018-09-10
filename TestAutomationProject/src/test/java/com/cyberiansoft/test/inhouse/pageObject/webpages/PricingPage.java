@@ -32,9 +32,62 @@ public class PricingPage extends BasePage {
     @FindBy(xpath = "//title[text()='Support Console | Pricing']")
     private WebElement pricingPage;
 
+    @FindBy(xpath = "//td[@class='col-feature recommended']//div[@class='btn-actions dropdown-toggle btn-add-edition-feature']")
+    private List<WebElement> recommendedToggleButtons;
+
+    @FindBy(xpath = "//td[@class='col-feature recommended']//div[@class='dropup open']")
+    private WebElement recommendedEditionDropupOpen;
+
+    @FindBy(xpath = "//td[@class='col-feature recommended']//div[@class='dropup open']//a[@class='btn-add-addon-edition-feature-inline']")
+    private WebElement addAddonEditionFeatureButton;
+
+    @FindBy(xpath = "//td[@class='col-feature recommended']//div[@class='dropup open']//div[@class='btn-row']")
+    private WebElement buttonsRow;
+
+    @FindBy(xpath = "//td[@class='col-feature recommended']//label")
+    private List<WebElement> recommendedFeatureLabels;
+
     public PricingPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    @Step
+    public boolean labelContainsPrice(String price) {
+        wait
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOfAllElements(recommendedFeatureLabels));
+        try {
+            return recommendedFeatureLabels.stream().anyMatch(e -> e.getText().contains(price));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Step
+    public PricingPage clickFirstRecommendedToggle() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(recommendedToggleButtons));
+        clickButton(recommendedToggleButtons.get(0));
+        return this;
+    }
+
+    @Step
+    public boolean isRecommendedEditionDropupOpened() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(recommendedEditionDropupOpen)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Step
+    public EditionFeatureDialog clickAddAddonEditionFeatureButton() {
+        clickButton(addAddonEditionFeatureButton);
+        try {
+            wait.until(ExpectedConditions.attributeContains(buttonsRow, "style", "display: none"));
+        } catch (Exception ignored) {}
+        return PageFactory.initElements(driver, EditionFeatureDialog.class);
     }
 
     @Step
@@ -180,12 +233,12 @@ public class PricingPage extends BasePage {
     public PricingPage addFeaturesToFeatureGroup(String featureGroupName, List<String> featureNames,
                                                  String featureState, List<String> marketingInfoList) {
         for (int i = 0; i < featureNames.size(); i++) {
-        clickAddForFeatureGroupDisplayed(featureGroupName)
+            AddFeatureDialog addFeatureDialog = (AddFeatureDialog) clickAddForFeatureGroupDisplayed(featureGroupName)
                     .typeFeatureName(featureNames.get(i))
                     .selectFeatureState(featureState)
-                    .typeMarketingInfo(marketingInfoList.get(i))
-                    .clickAddFeatureButton();
-        Assert.assertTrue(isFeatureDisplayed(featureGroupName, featureNames.get(i)),
+                    .typeMarketingInfo(marketingInfoList.get(i));
+            addFeatureDialog.clickAddFeatureButton();
+            Assert.assertTrue(isFeatureDisplayed(featureGroupName, featureNames.get(i)),
                     "The feature " + featureNames.get(i) + "is not displayed");
         }
         return this;
@@ -202,7 +255,7 @@ public class PricingPage extends BasePage {
         }
     }
 
-    public boolean isFeatureDeleted(String featureGroup, String feature) {
+    public boolean isFeatureNotDisplayed(String featureGroup, String feature) {
         try {
             return waitShortly.until(ExpectedConditions.invisibilityOfElementLocated(By
                         .xpath("//span[@title='" + featureGroup + "']//following::span[text()='" + feature + "']")));
@@ -226,15 +279,15 @@ public class PricingPage extends BasePage {
 
     public void verifyFeaturesAreDeleted(String featureGroup, List<String> features) {
         for (String feature: features) {
-            Assert.assertTrue(isFeatureDeleted(featureGroup, feature),
+            Assert.assertTrue(isFeatureNotDisplayed(featureGroup, feature),
                     "The feature " + feature + "has not been deleted");
         }
     }
 
-    public UpdateFeatureDialog clickFeature(String feutureGroup, String feature) {
+    public UpdateFeatureDialog clickFeature(String featureGroup, String feature) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(By
-                    .xpath("//span[text()='" + feutureGroup + "']//following::span[text()='" + feature + "']")))
+                    .xpath("//span[text()='" + featureGroup + "']//following::span[text()='" + feature + "']")))
                     .click();
         } catch (Exception e) {
             Assert.fail("The feature " + feature + " hasn't been clicked", e);

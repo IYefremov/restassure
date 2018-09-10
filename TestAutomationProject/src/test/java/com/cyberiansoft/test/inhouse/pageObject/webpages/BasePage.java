@@ -146,7 +146,6 @@ public class BasePage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(element));
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.fail("The selection element has not been found", e);
         }
         return new Select(element);

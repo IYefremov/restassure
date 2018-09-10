@@ -64,6 +64,12 @@ public class TeamPortalPricingData {
     @JsonProperty("featureDescription")
     private String featureDescription;
 
+    @JsonProperty("pricePerMonth")
+    private String pricePerMonth;
+
+    @JsonProperty("pricePerYear")
+    private String pricePerYear;
+
     @JsonProperty("featureNames")
     private List<String> featureNames;
 
@@ -72,6 +78,12 @@ public class TeamPortalPricingData {
 
     @JsonProperty("featureMarketingInfoList")
     private List<String> featureMarketingInfoList;
+
+    @JsonProperty("featureStates")
+    private List<String> featureStates;
+
+    @JsonProperty("marketingInfoOptions")
+    private List<String> marketingInfoOptions;
 
     public List<String> getMinCommitments() {
         return minCommitments;
@@ -149,6 +161,14 @@ public class TeamPortalPricingData {
         return featureName;
     }
 
+    public String getPricePerMonth() {
+        return pricePerMonth;
+    }
+
+    public String getPricePerYear() {
+        return pricePerYear;
+    }
+
     public List<String> getSetupFeeData2() {
         return Arrays.asList(setupFeeName2, setupFeeQuantity2, setupFeePrice2, setupFeeEstimatedHours2);
     }
@@ -163,5 +183,13 @@ public class TeamPortalPricingData {
 
     public List<String> getFeatureMarketingInfoList() {
         return featureMarketingInfoList;
+    }
+
+    public List<String> getFeatureStates() {
+        return featureStates;
+    }
+
+    public List<String> getMarketingInfoOptions() {
+        return marketingInfoOptions;
     }
 }

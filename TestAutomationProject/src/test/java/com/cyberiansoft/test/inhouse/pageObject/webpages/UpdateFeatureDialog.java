@@ -11,13 +11,16 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UpdateFeatureDialog extends BasePage {
+public class UpdateFeatureDialog extends FeatureDialog {
 
     @FindBy(xpath = "//div[@class='form-dialog update-feature-dialog active']")
     private WebElement updateFeatureDialog;
 
     @FindBy(xpath = "//div[@class='form-dialog update-feature-dialog active']//button[@class='btn btn-outline btn-submit']")
     private WebElement updateFeatureButton;
+
+    @FindBy(xpath = "//div[@class='form-dialog update-feature-dialog active']//button[@class='btn btn-outline pull-left btn-close']")
+    private WebElement updateFeatureCloseButton;
 
     @FindBy(xpath = "//div[@class='form-dialog update-feature-dialog active']//button[@class='btn btn-sm blue btn-add-setup-fee']")
     private WebElement addSetupFeeButton;
@@ -52,16 +55,29 @@ public class UpdateFeatureDialog extends BasePage {
     @FindBy(xpath = "//table[@id='table-update-feature-setup-fees']/tbody//td[position()<5]")
     private List<WebElement> setupFeeTableDataList;
 
+    @FindBy(xpath = "//div[@class='form-dialog update-feature-dialog active']//input[@id='Name']")
+    private WebElement featureNameField;
+
+    @FindBy(xpath = "//div[@class='form-dialog update-feature-dialog active']//select[@id='FeatureStateID']")
+    private WebElement featureState;
+
+    @FindBy(xpath = "//div[@class='form-dialog update-feature-dialog active']//textarea[@id='MarketingInfo']")
+    private WebElement featureMarketingInfo;
+
+    @FindBy(xpath = "//div[@class='form-dialog update-feature-dialog active']//textarea[@id='Description']")
+    private WebElement featureDescription;
+
     public UpdateFeatureDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
         try {
             wait.until(ExpectedConditions.visibilityOf(updateFeatureDialog));
         } catch (Exception e) {
-            Assert.fail("The Update Feature dialog hasn't been opened");
+            Assert.fail("The Update Feature dialog hasn't been opened", e);
         }
     }
 
+    @Step
     public UpdateFeatureDialog clickAddSetupFeeButton() {
         clickButton(addSetupFeeButton);
         try {
@@ -120,7 +136,16 @@ public class UpdateFeatureDialog extends BasePage {
 
     @Step
     public PricingPage clickUpdateFeatureButton() {
-        clickButton(updateFeatureButton);
+        return closeUpdateFeatureDialog(updateFeatureButton);
+    }
+
+    @Step
+    public PricingPage clickCloseButton() {
+        return closeUpdateFeatureDialog(updateFeatureCloseButton);
+    }
+
+    private PricingPage closeUpdateFeatureDialog(WebElement updateFeatureCloseButton) {
+        clickButton(updateFeatureCloseButton);
         waitForLoading();
         waitABit(2000);
         return PageFactory.initElements(driver, PricingPage.class);
@@ -159,5 +184,29 @@ public class UpdateFeatureDialog extends BasePage {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Step
+    public FeatureDialog typeFeatureName(String featureName) {
+        clearAndType(featureNameField, featureName);
+        return this;
+    }
+
+    @Step
+    public FeatureDialog selectFeatureState(String featureStateOption) {
+        selectValue(featureState, featureStateOption);
+        return this;
+    }
+
+    @Step
+    public FeatureDialog typeMarketingInfo(String marketingInfoValue) {
+        clearAndType(featureMarketingInfo, marketingInfoValue);
+        return this;
+    }
+
+    @Step
+    public FeatureDialog typeDescription(String descriptionValue) {
+        clearAndType(featureDescription, descriptionValue);
+        return this;
     }
 }

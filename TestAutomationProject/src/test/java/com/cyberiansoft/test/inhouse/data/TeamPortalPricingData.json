@@ -239,5 +239,96 @@
       "marketingInfo": "Marketing_info",
       "featureDescription": "My test Notes"
     }
+  ],
+
+  "verifyUserCanSelectPublicViewStatusForFeatureGroup": [
+    {
+      "rowID": "verifyUserCanSelectPublicViewStatusForFeatureGroup.01",
+      "description": "Test Case 76938:Verify user select \"Public View\" status for feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureState": "Public View",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureName": "Auto feature for features group Public",
+      "marketingInfo": "Marketing_info",
+      "featureDescription": "My test Notes"
+    }
+  ],
+
+  "verifyUserCanDeleteCreatedEdition": [
+    {
+      "rowID": "verifyUserCanDeleteCreatedEdition.01",
+      "description": "Test Case 76939:Verify user can delete created Edition",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureState": "Public View",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureName": "Auto feature for features group Public",
+      "marketingInfo": "Marketing_info",
+      "featureDescription": "My test Notes"
+    }
+  ],
+
+  "verifyUserCanSelectFeatureForEdition": [
+    {
+      "rowID": "verifyUserCanSelectFeatureForEdition.01",
+      "description": "Test Case 76940:Verify user can select feature for edition",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureStates": [
+        "Public View",
+        "Draft"
+      ],
+      "featureGroupMarketingInfo": "Test notes",
+      "featureNames": [
+        "Auto feature for features group Public",
+        "Auto feature for features group Public 2"
+      ],
+      "marketingInfoOptions": [
+        "Marketing_info",
+        "Marketing info 2"
+      ],
+      "featureDescriptions": [
+        "My test Notes",
+        "Description2"
+      ]
+    }
+  ],
+
+  "verifyUserCanCancelFeatureForEdition": [
+    {
+      "rowID": "verifyUserCanCancelFeatureForEdition.01",
+      "description": "Test Case 76941:Verify user can Cancel feature for Edition",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureStates": [
+        "Public View",
+        "Draft"
+      ],
+      "featureGroupMarketingInfo": "Test notes",
+      "featureNames": [
+        "Auto feature for features group Public",
+        "Auto feature for features group Public 2"
+      ],
+      "marketingInfoOptions": [
+        "Marketing_info",
+        "Marketing info 2"
+      ],
+      "featureDescriptions": [
+        "My test Notes",
+        "Description2"
+      ]
+    }
+  ],
+
+  "verifyUserCanCreateAddOnOptionForFeatureInEdition": [
+    {
+      "rowID": "verifyUserCanCreateAddOnOptionForFeatureInEdition.01",
+      "description": "Test Case 76942:Verify user can create \"Add On\" option for feature in Edition",
+      "editionName": "Auto Edition",
+      "price": "100",
+      "pricePerMonth": "25",
+      "pricePerYear": "50"
+    }
   ]
 }

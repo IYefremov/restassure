@@ -7,10 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class AddFeatureDialog extends BasePage {
+public class AddFeatureDialog extends FeatureDialog {
 
     @FindBy(xpath = "//div[@class='form-dialog add-feature-dialog active']")
     private WebElement addFeatureDialog;
+
+    @FindBy(xpath = "//div[@class='form-dialog add-feature-dialog active']//button[@class='btn btn-outline btn-submit']")
+    private WebElement addFeatureButton;
 
     @FindBy(xpath = "//div[@class='form-dialog add-feature-dialog active']//input[@id='Name']")
     private WebElement featureNameField;
@@ -24,10 +27,6 @@ public class AddFeatureDialog extends BasePage {
     @FindBy(xpath = "//div[@class='form-dialog add-feature-dialog active']//textarea[@id='Description']")
     private WebElement featureDescription;
 
-    @FindBy(xpath = "//div[@class='form-dialog add-feature-dialog active']//button[@class='btn btn-outline btn-submit']")
-    private WebElement addFeatureButton;
-
-
     public AddFeatureDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -39,25 +38,25 @@ public class AddFeatureDialog extends BasePage {
     }
 
     @Step
-    public AddFeatureDialog typeFeatureName(String featureName) {
+    public FeatureDialog typeFeatureName(String featureName) {
         clearAndType(featureNameField, featureName);
         return this;
     }
 
     @Step
-    public AddFeatureDialog selectFeatureState(String featureStateOption) {
+    public FeatureDialog selectFeatureState(String featureStateOption) {
         selectValue(featureState, featureStateOption);
         return this;
     }
 
     @Step
-    public AddFeatureDialog typeMarketingInfo(String marketingInfoValue) {
+    public FeatureDialog typeMarketingInfo(String marketingInfoValue) {
         clearAndType(featureMarketingInfo, marketingInfoValue);
         return this;
     }
 
     @Step
-    public AddFeatureDialog typeDescription(String descriptionValue) {
+    public FeatureDialog typeDescription(String descriptionValue) {
         clearAndType(featureDescription, descriptionValue);
         return this;
     }
