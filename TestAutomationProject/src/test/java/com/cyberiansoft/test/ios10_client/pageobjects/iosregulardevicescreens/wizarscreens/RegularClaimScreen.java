@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -30,15 +29,19 @@ public class RegularClaimScreen extends RegularBaseWizardScreen {
 
 	public void setClaim(String claim) {
 		appiumdriver.findElementByAccessibilityId("Claim#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(claim);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		WebElement par = getTableParentCell("Claim#");
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(claim + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(claim);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 
 	}
 
 	public void setPolicy(String policyNumber) {
 		appiumdriver.findElementByAccessibilityId("Policy#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(policyNumber);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		WebElement par = getTableParentCell("Claim#");
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(policyNumber + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(policyNumber);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 
 	}
 	
@@ -53,8 +56,8 @@ public class RegularClaimScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Deductible")));
 		WebElement par = getTableParentCell("Deductible");
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(deductible);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(deductible + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public String getDeductibleValue() {

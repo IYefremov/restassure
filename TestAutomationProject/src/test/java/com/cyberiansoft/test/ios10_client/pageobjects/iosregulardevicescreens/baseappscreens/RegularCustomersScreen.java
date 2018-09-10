@@ -69,19 +69,14 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Add")).click();
 		return new RegularAddCustomerScreen();
 	}
-
-	public void selectFirstCustomerWithoutEditing() {
-		appiumdriver.findElement(MobileBy.xpath("//UIATableView[1]/UIATableCell[1]"))
-				.click();
-		appiumdriver.findElement(MobileBy.AccessibilityId("Select")).click();
-	}
 	
 	public void selectCustomer(String customer) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 			searchbtn.click();
-		BaseUtils.waitABit(500);
-			appiumdriver.getKeyboard().sendKeys(customer);
+		BaseUtils.waitABit(1500);
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer);
+		//appiumdriver.getKeyboard().sendKeys(customer);
 		//}
 		appiumdriver.findElementByAccessibilityId(customer).click();
 			/*swipeToElement(appiumdriver.findElementByClassName("XCUIElementTypeTable").
@@ -89,20 +84,6 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 				appiumdriver.findElementByAccessibilityId(customer).click();
 		} else
 			customercell.click();*/
-	}
-
-	public void selectLocalCustomer(String customer) {
-		appiumdriver.findElementByAccessibilityId("Local").click();
-		if (!elementExists(customer)) {
-			appiumdriver.findElementByAccessibilityId("Search").click();
-			IOSElement searchfld = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Search' and type = 'XCUIElementTypeSearchField'"));
-			searchfld.click();
-			searchfld.sendKeys(customer + "\n");
-
-		}
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(customer)));
-		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
 	
 	public void selectOnlineCustomer(String customer) {

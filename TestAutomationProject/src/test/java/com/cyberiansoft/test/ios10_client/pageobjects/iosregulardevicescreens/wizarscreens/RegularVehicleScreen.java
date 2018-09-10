@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -84,6 +83,9 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;*/
+
+	@iOSFindBy(accessibility = "VehicleInfoTable")
+	private IOSElement vehicleinfotbl;
 	
 	public RegularVehicleScreen() {
 		super();
@@ -93,10 +95,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable"))); 
 	}
 
-	public static String getVehicleScreenCaption() {
-		return vehiclescreencapt;
-	}
-
 	public String clickSaveWithAlert() {
 		clickSave();
 		return Helpers.getAlertTextAndAccept();
@@ -104,8 +102,10 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public void setVINValue(String vin)  {
 		clickVINField();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		getVINField().sendKeys(vin);
+		getVINField().sendKeys("\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public void setVIN(String vin)  {
@@ -153,9 +153,9 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public void clearVINCode() {
 		appiumdriver.findElementByAccessibilityId("VIN#").click();
+		WebElement deleteBtn  = appiumdriver.findElementByClassName("XCUIElementTypeKeyboard").findElement(MobileBy.AccessibilityId("delete"));
 		for (int i = 0; i < 17; i++)
-			((IOSDriver) appiumdriver).getKeyboard().sendKeys(Keys.DELETE);
-		
+			deleteBtn.click();
 	}
 	
 	public WebElement getVINField() {
@@ -168,21 +168,23 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		getVINField().click();
 	}
 
-	public void setVINAndAndSearch(String vin)
-			throws InterruptedException {
+	public String setVINAndAndSearch(String vin) {
 
 		getVINField().click();
-		appiumdriver.getKeyboard().sendKeys(vin + "\n");
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("No vehicle invoice history found")));
-		Assert.assertTrue(appiumdriver.findElementByAccessibilityId("No vehicle invoice history found").isDisplayed());
+		getVINField().sendKeys(vin + "\n");
+		String alertText = appiumdriver.findElementByClassName("XCUIElementTypeTextView").getText();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("No vehicle invoice history found")));
+		//Assert.assertTrue(appiumdriver.findElementByAccessibilityId("No vehicle invoice history found").isDisplayed());
 		appiumdriver.findElementByAccessibilityId("Close").click();
+		return alertText;
 	}
 	
-	public void verifyExistingWorkOrdersDialogAppears() throws InterruptedException {
-		Assert.assertTrue(appiumdriver.findElements(MobileBy.iOSNsPredicateString("value BEGINSWITH 'Existing work orders were found'")).size() > 0);
+	public String getExistingWorkOrdersDialogMessage() {
+		String alertText = appiumdriver.findElementByClassName("XCUIElementTypeTextView").getText();
 		appiumdriver.findElementByAccessibilityId("Close")
 				.click();
+		return alertText;
 	}
 	
 	public String getWorkOrderNumber() {
@@ -210,31 +212,30 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public String getMake() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("VehicleInfoTable")));
-		IOSElement table = (IOSElement) appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
-		return table.findElement(By.xpath("//XCUIElementTypeCell[@name='Make']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		IOSElement table = (IOSElement)wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("VehicleInfoTable")));
+		return table.findElementByAccessibilityId("Make").findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
 	}
 
 	public String getModel() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Model']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Model")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 
 	public String getYear() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Year']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Year")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public String getTrim() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Trim']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Trim")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public String getEst() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Est#']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Est#'")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public String getTechnician() {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell[@name='Tech']/XCUIElementTypeTextField[1]")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Tech'")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
-	
+
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {
 		Assert.assertEquals(getMake(), exp_make);
 		Assert.assertEquals(getModel(), exp_model);
@@ -254,22 +255,25 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public void setMileage(String mileage) {
 		appiumdriver.findElementByAccessibilityId("Mileage").click();
-		appiumdriver.getKeyboard().sendKeys(mileage);
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Mileage' and type = 'XCUIElementTypeCell'")).sendKeys(mileage);
+		//appiumdriver.getKeyboard().sendKeys(mileage);
 	}
 	
 	public void setFuelTankLevel(String fueltanklevel) {
 		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").click();
-		appiumdriver.getKeyboard().sendKeys(fueltanklevel);
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Fuel Tank Level' and type = 'XCUIElementTypeCell'")).sendKeys(fueltanklevel);
+		//appiumdriver.getKeyboard().sendKeys(fueltanklevel);
 		//element(
 			//	MobileBy.name("Fuel Tank Level")).setValue(fueltanklevel);
 	}
 	
 	public void setLicensePlate(String licplate) {
 		appiumdriver.findElementByAccessibilityId("License Plate").click();
-		appiumdriver.getKeyboard().sendKeys(licplate);
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'License Plate' and type = 'XCUIElementTypeCell'")).sendKeys(licplate);
+		//appiumdriver.getKeyboard().sendKeys(licplate);
 	}
 
-	public void setTech(String _tech) throws InterruptedException {
+	public void setTech(String _tech) {
 		clickTech();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_tech)));
@@ -326,22 +330,24 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
 	public void setStock(String stock) {
 		appiumdriver.findElementByAccessibilityId("Stock#").click();
-		//appiumdriver.findElementByAccessibilityId("RO#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Stock#' and type = 'XCUIElementTypeCell'")).sendKeys(stock + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		
 	}
 
 	public void setRO(String ro) {
 		appiumdriver.findElementByAccessibilityId("RO#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'RO#' and type = 'XCUIElementTypeCell'")).sendKeys(ro + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
-	public void setPO(String po) throws InterruptedException {
+	public void setPO(String po) {
 		appiumdriver.findElementByAccessibilityId("PO#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'")).sendKeys(po + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public String getWorkOrderCustomer() {
@@ -359,10 +365,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Compose")));
 		appiumdriver.findElementByAccessibilityId("Compose").click();
 		return new RegularNotesScreen();
-	}
-	
-	public WebElement getVehicleInfoTableParentNode(String wonumber) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='VehicleInfoTable']/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='" + wonumber + "']/.."));
 	}
 
 	public String getWorkOrderTypeValue() {

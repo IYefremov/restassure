@@ -90,7 +90,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
     public void testVerifyUserCanEditDraftInvoice(String rowID,
                                                                      String description, JSONObject testData) {
         LocalDate date = LocalDate.now();
-        date = date.plusDays(1);
+        if (date.plusDays(1).getDayOfMonth() != 1)
+            date = date.plusDays(1);
         DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern("MMM dd");
         DateTimeFormatter dateFormatlong =
@@ -474,7 +475,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
 
         homescreen = invoicesscreen.clickBackButton();
         workordersscreen = homescreen.clickWorkOrdersMenuItem();
-        for (String woNumber : workOrdersToAdd)
+        final List<String> workOrdersDeleted = workOrders.subList(0, workOrders.size()-1);
+        for (String woNumber : workOrdersDeleted)
             Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
         workordersscreen.clickBackButton();
     }

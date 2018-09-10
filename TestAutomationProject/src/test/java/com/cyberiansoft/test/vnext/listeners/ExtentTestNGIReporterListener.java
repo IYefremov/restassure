@@ -14,18 +14,16 @@ import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.plexus.util.FileUtils;
 import org.testng.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.xml.XmlSuite;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Calendar;
-import java.util.Date;
+import java.io.*;
+import java.util.*;
 
-public class ExtentTestNGIReporterListener extends TestListenerAdapter implements IInvokedMethodListener {
+public class ExtentTestNGIReporterListener extends TestListenerAdapter implements IInvokedMethodListener, IReporter {
 	
 	
 	//private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
@@ -35,8 +33,35 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	public synchronized void onStart(ITestContext context) {
     	ExtentManager.createInstance(VNextConfigInfo.getInstance().getReportFolderPath() +
     			VNextConfigInfo.getInstance().getReportFileName());
-    	//ExtentTest parent = extent.createTest(getClass().getName());
-        //parentTest.set(parent);
+
+
+		File allureResults = new File("./allure-results");
+		if (allureResults.exists()) {
+			try {
+				FileUtils.deleteDirectory(allureResults);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		File allureResultsXml = new File("./target/allure-results");
+		if (allureResultsXml.exists()) {
+			try {
+				FileUtils.deleteDirectory(allureResultsXml);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		File videoFolder = new File("./video");
+		if (videoFolder.exists()) {
+			try {
+				FileUtils.deleteDirectory(videoFolder);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+
 	}
 
 	@Override
@@ -81,8 +106,12 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	public synchronized void onTestFailure(ITestResult result) {
 		extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
 		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
+		System.out.println("+++++++++++LOG");
+		AppiumUtils.attachAllureLog(Arrays.toString(result.getThrowable().getStackTrace()));
 		try {
 			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+			System.out.println("+++++++++++SCREEEN");
+			AppiumUtils.attachAllureScreenshot();
 			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot(VNextConfigInfo.getInstance().getReportFolderPath(), "fail")).build());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -104,6 +133,14 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	public synchronized void onTestSkipped(ITestResult result) {
 		extentTest.get().log(Status.SKIP, "<font color=#2196F3>" + Status.SKIP.toString().toUpperCase() + "</font>");
 		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
+		AppiumUtils.attachAllureLog(Arrays.toString(result.getThrowable().getStackTrace()));
+		try {
+			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+			AppiumUtils.attachAllureScreenshot();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
@@ -151,6 +188,23 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 			else
 				ExtentTestManager.createTest(result.getMethod().getTestClass().getName());
 			ExtentTestManager.getTest().getModel().setStartTime(getTime(result.getStartMillis()));
+		}
+	}
+
+
+	@Override
+	public void generateReport(List<XmlSuite> list, List<ISuite> suites, String s) {
+		for (ISuite suite : suites) {
+			String suiteName = suite.getName();
+
+			Map<String, ISuiteResult> suiteResults = suite.getResults();
+			for (ISuiteResult sr : suiteResults.values()) {
+				ITestContext testContext = sr.getTestContext();
+				System.out.println("Suite: " + suiteName);
+				System.out.println("Passed tests: " + testContext.getPassedTests().getAllResults().size());
+				System.out.println("Failed tests: " + testContext.getFailedTests().getAllResults().size());
+				System.out.println("Skipped tests: " + testContext.getSkippedTests().getAllResults().size());
+			}
 		}
 	}
 }

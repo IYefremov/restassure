@@ -5,7 +5,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -70,9 +69,10 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 		return getTypeScreenFromContext();
 	}
 
-	public void setPO(String _po) throws InterruptedException {
+	public void setPO(String _po) {
 		setPOWithoutHidingkeyboard(_po);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+        WebElement par = getTableParentCell("PO#");
+        par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys("\n");
 		//((IOSDriver) appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Return");
 		//hidekeyboardbtn.click();
 	}

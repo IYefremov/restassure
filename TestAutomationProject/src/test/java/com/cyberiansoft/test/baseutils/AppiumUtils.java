@@ -10,13 +10,11 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
+import ru.yandex.qatools.allure.annotations.Attachment;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class AppiumUtils {
 	
@@ -93,7 +91,30 @@ public class AppiumUtils {
 		}
 		return filename + uuid + ".jpeg";
 	}
-	
+
+	@Attachment(value = "Screen screenshot", type = "image/png")
+	public static byte[] attachAllureScreenshot() {
+		byte[] screenshotAs = null;
+		try {
+			screenshotAs = ((TakesScreenshot) DriverBuilder.getInstance().getAppiumDriver()).getScreenshotAs(OutputType.BYTES);
+		} catch (Exception e) {
+			failToSaveScreenshot(e);
+		}
+		return screenshotAs;
+	}
+
+	@Attachment(value = "Unable to save screenshot")
+	public static String failToSaveScreenshot(Exception e) {
+		return String.format("%s\n%s\n%s", "Failed to save screenshot",
+				e.getMessage(), Arrays.toString(e.getStackTrace()));
+	}
+
+	@Attachment(value = "Log", type = "text/html")
+	public static String attachAllureLog(String text) {
+		return String.format("%s\n", text);
+	}
+
+
 	public static String createBase64Screenshot() {
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		//WebDriver driver1 = new Augmenter().augment(driver);

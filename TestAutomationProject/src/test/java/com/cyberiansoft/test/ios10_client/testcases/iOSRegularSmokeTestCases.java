@@ -476,9 +476,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomer(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.SPECIFIC_CLIENT_TEST_WO1);
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		Assert.assertTrue(servicesscreen.isDefaultServiceIsSelected());
 		servicesscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
+		Assert.assertTrue(selectedServicesScreen.isDefaultServiceIsSelected());
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.WHEEL_SERVICE));
 		RegularOrderSummaryScreen ordersummaryscreen = selectedServicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(summ));
@@ -958,7 +958,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setRO(_ro);
 		//vehiclescreen.setLicensePlate(licplate);
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.WHEEL_SERVICE);
 		
 		
@@ -967,8 +966,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedservicedetailsscreen =  servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.WHEEL_SERVICE);
 		selectedservicedetailsscreen.setServiceQuantityValue("3");
 		selectedservicedetailsscreen.saveSelectedServiceDetails();
-		//servicesscreen.setSelectedServiceRequestServicesQuantity(iOSInternalProjectConstants.WHEEL_SERVICE, "3");
-		servicesscreen.clickAddServicesButton();
 		RegularClaimScreen claimscreen = servicesscreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompany("USG");
 		servicesscreen.clickSave();
@@ -1711,7 +1708,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		//Select services
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		//servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
 		Assert.assertEquals(selectedservicescreen.getServicePriceValue(), _dye_price);
@@ -2481,7 +2477,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.saveVehiclePart();
 
 		RegularServicesScreen servicesscreen =  vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		regularselectedservicedetailsscreen.clickVehiclePartsCell();
 		regularselectedservicedetailsscreen.selectVehiclePart("Roof");
@@ -2495,8 +2490,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		
-		servicesscreen.clickAddServicesButton();
-		
 		pricematrix = servicesscreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, "Test matrix33");
 		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix5);
 		vehiclePartScreen.switchOffOption("PDR");
@@ -2504,9 +2497,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.saveVehiclePart();
 
 		servicesscreen = pricematrix.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService("SR_S2_MoneyDisc_TE");
-		servicesscreen.clickAddServicesButton();
 
 		visualinteriorscreen = servicesscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, "New_Test_Image");
 		visualinteriorscreen.clickServicesToolbarButton();
@@ -2557,7 +2548,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setVIN(VIN);
 		vehiclescreen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		servicesscreen.selectService(iOSInternalProjectConstants.VPS1_SERVICE);
 		servicesscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
@@ -3567,9 +3557,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setVIN(VIN);
 		vehiclescreen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
-		servicesscreen.clickAddServicesButton();
 		RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
@@ -3621,9 +3609,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setVIN(VIN);
 		vehiclescreen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
-		servicesscreen.clickAddServicesButton();
 		RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
@@ -3741,8 +3727,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29083:SR: Regular - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech", 
 			description = "SR: Regular - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech")
-	public void testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech()
-			throws Exception {
+	public void testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
@@ -3778,7 +3763,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		
 		DriverBuilder.getInstance().getDriver().quit();
 		
-		homescreen = new RegularHomeScreen();
+		//homescreen = new RegularHomeScreen();
 		RegularMainScreen mainscr = homescreen.clickLogoutButton();
 		mainscr.updateDatabase();
 		RegularHomeScreen homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -3816,6 +3801,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		srlistwebpage.acceptFirstServiceRequestFromList();
 		
 		DriverBuilder.getInstance().getDriver().quit();
+
 		homescreen = new RegularHomeScreen();
 		mainscr = homescreen.clickLogoutButton();
 		mainscr.updateDatabase();
@@ -3854,14 +3840,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setColor(_color);
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServiceDetailsScreen.selectVehiclePart("Back Glass");
 		selectedServiceDetailsScreen.selectVehiclePart("Deck Lid");
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		String alerttext = selectedServiceDetailsScreen.saveSelectedServiceDetailsWithAlert();
-		servicesscreen.clickAddServicesButton();
 		Assert.assertTrue(alerttext.contains("You can add only one service '" + iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE + "'"));
 
 		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
@@ -3905,9 +3889,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
-		servicesscreen.clickAddServicesButton();
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
 		selectedServicesScreen.saveWizard();
@@ -3955,9 +3937,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.saveWizard();
 
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
@@ -3990,9 +3970,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.saveWizard();
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
@@ -4023,9 +4001,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.saveWizard();
 
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
@@ -4060,9 +4036,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.saveWizard();
 
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
@@ -4097,9 +4071,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.saveWizard();
 
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
@@ -4140,9 +4112,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.saveWizard();
 
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
@@ -4179,12 +4149,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
@@ -4262,12 +4230,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setVIN(VIN);
 		vehiclescreen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
@@ -4416,7 +4382,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_FOR_CALC);
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		selectedservicedetailscreen.clickSaveButton();
 		for (String vehiclepart : vehicleparts)
@@ -4427,7 +4392,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		for (String vehiclepart : vehicleparts)
 			Assert.assertTrue(selectedhehicleparts.contains(vehiclepart));
 		servicesscreen.clickSave();
-		servicesscreen.clickAddServicesButton();
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		for (int i = 0; i < vehicleparts.length; i++) {
 			selectedServicesScreen.openServiceDetailsByIndex(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE, i);
@@ -4455,7 +4419,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSPECTION_VIN_ONLY);
 		vehiclescreen.getVINField().click();
 		Assert.assertTrue(vehiclescreen.getVINField().isDisplayed());
-		Helpers.keyboadrType("\n");
+		vehiclescreen.getVINField().sendKeys("\n");
 		//vehiclescreen.clickChangeScreen();
 		vehiclescreen.cancelOrder();
 		myinspectionsscreen.clickHomeButton();
@@ -4484,7 +4448,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		for (int i=0; i < vehicleparts.length; i++)
@@ -4522,9 +4485,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setVIN(VIN);
 		vehiclescreen.verifyMakeModelyearValues("Dodge", "Dakota", "2006");
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
-		servicesscreen.clickAddServicesButton();
 		RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
@@ -4543,13 +4504,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String inspectionnumber = vehiclescreen.getInspectionNumber();
 
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Hood");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSaveAsDraft();
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		servicerequestsscreen.selectServiceRequest(srnumber);
@@ -4587,7 +4546,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setVIN(VIN);
 		final String inspnumber = vehiclescreen.getInspectionNumber();
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		servicedetailsscreen.answerQuestion2("A1");
@@ -4694,9 +4652,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			vehiclescreen.setVIN(VIN);
 			inspnumbers.add(vehiclescreen.getInspectionNumber());
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-			servicesscreen.clickToolButton();
 			servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
-			servicesscreen.clickAddServicesButton();
 			servicesscreen.clickSaveAsFinal();
 			new RegularMyInspectionsScreen();
 
@@ -4751,23 +4707,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		inspnumbers.add(vehiclescreen.getInspectionNumber());
 		RegularQuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
-		servicesscreen.clickAddServicesButton();
 		servicesscreen = servicesscreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.TEST_PACK_FOR_CALC);
 		servicesscreen.selectPriceMatrices("Back Glass");
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Vehicle");
 		selectedservicedetailscreen.answerQuestion2("A1");	
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.clickAddServicesButton();
 		//servicesscreen.clickBackServicesButton();
 		servicesscreen = servicesscreen.selectNextScreen(WizardScreenTypes.SERVICES, "SR_FeeBundle");
 		servicesscreen.selectPriceMatrices("Price Adjustment");
-		servicesscreen.clickToolButton();
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("SR_S6_Bl_I1_Percent");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.clickAddServicesButton();
 		servicesscreen = new RegularServicesScreen();
 		servicesscreen.clickBackServicesButton();
 		servicesscreen.clickSaveAsFinal();
@@ -4823,13 +4773,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
-		//servicesscreen.selectService("3/4\" - Penny Size");
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServicePriceValue(firstprice);
 		servicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.clickAddServicesButton();
-		servicesscreen.clickToolButton();
 		servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServicePriceValue(secondprice);
 		servicedetailsscreen.setServiceQuantityValue(secondquantity);
@@ -4910,7 +4856,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.clickVehiclePartsCell();
 		servicedetailsscreen.selectVehiclePart("Grill");
@@ -5077,7 +5022,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String inspnumber = vehiclescreen.getInspectionNumber();
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		regularselectedservicedetailsscreen.clickVehiclePartsCell();
 		regularselectedservicedetailsscreen.selectVehiclePart("Hood");
@@ -5089,7 +5033,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		regularselectedservicedetailsscreen.selectVehiclePart("Grill");
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.clickSaveAsDraft();
 		myinspectionsscreen = new RegularMyInspectionsScreen();
 		Assert.assertTrue(myinspectionsscreen.isDraftIconPresentForInspection(inspnumber));
@@ -5128,7 +5071,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Hood");
@@ -5146,7 +5088,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.saveWizard();
 		
 		myinspectionsscreen.selectInspectionForApprove(inspnumber);
@@ -5709,15 +5650,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServicePriceValue(_price1);
 		servicedetailsscreen.saveSelectedServiceDetails();
 		
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SALES_TAX);
-		
-		servicesscreen.clickAddServicesButton();
 		servicesscreen.saveWizard();
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 
@@ -5849,7 +5787,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickToolButton();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		servicedetailsscreen.answerQuestion2("A3");
 		servicedetailsscreen.saveSelectedServiceDetails();
@@ -5859,7 +5796,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicedetailsscreen.selectVehiclePart("Hood");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.clickAddServicesButton();
 
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		selectedServicesScreen.openServiceDetailsByIndex(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE, 0);
@@ -6053,8 +5989,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String wonumber = vehiclescreen.getWorkOrderNumber();
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (String serviceadd : servicestoadd) {
-			//servicesscreen.searchAvailableService(serviceadd);
-			servicesscreen.clickToolButton();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(serviceadd);
 			selectedservicescreen.clickVehiclePartsCell();
 			for (String vehiclepart : vehicleparts) {
@@ -6062,7 +5996,6 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			}
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-			servicesscreen.clickAddServicesButton();
 		}
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		for (String serviceadd : servicestoadd) {
@@ -6552,21 +6485,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectServicePanel(iOSInternalProjectConstants.BUFF_SERVICE);
-		servicesscreen.clickToolButton();
 		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL));
 		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE));
 		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE));
 		servicesscreen.clickBackServicesButton();
 		servicesscreen = new RegularServicesScreen();
 		servicesscreen.selectServicePanel(iOSInternalProjectConstants.DYE_SERVICE);
-		servicesscreen.clickToolButton();
 		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_VEHICLE));
 		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_PANEL));
 		Assert.assertTrue(servicesscreen.isServiceTypeExists(iOSInternalProjectConstants.CALC_MONEY_PP_SERVICE));
 		servicesscreen.clickBackServicesButton();
 		servicesscreen = new RegularServicesScreen();
 		servicesscreen.selectServicePanel(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
-		servicesscreen.clickToolButton();
 		Assert.assertTrue(servicesscreen.isServiceTypeExists("3/4\" - Penny Size"));
 		servicesscreen.clickBackServicesButton();
 		servicesscreen = new RegularServicesScreen();
@@ -6913,8 +6843,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 36004:SR: Regular - Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON", 
 			description = "Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON")
-	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON()
-			throws Exception {
+	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";

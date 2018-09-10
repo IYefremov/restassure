@@ -142,6 +142,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
         final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.saveInspectionViaMenu();
+        inspectionsScreen.searchInpectionByFreeText(inspNumber);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 
@@ -187,6 +188,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
         final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.saveInspectionViaMenu();
+        inspectionsScreen.searchInpectionByFreeText(inspNumber);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 

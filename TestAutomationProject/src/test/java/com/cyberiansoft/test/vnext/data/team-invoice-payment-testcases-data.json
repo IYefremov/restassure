@@ -84,5 +84,116 @@
         "expirationYear" : "2022",  "cvc" : "123"
       }
     }
+  ],
+
+  "testVerifyUserSeePOROPaymentMethodIfPOROMethodEqualsON": [
+    {
+      "rowID": "testVerifyUserSeePOROPaymentMethodIfPOROMethodEqualsON.01",
+      "description": "Test Case 78447:Verify user see PO/RO payment method if PO/RO method = ON",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserSeePOROPaymentActionForPaidInvoices": [
+    {
+      "rowID": "testVerifyUserSeePOROPaymentActionForPaidInvoices.01",
+      "description": "Test Case 78448:Verify user see PO/RO payment action for paid Invoices",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
+  ],
+
+  "testVerifyUserSeePOROPaymentActionForNotFullyPaidInvoice": [
+    {
+      "rowID": "testVerifyUserSeePOROPaymentActionForNotFullyPaidInvoice.01",
+      "description": "Test Case 78449:Verify user see PO/RO payment action for not fully paid Invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
+  ],
+
+  "testVerifyPaymentPOROIsEqualToInvoicePONumber": [
+    {
+      "rowID": "testVerifyPaymentPOROIsEqualToInvoicePONumber.01",
+      "description": "Test Case 78450:Verify payment PO/RO is equal to invoice PO#",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "90"
+      }
+    }
+  ],
+
+  "testVerifyPOROFieldIsRequired": [
+    {
+      "rowID": "testVerifyPOROFieldIsRequired.01",
+      "description": "Test Case 78451:Verify PO/RO field is required",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "90"
+      }
+    }
+  ],
+
+  "testVerifyNotesFieldIsOptionalForPOROPayment": [
+    {
+      "rowID": "testVerifyNotesFieldIsOptionalForPOROPayment.01",
+      "description": "Test Case 78452:Verify Notes field is optional for PO/RO payment",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "90"
+      }
+    }
+  ],
+
+  "testVerifyUserCanGoBackToInvoiceListWithoutSavePayment": [
+    {
+      "rowID": "testVerifyUserCanGoBackToInvoiceListWithoutSavePayment.01",
+      "description": "Test Case 78453:Verify user can go back to invoice list without save payment",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "90"
+      }
+    }
   ]
 }

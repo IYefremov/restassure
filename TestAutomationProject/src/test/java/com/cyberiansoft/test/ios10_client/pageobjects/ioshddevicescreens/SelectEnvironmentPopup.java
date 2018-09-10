@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class SelectEnvironmentPopup extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility = "EnvironmentSelection")
@@ -20,7 +18,6 @@ public class SelectEnvironmentPopup extends iOSHDBaseScreen {
 	public SelectEnvironmentPopup() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("EnvironmentSelection"))); 
 	}

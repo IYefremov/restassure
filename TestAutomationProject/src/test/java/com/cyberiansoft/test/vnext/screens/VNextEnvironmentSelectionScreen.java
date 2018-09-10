@@ -25,10 +25,9 @@ public class VNextEnvironmentSelectionScreen extends VNextBaseScreen {
         wait.until(ExpectedConditions.visibilityOf(environmentlistscreeen));
     }
 
-    public VNextTeamEditionVerificationScreen selectEnvironment(String environmentName) {
+    public void selectEnvironment(String environmentName) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-env-name='" + environmentName + "']")));
         tap(envlist.findElement(By.xpath(".//div[@data-env-name='" + environmentName + "']")));
-        return new VNextTeamEditionVerificationScreen(appiumdriver);
     }
 }

@@ -124,4 +124,78 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestCaseTea
         inspectionsScreen = new VNextInspectionsScreen(appiumdriver);
         inspectionsScreen.clickBackButton();
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanChangeRetailCustomerToWholesaleForInspection(String rowID,
+                                                             String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer1);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(appiumdriver);
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspectionNumber = vehicleinfoscreen.getNewInspectionNumber();
+        inspectionsScreen = vehicleinfoscreen.saveInspectionViaMenu();
+        inspectionsScreen.changeCustomerToWholesailForInspection(inspectionNumber, testwholesailcustomer);
+        inspectionsScreen.switchToTeamInspectionsView();
+        inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testwholesailcustomer.getFullName());
+        inspectionsScreen.switchToMyInspectionsView();
+
+        inspectionsScreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanSelectCustomerUsingSearch(String rowID,
+                                                             String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer1);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(appiumdriver);
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspectionNumber = vehicleinfoscreen.getNewInspectionNumber();
+        inspectionsScreen = vehicleinfoscreen.saveInspectionViaMenu();
+        inspectionsScreen.changeCustomerForWorkOrderViaSearch(inspectionNumber, testcustomer2);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        inspectionsScreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanChangeCustomerForTeamInspection(String rowID,
+                                                             String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer1);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(appiumdriver);
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspectionNumber = vehicleinfoscreen.getNewInspectionNumber();
+        inspectionsScreen = vehicleinfoscreen.saveInspectionViaMenu();
+        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testcustomer2);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        inspectionsScreen.switchToTeamInspectionsView();
+        inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        inspectionsScreen.switchToMyInspectionsView();
+        inspectionsScreen.clickBackButton();
+    }
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -45,7 +46,8 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(payscreen));
         wait = new WebDriverWait(appiumdriver, 30);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//iframe[@class='invoice-pay-iframe']")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//iframe[@class='invoice-pay-iframe']")));
+        BaseUtils.waitABit(3000);
         appiumdriver.switchTo().frame(payframe);
     }
 

@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularServicesScreen extends RegularBaseServicesScreen {
 
-	final static String defaultServiceValue = "Test Tax";
 	final static String servicesscreencapt = "Services";
 	
 	/*@iOSFindBy(accessibility = "Save")
@@ -64,11 +63,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 
-	public boolean isDefaultServiceIsSelected() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='"
-						+ defaultServiceValue + "']/XCUIElementTypeButton[@name='selected']").isDisplayed();
-	}
-
 	
 	public String getServicePriceValue(String servicename) {
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[3]")).getAttribute("value").replaceAll("[^a-zA-Z0-9$.%]", "");
@@ -103,7 +97,8 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	public void searchServiceByName(String servicename) {
 		clearSearchServiceParameters();
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").click();
-		appiumdriver.getKeyboard().sendKeys(servicename + "\n");
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(servicename + "\n");
+		//appiumdriver.getKeyboard().sendKeys(servicename + "\n");
 
 	}
 
@@ -202,17 +197,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 				.findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		return new RegularSelectedServiceDetailsScreen();
 	}
-	
-	public void clickToolButton() {
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("services")));
-		//appiumdriver.findElementByAccessibilityId("services").click();
-	}
-	
-	public void openCustomServiceDetailsByPartOfServiceName(String service) throws InterruptedException {
-		appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATableView[2]/UIATableCell[4]").click();
-	}
-
 
 	public RegularPriceMatrixScreen selectServicePriceMatrices(String servicepricematrices) {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + servicepricematrices + "']")).click();
@@ -245,14 +229,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Compose")).click();
 	}
 	
-	public void clickVehiclePartsButton() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Vehicle Part")).click();
-	}
-
-	public static String getServicesScreenCaption() {
-		return servicesscreencapt;
-	}
-	
 	public RegularServicesScreen clickBackServicesButton() {
 		BaseUtils.waitABit(500);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -261,20 +237,7 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		BaseUtils.waitABit(500);
 		return this;
 	}
-	
-	public void clickAddServicesButton() {
-		/*WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Add")));
-		IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
-		navbar.findElement(MobileBy.AccessibilityId("Add")).click();
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ServiceGroupServicesTable")));
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceGroupServicesTable")));
-		return this;*/
-	}
 
-	
 	public String getListOfSelectedVehicleParts() {
 		WebElement par = getServiceTableCell("Vehicle Part");	
 		return par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
@@ -291,11 +254,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	
 	public void changeTechnician(String servicetype, String techname) {
 		appiumdriver.findElementByAccessibilityId(servicetype).click();
-		/*if (appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").size() > 0) {
-			((IOSElement) appiumdriver.findElementsByAccessibilityId("DefaultEmployeeSelectorView").get(1)).
-			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
-				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
-		} else {*/
 		appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView").
 			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
 				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();

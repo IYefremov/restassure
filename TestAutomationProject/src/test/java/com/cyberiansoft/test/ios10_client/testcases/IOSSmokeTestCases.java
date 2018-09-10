@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.WebConstants;
@@ -4651,7 +4652,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 42388:Inspections: HD - Verify that it is possible to save as Final inspection linked to SR", description = "Verify that it is possible to save as Final inspection linked to SR")
-	public void testHDVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR() throws Exception {
+	public void testHDVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR() {
 		final String VIN  = "1D7HW48NX6S507810";
 		
 		homescreen = new HomeScreen();
@@ -5572,6 +5573,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
 		homescreen = myworkordersscreen.clickHomeButton();
+		BaseUtils.waitABit(5*1000);
 		TeamInvoicesScreen teaminvoicesscreen = homescreen.clickTeamInvoices();
 		teaminvoicesscreen.selectInvoice(invoicenumber);
 		
@@ -5817,6 +5819,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		singlepageinspectionscreen.expandToFullScreeenSevicesSection();
 		ServicesScreen servicesscreen = new ServicesScreen();
+		BaseUtils.waitABit(2000);
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectServicePriceMatrices("PM_New");
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen();
@@ -6112,11 +6115,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				.click();
 		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
 		invoiceinfoscreen.setPO("23");
-		invoiceinfoscreen.addWorkOrder(wonumber1);
 		final String invoicenum = invoiceinfoscreen.getInvoiceNumber();
+		invoiceinfoscreen.addWorkOrder(wonumber1);
 		invoiceinfoscreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
-		Helpers.waitABit(10*1000);
+		Helpers.waitABit(30*1000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());

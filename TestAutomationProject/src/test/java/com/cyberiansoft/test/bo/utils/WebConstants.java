@@ -11,7 +11,7 @@ public class WebConstants {
 		TIMEFRAME_90_DAYS("Last 90 Days"),
 		TIMEFRAME_YEARTODATE("Year to date"),
 		TIMEFRAME_LASTYEAR("Last Year"),
-		TIMEFRAME_CUSTOM("custom");
+		TIMEFRAME_CUSTOM("Custom");
 		 
 		private String name;
 		 

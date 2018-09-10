@@ -1,10 +1,15 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.dataclasses.Employee;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.testng.annotations.Test;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistration {
@@ -38,8 +43,10 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistration {
 	}
 	
 	@Test(testName= "Test Case 35901:vNext - Log in from the list of available users (success case)", description = "Log in from the list of available users (success case)")
-	public void testLogInSuccessCase() {
-		
+	public void testLogInSuccessCase() throws IOException {
+		employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/free-device-employee.json"), Employee.class);
+		VNextLoginScreen loginScreen = new VNextLoginScreen(appiumdriver);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 		new VNextHomeScreen(appiumdriver);
 	}
 

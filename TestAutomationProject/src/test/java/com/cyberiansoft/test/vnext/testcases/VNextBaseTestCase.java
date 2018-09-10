@@ -145,7 +145,15 @@ public class VNextBaseTestCase {
 
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		String userregmail = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserMail();
-		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
+		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
+		environmentSelectionScreen.selectEnvironment("Development");
+		BaseUtils.waitABit(15*1000);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+
+		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		
 		regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(), 
 				VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
@@ -207,9 +215,9 @@ public class VNextBaseTestCase {
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
 		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360 Team Edition");
-		VNextTeamEditionVerificationScreen verificationscreen = environmentSelectionScreen.selectEnvironment("Development");
+		environmentSelectionScreen.selectEnvironment("Development");
 
-		//VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		verificationscreen.setDeviceRegistrationCode(regCode);
 		verificationscreen.clickVerifyButton(); 
 		

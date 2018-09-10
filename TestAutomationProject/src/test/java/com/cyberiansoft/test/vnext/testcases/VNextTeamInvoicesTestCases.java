@@ -6,6 +6,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.Invoice;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
@@ -83,6 +84,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
@@ -112,7 +114,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoicespage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoicespage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();
 		Assert.assertEquals(invoicespage.getInvoiceStatus(invoicenumber), VNextInspectionStatuses.NEW);
@@ -183,6 +187,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoicespage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoicespage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_VOID);
 		invoicespage.clickFindButton();
@@ -216,6 +223,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
@@ -304,6 +312,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		invoicesscreen.switchToMyInvoicesView();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
@@ -589,6 +598,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
+		workordersscreen.switchToMyWorkordersView();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);

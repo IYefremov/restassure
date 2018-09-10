@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
@@ -94,7 +95,8 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToMyInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
@@ -104,7 +106,6 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -127,6 +128,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}
 	
@@ -170,7 +172,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
  		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
-			
+		BaseUtils.waitABit(1000);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);

@@ -96,10 +96,6 @@ public class VehicleScreen extends BaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleTable")));
 	}
 
-	public static String getVehicleScreenCaption() {
-		return vehiclescreencapt;
-	}
-
 	public String clickSaveWithAlert() {
 		clickSave();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();

@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.VNextPayCashCheckScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPayInvoicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextPayPOROScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.WebElement;
@@ -20,7 +22,7 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
     private WebElement paycheckbtn;
 
     @FindBy(xpath="//a[@data-name='payPORO']")
-    private WebElement payporobtn;
+    private WebElement invoicepayporomenubtn;
 
     public VNextPayMenu(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
@@ -30,6 +32,20 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
     public VNextPayInvoicesScreen clickPayCreditCardMenuItem() {
         clickMenuItem(paycreditcardbtn);
         return new VNextPayInvoicesScreen(appiumdriver);
+    }
+
+    public boolean isInvoicePayPOROMenuItemExists() {
+        return invoicepayporomenubtn.isDisplayed();
+    }
+
+    public VNextPayCashCheckScreen clickPayCachCheckMenuItem() {
+        clickMenuItem(paycheckbtn);
+        return new VNextPayCashCheckScreen(appiumdriver);
+    }
+
+    public VNextPayPOROScreen clickPayPOROMenuItem() {
+        clickMenuItem(invoicepayporomenubtn);
+        return new VNextPayPOROScreen(appiumdriver);
     }
 
 }

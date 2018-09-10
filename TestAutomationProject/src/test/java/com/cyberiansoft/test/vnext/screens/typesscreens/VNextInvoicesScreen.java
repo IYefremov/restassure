@@ -176,4 +176,9 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		WebElement invoicecell = getInvoiceCell(invoiceNumber);
 		return invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_notes']")).size() > 0;
 	}
+
+	public boolean isInvoiceHasPaymentIcon(String invoiceNumber) {
+		WebElement invoicecell = getInvoiceCell(invoiceNumber);
+		return invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_paid']")).size() > 0;
+	}
 }

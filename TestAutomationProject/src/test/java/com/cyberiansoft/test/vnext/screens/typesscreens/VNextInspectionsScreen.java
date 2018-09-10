@@ -89,6 +89,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public String getInspectionStatusValue(String inspectionnumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionnumber + "']")));
 		WebElement inspcell = getInspectionCell(inspectionnumber);
 		return inspcell.findElement(By.xpath(".//div[@action='select']/div/*[contains(@class, 'entity-item-status-')]")).getText();
 	}
@@ -113,6 +115,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public WebElement getInspectionCell(String inspectionnumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 		return getListCell(inspectionslist, inspectionnumber);
 	}
 	
@@ -164,6 +168,10 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
+		if (elementExists("//div[@class='searchlist-nothing-found']"))
+			return false;
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 		return inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']")).size() > 0;
 	}
 	
@@ -218,7 +226,29 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 		customersscreen.selectCustomer(newCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
-		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving work order customer...']"));
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Inspection customer...']"));
+		return this;
+	}
+
+	public VNextInspectionsScreen changeCustomerForWorkOrderViaSearch(String inspectionNumber, AppCustomer newCustomer) {
+		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
+		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		customersscreen.switchToRetailMode();
+		customersscreen.searchCustomerByName(newCustomer.getFullName());
+		customersscreen.selectCustomer(newCustomer);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickInformationDialogYesButton();
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Inspection customer...']"));
+		return this;
+	}
+
+	public VNextInspectionsScreen changeCustomerToWholesailForInspection(String inspectionNumber, AppCustomer newWholesailCustomer) {
+		VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
+		VNextCustomersScreen customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
+		customersscreen.switchToWholesaleMode();
+		customersscreen.selectCustomer(newWholesailCustomer);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickInformationDialogYesButton();
 		return this;
 	}
 }

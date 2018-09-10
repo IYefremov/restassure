@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
 
@@ -61,11 +63,13 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
     }
 
     public VNextVehicleInfoScreen clickEditWorkOrderMenuItem() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+        wait.until(ExpectedConditions.visibilityOf(editinspectionbtn));
         clickMenuItem(editinspectionbtn);
         return new VNextVehicleInfoScreen(appiumdriver);
     }
 
-    public VNextInformationDialog clickEditWorkOrderMenuItemWithAlerr() {
+    public VNextInformationDialog clickEditWorkOrderMenuItemWithAlert() {
         clickMenuItem(editinspectionbtn);
         return new VNextInformationDialog(appiumdriver);
     }

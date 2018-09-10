@@ -9,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class MainScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility  = "UpdateMainDatabaseButton")
@@ -37,7 +35,6 @@ public class MainScreen extends iOSHDBaseScreen {
 	public MainScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void updateDatabase() {

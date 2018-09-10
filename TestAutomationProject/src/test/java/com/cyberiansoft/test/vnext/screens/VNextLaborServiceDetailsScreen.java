@@ -35,12 +35,15 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseScreen {
         PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='details']")));
+        wait = new WebDriverWait(appiumdriver, 15);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-page='details']")));
     }
 
-    public void selectPanelAndPart(String panelName, String partName) {
+    public VNextLaborServiceDetailsScreen selectPanelAndPart(String panelName, String partName) {
         VNextLaborServicePanelsList laborServicePanelsList = clickSelectPanelCell();
         VNextLaborServicePartsList laborServicePartsList = laborServicePanelsList.selectServiceLaborPanel(panelName);
         laborServicePartsList.selectServiceLaborPart(partName);
+        return laborServicePartsList.saveLaborServiceParts();
     }
 
     public  VNextLaborServicePanelsList clickSelectPanelCell() {

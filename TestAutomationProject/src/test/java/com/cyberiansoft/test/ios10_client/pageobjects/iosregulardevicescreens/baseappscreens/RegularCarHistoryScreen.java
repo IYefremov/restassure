@@ -24,7 +24,7 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	@iOSFindBy(accessibility = "Close")
     private IOSElement closesearchbtn;
 	
-	@iOSFindBy(accessibility = "Switch to web")
+	@iOSFindBy(accessibility = "Switch to online")
     private IOSElement switchtowebbtn;
 	
 	public RegularCarHistoryScreen() {
@@ -55,7 +55,8 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	
 	public RegularCarHistoryWOsAndInvoicesScreen clickCarHistoryRowByVehicleInfo(String vehicleinfo) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(vehicleinfo)));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(vehicleinfo)));
+		swipeToElement(appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + vehicleinfo + "']")));
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + vehicleinfo + "']")).click();
 		return new RegularCarHistoryWOsAndInvoicesScreen();
 	}

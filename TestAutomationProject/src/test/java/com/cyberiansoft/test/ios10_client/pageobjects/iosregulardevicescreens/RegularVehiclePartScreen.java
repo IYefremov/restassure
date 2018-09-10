@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -106,9 +105,11 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
     public void setPrice(String price) {
         WebElement par = getTableParentCell("Price");
-        par.findElement(By.xpath("//XCUIElementTypeTextField")).click();
-        ((IOSDriver) appiumdriver).getKeyboard().pressKey(price);
-        ((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+        WebElement cell = par.findElement(By.xpath("//XCUIElementTypeTextField"));
+        cell.click();
+        cell.sendKeys(price + "\n");
+        //((IOSDriver) appiumdriver).getKeyboard().pressKey(price);
+        //((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
     }
 
     public void setTime(String timevalue) throws InterruptedException {

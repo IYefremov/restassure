@@ -58,6 +58,8 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     }
 
     protected void clickAddButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@action='add']")));
         WaitUtils.click(By.xpath("//*[@action='add']"));
     }
 

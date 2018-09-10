@@ -40,7 +40,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	public void updateMainDB() {
 		clickUpdateAppdata();
 		BaseUtils.waitABit(10000);
-		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 400);
+		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 800);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='" +
 				VNextAlertMessages.DATA_HAS_BEEN_DOWNLOADED_SECCESSFULY + "']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
