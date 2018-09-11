@@ -173,6 +173,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
  		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
 		BaseUtils.waitABit(1000);
+		System.out.println("++++++++++" + inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);

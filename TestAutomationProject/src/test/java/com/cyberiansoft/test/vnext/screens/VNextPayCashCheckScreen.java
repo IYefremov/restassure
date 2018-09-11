@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextBasicMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -9,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class VNextPayCashCheckScreen extends VNextBasicMenuScreen {
+public class VNextPayCashCheckScreen extends VNextBaseScreen {
 
     @FindBy(xpath="//div[@data-page='details']")
     private WebElement paycachcheckscreeen;

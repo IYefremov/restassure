@@ -493,7 +493,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
 		Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), totalprice);
 		availableServicesScreen.saveWorkOrderViaMenu();
-		Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(woNumber), totalprice);
+		Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(woNumber), totalprice,
+				"Price is not valid for work order: " + woNumber);
 		workordersscreen.clickBackButton();
 	}
 }

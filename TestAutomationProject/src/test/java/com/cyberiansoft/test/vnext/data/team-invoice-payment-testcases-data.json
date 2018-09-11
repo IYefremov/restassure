@@ -223,5 +223,35 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyUserSeeCashCheckPaymentMethodIfCashCheckMethodEqualsON": [
+    {
+      "rowID": "testVerifyUserSeePOROPaymentMethodIfPOROMethodEqualsON.01",
+      "description": "Test Case 78498:Verify user see Cash/Check payment method if Cash/Check method = ON",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCantSeeCashCheckPaymentActionForPaidInvoices": [
+    {
+      "rowID": "testVerifyUserCantSeeCashCheckPaymentActionForPaidInvoices.01",
+      "description": "Test Case 78499:Verify user can't see Cash/Check payment action for paid Invoices",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 }
