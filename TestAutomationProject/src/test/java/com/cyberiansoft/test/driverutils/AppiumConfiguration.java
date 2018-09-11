@@ -33,7 +33,7 @@ public class AppiumConfiguration {
 		switch (mplatform) {
 			case ANDROID:
 
-				//date = date.minusDays(1);
+				date = date.minusDays(1);
 				File appDir = new File("./data/");
 				try {
 					BaseUtils.unpackArchive(new URL("http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_" + date.format(dateFormat) + ".app.zip"), appDir);
