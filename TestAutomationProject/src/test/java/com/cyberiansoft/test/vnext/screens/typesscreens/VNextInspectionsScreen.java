@@ -115,9 +115,13 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public WebElement getInspectionCell(String inspectionnumber) {
+		waitForInspectionsListIsVisibile();
+		return getListCell(inspectionslist, inspectionnumber);
+	}
+
+	public void waitForInspectionsListIsVisibile() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
-		return getListCell(inspectionslist, inspectionnumber);
 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspectionnumber) {

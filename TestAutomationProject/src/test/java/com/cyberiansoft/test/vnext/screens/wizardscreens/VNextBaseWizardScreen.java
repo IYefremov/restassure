@@ -95,7 +95,9 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		if (inspectionType != null)
 			if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
 				clcikSaveViaMenuAsFinal();
-		return new VNextInspectionsScreen(appiumdriver);
+		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionsScreen.waitForInspectionsListIsVisibile();
+		return inspectionsScreen;
 	}
 	
 	public VNextWorkOrdersScreen saveWorkOrderViaMenu() {

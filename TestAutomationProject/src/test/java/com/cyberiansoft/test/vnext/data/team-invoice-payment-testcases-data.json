@@ -253,5 +253,20 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyUserSeeCashCheckPaymentActionForNotFullyPaidInvoice": [
+    {
+      "rowID": "testVerifyUserSeeCashCheckPaymentActionForNotFullyPaidInvoice.01",
+      "description": "Test Case 78500:Verify user see Cash/Check payment action for not fully paid Invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 }

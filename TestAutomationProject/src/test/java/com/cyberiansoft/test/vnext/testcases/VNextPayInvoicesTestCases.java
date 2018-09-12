@@ -701,6 +701,46 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayCashCheckScreen payCashCheckScreen = invoicemenuscreen.clickPayCachCheckMenuItem();
+        payCashCheckScreen.clickPayButton();
+
+        invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+        invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        Assert.assertFalse(invoicemenuscreen.isPayInvoiceMenuItemExists());
+        invoicemenuscreen.clickCloseInvoiceMenuButton();
+        invoicesscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserSeeCashCheckPaymentActionForNotFullyPaidInvoice(String rowID,
+                                                                           String description, JSONObject testData) {
+
+        Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToTeamWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
+        vehicleinfoscreen.changeScreen("Services");
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.changeScreen("Summary");
+        VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+        wosummaryscreen.clickCreateInvoiceOption();
+        wosummaryscreen.clickWorkOrderSaveButton();
+
+        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
+        VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        VNextPayCashCheckScreen payCashCheckScreen = invoicemenuscreen.clickPayCachCheckMenuItem();
         payCashCheckScreen.setAmauntValue("8");
         payCashCheckScreen.clickPayButton();
 
