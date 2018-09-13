@@ -214,8 +214,8 @@
 
   "testVerifyUserCantSeePaymentTypePOROForInvoiceIfAmountIsZero": [
     {
-      "rowID": "testVerifyEnteredPOOnPOROPaymentScreenIsSavedForInvoice.01",
-      "description": "Test Case 78455:Verify user can't see Payment type PO/RO for Invoice if amount is zero",
+      "rowID": "testVerifyUserCantSeePaymentTypePOROForInvoiceIfAmountIsZero.01",
+      "description": "Test Case 78455:Verify user can't see Payment type PO/RO for Invoice if amount is zero, Test Case 78502:Verify user can't see Payment type Cash/Check for Invoice if amount is zero",
       "workOrderData" : {"workOrderType": "O_Kramar",
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
@@ -259,6 +259,21 @@
     {
       "rowID": "testVerifyUserSeeCashCheckPaymentActionForNotFullyPaidInvoice.01",
       "description": "Test Case 78500:Verify user see Cash/Check payment action for not fully paid Invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanGoBackFromCachCheckScreenToInvoiceListWithoutSavePayment": [
+    {
+      "rowID": "testVerifyUserCanGoBackToInvoiceListWithoutSavePayment.01",
+      "description": "Test Case 78501:Verify user can go back to invoice list without save payment",
       "workOrderData" : {"workOrderType": "O_Kramar",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },

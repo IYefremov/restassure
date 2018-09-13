@@ -183,7 +183,8 @@ public class VNextBaseTestCase {
 	}
 
 	public void registerTeamEdition(String licensename) {
-		
+
+
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 		WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());

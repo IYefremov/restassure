@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import io.appium.java_client.AppiumDriver;
@@ -46,6 +47,7 @@ public class VNextApproveScreen extends VNextBaseScreen {
 	}
 	
 	public void drawSignature() {
+		BaseUtils.waitABit(5000);
 		clickSignatureCanvas();
 		int xx = drawcanvas.getLocation().getX();
 		
@@ -54,7 +56,9 @@ public class VNextApproveScreen extends VNextBaseScreen {
 		//action.down(xx + 100,yy + 100).perform();
 		
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		new TouchAction(appiumdriver).tap(PointOption.point(xx+200, yy+200)).perform();
+
+		new TouchAction(appiumdriver).tap(PointOption.point(appiumdriver.manage().window().getSize().width/2, appiumdriver.manage().window().getSize().height/2)).perform();
+		//new TouchAction(appiumdriver).tap(PointOption.point(xx+200, yy+200)).perform();
 		
 		TouchAction action = new TouchAction(appiumdriver);
 		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(300))).moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
