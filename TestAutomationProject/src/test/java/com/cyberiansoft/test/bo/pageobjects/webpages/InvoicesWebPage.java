@@ -571,6 +571,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public String getTechInfoServicesTableServiceValue(String columnname, String servicename) {
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_Main_report_ctl05"))));
 		int icolumn = getTechInfoServicesTableColumnIndex(columnname);
 		int irow = getTechInfoServicesTableServiceRowIndex(servicename);
 		return getTechInfoServicesTable().findElement(By.xpath("./tbody/tr[" + irow + "]/td[" + icolumn + "]"))
