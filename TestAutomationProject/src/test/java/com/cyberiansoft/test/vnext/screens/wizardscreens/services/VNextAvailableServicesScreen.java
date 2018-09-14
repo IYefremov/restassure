@@ -1,14 +1,17 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.VNextLaborServiceDetailsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -42,7 +45,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
 	public VNextAvailableServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 
 	}
 	
@@ -157,6 +160,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 	public String getServiceListItemName(WebElement srvlistitem) {
 		return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
 	}
+
 
 	public WebElement getServiceListItem(String servicename) {
 		WebElement serviceListItem = null;

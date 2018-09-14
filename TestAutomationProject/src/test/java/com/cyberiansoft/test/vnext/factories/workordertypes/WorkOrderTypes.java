@@ -6,6 +6,7 @@ public enum WorkOrderTypes {
     O_KRAMAR2("O_Kramar2"),
     KRAMAR_AUTO("Kramar_auto"),
     KRAMAR_AUTO2("Kramar_auto2"),
+    O_KRAMAR_3_SERVICE_GROUPING("O_Kramar 3 Service grouping"),
     ALL_AUTO_PHASES("All_auto_Phases");
 
     private final String woType;
