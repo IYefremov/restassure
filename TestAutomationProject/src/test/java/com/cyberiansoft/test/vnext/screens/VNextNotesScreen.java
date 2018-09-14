@@ -126,7 +126,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 	
 	public void addFakeImageNote() {
 		if (appiumdriver instanceof JavascriptExecutor)
-		    ((JavascriptExecutor)appiumdriver).executeScript("$('[action=take-camera]').trigger('tap:fake')");
+		    ((JavascriptExecutor)appiumdriver).executeScript("$('[action=take-camera]').trigger('click:fake')");
 	}
 	
 	public void addImageToNotesFromGallery() {
