@@ -229,11 +229,11 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getEst() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Est#'")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Est#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public String getTechnician() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Tech'")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Tech")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {

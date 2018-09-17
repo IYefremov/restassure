@@ -330,6 +330,8 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElement(MobileBy.AccessibilityId(inspection)).click();
 		clickChangeCustomerpopupMenu();
 		selectCustomer(customer);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("InspectionsTable")));
 	}
 	
 	public void customersPopupSwitchToWholesailMode() {

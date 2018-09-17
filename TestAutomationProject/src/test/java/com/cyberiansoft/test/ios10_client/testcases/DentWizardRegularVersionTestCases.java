@@ -95,6 +95,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
 			RegularSettingsScreen settingsScreen = homescreen.clickSettingsButton();
 			settingsScreen.setInsvoicesCustomLayoutOff();
+			settingsScreen.setShowAvailableSelectedServicesOn();
 			settingsScreen.clickHomeButton();
 		}
 

@@ -30,8 +30,7 @@ public class RegularSelectWorkOrderTypeScreen extends iOSRegularBaseScreen {
 		if (!wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
 			swipeToElement(wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
 			wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
-		}
-		if (elementExists("OrderTypeSelector"))
+		} else
 			wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
 		return workordertype.getFirstVizardScreen();
 	}

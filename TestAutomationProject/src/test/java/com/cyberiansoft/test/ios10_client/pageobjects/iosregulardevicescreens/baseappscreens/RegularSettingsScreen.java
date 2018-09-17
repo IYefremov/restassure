@@ -61,7 +61,24 @@ public class RegularSettingsScreen extends RegularBaseAppScreen {
 		if (option.getAttribute("value").equals("0"))
 			option.click();
 	}
-	
+
+	public void setShowAvailableSelectedServicesOn() {
+		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Show Available/Selected']/..")));
+		IOSElement option = ((IOSElement) table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Show Available/Selected']")));
+		if (option.getAttribute("value").equals("0"))
+			option.click();
+	}
+
+	public void setShowAvailableSelectedServicesOff() {
+		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Show Available/Selected']/..")));
+		IOSElement option = ((IOSElement) table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Show Available/Selected']")));
+		if (option.getAttribute("value").equals("1"))
+			option.click();
+	}
+
+
 	public void setShowAllServicesOff() {
 		if (showallservicestoggle.getAttribute("value").equals("1"))
 			showallservicestoggle.click();

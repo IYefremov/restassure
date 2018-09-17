@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
@@ -15,6 +16,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SingleP
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
@@ -59,9 +61,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
-				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Test_Automation_Regular");
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Test_Automation_Regular1");
 		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
 	}
 
 	/*@BeforeMethod
@@ -71,7 +72,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}*/
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword, String licensename) throws Exception {
+			String userName, String userPassword, String licensename) {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
@@ -118,6 +119,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularSettingsScreen settingscreen =  homescreen.clickSettingsButton();
+		settingscreen.setShowAvailableSelectedServicesOn();
+		homescreen = settingscreen.clickHomeButton();
 	}
 	
 	//Test Case 8438:Update database on the device
@@ -470,6 +474,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
+
+		RegularSettingsScreen settingscreen =  homescreen.clickSettingsButton();
+		settingscreen.setShowAvailableSelectedServicesOn();
+		homescreen = settingscreen.clickHomeButton();
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
@@ -1923,8 +1931,29 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
 		invoiceinfoscreen.setPO("23");
 		invoiceinfoscreen.addWorkOrder(wonumber1);
+		final String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
+
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
+		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
+		invoiceswebpage.clickFindButton();
+		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
 	//Test Case 23401:Test 'Change customer' option for inspection
@@ -5114,6 +5143,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
 		inspectionspage.selectSearchStatus("All active");
+		inspectionspage.selectSearchTimeframe("Custom");
+		inspectionspage.setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 		inspectionspage.searchInspectionByNumber(inspnumber);		
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspnumber), "$2,000.00");
 		Assert.assertEquals(inspectionspage.getInspectionStatus(inspnumber), "Approved");
@@ -5231,7 +5262,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
+
 		invoiceswebpage.clickFindButton();
 	
 		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), _po);
@@ -5325,6 +5360,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 	
@@ -5406,6 +5444,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 	
@@ -5513,6 +5554,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.setSearchWoNumber(wonum);
 		repairorderspage.selectSearchLocation("Default Location");
+
+		repairorderspage.selectSearchTimeframe("Custom");
+		repairorderspage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		repairorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		repairorderspage.clickFindButton();
 		
 		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(wonum);
@@ -6072,7 +6117,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationsWebPage.clickInvoicesLink();
-		//invoiceswebpage.waitABit(1000);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 		invoiceswebpage.archiveInvoiceByNumber(invoicenumber);
@@ -6135,6 +6182,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		WorkOrdersWebPage workorderspage = operationsWebPage.clickWorkOrdersLink();
 
 		workorderspage.makeSearchPanelVisible();
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		workorderspage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		workorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		workorderspage.setSearchOrderNumber(wonumber3);
 		workorderspage.clickFindButton();
 

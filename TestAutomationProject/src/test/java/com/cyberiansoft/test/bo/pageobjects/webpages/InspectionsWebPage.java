@@ -400,7 +400,12 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public void approveInspectionByNumber(String inspnumber) {
-		searchInspectionByNumber(inspnumber);
+		makeSearchPanelVisible();
+		selectSearchTimeframe("Custom");
+		setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
+		setInspectionNumberSearchCriteria(inspnumber);
+		clickFindButton();
+		waitForLoading();
 		clickInspectionApproveMarker(inspnumber);
 		waitForNewTab();
 		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
