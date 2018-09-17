@@ -37,7 +37,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,

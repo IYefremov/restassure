@@ -66,7 +66,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	//@AfterMethod

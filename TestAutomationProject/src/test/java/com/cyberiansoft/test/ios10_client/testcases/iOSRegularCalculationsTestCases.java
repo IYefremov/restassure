@@ -43,7 +43,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,
@@ -2642,7 +2641,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrder(wonumber2);	
 		myworkordersscreen.clickChangeCustomerPopupMenu();
 		customersscreen.swtchToRetailMode();
-		customersscreen.selectCustomer("19319");;
+		customersscreen.selectCustomer("19319");
+		myworkordersscreen = new RegularMyWorkOrdersScreen();
 		Assert.assertFalse(myworkordersscreen.woExists(wonumber2), "Can't find work order: " + wonumber2);
 		myworkordersscreen.clickHomeButton();
 		
