@@ -477,7 +477,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
 		
 		for (int i = 0; i < numberOfImageNotes; i++)
-			notesscreen.addImageToNotesFromGallery();
+			notesscreen.addFakeImageNote();
 		notesscreen.clickScreenBackButton();
 		
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);

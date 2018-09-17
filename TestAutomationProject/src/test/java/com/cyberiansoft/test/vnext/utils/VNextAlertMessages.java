@@ -32,5 +32,5 @@ public class VNextAlertMessages {
 	public static String YOU_CANNOT_DEATTACH_THE_LAST_WORK_ORDER_FROM_INVOICE = "You cannot detach the last work order from invoice.";
 	public static String CONNECTION_IS_NOT_AVAILABLE = "Connection is not available. Please try again later";
 	public static String PORO_FIELDIS_REQUIRED = "PO/RO field is required";
-
+	public static String AMOUNT_MAST_BE_GREATER_THEN_ZERO = "Amount must be greater than zero";
 }

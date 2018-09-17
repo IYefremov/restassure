@@ -283,5 +283,20 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyAmountFieldIsRequiredForCashCheckMethod": [
+    {
+      "rowID": "testVerifyAmountFieldIsRequiredForCashCheckMethod.01",
+      "description": "Test Case 78503:Verify Amount field is Required for Cash/Check method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 }

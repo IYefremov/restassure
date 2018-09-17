@@ -50,11 +50,15 @@ public class VNextCustomKeyboard extends VNextBaseScreen {
 	}
 	
 	public void setFieldValue(String existingvalue, String newvalue) {
+		clearFieldValue(existingvalue);
+		typeValue(newvalue);
+		clickKeyboardDoneButton();
+	}
+
+	public void clearFieldValue(String existingvalue) {
 		for (int i = 0; i <= existingvalue.length()+1; i++) {
 			clickKeyboardBackspaceButton();
 		}
-		typeValue(newvalue);
-		clickKeyboardDoneButton();
 	}
 
 }

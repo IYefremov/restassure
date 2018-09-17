@@ -31,7 +31,18 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
         keyboard.setFieldValue(defAmaunt, amauntValue);
     }
 
-    public VNextInvoicesScreen clickPayButton() {
+    public void clearAmauntValue() {
+        tap(paymentAmountfld);
+        VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
+        keyboard.clearFieldValue(paymentAmountfld.getAttribute("value"));
+        keyboard.clickKeyboardDoneButton();
+    }
+
+    public void clickPayButton() {
+        tap(paybtn);
+    }
+
+    public VNextInvoicesScreen payInvoice() {
         tap(paybtn);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         System.out.println("+++++++++" + informationDialog.clickInformationDialogOKButtonAndGetMessage());

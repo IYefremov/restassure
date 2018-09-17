@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -102,6 +103,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
         ((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+        BaseUtils.waitABit(1000);
         clickCancelSearchButton();
     }
 
