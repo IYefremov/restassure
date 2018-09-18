@@ -52,8 +52,10 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	public VNextInvoiceInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='info']")));
+		wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(invoiceinfoscreen));
 	}
 	

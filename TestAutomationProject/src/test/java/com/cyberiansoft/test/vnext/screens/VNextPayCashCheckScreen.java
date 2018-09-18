@@ -13,6 +13,9 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     @FindBy(xpath="//div[@data-page='details']")
     private WebElement paycachcheckscreeen;
 
+    @FindBy(id="paymentCheckNumber")
+    private WebElement paymentCheckNumberfld;
+
     @FindBy(id="paymentAmount")
     private WebElement paymentAmountfld;
 
@@ -22,6 +25,11 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     public VNextPayCashCheckScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+    }
+
+    public void setPaymentCheckNumber(String checkNumber) {
+        paymentCheckNumberfld.clear();
+        paymentCheckNumberfld.sendKeys(checkNumber);
     }
 
     public void setAmauntValue(String amauntValue) {
@@ -45,7 +53,7 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     public VNextInvoicesScreen payInvoice() {
         tap(paybtn);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-        System.out.println("+++++++++" + informationDialog.clickInformationDialogOKButtonAndGetMessage());
+        informationDialog.clickInformationDialogOKButtonAndGetMessage();
         return new VNextInvoicesScreen(appiumdriver);
     }
 
