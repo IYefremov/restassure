@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
@@ -362,6 +363,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	@FindBy(id = "lbViewChangeScheduler")
 	private WebElement scheduler;
+
+	@FindBy(xpath = "//*[contains(@id, 'ddlTimeframe_Input')]")
+	private ComboBox searchtimeframecmb;
+
+	@FindBy(xpath = "//*[contains(@id, 'ddlTimeframe_DropDown')]")
+	private DropDown searchtimeframedd;
 
     public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
@@ -2097,5 +2104,21 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
 	}
 		return true;
+	}
+
+	public void selectSearchTimeFrame(WebConstants.TimeFrameValues timeframe) {
+		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe.getName());
+	}
+
+	public void setSearchFromDate(String date) {
+		// Thread.sleep(1000);
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateFrom_dateInput")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateFrom_dateInput")).sendKeys(date);
+	}
+
+	public void setSearchToDate(String date) {
+		// Thread.sleep(1000);
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateTo_dateInput")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateTo_dateInput")).sendKeys(date);
 	}
 }

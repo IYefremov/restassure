@@ -965,6 +965,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//servicerequestslistpage.selectSearchStatus("All On Scheduled");
 		servicerequestslistpage.selectSearchTeam(teamname);
 		servicerequestslistpage.selectSearchTechnician("Employee Simple 20%");
+		servicerequestslistpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		servicerequestslistpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		servicerequestslistpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		servicerequestslistpage.setSearchFreeText(newsrnumber);
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.verifySearchResultsByServiceName("Test Company (Universal Client)");

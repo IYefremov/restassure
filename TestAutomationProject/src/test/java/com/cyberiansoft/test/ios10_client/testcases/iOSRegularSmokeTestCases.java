@@ -1029,6 +1029,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		servicerequestslistpage.selectSearchTeam(teamname);
 		servicerequestslistpage.selectSearchTechnician("Employee Simple 20%");
+		servicerequestslistpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		servicerequestslistpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		servicerequestslistpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+
 		servicerequestslistpage.setSearchFreeText(srtowo);
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.verifySearchResultsByServiceName("Test Company (Universal Client)");
