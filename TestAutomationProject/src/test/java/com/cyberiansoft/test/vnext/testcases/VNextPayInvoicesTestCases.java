@@ -832,6 +832,48 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyNotesFieldIsOptionalForCashCheckType(String rowID,
+                                                                 String description, JSONObject testData) {
+
+        Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToTeamWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
+        vehicleinfoscreen.changeScreen("Services");
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.changeScreen("Summary");
+        VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+        wosummaryscreen.clickCreateInvoiceOption();
+        wosummaryscreen.clickWorkOrderSaveButton();
+
+        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
+        VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        VNextPayCashCheckScreen payCashCheckScreen = invoicemenuscreen.clickPayCachCheckMenuItem();
+        payCashCheckScreen.setPaymentCheckNumber("0123456789");
+        payCashCheckScreen.clickPayButton();
+
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+                VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
+
+        invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+        invoicesscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCheckFieldIsOptionalForCashCheckMethod(String rowID,
                                                                   String description, JSONObject testData) {
 
@@ -862,7 +904,6 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayCashCheckScreen payCashCheckScreen = invoicemenuscreen.clickPayCachCheckMenuItem();
-        payCashCheckScreen.setPaymentCheckNumber("0123456789");
         payCashCheckScreen.clickPayButton();
 
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);

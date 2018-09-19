@@ -315,6 +315,21 @@
     }
   ],
 
+  "testVerifyNotesFieldIsOptionalForCashCheckType": [
+    {
+      "rowID": "testVerifyNotesFieldIsOptionalForCashCheckType.01",
+      "description": "Test Case 78505:Verify Notes field is Optional for Cash/Check type",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
   "testVerifyPaymentAmountIsUpdatedAfterPartPaymentUsingCashCheckMethod": [
     {
       "rowID": "testVerifyPaymentAmountIsUpdatedAfterPartPaymentUsingCashCheckMethod.01",
