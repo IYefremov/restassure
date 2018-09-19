@@ -303,7 +303,22 @@
   "testVerifyCheckFieldIsOptionalForCashCheckMethod": [
     {
       "rowID": "testVerifyCheckFieldIsOptionalForCashCheckMethod.01",
-      "description": "Automate Test Case 78504:Verify Check field is Optional for Cash/Check method",
+      "description": "Test Case 78504:Verify Check field is Optional for Cash/Check method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyPaymentAmountIsUpdatedAfterPartPaymentUsingCashCheckMethod": [
+    {
+      "rowID": "testVerifyPaymentAmountIsUpdatedAfterPartPaymentUsingCashCheckMethod.01",
+      "description": "Test Case 78506:Verify payment amount is updated after part payment using Cash/Check method, Test Case 78507:Verify payment amount is equal to invoice unpaid amount",
       "workOrderData" : {"workOrderType": "O_Kramar",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },

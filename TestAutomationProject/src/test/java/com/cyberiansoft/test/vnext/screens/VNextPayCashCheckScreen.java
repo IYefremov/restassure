@@ -2,8 +2,10 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +17,9 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
 
     @FindBy(id="paymentCheckNumber")
     private WebElement paymentCheckNumberfld;
+
+    @FindBy(id="paymentNotes")
+    private WebElement paymentNotesfld;
 
     @FindBy(id="paymentAmount")
     private WebElement paymentAmountfld;
@@ -32,11 +37,21 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
         paymentCheckNumberfld.sendKeys(checkNumber);
     }
 
+    public void setPaymentNotes(String paymentNotes) {
+        paymentNotesfld.clear();
+        paymentNotesfld.sendKeys(paymentNotes);
+    }
+
     public void setAmauntValue(String amauntValue) {
         tap(paymentAmountfld);
         VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
         String defAmaunt = paymentAmountfld.getAttribute("value");
         keyboard.setFieldValue(defAmaunt, amauntValue);
+    }
+
+    public String getAmauntValue() {
+        WaitUtils.waitUntilElementInvisible(By.id("paymentAmount"));
+        return paymentAmountfld.getAttribute("value");
     }
 
     public void clearAmauntValue() {
