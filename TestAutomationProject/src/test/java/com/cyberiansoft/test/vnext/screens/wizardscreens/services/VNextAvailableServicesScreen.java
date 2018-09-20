@@ -53,6 +53,11 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 		tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
+
+	public VNextLaborServiceDetailsScreen openLaborServiceDetailsScreen(String servicename) {
+		tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
+		return new VNextLaborServiceDetailsScreen(appiumdriver);
+	}
 	
 	public void clickSaveButton() {
 		tap(savebtn);
