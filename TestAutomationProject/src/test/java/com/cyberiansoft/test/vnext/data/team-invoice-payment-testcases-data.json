@@ -343,5 +343,23 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyUserCanPayOneInvoiceUsingCCAndCashCheckPaymentMethod": [
+    {
+      "rowID": "testVerifyUserCanPayOneInvoiceUsingCCAndCashCheckPaymentMethod.01",
+      "description": "Test Case 78508:Verify user can pay one Invoice using CC and Cash/Check payment method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
   ]
 }
