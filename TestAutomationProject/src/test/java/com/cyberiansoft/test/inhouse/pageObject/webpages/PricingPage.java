@@ -216,17 +216,32 @@ public class PricingPage extends BasePage {
     @Step
     public PricingPage deleteFeatureGroupIfDisplayed(String featureGroupName) {
         if (isFeatureGroupDisplayed(featureGroupName)) {
-            wait
-                    .ignoring(Exception.class)
-                    .until(ExpectedConditions.elementToBeClickable(driver
-                            .findElement(By.xpath("//span[@title='" + featureGroupName +
-                    "']//following::a[@class='btn-delete btn-delete-feature-group'][1]"))))
-                    .click();
+            clickDeleteFeatureGroup(featureGroupName);
             try {
                 acceptAlert();
             } catch (Exception ignored) {}
         }
         return this;
+    }
+
+    @Step
+    public PricingPage cancelDeletingFeatureGroupIfDisplayed(String featureGroupName) {
+        if (isFeatureGroupDisplayed(featureGroupName)) {
+            clickDeleteFeatureGroup(featureGroupName);
+            try {
+                dismissAlert();
+            } catch (Exception ignored) {}
+        }
+        return this;
+    }
+
+    public void clickDeleteFeatureGroup(String featureGroupName) {
+        wait
+                .ignoring(Exception.class)
+                .until(ExpectedConditions.elementToBeClickable(driver
+                        .findElement(By.xpath("//span[@title='" + featureGroupName +
+                "']//following::a[@class='btn-delete btn-delete-feature-group'][1]"))))
+                .click();
     }
 
     @Step
@@ -244,6 +259,7 @@ public class PricingPage extends BasePage {
         return this;
     }
 
+    @Step
     public boolean isFeatureDisplayed(String featureGroupName, String feature) {
         try {
             return wait.until(ExpectedConditions.visibilityOfElementLocated(By
@@ -255,6 +271,7 @@ public class PricingPage extends BasePage {
         }
     }
 
+    @Step
     public boolean isFeatureNotDisplayed(String featureGroup, String feature) {
         try {
             return waitShortly.until(ExpectedConditions.invisibilityOfElementLocated(By
@@ -265,18 +282,42 @@ public class PricingPage extends BasePage {
         }
     }
 
+    @Step
     public PricingPage deleteFeature(String featureGroup, String feature) {
+        clickDeleteIfFeatureIsDisplayed(featureGroup, feature);
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@title='" + featureGroup +
-                    "']//following::span[text()='" + feature + "']//following::a[@class='btn-delete btn-delete-feature']")))
+            acceptAlert();
+        } catch (Exception ignored) {}
+        return this;
+    }
+
+    public void clickDeleteIfFeatureIsDisplayed(String featureGroup, String feature) {
+        if (isFeatureDisplayed(featureGroup, feature)) {
+            clickDeleteFeatureButton(featureGroup, feature);
+        }
+    }
+
+    @Step
+    public PricingPage cancelDeletingFeature(String featureGroup, String feature) {
+        clickDeleteIfFeatureIsDisplayed(featureGroup, feature);
+        try {
+            dismissAlert();
+        } catch (Exception ignored) {}
+        return this;
+    }
+
+    public void clickDeleteFeatureButton(String featureGroup, String feature) {
+        try {
+            wait
+                    .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@title='" + featureGroup +
+                            "']//following::span[text()='" + feature + "']//following::a[@class='btn-delete btn-delete-feature']")))
                     .click();
         } catch (Exception e) {
             Assert.fail("The feature " + feature + " \"Delete\" button has been not clicked", e);
         }
-        acceptAlert();
-        return this;
     }
 
+    @Step
     public void verifyFeaturesAreDeleted(String featureGroup, List<String> features) {
         for (String feature: features) {
             Assert.assertTrue(isFeatureNotDisplayed(featureGroup, feature),
@@ -284,6 +325,20 @@ public class PricingPage extends BasePage {
         }
     }
 
+    @Step
+    public UpdateEditionDialog clickEditEditionButton(String editionName) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(By
+                    .xpath("//h3[text()='" + editionName +
+                            "']/preceding-sibling::div/div[@class='dropdown add-edition-cell-container']")))
+                    .click();
+        } catch (Exception e) {
+            Assert.fail("The edition " + editionName + " hasn't been clicked", e);
+        }
+        return PageFactory.initElements(driver, UpdateEditionDialog.class);
+    }
+
+    @Step
     public UpdateFeatureDialog clickFeature(String featureGroup, String feature) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(By
@@ -293,5 +348,17 @@ public class PricingPage extends BasePage {
             Assert.fail("The feature " + feature + " hasn't been clicked", e);
         }
         return PageFactory.initElements(driver, UpdateFeatureDialog.class);
+    }
+
+    @Step
+    public FeatureGroupDialog clickFeatureGroup(String featureGroup) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(By
+                    .xpath("//span[@title='" + featureGroup + "']")))
+                    .click();
+        } catch (Exception e) {
+            Assert.fail("The feature group " + featureGroup + " hasn't been clicked", e);
+        }
+        return PageFactory.initElements(driver, FeatureGroupDialog.class);
     }
 }

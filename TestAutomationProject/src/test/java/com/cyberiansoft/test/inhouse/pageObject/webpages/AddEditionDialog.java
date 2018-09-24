@@ -11,7 +11,7 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AddEditionDialog extends BasePage {
+public class AddEditionDialog extends EditionDialog {
 
     @FindBy(xpath = "//div[@class='form-dialog add-edition-dialog active']")
     private WebElement addEditionDialogOpened;
@@ -22,7 +22,7 @@ public class AddEditionDialog extends BasePage {
     @FindBy(xpath = "//input[@class='form-control valid' and @id='Name']")
     private WebElement nameTextField;
 
-    @FindBy(xpath = "//input[@class='form-control valid' and @id='PricePerMonth']")
+    @FindBy(xpath = "//div[@id='add-edition-dialog']//input[@class='form-control valid' and @id='PricePerMonth']")
     private WebElement priceTextField;
 
     @FindBy(xpath = "//select[@class='form-control mapping-ibs-service-select valid']")
@@ -72,30 +72,35 @@ public class AddEditionDialog extends BasePage {
     }
 
     @Step
+    @Override
     public AddEditionDialog typeEditionName(String name) {
         clearAndType(nameTextField, name);
         return this;
     }
 
     @Step
+    @Override
     public AddEditionDialog typePrice(String price) {
         clearAndType(priceTextField, price);
         return this;
     }
 
     @Step
+    @Override
     public AddEditionDialog selectRandomMappingIBSservice() {
         selectRandomValue(mappingIBSservice);
         return this;
     }
 
     @Step
+    @Override
     public AddEditionDialog clickRecommendedCheckbox() {
         wait.until(ExpectedConditions.elementToBeClickable(recommendedCheckbox)).click();
         return this;
     }
 
     @Step
+    @Override
     public AddEditionDialog clickAddDiscountButton() {
         clickButton(addDiscountButton);
         try {
@@ -107,7 +112,8 @@ public class AddEditionDialog extends BasePage {
     }
 
     @Step
-    public AddEditionDialog typeMinimumLicenses(String license) {
+    @Override
+    public AddEditionDialog typeMinimumLicense(String license) {
         clearAndType(discountMinimumLicenses, license);
         return this;
     }
@@ -126,6 +132,7 @@ public class AddEditionDialog extends BasePage {
     }
 
     @Step
+    @Override
     public AddEditionDialog clickSubmitDiscountButton() {
         clickButton(discountSubmitButton);
         verifyDiscountDropupIsClosed();
@@ -138,21 +145,6 @@ public class AddEditionDialog extends BasePage {
             wait.until(ExpectedConditions.visibilityOf(discountDropupClosed));
         } catch (Exception e) {
             Assert.fail("The discount dropup has not been closed", e);
-        }
-    }
-
-    @Step
-    private boolean areValuesDisplayed(List<String> values, List<String> listText) {
-        try {
-            return values
-                    .stream()
-                    .limit(3)
-                    .collect(Collectors.toList())
-                    .stream()
-                    .anyMatch(listText::contains);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
     }
 
@@ -172,22 +164,6 @@ public class AddEditionDialog extends BasePage {
     }
 
     @Step
-    private List<String> getValues(List<WebElement> newPriceValues) {
-        return newPriceValues
-                .stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
-    }
-
-    @Step
-    private List<String> getEditedInputTestData(List<String> textList) {
-        return textList
-                .stream()
-                .map(e -> e.replaceFirst("[.]\\d*", ""))
-                .collect(Collectors.toList());
-    }
-
-    @Step
     public PricingPage clickAddEditionSubmitButton() {
         clickButton(addEditionSubmitButton);
         waitForLoading();
@@ -199,7 +175,7 @@ public class AddEditionDialog extends BasePage {
     public void addDiscounts(List<String> minCommitments, List<String> newPrices) {
         for (int i = 0; i < minCommitments.size(); i++) {
             clickAddDiscountButton()
-                    .typeMinimumLicenses(minCommitments.get(i))
+                    .typeMinimumLicense(minCommitments.get(i))
                     .typeNewPrice(newPrices.get(i))
                     .clickSubmitDiscountButton();
             waitABit(2000);

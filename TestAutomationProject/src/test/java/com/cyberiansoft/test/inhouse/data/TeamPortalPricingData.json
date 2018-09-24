@@ -330,5 +330,105 @@
       "pricePerMonth": "25",
       "pricePerYear": "50"
     }
+  ],
+
+  "verifyUserCanChangeDiscountForEdition": [
+    {
+      "rowID": "verifyUserCanChangeDiscountForEdition.01",
+      "description": "Test Case 76943:Verify user can change discount for Edition",
+      "editionName": "Auto Edition",
+      "prices": [
+        "3"
+      ],
+      "minCommitments": [
+        "3"
+      ]
+    }
+  ],
+
+  "verifyUserCanEditFeatureGroup": [
+    {
+      "rowID": "verifyUserCanEditFeatureGroup.01",
+      "description": "Test Case 76944:Verify user can edit feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureGroupNameEdited": "New Auto feature group",
+      "featureGroupStateEdited": "Draft",
+      "featureGroupMarketingInfoEdited": "New Marketing info"
+    }
+  ],
+
+  "verifyUserCanCancelDeletingFeatureGroup": [
+    {
+      "rowID": "verifyUserCanCancelDeletingFeatureGroup.01",
+      "description": "Test Case 76945:Verify user can cancel deleting feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes"
+    }
+  ],
+
+  "verifyUserCanCancelDeletingFeatureFromFeatureGroup": [
+    {
+      "rowID": "verifyUserCanCancelDeletingFeatureFromFeatureGroup.01",
+      "description": "Test Case 76946:Verify user can cancel deleting feature from feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureNames": [
+        "Auto feature for features group",
+        "Auto feature for features group2",
+        "Auto feature for features group3"
+      ],
+
+      "featureState": "Public View",
+
+      "featureDescriptions": [
+        "My test Notes",
+        "My test Notes2",
+        "My test Notes3"
+      ],
+
+      "featureMarketingInfoList": [
+        "Marketing_info",
+        "Marketing_info2",
+        "Marketing_info3"
+      ]
+    }
+  ],
+
+  "verifyUserCanAddSetupFeeForFeatureGroup": [
+    {
+      "rowID": "verifyUserCanAddSetupFeeForFeatureGroup.01",
+      "description": "Test Case 76947:Verify user can add Setup fee for feature group",
+      "featureGroupName": "Auto feature group",
+      "featureGroupState": "Public",
+      "featureGroupMarketingInfo": "Test notes",
+      "featureNames": [
+        "Auto feature for features group",
+        "Auto feature for features group2",
+        "Auto feature for features group3"
+      ],
+
+      "featureState": "Public View",
+
+      "featureDescriptions": [
+        "My test Notes",
+        "My test Notes2",
+        "My test Notes3"
+      ],
+
+      "featureMarketingInfoList": [
+        "Marketing_info",
+        "Marketing_info2",
+        "Marketing_info3"
+      ],
+
+      "setupFeeName": "FeeName",
+      "setupFeeQuantity": "22",
+      "setupFeePrice": "123",
+      "setupFeeEstimatedHours": "8"
+    }
   ]
 }

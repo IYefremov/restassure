@@ -55,11 +55,11 @@ public class TeamPortalPricingPageTestCases extends BaseTestCase {
                 .typePrice(data.getPrice())
                 .clickRecommendedCheckbox()
                 .clickAddDiscountButton()
-                .typeMinimumLicenses(data.getMinCommitments().get(0))
+                .typeMinimumLicense(data.getMinCommitments().get(0))
                 .typeNewPrice(data.getPrices().get(0))
                 .clickCancelDiscountButton()
                 .clickAddDiscountButton()
-                .typeMinimumLicenses(data.getMinCommitments().get(1))
+                .typeMinimumLicense(data.getMinCommitments().get(1))
                 .typeNewPrice(data.getPrices().get(1))
                 .clickSubmitDiscountButton();
         Assert.assertTrue(addEditionDialog.areMinimumCommitmentValuesDisplayed(data.getMinCommitments()));
@@ -131,6 +131,7 @@ public class TeamPortalPricingPageTestCases extends BaseTestCase {
         Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
         pricingPage.addFeaturesToFeatureGroup(data.getFeatureGroupName(), data.getFeatureNames(),
                 data.getFeatureState(), data.getFeatureMarketingInfoList());
+
         pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupName());
     }
 
@@ -509,5 +510,147 @@ public class TeamPortalPricingPageTestCases extends BaseTestCase {
         Assert.assertTrue(pricingPage.labelContainsPrice(data.getPricePerYear()),
                 "The price per year has not been saved for the recommended edition");
         pricingPage.deleteEditionIfDisplayed(data.getEditionName());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeDiscountForEdition(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteEditionIfDisplayed(data.getEditionName())
+                .clickAddEditionButton()
+                .typeEditionName(data.getEditionName())
+                .selectRandomMappingIBSservice()
+                .typePrice(data.getPrices().get(0))
+                .clickRecommendedCheckbox()
+                .clickAddEditionSubmitButton();
+        Assert.assertTrue(pricingPage.isRecommendedEditionDisplayed(data.getEditionName()));
+        UpdateEditionDialog updateEditionDialog = pricingPage
+                .clickEditEditionButton(data.getEditionName())
+                .clickAddDiscountButton()
+                .typeMinimumLicense(data.getMinCommitments().get(0))
+                .typePrice(data.getPrices().get(0))
+                .clickSubmitDiscountButton();
+        updateEditionDialog.clickUpdateEditionButton();
+
+        Assert.assertTrue(updateEditionDialog.areMinimumCommitmentValuesDisplayed(data.getMinCommitments()));
+        Assert.assertTrue(updateEditionDialog.areNewPriceValuesDisplayed(data.getPrices()));
+
+        pricingPage.deleteEditionIfDisplayed(data.getEditionName());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanEditFeatureGroup(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupName())
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupNameEdited())
+                .clickAddFeatureGroupButton()
+                .typeFeatureGroupName(data.getFeatureGroupName())
+                .selectFeatureGroupState(data.getFeatureGroupState())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfo())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+
+        pricingPage
+                .clickFeatureGroup(data.getFeatureGroupName())
+                .typeFeatureGroupName(data.getFeatureGroupNameEdited())
+                .selectFeatureGroupState(data.getFeatureGroupStateEdited())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfoEdited())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupNameEdited()));
+        FeatureGroupDialog featureGroupDialog = pricingPage.clickFeatureGroup(data.getFeatureGroupNameEdited());
+        Assert.assertEquals(featureGroupDialog.getSelectedFeatureGroupState(), data.getFeatureGroupStateEdited(),
+                "The feature group state hasn't been changed after editing");
+
+        pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupNameEdited());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCancelDeletingFeatureGroup(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupName())
+                .clickAddFeatureGroupButton()
+                .typeFeatureGroupName(data.getFeatureGroupName())
+                .selectFeatureGroupState(data.getFeatureGroupState())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfo())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+
+        pricingPage.cancelDeletingFeatureGroupIfDisplayed(data.getFeatureGroupName());
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+
+        pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupNameEdited());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCancelDeletingFeatureFromFeatureGroup(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupName())
+                .clickAddFeatureGroupButton()
+                .typeFeatureGroupName(data.getFeatureGroupName())
+                .selectFeatureGroupState(data.getFeatureGroupState())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfo())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+        pricingPage.addFeaturesToFeatureGroup(data.getFeatureGroupName(), data.getFeatureNames(),
+                data.getFeatureState(), data.getFeatureMarketingInfoList());
+        pricingPage.cancelDeletingFeature(data.getFeatureGroupName(), data.getFeatureNames().get(0));
+        Assert.assertTrue(pricingPage.isFeatureDisplayed(data.getFeatureGroupName(), data.getFeatureNames().get(0)));
+
+        pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupName());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanAddSetupFeeForFeatureGroup(String rowID, String description, JSONObject testData) {
+        TeamPortalPricingData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalPricingData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+        PricingPage pricingPage = leftMenuPanel
+                .clickPricing()
+                .enableEditMode();
+        Assert.assertTrue(pricingPage.isEditModeEnabled(), "The Edit mode has not been enabled");
+        pricingPage
+                .deleteFeatureGroupIfDisplayed(data.getFeatureGroupName())
+                .clickAddFeatureGroupButton()
+                .typeFeatureGroupName(data.getFeatureGroupName())
+                .selectFeatureGroupState(data.getFeatureGroupState())
+                .typeMarketingInfo(data.getFeatureGroupMarketingInfo())
+                .clickFeatureGroupSubmitButton();
+        Assert.assertTrue(pricingPage.isFeatureGroupDisplayed(data.getFeatureGroupName()));
+        pricingPage.addFeaturesToFeatureGroup(data.getFeatureGroupName(), data.getFeatureNames(),
+                data.getFeatureState(), data.getFeatureMarketingInfoList());
+
+        UpdateFeatureDialog updateFeatureDialog = pricingPage.clickFeature(data.getFeatureGroupName(), data.getFeatureNames().get(0));
+        updateFeatureDialog.clickAddSetupFeeButton()
+                .typeSetupFeeName(data.getSetupFeeName())
+                .typeSetupFeeQuantity(data.getSetupFeeQuantity())
+                .typeSetupFeePrice(data.getSetupFeePrice())
+                .typeSetupFeeEstimatedHours(data.getSetupFeeEstimatedHours())
+                .clickSetupFeeSubmitButton();
+        Assert.assertTrue(updateFeatureDialog.getSetupFeeTableDataText().containsAll(data.getSetupFeeData()));
+        updateFeatureDialog.clickUpdateFeatureButton();
+
+        pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupName());
     }
 }

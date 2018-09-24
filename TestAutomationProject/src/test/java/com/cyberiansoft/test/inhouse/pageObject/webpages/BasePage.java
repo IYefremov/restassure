@@ -124,7 +124,7 @@ public class BasePage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(addEditionButton)).click();
         } catch (Exception e) {
-            Assert.fail("The button has been not clicked", e);
+            Assert.fail("The button has not been clicked", e);
         }
     }
 
@@ -156,5 +156,15 @@ public class BasePage {
         wait.until(ExpectedConditions.alertIsPresent()).accept();
         waitForLoading();
         waitABit(2000);
+    }
+
+    @Step
+    public void dismissAlert() {
+        wait.until(ExpectedConditions.alertIsPresent()).dismiss();
+        wait.until(ExpectedConditions.not(ExpectedConditions.alertIsPresent()));
+    }
+
+    public void setZoom(int zoom) {
+        ((JavascriptExecutor)driver).executeScript("document.body.style.zoom='" + zoom + "%'", "");
     }
 }

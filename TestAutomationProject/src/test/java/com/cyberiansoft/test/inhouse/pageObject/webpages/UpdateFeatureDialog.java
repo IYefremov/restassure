@@ -145,7 +145,8 @@ public class UpdateFeatureDialog extends FeatureDialog {
     }
 
     private PricingPage closeUpdateFeatureDialog(WebElement updateFeatureCloseButton) {
-        clickButton(updateFeatureCloseButton);
+//        clickButton(updateFeatureCloseButton);
+        clickWithJS(updateFeatureCloseButton);
         waitForLoading();
         waitABit(2000);
         return PageFactory.initElements(driver, PricingPage.class);
