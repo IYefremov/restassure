@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.ios10_client.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 public class ExcelUtils {
 	
@@ -63,7 +64,7 @@ public class ExcelUtils {
 			}
 		}
 
-	public static int getColumnIndex(XSSFSheet DataWSheet, String columnname) throws Exception {
+	public static int getColumnIndex(XSSFSheet DataWSheet, String columnname) {
 		int collnum  = -1;
 		for (int i = 0; i < DataWSheet.getRow(0).getPhysicalNumberOfCells(); i++) {
 			if (DataWSheet.getRow(0).getCell(i).getStringCellValue().equals(columnname)) {
@@ -74,7 +75,7 @@ public class ExcelUtils {
 		return collnum;		
 	}
 	
-	public static int getTestCaseRow(String testcase) throws Exception {
+	public static int getTestCaseRow(String testcase) {
 		int collnum  = getColumnIndex(TestCasesDataWSheet, testcasecolumnname);
 		if (collnum == -1) {
 			return -1;
@@ -87,7 +88,7 @@ public class ExcelUtils {
 		return -1;		
 	}
 	
-	public static int getRetailHailDataRow(String testcase) throws Exception {
+	public static int getRetailHailDataRow(String testcase) {
 		int collnum  = getColumnIndex(RetailHailDataWSheet, testcasecolumnname);
 		if (collnum == -1) {
 			return -1;
@@ -100,7 +101,7 @@ public class ExcelUtils {
 		return -1;		
 	}
 	
-	public static String getTestCasesData(int testcaserow, String columnname) throws Exception {
+	public static String getTestCasesData(int testcaserow, String columnname) {
 		if (testcaserow == -1) {
 			return "";
 		}
@@ -110,59 +111,59 @@ public class ExcelUtils {
 			return TestCasesDataWSheet.getRow(testcaserow).getCell(getColumnIndex(TestCasesDataWSheet, columnname)).getRawValue();
 	}
 	
-	public static String getVIN(int testcaserow) throws Exception {
+	public static String getVIN(int testcaserow) {
 		return getTestCasesData(testcaserow, vincolumnname);
 	}
 	
-	public static String getMake(int testcaserow) throws Exception {
+	public static String getMake(int testcaserow) {
 		return getTestCasesData(testcaserow, makecolumnname);
 	}
 	
-	public static String getModel(int testcaserow) throws Exception {
+	public static String getModel(int testcaserow) {
 		return getTestCasesData(testcaserow, modelcolumnname);
 	}
 	
-	public static String getYear(int testcaserow) throws Exception {
+	public static String getYear(int testcaserow) {
 		return getTestCasesData(testcaserow, yearcolumnname);
 	}
 	
-	public static String getStock(int testcaserow) throws Exception {
+	public static String getStock(int testcaserow) {
 		return getTestCasesData(testcaserow, stockcolumnname);
 	}
 	
-	public static String getRO(int testcaserow) throws Exception {
+	public static String getRO(int testcaserow) {
 		return getTestCasesData(testcaserow, rocolumnname);
 	}
 
 	//================================== Prices ================
 	
-	public static String getServicePrice(int testcaserow) throws Exception {
+	public static String getServicePrice(int testcaserow) {
 		return getTestCasesData(testcaserow, serviceprice);
 	}
 	
-	public static String getServicePrice2(int testcaserow) throws Exception {
+	public static String getServicePrice2(int testcaserow) {
 		return getTestCasesData(testcaserow, serviceprice2);
 	}
 	
-	public static String getServicePrice3(int testcaserow) throws Exception {
+	public static String getServicePrice3(int testcaserow) {
 		return getTestCasesData(testcaserow, serviceprice3);
 	}
 	
-	public static String getServicePrice4(int testcaserow) throws Exception {
+	public static String getServicePrice4(int testcaserow) {
 		return getTestCasesData(testcaserow, serviceprice4);
 	}
 	
 	
-	public static String getTotalSumm(int testcaserow) throws Exception {
+	public static String getTotalSumm(int testcaserow) {
 		return getTestCasesData(testcaserow, totalsumm);
 	}
 	
-	public static String getTotalSumm2(int testcaserow) throws Exception {
+	public static String getTotalSumm2(int testcaserow) {
 		return getTestCasesData(testcaserow, totalsumm2);
 	}
 	
 	//================================== Retail Hail Data ================
-	public static String getRetailHailData(int testcaserow, String columnname) throws Exception {
+	public static String getRetailHailData(int testcaserow, String columnname) {
 		if (testcaserow == -1) {
 			return "";
 		}
@@ -172,51 +173,51 @@ public class ExcelUtils {
 			return RetailHailDataWSheet.getRow(testcaserow).getCell(getColumnIndex(RetailHailDataWSheet, columnname)).getRawValue();
 	}
 	
-	public static String getOwnerName(int testcaserow) throws Exception {
+	public static String getOwnerName(int testcaserow) {
 		return getRetailHailData(testcaserow, ownernamecolumn);
 	}
 	
-	public static String getOwnerAddress(int testcaserow) throws Exception {
+	public static String getOwnerAddress(int testcaserow) {
 		return getRetailHailData(testcaserow, owneraddresscolumn);
 	}
 	
-	public static String getownerState(int testcaserow) throws Exception {
+	public static String getownerState(int testcaserow) {
 		return getRetailHailData(testcaserow, ownerstatecolumnn);
 	}
 	
-	public static String getownerCity(int testcaserow) throws Exception {
+	public static String getownerCity(int testcaserow) {
 		return getRetailHailData(testcaserow, ownercitycolumnn);
 	}
 	
-	public static String getOwnerZip(int testcaserow) throws Exception {
+	public static String getOwnerZip(int testcaserow) {
 		return getRetailHailData(testcaserow, ownerzipcolumnn);
 	}
 	
-	public static String getInsuranceCompany(int testcaserow) throws Exception {
+	public static String getInsuranceCompany(int testcaserow) {
 		return getRetailHailData(testcaserow, insurancecompanycolumnn);
 	}
 	
-	public static String getClaim(int testcaserow) throws Exception {
+	public static String getClaim(int testcaserow) {
 		return getRetailHailData(testcaserow, claimcolumnn);
 	}
 	
-	public static String getPriceMatrix(int testcaserow) throws Exception {
+	public static String getPriceMatrix(int testcaserow){
 		return getRetailHailData(testcaserow, pricematrix1column);
 	}
 	
-	public static String getPriceMatrix2(int testcaserow) throws Exception {
+	public static String getPriceMatrix2(int testcaserow) {
 		return getRetailHailData(testcaserow, pricematrix2column);
 	}
 	
-	public static String getDiscount(int testcaserow) throws Exception {
+	public static String getDiscount(int testcaserow) {
 		return getRetailHailData(testcaserow, discount1column);
 	}
 	
-	public static String getDiscount2(int testcaserow) throws Exception {
+	public static String getDiscount2(int testcaserow) {
 		return getRetailHailData(testcaserow, discount2column);
 	}
 	
-	public static String getDiscount3(int testcaserow) throws Exception {
+	public static String getDiscount3(int testcaserow) {
 		return getRetailHailData(testcaserow, discount3column);
 	}
 }

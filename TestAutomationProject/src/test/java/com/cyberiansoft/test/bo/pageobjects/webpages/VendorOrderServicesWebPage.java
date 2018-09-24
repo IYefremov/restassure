@@ -105,6 +105,7 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	}
 	
 	public List<WebElement> getRepairOrderServiceTableRows() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_gv_ctl00")));
 		return servicestable.getTableRows();
 	}
 	

@@ -6,6 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,7 +31,12 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
         wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
-        BaseUtils.waitABit(500);
+        if (!appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")).isDisplayed()) {
+            WebElement elem = appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']"));
+            JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+            je.executeScript("arguments[0].scrollIntoView(true);",elem);
+            BaseUtils.waitABit(500);
+        }
         tap(typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")));
     }
 }

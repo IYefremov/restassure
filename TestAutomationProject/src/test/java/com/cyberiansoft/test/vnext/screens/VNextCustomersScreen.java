@@ -49,7 +49,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	public VNextCustomersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);	
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.visibilityOf(customersscreen));
 		BaseUtils.waitABit(1500);
 		if (checkHelpPopupPresence())		

@@ -37,7 +37,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,
@@ -1866,8 +1865,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		Assert.assertEquals(myinvoicesscreen.getPriceForInvoice(invoicenumber), "$987.52");
 		myinvoicesscreen.clickHomeButton();
 	}
-	
-	String wonumber45224 = null;
+
+	String invoicenumber45224 = null;
 	
 	@Test(testName = "Test Case 45224:WO: HD - Verify calculation with price matrix Labor type", 
 			description = "WO: HD - Verify calculation with price matrix Labor type")
@@ -1884,7 +1883,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehiclescreen.setVIN(VIN);
-		wonumber45224 = vehiclescreen.getInspectionNumber();
+		String wonumber = vehiclescreen.getInspectionNumber();
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
@@ -1940,14 +1939,14 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 		InvoiceInfoScreen invoiceinfoscreen = questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceinfoscreen.setPO("12345");
-		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+		invoicenumber45224 = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsFinal();
 		
 		myworkordersscreen.clickFilterButton();
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
 		
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber45224), "$542.68");
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$542.68");
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
 
@@ -1966,10 +1965,10 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		
-		invoicespage.setSearchInvoiceNumber(wonumber45224);
+		invoicespage.setSearchInvoiceNumber(invoicenumber45224);
 		invoicespage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
-		invoicespage.clickInvoicePrintPreview(wonumber45224);
+		invoicespage.clickInvoicePrintPreview(invoicenumber45224);
 		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceListValue("Matrix Service"), "$100.00");
 		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceNetValue("Matrix Service"), "$112.50");
 		Assert.assertEquals(invoicespage.getPrintPreviewTestMartrixLaborServiceListValue("Test service zayats"), "$100.00");

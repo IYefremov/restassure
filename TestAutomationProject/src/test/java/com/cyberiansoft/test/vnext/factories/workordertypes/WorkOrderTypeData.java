@@ -22,6 +22,10 @@ public class WorkOrderTypeData {
                 workOrderTypeID = "5db7c5ec-42c6-4e78-bab2-3f4edfc089b0";
                 canBeFinalDraft= false;
                 break;
+            case O_KRAMAR_3_SERVICE_GROUPING:
+                workOrderTypeID = "5db7c5ec-42c6-4e78-bab2-3f4edfc089b0";
+                canBeFinalDraft= false;
+                break;
             case ALL_AUTO_PHASES:
                 workOrderTypeID = "5db7c5ec-42c6-4e78-bab2-3f4edfc089b0";
                 canBeFinalDraft= false;

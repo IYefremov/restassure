@@ -671,12 +671,12 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
 		for (int i = 0; i < amountToSelect; i++)
 			availableServicesScreen.selectService(moneyservice);
-		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), amountToSelect);
 		for (int i = 0; i < amountToSelect; i++)
 			availableServicesScreen.selectService(percentageservice);
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
 
 		selectedServicesScreen.saveInspectionViaMenu();
@@ -685,24 +685,24 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen.swipeScreenLeft();
 		vehicleinfoscreen.swipeScreenLeft();
 		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
-		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), amountToSelect);
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
 		selectedServicesScreen.uselectService(percentageservice);
 		selectedServicesScreen.uselectService(percentageservice);
 		selectedServicesScreen.uselectService(moneyservice);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), defaultCountForMoneyService);
 		selectedServicesScreen.switchToAvalableServicesView();
-		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), 0);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), 2);
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), defaultCountForMoneyService);
 		availableServicesScreen.selectService(percentageservice);
 		availableServicesScreen.selectService(percentageservice);
 		availableServicesScreen.selectService(moneyservice);
 
 		availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
 		availableServicesScreen.saveInspection();
 		inspectionscreen.switchToMyInspectionsView();

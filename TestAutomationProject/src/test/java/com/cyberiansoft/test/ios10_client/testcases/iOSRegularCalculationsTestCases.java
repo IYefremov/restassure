@@ -13,6 +13,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailSc
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
@@ -42,7 +43,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,
@@ -77,6 +77,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularSettingsScreen settingscreen =  homescreen.clickSettingsButton();
+		settingscreen.setShowAvailableSelectedServicesOn();
+		homescreen = settingscreen.clickHomeButton();
 	}
 	
 	//Test Case 8553:Create inspection on the device with approval required
@@ -2638,7 +2641,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrder(wonumber2);	
 		myworkordersscreen.clickChangeCustomerPopupMenu();
 		customersscreen.swtchToRetailMode();
-		customersscreen.selectCustomer("19319");;
+		customersscreen.selectCustomer("19319");
+		myworkordersscreen = new RegularMyWorkOrdersScreen();
 		Assert.assertFalse(myworkordersscreen.woExists(wonumber2), "Can't find work order: " + wonumber2);
 		myworkordersscreen.clickHomeButton();
 		

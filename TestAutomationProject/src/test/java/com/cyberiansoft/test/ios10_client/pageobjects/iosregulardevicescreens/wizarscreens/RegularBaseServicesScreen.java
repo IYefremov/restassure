@@ -28,7 +28,7 @@ public class RegularBaseServicesScreen extends RegularBaseWizardScreen {
     }
 
     public RegularSelectedServicesScreen switchToSelectedServicesTab() {
-        selectedtab.click();
+        appiumdriver.findElementByXPath("//XCUIElementTypeButton[contains(@name, 'Selected')]").click();
         return new RegularSelectedServicesScreen();
     }
 

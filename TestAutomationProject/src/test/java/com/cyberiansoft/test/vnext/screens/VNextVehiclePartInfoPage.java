@@ -2,9 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -56,7 +54,9 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	
 	public void selectVehiclePartSeverity(String vehiclepartseverity) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable(vehiclepartseverityselect));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@action='severity']")));
+		//wait = new WebDriverWait(appiumdriver, 15);
+		//wait.until(ExpectedConditions.elementToBeClickable(vehiclepartseverityselect));
 		tap(vehiclepartseverityselect);
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartseverity + "')]")));
 	}
@@ -69,12 +69,22 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
 	}
 
-	public void openVehiclePartAdditionalServiceDetails(String additionalservicename) {
+	public VNextServiceDetailsScreen openVehiclePartAdditionalServiceDetails(String additionalservicename) {
 		WebElement addservs = getVehiclePartAdditionalServiceCell(additionalservicename);
 		if (addservs != null)
 			tap(addservs.findElement(By.xpath(".//div[@class='checkbox-item-title']")));
 		else
 			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
+		return new VNextServiceDetailsScreen(appiumdriver);
+	}
+
+	public VNextLaborServiceDetailsScreen openVehiclePartLaborServiceDetails(String additionalservicename) {
+		WebElement addservs = getVehiclePartAdditionalServiceCell(additionalservicename);
+		if (addservs != null)
+			tap(addservs.findElement(By.xpath(".//div[@class='checkbox-item-title']")));
+		else
+			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
+		return new VNextLaborServiceDetailsScreen(appiumdriver);
 	}
 
 	public void selectVehiclePartAdditionalServices(List<ServiceData> additionalServices) {
@@ -161,6 +171,8 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	}
 
 	public String getMatrixServiceTotalPriceValue() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(vehiclepartinfoscreen.findElement(By.xpath(".//span[@class='money-wrapper']"))));
 		return vehiclepartinfoscreen.findElement(By.xpath(".//span[@class='money-wrapper']")).getText();
 	}
 	
@@ -177,45 +189,10 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		return new VNextNotesScreen(appiumdriver);
 	}
 
-	public VNextLaborServicePartsList clickSelectPanelsAndPartsForLaborService(LaborServiceData laborService) {
-		//WebElement servicerow = getSelectedServiceCell(laborService.getServiceName());
-		//if (servicerow != null) {
-		//	tap(servicerow.findElement(By.xpath(".//div[@class='checkbox-item-title']")));
-			/*if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
-				tap(servicerow);
-			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
-				tap(servicerow);*/
-			tap(appiumdriver.findElement(By.xpath("//div[@action='select-panel']")));
-		//} else
-		//	Assert.assertTrue(false, "Can't find service: " + laborService.getServiceName());
-		return new VNextLaborServicePartsList(appiumdriver);
-	}
 
-	public WebElement expandLaborServiceDetails(LaborServiceData laborService) {
-		WebElement servicerow = getSelectedServiceCell(laborService.getServiceName());
-		if (servicerow != null) {
-			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
-				tap(servicerow);
-			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
-				tap(servicerow);
-		} else
-			Assert.assertTrue(false, "Can't find service: " + laborService.getServiceName());
-		return servicerow;
-	}
 
-	public String getLaborServiceRate(LaborServiceData laborService) {
-		WebElement servicerow =expandLaborServiceDetails(laborService);
-		return servicerow.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value").trim();
-	}
 
-	public String getLaborServiceTime(LaborServiceData laborService) {
-		WebElement servicerow =expandLaborServiceDetails(laborService);
-		return servicerow.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value").trim();
-	}
 
-	public String getLaborServiceNotes(LaborServiceData laborService) {
-		WebElement servicerow =expandLaborServiceDetails(laborService);
-		return servicerow.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).getText().trim();
-	}
+
 
 }

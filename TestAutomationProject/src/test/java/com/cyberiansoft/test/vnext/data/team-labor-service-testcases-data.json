@@ -58,7 +58,7 @@
         "matrixPart" : {"matrixPartName": "Anastasia Part", "partSize": "DIME", "partSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence",
           "laborServicePart": "Refinish Liftgate Frame",
           "laborServiceRate": "99.12",
-          "laborServiceTime": "2.00",
+          "laborServiceTime": "2.0",
           "laborServiceNotes": "Liftgate Frame - Refinish Liftgate Frame" }
         }
       },

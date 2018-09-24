@@ -43,7 +43,6 @@ public class NewTestCases extends BaseTestCase {
 		initTestUser(userLogin, userPassword);
 		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword, licensename);
 		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,

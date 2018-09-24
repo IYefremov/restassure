@@ -214,13 +214,169 @@
 
   "testVerifyUserCantSeePaymentTypePOROForInvoiceIfAmountIsZero": [
     {
-      "rowID": "testVerifyEnteredPOOnPOROPaymentScreenIsSavedForInvoice.01",
-      "description": "Test Case 78455:Verify user can't see Payment type PO/RO for Invoice if amount is zero",
+      "rowID": "testVerifyUserCantSeePaymentTypePOROForInvoiceIfAmountIsZero.01",
+      "description": "Test Case 78455:Verify user can't see Payment type PO/RO for Invoice if amount is zero, Test Case 78502:Verify user can't see Payment type Cash/Check for Invoice if amount is zero",
       "workOrderData" : {"workOrderType": "O_Kramar",
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       },
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserSeeCashCheckPaymentMethodIfCashCheckMethodEqualsON": [
+    {
+      "rowID": "testVerifyUserSeePOROPaymentMethodIfPOROMethodEqualsON.01",
+      "description": "Test Case 78498:Verify user see Cash/Check payment method if Cash/Check method = ON",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCantSeeCashCheckPaymentActionForPaidInvoices": [
+    {
+      "rowID": "testVerifyUserCantSeeCashCheckPaymentActionForPaidInvoices.01",
+      "description": "Test Case 78499:Verify user can't see Cash/Check payment action for paid Invoices",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserSeeCashCheckPaymentActionForNotFullyPaidInvoice": [
+    {
+      "rowID": "testVerifyUserSeeCashCheckPaymentActionForNotFullyPaidInvoice.01",
+      "description": "Test Case 78500:Verify user see Cash/Check payment action for not fully paid Invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanGoBackFromCachCheckScreenToInvoiceListWithoutSavePayment": [
+    {
+      "rowID": "testVerifyUserCanGoBackToInvoiceListWithoutSavePayment.01",
+      "description": "Test Case 78501:Verify user can go back to invoice list without save payment",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyAmountFieldIsRequiredForCashCheckMethod": [
+    {
+      "rowID": "testVerifyAmountFieldIsRequiredForCashCheckMethod.01",
+      "description": "Test Case 78503:Verify Amount field is Required for Cash/Check method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyCheckFieldIsOptionalForCashCheckMethod": [
+    {
+      "rowID": "testVerifyCheckFieldIsOptionalForCashCheckMethod.01",
+      "description": "Test Case 78504:Verify Check field is Optional for Cash/Check method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyNotesFieldIsOptionalForCashCheckType": [
+    {
+      "rowID": "testVerifyNotesFieldIsOptionalForCashCheckType.01",
+      "description": "Test Case 78505:Verify Notes field is Optional for Cash/Check type",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyPaymentAmountIsUpdatedAfterPartPaymentUsingCashCheckMethod": [
+    {
+      "rowID": "testVerifyPaymentAmountIsUpdatedAfterPartPaymentUsingCashCheckMethod.01",
+      "description": "Test Case 78506:Verify payment amount is updated after part payment using Cash/Check method, Test Case 78507:Verify payment amount is equal to invoice unpaid amount",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanPayOneInvoiceUsingCCAndCashCheckPaymentMethod": [
+    {
+      "rowID": "testVerifyUserCanPayOneInvoiceUsingCCAndCashCheckPaymentMethod.01",
+      "description": "Test Case 78508:Verify user can pay one Invoice using CC and Cash/Check payment method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
+  ],
+
+  "testVerifyUserCanPayInvoiceUsingCashCheckAndPOROPaymentMethod": [
+    {
+      "rowID": "testVerifyUserCanPayInvoiceUsingCashCheckAndPOROPaymentMethod.01",
+      "description": "Test Case 78509:Verify user can pay Invoice using Cash/Check and PO/RO payment method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
       }
     }
   ]

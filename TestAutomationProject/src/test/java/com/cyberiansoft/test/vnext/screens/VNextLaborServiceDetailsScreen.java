@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -51,13 +52,30 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseScreen {
         return new VNextLaborServicePanelsList(appiumdriver);
     }
 
-    public VNextAvailableServicesScreen saveLaborServiceDetails() {
+    public void saveLaborServiceDetails() {
         tap(savebtn);
-        return new VNextAvailableServicesScreen(appiumdriver);
     }
 
     public VNextAvailableServicesScreen clickBackButton(){
         clickScreenBackButton();
         return new VNextAvailableServicesScreen(appiumdriver);
+    }
+
+    public VNextLaborServicePartsList clickSelectPanelsAndPartsForLaborService(LaborServiceData laborService) {
+
+        tap(appiumdriver.findElement(By.xpath("//div[@action='select-panel']")));
+        return new VNextLaborServicePartsList(appiumdriver);
+    }
+
+    public String getLaborServiceRate(LaborServiceData laborService) {
+        return appiumdriver.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value").trim();
+    }
+
+    public String getLaborServiceTime(LaborServiceData laborService) {
+        return appiumdriver.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value").trim();
+    }
+
+    public String getLaborServiceNotes(LaborServiceData laborService) {
+        return appiumdriver.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).getText().trim();
     }
 }

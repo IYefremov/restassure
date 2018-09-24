@@ -401,4 +401,16 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		createInvoiceToWorkORderButton.click();
 		waitForLoading();
 	}
+
+	public void setSearchFromDate(String date) {
+		// Thread.sleep(1000);
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys(date);
+	}
+
+	public void setSearchToDate(String date) {
+		// Thread.sleep(1000);
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys(date);
+	}
 }

@@ -183,7 +183,8 @@ public class VNextBaseTestCase {
 	}
 
 	public void registerTeamEdition(String licensename) {
-		
+
+
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
 		WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
@@ -214,13 +215,12 @@ public class VNextBaseTestCase {
 		switchToWebViewContext();*/
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
-		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360 Team Edition");
+		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("ReconPro Starter");
 		environmentSelectionScreen.selectEnvironment("Development");
 
 		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		verificationscreen.setDeviceRegistrationCode(regCode);
-		verificationscreen.clickVerifyButton(); 
-		
+		verificationscreen.clickVerifyButton();
 
 		BaseUtils.waitABit(20*1000);
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		

@@ -8,13 +8,12 @@ import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScree
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderClaimInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.*;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -378,8 +377,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workordersscreen.clickBackButton();
 	}
 
-	@Test(testName= "Automate Verify user can edit team Work Order (add and remove services)",
-			description = "Automate Verify user can edit team Work Order (add and remove services)")
+	@Test(testName= "Verify user can edit team Work Order (add and remove services)",
+			description = "Verify user can edit team Work Order (add and remove services)")
 	public void testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices() {
 
 		final String vinnumber = "TEST";
@@ -412,12 +411,12 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
 		for (int i = 0; i < amountToSelect; i++)
 			availableServicesScreen.selectService(moneyservice);
-		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), amountToSelect);
 		for (int i = 0; i < amountToSelect; i++)
 			availableServicesScreen.selectService(percentageservice);
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
 
 		selectedServicesScreen.saveWorkOrderViaMenu();
@@ -425,24 +424,24 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
 		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
-		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), amountToSelect);
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
 		selectedServicesScreen.uselectService(percentageservice);
 		selectedServicesScreen.uselectService(percentageservice);
 		selectedServicesScreen.uselectService(moneyservice);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), defaultCountForMoneyService);
 		selectedServicesScreen.switchToAvalableServicesView();
-		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), 0);
+		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), 2);
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), defaultCountForMoneyService);
 		availableServicesScreen.selectService(percentageservice);
 		availableServicesScreen.selectService(percentageservice);
 		availableServicesScreen.selectService(moneyservice);
 
 		availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), defaultCountForMoneyService);
+		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		workordersscreen.switchToMyWorkordersView();
@@ -493,7 +492,67 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
 		Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), totalprice);
 		availableServicesScreen.saveWorkOrderViaMenu();
-		Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(woNumber), totalprice);
+		Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(woNumber), totalprice,
+				"Price is not valid for work order: " + woNumber);
 		workordersscreen.clickBackButton();
+	}
+
+	@Test(testName= "Verify user Can unselect Service for created WO",
+			description = "Verify user Can unselect Service for created WO")
+	public void testVerifyUserCanUnselectServiceForCreatedWO() {
+
+		final String vinnumber = "TEST";
+
+		final String servicegroup1 = "Dent Repair";
+		final String moneyservice1 = "Expenses Service";
+
+		final String servicegroup2 = "Autre";
+		final String moneyservice2 = "Cirrus_Detail";
+		final String percentageservice = "Cirrus_Discount";
+
+		final String amountTotal = "$34.76";
+		final String amountTotalEdited = "$26.26";
+
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		workordersscreen.switchToMyWorkordersView();
+		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+		customersscreen.switchToRetailMode();
+		customersscreen.selectCustomer(testcustomer);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_3_SERVICE_GROUPING);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen.setVIN(vinnumber);
+		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.changeScreen("Services");
+		VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen(appiumdriver);
+		VNextAvailableGroupServicesList availableGroupServicesList = groupServicesScreen.openServiceGroup(servicegroup1);
+		availableGroupServicesList.selectService(moneyservice1);
+		availableGroupServicesList.clickBackButton();
+		groupServicesScreen.openServiceGroup(servicegroup2);
+		availableGroupServicesList.selectService(moneyservice2);
+		availableGroupServicesList.selectService(percentageservice);
+		availableGroupServicesList.clickBackButton();
+		Assert.assertEquals(groupServicesScreen.getInspectionTotalPriceValue(), amountTotal);
+		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+
+		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+		vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		vehicleinfoscreen.changeScreen("Services");
+		groupServicesScreen = new VNextGroupServicesScreen(appiumdriver);
+		VNextSelectedGroupServicesScreen selectedGroupServicesScreen = groupServicesScreen.switchToSelectedGroupServicesView();
+		selectedGroupServicesScreen.uselectService(moneyservice1);
+		selectedGroupServicesScreen.switchToGroupServicesScreen();
+		Assert.assertEquals(groupServicesScreen.getInspectionTotalPriceValue(), amountTotalEdited);
+		groupServicesScreen.switchToSelectedGroupServicesView();
+		Assert.assertEquals(selectedGroupServicesScreen.getInspectionTotalPriceValue(), amountTotalEdited);
+		selectedGroupServicesScreen.switchToGroupServicesScreen();
+		workordersscreen = groupServicesScreen.saveWorkOrderViaMenu();
+		Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(woNumber), amountTotalEdited);
+		workordersscreen.clickBackButton();
+
+
 	}
 }

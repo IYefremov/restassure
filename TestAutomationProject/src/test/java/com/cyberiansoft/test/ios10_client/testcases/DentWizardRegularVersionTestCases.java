@@ -94,7 +94,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			RegularMainScreen mainscr = new RegularMainScreen();
 			homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
 			RegularSettingsScreen settingsScreen = homescreen.clickSettingsButton();
+			settingsScreen.setShowAvailableSelectedServicesOn();
 			settingsScreen.setInsvoicesCustomLayoutOff();
+
 			settingsScreen.clickHomeButton();
 		}
 
@@ -171,6 +173,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			
 			homescreen.clickSettingsButton();
 			RegularSettingsScreen settingsscreen = new RegularSettingsScreen();
+
+			settingsscreen.setInsvoicesCustomLayoutOff();
+			settingsscreen.setShowAvailableSelectedServicesOn();
 			settingsscreen.setCheckDuplicatesOn();
 			settingsscreen.clickHomeButton();
 

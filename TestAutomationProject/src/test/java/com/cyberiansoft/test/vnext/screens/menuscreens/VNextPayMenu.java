@@ -43,6 +43,10 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
         return new VNextPayCashCheckScreen(appiumdriver);
     }
 
+    public boolean isInvoicePayCashCheckMenuItemExists() {
+        return paycheckbtn.isDisplayed();
+    }
+
     public VNextPayPOROScreen clickPayPOROMenuItem() {
         clickMenuItem(invoicepayporomenubtn);
         return new VNextPayPOROScreen(appiumdriver);

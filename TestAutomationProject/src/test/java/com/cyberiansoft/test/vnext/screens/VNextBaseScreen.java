@@ -25,8 +25,8 @@ public class VNextBaseScreen {
 	public void tap(WebElement element) {
 
 		BaseUtils.waitABit(300);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.elementToBeClickable(element));
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		//wait.until(ExpectedConditions.elementToBeClickable(element));
 		WaitUtils.click(element);
 		//element.click();
 		//new TouchActions(appiumdriver).singleTap(element).perform();
@@ -86,6 +86,8 @@ public class VNextBaseScreen {
 	public void clickScreenBackButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='back']")));
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@action='back']")));
 		WaitUtils.click(By.xpath("//*[@action='back']"));
 	}
 	

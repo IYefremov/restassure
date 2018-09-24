@@ -32,7 +32,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		final String vinnumber = "123";
 		final String notetext = "new notes";
-		final String quicknotenew = "Z note";
+		final String quicknotenew = "1 note";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -173,6 +173,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
  		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
 		BaseUtils.waitABit(1000);
+
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);
@@ -188,7 +189,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		final String vinnumber = "123";
 		
-		final String[] quicknotes = { quicknote, "Z note" };
+		final String[] quicknotes = { quicknote, "1 note" };
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);

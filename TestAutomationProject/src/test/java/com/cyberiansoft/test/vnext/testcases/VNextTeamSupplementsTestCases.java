@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.InspectionStatuses;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -59,6 +60,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		vehicleinfoscreen = inspmenu.clickAddSupplementInspectionMenuItem();
 		vehicleinfoscreen.setVIN(inspdata.getNewVinNumber());
 		vehicleinfoscreen.clickSaveInspectionMenuButton();
+		BaseUtils.waitABit(2000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.NEW_SUPPLEMENT_WILL_NOT_BE_ADDED);

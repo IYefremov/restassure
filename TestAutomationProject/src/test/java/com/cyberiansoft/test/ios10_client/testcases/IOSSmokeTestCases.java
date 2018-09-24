@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
@@ -65,7 +66,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	//@AfterMethod
@@ -965,6 +965,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		//servicerequestslistpage.selectSearchStatus("All On Scheduled");
 		servicerequestslistpage.selectSearchTeam(teamname);
 		servicerequestslistpage.selectSearchTechnician("Employee Simple 20%");
+		servicerequestslistpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		servicerequestslistpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		servicerequestslistpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		servicerequestslistpage.setSearchFreeText(newsrnumber);
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.verifySearchResultsByServiceName("Test Company (Universal Client)");
@@ -1781,7 +1784,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 25526:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
-	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() throws Exception {
+	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
@@ -1863,6 +1866,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
@@ -3920,8 +3926,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29083:SR: HD - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech", 
 			description = "SR: HD - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech")
-	public void testSRHDVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech()
-			throws Exception {
+	public void testSRHDVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
@@ -5197,7 +5202,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			+ "Test Case 30855:Inspections: HD - Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)", 
 			description = "Verify that when option ''Draft Mode'' is set to ON - when save inspection provide prompt to a user to select either Draft or Final,"
 					+ "Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)")
-	public void testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal() throws Exception {
+	public void testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal() {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -5248,7 +5253,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
-	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount() throws Exception {
+	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -5312,6 +5317,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
 		inspectionspage.selectSearchStatus("All active");
+		inspectionspage.selectSearchTimeframe("Custom");
+		inspectionspage.setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
+
 		inspectionspage.searchInspectionByNumber(inspnumber);		
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspnumber), "$2,000.00");
 		Assert.assertEquals(inspectionspage.getInspectionStatus(inspnumber), "Approved");
@@ -5429,6 +5437,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), _po);
@@ -5447,8 +5458,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	@Test(testName="Test Case 27739:Invoices: HD - Verify that payment is send to BO when PO# is changed under My invoice", 
 			description = "Invoices: HD - Verify that payment is send to BO when PO# is changed under My invoice")
-	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice()
-			throws Exception {
+	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";
@@ -5519,6 +5529,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 	
@@ -5594,6 +5607,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 	
@@ -5611,8 +5627,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			+ "Test Case 40034:WO Monitor: Verify that employee with Manager role may see and change all services of repair order", 
 			description = "WO: HD - Verify filter for Team WO that returns only work assigned to tech who is logged in,"
 					+ "WO Monitor: Verify that employee with Manager role may see and change all services of repair order")
-	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn()
-			throws Exception {
+	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 
@@ -5698,6 +5713,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation("Default Location");
+		repairorderspage.selectSearchTimeframe("Custom");
+		repairorderspage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		repairorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		repairorderspage.setSearchWoNumber(wonum);
 		repairorderspage.clickFindButton();
 		
@@ -6132,6 +6150,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
@@ -6366,8 +6387,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 50250:WO: HD - Verify that WO number is not duplicated", 
 			description = "WO: - Verify that WO number is not duplicated")
-	public void testWOVerifyThatWONumberIsNotDuplicated()
-			throws Exception {
+	public void testWOVerifyThatWONumberIsNotDuplicated() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po  = "12345";
@@ -6412,7 +6432,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
-
+		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 		invoiceswebpage.archiveInvoiceByNumber(invoicenumber);
@@ -6472,7 +6494,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
 
 		workorderspage.makeSearchPanelVisible();
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		workorderspage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		workorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		workorderspage.setSearchOrderNumber(wonumber3);
+
 		workorderspage.clickFindButton();
 
 		Assert.assertEquals(workorderspage.getWorkOrdersTableRowCount(), 1);

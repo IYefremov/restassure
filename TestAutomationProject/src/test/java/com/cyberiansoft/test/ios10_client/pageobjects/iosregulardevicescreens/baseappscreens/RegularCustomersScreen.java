@@ -76,14 +76,7 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 			searchbtn.click();
 		BaseUtils.waitABit(1500);
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer);
-		//appiumdriver.getKeyboard().sendKeys(customer);
-		//}
 		appiumdriver.findElementByAccessibilityId(customer).click();
-			/*swipeToElement(appiumdriver.findElementByClassName("XCUIElementTypeTable").
-					findElement(By.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + customer + "']/..")));
-				appiumdriver.findElementByAccessibilityId(customer).click();
-		} else
-			customercell.click();*/
 	}
 	
 	public void selectOnlineCustomer(String customer) {

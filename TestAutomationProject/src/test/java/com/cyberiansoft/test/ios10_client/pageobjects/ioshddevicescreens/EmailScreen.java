@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iOSRegularBaseScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -26,7 +25,7 @@ public class EmailScreen extends iOSRegularBaseScreen {
 	
 	public void sendInvoiceOnEmailAddress(String emailaddr) {
 		clickAddEmailButton();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(emailaddr);
+		appiumdriver.findElementByClassName("XCUIElementTypeTextField").sendKeys(emailaddr);
 		Helpers.acceptAlert();
 		clickSendButton();
 		Helpers.waitABit(500);

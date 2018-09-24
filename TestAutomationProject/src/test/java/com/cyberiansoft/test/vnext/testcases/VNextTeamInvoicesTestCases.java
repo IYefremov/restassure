@@ -477,7 +477,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextNotesScreen notesscreen = invoicemenuscreen.clickInvoiceNotesMenuItem();
 		
 		for (int i = 0; i < numberOfImageNotes; i++)
-			notesscreen.addImageToNotesFromGallery();
+			notesscreen.addFakeImageNote();
 		notesscreen.clickScreenBackButton();
 		
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
@@ -583,7 +583,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
 		final String notetext = "Test";
-		final String quicknote = "Z note";
+		final String quicknote = "1 note";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
