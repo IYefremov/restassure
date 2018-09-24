@@ -364,11 +364,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "lbViewChangeScheduler")
 	private WebElement scheduler;
 
-	@FindBy(xpath = "//*[contains(@id, 'ddlTimeframe_Input')]")
-	private ComboBox searchtimeframecmb;
+	@FindBy(id = "Card_rcbAppLocations_Arrow")
+	private WebElement arrow;
 
-	@FindBy(xpath = "//*[contains(@id, 'ddlTimeframe_DropDown')]")
-	private DropDown searchtimeframedd;
+    @FindBy(xpath = "//*[contains(@id, 'ddlTimeframe_Input')]")
+    private ComboBox searchtimeframecmb;
+
+    @FindBy(xpath = "//*[contains(@id, 'ddlTimeframe_DropDown')]")
+    private DropDown searchtimeframedd;
 
     public ServiceRequestsListWebPage(WebDriver driver) {
 		super(driver);
@@ -416,10 +419,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public void clickFindButton() {
-		try{
-			waitABit(1000);
-			driver.switchTo().alert().accept();
-        }catch (Exception e){}
+        try {
+            wait.ignoring(Exception.class).until(ExpectedConditions.alertIsPresent()).accept();
+        } catch (TimeoutException ignored) {}
         clickAndWait(findbtn);
 	}
 
@@ -515,8 +517,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public String getStatusOfFirstServiceRequestFromList() {
-		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='serviceRequestStatus']"))
-				.getText();
+		return getFirstServiceRequestFromList()
+                .findElement(By.xpath(".//span[@class='serviceRequestStatus']"))
+				.getText()
+                .replaceAll("\\u00A0", "")
+                .trim();
 	}
 
 	public String getFirstInTheListServiceRequestNumber() {
@@ -591,7 +596,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public String getFirstServiceRequestStatus() {
 		return getFirstServiceRequestFromList().findElement(By.xpath(".//span[@class='serviceRequestStatus']"))
-				.getText();
+				.getText()
+                .replaceAll("\\u00A0", "")
+                .trim();
 	}
 
 	public String getFirstServiceRequestPhase() {
@@ -1209,15 +1216,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 						.equals("ALICIA.VILLALOBOS@KCC.COM")) {
 			return false;
 		}
-		driver.findElement(By.id("Card_rcbAppLocations_Arrow")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(arrow)).click();
         waitABit(2000);
 		try {
             wait.until(ExpectedConditions
                     .elementToBeClickable(techniciansField)).click();
-			wait.until(ExpectedConditions.elementToBeClickable(By.className("rcbList")))
+			wait.ignoring(WebDriverException.class).until(ExpectedConditions.elementToBeClickable(By.className("rcbList")))
 					.findElements(By.className("rcbItem")).get(0).click();
             waitABit(500);
-            wait.until(ExpectedConditions.elementToBeClickable(techniciansField)).click();
+            wait.ignoring(WebDriverException.class).until(ExpectedConditions.elementToBeClickable(techniciansField)).click();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
 					.findElements(By.className("rcbItem")).get(1).click();
 		} catch (TimeoutException e) {
@@ -1456,10 +1463,16 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 			try {
                 waitForLoading();
                 waitABit(1500);
-				// wait.ignoring(TimeoutException.class).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsNonWorkHour")));
-				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsWrap")));
-				driver.findElement(by).findElements(byInner).stream().map(w -> w.findElement(By.tagName("a")))
-						.filter(t -> t.getText().split(" ")[1].equals(startDate.split("/")[1])).findFirst().get()
+                try {
+                    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("rsWrap")));
+                } catch (Exception ignored) {}
+                wait
+                        .until(ExpectedConditions.elementToBeClickable(driver.findElement(by)))
+                        .findElements(byInner)
+                        .stream().map(w -> w.findElement(By.tagName("a")))
+						.filter(t -> t.getText().split(" ")[1].equals(startDate.split("/")[1]))
+                        .findFirst()
+                        .get()
 						.click();
 				result = true;
 				break;
@@ -1652,9 +1665,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return result;
 	}
 
-	public void aplyTechniciansFromScheduler() {
+	public void applyTechniciansFromScheduler() {
 		arrowInTechniciansList.click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
+		wait
+                .ignoring(WebDriverException.class)
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
 				.click();
         waitForLoading();
 		waitABit(10000);
@@ -2106,19 +2121,19 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public void selectSearchTimeFrame(WebConstants.TimeFrameValues timeframe) {
-		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe.getName());
-	}
+    public void selectSearchTimeFrame(WebConstants.TimeFrameValues timeframe) {
+        selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe.getName());
+    }
 
-	public void setSearchFromDate(String date) {
-		// Thread.sleep(1000);
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateFrom_dateInput")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateFrom_dateInput")).sendKeys(date);
-	}
+    public void setSearchFromDate(String date) {
+        // Thread.sleep(1000);
+         driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateFrom_dateInput")).clear();
+         driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateFrom_dateInput")).sendKeys(date);
+    }
 
-	public void setSearchToDate(String date) {
-		// Thread.sleep(1000);
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateTo_dateInput")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateTo_dateInput")).sendKeys(date);
-	}
+    public void setSearchToDate(String date) {
+        // Thread.sleep(1000);
+         driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateTo_dateInput")).clear();
+         driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateTo_dateInput")).sendKeys(date);
+    }
 }
