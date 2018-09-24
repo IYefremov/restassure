@@ -361,5 +361,23 @@
         "expirationYear" : "2022",  "cvc" : "123"
       }
     }
+  ],
+
+  "testVerifyUserCanPayInvoiceUsingCashCheckAndPOROPaymentMethod": [
+    {
+      "rowID": "testVerifyUserCanPayInvoiceUsingCashCheckAndPOROPaymentMethod.01",
+      "description": "Test Case 78509:Verify user can pay Invoice using Cash/Check and PO/RO payment method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
   ]
 }
