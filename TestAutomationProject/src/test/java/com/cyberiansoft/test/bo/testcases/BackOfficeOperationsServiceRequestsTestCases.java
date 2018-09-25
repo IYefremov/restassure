@@ -843,10 +843,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.goToMonthInScheduler();
 		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
-		serviceRequestsWebPage.aplyTechniciansFromScheduler();
+		serviceRequestsWebPage.applyTechniciansFromScheduler();
 		int countBeforeAnySelections = serviceRequestsWebPage.countSR();
 		serviceRequestsWebPage.selectTechnicianFromSchedulerByIndex(0);
-		serviceRequestsWebPage.aplyTechniciansFromScheduler();
+		serviceRequestsWebPage.applyTechniciansFromScheduler();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2137,7 +2137,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         Assert.assertTrue(serviceDialog.isSelectedServiceContainerDisplayed(), "The service container is not displayed");
         ServiceRequestListServiceVehiclePartDialog vehiclePartDialog = serviceDialog.clickVehiclePart();
         int availableVehiclePartOptions = vehiclePartDialog.getAvailableVehiclePartOptions();
-        int assignedVehiclePartOptions = vehiclePartDialog.getAssignedVehiclePartOptions();
         vehiclePartDialog.clickMoveAllToTheRight();
         Assert.assertEquals(vehiclePartDialog.getAvailableVehiclePartOptions(), 0,
                 "The available vehicle Part Options have not been reduced by the number of assigned options " +
