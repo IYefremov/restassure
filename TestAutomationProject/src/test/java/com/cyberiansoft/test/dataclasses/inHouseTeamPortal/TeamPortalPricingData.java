@@ -28,6 +28,15 @@ public class TeamPortalPricingData {
     @JsonProperty("featureGroupMarketingInfo")
     private String featureGroupMarketingInfo;
 
+    @JsonProperty("featureGroupNameEdited")
+    private String featureGroupNameEdited;
+
+    @JsonProperty("featureGroupStateEdited")
+    private String featureGroupStateEdited;
+
+    @JsonProperty("featureGroupMarketingInfoEdited")
+    private String featureGroupMarketingInfoEdited;
+
     @JsonProperty("featureState")
     private String featureState;
 
@@ -93,12 +102,12 @@ public class TeamPortalPricingData {
         return prices;
     }
 
-    public String getEditionName() {
-        return editionName;
-    }
-
     public String getPrice() {
         return price;
+    }
+
+    public String getEditionName() {
+        return editionName;
     }
 
     public String getFeatureGroupName() {
@@ -111,6 +120,18 @@ public class TeamPortalPricingData {
 
     public String getFeatureGroupMarketingInfo() {
         return featureGroupMarketingInfo;
+    }
+
+    public String getFeatureGroupNameEdited() {
+        return featureGroupNameEdited;
+    }
+
+    public String getFeatureGroupStateEdited() {
+        return featureGroupStateEdited;
+    }
+
+    public String getFeatureGroupMarketingInfoEdited() {
+        return featureGroupMarketingInfoEdited;
     }
 
     public String getFeatureState() {
@@ -167,6 +188,10 @@ public class TeamPortalPricingData {
 
     public String getPricePerYear() {
         return pricePerYear;
+    }
+
+    public List<String> getSetupFeeData() {
+        return Arrays.asList(setupFeeName, setupFeeQuantity, setupFeePrice, setupFeeEstimatedHours);
     }
 
     public List<String> getSetupFeeData2() {
