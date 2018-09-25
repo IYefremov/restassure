@@ -220,6 +220,7 @@ public class VNextBaseTestCase {
 
 		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		verificationscreen.setDeviceRegistrationCode(regCode);
+		BaseUtils.waitABit(3000);
 		verificationscreen.clickVerifyButton();
 
 		BaseUtils.waitABit(20*1000);
