@@ -7,6 +7,8 @@ import io.appium.java_client.MobileElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextPayPOROScreen extends VNextBaseScreen {
 
@@ -33,6 +35,8 @@ public class VNextPayPOROScreen extends VNextBaseScreen {
     }
 
     public String getPaymentPOROValue() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.visibilityOf(poroNumberfld));
         return poroNumberfld.getCssValue("value");
 
     }
@@ -49,7 +53,7 @@ public class VNextPayPOROScreen extends VNextBaseScreen {
     public VNextInvoicesScreen payForInvoice() {
         clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-        System.out.println("+++++++++" + informationDialog.clickInformationDialogOKButtonAndGetMessage());
+        informationDialog.clickInformationDialogOKButtonAndGetMessage();
         return new VNextInvoicesScreen(appiumdriver);
     }
 }
