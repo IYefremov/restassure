@@ -2292,8 +2292,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickFilterStatus("Declined");
 		myinspectionsscreen.clickBackButton();
 		myinspectionsscreen.clickSaveFilterDialogButton();
-				
-		Assert.assertEquals(myinspectionsscreen.getFirstInspectionAprovedPriceValue(), "$0.00");
+		Assert.assertEquals(myinspectionsscreen.getInspectionApprovedPriceValue(inspectionnumber), "$0.00");
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspectionnumber), "$2,638.00");
 		myinspectionsscreen.clickHomeButton();		
 	}

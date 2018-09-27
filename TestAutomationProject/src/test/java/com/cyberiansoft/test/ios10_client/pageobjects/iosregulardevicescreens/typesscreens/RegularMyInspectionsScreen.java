@@ -243,9 +243,9 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		//return firstinspectionprice.getAttribute("label");
 	}
 	
-	public String getFirstInspectionAprovedPriceValue() {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionApprovedAmount']")).getAttribute("label");	
-	}
+	//public String getFirstInspectionAprovedPriceValue() {
+	//	return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionApprovedAmount']")).getAttribute("label");
+	//}
 
 	public boolean checkInspectionDoesntExists(String inspection)  {
 		return appiumdriver.findElementsByName(inspection).size() < 1;
@@ -326,12 +326,11 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
 	
-	public void changeCustomerForInspection(String inspection, String customer) {
+	public RegularMyInspectionsScreen changeCustomerForInspection(String inspection, String customer) {
 		appiumdriver.findElement(MobileBy.AccessibilityId(inspection)).click();
 		clickChangeCustomerpopupMenu();
 		selectCustomer(customer);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("InspectionsTable")));
+		return this;
 	}
 	
 	public void customersPopupSwitchToWholesailMode() {
