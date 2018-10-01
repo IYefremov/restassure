@@ -1,0 +1,47 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="selenium.browser" value="chrome" />
+  <parameter name="device.platform" value="android"  />
+  <parameter name="device.lecense" value="Automation_android_device"  />
+  <parameter name="appium.path" value="C:\Users\OKramar\AppData\Roaming\npm\node_modules\appium\build\lib\main.js"  />
+  <listeners>
+		<!--  <listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>-->
+		<listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
+  </listeners>
+  <test name="Tests for VNext client" preserve-order="true">
+    <classes>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextWholesaleCustomersTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionNotestTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextApproveTeamInspectionsTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamClaimInfoScreenTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoicesTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamSupplementsTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsLineApprovalTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamCalculationsTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextPayInvoicesTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersChangeCustomerTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoiceEditingTestCases">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersList">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextLaborServiceTestCases">
+      </class>
+    </classes>
+  </test>
+</suite>
