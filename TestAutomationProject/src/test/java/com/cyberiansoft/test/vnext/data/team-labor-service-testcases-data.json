@@ -40,7 +40,7 @@
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "777777777777777777"
       },
-      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix",
+      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
         "matrixPart" : {"matrixPartName": "Anastasia Part", "partSize": "DIME", "partSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence" }
         }
       }
@@ -54,7 +54,7 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "777777777777777777"
       },
-      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix",
+      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
         "matrixPart" : {"matrixPartName": "Anastasia Part", "partSize": "DIME", "partSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence",
           "laborServicePart": "Refinish Liftgate Frame",
           "laborServiceRate": "99.12",

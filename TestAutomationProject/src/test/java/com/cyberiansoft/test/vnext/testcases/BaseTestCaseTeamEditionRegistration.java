@@ -5,9 +5,9 @@ import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
-import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import java.io.File;
 
@@ -18,12 +18,13 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 
 	
 	@BeforeTest
-	public void beforeTest() throws Exception {
+	@Parameters("device.lecense")
+	public void beforeTest(String deviceLicense) throws Exception {
 		setUp();
 		employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/team-device-employee.json"), Employee.class);
 
 		if (VNextConfigInfo.getInstance().installNewBuild()) {
-			registerTeamEdition(VNextTeamRegistrationInfo.getInstance().getDeviceDefaultLicenseName());
+			registerTeamEdition(deviceLicense);
 
 		}
 

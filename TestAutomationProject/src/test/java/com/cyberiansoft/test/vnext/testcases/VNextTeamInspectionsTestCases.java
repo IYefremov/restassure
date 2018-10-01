@@ -516,7 +516,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible()
 				.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName())
-				.setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted())
+				.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted())
 				.searchInspectionByNumber(inspnumber);
 		inspectionspage.verifyVINIsPresentForInspection(inspnumber, newVIN);
 		webdriver.quit();
