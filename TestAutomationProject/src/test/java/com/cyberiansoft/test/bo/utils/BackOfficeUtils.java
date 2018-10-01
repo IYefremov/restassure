@@ -27,13 +27,19 @@ public class BackOfficeUtils {
 		date = date.plusDays(1);
 		return date.format(DateTimeFormatter.ofPattern("MM/d/uuuu"));
 	}
+
+	public static String getPreviousDateFormatted() {
+		LocalDate date = LocalDate.now();
+		date = date.minusDays(1);
+		return date.format(DateTimeFormatter.ofPattern("MM/d/uuuu"));
+	}
 	
 	public static String getDayAfterTomorrowDateFormatted() {
 		LocalDate date = LocalDate.now();
 		date = date.plusDays(2);
 		return date.format(DateTimeFormatter.ofPattern("MM/d/uuuu"));
 	}
-	
+
 	public static String getShortTomorrowDateFormatted() {
 		LocalDate date = LocalDate.now();
 		date = date.plusDays(1);

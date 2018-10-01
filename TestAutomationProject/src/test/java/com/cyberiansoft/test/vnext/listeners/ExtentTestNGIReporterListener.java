@@ -106,11 +106,9 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 	public synchronized void onTestFailure(ITestResult result) {
 		extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
 		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
-		System.out.println("+++++++++++LOG");
 		AppiumUtils.attachAllureLog(Arrays.toString(result.getThrowable().getStackTrace()));
 		try {
 			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-			System.out.println("+++++++++++SCREEEN");
 			AppiumUtils.attachAllureScreenshot();
 			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot(VNextConfigInfo.getInstance().getReportFolderPath(), "fail")).build());
 		} catch (IOException e) {

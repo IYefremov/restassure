@@ -36,7 +36,7 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	public VNextEmailScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 45);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 150);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='email']")));
 		BaseUtils.waitABit(1000);
 	}

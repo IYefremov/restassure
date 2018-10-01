@@ -6836,8 +6836,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it", 
 			description = "Verify that SR is not accepted when employee review or update it")
-	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt()
-			throws Exception {
+	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";

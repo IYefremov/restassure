@@ -379,5 +379,20 @@
         "expirationYear" : "2022",  "cvc" : "123"
       }
     }
+  ],
+
+  "testVerifyUserCantPayAmountLessThen0UsingCashCheckMethod": [
+    {
+      "rowID": "testVerifyUserCantPayAmountLessThen0UsingCashCheckMethod.01",
+      "description": "Test Case 78510:Verify user can't pay amount <=0 using Cash/Check method",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 }

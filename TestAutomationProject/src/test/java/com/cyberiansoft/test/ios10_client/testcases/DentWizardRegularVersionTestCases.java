@@ -2292,7 +2292,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			
 			homescreen.clickCustomersButton();
 			RegularCustomersScreen customersscreen = new RegularCustomersScreen();
-			customersscreen.selectCustomerWithoutEditing("Abc Rental Center");
+     			customersscreen.selectCustomerWithoutEditing("Abc Rental Center");
 			homescreen = new RegularHomeScreen();
 			homescreen.clickMyInspectionsButton();
 			myinspectionsscreen = new RegularMyInspectionsScreen();

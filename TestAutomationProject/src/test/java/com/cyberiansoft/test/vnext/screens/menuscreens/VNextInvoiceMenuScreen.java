@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
@@ -91,6 +92,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	
 	public void refreshInvoicePictures() {
 		clickInvoiceRefreshPicturesMenuItem();
+		BaseUtils.waitABit(2000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 	}

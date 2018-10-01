@@ -115,7 +115,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicespage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoicespage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
 		invoicespage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoicespage.setSearchInvoiceNumber(invoicenumber);
 		invoicespage.clickFindButton();

@@ -6691,7 +6691,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 35375:WO: HD - Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF", 
 			description = "Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF")
-	public void testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF() throws Exception {
+	public void testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
