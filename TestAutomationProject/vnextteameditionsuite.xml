@@ -4,6 +4,7 @@
   <parameter name="selenium.port" value="3737" />
   <parameter name="selenium.browser" value="chrome" />
   <parameter name="device.platform" value="android"  />
+  <parameter name="device.lecense" value="Automation_android_emulator"  />
   <listeners>
 		<!--  <listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>-->
 		<listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
@@ -37,6 +38,8 @@
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoiceEditingTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersList">
+      </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextLaborServiceTestCases">
       </class>
     </classes>
   </test>
