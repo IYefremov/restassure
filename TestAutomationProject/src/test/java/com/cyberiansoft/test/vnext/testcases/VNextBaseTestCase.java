@@ -31,6 +31,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -73,13 +74,14 @@ public class VNextBaseTestCase {
 	private ThreadLocal<AppiumDriverLocalService> service = new ThreadLocal<AppiumDriverLocalService>();
 	
 	@BeforeSuite
-	public void startServer()  {
+	@Parameters("appium.path")
+	public void startServer(String appiumPath)  {
 		
 		browsertype = BaseUtils.getBrowserType(VNextToolsInfo.getInstance().getDefaultBrowser());
 		mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
 		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 
-		service.set(new AppiumServiceBuilder().withAppiumJS(new File(System.getenv("Appium") + "\\build\\lib\\main.js"))
+		service.set(new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
 				.usingAnyFreePort().withArgument(SESSION_OVERRIDE)
 				.withArgument(LOG_LEVEL, "error")
 				.build());
