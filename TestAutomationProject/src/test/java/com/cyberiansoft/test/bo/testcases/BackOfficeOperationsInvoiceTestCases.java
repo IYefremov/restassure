@@ -18,7 +18,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInvoiceData.json";
 
-    @BeforeClass()
+    @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
     }
@@ -703,7 +703,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
         Assert.assertTrue(invoicesPage.isChangeButtonClicked());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void checkOperationInvoiceDownloadJSON(String rowID, String description, JSONObject testData) {
 
         BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
@@ -715,6 +715,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
         invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
         invoicesPage.clickFindButton();
         invoicesPage.selectDownloadJsonOption();
+        invoicesPage.handleAlertForEdgeBrowser();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -804,18 +805,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeTab(newTab);
 	}
 
+	//todo TC is not ready!!! TODO
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void checkOperationInvoiceArchive(String rowID, String description, JSONObject testData) {
 
         BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 
+        backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-
-		operationspage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.clickFindButton();
-
+        System.out.println();
 	}
 
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -876,19 +877,13 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
         OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-		try {
-			invoicespage.clickFindButton();
-			invoicespage.selectMarkAsUnpaidOption();
-		} catch (Exception e) {
-		}
-		invoicespage.clickFindButton();
-		invoicespage.selectPayOption();
+        invoicespage.clickFindButton();
+        invoicespage.chooseMarkAsUnpaidOptionIfPresent();
+        invoicespage.selectPayOption();
 		invoicespage.checkPayBoxContent();
 		invoicespage.clickFindButton();
-		try{
-		invoicespage.selectMarkAsUnpaidOption();
-		}catch(Exception e){}
-	}
+        invoicespage.chooseMarkAsUnpaidOptionIfPresent();
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void checkOperationInvoiceEditAuditLog(String rowID, String description, JSONObject testData) {

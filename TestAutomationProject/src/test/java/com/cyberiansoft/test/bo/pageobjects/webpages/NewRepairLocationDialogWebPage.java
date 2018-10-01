@@ -61,7 +61,13 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnOk")
 	private WebElement repairLocationOkButton;
-	
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnCancel")
+	private WebElement repairLocationCancelButton;
+
+    @FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbCompleteInvoicedROs")
+    private WebElement completeInvoicesROsCheckbox;
+
 	public NewRepairLocationDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -71,6 +77,20 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 		setNewRepairLocationName(repairlocationname);
 		clickOKButton();
 	}
+
+    public NewRepairLocationDialogWebPage clickCompleteInvoicesROsCheckbox() {
+        wait.until(ExpectedConditions.elementToBeClickable(completeInvoicesROsCheckbox)).click();
+        return this;
+    }
+
+    public boolean isCompleteInvoicesROsOptionChecked() {
+	    try {
+            wait.until(ExpectedConditions.attributeToBeNotEmpty(completeInvoicesROsCheckbox, "checked"));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 	
 	public void createNewRepairLocation(String repairlocationname, String repairlocationstatus, String repairlocationtomezone) {
 		setNewRepairLocationName(repairlocationname);
@@ -148,7 +168,13 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 	}
 	
 	public RepairLocationsWebPage clickOKButton() {
-		clickAndWait(repairLocationOkButton);
+		click(repairLocationOkButton);
+		waitForLoading();
+		return PageFactory.initElements(driver, RepairLocationsWebPage.class);
+	}
+
+	public RepairLocationsWebPage clickCancelButton() {
+		clickAndWait(repairLocationCancelButton);
 		return PageFactory.initElements(driver, RepairLocationsWebPage.class);
 	}
 }

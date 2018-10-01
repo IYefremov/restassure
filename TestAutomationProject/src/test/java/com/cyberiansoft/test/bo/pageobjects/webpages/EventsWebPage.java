@@ -97,8 +97,9 @@ public class EventsWebPage extends BaseWebPage {
 
 	public void selectFirstConditionValues(String firstconditionname, String firstconditiontype,
 			String firstconditioncriteria) {
-//		waitABit(1000);
-		wait.until(ExpectedConditions.visibilityOf(visibleconditions));
+		wait
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOf(visibleconditions));
 		selectFirstConditionNameCriteria(firstconditionname);
 		selectFirstConditionTypeCriteria(firstconditiontype);
 //		waitABit(1000);

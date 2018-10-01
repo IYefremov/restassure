@@ -150,5 +150,19 @@
       "description": "Test Case 78652:Monitor - Repair Locations: Configure Auto-Completion For the Newly Created Repair Order Phase After Inspection Approval",
       "phase": "AutoTest"
     }
+  ],
+
+  "verifyAutoCompletionOfInvoicedRepairOrdersIsConfigured": [
+    {
+      "rowID": "verifyAutoCompletionOfInvoicedRepairOrdersIsConfigured.01",
+      "description": "Test Case 79115:Monitor - Repair Locations: Verify auto-completion of invoiced repair orders is configured"
+    }
+  ],
+
+  "verifyAutoCompletionOfInvoicedRepairOrdersIsNotSavedAfterClickingCancelButton": [
+    {
+      "rowID": "verifyAutoCompletionOfInvoicedRepairOrdersIsNotSavedAfterClickingCancelButton.01",
+      "description": "Test Case 79116:Monitor - Repair Locations: Verify auto-completion of invoiced repair orders is not saved after clicking the Cancel button"
+    }
   ]
 }

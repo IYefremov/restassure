@@ -23,7 +23,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
     private EmailUtils emailUtils;
     private MailChecker mailChecker;
 
-    @BeforeClass()
+    @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
         mailChecker = new MailChecker();
@@ -823,6 +823,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.alpyAndCheck5TecniciansFromScheduler());
 	}
 
+    //todo edge
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void checkSchedulerTechniciansFilter(String rowID, String description, JSONObject testData) {
 
@@ -849,6 +850,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.applyTechniciansFromScheduler();
 	}
 
+    //todo edge
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void checkSRmultiTechReset(String rowID, String description, JSONObject testData) {
 

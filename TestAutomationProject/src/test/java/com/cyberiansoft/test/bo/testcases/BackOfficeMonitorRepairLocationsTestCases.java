@@ -18,7 +18,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOMonitorRepairLocationsData.json";
 
-    @BeforeClass()
+    @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
     }
@@ -33,7 +33,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 
-		repairlocationspage.verifyRRepairLocationsTableColumnsAreVisible();
+		repairlocationspage.verifyRepairLocationsTableColumnsAreVisible();
 		repairlocationspage.makeSearchPanelVisible().selectSearchStatus(data.getLocationStatus()).setSearchLocation(data.getLocationName()).clickFindButton();
 
 		Assert.assertTrue(repairlocationspage.repairLocationExists(data.getLocationName()));
@@ -48,7 +48,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
         MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog
@@ -75,7 +75,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
         MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
@@ -102,7 +102,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
@@ -141,7 +141,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
@@ -207,7 +207,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
@@ -243,7 +243,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
@@ -293,7 +293,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
         MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
@@ -334,7 +334,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
         MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
@@ -376,7 +376,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
         MonitorWebPage monitorpage = backOfficeHeader.clickMonitorLink();
 		RepairLocationsWebPage repairlocationspage = monitorpage.clickRepairLocationsLink();
 		repairlocationspage.makeSearchPanelVisible().setSearchLocation(data.getRepairLocationName()).clickFindButton();
-		repairlocationspage.deleteRepairLocationifExists(data.getRepairLocationName());
+		repairlocationspage.deleteRepairLocationIfExists(data.getRepairLocationName());
 		NewRepairLocationDialogWebPage newrepairlocdialog = repairlocationspage.clickAddRepairLocationButton();
 		newrepairlocdialog.createNewRepairLocation(data.getRepairLocationName(), data.getRepairLocationStatus(), data.getRepairLocationTimeZone());
 
@@ -501,6 +501,74 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 
         phasesTab.clickNewRepairLocationPhaseCancelButton();
         repairLocationsPage.closeNewTab(mainWindowHandle);
+        repairLocationsPage.deleteRepairLocation(randomLocationName);
+	}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyAutoCompletionOfInvoicedRepairOrdersIsConfigured(String rowID, String description, JSONObject testData) {
+
+        BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        String randomLocationName = data.getRandomLocationName();
+
+        RepairLocationsWebPage repairLocationsPage = backOfficeHeader
+                .clickMonitorLink()
+                .clickRepairLocationsLink()
+                .clickAddRepairLocationButton()
+                .setNewRepairLocationName(randomLocationName)
+                .clickOKButton();
+
+        repairLocationsPage
+                .makeSearchPanelVisible()
+                .setSearchLocation(randomLocationName)
+                .clickFindButton();
+        Assert.assertTrue(repairLocationsPage.repairLocationExists(randomLocationName));
+        NewRepairLocationDialogWebPage newRepairLocationDialog = repairLocationsPage.clickEditRepairLocation(randomLocationName);
+        Assert.assertFalse(newRepairLocationDialog.isCompleteInvoicesROsOptionChecked(),
+                "The Complete invoiced ROs option is checked, but should be unchecked");
+        newRepairLocationDialog
+                .clickCompleteInvoicesROsCheckbox()
+                .clickOKButton()
+                .clickEditRepairLocation(randomLocationName);
+
+        Assert.assertTrue(newRepairLocationDialog.isCompleteInvoicesROsOptionChecked(),
+                "The Complete invoiced ROs option is NOT checked, but should be checked");
+        newRepairLocationDialog.clickCancelButton();
+        repairLocationsPage.deleteRepairLocation(randomLocationName);
+	}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyAutoCompletionOfInvoicedRepairOrdersIsNotSavedAfterClickingCancelButton(String rowID, String description, JSONObject testData) {
+
+        BOMonitorRepairLocationsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorRepairLocationsData.class);
+        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+
+        String randomLocationName = data.getRandomLocationName();
+
+        RepairLocationsWebPage repairLocationsPage = backOfficeHeader
+                .clickMonitorLink()
+                .clickRepairLocationsLink()
+                .clickAddRepairLocationButton()
+                .setNewRepairLocationName(randomLocationName)
+                .clickOKButton();
+
+        repairLocationsPage
+                .makeSearchPanelVisible()
+                .setSearchLocation(randomLocationName)
+                .clickFindButton();
+        Assert.assertTrue(repairLocationsPage.repairLocationExists(randomLocationName));
+        NewRepairLocationDialogWebPage newRepairLocationDialog = repairLocationsPage.clickEditRepairLocation(randomLocationName);
+        Assert.assertFalse(newRepairLocationDialog.isCompleteInvoicesROsOptionChecked(),
+                "The Complete invoiced ROs option is checked, but should be unchecked");
+        newRepairLocationDialog
+                .clickCompleteInvoicesROsCheckbox()
+                .clickCancelButton()
+                .clickEditRepairLocation(randomLocationName);
+
+        Assert.assertFalse(newRepairLocationDialog.isCompleteInvoicesROsOptionChecked(),
+                "The Complete invoiced ROs option is NOT checked, but should be checked");
+        newRepairLocationDialog.clickCancelButton();
         repairLocationsPage.deleteRepairLocation(randomLocationName);
 	}
 }

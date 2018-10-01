@@ -1,10 +1,12 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -53,7 +55,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 				driver.switchTo().window(activeHandle);
             }
         } catch (Exception e) {
-            System.err.println("Closing driver exception: " + e);
+            System.err.println("Closing window driver exception: " + e);
         }
 		driver.switchTo().defaultContent();
 		waitABit(1000);
@@ -66,15 +68,23 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
         try {
             wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
         } catch (TimeoutException e) {
-            driver.close();
-            System.err.println("Login button has not been displayed!\n" + e);
+            DriverBuilder.getInstance().quitDriver();
         }
 		waitABit(4000);
 	}
 	
 	public OperationsWebPage clickOperationsLink() {
 		waitABit(5000);
-		wait.until(ExpectedConditions.elementToBeClickable(operationstab)).click();
+		if (getBrowserType().contains("edge")) {
+            try {
+                new Actions(driver).moveToElement(operationstab).click().build().perform();
+            } catch (Exception e) {
+                e.printStackTrace();
+                clickWithJS(operationstab);
+            }
+        } else {
+            wait.until(ExpectedConditions.elementToBeClickable(operationstab)).click();
+        }
 		return PageFactory.initElements(
 				driver, OperationsWebPage.class);
 	}

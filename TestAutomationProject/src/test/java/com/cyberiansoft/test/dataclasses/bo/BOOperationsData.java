@@ -19,6 +19,9 @@ public class BOOperationsData {
     @JsonProperty("page2")
     private String page2;
 
+    @JsonProperty("page20")
+    private String page20;
+
     @JsonProperty("pageInt50")
     private int pageInt50;
 
@@ -127,6 +130,10 @@ public class BOOperationsData {
 
     public String getPage2() {
         return page2;
+    }
+
+    public String getPage20() {
+        return page20;
     }
 
     public int getPageInt50() {

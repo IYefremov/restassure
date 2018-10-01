@@ -19,12 +19,12 @@ public class ReportsWebPage extends BaseWebPage {
 
 	public ReportsWebPage(WebDriver driver) {
 		super(driver);
-		try {
+        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+        try {
             wait.until(ExpectedConditions.titleContains("ReconPro :: Reports"));
         } catch (Exception e) {
             Assert.fail("The Reports webpage has not been opened", e);
         }
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 	
 	public TechnicianCommissionsWebPage clickTechnicianCommissionsLink() {

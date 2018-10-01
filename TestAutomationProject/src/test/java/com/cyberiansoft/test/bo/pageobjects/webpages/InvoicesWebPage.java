@@ -136,6 +136,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	@FindBy(xpath = "//div[@class='rmSlide' and contains(@style, 'block')]")
     private WebElement slideDisplayed;
 
+	@FindBy(xpath = "//div[@class='rmSlide' and contains(@style, 'none')]")
+    private WebElement slideHidden;
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_popupEmailRecipients")
     private WebElement emailRecipientsPopupField;
 
@@ -248,10 +251,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	public InvoicesWebPage clickFindButton() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
-        } catch (Exception ignored) {
-            waitABit(2000);
-            wait.until(ExpectedConditions.elementToBeClickable(findbtn)).click();
-        }
+        } catch (Exception ignored) {}
         waitForLoading();
         return this;
 	}
@@ -687,7 +687,6 @@ public class InvoicesWebPage extends WebPageWithFilter {
 
     private String selectOptionForFirstInvoice(WebElement button) {
         String mainWindow = driver.getWindowHandle();
-//        scrollWindowDown(300);
         Actions actions = new Actions(driver);
         actions.moveToElement(selectButton).click().build().perform();
 
@@ -698,9 +697,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
             try {
                 actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
                 wait.until(ExpectedConditions.visibilityOf(button)).click();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            } catch (Exception ignored) {}
         }
         try {
             Set frames = driver.getWindowHandles();
@@ -721,6 +718,12 @@ public class InvoicesWebPage extends WebPageWithFilter {
         }
 	}
 
+    public void handleAlertForEdgeBrowser() {
+        if (getBrowserType().contains("edge")) {
+            wait.until(ExpectedConditions.alertIsPresent()).accept();
+        }
+    }
+
 	public void scrollWindowDown(int pix) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0," + pix + ")", "");
@@ -728,11 +731,15 @@ public class InvoicesWebPage extends WebPageWithFilter {
 
 	public boolean isFirstInvoiceMarkedAsPaid() {
 		try {
-			Actions actioons = new Actions(driver);
-			actioons.moveToElement(selectButton).click().build().perform();
+			Actions actions = new Actions(driver);
+			wait.until(ExpectedConditions.elementToBeClickable(selectButton)).click();
+
+			actions.moveToElement(selectButton).click().build().perform();
+//            setAttribute(slideDisplayed, "")
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Mark as Unpaid"))).click();
-			actioons.moveToElement(selectButton).click().build().perform();
-		} catch (TimeoutException e) {
+			actions.moveToElement(selectButton).click().build().perform();
+		} catch (WebDriverException e) {
+		    e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -1217,4 +1224,10 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		}
 		return PageFactory.initElements(driver, ExportInvoicesWebPage.class);
 	}
+
+	public void chooseMarkAsUnpaidOptionIfPresent() {
+        try {
+            selectMarkAsUnpaidOption();
+        } catch (Exception ignored) {}
+    }
 }

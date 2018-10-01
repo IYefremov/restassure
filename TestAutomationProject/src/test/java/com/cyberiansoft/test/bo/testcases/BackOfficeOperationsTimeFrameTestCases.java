@@ -18,7 +18,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsTimeFrameData.json";
 
-    @BeforeClass()
+    @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
     }
@@ -126,6 +126,7 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastYear(), data.getEndLastYear(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(BackOfficeUtils.getTheShortestDateFormat()));
 	}
 
+    //todo edge
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationInvoicesTimeframeSearch(String rowID, String description, JSONObject testData) {
 
@@ -138,26 +139,32 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		invoicesPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
 		invoicesPage.clickFindButton();
-		invoicesPage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getCurrentDate(), invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
+		invoicesPage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getCurrentDate(),
+                invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 		
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		invoicesPage.clickFindButton();
-		invoicesPage.verifyTableDateRangeForAllTablePages(data.getLastWeekStart(), data.getLastWeekEnd(), invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
+		invoicesPage.verifyTableDateRangeForAllTablePages(data.getLastWeekStart(), data.getLastWeekEnd(),
+                invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		invoicesPage.clickFindButton();
-		invoicesPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartMonth(), data.getCurrentDate(), invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
+		invoicesPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartMonth(), data.getCurrentDate(),
+                invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
 		invoicesPage.clickFindButton();
-		invoicesPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastMonth(), data.getEndLastMonth(), invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
+		invoicesPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastMonth(), data.getEndLastMonth(),
+                invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		invoicesPage.clickFindButton();
-		invoicesPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartYear(), data.getCurrentDate(), invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
+		invoicesPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartYear(), data.getCurrentDate(),
+                invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.clickFindButton();
-		invoicesPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastYear(), data.getEndLastYear(), invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
+		invoicesPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastYear(), data.getEndLastYear(),
+                invoicesPage.getInvoicesTable(), InvoicesWebPage.WOTABLE_DATE_COLUMN_NAME);
 	}
 }

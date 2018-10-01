@@ -18,7 +18,7 @@ public class BackOfficeReportsTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOReportsData.json";
 
-    @BeforeClass()
+    @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
     }

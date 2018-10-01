@@ -16,7 +16,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json";
 
-    @BeforeClass()
+    @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
     }
@@ -60,6 +60,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
         techCommissionPage.verifySearchFieldsAreVisible();
 
+        techCommissionPage.setPageSize(data.getPage20());
         techCommissionPage.selectSearchStatus(data.getStatus());
         techCommissionPage.selectSearchTechnician(data.getTech());
         techCommissionPage.setSearchInvoice(data.getInvoiceNumber());
@@ -69,6 +70,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         techCommissionPage.verifySearchResults(data.getInvoiceNumber());
     }
 
+    //todo edge
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationWorkOrdersSearch(String rowID, String description, JSONObject testData) {
 
@@ -108,6 +110,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
         wopage.makeSearchPanelVisible();
         wopage.verifySearchFieldsAreVisible();
+        wopage.setPageSize(data.getPage20());
 
         wopage.selectSearchPackage(data.getSearchPackage());
         wopage.selectSearchStatus(data.getStatus());

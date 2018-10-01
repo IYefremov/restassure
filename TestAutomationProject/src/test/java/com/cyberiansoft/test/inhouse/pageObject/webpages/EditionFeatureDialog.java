@@ -38,6 +38,7 @@ public class EditionFeatureDialog extends BasePage {
     public PricingPage clickSubmitEditionFeatureButton() {
         clickButton(submitEditionFeatureButton);
         waitForLoading();
+        waitABit(3000);
         return PageFactory.initElements(driver, PricingPage.class);
     }
 }

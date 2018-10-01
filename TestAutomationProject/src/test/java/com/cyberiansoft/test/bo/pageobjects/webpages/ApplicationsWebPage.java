@@ -35,7 +35,7 @@ public class ApplicationsWebPage extends WebPageWithPagination {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboStatus_DropDown")
 	private DropDown statussearchdd;
 	
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbxUserName")
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbSearch")
 	private TextField usernamesearchfld;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")

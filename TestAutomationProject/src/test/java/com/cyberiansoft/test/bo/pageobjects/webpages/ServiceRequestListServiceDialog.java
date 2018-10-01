@@ -2,9 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.apache.commons.lang3.RandomUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -54,7 +52,11 @@ public class ServiceRequestListServiceDialog extends BaseWebPage {
     public ServiceRequestListServiceDialog openServicesDropDown() {
         wait.until(ExpectedConditions.textToBePresentInElement(serviceComboArrow, "select"));
         wait.until(ExpectedConditions.elementToBeClickable(serviceComboArrow)).click();
-        wait.until(ExpectedConditions.attributeContains(serviceComboDropDown, "display", "block"));
+        try {
+            wait.until(ExpectedConditions.attributeContains(serviceComboDropDown, "display", "block"));
+        } catch (Exception e) {
+            waitABit(2000);
+        }
         return this;
     }
 
@@ -66,18 +68,41 @@ public class ServiceRequestListServiceDialog extends BaseWebPage {
     }
 
     public int countAvailableServices() {
-        return wait.until(ExpectedConditions.visibilityOfAllElements(serviceComboDropDownCheckboxOptions)).size();
+        if (!getBrowserType().contains("edge")) {
+            return wait.until(ExpectedConditions.visibilityOfAllElements(serviceComboDropDownCheckboxOptions)).size();
+        } else {
+            try {
+                wait.ignoring(Exception.class).until(e -> serviceComboDropDownCheckboxOptions.size() > 0);
+            } catch (TimeoutException ignored) {
+                waitABit(3000);
+            }
+            return serviceComboDropDownCheckboxOptions.size();
+        }
     }
 
     public ServiceRequestListServiceDialog checkRandomServiceOption() {
         int i = RandomUtils.nextInt(0, countAvailableServices());
-        wait.until(ExpectedConditions.elementToBeClickable(serviceComboDropDownCheckboxOptions.get(i))).click();
+        try {
+            wait
+                    .ignoring(WebDriverException.class)
+                    .until(ExpectedConditions.elementToBeClickable(serviceComboDropDownCheckboxOptions.get(i)))
+                    .click();
+        } catch (Exception e) {
+            waitABit(3000);
+            wait.until(ExpectedConditions.elementToBeClickable(serviceComboDropDownCheckboxOptions.get(i))).click();
+        }
         return this;
     }
 
     public ServiceRequestListServiceDialog clickAddServiceOption() {
         wait.until(ExpectedConditions.elementToBeClickable(addServiceOptionButton)).click();
-        wait.until(ExpectedConditions.attributeContains(serviceComboDropDown, "display", "none"));
+        try {
+            if (getBrowserType().contains("edge")) {
+                wait.until(ExpectedConditions.attributeContains(serviceComboDropDown, "display", "null"));
+            } else {
+                wait.until(ExpectedConditions.attributeContains(serviceComboDropDown, "display", "none"));
+            }
+        } catch (Exception ignored) {}
         return this;
     }
 

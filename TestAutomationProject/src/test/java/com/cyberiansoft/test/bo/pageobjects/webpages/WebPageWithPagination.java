@@ -57,6 +57,8 @@ public class WebPageWithPagination extends BaseWebPage {
 	
 	public String getLastPageNumber() {
 		String oftxt = "of ";
+		wait.ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOf(pageoflabel));
 		return pageoflabel.getText().substring(oftxt.length(), pageoflabel.getText().length());
 	}
 	
@@ -104,9 +106,9 @@ public class WebPageWithPagination extends BaseWebPage {
 	public void clickGoToFirstPage() {
 		gotofirstpage.click();
 		try{
-		wait.until(ExpectedConditions.visibilityOf(updateProcess));
-		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		}catch(TimeoutException e){}
+            wait.until(ExpectedConditions.visibilityOf(updateProcess));
+            wait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		} catch(TimeoutException e) {}
 		waitForLoading();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='1']")));
 		waitABit(1000);
@@ -126,19 +128,10 @@ public class WebPageWithPagination extends BaseWebPage {
 		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
-		try{
-		wait.until(ExpectedConditions.visibilityOf(updateProcess));
-		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		}catch(TimeoutException ignored){}
-		waitForLoading();
-	}
-
-	public void waitForLoading(){
 		try {
-		    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-		} catch (TimeoutException e) {
-		    waitABit(3000);
-        }
+		    wait.until(ExpectedConditions.visibilityOf(updateProcess));
+		    wait.until(ExpectedConditions.invisibilityOf(updateProcess));
+		} catch(TimeoutException ignored){}
+		waitForLoading();
 	}
 }

@@ -12,17 +12,19 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import org.awaitility.Duration;
 import org.monte.screenrecorder.ScreenRecorder;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
-
-import static org.awaitility.Awaitility.await;
 
 public class BaseTestCase {
 
@@ -99,27 +101,35 @@ public class BaseTestCase {
 	@AfterSuite
 	public void tearDown() {
 		if (DriverBuilder.getInstance().getDriver() != null)
-			DriverBuilder.getInstance().getDriver().quit();
+			DriverBuilder.getInstance().quitDriver();
 		if (DriverBuilder.getInstance().getAppiumDriver() != null)
 			DriverBuilder.getInstance().getAppiumDriver().quit();
 	}
 
     @BeforeMethod
     public void BackOfficeLogin() {
-        //todo delete from here after the problem with skips will be solved
         browsertype = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
         try {
             DriverBuilder.getInstance().setDriver(browsertype);
-        } catch (SessionNotCreatedException e) {
-            await().atMost(Duration.TEN_SECONDS);
-            DriverBuilder.getInstance().setDriver(browsertype);
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+//            await().atMost(30, TimeUnit.SECONDS).ignoreExceptions().until(() -> DriverBuilder.getInstance().setDriver(browsertype));
         }
         webdriver = DriverBuilder.getInstance().getDriver();
-        webdriver.navigate().refresh();
-        //todo delete from here after the problem with skips will be solved
+//        if (webdriver != null) {
+//            webdriver.navigate().refresh();
+//        } else {
+//            DriverBuilder.getInstance().quitDriver();
+//            webdriver = DriverBuilder.getInstance().getDriver();
+//            webdriver.navigate().refresh();
+//        }
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
         loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+    }
+
+    public void setBrowser() {
+        DriverBuilder.getInstance().setDriver(browsertype);
     }
 
     @AfterMethod
@@ -130,10 +140,6 @@ public class BaseTestCase {
                 backOfficeHeader.clickLogout();
             } catch (WebDriverException ignored) {}
         }
-        //todo delete from here after the problem with skips will be solved
-        if (DriverBuilder.getInstance().getDriver() != null) {
-            DriverBuilder.getInstance().getDriver().quit();
-        }
-        //todo delete from here after the problem with skips will be solved
+        DriverBuilder.getInstance().quitDriver();
     }
 }

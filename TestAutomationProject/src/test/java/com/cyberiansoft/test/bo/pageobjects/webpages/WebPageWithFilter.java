@@ -18,10 +18,10 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 public class WebPageWithFilter extends WebPageWithPagination {
 
-	@FindBy(xpath = "//*[contains(@id, 'filterer_ddlTimeframe_Input')]")
+	@FindBy(xpath = "//input[contains(@id, 'filterer_ddlTimeframe_Input')]")
 	private ComboBox searchtimeframecmb;
 	
-	@FindBy(xpath = "//*[contains(@id, 'filterer_ddlTimeframe_DropDown')]")
+	@FindBy(xpath = "//div[contains(@id, 'filterer_ddlTimeframe_DropDown')]")
 	private DropDown searchtimeframedd;
 
     @FindBy(xpath = "//input[contains(@id, 'filterer_ddlPORequired_Input')]")

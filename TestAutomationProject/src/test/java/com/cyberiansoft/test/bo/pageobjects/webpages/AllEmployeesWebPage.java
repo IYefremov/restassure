@@ -72,11 +72,9 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	}
 	
 	public void selectSearchApplication(String _application) {
-//		wait.until(ExpectedConditions.visibilityOf(updateProcess));
-//		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		//Thread.sleep(1000);
-		applicationsearchcmb.click();
-		applicationsearchcmb.sendKeys(_application);
+        waitForUpdate();
+		wait.until(ExpectedConditions.elementToBeClickable(applicationsearchcmb)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(applicationsearchcmb)).sendKeys(_application);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + _application + "']"))).click();
 		//driver.findElement(By.xpath("//li/em[text()='" + _application + "']")).click();
 	}

@@ -1,20 +1,27 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.google.common.base.Function;
+import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.awaitility.Awaitility.await;
+
 public abstract class BaseWebPage {
 
 	public WebDriver driver;
 	public static WebDriverWait wait;
     public static WebDriverWait waitShortly;
+
+    @FindBy(className = "updateProcess")
+    private WebElement updateProcess;
 
 	private static final long SLEEP_TIMEOUT_IN_SEC = 15;
 
@@ -225,12 +232,38 @@ public abstract class BaseWebPage {
 	}
 
     public void waitForLoading(){
-        try{
+        waitForLoadingToBegin();
+        try {
+            await().atMost(80, TimeUnit.SECONDS)
+                    .ignoreExceptions()
+                    .pollInterval(500, TimeUnit.MILLISECONDS)
+                    .until(this::waitForLoadingToStop);
+        } catch (ConditionTimeoutException ignored) {}
+    }
+
+    private void waitForLoadingToBegin() {
+        try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
-        } catch(WebDriverException ignored){
-            waitABit(5000);
-        }
+        } catch (Exception ignored) {}
+    }
+
+    private Boolean waitForLoadingToStop() {
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
+    }
+
+    public void waitForUpdate() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(updateProcess));
+            wait.until(ExpectedConditions.invisibilityOf(updateProcess));
+        } catch (TimeoutException ignored) {}
+    }
+
+    public void setAttribute(WebElement element, String attribute, String value) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
+                element, attribute, value);
+        try {
+            waitShortly.until(ExpectedConditions.attributeContains(element, attribute, value));
+        } catch (Exception ignored) {}
     }
 
     BaseWebPage clickWithJS(WebElement element) {

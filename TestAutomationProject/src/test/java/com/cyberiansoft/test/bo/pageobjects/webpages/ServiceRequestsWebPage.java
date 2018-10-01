@@ -1,10 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.Calendar;
-import java.util.List;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,11 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.Calendar;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class ServiceRequestsWebPage extends WebPageWithPagination {
 	
@@ -246,7 +241,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 
 	public void clickServicesTab() {
 		click(servicestab);
-	waitABit(1000);
+	    waitABit(1000);
 	}
 
 	public void selectCustomer(String customer) {
@@ -291,5 +286,4 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 		}
 		waitABit(3000);
 	}
-
 }

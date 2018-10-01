@@ -14,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
@@ -68,9 +69,13 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	
 	public void selectAllServicesInTable() {
 		List<WebElement> rows = getPhaseServicesTableRows();
-		if (getBrowserType().equals("chrome")) {			
+		if (getBrowserType().equals("chrome")) {
 			for (WebElement row : rows) {
 				click(row.findElement(By.xpath(".//td[1]/input")));
+			}
+		} else if (getBrowserType().contains("edge")) {
+			for (WebElement row : rows) {
+                setAttribute(row.findElement(By.xpath(".//td[1]/input")), "checked", "checked");
 			}
 		} else {
 			for (WebElement row : rows) {
@@ -81,13 +86,17 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 	
 	public int getNumberOfSelectedServicesInTable() {
 		List<WebElement> rows = getPhaseServicesTableRows();
-		int cheked = 0;
-		for (WebElement row : rows) {
-			if (isCheckboxChecked(row.findElement(By.xpath("./td/input")))) {
-				cheked = cheked + 1; 
-			}
-		}
-		return cheked;
+		int checked = 0;
+		if (getBrowserType().contains("edge")) {
+            return rows.stream().map(e -> e.getAttribute("checked")).collect(Collectors.toList()).size(); //todo check!!!
+        } else {
+            for (WebElement row : rows) {
+                if (isCheckboxChecked(row.findElement(By.xpath("./td/input")))) {
+                    checked += checked;
+                }
+            }
+        }
+		return checked;
 	}
 	
 	public void selectServicePhaseValue(String phaseservice, String phase) {

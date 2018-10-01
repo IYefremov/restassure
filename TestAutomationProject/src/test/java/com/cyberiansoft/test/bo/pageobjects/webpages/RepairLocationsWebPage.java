@@ -236,7 +236,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
         }
     }
 
-    public void deleteRepairLocationifExists(String repairlocation) {
+    public void deleteRepairLocationIfExists(String repairlocation) {
         if (repairLocationExists(repairlocation)) {
             deleteRepairLocation(repairlocation);
         }
@@ -247,7 +247,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
         if (row != null) {
             cancelDeletingTableRow(row);
         } else {
-            Assert.assertTrue(false, "Can't find " + repairlocation + " repair location");
+            Assert.fail("Can't find " + repairlocation + " repair location");
         }
     }
 
@@ -269,7 +269,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
         return null;
     }
 
-    public void verifyRRepairLocationsTableColumnsAreVisible() {
+    public void verifyRepairLocationsTableColumnsAreVisible() {
         Assert.assertTrue(repairlocationstable.tableColumnExists("Phases"));
         Assert.assertTrue(repairlocationstable.tableColumnExists("Services"));
         Assert.assertTrue(repairlocationstable.tableColumnExists("Managers"));
