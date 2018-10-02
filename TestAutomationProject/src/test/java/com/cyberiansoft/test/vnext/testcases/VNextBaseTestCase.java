@@ -22,8 +22,6 @@ import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -33,11 +31,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
-
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
 
 /*import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
@@ -81,7 +75,7 @@ public class VNextBaseTestCase {
 		mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
 		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 
-		service.set(new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
+		/*service.set(new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
 				.usingAnyFreePort().withArgument(SESSION_OVERRIDE)
 				.withArgument(LOG_LEVEL, "error")
 				.build());
@@ -89,7 +83,7 @@ public class VNextBaseTestCase {
 
 		if (service.get() == null || !service.get().isRunning()) {
 			throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
-		}
+		}*/
 
 
 		if (mobilePlatform.getMobilePlatformString().contains("ios"))
