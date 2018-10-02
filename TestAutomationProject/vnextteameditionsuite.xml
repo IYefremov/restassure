@@ -5,7 +5,7 @@
   <parameter name="selenium.browser" value="chrome" />
   <parameter name="device.platform" value="android"  />
   <parameter name="device.lecense" value="Automation_android_emulator"  />
-  <parameter name="appium.path" value="D:\npm\node_modules\appium\lib\main.js"  />
+  <parameter name="appium.path" value="D:\npm\node_modules\appium\build\lib\main.js"  />
   <listeners>
 		<!--  <listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>-->
 		<listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
