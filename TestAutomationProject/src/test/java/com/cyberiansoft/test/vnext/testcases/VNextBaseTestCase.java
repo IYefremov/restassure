@@ -10,7 +10,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.Employee;
-import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -89,13 +88,13 @@ public class VNextBaseTestCase {
 		if (mobilePlatform.getMobilePlatformString().contains("ios"))
 			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR);
 		else {
-			AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
-			//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+			//AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
+			DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 			if (VNextConfigInfo.getInstance().installNewBuild()) {
 				DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.ReconProClient");
 				DriverBuilder.getInstance().getAppiumDriver().quit();
-				//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
-				AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
+				DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+				//AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
 
 			}
 			appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
