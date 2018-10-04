@@ -10,7 +10,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.Employee;
-import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -22,8 +21,6 @@ import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -33,11 +30,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
-
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;
-import static io.appium.java_client.service.local.flags.GeneralServerFlag.SESSION_OVERRIDE;
 
 /*import com.ssts.pcloudy.Connector;
 import com.ssts.pcloudy.appium.PCloudyAppiumSession;
@@ -81,7 +74,7 @@ public class VNextBaseTestCase {
 		mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
 		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 
-		service.set(new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
+		/*service.set(new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
 				.usingAnyFreePort().withArgument(SESSION_OVERRIDE)
 				.withArgument(LOG_LEVEL, "error")
 				.build());
@@ -89,19 +82,19 @@ public class VNextBaseTestCase {
 
 		if (service.get() == null || !service.get().isRunning()) {
 			throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
-		}
+		}*/
 
 
 		if (mobilePlatform.getMobilePlatformString().contains("ios"))
 			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR);
 		else {
-			AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
-			//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+			//AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
+			DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 			if (VNextConfigInfo.getInstance().installNewBuild()) {
 				DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.ReconProClient");
 				DriverBuilder.getInstance().getAppiumDriver().quit();
-				//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
-				AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
+				DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
+				//AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
 
 			}
 			appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
