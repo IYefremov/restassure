@@ -22,29 +22,29 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	final String quemessagexpath = "//span[@class='letter-number']";
 	
 	//@FindBy(xpath="//div[@class='title' and text()='Customers']")
-	@FindBy(xpath="//a[@class='tile-link tile-item customers-tile']")
+	@FindBy(xpath="//*[@action='show-customers']")
 	private WebElement customerslist;
 	
 	//@FindBy(xpath="//div[@class='title' and text()='Inspections']")
-	@FindBy(xpath="//div[@class='tiles-block']/a[@class='tile-link tile-item inspections-tile']")
+	@FindBy(xpath="//*[@action='show-inspections']")
 	private WebElement inspectionslist;
 	
 	//@FindBy(xpath="//div[@class='title' and text()='Work Orders']")
-	@FindBy(xpath="//div[@class='tiles-block']/a[@class='tile-link tile-item work-orders-tile']")
+	@FindBy(xpath="//*[@action='show-orders']")
 	private WebElement workorderslist;
-	
-	@FindBy(xpath="//div[@class='tiles-block']/a[@class='tile-link tile-item invoices-tile']")
+
+	@FindBy(xpath="//*[@action='show-invoices']")
 	private WebElement invoiceslist;
 	
 	@FindBy(xpath="//a[@class='tile-link tile-item more-tile']")
 	private WebElement morelist;
 	
 	//@FindBy(xpath="//div[@class='title' and text()='Settings']")
-	@FindBy(xpath="//a[@class='tile-link tile-item settings-tile']")
+	@FindBy(xpath="//*[@action='show-settings']")
 	private WebElement settingslist;
 	
 	//@FindBy(xpath="//div[@class='title' and text()='Status']")
-	@FindBy(xpath="//a[@class='tile-link tile-item status-tile']")
+	@FindBy(xpath="//*[@action='show-status']")
 	private WebElement statuslist;
 	
 	@FindBy(xpath=quemessagexpath)
