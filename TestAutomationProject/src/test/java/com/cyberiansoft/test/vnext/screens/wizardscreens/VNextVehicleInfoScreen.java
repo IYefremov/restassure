@@ -41,7 +41,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	@FindBy(name="Vehicle.Color")
 	private WebElement colcorfld;
 	
-	@FindBy(xpath="//a[@action='select-color']")
+	@FindBy(xpath="//*[@action='select-color']")
 	private WebElement selectcolorbtn;
 	
 	@FindBy(name="Vehicle.VehicleTypeId")
@@ -70,6 +70,9 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	
 	@FindBy(name="Estimations.EmployeeId")
 	private WebElement techfld;
+
+	@FindBy(xpath="//*[@action='select-owner']")
+	private WebElement selectownertn;
 	
 	public VNextVehicleInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
@@ -293,6 +296,15 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color) {
 		setVIN(VIN);
 		selectModelColor(color);
+	}
+
+	public VNextCustomersScreen clickSelectOwnerCell() {
+		tap(selectownertn);
+		return new VNextCustomersScreen(appiumdriver);
+	}
+
+	public String getOwnerCellValue() {
+		return appiumdriver.findElement(By.id("vehicleInfoOwner")).getAttribute("value");
 	}
 
 }

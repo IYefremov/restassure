@@ -86,8 +86,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.changeScreen("Summary");
 		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-		wosummaryscreen.clickCreateInvoiceOption();
-		wosummaryscreen.clickWorkOrderSaveButton();
+		wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
 		invoiceTypesScreen.selectInvoiceType(invoiceType);
 		

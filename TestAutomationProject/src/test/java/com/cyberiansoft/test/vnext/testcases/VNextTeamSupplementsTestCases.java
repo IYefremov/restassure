@@ -254,10 +254,10 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 			System.out.println("Total Created [" + inspectionGenericObjectPool.getCreatedCount() + "]");
 			System.out.println("Number! [" + inspectionDTO1.getLocalNo());
 			inspectionGenericObjectPool.invalidateObject(inspectionDTO1);
-		}
+		}*/
 
 
-
+		/*final String apiPath = VNextDataInfo.getInstance().getPathToAPIDataFiles();
 		final String DATA_FILE1 = "team-base-workorder-data1.json";
 		WorkOrderDTO workOrderDTO = JsonUtils.getWorkOrderDTO(new File(apiPath + DATA_FILE1),
 				new File(apiPath + VNextDataInfo.getInstance().getDefaultVehicleInfoDataFileName()),
@@ -265,18 +265,27 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 
 
 
-		config = new GenericObjectPoolConfig();
+		GenericObjectPoolConfig config = new GenericObjectPoolConfig();
 		config.setMaxIdle(1);
-		config.setMaxTotal(10);
+		config.setMaxTotal(5);
 
 
 		config.setTestOnBorrow(true);
 		config.setTestOnReturn(true);
 		WOPool woPool = new WOPool(new WorkOrderFactory(workOrderDTO, WorkOrderTypes.O_KRAMAR, testcustomer.getClientId(),
 				employee.getEmployeeID(), licenseID, deviceID, appID, appLicenseEntity), config);
+		for (int i = 0; i < woPool.getMaxTotal(); i++) {
+			WorkOrderDTO workOrder1 = woPool.borrowObject();
+			System.out.println("WO Number [" + workOrder1.getOrderId() + "]");
+			System.out.println("WO Number [" + workOrder1.getLocalNo() + "]");
+			System.out.println("Active [" + woPool.getNumActive() + "]"); //Return the number of instances currently borrowed from this pool
+			System.out.println("Idle [" + woPool.getNumIdle() + "]"); //The number of instances currently idle in this pool
+			System.out.println("Total Created [" + woPool.getCreatedCount() + "]");
+			System.out.println("Number! [" + workOrder1.getLocalNo());
+			woPool.invalidateObject(workOrder1);
+		}*/
 
-
-
+/*
 		final GenericObjectPool<WorkOrderDTO> woGenericObjectPool =
 				new GenericObjectPool<WorkOrderDTO>(new WorkOrderFactory(workOrderDTO, WorkOrderTypes.O_KRAMAR,
 						testcustomer.getClientId(), employee.getEmployeeID(), licenseID, deviceID, appID, appLicenseEntity), config);

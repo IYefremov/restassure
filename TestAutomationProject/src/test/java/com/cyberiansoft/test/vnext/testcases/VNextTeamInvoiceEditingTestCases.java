@@ -9,12 +9,13 @@ import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
+import io.appium.java_client.android.AndroidDriver;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -23,8 +24,7 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionRegistration {
 
@@ -388,43 +388,68 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanAttachWOWithSameCustomers(String rowID,
-                                                      String description, JSONObject testData) {
+                                                      String description, JSONObject testData) throws Exception {
 
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         List<String> workOrders = new ArrayList<>();
 
-        for (WorkOrderData woData : invoice.getWorkOrdersData())
-            workOrders.add(createWorkOrder(woData));
+        HashMap<String, Integer> memoryInfo = getMemoryInfo((AndroidDriver) appiumdriver);
+        Iterator it = memoryInfo.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrders.get(0));
-        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        }
+        System.out.println("-----------!!!!!!!!!!! " + memoryInfo.get("totalPss"));
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        List<String> workOrdersToAdd = workOrders.subList(1, workOrders.size());
-        invoiceinfoscreen.addWorkOrdersToInvoice(workOrdersToAdd);
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        for (String woNumber : workOrders)
-            invoiceinfoscreen.isWorkOrderSelectedForInvoice(woNumber);
-        invoiceinfoscreen.clickInvoiceInfoBackButton();
-        VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
-        Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
-                VNextAlertMessages.CANCEL_ETING_INVOICE);
-        invoicesscreen = new VNextInvoicesScreen(appiumdriver);
-        for (String woNumber : workOrders)
-            Assert.assertTrue(invoicesscreen.getInvoiceWorkOrders(invoicenumber).contains(woNumber));
-        invoicesscreen.clickBackButton();
+
+       // for (int j = 0; j<15; j++) {
+           // System.out.println("----------------------------- " + j);
+
+            for (WorkOrderData woData : invoice.getWorkOrdersData())
+                workOrders.add(createWorkOrder(woData));
+
+            VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+            VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+            VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
+            workordersscreen.clickCreateInvoiceFromWorkOrder(workOrders.get(0));
+            VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+            invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+
+            VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+            invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+            final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+            invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
+            Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
+            VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+            invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+            List<String> workOrdersToAdd = workOrders.subList(1, workOrders.size());
+            invoiceinfoscreen.addWorkOrdersToInvoice(workOrdersToAdd);
+            invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
+            invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+            invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+            for (String woNumber : workOrders)
+                invoiceinfoscreen.isWorkOrderSelectedForInvoice(woNumber);
+            invoiceinfoscreen.clickInvoiceInfoBackButton();
+            VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
+            Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
+                    VNextAlertMessages.CANCEL_ETING_INVOICE);
+            invoicesscreen = new VNextInvoicesScreen(appiumdriver);
+            for (String woNumber : workOrders)
+                Assert.assertTrue(invoicesscreen.getInvoiceWorkOrders(invoicenumber).contains(woNumber));
+            invoicesscreen.clickBackButton();
+       // }
+
+        memoryInfo = getMemoryInfo((AndroidDriver) appiumdriver);
+        it = memoryInfo.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+
+        }
+        System.out.println("-----------!!!!!!!!!!! " + memoryInfo.get("totalPss"));
+
+
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -501,5 +526,20 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
             workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
         workordersscreen.clickBackButton();
         return workOrderNumber;
+    }
+
+    private HashMap<String, Integer> getMemoryInfo(AndroidDriver driver) throws Exception {
+        List<List<Object>> data = driver.getPerformanceData("com.automobiletechnologies.ReconProClient", "memoryinfo", 10);
+        HashMap<String, Integer> readableData = new HashMap<>();
+        for (int i = 0; i < data.get(0).size(); i++) {
+            int val;
+            if (data.get(1).get(i) == null) {
+                val = 0;
+            } else {
+                val = Integer.parseInt((String) data.get(1).get(i));
+            }
+            readableData.put((String) data.get(0).get(i), val);
+        }
+        return readableData;
     }
 }

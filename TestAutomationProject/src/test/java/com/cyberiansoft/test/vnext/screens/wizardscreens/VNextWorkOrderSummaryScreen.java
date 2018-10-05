@@ -29,9 +29,9 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseWizardScreen {
 		wait.until(ExpectedConditions.visibilityOf(autoinvoicecreateoption));
 	}
 	
-	public void clickCreateInvoiceOption() {
+	/*public void clickCreateInvoiceOption() {
 		tap(autoinvoicecreateoption);
-	}
+	}*/
 	
 	public void clickWorkOrderSaveButton() {
 		tap(savebtn);
@@ -39,6 +39,11 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseWizardScreen {
 			VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 			informationDialog.clickFinalButton();
 		}
+	}
+
+	public void clickCreateInvoiceOptionAndSaveWO() {
+		tap(autoinvoicecreateoption);
+		tap(savebtn);
 	}
 
 }

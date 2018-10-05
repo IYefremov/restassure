@@ -180,9 +180,8 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		inspmenuscreen.clickCreateWorkOrderInspectionMenuItem();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		VNextWorkOrderSummaryScreen wosummaryscreen = vehicleinfoscreen.goToWorkOrderSummaryScreen();
-		wosummaryscreen.clickCreateInvoiceOption();
-		wosummaryscreen.clickWorkOrderSaveButton();
-		
+		wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
+
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		invoicenumbertc48094  = invoiceinfoscreen.getInvoiceNumber();
@@ -315,8 +314,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		//final String wonumber = servicesscreen.getNewInspectionNumber();
 		selectedServicesScreen.swipeScreenLeft();
 		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-		wosummaryscreen.clickCreateInvoiceOption();
-		wosummaryscreen.clickWorkOrderSaveButton();
+		wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		String invoicenumber  = invoiceinfoscreen.getInvoiceNumber();
@@ -350,8 +348,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 
 		servicesscreen.swipeScreenLeft();
 		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-		wosummaryscreen.clickCreateInvoiceOption();
-		wosummaryscreen.clickWorkOrderSaveButton();
+		wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);		
