@@ -89,7 +89,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
     @Test(testName= "Test Case 78392:Verify user can change retail owner to wholesale",
             description = "Verify user can change retail owner to wholesale")
-    public void testVerifyUserCanСhangeRetailOwnerToWholesale() {
+    public void testVerifyUserCanChangeRetailOwnerToWholesale() {
 
         final String vinnumber = "TEST";
 
