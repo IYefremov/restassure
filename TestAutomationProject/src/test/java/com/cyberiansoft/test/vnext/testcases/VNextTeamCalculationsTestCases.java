@@ -51,7 +51,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.swipeScreensLeft(2);
+        vehicleinfoscreen.changeScreen("Services");
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.selectService(inspdata.getServiceName());
         availableservicesscreen.selectService(inspdata.getPercentageServicesList().get(0).getServiceName());
