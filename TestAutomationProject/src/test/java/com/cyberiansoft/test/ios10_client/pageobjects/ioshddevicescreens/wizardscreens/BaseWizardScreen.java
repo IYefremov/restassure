@@ -28,7 +28,9 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen implements IBaseW
 
     public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType, String screenName) {
         IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
-        navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.visibilityOf(navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'"))).click();
+        //navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();
         appiumdriver.findElementByAccessibilityId(screenName).click();
         return (T) WizardScreensFactory.getWizardScreenType(wizardScreenType);
     }

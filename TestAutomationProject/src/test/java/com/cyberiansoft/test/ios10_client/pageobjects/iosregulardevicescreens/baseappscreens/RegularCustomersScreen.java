@@ -12,8 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class RegularCustomersScreen extends RegularBaseAppScreen {
 	
 	/*@iOSFindBy(accessibility = "btnWholesale")
@@ -46,7 +44,6 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	public RegularCustomersScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void swtchToRetailMode() {

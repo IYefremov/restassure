@@ -260,6 +260,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	public void selectInspectionInTable(String inspectionnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspectionnumber)));
+		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspectionnumber))).click();
 	}
 	

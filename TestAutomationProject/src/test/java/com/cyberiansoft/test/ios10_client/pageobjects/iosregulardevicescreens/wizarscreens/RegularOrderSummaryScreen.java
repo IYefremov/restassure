@@ -6,13 +6,12 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 
@@ -24,13 +23,15 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	
 	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;*/
+
+	@iOSFindBy(accessibility = "TotalAmount")
+	private IOSElement wototalamaunt;
 	
 	private By approveandcreateinvoicechekbox = MobileBy.AccessibilityId("checkbox unchecked");
 
 	public RegularOrderSummaryScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void checkApproveAndCreateInvoice() {
@@ -83,7 +84,9 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	}*/
 
 	public String getOrderSumm() {
-		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(wototalamaunt));
+		return wototalamaunt.getAttribute("value");
 	}
 
 	public String getTotalSaleValue() {

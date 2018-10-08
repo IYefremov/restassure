@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -57,11 +58,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	private final String country = "Canada";
 
 	@BeforeClass
-	public void setUpSuite() throws Exception {
+	public void setUpSuite() {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
-				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Test_Automation_Regular1");
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Test_Automation_Regular2");
 		testRegisterationiOSDdevice();
 	}
 
@@ -91,7 +92,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	public void testRegisterationiOSDdevice() throws Exception {
+	public void testRegisterationiOSDdevice() {
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 		//Helpers.waitABit(5000);
 		//.removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId(), null);
@@ -1674,6 +1675,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		visualinteriorscreen.tapInterior();
 
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR,  ScreenNamesConstants.FUTURE_AUDI_CAR);
+		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);	
 		Helpers.tapRegularCarImage();
@@ -1681,6 +1683,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$180.50");
 		
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);	
 		RegularVisualInteriorScreen.tapExterior();
@@ -1688,6 +1691,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$250.50");
 			
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR,  ScreenNamesConstants.FUTiRE_JET_CAR);
+		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTiRE_JET_CAR);
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.selectService(visualjetservice);
 		Helpers.tapRegularCarImage();
@@ -1780,10 +1784,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(vehiclescreen.getModel(), _model);
 		
 		visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
-		vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_AUDI_CAR);
+		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR,  ScreenNamesConstants.FUTiRE_JET_CAR);
+		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTiRE_JET_CAR);
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FOLLOW_UP_REQUESTED);
+		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FOLLOW_UP_REQUESTED);
 		SinglePageInspectionScreen singlepageinspectionscreen = new SinglePageInspectionScreen();
 		questionsscreen.swipeScreenUp();
 		Assert.assertTrue(singlepageinspectionscreen.isSignaturePresent());
@@ -5504,6 +5513,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation("5"));
 		ordersummaryscreen.saveWizard();
+
+		BaseUtils.waitABit(20*1000);
 		myworkordersscreen.switchToTeamView();
 		RegularTeamWorkOrdersScreen teamworkordersscreen = new RegularTeamWorkOrdersScreen();
 		teamworkordersscreen.clickOnWO(wonum);
@@ -5709,6 +5720,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 
 		visualInteriorScreen = new RegularVisualInteriorScreen();
+		visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_SPORT_CAR);
 		vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		RegularNotesScreen notesscreen = vehiclescreen.clickNotesButton();
 		notesscreen.setNotes(inspectionnotes);

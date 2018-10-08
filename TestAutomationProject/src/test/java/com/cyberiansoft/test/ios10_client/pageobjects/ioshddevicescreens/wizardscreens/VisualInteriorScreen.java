@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -57,8 +58,8 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 	public void selectService(String _service) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_service)));
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(_service))).click();
+		BaseUtils.waitABit(1000);
+		appiumdriver.findElementByAccessibilityId(_service).click();
 	}
 
 	public void selectSubService(String _subservice) {

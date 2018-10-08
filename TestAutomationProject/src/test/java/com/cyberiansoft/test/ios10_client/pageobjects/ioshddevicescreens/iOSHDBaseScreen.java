@@ -40,6 +40,8 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancelButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("Cancel")));
 		appiumdriver.findElementByAccessibilityId("Cancel").click();		
 	}
 

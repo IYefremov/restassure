@@ -153,12 +153,13 @@ public class ServicesScreen extends BaseWizardScreen {
 		} else
 			tablelist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableGroupItemList']/.."));
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		if (tablelist.findElementsByAccessibilityId("Clear text").size() > 0) {
+		/*if (tablelist.findElementsByAccessibilityId("Clear text").size() > 0) {
 			tablelist.findElementByAccessibilityId("Clear text").click();
 
-		}
-        tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
-		appiumdriver.getKeyboard().sendKeys(servicename);
+		}*/
+        tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
+		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).setValue(servicename);
+		//appiumdriver.getKeyboard().sendKeys(servicename);
 		appiumdriver.hideKeyboard();
 
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeTable")).findElement(MobileBy.AccessibilityId(servicename)).click();
@@ -197,12 +198,12 @@ public class ServicesScreen extends BaseWizardScreen {
 	public SelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
 		IOSElement grouplist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/.."));
         appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-        if (grouplist.findElementsByAccessibilityId("Clear text").size() > 0) {
+        /*if (grouplist.findElementsByAccessibilityId("Clear text").size() > 0) {
 			grouplist.findElementByAccessibilityId("Clear text").click();
 
-        }
-		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
-        appiumdriver.getKeyboard().sendKeys(servicename);
+        }*/
+		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
+		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).sendKeys(servicename);
 		appiumdriver.hideKeyboard();
 		((IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList")).findElementByAccessibilityId(servicename).
 				findElementByAccessibilityId("custom detail button").click();

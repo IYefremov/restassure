@@ -70,6 +70,9 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 	
 	public List<String> getPanelsStatuses(String panelname) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = '" +
+						panelname + "' and type = 'XCUIElementTypeCell'")));
 		List<MobileElement> elements = monitorservicestable.findElementsByIosNsPredicate ("name = '" +
 				panelname + "' and type = 'XCUIElementTypeCell'");
 		return elements.stream().map(element -> element.
