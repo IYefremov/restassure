@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
-import io.appium.java_client.android.AndroidDriver;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -24,7 +23,8 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionRegistration {
 
@@ -391,21 +391,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
                                                       String description, JSONObject testData) throws Exception {
 
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
         List<String> workOrders = new ArrayList<>();
-
-        HashMap<String, Integer> memoryInfo = getMemoryInfo((AndroidDriver) appiumdriver);
-        Iterator it = memoryInfo.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            System.out.println(pair.getKey() + " = " + pair.getValue());
-
-        }
-        System.out.println("-----------!!!!!!!!!!! " + memoryInfo.get("totalPss"));
-
-
-       // for (int j = 0; j<15; j++) {
-           // System.out.println("----------------------------- " + j);
-
             for (WorkOrderData woData : invoice.getWorkOrdersData())
                 workOrders.add(createWorkOrder(woData));
 
@@ -438,18 +425,6 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
             for (String woNumber : workOrders)
                 Assert.assertTrue(invoicesscreen.getInvoiceWorkOrders(invoicenumber).contains(woNumber));
             invoicesscreen.clickBackButton();
-       // }
-
-        memoryInfo = getMemoryInfo((AndroidDriver) appiumdriver);
-        it = memoryInfo.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            System.out.println(pair.getKey() + " = " + pair.getValue());
-
-        }
-        System.out.println("-----------!!!!!!!!!!! " + memoryInfo.get("totalPss"));
-
-
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -528,18 +503,5 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         return workOrderNumber;
     }
 
-    private HashMap<String, Integer> getMemoryInfo(AndroidDriver driver) throws Exception {
-        List<List<Object>> data = driver.getPerformanceData("com.automobiletechnologies.ReconProClient", "memoryinfo", 10);
-        HashMap<String, Integer> readableData = new HashMap<>();
-        for (int i = 0; i < data.get(0).size(); i++) {
-            int val;
-            if (data.get(1).get(i) == null) {
-                val = 0;
-            } else {
-                val = Integer.parseInt((String) data.get(1).get(i));
-            }
-            readableData.put((String) data.get(0).get(i), val);
-        }
-        return readableData;
-    }
+
 }
