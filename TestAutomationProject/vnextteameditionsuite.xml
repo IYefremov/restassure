@@ -42,6 +42,8 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextLaborServiceTestCases">
       </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextVehicleOwnerSupportTestCases">
+      </class>
     </classes>
   </test>
 </suite>
