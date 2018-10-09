@@ -188,6 +188,8 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getWorkOrderNumber() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name CONTAINS 'O-'")));
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByIosNsPredicate("name CONTAINS 'O-'").getText();
 	}

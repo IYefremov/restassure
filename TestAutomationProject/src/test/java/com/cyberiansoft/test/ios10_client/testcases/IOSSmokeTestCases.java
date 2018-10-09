@@ -5837,10 +5837,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		SinglePageInspectionScreen singlepageinspectionscreen = myinspectionsscreen.addInspection(InspectionsTypes.INSP_DRAFT_SINGLE_PAGE);
 		String inspnumber = singlepageinspectionscreen.getInspectionNumber();
-		
+		System.out.println("+++++++++++++++!!!!!!!" + inspnumber);
 		singlepageinspectionscreen.expandToFullScreeenSevicesSection();
 		ServicesScreen servicesscreen = new ServicesScreen();
-		BaseUtils.waitABit(2000);
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectServicePriceMatrices("PM_New");
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen();

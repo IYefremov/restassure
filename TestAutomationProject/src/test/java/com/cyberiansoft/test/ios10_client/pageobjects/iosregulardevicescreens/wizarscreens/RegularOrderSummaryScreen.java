@@ -34,6 +34,11 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
+	public void waitWorkOrderSummaryScreenLoad() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'OrderSummaryView'")));
+    }
+
 	public void checkApproveAndCreateInvoice() {
 		//savebtn.click();
 		appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();
@@ -127,7 +132,7 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void closeDublicaterServicesWarningByClickingCancel() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver,15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Duplicate services")));
 		//wait = new WebDriverWait(appiumdriver,10);
         //wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Duplicate services")));
