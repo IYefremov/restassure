@@ -247,7 +247,7 @@ public class VNextBaseTestCase {
 		BaseUtils.waitABit(5000);
 		verificationscreen.clickVerifyButton();
 
-		BaseUtils.waitABit(20*1000);
+		BaseUtils.waitABit(50*1000);
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);		
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();

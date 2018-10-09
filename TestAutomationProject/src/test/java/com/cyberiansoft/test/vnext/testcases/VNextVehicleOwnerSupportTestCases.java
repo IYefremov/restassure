@@ -186,4 +186,51 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
         inspectionscreen.clickBackButton();
     }
+
+    @Test(testName= "Test Case 78395:Verify user can change owner when create WO from Inspection",
+            description = "Verify user can change owner when create WO from Inspection")
+    public void testVerifyUserCanChangeOwnerWhenCreateWOFromInspection() {
+
+        final String vinnumber = "TEST";
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+        inspectionscreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(vinnumber);
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
+        VNextCustomersScreen customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer2);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
+        vehicleinfoscreen.saveInspectionViaMenu();
+
+        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
+        inspectionsMenuScreen.clickApproveInspectionMenuItem();
+        VNextApproveScreen approveScreen = new VNextApproveScreen(appiumdriver);
+        approveScreen.drawSignature();
+        approveScreen.saveApprovedInspection();
+        inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+        inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
+        inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
+        customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer.getFullName());
+
+        vehicleinfoscreen.saveWorkOrderViaMenu();
+
+        inspectionscreen.clickBackButton();
+    }
 }
