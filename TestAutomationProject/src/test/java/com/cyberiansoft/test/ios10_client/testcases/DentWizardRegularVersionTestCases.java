@@ -835,8 +835,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 					alerttext,
 					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
 
-			RegularQuestionsScreen  regularQuestionsScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
-			RegularServicesScreen servicesscreen = regularQuestionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 
 			selectedservicescreen.clickVehiclePartsCell();
@@ -845,9 +844,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			}			
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-
-
-
 
 			RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 			Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(UtilConstants.FIXPRICE_SERVICE));
@@ -1638,10 +1634,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), "%25.000");
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-			Helpers.acceptAlert();
-			selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
-			selectedservicescreen.saveSelectedServiceDetails();
-			selectedservicescreen.saveSelectedServiceDetails();
+			//Helpers.acceptAlert();
+			//selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
+			//selectedservicescreen.saveSelectedServiceDetails();
+			//selectedservicescreen.saveSelectedServiceDetails();
 			pricematrix = new RegularPriceMatrixScreen();
             vehiclePartScreen = pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
             vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
