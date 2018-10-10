@@ -18,6 +18,12 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
     @FindBy(xpath="//div[@data-page='entity-types']")
     private WebElement typeslist;
 
+    @FindBy(xpath="//*[@data-automation-id='search-icon']")
+    private WebElement searchbtn;
+
+    @FindBy(xpath="//*[@data-autotests-id='search-input']")
+    private WebElement searchfld;
+
     public VNextBaseTypeSelectionList(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         //PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
@@ -27,9 +33,13 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
     }
 
     public void selectType(String typeName) {
+        if (!elementExists("//div[@class='item-title']/div[text()='" + typeName + "']")) {
+            clickSearchButton();
+            setSearchText(typeName);
+        }
+        //WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
-        wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
         if (!appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")).isDisplayed()) {
             WebElement elem = appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']"));
@@ -38,5 +48,16 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
             BaseUtils.waitABit(500);
         }
         tap(typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")));
+    }
+
+    public void clickSearchButton() {
+        tap(searchbtn);
+    }
+
+    private void setSearchText(String searchtext) {
+        tap(searchfld);
+        searchfld.clear();
+        appiumdriver.getKeyboard().sendKeys(searchtext);
+        appiumdriver.hideKeyboard();
     }
 }

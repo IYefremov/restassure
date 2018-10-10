@@ -337,8 +337,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
 
         invoicesscreen = new VNextInvoicesScreen(appiumdriver);
         invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayMenu payMenu = invoicemenuscreen.clickPayInvoiceMenuItem();
-        Assert.assertTrue(payMenu.isInvoicePayPOROMenuItemExists());
+        Assert.assertTrue(invoicemenuscreen.isInvoicePayPOROMenuItemExists());
         invoicemenuscreen.clickCloseInvoiceMenuButton();
         invoicesscreen.clickBackButton();
     }
@@ -450,6 +449,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayPOROScreen payPOROScreen = invoicemenuscreen.clickPayPOROMenuItem();
+        payPOROScreen.setPaymentPOROValue("");
         payPOROScreen.clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),

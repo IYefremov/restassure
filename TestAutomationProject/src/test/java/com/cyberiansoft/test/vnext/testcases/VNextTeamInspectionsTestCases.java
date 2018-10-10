@@ -94,6 +94,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen.switchToMyInvoicesView();
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		
 		invoicesscreen.clickBackButton();

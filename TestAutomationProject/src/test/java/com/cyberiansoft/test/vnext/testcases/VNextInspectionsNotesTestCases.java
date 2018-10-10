@@ -488,6 +488,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextNotesScreen notesscreen = vehicleinfoscreen.clickInspectionNotesOption();
 		notesscreen.selectNotesPicturesTab();
 		notesscreen.addFakeImageNote();
+		notesscreen.clickAllowIfAppears();
 		notesscreen.clickNotesBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		notesscreen = vehicleinfoscreen.clickInspectionNotesOption();

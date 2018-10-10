@@ -42,6 +42,10 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	public void clickServiceDetailsDoneButton() {
 		tap(servicedtailsapplybtn);
+		if (elementExists("//div[@class='modal-text']")) {
+			VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+			informationDialog.clickInformationDialogNoButton();
+		}
 	}
 	
 	public void clickDeleteServiceIcon() {
