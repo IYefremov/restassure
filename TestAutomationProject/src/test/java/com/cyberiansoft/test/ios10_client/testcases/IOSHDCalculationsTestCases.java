@@ -102,8 +102,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 				InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
 		final String inspNumber = vehiclescreen.getInspectionNumber();
 		ClaimScreen claimScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.CLAIM);
+		claimScreen.waitClaimScreenLoad();
 		VisualInteriorScreen visualinteriorscreen = claimScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
@@ -167,7 +170,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		vehiclescreen.setColor(_color);
 		vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 		VisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		vehiclescreen.saveWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -206,6 +211,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.tapInteriorWithCoords(3);
 		visualinteriorscreen.tapInteriorWithCoords(4);
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
@@ -1277,6 +1283,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickInvoiceIcon();
 
         QuestionsScreen questionsScreen = myworkordersscreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
+		questionsScreen.waitQuestionsScreenLoaded();
 		InvoiceInfoScreen invoiceinfoscreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceinfoscreen.setPO("123");
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -1289,6 +1296,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myinvoicesscreen.selectInvoice(invoicenum);
 		myinvoicesscreen.clickEditPopup();
 		questionsScreen = new QuestionsScreen();
+		questionsScreen.waitQuestionsScreenLoaded();
 		questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceinfoscreen.addWorkOrder(wo2);
 		invoiceinfoscreen.clickSave();
@@ -1336,7 +1344,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 42372:Inspections: HD - Verify approved amount for Inspection created from SR", description = "Verify approved amount for Inspection created from SR")
-	public void testVerifyApprovedAmountForInspectionCreatedFromSR() throws Exception {
+	public void testVerifyApprovedAmountForInspectionCreatedFromSR() {
 		final String VIN  = "1D7HW48NX6S507810";
 		
 		homescreen = new HomeScreen();

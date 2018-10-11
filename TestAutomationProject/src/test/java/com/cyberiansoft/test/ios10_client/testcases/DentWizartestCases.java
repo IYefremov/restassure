@@ -1208,6 +1208,7 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
         questionsscreen  = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
 		String alerttext = questionsscreen.clickSaveWithAlert();
 		Assert.assertTrue(
 				alerttext.contains("Question 'Estimate Conditions' in section 'Hail Info' should be answered."));

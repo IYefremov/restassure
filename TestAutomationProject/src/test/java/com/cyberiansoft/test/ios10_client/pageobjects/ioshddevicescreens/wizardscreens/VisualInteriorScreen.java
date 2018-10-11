@@ -50,6 +50,12 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Visual")));
 	}
+
+	public void waitVisualScreenLoaded(String screenName) {
+
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'viewPrompt' and label = '" + screenName+ "'")));
+	}
 	
 	public void switchToCustomTab() {
 		appiumdriver.findElementByAccessibilityId("Custom").click();

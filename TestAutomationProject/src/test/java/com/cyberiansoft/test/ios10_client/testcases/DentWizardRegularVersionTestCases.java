@@ -1634,10 +1634,10 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), "%25.000");
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
-			//Helpers.acceptAlert();
-			//selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
-			//selectedservicescreen.saveSelectedServiceDetails();
-			//selectedservicescreen.saveSelectedServiceDetails();
+			Helpers.acceptAlert();
+			selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
+			selectedservicescreen.saveSelectedServiceDetails();
+			selectedservicescreen.saveSelectedServiceDetails();
 			pricematrix = new RegularPriceMatrixScreen();
             vehiclePartScreen = pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
             vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
