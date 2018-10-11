@@ -56,6 +56,20 @@ public class VNextStatusScreen extends VNextBaseScreen {
 		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 
 	}
+
+	public void updateMainDB(Employee employee) {
+		clickUpdateAppdata();
+		BaseUtils.waitABit(10000);
+		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 800);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='" +
+				VNextAlertMessages.DATA_HAS_BEEN_DOWNLOADED_SECCESSFULY + "']")));
+		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg.clickInformationDialogOKButton();
+
+		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+
+	}
 	
 	public void clickUpdateAppdata() {
 		WaitUtils.click(updatemaindbbtn);

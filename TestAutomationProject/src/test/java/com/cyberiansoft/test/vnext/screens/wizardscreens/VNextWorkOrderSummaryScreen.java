@@ -35,19 +35,21 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseWizardScreen {
 	
 	public void clickWorkOrderSaveButton() {
 		tap(savebtn);
-		if (new WorkOrderTypeData(workOrderType).isCanBeDraft()) {
-			VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-			informationDialog.clickFinalButton();
-		}
+		if (workOrderType != null)
+			if (new WorkOrderTypeData(workOrderType).isCanBeDraft()) {
+				VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+				informationDialog.clickFinalButton();
+			}
 	}
 
 	public void clickCreateInvoiceOptionAndSaveWO() {
 		tap(autoinvoicecreateoption);
 		tap(savebtn);
-		if (new WorkOrderTypeData(workOrderType).isCanBeDraft()) {
-			VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-			informationDialog.clickFinalButton();
-		}
+		if (workOrderType != null)
+			if (new WorkOrderTypeData(workOrderType).isCanBeDraft()) {
+				VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+				informationDialog.clickFinalButton();
+			}
 	}
 
 }

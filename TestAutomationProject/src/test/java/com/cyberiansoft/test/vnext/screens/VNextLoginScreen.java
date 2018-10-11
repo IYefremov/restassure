@@ -88,7 +88,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	}
 	
 	public void selectEmployee(String username) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), '" + username + "')]")));
 		tapListElement(employeeslist, username);
 	}

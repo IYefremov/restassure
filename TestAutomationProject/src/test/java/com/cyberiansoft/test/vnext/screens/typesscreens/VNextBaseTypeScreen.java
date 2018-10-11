@@ -108,8 +108,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     }
 
     public void clickCancelSearchButton() {
-        //WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='search-cancel']")));
+        BaseUtils.waitABit(1000);
         tap(cancelsearchbtn);
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
     }

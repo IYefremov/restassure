@@ -6,13 +6,13 @@ import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
@@ -23,7 +23,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -477,7 +476,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 	
 	@Test(testName= "Test Case 40285:vNext - Save picture note from gallery on tapping 'Back' button (Estimation level)", 
 			description = "Save picture note from gallery on tapping 'Back' button (Estimation level)")
-	public void testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel() throws IOException {
+	public void testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel() {
 		
 		final int addedpictures = 1;
 		
@@ -504,7 +503,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			+ "Test Case 55444:vNext: verify displaying image notes for the Inspection Visual Breakage service", 
 			description = "Create Inspection with breakage service image notes, "
 					+ "verify displaying image notes for the Inspection Visual Breakage service")
-	public void testCreateInspectionWithBreakageServiceImageNotes() throws IOException {
+	public void testCreateInspectionWithBreakageServiceImageNotes() {
 		
 		final String selectdamage = "Price Adjustment";
 		final String servicepercentage = "Corrosion Protection";
@@ -563,7 +562,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			+ "Test Case 55662:vNext: verify displaying image notes for the Inspection Money service,"
 			+ "Test Case 55663:vNext: verify displaying image notes for the Percentage service", 
 			description = "Create Inspection with money service image notes")
-	public void testCreateInspectionWithMoneyServiceImageNotes() throws IOException {
+	public void testCreateInspectionWithMoneyServiceImageNotes() {
 		
 		final String[] servicestoadd = { "Dent Repair", "Aluminum Upcharge" };
 		final int addedpictures = 1;
@@ -610,7 +609,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 	
 	@Test(testName= "Test Case 55650:vNext mobile: Create Inspection with matrix services image notes", 
 			description = "Create Inspection with matrix services image notes")
-	public void testCreateInspectionWithMatrixServicesImageNotes() throws IOException {
+	public void testCreateInspectionWithMatrixServicesImageNotes() {
 		
 		final String matrixservice = "Hail Dent Repair";
 		final String pricematrix = "State Farm";

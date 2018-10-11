@@ -288,8 +288,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		settingsscreen.setManualSendOff();
 		settingsscreen.clickBackButton();
+
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToMyInspectionsView();
 		AppiumUtils.setNetworkOff();
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();

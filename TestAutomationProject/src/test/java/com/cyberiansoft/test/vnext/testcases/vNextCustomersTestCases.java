@@ -102,8 +102,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		homescreen = new VNextHomeScreen(appiumdriver);
 		BaseUtils.waitABit(1000);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
-		statusscreen.updateMainDB();
-		homescreen = statusscreen.clickBackButton();
+		statusscreen.updateMainDB(employee);
+		//homescreen = statusscreen.clickBackButton();
 		customersscreen = homescreen.clickCustomersMenuItem();
 		newcustomerscreen = customersscreen.openCustomerForEdit(testcustomer);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());
@@ -142,8 +142,8 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		homescreen = new VNextHomeScreen(appiumdriver);
 		BaseUtils.waitABit(30000);
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
-		statusscreen.updateMainDB();
-		homescreen = statusscreen.clickBackButton();
+		statusscreen.updateMainDB(employee);
+		//homescreen = statusscreen.clickBackButton();
 		customersscreen = homescreen.clickCustomersMenuItem();
 		newcustomerscreen = customersscreen.openCustomerForEdit(testcustomer);
 		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());

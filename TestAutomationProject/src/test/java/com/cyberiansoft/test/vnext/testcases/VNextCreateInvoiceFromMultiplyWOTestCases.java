@@ -1,12 +1,13 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -25,7 +26,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 	public void testVerifyUserCanCreateInvoiceFromMultiplyWO() {
 		
 		final String ponumber = "123po";
-		ArrayList<String> workOrders = new ArrayList<String>();
+		ArrayList<String> workOrders = new ArrayList<>();
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
@@ -34,6 +35,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			customersscreen.selectCustomer(testcustomer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
+			AppiumUtils.clickHardwareBackButton();
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
@@ -49,7 +51,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		final String invoiceNumber = invoiceinfoscren.getInvoiceNumber();
-		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoice();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoiceAsFinal();
 		ArrayList<String> wonumbers = invoicesscreen.getInvoiceWorkOrders(invoiceNumber);
 		Assert.assertEquals(wonumbers.size(), workOrders.size());
 		for (String wonumber : wonumbers)
@@ -84,6 +86,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			customersscreen.selectCustomer(customer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
+			AppiumUtils.clickHardwareBackButton();
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
@@ -101,11 +104,10 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		final String invoiceNumber = invoiceinfoscren.getInvoiceNumber();
-		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoice();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoiceAsFinal();
 		ArrayList<String> wonumbers = invoicesscreen.getInvoiceWorkOrders(invoiceNumber);
 		Assert.assertEquals(wonumbers.size(), 1);
 		for (String wonumber : wonumbers) {
-			System.out.println("++++" + wonumber);
 			Assert.assertTrue(wonumber.contains(invoicedetails));
 		} 
 		invoicesscreen.clickBackButton();
@@ -137,6 +139,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 				customersscreen.selectCustomer(customer);
 				VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 				vehicleinfoscreen.setVIN(testVIN);
+				AppiumUtils.clickHardwareBackButton();
 				workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 				vehicleinfoscreen.saveWorkOrderViaMenu();
 			}
@@ -193,6 +196,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			customersscreen.selectCustomer(customer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
+			AppiumUtils.clickHardwareBackButton();
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
@@ -272,7 +276,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		Assert.assertEquals(invoiceinfoscren.getInvoiceTotalAmount(), totalAmount);
-		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoice();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoiceAsFinal();
 		invoicesscreen.clickBackButton();
 	}
 	
@@ -326,7 +330,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		Assert.assertEquals(invoiceinfoscren.getInvoiceTotalAmount(), totalAmount);
-		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoice();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoiceAsFinal();
 		invoicesscreen.clickBackButton();
 	}
 }

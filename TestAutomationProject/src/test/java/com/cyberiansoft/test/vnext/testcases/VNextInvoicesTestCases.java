@@ -353,7 +353,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);		
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber));
 		homescreen = invoicesscreen.clickBackButton();
 	}
@@ -382,7 +382,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);		
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
 		Assert.assertTrue(invoicesscreen.isInvoiceExists(invoicenumber));
 		homescreen = invoicesscreen.clickBackButton();
 	}

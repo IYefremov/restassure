@@ -131,8 +131,12 @@ public class VNextNotesScreen extends VNextBaseScreen {
 
 	public void clickAllowIfAppears() {
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0)
+		if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0) {
 			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
+			BaseUtils.waitABit(1000);
+			AppiumUtils.clickHardwareBackButton();
+		}
+
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 	}
 	
