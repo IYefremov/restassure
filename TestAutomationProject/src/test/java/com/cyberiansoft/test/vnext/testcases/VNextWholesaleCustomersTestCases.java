@@ -22,8 +22,8 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 	public void beforeClass() {
 	}
 	
-	@Test(testName= "Test Case 63620:Verify created on BO Wholesale customer displays in the list", 
-			description = "Verify created on BO Wholesale customer displays in the list")
+	//@Test(testName= "Test Case 63620:Verify created on BO Wholesale customer displays in the list",
+	//		description = "Verify created on BO Wholesale customer displays in the list")
 	public void testVerifyCreatedOnBOWholesaleCustomerDisplaysInTheList() {
 		
 		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
