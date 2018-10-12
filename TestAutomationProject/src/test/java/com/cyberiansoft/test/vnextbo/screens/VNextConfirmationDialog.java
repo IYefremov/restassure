@@ -1,8 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	
@@ -36,13 +35,17 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	}
 	
 	public void clickNoButton() {
-		nobtn.click();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOf(confirmdialog));
+		confirmdialog.
+				findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")).click();
+		new WebDriverWait(driver, 10)
+		  .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
 	}
 	
 	public void clickYesButton() {
-		yesbtn.click();
+		confirmdialog.
+				findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")).click();
+		new WebDriverWait(driver, 10)
+				.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
 	}
 	
 	public String getConfirmationDialogMessage() {

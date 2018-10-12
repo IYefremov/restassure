@@ -59,6 +59,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         nada.deleteAllMessages();
 		VNextAppUtils.resetApp();
 		setUp();
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+
+		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
+		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
+		environmentSelectionScreen.selectEnvironment("Development");
+		//BaseUtils.waitABit(15*1000);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 	}
 	
 	@Test(testName= "Test Case 44318:vNext: verify creating BO with JumpStart Edition (PDR)", 
@@ -309,6 +317,16 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		BaseUtils.waitABit(10*1000);
 
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+
+
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+
+		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
+		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
+		environmentSelectionScreen.selectEnvironment("Development");
+		//BaseUtils.waitABit(15*1000);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
 		regscreen.setLastName(userlastname);
