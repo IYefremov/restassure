@@ -2767,16 +2767,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 25009:WO HD: Verify that only assigned services on Matrix Panel is available as additional services", description = "WO HD: Verify that only assigned services on Matrix Panel is available as additional services")
-	public void testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices()
-			throws Exception {
+	public void testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
-		
+
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
@@ -2803,6 +2801,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen = new ServicesScreen();
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX));
 		QuestionsScreen questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
+		questionsscreen.waitQuestionsScreenLoaded();
 		questionsscreen.cancelWizard();
 		myworkordersscreen = new MyWorkOrdersScreen();
 		myworkordersscreen.clickHomeButton();
@@ -3071,8 +3070,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 26014:WO Monitor: HD - Verify that Start date is set when Start Service", description = "WO Monitor: HD - Verify that Start date is set when Start Service")
-	public void testWOMonitorVerifyThatStartDateIsSetWhenStartService()
-			throws Exception {
+	public void testWOMonitorVerifyThatStartDateIsSetWhenStartService() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3117,6 +3115,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isServiceStartDateExists());
 		ordermonitorscreen.clickServiceDetailsDoneButton();
+		ordermonitorscreen = new OrderMonitorScreen();
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();;
 		teamworkordersscreen.clickHomeButton();
 	}

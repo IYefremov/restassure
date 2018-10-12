@@ -467,7 +467,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	public void selectVehiclePart(String vehiclepart) {
 		IOSElement vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
 		if (!vehiclepartstable.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
-			scrollToElement(vehiclepart);
+			scrollToElement(vehiclepartstable.findElementByAccessibilityId(vehiclepart));
 		}
 		vehiclepartstable.findElementByAccessibilityId(vehiclepart).click();
 	}

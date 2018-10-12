@@ -116,7 +116,8 @@ public class QuestionsScreen extends BaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Owner State")));
 		if (!appiumdriver.findElementByName(ownerstate).isDisplayed())
-			scrollToElement(ownerstate);
+			//scrollToElement(ownerstate);
+			scrollToElement((MobileElement) appiumdriver.findElementByName(ownerstate));
 		appiumdriver.findElementByName(ownerstate).click();
 	}
 

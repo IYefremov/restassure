@@ -1247,6 +1247,7 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen();
         questionsscreen  = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
         OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 		ordersummaryscreen.saveWizard();
@@ -1294,6 +1295,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 
         questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+        questionsscreen.waitQuestionsScreenLoaded();
         OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		ordersummaryscreen.saveWizard();
@@ -1397,6 +1399,7 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen();
 		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
         OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 		ordersummaryscreen.saveWizard();
@@ -1474,6 +1477,7 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen();
         questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
         OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		ordersummaryscreen.saveWizard();
@@ -1524,6 +1528,7 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen();
 		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
         OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
@@ -1664,6 +1669,7 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen();
 		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
 		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		ordersummaryscreen.saveWizard();
@@ -1774,6 +1780,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen = new ServicesScreen();
 		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
 		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		ordersummaryscreen.saveWizard();
@@ -1819,6 +1826,7 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 
         questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
 		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		ordersummaryscreen.saveWizard();
@@ -2355,9 +2363,10 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_HAIL_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.setServiceQuantityValue(servicequantity2);	
-		selectedservicescreen.saveSelectedServiceDetails();		
-		
+		selectedservicescreen.saveSelectedServiceDetails();
+		servicesscreen = new ServicesScreen();
 		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsscreen.waitQuestionsScreenLoaded();
         OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
         Assert.assertEquals(ordersummaryscreen.getOrderSumm(), totalsumm);
         ordersummaryscreen.checkApproveAndSaveWorkOrder();

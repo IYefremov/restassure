@@ -125,7 +125,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	public void clickDiscaunt(String discaunt) {
 		IOSElement table = (IOSElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails");
 		if (!table.findElementByAccessibilityId(discaunt).isDisplayed()) {
-		    scrollToElement(discaunt);
+		    scrollToElement(table.findElementByAccessibilityId(discaunt));
 			//swipeTableUp(table.findElementByAccessibilityId(discaunt),
 			//		table);
 		}
