@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.monitorlite.testcases;
 
+import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -12,7 +13,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBORepairOrderDetailsPage;
@@ -27,7 +27,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		//webdriver.navigate().refresh();
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeReconProURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+		loginpage.UserLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
 				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 	}
 
@@ -53,7 +53,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 			+ "Test Case 68404:Repair Orders: Start WO on the List", 
 			description = "MonitorLite: Create SR on classic BO, "
 					+ "Repair Orders: Start WO on the List")
-	public void testRepairOrdersStartWOOnTheList() throws InterruptedException {
+	public void testRepairOrdersStartWOOnTheList() {
 
 		final String srCustomer = "Test";
 		final String VIN = "1GNEK13R4TJ423282";
@@ -94,7 +94,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
 				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
@@ -112,7 +112,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	
 	@Test(testName = "Test Case 68405:Repair Orders: Complete WO on the List", 
 			description = "Repair Orders: Complete WO on the List")
-	public void testRepairOrdersCompleteWOOnTheList() throws InterruptedException {
+	public void testRepairOrdersCompleteWOOnTheList() {
 
 		final String srCustomer = "Test";
 		final String VIN = "1GNEK13R4TJ423282";
@@ -154,7 +154,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
 				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
@@ -177,7 +177,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	
 	@Test(testName = "Test Case 68406:Repair Orders: Start WO on the Order Details", 
 			description = "Repair Orders: Start WO on the Order Details")
-	public void testRepairOrdersStartWOOnTheOrderDetails() throws InterruptedException {
+	public void testRepairOrdersStartWOOnTheOrderDetails() {
 
 		final String srCustomer = "Test";
 		final String VIN = "1GNEK13R4TJ423282";
@@ -220,7 +220,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
 				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
@@ -246,7 +246,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	
 	@Test(testName = "Test Case 68407:Repair Orders: Complete WO on the Order Details", 
 			description = "Repair Orders: Complete WO on the Order Details")
-	public void testRepairOrdersCompleteWOOnTheOrderDetails() throws InterruptedException {
+	public void testRepairOrdersCompleteWOOnTheOrderDetails() {
 
 		final String srCustomer = "Test";
 		final String VIN = "1GNEK13R4TJ423282";
@@ -293,7 +293,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(), 
+		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
 				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);

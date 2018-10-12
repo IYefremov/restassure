@@ -23,12 +23,12 @@ public class BaseTestCase {
 
 //	@BeforeClass
 //	public void setUp() throws InterruptedException {
-//        browsertype = BaseUtils.getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser());
+//        browserType = BaseUtils.getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser());
 //        try {
-//            DriverBuilder.getInstance().setDriver(browsertype);
+//            DriverBuilder.getInstance().setDriver(browserType);
 //        } catch (SessionNotCreatedException e) {
 //            Thread.sleep(10000);
-//            DriverBuilder.getInstance().setDriver(browsertype);
+//            DriverBuilder.getInstance().setDriver(browserType);
 //        }
 //        webdriver = DriverBuilder.getInstance().getDriver();
 //        webdriver.navigate().refresh();

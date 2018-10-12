@@ -3,7 +3,7 @@ package com.cyberiansoft.test.dataclasses.inHouseTeamPortal;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TeamPortalCategoriesData {
+public class TeamPortalSalesQuotesData {
 
     @JsonProperty("category")
     private String category;

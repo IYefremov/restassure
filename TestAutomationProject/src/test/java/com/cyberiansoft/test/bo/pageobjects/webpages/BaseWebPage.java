@@ -18,7 +18,8 @@ public abstract class BaseWebPage {
 
 	public WebDriver driver;
 	public static WebDriverWait wait;
-    public static WebDriverWait waitShortly;
+    public static WebDriverWait waitLong;
+    public static WebDriverWait waitShort;
 
     @FindBy(className = "updateProcess")
     private WebElement updateProcess;
@@ -32,7 +33,8 @@ public abstract class BaseWebPage {
 		driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC*2, TimeUnit.SECONDS);
 
 		wait = new WebDriverWait(driver, 15, 1);
-		waitShortly = new WebDriverWait(driver, 5, 1);
+        waitShort = new WebDriverWait(driver, 5, 1);
+        waitLong = new WebDriverWait(driver, 30, 1);
 	}
 
 	protected WebElement waitUntilElementIsClickable(final WebElement parent, final By locator) {
@@ -262,7 +264,7 @@ public abstract class BaseWebPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
                 element, attribute, value);
         try {
-            waitShortly.until(ExpectedConditions.attributeContains(element, attribute, value));
+            waitShort.until(ExpectedConditions.attributeContains(element, attribute, value));
         } catch (Exception ignored) {}
     }
 

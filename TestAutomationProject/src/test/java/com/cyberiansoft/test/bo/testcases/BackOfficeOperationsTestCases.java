@@ -42,7 +42,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         Assert.assertEquals(data.getTableRowCount1(), techCommissionPage.getTechnicianCommissionsTableRowCount());
 
         String lastPageNumber = techCommissionPage.getLastPageNumber();
-        techCommissionPage.clickGoToLastPage(browsertype.getBrowserTypeString());
+        techCommissionPage.clickGoToLastPage(browserType.getBrowserTypeString());
         Assert.assertEquals(lastPageNumber, techCommissionPage.getPageFieldValue());
 
         techCommissionPage.clickGoToFirstPage();
@@ -93,7 +93,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         Assert.assertEquals(data.getTableRowCount1(), wopage.getWorkOrdersTableRowCount());
 
         String lastPageNumber = wopage.getLastPageNumber();
-        wopage.clickGoToLastPage(browsertype.getBrowserTypeString());
+        wopage.clickGoToLastPage(browserType.getBrowserTypeString());
         Assert.assertEquals(lastPageNumber, wopage.getPageFieldValue());
 
         wopage.clickGoToFirstPage();
@@ -140,10 +140,10 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         webdriver.navigate().back();
         Thread.sleep(1000);
         serviceContractsPage.clickContractDataButton();
-        serviceContractsPage.verifyDropDownMenuIsOpened(browsertype.getBrowserTypeString());
+        serviceContractsPage.verifyDropDownMenuIsOpened(browserType.getBrowserTypeString());
 
         serviceContractsPage.clickClaimDataButton();
-        serviceContractsPage.verifyDropDownMenuIsOpened(browsertype.getBrowserTypeString());
+        serviceContractsPage.verifyDropDownMenuIsOpened(browserType.getBrowserTypeString());
 
         serviceContractsPage.clickPortfolioButton();
         Thread.sleep(2000);

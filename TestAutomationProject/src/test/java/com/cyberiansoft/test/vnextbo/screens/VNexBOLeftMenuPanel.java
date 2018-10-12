@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,11 +39,10 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	
 	public VNexBOLeftMenuPanel(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(mainmenu));
-	}
+        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        waitLong.until(ExpectedConditions.visibilityOf(mainmenu));
+    }
 	
 	public VNextBOInspectionsWebPage selectInspectionsMenu() {
 		selectMenuItem(inspectionsmenu, OPERATIONS_MAINMENU_ITEM);
@@ -97,11 +95,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	}
 	
 	public WebElement getMainMenuItem(String meinmenu) {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(mainmenu));
+		waitLong.until(ExpectedConditions.visibilityOf(mainmenu));
 		waitABit(1000);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) mainmenu.findElement(By.xpath("./li/div[contains(text(), '" + meinmenu + "')]"))));
+		waitLong
+                .until(ExpectedConditions.elementToBeClickable(mainmenu
+                        .findElement(By.xpath("./li/div[contains(text(), '" + meinmenu + "')]"))));
 		return mainmenu.findElement(By.xpath(".//div[contains(text(), '" + meinmenu + "')]"));
 	}
 	
@@ -111,8 +109,6 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 		waitABit(1000);
 		if (!menuitem.isDisplayed())
 			expandMainMenu(mainmenuitem);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(menuitem)).click();		
+		waitLong.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
 	}
-
 }

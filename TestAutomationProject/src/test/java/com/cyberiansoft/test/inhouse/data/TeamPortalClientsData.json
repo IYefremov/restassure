@@ -1,0 +1,27 @@
+{
+  "verifyUserCanAddNewCategory": [
+    {
+      "rowID": "verifyUserCanAddNewCategory.01",
+      "description": "Test Case 76897:Verify user can add new categories",
+      "category": "Test Category"
+    }
+  ],
+
+  "verifyUserCanDeleteCategory": [
+    {
+      "rowID": "verifyUserCanDeleteCategory.01",
+      "description": "Test Case 76898:Verify user can delete category",
+      "category": "Test Category"
+    }
+  ],
+
+  "verifyUserCanAddAttributeToCreatedCategory": [
+    {
+      "rowID": "verifyUserCanAddAttributeToCreatedCategory.01",
+      "description": "Test Case 76899:Verify user can add attribute to created categories",
+      "category": "Test Category",
+      "attributeName": "Attribute Name",
+      "dataType": "String"
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "testAddMoneyService": [
+    {
+      "rowID": "testAddMoneyService.01",
+      "description": "Test Case 43806:vNext: add money service",
+      "percentageServiceName": "Test Percentage service",
+      "serviceEdited": " edit",
+      "priceServiceName": "Test Money Service",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5"
+    }
+  ],
+
+  "testAddPercentageService": [
+    {
+      "rowID": "testAddPercentageService.01",
+      "description": "Test Case 43807:vNext: add percentage service",
+      "percentageServiceName": "Test Percentage service",
+      "serviceEdited": " edit",
+      "priceServiceName": "Test Money Service",
+      "serviceType": "Dent Repair",
+      "percentageServiceDescription": "test percentage service",
+      "servicePercentageType": "Percentage",
+      "servicePrice": "5"
+    }
+  ],
+
+  "testEditMoneyService": [
+    {
+      "rowID": "testEditMoneyService.01",
+      "description": "Test Case 43812:vNext: Edit money service",
+      "priceServiceName": "Test Money Service",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5",
+
+      "serviceTypeEdited": "Other",
+      "servicePriceEdited": "1",
+      "serviceEdited": " edit",
+
+      "percentageServiceName": "Test Percentage service",
+      "percentageServiceDescription": "test percentage service",
+      "servicePercentageType": "Percentage"
+    }
+  ],
+
+  "testRemoveMoneyService": [
+    {
+      "rowID": "testRemoveMoneyService.01",
+      "description": "Test Case 44149:vNext: Remove money service",
+      "priceServiceName": "Test Money Service",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5",
+
+      "serviceTypeEdited": "Other",
+      "servicePriceEdited": "1",
+      "serviceEdited": " edit",
+
+      "percentageServiceName": "Test Percentage service",
+      "percentageServiceDescription": "test percentage service",
+      "servicePercentageType": "Percentage"
+    }
+  ],
+
+  "testEditPercentageService": [
+    {
+      "rowID": "testEditPercentageService.01",
+      "description": "Test Case 43813:vNext: Edit percentage service",
+      "priceServiceName": "Test Money Service",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5",
+
+      "serviceTypeEdited": "Other",
+      "servicePriceEdited": "1",
+      "serviceEdited": " edit",
+
+      "percentageServiceName": "Test Percentage service",
+      "percentageServiceDescription": "test percentage service",
+      "servicePercentageType": "Percentage"
+    }
+  ],
+
+  "testRemovePercentageService": [
+    {
+      "rowID": "testRemovePercentageService.01",
+      "description": "Test Case 44151:vNext: Remove percentage service",
+      "priceServiceName": "Test Money Service",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5",
+
+      "serviceTypeEdited": "Other",
+      "servicePriceEdited": "1",
+      "serviceEdited": " edit",
+
+      "percentageServiceName": "Test Percentage service",
+      "percentageServiceDescription": "test percentage service",
+      "servicePercentageType": "Percentage"
+    }
+  ],
+
+  "testResumeRemovedMoneyService": [
+    {
+      "rowID": "testResumeRemovedMoneyService.01",
+      "description": "Test Case 44150:vNext: Resume removed money service",
+      "priceServiceName": "Test Money Service",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5",
+
+      "serviceTypeEdited": "Other",
+      "servicePriceEdited": "1",
+      "serviceEdited": " edit",
+
+      "percentageServiceName": "Test Percentage service",
+      "percentageServiceDescription": "test percentage service",
+      "servicePercentageType": "Percentage"
+    }
+  ],
+
+  "testResumeRemovedPercentageService": [
+    {
+      "rowID": "testResumeRemovedPercentageService.01",
+      "description": "Test Case 44152:vNext: Resume removed percentage service",
+      "priceServiceName": "Test Money Service",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5",
+
+      "serviceTypeEdited": "Other",
+      "servicePriceEdited": "1",
+      "serviceEdited": " edit",
+
+      "percentageServiceName": "Test Percentage service",
+      "percentageServiceDescription": "test percentage service",
+      "servicePercentageType": "Percentage"
+    }
+  ],
+
+  "testVerifyErrorMessagesOnCreateEditServiceDialog": [
+    {
+      "rowID": "testVerifyErrorMessagesOnCreateEditServiceDialog.01",
+      "description": "Test Case 44153:vNext: verify error messages on Create-Edit service dialog",
+      "emptyServiceName": "    ",
+      "serviceName": "TestErrors"
+    }
+  ],
+
+  "testEditMatrixService": [
+    {
+      "rowID": "testEditMatrixService.01",
+      "description": "Test Case 44157:vNext: Edit matrix service",
+      "matrixServiceType": "Hail Damage Repair",
+      "newMatrixServiceName": "Test Matrix Service"
+    }
+  ]
+}

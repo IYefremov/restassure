@@ -176,7 +176,7 @@ public class EmailUtils {
         return messages;
     }
 
-    private Message[] getMessagesAndDownloadhAttachmentFileName(Message messages[], String attachmentFileName) throws Exception {
+    private Message[] getMessagesAndDownloadhAttachmentFileName(Message messages[], String attachmentFileName) {
         List<Message> matchMessages = new ArrayList<>();
         for (Message message : messages) {
             if (isMessageAttachmentExists(message, attachmentFileName)) {
@@ -187,7 +187,7 @@ public class EmailUtils {
         return matchMessages.toArray(new Message[]{});
     }
 
-    private Message[] getMessagesWithAttachmentFileName(Message messages[], String attachmentFileName) throws Exception {
+    private Message[] getMessagesWithAttachmentFileName(Message messages[], String attachmentFileName) {
         List<Message> matchMessages = new ArrayList<>();
         for (Message message : messages) {
             if (isMessageAttachmentExists(message, attachmentFileName))
@@ -254,8 +254,13 @@ public class EmailUtils {
         return content.contains(text);
     }
 
-    public boolean isMessageInFolder(MailSearchParametersBuilder mailSearchParameters) throws Exception {
-        int messagesFound = getMessages(mailSearchParameters).length;
+    public boolean isMessageInFolder(MailSearchParametersBuilder mailSearchParameters) {
+        int messagesFound = 0;
+        try {
+            messagesFound = getMessages(mailSearchParameters).length;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return messagesFound > 0;
     }
 
@@ -282,7 +287,7 @@ public class EmailUtils {
         return mailMessage;
     }
 
-    public boolean waitForMessageWithSubjectInFolder(MailSearchParametersBuilder mailSearchParameters) throws Exception  {
+    public boolean waitForMessageWithSubjectInFolder(MailSearchParametersBuilder mailSearchParameters) {
         boolean found = false;
         boolean timeout = false;
         long waitedTime = 0;

@@ -199,7 +199,8 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		List<WebElement> rows = getRepairOrdersTableRows();		
 		for (WebElement row : rows) {
 		    try {
-                if (row.findElement(By.xpath(".//td[3]/a")).getText().equals(wo)) {
+//                if (row.findElement(By.xpath(".//td[3]/a")).getText().equals(wo)) {
+                if (row.findElement(By.xpath(".//td[4]/a")).getText().equals(wo)) {
                     return row;
                 }
             } catch (NoSuchElementException | StaleElementReferenceException e) {
@@ -222,7 +223,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	public VendorOrderServicesWebPage clickOnWorkOrderLinkInTable(String wo) {
 		WebElement row = getTableRowWithRepairOrder(wo);
 		if (row != null) {
-			row.findElement(By.xpath(".//td[3]/a[contains(text(), '" + wo + "')]")).click();
+			row.findElement(By.xpath(".//td[4]/a[contains(text(), '" + wo + "')]")).click();
 		} else {
             Assert.fail("Can't find " + wo + " repair order");
 		}

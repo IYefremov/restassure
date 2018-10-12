@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -11,11 +10,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.concurrent.TimeUnit;
 
 public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	
-	@FindBy(xpath = "//div[@class='login']/a[@data-bind='click: logout']")
+	@FindBy(xpath = "//a[@data-bind='click: logout']")
 	private WebElement logoutlink;
 	
 	@FindBy(xpath = "//div[@class='user']/span")
@@ -32,14 +31,15 @@ public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	
 	public void clickLogout() {
 		try {
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
+		    new WebDriverWait(driver, 5)
+                    .until(ExpectedConditions.elementToBeClickable(logoutlink))
+                    .click();
 		} catch (WebDriverException e) {
 			logoutlink.click();
 		}
 	}
 	
-	public boolean isLogOutLinkExists() {
+	public boolean logOutLinkExists() {
 		return driver.findElements(By.xpath("//div[@class='login']/a")).size() > 0;
 	}
 	

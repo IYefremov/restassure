@@ -21,44 +21,24 @@
   <test name="Back Office Test Cases - IE" preserve-order="true">
     <parameter name="selenium.browser" value="chrome" />
     <classes>
-	  <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">
-	  <methods> 
-	  	 <include name="testCreateUserWithWebAccess" />
-	  	 <include name="testVerifyUserCanChangePasswordUsingLinkFromTheEmail" />
-	  	 <include name="testVerifyValidationMessagesOnChangePasswordPage" />
-	  	 <include name="testVerifyValidationMessagesOnRequestPasswordResetPage" />
-	  	 <include name="testVerifyForgotPasswordPageIsOpenedOnClickForgotPasswordLink" />
-	  	 <include name="testEditNotConfirmedUserWithWebAccess" />
-	  	 <include name="testEditUserWithoutWebAccess" />
-	  	 <include name="testCheckPosibilityToResendRegistrationEmail" />
-	  	 <include name="testCheckValidationErrorsOnTheCreateNewUserDialog" />
-	  	 <include name="testCheckValidationErrorsOnTheSetPasswordPage" />
-	  	 <include name="testCreateUserWithExistingEmailAddress" />
-      </methods>
-      </class>-->
-     <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicestestCases">
-	  <methods> 
-	  	 <include name="testAddMoneyService" />	  	 
-	  	 <include name="testEditMoneyService" />
-	  	 <include name="testRemoveMoneyService" />
-	  	 <include name="testResumeRemovedMoneyService" />
-	  	 <include name="testAddPercentageService" />
-	  	 <include name="testEditPercentageService" />
-	  	 <include name="testRemovePercentageService" />
-	  	 <include name="testResumeRemovedPercentageService" />
-	  	 <include name="testVerifyErrorMessagesOnCreateEditServiceDialog" />
-	  	 <include name="testEditMatrixService" />
-      </methods>
-      </class>
-      <!--<class name="com.cyberiansoft.test.vnextbo.testcases.testMy">
-	  <methods> 
-	  	 <include name="testCreateUserWithWebAccess" />
-	  	 <include name="testVerifyUserCanChangePasswordUsingLinkFromTheEmail" />
-	  	 <include name="testVerifyUserCanChangePasswordPageIsNotOpenedWhenUserIsLoggedIn" />	
-	  	 <include name="testVerifyValidationMessagesOnChangePasswordPage" />  
-	  	 <include name="testCheckPosibilityToResendRegistrationEmail" /> 	 
-      </methods>
-      </class>-->
+	  <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">-->
+	  <!--<methods>-->
+	  	 <!--<include name="testCreateUserWithWebAccess" />-->
+	  	 <!--<include name="testVerifyUserCanChangePasswordUsingLinkFromTheEmail" />-->
+	  	 <!--<include name="testVerifyValidationMessagesOnChangePasswordPage" />-->
+	  	 <!--<include name="testVerifyValidationMessagesOnRequestPasswordResetPage" />-->
+	  	 <!--<include name="testVerifyForgotPasswordPageIsOpenedOnClickForgotPasswordLink" />-->
+	  	 <!--<include name="testEditNotConfirmedUserWithWebAccess" />-->
+	  	 <!--<include name="testEditUserWithoutWebAccess" />-->
+	  	 <!--<include name="testCheckPosibilityToResendRegistrationEmail" />-->
+	  	 <!--<include name="testCheckValidationErrorsOnTheCreateNewUserDialog" />-->
+	  	 <!--<include name="testCheckValidationErrorsOnTheSetPasswordPage" />-->
+	  	 <!--<include name="testCreateUserWithExistingEmailAddress" />-->
+      <!--</methods>-->
+      <!--</class>-->
+     <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>
+     <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>
+     <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases"/>
     </classes>
   </test>
 </suite>

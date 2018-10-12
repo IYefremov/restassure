@@ -33,7 +33,7 @@ public class BaseTestCase {
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
 	protected DesiredCapabilities webcap;
-	protected static BrowserType browsertype;
+	protected static BrowserType browserType;
 	protected static MobilePlatform mobilePlatform = MobilePlatform.IOS_REGULAR;
 	protected File app;
 	String bundleid = "";
@@ -75,17 +75,17 @@ public class BaseTestCase {
 ////	    	throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
 ////	    }
 //	    this.bundleid =  bundleid;
-//		browsertype = BaseUtils.getBrowserType(browser);
+//		browserType = BaseUtils.getBrowserType(browser);
 //
-//		DriverBuilder.getInstance().setDriver(browsertype);
+//		DriverBuilder.getInstance().setDriver(browserType);
 //		webdriver = DriverBuilder.getInstance().getDriver();
 //		webdriver.navigate().refresh();
 //	}
 
 //	@BeforeSuite
 //	public void setUp() {
-//		browsertype = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
-//		DriverBuilder.getInstance().setDriver(browsertype);
+//		browserType = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
+//		DriverBuilder.getInstance().setDriver(browserType);
 //		webdriver = DriverBuilder.getInstance().getDriver();
 //		webdriver.navigate().refresh();
 //	}
@@ -108,12 +108,12 @@ public class BaseTestCase {
 
     @BeforeMethod
     public void BackOfficeLogin() {
-        browsertype = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
+        browserType = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
         try {
-            DriverBuilder.getInstance().setDriver(browsertype);
+            DriverBuilder.getInstance().setDriver(browserType);
         } catch (WebDriverException e) {
             e.printStackTrace();
-//            await().atMost(30, TimeUnit.SECONDS).ignoreExceptions().until(() -> DriverBuilder.getInstance().setDriver(browsertype));
+//            await().atMost(30, TimeUnit.SECONDS).ignoreExceptions().until(() -> DriverBuilder.getInstance().setDriver(browserType));
         }
         webdriver = DriverBuilder.getInstance().getDriver();
 //        if (webdriver != null) {
@@ -129,7 +129,7 @@ public class BaseTestCase {
     }
 
     public void setBrowser() {
-        DriverBuilder.getInstance().setDriver(browsertype);
+        DriverBuilder.getInstance().setDriver(browserType);
     }
 
     @AfterMethod

@@ -255,7 +255,7 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 
     public boolean isOptionDisplayed(WebElement checkoutOptionDisabled) {
         try {
-            return waitShortly.until(ExpectedConditions.visibilityOf(checkoutOptionDisabled)).isDisplayed();
+            return waitShort.until(ExpectedConditions.visibilityOf(checkoutOptionDisabled)).isDisplayed();
         } catch (Exception ignored) {
             return false;
         }

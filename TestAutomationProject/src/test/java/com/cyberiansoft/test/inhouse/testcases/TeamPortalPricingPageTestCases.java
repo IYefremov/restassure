@@ -571,6 +571,7 @@ public class TeamPortalPricingPageTestCases extends BaseTestCase {
         FeatureGroupDialog featureGroupDialog = pricingPage.clickFeatureGroup(data.getFeatureGroupNameEdited());
         Assert.assertEquals(featureGroupDialog.getSelectedFeatureGroupState(), data.getFeatureGroupStateEdited(),
                 "The feature group state hasn't been changed after editing");
+        featureGroupDialog.clickFeatureGroupCancelButton(data.getFeatureGroupNameEdited());
 
         pricingPage.deleteFeatureGroupIfDisplayed(data.getFeatureGroupNameEdited());
     }

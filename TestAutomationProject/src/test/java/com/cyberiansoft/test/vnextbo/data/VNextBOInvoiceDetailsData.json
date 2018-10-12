@@ -1,0 +1,24 @@
+{
+  "testSetupConfigurationToRunInvoiceListSuite": [
+    {
+      "rowID": "testSetupConfigurationToRunInvoiceListSuite.01",
+      "description": "Test Case 45496:vNext: setup configuration to run Invoice list suite",
+      "companyName": "AMT",
+      "firstName": "Retail",
+      "lastName": "Automation",
+      "companyMail": "test.cyberiansoft+retail@gmail.com",
+      "companyPhone": "911",
+      "shipToAddress": "Rynok square 12",
+      "shipToAddress2": "AP 24",
+      "shipToCity": "Lviv",
+      "country": "United States",
+      "state": "California",
+      "shipToZip": "79031",
+      "techFirstName": "Test",
+      "techLastName": "Technician",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com",
+      "techUserPhone": "98988989"
+    }
+  ]
+}

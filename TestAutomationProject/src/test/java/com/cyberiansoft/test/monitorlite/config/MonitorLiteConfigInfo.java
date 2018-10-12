@@ -5,13 +5,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
-
 public class MonitorLiteConfigInfo {
 		
 		private static MonitorLiteConfigInfo _instance = null;
 
-	    private Properties props = null;
+	    private Properties props;
 
 	    private MonitorLiteConfigInfo() {
 	    	props = new Properties();

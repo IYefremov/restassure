@@ -1,91 +1,101 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
-import java.util.UUID;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.testcases.BaseTestCase;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInvoiceDetailsData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.screens.*;
+import org.json.simple.JSONObject;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.NewClientDialogWebPage;
-import com.cyberiansoft.test.bo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOAddNewUserDialog;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOUsersWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import java.util.UUID;
 
 public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
-	
-	final String techfirstname = "Test";
-	final String techlastname = "Technician";
-	final String usermailprefix = "test.cyberiansoft+";
-	final String usermailpostbox = "@gmail.com";
-	final String techuserphone = "98988989";
-	
-	@Test(description = "Test Case 45496:vNext: setup configuration to run Invoice list suite")
-	@Parameters({ "backoffice.url", "user.name", "user.psw", "backofficeold.url" })
-	public void testSetupConfigurationToRunInvoiceListSuite(String backofficeurl,
-			String userName, String userPassword, String oldbourl) {
-		final String companyname = "AMT";
-		final String firstname = "Retail";
-		final String lastname = "Automation";
-		final String companymail = "test.cyberiansoft+retail@gmail.com";
-		final String companyphone = "911";
-		final String shiptoaddress = "Rynok square 12";
-		final String shiptoaddress2 = "AP 24";
-		final String shiptocity = "Lviv";
-		final String country = "United States";
-		final String state = "California";
-		final String shiptozip = "79031";
-		
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInvoiceDetailsData.json";
+
+    @BeforeClass
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
+    }
+
+    @BeforeMethod
+    public void BackOfficeLogin() {
+        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
+        try {
+            DriverBuilder.getInstance().setDriver(browserType);
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+        }
+        webdriver = DriverBuilder.getInstance().getDriver();
+        WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+    }
+
+    @AfterMethod
+    public void BackOfficeLogout() {
+        VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
+                VNextBOHeaderPanel.class);
+        if (headerpanel.logOutLinkExists())
+            headerpanel.userLogout();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testSetupConfigurationToRunInvoiceListSuite(String rowID, String description, JSONObject testData) {
+
+        VNextBOInvoiceDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInvoiceDetailsData.class);
+        
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(userName, userPassword);
+		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		final String usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		final String usermail = data.getUserMailPrefix() + UUID.randomUUID() + data.getUserMailPostbox();
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(techfirstname, techlastname, usermail, techuserphone, false);
+		adduserdialog.createNewUser(data.getTechFirstName(), data.getTechLastName(), usermail, data.getTechUserPhone(), false);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
 		
-		WebDriverUtils.webdriverGotoWebPage(oldbourl);
+		WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
 		BackOfficeLoginWebPage oldloginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		oldloginpage.UserLogin(userName, userPassword);
+		oldloginpage.UserLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(),
+                VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
 		ClientsWebPage clientspage = companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
-		final String fullcustomer = firstname + " " + lastname;
+		final String fullcustomer = data.getFirstName() + " " + data.getLastName();
 		clientspage.searchClientByName(fullcustomer);
 		
 		if (!clientspage.isClientPresentInTable(fullcustomer)) {
 			NewClientDialogWebPage newclientpage = clientspage.clickAddClientButton();
-			newclientpage.setCompanyName(companyname);
-			newclientpage.setClientFirstName(firstname);
-			newclientpage.setClientLastName(lastname);
-			newclientpage.setCompanyMail(companymail);
-			newclientpage.setCompanyPhone(companyphone);
-			newclientpage.setCompanyShipToAddress(shiptoaddress);
-			newclientpage.setCompanyShipToAddress2(shiptoaddress2);
-			newclientpage.setCompanyShipToCity(shiptocity);
-			newclientpage.selectCompanyShipToCountry(country);
-			newclientpage.selectCompanyShipToState(state);
-			newclientpage.setCompanyShipToZip(shiptozip);
+			newclientpage.setCompanyName(data.getCompanyName());
+			newclientpage.setClientFirstName(data.getFirstName());
+			newclientpage.setClientLastName(data.getLastName());
+			newclientpage.setCompanyMail(data.getCompanyMail());
+			newclientpage.setCompanyPhone(data.getCompanyPhone());
+			newclientpage.setCompanyShipToAddress(data.getShipToAddress());
+			newclientpage.setCompanyShipToAddress2(data.getShipToAddress2());
+			newclientpage.setCompanyShipToCity(data.getShipToCity());
+			newclientpage.selectCompanyShipToCountry(data.getCountry());
+			newclientpage.selectCompanyShipToState(data.getState());
+			newclientpage.setCompanyShipToZip(data.getShipToZip());
 			newclientpage.clickOKButton();
 		}
 	}
-
 }

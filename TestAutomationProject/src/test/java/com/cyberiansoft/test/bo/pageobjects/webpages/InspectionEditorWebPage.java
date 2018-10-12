@@ -100,7 +100,7 @@ public class InspectionEditorWebPage extends BaseWebPage {
 
     public boolean isNextMonthButtonDisabled() {
         try {
-            return !waitShortly.until(ExpectedConditions.elementToBeClickable(nextMonthButton)).isDisplayed();
+            return !waitShort.until(ExpectedConditions.elementToBeClickable(nextMonthButton)).isDisplayed();
         } catch (Exception e) {
             return false;
         }

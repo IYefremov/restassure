@@ -208,7 +208,7 @@ public class DriverBuilder {
                 getDriver().quit();
 //                if (getBrowser().contains("edge")) {
 //                    try {
-//                        waitShortly.until(ExpectedConditions.alertIsPresent()).accept();
+//                        waitLong.until(ExpectedConditions.alertIsPresent()).accept();
 //                        getDriver().quit();
 //                    } catch (Exception e) {
 //                        e.printStackTrace();

@@ -1,21 +1,16 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 	
@@ -28,7 +23,7 @@ public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 	@FindBy(id = "users-email")
 	private TextField usermailfld;
 	
-	@FindBy(id = "users-phone")
+	@FindBy(xpath = "//div[@class='amt-widget-phone-input']/input")
 	private TextField userphonefld;
 	
 	@FindBy(id = "users-countryPhoneCodes")

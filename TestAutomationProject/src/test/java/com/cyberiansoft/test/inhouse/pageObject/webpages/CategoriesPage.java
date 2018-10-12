@@ -104,7 +104,7 @@ public class CategoriesPage extends BasePage {
     }
 
     @Step
-    public CategoriesPage verifyCategoriesDoNotExist(String category) {
+    public CategoriesPage verifyCategoryDoesNotExist(String category) {
         try {
             while (isCategoryDisplayed(category)) {
                 deleteCategory(category);

@@ -1,49 +1,51 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	
 	@FindBy(id = "dialogModal")
-	private WebElement confirmdialog;
+	private WebElement confirmDialog;
 	
 	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div[contains(@data-bind, 'html: html,')]")
 	private WebElement confirmdialogmessage;
 	
-	@FindBy(xpath = "//button[@data-automation-id='modalCancelButton']")
+	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCancelButton']")
 	private WebElement nobtn;
 	
-	@FindBy(xpath = "//button[@data-automation-id='modalConfirmButton']")
+	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalConfirmButton']")
 	private WebElement yesbtn;
 	
 	public VNextConfirmationDialog(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(confirmdialog));
+		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
 	}
 	
 	public void clickNoButton() {
 		nobtn.click();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOf(confirmdialog));
+		wait.until(ExpectedConditions.invisibilityOf(confirmDialog));
 	}
 	
 	public void clickYesButton() {
-		yesbtn.click();
-	}
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(yesbtn)).click();
+        } catch (Exception e) {
+            Assert.fail("The 'Yes' button has not been clicked");
+        }
+        wait.until(ExpectedConditions.invisibilityOf(confirmDialog));
+    }
 	
 	public String getConfirmationDialogMessage() {
 		String confirmMessage  = null;

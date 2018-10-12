@@ -20,16 +20,16 @@ public class BOConfigInfo {
 			props.load(fileInput);
 			fileInput.close();
 		} catch (IOException e) {
-			System.out.println("Can't load VNext environment properties");
+			System.out.println("Can't load BO environment properties");
 			e.printStackTrace();
-		}       
+		}
     }
 
     public synchronized static BOConfigInfo getInstance() {
         if (_instance == null)
             _instance = new BOConfigInfo();
         return _instance;
-    }		 
+    }
 	
 	public String getBackOfficeURL() {
 	      return props.getProperty("backoffice.url");
@@ -66,8 +66,6 @@ public class BOConfigInfo {
 	public String getDefaultBrowser() {
 		return props.getProperty("default.browser");
 	}
-
-
 
     public String getOutlookMail() {
         return props.getProperty("outlook.mail");

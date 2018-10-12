@@ -8,7 +8,8 @@
     <test name="InHouse tests Chrome">
         <parameter name="selenium.browser" value="chrome"/>
         <classes>
-            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalCategoriesTestCases"/>
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalSalesQuotesTestCases"/>
+            <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalClientsTestCases"/>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalFinancialMappingTestCases"/>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalUserTestCases"/>
             <class name="com.cyberiansoft.test.inhouse.testcases.TeamPortalPricingPageTestCases"/>

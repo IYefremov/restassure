@@ -1,11 +1,20 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -13,18 +22,42 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
-
 
 public class VNextWebServices extends BaseTestCase {
-	final String USER_AGENT = "Mozilla/5.0";
-	
+
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextWebServicesData.json";
+
+    @BeforeClass
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
+    }
+
+    final String USER_AGENT = "Mozilla/5.0";
+
+    @BeforeMethod
+    public void BackOfficeLogin() {
+        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
+        try {
+            DriverBuilder.getInstance().setDriver(browserType);
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+        }
+        webdriver = DriverBuilder.getInstance().getDriver();
+        WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+    }
+
+    @AfterMethod
+    public void BackOfficeLogout() {
+        VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
+                VNextBOHeaderPanel.class);
+        if (headerpanel.logOutLinkExists())
+            headerpanel.userLogout();
+    }
+
 	@Test(description = "Test Case 45496:vNext: setup configuration to run Invoice list suite")
-	@Parameters({ "backoffice.url", "user.name", "user.psw", "backofficeold.url" })
-	public void testSetupConfigurationToRunInvoiceListSuite(String backofficeurl,
-			String userName, String userPassword, String oldbourl) throws Exception {
+	public void testSetupConfigurationToRunInvoiceListSuite() throws Exception {
 		
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
 		
 
 		
@@ -119,5 +152,4 @@ public class VNextWebServices extends BaseTestCase {
 		System.out.println(response.toString());
 
 	}
-
 }

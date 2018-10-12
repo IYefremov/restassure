@@ -1,21 +1,18 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.VNextWebTable;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 	
@@ -50,14 +47,13 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
+		wait
 		  .until(ExpectedConditions.visibilityOf(addservicebtn));
 	}
 	
-	public VNextBOAddNewServiceDialog clickAddNewserviceButton() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(addservicebtn));
-		addservicebtn.click();
+	public VNextBOAddNewServiceDialog clickAddNewServiceButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(addservicebtn)).click();
+		waitABit(1000);
 		return PageFactory.initElements(
 				driver, VNextBOAddNewServiceDialog.class);
 	}
@@ -66,17 +62,23 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		searchservicefld.clearAndType(searchtext);
 	}
 	
-	public void searchServiceByServiceName(String searchtext) {
+	public VNexBOServicesWebPage searchServiceByServiceName(String searchtext) {
 		setSearchFreeTextValue(searchtext);
-		searchservicespanel.findElement(By.xpath(".//div[@class='custom-search__input']/i[@data-bind='click: freeTextSearch']")).click();
-		waitABit(1000);
+		waitABit(1500);
+		wait
+                .ignoring(WebDriverException.class)
+                .until(ExpectedConditions.elementToBeClickable(searchservicespanel.findElement(By
+                        .xpath(".//div[@class='custom-search__input']/i[@data-bind='click: freeTextSearch']"))))
+                .click();
+		waitForLoading();
+		return this;
 	}
 	
 	public void advancedSearchService(String searchtext, boolean archived) {
 		setSearchFreeTextValue(searchtext);
 		openAdvancedSearchPanel();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']"))));
+		wait
+		  .until(ExpectedConditions.elementToBeClickable(searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']"))));
 		if (archived)
 			checkboxSelect(searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']")));
 		else
@@ -86,41 +88,52 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		waitABit(1500);
 	}
 	
-	public void advancedSearchServiceByServiceType(String servicetype) {
+	public VNexBOServicesWebPage advancedSearchServiceByServiceType(String servicetype) {
 		openAdvancedSearchPanel();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//input[@type='checkbox']"))));
-		driver.findElement(By.xpath("//span[@aria-owns='advSearchServices-type_listbox']/span/span[2]")).click();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("advSearchServices-type_listbox"))));
+		wait
+                .until(ExpectedConditions.elementToBeClickable(searchservicespanel
+                        .findElement(By.xpath(".//input[@type='checkbox']"))));
+		wait
+                .until(ExpectedConditions.elementToBeClickable(driver
+                        .findElement(By.xpath("//span[@aria-owns='advSearchServices-type_listbox']/span/span[2]"))))
+                .click();
+		wait
+                .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("advSearchServices-type_listbox"))));
 		WebElement advserchcmb = driver.findElement(By.id("advSearchServices-type_listbox"));
 		waitABit(500);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) advserchcmb.
-		findElement(By.xpath(".//li/span[text()='" + servicetype + "']")))).click();
+		wait
+                .until(ExpectedConditions.elementToBeClickable(advserchcmb.
+                        findElement(By.xpath(".//li/span[text()='" + servicetype + "']"))))
+                .click();
 		waitABit(500);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//button[@type='submit']")))).click();
+		wait
+                .until(ExpectedConditions.elementToBeClickable(searchservicespanel
+                        .findElement(By.xpath(".//button[@type='submit']"))))
+                .click();
 		waitABit(1500);
+		return this;
 	}
 	
 	public void openAdvancedSearchPanel() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) searchservicespanel.findElement(By.xpath(".//i[@data-bind='click: showAdvancedSearch']")))).click();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(advancedsearchform));
+		wait
+                .until(ExpectedConditions.elementToBeClickable(searchservicespanel
+                .findElement(By.xpath(".//i[@data-bind='click: showAdvancedSearch']"))))
+                .click();
+		wait
+                .until(ExpectedConditions.visibilityOf(advancedsearchform));
 	}
 	
 	public boolean isServicePresentOnCurrentPageByServiceName(String servicename) {
-		boolean founded = false;
-		if (!driver.findElement(By.xpath("//div[@id='services-list-view']/div/p")).getText().equals("No services to show")) {
-			WebElement row = getTableRowWithServiceByServiceName(servicename);
-			if (row != null)
-				founded = true;
-		}
-		return founded;
-		
-	}
+        try {
+            if (!driver.findElement(By.xpath("//div[@id='services-list-view']/div/p")).getText().equals("No services to show")) {
+                WebElement row = getTableRowWithServiceByServiceName(servicename);
+                if (row != null) {
+                    return true;
+                }
+            }
+        } catch (Exception ignored) {}
+        return false;
+    }
 	
 	public String getServiceTypeValue(String servicename) {
 		String servicetype = null;
@@ -150,7 +163,11 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		if (row != null) {
 			Actions act = new Actions(driver);
 			act.moveToElement(row.findElement(By.xpath("./td[" + servicestable.getTableColumnIndex("Description") + "]/i/i"))).perform();
-			serviceprice = row.findElement(By.xpath("./td[" + servicestable.getTableColumnIndex("Description") + "]/i/div")).getText().trim();
+			serviceprice = wait
+                    .until(ExpectedConditions.visibilityOf(row.findElement(By.xpath("./td[" + servicestable
+                            .getTableColumnIndex("Description") + "]/i/div"))))
+                    .getText()
+                    .trim();
 		} else {
 			Assert.assertTrue(false, "Can't find " + servicename + " service");	
 		}
@@ -158,23 +175,42 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 	}
 	
 	private WebElement getTableRowWithServiceByServiceName(String servicename) {
-		waitABit(300);
-		WebElement servicerow = null;
-		List<WebElement> rows = getServicesTableRows();
-		if (rows.size() > 0) {
-			for (WebElement row : rows) {
-				if (row.findElement(By.xpath("./td[" + servicestable.getTableColumnIndex("Name") + "]")).getText().equals(servicename)) {
-					servicerow = row;
-					break;
-				}			
-			} 
-		}
-		return servicerow;
-	}
-	
+        waitABit(300);
+        List<WebElement> rows = getServicesTableRows();
+        if (rows.size() > 0) {
+            try {
+                return wait
+                        .ignoring(StaleElementReferenceException.class)
+                        .until(ExpectedConditions.visibilityOfAllElements(rows)).stream().filter(e -> e
+                                .findElement(By.xpath("./td[" + servicestable.getTableColumnIndex("Name") + "]"))
+                                .getText()
+                                .equals(servicename))
+                        .findAny()
+                        .get();
+            } catch (NoSuchElementException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+	public String getFirstServiceNameInTableRow() {
+        waitABit(300);
+        List<WebElement> rows = getServicesTableRows();
+        if (rows.size() > 0) {
+            try {
+                return wait
+                        .ignoring(StaleElementReferenceException.class)
+                        .until(ExpectedConditions.visibilityOf(rows.get(0)))
+                        .findElement(By.xpath("./td[" + servicestable.getTableColumnIndex("Name") + "]"))
+                        .getText();
+            } catch (NoSuchElementException ignored) {}
+        }
+        return null;
+    }
+
 	public List<WebElement>  getServicesTableRows() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
+		waitLong.until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
 		return servicestable.getTableRows();
 	}
 	
@@ -184,29 +220,41 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 	
 	public VNextBOAddNewServiceDialog clickEditServiceByServiceName(String servicename) {
 		WebElement tablerow = getTableRowWithServiceByServiceName(servicename);
-		Actions act = new Actions(driver);
-		act.moveToElement(tablerow.findElement(By.xpath("./td[@class='grid__actions']"))).click(tablerow.findElement(By.xpath(".//span[@class='icon-pencil2']"))).build().perform();
-		return PageFactory.initElements(
+		if (tablerow != null) {
+		    Actions actions = new Actions(driver);
+            actions.moveToElement(tablerow.findElement(By.xpath("./td[@class='grid__actions']")))
+                    .click(tablerow.findElement(By.xpath(".//span[@class='icon-pencil2']")))
+                    .build()
+                    .perform();
+        }
+            return PageFactory.initElements(
 				driver, VNextBOAddNewServiceDialog.class);
 	}
 	
-	public void deleteServiceByServiceName(String servicename) {
+	public VNexBOServicesWebPage deleteServiceByServiceName(String servicename) {
 		WebElement tablerow = getTableRowWithServiceByServiceName(servicename);
 		clickDeleteServiceButton(tablerow);
-		VNextConfirmationDialog confirmdialog = PageFactory.initElements(
-				driver, VNextConfirmationDialog.class);
+		VNextConfirmationDialog confirmdialog = PageFactory.initElements(driver, VNextConfirmationDialog.class);
 		Assert.assertEquals(confirmdialog.clickYesAndGetConfirmationDialogMessage(), 
 				"Are you sure you want to delete \"" + servicename + "\" service?");
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(addservicebtn));
+//		waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
+		wait.until(ExpectedConditions.elementToBeClickable(addservicebtn));
 		waitABit(1000);
+		return this;
 	}
 	
-	public void clickDeleteServiceButton(WebElement tablerow) {
+	public VNextConfirmationDialog clickDeleteServiceButton(WebElement tablerow) {
 		Actions act = new Actions(driver);
-		act.moveToElement(tablerow.findElement(By.xpath("./td[@class='grid__actions']"))).click(tablerow.findElement(By.xpath(".//span[@title='Delete']"))).build().perform();
+		try {
+            act.moveToElement(tablerow.findElement(By.xpath("./td[@class='grid__actions']")))
+                    .click(tablerow.findElement(By.xpath(".//span[@title='Delete']")))
+                    .build()
+                    .perform();
+            return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+        } catch (Exception e) {
+            clickWithJS(tablerow.findElement(By.xpath(".//span[@title='Delete']")));
+            return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+        }
 	}
 	
 	public void clickDeleteServiceButtonAndAcceptAlert (WebElement tablerow) {
@@ -214,10 +262,8 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		VNextConfirmationDialog confirmdialog = PageFactory.initElements(
 				driver, VNextConfirmationDialog.class);
 		confirmdialog.clickYesButton();
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable(addservicebtn));
+		waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
+		wait.until(ExpectedConditions.elementToBeClickable(addservicebtn));
 	}
 	
 	
@@ -225,8 +271,7 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		VNextConfirmationDialog confirmdialog = clickUnarchiveButtonForService(servicename);
 		Assert.assertEquals(confirmdialog.clickYesAndGetConfirmationDialogMessage(), 
 				"Are you sure you want to restore \"" + servicename + "\" service?");
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
+		waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
 	}
 	
 	public VNextConfirmationDialog clickUnarchiveButtonForService(String servicename) {
@@ -236,6 +281,10 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 		return PageFactory.initElements(
 				driver, VNextConfirmationDialog.class);
 	}
-	
 
+    public VNexBOServicesWebPage deleteServiceIfPresent(String percentageservicename) {
+        if (isServicePresentOnCurrentPageByServiceName(percentageservicename))
+            deleteServiceByServiceName(percentageservicename);
+        return this;
+    }
 }

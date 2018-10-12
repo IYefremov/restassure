@@ -5,6 +5,7 @@ import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -113,9 +114,13 @@ public class AverageRepairTimeReportWebPage extends BaseWebPage {
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + year + "']")).isDisplayed());
 	}
 	
-	public boolean areLocationResultsPresent(String location) {
-	    return wait.until(ExpectedConditions.visibilityOfAllElements(
-	            driver.findElements(By.xpath("//tr/td/div[text()='" + location + "']")))).size() > 0;
+	public boolean areLocationResultsDisplayed(String location) {
+	    try {
+            return wait.until(ExpectedConditions.visibilityOfAllElements(
+                    driver.findElements(By.xpath(".//tr/td/div[text()='" + location + "']")))).size() > 0;
+        } catch (TimeoutException e) {
+	        return false;
+        }
 	}
 	
 	public void checkShowDetails() {

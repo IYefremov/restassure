@@ -156,7 +156,7 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
         Assert.assertEquals(data.getTableRowCount1(), inpectionsPage.getInspectionsTableRowCount());
 
         String lastpagenumber = inpectionsPage.getLastPageNumber();
-        inpectionsPage.clickGoToLastPage(browsertype.getBrowserTypeString());
+        inpectionsPage.clickGoToLastPage(browserType.getBrowserTypeString());
 
         inpectionsPage.clickGoToFirstPage();
         Assert.assertEquals(data.getPage1(), inpectionsPage.getGoToPageFieldValue());

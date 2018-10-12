@@ -371,7 +371,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		// verify message text and color for contact1
 		Assert.assertEquals(data.getNotVerifiedMess(),
                 clientContactsWebPage1.getClientStatusText(data.getContactFirstName()));
-        if (browsertype.getBrowserTypeString().equalsIgnoreCase("edge")) {
+        if (browserType.getBrowserTypeString().equalsIgnoreCase("edge")) {
             Assert.assertEquals(data.getColorRed(), clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
         } else {
             Assert.assertEquals(data.getRed(), clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
@@ -396,7 +396,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
 		// verify message text and color for contact2
 		Assert.assertEquals(data.getVerifiedMess(), clientContactsWebPage3.getClientStatusText(data.getContactFirstName2()));
-        if (browsertype.getBrowserTypeString().equalsIgnoreCase("edge")) {
+        if (browserType.getBrowserTypeString().equalsIgnoreCase("edge")) {
             Assert.assertEquals(data.getColorGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
         } else {
             Assert.assertEquals(data.getGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
