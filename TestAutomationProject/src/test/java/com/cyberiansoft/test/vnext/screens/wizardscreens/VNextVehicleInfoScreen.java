@@ -1,12 +1,12 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -41,7 +41,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	@FindBy(name="Vehicle.Color")
 	private WebElement colcorfld;
 	
-	@FindBy(xpath="//a[@action='select-color']")
+	@FindBy(xpath="//*[@action='select-color']")
 	private WebElement selectcolorbtn;
 	
 	@FindBy(name="Vehicle.VehicleTypeId")
@@ -70,11 +70,14 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	
 	@FindBy(name="Estimations.EmployeeId")
 	private WebElement techfld;
+
+	@FindBy(xpath="//*[@action='select-owner']")
+	private WebElement selectownertn;
 	
 	public VNextVehicleInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@data-autotests-id, '-vehicle-info')]")));
 		BaseUtils.waitABit(1000);
 		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
@@ -86,6 +89,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	public void setVIN (String vinnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("Vehicle.VIN")));
+		vinfld.clear();
 		setValue(vinfld, vinnumber);
 	}
 	
@@ -293,6 +297,15 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color) {
 		setVIN(VIN);
 		selectModelColor(color);
+	}
+
+	public VNextCustomersScreen clickSelectOwnerCell() {
+		tap(selectownertn);
+		return new VNextCustomersScreen(appiumdriver);
+	}
+
+	public String getOwnerCellValue() {
+		return appiumdriver.findElement(By.id("vehicleInfoOwner")).getAttribute("value");
 	}
 
 }

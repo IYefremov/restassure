@@ -42,7 +42,9 @@ public class RegularMainScreen extends iOSBaseScreen {
 	
 	public void updateDatabase() {
 		Helpers.setTimeOut(340);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("UpdateMainDatabaseButton")));
 		mainbtn.click();
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();

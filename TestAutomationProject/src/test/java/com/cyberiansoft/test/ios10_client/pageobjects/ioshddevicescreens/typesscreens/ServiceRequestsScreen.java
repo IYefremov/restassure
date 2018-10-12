@@ -127,7 +127,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, Duration.ofSeconds(10)), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("ServiceRequestsPageTableLeft")));
-		wait = new WebDriverWait(appiumdriver, 20);
+		wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")));
 	}
 
@@ -276,7 +276,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	}
 	
 	public void selectCloseAction() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Close")));
 		appiumdriver.findElementByAccessibilityId("Close").click();
 	}

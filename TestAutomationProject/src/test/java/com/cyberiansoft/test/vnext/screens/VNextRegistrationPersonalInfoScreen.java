@@ -104,6 +104,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void setPhoneNumber(String phonenumber) {
+		BaseUtils.waitABit(500);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal-info-phone")));
 		tap(phonenumberfld);

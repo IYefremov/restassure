@@ -37,8 +37,8 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 	final String po = "987";
 	final String licPlate = "qwerty";
 	
-	//@Test(testName = "Test Case 64860:vNext mobile: Create Inspection with populated vehicle info for current day",
-		//	description="Create Inspection with populated vehicle info for current day")
+	@Test(testName = "Test Case 64860:vNext mobile: Create Inspection with populated vehicle info for current day",
+			description="Create Inspection with populated vehicle info for current day")
 	public void createInspectionWithPopulatedVehicleInfoForCurrentDay() {
  		
 		final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
@@ -81,7 +81,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		claiminfoscreen.setClaimNumber(claimNumber);
 		claiminfoscreen.setPolicyNumber(policyNumber);
 		claiminfoscreen.setDeductibleValue(deductibleValue);
-		inspinfoscreen.swipeScreensLeft(3);
+		inspinfoscreen.changeScreen("Services");
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		//selectservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(moneyservices);
@@ -127,6 +127,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		insppage.selectInspectionInTheList(inspnumber);
 		insppage.clickInspectionApproveButton();
 		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(webdriver);
+
 		confirmdialog.clickNoButton();
 		
 		insppage.approveInspection(approveNotes);
@@ -169,8 +170,8 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		webdriver.quit();
 	}
 	
-	@Test(testName = "Test Case 69003:R360: verify Archived Inspection can't be approved",
-			description="Verify Archived Inspection can't be approved")
+	//@Test(testName = "Test Case 69003:R360: verify Archived Inspection can't be approved",
+	//		description="Verify Archived Inspection can't be approved")
 	public void testVerifyArchivedInspectionCantBeApproved() {
  		
 		final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
@@ -215,7 +216,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		claiminfoscreen.setClaimNumber(claimNumber);
 		claiminfoscreen.setPolicyNumber(policyNumber);
 		claiminfoscreen.setDeductibleValue(deductibleValue);
-		inspinfoscreen.swipeScreensLeft(2);
+		inspinfoscreen.changeScreen("Services");
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		inspservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(moneyservices);

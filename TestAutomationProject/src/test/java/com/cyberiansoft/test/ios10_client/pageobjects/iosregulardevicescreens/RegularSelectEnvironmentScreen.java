@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularSelectEnvironmentScreen extends iOSRegularBaseScreen {
 
-	@iOSFindBy(accessibility = "Environments")
+	@iOSFindBy(accessibility = "Select Environment")
 	private IOSElement environmentspopup;
 	
 	public RegularSelectEnvironmentScreen() {

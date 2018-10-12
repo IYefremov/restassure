@@ -91,7 +91,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable"))); 
 	}
 
@@ -188,6 +188,8 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getWorkOrderNumber() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name CONTAINS 'O-'")));
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByIosNsPredicate("name CONTAINS 'O-'").getText();
 	}

@@ -80,6 +80,11 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
             tap(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
             keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='QuantityFloat']")).getAttribute("value"), quantity);
+            WaitUtils.click(servicecell.findElement(By.xpath(".//*[@class='checkbox-item-title']")));
+            if (elementExists("//div[@class='modal-text']")) {
+                VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+                informationDialog.clickInformationDialogNoButton();
+            }
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }

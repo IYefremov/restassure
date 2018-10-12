@@ -95,6 +95,8 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	}
 	
 	public void clickiCreateInvoiceButton()  {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(invoicenewbtn));
 		invoicenewbtn.click();
 		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}	

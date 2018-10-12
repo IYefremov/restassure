@@ -34,7 +34,7 @@ public class AppiumConfiguration {
 			case ANDROID:
 
 				date = date.minusDays(1);
-				File appDir = new File("./data/");
+				File appDir = new File("data/");
 				try {
 					BaseUtils.unpackArchive(new URL("http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_" + date.format(dateFormat) + ".app.zip"), appDir);
 				} catch (IOException e) {
@@ -43,7 +43,8 @@ public class AppiumConfiguration {
 				File app = new File(appDir, "Repair360AndroidTeam.apk");
 				//File app = new File(appDir, "Repair360Android.apk");
 				appiumcap = new DesiredCapabilities();
-				appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "mydroid19");
+				appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "myphone");
+				//appiumcap.setCapability("avd", "myphone");
 	    		appiumcap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "1500");
 	    		appiumcap.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
 	    		appiumcap.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());

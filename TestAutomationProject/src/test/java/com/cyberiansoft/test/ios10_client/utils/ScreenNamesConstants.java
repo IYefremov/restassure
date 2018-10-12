@@ -4,6 +4,7 @@ public class ScreenNamesConstants {
 
     public static final String FUTURE_AUDI_CAR = "Future Audi Car";
     public static final String FUTiRE_JET_CAR = "Futire Jet Car";
+    public static final String FUTURE_SPORT_CAR = "Future Sport Car";
     public static final String TEST_SECTION = "Test Section";
     public static final String FOLLOW_UP_REQUESTED = "Follow up Requested";
     public static final String PACKAGE_FOR_MONITOR = "Package_for_Monitor";

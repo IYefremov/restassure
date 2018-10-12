@@ -5,12 +5,11 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	
@@ -32,14 +31,22 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	@iOSFindBy(accessibility = "TotalAmount")
     private IOSElement toolbarpricevalue;
 	
-	
 	@iOSFindBy(accessibility = "Save")
     private IOSElement savebtn;*/
+
+	@iOSFindBy(accessibility = "services")
+	private IOSElement servicetoolbarrtn;
 
 	public RegularVisualInteriorScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+
+	public void waitVisualScreenLoaded(String screenName) {
+
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'viewPrompt' and label = '" + screenName+ "'")));
 	}
 	
 	public void switchToCustomTab() {	
@@ -89,7 +96,9 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void clickServicesToolbarButton() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("services")).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(servicetoolbarrtn));
+		servicetoolbarrtn.click();
 	}
 
 	public String getTotalPrice() {

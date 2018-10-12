@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import io.appium.java_client.AppiumDriver;
@@ -50,8 +51,9 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     }
 
     public String getAmauntValue() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 150);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
         wait.until(ExpectedConditions.visibilityOf(paymentAmountfld));
+        BaseUtils.waitABit(500);
         return paymentAmountfld.getAttribute("value");
     }
 

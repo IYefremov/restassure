@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
@@ -26,7 +25,12 @@ public class QuestionsScreen extends BaseWizardScreen {
 	public QuestionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+	}
+
+	public void waitQuestionsScreenLoaded() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("label = 'Questions'  and type = 'XCUIElementTypeButton'")));
 	}
 
 	public void acceptForReminderNoDrilling() {
@@ -112,7 +116,8 @@ public class QuestionsScreen extends BaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Owner State")));
 		if (!appiumdriver.findElementByName(ownerstate).isDisplayed())
-			scrollToElement(ownerstate);
+			//scrollToElement(ownerstate);
+			scrollToElement((MobileElement) appiumdriver.findElementByName(ownerstate));
 		appiumdriver.findElementByName(ownerstate).click();
 	}
 

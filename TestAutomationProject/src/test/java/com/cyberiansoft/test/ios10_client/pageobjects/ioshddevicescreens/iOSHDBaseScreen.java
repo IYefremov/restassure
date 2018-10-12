@@ -1,10 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -40,6 +42,8 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void clickCancelButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("Cancel")));
 		appiumdriver.findElementByAccessibilityId("Cancel").click();		
 	}
 
@@ -124,13 +128,20 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 				swipe = false;
 		}
 	}
+
+	public void scrollToElement(MobileElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+		HashMap<String, String> scrollObject = new HashMap<String, String>();
+		scrollObject.put("direction", "down");
+		scrollObject.put("element", ((RemoteWebElement) element).getId());
+		js.executeScript("mobile: scroll", scrollObject);
+	}
 		
-		public void scrollToElement(String elementValue) {
-			JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-	        HashMap scrollObject = new HashMap<>();
-	        scrollObject.put("predicateString", "value == '" + elementValue + "'");
-	        js.executeScript("mobile: scroll", scrollObject);
-		
-		}
+	public void scrollToElement(String elementValue) {
+		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+		HashMap scrollObject = new HashMap<>();
+		scrollObject.put("predicateString", "value == '" + elementValue + "'");
+		js.executeScript("mobile: scroll", scrollObject);
+	}
 	
 }

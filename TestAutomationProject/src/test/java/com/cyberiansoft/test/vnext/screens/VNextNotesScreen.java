@@ -128,6 +128,17 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		if (appiumdriver instanceof JavascriptExecutor)
 		    ((JavascriptExecutor)appiumdriver).executeScript("$('[action=take-camera]').trigger('click:fake')");
 	}
+
+	public void clickAllowIfAppears() {
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		if (appiumdriver.findElements(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).size() > 0) {
+			appiumdriver.findElement(MobileBy.xpath("//*[@class='android.widget.Button' and @text='ALLOW']")).click();
+			BaseUtils.waitABit(1000);
+			AppiumUtils.clickHardwareBackButton();
+		}
+
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+	}
 	
 	public void addImageToNotesFromGallery() {
 		clickCameraIcon();

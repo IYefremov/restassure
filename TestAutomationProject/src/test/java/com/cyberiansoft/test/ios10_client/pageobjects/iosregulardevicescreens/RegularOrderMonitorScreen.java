@@ -86,6 +86,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getPanelStatus(String panelname) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		WebElement wotable = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
 		return monitorserviceslist.findElementByAccessibilityId(panelname).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}
 
@@ -122,6 +125,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickCompletedPhaseCell() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Completed")));
 		completedcell.click();
 	}
 	
@@ -182,7 +187,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	
 	public RegularTeamWorkOrdersScreen clickBackButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(backbtn));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
 		backbtn.click();
 		return new RegularTeamWorkOrdersScreen();
 	}

@@ -1016,7 +1016,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		//singlepageinspectionscreen.swipeScreenLeft();
 		//singlepageinspectionscreen.swipeScreenLeft();
-		//singlepageinspectionscreen.swipeScreenLeft();
 		Assert.assertTrue(singlepageinspectionscreen.isSignaturePresent());		
 		singlepageinspectionscreen.swipeScreenRight();
 		singlepageinspectionscreen.swipeScreenRight();
@@ -1025,6 +1024,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(singlepageinspectionscreen.isAnswerPresent("Test Answer 1"));
 		singlepageinspectionscreen.collapseFullScreen();
 		singlepageinspectionscreen.clickSaveButton();
+		servicerequestsscreen = new ServiceRequestsScreen();
 		homescreen = servicerequestsscreen.clickHomeButton();
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
@@ -1664,6 +1664,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		questionsscreen.setSampleQuestion("Answers 1");
 
 		questionsscreen =questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "Ins. Info");
+		BaseUtils.waitABit(1000);
 		questionsscreen =questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "BATTERY PERFORMANCE");
 		questionsscreen.setBetteryTerminalsAnswer("Immediate Attention Required");
 		questionsscreen.setCheckConditionOfBatteryAnswer("Immediate Attention Required");
@@ -1691,8 +1692,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
+		BaseUtils.waitABit(1000);
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+		BaseUtils.waitABit(1000);
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR, ScreenNamesConstants.FUTiRE_JET_CAR);
+		BaseUtils.waitABit(1000);
 		servicesscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DYE_SERVICE));
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DISC_EX_SERVICE1));
@@ -1717,7 +1721,6 @@ public class IOSSmokeTestCases extends BaseTestCase {
 				MobileBy.name("Yes"))
 				.click();
 		myinspectionsscreen = new MyInspectionsScreen();
-		System.out.println("++++++" + inspNumber);
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(copiedInspection), "$837.99");
 				//.getFirstInspectionPriceValue(), "$837.99");
 		myinspectionsscreen.clickHomeButton();
@@ -2608,7 +2611,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		Assert.assertTrue(myworkordersscreen.isAutosavedWorkOrderExists());
-		myworkordersscreen.selectContinueWorkOrder(wonumber);
+		myworkordersscreen.selectContinueWorkOrder("Auto Save");
 		Thread.sleep(30*1000);
 		Assert.assertEquals(vehiclescreen.getInspectionNumber(), wonumber);
 
@@ -2618,7 +2621,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		Assert.assertTrue(myworkordersscreen.isAutosavedWorkOrderExists());
-		myworkordersscreen.selectDiscardWorkOrder(wonumber);
+		myworkordersscreen.selectDiscardWorkOrder("Auto Save");
 		Assert.assertFalse(myworkordersscreen.isAutosavedWorkOrderExists());
 		myworkordersscreen.clickHomeButton();
 	}
@@ -2764,16 +2767,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 25009:WO HD: Verify that only assigned services on Matrix Panel is available as additional services", description = "WO HD: Verify that only assigned services on Matrix Panel is available as additional services")
-	public void testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices()
-			throws Exception {
+	public void testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
-		
+
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
@@ -2800,6 +2801,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen = new ServicesScreen();
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX));
 		QuestionsScreen questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
+		questionsscreen.waitQuestionsScreenLoaded();
 		questionsscreen.cancelWizard();
 		myworkordersscreen = new MyWorkOrdersScreen();
 		myworkordersscreen.clickHomeButton();
@@ -2941,8 +2943,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 26008:WO Monitor: HD - Verify that it is not possible to change Service Status before Start Service", description = "WO Monitor: HD - Verify that it is not possible to change Service Status before Start Service")
-	public void testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService()
-			throws Exception {
+	public void testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3069,8 +3070,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 26014:WO Monitor: HD - Verify that Start date is set when Start Service", description = "WO Monitor: HD - Verify that Start date is set when Start Service")
-	public void testWOMonitorVerifyThatStartDateIsSetWhenStartService()
-			throws Exception {
+	public void testWOMonitorVerifyThatStartDateIsSetWhenStartService() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3115,6 +3115,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isServiceStartDateExists());
 		ordermonitorscreen.clickServiceDetailsDoneButton();
+		ordermonitorscreen = new OrderMonitorScreen();
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();;
 		teamworkordersscreen.clickHomeButton();
 	}
@@ -5318,7 +5319,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		inspectionspage.makeSearchPanelVisible();
 		inspectionspage.selectSearchStatus("All active");
 		inspectionspage.selectSearchTimeframe("Custom");
-		inspectionspage.setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
+		inspectionspage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 
 		inspectionspage.searchInspectionByNumber(inspnumber);		
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspnumber), "$2,000.00");
@@ -5608,7 +5609,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
 		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
@@ -5662,7 +5663,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.saveWizard();
 		homescreen = myworkordersscreen.clickHomeButton();
-		
+		BaseUtils.waitABit(1000*20);
+
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(wonum);
 		
@@ -5721,7 +5723,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(wonum);
 		vendororderservicespage.changeRepairOrderServiceVendor(iOSInternalProjectConstants.DYE_SERVICE, "Device Team");
-		vendororderservicespage.waitABit(1000);
+		vendororderservicespage.waitABit(3000);
 		Assert.assertEquals(vendororderservicespage.getRepairOrderServiceTechnician(iOSInternalProjectConstants.DYE_SERVICE), "Oksi User");
 		DriverBuilder.getInstance().getDriver().quit();
 			
@@ -5834,10 +5836,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		SinglePageInspectionScreen singlepageinspectionscreen = myinspectionsscreen.addInspection(InspectionsTypes.INSP_DRAFT_SINGLE_PAGE);
 		String inspnumber = singlepageinspectionscreen.getInspectionNumber();
-		
+		System.out.println("+++++++++++++++!!!!!!!" + inspnumber);
 		singlepageinspectionscreen.expandToFullScreeenSevicesSection();
 		ServicesScreen servicesscreen = new ServicesScreen();
-		BaseUtils.waitABit(2000);
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectServicePriceMatrices("PM_New");
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen();
@@ -5872,7 +5873,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(alerttxt.contains("Question 'Question 2' in section 'Zayats Section1' should be answered."));
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
         questionsscreen.clickSaveAsFinal();
-
+		myinspectionsscreen = new MyInspectionsScreen();
 		myinspectionsscreen.selectInspectionInTable(inspnumber);
 		myinspectionsscreen.isApproveInspectionMenuActionExists();
 		myinspectionsscreen.clickArchiveInspectionButton();
@@ -6803,7 +6804,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 58663:Inspections: HD - Verify that when Panel grouping is used for package for selected Panel only linked services are shown", 
 			description = "Verify that when Panel grouping is used for package for selected Panel only linked services are shown")
-	public void testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown() throws Exception {
+	public void testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		

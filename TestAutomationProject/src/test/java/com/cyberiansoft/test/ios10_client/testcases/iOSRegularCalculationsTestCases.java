@@ -101,7 +101,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
         RegularVehicleScreen vehicleScreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
         RegularClaimScreen claimScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.CLAIM);
+		claimScreen.waitClaimScreenLoad();
         RegularVisualInteriorScreen visualInteriorScreen = claimScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
         RegularServicesScreen servicesscreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
@@ -165,8 +167,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclescreen.setColor(_color);
 		vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
         RegularVisualInteriorScreen visualInteriorScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
         visualInteriorScreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
-
+		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
         visualInteriorScreen.saveWizard();
 		myinspectionsscreen.selectInspectionForEdit(inspection8434);
         vehiclescreen = new RegularVehicleScreen();
@@ -187,6 +190,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVisualInteriorScreen.tapInteriorWithCoords(150, 150);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 200);
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.clickServicesToolbarButton();
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
@@ -1176,10 +1180,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
             Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$193.00");
 		
 			pricematrix.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.HAIL_MATRIX);
+			pricematrix.waitPriceMatrixScreenLoad();
 			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$123.00");
 			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
 		
 			pricematrix.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.HAIL_DAMAGE);
+			pricematrix.waitPriceMatrixScreenLoad();
 			Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$10.00");
 			Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$193.00");
             pricematrix.saveWizard();

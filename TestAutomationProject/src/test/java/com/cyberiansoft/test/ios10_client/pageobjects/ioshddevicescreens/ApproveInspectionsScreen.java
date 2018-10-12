@@ -62,7 +62,7 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		else
 			appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
 	}

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
@@ -124,7 +125,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	public void clickDiscaunt(String discaunt) {
 		IOSElement table = (IOSElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails");
 		if (!table.findElementByAccessibilityId(discaunt).isDisplayed()) {
-		    scrollToElement(discaunt);
+		    scrollToElement(table.findElementByAccessibilityId(discaunt));
 			//swipeTableUp(table.findElementByAccessibilityId(discaunt),
 			//		table);
 		}
@@ -150,9 +151,12 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 	
 	public boolean isPriceMatrixSelected(String pricematrix) {
-		IOSElement pricematrixesVPList = (IOSElement) appiumdriver.findElementByAccessibilityId("PriceMatrixVehiclePartList");
-		IOSElement vehiclePart = (IOSElement) new WebDriverWait(appiumdriver, 3).
-			until(ExpectedConditions.elementToBeClickable(pricematrixesVPList.findElementByAccessibilityId(pricematrix)));
+		BaseUtils.waitABit(1000);
+		IOSElement pricematrixesVPList = (IOSElement) new WebDriverWait(appiumdriver, 10).
+					until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("PriceMatrixVehiclePartList")));
+		IOSElement vehiclePart = (IOSElement) pricematrixesVPList.findElementByAccessibilityId(pricematrix);
+		//IOSElement vehiclePart = (IOSElement) new WebDriverWait(appiumdriver, 10).
+		//	until(ExpectedConditions.elementToBeClickable(pricematrixesVPList.findElementByAccessibilityId(pricematrix)));
 
 		return vehiclePart.findElementsByAccessibilityId("selected").size() > 0;
 	}

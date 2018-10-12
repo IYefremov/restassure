@@ -37,7 +37,7 @@ public class VNextPayPOROScreen extends VNextBaseScreen {
     public String getPaymentPOROValue() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.visibilityOf(poroNumberfld));
-        return poroNumberfld.getCssValue("value");
+        return poroNumberfld.getAttribute("value");
 
     }
 

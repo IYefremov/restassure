@@ -55,9 +55,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
@@ -98,10 +96,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -144,10 +141,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -190,10 +186,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -241,10 +236,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -286,10 +280,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -322,10 +315,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -345,8 +337,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
 
         invoicesscreen = new VNextInvoicesScreen(appiumdriver);
         invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayMenu payMenu = invoicemenuscreen.clickPayInvoiceMenuItem();
-        Assert.assertTrue(payMenu.isInvoicePayPOROMenuItemExists());
+        Assert.assertTrue(invoicemenuscreen.isInvoicePayPOROMenuItemExists());
         invoicemenuscreen.clickCloseInvoiceMenuButton();
         invoicesscreen.clickBackButton();
     }
@@ -371,10 +362,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -413,10 +403,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -450,10 +439,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -461,6 +449,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextPayPOROScreen payPOROScreen = invoicemenuscreen.clickPayPOROMenuItem();
+        payPOROScreen.setPaymentPOROValue("");
         payPOROScreen.clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
@@ -491,10 +480,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -529,10 +517,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -564,6 +551,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
         workordersscreen.switchToTeamWorkordersView();
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
@@ -574,10 +562,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -617,10 +604,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
 
         vehicleinfoscreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -653,10 +639,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -690,10 +675,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -730,10 +714,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -772,10 +755,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -810,10 +792,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -851,10 +832,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -893,10 +873,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -934,10 +913,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -985,10 +963,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -1040,10 +1017,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -1087,10 +1063,9 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         servicesScreen.changeScreen("Summary");
         VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-        wosummaryscreen.clickCreateInvoiceOption();
-        wosummaryscreen.clickWorkOrderSaveButton();
-
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
         invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());

@@ -21,7 +21,7 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
     @FindBy(xpath="//a[@data-name='paycachCheck']")
     private WebElement paycheckbtn;
 
-    @FindBy(xpath="//a[@data-name='payPORO']")
+    @FindBy(xpath="//a[@data-name='payPOROChildren']")
     private WebElement invoicepayporomenubtn;
 
     public VNextPayMenu(AppiumDriver<MobileElement> appiumdriver) {

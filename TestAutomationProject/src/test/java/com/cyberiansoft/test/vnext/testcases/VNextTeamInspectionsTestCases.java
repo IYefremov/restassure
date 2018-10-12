@@ -86,8 +86,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.changeScreen("Summary");
 		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
-		wosummaryscreen.clickCreateInvoiceOption();
-		wosummaryscreen.clickWorkOrderSaveButton();
+		wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
 		invoiceTypesScreen.selectInvoiceType(invoiceType);
 		
@@ -95,6 +94,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		invoiceinfoscreen.setInvoicePONumber(ponumber);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
+		invoicesscreen.switchToMyInvoicesView();
 		Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
 		
 		invoicesscreen.clickBackButton();
@@ -288,8 +288,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		settingsscreen.setManualSendOff();
 		settingsscreen.clickBackButton();
+
+		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+		inspectionscreen.switchToMyInspectionsView();
 		AppiumUtils.setNetworkOff();
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
@@ -516,7 +518,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible()
 				.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName())
-				.setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted())
+				.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted())
 				.searchInspectionByNumber(inspnumber);
 		inspectionspage.verifyVINIsPresentForInspection(inspnumber, newVIN);
 		webdriver.quit();

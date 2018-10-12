@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	
@@ -69,11 +68,11 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	public RegularPriceMatrixScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
-	
-	public WebElement getServiceCell(String servicename) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + servicename + "']/.."));
+
+	public void waitPriceMatrixScreenLoad() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'PriceMatrixVehicleParts'")));
 	}
 	
 	public RegularVehiclePartScreen selectPriceMatrix(String pricematrix) {

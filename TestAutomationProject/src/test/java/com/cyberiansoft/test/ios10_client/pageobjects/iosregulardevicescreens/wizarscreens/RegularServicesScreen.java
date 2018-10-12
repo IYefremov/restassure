@@ -123,15 +123,16 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 			if (appiumdriver.findElementsByClassName("XCUIElementTypeSearchField").size() > 0)
 				searchServiceByName(servicename);
 		}
-
+		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		if (appiumdriver.findElementByAccessibilityId("AvailableServiceList").
-				findElement(MobileBy.AccessibilityId(servicename)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0)
+				findElement(MobileBy.AccessibilityId(servicename)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0) {
 			appiumdriver.findElementByAccessibilityId("AvailableServiceList").
-				findElement(MobileBy.AccessibilityId(servicename)).findElement(MobileBy.AccessibilityId("unselected")).click();
-		else
+					findElement(MobileBy.AccessibilityId(servicename)).findElement(MobileBy.AccessibilityId("unselected")).click();
+		} else {
 
 			appiumdriver.findElementByAccessibilityId("AvailableServiceList").
-					findElement(MobileBy.AccessibilityId(servicename)).findElement(MobileBy.className("XCUIElementTypeImage")).click();
+					findElement(MobileBy.AccessibilityId(servicename)).click();
+		}
 	}
 	
 	public void selectServiceSubSrvice(String servicesubsrvicename) {

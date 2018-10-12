@@ -8,13 +8,8 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.DentWizardRegularVersionTestCases">
         <methods>
-          <include name="testTurningMultipleWorkOrdersIntoASingleInvoice" />
-          <include name="testEditingAnInvoiceInDraft" />
-
 
           <include name="testValidVINCheck" />
-          <include name="testTopCustomersSetting" />
-          <include name="testVINDuplicateCheck" />
           <include name="testVehiclePartRequirement" />
           <include name="testTurningMultipleWorkOrdersIntoASingleInvoice" />
           <include name="testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice" />
@@ -61,7 +56,7 @@
           <include name="testAddingPOToAnInvoiceContainingMultipleWorkOrders" />
           <include name="testCopyVehicleFeature" />
           <include name="testCopyServicesFeature" />
-          <include name="testPreExistingDamageOption" /> 
+          <include name="testPreExistingDamageOption" />
           <include name="testTotalSaleRequirement" />
           <include name="testPackagePricingForReadOnlyItems" />
           <include name="testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation" /> 
@@ -76,6 +71,8 @@
           <include name="testPONumberSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testCarHistoryFeature" />
+          <include name="testTopCustomersSetting" />
+          <include name="testVINDuplicateCheck" />
         </methods>
       </class>
     </classes>

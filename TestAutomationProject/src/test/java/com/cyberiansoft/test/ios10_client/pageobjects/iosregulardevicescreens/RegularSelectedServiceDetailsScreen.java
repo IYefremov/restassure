@@ -403,6 +403,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void cancelSelectedServiceDetails() {
+		new WebDriverWait(appiumdriver, 10)
+		  .until(ExpectedConditions.visibilityOf(cancelbtn));
 		cancelbtn.click();
 	}
 

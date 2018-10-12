@@ -1,11 +1,11 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,6 +39,9 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	@FindBy(xpath="//a[@data-name='payMulti']")
 	private WebElement invoicepaymenubtn;
 
+	@FindBy(xpath="//a[@data-name='payPORO']")
+	private WebElement invoicepayporomenubtn;
+
 	@FindBy(xpath="//a[@data-name='cancel']")
 	private WebElement invoicecancelmenubtn;
 	
@@ -47,7 +50,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	
 	public VNextInvoiceMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		//wait.until(ExpectedConditions.visibilityOf(invoicemenuscreen));
 	}
@@ -137,5 +140,9 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	public VNextInvoiceInfoScreen clickEditInvoiceMenuItem() {
 		clickMenuItem(editinvoicebtn);
 		return new VNextInvoiceInfoScreen(appiumdriver);
+	}
+
+	public boolean isInvoicePayPOROMenuItemExists() {
+		return invoicepayporomenubtn.isDisplayed();
 	}
 }

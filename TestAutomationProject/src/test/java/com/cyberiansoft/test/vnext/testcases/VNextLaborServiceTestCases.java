@@ -117,7 +117,9 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.switchToAvalableServicesView();
 
-        VNextVehiclePartsScreen vehiclepartsscreen = availableservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
+        VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
+        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
+
         MatrixPartData matrixPartData = inspdata.getMatrixServiceData().getMatrixPartData();
         VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
         vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
@@ -159,7 +161,9 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.switchToAvalableServicesView();
 
-        VNextVehiclePartsScreen vehiclepartsscreen = availableservicesscreen.openSelectedMatrixServiceDetails( inspdata.getMatrixServiceData().getMatrixServiceName());
+        VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
+        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
+
         MatrixPartData matrixPartData = inspdata.getMatrixServiceData().getMatrixPartData();
         VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
         vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());

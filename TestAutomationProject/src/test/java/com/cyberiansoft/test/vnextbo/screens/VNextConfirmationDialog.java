@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -20,10 +19,10 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div[contains(@data-bind, 'html: html,')]")
 	private WebElement confirmdialogmessage;
 	
-	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCancelButton']")
+	@FindBy(xpath = "//button[@data-automation-id='modalCancelButton']")
 	private WebElement nobtn;
 	
-	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalConfirmButton']")
+	@FindBy(xpath = "//button[@data-automation-id='modalConfirmButton']")
 	private WebElement yesbtn;
 	
 	public VNextConfirmationDialog(WebDriver driver) {
@@ -34,18 +33,16 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	}
 	
 	public void clickNoButton() {
-		nobtn.click();
-		wait.until(ExpectedConditions.invisibilityOf(confirmDialog));
+		confirmDialog.
+				findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")).click();
+		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
 	}
 	
 	public void clickYesButton() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(yesbtn)).click();
-        } catch (Exception e) {
-            Assert.fail("The 'Yes' button has not been clicked");
-        }
-        wait.until(ExpectedConditions.invisibilityOf(confirmDialog));
-    }
+		confirmDialog.
+				findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")).click();
+		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
+	}
 	
 	public String getConfirmationDialogMessage() {
 		String confirmMessage  = null;
