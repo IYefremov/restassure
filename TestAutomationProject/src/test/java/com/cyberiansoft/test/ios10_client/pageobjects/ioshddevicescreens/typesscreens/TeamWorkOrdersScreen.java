@@ -86,8 +86,9 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public void clickiCreateInvoiceButton()  {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
-		wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("invoice new"))).click();
+		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("invoice new")).click();
+		//wait = new WebDriverWait(appiumdriver, 5);
+		//wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("invoice new"))).click();
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 

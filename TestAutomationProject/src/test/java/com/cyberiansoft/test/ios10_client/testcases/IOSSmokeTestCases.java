@@ -5330,8 +5330,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 51336:WO: HD - Verify that approve WO is working correct under Team WO", 
 			description = "WO: HD - Verify that approve WO is working correct under Team WO")
-	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO()
-			throws Exception {
+	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -7032,8 +7031,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35953:SR: HD - Verify that when SR is declined status reason should be selected", 
 			description = "Verify that when SR is declined status reason should be selected")
-	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected()
-			throws Exception {
+	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
@@ -7089,8 +7087,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it", 
 			description = "Verify that SR is not accepted when employee review or update it")
-	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt()
-			throws Exception {
+	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
