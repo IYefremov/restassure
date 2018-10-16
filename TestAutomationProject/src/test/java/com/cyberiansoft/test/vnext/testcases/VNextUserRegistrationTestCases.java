@@ -407,6 +407,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		BaseUtils.waitABit(10*1000);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+
+		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
+		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
+		environmentSelectionScreen.selectEnvironment("Development");
+		//BaseUtils.waitABit(15*1000);
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setFirstName(userfirstname);	
 		regscreen.setLastName(userlastname);

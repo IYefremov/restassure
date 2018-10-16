@@ -45,6 +45,7 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 	}
 	
 	public void clickDoneButton() {
+		BaseUtils.waitABit(2000);
 		try {
 			tap(businesstypescreen.findElement(By.xpath(".//div[@class='pull-right']/div[contains(@data-bind, 'navigateNext')]")));
 		} catch (UnhandledAlertException e) {
