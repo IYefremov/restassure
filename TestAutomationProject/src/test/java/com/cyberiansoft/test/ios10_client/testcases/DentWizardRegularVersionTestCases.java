@@ -153,7 +153,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String searchresult = vehiclescreen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
 					0, 11));
 			Assert.assertEquals(searchresult, "No vehicle invoice history found");
-			vehiclescreen.setVINValue(ExcelUtils.getVIN(tcrow).substring(11, 17));
+			vehiclescreen.setVINValue(ExcelUtils.getVIN(tcrow).substring(10, 17));
 			String msg = vehiclescreen.getExistingWorkOrdersDialogMessage();
 			Assert.assertTrue(msg.contains("Existing work orders were found"), msg);
 			if (DriverBuilder.getInstance().getAppiumDriver().findElementsByAccessibilityId("Close").size() > 0)
