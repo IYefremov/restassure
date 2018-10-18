@@ -83,6 +83,8 @@ public class MainScreen extends iOSHDBaseScreen {
 	}
 	
 	public LicensesScreen clickLicenses() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(licenses));
 		licenses.click();
 		return new LicensesScreen();
 	}

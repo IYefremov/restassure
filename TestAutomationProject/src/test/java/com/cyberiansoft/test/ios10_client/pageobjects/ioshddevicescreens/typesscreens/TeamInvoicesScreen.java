@@ -36,7 +36,7 @@ public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void selectInvoice(String invoice) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(invoice)));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= \""

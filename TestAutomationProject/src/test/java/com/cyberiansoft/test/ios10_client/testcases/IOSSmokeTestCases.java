@@ -361,8 +361,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8430:Create work order with type is assigned to a specific client
 	@Test(testName = "Test Case 8430:Create work order with type is assigned to a specific client", description = "Create work order with type is assigned to a specific client ")
-	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient()
-			throws Exception {
+	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient() {
 		final String VIN = "ZWERTYASDFDDXZBVB";
 		final String _po = "1111 2222";
 		final String summ = "71.40";
