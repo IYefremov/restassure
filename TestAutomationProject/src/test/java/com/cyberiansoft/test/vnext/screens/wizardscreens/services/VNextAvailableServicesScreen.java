@@ -88,8 +88,10 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 	
 	public void selectService(String serviceName) {
 		WebElement servicerow = getServiceListItem(serviceName);
+		String servicePrice = "";
 		if (servicerow != null) {
 			try {
+				servicePrice = servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
 				tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//input[@action='select-item']"))));
 				WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
 			} catch (WebDriverException e) {
@@ -97,6 +99,12 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 				WaitUtils.click(servicerow.findElement(By.xpath(".//input[@action='select-item']")));
 			}
 			WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
+			if (servicePrice.contains("$0.00")) {
+				VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(appiumdriver);
+				serviceDetailsScreen.clickServiceDetailsDoneButton();
+			}
+			new VNextAvailableServicesScreen(appiumdriver);
+
 		}
 		else
 			Assert.assertTrue(false, "Can't find service: " + serviceName);

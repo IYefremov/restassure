@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,12 +34,19 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	}
 	
 	public void clickNoButton() {
+		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
+		wait.until(ExpectedConditions.visibilityOf(confirmDialog.
+				findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']"))));
 		confirmDialog.
 				findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")).click();
-		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
+		new WebDriverWait(driver, 30)
+				.until(ExpectedConditions.invisibilityOf(confirmDialog));
 	}
 	
 	public void clickYesButton() {
+		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
+		wait.until(ExpectedConditions.visibilityOf(confirmDialog.
+				findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']"))));
 		confirmDialog.
 				findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")).click();
 		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));

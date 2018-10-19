@@ -39,6 +39,9 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     @FindBy(xpath="//*[@action='team']")
     private WebElement teamviewtab;
 
+    @FindBy(xpath="//*[@action='add']")
+    private WebElement addbtn;
+
     public VNextBaseTypeScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
@@ -60,8 +63,10 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
 
     protected void clickAddButton() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.visibilityOf(addbtn));
+        wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@action='add']")));
-        WaitUtils.click(By.xpath("//*[@action='add']"));
+        tap(addbtn);
     }
 
     protected void switchToTeamView() {

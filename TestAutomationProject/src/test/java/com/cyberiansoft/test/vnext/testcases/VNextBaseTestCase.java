@@ -192,7 +192,7 @@ public class VNextBaseTestCase {
 		
 		//VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(DriverBuilder.getInstance().getAppiumDriver());
 		//Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-		BaseUtils.waitABit(15*1000);
+		BaseUtils.waitABit(25*1000);
 		if (DriverBuilder.getInstance().getMobilePlatform().equals(MobilePlatform.ANDROID)) {
 			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);	
 			DriverBuilder.getInstance().getAppiumDriver().closeApp();
