@@ -14,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
@@ -364,7 +365,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
-	/*public void changeAmountOfBundleService(String newamount) {
+	public void changeAmountOfBundleService(String newamount) {
 		List<WebElement> toolbarbtns = appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElements(MobileBy.className("XCUIElementTypeButton"));
 		for (WebElement btn : toolbarbtns)
 			if (btn.getAttribute("name").contains("$")) {
@@ -375,7 +376,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		amountfld.clear();
 		amountfld.sendKeys(newamount);
 		appiumdriver.findElementByAccessibilityId("Override").click();
-	}*/
+	}
 
 	public boolean isTechnicianIsSelected(String technician) {
 		return appiumdriver.
