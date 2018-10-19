@@ -262,6 +262,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setColor(_color);
 		vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 		RegularVisualInteriorScreen regularVisualInteriorScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		regularVisualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
 		regularVisualInteriorScreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
 		regularVisualInteriorScreen.saveWizard();
 		myinspectionsscreen.clickHomeButton();
@@ -350,12 +351,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickEditInspectionButton();
 		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
 		RegularVisualInteriorScreen visualInteriorScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
 		RegularNotesScreen notesscreen = visualInteriorScreen.clickNotesButton();
 		notesscreen.setNotes(_notes1);
 		//notesscreen.clickDoneButton();
 		notesscreen.addQuickNotes();
 		notesscreen.clickSaveButton();
-		visualInteriorScreen = new RegularVisualInteriorScreen();
+		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
 		visualInteriorScreen.clickNotesButton();
 		Assert.assertEquals(notesscreen.getNotesAndQuickNotes(), _notes1 + "\n" + notesscreen.quicknotesvalue);
 		notesscreen.clickSaveButton();
@@ -5486,6 +5488,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -5575,7 +5578,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		repairorderspage.selectSearchLocation("Default Location");
 
 		repairorderspage.selectSearchTimeframe("Custom");
-		repairorderspage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
+		repairorderspage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
 		repairorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		repairorderspage.clickFindButton();
 		
