@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizard
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -44,16 +45,16 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	
 	//@iOSFindBy(xpath = "//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\"Technicians\")]/XCUIElementTypeStaticText[2]")
    // private IOSElement technicianscellvalue;
-	
+
 	/*@iOSFindBy(accessibility  = "Compose")
     private IOSElement composecell;
-	
+
 	@iOSFindBy(accessibility = "Clear")
     private IOSElement clearvehiclepartdatabtn;
-	
+
 	@iOSFindBy(accessibility  = "Save")
     private IOSElement savebtn;
-	
+
 	@iOSFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;*/
 
@@ -62,12 +63,15 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 
 	@iOSFindBy(accessibility = "Notes")
 	private IOSElement notescell;
-	
+
+	private static String viewMode = "PdrView";
+
 	public PriceMatrixScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		viewMode = "PdrView";
 	}
-	
+
 	public void selectPriceMatrix(String pricematrix) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(pricematrix)));
@@ -77,7 +81,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 			//appiumdriver.findElementByAccessibilityId(wotype).click();
 		}
 		appiumdriver.findElementByAccessibilityId(pricematrix).click();
-		
+
 		//TouchAction action = new TouchAction(appiumdriver);
 		//action.press(appiumdriver.findElementByAccessibilityId(pricematrix)).waitAction(Duration.ofSeconds(1)).release().perform();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + pricematrix + "']").click();
@@ -85,7 +89,8 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public void setSizeAndSeverity(String size, String severity) {
-		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId("Size")).click();
+
+		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellSize").click();
 		appiumdriver.findElementByAccessibilityId("tableSize").findElement(MobileBy.AccessibilityId(size)).click();
 		appiumdriver.findElementByAccessibilityId("tableSeverity").findElement(MobileBy.AccessibilityId(severity)).click();
 		appiumdriver.findElementByAccessibilityId("Size & Severity").findElement(By.name("Save")).click();
@@ -98,7 +103,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId("Price").click();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(price + "\n");
 	}
-	
+
 	public void setTime(String timevalue) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Time")));
@@ -113,17 +118,21 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}*/
 
 	public String getPrice() {
-		return appiumdriver.findElement(
-				MobileBy.xpath("//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[@name='PriceMatrixItemDetailsCellPrice']/XCUIElementTypeTextField[1]")).
+		return getMaqtrixPanel().findElement(
+				MobileBy.xpath("//XCUIElementTypeCell[@name='PriceMatrixItemDetailsCellPrice']/XCUIElementTypeTextField[1]")).
 				getAttribute("value");
 	}
 
 	public void selectDiscaunt(String discaunt) {
-		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(By.name(discaunt)).findElement(By.name("unselected")).click();
+		getMaqtrixPanel().findElement(By.name(discaunt)).findElement(By.name("unselected")).click();
+	}
+
+	public MobileElement getMaqtrixPanel() {
+		return (MobileElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode);
 	}
 
 	public void clickDiscaunt(String discaunt) {
-		IOSElement table = (IOSElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails");
+		MobileElement table = getMaqtrixPanel();
 		if (!table.findElementByAccessibilityId(discaunt).isDisplayed()) {
 		    scrollToElement(table.findElementByAccessibilityId(discaunt));
 			//swipeTableUp(table.findElementByAccessibilityId(discaunt),
@@ -132,24 +141,25 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		if (!table.findElementByAccessibilityId(discaunt).isDisplayed())
 			swipeTableUp(table.findElementByAccessibilityId(discaunt), table);
 
-		appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId(discaunt)).click();
+		getMaqtrixPanel().findElement(MobileBy.AccessibilityId(discaunt)).click();
 	}
-	
+
 	public void switchOffOption(String optionname) {
 		IOSElement switcher = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = '" + optionname + "' and type = 'XCUIElementTypeSwitch'"));
 		if (switcher.getAttribute("value").equals("1"))
 			switcher.click();
+		viewMode = "OtherView";
 	}
-	
+
 	public String getDiscauntPriceAndValue(String discaunt) {
-		return appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(By.name(discaunt)).getAttribute("label");
+		return getMaqtrixPanel().findElement(By.name(discaunt)).getAttribute("label");
 	}
-	
+
 	public boolean isDiscauntPresent(String discaunt) {
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='"
 						+ discaunt + "']").isDisplayed();
 	}
-	
+
 	public boolean isPriceMatrixSelected(String pricematrix) {
 		BaseUtils.waitABit(1000);
 		IOSElement pricematrixesVPList = (IOSElement) new WebDriverWait(appiumdriver, 10).
@@ -170,7 +180,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public String getTechniciansValue() {
-		return appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails")
+		return getMaqtrixPanel()
 		.findElement(By.xpath("//XCUIElementTypeCell[contains(@name,\"Technicians\")]/XCUIElementTypeStaticText[2]"))
 		.getAttribute("name");
 	}

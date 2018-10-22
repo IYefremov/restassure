@@ -2583,7 +2583,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 49945:HD - Verify that package price overrides client (retail or wholesale)", 
 			description = "WO: Verify that package price overrides client (retail or wholesale)")
-	public void testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale() throws Exception {
+	public void testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		

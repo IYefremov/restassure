@@ -2856,8 +2856,7 @@ public class DentWizartestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 19548:Test adding a PO# to an invoice", description = "Test adding a PO# to an invoice")
-	public void testAddingAPOToAnInvoice()
-			throws Exception {
+	public void testAddingAPOToAnInvoice() {
 		String tcname = "testAddingAPOToAnInvoice";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
@@ -2915,12 +2914,11 @@ public class DentWizartestCases extends BaseTestCase {
 		teamworkordersscreen.clickCreateInvoiceIconForTeamWO(workOrderNumber);
 		Assert.assertTrue(teamworkordersscreen.isCreateInvoiceActivated(workOrderNumber));
 		teamworkordersscreen.clickiCreateInvoiceButton();
-        QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.waitQuestionsScreenLoaded();
-        questionsscreen = questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
+		QuestionsScreen questionsscreen = invoiceInfoScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
 		questionsscreen.waitQuestionsScreenLoaded();
 		questionsscreen.chooseAVISCode("Rental-921");
-		InvoiceInfoScreen invoiceInfoScreen = questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+		questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 
 		final String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
