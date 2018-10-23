@@ -145,9 +145,10 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public void switchOffOption(String optionname) {
-		IOSElement switcher = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = '" + optionname + "' and type = 'XCUIElementTypeSwitch'"));
-		if (switcher.getAttribute("value").equals("1"))
-			switcher.click();
+		//IOSElement switcher = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = '" + optionname + "' and type = 'XCUIElementTypeSwitch'"));
+		//if (switcher.getAttribute("value").equals("1"))
+		//	switcher.click();
+		appiumdriver.findElementByAccessibilityId("Other").click();
 		viewMode = "OtherView";
 	}
 

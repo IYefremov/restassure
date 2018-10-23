@@ -94,8 +94,9 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     }
 
     public void switchOffOption(String optionname) {
-        if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").getAttribute("value").equals("1"))
-            appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").click();
+        appiumdriver.findElementByAccessibilityId("Other").click();
+        //if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").getAttribute("value").equals("1"))
+        //    appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").click();
     }
 
     public String getDiscauntPriceAndValue(String discaunt) {
