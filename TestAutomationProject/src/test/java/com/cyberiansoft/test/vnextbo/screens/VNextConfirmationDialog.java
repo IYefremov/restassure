@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	
@@ -29,14 +28,16 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	public VNextConfirmationDialog(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
 	}
 	
 	public void clickNoButton() {
-		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
 		wait.until(ExpectedConditions.visibilityOf(confirmDialog.
 				findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']"))));
+		new WebDriverWait(driver, 30)
+				.until(ExpectedConditions.elementToBeClickable(confirmDialog.
+						findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']"))));
 		confirmDialog.
 				findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")).click();
 		new WebDriverWait(driver, 30)
@@ -44,12 +45,15 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	}
 	
 	public void clickYesButton() {
-		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
 		wait.until(ExpectedConditions.visibilityOf(confirmDialog.
 				findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']"))));
+		new WebDriverWait(driver, 30)
+				.until(ExpectedConditions.elementToBeClickable(confirmDialog.
+								findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']"))));
 		confirmDialog.
 				findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")).click();
-		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
+		new WebDriverWait(driver, 30)
+				.until(ExpectedConditions.invisibilityOf(confirmDialog));
 	}
 	
 	public String getConfirmationDialogMessage() {

@@ -37,7 +37,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@type='password']")
 	private WebElement passwordfld;
 	
-	@FindBy(xpath="//span[text()='Login']")
+	@FindBy(xpath="//span[@class='modal-button ' and text()='Login']")
 	private WebElement loginbtn;
 	
 	@FindBy(xpath="//span[@class='modal-button ' and text()='Cancel']")
@@ -80,6 +80,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	
 	public void setUserLoginPassword(String userpsw) {
 		WaitUtils.click(By.xpath("//input[@type='password']"));
+		//appiumdriver.getKeyboard().sendKeys(userpsw);
 		setValue(passwordfld, userpsw);
 	}
 	
@@ -94,8 +95,10 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	}
 	
 	public void tapLoginButton() {
-		tap(loginbtn);
-		
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
+		//tap(loginbtn);
+		loginbtn.click();
 	}
 	
 	public void tapLoginDialogCancelButton() {
