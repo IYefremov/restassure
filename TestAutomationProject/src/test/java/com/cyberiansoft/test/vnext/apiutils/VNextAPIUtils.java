@@ -2,11 +2,15 @@ package com.cyberiansoft.test.vnext.apiutils;
 
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
 import com.cyberiansoft.test.dataclasses.r360.WorkOrderDTO;
 import com.cyberiansoft.test.dataprovider.JsonUtils;
+import com.cyberiansoft.test.objectpoolsi.InspPool;
+import com.cyberiansoft.test.objectpoolsi.InspectionFactory;
 import com.cyberiansoft.test.objectpoolsi.WOPool;
 import com.cyberiansoft.test.objectpoolsi.WorkOrderFactory;
 import com.cyberiansoft.test.vnext.config.VNextDataInfo;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
@@ -60,6 +64,38 @@ public class VNextAPIUtils {
             }
         }
         return workOrderDTOS;
+    }
+
+    public List<InspectionDTO> generateInspections(String INSP_DATA_FILE, InspectionTypes inspectionType, RetailCustomer testcustomer,
+                                                  Employee employee, String licenseID, String deviceID, String appID,
+                                                  String appLicenseEntity, int numberOfInspectionsToCreate) throws Exception {
+        final String apiPath = getAPIDataFilesPath();
+
+        List<InspectionDTO> inspectionDTOS = new ArrayList<>();
+        InspPool isnpPool = null;
+
+        GenericObjectPoolConfig config = new GenericObjectPoolConfig();
+        config.setMaxIdle(1);
+        config.setMaxTotal(numberOfInspectionsToCreate);
+
+
+        InspectionDTO inspectionDTO = JsonUtils.getInspectionDTO(new File(apiPath + INSP_DATA_FILE),
+                new File(apiPath + VNextDataInfo.getInstance().getDefaultVehicleInfoDataFileName()),
+                new File(apiPath + VNextDataInfo.getInstance().getDefaultDeviceInfoDataFileName()));
+        config.setTestOnBorrow(true);
+        config.setTestOnReturn(true);
+        isnpPool = new InspPool(new InspectionFactory(inspectionDTO, inspectionType, testcustomer.getClientId(),
+                employee.getEmployeeID(), licenseID, deviceID, appID, appLicenseEntity), config);
+        for (int i = 0; i < isnpPool.getMaxTotal(); i++) {
+            try {
+                InspectionDTO inspection = isnpPool.borrowObject();
+                inspectionDTOS.add(inspection);
+                isnpPool.invalidateObject(inspection);
+            } catch (SocketTimeoutException tm) {
+                System.out.println("SocketTimeoutException happen");
+            }
+        }
+        return inspectionDTOS;
     }
 
     private String getAPIDataFilesPath() {

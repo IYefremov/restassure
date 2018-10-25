@@ -16,7 +16,6 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
-import com.cyberiansoft.test.objectpoolsi.WOPool;
 import com.cyberiansoft.test.vnext.apiutils.VNextAPIUtils;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -47,8 +46,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	private final RetailCustomer testcustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
 	private final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
-	private List<WorkOrderDTO> workOrderDTOS = new ArrayList<WorkOrderDTO>();
-	private WOPool woPool = null;
+	private List<WorkOrderDTO> workOrderDTOS = new ArrayList<>();
 
 	@BeforeClass(description="Team Invoices Test Cases")
 	public void beforeClass() throws Exception {
