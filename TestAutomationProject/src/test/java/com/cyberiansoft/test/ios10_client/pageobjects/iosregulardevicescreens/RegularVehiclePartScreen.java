@@ -19,12 +19,15 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
+    private static String viewMode = "PdrView";
+
     public RegularVehiclePartScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Vehicle Part")));
+        viewMode = "PdrView";
     }
 
     public void setSizeAndSeverity(String size, String severity) {
@@ -64,9 +67,9 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     public void clickDiscaunt(String discaunt) {
         MobileElement elDiscount = (MobileElement) appiumdriver.findElementByAccessibilityId(discaunt);
         if (!elDiscount.isDisplayed())
-            swipeToElement(appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsPdrView").findElement(MobileBy.AccessibilityId(discaunt)));
+            swipeToElement(appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode).findElement(MobileBy.AccessibilityId(discaunt)));
 
-        WebElement table = appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsPdrView");
+        WebElement table = appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode);
 
         if (!elDiscount.isDisplayed()) {
             TouchAction swipe = new TouchAction(appiumdriver).press(element(table, table.getSize().width/2, table.getSize().height-30))
@@ -74,7 +77,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
             swipe.perform();
         }
 
-        appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsPdrView").findElement(MobileBy.AccessibilityId(discaunt)).click();
+        appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode).findElement(MobileBy.AccessibilityId(discaunt)).click();
     }
 
     public String getPrice() {
@@ -107,8 +110,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
     public void switchOffOption(String optionname) {
         appiumdriver.findElementByAccessibilityId("Other").click();
-        //if (appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").getAttribute("value").equals("1"))
-        //    appiumdriver.findElementByXPath("//XCUIElementTypeSwitch[@name='" + optionname  + "']").click();
+        viewMode = "OtherView";
     }
 
     public String getDiscauntPriceAndValue(String discaunt) {

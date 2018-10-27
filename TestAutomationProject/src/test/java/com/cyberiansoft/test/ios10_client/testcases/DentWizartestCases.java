@@ -2230,8 +2230,7 @@ public class DentWizartestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 12632:Test Delete Work Order function", description = "Test Delete Work Order function")
-	public void testDeleteWorkOrderFunction()
-			throws Exception {
+	public void testDeleteWorkOrderFunction() {
 		String tcname = "testDeleteWorkOrderFunction";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 

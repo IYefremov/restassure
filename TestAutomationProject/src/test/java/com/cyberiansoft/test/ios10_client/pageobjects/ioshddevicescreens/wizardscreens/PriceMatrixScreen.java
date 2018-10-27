@@ -111,12 +111,6 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(timevalue + "\n");
 	}
 
-	/*public void setSeverity(String severity) {
-		Helpers.text_exact("Severity").click();
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView[1]/UIATableCell[@name=\""
-						+ severity + "\"]").click();
-	}*/
-
 	public String getPrice() {
 		return getMaqtrixPanel().findElement(
 				MobileBy.xpath("//XCUIElementTypeCell[@name='PriceMatrixItemDetailsCellPrice']/XCUIElementTypeTextField[1]")).
