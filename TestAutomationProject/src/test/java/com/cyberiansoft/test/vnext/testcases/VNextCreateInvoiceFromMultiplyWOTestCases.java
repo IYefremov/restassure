@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
@@ -18,7 +17,6 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 	
 	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 	final private String testVIN = "1FMCU0DG4BK830800";
-	ArrayList<String> workOrders = new ArrayList<>();
 	
 	
 	@Test(testName= "Test Case 65591:Verify user can create Invoice from multiply WO", 
@@ -35,7 +33,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			customersscreen.selectCustomer(testcustomer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
-			AppiumUtils.clickHardwareBackButton();
+			vehicleinfoscreen.clickScreenForwardButton();
 			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
 			vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
@@ -89,7 +87,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			customersscreen.selectCustomer(customer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
-			AppiumUtils.clickHardwareBackButton();
+			vehicleinfoscreen.clickScreenForwardButton();
 			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
 			vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
@@ -144,7 +142,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 				customersscreen.selectCustomer(customer);
 				VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 				vehicleinfoscreen.setVIN(testVIN);
-				AppiumUtils.clickHardwareBackButton();
+				vehicleinfoscreen.clickScreenForwardButton();
 				VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
 				vehicleVINHistoryScreen.clickBackButton();
 				workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
@@ -203,9 +201,9 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			customersscreen.selectCustomer(customer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
-			AppiumUtils.clickHardwareBackButton();
-            VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
-            vehicleVINHistoryScreen.clickBackButton();
+			vehicleinfoscreen.clickScreenForwardButton();
+			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
+			vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
@@ -260,6 +258,9 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			customersscreen.selectCustomer(testcustomer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
+			vehicleinfoscreen.clickScreenForwardButton();
+			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
+			vehicleVINHistoryScreen.clickBackButton();
 			vehicleinfoscreen.swipeScreenLeft();
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 			servicesscreen.switchToAvalableServicesView();
@@ -312,6 +313,9 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			customersscreen.selectCustomer(testcustomers[i]);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(testVIN);
+			vehicleinfoscreen.clickScreenForwardButton();
+			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
+			vehicleVINHistoryScreen.clickBackButton();
 			vehicleinfoscreen.swipeScreenLeft();
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 			servicesscreen.selectService(serviceName);

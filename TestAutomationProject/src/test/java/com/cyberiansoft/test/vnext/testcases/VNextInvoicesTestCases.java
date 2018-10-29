@@ -340,7 +340,9 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextVehicleInfoScreen vehicleinfoscreen = homescreen.openCreateWOWizard(testcustomer);
 		vehicleinfoscreen.setVIN(VIN);
-		
+		vehicleinfoscreen.clickScreenForwardButton();
+		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
+		vehicleVINHistoryScreen.clickBackButton();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.selectService(moneyservices);
@@ -369,6 +371,9 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextVehicleInfoScreen vehicleinfoscreen = homescreen.openCreateWOWizard(testcustomer);
 		vehicleinfoscreen.setVIN(VIN);
+		vehicleinfoscreen.clickScreenForwardButton();
+		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
+		vehicleVINHistoryScreen.clickBackButton();
 		final String wonumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);

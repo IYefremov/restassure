@@ -10,7 +10,9 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.vnext.apiutils.VNextAPIUtils;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -35,13 +37,24 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
+
+	private List<InspectionDTO> inspectionDTOs = new ArrayList<>();
 	
 	@BeforeClass(description="Team Inspections Test Cases")
-	public void beforeClass() {
+	public void beforeClass() throws Exception {
+		inspectionDTOs = VNextAPIUtils.getInstance().generateInspections("team-base-inspection-data1.json",
+				InspectionTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
+				appLicenseEntity, 30
+		);
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
+		statusScreen.updateMainDB();
+
 	}
 	
 	@BeforeMethod(description="Send all messages")
@@ -107,18 +120,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
 		final String vinnumber = "TEST";
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		customersscreen.switchToRetailMode();
-		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		vehicleinfoscreen.setVIN(vinnumber);
-		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-		
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
+		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.switchToTeamInspectionsView();
 		Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
@@ -474,7 +477,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
-		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);;
+		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		
 		vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspnumber);
 		vehicleinfoscreen.setVIN(newVIN);
@@ -711,20 +714,28 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.clickBackButton();
 	}
 	
-	public String createSimpleInspection(AppCustomer inspcustomer, InspectionTypes insptype, String vinnumber) {
+	private String createSimpleInspection(AppCustomer inspcustomer, InspectionTypes insptype, String vinnumber) {
+
+		String inspnumber = "";
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		inspectionscreen.switchToMyInspectionsView();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(inspcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-		insptypeslist.selectInspectionType(insptype);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		vehicleinfoscreen.setVIN(vinnumber);
-		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		
-		vehicleinfoscreen.saveInspectionViaMenu();
+		if ((insptype.equals(InspectionTypes.O_KRAMAR) & (inspectionDTOs.size() > 0))) {
+			InspectionDTO inspectionDTO = inspectionDTOs.remove(0);
+			inspnumber = "E-" + appLicenseEntity + "-0" + inspectionDTO.getLocalNo();
+		} else {
+			inspectionscreen.switchToMyInspectionsView();
+			VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+			customersscreen.switchToWholesaleMode();
+			customersscreen.selectCustomer(inspcustomer);
+			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+			insptypeslist.selectInspectionType(insptype);
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(vinnumber);
+			inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+
+			vehicleinfoscreen.saveInspectionViaMenu();
+		}
 		return inspnumber;
 	}
 
