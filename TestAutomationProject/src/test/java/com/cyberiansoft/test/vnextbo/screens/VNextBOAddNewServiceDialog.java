@@ -78,14 +78,17 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 		super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public boolean isNewServicePopupDisplayed() {
         try {
-            wait.until(ExpectedConditions.visibilityOf(newServicePopupDisplayed));
+            return wait.until(ExpectedConditions.visibilityOf(newServicePopupDisplayed)).isDisplayed();
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
     }
-	
-	public VNexBOServicesWebPage addNewService(String servicename, String servicetype, String servicedesc, String servicepricetype, String serviceprice) {
+
+    public VNexBOServicesWebPage addNewService(String servicename, String servicetype, String servicedesc, String servicepricetype, String serviceprice) {
 		setServiceName(servicename);
 		selectServiceType(servicetype);
 		setServiceDescription(servicedesc);
@@ -117,8 +120,8 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 	
 	public VNextBOAddNewServiceDialog setServiceName(String servicename) {
 		wait.until(ExpectedConditions.elementToBeClickable(servicenamefld.getWrappedElement()));
-        servicenamefld.clearAndType(servicename);
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        clearAndType(servicenamefld.getWrappedElement(), servicename);
+        return this;
 	}
 	
 	public String getServiceName() {
@@ -136,14 +139,14 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
                 .findElement(By.xpath("//ul[@id='popup-services-type_listbox']/li/span[text()='" + servicetype + "']"))))
                 .click();
 		waitABit(500);
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        return this;
     }
 	
 	public VNextBOAddNewServiceDialog setServiceDescription(String servicedesc) {
 	    wait.until(ExpectedConditions.elementToBeClickable(servicedescfld.getWrappedElement()));
 	    servicedescfld.clearAndType(servicedesc);
 	    waitABit(500);
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        return this;
     }
 	
 	public String getServiceDescription() {
@@ -162,7 +165,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         } catch (Exception ignored) {
             waitABit(500);
         }
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        return this;
     }
 	
 	public boolean isServicePriceTypeVisible() {
@@ -181,7 +184,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         setAttributeWithJS(servicePriceTypingField, "aria-valuenow", servicepricevalue);
         setAttributeWithJS(priceTypeDropDown, "aria-expanded", "false");
         waitABit(500);
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        return this;
     }
 
 	public VNextBOAddNewServiceDialog setServiceLaborRate(String laborRateValue) {
@@ -190,7 +193,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         laborRateTypingField.sendKeys(laborRateValue);
         setAttributeWithJS(laborRateTypingField, "aria-valuenow", laborRateValue);
         waitABit(500);
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        return this;
     }
 
 	public VNextBOAddNewServiceDialog setServiceDefaultLaborTime(String defaultLaborTime) {
@@ -199,7 +202,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         defaultLaborTimeField.sendKeys(defaultLaborTime);
         setAttributeWithJS(defaultLaborTimeField, "aria-valuenow", defaultLaborTime);
         waitABit(500);
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        return this;
     }
 
     public VNextBOAddNewServiceDialog checkUseLaborTimesCheckbox() {
@@ -213,7 +216,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
             e.printStackTrace();
         }
 
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        return this;
     }
 
     public VNextBOAddNewServiceDialog setServicePercentageValue(String servicepercentagevalue) {
@@ -223,7 +226,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 		pricepercentagefld.clear();
 		waitLong.until(ExpectedConditions.elementToBeClickable(servicepercentagefld.getWrappedElement()));
 		servicepercentagefld.clearAndType(servicepercentagevalue);
-        return PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+        return this;
     }
 	
 	public WebElement getServicePricePercentageValueTxtField() {
@@ -249,7 +252,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(newservicepopup.findElement(serviceaddbtnxpath))).click();
         } catch (Exception e) {
-            Assert.fail("Tha \"Add service\" button has not been clicked!");
+            Assert.fail("Tha \"Add service\" button has not been clicked!", e);
         }
     }
 

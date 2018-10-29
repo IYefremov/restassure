@@ -3,26 +3,31 @@ package com.cyberiansoft.test.vnextbo.testcases;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
+import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOSmokeData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.email.EmailUtils;
 import com.cyberiansoft.test.email.emaildata.EmailFolder;
 import com.cyberiansoft.test.email.emaildata.EmailHost;
+import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
-import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
-import com.cyberiansoft.test.vnextbo.utils.VNextBOErrorMessages;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import java.util.UUID;
+
+import static com.cyberiansoft.test.vnextbo.utils.WebConstants.VNextBOErrorMessages.*;
 
 public class VNextBOSmokeTestCases extends BaseTestCase {
 
@@ -33,16 +38,16 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-	String usermail = "";
-	final String confirmpsw = "111111";
-	ArrayList<String> userslist = new ArrayList<String>();
-	
-	//final String userFromEmail = "ReconPro@cyberiansoft.com";
-	final String userFromEmail = "Repair360-qc@cyberianconcepts.com";
+	private String userMail = "";
+	private final String confirmpsw = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+	private ArrayList<String> userslist = new ArrayList<>();
+
+    final String userFromEmail = "ReconPro@cyberiansoft.com";
+//	final String userFromEmail = "Repair360-qc@cyberianconcepts.com";
 	
 	@BeforeMethod
 	public void BackOfficeLogin() {
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
+        BrowserType browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
         try {
             DriverBuilder.getInstance().setDriver(browserType);
         } catch (WebDriverException e) {
@@ -61,63 +66,47 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		if (headerpanel.logOutLinkExists())
 			headerpanel.userLogout();		
 	}
-	
-	@AfterSuite
-	public void clearUsers() throws IOException {
-		if (userslist.size() > 0)
-			for (String usermails : userslist)
-				VNextWebServicesUtils.deleteUserByMail(usermails);	
-	}
-	
-	@Test(description = "Test Case 43038:vNext: create user without Web access")
-	public void testCreateUserWithoutWebAccess() {
-		
-		final String firstname = "TestTech";
-		final String lastname = "QA";
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		final String userphone = "12345";
-		
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCreateUserWithoutWebAccess(String rowID, String description, JSONObject testData) {
+
+        VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
+
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		final String usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userMail = data.getUserMailPrefix() + RandomStringUtils.randomAlphanumeric(5) + data.getUserMailPostbox();
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(firstname, lastname, usermail, userphone);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		userslist.add(usermail);
+		adduserdialog.createNewUser(data.getFirstName(), data.getLastName(), userMail, data.getUserPhone());
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		userslist.add(userMail);
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
 	}
 	
 	@Test(description = "Test Case 43046:vNext: create user with Web access")
-	public void testCreateUserWithWebAccess() throws Exception {
-		
-		final String firstname = "TestTech";
-		final String lastname = "QA";
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		final String userphone = "12345";
-		
-		
+	public void testCreateUserWithWebAccess(String rowID, String description, JSONObject testData) throws Exception {
+
+        VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
+
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userMail = data.getUserMailPrefix() + RandomStringUtils.randomAlphanumeric(5) + data.getUserMailPostbox();
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		userslist.add(usermail);
-		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
+		adduserdialog.createNewUser(data.getFirstName(), data.getLastName(), userMail, data.getUserPhone(), true);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		userslist.add(userMail);
+		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(userMail));
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userMail,
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubject("ReconPro vNext Dev: REGISTRATION")
@@ -138,36 +127,40 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 				webdriver, VNextBOConfirmPasswordWebPage.class);
 		loginpage = confirmationpswpage.confirmNewUserPassword(confirmpsw);
 
-		loginpage.userLogin(usermail, confirmpsw);
+		loginpage.userLogin(userMail, confirmpsw);
 		leftmenu.selectServicesMenu();
 		headerpanel.userLogout();
 	}
 	
 	@Test(description = "Test Case 41403:vNext: Verify user can change password using link from the email")
 	public void testVerifyUserCanChangePasswordUsingLinkFromTheEmail() throws Exception {
-		
+		//todo start here
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		VNextBOForgotPasswordWebPage forgotpswpage = loginpage.clickForgotPasswordLink();
-		loginpage = forgotpswpage.sendConfirmationMail(usermail);
+        userMail = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+        NadaEMailService nada = new NadaEMailService();
+        nada.setEmailId(userMail);
+        loginpage = forgotpswpage.sendConfirmationMail(userMail);
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+                new NadaEMailService.MailSearchParametersBuilder()
+                        .withSubject("ReconPro vNext Dev: PASSWORD RESET");
+        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String linkText = "reset your password";
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("ReconPro vNext Dev: PASSWORD RESET")
-				.unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText, "https", "'>");
+        String confirmationUrl =  allMatches.get(0);
+        Assert.assertTrue(!confirmationUrl.isEmpty(), "The requested password reset link is not displayed in the letter");
+        nada.deleteMessageWithSubject("ReconPro vNext Dev: PASSWORD RESET");
 
-		String confirmationurl = confirmationurl = mailmessage.substring(mailmessage.indexOf("'")+1, mailmessage.lastIndexOf("'"));
-
-		loginpage.waitABit(6000);
-		webdriver.navigate().to(confirmationurl);
-		loginpage.waitABit(6000);
-		webdriver.get(confirmationurl);
+		loginpage.waitABit(2000);
+		webdriver.navigate().to(confirmationUrl);
+		loginpage.waitABit(2000);
+		webdriver.get(confirmationUrl);
 		VNextBOConfirmPasswordWebPage confirmationpswpage = PageFactory.initElements(
 				webdriver, VNextBOConfirmPasswordWebPage.class);
 		loginpage = confirmationpswpage.confirmNewUserPassword(confirmpsw);
-		loginpage.userLogin(usermail, confirmpsw);
+		loginpage.userLogin(userMail, confirmpsw);
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		leftmenu.selectUsersMenu();
@@ -183,15 +176,15 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		VNextBOForgotPasswordWebPage forgotpswpage = loginpage.clickForgotPasswordLink();
-		loginpage = forgotpswpage.sendConfirmationMail(usermail);
+		loginpage = forgotpswpage.sendConfirmationMail(userMail);
 		
-		loginpage.userLogin(usermail, confirmpsw);
+		loginpage.userLogin(userMail, confirmpsw);
 		
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		leftmenu.selectUsersMenu();
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userMail,
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubject("ReconPro vNext Dev: PASSWORD RESET")
@@ -224,9 +217,9 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		VNextBOForgotPasswordWebPage forgotpswpage = loginpage.clickForgotPasswordLink();
-		loginpage = forgotpswpage.sendConfirmationMail(usermail);
+		loginpage = forgotpswpage.sendConfirmationMail(userMail);
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
+		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userMail,
 				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubject("ReconPro vNext Dev: PASSWORD RESET")
@@ -243,24 +236,23 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 				webdriver, VNextBOConfirmPasswordWebPage.class);
 		confirmationpswpage.setUserPasswordFieldValue(confirmpsw);
 		confirmationpswpage.clickSubmitButton();
-		Assert.assertEquals(confirmationpswpage.geterrorMessageValue(), "Please confirm password!");
+		Assert.assertEquals(confirmationpswpage.getErrorMessageValue(), "Please confirm password!");
 		confirmationpswpage.setUserConfirmPasswordFieldValue("222222");
 		confirmationpswpage.clickSubmitButton();
-		Assert.assertEquals(confirmationpswpage.geterrorMessageValue(), "Passwords do not match!");
+		Assert.assertEquals(confirmationpswpage.getErrorMessageValue(), "Passwords do not match!");
 	}
 	
 	@Test(description = "Test Case 41411:vNext: Verify valiation messages on request pasword reset page")
-	@Parameters({ "user.name", "user.psw" })
 	public void testVerifyValidationMessagesOnRequestPasswordResetPage() {
 		
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		VNextBOForgotPasswordWebPage forgotpswpage = loginpage.clickForgotPasswordLink();
-		forgotpswpage.clickSubmitButton();
-		Assert.assertEquals(forgotpswpage.geterrorMessageValue(), VNextBOErrorMessages.EMAIL_IS_INVALID);
-		forgotpswpage.setConfirmationMailFieldValue(confirmpsw);
-		forgotpswpage.clickSubmitButton();
-		Assert.assertEquals(forgotpswpage.geterrorMessageValue(), VNextBOErrorMessages.EMAIL_IS_INVALID);
+		VNextBOForgotPasswordWebPage forgotPasswordPage = loginpage.clickForgotPasswordLink();
+		forgotPasswordPage.clickSubmitButton();
+		Assert.assertEquals(forgotPasswordPage.getErrorMessageValue(), EMAIL_IS_INVALID);
+		forgotPasswordPage.setConfirmationMailFieldValue(confirmpsw);
+		forgotPasswordPage.clickSubmitButton();
+		Assert.assertEquals(forgotPasswordPage.getErrorMessageValue(), EMAIL_IS_INVALID);
 	}
 	
 	@Test(description = "Test Case 41408:vNext:Verify 'Forgot password' page is opened on click 'Forgot password' link")
@@ -272,278 +264,288 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNextBOForgotPasswordWebPage forgotpswpage = loginpage.clickForgotPasswordLink();
 		Assert.assertTrue(forgotpswpage.isConfirmationMailFieldDisplayed());
 		forgotpswpage.clickSubmitButton();
-		Assert.assertEquals(forgotpswpage.geterrorMessageValue(), VNextBOErrorMessages.EMAIL_IS_INVALID);
+		Assert.assertEquals(forgotpswpage.getErrorMessageValue(), EMAIL_IS_INVALID);
 		
 	}
 
-	@Test(description = "Test Case 43165:vNext: Edit not confirmed user with Web access")
-	public void testEditNotConfirmedUserWithWebAccess() {
-		
-		final String firstname = "TestTech";
-		final String useredited = " edited";
-		final String lastname = "QA";
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		final String userphone = "12345";
-		final String usernewphone = "3456789";
-		
-		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEditNotConfirmedUserWithWebAccess(String rowID, String description, JSONObject testData) {
+
+        VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
+
+        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userMail = data.getUserMailPrefix() + RandomStringUtils.randomAlphanumeric(5) + data.getUserMailPostbox();
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		userslist.add(usermail);
-		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
-		adduserdialog = userswabpage.clickEditButtonForUser(usermail);
+		adduserdialog.createNewUser(data.getFirstName(), data.getLastName(), userMail, data.getUserPhone(), true);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		userslist.add(userMail);
+		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(userMail));
+		adduserdialog = userswabpage.clickEditButtonForUser(userMail);
 		Assert.assertTrue(adduserdialog.isEmailFieldDisabled());
-		adduserdialog.setUserFirstName(firstname + useredited);
-		adduserdialog.setUserLastName(lastname + useredited);
+		adduserdialog.setUserFirstName(data.getFirstName() + data.getUserEdited());
+		adduserdialog.setUserLastName(data.getLastName() + data.getUserEdited());
 		adduserdialog.clickSaveButtonAndWait();
 		
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		Assert.assertEquals(userswabpage.getUserName(usermail), firstname + useredited + " " + lastname + useredited);
-		adduserdialog = userswabpage.clickEditButtonForUser(usermail);
-		adduserdialog.setUserPhone(usernewphone);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		Assert.assertEquals(userswabpage.getUserName(userMail), data.getFirstName() + data.getUserEdited() + " " + data.getLastName() + data.getUserEdited());
+		adduserdialog = userswabpage.clickEditButtonForUser(userMail);
+		adduserdialog.setUserPhone(data.getUserNewPhone());
 		final String userphonecountrycode = adduserdialog.getSelectedUserPhoneCountryCode();
 		adduserdialog.unselectWebAccessCheckbox();
 		adduserdialog.clickSaveButtonAndWait();
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		Assert.assertEquals(userswabpage.getUserPhone(usermail), userphonecountrycode + usernewphone);
-		Assert.assertFalse(userswabpage.isRedWarningTrianglePresentForUser(usermail));		
-		Assert.assertEquals(userswabpage.getUserName(usermail), firstname + useredited + " " + lastname + useredited);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		Assert.assertEquals(userswabpage.getUserPhone(userMail), userphonecountrycode + data.getUserNewPhone());
+		Assert.assertFalse(userswabpage.isRedWarningTrianglePresentForUser(userMail));
+		Assert.assertEquals(userswabpage.getUserName(userMail), data.getFirstName() + data.getUserEdited() + " " + data.getLastName() + data.getUserEdited());
 		
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
 	}
 	
-	@Test(description = "Test Case 43371:vNext: Edit user without Web access")
-	public void testEditUserWithoutWebAccess() {
-		
-		final String firstname = "TestTech";
-		final String useredited = " edited";
-		final String lastname = "QA";
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		final String userphone = "12345";
-		final String usernewphone = "3456789";
-		
-		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEditUserWithoutWebAccess(String rowID, String description, JSONObject testData) {
+
+        VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
+        
+        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userMail = data.getUserMailPrefix() + RandomStringUtils.randomAlphanumeric(5) + data.getUserMailPostbox();
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, false);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		userslist.add(usermail);
-		Assert.assertFalse(userswabpage.isRedWarningTrianglePresentForUser(usermail));
-		adduserdialog = userswabpage.clickEditButtonForUser(usermail);
+		adduserdialog.createNewUser(data.getFirstName(), data.getLastName(), userMail, data.getUserPhone(), false);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		userslist.add(userMail);
+		Assert.assertFalse(userswabpage.isRedWarningTrianglePresentForUser(userMail));
+		adduserdialog = userswabpage.clickEditButtonForUser(userMail);
 		Assert.assertTrue(adduserdialog.isEmailFieldDisabled());
-		adduserdialog.setUserFirstName(firstname + useredited);
-		adduserdialog.setUserLastName(lastname + useredited);
+		adduserdialog.setUserFirstName(data.getFirstName() + data.getUserEdited());
+		adduserdialog.setUserLastName(data.getLastName() + data.getUserEdited());
 		adduserdialog.clickSaveButtonAndWait();
 		
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		Assert.assertEquals(userswabpage.getUserName(usermail), firstname + useredited + " " + lastname + useredited);
-		adduserdialog = userswabpage.clickEditButtonForUser(usermail);
-		adduserdialog.setUserPhone(usernewphone);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		Assert.assertEquals(userswabpage.getUserName(userMail), data.getFirstName() + data.getUserEdited() + " " + data.getLastName() + data.getUserEdited());
+		adduserdialog = userswabpage.clickEditButtonForUser(userMail);
+		adduserdialog.setUserPhone(data.getUserNewPhone());
 		final String userphonecountrycode = adduserdialog.getSelectedUserPhoneCountryCode();
 		adduserdialog.clickSaveButtonAndWait();
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		Assert.assertEquals(userswabpage.getUserPhone(usermail), userphonecountrycode + usernewphone);
-		Assert.assertFalse(userswabpage.isRedWarningTrianglePresentForUser(usermail));		
-		Assert.assertEquals(userswabpage.getUserName(usermail), firstname + useredited + " " + lastname + useredited);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		Assert.assertEquals(userswabpage.getUserPhone(userMail), userphonecountrycode + data.getUserNewPhone());
+		Assert.assertFalse(userswabpage.isRedWarningTrianglePresentForUser(userMail));
+		Assert.assertEquals(userswabpage.getUserName(userMail), data.getFirstName() + data.getUserEdited() + " " + data.getLastName() + data.getUserEdited());
 		
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
 	}
 	
-	@Test(description = "Test Case 43372:vNext: check posibility to resend registration email")
-	public void testCheckPosibilityToResendRegistrationEmail() throws Exception {
-		
-		final String firstname = "TestTech";
-		final String lastname = "QA";
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		final String userphone = "12345";
-		
-		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCheckPossibilityToResendRegistrationEmail(String rowID, String description, JSONObject testData) throws Exception {
+
+        VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
+
+        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
+		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(),
+                VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
-		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		userslist.add(usermail);
-		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
-		
+		VNexBOUsersWebPage userswebpage = leftmenu.selectUsersMenu();
+		userMail = data.getUserMailPrefix() + RandomStringUtils.randomAlphanumeric(7) + data.getUserMailPostbox();
+		VNexBOAddNewUserDialog adduserdialog = userswebpage.clickAddUserButton();
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("ReconPro vNext Dev: REGISTRATION")
-				.unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+		NadaEMailService nada = new NadaEMailService();
+        String emailId = nada.getEmailId();
+        adduserdialog.createNewUser(data.getFirstName(), data.getLastName(), emailId, data.getUserPhone(), true);
+		Assert.assertTrue(userswebpage.findUserInTableByUserEmail(emailId));
+		userslist.add(emailId);
+		Assert.assertTrue(userswebpage.isRedWarningTrianglePresentForUser(emailId));
 
-		Assert.assertTrue(mailmessage.length() > 3);
-		userswabpage.clickUserResendButtonAndDisagree(usermail);
+		// verify the letter is sent
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+                new NadaEMailService.MailSearchParametersBuilder()
+                        .withSubject("ReconPro vNext Dev: REGISTRATION");
+        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String linkText = "Click here";
+        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
+        String newbourl =  allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
 
-		emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("ReconPro vNext Dev: REGISTRATION")
-				.unreadOnlyMessages(true).maxMessagesToSearch(5);
-		mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+		Assert.assertTrue(!newbourl.isEmpty(), "The new BO url is not displayed in the letter");
+        nada.deleteMessageWithSubject("ReconPro vNext Dev: REGISTRATION");
+        int numOfMessages = mailmessage.length();
 
-		Assert.assertFalse(mailmessage.length() > 3);
-		userswabpage.clickUserResendButtonAndAgree(usermail);
+        // Click the resend letter button and cancel
+		userswebpage.clickUserResendButtonAndDisagree(emailId);
+        try {
+            mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        } catch (NullPointerException ignored) {}
+        int updatedNumOfMessages = mailmessage.length();
+        System.out.println(updatedNumOfMessages);
+        Assert.assertEquals(numOfMessages, updatedNumOfMessages, "The number of messages differs");
 
-		emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("ReconPro vNext Dev: REGISTRATION")
-				.unreadOnlyMessages(true).maxMessagesToSearch(5);
-		mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+        // Verify email is sent after clicking the Resend button
+        userswebpage.clickUserResendButtonAndAgree(emailId);
+        mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
 
-		Assert.assertTrue(mailmessage.length() > 3);
+        allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
+        newbourl =  allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
+
+        Assert.assertTrue(!newbourl.isEmpty(), "The new BO url is not displayed in the letter");
+        nada.deleteMessageWithSubject("ReconPro vNext Dev: REGISTRATION");
 	}
-	
-	@Test(description = "Test Case 43376:vNext: check validation errors on the Create new user dialog")
-	public void testCheckValidationErrorsOnTheCreateNewUserDialog() {
-		
-		final String firstname = "TestTech";
-		final String lastname = "QA";
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		
-		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCheckValidationErrorsOnTheCreateNewUserDialog(String rowID, String description, JSONObject testData) {
+
+        VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
+
+        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userMail = data.getUserMailPrefix() + RandomStringUtils.randomAlphanumeric(5) + data.getUserMailPostbox();
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.clickSaveButton();
-		Assert.assertTrue(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.FIRST_NAME_IS_REQUIRED));
-		Assert.assertTrue(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.LAST_NAME_IS_REQUIRED));
-		Assert.assertTrue(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.EMAIL_IS_REQUIRED));
+		Assert.assertTrue(adduserdialog.isErrorMessageShown(FIRST_NAME_IS_REQUIRED.getErrorMessage()));
+		Assert.assertTrue(adduserdialog.isErrorMessageShown(LAST_NAME_IS_REQUIRED.getErrorMessage()));
+		Assert.assertTrue(adduserdialog.isErrorMessageShown(EMAIL_IS_REQUIRED.getErrorMessage()));
 		
-		adduserdialog.setUserFirstName(firstname);
+		adduserdialog.setUserFirstName(data.getFirstName());
 		adduserdialog.clickSaveButton();
-		Assert.assertFalse(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.FIRST_NAME_IS_REQUIRED));
-		Assert.assertTrue(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.LAST_NAME_IS_REQUIRED));
-		Assert.assertTrue(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.EMAIL_IS_REQUIRED));
+		Assert.assertFalse(adduserdialog.isErrorMessageShown(FIRST_NAME_IS_REQUIRED.getErrorMessage()));
+		Assert.assertTrue(adduserdialog.isErrorMessageShown(LAST_NAME_IS_REQUIRED.getErrorMessage()));
+		Assert.assertTrue(adduserdialog.isErrorMessageShown(EMAIL_IS_REQUIRED.getErrorMessage()));
 		
-		adduserdialog.setUserLastName(lastname);
+		adduserdialog.setUserLastName(data.getLastName());
 		adduserdialog.clickSaveButton();
-		Assert.assertFalse(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.FIRST_NAME_IS_REQUIRED));
-		Assert.assertFalse(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.LAST_NAME_IS_REQUIRED));
-		Assert.assertTrue(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.EMAIL_IS_REQUIRED));
+		Assert.assertFalse(adduserdialog.isErrorMessageShown(FIRST_NAME_IS_REQUIRED.getErrorMessage()));
+		Assert.assertFalse(adduserdialog.isErrorMessageShown(LAST_NAME_IS_REQUIRED.getErrorMessage()));
+		Assert.assertTrue(adduserdialog.isErrorMessageShown(EMAIL_IS_REQUIRED.getErrorMessage()));
 		
-		adduserdialog.setUserEmail(usermail);
+		adduserdialog.setUserEmail(userMail);
 		adduserdialog.clickSaveButtonAndWait();
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		userslist.add(usermail);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		userslist.add(userMail);
 	}
 	
-	@Test(description = "Test Case 43377:vNext: check validation errors on the set password page")
-	public void testCheckValidationErrorsOnTheSetPasswordPage() throws Exception {
-		
-		final String firstname = "TestTech";
-		final String lastname = "QA";
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		final String userphone = "12345";
-		final String shortpsw = "11";
-		
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCheckValidationErrorsOnTheSetPasswordPage(String rowID, String description, JSONObject testData) throws Exception {
+
+        VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
+
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
-		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		userslist.add(usermail);
-		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
+		VNexBOUsersWebPage userswebpage = leftmenu.selectUsersMenu();
+        VNexBOAddNewUserDialog adduserdialog = userswebpage.clickAddUserButton();
+        NadaEMailService nada = new NadaEMailService();
+        String emailId = nada.getEmailId();
+        String firstName = data.getFirstName();
+        adduserdialog.createNewUser(firstName, data.getLastName(), emailId, data.getUserPhone(), true);
+        Assert.assertTrue(userswebpage.findUserBySearch(firstName, emailId));
+        Assert.assertTrue(userswebpage.isRedWarningTrianglePresentForUser(emailId));
 
-		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, usermail,
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubject("ReconPro vNext Dev: REGISTRATION")
-				.unreadOnlyMessages(true).maxMessagesToSearch(5);
-		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
-		String confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
-		
+//todo bug 73134 - fix after bug fixing
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+                new NadaEMailService.MailSearchParametersBuilder()
+                        .withSubject("ReconPro vNext Dev: REGISTRATION");
+        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String linkText = "Click here";
+//        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
+
+        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText, "https", "\" style");
+        String confirmationUrl =  allMatches.get(0);
+
+//        String confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
+        System.out.println(mailmessage);
+        System.out.println("URL: "+confirmationUrl);
+
+
+        Assert.assertTrue(!confirmationUrl.isEmpty(), "The new BO url is not displayed in the letter");
+        nada.deleteMessageWithSubject("ReconPro vNext Dev: REGISTRATION");
+
+
+
+
+
+//		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userMail,
+//				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+//		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
+//				.withSubject("ReconPro vNext Dev: REGISTRATION")
+//				.unreadOnlyMessages(true).maxMessagesToSearch(5);
+//		String mailmessage = emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
+//		String confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
+
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
-		headerpanel.userLogout();
+//		headerpanel.userLogout();
 		headerpanel.waitABit(2000);
-		webdriver.navigate().to(confirmationurl);
+		webdriver.navigate().to(confirmationUrl);
 		headerpanel.waitABit(4000);
-		webdriver.get(confirmationurl);
+		webdriver.get(confirmationUrl);
 		VNextBOConfirmPasswordWebPage confirmationpswpage = PageFactory.initElements(
 				webdriver, VNextBOConfirmPasswordWebPage.class);
-		
+
 		confirmationpswpage.clickSubmitButton();
-		Assert.assertEquals(confirmationpswpage.geterrorMessageValue(), VNextBOErrorMessages.PLEASE_ENTER_PASSWORD);
-		confirmationpswpage.setUserPasswordFieldValue(shortpsw);
+		Assert.assertEquals(confirmationpswpage.getErrorMessageValue(), PLEASE_ENTER_PASSWORD.getErrorMessage());
+		confirmationpswpage.setUserPasswordFieldValue(data.getShortPassword());
 		confirmationpswpage.clickSubmitButton();
-		Assert.assertEquals(confirmationpswpage.geterrorMessageValue(), VNextBOErrorMessages.PASSWORD_SHOULD_BE_LONGER);
+		Assert.assertEquals(confirmationpswpage.getErrorMessageValue(), PASSWORD_SHOULD_BE_LONGER.getErrorMessage());
 		confirmationpswpage.setUserPasswordFieldValue(confirmpsw);
 		confirmationpswpage.clickSubmitButton();
-		Assert.assertEquals(confirmationpswpage.geterrorMessageValue(), VNextBOErrorMessages.PLEASE_CONFIRM_PASSWORD);
+		Assert.assertEquals(confirmationpswpage.getErrorMessageValue(), PLEASE_CONFIRM_PASSWORD.getErrorMessage());
 		loginpage = confirmationpswpage.confirmNewUserPassword(confirmpsw);
-		
-		loginpage.userLogin(usermail, confirmpsw);
-		userswabpage = leftmenu.selectUsersMenu();
+
+		loginpage.userLogin(userMail, confirmpsw);
+		leftmenu.selectUsersMenu();
 		headerpanel.userLogout();
 	}
 	
-	@Test(description = "Test Case 43373:vNext: create user with existing Email address")
-	public void testCreateUserWithExistingEmailAddress() {
-		
-		final String firstname = "TestTech";
-		final String lastname = "QA";
-		final String usermailprefix = "test.cyberiansoft+";
-		final String usermailpostbox = "@gmail.com";
-		final String userphone = "12345";
-		
-		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCreateUserWithExistingEmailAddress(String rowID, String description, JSONObject testData) {
+
+        VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
+
+        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		usermail = usermailprefix + UUID.randomUUID() + usermailpostbox;
+		userMail = data.getUserMailPrefix() + RandomStringUtils.randomAlphanumeric(5) + data.getUserMailPostbox();
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.createNewUser(firstname, lastname, usermail, userphone, true);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
-		userslist.add(usermail);
-		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(usermail));
+		adduserdialog.createNewUser(data.getFirstName(), data.getLastName(), userMail, data.getUserPhone(), true);
+		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		userslist.add(userMail);
+		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(userMail));
 		adduserdialog = userswabpage.clickAddUserButton();
-		adduserdialog.setUserFirstName(firstname);
-		adduserdialog.setUserLastName(lastname);
-		adduserdialog.setUserEmail(usermail);
+		adduserdialog.setUserFirstName(data.getFirstName());
+		adduserdialog.setUserLastName(data.getLastName());
+		adduserdialog.setUserEmail(userMail);
 		adduserdialog.selectWebAccessCheckbox();
 		adduserdialog.clickSaveButton();
-		Assert.assertFalse(adduserdialog.isErrorMessageShown(VNextBOErrorMessages.FIRST_NAME_IS_REQUIRED));
-		adduserdialog.isErrorMessageShown("E-mail " + usermail + " is occupied");
-		userswabpage = adduserdialog.closeadduserDialog();
+		Assert.assertFalse(adduserdialog.isErrorMessageShown(FIRST_NAME_IS_REQUIRED.getErrorMessage()));
+		adduserdialog.isErrorMessageShown("E-mail " + userMail + " is occupied");
+		adduserdialog.closeadduserDialog();
 	}
+
+    //        webdriver = WebdriverInicializator //todo use in other TC to approve the link
+//                .getInstance()
+//                .initWebDriver(BaseUtils
+//                .getBrowserType(VNextBOConfigInfo
+//                        .getInstance()
+//                        .getDefaultBrowser()));
+//        WebDriverUtils.webdriverGotoWebPage(newbourl);
 }

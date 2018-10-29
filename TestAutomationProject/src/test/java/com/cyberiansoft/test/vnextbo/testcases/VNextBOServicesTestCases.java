@@ -319,11 +319,11 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 .selectServicesMenu()
                 .advancedSearchServiceByServiceType(data.getMatrixServiceType());
         String firstServiceNameInTableRow = servicespage.getFirstServiceNameInTableRow();
-        VNextBOAddNewServiceDialog addnewservicedialog = servicespage
-                .clickEditServiceByServiceName(firstServiceNameInTableRow);
-		addnewservicedialog.setServiceName(data.getNewMatrixServiceName());
-		servicespage = addnewservicedialog.saveNewService();
-		servicespage.searchServiceByServiceName(data.getNewMatrixServiceName());
+        servicespage
+                .clickEditServiceByServiceName(firstServiceNameInTableRow)
+                .setServiceName(data.getNewMatrixServiceName())
+                .saveNewService()
+                .searchServiceByServiceName(data.getNewMatrixServiceName());
 		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getNewMatrixServiceName()));
 	}
 

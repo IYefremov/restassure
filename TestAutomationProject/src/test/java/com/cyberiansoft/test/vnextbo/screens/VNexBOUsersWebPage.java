@@ -1,11 +1,9 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.VNextWebTable;
+import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -13,9 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.VNextWebTable;
-import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 	
@@ -30,6 +27,9 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//div[@id='pagingPanel']/button[@data-automation-id='usersListPrev']")
 	private WebElement previouspagebtn;
+
+	@FindBy(id = "advSearchUsers-freeText")
+	private WebElement searchField;
 	
 	public VNexBOUsersWebPage(WebDriver driver) {
 		super(driver);
@@ -40,14 +40,15 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public VNexBOAddNewUserDialog clickAddUserButton() {
-		adduserbtn.click();
+		wait.until(ExpectedConditions.elementToBeClickable(adduserbtn)).click();
 		return PageFactory.initElements(
 				driver, VNexBOAddNewUserDialog.class);
 	}
 	
 	public List<WebElement>  getUsersTableRows() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(userstable.getWrappedElement()));
+		waitLong
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOf(userstable.getWrappedElement()));
 		return userstable.getTableRows();
 	}
 	
@@ -60,39 +61,54 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 		WebElement userrow = null;
 		List<WebElement> rows = getUsersTableRows();
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath("./td[" + userstable.getTableColumnIndex("Email") + "]")).getText().equals(usermail)) {
+            if (
+                    wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath("./td[" +
+                            userstable.getTableColumnIndex("Email") + "]"))))
+                    .getText()
+                    .equals(usermail)) {
 				userrow = row;
 				break;
 			}			
 		} 
 		return userrow;
 	}
-	
-	public boolean isUserPresentOnCurrentPageByUserEmail(String usermail) {
-		boolean founded = false;
+
+    public boolean isUserPresentOnCurrentPageByUserEmail(String usermail) {
+		boolean found = false;
+        try {
+            wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(getTableRowWithUserMail(usermail))));
+        } catch (NullPointerException ignored) {}
 		WebElement row = getTableRowWithUserMail(usermail);
 		if (row != null)
-			founded = true;
-		return founded;
+			found = true;
+		return found;
 	}
 	
 	public boolean findUserInTableByUserEmail(String usermail) {
-		boolean founded = false;
+		boolean found = false;
 		boolean nextpage = true;
 		while (nextpage) {
 			if (nextpagebtn.getAttribute("disabled") != null) {
-				founded = isUserPresentOnCurrentPageByUserEmail(usermail);
+				found = isUserPresentOnCurrentPageByUserEmail(usermail);
 				nextpage = false;
 			} else if (!isUserPresentOnCurrentPageByUserEmail(usermail)) {
-				new WebDriverWait(driver, 30)
-				  .until(ExpectedConditions.elementToBeClickable(nextpagebtn)).click();
-				waitABit(1000);
+				wait.until(ExpectedConditions.elementToBeClickable(nextpagebtn));
+				clickWithJS(nextpagebtn);
+				waitABit(2500);
 			} else  {
-				founded = true;
+				found = true;
 				break;
 			}
 		}
-		return founded;
+		return found;
+	}
+
+	public boolean findUserBySearch(String usenFirstName, String userMail) {
+        wait.until(ExpectedConditions.elementToBeClickable(searchField)).click();
+        searchField.sendKeys(usenFirstName);
+        searchField.sendKeys(Keys.ENTER);
+        waitForLoading();
+        return isUserPresentOnCurrentPageByUserEmail(userMail);
 	}
 	
 	public boolean isRedWarningTrianglePresentForUser(String usermail) {

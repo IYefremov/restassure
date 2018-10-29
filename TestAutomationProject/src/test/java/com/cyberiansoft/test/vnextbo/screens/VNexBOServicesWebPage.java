@@ -42,6 +42,8 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//span[@aria-owns='advSearchServices-type_listbox']/span")
 	private WebElement advancedsearchtypefld;
+
+	By editButton = By.xpath("//td[@class='grid__actions']/span[@class='icon-pencil2']");
 	
 	public VNexBOServicesWebPage(WebDriver driver) {
 		super(driver);
@@ -220,15 +222,23 @@ public class VNexBOServicesWebPage extends VNextBOBaseWebPage {
 	
 	public VNextBOAddNewServiceDialog clickEditServiceByServiceName(String servicename) {
 		WebElement tablerow = getTableRowWithServiceByServiceName(servicename);
+        VNextBOAddNewServiceDialog addNewServiceDialog = null;
 		if (tablerow != null) {
-		    Actions actions = new Actions(driver);
+            wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(driver.findElement(editButton)));
+            Actions actions = new Actions(driver);
             actions.moveToElement(tablerow.findElement(By.xpath("./td[@class='grid__actions']")))
                     .click(tablerow.findElement(By.xpath(".//span[@class='icon-pencil2']")))
                     .build()
                     .perform();
+            addNewServiceDialog = PageFactory.initElements(driver, VNextBOAddNewServiceDialog.class);
+            if (!addNewServiceDialog.isNewServicePopupDisplayed()) {
+                System.out.println("Clicked with JS!!!");
+                clickWithJS(tablerow.findElement(By.xpath("//td[@class='grid__actions']/span[@class='icon-pencil2']")));
+            }
         }
-            return PageFactory.initElements(
-				driver, VNextBOAddNewServiceDialog.class);
+            return addNewServiceDialog;
 	}
 	
 	public VNexBOServicesWebPage deleteServiceByServiceName(String servicename) {

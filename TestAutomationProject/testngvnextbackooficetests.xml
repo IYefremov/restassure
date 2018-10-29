@@ -9,7 +9,8 @@
   <parameter name="backofficeold.url" value="https://vnext_dev.cyberianconcepts.com"  />
   <!--<parameter name="backoffice.url" value="https://reconpro-qc.cyberianconcepts.com"  />-->
   <parameter name="backofficedemo.url" value="https://demo.reconpro.net/"  />
-  <parameter name="user.name" value="test.cyberiansoft+su@gmail.com"  />
+  <!--<parameter name="user.name" value="test.cyberiansoft+su@gmail.com"  />-->
+  <parameter name="user.name" value="test.cyberiansoft@gmail.com"  />
   <parameter name="user.psw" value="ZZzz11!!"  />
   <parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"  />
   <parameter name="userdemo.psw" value="111111"  />

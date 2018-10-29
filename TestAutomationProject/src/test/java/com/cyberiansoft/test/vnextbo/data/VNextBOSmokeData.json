@@ -1,0 +1,101 @@
+{
+  "testCheckValidationErrorsOnTheCreateNewUserDialog": [
+    {
+      "rowID": "testCheckValidationErrorsOnTheCreateNewUserDialog.01",
+      "description": "Test Case 43376:vNext: check validation errors on the Create new user dialog",
+      "firstName": "TestTech",
+      "lastName": "QA",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com"
+    }
+  ],
+
+  "testCreateUserWithExistingEmailAddress": [
+    {
+      "rowID": "testCreateUserWithExistingEmailAddress.01",
+      "description": "Test Case 43373:vNext: create user with existing Email address",
+      "firstName": "TestTech",
+      "lastName": "QA",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com",
+      "userPhone": "12345"
+    }
+  ],
+
+  "testCheckPossibilityToResendRegistrationEmail": [
+    {
+      "rowID": "testCheckPossibilityToResendRegistrationEmail.01",
+      "description": "Test Case 43372:vNext: check posibility to resend registration email",
+      "firstName": "TestTech",
+      "lastName": "QA",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com",
+      "userPhone": "12345"
+    }
+  ],
+
+  "testCheckValidationErrorsOnTheSetPasswordPage": [
+    {
+      "rowID": "testCheckValidationErrorsOnTheSetPasswordPage.01",
+      "description": "Test Case 43377:vNext: check validation errors on the set password page",
+      "firstName": "TestTech",
+      "lastName": "QA",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com",
+      "userPhone": "12345",
+      "shortPassword": "11"
+    }
+  ],
+
+  "testCreateUserWithoutWebAccess": [
+    {
+      "rowID": "testCreateUserWithoutWebAccess.01",
+      "description": "Test Case 43038:vNext: create user without Web access",
+      "firstName": "TestTech",
+      "lastName": "QA",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com",
+      "userPhone": "12345"
+    }
+  ],
+
+  "testCreateUserWithWebAccess": [
+    {
+      "rowID": "testCreateUserWithWebAccess.01",
+      "description": "Test Case 43046:vNext: create user with Web access",
+      "firstName": "TestTech",
+      "lastName": "QA",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com",
+      "userPhone": "12345"
+    }
+  ],
+
+  "testEditNotConfirmedUserWithWebAccess": [
+    {
+      "rowID": "testEditNotConfirmedUserWithWebAccess.01",
+      "description": "Test Case 43165:vNext: Edit not confirmed user with Web access",
+      "firstName": "TestTech",
+      "lastName": "QA",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com",
+      "userPhone": "12345",
+      "userEdited": " edited",
+      "userNewPhone": "3456789"
+    }
+  ],
+
+  "testEditUserWithoutWebAccess": [
+    {
+      "rowID": "testEditUserWithoutWebAccess.01",
+      "description": "Test Case 43371:vNext: Edit user without Web access",
+      "firstName": "TestTech",
+      "lastName": "QA",
+      "userMailPrefix": "test.cyberiansoft+",
+      "userMailPostbox": "@gmail.com",
+      "userPhone": "12345",
+      "userEdited": " edited",
+      "userNewPhone": "3456789"
+    }
+  ]
+}

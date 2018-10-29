@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,8 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
+import java.util.concurrent.TimeUnit;
 
 public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	
@@ -35,9 +34,13 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	public VNextBOLoginScreenWebPage sendConfirmationMail(String usermail) {
 		setConfirmationMailFieldValue(usermail);
 		clickSubmitButton();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(alertOKbtn)).click();
-		return PageFactory.initElements(
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(alertOKbtn)).click();
+        } catch (Exception e) {
+            clickWithJS(alertOKbtn);
+        }
+
+        return PageFactory.initElements(
 				driver, VNextBOLoginScreenWebPage.class);
 	}
 	
@@ -53,7 +56,7 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 		submitbtn.click();
 	}
 	
-	public String geterrorMessageValue() {
+	public String getErrorMessageValue() {
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@data-bind, 'confirmEmail.hasError')]/p"))));
 		return driver.findElement(By.xpath("//div[contains(@data-bind, 'confirmEmail.hasError')]/p")).getText();

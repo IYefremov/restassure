@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -99,5 +100,14 @@ public abstract class VNextBOBaseWebPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
                 element, attribute, value);
         wait.until(ExpectedConditions.attributeContains(element, attribute, value));
+    }
+
+    public void clearAndType(WebElement textField, String name) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(textField)).clear();
+        } catch (Exception e) {
+            Assert.fail("The text field has not been displayed", e);
+        }
+        textField.sendKeys(name);
     }
 }

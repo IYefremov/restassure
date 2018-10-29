@@ -103,8 +103,7 @@ public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 	
 	public VNexBOUsersWebPage clickSaveButtonAndWait() {
 		clickSaveButton();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOfElementLocated(By.id("users-form-popup"))); 
+		waitLong.until(ExpectedConditions.invisibilityOfElementLocated(By.id("users-form-popup")));
 		waitABit(1000);
 		return PageFactory.initElements(
 				driver, VNexBOUsersWebPage.class);

@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,17 +34,24 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	}
 	
 	public void clickNoButton() {
-		confirmDialog.
-				findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")).click();
-		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
+        clickModalDialogButton(confirmDialog
+                .findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")));
 	}
-	
-	public void clickYesButton() {
-		confirmDialog.
-				findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")).click();
-		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
+
+    public void clickYesButton() {
+	    clickModalDialogButton(confirmDialog
+                .findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")));
 	}
-	
+
+    private void clickModalDialogButton(WebElement button) {
+        wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
+        } catch (TimeoutException e) {
+            clickWithJS(button);
+        }
+    }
+
 	public String getConfirmationDialogMessage() {
 		String confirmMessage  = null;
 		List<WebElement> msgs = driver.findElements(By.xpath("//div[@class='modal-body']/div[@class='modal-body__content']/div"));

@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
 
 public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
@@ -40,8 +39,8 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public VNextBOHeaderPanel userLogin(String username, String userpsw) {
-		clearAndType(emailfld, username);
-		clearAndType(passwordfld, userpsw);
+		clearAndType(emailfld.getWrappedElement(), username);
+		clearAndType(passwordfld.getWrappedElement(), userpsw);
 		click(loginbtn);
 		waitABit(2000);
 		return PageFactory.initElements(

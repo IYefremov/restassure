@@ -272,13 +272,25 @@ public class NadaEMailService {
     }
 
     public List<String> getUrlsFromMessage(String message, String linkText) {
+        return getUrlsFromMessage(message, linkText, "http", "\">");
+    }
+
+    public List<String> getUrlsFromMessage(String message, String linkText, String start, String end) {
         List<String> allMatches = new ArrayList<String>();
         Matcher matcher = Pattern.compile("(<a [^>]+>)" + linkText + "<.a>").matcher(message);
         while (matcher.find()) {
             String aTag = matcher.group(1);
-            allMatches.add(aTag.substring(aTag.indexOf("http"), aTag.indexOf("\">")));
+            allMatches.add(aTag.substring(aTag.indexOf(start), aTag.indexOf(end)));
         }
         return allMatches;
+    }
+
+    public List<String> getUrlFromMessageWithSubject(MailSearchParametersBuilder builder, String message, String linkText) throws IOException, UnirestException {
+        if (isMessageWithSubjectPresent(builder)) {
+            return getUrlsFromMessage(message, linkText);
+        } else {
+            return null;
+        }
     }
 
     public void deleteAllMessages() throws IOException, UnirestException {
