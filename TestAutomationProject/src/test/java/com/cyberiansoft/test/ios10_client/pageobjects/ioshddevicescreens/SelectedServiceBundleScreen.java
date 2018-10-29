@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -43,9 +44,10 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 		bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("unselected")).click();
 	}
 
-	public void openBundleInfo(String bundle) {
+	public RegularSelectedServiceDetailsScreen openBundleInfo(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));	
 		bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("custom detail button")).click();
+		return new RegularSelectedServiceDetailsScreen();
 	}
 	
 	public void clickCancelBundlePopupButton() {
@@ -63,26 +65,24 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	public boolean isBundleServiceExists(String bundle) {
 		return appiumdriver.findElements(MobileBy.AccessibilityId(bundle)).size() > 0;
 	}
-	
-	public void overrideBundleAmountValue(String newvalue) {
-		appiumdriver.findElementByXPath("//UIAPopover[1]/UIAToolbar[1]/UIAButton[3]").click();
-		
-		List<WebElement> elems = appiumdriver.findElementsByAccessibilityId("Bundle service amount");
-		for (WebElement el : elems) {
-			if (el.getAttribute("value").equals("")) {
-				el.findElement(By.xpath(".//UIATableView[1]/UIATableCell[1]/UIATextField[1]/UIATextField[1]")).clear();
-				el.findElement(By.xpath(".//UIAScrollView[1]/UIATableView[1]/UIATableCell[1]/UIATextField[1]/UIATextField[1]")).click();
+
+	public String getServiceDetailsPriceValue() {
+
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
+	}
+
+	public void changeAmountOfBundleService(String newamount) {
+		List<WebElement> toolbarbtns = appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElements(MobileBy.className("XCUIElementTypeButton"));
+		for (WebElement btn : toolbarbtns)
+			if (btn.getAttribute("name").contains("$")) {
+				btn.click();
+				break;
 			}
-			//System.out.println("++++" + el.getAttribute("className"));
-			
-		}
-		appiumdriver.getKeyboard().sendKeys(newvalue);
-		//appiumdriver.findElementByXPath("//UIAAlert[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[1]").click();
-		//appiumdriver.findElementByXPath("//UIAAlert[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[1]/UIATextField[1]/UIATextField[1]").clear();
-		//appiumdriver.findElementByXPath("//UIAAlert[1]/UIAScrollView[1]/UIATableView[1]/UIATableCell[1]/UIATextField[1]/UIATextField[1]").sendKeys(newvalue);
+		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
+		amountfld.clear();
+		amountfld.sendKeys(newamount);
 		appiumdriver.findElementByAccessibilityId("Override").click();
 	}
-	
-	
 
 }

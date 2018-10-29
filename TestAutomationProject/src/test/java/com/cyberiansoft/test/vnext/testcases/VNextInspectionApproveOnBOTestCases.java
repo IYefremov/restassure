@@ -1,27 +1,22 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextConfirmationDialog;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
@@ -49,7 +44,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		
 		//final String percservices = "Aluminum Upcharge"; 
 		final String moneyservices = "Dent Repair"; 
-		final String matrixservice = "Hail Dent Repair";
+		final String matrixservice = "Test Matrix Service";
 		final String matrixsubservice = "State Farm";
 		final String moneyserviceprice = "58";
 		final String moneyservicequant = "1";
@@ -118,7 +113,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.waitABit(1000*15);
+		loginpage.waitABit(1000*20);
 		loginpage.userLogin(VNextConfigInfo.getInstance().getUserCapiUserName(), 
 				VNextConfigInfo.getInstance().getUserCapiUserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
@@ -129,7 +124,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(webdriver);
 
 		confirmdialog.clickNoButton();
-		
+		//BaseUtils.waitABit(500);
 		insppage.approveInspection(approveNotes);
 		
 		insppage = leftmenu.selectInspectionsMenu();

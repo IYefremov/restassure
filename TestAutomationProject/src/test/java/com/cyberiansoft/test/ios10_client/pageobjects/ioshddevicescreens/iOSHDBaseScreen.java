@@ -6,7 +6,6 @@ import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -113,7 +112,6 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 		boolean swipe = true;
 		
 		while (swipe) {
-			//if (!tableCell.isDisplayed()) {
 			if (tableCell.isDisplayed()) {
 				swipe = false;
 				break;
@@ -132,15 +130,31 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	public void scrollToElement(MobileElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
-		scrollObject.put("direction", "down");
-		scrollObject.put("element", ((RemoteWebElement) element).getId());
+		//scrollObject.put("direction", "down");
+		scrollObject.put("element", element.getId());
+		scrollObject.put("toVisible", "true");
 		js.executeScript("mobile: scroll", scrollObject);
+	}
+
+	public void scrollTable(MobileElement table, String elementName) {
+		boolean visible = table.findElementByAccessibilityId(elementName).isDisplayed();
+		int count = 0;
+		while ((!visible) & (count < 20)) {
+			JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+			HashMap<String, Object> scrollObject = new HashMap<>();
+
+			scrollObject.put("element", table.getId());
+			scrollObject.put("direction", "down");
+			js.executeScript("mobile: scroll", scrollObject);
+			count++;
+			visible = table.findElementByAccessibilityId(elementName).isDisplayed();
+		}
 	}
 		
 	public void scrollToElement(String elementValue) {
 		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-		HashMap scrollObject = new HashMap<>();
-		scrollObject.put("predicateString", "value == '" + elementValue + "'");
+		HashMap<String, Object> scrollObject = new HashMap<>();
+		scrollObject.put("predicateString", "name == '" + elementValue + "'");
 		js.executeScript("mobile: scroll", scrollObject);
 	}
 	

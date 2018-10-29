@@ -28,11 +28,12 @@ public class SinglePageInspectionScreen extends BaseWizardScreen {
 	}
 	
 	public String getInspectionNumber() {
-		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 
-		return wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name contains 'E-00'"))).getText();
-		//return toolbar.findElementByIosNsPredicate("name contains 'E-00'").getText();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name contains 'E-00'")));
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+
+		return toolbar.findElementByIosNsPredicate("name contains 'E-00'").getText();
 	}
 	
 	public void expandToFullScreeenSevicesSection() throws InterruptedException {

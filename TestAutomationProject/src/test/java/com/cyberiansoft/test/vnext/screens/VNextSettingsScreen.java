@@ -14,7 +14,7 @@ public class VNextSettingsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@action='manual-update']")
 	private WebElement manualsendradio;
 	
-	@FindBy(xpath="//a[@class='link icon-only back']")
+	@FindBy(xpath="//*[@action='back']")
 	private WebElement backbtn;
 	
 	public VNextSettingsScreen(AppiumDriver<MobileElement> appiumdriver) {

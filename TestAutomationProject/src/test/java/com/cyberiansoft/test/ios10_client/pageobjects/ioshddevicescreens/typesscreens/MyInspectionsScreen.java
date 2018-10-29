@@ -225,8 +225,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		selectInspectionInTable(inpectionNumber);
 		clickArchiveInspectionButton();
 		selectReasonToArchive(reason);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByAccessibilityId(inpectionNumber)));
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId(inpectionNumber), 1)  );
 	}
 
 	public void archiveInspections(ArrayList<String> inspections, String reason)  {

@@ -150,7 +150,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 	}
 	
 	public String getInspectionTotalPriceValue() {
-		return appiumdriver.findElement(By.xpath("//div[contains(@class, 'toolbar-inner')]/div[@class='right']")).getText().trim();
+		return appiumdriver.findElement(By.xpath("//*[@id='total']")).getText().trim();
 	}
 
 }

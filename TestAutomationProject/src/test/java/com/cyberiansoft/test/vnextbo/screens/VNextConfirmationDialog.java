@@ -29,7 +29,7 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	public VNextConfirmationDialog(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
 	}
 	

@@ -413,6 +413,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getServiceDetailsPriceValue() {
+
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
 	}

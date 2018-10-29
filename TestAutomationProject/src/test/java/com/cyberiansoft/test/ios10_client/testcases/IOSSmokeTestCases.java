@@ -361,8 +361,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8430:Create work order with type is assigned to a specific client
 	@Test(testName = "Test Case 8430:Create work order with type is assigned to a specific client", description = "Create work order with type is assigned to a specific client ")
-	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient()
-			throws Exception {
+	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient() {
 		final String VIN = "ZWERTYASDFDDXZBVB";
 		final String _po = "1111 2222";
 		final String summ = "71.40";
@@ -2450,7 +2449,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServiceQuantityValue("3");
 		selectedservicescreen.saveSelectedServiceDetails();
-		pricematrix = new PriceMatrixScreen();
+
 		Assert.assertTrue(pricematrix.getDiscauntPriceAndValue(iOSInternalProjectConstants.SR_S1_MONEY).contains("$2,000.00 x 3.00"));
 		pricematrix.selectPriceMatrix(_pricematrix2);
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, "VERY LIGHT");
@@ -4254,13 +4253,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31752:SR: HD - Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO", 
 			description = "SR: HD - Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO")
-	public void testSRHDVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO()
-			throws Exception {
-		
+	public void testSRHDVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO() {
+
 		final String VIN = "2A4RR4DE2AR286008";
 		
 		homescreen = new HomeScreen();
-		
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5330,8 +5327,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 51336:WO: HD - Verify that approve WO is working correct under Team WO", 
 			description = "WO: HD - Verify that approve WO is working correct under Team WO")
-	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO()
-			throws Exception {
+	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -7032,8 +7028,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35953:SR: HD - Verify that when SR is declined status reason should be selected", 
 			description = "Verify that when SR is declined status reason should be selected")
-	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected()
-			throws Exception {
+	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
@@ -7089,8 +7084,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it", 
 			description = "Verify that SR is not accepted when employee review or update it")
-	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt()
-			throws Exception {
+	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";

@@ -37,7 +37,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 		wait.until(ExpectedConditions.visibilityOf(updatemaindbbtn));
 	}
 	
-	public void updateMainDB() {
+	public VNextHomeScreen updateMainDB() {
 		clickUpdateAppdata();
 		BaseUtils.waitABit(10000);
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 800);
@@ -53,11 +53,12 @@ public class VNextStatusScreen extends VNextBaseScreen {
 		}
 
 		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+		return loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+
 
 	}
 
-	public void updateMainDB(Employee employee) {
+	public VNextHomeScreen updateMainDB(Employee employee) {
 		clickUpdateAppdata();
 		BaseUtils.waitABit(10000);
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 800);
@@ -67,8 +68,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 		informationdlg.clickInformationDialogOKButton();
 
 		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
-
+		return loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 	}
 	
 	public void clickUpdateAppdata() {

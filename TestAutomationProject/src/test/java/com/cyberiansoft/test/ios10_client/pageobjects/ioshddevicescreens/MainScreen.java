@@ -39,7 +39,8 @@ public class MainScreen extends iOSHDBaseScreen {
 	
 	public void updateDatabase() {
 		Helpers.setTimeOut(340);
-
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(mainbtn));
 		mainbtn.click();
 		Helpers.acceptAlert();
 		Helpers.setDefaultTimeOut();
@@ -82,6 +83,8 @@ public class MainScreen extends iOSHDBaseScreen {
 	}
 	
 	public LicensesScreen clickLicenses() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(licenses));
 		licenses.click();
 		return new LicensesScreen();
 	}

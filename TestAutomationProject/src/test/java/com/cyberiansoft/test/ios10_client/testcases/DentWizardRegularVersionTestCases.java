@@ -153,7 +153,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			String searchresult = vehiclescreen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
 					0, 11));
 			Assert.assertEquals(searchresult, "No vehicle invoice history found");
-			vehiclescreen.setVINValue(ExcelUtils.getVIN(tcrow).substring(11, 17));
+			vehiclescreen.setVINValue(ExcelUtils.getVIN(tcrow).substring(10, 17));
 			String msg = vehiclescreen.getExistingWorkOrdersDialogMessage();
 			Assert.assertTrue(msg.contains("Existing work orders were found"), msg);
 			if (DriverBuilder.getInstance().getAppiumDriver().findElementsByAccessibilityId("Close").size() > 0)
@@ -3312,9 +3312,11 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 			myinvoicesscreen.clickActionButton();
-			for (int i = 0; i< 4; i++) {
-				myinvoicesscreen.selectInvoiceForActionByIndex(i+1);
-			}
+			myinvoicesscreen.selectInvoices(3);
+
+			//for (int i = 0; i< 4; i++) {
+			//	myinvoicesscreen.selectInvoiceForActionByIndex(i+1);
+			//}
 			myinvoicesscreen.clickActionButton();
 			//myinvoicesscreen.sendEmail();
 			myinvoicesscreen.sendSingleEmail(UtilConstants.TEST_EMAIL);
@@ -3536,7 +3538,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
 			notesscreen.clickSaveButton();
 			myinvoicesscreen.clickActionButton();
-			myinvoicesscreen.selectInvoiceForActionByIndex(0);
+			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickActionButton();
 			myinvoicesscreen.sendEmail(UtilConstants.TEST_EMAIL);
 			myinvoicesscreen.clickDoneButton();
@@ -3665,11 +3667,12 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			myworkordersscreen.clickCreateInvoiceIconForWO(wo);
 			myworkordersscreen.clickInvoiceIcon();
 			RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(DentWizardInvoiceTypes.AUCTION_NO_DISCOUNT_INVOICE);
+			final  String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 			invoiceinfoscreen.clickSaveAsFinal();
 			myworkordersscreen.clickHomeButton();
 			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 			myinvoicesscreen.clickActionButton();
-			myinvoicesscreen.selectInvoiceForActionByIndex(0);
+			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickActionButton();
 			myinvoicesscreen.sendEmail(UtilConstants.TEST_EMAIL);
 			myinvoicesscreen.clickDoneButton();
@@ -3731,7 +3734,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			notesscreen.clickSaveButton();
 			
 			myinvoicesscreen.clickActionButton();
-			myinvoicesscreen.selectInvoiceForActionByIndex(0);
+			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickActionButton();
 			myinvoicesscreen.sendEmail(UtilConstants.TEST_EMAIL);
 			myinvoicesscreen.clickDoneButton();

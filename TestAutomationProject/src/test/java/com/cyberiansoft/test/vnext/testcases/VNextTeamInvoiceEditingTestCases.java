@@ -388,7 +388,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanAttachWOWithSameCustomers(String rowID,
-                                                      String description, JSONObject testData) throws Exception {
+                                                      String description, JSONObject testData)  {
 
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 

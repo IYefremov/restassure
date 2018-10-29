@@ -611,7 +611,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			description = "Create Inspection with matrix services image notes")
 	public void testCreateInspectionWithMatrixServicesImageNotes() {
 		
-		final String matrixservice = "Hail Dent Repair";
+		final String matrixservice = "Test Matrix Service";
 		final String pricematrix = "State Farm";
 		final String[] vehiclepartnames = { "Hood", "Roof" };
 		final String[] vehiclepartsizes = { "Dime", "Dime" };	

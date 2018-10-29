@@ -1032,7 +1032,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Total is not set to 0 if user adds Matrix Additional service with negative percentage service")
 	public void testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService() {
 		
-		final String matrixservice = "Hail Dent Repair";
+		final String matrixservice = "Test Matrix Service";
 		final String pricematrix = "State Farm" ;
 		final String vehiclepartname = "Hood";
 		final String vehiclepartsize = "Dime";	
@@ -1055,8 +1055,11 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
-		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservicename);
-		vehiclepartinfoscreen.setAdditionalServiceAmauntValue(additionalservicename, additionalservicenprice);
+		//vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservicename);
+		VNextServiceDetailsScreen serviceDetailsScreen = vehiclepartinfoscreen.openServiceDetailsScreen(additionalservicename);
+		serviceDetailsScreen.setServiceAmountValue(additionalservicenprice);
+		serviceDetailsScreen.clickServiceDetailsDoneButton();
+		vehiclepartinfoscreen = new VNextVehiclePartInfoPage(appiumdriver);
 		Assert.assertEquals(vehiclepartinfoscreen.getMatrixServiceTotalPriceValue(), inspectiontotalprice);
 		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
 		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);

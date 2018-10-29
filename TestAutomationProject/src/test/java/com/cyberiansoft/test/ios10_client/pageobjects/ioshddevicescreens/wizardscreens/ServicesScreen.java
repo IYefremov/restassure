@@ -61,7 +61,7 @@ public class ServicesScreen extends BaseWizardScreen {
 		clickSave();
 		appiumdriver.findElementByAccessibilityId("Draft").click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
 		}
 	}

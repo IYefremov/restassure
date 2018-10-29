@@ -13,7 +13,7 @@
           "laborServicePanel": "Front Door",
           "laborServicePart": "Refinish Left Front Door Cladding",
           "laborServiceRate": "$99.12",
-          "laborServiceTime": "1.03"
+          "laborServiceTime": "1.00"
         }
     }
   ],
@@ -56,13 +56,13 @@
       },
       "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
         "matrixPart" : {"matrixPartName": "Anastasia Part", "partSize": "DIME", "partSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence",
-          "laborServicePart": "Refinish Liftgate Frame",
+          "laborServicePart": "Refinish Cab Roof Panel",
           "laborServiceRate": "99.12",
-          "laborServiceTime": "2.0",
-          "laborServiceNotes": "Liftgate Frame - Refinish Liftgate Frame" }
+          "laborServiceTime": "2.8",
+          "laborServiceNotes": "Cab Roof Panel - Refinish Cab Roof Panel" }
         }
       },
-      "inspPrice": "$198.24"
+      "inspPrice": "$272.58"
     }
   ],
 

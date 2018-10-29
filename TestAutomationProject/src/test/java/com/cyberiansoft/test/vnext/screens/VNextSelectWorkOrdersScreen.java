@@ -18,7 +18,7 @@ public class VNextSelectWorkOrdersScreen extends VNextBaseScreen {
 
     private final By selectworkordersscreen = By.xpath("//div[@data-page='select-work-orders']");
 
-    @FindBy(xpath="//a[@action='add']")
+    @FindBy(xpath="//*[@action='save']")
     private WebElement addworkordersbtn;
 
     @FindBy(xpath="//*[@data-autotests-id='-list']")

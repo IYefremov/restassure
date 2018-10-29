@@ -124,13 +124,9 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		return serviceListItem;
 	}
 
-	public void openSelectedServiceDetails(String serviceName) {
-		WebElement servicerow = getSelectedServiceCell(serviceName);
-		if (servicerow != null) {
-			if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
-				tap(servicerow);
-		} else
-			Assert.assertTrue(false, "Can't find service: " + serviceName);
+	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
+		tap(additionalavailableserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
+		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 	
 	public WebElement getVehiclePartAdditionalServiceCell(String additionalservicename) {

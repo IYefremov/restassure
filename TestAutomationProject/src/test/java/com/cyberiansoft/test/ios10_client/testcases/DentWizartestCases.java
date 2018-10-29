@@ -374,6 +374,7 @@ public class DentWizartestCases extends BaseTestCase {
 		for (int i = 0; i <= vehicleparts.length; i++) {
 			selectedservicescreen.saveSelectedServiceDetails();
 		}
+		servicesscreen = new ServicesScreen();
         OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.saveWizard();
 
@@ -817,6 +818,7 @@ public class DentWizartestCases extends BaseTestCase {
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsscreen.waitQuestionsScreenLoaded();
         ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 
@@ -945,6 +947,7 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehiclescreen.setStock(ExcelUtils.getStock(testcaserow));
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsscreen.waitQuestionsScreenLoaded();
         ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -1030,6 +1033,7 @@ public class DentWizartestCases extends BaseTestCase {
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
 
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsscreen.waitQuestionsScreenLoaded();
         ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -1083,6 +1087,7 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreen.setStock(ExcelUtils.getStock(testcaserow));
 
 		QuestionsScreen questionsScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsScreen.waitQuestionsScreenLoaded();
         ServicesScreen servicesscreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -1172,6 +1177,7 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehiclescreen.setStock(ExcelUtils.getStock(testcaserow));
 		QuestionsScreen questionsScreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsScreen.waitQuestionsScreenLoaded();
         ServicesScreen servicesscreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
@@ -1912,8 +1918,7 @@ public class DentWizartestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 12628:Test Phase Enforcement for WizardPro Tracker", description = "Test Phase Enforcement for WizardPro Tracker")
-	public void testPhaseEnforcementForWizardProTracker()
-			throws Exception {
+	public void testPhaseEnforcementForWizardProTracker() {
 		String tcname = "testPhaseEnforcementForWizardProTracker";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
@@ -2014,8 +2019,7 @@ public class DentWizartestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 12630:Test adding services to an order being monitored", description = "Test adding services to an order being monitored")
-	public void testAddingServicesToOnOrderBeingMonitored()
-			throws Exception {
+	public void testAddingServicesToOnOrderBeingMonitored() {
 		String tcname = "testAddingServicesToOnOrderBeingMonitored";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
@@ -2095,7 +2099,7 @@ public class DentWizartestCases extends BaseTestCase {
 		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE);
 		for (String status : statuses)
 			Assert.assertEquals(status, "Completed");
-		statuses = ordermonitorscreen.getPanelsStatuses(" Paint - Full Bumper");
+		statuses = ordermonitorscreen.getPanelsStatuses("Paint - Full Bumper");
 		for (String status : statuses)
 			Assert.assertEquals(status, "Active");
 		
@@ -2226,8 +2230,7 @@ public class DentWizartestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 12632:Test Delete Work Order function", description = "Test Delete Work Order function")
-	public void testDeleteWorkOrderFunction()
-			throws Exception {
+	public void testDeleteWorkOrderFunction() {
 		String tcname = "testDeleteWorkOrderFunction";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -2852,8 +2855,7 @@ public class DentWizartestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 19548:Test adding a PO# to an invoice", description = "Test adding a PO# to an invoice")
-	public void testAddingAPOToAnInvoice()
-			throws Exception {
+	public void testAddingAPOToAnInvoice() {
 		String tcname = "testAddingAPOToAnInvoice";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
@@ -2911,10 +2913,11 @@ public class DentWizartestCases extends BaseTestCase {
 		teamworkordersscreen.clickCreateInvoiceIconForTeamWO(workOrderNumber);
 		Assert.assertTrue(teamworkordersscreen.isCreateInvoiceActivated(workOrderNumber));
 		teamworkordersscreen.clickiCreateInvoiceButton();
-        QuestionsScreen questionsscreen = new QuestionsScreen();
-        questionsscreen = questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
+		QuestionsScreen questionsscreen = invoiceInfoScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
+		questionsscreen.waitQuestionsScreenLoaded();
 		questionsscreen.chooseAVISCode("Rental-921");
-		InvoiceInfoScreen invoiceInfoScreen = questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+		questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 
 		final String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();

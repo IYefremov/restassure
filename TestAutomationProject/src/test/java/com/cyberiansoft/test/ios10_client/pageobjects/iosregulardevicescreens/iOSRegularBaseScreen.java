@@ -5,6 +5,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBase
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -98,6 +99,21 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 			else
 				swipe = false;
 		}
+	}
+
+	public void swipeTableUp(WebElement elementtoswipe) {
+		JavascriptExecutor js1 = (JavascriptExecutor) appiumdriver;
+		HashMap<String, String> scrollObject1 = new HashMap<>();
+		scrollObject1.put("direction", "up");
+		scrollObject1.put("element", ((IOSElement) elementtoswipe).getId());
+		js1.executeScript("mobile: swipe", scrollObject1);
+	}
+
+	public void scrollToElement(String elementValue) {
+		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
+		HashMap<String, Object> scrollObject = new HashMap<>();
+		scrollObject.put("predicateString", "name == '" + elementValue + "'");
+		js.executeScript("mobile: scroll", scrollObject);
 	}
 
 }

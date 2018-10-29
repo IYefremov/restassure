@@ -11,6 +11,7 @@ import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
@@ -2324,17 +2325,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
         RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.openCustomServiceDetails("Oksi_Bundle_PP");
-		
-		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openBundleServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		servicesscreen.selectService("Oksi_Bundle_PP");
+		SelectedServiceBundleScreen selectedservicebundlescreen = new SelectedServiceBundleScreen();
+		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Back Glass");
 		selectedservicedetailscreen.selectVehiclePart("Deck Lid");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$13.00");
+		selectedservicebundlescreen = new SelectedServiceBundleScreen();
+		Assert.assertEquals(selectedservicebundlescreen.getServiceDetailsPriceValue(), "$13.00");
 		
-		selectedservicedetailscreen = servicesscreen.openBundleServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE);
+		selectedservicedetailscreen = selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE);
 		selectedservicedetailscreen.setServiceQuantityValue("3");
 		selectedservicedetailscreen.setServicePriceValue("10");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -2344,21 +2346,24 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		Assert.assertTrue(selectedservicedetailscreen.getVehiclePartValue().contains("Hood"));
 		Assert.assertTrue(selectedservicedetailscreen.getVehiclePartValue().contains("Deck Lid"));	
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$73.00");
+		selectedservicebundlescreen = new SelectedServiceBundleScreen();
+		Assert.assertEquals(selectedservicebundlescreen.getServiceDetailsPriceValue(), "$73.00");
 		
-		selectedservicedetailscreen = servicesscreen.openBundleServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
+		selectedservicedetailscreen = selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.selectVehiclePart("Driver Seat");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$97.00");
+		selectedservicebundlescreen = new SelectedServiceBundleScreen();
+		Assert.assertEquals(selectedservicebundlescreen.getServiceDetailsPriceValue(), "$97.00");
 		
-		selectedservicedetailscreen = servicesscreen.openBundleServiceDetails(iOSInternalProjectConstants.SR_S5_MT_DISCOUNT_10);
+		selectedservicedetailscreen = selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.SR_S5_MT_DISCOUNT_10);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$87.30");
+		selectedservicebundlescreen = new SelectedServiceBundleScreen();
+		Assert.assertEquals(selectedservicebundlescreen.getServiceDetailsPriceValue(), "$87.30");
 		
-		selectedservicedetailscreen = servicesscreen.openBundleServiceDetails(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
+		selectedservicedetailscreen = selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
 		selectedservicedetailscreen.setServicePriceValue("10");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Back Glass");
@@ -2367,19 +2372,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("You can add only one service 'Service_PP_Vehicle_not_multiple'"));
-		selectedservicedetailscreen = new RegularSelectedServiceDetailsScreen();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$96.30");
+		selectedservicebundlescreen = new SelectedServiceBundleScreen();
+		Assert.assertEquals(selectedservicebundlescreen.getServiceDetailsPriceValue(), "$96.30");
 		
 		//servicesscreen.selectPriceMatrices(iOSInternalProjectConstants.OKSI_SERVICE_PP_LABOR);
-		selectedservicedetailscreen = servicesscreen.openBundleServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_LABOR);
+		selectedservicedetailscreen = selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.OKSI_SERVICE_PP_LABOR);
 		selectedservicedetailscreen.setServiceTimeValue("3");
 		selectedservicedetailscreen.setServiceRateValue("25");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$163.80");
-	
-		
-		
-		selectedservicedetailscreen.changeAmountOfBundleService("163.80");
+		selectedservicebundlescreen = new SelectedServiceBundleScreen();
+		Assert.assertEquals(selectedservicebundlescreen.getServiceDetailsPriceValue(), "$163.80");
+
+		selectedservicebundlescreen.changeAmountOfBundleService("163.80");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
         servicesscreen = new RegularServicesScreen();
         RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);

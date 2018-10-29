@@ -282,18 +282,6 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 		return new VNextWorkOrderSummaryScreen(appiumdriver);
 	}
 	
-	public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color, String mileage, 
-			String stockno, String rono, String licplate, String pono, String vehicletype) {
-		setVIN(VIN);
-		selectModelColor(color);
-		setMilage(mileage);
-		setStockNo(stockno);
-		setRoNo(rono);
-		setLicPlate(licplate);
-		setPoNo(pono);
-		selectType(vehicletype);
-	}
-	
 	public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color) {
 		setVIN(VIN);
 		selectModelColor(color);

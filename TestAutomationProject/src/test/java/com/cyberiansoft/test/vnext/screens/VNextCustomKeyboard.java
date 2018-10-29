@@ -32,7 +32,7 @@ public class VNextCustomKeyboard extends VNextBaseScreen {
 	}
 	
 	public void clickKeyboardDoneButton() {
-		tap(keyboard.findElement(By.xpath(".//a[@class='link close-picker']")));
+		tap(keyboard.findElement(By.xpath(".//*[@class='link close-picker']")));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='keypad']"));
 	}
 	

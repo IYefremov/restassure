@@ -5,7 +5,7 @@ import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import org.testng.annotations.BeforeClass;
 
 import java.io.File;
@@ -20,12 +20,12 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
 	@BeforeClass(description = "Setting up new suite")
 	public void settingUp() throws Exception {
 
-		//setUp();
-		//AppiumUtils.setNetworkOn();
-		//VNextAppUtils.resetApp();
-		//registerDevice();
-		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		setUp();
+		AppiumUtils.setNetworkOn();
+		VNextAppUtils.resetApp();
+		registerDevice();
+		//AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+		//AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 
 		employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/free-device-employee.json"), Employee.class);
 		VNextLoginScreen loginScreen = new VNextLoginScreen(appiumdriver);

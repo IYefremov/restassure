@@ -115,9 +115,20 @@ public class QuestionsScreen extends BaseWizardScreen {
 	public void setOwnerState(String ownerstate) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Owner State")));
-		if (!appiumdriver.findElementByName(ownerstate).isDisplayed())
+		if (!appiumdriver.findElementByName(ownerstate).isDisplayed()) {
+			//dragTable((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']/../.."));
+			scrollTable((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']/../.."),
+					ownerstate);
+
+			System.out.println("++++++++" + appiumdriver.findElementByName(ownerstate).isDisplayed());
+					//scrollToElementUp((MobileElement) appiumdriver.findElementByName(ownerstate));
 			//scrollToElement(ownerstate);
-			scrollToElement((MobileElement) appiumdriver.findElementByName(ownerstate));
+			//swipeToElementUp((MobileElement) appiumdriver.findElementByName(ownerstate));
+			//scrollToElement((MobileElement) appiumdriver.findElementByName(ownerstate));
+			//scrollToElement(ownerstate);
+			//swipeTableUp((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']"),
+			//		appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']/../.."));
+		}
 		appiumdriver.findElementByName(ownerstate).click();
 	}
 

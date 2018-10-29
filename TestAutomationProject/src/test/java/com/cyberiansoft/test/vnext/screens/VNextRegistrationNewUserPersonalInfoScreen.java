@@ -125,6 +125,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(statefld));
 		tap(statefld);
+		BaseUtils.waitABit(1000);
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(statespage));
 		tap(statespage.findElement(By.xpath(".//span[@class='selection-text' and text()='" + userstate + "']")));
