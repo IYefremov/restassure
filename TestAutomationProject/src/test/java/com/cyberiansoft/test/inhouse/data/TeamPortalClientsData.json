@@ -23,5 +23,28 @@
       "attributeName": "Attribute Name",
       "dataType": "String"
     }
+  ],
+
+  "verifyAutomatedAttribute": [
+    {
+      "rowID": "verifyAutomatedAttribute.01",
+      "description": "Test Case 76900:Verify automated attribute",
+      "category": "Test Category",
+      "attributeName": "Attribute Name",
+      "dataType": "String",
+      "isAutomatedStatus": "Yes",
+      "procedureName": "[ProcessDX].[dbo].[usp_ClientSegm_GetDatetimeValue]"
+    }
+  ],
+
+  "verifyManualAttribute": [
+    {
+      "rowID": "verifyManualAttribute.01",
+      "description": "Test Case 76902:Verify manual attribute",
+      "category": "Test Category",
+      "attributeName": "Attribute Name",
+      "dataType": "String",
+      "isAutomatedStatus": "No"
+    }
   ]
 }

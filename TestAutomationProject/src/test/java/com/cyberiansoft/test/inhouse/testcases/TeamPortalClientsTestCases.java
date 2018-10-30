@@ -80,4 +80,53 @@ public class TeamPortalClientsTestCases extends BaseTestCase {
         categoriesPage.deleteCategory(data.getCategory());
         Assert.assertFalse(categoriesPage.isCategoryDisplayed(data.getCategory()));
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyAutomatedAttribute(String rowID, String description, JSONObject testData) {
+
+        TeamPortalClientsData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalClientsData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
+        CategoriesPage categoriesPage = leftMenuPanel
+                .clickClients()
+                .clickCategoriesSubmenu()
+                .verifyCategoryDoesNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton();
+
+        Assert.assertTrue(categoriesPage.isCategoryDisplayed(data.getCategory()), "The category is not displayed");
+
+        categoriesPage
+                .clickAddAttributeButtonForCategory(data.getCategory())
+                .fillAutomatedAttributeFields(data.getAttributeName(), data.getIsAutomatedStatus(),
+                        data.getProcedureName())
+                .clickAddAttributeButton();
+        Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()),
+                "The saved attribute name is not displayed in the category");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyManualAttribute(String rowID, String description, JSONObject testData) {
+
+        TeamPortalClientsData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalClientsData.class);
+        LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
+
+        CategoriesPage categoriesPage = leftMenuPanel
+                .clickClients()
+                .clickCategoriesSubmenu()
+                .verifyCategoryDoesNotExist(data.getCategory())
+                .clickAddCategoryButton()
+                .setCategory(data.getCategory())
+                .clickSubmitCategoryButton();
+
+        Assert.assertTrue(categoriesPage.isCategoryDisplayed(data.getCategory()), "The category is not displayed");
+
+        categoriesPage
+                .clickAddAttributeButtonForCategory(data.getCategory())
+                .fillNotAutomatedAttributeFields(data.getAttributeName(), data.getDataType())
+                .clickAddAttributeButton();
+        Assert.assertTrue(categoriesPage.checkAttributeByName(data.getCategory(), data.getAttributeName()),
+                "The saved attribute name is not displayed in the category");
+    }
 }

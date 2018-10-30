@@ -72,7 +72,7 @@ public class TeamPortalSalesQuotesTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testUserCanManualAttribute(String rowID, String description, JSONObject testData) {
+    public void testUserCanVerifyManualAttribute(String rowID, String description, JSONObject testData) {
         TeamPortalSalesQuotesData data = JSonDataParser.getTestDataFromJson(testData, TeamPortalSalesQuotesData.class);
         LeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver, LeftMenuPanel.class);
 

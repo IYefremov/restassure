@@ -25,9 +25,9 @@
     }
   ],
 
-  "testUserCanManualAttribute": [
+  "testUserCanVerifyManualAttribute": [
     {
-      "rowID": "testUserCanManualAttribute.01",
+      "rowID": "testUserCanVerifyManualAttribute.01",
       "description": "Test Case 59881:Verify manual attribute",
       "category": "Test Category",
       "name": "CompanyAutomation",

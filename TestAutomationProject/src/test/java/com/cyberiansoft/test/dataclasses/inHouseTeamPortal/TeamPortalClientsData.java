@@ -13,6 +13,12 @@ public class TeamPortalClientsData {
     @JsonProperty("dataType")
     private String dataType;
 
+    @JsonProperty("isAutomatedStatus")
+    private String isAutomatedStatus;
+
+    @JsonProperty("procedureName")
+    private String procedureName;
+
     public String getCategory() {
         return category;
     }
@@ -23,5 +29,13 @@ public class TeamPortalClientsData {
 
     public String getDataType() {
         return dataType;
+    }
+
+    public String getProcedureName() {
+        return procedureName;
+    }
+
+    public String getIsAutomatedStatus() {
+        return isAutomatedStatus;
     }
 }

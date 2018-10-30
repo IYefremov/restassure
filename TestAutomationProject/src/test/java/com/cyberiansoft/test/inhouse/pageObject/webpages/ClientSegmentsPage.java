@@ -3,6 +3,7 @@ package com.cyberiansoft.test.inhouse.pageObject.webpages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -115,8 +116,13 @@ public class ClientSegmentsPage extends BasePage {
 
     @Step
     public ClientSegmentsPage clickSearch() {
-        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
-        wait.until(ExpectedConditions.not(ExpectedConditions.attributeContains(searchButton, "disabled", "")));
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+            wait.until(ExpectedConditions.not(ExpectedConditions.attributeContains(searchButton, "disabled", "")));
+        } catch (WebDriverException ignored) {
+            clickWithJS(searchButton);
+            wait.until(ExpectedConditions.not(ExpectedConditions.attributeContains(searchButton, "disabled", "")));
+        }
         return this;
     }
 

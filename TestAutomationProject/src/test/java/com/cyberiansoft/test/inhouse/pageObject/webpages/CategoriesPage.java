@@ -135,8 +135,8 @@ public class CategoriesPage extends BasePage {
     }
 
     @Step
-    public CategoriesPage fillNotAutomatedAttributeFields(String name, String dataType) {
-        wait.until(ExpectedConditions.visibilityOf(createAttributeName)).sendKeys(name);
+    public CategoriesPage fillNotAutomatedAttributeFields(String attributeName, String dataType) {
+        wait.until(ExpectedConditions.visibilityOf(createAttributeName)).sendKeys(attributeName);
 
         createElementAttributeDataType.click();
         createElementAttributeDataType.findElements(By.tagName("option")).stream().
