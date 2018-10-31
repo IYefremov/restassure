@@ -779,9 +779,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		selectedservicedetailscreen.setServicePriceValue(discount);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Hood");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen = new RegularServicesScreen();
 		servicesscreen.selectService(iOSInternalProjectConstants.TAX_DISCOUNT);
         Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$3,153.94");
@@ -1464,15 +1461,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_20");
 		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
 		selectedservicescreen.saveSelectedServiceDetails();
-		vehiclePartScreen = new RegularVehiclePartScreen();
+		//vehiclePartScreen = new RegularVehiclePartScreen();
 		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$120.00");
 		vehiclePartScreen= pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.switchOffOption("PDR");
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Upcharge_25");
 		selectedservicescreen.saveSelectedServiceDetails();
 		vehiclePartScreen.saveVehiclePart();
 		Assert.assertEquals(pricematrix.getInspectionSubTotalPrice(), "$145.00");
 		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix1);
+		vehiclePartScreen.switchOffOption("PDR");
 		vehiclePartScreen.clickDiscaunt("SR_S5_Mt_Discount_10");
 		selectedservicescreen.saveSelectedServiceDetails();
 		vehiclePartScreen.saveVehiclePart();
@@ -1556,18 +1555,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectServicePartSubcategoryPosition("Oil Cooler");
 		selectedservicescreen.saveSelectedServiceDetails();	
 		selectedservicescreen.setServicePriceValue("2.35");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Driver Seat");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
 		//selectedservicescreen.clickServicePartCell();
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
 		selectedservicescreen.setServicePriceValue("2.5");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
@@ -1578,9 +1571,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectServicePartSubcategoryPosition("Rear Upper");
 		selectedservicescreen.saveSelectedServiceDetails();	
 		selectedservicescreen.setServicePriceValue("5.09");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Back Glass");
-		selectedservicescreen.saveSelectedServiceDetails();
+		//selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.answerQuestionCheckButton();		
 		selectedservicescreen.saveSelectedServiceDetails();
 
@@ -1602,9 +1593,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectServicePartSubcategoryPosition("Front Lower");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.setServicePriceValue("4.31");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
         RegularVisualInteriorScreen visualinteriorscreen =vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
@@ -1612,6 +1600,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService("Detail");
 		visualinteriorscreen.selectSubService("Oksi_Part_SubCategory");
+		Helpers.tapRegularCarImage();
 		Helpers.tapRegularCarImage();
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen();
 		selectedservicescreen.clickServicePartCell();
@@ -1621,9 +1610,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectServicePartSubcategoryPosition("Front");
 		selectedservicescreen.saveSelectedServiceDetails();	
 		selectedservicescreen.setServicePriceValue("6.43");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
         RegularPriceMatrixScreen pricematrix = visualinteriorscreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, "PM_New");
@@ -1942,9 +1928,6 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicesscreen.selectService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		selectedservicedetailscreen.setServicePriceValue("25");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Hood");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.TAX_DISCOUNT);
