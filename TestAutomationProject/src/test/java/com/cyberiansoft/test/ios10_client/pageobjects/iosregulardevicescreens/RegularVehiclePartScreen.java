@@ -127,7 +127,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         //((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
     }
 
-    public void setTime(String timevalue) throws InterruptedException {
+    public void setTime(String timevalue) {
         WebElement par = getTableParentCell("Time");
         par.findElement(By.xpath("//XCUIElementTypeTextField")).sendKeys(timevalue + "\n");
     }

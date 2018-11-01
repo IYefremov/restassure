@@ -93,7 +93,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
 	}
 	
-	public void clickSingnAndDrawApprovalSignature() throws InterruptedException {
+	public void clickSingnAndDrawApprovalSignature() {
 		clickSignButton();
 		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='TouchInputView']/XCUIElementTypeImage[1]/XCUIElementTypeOther");
 		int xx = element.getLocation().getX();
@@ -151,7 +151,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		donestatusreasonbtn.click();
 	}
 	
-	public void selectStatusReason(String statusreson) throws InterruptedException {
+	public void selectStatusReason(String statusreson) {
 		selectUIAPickerValue(statusreson);
 		clickDoneStatusReasonButton();
 	}

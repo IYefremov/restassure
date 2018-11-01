@@ -38,7 +38,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	private RegularHomeScreen homescreen;
 	
 	@BeforeClass
-	public void setUpSuite() throws Exception {
+	public void setUpSuite() {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
@@ -47,7 +47,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword) throws Exception {
+			String userName, String userPassword) {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
@@ -68,7 +68,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	public void testRegisterationiOSDdevice() throws Exception {
+	public void testRegisterationiOSDdevice() {
         AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
         DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
         DriverBuilder.getInstance().getAppiumDriver().quit();
@@ -85,8 +85,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	//Test Case 8553:Create inspection on the device with approval required
 	@Test(testName = "Test Case 8553:Create inspection on the device with approval required", description = "Create Inspection On The Device With Approval Required")
-	public void testCreateInspectionOnTheDeviceWithApprovalRequired()
-				throws Exception {
+	public void testCreateInspectionOnTheDeviceWithApprovalRequired() {
 		final String VIN = "TESTVINNO";
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
@@ -136,7 +135,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 	}
 
-	String inspection8434 = "";
+	private String inspection8434 = "";
 	//Test Case 8435:Create Retail Inspection (HD Single page)
 	//Test Case 8434:Add Services to visual inspection
 	@Test(testName = "Test Case 8434:Add Services to visual inspection", description = "Add Services To Visual Inspection")
@@ -244,8 +243,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28580:WO: Regular - If fee bundle item price policy = 'Panel' then it will be added once for many associated service instances with same vehicle part.", 
 			description = "WO: Regular - If fee bundle item price policy = 'Panel' then it will be added once for many associated service instances with same vehicle part.")
-	public void testRegularIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart()
-			throws Exception {
+	public void testRegularIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -290,12 +288,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
-	String wonumber28583 = null;
+	private String wonumber28583 = null;
 
 	@Test(testName="Test Case 28583:WO: Regular - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity", 
 			description = "WO: Regular - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity")
-	public void testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1()
-			throws Exception {
+	public void testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -325,8 +322,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28583:WO: Regular - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity", 
 			description = "WO: Regular - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity")
-	public void testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2()
-			throws Exception {
+	public void testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -356,8 +352,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28585:WO: Regular - Verify that package price of fee bundle item is override the price of wholesale and retail prices", 
 			description = "WO: Regular - Verify that package price of fee bundle item is override the price of wholesale and retail prices")
-	public void testRegularVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices()
-			throws Exception {
+	public void testRegularVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -384,8 +379,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28600:WO: Regular - If fee bundle item price policy = 'Vehicle' then it will be added once for many associated service instances", 
 			description = "WO: Regular - If fee bundle item price policy = 'Vehicle' then it will be added once for many associated service instances")
-	public void testRegularIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances()
-			throws Exception {
+	public void testRegularIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -435,8 +429,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28601:WO: Regular -  If fee bundle item price policy = 'Service' or 'Flat Fee' then it will be added to WO every time when associated service instance will add to WO.", 
 			description = "WO: Regular -  If fee bundle item price policy = 'Service' or 'Flat Fee' then it will be added to WO every time when associated service instance will add to WO.")
-	public void testRegularIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO()
-			throws Exception {
+	public void testRegularIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -483,8 +476,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28602:WO: Regular - Verify that for Wholesale and Retail customers fee is added depends on the price accordingly to price of the fee bundle item", 
 			description = "WO: Regular - Verify that for Wholesale and Retail customers fee is added depends on the price accordingly to price of the fee bundle item")
-	public void testRegularVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem()
-			throws Exception {
+	public void testRegularVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -529,12 +521,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
-	String wonumber29398 = null;
+	private String wonumber29398 = null;
 	
 	@Test(testName="Test Case 29398:WO: Regular - Verify that Fee Bundle services is calculated for additional matrix services", 
 			description = "Verify that Fee Bundle services is calculated for additional matrix services")
 	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _pricematrix  = "Roof";
@@ -573,8 +565,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29398:WO: Regular - Verify that Fee Bundle services is calculated for additional matrix services", 
 			description = "Verify that Fee Bundle services is calculated for additional matrix services")
-	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2()
-			throws Exception {
+	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -600,8 +591,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 30672:WO: Regular - Verify that money value of some percentage service is rounds up after 0.095", 
 			description = "Regular - Verify that money value of some percentage service is rounds up after 0.095")
-	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095()
-			throws Exception {
+	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String srs1moneyprice  = "40";
@@ -649,8 +639,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 30675:WO: Regular - Verify that money value of some percentage service is rounds down after 0.003", 
 			description = "Regular - Verify that money value of some percentage service is rounds down after 0.003")
-	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003()
-			throws Exception {
+	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String srs1moneyprice  = "40";
@@ -697,8 +686,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 30676:WO: Regular - Verify that money value of some percentage service is rounds up after 0.005", 
 			description = "Regular - Verify that money value of some percentage service is rounds up after 0.005")
-	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005()
-			throws Exception {
+	public void testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String srs1moneyprice  = "20";
@@ -744,12 +732,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
-	String wonumber31498 = null;
+	private String wonumber31498 = null;
 	
 	@Test(testName="Test Case 31498:WO: Regular - Verify that amount is calculated and rounded correctly", 
 			description = "Verify that amount is calculated and rounded correctly")
-	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1()
-			throws Exception {
+	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String[] prices  = { "160", "105", "400", "195", "2400", "180", "160", "105", "300" };
@@ -792,8 +779,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31498:WO: Regular - Verify that amount is calculated and rounded correctly", 
 			description = "Verify that amount is calculated and rounded correctly")
-	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2()
-			throws Exception {
+	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -816,11 +802,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	String inspectionnumber32226 = null;
+	private String inspectionnumber32226 = null;
 	
 	@Test(testName = "Test Case 32226:Inspections: Regular - Verify that inspection is saved as declined when all services are skipped or declined", 
 			description = "Verify that inspection is saved as declined when all services are skipped or declined")
-	public void testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1() throws Exception {
+	public void testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1()  {
 
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -872,7 +858,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32226:Inspections: Regular - Verify that inspection is saved as declined when all services are skipped or declined", 
 			description = "Verify that inspection is saved as declined when all services are skipped or declined")
-	public void testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2() throws Exception {
+	public void testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2()  {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -893,11 +879,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	String inspectionnumber32286 = null;
+	private String inspectionnumber32286 = null;
 	
 	@Test(testName = "Test Case 32286:Inspections: Regular - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
-	public void testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1() throws Exception {
+	public void testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1() {
 
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -926,7 +912,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);;
+		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Left Rear Door");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -944,7 +930,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();
 		String servicetoapprove = iOSInternalProjectConstants.SR_S1_MONEY + " (Grill)";
 		String servicetodecline = iOSInternalProjectConstants.SR_S1_MONEY_PANEL + " (Left Rear Door)";
-		String servicetoskip = iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE + " (Front Bumper)";;
+		String servicetoskip = iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE + " (Front Bumper)";
 		approveinspscreen.selectInspection(inspectionnumber32286);
 		approveinspscreen.selectInspectionServiceToApprove(servicetoapprove);
 		approveinspscreen.selectInspectionServiceToDecline(servicetodecline);
@@ -958,7 +944,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32286:Inspections: Regular - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
-	public void testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2() throws Exception {
+	public void testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -978,11 +964,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();	
 	}
 
-	String inspnumber32287 = null;	
+	private String inspnumber32287 = null;
 	
 	@Test(testName = "Test Case 32287:Inspections: Regular - Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount")
-	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1() throws Exception {
+	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1059,7 +1045,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33664:Inspections: Regular - Verify that services are marked as strikethrough when exclude from total", 
 			description = "Inspections: Regular - Verify that services are marked as strikethrough when exclude from total")
-	public void testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal() throws Exception {
+	public void testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1111,7 +1097,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 38748:Inspections: Regular - Verify that value selected on price matrix step is saved and shown during edit mode", 
 			description = "Verify that value selected on price matrix step is saved and shown during edit mode")
-	public void testRegularVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode() throws Exception {
+	public void testRegularVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -1193,8 +1179,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 42184:WO: Regular - Verify that message is shown total is over limitation 999999999.999", 
 			description = "Verify that message is shown total is over limitation 999999999.999")
-	public void testWOVerifyThatMessageIsShownTotalIsOverLimitation()
-			throws Exception {
+	public void testWOVerifyThatMessageIsShownTotalIsOverLimitation() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -1240,8 +1225,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 42183:Invoices: Regular - Verify that message is shown total is over limitation 999,999,999.999", 
 			description = "Verify that message is shown total is over limitation 999,999,999.999")
-	public void testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation()
-			throws Exception {
+	public void testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -1326,7 +1310,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 42182:Inspection: Regular - Verify that message is shown total is over limitation 999999999.999", 
 			description = "Inspection: Verify that message is shown total is over limitation 999999999.999")
-	public void testInspectionVerifyThatMessageIsShownTotalIsOverLimitation() throws Exception {
+	public void testInspectionVerifyThatMessageIsShownTotalIsOverLimitation() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1364,7 +1348,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 42372:Inspections: Regular - Verify approved amount for Inspection created from SR", description = "Verify approved amount for Inspection created from SR")
-	public void testVerifyApprovedAmountForInspectionCreatedFromSR() throws Exception {
+	public void testVerifyApprovedAmountForInspectionCreatedFromSR() {
 		final String VIN  = "1D7HW48NX6S507810";
 		
 		homescreen = new RegularHomeScreen();
@@ -1429,11 +1413,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen.clickHomeButton();
 	}
 	
-	String inspnumber47249 = "";
+	private String inspnumber47249 = "";
 	
 	@Test(testName = "Test Case 47249:Inspections: Regular - Verify that on Price matrix step sub total value is shown correctly", 
 			description = "Verify that on Price matrix step sub total value is shown correctly")
-	public void testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly() throws Exception {
+	public void testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly()  {
 		
 		final String VIN  = "1D7HW48NX6S507810";		
 		final String _pricematrix1 = "Hood";
@@ -1519,11 +1503,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 	}
 	
-	String inspnumber48543 = "";
+	private String inspnumber48543 = "";
 	
 	@Test(testName = "Test Case 48543:Inspections: Regular - Verify that part services with different configurations are correctly shown for inspection", 
 			description = "Inspections: Regular - Verify that part services with different configurations are correctly shown for inspection")
-	public void testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection() throws Exception {
+	public void testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1660,7 +1644,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 48562:WO: Regular - Verify that part services are copied from insp to order", 
 			description = "WO: Regular - Verify that part services are copied from insp to order")
-	public void testWOVerifyThatPartServicesAreCopiedFromInspToOrder() throws Exception {
+	public void testWOVerifyThatPartServicesAreCopiedFromInspToOrder() {
 		
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber48543);
@@ -1690,7 +1674,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 48563:WO: Regular - Verify that part services with different configurations are correctly shown for WO", 
 			description = "WO: Regular - Verify that part services with different configurations are correctly shown for WO")
-	public void testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO() throws Exception {
+	public void testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1806,7 +1790,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45100:WO: Regular - Verify rounding in calculation script with price matrix", 
 			description = "WO: Regular - Verify rounding in calculation script with price matrix")
-	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix() throws Exception {
+	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1874,11 +1858,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinvoicesscreen.clickHomeButton();		
 	}
 	
-	String invoicenumber45224 = null;
+	private String invoicenumber45224 = null;
 	
 	@Test(testName = "Test Case 45224:WO: Regular - Verify calculation with price matrix Labor type", 
 			description = "WO: Regular - Verify calculation with price matrix Labor type")
-	public void testWOVerifyCalculationWithPriceMatrixLaborType_1() throws Exception {
+	public void testWOVerifyCalculationWithPriceMatrixLaborType_1() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1959,7 +1943,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45224:WO: Regular - Verify calculation with price matrix Labor type", 
 			description = "WO: Regular - Verify calculation with price matrix Labor type")
-	public void testWOVerifyCalculationWithPriceMatrixLaborType_2() throws Exception {
+	public void testWOVerifyCalculationWithPriceMatrixLaborType_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -1987,11 +1971,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	String invoicenumber42803 = null;
+	private String invoicenumber42803 = null;
 	
 	@Test(testName = "Test Case 42803:Invoices: Regular - Verify rounding money amount values", 
 			description = "Invoices: Regular - Verify rounding money amount values")
-	public void testInvoicesVerifyRoundingMoneyAmountValues_1() throws Exception {
+	public void testInvoicesVerifyRoundingMoneyAmountValues_1() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2100,16 +2084,16 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 38970:Inspections: Reqular - Verify that updated value for required service with 0 Price is saved when package grouped by panels", 
 			description = "Inspections: Reqular - Verify that updated value for required service with 0 Price is saved when package grouped by panels")
-	public void testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels() throws Exception {
-		
+	public void testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels() {
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String serviceprice = "21";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
         RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_WITH_0_PRICE);
@@ -2121,15 +2105,15 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 
         RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.saveWizard();
-		
+
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();	
+		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();
 		approveinspscreen.selectInspection(inspnumber);
 		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE), "$0.00");
 		approveinspscreen.clickCancelButton();
 		approveinspscreen.clickCancelButton();
-		
+
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
         vehiclescreen = new RegularVehicleScreen();
 		vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -2140,11 +2124,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedServicesScreen = new RegularSelectedServicesScreen();
 		//servicesscreen.clickBackServicesButton();
-		servicesscreen.saveWizard();
-		
+		selectedServicesScreen.saveWizard();
+
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		approveinspscreen = new RegularApproveInspectionsScreen();	
+		approveinspscreen = new RegularApproveInspectionsScreen();
 		approveinspscreen.selectInspection(inspnumber);
 		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE), PricesCalculations.getPriceRepresentation(serviceprice));
 		approveinspscreen.clickCancelButton();
@@ -2154,7 +2138,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 40463:Inspections: Regular - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection", 
 			description = "Inspections: Regular - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection")
-	public void testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection() throws Exception {
+	public void testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 
@@ -2220,7 +2204,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 40466:Inspections: Regular - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when decline inspection", 
 			description = "Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when decline inspection")
-	public void testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection() throws Exception {
+	public void testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection() {
 
 		final String VIN  = "1D7HW48NX6S507810";		
 		homescreen = new RegularHomeScreen();
@@ -2276,7 +2260,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 35030:WO: Regular - Verify that for bundle items price policy is applied", 
 			description = "WO: Regular - Verify that for bundle items price policy is applied")
-	public void testWOVerifyThatForBundleItemsPricePolicyIsApplied() throws Exception {
+	public void testWOVerifyThatForBundleItemsPricePolicyIsApplied() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2364,7 +2348,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 40541:WO: Regular - Verify that for Sales Tax Service data is set from DB when create WO for customer with appropriate data", 
 			description = "WO: Regular - Verify that for Sales Tax Service data is set from DB when create WO for customer with appropriate data")
-	public void testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData() throws Exception {
+	public void testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2429,7 +2413,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 49680:Invoices: Regular - Verify that tax rounding is correctly calculated", 
 			description = "Invoices: Regular - Verify that tax rounding is correctly calculated")
-	public void testInvoicesVerifyThatTaxRoundingIsCorrectlyCalculated() throws Exception {
+	public void testInvoicesVerifyThatTaxRoundingIsCorrectlyCalculated() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2496,7 +2480,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 49915:Inspections: Regular - Verify that tax is calc correctly from services with tax exempt YES/No", 
 			description = "Inspections: Regular - Verify that tax is calc correctly from services with tax exempt YES/No")
-	public void testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo() throws Exception {
+	public void testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo() {
 
 		final String VIN  = "1D7HW48NX6S507810";		
 		homescreen = new RegularHomeScreen();
@@ -2566,7 +2550,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 49945:WO:Regular - Verify that package price overrides client (retail or wholesale)", 
 			description = "WO:Regular - Verify that package price overrides client (retail or wholesale)")
-	public void testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale() throws Exception {
+	public void testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2643,7 +2627,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 50013:WO: Regular - Verify that client and job overrides are working fine for WO", 
 			description = "WO: Regular - Verify that client and job overrides are working fine for WO")
-	public void testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO() throws Exception {
+	public void testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2675,8 +2659,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 49856:SR: Regular - Verify ALM flow when approve both inspectiontypes",
 			description = "SR: Regular - Verify ALM flow when approve both inspectiontypes")
-	public void testSRVerifyALMFlowWhenApproveBothInspections()
-			throws Exception {
+	public void testSRVerifyALMFlowWhenApproveBothInspections() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -2795,8 +2778,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 49895:SR: Regular - Verify ALM flow when approve one inspection and one decline", 
 			description = "SR: Regular - Verify ALM flow when approve one inspection and one decline")
-	public void testSRVerifyALMFlowWhenApproveOneInspectionAndOneDecline()
-			throws Exception {
+	public void testSRVerifyALMFlowWhenApproveOneInspectionAndOneDecline() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -2916,8 +2898,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 49896:SR: Regular - Verify ALM flow when decline both inspectiontypes",
 			description = "SR: Regular - Verify ALM flow when decline both inspectiontypes")
-	public void testSRVerifyALMFlowWhenDeclineBothInspections()
-			throws Exception {
+	public void testSRVerifyALMFlowWhenDeclineBothInspections() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -3163,6 +3144,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
             DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		} catch (UnsupportedCommandException e) {
 
+			System.out.println("Can't launch app");
 		}
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);

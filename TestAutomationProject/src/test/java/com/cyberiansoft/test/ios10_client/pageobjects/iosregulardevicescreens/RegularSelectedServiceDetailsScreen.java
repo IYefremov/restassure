@@ -140,8 +140,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		return exists;
 	}
 
-	public void setServiceQuantityValue(String _quantity)
-			throws InterruptedException {	
+	public void setServiceQuantityValue(String _quantity) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Quantity")));
 		WebElement par = getTableParentCell("Quantity");
@@ -159,8 +158,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(300);
 	}
 	
-	public void setServiceTimeValue(String _timevalue)
-			throws InterruptedException {	
+	public void setServiceTimeValue(String _timevalue) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Time")));	
         WebElement par = getTableParentCell("Time");
@@ -176,8 +174,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");*/
 	}
 	
-	public void setServiceRateValue(String _ratevalue)
-			throws InterruptedException {	
+	public void setServiceRateValue(String _ratevalue) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Rate")));	
         WebElement par = getTableParentCell("Rate");
@@ -214,7 +211,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		par.findElement(By.xpath("//XCUIElementTypeButton[@name='unselected']")).click();
 	}
 	
-	public void changeBundleQuantity(String bundle, String _quantity) throws InterruptedException {
+	public void changeBundleQuantity(String bundle, String _quantity) {
 		WebElement par = getTableParentCell(bundle);
 		par.findElement(By.xpath("//XCUIElementTypeButton[@name='custom detail button']")).click();
 		setServiceQuantityValue(_quantity);
