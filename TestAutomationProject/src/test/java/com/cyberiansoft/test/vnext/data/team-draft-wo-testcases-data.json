@@ -1,0 +1,70 @@
+{
+
+  "testVerifyUserCanSaveDraftWOWithoutPopulateRequiredFields": [
+    {
+      "rowID": "testVerifyUserCanSaveDraftWOWithoutPopulateRequiredFields.01",
+      "description": "Test Case 80703:Verify user can save Draft WO without populate required fields",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCantSaveWOIfDraftModeEqualsOFF": [
+    {
+      "rowID": "testVerifyUserCantSaveWOIfDraftModeEqualsOFF.01",
+      "description": "Test Case 80704:Verify user can't save WO if Draft mode = OFF",
+      "workOrderType": "O_Kramar2",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCantSaveDraftWOIfCreateInvoiceToggleEqualsON": [
+    {
+      "rowID": "testVerifyUserCantSaveDraftWOIfCreateInvoiceToggleEqualsON.01",
+      "description": "Test Case 80705:Verify user can't save draft WO if 'Create Invoice' toggle = ON",
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        }
+      },
+      "invoiceData": {
+        "invoiceType": "O_Kramar"
+      }
+    }
+  ],
+
+  "testVerifyUserCantSaveWOAsDraftWhenEditWOInInvoice": [
+    {
+      "rowID": "testVerifyUserCantSaveWOAsDraftWhenEditWOInInvoice.01",
+      "description": "Test Case 80706:Verify user can't save WO as draft when edit WO in Invoice",
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData": {
+        "invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanEditDraftWO": [
+    {
+      "rowID": "testVerifyUserCanEditDraftWO.01",
+      "description": "Test Case 80707:Verify user can edit draft WO",
+      "workOrderType": "O_Kramar2",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "service": {"serviceName": "Battery Installation"
+      }
+    }
+  ]
+
+
+}

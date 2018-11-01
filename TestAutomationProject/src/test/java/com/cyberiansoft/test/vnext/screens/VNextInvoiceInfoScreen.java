@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -213,5 +214,11 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 
 	private List<WebElement> getListOfInvoiceWorkOrders() {
 		return invoiceinfopanel.findElements(By.xpath(".//*[@action='edit-order']"));
+	}
+
+	public VNextVehicleInfoScreen clickOnWorkOrder(String workOrderNumber) {
+		tap(appiumdriver.
+				findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + workOrderNumber + "']")));
+		return new VNextVehicleInfoScreen(appiumdriver);
 	}
 }

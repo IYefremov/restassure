@@ -16,7 +16,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRegistration {
 	
 	@BeforeClass(description="Team Claim Info Test Cases")
-	public void beforeClass() throws Exception {
+	public void beforeClass() {
 	}
 	
 	@Test(testName= "Test Case 64814:Verify Claim Info screen visible for Inspection if 'Claim Info = ON'", 

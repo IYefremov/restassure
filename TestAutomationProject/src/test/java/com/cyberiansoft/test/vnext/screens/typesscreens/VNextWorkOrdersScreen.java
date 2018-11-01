@@ -97,6 +97,11 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 		return workordercell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
 	}
 
+	public String getWorkOrderStatusValue(String wonumber) {
+		WebElement workordercell = getWorkOrderCell(wonumber);
+		return workordercell.findElement(By.xpath(".//span[contains(@class, 'entity-item-status-')]")).getText();
+	}
+
 	public String getWorkOrderCustomerValue(String wonumber) {
 		WebElement workordercell = getWorkOrderCell(wonumber);
 		return workordercell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText();
