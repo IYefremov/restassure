@@ -765,9 +765,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		selectedservicedetailscreen.setServicePriceValue(discount);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Hood");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
+		//selectedservicedetailscreen.selectVehiclePart("Hood");
+		//selectedservicedetailscreen.saveSelectedServiceDetails();
+		//selectedservicedetailscreen.saveSelectedServiceDetails();
 		
 		servicesscreen.selectService("Tax discount");
 		InspectionToolBar toolaber = new InspectionToolBar();		
@@ -887,7 +887,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
-	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1() throws Exception {
+	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1() {
 
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -1913,9 +1913,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		selectedservicedetailscreen.setServicePriceValue("25");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Hood");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
+		//selectedservicedetailscreen.selectVehiclePart("Hood");
+		//selectedservicedetailscreen.saveSelectedServiceDetails();
+		//selectedservicedetailscreen.saveSelectedServiceDetails();
 		
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("Tax discount");
 		selectedservicedetailscreen.setServicePriceValue("10");

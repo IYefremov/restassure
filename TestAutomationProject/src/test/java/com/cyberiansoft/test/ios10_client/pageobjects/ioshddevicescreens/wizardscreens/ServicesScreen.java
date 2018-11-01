@@ -158,6 +158,7 @@ public class ServicesScreen extends BaseWizardScreen {
 
 		}*/
         tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
+        Helpers.waitABit(1000);
 		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).setValue(servicename);
 		//appiumdriver.getKeyboard().sendKeys(servicename);
 		appiumdriver.hideKeyboard();

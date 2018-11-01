@@ -4198,7 +4198,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
+		//servicesscreen.selectService(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		servicesscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndCancel();
@@ -4215,13 +4215,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_S1_MONEY));
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE));
-		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_DISC_20_PERCENT));
+		//Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_DISC_20_PERCENT));
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_S1_MONEY_PANEL));
 		RegularOrderSummaryScreen ordersummaryscreen = selectedServicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.clickSave();
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.lastIndexOf("'"));
 			selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
@@ -4229,9 +4229,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			
 			selectedservicedetailsscreen.clickVehiclePartsCell();
 			switch (servicedetails) {
-			case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
-				 selectedservicedetailsscreen.selectVehiclePart("Hood");
-	             break;
+			//case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
+			//	 selectedservicedetailsscreen.selectVehiclePart("Hood");
+	        //     break;
 			case iOSInternalProjectConstants.SR_S1_MONEY_PANEL:
 				 selectedservicedetailsscreen.selectVehiclePart("Back Glass");
 	             break;     
@@ -4279,7 +4279,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
+		//servicesscreen.selectService(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		servicesscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndCancel();
@@ -4298,11 +4298,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_S1_MONEY));
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE));
-		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_DISC_20_PERCENT));
+		//Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_DISC_20_PERCENT));
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_S1_MONEY_PANEL));
 		selectedServicesScreen.clickSave();
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.lastIndexOf("'"));
 			RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = selectedServicesScreen.openSelectedServiceDetails(servicedetails);
@@ -4315,9 +4315,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			case iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE:
 				 selectedservicedetailsscreen.selectVehiclePart("Back Glass");
 	             break;     
-			case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
-				 selectedservicedetailsscreen.selectVehiclePart("Hood");
-	             break;
+			//case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
+			//	 selectedservicedetailsscreen.selectVehiclePart("Hood");
+	        //     break;
 			case iOSInternalProjectConstants.SR_S1_MONEY:
 				 selectedservicedetailsscreen.selectVehiclePart("Grill");
 	             break;
