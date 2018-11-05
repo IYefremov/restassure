@@ -4327,8 +4327,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 30083:SR: HD - Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services", 
 			description = "SR: HD - Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services")
-	public void testSRHDVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices()
-			throws Exception {
+	public void testSRHDVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4366,16 +4365,16 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String wonumber = ordersummaryscreen.getWorkOrderNumber();
 		ordersummaryscreen.clickSave();
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.indexOf("' require"));
 			SelectedServiceDetailsScreen selectedservicedetailsscreen = servicesscreen.openServiceDetails(servicedetails);
 			
 			selectedservicedetailsscreen.clickVehiclePartsCell();
 			switch (servicedetails) {
-			case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
-				 selectedservicedetailsscreen.selectVehiclePart("Hood");
-	             break;
+			//case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
+			//	 selectedservicedetailsscreen.selectVehiclePart("Hood");
+	        //     break;
 			case iOSInternalProjectConstants.SR_S1_MONEY_PANEL:
 				 selectedservicedetailsscreen.selectVehiclePart("Back Glass");
 	             break;     
@@ -4442,7 +4441,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_S1_MONEY_PANEL));
 		servicesscreen.clickSave();
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.indexOf("' require"));
 			SelectedServiceDetailsScreen selectedservicedetailsscreen = servicesscreen.openServiceDetails(servicedetails);
@@ -4455,9 +4454,9 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			case iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE:
 				 selectedservicedetailsscreen.selectVehiclePart("Back Glass");
 	             break;     
-			case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
-				 selectedservicedetailsscreen.selectVehiclePart("Hood");
-	             break;
+			//case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
+			//	 selectedservicedetailsscreen.selectVehiclePart("Hood");
+	        //     break;
 			case iOSInternalProjectConstants.SR_S1_MONEY:
 				 selectedservicedetailsscreen.selectVehiclePart("Grill");
 	             break;

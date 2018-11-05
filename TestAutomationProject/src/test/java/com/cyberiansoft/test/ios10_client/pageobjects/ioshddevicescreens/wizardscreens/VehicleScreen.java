@@ -91,7 +91,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	public VehicleScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleTable")));
 	}

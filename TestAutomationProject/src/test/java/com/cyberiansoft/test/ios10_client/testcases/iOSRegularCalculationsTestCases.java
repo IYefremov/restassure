@@ -1585,6 +1585,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		visualinteriorscreen.selectService("Detail");
 		visualinteriorscreen.selectSubService("Oksi_Part_SubCategory");
 		Helpers.tapRegularCarImage();
+		Helpers.tapRegularCarImage();
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen();
 		selectedservicescreen.clickServicePartCell();
 		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Body");

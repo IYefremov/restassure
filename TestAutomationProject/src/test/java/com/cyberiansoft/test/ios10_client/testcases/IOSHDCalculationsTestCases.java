@@ -1539,17 +1539,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Oil Cooler");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("2.35");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Driver Seat");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
 		selectedservicescreen.setServicePriceValue("2.5");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
@@ -1560,9 +1554,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Rear Upper");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("5.09");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Back Glass");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.answerQuestionCheckButton();		
 		selectedservicescreen.saveSelectedServiceDetails();
 		
@@ -1585,15 +1576,13 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Front Lower");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("4.31");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		VisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService("Detail");
 		visualinteriorscreen.selectSubService("Oksi_Part_SubCategory");
+		visualinteriorscreen.tapCarImage();
 		visualinteriorscreen.tapCarImage();
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		servicepartpopup = selectedservicescreen.clickServicePartCell();
@@ -1603,9 +1592,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Front");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("6.43");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		PriceMatrixScreen pricematrix = vehiclescreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, "PM_New");
@@ -1712,17 +1698,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Oil Cooler");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("2.35");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Driver Seat");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
 		selectedservicescreen.setServicePriceValue("2.5");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
@@ -1733,9 +1713,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Rear Upper");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("5.09");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Back Glass");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.answerQuestionCheckButton();		
 		selectedservicescreen.saveSelectedServiceDetails();
 		
@@ -1758,9 +1735,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Front Lower");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("4.31");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
