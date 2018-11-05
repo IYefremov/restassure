@@ -64,7 +64,16 @@
       "service": {"serviceName": "Battery Installation"
       }
     }
-  ]
+  ],
 
+  "testVerifyUserCantEditWOInStateFinal": [
+    {
+      "rowID": "testVerifyUserCantEditWOInStateFinal.01",
+      "description": "Test Case 80708:Verify user can't edit WO in state Final",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ]
 
 }

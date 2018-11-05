@@ -166,8 +166,6 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         Assert.assertEquals(workordersscreen.getWorkOrderStatusValue(woNumber),
                 WorkOrderStatuses.DRAFT.getWorkOrderStatusValue());
 
-
-
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
         workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleinfoscreen.changeScreen("Services");
@@ -177,6 +175,32 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
 
         Assert.assertEquals(workordersscreen.getWorkOrderStatusValue(woNumber),
                 WorkOrderStatuses.APPROVED.getWorkOrderStatusValue());
+        workordersscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCantEditWOInStateFinal(String rowID,
+                                                                          String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+        wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
+        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
+        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        Assert.assertFalse(workOrdersMenuScreen.isEditWorkOrderMenuButtonExists());
+        workOrdersMenuScreen.clickCloseWorkOrdersMenuButton();
+        Assert.assertEquals(workordersscreen.getWorkOrderStatusValue(woNumber),
+                WorkOrderStatuses.APPROVED.getWorkOrderStatusValue());
+
         workordersscreen.clickBackButton();
     }
 }

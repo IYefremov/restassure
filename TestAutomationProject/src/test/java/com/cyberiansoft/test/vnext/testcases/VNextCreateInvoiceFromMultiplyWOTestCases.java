@@ -46,6 +46,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.selectWorkOrder(wonumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSingleInvoiceButton();
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
 		for (String wonumber : workOrders) {
 			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
@@ -99,6 +101,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.selectWorkOrder(wonumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSingleInvoiceButton();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
@@ -155,6 +159,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.selectWorkOrder(wonumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSingleInvoiceButton();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
@@ -213,6 +219,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.selectWorkOrder(wonumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSingleInvoiceButton();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
@@ -235,6 +243,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.selectWorkOrder(wonumber);
 		
 		workordersscreen.clickCreateInvoiceIcon();
+		informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSingleInvoiceButton();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.clickScreenBackButton();
 		workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
@@ -275,6 +285,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.selectWorkOrder(wonumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSingleInvoiceButton();
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
 		for (String wonumber : workOrders) {
 			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
@@ -330,6 +342,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.selectWorkOrder(wonumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSingleInvoiceButton();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.selectCustomer(testcustomers[1]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);

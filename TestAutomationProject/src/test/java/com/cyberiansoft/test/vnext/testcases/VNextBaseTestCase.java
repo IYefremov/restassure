@@ -98,8 +98,8 @@ public class VNextBaseTestCase {
 			AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
 			//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 			if (VNextConfigInfo.getInstance().installNewBuild()) {
-				//DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.ReconProClient");
-				DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.repair360");
+				DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.ReconProClient");
+				//DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.repair360");
 				DriverBuilder.getInstance().getAppiumDriver().quit();
 				//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 				AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());

@@ -9,6 +9,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.extentreportproviders.ExtentTestManager;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -125,6 +126,7 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Employee employee = ((VNextBaseTestCase) result.getInstance()).getDeviceEmployee();
 		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+		new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 	}
 
 	@Override

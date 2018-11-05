@@ -57,6 +57,10 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
         return appiumdriver.findElement(By.xpath("//a[@handler='_deleteWorkOrder']")).isDisplayed();
     }
 
+    public boolean isEditWorkOrderMenuButtonExists() {
+        return appiumdriver.findElement(By.xpath("//a[@data-name='edit']")).isDisplayed();
+    }
+
     public VNextWorkOrdersScreen clickCloseWorkOrdersMenuButton() {
         clickCloseMenuButton();
         return new VNextWorkOrdersScreen(appiumdriver);

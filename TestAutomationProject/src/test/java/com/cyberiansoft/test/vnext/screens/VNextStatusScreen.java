@@ -45,6 +45,9 @@ public class VNextStatusScreen extends VNextBaseScreen {
 				VNextAlertMessages.DATA_HAS_BEEN_DOWNLOADED_SECCESSFULY + "']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
+
+		if (elementExists("//span[Text()='Start sync']"))
+			tap(appiumdriver.findElement(By.xpath("//span[text()='Start sync']")));
 		Employee employee = null;
 		try {
 			employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/team-device-employee.json"), Employee.class);
@@ -67,8 +70,9 @@ public class VNextStatusScreen extends VNextBaseScreen {
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
 
-		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
-		return loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+		//VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		//return loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+		return clickBackButton();
 	}
 	
 	public void clickUpdateAppdata() {

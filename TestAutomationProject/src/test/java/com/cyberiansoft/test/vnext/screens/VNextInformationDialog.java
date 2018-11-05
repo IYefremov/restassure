@@ -155,4 +155,8 @@ public class VNextInformationDialog extends VNextBaseScreen {
 		tap(modaldlg.findElement(By.xpath(".//span[ text()='Final']")));
 	}
 
+	public void clickSingleInvoiceButton() {
+		tap(modaldlg.findElement(By.xpath(".//span[ text()='Single Invoice']")));
+	}
+
 }
