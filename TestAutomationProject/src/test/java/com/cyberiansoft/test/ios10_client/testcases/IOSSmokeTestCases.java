@@ -1004,8 +1004,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		ServicesScreen servicesscreen = new ServicesScreen();
 		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(iOSInternalProjectConstants.WHEEL_SERVICE, "$70.00 x 3.00"));
 		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(iOSInternalProjectConstants.BUNDLE1_DISC_EX, "$150.00"));
+        SelectedServiceDetailsScreen selectedservicedetailsscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		selectedservicedetailsscreen.selectBundle(iOSInternalProjectConstants.DYE_SERVICE);
+		selectedservicedetailsscreen.changeBundleQuantity(iOSInternalProjectConstants.WHEEL_SERVICE, "2");
+        selectedservicedetailsscreen.saveSelectedServiceDetails();
+		selectedservicedetailsscreen.saveSelectedServiceDetails();
+
 		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues("Quest_Req_Serv", "$10.00 x 1.00"));
-		SelectedServiceDetailsScreen selectedservicedetailsscreen = servicesscreen.openServiceDetails("Quest_Req_Serv");
+		selectedservicedetailsscreen = servicesscreen.openServiceDetails("Quest_Req_Serv");
 		selectedservicedetailsscreen.answerTaxPoint1Question("Test Answer 1");
 		selectedservicedetailsscreen.saveSelectedServiceDetails();
 		singlepageinspectionscreen = new SinglePageInspectionScreen();
@@ -1623,7 +1629,15 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DISC_EX_SERVICE1));
 		// =====================================
-		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		//servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		SelectedServiceBundleScreen selectedservicebundlescreen = new SelectedServiceBundleScreen();
+		selectedservicebundlescreen.selectBundle(iOSInternalProjectConstants.DYE_SERVICE);
+		selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.WHEEL_SERVICE);
+		selectedservicescreen = new SelectedServiceDetailsScreen();
+		selectedservicescreen.setServiceQuantityValue("2.00");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
 		// =====================================
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
@@ -4066,8 +4080,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 34562:WO: Verify that Bundle Items are shown when create WO from inspection", description = "WO: Verify that Bundle Items are shown when create WO from inspection")
-	public void testWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection()
-			throws Exception {
+	public void testWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection() {
 		
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -4094,8 +4107,14 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 
 		ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		//servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+
+        servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+        SelectedServiceDetailsScreen selectedservicedetailsscreen = new SelectedServiceDetailsScreen();
+        selectedservicedetailsscreen.changeAmountOfBundleService("70");
+        selectedservicedetailsscreen.saveSelectedServiceDetails();
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
+		servicesscreen = new ServicesScreen();
 		servicesscreen.saveWizard();
 		
 		myinspectionsscreen.approveInspectionAllServices(inspnumber,
@@ -4104,7 +4123,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
                 WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.openServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
-		SelectedServiceBundleScreen selectedservicebundlescreen = new SelectedServiceBundleScreen();
+        SelectedServiceBundleScreen selectedservicebundlescreen = new SelectedServiceBundleScreen();
 		Assert.assertTrue(selectedservicebundlescreen.checkBundleIsSelected(iOSInternalProjectConstants.WHEEL_SERVICE));
 		Assert.assertTrue(selectedservicebundlescreen.checkBundleIsNotSelected(iOSInternalProjectConstants.DYE_SERVICE));
 		selectedservicebundlescreen.clickServicesIcon();
@@ -4711,7 +4730,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 33117:Inspections: HD - Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)", 
 			description = "Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)")
-	public void testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped() throws Exception {
+	public void testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -4728,7 +4747,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setVIN(VIN);
 		final String inspnumber = vehiclescreen.getInspectionNumber();
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		//servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		servicedetailsscreen.answerQuestion2("A1");
 		servicedetailsscreen.saveSelectedServiceDetails();
@@ -4747,7 +4766,8 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicesscreen.cancelSearchAvailableService();
 		
 		servicesscreen.searchAvailableService(iOSInternalProjectConstants.SR_S4_BUNDLE);
-		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S4_BUNDLE);	
+		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S4_BUNDLE);
+        servicedetailsscreen.changeAmountOfBundleService("100");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);	
@@ -4814,10 +4834,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33154:Inspections: HD - Verify that it is possible to approve Team Inspections use multi select", 
 			description = "Verify that it is possible to approve Team Inspections use multi select")
-	public void testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect() throws Exception {
+	public void testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
-		List<String> inspnumbers = new ArrayList<String>();
+		List<String> inspnumbers = new ArrayList<>();
 		
 		homescreen = new HomeScreen();
 		SettingsScreen settingscreen = homescreen.clickSettingsButton();
@@ -4834,6 +4854,10 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			inspnumbers.add(vehiclescreen.getInspectionNumber());
 			ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+            SelectedServiceDetailsScreen servicedetailsscreen = new SelectedServiceDetailsScreen();
+            servicedetailsscreen.changeAmountOfBundleService("100");
+            servicedetailsscreen.saveSelectedServiceDetails();
+			servicesscreen = new ServicesScreen();
 			servicesscreen.clickSaveAsFinal();
 			myinspectionsscreen = new MyInspectionsScreen();
 		}
