@@ -43,7 +43,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		// String initialpagenumber = invoicespage.getLastPageNumber();
 		invoicespage.setPageSize("1");
-		Assert.assertEquals(1, invoicespage.getInvoicesTableRowCount());
+		Assert.assertEquals(invoicespage.getInvoicesTableRowCount(), 1);
 		int numberofrows = Integer.valueOf(invoicespage.getLastPageNumber());
 
 		String lastpagenumber = invoicespage.getLastPageNumber();
@@ -311,12 +311,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workorderspage.selectSearchStatus("All");		
 		workorderspage.clickFindButton();
 
-		if (invoiceNumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoiceNumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		if (invoiceNumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoiceNumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 
 		operationspage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
@@ -378,12 +378,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
 
-		if (invoiceNumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoiceNumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		if (invoiceNumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoiceNumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 
 		operationspage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
@@ -444,12 +444,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
 
-		if (invoiceNumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoiceNumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		if (invoiceNumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoiceNumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 
 		operationspage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
@@ -510,12 +510,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workOrdersPage.selectSearchStatus("All");
 		workOrdersPage.clickFindButton();
 
-		if (invoiceNumber.equals("")) {
-			workOrdersPage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
-			workOrdersPage.setSearchOrderNumber(wonum);
-			workOrdersPage.clickFindButton();
-			invoiceNumber = workOrdersPage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		if (invoiceNumber.equals("")) {
+//			workOrdersPage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
+//			workOrdersPage.setSearchOrderNumber(wonum);
+//			workOrdersPage.clickFindButton();
+//			invoiceNumber = workOrdersPage.getWorkOrderInvoiceNumber(wonum);
+//		}
 
 		operationspage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
@@ -577,12 +577,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		workorderspage.selectSearchStatus("All");
 		workorderspage.clickFindButton();
 
-		if (invoiceNumber.equals("")) {
-			workorderspage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
-			workorderspage.setSearchOrderNumber(wonum);
-			workorderspage.clickFindButton();
-			invoiceNumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
-		}
+//		if (invoiceNumber.equals("")) {
+//			workorderspage.createInvoiceFromWorkOrder(wonum, data.getPoNum());
+//			workorderspage.setSearchOrderNumber(wonum);
+//			workorderspage.clickFindButton();
+//			invoiceNumber = workorderspage.getWorkOrderInvoiceNumber(wonum);
+//		}
 
 		operationspage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();

@@ -181,18 +181,18 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	public void verifyRepairOrdersTableColumnsAreVisible() {
 		Assert.assertTrue(repairorderstable.tableColumnExists("!"));
 		Assert.assertTrue(repairorderstable.tableColumnExists("Flag"));
-		Assert.assertEquals(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[3]")).getText(), "Order /\nType");
+		Assert.assertEquals(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[4]")).getText(), "Order /\nType");
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[3]")).isDisplayed());
-		Assert.assertEquals(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[4]")).getText(), "Customer /\nVehicle /\nVIN#");
-		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[4]")).isDisplayed());
+		Assert.assertEquals(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[5]")).getText(), "Customer /\nVehicle /\nVIN#");
+		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[5]")).isDisplayed());
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//a[text()='Stock# / RO#']")).isDisplayed());
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//a[text()='Amount']")).isDisplayed());
-		Assert.assertEquals(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[7]")).getText(), "Start Date /\nTarget Date");
-		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[7]")).isDisplayed());
+		Assert.assertEquals(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[8]")).getText(), "Start Date /\nTarget Date");
+		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[8]")).isDisplayed());
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//a[text()='Active Phase']")).isDisplayed());
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//a[text()='Completed(%)']")).isDisplayed());
-		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[10]")).isDisplayed());
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[11]")).isDisplayed());
+		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[12]")).isDisplayed());
 	}
 	
 	public WebElement getTableRowWithRepairOrder(String wo) {
@@ -200,7 +200,10 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		for (WebElement row : rows) {
 		    try {
 //                if (row.findElement(By.xpath(".//td[3]/a")).getText().equals(wo)) {
-                if (row.findElement(By.xpath(".//td[" + repairorderstable.getTableColumnIndex("Order /\nType") + "]/a")).getText().equals(wo)) {
+                if (row.findElement(By.xpath(".//td[" + repairorderstable
+                        .getTableColumnIndex("Order /\nType") + "]/a"))
+                        .getText()
+                        .equals(wo)) {
                     return row;
                 }
             } catch (NoSuchElementException | StaleElementReferenceException e) {
@@ -223,7 +226,9 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	public VendorOrderServicesWebPage clickOnWorkOrderLinkInTable(String wo) {
 		WebElement row = getTableRowWithRepairOrder(wo);
 		if (row != null) {
-			row.findElement(By.xpath(".//td[" + repairorderstable.getTableColumnIndex("Order /\nType") + "]/a[contains(text(), '" + wo + "')]")).click();
+			row.findElement(By.xpath(".//td[" + repairorderstable
+                    .getTableColumnIndex("Order /\nType") + "]/a[contains(text(), '" + wo + "')]"))
+                    .click();
 		} else {
             Assert.fail("Can't find " + wo + " repair order");
 		}
@@ -232,8 +237,10 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	}
 	
 	public void verifyTableCustomerAndVinColumnValuesAreVisible(String customer, String vin) {
-		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tbody/tr/td/div/span[contains(text(), '" + customer + "')]")).isDisplayed());
-		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tbody/tr/td/div/div[contains(text(), '" + vin + "')]")).isDisplayed());
+		Assert.assertTrue(repairorderstable.getWrappedElement()
+                .findElement(By.xpath(".//tbody/tr/td/div/span[contains(text(), '" + customer + "')]")).isDisplayed());
+		Assert.assertTrue(repairorderstable.getWrappedElement()
+                .findElement(By.xpath(".//tbody/tr/td/div/div[contains(text(), '" + vin + "')]")).isDisplayed());
 	}
 	
 	public void openFullDisplayWOMonitorAndVerifyContent() {
@@ -255,12 +262,11 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='ActiveTechnicians']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='Completed']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='OrderDescription']")).isDisplayed());
-			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("fullGrid")).findElement(By.xpath("./table/tbody/tr[2]"))));
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("fullGrid"))
+                    .findElement(By.xpath("./table/tbody/tr[2]"))));
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 	}
-	
-
 }

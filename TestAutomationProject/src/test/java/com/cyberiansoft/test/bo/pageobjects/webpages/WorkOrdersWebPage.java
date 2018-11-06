@@ -292,7 +292,10 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		if (row != null) {
 			waitABit(2000);
 			// + wotable.getTableColumnIndex("Invoice#") +
-			invoicenum = row.findElements(By.className("entity-link")).get(1).getText();
+			invoicenum = wait
+                    .until(ExpectedConditions.visibilityOfAllElements(row.findElements(By.className("entity-link"))))
+                    .get(1)
+                    .getText();
 
 		} else {
 			Assert.assertTrue(false, "Can't find " + wonumber + " work order");

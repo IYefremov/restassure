@@ -64,7 +64,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.setSearchVIN(data.getVIN());
 		repairorderspage.setSearchWoNumber(data.getWoNumber());
 		repairorderspage.clickFindButton();
-		Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(repairorderspage.getRepairOrdersTableRowCount()));
+		Assert.assertEquals(1, repairorderspage.getRepairOrdersTableRowCount());
 		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(data.getWoNumber()));
 		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible(data.getCompany(), data.getVIN());
 	}
@@ -314,7 +314,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkMonitorKanbanAutoRefresh(String rowID, String description, JSONObject testData) {
+    public void checkMonitorWhiteBoardAutoRefresh(String rowID, String description, JSONObject testData) {
 
         BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -327,7 +327,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(whiteBoardPage.checkSearhResultColumns());
 		Assert.assertFalse(whiteBoardPage.checkIntervalFieldLessThan(5));
 		Assert.assertFalse(whiteBoardPage.checkIntervalFieldOverThan(720));
-		Assert.assertFalse(whiteBoardPage.checkIntervalFieldInputSymbol("a"));
+        Assert.assertFalse(whiteBoardPage.checkIntervalFieldInputSymbol("a"));
 		Assert.assertTrue(whiteBoardPage.checkIntervalField(6));
 	}
 

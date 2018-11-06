@@ -56,7 +56,8 @@ public class WhiteBoardWebPage extends BaseWebPage {
 	}
 
 	public boolean checkIntervalFieldLessThan(int intervalBorder) {
-		intervalField.clear();
+        setAttribute(intervalField, "value", "");
+        wait.until(ExpectedConditions.elementToBeClickable(intervalField)).clear();
 
 		intervalField.sendKeys(String.valueOf(intervalBorder - 1));
         try {
@@ -66,11 +67,19 @@ public class WhiteBoardWebPage extends BaseWebPage {
             searchButton.click();
         }
 		waitForLoading();
-        return !intervalField.getAttribute("value").equals(String.valueOf(intervalBorder));
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(intervalField));
+        } catch (Exception e) {
+            waitABit(3000);
+        }
+        return !wait.until(ExpectedConditions.elementToBeClickable(intervalField))
+                .getAttribute("value")
+                .equals(String.valueOf(intervalBorder));
     }
 
 	public boolean checkIntervalFieldOverThan(int intervalBorder) {
-		intervalField.clear();
+        setAttribute(intervalField, "value", "");
+        wait.until(ExpectedConditions.elementToBeClickable(intervalField)).clear();
 
 		intervalField.sendKeys(Integer.toString(intervalBorder + 1));
         try {
@@ -80,11 +89,19 @@ public class WhiteBoardWebPage extends BaseWebPage {
             searchButton.click();
         }
         waitForLoading();
-        return !intervalField.getAttribute("value").equals(String.valueOf(intervalBorder));
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(intervalField));
+        } catch (Exception e) {
+            waitABit(3000);
+        }
+        return !wait.until(ExpectedConditions.elementToBeClickable(intervalField))
+                .getAttribute("value")
+                .equals(String.valueOf(intervalBorder));
     }
 
 	public boolean checkIntervalFieldInputSymbol(String string) {
-		intervalField.clear();
+        setAttribute(intervalField, "value", "");
+        wait.until(ExpectedConditions.elementToBeClickable(intervalField)).clear();
 
 		intervalField.sendKeys(string);
         try {
@@ -94,13 +111,21 @@ public class WhiteBoardWebPage extends BaseWebPage {
             searchButton.click();
         }
 		waitForLoading();
-        return intervalField.getAttribute("value").equals(string);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(intervalField));
+        } catch (Exception e) {
+            waitABit(3000);
+        }
+        return wait.until(ExpectedConditions.elementToBeClickable(intervalField))
+                .getAttribute("value")
+                .equals(string);
     }
 
 	public boolean checkIntervalField(int interval) {
-		intervalField.clear();
+        setAttribute(intervalField, "value", "");
+        wait.until(ExpectedConditions.elementToBeClickable(intervalField)).clear();
 
-		intervalField.sendKeys(Integer.toString(interval));
+        wait.until(ExpectedConditions.elementToBeClickable(intervalField)).sendKeys(Integer.toString(interval));
         try {
             wait.until(ExpectedConditions.elementToBeClickable(autoRefreshButton)).click();
         } catch (Exception e) {
@@ -108,6 +133,18 @@ public class WhiteBoardWebPage extends BaseWebPage {
             autoRefreshButton.click();
         }
         waitForLoading();
-        return intervalField.getAttribute("value").equals(String.valueOf(interval));
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(intervalField));
+        } catch (Exception e) {
+            waitABit(3000);
+        }
+        try {
+            return wait.until(ExpectedConditions.elementToBeClickable(intervalField))
+                    .getAttribute("value")
+                    .equals(String.valueOf(interval));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 }

@@ -29,7 +29,7 @@ public class WebPageWithPagination extends BaseWebPage {
 	@FindBy(xpath = "//div[@class='rgWrap rgNumPart']")
 	private WebElement paginations;
 	
-	@FindBy(xpath = "//input[contains(@id, 'ChangePageSizeTextBox')]")
+	@FindBy(xpath = "//input[contains(@id, 'ChangePageSizeTextBox')][1]")
 	private WebElement pagesizefld;
 		
 	@FindBy(xpath = "//*[contains(@id, 'ChangePageSizeLinkButton')]")
@@ -75,10 +75,19 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 	
 	public void setPageSize(String pageSize) {
-		wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).clear();
+        setAttribute(pagesizefld, "value", "");
+        wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).clear();
         wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).sendKeys(pageSize);
         pagesizefld.sendKeys(Keys.ENTER);
-		waitForLoading();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(changesizebtn)).click();
+        } catch (WebDriverException e) {
+            wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(changesizebtn));
+            clickWithJS(changesizebtn);
+        }
+        waitForLoading();
     }
 	
 	public void clickGoToLastPage() {
@@ -96,9 +105,13 @@ public class WebPageWithPagination extends BaseWebPage {
 		} else {
 			gotolastpage.click();
 		}
-		wait.until(ExpectedConditions.visibilityOf(updateProcess));
-		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
-		waitForLoading();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(updateProcess));
+            wait.until(ExpectedConditions.invisibilityOf(updateProcess));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        waitForLoading();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber()  + "']")));
 		wait.withTimeout(30, TimeUnit.SECONDS);
 	}

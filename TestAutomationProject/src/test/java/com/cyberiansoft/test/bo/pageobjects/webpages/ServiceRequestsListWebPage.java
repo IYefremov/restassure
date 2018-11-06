@@ -378,8 +378,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		PageFactory.initElements(driver, WebPageWithPagination.class);
 
-        userName = BOConfigInfo.getInstance().getUserName();
-        userPassword = BOConfigInfo.getInstance().getUserPassword();
+        userName = BOConfigInfo.getInstance().getUserNadaName();
+        userPassword = BOConfigInfo.getInstance().getUserNadaPassword();
 	}
 
 	public boolean searchPanelIsExpanded() {

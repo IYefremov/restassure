@@ -3,11 +3,10 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
-import com.cyberiansoft.test.bo.utils.MailChecker;
 import com.cyberiansoft.test.dataclasses.bo.BOoperationsSRdata;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.email.EmailUtils;
+import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -20,21 +19,14 @@ import java.util.Random;
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOoperationsSRdata.json";
-    private EmailUtils emailUtils;
-    private MailChecker mailChecker;
+    private NadaEMailService nada;
 
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
-        mailChecker = new MailChecker();
+        nada = new NadaEMailService();
+        nada.setEmailId(BOConfigInfo.getInstance().getUserNadaName());
     }
-//        try {
-//            emailUtils = new EmailUtils(EmailHost.GMAIL, BOConfigInfo.getInstance().getUserName(),
-//                    BOConfigInfo.getInstance().getUserPassword(), EmailFolder.INBOX);
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testOperationNewServiceRequestAppointmentWholesale(String rowID, String description, JSONObject testData) {
@@ -454,7 +446,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		backOfficeHeader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+		loginpage.UserLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
 		backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		servicerequestslistpage = operationspage.clickNewServiceRequestList();
@@ -1082,6 +1074,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+// todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
 //                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
@@ -1123,8 +1121,15 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-//todo fails
-//        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
+
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
+
+		//        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
 //                "Could not find email message with subject containing " + data.getEmailKeyWord());
 
         miscellaneouspage = backOfficeHeader.clickMiscellaneousLink();
@@ -1171,6 +1176,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
 
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
+
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
 //                "Could not find email message with subject containing " + data.getEmailKeyWord());
 
@@ -1181,7 +1193,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMiscellaneousEventsAppointmentCreated(String rowID, String description, JSONObject testData) {
+    public void testMiscellaneousEventsAppointmentCreated(String rowID, String description, JSONObject testData) throws Exception {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -1213,6 +1225,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 //        Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()) || mailChecker.checkTestEmails());
+
+// todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
 //                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
@@ -1255,6 +1274,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
+// todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
 //                "Could not find email message with subject containing " + data.getEmailKeyWordWasCreated());
@@ -1296,6 +1321,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
+
 //		Assert.assertTrue(
 //				mailChecker.checkTestEmails() || mailChecker.checkEmails(data.getEmailKeyWord()));
 //todo fails
@@ -1339,6 +1371,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
+
 //		Assert.assertTrue(mailChecker.checkTestEmails()
 //				|| mailChecker.checkEmails(data.getEmailKeyWord()));
 
@@ -1382,6 +1422,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
+
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()));
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1424,6 +1472,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
+
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordRemainder()) || mailChecker.checkTestEmails());
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1466,6 +1521,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
+
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
+
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()));
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1508,6 +1571,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.addAppointmentWithTechnician(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
+
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()) || mailChecker.checkTestEmails());
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1553,9 +1623,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
 		serviceRequestsWebPage.switchToServiceRequestInfoFrame();
 		serviceRequestsWebPage.saveNewServiceRequest();
-//		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
+        // todo uncomment after BO will be configured.
+//        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
+//                new NadaEMailService.MailSearchParametersBuilder()
+//                        .withSubject(data.getEmailKeyWordWasCreated());
+//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        System.out.println("MESSAGE:\n"+ mailmessage);
 
-        
+//		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
 //                "Could not find email message with subject containing " + data.getEmailKeyWord());
 

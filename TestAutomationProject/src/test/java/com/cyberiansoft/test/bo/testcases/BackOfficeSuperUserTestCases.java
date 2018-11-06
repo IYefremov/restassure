@@ -38,8 +38,8 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		
 		String lastpagenumber = allUsersPage.getLastPageNumber();
 		allUsersPage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, allUsersPage.getGoToPageFieldValue());
-		
+		Assert.assertEquals(lastpagenumber, allUsersPage.getGoToPageFieldValue().replaceAll(",", ""));
+
 		allUsersPage.clickGoToFirstPage();
 		Assert.assertEquals("1", allUsersPage.getGoToPageFieldValue());
 		

@@ -115,9 +115,9 @@
     }
   ],
   
-  "checkMonitorKanbanAutoRefresh": [
+  "checkMonitorWhiteBoardAutoRefresh": [
     {
-      "rowID": "checkMonitorKanbanAutoRefresh.01",
+      "rowID": "checkMonitorWhiteBoardAutoRefresh.01",
       "description": "Test Case 64965:Monitor - Kanban: Auto Refresh ON OFF",
       "searchLocation": "Default Location"
     }

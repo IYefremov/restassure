@@ -224,14 +224,11 @@ public abstract class BaseWebPage {
 	}
 
 	public void labeledCheckBoxSelect(WebElement checkbox) {
-        if (!isCheckboxChecked(checkbox))
-            if (getBrowserType().contains("firefox")) {
-                WebElement parent = checkbox.findElement(By.xpath("parent::*"));
-                parent.findElement(By.xpath("./label")).click();
-        } else {
-            checkbox.click();
+        if (!isCheckboxChecked(checkbox)) {
+            WebElement parent = checkbox.findElement(By.xpath("parent::*"));
+            parent.findElement(By.xpath("./label")).click();
         }
-	}
+    }
 
     public void waitForLoading(){
         waitForLoadingToBegin();
@@ -264,7 +261,7 @@ public abstract class BaseWebPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
                 element, attribute, value);
         try {
-            waitShort.until(ExpectedConditions.attributeContains(element, attribute, value));
+            waitShort.until(ExpectedConditions.attributeContains(element, attribute, null));
         } catch (Exception ignored) {}
     }
 

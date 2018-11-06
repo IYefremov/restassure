@@ -43,6 +43,10 @@ public class BOConfigInfo {
 	      return props.getProperty("user.name");
 	}
 
+	public String getUserNadaName() {
+	      return props.getProperty("user.nada.name");
+	}
+
 	public String getAlternativeUserName() {
 	      return props.getProperty("alternative.user.name");
 	}
@@ -53,6 +57,10 @@ public class BOConfigInfo {
 
 	public String getUserPassword() {
 	      return props.getProperty("user.password");
+	}
+
+	public String getUserNadaPassword() {
+	      return props.getProperty("user.nada.password");
 	}
 
 	public String getAlternativeUserPassword() {

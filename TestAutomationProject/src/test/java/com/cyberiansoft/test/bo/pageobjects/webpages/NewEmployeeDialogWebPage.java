@@ -162,7 +162,9 @@ public class NewEmployeeDialogWebPage extends BaseWebPage {
 	public void selectNewEmployeeCountry(String employeecountry) {
 		selectComboboxValue(employeecountrycmb, employeecountrydd, employeecountry);
 		waitForLoading();
-        Assert.assertEquals(employeecountrycmb.getSelectedValue(), employeecountry);
+        Assert.assertEquals(employeecountrycmb.getSelectedValue()
+                .replaceAll("\\u00A0", "")
+                .trim(), employeecountry);
     }
 	
 	public String getNewEmployeeCountry() {
