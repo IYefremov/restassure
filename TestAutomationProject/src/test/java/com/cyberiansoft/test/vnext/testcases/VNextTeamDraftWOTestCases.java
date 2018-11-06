@@ -203,4 +203,35 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
 
         workordersscreen.clickBackButton();
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanEditWOIfDraftModeEqualsOFF(String rowID,
+                                                     String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+        wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR2);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
+        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
+        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleinfoscreen.changeScreen("Services");
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+        availableServicesScreen.selectService(workOrderData.getServiceName());
+        availableServicesScreen.saveWorkOrderViaMenu();
+
+        Assert.assertEquals(workordersscreen.getWorkOrderStatusValue(woNumber),
+                WorkOrderStatuses.APPROVED.getWorkOrderStatusValue());
+        workordersscreen.clickBackButton();
+
+    }
 }

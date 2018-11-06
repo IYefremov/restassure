@@ -74,6 +74,18 @@
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
+  ],
+
+  "testVerifyUserCanEditWOIfDraftModeEqualsOFF": [
+    {
+      "rowID": "testVerifyUserCanEditWOIfDraftModeEqualsOFF.01",
+      "description": "Test Case 80709:Verify user can edit WO if draft mode = OFF.",
+      "workOrderType": "O_Kramar2",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "service": {"serviceName": "Battery Installation"
+      }
+    }
   ]
 
 }

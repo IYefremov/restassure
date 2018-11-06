@@ -116,6 +116,10 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if ( !getTestParams(result).isEmpty() ) {
 			extentTest.get().log(Status.INFO, "STACKTRACE" + getStrackTrace(result));
 		}
