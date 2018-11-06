@@ -176,6 +176,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 			return false;
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
+		wait = new WebDriverWait(appiumdriver, 30);
+		//return !wait.until(ExpectedConditions.invisibilityOf(inspectionslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']"))));
 		return inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']")).size() > 0;
 	}
 	

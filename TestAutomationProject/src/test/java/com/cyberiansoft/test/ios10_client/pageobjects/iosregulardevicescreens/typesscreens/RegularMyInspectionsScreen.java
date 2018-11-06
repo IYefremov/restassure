@@ -90,7 +90,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("InspectionsTable")));
 	}
 
-	public void clickAddInspectionButton() throws InterruptedException {
+	public void clickAddInspectionButton() {
 		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(By.name("Add")).click();
 		if (elementExists("Discard")) {
 			appiumdriver.findElementByAccessibilityId("Discard").click();
@@ -161,10 +161,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 
-	public boolean isCreateWOButtonDisplayed() {
-		return appiumdriver.findElementsByAccessibilityId("Create\nWO").size() > 0;
-	}
-
 	public void clickArchiveInspectionButton() {
 		appiumdriver.findElementByAccessibilityId("Archive").click();
 		waitForAlert();
@@ -210,7 +206,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void selectFirstInspection() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='InspectionsTable']/XCUIElementTypeCell[1]"))).click();;
+        wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='InspectionsTable']/XCUIElementTypeCell[1]"))).click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='MyInspectionsTable']/XCUIElementTypeCell[1]").click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='MyInspectionsTable']/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionNumber']").click();
 		//firstinspection.click();
@@ -309,9 +305,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("Show\nWOs").click();
 	}
 
-	public void clickCloseFilterDialogButton() {
-		appiumdriver.findElementByAccessibilityId("Close").click();
-	}
 
 	public void clickSaveFilterDialogButton() {
 		appiumdriver.findElementByAccessibilityId("Save").click();

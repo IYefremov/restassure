@@ -302,7 +302,7 @@ public abstract class Helpers {
 		waitABit(1000);
 	}
 	
-	public static void tapRegularCarImage() throws InterruptedException {
+	public static void tapRegularCarImage() {
 		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
 		MobileElement element = DriverBuilder.getInstance().getAppiumDriver()
 				.findElementByXPath("//XCUIElementTypeImage");
@@ -312,10 +312,10 @@ public abstract class Helpers {
 		action.tap(element(element, x, y)).perform();
 		
 		//element.tap(1, x, y, 1000);
-		Thread.sleep(1000);
+		waitABit(1000);
 	}
 	
-	public static void drawRegularQuestionsSignature() throws InterruptedException {
+	public static void drawRegularQuestionsSignature() {
 		MobileElement element = DriverBuilder.getInstance().getAppiumDriver()
 				.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeStaticText[1]");
 		element.click();
@@ -332,7 +332,7 @@ public abstract class Helpers {
 		DriverBuilder.getInstance().getAppiumDriver().findElementByAccessibilityId("Done").click();
 	}
 	
-	public static void drawQuestionsSignature() throws InterruptedException {
+	public static void drawQuestionsSignature() {
 		MobileElement element = DriverBuilder.getInstance().getAppiumDriver()
 				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[2]");
 		element.click();
@@ -374,8 +374,8 @@ public abstract class Helpers {
 		keyboadrType(vin + "\n");
 	}
 
-	public static void makeCapture() throws InterruptedException {
-		Thread.sleep(2000);
+	public static void makeCapture()  {
+		waitABit(2000);
 		if (elementExists(By.xpath("//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[1]/UIAButton[@name=\"OK\"]"))) {
 			DriverBuilder.getInstance().getAppiumDriver()
 					.findElementByXPath("//UIAAlert[1]/UIACollectionView[1]/UIACollectionCell[1]/UIAButton[@name=\"OK\"]")

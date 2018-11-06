@@ -13,11 +13,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 	
@@ -45,7 +42,7 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 
 
 
-		FileWriter fileWriter = new FileWriter("data/memory.csv", true);
+		/*FileWriter fileWriter = new FileWriter("data/memory.csv", true);
 		fileWriter.append(getClass().getName() + "_start" + ",");
 		HashMap<String, Integer> memoryInfo = getMemoryInfo((AndroidDriver) appiumdriver);
 		Iterator it = memoryInfo.entrySet().iterator();
@@ -55,12 +52,12 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 		}
 		fileWriter.append("\r\n");
 		fileWriter.flush();
-		fileWriter.close();
+		fileWriter.close();*/
 	}
 
 	@AfterTest
 	public void beforeTest(ITestContext context) throws Exception {
-		FileWriter fileWriter = new FileWriter("data/memory.csv", true);
+		/*FileWriter fileWriter = new FileWriter("data/memory.csv", true);
 		fileWriter.append(getClass().getName() + "_end" + ",");
 		HashMap<String, Integer> memoryInfo = getMemoryInfo((AndroidDriver) appiumdriver);
 		Iterator it = memoryInfo.entrySet().iterator();
@@ -70,7 +67,7 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 		}
 
 		fileWriter.flush();
-		fileWriter.close();
+		fileWriter.close();*/
 	}
 
 

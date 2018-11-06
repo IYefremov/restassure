@@ -71,7 +71,7 @@ public class VNextBaseTestCase {
 	protected static String appID;
 	protected static String appLicenseEntity;
 
-	private ThreadLocal<AppiumDriverLocalService> service = new ThreadLocal<AppiumDriverLocalService>();
+	private ThreadLocal<AppiumDriverLocalService> service = new ThreadLocal<>();
 	
 	@BeforeSuite
 	@Parameters("appium.path")
@@ -99,6 +99,7 @@ public class VNextBaseTestCase {
 			//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 			if (VNextConfigInfo.getInstance().installNewBuild()) {
 				DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.ReconProClient");
+				//DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.repair360");
 				DriverBuilder.getInstance().getAppiumDriver().quit();
 				//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
 				AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());

@@ -12,7 +12,6 @@ import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.vnext.apiutils.VNextAPIUtils;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -47,13 +46,13 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 	
 	@BeforeClass(description="Team Inspections Test Cases")
 	public void beforeClass() throws Exception {
-		inspectionDTOs = VNextAPIUtils.getInstance().generateInspections("team-base-inspection-data1.json",
+		/*inspectionDTOs = VNextAPIUtils.getInstance().generateInspections("team-base-inspection-data1.json",
 				InspectionTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
 				appLicenseEntity, 30
 		);
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
-		statusScreen.updateMainDB();
+		statusScreen.updateMainDB();*/
 
 	}
 	
@@ -666,6 +665,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
+
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.switchToTeamInspectionsView();
         inspectionscreen.searchInpectionByFreeText(inspnumber);

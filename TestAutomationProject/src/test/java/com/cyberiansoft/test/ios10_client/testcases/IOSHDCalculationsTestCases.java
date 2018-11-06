@@ -22,16 +22,17 @@ import com.cyberiansoft.test.ios10_client.utils.*;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	private String regCode;
-	public HomeScreen homescreen;
+	private HomeScreen homescreen;
 	
 	@BeforeClass
-	public void setUpSuite() throws Exception {
+	public void setUpSuite() {
 		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
@@ -40,7 +41,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword) throws Exception {
+			String userName, String userPassword) {
 
 		final String searchlicensecriteria = "Vit_Iph";
 
@@ -61,7 +62,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	public void testRegisterationiOSDdevice() throws Exception {
+	public void testRegisterationiOSDdevice() {
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
         DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
         DriverBuilder.getInstance().getAppiumDriver().quit();
@@ -80,7 +81,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	//Test Case 8553:Create inspection on the device with approval required
 	@Test(testName = "Test Case 8553:Create inspection on the device with approval required", description = "Create Inspection On The Device With Approval Required")
 	public void testCreateInspectionOnTheDeviceWithApprovalRequired()
-				throws Exception {
+	{
 		final String VIN = "TESTVINNO";
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
@@ -137,7 +138,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	//Test Case 8435:Create Retail Inspection (HD Single page)	
 	@Test(testName = "Test Case 8435:Create Retail Inspection (HD Single page)", description = "Create Retail Inspection")
-	public void testCreateRetailInspection() throws Exception {
+	public void testCreateRetailInspection() {
 		final String VIN = "ZWERTYASDFEWSDRZG";
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
@@ -230,7 +231,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		final String _quantity = "3.00";
 		final String _quantityexterior = "2.00";
 		final String _inspectionpricevisual = "275";
-		final String _inspectionprice = "325";
+
 
 		//resrtartApplication();	
 		//MainScreen mainscreen = new MainScreen();
@@ -268,7 +269,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 28580:WO: HD - If fee bundle item price policy = 'Panel' then it will be added once for many associated service instances with same vehicle part.", 
 			description = "WO: HD - If fee bundle item price policy = 'Panel' then it will be added once for many associated service instances with same vehicle part.")
 	public void testHDIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart()
-			throws Exception {
+		 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -309,12 +310,12 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
-	String wonumber28583 = null;
+	private String wonumber28583 = null;
 	
 	@Test(testName="Test Case 28583:WO: HD - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity", 
 			description = "WO: HD - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity")
 	public void testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -341,7 +342,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 28583:WO: HD - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity", 
 			description = "WO: HD - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity")
 	public void testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2()
-			throws Exception {
+			 {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -371,7 +372,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 28585:WO: HD - Verify that package price of fee bundle item is override the price of wholesale and retail prices", 
 			description = "WO: HD - Verify that package price of fee bundle item is override the price of wholesale and retail prices")
 	public void testHDVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -396,7 +397,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 28600:WO: HD - If fee bundle item price policy = 'Vehicle' then it will be added once for many associated service instances", 
 			description = "WO: HD - If fee bundle item price policy = 'Vehicle' then it will be added once for many associated service instances.")
 	public void testHDIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -448,7 +449,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 28601:WO: HD -  If fee bundle item price policy = 'Service' or 'Flat Fee' then it will be added to WO every time when associated service instance will add to WO.", 
 			description = "WO: HD - If fee bundle item price policy = 'Service' or 'Flat Fee' then it will be added to WO every time when associated service instance will add to WO.")
 	public void testHDIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -494,7 +495,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 28602:WO: HD - Verify that for Wholesale and Retail customers fee is added depends on the price accordingly to price of the fee bundle item", 
 			description = "WO: HD - Verify that for Wholesale and Retail customers fee is added depends on the price accordingly to price of the fee bundle item")
 	public void testHDVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -536,12 +537,12 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
-	String wonumber29398 = null;
+	private String wonumber29398 = null;
 	
 	@Test(testName="Test Case 29398:WO: HD - Verify that Fee Bundle services is calculated for additional matrix services", 
 			description = "Verify that Fee Bundle services is calculated for additional matrix services")
 	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _pricematrix  = "Roof";
@@ -576,7 +577,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 29398:WO: HD - Verify that Fee Bundle services is calculated for additional matrix services", 
 			description = "Verify that Fee Bundle services is calculated for additional matrix services")
 	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2()
-			throws Exception {
+			 {
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
@@ -605,7 +606,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 30672:WO: HD - Verify that money value of some percentage service is rounds up after 0.095", 
 			description = "HD - Verify that money value of some percentage service is rounds up after 0.095")
 	public void testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String srs1moneyprice  = "40";
@@ -649,7 +650,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 30675:WO: HD - Verify that money value of some percentage service is rounds down after 0.003", 
 			description = "HD - Verify that money value of some percentage service is rounds down after 0.003")
 	public void testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String srs1moneyprice  = "40";
@@ -693,7 +694,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 30676:WO: HD - Verify that money value of some percentage service is rounds up after 0.005", 
 			description = "HD - Verify that money value of some percentage service is rounds up after 0.005")
 	public void testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String srs1moneyprice  = "20";
@@ -734,12 +735,12 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 	
-	String wonumber31498 = null;
+	private String wonumber31498 = null;
 	
 	@Test(testName="Test Case 31498:WO: HD - Verify that amount is calculated and rounded correctly", 
 			description = "Verify that amount is calculated and rounded correctly")
 	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1()
-			throws Exception {
+			{
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String[] prices  = { "160", "105", "400", "195", "2400", "180", "160", "105", "300" };
@@ -765,9 +766,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		selectedservicedetailscreen.setServicePriceValue(discount);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Hood");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
+		//selectedservicedetailscreen.selectVehiclePart("Hood");
+		//selectedservicedetailscreen.saveSelectedServiceDetails();
+		//selectedservicedetailscreen.saveSelectedServiceDetails();
 		
 		servicesscreen.selectService("Tax discount");
 		InspectionToolBar toolaber = new InspectionToolBar();		
@@ -781,7 +782,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 31498:WO: HD - Verify that amount is calculated and rounded correctly", 
 			description = "Verify that amount is calculated and rounded correctly")
 	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2()
-			throws Exception {
+			 {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -805,7 +806,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	String inspectionnumber32226 = null;
+	private String inspectionnumber32226 = null;
 	
 	@Test(testName = "Test Case 32226:Inspections: HD - Verify that inspection is saved as declined when all services are skipped or declined", 
 			description = "Verify that inspection is saved as declined when all services are skipped or declined")
@@ -862,7 +863,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32226:Inspections: HD - Verify that inspection is saved as declined when all services are skipped or declined", 
 			description = "Verify that inspection is saved as declined when all services are skipped or declined")
-	public void testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2() throws Exception {
+	public void testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -883,11 +884,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	String inspectionnumber32286 = null;
+	private String inspectionnumber32286 = null;
 	
 	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
-	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1() throws Exception {
+	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1() {
 
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -953,7 +954,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
-	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2() throws Exception {
+	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2()  {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 
@@ -973,7 +974,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	String inspectionnumber32287 = null;
+	private String inspectionnumber32287 = null;
 	
 	@Test(testName = "Test Case 32287:Inspections: HD - Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount")
@@ -1031,7 +1032,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32287:Inspections: HD - Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount")
-	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2() throws Exception {
+	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2() {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
@@ -1054,7 +1055,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33664:Inspections: HD - Verify that services are marked as strikethrough when exclude from total", 
 			description = "Inspections: HD - Verify that services are marked as strikethrough when exclude from total")
-	public void testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal() throws Exception {
+	public void testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1106,7 +1107,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 38748:Inspections: HD - Verify that value selected on price matrix step is saved and shown during edit mode", 
 			description = "Verify that value selected on price matrix step is saved and shown during edit mode")
-	public void testHDVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode() throws Exception {
+	public void testHDVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -1185,7 +1186,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 42184:WO: HD - Verify that message is shown total is over limitation 999999999.999", 
 			description = "Verify that message is shown total is over limitation 999999999.999")
 	public void testWOVerifyThatMessageIsShownTotalIsOverLimitation()
-			throws Exception {
+			 {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -1310,7 +1311,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 42182:Inspection: HD - Verify that message is shown total is over limitation 999999999.999", 
 			description = "Inspection: Verify that message is shown total is over limitation 999999999.999")
-	public void testInspectionVerifyThatMessageIsShownTotalIsOverLimitation() throws Exception {
+	public void testInspectionVerifyThatMessageIsShownTotalIsOverLimitation() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1408,11 +1409,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen.clickHomeButton();		
 	}
 	
-	String inspnumber47249 = "";
+	private String inspnumber47249 = "";
 	
 	@Test(testName = "Test Case 47249:Inspections: HD - Verify that on Price matrix step sub total value is shown correctly", 
 			description = "Verify that on Price matrix step sub total value is shown correctly")
-	public void testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly() throws Exception {
+	public void testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly() {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1482,7 +1483,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 47257:WO: HD - Verify that on Price Matrix step sub total is shown correctly", 
 			description = "Verify that on Price Matrix step sub total is shown correctly")
-	public void testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly() throws Exception {
+	public void testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly() {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectInspectionForApprove(inspnumber47249);
@@ -1502,14 +1503,14 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 	}
 	
-	String inspnumber48543 = "";
+	private String inspnumber48543 = "";
 	
 	@Test(testName = "Test Case 48543:Inspections: HD - Verify that part services with different configurations are correctly shown for inspection", 
 			description = "Inspections: HD - Verify that part services with different configurations are correctly shown for inspection")
 	public void testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection() throws Exception {
 		
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -1538,17 +1539,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Oil Cooler");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("2.35");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Driver Seat");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
 		selectedservicescreen.setServicePriceValue("2.5");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
@@ -1559,9 +1554,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Rear Upper");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("5.09");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Back Glass");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.answerQuestionCheckButton();		
 		selectedservicescreen.saveSelectedServiceDetails();
 		
@@ -1584,15 +1576,13 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Front Lower");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("4.31");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		VisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.switchToCustomTab();
 		visualinteriorscreen.selectService("Detail");
 		visualinteriorscreen.selectSubService("Oksi_Part_SubCategory");
+		visualinteriorscreen.tapCarImage();
 		visualinteriorscreen.tapCarImage();
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		servicepartpopup = selectedservicescreen.clickServicePartCell();
@@ -1602,9 +1592,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Front");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("6.43");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		PriceMatrixScreen pricematrix = vehiclescreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, "PM_New");
@@ -1648,7 +1635,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 48562:WO: HD - Verify that part services are copied from insp to order", 
 			description = "WO: HD - Verify that part services are copied from insp to order")
-	public void testWOVerifyThatPartServicesAreCopiedFromInspToOrder() throws Exception {
+	public void testWOVerifyThatPartServicesAreCopiedFromInspToOrder() {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber48543);
@@ -1711,17 +1698,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Oil Cooler");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("2.35");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Driver Seat");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
 		selectedservicescreen.setServicePriceValue("2.5");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
@@ -1732,9 +1713,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Rear Upper");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("5.09");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Back Glass");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.answerQuestionCheckButton();		
 		selectedservicescreen.saveSelectedServiceDetails();
 		
@@ -1757,9 +1735,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicepartpopup.selectServicePartSubcategoryPosition("Front Lower");
 		servicepartpopup.saveSelectedServicePart();	
 		selectedservicescreen.setServicePriceValue("4.31");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("VP1 zayats");
-		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
@@ -1806,7 +1781,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45100:WO: HD - Verify rounding in calculation script with price matrix", 
 			description = "WO: HD - Verify rounding in calculation script with price matrix")
-	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix() throws Exception {
+	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 
@@ -1874,11 +1849,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myinvoicesscreen.clickHomeButton();
 	}
 
-	String invoicenumber45224 = null;
+	private String invoicenumber45224 = null;
 	
 	@Test(testName = "Test Case 45224:WO: HD - Verify calculation with price matrix Labor type", 
 			description = "WO: HD - Verify calculation with price matrix Labor type")
-	public void testWOVerifyCalculationWithPriceMatrixLaborType_1() throws Exception {
+	public void testWOVerifyCalculationWithPriceMatrixLaborType_1() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1913,9 +1888,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
 		selectedservicedetailscreen.setServicePriceValue("25");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Hood");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
+		//selectedservicedetailscreen.selectVehiclePart("Hood");
+		//selectedservicedetailscreen.saveSelectedServiceDetails();
+		//selectedservicedetailscreen.saveSelectedServiceDetails();
 		
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("Tax discount");
 		selectedservicedetailscreen.setServicePriceValue("10");
@@ -1935,7 +1910,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen();
-		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		
@@ -1987,11 +1962,11 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	String invoicenumber42803 = null;
+	private String invoicenumber42803 = null;
 	
 	@Test(testName = "Test Case 42803:Invoices: HD - Verify rounding money amount values", 
 			description = "Invoices: HD - Verify rounding money amount values")
-	public void testInvoicesVerifyRoundingMoneyAmountValues_1() throws Exception {
+	public void testInvoicesVerifyRoundingMoneyAmountValues_1() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2101,7 +2076,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 40463:Inspections: HD - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection", 
 			description = "Inspections: HD - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection")
-	public void testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection() throws Exception {
+	public void testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 
@@ -2235,7 +2210,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 38970:Inspections: Reqular - Verify that updated value for required service with 0 Price is saved when package grouped by panels", 
 			description = "Inspections: Reqular - Verify that updated value for required service with 0 Price is saved when package grouped by panels")
-	public void testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels() throws Exception {
+	public void testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String serviceprice = "21";
@@ -2298,7 +2273,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.setVIN(VIN);
-		String wonumber = vehiclescreen.getInspectionNumber();
+
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
@@ -2367,7 +2342,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 40541:WO: HD - Verify that for Sales Tax Service data is set from DB when create WO for customer with appropriate data", 
 			description = "WO: HD - Verify that for Sales Tax Service data is set from DB when create WO for customer with appropriate data")
-	public void testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData() throws Exception {
+	public void testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String customer  = "Avalon";
@@ -2381,7 +2356,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		VehicleScreen vehiclescreen = myworkordersscreen.addOrderWithSelectCustomer(customer, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.setVIN(VIN);
 		String wonumber = vehiclescreen.getInspectionNumber();
-		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);;
+		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -2430,7 +2405,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 49680:Invoices: HD - Verify that tax rounding is correctly calculated", 
 			description = "Invoices: HD - Verify that tax rounding is correctly calculated")
-	public void testInvoicesVerifyThatTaxRoundingIsCorrectlyCalculated() throws Exception {
+	public void testInvoicesVerifyThatTaxRoundingIsCorrectlyCalculated() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2499,7 +2474,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 49915:Inspections: HD - Verify that tax is calc correctly from services with tax exempt YES/No", 
 			description = "Inspections: HD - Verify that tax is calc correctly from services with tax exempt YES/No")
-	public void testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo() throws Exception {
+	public void testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo() {
 
 		final String VIN  = "1D7HW48NX6S507810";		
 		homescreen = new HomeScreen();
@@ -2658,7 +2633,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 50013:WO: HD - Verify that client and job overrides are working fine for WO", 
 			description = "WO: Verify that client and job overrides are working fine for WO")
-	public void testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO() throws Exception {
+	public void testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2689,7 +2664,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	@Test(testName="Test Case 49856:SR: HD - Verify ALM flow when approve both inspectiontypes",
 			description = "SR: Verify ALM flow when approve both inspectiontypes")
 	public void testSRVerifyALMFlowWhenApproveBothInspections()
-			throws Exception {
+			 {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -2751,8 +2726,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		Assert.assertTrue(teaminspectionsscreen.getInspectionTypeValue(inspnumber2).contains( "ALM - Service Inspection"));
 		teaminspectionsscreen.selectInspectionForEdit(inspnumber2);
 		vehiclescreen = new VehicleScreen();
-		questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ALM_STATUSES);
-		questionsscreen = new QuestionsScreen();
+		vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ALM_STATUSES);
 		questionsscreen.setToYesFinalQuestion();
 		questionsscreen.setToYesCompleteQuestion();
 		servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3053,7 +3027,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 			+ "Test Case 32191:Inspections: HD Verify that declined/skipped services are marked with text (Declined) or (Skipped) accordingly on Inspection Summary screen", 
 			description = "Inspections: Verify that for Declined/Skipped services appropriate icon is shown after approval,"
 					+ "Inspections: Verify that declined/skipped services are marked with text (Declined) or (Skipped) accordingly on Inspection Summary screen")
-	public void testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval() throws Exception {
+	public void testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval() {
 
 		final String VIN  = "1D7HW48NX6S507810";		
 		homescreen = new HomeScreen();
@@ -3181,7 +3155,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		Helpers.waitABit(3*hour);
 	}
 	
-	//@AfterMethod
+	@AfterMethod
 	public void closeBrowser() {
 		if (webdriver != null)
 			webdriver.quit();

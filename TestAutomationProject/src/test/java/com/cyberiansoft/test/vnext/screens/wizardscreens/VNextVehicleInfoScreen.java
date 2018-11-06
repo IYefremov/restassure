@@ -176,7 +176,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 		je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 		tap(appiumdriver.findElement(By.xpath("//div[@data-picker-value='" + yearValue + "']")));
-		List<MobileElement> closebtns = appiumdriver.findElements(By.xpath("//div[@class='right']/a[@class='link close-picker']"));
+		List<MobileElement> closebtns = appiumdriver.findElements(By.xpath("//a[@class='link close-picker']"));
 		for (WebElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
 				tap(closebtn);

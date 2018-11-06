@@ -244,7 +244,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		inspectionsscreen = claiminfoscreen.saveInspectionViaMenu();
 		
 		inspectionsscreen = inspectionsscreen.archiveInspection(inspnumber);
-		Assert.assertFalse(inspectionsscreen.isInspectionExists(inspnumber));
+		Assert.assertFalse(inspectionsscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
+			" still exists, but shouldn't");
 		homescreen = inspectionsscreen.clickBackButton();
 		
 	}

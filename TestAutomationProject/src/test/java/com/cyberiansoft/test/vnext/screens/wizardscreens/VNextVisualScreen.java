@@ -84,7 +84,7 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 	
 	public void clickCarImageACoupleTimes(int touchTimes) {
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		BaseUtils.waitABit(300);
+		BaseUtils.waitABit(1300);
 		
 		for (int i = 0; i < touchTimes; i++) {
 			TouchAction tch = new TouchAction(appiumdriver);

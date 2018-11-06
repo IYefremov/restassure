@@ -86,7 +86,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		return new RegularTeamInspectionsScreen();
 	}
 
-	public RegularMyWorkOrdersScreen clickMyWorkOrdersButton() throws InterruptedException {
+	public RegularMyWorkOrdersScreen clickMyWorkOrdersButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
 		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen();

@@ -68,7 +68,7 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	}
 	
 	public void selectCustomer(String customer) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 			searchbtn.click();
 		BaseUtils.waitABit(1500);

@@ -16,7 +16,6 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
-import com.cyberiansoft.test.vnext.apiutils.VNextAPIUtils;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -51,14 +50,14 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	@BeforeClass(description="Team Invoices Test Cases")
 	public void beforeClass() throws Exception {
 		JSONDataProvider.dataFile = DATA_FILE;
-		workOrderDTOS = VNextAPIUtils.getInstance().generateWorkOrders("team-base-workorder-data1.json",
+		/*workOrderDTOS = VNextAPIUtils.getInstance().generateWorkOrders("team-base-workorder-data1.json",
 				WorkOrderTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
 				appLicenseEntity, 30
 				);
-
+*/
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
-		statusScreen.updateMainDB();
+		//VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
+		//statusScreen.updateMainDB();
 
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.switchToRetailMode();
