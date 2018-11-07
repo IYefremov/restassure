@@ -494,7 +494,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		//notesscreen.selectNotesPicturesTab();
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
 		AppiumUtils.clickHardwareBackButton();
-		notesscreen.clickNotesBackButton();
+		//notesscreen = new VNextNotesScreen(appiumdriver);
+		//notesscreen.clickNotesBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();

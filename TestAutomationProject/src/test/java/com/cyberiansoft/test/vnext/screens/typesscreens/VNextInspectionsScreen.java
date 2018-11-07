@@ -168,7 +168,10 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	
 	public VNextInspectionsScreen archiveInspection(String inspnumber) {
 		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspnumber);
-		return inspmenulist.archiveInspection();
+		inspmenulist.archiveInspection();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.invisibilityOf(inspectionslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']"))));
+		return new VNextInspectionsScreen(appiumdriver);
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
