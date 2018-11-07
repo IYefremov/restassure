@@ -234,4 +234,31 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         workordersscreen.clickBackButton();
 
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCantSaveFinalWOWithoutPopulateRequiredField(String rowID,
+                                                                          String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+        wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.clickSaveWorkOrderMenuButton();
+        vehicleinfoscreen.clcikSaveViaMenuAsFinal();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+                VNextAlertMessages.VIN_REQUIRED_MSG);
+        vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
+        vehicleinfoscreen.saveWorkOrderViaMenu();
+        Assert.assertEquals(workordersscreen.getWorkOrderStatusValue(woNumber),
+                WorkOrderStatuses.APPROVED.getWorkOrderStatusValue());
+
+        workordersscreen.clickBackButton();
+    }
 }

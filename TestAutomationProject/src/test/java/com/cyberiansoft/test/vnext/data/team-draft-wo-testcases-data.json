@@ -86,6 +86,16 @@
       "service": {"serviceName": "Battery Installation"
       }
     }
+  ],
+
+  "testVerifyUserCantSaveFinalWOWithoutPopulateRequiredField": [
+    {
+      "rowID": "testVerifyUserCantSaveFinalWOWithoutPopulateRequiredField.01",
+      "description": "Test Case 80710:Verify user can't save Final WO without populate required field",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
   ]
 
 }
