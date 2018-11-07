@@ -2,13 +2,16 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
@@ -44,10 +47,11 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='unselected']").click();
 	}
 
-	public void openBundleInfo(String bundle) {
+	public RegularSelectedServiceDetailsScreen openBundleInfo(String bundle) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='custom detail button']").click();
+		return new RegularSelectedServiceDetailsScreen();
 	}
 	
 	public void clickServicesIcon() {
@@ -60,6 +64,25 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	
 	public boolean isBundleServiceExists(String bundle) {
 		return appiumdriver.findElements(MobileBy.AccessibilityId(bundle)).size() > 0;
+	}
+
+	public String getServiceDetailsPriceValue() {
+
+		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
+		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
+	}
+
+	public void changeAmountOfBundleService(String newamount) {
+		List<WebElement> toolbarbtns = appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElements(MobileBy.className("XCUIElementTypeButton"));
+		for (WebElement btn : toolbarbtns)
+			if (btn.getAttribute("name").contains("$")) {
+				btn.click();
+				break;
+			}
+		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
+		amountfld.clear();
+		amountfld.sendKeys(newamount);
+		appiumdriver.findElementByAccessibilityId("Override").click();
 	}
 
 }

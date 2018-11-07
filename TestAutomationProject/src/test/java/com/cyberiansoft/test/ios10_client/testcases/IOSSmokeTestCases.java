@@ -1055,7 +1055,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	//Test Case 21585:Create WO from Service Request
 	@Test(testName = "Test Case 21585:Create WO from Service Request", description = "Create WO from Service Request"/*,
 			dependsOnMethods = { "testCreateInspectionFromServiceRequest" }*/)
-	public void testCreateWOFromServiceRequest() throws Exception {
+	public void testCreateWOFromServiceRequest() {
 
 		/*.closeApp();
 		Thread.sleep(60*1000*15);
@@ -1126,7 +1126,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 16640:Create Inspection from Invoice with two WOs
 	@Test(testName = "Test Case 16640:Create Inspection from Invoice with two WOs", description = "Create Inspection from Invoice with two WOs")
-	public void testCreateInspectionFromInvoiceWithTwoWOs() throws Exception {
+	public void testCreateInspectionFromInvoiceWithTwoWOs() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";

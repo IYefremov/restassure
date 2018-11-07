@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -44,10 +43,10 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 		bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("unselected")).click();
 	}
 
-	public RegularSelectedServiceDetailsScreen openBundleInfo(String bundle) {
+	public SelectedServiceDetailsScreen openBundleInfo(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));	
 		bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("custom detail button")).click();
-		return new RegularSelectedServiceDetailsScreen();
+		return new SelectedServiceDetailsScreen();
 	}
 	
 	public void clickCancelBundlePopupButton() {

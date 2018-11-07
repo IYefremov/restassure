@@ -2108,9 +2108,12 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
-		selectedservicedetailscreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SR_S4_BUNDLE);
-		selectedservicedetailscreen.setServicePriceValue("600");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
+		SelectedServiceBundleScreen selectedServiceBundleScreen = new SelectedServiceBundleScreen();
+		selectedServiceBundleScreen.selectBundle("SR_S4_Bl_I1_M");
+		SelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo ("SR_S4_Bl_I2_M");
+		selectedServiceDetailsScreen.setServicePriceValue("200");
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		
 		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
@@ -2173,8 +2176,14 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+		SelectedServiceBundleScreen selectedServiceBundleScreen = new SelectedServiceBundleScreen();
+		selectedServiceBundleScreen.selectBundle("SR_S4_Bl_I1_M");
+		SelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo ("SR_S4_Bl_I2_M");
+		selectedServiceDetailsScreen.setServicePriceValue("200");
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		
-		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		//servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		selectedservicedetailscreen.clickVehiclePartsCell();
 		selectedservicedetailscreen.selectVehiclePart("Back Glass");
@@ -3048,7 +3057,14 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		SelectedServiceBundleScreen selectedServiceBundleScreen = new SelectedServiceBundleScreen();
+		selectedServiceBundleScreen.selectBundle(iOSInternalProjectConstants.DYE_SERVICE);
+		SelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo (iOSInternalProjectConstants.WHEEL_SERVICE);
+		selectedServiceDetailsScreen.setServiceQuantityValue("2");
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		servicesscreen.selectService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+
 		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.clickVehiclePartsCell();
 		selectedservicedetailscreen.selectVehiclePart("Grill");
