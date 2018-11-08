@@ -134,14 +134,14 @@
     {
       "rowID": "testVerifyUserCanApproveSeveralInspectionsWithOneCustomersWithLineApproveAndWithoutLineApprove.01",
       "description": "Test Case 73111:Verify user can approve several inspections with one customers with line approve and without line approve",
-      "inspectionDatas" : [{"inspType": "O_Kramar",
+      "inspectionDatas" : [{"inspType": "O_KRAMAR",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation"
         }, {"serviceName": "Labor"
         }, {"serviceName": "Aluminum Panel"
         }]
-      }, {"inspType": "O_Kramar3",
+      }, {"inspType": "O_KRAMAR3",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation"

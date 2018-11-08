@@ -424,7 +424,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			customersscreen.switchToRetailMode();
 			customersscreen.selectCustomer(testcustomer);
 			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
-			insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
+			insptypeslist.selectInspectionType(InspectionTypes.valueOf(inspdata.getInspectionType()));
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());

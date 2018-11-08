@@ -121,6 +121,10 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 		return changecustomerbtn.isDisplayed();
 	}
 
+	public boolean isEditInspectionMenuButtonExists() {
+		return editinspectionbtn.isDisplayed();
+	}
+
 	public VNextInspectionsScreen clickCloseInspectionMenuButton() {
 		clickCloseMenuButton();
 		return new VNextInspectionsScreen(appiumdriver);
