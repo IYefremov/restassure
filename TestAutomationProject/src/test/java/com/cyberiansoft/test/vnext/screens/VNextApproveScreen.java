@@ -9,6 +9,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -86,5 +87,11 @@ public class VNextApproveScreen extends VNextBaseScreen {
 	public boolean isClearButtonVisible() {
 		return clearsignaturebtn.isDisplayed();
 	}
+
+	public String getApprovePriceValue() {
+		return appiumdriver.findElement(By.xpath("//div[@class='approve-page-placeholder approve-page-row']")).
+				findElement(By.xpath(".//div[@class='text-bold']")).getText();
+	}
+
 
 }
