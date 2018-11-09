@@ -84,11 +84,10 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 		return createwoinspectionbtn.isDisplayed();
 	}
 	
-	public VNextInspectionsScreen archiveInspection() {
+	public void archiveInspection() {
 		clickArchiveInspectionMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		informationdlg.clickInformationDialogArchiveButton();	
-		return new VNextInspectionsScreen(appiumdriver);
+		informationdlg.clickInformationDialogArchiveButton();
 	}
 	
 	public void clickArchiveInspectionMenuItem() {
@@ -120,6 +119,10 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 
 	public boolean isChangeCustomerMenuPresent() {
 		return changecustomerbtn.isDisplayed();
+	}
+
+	public boolean isEditInspectionMenuButtonExists() {
+		return editinspectionbtn.isDisplayed();
 	}
 
 	public VNextInspectionsScreen clickCloseInspectionMenuButton() {

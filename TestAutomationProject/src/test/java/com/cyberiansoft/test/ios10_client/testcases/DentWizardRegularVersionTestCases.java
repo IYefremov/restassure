@@ -664,7 +664,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10657:Test Service Drive requires Advisor", description = "Test Service Drive requires Advisor")
-		public void testServiceDriveRequiresAdvisor() throws Exception {
+		public void testServiceDriveRequiresAdvisor() {
 			String tcname = "testServiceDriveRequiresAdvisor";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -686,7 +686,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName= "Test Case 10658:Test Inspection requirments inforced", description = "Test Inspection requirements inforced")
-		public void testInspectionRequirementsInforced() throws Exception {
+		public void testInspectionRequirementsInforced() {
 			String tcname = "testInspectionRequirementsInforced";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -708,8 +708,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10663:Test Inspections can convert to multiple Work Orders", description = "Test Inspections can convert to multiple Work Orders")
-		public void testInspectionsCanConvertToMultipleWorkOrders()
-				throws Exception {
+		public void testInspectionsCanConvertToMultipleWorkOrders() {
 			String tcname = "testInspectionsCanConvertToMultipleWorkOrders";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -766,7 +765,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10665:Test Archive feature for Inspections", description = "Test Archive feature for Inspections")
-		public void testArchiveFeatureForInspections() throws Exception {
+		public void testArchiveFeatureForInspections() {
 			String tcname = "testArchiveFeatureForInspections";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -927,8 +926,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 11732:Test even service level tech split for Wholesale Hail", description = "Test even service level tech split for Wholesale Hail")
-		public void testEvenServiceLevelTechSplitForWholesaleHail()
-				throws Exception {
+		public void testEvenServiceLevelTechSplitForWholesaleHail() {
 			String tcname = "testEvenServiceLevelTechSplitForWholesaleHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 

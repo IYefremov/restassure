@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -90,9 +91,10 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	public void selectVehiclePartAdditionalServices(List<ServiceData> additionalServices) {
 		for (ServiceData additionalService : additionalServices) {
 			WebElement addservs = getVehiclePartAdditionalServiceCell(additionalService.getServiceName());
-			if (addservs != null)
-				tap(addservs.findElement(By.xpath(".//input[@action='select']")));
-			else
+			if (addservs != null) {
+				tap(addservs.findElement(By.xpath(".//input[@action='select-item']")));
+				WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
+			} else
 				Assert.fail("Can't find additional servicve: " + additionalService.getServiceName());
 		}
 	}

@@ -53,7 +53,8 @@
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
       "service": {"serviceName": "Battery Installation"
-      }
+      },
+      "inspApprovedPrice": "$9.00"
     }
   ],
   
@@ -122,11 +123,11 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
-      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix",
+      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
         "matrixParts" : [{"matrixPartName": "Anastasia Part", "partSize": "Nickel", "partSeverity": "VERY LIGHT", "matrixAdditionalServices" : [{ "serviceName" : "Anastasia Labor Avarage Data" }, { "serviceName" : "Igor Labor Service" }, { "serviceName" : "Labor_expence" }]
         }, {"matrixPartName": "Hood", "partSize": "Quarter", "partSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)", "matrixAdditionalServices" : [{ "serviceName" : "A demo service" }, { "serviceName" : "Large Dent" }, { "serviceName" : "Panel Service" }]
         }]},
-      "inspPrice": "$598.22"
+      "inspPrice": "$551.13"
     }
   ],
 
@@ -134,14 +135,14 @@
     {
       "rowID": "testVerifyUserCanApproveSeveralInspectionsWithOneCustomersWithLineApproveAndWithoutLineApprove.01",
       "description": "Test Case 73111:Verify user can approve several inspections with one customers with line approve and without line approve",
-      "inspectionDatas" : [{"inspType": "O_Kramar",
+      "inspectionDatas" : [{"inspType": "O_KRAMAR",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation"
         }, {"serviceName": "Labor"
         }, {"serviceName": "Aluminum Panel"
         }]
-      }, {"inspType": "O_Kramar3",
+      }, {"inspType": "O_KRAMAR3",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation"

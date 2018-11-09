@@ -4,7 +4,8 @@ public enum InspectionStatuses {
 	
 	NEW("New"),
 	APPROVED("Approved"),
-	DECLINED("Declined");
+	DECLINED("Declined"),
+	DRAFT("Draft");
 
 	private final String inspStatus; 
 	

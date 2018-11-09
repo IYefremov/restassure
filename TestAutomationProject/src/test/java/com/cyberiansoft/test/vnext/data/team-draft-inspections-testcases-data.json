@@ -1,0 +1,25 @@
+{
+
+  "testVerifyUserCanSaveDraftInspectionWithoutPopulateRequiredFields": [
+    {
+      "rowID": "testVerifyUserCanSaveDraftInspectionWithoutPopulateRequiredFields.01",
+      "description": "Test Case 81095:Verify user can save Draft Inspection without populate required fields",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "service": {"serviceName": "Battery Installation"
+      }
+    }
+  ],
+
+  "testVerifyUserCantSaveInspectionIfDraftModeEqualsOFF": [
+    {
+      "rowID": "testVerifyUserCanSaveDraftInspectionWithoutPopulateRequiredFields.01",
+      "description": "Test Case 81096:Verify user can't save Inspection if Draft mode = OFF",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ]
+
+}

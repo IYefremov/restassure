@@ -13,7 +13,7 @@
           "laborServicePanel": "Front Door",
           "laborServicePart": "Refinish Left Front Door Cladding",
           "laborServiceRate": "$99.12",
-          "laborServiceTime": "1.00"
+          "laborServiceTime": "1.0"
         }
     }
   ],
@@ -62,7 +62,7 @@
           "laborServiceNotes": "Cab Roof Panel - Refinish Cab Roof Panel" }
         }
       },
-      "inspPrice": "$272.58"
+      "inspPrice": "$277.54"
     }
   ],
 

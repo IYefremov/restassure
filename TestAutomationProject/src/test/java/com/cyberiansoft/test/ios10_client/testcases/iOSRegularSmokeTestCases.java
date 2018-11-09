@@ -520,7 +520,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 8429:Creating complex calculation WO,"
 			+ "Test Case 8428:Copy services of WO (regular version)", description = "Createing Complex calculation WO,"
 					+ "Copy Cervices Of WO")
-	public void testCreateWorkOrderWithTeamSharingOption() throws Exception {
+	public void testCreateWorkOrderWithTeamSharingOption() {
 
 		final String VIN = "1FTRX02W35K097028";
 		final String summ = "346.23";
@@ -633,6 +633,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.TEST_TAX_SERVICE));
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE));
 		ordersummaryscreen = selectedServicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(summfinal));
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
@@ -1072,8 +1073,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(iOSInternalProjectConstants.WHEEL_SERVICE,  "$70.00 x 3.00"));
 		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(iOSInternalProjectConstants.BUNDLE1_DISC_EX, "$150.00"));
+		RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = selectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		selectedservicedetailsscreen.selectBundle(iOSInternalProjectConstants.DYE_SERVICE);
+		selectedservicedetailsscreen.changeBundleQuantity(iOSInternalProjectConstants.WHEEL_SERVICE, "2");
+		selectedservicedetailsscreen.saveSelectedServiceDetails();
+		selectedservicedetailsscreen.saveSelectedServiceDetails();
 		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues("Quest_Req_Serv", "$10.00 x 1.00"));
-		RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = selectedServicesScreen.openCustomServiceDetails("Quest_Req_Serv");
+		selectedservicedetailsscreen = selectedServicesScreen.openCustomServiceDetails("Quest_Req_Serv");
 		selectedservicedetailsscreen.answerTaxPoint1Question("Test Answer 1");
 		selectedservicedetailsscreen.saveSelectedServiceDetails();
 		servicesscreen = new RegularServicesScreen();
@@ -1744,6 +1750,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		// =====================================
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		RegularSelectedServiceBundleScreen selectedservicebundlescreen = new RegularSelectedServiceBundleScreen();
+		selectedservicebundlescreen.selectBundle(iOSInternalProjectConstants.DYE_SERVICE);
+		selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.WHEEL_SERVICE);
+		selectedservicescreen = new RegularSelectedServiceDetailsScreen();
+		selectedservicescreen.setServiceQuantityValue("2.00");
+		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.saveSelectedServiceDetails();
 		// =====================================
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
@@ -3937,6 +3950,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen();
+		selectedservicedetailsscreen.changeAmountOfBundleService("70");
+		selectedservicedetailsscreen.saveSelectedServiceDetails();
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
 		selectedServicesScreen.saveWizard();
@@ -4578,7 +4594,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33117:Inspections: Regular - Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)", 
 			description = "Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)")
-	public void testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped() throws Exception {
+	public void testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -4594,7 +4610,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String inspnumber = vehiclescreen.getInspectionNumber();
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
-		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
+		RegularSelectedServiceDetailsScreen servicedetailsscreen = new RegularSelectedServiceDetailsScreen();
+		servicedetailsscreen.changeAmountOfBundleService("100");
+		servicedetailsscreen.saveSelectedServiceDetails();
+		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
 		servicedetailsscreen.answerQuestion2("A1");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.selectVehiclePart("Back Glass");
@@ -4649,7 +4668,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 33116:Inspections: Regular - Verify that text notes are copied to new inspectiontypes when use copy action", description = "Verify that text notes are copied to new inspectiontypes when use copy action")
-	public void testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction() throws Exception {
+	public void testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction() {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		final String _notes = "Test for copy";
@@ -4682,7 +4701,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33154:Inspections: Regular - Verify that it is possible to approve Team Inspections use multi select", 
 			description = "Verify that it is possible to approve Team Inspections use multi select")
-	public void testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect() throws Exception {
+	public void testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		List<String> inspnumbers = new ArrayList<String>();
@@ -4700,6 +4719,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			inspnumbers.add(vehiclescreen.getInspectionNumber());
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+			RegularSelectedServiceDetailsScreen servicedetailsscreen = new RegularSelectedServiceDetailsScreen();
+			servicedetailsscreen.changeAmountOfBundleService("100");
+			servicedetailsscreen.saveSelectedServiceDetails();
+			servicesscreen = new RegularServicesScreen();
 			servicesscreen.clickSaveAsFinal();
 			new RegularMyInspectionsScreen();
 
@@ -5211,7 +5234,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	@Test(testName="Test Case 27717:Invoices: Regular - Verify that it is posible to add payment from device for draft invoice", 
 			description = "Invoices: Regular - Verify that it is posible to add payment from device for draft invoice")
 	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice()
-			throws Exception {
+			 {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";

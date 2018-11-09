@@ -205,7 +205,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         invoiceinfoscreen.setInvoicePONumber(invoice.getNewPONumber());
         invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
-        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber),invoice.getNewPONumber());
+        final String invoicePOnumber = invoice.getNewPONumber();
+        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), invoicePOnumber, "PO number is " + invoicePOnumber);
         Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
         invoicesscreen.clickBackButton();
     }
