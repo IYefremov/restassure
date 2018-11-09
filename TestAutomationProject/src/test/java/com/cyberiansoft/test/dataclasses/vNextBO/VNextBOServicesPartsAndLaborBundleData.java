@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,15 @@ public class VNextBOServicesPartsAndLaborBundleData {
 
     @JsonProperty("serviceDefaultLaborTime")
     private String serviceDefaultLaborTime;
+
+    @JsonProperty("servicePartCategory")
+    private String servicePartCategory;
+
+    @JsonProperty("servicePartSubcategory")
+    private String servicePartSubcategory;
+
+    @JsonProperty("servicePartName")
+    private String servicePartName;
 
     public String getServiceName() {
         return serviceName;
@@ -61,9 +71,28 @@ public class VNextBOServicesPartsAndLaborBundleData {
         return serviceDefaultLaborTime;
     }
 
+    public String getServicePartCategory() {
+        return servicePartCategory;
+    }
+
+    public String getServicePartSubcategory() {
+        return servicePartSubcategory;
+    }
+
+    public String getServicePartName() {
+        return servicePartName;
+    }
+
+    public List<String> getPartOptionsList() {
+        return Arrays.asList(servicePartCategory, servicePartSubcategory, servicePartName);
+    }
+
     public String getJsForAddOnSettings() {
         try {
-            List<String> collect = Files.lines(Paths.get("src/test/java/com/cyberiansoft/test/dataclasses/vNextBO/JsForPartsAndLaborAddOns.txt"), StandardCharsets.UTF_8).collect(Collectors.toList());
+            List<String> collect = Files
+                    .lines(Paths.get("src/test/java/com/cyberiansoft/test/dataclasses/vNextBO/" +
+                                    "JsForPartsAndLaborAddOns.txt"), StandardCharsets.UTF_8)
+                    .collect(Collectors.toList());
             return StringUtils.substring(collect.get(0), collect.size() - 1);
         } catch (IOException e) {
             e.printStackTrace();

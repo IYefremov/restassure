@@ -3,10 +3,13 @@ package com.cyberiansoft.test.vnextbo.testcases;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextWebServicesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
@@ -54,14 +57,14 @@ public class VNextWebServices extends BaseTestCase {
             headerpanel.userLogout();
     }
 
-	@Test(description = "Test Case 45496:vNext: setup configuration to run Invoice list suite")
-	public void testSetupConfigurationToRunInvoiceListSuite() throws Exception {
-		
-		WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
-		
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testSetupConfigurationToRunInvoiceListSuite(String rowID, String description, JSONObject testData) throws Exception {
 
-		
-		System.out.println("\nTesting 1 - Send Http POST request");
+        VNextWebServicesData  data = JSonDataParser.getTestDataFromJson(testData, VNextWebServicesData.class);
+
+		WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+
+//		System.out.println("\nTesting 1 - Send Http POST request");
 		//sendPost();
 		/*URL url = new URL("https://api.cyberianconcepts.com/v1/userInfo/actions/generateRegCode?email=danyl@cyberiansoft.com");
 		  HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();

@@ -57,7 +57,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
         
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
+		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();

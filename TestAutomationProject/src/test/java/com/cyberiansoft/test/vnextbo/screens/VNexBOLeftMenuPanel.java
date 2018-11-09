@@ -24,6 +24,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//*[@data-automation-id='services']")
 	private WebElement servicesmenu;
 
+	@FindBy(xpath = "//*[@data-automation-id='quick-notes']")
+	private WebElement quickNotesMenu;
+
 	@FindBy(xpath = "//*[@data-automation-id='company-info']")
 	private WebElement companyinfomenu;
 
@@ -41,7 +44,6 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 		super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        waitLong.until(ExpectedConditions.visibilityOf(mainmenu));
     }
 	
 	public VNextBOInspectionsWebPage selectInspectionsMenu() {
@@ -75,11 +77,18 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 		return driver.findElement(By.xpath("//*[@data-automation-id='users']")).isDisplayed();
 	}
 	
-	public VNexBOServicesWebPage selectServicesMenu() {
+	public VNextBOServicesWebPage selectServicesMenu() {
 		selectMenuItem(servicesmenu, SETTINGS_MAINMENU_ITEM);
-		waitABit(3000);
+        waitForLoading();
 		return PageFactory.initElements(
-				driver, VNexBOServicesWebPage.class);
+				driver, VNextBOServicesWebPage.class);
+	}
+
+	public VNextBOQuickNotesWebPage selectQuickNotesMenu() {
+		selectMenuItem(quickNotesMenu, SETTINGS_MAINMENU_ITEM);
+		waitForLoading();
+		return PageFactory.initElements(
+				driver, VNextBOQuickNotesWebPage.class);
 	}
 	
 	public boolean isMainMenuExpanded(String meinmenu) {

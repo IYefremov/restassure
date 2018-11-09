@@ -1,0 +1,26 @@
+{
+  "verifyUserCanAddQuickNotes": [
+    {
+      "rowID": "verifyUserCanAddQuickNotes.01",
+      "description": "Test Case 79070:Verify user can add new \"Quick Notes\"",
+      "quickNotesDescription": "Test Description"
+    }
+  ],
+
+  "verifyQuickNoteIsNotAddedAfterReject": [
+    {
+      "rowID": "verifyQuickNoteIsNotAddedAfterReject.01",
+      "description": "Test Case 79071:Verify user can't add new \"Quick Notes\" when click reject icon",
+      "quickNotesDescription": "Test Description"
+    }
+  ],
+
+  "verifyUserCannotAddEmptyQuickNotes": [
+    {
+      "rowID": "verifyUserCannotAddEmptyQuickNotes.01",
+      "description": "Test Case 79072:Verify user can't add empty \"Quick Notes\"",
+      "quickNotesDescription": "",
+      "quickNotesDescriptionErrorMessage": "//span[text()='Text is required']"
+    }
+  ]
+}

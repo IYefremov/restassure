@@ -31,7 +31,7 @@
     {
       "rowID": "testEditMoneyService.01",
       "description": "Test Case 43812:vNext: Edit money service",
-      "priceServiceName": "Test Money Service",
+      "priceServiceName": "MoneyService",
       "serviceType": "Dent Repair",
       "serviceDescription": "test money service",
       "servicePriceType": "Money",

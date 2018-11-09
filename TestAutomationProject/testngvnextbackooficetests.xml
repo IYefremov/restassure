@@ -37,9 +37,11 @@
 	  	 <!--<include name="testCreateUserWithExistingEmailAddress" />-->
       <!--</methods>-->
       <!--</class>-->
-     <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>
-     <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>
-     <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases"/>
     </classes>
   </test>
 </suite>

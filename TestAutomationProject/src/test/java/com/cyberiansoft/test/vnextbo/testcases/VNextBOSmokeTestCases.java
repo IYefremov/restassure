@@ -88,7 +88,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		headerpanel.userLogout();
 	}
 	
-	@Test(description = "Test Case 43046:vNext: create user with Web access")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateUserWithWebAccess(String rowID, String description, JSONObject testData) throws Exception {
 
         VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
@@ -438,7 +438,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		userslist.add(userMail);
 	}
 	
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCheckValidationErrorsOnTheSetPasswordPage(String rowID, String description, JSONObject testData) throws Exception {
 
         VNextBOSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSmokeData.class);
@@ -463,21 +463,14 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
                         .withSubject("ReconPro vNext Dev: REGISTRATION");
         String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
         String linkText = "Click here";
-//        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
-
         List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText, "https", "\" style");
         String confirmationUrl =  allMatches.get(0);
-
-//        String confirmationurl = mailmessage.substring(mailmessage.indexOf("'") + 1, mailmessage.lastIndexOf("'"));
         System.out.println(mailmessage);
         System.out.println("URL: "+confirmationUrl);
 
 
         Assert.assertTrue(!confirmationUrl.isEmpty(), "The new BO url is not displayed in the letter");
         nada.deleteMessageWithSubject("ReconPro vNext Dev: REGISTRATION");
-
-
-
 
 
 //		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userMail,
@@ -490,7 +483,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
-//		headerpanel.userLogout();
+		headerpanel.userLogout();
 		headerpanel.waitABit(2000);
 		webdriver.navigate().to(confirmationUrl);
 		headerpanel.waitABit(4000);

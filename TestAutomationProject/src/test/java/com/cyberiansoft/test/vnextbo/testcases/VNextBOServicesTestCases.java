@@ -31,7 +31,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 	private String userName;
 	private String userPassword;
     private VNextBOLoginScreenWebPage loginpage;
-    private VNexBOLeftMenuPanel leftmenu;
+    private VNexBOLeftMenuPanel leftMenu;
 
 	@BeforeMethod
 	public void BackOfficeLogin() {
@@ -44,12 +44,12 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         webdriver = DriverBuilder.getInstance().getDriver();
 
         WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
-		userName = VNextBOConfigInfo.getInstance().getVNextBOMail();
+		userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
 		userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
         loginpage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginpage.userLogin(userName, userPassword);
-        leftmenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
+        leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
 	}
 	
 	@AfterMethod
@@ -64,7 +64,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
     public void testAddMoneyService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 		
-        VNexBOServicesWebPage servicespage = leftmenu
+        VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPercentageServiceName())
                 .deleteServiceIfPresent(data.getPercentageServiceName())
@@ -80,7 +80,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
     public void testAddPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 		
-		VNexBOServicesWebPage servicespage = leftmenu
+		VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPercentageServiceName())
                 .deleteServiceIfPresent(data.getPercentageServiceName())
@@ -98,21 +98,21 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 	public void testEditMoneyService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-        VNexBOServicesWebPage servicespage = leftmenu
+        VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
-                .searchServiceByServiceName(data.getPercentageServiceName())
-                .deleteServiceIfPresent(data.getPercentageServiceName())
-                .deleteServiceIfPresent(data.getPercentageServiceName() + data.getServiceEdited())
+                .searchServiceByServiceName(data.getPriceServiceName())
+                .deleteServiceIfPresent(data.getPriceServiceName())
+                .deleteServiceIfPresent(data.getPriceServiceName() + data.getServiceEdited())
                 .clickAddNewServiceButton()
                 .addNewService(data.getPriceServiceName(), data.getServiceType(), data.getServiceDescription(),
                         data.getServicePriceType(), data.getServicePrice())
                 .searchServiceByServiceName(data.getPriceServiceName());
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
 
-		servicespage = leftmenu
-                .selectServicesMenu()
-                .searchServiceByServiceName(data.getPriceServiceName());
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
+//		servicespage = leftMenu
+//                .selectServicesMenu()
+//                .searchServiceByServiceName(data.getPriceServiceName());
+//		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
 		VNextBOAddNewServiceDialog addnewservicedialog = servicespage
                 .clickEditServiceByServiceName(data.getPriceServiceName());
 		Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPriceServiceName());
@@ -144,7 +144,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
         String serviceEdited = data.getServiceEdited();
-        VNexBOServicesWebPage servicespage = leftmenu
+        VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPercentageServiceName())
                 .deleteServiceIfPresent(data.getPercentageServiceName())
@@ -155,7 +155,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 .searchServiceByServiceName(data.getPriceServiceName());
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
 
-        servicespage = leftmenu
+        servicespage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPriceServiceName());
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
@@ -187,7 +187,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPriceServiceName() +
                 serviceEdited), data.getServiceDescription() + serviceEdited);
 
-		servicespage = leftmenu
+		servicespage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPriceServiceName() + serviceEdited);
 		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
@@ -202,7 +202,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 	public void testEditPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNexBOServicesWebPage servicespage = leftmenu
+		VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPercentageServiceName());
 		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()));
@@ -239,7 +239,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNexBOServicesWebPage servicespage = leftmenu
+		VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
 		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
@@ -254,7 +254,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 	public void testResumeRemovedMoneyService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNexBOServicesWebPage servicespage = leftmenu.selectServicesMenu();
+		VNextBOServicesWebPage servicespage = leftMenu.selectServicesMenu();
 		servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), true);
 		VNextConfirmationDialog confirmdialog = servicespage
                 .clickUnarchiveButtonForService(data.getPriceServiceName() + data.getServiceEdited());
@@ -273,7 +273,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 	public void testResumeRemovedPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNexBOServicesWebPage servicespage = leftmenu.selectServicesMenu();
+		VNextBOServicesWebPage servicespage = leftMenu.selectServicesMenu();
 		servicespage.advancedSearchService(data.getPercentageServiceName()
                 + data.getServiceEdited(), true);
 		VNextConfirmationDialog confirmdialog = servicespage
@@ -293,7 +293,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
     public void testVerifyErrorMessagesOnCreateEditServiceDialog(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNexBOServicesWebPage servicespage = leftmenu.selectServicesMenu();
+		VNextBOServicesWebPage servicespage = leftMenu.selectServicesMenu();
 		VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickAddNewServiceButton();
 		addnewservicedialog.clickServiceAddButton();
 		Assert.assertEquals(addnewservicedialog.getErrorMessage(), "Service name is required!");
@@ -315,7 +315,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
     public void testEditMatrixService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNexBOServicesWebPage servicespage = leftmenu
+		VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
                 .advancedSearchServiceByServiceType(data.getMatrixServiceType());
         String firstServiceNameInTableRow = servicespage.getFirstServiceNameInTableRow();
@@ -331,7 +331,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
     public void verifyUserCanAddLaborPriceService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-        VNexBOServicesWebPage servicesPage = leftmenu
+        VNextBOServicesWebPage servicesPage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getServiceName())
                 .deleteServiceIfPresent(data.getServiceName())
