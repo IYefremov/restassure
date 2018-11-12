@@ -88,7 +88,7 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		return invoiceType.getFirstVizardScreen();
 	}
 	
-	public void verifyCreateInvoiceIsActivated(String wonumber) throws InterruptedException {
+	public void verifyCreateInvoiceIsActivated(String wonumber) {
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
 				+ wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
 Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);	

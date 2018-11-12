@@ -60,7 +60,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
 		//@Test(description = "Get registration code on back-office for iOS device")
 		public void testGetDeviceRegistrationCode(String backofficeurl,
-				String userName, String userPassword) throws Exception {
+				String userName, String userPassword) {
 
 			//final String searchlicensecriteria = "Mac mini_olkr";
 			final String searchlicensecriteria = "DW_Automation3";
@@ -83,7 +83,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 
 		//@Test(description = "Register iOS Ddevice")
-		public void testRegisterationiOSDdevice() throws Exception {
+		public void testRegisterationiOSDdevice() {
 			AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 			DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 			DriverBuilder.getInstance().getAppiumDriver().quit();
@@ -101,7 +101,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 
 		@Test(testName = "Test Case 10264:Test Valid VIN Check", description = "Test Valid VIN Check")
-		public void testValidVINCheck() throws Exception {
+		public void testValidVINCheck() {
 			final String tcname = "testValidVINCheck";
 			final int tcrow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -117,7 +117,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10451:Test Top Customers Setting", description = "Test Top Customers Setting")
-		public void testTopCustomersSetting() throws Exception {
+		public void testTopCustomersSetting() {
 			
 			homescreen.clickSettingsButton();
 			RegularSettingsScreen settingsscreen = new RegularSettingsScreen();
@@ -136,7 +136,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10452:Test VIN Duplicate check", description = "Test VIN Duplicate check")
-		public void testVINDuplicateCheck() throws Exception {
+		public void testVINDuplicateCheck() {
 			
 			final String tcname = "testVINDuplicateCheck";
 			final int tcrow = ExcelUtils.getTestCaseRow(tcname);
@@ -167,7 +167,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10453:Test Vehicle Part requirement", description = "Test Vehicle Part requirement")
-		public void testVehiclePartRequirement() throws Exception {
+		public void testVehiclePartRequirement() {
 			final String tcname = "testVehiclePartRequirement";
 			final int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -211,8 +211,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10455:Test turning multiple Work Orders into a single Invoice", description = "Test turning multiple Work Orders into a single Invoice")
-		public void testTurningMultipleWorkOrdersIntoASingleInvoice()
-				throws Exception {
+		public void testTurningMultipleWorkOrdersIntoASingleInvoice() {
 		    String tcname = "testTurningMultipleWorkOrdersIntoASingleInvoice1";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -352,8 +351,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10651:Test same Order Type required for turning multiple Work Orders into a single Invoice", description = "Test same Order Type required for turning multiple Work Orders into a single Invoice")
-		public void testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice()
-				throws Exception {
+		public void testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice() {
 			String tcname = "testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice1";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -432,8 +430,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10652:Test Approval needed before Inspections can be converted to Work Order for WizardPro Tracker", description = "Test Approval needed before Inspections can be converted to Work Order for WizardPro Tracker")
-		public void testApprovalNeededBeforeInspectionsCanBeConvertedToWorkOrderForWizardProTracker()
-				throws Exception {
+		public void testApprovalNeededBeforeInspectionsCanBeConvertedToWorkOrderForWizardProTracker() {
 			String tcname = "testApprovalNeededBeforeInspectionsCanBeConvertedToWorkOrderForWizardProTracker";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -482,7 +479,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10653:Test Inspections convert to Work Order", description = "Test Inspections convert to Work Order")
-		public void testInspectionsConvertToWorkOrder() throws Exception {
+		public void testInspectionsConvertToWorkOrder() {
 			String tcname = "testInspectionsConvertToWorkOrder";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -564,8 +561,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10654:Test 'Vehicle' Service does not multiply price entered when selecting multiple panels", description = "Test 'Vehicle' Service does not multiply price entered when selecting multiple panels")
-		public void testVehicleServiceDoesNotMultiplyPriceEnteredWhenSelectingMultiplePanels()
-				throws Exception {
+		public void testVehicleServiceDoesNotMultiplyPriceEnteredWhenSelectingMultiplePanels() {
 			String tcname = "testVehicleServiceDoesNotMultiplyPriceEnteredWhenSelectingMultiplePanels";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -605,8 +601,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10655:Test 'Panel' Service multiplies price entered when selecting multiple panels", description = "Test 'Panel' Service multiplies price entered when selecting multiple panels")
-		public void testPanelServiceMultipliesPriceEnteredWhenSelectingMultiplePanels()
-				throws Exception {
+		public void testPanelServiceMultipliesPriceEnteredWhenSelectingMultiplePanels() {
 			String tcname = "testPanelServiceMultipliesPriceEnteredWhenSelectingMultiplePanels";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -642,7 +637,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10656:Test Carmax vehicle information requirements", description = "Test Carmax vehicle information requirements")
-		public void testCarmaxVehicleInformationRequirements() throws Exception {
+		public void testCarmaxVehicleInformationRequirements() {
 			String tcname = "testCarmaxVehicleInformationRequirements";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -808,7 +803,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 11731:Test even WO level tech split for Wholesale Hail", description = "Test even WO level tech split for Wholesale Hail")
-		public void testEvenWOLevelTechSplitForWholesaleHail() throws Exception {
+		public void testEvenWOLevelTechSplitForWholesaleHail() {
 			String tcname = "testEvenWOLevelTechSplitForWholesaleHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -985,7 +980,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 11733:Test Custom WO level tech split for wholesale Hail", description = "Test Custom WO level tech split for wholesale Hail")
-		public void testCustomWOLevelTechSplitForWholesaleHail() throws Exception {
+		public void testCustomWOLevelTechSplitForWholesaleHail() {
 			String tcname = "testCustomWOLevelTechSplitForWholesaleHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1060,7 +1055,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 11734:Test Custom service level tech split for wholesale Hail", description = "Test Custom service level tech split for wholesale Hail")
-		public void testCustomServiceLevelTechSplitForWholesaleHail() throws Exception {
+		public void testCustomServiceLevelTechSplitForWholesaleHail() {
 			String tcname = "testCustomServiceLevelTechSplitForWholesaleHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1300,7 +1295,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10734:Test Even WO level tech split for Retail Hail", description = "Test Even WO level tech split for Retail Hail")
-		public void testEvenWOLevelTechSplitForRetailHail() throws Exception {
+		public void testEvenWOLevelTechSplitForRetailHail() {
 			String tcname = "testEvenWOLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1568,7 +1563,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 11727:Test Custom WO level tech split for Retail Hail", description = "Test Custom WO level tech split for Retail Hail")
-		public void testCustomWOLevelTechSplitForRetailHail() throws Exception {
+		public void testCustomWOLevelTechSplitForRetailHail() {
 			String tcname = "testCustomWOLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1671,7 +1666,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 11728:Test Custom service level tech split for Retail Hail", description = "Test Custom service level tech split for Retail Hail")
-		public void testCustomServiceLevelTechSplitForRetailHail() throws Exception {
+		public void testCustomServiceLevelTechSplitForRetailHail() {
 			String tcname = "testCustomServiceLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1883,8 +1878,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12628:Test Phase Enforcement for WizardPro Tracker", description = "Test Phase Enforcement for WizardPro Tracker")
-		public void testPhaseEnforcementForWizardProTracker()
-				throws Exception {
+		public void testPhaseEnforcementForWizardProTracker() {
 			String tcname = "testPhaseEnforcementForWizardProTracker";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -2349,7 +2343,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12641:Test custom WO level split for Route package", description = "Test custom WO level split for Route package")
-		public void testCustomWOLevelSplitForRoutePackage() throws Exception {
+		public void testCustomWOLevelSplitForRoutePackage() {
 			String tcname = "testCustomWOLevelSplitForRoutePackage";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -2440,7 +2434,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12642:Test even WO level split for Route package", description = "Test even WO level split for Route package")
-		public void testEvenWOLevelSplitForRoutePackage() throws Exception {
+		public void testEvenWOLevelSplitForRoutePackage() {
 			String tcname = "testEvenWOLevelSplitForRoutePackage";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -2719,8 +2713,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19514:Test editing an Invoice in Draft", description = "Test Editing an Invoice in Draft")
-		public void testEditingAnInvoiceInDraft()
-				throws Exception {
+		public void testEditingAnInvoiceInDraft() {
 			String tcname = "testEditingAnInvoiceInDraft";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -2822,8 +2815,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19548:Test adding a PO# to an invoice", description = "Test adding a PO# to an invoice")
-		public void testAddingAPOToAnInvoice()
-				throws Exception {
+		public void testAddingAPOToAnInvoice() {
 			String tcname = "testAddingAPOToAnInvoice";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3429,8 +3421,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10659:Test Enterprise Work Order question forms inforced", description = "Test Enterprize Work Order question forms inforced")
-		public void testEnterprizeWorkOrderQuestionFormsInforced()
-				throws Exception {
+		public void testEnterprizeWorkOrderQuestionFormsInforced() {
 			String tcname = "testEnterprizeWorkOrderQuestionFormsInforced";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3458,8 +3449,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12633:Test successful email of pictures using Notes feature", description = "Test successful email of pictures using Notes feature")
-		public void testSuccessfulEmailOfPicturesUsingNotesFeature()
-				throws Exception {
+		public void testSuccessfulEmailOfPicturesUsingNotesFeature() {
 			String tcname = "testSuccessfulEmailOfPicturesUsingNotesFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3526,8 +3516,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12634:Test emailing photos in Economical Inspection", description = "Test emailing photos in Economical Inspection")
-		public void testEmailingPhotosInEconomicalInspection()
-				throws Exception {
+		public void testEmailingPhotosInEconomicalInspection() {
 			String tcname = "testEmailingPhotosInEconomicalInspection";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3591,8 +3580,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12635:Test emailing photos in Auction package", description = "Test emailing photos in Auction package")
-		public void testEmailingPhotosInAuctionPackage()
-				throws Exception {
+		public void testEmailingPhotosInAuctionPackage() {
 			String tcname = "testEmailingPhotosInAuctionPackage";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3660,8 +3648,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12636:Test emailing photos in Service Drive package", description = "Test emailing photos in Service Drive package")
-		public void testEmailingPhotosInServiceDrivePackage()
-				throws Exception {
+		public void testEmailingPhotosInServiceDrivePackage() {
 			String tcname = "testEmailingPhotosInServiceDrivePackage";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 

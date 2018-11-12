@@ -179,9 +179,9 @@ public abstract class Helpers {
 		return alertetxt;
 	}
 
-	public static void acceptAlertIfExists() throws InterruptedException {
+	public static void acceptAlertIfExists() {
 
-		Thread.sleep(2000);
+		waitABit(2000);
 		try {
 			Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 			alert.accept();
