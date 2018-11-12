@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
@@ -58,20 +59,19 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 
 	public void addCustomer(String firstname, String lastname,
 			String companyname, String street, String city, String state,
-			String zip, String country, String phone, String mail)
-			throws InterruptedException {
+			String zip, String country, String phone, String mail) {
 		setFirstName(firstname);
 		setLastName(lastname);
 		setCompanyName(companyname);
-		Thread.sleep(2000);
+		Helpers.waitABit(2000);
 		setMail(mail);
 		setPhone(phone);
 		setStreet(street);
 		setCity(city);
-		selectCountry(country);	
-		Thread.sleep(2000);
-		selectState(state);		
-		Thread.sleep(4000);
+		selectCountry(country);
+		Helpers.waitABit(2000);
+		selectState(state);
+		Helpers.waitABit(4000);
 		setZip(zip);
 			
 		
@@ -79,13 +79,12 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 
 	public void editCustomer(String firstname, String lastname,
 			String companyname, String street, String city, String state,
-			String zip, String country, String phone, String mail)
-			throws InterruptedException {
-		Thread.sleep(1000);
+			String zip, String country, String phone, String mail) {
+		Helpers.waitABit(1000);
 		setFirstName(firstname);
 		setLastName(lastname);
 		setCompanyName(companyname);
-		Thread.sleep(2000);
+		Helpers.waitABit(2000);
 		setMail(mail);
 		setPhone(phone);
 		setStreet(street);
@@ -147,13 +146,12 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 		//appiumdriver.hideKeyboard();
 	}
 
-	public void selectState(String state) throws InterruptedException {
+	public void selectState(String state) {
 		statefld.click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(state)).click();		
 	}
 
-	public void selectCountry(String country)
-			throws InterruptedException {
+	public void selectCountry(String country) {
 		countryfld.click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(country)).click();
 	}

@@ -127,7 +127,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 8438:Update database on the device
 	@Test(testName = "Test Case 8438:Update database on the device" ,description = "Update Database")
-	public void testUpdateDatabase() throws Exception {
+	public void testUpdateDatabase() {
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		RegularMainScreen mainscr = new RegularMainScreen();
@@ -141,7 +141,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8437:Updating VIN decoder
 	@Test(testName = "Test Case 8437:Updating VIN decoder", description = "Update VIN")
-	public void testUpdateVIN() throws Exception {
+	public void testUpdateVIN() {
 		//resrtartApplication();
 		//RegularMainScreen mainscr = new RegularMainScreen();
 		RegularMainScreen mainscr = homescreen.clickLogoutButton();
@@ -155,7 +155,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8441:Add Retail Customer in regular build
 	@Test(testName = "Test Case 8441:Add Retail Customer in regular build", description = "Create retail customer")
-	public void testCreateRetailCustomer() throws Exception {
+	public void testCreateRetailCustomer() {
 
 		//resrtartApplication();	
 		//MainScreen mainscreen = new MainScreen();
@@ -176,7 +176,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8439:Edit Customer 
 	@Test(testName = "Test Case 8439:Edit Customer ", description = "Edit retail customer")
-	public void testEditRetailCustomer() throws Exception {
+	public void testEditRetailCustomer() {
 		final String lastname = "superedited";
 		final String companyname = "supercompanyedited";
 		final String street = "Second streer";
@@ -205,7 +205,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	// Test Case 8460: Delete Customer 
 	@Test(testName = "Test Case 8460: Delete Customer", description = "Delete retail customer")
-	public void testDeleteRetailCustomer() throws Exception {
+	public void testDeleteRetailCustomer() {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
@@ -236,7 +236,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 8435:Create Retail Inspection (HD Single page)
 	@Test(testName = "Test Case 8435:Create Retail Inspection", description = "Create Retail Inspection")
-	public void testCreateRetailInspection() throws Exception {
+	public void testCreateRetailInspection() {
 		final String VIN = "ZWERTYASDFEWSDRZG";
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
@@ -270,7 +270,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8434:Add Services to visual inspection
 	@Test(testName = "Test Case 8434:Add Services to visual inspection", description = "Add Services To Visual Inspection")
-	public void testAddServicesToVisualInspection() throws Exception {
+	public void testAddServicesToVisualInspection() {
 		final String _inspectionprice = "275";
 		
 		homescreen = new RegularHomeScreen();
@@ -311,8 +311,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8433:Change Quantity of services in Visual Inspection 
 	@Test(testName = "Test Case 8433:Change Quantity of services in Visual Inspection", description = "Change Quantity Of Services In Visual Inspection")
-	public void testChangeQuantityOfServicesInVisualInspection()
-			throws Exception {
+	public void testChangeQuantityOfServicesInVisualInspection() {
 		final String _quantity = "3.00";
 		final String _quantityexterior = "2.00";
 		final String _inspectionpricevisual = "275";
@@ -342,7 +341,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8432:Edit the retail Inspection Notes
 	@Test(testName = "Test Case 8432:Edit the retail Inspection Notes", description = "Edit Retail Inspection Notes")
-	public void testEditRetailInspectionNotes() throws Exception {
+	public void testEditRetailInspectionNotes() {
 		final String _notes1 = "Test\nTest 2";
 		
 		homescreen = new RegularHomeScreen();
@@ -369,7 +368,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8431:Approve inspection on device (Not Line Approval)
 	@Test(testName = "Test Case 8431:Approve inspection on device (Not Line Approval)", description = "Approve Inspection On Device")
-	public void testApproveInspectionOnDevice() throws Exception {
+	public void testApproveInspectionOnDevice() {
 
 		final String VIN = "CFRTHASDFEWSDRZWM";
 		final String _make = "Acura";
@@ -407,7 +406,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	// Test Case 8586:Archive and Un-Archive the Inspection
 	@Test(testName = "Test Case 8586:Archive and Un-Archive the Inspection", description = "Archive and Un-Archive the Inspection")
-	public void testArchiveAndUnArchiveTheInspection() throws Exception {
+	public void testArchiveAndUnArchiveTheInspection() {
 
 		final String VIN = "TESTVINNO";
 		final String _make = "Acura";
@@ -441,8 +440,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8430:Create work order with type is assigned to a specific client
 	@Test(testName = "Test Case 8430:Create work order with type is assigned to a specific client", description = "Create work order with type is assigned to a specific client ")
-	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient()
-			throws Exception {
+	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient() {
 		final String VIN = "ZWERTYASDFDDXZBVB";
 		final String _po = "1111 2222";
 		final String summ = "71.40";
@@ -642,7 +640,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//todo
 	@Test(testName = "Approve Inspections On Device via Action", description = "Approve Inspections On Device via Action")
-	public void testApproveInspectionsOnDeviceViaAction() throws Exception {
+	public void testApproveInspectionsOnDeviceViaAction() {
 
 		final String VIN = "TESTVINN";
 		final String _make = "Acura";
@@ -698,7 +696,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//todo
 	@Test(testName = "Archive Inspections On Device via Action", description = "Archive Inspections On Device via Action")
-	public void testArchiveInspectionsOnDeviceViaAction() throws Exception {
+	public void testArchiveInspectionsOnDeviceViaAction() {
 
 		final String VIN = "TESTVINN";
 		final String _make = "Acura";
@@ -739,7 +737,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8467:Approve inspection on back office (full inspection approval)
 	@Test(testName = "Test Case 8467:Approve inspection on back office (full inspection approval)", description = "Approve inspection on back office (full inspection approval)")
-	public void testApproveInspectionOnBackOfficeFullInspectionApproval() throws Exception {
+	public void testApproveInspectionOnBackOfficeFullInspectionApproval() {
 
 		final String VIN = "TESTVINNO";
 		final String _make = "Acura";
@@ -793,7 +791,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8463:Approve inspection on back office (line-by-line approval)
 	@Test(testName = "Test Case 8463:Approve inspection on back office (line-by-line approval) ", description = "Approve inspection on back office (line-by-line approval)")
-	public void testApproveInspectionOnBackOfficeLinebylineApproval() throws Exception {
+	public void testApproveInspectionOnBackOfficeLinebylineApproval() {
 
 		final String VIN = "TESTVINNO";
 		final String _make = "Acura";
@@ -846,7 +844,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	// Test Case 8442: Creating Inspection From Service Request
 	@Test(testName = "Test Case 8442: Creating Inspection From Service Request", description = "Creating Inspection From Service Request")
-	public void testCreatingInspectionFromServiceRequest() throws Exception {
+	public void testCreatingInspectionFromServiceRequest() {
 
 		final String customer = "Company2";
 		final String vin = "TESTVNN1";
@@ -925,7 +923,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device
 	@Test(testName = "Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device", description = "Creating Service Request with Inspection, WO and Appointment required on device")
-	public void testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice() throws Exception {
+	public void testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice() {
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
 		final String _model = "323i U";
@@ -1054,7 +1052,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	//Test Case 21582:Create Inspection from Service request
 	@Test(testName = "Test Case 21582:Create Inspection from Service request", description = "Create Inspection from Service request"/*,
 			dependsOnMethods = { "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice" }*/)
-	public void testCreateInspectionFromServiceRequest() throws Exception {
+	public void testCreateInspectionFromServiceRequest()  {
 		final String summ= "438.60";
 			
 		homescreen = new RegularHomeScreen();
@@ -1107,7 +1105,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	//Test Case 21585:Create WO from Service Request
 	@Test(testName = "Test Case 21585:Create WO from Service Request", description = "Create WO from Service Request"/*,
 			dependsOnMethods = { "testCreateInspectionFromServiceRequest" }*/)
-	public void testCreateWOFromServiceRequest() throws Exception {
+	public void testCreateWOFromServiceRequest() {
 
 		/*.closeApp();
 		Thread.sleep(60*1000*15);
@@ -1150,7 +1148,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 16640:Create Inspection from Invoice with two WOs
 	@Test(testName = "Test Case 16640:Create Inspection from Invoice with two WOs", description = "Create Inspection from Invoice with two WOs")
-	public void testCreateInspectionFromInvoiceWithTwoWOs() throws Exception {
+	public void testCreateInspectionFromInvoiceWithTwoWOs() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1232,7 +1230,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 16664:Create Invoice from WO in "My WOs" list
 	@Test(testName = "Test Case 16664:Create Invoice from WO in \"My WOs\" list", description = "Create Invoice from WO in My WOs list")
-	public void testCreateInvoiceFromWOInMyWOsList() throws Exception {
+	public void testCreateInvoiceFromWOInMyWOsList() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1321,7 +1319,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode
 	@Test(testName = "Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode", description = "Don't allow to select billed and not billed orders together in multi selection mode")
-	public void testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode() throws Exception {
+	public void testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode() {
 
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1435,7 +1433,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 18436:Don't allow to change billed orders
 	@Test(testName = "Test Case 18436:Don't allow to change billed orders", description = "Don't allow to change billed orders")
-	public void testDontAlowToChangeBilledOrders() throws Exception {
+	public void testDontAlowToChangeBilledOrders() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1518,7 +1516,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 18439:Change customer for invoice
 	@Test(testName = "Test Case 18439:Change customer for invoice", description = "Change customer for invoice")
-	public void testChangeCustomerForInvoice() throws Exception {
+	public void testChangeCustomerForInvoice() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1593,7 +1591,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 10498:Regression test: test bug with crash on "Copy Vehicle" 
 	@Test(testName = "Test Case 10498:Regression test: test bug with crash on \"Copy Vehicle\"", description = "Regression test: test bug with crash on Copy Vehicle")
-	public void testBugWithCrashOnCopyVehicle() throws Exception {
+	public void testBugWithCrashOnCopyVehicle() {
 
 		final String vin = "SHDHBEVDHDHDGDVDG";
 		final String vehicleinfo = "Black, BMW, 323i U";
@@ -1624,7 +1622,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 16239:Copy Inspections
 	@Test(testName = "Test Case 16239:Copy Inspections", description = "Copy Inspections")
-	public void testCopyInspections() throws Exception {
+	public void testCopyInspections() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Audi";
@@ -1833,7 +1831,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 16507:Create inspection from WO
 	@Test(testName = "Test Case 16507:Create inspection from WO", description = "Create inspection from WO")
-	public void testCreateInspectionFromWO() throws Exception {
+	public void testCreateInspectionFromWO() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
@@ -1891,7 +1889,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 26266:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
-	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() throws Exception {
+	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
@@ -1986,7 +1984,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23401:Test 'Change customer' option for inspection
 	@Test(testName = "Test Case 23401:Test 'Change customer' option for inspection", description = "Test 'Change customer' option for inspection")
-	public void testChangeCustomerOptionForInspection() throws Exception {
+	public void testChangeCustomerOptionForInspection() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2031,7 +2029,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'
 	@Test(testName = "Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'", description = "Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'")
-	public void testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa() throws Exception {
+	public void testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2082,7 +2080,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies
 	@Test(testName = "Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies", description = "Test 'Change customer' option for Inspections based on type with preselected Companies")
-	public void testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies() throws Exception {
+	public void testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2121,7 +2119,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23422:Test 'Change customer' option for Work Order
 	@Test(testName = "Test Case 23422:Test 'Change customer' option for Work Order", description = "Test 'Change customer' option for Work Order")
-	public void testChangeCustomerOptionForWorkOrder() throws Exception {
+	public void testChangeCustomerOptionForWorkOrder()  {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2162,7 +2160,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies
 	@Test(testName = "Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies", description = "Test 'Change customer' option for WO based on type with preselected Companies")
-	public void testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies() throws Exception {
+	public void testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2207,7 +2205,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'
 	@Test(testName = "Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'", description = "Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'")
-	public void testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa() throws Exception {
+	public void testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2257,7 +2255,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN
 	@Test(testName = "Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN", description = "'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN")
-	public void testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN() throws Exception {
+	public void testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2293,7 +2291,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23459:'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service
 	@Test(testName = "Test Case 23459:'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service", description = "'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service")
-	public void testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService() throws Exception {
+	public void testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2331,7 +2329,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO
 	@Test(testName="Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO", description = "'WO: Test 'Edit' option of 'Duplicate services' message for WO")
-	public void testEditOptionOfDuplicateServicesMessageForWO() throws Exception {
+	public void testEditOptionOfDuplicateServicesMessageForWO() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2373,7 +2371,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO.
 	@Test(testName="Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO", description = "'WO: Test 'Override' option of 'Duplicate services' message for WO.")
-	public void testOverrideOptionOfDuplicateServicesMessageForWO() throws Exception {
+	public void testOverrideOptionOfDuplicateServicesMessageForWO() {
 
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2413,7 +2411,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO
 	@Test(testName="Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO", description = "'WO: Test 'Cancel' option of 'Duplicate services' message for WO.")
-	public void testCancelOptionOfDuplicateServicesMessageForWO() throws Exception {
+	public void testCancelOptionOfDuplicateServicesMessageForWO() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2454,7 +2452,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	//Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price
 	@Test(testName="Test Case 23966:Inspections: Test saving inspectiontypes with three matrix, "
 			+ "Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price", description = "'Inspections: Test saving inspectiontypes with three matrix")
-	public void testSavingInspectionsWithThreeMatrix() throws Exception {
+	public void testSavingInspectionsWithThreeMatrix() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2590,7 +2588,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR
 	@Test(testName="Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR", description = "Test that selected services on SR are copied to Inspection based on SR")
-	public void testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR() throws Exception {
+	public void testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR() {
 		final String VIN  = "1D7HW48NX6S507810";
 		
 		/*RegularSettingsScreen settingscreen =  homescreen.clickSettingsButton();
@@ -2657,8 +2655,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	@Test(testName="Test Case 24657:WO: Test that auto-saved WO is created correctly, " +
 			"Test Case 23435:WO: Test 'Continue' option of 'Auto-saved' WO, " + 
 			"Test Case 23436:WO: Test 'Discard' option of 'Auto-saved' WO", description = "WO: Test that auto-saved WO is created correctly")
-	public void testThatAutoSavedWOIsCreatedCorrectly()
-			throws Exception {
+	public void testThatAutoSavedWOIsCreatedCorrectly() {
 		final String VIN  = "1FMFU18L53LC13897";
 
 		//resrtartApplication();
@@ -2701,7 +2698,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 21578:SR: Add appointment to Service Request 
 	@Test(testName = "Test Case 21578:SR: Add appointment to Service Request", description = "SR: Add appointment to Service Request")
-	public void testSRAddAppointmentToServiceRequest() throws Exception {
+	public void testSRAddAppointmentToServiceRequest() {
 		final String VIN = "QWERTYUI123";
 
 		homescreen = new RegularHomeScreen();
@@ -2764,7 +2761,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar
 	@Test(testName = "Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar", description = "SR: Verify 'Summary' action for appointment on SR's calendar")
-	public void testSRVerifySummaryActionForAppointmentOnSRsCalendar() throws Exception {
+	public void testSRVerifySummaryActionForAppointmentOnSRsCalendar() {
 		final String VIN = "QWERTYUI123";
 		final String srappsubject = "SR-APP";
 		final String srappaddress = "Maidan";
@@ -2843,8 +2840,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 25403:WO Regular: Verify that only assigned services on Matrix Panel is available as additional services", description = "WO Regular: Verify that only assigned services on Matrix Panel is available as additional services")
-	public void testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices()
-			throws Exception {
+	public void testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 
@@ -2887,8 +2883,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 25011:Inspections: verify that only assigned services on Matrix Panel is available as additional services", description = "Inspections: verify that only assigned services on Matrix Panel is available as additional services")
-	public void testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices()
-			throws Exception {
+	public void testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 
@@ -2923,8 +2918,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 25421:WO: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services", description = "WO HD: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services")
-	public void testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices()
-			throws Exception {
+	public void testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices() {
 		
 		final String VIN  = "2C3CDXBG2EH174681";
 
@@ -2987,8 +2981,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 26054:WO Monitor: Regular - Create WO for monitor", description = "WO Monitor: Regular - Create WO for monitor")
-	public void testWOMonitorCreateWOForMonitor()
-			throws Exception {
+	public void testWOMonitorCreateWOForMonitor() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 
@@ -3023,8 +3016,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 26091:WO Monitor: Regular - Verify that it is not possible to change Service Status before Start Service", description = "WO Monitor: Regular - Verify that it is not possible to change Service Status before Start Service")
-	public void testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService()
-			throws Exception {
+	public void testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3078,8 +3070,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 26092:WO Monitor: Regular - Verify that it is not possible to change Phase Status before Start phase", description = "WO Monitor: HD - Verify that it is not possible to change Phase Status before Start phase")
-	public void testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase()
-			throws Exception {
+	public void testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3147,8 +3138,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}	
 	
 	@Test(testName="Test Case 26094:WO Monitor: Regular - Verify that Start date is set when Start Service", description = "WO Monitor: Regular - Verify that Start date is set when Start Service")
-	public void testWOMonitorVerifyThatStartDateIsSetWhenStartService()
-			throws Exception {
+	public void testWOMonitorVerifyThatStartDateIsSetWhenStartService() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3200,8 +3190,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	//@Test(testName="Test Case 26016:WO Monitor: Regular - Verify that for % service message about change status is not shown", description = "WO Monitor: Regular - Verify that for % service message about change status is not shown")
-	public void testWOMonitorVerifyThatForPercentServiceMessageAboutChangeStatusIsNotShown()
-			throws Exception {
+	public void testWOMonitorVerifyThatForPercentServiceMessageAboutChangeStatusIsNotShown() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3250,8 +3239,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26013:WO Monitor: Regular - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase", 
 			description = "WO Monitor: Regular - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase")
-	public void testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase()
-			throws Exception {
+	public void testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		final String _pricematrix = "HOOD";
@@ -3347,8 +3335,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26093:WO Monitor: Regular - Verify that %Service is not Started when Start phase", 
 			description = "WO Monitor: Regular - Verify that %Service is not Started when Start phase")
-	public void testWOMonitorVerifyThatPercentageServiceIsNotStartedWhenStartPhase()
-			throws Exception {
+	public void testWOMonitorVerifyThatPercentageServiceIsNotStartedWhenStartPhase() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		final String _pricematrix = "HOOD";
@@ -3439,8 +3426,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28473:Invoices: HD - Verify that red 'A' icon is present for invoice with customer approval ON and no signature", 
 			description = "Invoices: Regular - Verify that red 'A' icon is present for invoice with customer approval ON and no signature")
-	public void testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature()
-			throws Exception {
+	public void testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
@@ -3480,8 +3466,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28476:Invoices: HD&Regular - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature", 
 			description = "Invoices: Regular - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature")
-	public void testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature()
-			throws Exception {
+	public void testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
@@ -3521,8 +3506,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28478:Invoices: Regular - Verify that 'A' icon is not present for invoice when signature exists", 
 			description = "Invoices: Regular - Verify that 'A' icon is not present for invoice when signature exists")
-	public void testRegularVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists()
-			throws Exception {
+	public void testRegularVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
@@ -3601,8 +3585,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29022:SR: Regular - Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech", 
 			description = "Test Case 29022:SR: Regular - Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech")
-	public void testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech()
-			throws Exception {
+	public void testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -3653,8 +3636,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29029:SR: Regular - Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech", 
 			description = "Test Case 29029:SR: Regular - Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech")
-	public void testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech()
-			throws Exception {
+	public void testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -3879,7 +3861,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33165:WO: Regular - Not multiple Service with required Panels is added one time to WO after selecting", 
 			description = "WO: Regular - Not multiple Service with required Panels is added one time to WO after selecting")
-	public void testWORegularNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting() throws Exception {
+	public void testWORegularNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting()  {
 				
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -3924,8 +3906,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 34562:WO: Verify that Bundle Items are shown when create WO from inspection", description = "WO: Verify that Bundle Items are shown when create WO from inspection")
-	public void testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection()
-			throws Exception {
+	public void testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection() {
 		
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -4014,8 +3995,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31748:SR: Regular - Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'", 
 			description = "SR: Regular - Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'")
-	public void testSRRegularVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold()
-			throws Exception {
+	public void testSRRegularVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4045,8 +4025,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31749:SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press No alert message is close", 
 			description = "SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press No alert message is close")
-	public void testSRRegularVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose()
-			throws Exception {
+	public void testSRRegularVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4080,8 +4059,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31750:SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown", 
 			description = "SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown")
-	public void testSRRegularVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown()
-			throws Exception {
+	public void testSRRegularVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4115,8 +4093,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31752:SR: Regular - Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO", 
 			description = "SR: Regular - Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO")
-	public void testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO()
-			throws Exception {
+	public void testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4156,8 +4133,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31753:SR: Regular - Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO", 
 			description = "SR: Regular - Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO")
-	public void testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO()
-			throws Exception {
+	public void testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4193,8 +4169,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 30083:SR: Regular - Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services", 
 			description = "SR: Regular - Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services")
-	public void testSRRegularVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices()
-			throws Exception {
+	public void testSRRegularVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4278,8 +4253,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 30084:SR: Regular - Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services", 
 			description = "SR: Regular - Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services")
-	public void testSRRegularVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices()
-			throws Exception {
+	public void testSRRegularVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4356,7 +4330,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 38749:Inspections: Regular - Verify that on inspection approval screen selected price matrix value is shown", 
 			description = "Verify that on inspection approval screen selected price matrix value is shown")
-	public void testRegularVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown() throws Exception {
+	public void testRegularVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -4431,7 +4405,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 31451:Inspection - Regular: Verify that question section is shown per service for first selected panel when QF is not required", 
 			description = "Verify that question section is shown per service for first selected panel when QF is not required")
-	public void testRegularVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired() throws Exception {
+	public void testRegularVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired() {
 
 		final String[] vehicleparts = { "Front Bumper", "Grill", "Hood", "Left Fender" };
 		
@@ -4469,7 +4443,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 31963:Inspections: Regular - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
 			description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
-	public void testRegularVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() throws Exception {
+	public void testRegularVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() {
 
 		homescreen = new RegularHomeScreen();
 		
@@ -4490,7 +4464,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 42376:Inspections: Regular - Verify that when edit inspection selected vehicle parts for services are present", 
 			description = "Verify that when edit inspection selected vehicle parts for services are present")
-	public void testRegularVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent() throws Exception {
+	public void testRegularVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent() {
 
 		final String VIN = "1D7HW48NX6S507810";
 		final String[] vehicleparts = { "Deck Lid", "Hood", "Roof" };
@@ -4759,7 +4733,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33869:Inspections: Regular - Verify that Services on Service Package are grouped by type selected on Insp type->Wizard", 
 			description = "Verify that Services on Service Package are grouped by type selected on Insp type->Wizard")
-	public void testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard() throws Exception {
+	public void testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		List<String> inspnumbers = new ArrayList<>();
@@ -4821,7 +4795,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 44407:Inspections: Regular - Verify that all instances of one service are copied from inspection to WO", 
 			description = "Verify that all instances of one service are copied from inspection to WO")
-	public void testVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO() throws Exception {
+	public void testVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String firstprice = "43";
@@ -4879,7 +4853,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33918:Inspections: Regular - Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type", 
 			description = "Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type")
-	public void testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType() throws Exception {
+	public void testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -4908,7 +4882,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 34285:Inspections: Regular - Verify that during Line approval ''Select All'' buttons are working correctly", 
 			description = "Verify that during Line approval ''Select All'' buttons are working correctly")
-	public void testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly() throws Exception {
+	public void testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -4961,7 +4935,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 30012:Inspections: Regular - Verify that Approve option is not present for approved inspection in multi-select mode", 
 			description = "Verify that Approve option is not present for approved inspection in multi-select mode")
-	public void testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode() throws Exception {
+	public void testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		ArrayList<String> inspections = new ArrayList<String>();
@@ -5019,7 +4993,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 30013:Inspections: Regular - Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected",
 			description = "Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected")
-	public void testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected() throws Exception {
+	public void testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		ArrayList<String> inspections = new ArrayList<String>();
@@ -5077,7 +5051,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			+ "Test Case 30855:Inspections: Regular - Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)", 
 			description = "Verify that when option ''Draft Mode'' is set to ON - when save inspection provide prompt to a user to select either Draft or Final,"
 					+ "Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)")
-	public void testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal() throws Exception {
+	public void testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -5123,7 +5097,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32286:Inspections: Regular - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
-	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount() throws Exception {
+	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -5196,8 +5170,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 51336:WO: Regular - Verify that approve WO is working correct under Team WO", 
 			description = "WO: Regular - Verify that approve WO is working correct under Team WO")
-	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO()
-			throws Exception {
+	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		
@@ -5233,8 +5206,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 27717:Invoices: Regular - Verify that it is posible to add payment from device for draft invoice", 
 			description = "Invoices: Regular - Verify that it is posible to add payment from device for draft invoice")
-	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice()
-			 {
+	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";
@@ -5326,8 +5298,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 27739:Invoices: Regular - Verify that payment is send to BO when PO# is changed under My invoice", 
 			description = "Invoices: Regular - Verify that payment is send to BO when PO# is changed under My invoice")
-	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice()
-			throws Exception {
+	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";
@@ -5420,8 +5391,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 27741:Invoices: Regular - Verify that payment is send to BO when PO# is changed under Team invoice", 
 			description = "Invoices: Regular - Verify that payment is send to BO when PO# is changed under Team invoice")
-	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice()
-			throws Exception {
+	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";
@@ -5504,8 +5474,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in", 
 			description = "WO: Regular - Verify filter for Team WO that returns only work assigned to tech who is logged in")
-	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn()
-			throws Exception {
+	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 
@@ -5713,7 +5682,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45128:Inspections: Regular - Verify that service level notes are copied from Inspection to WO when it is auto created after approval", 
 			description = "Verify that service level notes are copied from Inspection to WO when it is auto created after approval")
-	public void testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval() throws Exception {
+	public void testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String _price1  = "10";
@@ -5859,7 +5828,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32989:Inspections: Regular - Verify that question section is shown per service with must panels when questions are required", 
 			description = "Verify that question section is shown per service with must panels when questions are required")
-	public void testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired() throws Exception {
+	public void testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -5949,7 +5918,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33115:WO: Regular - Verify that Tech splits is saved in price matrices", 
 			description = "Verify that Tech splits is saved in price matrices")
-	public void testWOVerifyThatTechSplitsIsSavedInPriceMatrices() throws Exception {
+	public void testWOVerifyThatTechSplitsIsSavedInPriceMatrices() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String pricevalue  = "100";
@@ -6004,7 +5973,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 34551:WO: Regular - Verify that it is not possible to change default tech via service type split", 
 			description = "Verify that it is not possible to change default tech via service type split")
-	public void testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit() throws Exception {
+	public void testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String defaulttech  = "Employee Simple 20%";
@@ -6059,7 +6028,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45097:WO: Regular - Verify that when use Copy Services action for WO all service instances should be copied", 
 			description = "Verify that when use Copy Services action for WO all service instances should be copied")
-	public void testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied() throws Exception {
+	public void testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "5";
@@ -6117,8 +6086,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 50250:WO: Regular - Verify that WO number is not duplicated", 
 			description = "WO: - Verify that WO number is not duplicated")
-	public void testWOVerifyThatWONumberIsNotDuplicated()
-			throws Exception {
+	public void testWOVerifyThatWONumberIsNotDuplicated() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po  = "12345";
@@ -6240,8 +6208,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 39573:WO: Regular - Verify that in case valid VIN is decoded, replace existing make and model with new one", 
 			description = "WO: - Verify that in case valid VIN is decoded, replace existing make and model with new one")
-	public void testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne()
-			throws Exception {
+	public void testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne() {
 		
 		final String[] VINs  = { "2A8GP54L87R279721", "1FMDU32X0PUB50142", "GFFGG"} ;
 		final String makes[]  = { "Chrysler", "Ford", null } ;
@@ -6271,9 +6238,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 34626:WO: Regular - Verify that when service do not have questions and select several panels do not underline anyone", 
 			description = "WO: - Verify that when service do not have questions and select several panels do not underline anyone")
-	public void testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone()
-			throws Exception {
-		
+	public void testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone() {
 		final String VIN  = "2A8GP54L87R279721";
 		final String[] vehicleparts  = { "Center Rear Passenger Seat", "Dashboard" };
 		
@@ -6308,7 +6273,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 31964:WO: Regular - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
 				description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
-	public void testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() throws Exception {
+	public void testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() {
 			
 		final String VIN = "2A8GP54L87R279721";
 
@@ -6332,7 +6297,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 53824:WO: Regular - Verify that message is shown for Money and Labor service when price is changed to 0$ under WO", 
 			description = "Verify that message is shown for Money and Labor service when price is changed to 0$ under WO")
-	public void testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO() throws Exception {
+	public void testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "5";
@@ -6406,7 +6371,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45252:WO: Regular - Verify that validation is present for vehicle trim field", 
 			description = "Verify that validation is present for vehicle trim field")
-	public void testWOVerifyThatValidationIsPresentForVehicleTrimField() throws Exception {
+	public void testWOVerifyThatValidationIsPresentForVehicleTrimField() {
 		
 		final String VIN  = "TESTVINN";
 		final String _make = "Acura";
@@ -6442,7 +6407,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 35375:WO: Regular - Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF", 
 			description = "Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF")
-	public void testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF() throws Exception {
+	public void testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6478,7 +6443,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	@Test(testName = "Test Case 40821:WO: Regular - Verify that it is possible to assign tech to order by action Technicians", 
 			description = "Verify that it is possible to assign tech to order by action Technicians")
-	public void testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians() throws Exception {
+	public void testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String pricevalue  = "21";
@@ -6565,7 +6530,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 58663:Inspections: Regular - Verify that when Panel grouping is used for package for selected Panel only linked services are shown", 
 			description = "Verify that when Panel grouping is used for package for selected Panel only linked services are shown")
-	public void testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown() throws Exception {
+	public void testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6602,7 +6567,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 57101:WO: Regular - Verify that WO is saved correct with selected sub service (no message with incorrect tech split)", 
 			description = "Verify that WO is saved correct with selected sub service (no message with incorrect tech split)")
-	public void testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit() throws Exception {
+	public void testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "10";
@@ -6649,7 +6614,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 54542:WO: Regular - Verify that answer services are correctly added for WO when Panel group is set", 
 			description = "Verify that answer services are correctly added for WO when Panel group is set")
-	public void testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet() throws Exception {
+	public void testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6682,7 +6647,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 43408:WO: Regular - Verify that search bar is present for service pack screen", 
 			description = "Verify that search bar is present for service pack screen")
-	public void testWOVerifyThatSearchBarIsPresentForServicePackScreen() throws Exception {
+	public void testWOVerifyThatSearchBarIsPresentForServicePackScreen() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6718,7 +6683,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 42178:WO: Regular - Verify that Cancel message is shown for New/Existing WO", 
 			description = "Verify that Cancel message is shown for New/Existing WO")
-	public void testWOVerifyThatCancelMessageIsShownForNewOrExistingWO() throws Exception {
+	public void testWOVerifyThatCancelMessageIsShownForNewOrExistingWO() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6760,8 +6725,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35951:SR: Reqular - Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed", 
 			description = "Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed")
-	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed()
-			throws Exception {
+	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
