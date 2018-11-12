@@ -1152,7 +1152,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 11735:Test Customer Discount on Wholesale Hail", description = "Test Customer Discount on Wholesale Hail")
-		public void testCustomerDiscountOnWholesaleHail() throws Exception {
+		public void testCustomerDiscountOnWholesaleHail() {
 			String tcname = "testCustomerDiscountOnWholesaleHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -1190,7 +1190,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10668:Test Quick Quote option for Retail Hail", description = "Test Quick Quote option for Retail Hail")
-		public void testQuickQuoteOptionForRetailHail() throws Exception {
+		public void testQuickQuoteOptionForRetailHail() {
 			String tcname = "testQuickQuoteOptionForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1253,7 +1253,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10733:Test Customer self-pay option for Retail Hail", description = "Test Customer self-pay option for Retail Hail")
-		public void testCustomerSelfPayOptionForRetailHail() throws Exception {
+		public void testCustomerSelfPayOptionForRetailHail() {
 			String tcname = "testCustomerSelfPayOptionForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1403,7 +1403,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10735:Test even service level tech split for Retail Hail", description = "Test even service level tech split for Retail Hail")
-		public void testEvenServiceLevelTechSplitForRetailHail() throws Exception {
+		public void testEvenServiceLevelTechSplitForRetailHail() {
 			String tcname = "testEvenServiceLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1482,7 +1482,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10736:Test deductible feature for Retail Hail", description = "Test deductible feature for Retail Hail")
-		public void testDeductibleFeatureForRetailHail() throws Exception {
+		public void testDeductibleFeatureForRetailHail() {
 			String tcname = "testDeductibleFeatureForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1535,7 +1535,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 10737:Test Zip Code validator for Retail Hail", description = "Test Zip Code validator for Retail Hail")
-		public void testZipCodeValidatorForRetailHail() throws Exception {
+		public void testZipCodeValidatorForRetailHail() {
 			String tcname = "testZipCodeValidatorForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			final String validzip = "83707";
@@ -1778,7 +1778,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12626:Test Customer Discount on Retail Hail", description = "Test Customer Discount on Retail Hail")
-		public void testCustomerDiscountOnRetailHail() throws Exception {
+		public void testCustomerDiscountOnRetailHail() {
 			String tcname = "testCustomerDiscountOnRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -1821,8 +1821,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12627:Test WizardPro Tracker package requirement for RO to be completed before turning into an invoice", description = "Test WizardPro Tracker package requirement for RO to be completed before turning into an invoice")
-		public void testWizardProTrackerPackageRequirementForROToBeCompletedBeforeTurningIntoOnInvoice()
-				throws Exception {
+		public void testWizardProTrackerPackageRequirementForROToBeCompletedBeforeTurningIntoOnInvoice() {
 			String tcname = "testWizardProTrackerPackageRequirementForROToBeCompletedBeforeTurningIntoOnInvoice";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -1973,8 +1972,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 
 		@Test(testName = "Test Case 12630:Test adding services to an order being monitored", description = "Test adding services to an order being monitored")
-		public void testAddingServicesToOnOrderBeingMonitored()
-				throws Exception {
+		public void testAddingServicesToOnOrderBeingMonitored() {
 			String tcname = "testAddingServicesToOnOrderBeingMonitored";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -2095,8 +2093,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12629:Test Start Service feature is accurately capturing times", description = "Test Start Service feature is accurately capturing times")
-		public void testStartServiceFeatureIsAccuratelyCapturingTimes()
-				throws Exception {
+		public void testStartServiceFeatureIsAccuratelyCapturingTimes() {
 			String tcname = "testStartServiceFeatureIsAccuratelyCapturingTimes";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -2138,8 +2135,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12631:Test Quantity does not mulitply price in Route package", description = "Test Quantity does not mulitply price in Route package")
-		public void testQuantityDoesNotMulitplyPriceInRoutePackage()
-				throws Exception {
+		public void testQuantityDoesNotMulitplyPriceInRoutePackage() {
 			String tcname = "testQuantityDoesNotMulitplyPriceInRoutePackage";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -2204,8 +2200,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12632:Test Delete Work Order function", description = "Test Delete Work Order function")
-		public void testDeleteWorkOrderFunction()
-				throws Exception {
+		public void testDeleteWorkOrderFunction() {
 			String tcname = "testDeleteWorkOrderFunction";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -2240,8 +2235,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12637:Test changing customer on Inspection", description = "Test changing customer on Inspection")
-		public void testChangingCustomerOnInspection()
-				throws Exception {
+		public void testChangingCustomerOnInspection() {
 			String tcname = "testChangingCustomerOnInspection";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -2304,7 +2298,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12638:Test Retail Hail package quantity multiplier", description = "Test Retail Hail package quantity multiplier")
-		public void testRetailHailPackageQuantityMultiplier() throws Exception {
+		public void testRetailHailPackageQuantityMultiplier() {
 			String tcname = "testRetailHailPackageQuantityMultiplier";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			
@@ -2517,8 +2511,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12644:Test adding notes to a Work Order", description = "Test adding notes to a Work Order")
-		public void testAddingNotesToWorkOrder()
-				throws Exception {
+		public void testAddingNotesToWorkOrder() {
 			String tcname = "testAddingNotesToWorkOrder";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -2591,8 +2584,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12645:Test changing the PO# on an invoice", description = "Test changing the PO# on an invoice")
-		public void testChangingThePOOnAnInvoice()
-				throws Exception {
+		public void testChangingThePOOnAnInvoice() {
 			String tcname = "testChangingThePOOnAnInvoice";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -2630,8 +2622,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12646:Test editing an Inspection", description = "Test editing an Inspection")
-		public void testEditingAnInspection()
-				throws Exception {
+		public void testEditingAnInspection() {
 			String tcname = "testEditingAnInspection";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -2675,8 +2666,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 12647:Test editing a Work Order", description = "Test editing a Work Order")
-		public void testEditingWorkOrder()
-				throws Exception {
+		public void testEditingWorkOrder() {
 			String tcname = "testEditingWorkOrder";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -2898,8 +2888,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19670:Test adding a PO# to an invoice containing multiple Work Orders", description = "Test adding a PO# to an invoice containing multiple Work Orders")
-		public void testAddingPOToAnInvoiceContainingMultipleWorkOrders()
-				throws Exception {
+		public void testAddingPOToAnInvoiceContainingMultipleWorkOrders() {
 			String tcname1 = "testAddingPOToAnInvoiceContainingMultipleWorkOrders1";
 			String tcname2 = "testAddingPOToAnInvoiceContainingMultipleWorkOrders2";
 			String tcname3 = "testAddingPOToAnInvoiceContainingMultipleWorkOrders3";
@@ -3007,8 +2996,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19671:Test Copy Vehicle feature", description = "Test Copy Vehicle feature")
-		public void testCopyVehicleFeature()
-				throws Exception {
+		public void testCopyVehicleFeature() {
 			String tcname = "testCopyVehicleFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3036,8 +3024,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19672:Test Copy Services feature", description = "Test Copy Services feature")
-		public void testCopyServicesFeature()
-				throws Exception {
+		public void testCopyServicesFeature() {
 			String tcname1 = "testCopyServicesFeature1";
 			String tcname2 = "testCopyServicesFeature2";
 			
@@ -3073,8 +3060,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 24164:Test Pre-Existing Damage option", description = "Test Pre-Existing Damage option")
-		public void testPreExistingDamageOption()
-				throws Exception {
+		public void testPreExistingDamageOption() {
 			String tcname = "testPreExistingDamageOption";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3144,8 +3130,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19676:Test Total Sale requirement", description = "Test Total Sale requirement")
-		public void testTotalSaleRequirement()
-				throws Exception {
+		public void testTotalSaleRequirement() {
 			String tcname = "testTotalSaleRequirement";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3188,8 +3173,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19678:Test package pricing for read only items", description = "Test package pricing for read only items")
-		public void testPackagePricingForReadOnlyItems()
-				throws Exception {
+		public void testPackagePricingForReadOnlyItems() {
 			String tcname = "testPackagePricingForReadOnlyItems";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3234,8 +3218,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19681:Test price policy for service items from Inspection through Invoice creation", description = "Test price policy for service items from Inspection through Invoice creation")
-		public void testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation()
-				throws Exception {
+		public void testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation() {
 			String tcname = "testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3323,7 +3306,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19683:Test Work Order Discount Override feature", description = "Test Work Order Discount Override feature")
-		public void testWorkOrderDiscountOverrideFeature() throws Exception {		
+		public void testWorkOrderDiscountOverrideFeature() {
 			String tcname = "testWorkOrderDiscountOverrideFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3380,8 +3363,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 19685:Test completed RO only requirement for invoicing", description = "Test Completed RO only requirement for invoicing")
-		public void testCompletedROOnlyRequirementForInvoicing()
-				throws Exception {
+		public void testCompletedROOnlyRequirementForInvoicing() {
 			String tcname = "testCompletedROOnlyRequirementForInvoicing";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3740,8 +3722,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 24131:Test PO# saves with active keyboard on WO summary screen", description = "Test PO# saves with active keyboard on WO summary screen")
-		public void testPONumberSavesWithActiveKeyboardOnWOSummaryScreen()
-				throws Exception {
+		public void testPONumberSavesWithActiveKeyboardOnWOSummaryScreen() {
 			String tcname = "testPONumberSavesWithActiveKeyboardOnWOSummaryScreen";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
@@ -3781,8 +3762,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		}
 		
 		@Test(testName = "Test Case 24132:Test Total Sale saves with active keyboard on WO summary screen", description = "Test Total Sale saves with active keyboard on WO summary screen")
-		public void testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen()
-				throws Exception {
+		public void testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen() {
 			String tcname = "testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			final String totalsale = "675";
