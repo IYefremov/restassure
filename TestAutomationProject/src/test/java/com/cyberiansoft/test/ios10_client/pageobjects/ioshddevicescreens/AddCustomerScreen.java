@@ -72,8 +72,7 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 
 	public void editCustomer(String firstname, String lastname,
 			String companyname, String street, String city, String state,
-			String zip, String country, String phone, String mail)
-			throws InterruptedException {
+			String zip, String country, String phone, String mail) {
 		setFirstName(firstname);
 		setLastName(lastname);
 		setCompanyName(companyname);

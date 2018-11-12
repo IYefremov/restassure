@@ -72,7 +72,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId(_subservice).click();
 	}
 
-	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
+	public void setCarServiceQuantityValue(String _quantity)  {
 		IOSElement quantityfld = (IOSElement) appiumdriver.findElementByAccessibilityId("Quantity");
 		quantityfld.click();
 		quantityfld.findElement(MobileBy.className("XCUIElementTypeTextField")).setValue("");
@@ -119,7 +119,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 
 	}
 
-	public void tapExterior() throws InterruptedException {
+	public void tapExterior() {
 		TouchAction action = new TouchAction(appiumdriver);
 		MobileElement element = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
 		
@@ -137,7 +137,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		action.tap(element(element, x, y)).perform();
 		}
 	
-	public static void tapExteriorWithCoords(int x, int y) throws InterruptedException {
+	public static void tapExteriorWithCoords(int x, int y) {
 		Helpers.tapExterior(x, y);
 	}
 

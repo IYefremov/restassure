@@ -178,8 +178,7 @@ public class VehicleScreen extends BaseWizardScreen {
 		getVINField().click();
 	}
 
-	public void setVINAndAndSearch(String vin)
-			throws InterruptedException {
+	public void setVINAndAndSearch(String vin) {
 
 		appiumdriver.findElementByAccessibilityId("VIN#").click();
 
@@ -398,10 +397,6 @@ public class VehicleScreen extends BaseWizardScreen {
 	
 	public String getWorkOrderTypeValue() {
 		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[4]").getAttribute("value");
-	}
-
-	public void clickNavigationBarSaveButton() {
-		appiumdriver.findElement(By.xpath("//XCUIElementTypeNavigationBar[@name='Vehicle']/XCUIElementTypeButton[@name='Save']")).click();
 	}
 	
 	public void saveWorkOrder() {

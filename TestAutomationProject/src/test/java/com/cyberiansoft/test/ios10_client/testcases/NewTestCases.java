@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -38,7 +39,7 @@ public class NewTestCases extends BaseTestCase {
 
 	@BeforeClass
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "license.name" })
-	public void setUpSuite(String backofficeurl, String userName, String userPassword, String licensename) throws Exception {
+	public void setUpSuite(String backofficeurl, String userName, String userPassword, String licensename) {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(userLogin, userPassword);
 		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword, licensename);
@@ -46,7 +47,7 @@ public class NewTestCases extends BaseTestCase {
 	}
 	
 	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword, String licensename) throws Exception {
+			String userName, String userPassword, String licensename) {
 
 		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
@@ -62,7 +63,7 @@ public class NewTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	public void testRegisterationiOSDdevice() throws Exception {
+	public void testRegisterationiOSDdevice()  {
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 		DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
 		DriverBuilder.getInstance().getAppiumDriver().quit();
@@ -74,7 +75,7 @@ public class NewTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "Test Case 59643:iOS: Invoices - Send Multiple Emails", description = "Invoices - Send Multiple Emails")
-	public void testInvoicesSendMultipleEmails() throws Exception {
+	public void testInvoicesSendMultipleEmails() {
 			
 		final int numberInvoicesToSelect = 4;
 		final String mailaddress = "test@cyberiansoft.com";
@@ -91,7 +92,7 @@ public class NewTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 59645:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
-	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() throws Exception {
+	public void testCreateInvoiceWithTwoWOsAndCopyVehicle(){
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
@@ -178,7 +179,7 @@ public class NewTestCases extends BaseTestCase {
 	
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
 	@Test(testName = "Test Case 59646:Creating Service Request with Inspection, WO and Appointment required on device", description = "Creating Service Request with Inspection, WO and Appointment required on device")
-	public void testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice(String backofficeurl, String userName, String userPassword) {
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
 		final String _model = "323i U";
@@ -268,7 +269,7 @@ public class NewTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 59642:iOS: Creating Inspection From Service Request", description = "Creating Inspection From Service Request")
 	@Parameters({ "backoffice.url", "user.name", "user.psw" })
-	public void testSRCreatingInspectionFromServiceRequest(String backofficeurl, String userName, String userPassword) throws Exception {
+	public void testSRCreatingInspectionFromServiceRequest(String backofficeurl, String userName, String userPassword) {
 			
 		final String VIN = "2A4RR4DE2AR286008";
 		String[] services = { "Dye_Panel", "PPV_service"};
@@ -323,10 +324,10 @@ public class NewTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 8430:Create work order with type is assigned to a specific client", description = "Create work order with type is assigned to a specific client ")
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "license.name" })
 	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient(String backofficeurl, String userName, String userPassword, String licensename)
-			throws Exception {
+	{
 		
 		RegularMainScreen mainscreen = homescreen.clickLogoutButton();
-		Thread.sleep(2000);
+		BaseUtils.waitABit(2000);
 		LicensesScreen licensesscreen = mainscreen.clickLicenses();
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
 
@@ -346,7 +347,7 @@ public class NewTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 		LoginScreen loginscreen = new LoginScreen();
 		loginscreen.registeriOSDevice(regCode);
-		Thread.sleep(2000);
+		BaseUtils.waitABit(2000);
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(userLogin, userPassword);
 		

@@ -60,7 +60,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	private final String country = "Canada";
 
 	@BeforeClass
-	public void setUpSuite() throws Exception {
+	public void setUpSuite() {
 		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
@@ -97,7 +97,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	public void testRegisterationiOSDdevice() throws Exception {
+	public void testRegisterationiOSDdevice()  {
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 
 		DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
@@ -118,7 +118,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 8438:Update database on the device
 	@Test(testName = "Test Case 8438:Update database on the device" ,description = "Update Database")
-	public void testUpdateDatabase() throws Exception {
+	public void testUpdateDatabase()  {
 		homescreen = new HomeScreen();
 		MainScreen mainscr = homescreen.clickLogoutButton();
 		mainscr.updateDatabase();
@@ -165,7 +165,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	//Test Case 8439:Edit Customer 
 	@Test(testName = "Test Case 8439:Edit Customer ", description = "Edit retail customer")
-	public void testEditRetailCustomer() throws Exception {
+	public void testEditRetailCustomer()  {
 		final String lastname = "superedited";
 		final String companyname = "supercompanyedited";
 		final String street = "Second streer";
@@ -783,7 +783,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 	// Test Case 8442: Creating Inspection From Service Request
 	@Test(testName = "Test Case 8442: Creating Inspection From Service Request", description = "Creating Inspection From Service Request")
-	public void testCreatingInspectionFromServiceRequest() throws Exception {
+	public void testCreatingInspectionFromServiceRequest()  {
 
 		final String customer = "Company2";
 		final String vin = "TESTVNN1";
@@ -984,7 +984,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	//Test Case 21582:Create Inspection from Service request
 	@Test(testName = "Test Case 21582:Create Inspection from Service request", description = "Create Inspection from Service request"/*,
 			dependsOnMethods = { "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice" }*/)
-	public void testCreateInspectionFromServiceRequest() throws Exception {
+	public void testCreateInspectionFromServiceRequest() {
 		final String summ= "438.60";
 				
 
@@ -1193,7 +1193,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 16664:Create Invoice from WO in "My WOs" list
 	@Test(testName = "Test Case 16664:Create Invoice from WO in \"My WOs\" list", description = "Create Invoice from WO in My WOs list")
-	public void testCreateInvoiceFromWOInMyWOsList() throws Exception {
+	public void testCreateInvoiceFromWOInMyWOsList() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1271,7 +1271,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode
 	@Test(testName = "Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode", description = "Don't allow to select billed and not billed orders together in multi selection mode")
-	public void testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode() throws Exception {
+	public void testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode()  {
 
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1370,7 +1370,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 18436:Don't allow to change billed orders
 	@Test(testName = "Test Case 18436:Don't allow to change billed orders", description = "Don't allow to change billed orders")
-	public void testDontAlowToChangeBilledOrders() throws Exception {
+	public void testDontAlowToChangeBilledOrders()  {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1436,7 +1436,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 18439:Change customer for invoice
 	@Test(testName = "Test Case 18439:Change customer for invoice", description = "Change customer for invoice")
-	public void testChangeCustomerForInvoice() throws Exception {
+	public void testChangeCustomerForInvoice() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
@@ -1495,7 +1495,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceinfoscreen.clickSaveAsDraft();
 		
 		myworkordersscreen.clickHomeButton();
-		Thread.sleep(60000);
+		BaseUtils.waitABit(60000);
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		
 		myinvoicesscreen.changeCustomerForInvoice(invoicenumber, iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
@@ -1514,7 +1514,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 10498:Regression test: test bug with crash on "Copy Vehicle" 
 	@Test(testName = "Test Case 10498:Regression test: test bug with crash on \"Copy Vehicle\"", description = "Regression test: test bug with crash on Copy Vehicle")
-	public void testBugWithCrashOnCopyVehicle() throws Exception {
+	public void testBugWithCrashOnCopyVehicle() {
 
 		
 		//resrtartApplication();
@@ -1536,7 +1536,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 16239:Copy Inspections
 	@Test(testName = "Test Case 16239:Copy Inspections", description = "Copy Inspections")
-	public void testCopyInspections() throws Exception {
+	public void testCopyInspections() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Audi";
@@ -1741,7 +1741,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 16507:Create inspection from WO
 	@Test(testName = "Test Case 16507:Create inspection from WO", description = "Create inspection from WO")
-	public void testCreateInspectionFromWO() throws Exception {
+	public void testCreateInspectionFromWO() {
 		
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
@@ -1893,7 +1893,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23401:Test 'Change customer' option for inspection
 	@Test(testName = "Test Case 23401:Test 'Change customer' option for inspection", description = "Test 'Change customer' option for inspection")
-	public void testChangeCustomerOptionForInspection() throws Exception {
+	public void testChangeCustomerOptionForInspection() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -1938,7 +1938,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'
 	@Test(testName = "Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'", description = "Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'")
-	public void testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa() throws Exception {
+	public void testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -1993,7 +1993,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies
 	@Test(testName = "Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies", description = "Test 'Change customer' option for Inspections based on type with preselected Companies")
-	public void testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies() throws Exception {
+	public void testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies()  {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2036,7 +2036,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23422:Test 'Change customer' option for Work Order
 	@Test(testName = "Test Case 23422:Test 'Change customer' option for Work Order", description = "Test 'Change customer' option for Work Order")
-	public void testChangeCustomerOptionForWorkOrder() throws Exception {
+	public void testChangeCustomerOptionForWorkOrder()  {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2079,7 +2079,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies
 	@Test(testName = "Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies", description = "Test 'Change customer' option for WO based on type with preselected Companies")
-	public void testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies() throws Exception {
+	public void testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2116,7 +2116,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		String wonumber = ordersummaryscreen.getWorkOrderNumber();
 		ordersummaryscreen.saveWizard();
 		
-		Thread.sleep(45000);
+		BaseUtils.waitABit(45000);
 		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);	
 		myworkordersscreen.openWorkOrderDetails(wonumber);
 		vehiclescreen = new VehicleScreen(); 
@@ -2127,7 +2127,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'
 	@Test(testName = "Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'", description = "Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'")
-	public void testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa() throws Exception {
+	public void testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa()  {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2179,7 +2179,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN
 	@Test(testName = "Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN", description = "'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN")
-	public void testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN() throws Exception {
+	public void testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2221,7 +2221,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23459:'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service
 	@Test(testName = "Test Case 23459:'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service", description = "'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service")
-	public void testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService() throws Exception {
+	public void testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2264,7 +2264,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO
 	@Test(testName="Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO", description = "'WO: Test 'Edit' option of 'Duplicate services' message for WO")
-	public void testEditOptionOfDuplicateServicesMessageForWO() throws Exception {
+	public void testEditOptionOfDuplicateServicesMessageForWO() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2310,7 +2310,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO.
 	@Test(testName="Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO", description = "'WO: Test 'Override' option of 'Duplicate services' message for WO.")
-	public void testOverrideOptionOfDuplicateServicesMessageForWO() throws Exception {
+	public void testOverrideOptionOfDuplicateServicesMessageForWO() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2358,7 +2358,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO
 	@Test(testName="Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO", description = "'WO: Test 'Cancel' option of 'Duplicate services' message for WO.")
-	public void testCancelOptionOfDuplicateServicesMessageForWO() throws Exception {
+	public void testCancelOptionOfDuplicateServicesMessageForWO() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2405,7 +2405,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	//Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price
 	@Test(testName="Test Case 23966:Inspections: Test saving inspectiontypes with three matrix, "
 			+ "Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price", description = "'Inspections: Test saving inspectiontypes with three matrix")
-	public void testSavingInspectionsWithThreeMatrix() throws Exception {
+	public void testSavingInspectionsWithThreeMatrix() {
 			
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -2595,8 +2595,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	@Test(testName="Test Case 24657:WO: Test that auto-saved WO is created correctly, " +
 			"Test Case 23435:WO: Test 'Continue' option of 'Auto-saved' WO, " + 
 			"Test Case 23436:WO: Test 'Discard' option of 'Auto-saved' WO", description = "WO: Test that auto-saved WO is created correctly")
-	public void testThatAutoSavedWOIsCreatedCorrectly()
-			throws Exception {
+	public void testThatAutoSavedWOIsCreatedCorrectly() {
 		final String VIN  = "1FMFU18L53LC13897";
 
 		//resrtartApplication();
@@ -2625,7 +2624,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		Assert.assertTrue(myworkordersscreen.isAutosavedWorkOrderExists());
 		myworkordersscreen.selectContinueWorkOrder("Auto Save");
-		Thread.sleep(30*1000);
+		BaseUtils.waitABit(30*1000);
 		Assert.assertEquals(vehiclescreen.getInspectionNumber(), wonumber);
 
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
@@ -2641,7 +2640,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 21578:SR: Add appointment to Service Request 
 	@Test(testName = "Test Case 21578:SR: Add appointment to Service Request", description = "SR: Add appointment to Service Request")
-	public void testSRAddAppointmentToServiceRequest() throws Exception {
+	public void testSRAddAppointmentToServiceRequest() {
 		final String VIN = "QWERTYUI123";
 
 		homescreen = new HomeScreen();
@@ -2714,7 +2713,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	//Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar
 	@Test(testName = "Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar", description = "SR: Verify 'Summary' action for appointment on SR's calendar")
-	public void testSRVerifySummaryActionForAppointmentOnSRsCalendar() throws Exception {
+	public void testSRVerifySummaryActionForAppointmentOnSRsCalendar() {
 		final String VIN = "QWERTYUI123";
 		final String srappsubject = "SR-APP";
 		final String srappaddress = "Maidan";
@@ -2917,8 +2916,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 26054:WO Monitor: HD&Regular - Create WO for monitor", description = "WO Monitor: HD&Regular - Create WO for monitor")
-	public void testWOMonitorCreateWOForMonitor()
-			throws Exception {
+	public void testWOMonitorCreateWOForMonitor() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 
@@ -3012,8 +3010,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName="Test Case 26009:WO Monitor: HD - Verify that it is not possible to change Phase Status before Start phase", description = "WO Monitor: HD - Verify that it is not possible to change Phase Status before Start phase")
-	public void testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase()
-			throws Exception {
+	public void testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3134,8 +3131,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	//@Test(testName="Test Case 26016:WO Monitor: HD - Verify that for % service message about change status is not shown", description = "WO Monitor: HD - Verify that for % service message about change status is not shown")
-	public void testWOMonitorVerifyThatForPercentServiceMessageAboutChangeStatusIsNotShown()
-			throws Exception {
+	public void testWOMonitorVerifyThatForPercentServiceMessageAboutChangeStatusIsNotShown() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		
@@ -3183,8 +3179,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 26013:WO Monitor: HD - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase", 
 			description = "WO Monitor: HD - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase")
-	public void testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase()
-			throws Exception {
+	public void testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase() {
 		
 		final String VIN  = "1D3HV13T19S825733";
 		final String _pricematrix = "HOOD";
@@ -3582,8 +3577,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28473:Invoices: HD - Verify that red 'A' icon is present for invoice with customer approval ON and no signature", 
 			description = "Invoices: HD - Verify that red 'A' icon is present for invoice with customer approval ON and no signature")
-	public void testHDVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature()
-			throws Exception {
+	public void testHDVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
@@ -3676,8 +3670,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 28478:Invoices: HD - Verify that 'A' icon is not present for invoice when signature exists", 
 			description = "Invoices: HD - Verify that 'A' icon is not present for invoice when signature exists")
-	public void testHDVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists()
-			throws Exception {
+	public void testHDVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists() {
 		
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
@@ -3809,8 +3802,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 29029:SR: HD - Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech", 
 			description = "Test Case 29029:SR: HD - Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech")
-	public void testSRHDVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech()
-			throws Exception {
+	public void testSRHDVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -3877,7 +3869,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 			servicerequestsscreen = homescreen.clickServiceRequestsButton();
 			if (!servicerequestsscreen.getServiceRequestStatus(srnumber).equals("On Hold")) {
 				servicerequestsscreen.clickHomeButton();
-				Thread.sleep(30*1000); 
+				BaseUtils.waitABit(30*1000);
 			} else {
 				
 				onhold = true;
@@ -4033,7 +4025,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33165:WO: HD - Not multiple Service with required Panels is added one time to WO after selecting", 
 			description = "WO: HD - Not multiple Service with required Panels is added one time to WO after selecting")
-	public void testWOHDNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting() throws Exception {
+	public void testWOHDNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting() {
 				
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -4137,8 +4129,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31743:SR: HD - Verify that when option 'Allow to close SR' is set to ON action 'Close' is shown for selected SR on status 'Scheduled' or 'On-Hold'", 
 			description = "SR HD - Verify that when option 'Allow to close SR' is set to ON action 'Close' is shown for selected SR on status 'Scheduled' or 'On-Hold'")
-	public void testSRHDVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold()
-			throws Exception {
+	public void testSRHDVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4203,8 +4194,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31749:SR: HD - Verify that alert message is shown when select 'Close' action for SR - press No alert message is close", 
 			description = "SR: HD - Verify that alert message is shown when select 'Close' action for SR - press No alert message is close")
-	public void testSRHDVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose()
-			throws Exception {
+	public void testSRHDVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4237,8 +4227,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31750:SR: HD - Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown", 
 			description = "SR: HD - Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown")
-	public void testSRHDVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown()
-			throws Exception {
+	public void testSRHDVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4310,8 +4299,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31753:SR: HD - Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO", 
 			description = "Test Case 31753:SR: HD - Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO")
-	public void testSRHDVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO()
-			throws Exception {
+	public void testSRHDVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -4568,7 +4556,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 31451:Inspection - HD: Verify that question section is shown per service for first selected panel when QF is not required", 
 			description = "Verify that question section is shown per service for first selected panel when QF is not required")
-	public void testHDVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired() throws Exception {
+	public void testHDVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired()  {
 
 		final String[] vehicleparts = { "Front Bumper", "Grill", "Hood", "Left Fender" };
 		
@@ -4605,7 +4593,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 31963:Inspections: HD - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
 			description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
-	public void testHDVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() throws Exception {
+	public void testHDVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() {
 
 		homescreen = new HomeScreen();
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
@@ -4628,7 +4616,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 42376:Inspections: HD - Verify that when edit inspection selected vehicle parts for services are present", 
 			description = "Verify that when edit inspection selected vehicle parts for services are present")
-	public void testHDVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent() throws Exception {
+	public void testHDVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent() {
 
 		final String VIN = "1D7HW48NX6S507810";
 		final String[] vehicleparts = { "Deck Lid", "Hood", "Roof" };
@@ -4797,7 +4785,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 33116:Inspections: HD - Verify that text notes are copied to new inspectiontypes when use copy action", description = "Verify that text notes are copied to new inspectiontypes when use copy action")
-	public void testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction() throws Exception {
+	public void testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction() {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		final String _notes = "Test notes for copy";
@@ -4961,7 +4949,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 44407:Inspections: HD - Verify that all instances of one service are copied from inspection to WO", 
 			description = "Verify that all instances of one service are copied from inspection to WO")
-	public void testHDVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO() throws Exception {
+	public void testHDVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO() {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -5024,7 +5012,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 33918:Inspections: HD - Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type", 
 			description = "Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type")
-	public void testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType() throws Exception {
+	public void testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType() {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -5054,7 +5042,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 34285:Inspections: HD - Verify that during Line approval ''Select All'' buttons are working correctly", 
 			description = "Verify that during Line approval ''Select All'' buttons are working correctly")
-	public void testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly() throws Exception {
+	public void testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly()  {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -5112,7 +5100,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 30012:Inspections: HD - Verify that Approve option is not present for approved inspection in multi-select mode", 
 			description = "Verify that Approve option is not present for approved inspection in multi-select mode")
-	public void testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode() throws Exception {
+	public void testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode() {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		ArrayList<String> inspections = new ArrayList<String>();
@@ -5167,7 +5155,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 30013:Inspections: HD - Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected",
 			description = "Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected")
-	public void testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected() throws Exception {
+	public void testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected() {
 			
 		final String VIN  = "1D7HW48NX6S507810";
 		ArrayList<String> inspections = new ArrayList<String>();
@@ -5386,8 +5374,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 27717:Invoices: HD - Verify that it is posible to add payment from device for draft invoice", 
 			description = "Invoices: HD - Verify that it is posible to add payment from device for draft invoice")
-	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice()
-			throws Exception {
+	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";
@@ -5773,8 +5760,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 45251:SR: HD - Verify multiple inspectiontypes and multiple work orders to be tied to a Service Request",
 			description = "SR: HD - Verify multiple inspectiontypes and multiple work orders to be tied to a Service Request")
-	public void testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest()
-			throws Exception {
+	public void testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest() {
 		
 		final String VIN  = "WDZPE7CD9E5889222";
 		List<String> inspnumbers = new ArrayList<String>();
@@ -5839,7 +5825,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 50249:Inspections: HD - Verify that Single-page inspection is saved without crush", 
 			description = "Verify that Single-page inspection is saved without crush")
-	public void testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush() throws Exception {
+	public void testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String _price  = "100";
@@ -6044,7 +6030,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32989:Inspections: HD - Verify that question section is shown per service with must panels when questions are required", 
 			description = "Verify that question section is shown per service with must panels when questions are required")
-	public void testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired() throws Exception {
+	public void testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6182,7 +6168,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 30509:Invoices: HD - Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices", 
 			description = "Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices")
-	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices() throws Exception {
+	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices()  {
 		
 		final String emptypo = "";
 		
@@ -6226,7 +6212,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 40023:Invoices: Verify that 'Create invoice' check mark is not shown for WO that is selected for billing", 
 			description = "Verify that 'Create invoice' check mark is not shown for WO that is selected for billing")
-	public void testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling() throws Exception {
+	public void testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6305,7 +6291,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 34551:WO: HD - Verify that it is not possible to change default tech via service type split", 
 			description = "Verify that it is not possible to change default tech via service type split")
-	public void testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit() throws Exception {
+	public void testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit()  {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String defaulttech  = "Employee Simple 20%";
@@ -6353,7 +6339,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45097:WO: HD - Verify that when use Copy Services action for WO all service instances should be copied", 
 			description = "Verify that when use Copy Services action for WO all service instances should be copied")
-	public void testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied() throws Exception {
+	public void testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied()  {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "5";
@@ -6527,8 +6513,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 39573:WO: HD - Verify that in case valid VIN is decoded, replace existing make and model with new one", 
 			description = "WO: - Verify that in case valid VIN is decoded, replace existing make and model with new one")
-	public void testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne()
-			throws Exception {
+	public void testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne() {
 		
 		final String[] VINs  = { "2A8GP54L87R279721", "1FMDU32X0PUB50142", "GFFGG"} ;
 		final String makes[]  = { "Chrysler", "Ford", null } ;
@@ -6554,8 +6539,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 34626:WO: HD - Verify that when service do not have questions and select several panels do not underline anyone", 
 			description = "WO: - Verify that when service do not have questions and select several panels do not underline anyone")
-	public void testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone()
-			throws Exception {
+	public void testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone() {
 		
 		final String VIN  = "2A8GP54L87R279721";
 		final String[] vehicleparts  = { "Center Rear Passenger Seat", "Dashboard" };
@@ -6587,7 +6571,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 31964:WO: HD - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
 			description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
-	public void testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() throws Exception {
+	public void testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() {
 		
 		final String VIN = "2A8GP54L87R279721";
 
@@ -6611,7 +6595,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 53824:WO: HD - Verify that message is shown for Money and Labor service when price is changed to 0$ under WO", 
 			description = "Verify that message is shown for Money and Labor service when price is changed to 0$ under WO")
-	public void testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO() throws Exception {
+	public void testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "5";
@@ -6680,7 +6664,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 45252:WO: HD - Verify that validation is present for vehicle trim field", 
 			description = "Verify that validation is present for vehicle trim field")
-	public void testWOVerifyThatValidationIsPresentForVehicleTrimField() throws Exception {
+	public void testWOVerifyThatValidationIsPresentForVehicleTrimField() {
 		
 		final String VIN  = "TESTVINN";
 		final String _make = "Acura";
@@ -6745,7 +6729,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 40821:WO: HD - Verify that it is possible to assign tech to order by action Technicians", 
 			description = "Verify that it is possible to assign tech to order by action Technicians")
-	public void testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians() throws Exception {
+	public void testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians()  {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String pricevalue  = "21";
@@ -6854,7 +6838,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 57101:WO: HD - Verify that WO is saved correct with selected sub service (no message with incorrect tech split)", 
 			description = "Verify that WO is saved correct with selected sub service (no message with incorrect tech split)")
-	public void testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit() throws Exception {
+	public void testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "10";
@@ -6892,7 +6876,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 54542:WO: Regular - Verify that answer services are correctly added for WO when Panel group is set", 
 			description = "Verify that answer services are correctly added for WO when Panel group is set")
-	public void testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet() throws Exception {
+	public void testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6918,7 +6902,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "est Case 43408:WO: HD - Verify that search bar is present for service pack screen", 
 			description = "Verify that search bar is present for service pack screen")
-	public void testWOVerifyThatSearchBarIsPresentForServicePackScreen() throws Exception {
+	public void testWOVerifyThatSearchBarIsPresentForServicePackScreen() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -6955,7 +6939,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 42178:WO: HD - Verify that Cancel message is shown for New/Existing WO", 
 			description = "Verify that Cancel message is shown for New/Existing WO")
-	public void testWOVerifyThatCancelMessageIsShownForNewOrExistingWO() throws Exception {
+	public void testWOVerifyThatCancelMessageIsShownForNewOrExistingWO()  {
 		
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -6989,8 +6973,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 35951:SR: HD - Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed", 
 			description = "Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed")
-	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed()
-			throws Exception {
+	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
@@ -7167,8 +7150,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 36004:SR: HD - Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON", 
 			description = "Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON")
-	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON()
-			throws Exception {
+	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
@@ -7226,7 +7208,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	@Test(testName = "testGenerateInvoices", description = "testGenerateInvoices")
-	public void testGenerateInvoices() throws Exception {
+	public void testGenerateInvoices() {
 
 		final String VIN = "2A4RR4DE2AR286008";
 

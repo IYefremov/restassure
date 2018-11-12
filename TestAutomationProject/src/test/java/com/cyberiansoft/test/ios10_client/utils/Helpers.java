@@ -227,10 +227,10 @@ public abstract class Helpers {
 		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 	}
 
-	public static void keyboadrType(String value) throws InterruptedException {
+	public static void keyboadrType(String value) {
 		for (int i = 0; i < value.length(); i++) {
 			DriverBuilder.getInstance().getAppiumDriver().getKeyboard().sendKeys(value.substring(i, i + 1));
-			Thread.sleep(200);
+			waitABit(200);
 		}
 
 	}

@@ -81,19 +81,19 @@ public class CarHistoryScreen extends BaseAppScreen {
 		switchtowebbtn.click();
 	}
 	
-	public MyInvoicesScreen clickCarHistoryInvoices() throws InterruptedException {
+	public MyInvoicesScreen clickCarHistoryInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(invoicesmenu)).click();
 		return new MyInvoicesScreen();
 	}
 
-	public TeamInvoicesScreen clickCarHistoryTeamInvoices() throws InterruptedException {
+	public TeamInvoicesScreen clickCarHistoryTeamInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(invoicesmenu)).click();
 		return new TeamInvoicesScreen();
 	}
 	
-	public void clickCarHistoryMyWorkOrders() throws InterruptedException {
+	public void clickCarHistoryMyWorkOrders() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(myworkordersmenumenu)).click();
 		Helpers.waitABit(1000);
