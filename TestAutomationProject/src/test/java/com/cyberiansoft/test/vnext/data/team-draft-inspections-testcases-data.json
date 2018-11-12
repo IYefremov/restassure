@@ -20,6 +20,26 @@
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
+  ],
+
+  "testVerifyUserCanEditDraftInspection": [
+    {
+      "rowID": "testVerifyUserCanEditDraftInspection.01",
+      "description": "Test Case 81098:Verify user can edit draft Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCantEditInspectionInStateFinal": [
+    {
+      "rowID": "testVerifyUserCantEditInspectionInStateFinal.01",
+      "description": "Test Case 81099:Verify user can't edit Inspection in state Final",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
   ]
 
 }
