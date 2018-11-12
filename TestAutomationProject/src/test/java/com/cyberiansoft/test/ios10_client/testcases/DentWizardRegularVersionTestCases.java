@@ -63,7 +63,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 				String userName, String userPassword) throws Exception {
 
 			//final String searchlicensecriteria = "Mac mini_olkr";
-			final String searchlicensecriteria = "DW_Automation2";
+			final String searchlicensecriteria = "DW_Automation3";
 
 			webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 			WebDriverUtils.webdriverGotoWebPage(backofficeurl);
@@ -89,7 +89,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			DriverBuilder.getInstance().getAppiumDriver().quit();
 			AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 			RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
-			LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+			LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
 			loginscreen.registeriOSDevice(regCode);
 			RegularMainScreen mainscr = new RegularMainScreen();
 			homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
