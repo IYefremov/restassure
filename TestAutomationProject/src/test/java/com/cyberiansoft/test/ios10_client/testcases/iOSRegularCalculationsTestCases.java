@@ -138,7 +138,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	//Test Case 8435:Create Retail Inspection (HD Single page)
 	//Test Case 8434:Add Services to visual inspection
 	@Test(testName = "Test Case 8434:Add Services to visual inspection", description = "Add Services To Visual Inspection")
-	public void testAddServicesToVisualInspection() throws Exception {
+	public void testAddServicesToVisualInspection()  {
 		final String VIN = "ZWERTYASDFEWSDRZG";
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
@@ -204,8 +204,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 8433:Change Quantity of services in Visual Inspection", description = "Change Quantity Of Services In Visual Inspection")
-	public void testChangeQuantityOfServicesInVisualInspection()
-			throws Exception {
+	public void testChangeQuantityOfServicesInVisualInspection() {
 		final String _quantity = "3.00";
 		final String _quantityexterior = "2.00";
 		final String _inspectionpricevisual = "275";
@@ -1481,7 +1480,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 47257:WO: Regular - Verify that on Price Matrix step sub total is shown correctly", 
 			description = "Verify that on Price Matrix step sub total is shown correctly"/*,
 			dependsOnMethods = { "testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly" }*/)
-	public void testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly() throws Exception {
+	public void testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly() {
 		
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectInspectionForApprove(inspnumber47249);

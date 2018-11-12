@@ -124,7 +124,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
 	
-	public void approveInspectionApproveAllAndSignature() throws InterruptedException {
+	public void approveInspectionApproveAllAndSignature() {
 		approveallbtn.click();
 		clickSaveButton();
 		clickSingnAndDrawApprovalSignature();
