@@ -62,7 +62,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
-				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Test_Automation_Regular2");
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Test_Automation_Regular3");
 		testRegisterationiOSDdevice();
 	}
 
@@ -114,7 +114,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		}
 		//.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
 		
 		//LoginScreen loginscreen = new LoginScreen();
 		loginscreen.registeriOSDevice(regCode);

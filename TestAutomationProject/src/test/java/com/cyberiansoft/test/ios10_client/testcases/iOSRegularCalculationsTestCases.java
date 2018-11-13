@@ -61,7 +61,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 
 		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
 
-		devicespage.setSearchCriteriaByName("AutomationCalculations_Regular");
+		devicespage.setSearchCriteriaByName("AutomationCalculations_Regular2");
 		regCode = devicespage.getFirstRegCodeInTable();
 
 		DriverBuilder.getInstance().getDriver().quit();
@@ -73,7 +73,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         DriverBuilder.getInstance().getAppiumDriver().quit();
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -106,13 +106,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         RegularServicesScreen servicesscreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("VIN# is required"));
+		Assert.assertEquals(alerttxt, AlertsCaptions.ALERT_VIN_REQUIRED);
 			
 		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
 		vehiclescreen.setVIN(VIN);
 		vehiclescreen.clickSave();
 		alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("Make is required"));
+		Assert.assertEquals(alerttxt, AlertsCaptions.ALERT_MAKE_REQUIRED);
 			
 		vehiclescreen.setMakeAndModel(_make, _model);
 		vehiclescreen.setColor(_color);
@@ -155,12 +155,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.DEFAULT);
 		vehiclescreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("VIN# is required"));
+		Assert.assertEquals(alerttxt, AlertsCaptions.ALERT_VIN_REQUIRED);
 		vehiclescreen.setVIN(VIN);
 		inspection8434 = vehiclescreen.getInspectionNumber();
 		vehiclescreen.clickSave();
 		alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("Make is required"));
+		Assert.assertEquals(alerttxt, AlertsCaptions.ALERT_MAKE_REQUIRED);
 			
 		vehiclescreen.setMakeAndModel(_make, _model);
 		vehiclescreen.setColor(_color);

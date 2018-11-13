@@ -68,7 +68,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
         DriverBuilder.getInstance().getAppiumDriver().quit();
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
 		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);

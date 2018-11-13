@@ -105,7 +105,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
 
 		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen();
