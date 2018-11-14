@@ -46,6 +46,8 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamDraftWOTestCases">
       </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamDraftInspectionsTestCases">
+      </class>
     </classes>
   </test>
 </suite>
