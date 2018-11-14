@@ -2,6 +2,8 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
@@ -354,6 +356,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		WorkOrdersWebPage workorderspage = operationspage.clickWorkOrdersLink();
 		workorderspage.makeSearchPanelVisible();
+		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		workorderspage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
+		workorderspage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
 		workorderspage.setSearchOrderNumber(wonumber28583);
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.clickFindButton();
@@ -590,6 +595,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		WorkOrdersWebPage wopage = operationspage.clickWorkOrdersLink();
 		wopage.makeSearchPanelVisible();
+		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		wopage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
+		wopage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
 		wopage.setSearchOrderNumber(wonumber29398);
 		wopage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
@@ -794,6 +802,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		WorkOrdersWebPage wopage = operationspage.clickWorkOrdersLink();
 		wopage.makeSearchPanelVisible();
+		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		wopage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
+		wopage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
 		wopage.setSearchOrderNumber(wonumber31498);
 		wopage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
@@ -875,6 +886,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
+        inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        inspectionspage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 		inspectionspage.selectSearchStatus("Declined");
 		inspectionspage.searchInspectionByNumber(inspectionnumber32226);
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspectionnumber32226), "$0.00");
@@ -966,6 +979,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
+        inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        inspectionspage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 		inspectionspage.selectSearchStatus("All active");
 		inspectionspage.searchInspectionByNumber(inspectionnumber32286);		
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspectionnumber32286), "$2,000.00");
@@ -1045,6 +1060,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InspectionsWebPage inspectionspage = operationspage.clickInspectionsLink();
 		inspectionspage.makeSearchPanelVisible();
+        inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        inspectionspage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 		inspectionspage.selectSearchStatus("Declined");
 		inspectionspage.searchInspectionByNumber(inspectionnumber32287);		
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspectionnumber32287), "$0.00");
@@ -1946,7 +1963,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		
+        invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        invoicespage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
+        invoicespage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoicespage.setSearchInvoiceNumber(invoicenumber45224);
 		invoicespage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
@@ -2061,7 +2080,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-		
+        invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        invoicespage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
+        invoicespage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoicespage.setSearchInvoiceNumber(invoicenumber42803);
 		invoicespage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
