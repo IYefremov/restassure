@@ -1,9 +1,8 @@
 package com.cyberiansoft.test.dataclasses.r360;
 
-import com.fasterxml.jackson.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -28,8 +27,7 @@ public class DeviceDTO {
     private Integer TimeZoneOffset;
     @JsonProperty("EmployeeId")
     private String EmployeeId;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     @JsonProperty("DeviceId")
     public String getDeviceId() {
@@ -89,16 +87,6 @@ public class DeviceDTO {
     @JsonProperty("EmployeeId")
     public void setEmployeeId(String employeeId) {
         this.EmployeeId = employeeId;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

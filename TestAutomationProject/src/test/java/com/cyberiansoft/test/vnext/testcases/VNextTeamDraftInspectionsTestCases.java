@@ -7,11 +7,13 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -23,8 +25,9 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-draft-inspections-testcases-data.json";
 
     @BeforeClass(description="Team Draft Inspections Test Cases")
-    public void beforeClass() {
+    public void beforeClass() throws Exception {
         JSONDataProvider.dataFile = DATA_FILE;
+        
     }
 
     @AfterClass()
@@ -136,6 +139,66 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
 
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
                 InspectionStatuses.NEW.getInspectionStatusValue());
+        inspectionsScreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanEditInspectionIfDraftModeEqualsOFF(String rowID,
+                                                                     String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypes = new VNextInspectionTypesList(appiumdriver);
+        insptypes.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        vehicleinfoscreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
+                InspectionStatuses.NEW.getInspectionStatusValue());
+
+        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        vehicleinfoscreen.changeScreen("Services");
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.saveInspection();
+        Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
+                InspectionStatuses.NEW.getInspectionStatusValue());
+
+        inspectionsScreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCantSaveFinalInspectionWithoutPopulateRequiredField(String rowID,
+                                                     String description, JSONObject testData) {
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypes = new VNextInspectionTypesList(appiumdriver);
+        insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.clickSaveWorkOrderMenuButton();
+        vehicleinfoscreen.clcikSaveViaMenuAsFinal();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+                VNextAlertMessages.VIN_REQUIRED_MSG);
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+
+        vehicleinfoscreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
+                InspectionStatuses.NEW.getInspectionStatusValue());
+
         inspectionsScreen.clickBackButton();
     }
 }

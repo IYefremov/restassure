@@ -2,13 +2,12 @@ package com.cyberiansoft.test.dataprovider;
 
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.dataclasses.r360.DeviceDTO;
-import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
-import com.cyberiansoft.test.dataclasses.r360.VehicleDTO;
-import com.cyberiansoft.test.dataclasses.r360.WorkOrderDTO;
+import com.cyberiansoft.test.dataclasses.r360.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsonUtils {
 
@@ -28,6 +27,10 @@ public class JsonUtils {
         return JSonDataParser.getTestDataFromJson(customerDTOFile, RetailCustomer.class);
     }
 
+    public static InvoiceOrderDTO getInvoiceOrders(File invoiceOrdersDTOFile) throws IOException {
+        return JSonDataParser.getTestDataFromJson(invoiceOrdersDTOFile, InvoiceOrderDTO.class);
+    }
+
     public static WorkOrderDTO getWorkOrderDTO(File workOrderDTOFile, File vehicleDTOFile,
                                                File deviceDTOFile) throws IOException {
         WorkOrderDTO workOrderDTO = JSonDataParser.getTestDataFromJson(workOrderDTOFile, WorkOrderDTO.class);
@@ -41,6 +44,17 @@ public class JsonUtils {
         InspectionDTO inspectionDTO = JSonDataParser.getTestDataFromJson(inspectionDTOFile, InspectionDTO.class);
         inspectionDTO.setDevice(getDeviceDTO(deviceDTOFile));
         inspectionDTO.setVehicle(getVehicleDTO(vehicleDTOFile));
+        return inspectionDTO;
+    }
+
+    public static InvoiceDTO getInvoiceDTO(File invoiceDTOFile, File deviceDTOFile,
+                                           File invoiceOrdersDTOFile) throws IOException {
+        InvoiceDTO inspectionDTO = JSonDataParser.getTestDataFromJson(invoiceDTOFile, InvoiceDTO.class);
+        inspectionDTO.setDevice(getDeviceDTO(deviceDTOFile));
+        List<InvoiceOrderDTO> invoiceOrders = new ArrayList<>();
+        invoiceOrders.add(getInvoiceOrders(invoiceOrdersDTOFile));
+        inspectionDTO.setInvoiceOrders(invoiceOrders);
+        inspectionDTO.setOrders(invoiceOrders);
         return inspectionDTO;
     }
 }
