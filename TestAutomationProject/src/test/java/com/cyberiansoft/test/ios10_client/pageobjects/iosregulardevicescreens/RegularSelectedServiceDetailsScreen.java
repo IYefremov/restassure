@@ -230,8 +230,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
 	}
 
-	public String saveSelectedServiceDetailsWithAlert()
-			throws InterruptedException {
+	public String saveSelectedServiceDetailsWithAlert() {
 		saveSelectedServiceDetails();
 		return Helpers.getAlertTextAndAccept();
 	}
@@ -248,7 +247,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.xpath("//UIASegmentedControl[1]/UIAButton[@name=\"Evenly\"]")).click();
 	}
 	
-	public void removeService() throws InterruptedException {
+	public void removeService() {
 		appiumdriver.findElementByAccessibilityId("Remove").click();
 		Helpers.acceptAlertIfExists();
 	}
@@ -348,7 +347,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setTechnicianCustomPercentageValue(String technician,
-			String percentage) throws InterruptedException {
+			String percentage) {
 		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
 				+ technician + "\")]/XCUIElementTypeStaticText[1]")).click();
 		if (appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""

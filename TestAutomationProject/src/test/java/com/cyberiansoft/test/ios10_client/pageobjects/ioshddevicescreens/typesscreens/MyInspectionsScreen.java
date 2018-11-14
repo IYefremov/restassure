@@ -178,7 +178,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByName(employee).click();
 	}
 	
-	public void selectInspectionForCopy(String inspnumber) throws InterruptedException {
+	public void selectInspectionForCopy(String inspnumber) {
 		selectInspectionInTable(inspnumber);
 		clickCopyInspection();
 	}
@@ -362,7 +362,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		//Helpers.waitABit(1000);
 	}
 	
-	public void changeCustomerForInspection(String inspection, String customer) throws InterruptedException {
+	public void changeCustomerForInspection(String inspection, String customer) {
 		selectInspectionInTable(inspection);
 		clickChangeCustomerpopupMenu();
 		selectCustomer(customer);

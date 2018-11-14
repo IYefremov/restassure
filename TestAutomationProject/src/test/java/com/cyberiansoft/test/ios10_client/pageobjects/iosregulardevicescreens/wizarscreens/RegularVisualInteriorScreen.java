@@ -69,7 +69,7 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId( _subservice).click();
 	}
 
-	public void setCarServiceQuantityValue(String _quantity) throws InterruptedException {
+	public void setCarServiceQuantityValue(String _quantity) {
 		IOSElement quantityrow = (IOSElement) appiumdriver.findElementByAccessibilityId("Quantity");
 		quantityrow.findElementByClassName("XCUIElementTypeTextField").clear();
 		quantityrow.findElementByClassName("XCUIElementTypeTextField").sendKeys(_quantity);
@@ -79,19 +79,19 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
 	}
 
-	public void tapInterior() throws InterruptedException {
+	public void tapInterior() {
 		Helpers.tapInterior(50, 50);
 	}
 	
-	public static void tapInteriorWithCoords(int x, int y) throws InterruptedException {
+	public static void tapInteriorWithCoords(int x, int y) {
 		Helpers.tapInterior(x, y);
 	}
 
-	public static void tapExterior() throws InterruptedException {
+	public static void tapExterior() {
 		Helpers.tapExterior(150, 150);
 	}
 	
-	public static void tapExteriorWithCoords(int x, int y) throws InterruptedException {
+	public static void tapExteriorWithCoords(int x, int y) {
 		Helpers.tapExterior(x, y);
 	}
 	

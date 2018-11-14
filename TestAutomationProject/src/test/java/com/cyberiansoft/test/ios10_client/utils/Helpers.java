@@ -179,9 +179,9 @@ public abstract class Helpers {
 		return alertetxt;
 	}
 
-	public static void acceptAlertIfExists() throws InterruptedException {
+	public static void acceptAlertIfExists() {
 
-		Thread.sleep(2000);
+		waitABit(2000);
 		try {
 			Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
 			alert.accept();
@@ -227,10 +227,10 @@ public abstract class Helpers {
 		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 	}
 
-	public static void keyboadrType(String value) throws InterruptedException {
+	public static void keyboadrType(String value) {
 		for (int i = 0; i < value.length(); i++) {
 			DriverBuilder.getInstance().getAppiumDriver().getKeyboard().sendKeys(value.substring(i, i + 1));
-			Thread.sleep(200);
+			waitABit(200);
 		}
 
 	}
@@ -250,7 +250,7 @@ public abstract class Helpers {
 
 	}
 
-	public static void tapInterior(int x, int y) throws InterruptedException {
+	public static void tapInterior(int x, int y) {
 		TouchAction action = new TouchAction(DriverBuilder.getInstance().getAppiumDriver());
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[1]");*/
@@ -260,12 +260,12 @@ public abstract class Helpers {
 		//action = new TouchAction(driver);
 		//action.press(element, x, y).waitAction(1000).release().perform();
 		//action.press(element).moveTo(element, 30, 30).release().perform();
-		Thread.sleep(2000);
+		waitABit(2000);
 		// JavascriptExecutor js = (JavascriptExecutor) driver;
 		// js.executeScript("target.frontMostApp().mainWindow().images()[\"car_interior_color.png\"].tapWithOptions({tapOffset:{x:0.19, y:0.16}}) ;");
 	}
 
-	public static void tapExterior(int x, int y) throws InterruptedException {
+	public static void tapExterior(int x, int y) {
 		/*TouchAction action = new TouchAction(driver);
 
 		MobileElement element = (MobileElement) driver
@@ -282,7 +282,7 @@ public abstract class Helpers {
 		action.tap(element(element, x, y)).perform();
 		
 		//element.tap(1, x, y, 1000);
-		Thread.sleep(1000);
+		waitABit(1000);
 		
 		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getX());
 		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getY());

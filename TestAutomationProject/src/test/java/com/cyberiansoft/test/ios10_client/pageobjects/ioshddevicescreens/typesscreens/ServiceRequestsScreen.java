@@ -391,17 +391,17 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 	
-	public void setSubjectAppointmet(String _subject) throws InterruptedException {
+	public void setSubjectAppointmet(String _subject)  {
 		appiumdriver.findElementByAccessibilityId("Subject").click();
 		Helpers.keyboadrType(_subject+"\n");
 	}
 	
-	public void setAddressAppointmet(String _address) throws InterruptedException {
+	public void setAddressAppointmet(String _address)  {
 		appiumdriver.findElementByAccessibilityId("Address").click();
 		Helpers.keyboadrType(_address+"\n");
 	}
 	
-	public void setCityAppointmet(String _city) throws InterruptedException {
+	public void setCityAppointmet(String _city)  {
 		appiumdriver.findElementByAccessibilityId("City").click();
 		Helpers.keyboadrType(_city+"\n");
 	}
@@ -449,7 +449,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
         appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
     }
 			
-	public void selectDoneReason(String selectreason) throws InterruptedException {
+	public void selectDoneReason(String selectreason) {
 		selectUIAPickerValue(selectreason);
 		clickDoneCloseReasonDialog();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {

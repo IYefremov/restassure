@@ -68,7 +68,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
         DriverBuilder.getInstance().getAppiumDriver().quit();
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
 		loginscreen.registeriOSDevice(regCode);
 		MainScreen mainscr = new MainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -180,7 +180,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 
 	//Test Case 8434:Add Services to visual inspection
 	@Test(testName = "Test Case 8434:Add Services to visual inspection", description = "Add Services To Visual Inspection")
-	public void testAddServicesToVisualInspection() throws Exception {
+	public void testAddServicesToVisualInspection() {
 		final String _inspectionprice = "275";
 
 		//resrtartApplication();	
@@ -226,8 +226,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 
 	//Test Case 8433:Change Quantity of services in Visual Inspection 
 	@Test(testName = "Test Case 8433:Change Quantity of services in Visual Inspection", description = "Change Quantity Of Services In Visual Inspection")
-	public void testChangeQuantityOfServicesInVisualInspection()
-			throws Exception {
+	public void testChangeQuantityOfServicesInVisualInspection() {
 		final String _quantity = "3.00";
 		final String _quantityexterior = "2.00";
 		final String _inspectionpricevisual = "275";
@@ -810,7 +809,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32226:Inspections: HD - Verify that inspection is saved as declined when all services are skipped or declined", 
 			description = "Verify that inspection is saved as declined when all services are skipped or declined")
-	public void testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1() throws Exception {
+	public void testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1() {
 
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
@@ -978,7 +977,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 32287:Inspections: HD - Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount")
-	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1() throws Exception {
+	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -1507,7 +1506,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 48543:Inspections: HD - Verify that part services with different configurations are correctly shown for inspection", 
 			description = "Inspections: HD - Verify that part services with different configurations are correctly shown for inspection")
-	public void testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection() throws Exception {
+	public void testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 
@@ -1666,7 +1665,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 48563:WO: HD - Verify that part services with different configurations are correctly shown for WO", 
 			description = "WO: HD - Verify that part services with different configurations are correctly shown for WO")
-	public void testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO() throws Exception {
+	public void testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO()  {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2149,7 +2148,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 40466:Inspections: HD - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when decline inspection", 
 			description = "Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when decline inspection")
-	public void testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection() throws Exception {
+	public void testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection() {
 
 		final String VIN  = "1D7HW48NX6S507810";		
 		homescreen = new HomeScreen();
@@ -2270,7 +2269,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName = "Test Case 35030:WO: HD - Verify that for bundle items price policy is applied", 
 			description = "WO: HD - Verify that for bundle items price policy is applied")
-	public void testWOVerifyThatForBundleItemsPricePolicyIsApplied() throws Exception {
+	public void testWOVerifyThatForBundleItemsPricePolicyIsApplied() {
 		
 		final String VIN  = "1D7HW48NX6S507810";
 		
@@ -2793,8 +2792,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 49895:SR: HD - Verify ALM flow when approve one inspection and one decline", 
 			description = "SR: Verify ALM flow when approve one inspection and one decline")
-	public void testSRVerifyALMFlowWhenApproveOneInspectionAndOneDecline()
-			throws Exception {
+	public void testSRVerifyALMFlowWhenApproveOneInspectionAndOneDecline() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		
@@ -2911,8 +2909,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 49896:SR: HD - Verify ALM flow when decline both inspectiontypes",
 			description = "SR: Verify ALM flow when decline both inspectiontypes")
-	public void testSRVerifyALMFlowWhenDeclineBothInspections()
-			throws Exception {
+	public void testSRVerifyALMFlowWhenDeclineBothInspections() {
 		
 		final String VIN = "2A4RR4DE2AR286008";
 		

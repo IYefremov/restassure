@@ -209,7 +209,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		bundleitem.findElement(MobileBy.AccessibilityId("unselected")).click();
 	}
 	
-	public void changeBundleQuantity(String bundle, String _quantity) throws InterruptedException {
+	public void changeBundleQuantity(String bundle, String _quantity) {
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")).findElement(MobileBy.AccessibilityId(bundle))
 		.findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		setServiceQuantityValue(_quantity);
@@ -235,7 +235,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		}
 	}
 
-	public void clickCancelSelectedServiceDetails() throws InterruptedException {
+	public void clickCancelSelectedServiceDetails() {
 		List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
 		for (WebElement nv : navbars) {
 			if(nv.isDisplayed()) {
@@ -246,14 +246,12 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		}
 	}
 
-	public String saveSelectedServiceDetailsWithAlert()
-			throws InterruptedException {
+	public String saveSelectedServiceDetailsWithAlert() {
 		saveSelectedServiceDetails();
 		return Helpers.getAlertTextAndAccept();
 	}
 	
-	public String saveTechnociansViewWithAlert()
-			throws InterruptedException {
+	public String saveTechnociansViewWithAlert() {
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Technicians' and type = 'XCUIElementTypeNavigationBar'"))
 		.findElement(MobileBy.AccessibilityId("Save")).click();
 		return Helpers.getAlertTextAndAccept();
@@ -267,16 +265,16 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Evenly").click();
 	}
 	
-	public void removeService() throws InterruptedException {
+	public void removeService() {
 		appiumdriver.findElementByAccessibilityId("Remove").click();
 		Helpers.acceptAlertIfExists();
 	}
 
 	public void setTechnicianCustomPriceValue(String technician,
-			String _quantity) throws InterruptedException {
-		
-		IOSElement techsplittable =  getTechnicianSplitTable();	
-	
+			String _quantity) {
+
+		IOSElement techsplittable =  getTechnicianSplitTable();
+
 		techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
 			+ technician + "')]/XCUIElementTypeStaticText[1]").click();
 		Helpers.waitABit(500);
@@ -286,24 +284,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 					+ technician + "')]/XCUIElementTypeTextField[1]").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		/*if (elementExists("//UIAPopover[1]")) {
-			appiumdriver.findElementByXPath("//UIAPopover[1]/UIATableView/UIATableCell[contains(@name, \""
-						+ technician + "\")]/UIAStaticText[1]").click();
-		} else {
-			appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-							+ technician + "\")]/UIAStaticText[1]").click();
-		}
-
-		if (elementExists("//UIATableView/UIATableCell[contains(@name, \""
-						+ technician
-						+ "\")]/UIATextField[1]/UIAButton[@name=\"Clear text\"]")) {
-
-			((IOSElement) appiumdriver.findElementByXPath("//UIATableView/UIATableCell[contains(@name, \""
-							+ technician
-							+ "\")]/UIATextField[1]")).setValue("");
-		}
-		Helpers.keyboadrType(_quantity);
-		Helpers.keyboadrType("\n");*/
 	}
 
 	public String getAdjustmentsValue() {
@@ -529,8 +509,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").getAttribute("value");
 	}
 	
-	public void setServiceTimeValue(String _timevalue)
-			throws InterruptedException {	
+	public void setServiceTimeValue(String _timevalue) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Time"))).click();	
         WebElement par = getTableParentCell("Time");
@@ -540,8 +519,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
-	public void setServiceRateValue(String _ratevalue)
-			throws InterruptedException {	
+	public void setServiceRateValue(String _ratevalue) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Rate"))).click();
         WebElement par = getTableParentCell("Rate");

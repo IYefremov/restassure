@@ -293,13 +293,13 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId(_location).click();
 	}
 	
-	public void setType(String _type) throws InterruptedException {
+	public void setType(String _type) {
 		appiumdriver.findElementByAccessibilityId("Type").click();
 		//selectUIAPickerValue(_type);
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
-	public void setYear(String year) throws InterruptedException {
+	public void setYear(String year) {
 		appiumdriver.findElementByAccessibilityId("Year").click();
 		selectUIAPickerValue(year);
 		//((IOSElement) appiumdriver.findElementsByAccessibilityId("Year").get(1)).click();
@@ -309,7 +309,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		
 	}
 	
-	public void setTrim(String trimvalue) throws InterruptedException {
+	public void setTrim(String trimvalue)  {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
 		appiumdriver.findElementByAccessibilityId("Trim").click();

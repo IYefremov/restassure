@@ -61,7 +61,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 
 		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
 
-		devicespage.setSearchCriteriaByName("AutomationCalculations_Regular");
+		devicespage.setSearchCriteriaByName("AutomationCalculations_Regular2");
 		regCode = devicespage.getFirstRegCodeInTable();
 
 		DriverBuilder.getInstance().getDriver().quit();
@@ -73,7 +73,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         DriverBuilder.getInstance().getAppiumDriver().quit();
 		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
 		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -106,13 +106,13 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         RegularServicesScreen servicesscreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("VIN# is required"));
+		Assert.assertEquals(alerttxt, AlertsCaptions.ALERT_VIN_REQUIRED);
 			
 		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
 		vehiclescreen.setVIN(VIN);
 		vehiclescreen.clickSave();
 		alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("Make is required"));
+		Assert.assertEquals(alerttxt, AlertsCaptions.ALERT_MAKE_REQUIRED);
 			
 		vehiclescreen.setMakeAndModel(_make, _model);
 		vehiclescreen.setColor(_color);
@@ -138,7 +138,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	//Test Case 8435:Create Retail Inspection (HD Single page)
 	//Test Case 8434:Add Services to visual inspection
 	@Test(testName = "Test Case 8434:Add Services to visual inspection", description = "Add Services To Visual Inspection")
-	public void testAddServicesToVisualInspection() throws Exception {
+	public void testAddServicesToVisualInspection()  {
 		final String VIN = "ZWERTYASDFEWSDRZG";
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
@@ -155,12 +155,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.DEFAULT);
 		vehiclescreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("VIN# is required"));
+		Assert.assertEquals(alerttxt, AlertsCaptions.ALERT_VIN_REQUIRED);
 		vehiclescreen.setVIN(VIN);
 		inspection8434 = vehiclescreen.getInspectionNumber();
 		vehiclescreen.clickSave();
 		alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("Make is required"));
+		Assert.assertEquals(alerttxt, AlertsCaptions.ALERT_MAKE_REQUIRED);
 			
 		vehiclescreen.setMakeAndModel(_make, _model);
 		vehiclescreen.setColor(_color);
@@ -204,8 +204,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	}
 	
 	@Test(testName = "Test Case 8433:Change Quantity of services in Visual Inspection", description = "Change Quantity Of Services In Visual Inspection")
-	public void testChangeQuantityOfServicesInVisualInspection()
-			throws Exception {
+	public void testChangeQuantityOfServicesInVisualInspection() {
 		final String _quantity = "3.00";
 		final String _quantityexterior = "2.00";
 		final String _inspectionpricevisual = "275";
@@ -1481,7 +1480,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 47257:WO: Regular - Verify that on Price Matrix step sub total is shown correctly", 
 			description = "Verify that on Price Matrix step sub total is shown correctly"/*,
 			dependsOnMethods = { "testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly" }*/)
-	public void testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly() throws Exception {
+	public void testVerifyThatOnPriceMatrixStepSubTotalIsShownCorrectly() {
 		
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectInspectionForApprove(inspnumber47249);

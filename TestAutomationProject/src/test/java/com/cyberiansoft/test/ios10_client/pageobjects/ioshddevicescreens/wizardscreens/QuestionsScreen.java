@@ -99,7 +99,7 @@ public class QuestionsScreen extends BaseWizardScreen {
 	}
 	
 	public void setOwnerInfo(String ownername, String owneraddress, String ownercity, String ownerstate,
-			String ownercountry, String ownerzip) throws InterruptedException {
+			String ownercountry, String ownerzip) {
 		swipeScreenRight();
 		setOwnerName(ownername);
 		setOwnerAddress(owneraddress);
@@ -151,7 +151,7 @@ public class QuestionsScreen extends BaseWizardScreen {
 		appiumdriver.findElementByName(consignor).click();
 	}
 	
-	public void makeCaptureForQuestion(String question) throws InterruptedException {
+	public void makeCaptureForQuestion(String question) {
 		String elementname = question + "_Image_Cell";
 		appiumdriver.findElementByXPath("//UIATableCell[@name=\"" + elementname  + "\"]").click();
 		Helpers.makeCapture();

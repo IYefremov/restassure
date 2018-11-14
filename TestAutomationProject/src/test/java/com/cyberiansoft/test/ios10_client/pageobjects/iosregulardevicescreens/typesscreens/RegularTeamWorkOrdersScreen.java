@@ -88,7 +88,7 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		return invoiceType.getFirstVizardScreen();
 	}
 	
-	public void verifyCreateInvoiceIsActivated(String wonumber) throws InterruptedException {
+	public void verifyCreateInvoiceIsActivated(String wonumber) {
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
 				+ wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
 Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);	
@@ -198,7 +198,7 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelOrderNumber']")).getAttribute("label");
 	}
 	
-	public void selectWorkOrderForEidt(String wo) throws InterruptedException {
+	public void selectWorkOrderForEidt(String wo) {
 		selectWorkOrder(wo);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;

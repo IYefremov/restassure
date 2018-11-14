@@ -36,14 +36,14 @@ public class EnterpriseBeforeDamageScreen extends BaseWizardScreen {
 		return enterprisebeforedamagescreencapt;
 	}
 
-	public void setVINCapture() throws InterruptedException {
+	public void setVINCapture() {
 		vinbtn.click();
 		makeCapture();
 		capturedonebtn.click();
 	}
 
 	
-	public void setLicensePlateCapture() throws InterruptedException {
+	public void setLicensePlateCapture() {
 		licenseplatebtn.click();
 		makeCapture();
 		capturedonebtn.click();

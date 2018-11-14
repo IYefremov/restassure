@@ -45,7 +45,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
     }
 
     @BeforeClass
-    public void setUpSuite() throws Exception {
+    public void setUpSuite() {
         JSONDataProvider.dataFile = DATA_FILE;
         mobilePlatform = MobilePlatform.IOS_REGULAR;
         initTestUser(employee.getEmployeeName(), employee.getEmployeePassword());
@@ -80,7 +80,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         DriverBuilder.getInstance().getDriver().quit();
     }
 
-    public void testRegisterationiOSDdevice() throws Exception {
+    public void testRegisterationiOSDdevice() {
         AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
         DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
         DriverBuilder.getInstance().getAppiumDriver().quit();
@@ -94,7 +94,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testMyInspectionInspectionTypeMatrixInspection(String rowID,
-                                                               String description, JSONObject testData) throws Exception {
+                                                               String description, JSONObject testData)  {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -171,7 +171,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testMyInspectionInspectionTypePaintInspection(String rowID,
-                                                               String description, JSONObject testData) throws Exception {
+                                                               String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -208,7 +208,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testMyInspectionInspectionTypeInteriorInspection(String rowID,
-                                                              String description, JSONObject testData) throws Exception {
+                                                              String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -239,7 +239,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testMyInspectionInspectionTypeWheelInspection(String rowID,
-                                                                 String description, JSONObject testData) throws Exception {
+                                                                 String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -270,7 +270,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testMyInspectionInspectionTypeInteriorDetail(String rowID,
-                                                              String description, JSONObject testData) throws Exception {
+                                                              String description, JSONObject testData)  {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -301,7 +301,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testMyInspectionInspectionTypeExteriorDetail(String rowID,
-                                                             String description, JSONObject testData) throws Exception {
+                                                             String description, JSONObject testData)  {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 

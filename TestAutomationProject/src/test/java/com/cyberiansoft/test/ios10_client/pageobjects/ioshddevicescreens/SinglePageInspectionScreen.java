@@ -36,17 +36,17 @@ public class SinglePageInspectionScreen extends BaseWizardScreen {
 		return toolbar.findElementByIosNsPredicate("name contains 'E-00'").getText();
 	}
 	
-	public void expandToFullScreeenSevicesSection() throws InterruptedException {
+	public void expandToFullScreeenSevicesSection()  {
 		((IOSElement) appiumdriver.findElementsByAccessibilityId("full screen").get(0)).click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeToolbar/XCUIElementTypeButton[@name=\"full screen\"]").click();
 	}
 	
-	public void expandToFullScreeenQuestionsSection() throws InterruptedException {
+	public void expandToFullScreeenQuestionsSection()  {
 		((IOSElement) appiumdriver.findElementsByAccessibilityId("full screen").get(1)).click();
 		//appiumdriver.findElementByXPath("//XCUIElementTypeOther[3]/XCUIElementTypeToolbar/XCUIElementTypeButton[@name=\"full screen\"]").click();
 	}
 	
-	public void collapseFullScreen() throws InterruptedException {
+	public void collapseFullScreen()  {
 		appiumdriver.findElementByAccessibilityId("window screen").click();
 	}
 	

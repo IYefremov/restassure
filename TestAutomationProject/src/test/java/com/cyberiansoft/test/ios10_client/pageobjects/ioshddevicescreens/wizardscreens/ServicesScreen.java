@@ -157,6 +157,7 @@ public class ServicesScreen extends BaseWizardScreen {
 			tablelist.findElementByAccessibilityId("Clear text").click();
 
 		}*/
+		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
         tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
         Helpers.waitABit(1000);
 		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).setValue(servicename);

@@ -167,16 +167,14 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		acceptAlert();
 	}
 
-	public void archiveInspection(String inspnumber, String reason)
-			throws InterruptedException {
+	public void archiveInspection(String inspnumber, String reason) {
 		clickOnInspection(inspnumber);
 		clickArchiveInspectionButton();
 		selectReasonToArchive(reason);
 
 	}
 
-	public void selectReasonToArchive(String reason)
-			throws InterruptedException {
+	public void selectReasonToArchive(String reason) {
 
 		selectUIAPickerValue(reason);
 		//statusreasonbtn.click();

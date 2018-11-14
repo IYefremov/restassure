@@ -161,7 +161,7 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		}
 	}
 	
-	public void selectStatusReason(String statusreson) throws InterruptedException {
+	public void selectStatusReason(String statusreson) {
 		selectUIAPickerValue(statusreson);
 		clickDoneStatusReasonButton();
 	}
