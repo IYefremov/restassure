@@ -95,7 +95,7 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
 
         VNextBOQuickNotesWebPage quickNotesPage = leftMenu.selectQuickNotesMenu();
         final int numberOfQuickNotes = quickNotesPage.getNumberOfQuickNotesDisplayed();
-        VNextBOAddNewNotesDialog addNewNotesDialog = quickNotesPage.clickAddNotesButton();
+        VNextBONewNotesDialog addNewNotesDialog = quickNotesPage.clickAddNotesButton();
         addNewNotesDialog
                 .typeDescription(data.getQuickNotesDescription())
                 .clickQuickNotesDialogAddButton();
@@ -117,7 +117,48 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
                 .clickQuickNotesDialogAddButton();
         Assert.assertEquals(numberOfQuickNotes + 1,
                 quickNotesPage.getNumberOfQuickNotesDisplayed(data.getQuickNotesDescription()));
-//todo finish
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
+        quickNotesPage.deleteQuickNote(data.getQuickNotesDescription());
+    }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanEditQuickNotes(String rowID, String description, JSONObject testData) {
+        VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
+
+        VNextBOQuickNotesWebPage quickNotesPage = leftMenu.selectQuickNotesMenu();
+        quickNotesPage
+                .deleteQuickNotesIfPresent(data.getQuickNotesDescription())
+                .deleteQuickNotesIfPresent(data.getQuickNotesDescriptionEdited())
+                .clickAddNotesButton()
+                .typeDescription(data.getQuickNotesDescription())
+                .clickQuickNotesDialogAddButton();
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
+
+        quickNotesPage.clickEditQuickNote(data.getQuickNotesDescription())
+                .typeDescription(data.getQuickNotesDescriptionEdited())
+                .clickQuickNotesDialogUpdateButton();
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescriptionEdited()));
+        quickNotesPage.deleteQuickNote(data.getQuickNotesDescriptionEdited());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCannotSaveUpdating(String rowID, String description, JSONObject testData) {
+        VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
+
+        VNextBOQuickNotesWebPage quickNotesPage = leftMenu.selectQuickNotesMenu();
+        quickNotesPage
+                .deleteQuickNotesIfPresent(data.getQuickNotesDescription())
+                .deleteQuickNotesIfPresent(data.getQuickNotesDescriptionEdited())
+                .clickAddNotesButton()
+                .typeDescription(data.getQuickNotesDescription())
+                .clickQuickNotesDialogAddButton();
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
+
+        quickNotesPage.clickEditQuickNote(data.getQuickNotesDescription())
+                .typeDescription(data.getQuickNotesDescriptionEdited())
+                .clickQuickNotesDialogCloseButton();
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
+        Assert.assertFalse(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescriptionEdited()));
+        quickNotesPage.deleteQuickNote(data.getQuickNotesDescription());
     }
 }

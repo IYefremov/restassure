@@ -1,12 +1,15 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,17 +28,56 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
         wait.until(ExpectedConditions.visibilityOf(addQuickNotesButton));
     }
 
-    public VNextBOAddNewNotesDialog clickAddNotesButton() {
+    public VNextBONewNotesDialog clickAddNotesButton() {
         wait.until(ExpectedConditions.elementToBeClickable(addQuickNotesButton)).click();
         waitForLoading();
-        return PageFactory.initElements(driver, VNextBOAddNewNotesDialog.class);
+        return PageFactory.initElements(driver, VNextBONewNotesDialog.class);
     }
 
     public boolean isQuickNoteDisplayed(String quickNoteName) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(quickNotes));
-        return quickNotes
+        return getQuickNotesList()
                 .stream()
                 .anyMatch(e -> e.getText().equals(quickNoteName));
+    }
+
+    public VNextBOQuickNotesWebPage clickDeleteQuickNote(String quickNoteName) {
+        clickFilteredQuickNote(quickNoteName, ".//../..//span[@title='Delete']");
+        return this;
+    }
+
+    public VNextBONewNotesDialog clickEditQuickNote(String quickNoteName) {
+        clickFilteredQuickNote(quickNoteName, ".//../..//span[@title='Edit']");
+        return PageFactory.initElements(driver, VNextBONewNotesDialog.class);
+    }
+
+    public void clickFilteredQuickNote(String quickNoteName, String locator) {
+        getQuickNotesList()
+                .stream()
+                .filter(e -> e.getText().equals(quickNoteName))
+                .findFirst()
+                .ifPresent(el -> new Actions(driver)
+                        .moveToElement(el.findElement(By.xpath(locator)))
+                        .click()
+                        .build()
+                        .perform());
+    }
+
+    public VNextBOQuickNotesWebPage deleteQuickNote(String quickNoteName) {
+        int numberOfQuickNotes = getNumberOfQuickNotesDisplayed(quickNoteName);
+        clickDeleteQuickNote(quickNoteName);
+        try {
+            wait.until((num) -> numberOfQuickNotes > getNumberOfQuickNotesDisplayed(quickNoteName));
+        } catch (Exception e) {
+            Assert.fail("The Quick Note hasn't been deleted");
+        }
+        return this;
+    }
+
+    public VNextBOQuickNotesWebPage deleteQuickNotesIfPresent(String quickNoteName) {
+        while (isQuickNoteDisplayed(quickNoteName)) {
+            deleteQuickNote(quickNoteName);
+        }
+        return this;
     }
 
     public int getNumberOfQuickNotesDisplayed(String quickNoteName) {

@@ -62,7 +62,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     private TextField servicepercentagefld;
 
     @FindBy(xpath = "//div[@data-bind='visible: priceFieldVisible']//input[@id='priceForPercentageType']/preceding-sibling::input")
-    private WebElement servicePercentageField;
+    protected WebElement servicePercentageField;
 
     @FindBy(xpath = "//div[@data-bind='visible: priceFieldVisible']//input[@id='priceForPercentageType']")
     private WebElement servicePercentageTypingField;
@@ -71,7 +71,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     private WebElement servicePriceField;
 
     @FindBy(xpath = "//div[@data-bind='visible: priceFieldVisible']//input[@id='priceForMoneyType']")
-    private WebElement servicePriceTypingField;
+    protected WebElement servicePriceTypingField;
 
     @FindBy(xpath = "//div[@class='errorMessege']/p")
     private WebElement errormsg;

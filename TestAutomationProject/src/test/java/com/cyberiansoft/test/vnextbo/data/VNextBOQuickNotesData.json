@@ -27,7 +27,25 @@
     {
       "rowID": "verifyUserCanDeleteQuickNotes.01",
       "description": "Test Case 79073:Verify user can delete \"Quick Notes\"",
-      "quickNotesDescription": ""
+      "quickNotesDescription": "Test Description"
+    }
+  ],
+
+  "verifyUserCanEditQuickNotes": [
+    {
+      "rowID": "verifyUserCanEditQuickNotes.01",
+      "description": "Test Case 79074:Verify user can edit \"Quick Notes\"",
+      "quickNotesDescription": "Test Description",
+      "quickNotesDescriptionEdited": "Description test for update"
+    }
+  ],
+
+  "verifyUserCannotSaveUpdating": [
+    {
+      "rowID": "verifyUserCannotSaveUpdating.01",
+      "description": "Test Case 79075:Verify user can't save updating when click \"Reject\" icon",
+      "quickNotesDescription": "Test Description",
+      "quickNotesDescriptionEdited": "Test Description for updating"
     }
   ]
 }

@@ -1,49 +1,50 @@
-<suite name="Cyberiansoft iOS client tests" verbose="10" configfailurepolicy="continue">
-  <parameter name="selenium.host" value="localhost" />
-  <parameter name="selenium.port" value="3737" />
-  <!--<parameter name="selenium.browser" value="firefox" />-->
-  <parameter name="selenium.browser" value="chrome"/>
-  <parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd" />
-  <!--<parameter name="backoffice.url" value="http://capi.cyberianconcepts.com"  />-->
-  <parameter name="backoffice.url" value="http://capi.qc.cyberianconcepts.com"  />
-  <parameter name="backofficeold.url" value="https://vnext_dev.cyberianconcepts.com"  />
-  <!--<parameter name="backoffice.url" value="https://reconpro-qc.cyberianconcepts.com"  />-->
-  <parameter name="backofficedemo.url" value="https://demo.reconpro.net/"  />
-  <!--<parameter name="user.name" value="test.cyberiansoft+su@gmail.com"  />-->
-  <parameter name="user.name" value="test.cyberiansoft@gmail.com"  />
-  <parameter name="user.psw" value="ZZzz11!!"  />
-  <parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"  />
-  <parameter name="userdemo.psw" value="111111"  />
-  <parameter name="setupengineer.name" value="testapp@i.ua"  />
-  <parameter name="setupengineer.psw" value="ReconPro"  />
+<suite name="Cyberiansoft R360 ReconPro tests" verbose="10" configfailurepolicy="continue">
+  <!--<parameter name="selenium.host" value="localhost" />-->
+  <!--<parameter name="selenium.port" value="3737" />-->
+  <!--&lt;!&ndash;<parameter name="selenium.browser" value="firefox" />&ndash;&gt;-->
+  <!--<parameter name="selenium.browser" value="chrome"/>-->
+  <!--<parameter name="ios.bundleid" value="com.automobiletechnologies.reconprohd" />-->
+  <!--&lt;!&ndash;<parameter name="backoffice.url" value="http://capi.cyberianconcepts.com"  />&ndash;&gt;-->
+  <!--<parameter name="backoffice.url" value="http://capi.qc.cyberianconcepts.com"  />-->
+  <!--<parameter name="backofficeold.url" value="https://vnext_dev.cyberianconcepts.com"  />-->
+  <!--&lt;!&ndash;<parameter name="backoffice.url" value="https://reconpro-qc.cyberianconcepts.com"  />&ndash;&gt;-->
+  <!--<parameter name="backofficedemo.url" value="https://demo.reconpro.net/"  />-->
+  <!--&lt;!&ndash;<parameter name="user.name" value="test.cyberiansoft+su@gmail.com"  />&ndash;&gt;-->
+  <!--<parameter name="user.name" value="test.cyberiansoft@gmail.com"  />-->
+  <!--<parameter name="user.psw" value="ZZzz11!!"  />-->
+  <!--<parameter name="userdemo.name" value="Zakaulov@cyberiansoft.com"  />-->
+  <!--<parameter name="userdemo.psw" value="111111"  />-->
+  <!--<parameter name="setupengineer.name" value="testapp@i.ua"  />-->
+  <!--<parameter name="setupengineer.psw" value="ReconPro"  />-->
 
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
     </listeners>
 
-  <test name="Back Office Test Cases - IE" preserve-order="true">
+  <test name="Back Office Test Cases" preserve-order="true">
     <parameter name="selenium.browser" value="chrome" />
     <classes>
-	  <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">-->
-	  <!--<methods>-->
-	  	 <!--<include name="testCreateUserWithWebAccess" />-->
-	  	 <!--<include name="testVerifyUserCanChangePasswordUsingLinkFromTheEmail" />-->
-	  	 <!--<include name="testVerifyValidationMessagesOnChangePasswordPage" />-->
-	  	 <!--<include name="testVerifyValidationMessagesOnRequestPasswordResetPage" />-->
-	  	 <!--<include name="testVerifyForgotPasswordPageIsOpenedOnClickForgotPasswordLink" />-->
-	  	 <!--<include name="testEditNotConfirmedUserWithWebAccess" />-->
-	  	 <!--<include name="testEditUserWithoutWebAccess" />-->
-	  	 <!--<include name="testCheckPosibilityToResendRegistrationEmail" />-->
-	  	 <!--<include name="testCheckValidationErrorsOnTheCreateNewUserDialog" />-->
-	  	 <!--<include name="testCheckValidationErrorsOnTheSetPasswordPage" />-->
-	  	 <!--<include name="testCreateUserWithExistingEmailAddress" />-->
-      <!--</methods>-->
-      <!--</class>-->
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases">
+            <methods>
+                <include name="verifyUserCanAddLaborPriceServiceWithUseLaborTimes"/>
+                <include name="verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName"/>
+                <include name="verifyUserCanChangeSequenceNumberForMoneyServiceOrder"/>
+                <include name="verifyUserCanDeletePartPriceService"/>
+                <include name="verifyUserCanEditLaborPriceService"/>
+                <include name="verifyUserCanRestoreDeletedPartPriceService"/>
+                <include name="verifyUserCannotAddLaborServiceWithClickedRejectIcon"/>
+            </methods>
+        </class>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">
+            <methods>
+                <include name="testCheckValidationErrorsOnTheCreateNewUserDialog"/>
+                <include name="testCreateUserWithExistingEmailAddress"/>
+                <include name="testCreateUserWithoutWebAccess"/>
+            </methods>
+        </class>
     </classes>
   </test>
 </suite>

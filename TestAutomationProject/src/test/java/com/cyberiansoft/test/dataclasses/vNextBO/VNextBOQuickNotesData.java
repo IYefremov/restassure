@@ -7,14 +7,14 @@ public class VNextBOQuickNotesData {
     @JsonProperty("quickNotesDescription")
     private String quickNotesDescription;
 
-    @JsonProperty("quickNotesDescriptionErrorMessage")
-    private String quickNotesDescriptionErrorMessage;
+    @JsonProperty("quickNotesDescriptionEdited")
+    private String quickNotesDescriptionEdited;
 
     public String getQuickNotesDescription() {
         return quickNotesDescription;
     }
 
-    public String getQuickNotesDescriptionErrorMessage() {
-        return quickNotesDescriptionErrorMessage;
+    public String getQuickNotesDescriptionEdited() {
+        return quickNotesDescriptionEdited;
     }
 }

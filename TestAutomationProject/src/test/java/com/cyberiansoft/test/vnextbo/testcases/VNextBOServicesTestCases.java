@@ -284,7 +284,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage.deleteServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
         Assert.assertFalse(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
                 + data.getServiceEdited()));
-    }
+        }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testResumeRemovedMoneyService(String rowID, String description, JSONObject testData) {
@@ -341,20 +341,19 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 + data.getServiceEdited()));
 
         leftMenu.selectServicesMenu();
-        servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), true);
+        servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), false);
         VNextConfirmationDialog confirmdialog = servicespage
                 .clickUnarchiveButtonForService(data.getPriceServiceName() + data.getServiceEdited());
         Assert.assertEquals(confirmdialog.clickNoAndGetConfirmationDialogMessage(),
                 "Are you sure you want to restore \"" + data.getPriceServiceName() + data.getServiceEdited()
                         + "\" service?");
         servicespage.unarchiveServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
-        servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), false);
+        servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), true);
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
                 + data.getServiceEdited()));
         servicespage.deleteServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
     }
 
-    //todo fix
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testResumeRemovedPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
@@ -371,8 +370,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage.searchServiceByServiceName(data.getPercentageServiceName());
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()));
 
-        addnewservicedialog = servicespage
-                .clickEditServiceByServiceName(data.getPercentageServiceName());
+        addnewservicedialog = servicespage.clickEditServiceByServiceName(data.getPercentageServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
 //        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
@@ -407,7 +405,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 
         servicespage = leftMenu.selectServicesMenu();
         servicespage.advancedSearchService(data.getPercentageServiceName()
-                + data.getServiceEdited(), true);
+                + data.getServiceEdited(), false);
         VNextConfirmationDialog confirmdialog = servicespage
                 .clickUnarchiveButtonForService(data.getPercentageServiceName() + data.getServiceEdited());
         Assert.assertEquals(confirmdialog.clickNoAndGetConfirmationDialogMessage(),
@@ -415,7 +413,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                         + data.getServiceEdited() + "\" service?");
         servicespage.unarchiveServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
         servicespage.advancedSearchService(data.getPercentageServiceName()
-                + data.getServiceEdited(), false);
+                + data.getServiceEdited(), true);
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
                 + data.getServiceEdited()));
         servicespage.deleteServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
@@ -443,7 +441,6 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage.deleteServiceByServiceName(data.getServiceName());
     }
 
-    //todo start!!!
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testEditMatrixService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
