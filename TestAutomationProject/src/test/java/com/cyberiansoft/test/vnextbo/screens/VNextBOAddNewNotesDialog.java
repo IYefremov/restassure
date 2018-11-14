@@ -31,7 +31,7 @@ public class VNextBOAddNewNotesDialog extends VNextBOBaseWebPage {
     }
 
     public VNextBOAddNewNotesDialog typeDescription(String description) {
-        wait.until(ExpectedConditions.elementToBeClickable(quickNotesDescription)).clear();
+        waitShort.until(ExpectedConditions.elementToBeClickable(quickNotesDescription)).clear();
         quickNotesDescription.sendKeys(description);
         return this;
     }

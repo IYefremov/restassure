@@ -108,6 +108,6 @@ public abstract class VNextBOBaseWebPage {
         } catch (Exception e) {
             Assert.fail("The text field has not been displayed", e);
         }
-        textField.sendKeys(name);
+        wait.until(ExpectedConditions.elementToBeClickable(textField)).sendKeys(name);
     }
 }

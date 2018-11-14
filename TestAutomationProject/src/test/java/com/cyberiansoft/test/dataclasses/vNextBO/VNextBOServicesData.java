@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.RandomStringUtils;
 
 public class VNextBOServicesData {
 
@@ -100,8 +99,7 @@ public class VNextBOServicesData {
     }
 
     public String getServiceEdited() {
-//        return serviceEdited;
-        return " " + RandomStringUtils.randomAlphanumeric(5);
+        return serviceEdited;
     }
 
     public String getPercentageServiceName() {

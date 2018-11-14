@@ -39,19 +39,20 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
     }
 
     public int getNumberOfQuickNotesDisplayed(String quickNoteName) {
-        wait
-                .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.visibilityOfAllElements(quickNotes));
-        return quickNotes
+        return getQuickNotesList()
                 .stream()
                 .filter(e -> e.getText().equals(quickNoteName))
                 .collect(Collectors.toList())
                 .size();
     }
 
-    public int getNumberOfQuickNotesDisplayed() {
+    private List<WebElement> getQuickNotesList() {
         return wait
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.visibilityOfAllElements(quickNotes)).size();
+                .until(ExpectedConditions.visibilityOfAllElements(quickNotes));
+    }
+
+    public int getNumberOfQuickNotesDisplayed() {
+        return getQuickNotesList().size();
     }
 }

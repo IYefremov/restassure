@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	
@@ -41,6 +40,7 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
     public void clickYesButton() {
 	    clickModalDialogButton(confirmDialog
                 .findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")));
+	    waitForLoading();
 	}
 
     private void clickModalDialogButton(WebElement button) {

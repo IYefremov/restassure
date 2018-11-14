@@ -16,9 +16,11 @@
   <parameter name="userdemo.psw" value="111111"  />
   <parameter name="setupengineer.name" value="testapp@i.ua"  />
   <parameter name="setupengineer.psw" value="ReconPro"  />
-  <listeners>
-		<listener class-name="com.cyberiansoft.test.bo.utils.TestListener"/>
-  </listeners>
+
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
+    </listeners>
+
   <test name="Back Office Test Cases - IE" preserve-order="true">
     <parameter name="selenium.browser" value="chrome" />
     <classes>

@@ -19,8 +19,15 @@
     {
       "rowID": "verifyUserCannotAddEmptyQuickNotes.01",
       "description": "Test Case 79072:Verify user can't add empty \"Quick Notes\"",
-      "quickNotesDescription": "",
-      "quickNotesDescriptionErrorMessage": "//span[text()='Text is required']"
+      "quickNotesDescription": ""
+    }
+  ],
+
+  "verifyUserCanDeleteQuickNotes": [
+    {
+      "rowID": "verifyUserCanDeleteQuickNotes.01",
+      "description": "Test Case 79073:Verify user can delete \"Quick Notes\"",
+      "quickNotesDescription": ""
     }
   ]
 }

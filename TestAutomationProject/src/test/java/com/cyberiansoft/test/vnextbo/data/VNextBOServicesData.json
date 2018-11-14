@@ -161,7 +161,8 @@
       "rowID": "testEditMatrixService.01",
       "description": "Test Case 44157:vNext: Edit matrix service",
       "matrixServiceType": "Hail Damage Repair",
-      "newMatrixServiceName": "Test Matrix Service"
+      "newMatrixServiceName": "Test Matrix Service",
+      "serviceDescription": "test edit matrix service"
     }
   ]
 }

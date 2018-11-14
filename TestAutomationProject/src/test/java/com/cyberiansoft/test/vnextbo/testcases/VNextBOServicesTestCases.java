@@ -28,13 +28,13 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-	private String userName;
-	private String userPassword;
+    private String userName;
+    private String userPassword;
     private VNextBOLoginScreenWebPage loginpage;
     private VNexBOLeftMenuPanel leftMenu;
 
-	@BeforeMethod
-	public void BackOfficeLogin() {
+    @BeforeMethod
+    public void BackOfficeLogin() {
         browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
         try {
             DriverBuilder.getInstance().setDriver(browserType);
@@ -44,58 +44,58 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         webdriver = DriverBuilder.getInstance().getDriver();
 
         WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
-		userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-		userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+        userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+        userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
         loginpage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginpage.userLogin(userName, userPassword);
         leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
-	}
-	
-	@AfterMethod
-	public void BackOfficeLogout() {
-		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-				VNextBOHeaderPanel.class);
-		if (headerpanel.logOutLinkExists())
-			headerpanel.userLogout();
-	}
-	
+    }
+
+    @AfterMethod
+    public void BackOfficeLogout() {
+        VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
+                VNextBOHeaderPanel.class);
+        if (headerpanel.logOutLinkExists())
+            headerpanel.userLogout();
+    }
+
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testAddMoneyService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
-		
+
         VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
-                .searchServiceByServiceName(data.getPercentageServiceName())
-                .deleteServiceIfPresent(data.getPercentageServiceName())
-                .deleteServiceIfPresent(data.getPercentageServiceName() + data.getServiceEdited())
+                .searchServiceByServiceName(data.getPriceServiceName())
+                .deleteServiceIfPresent(data.getPriceServiceName())
+                .deleteServiceIfPresent(data.getPriceServiceName() + data.getServiceEdited())
                 .clickAddNewServiceButton()
                 .addNewService(data.getPriceServiceName(), data.getServiceType(), data.getServiceDescription(),
                         data.getServicePriceType(), data.getServicePrice())
                 .searchServiceByServiceName(data.getPriceServiceName());
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
-	}
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testAddPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
-		
-		VNextBOServicesWebPage servicespage = leftMenu
+
+        VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPercentageServiceName())
                 .deleteServiceIfPresent(data.getPercentageServiceName())
                 .deleteServiceIfPresent(data.getPercentageServiceName() + data.getServiceEdited());
 
         VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickAddNewServiceButton();
-		servicespage = addnewservicedialog.addNewPercentageService(data.getPercentageServiceName(),
+        servicespage = addnewservicedialog.addNewPercentageService(data.getPercentageServiceName(),
                 data.getServiceType(), data.getPercentageServiceDescription(), data.getServicePercentageType(),
                 data.getServicePrice());
-		servicespage.searchServiceByServiceName(data.getPercentageServiceName());
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()));
-	}
+        servicespage.searchServiceByServiceName(data.getPercentageServiceName());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()));
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testEditMoneyService(String rowID, String description, JSONObject testData) {
+    public void testEditMoneyService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
         VNextBOServicesWebPage servicespage = leftMenu
@@ -109,223 +109,357 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 .searchServiceByServiceName(data.getPriceServiceName());
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
 
-//		servicespage = leftMenu
-//                .selectServicesMenu()
-//                .searchServiceByServiceName(data.getPriceServiceName());
-//		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
-		VNextBOAddNewServiceDialog addnewservicedialog = servicespage
-                .clickEditServiceByServiceName(data.getPriceServiceName());
-		Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPriceServiceName());
-		Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
-		Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getServiceDescription());
-		Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
-                VNextPriceCalculations.getPriceRepresentation(data.getServicePrice()));
-		Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
-
-		addnewservicedialog.setServiceName(data.getPriceServiceName() + data.getServiceEdited());
-		addnewservicedialog.selectServiceType(data.getServiceTypeEdited());
-		addnewservicedialog.setServiceDescription(data.getServiceDescription() + data.getServiceEdited());
-		addnewservicedialog.setServicePriceValue(data.getServicePriceEdited());
-		servicespage = addnewservicedialog.saveNewService();
-		servicespage.searchServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName() +
-                data.getServiceEdited()));
-
-		Assert.assertEquals(servicespage.getServiceTypeValue(data.getPriceServiceName() +
-                data.getServiceEdited()), data.getServiceTypeEdited());
-		Assert.assertEquals(servicespage.getServicePriceValue(data.getPriceServiceName() +
-                data.getServiceEdited()), VNextPriceCalculations.getPriceRepresentation(data.getServicePriceEdited()));
-		Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPriceServiceName() +
-                data.getServiceEdited()), data.getServiceDescription() + data.getServiceEdited());
-	}
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testRemoveMoneyService(String rowID, String description, JSONObject testData) {
-        VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
-
-        String serviceEdited = data.getServiceEdited();
-        VNextBOServicesWebPage servicespage = leftMenu
-                .selectServicesMenu()
-                .searchServiceByServiceName(data.getPercentageServiceName())
-                .deleteServiceIfPresent(data.getPercentageServiceName())
-                .deleteServiceIfPresent(data.getPercentageServiceName() + serviceEdited)
-                .clickAddNewServiceButton()
-                .addNewService(data.getPriceServiceName(), data.getServiceType(), data.getServiceDescription(),
-                        data.getServicePriceType(), data.getServicePrice())
-                .searchServiceByServiceName(data.getPriceServiceName());
-        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
-
-        servicespage = leftMenu
-                .selectServicesMenu()
-                .searchServiceByServiceName(data.getPriceServiceName());
-        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
         VNextBOAddNewServiceDialog addnewservicedialog = servicespage
                 .clickEditServiceByServiceName(data.getPriceServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPriceServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
-        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getServiceDescription());
+//        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getServiceDescription()); //todo verify getServiceDescription.getText() works
         Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
                 VNextPriceCalculations.getPriceRepresentation(data.getServicePrice()));
         Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
 
-        addnewservicedialog.setServiceName(data.getPriceServiceName() + serviceEdited);
-        String serviceTypeEdited = data.getServiceTypeEdited();
-        addnewservicedialog.selectServiceType(serviceTypeEdited);
-        addnewservicedialog.setServiceDescription(data.getServiceDescription() + serviceEdited);
+        addnewservicedialog.setServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        addnewservicedialog.selectServiceType(data.getServiceTypeEdited());
+        addnewservicedialog.setServiceDescription(data.getServiceDescription() + data.getServiceEdited());
         addnewservicedialog.setServicePriceValue(data.getServicePriceEdited());
-        servicespage = addnewservicedialog.clickSaveNewServiceButton();
-        servicespage.searchServiceByServiceName(data.getPriceServiceName() + serviceEdited);
+        servicespage = addnewservicedialog.saveNewService();
+        servicespage.searchServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName() +
-                serviceEdited));
+                data.getServiceEdited()));
 
         Assert.assertEquals(servicespage.getServiceTypeValue(data.getPriceServiceName() +
-                serviceEdited), serviceTypeEdited);
-        System.out.println(servicespage.getServicePriceValue(data.getPriceServiceName() + serviceEdited));
+                data.getServiceEdited()), data.getServiceTypeEdited());
+        Assert.assertEquals(servicespage.getServicePriceValue(data.getPriceServiceName() +
+                data.getServiceEdited()), VNextPriceCalculations.getPriceRepresentation(data.getServicePriceEdited()));
+        Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPriceServiceName() +
+                data.getServiceEdited()), data.getServiceDescription() + data.getServiceEdited());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testRemoveMoneyService(String rowID, String description, JSONObject testData) {
+        VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
+
+        VNextBOServicesWebPage servicespage = leftMenu
+                .selectServicesMenu()
+                .searchServiceByServiceName(data.getPriceServiceName())
+                .deleteServiceIfPresent(data.getPriceServiceName())
+                .deleteServiceIfPresent(data.getPriceServiceName() + data.getServiceEdited())
+                .clickAddNewServiceButton()
+                .addNewService(data.getPriceServiceName(), data.getServiceType(), data.getServiceDescription(),
+                        data.getServicePriceType(), data.getServicePrice());
+
+        leftMenu
+                .selectServicesMenu()
+                .searchServiceByServiceName(data.getPriceServiceName());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
+        VNextBOAddNewServiceDialog addNewServiceDialog = servicespage
+                .clickEditServiceByServiceName(data.getPriceServiceName());
+        Assert.assertEquals(addNewServiceDialog.getServiceName(), data.getPriceServiceName());
+        Assert.assertEquals(addNewServiceDialog.getServiceType(), data.getServiceType());
+//        Assert.assertEquals(addNewServiceDialog.getServiceDescription(), data.getServiceDescription());
+        Assert.assertEquals(addNewServiceDialog.getServicePricePercentageValueTxtField().getAttribute("value"),
+                VNextPriceCalculations.getPriceRepresentation(data.getServicePrice()));
+        Assert.assertTrue(addNewServiceDialog.isServicePriceTypeVisible());
+
+        addNewServiceDialog.setServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        String serviceTypeEdited = data.getServiceTypeEdited();
+        addNewServiceDialog.selectServiceType(serviceTypeEdited);
+        addNewServiceDialog.setServiceDescription(data.getServiceDescription() + data.getServiceEdited());
+        addNewServiceDialog.setServicePriceValue(data.getServicePriceEdited());
+        servicespage = addNewServiceDialog.clickSaveNewServiceButton();
+        servicespage.searchServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName() +
+                data.getServiceEdited()));
+
+        Assert.assertEquals(servicespage.getServiceTypeValue(data.getPriceServiceName() +
+                data.getServiceEdited()), serviceTypeEdited);
+        System.out.println(servicespage.getServicePriceValue(data.getPriceServiceName() + data.getServiceEdited()));
         System.out.println(data.getServicePriceEdited());
-        Assert.assertEquals(servicespage.getServicePriceValue(data.getPriceServiceName() + serviceEdited),
+        Assert.assertEquals(servicespage.getServicePriceValue(data.getPriceServiceName() + data.getServiceEdited()),
                 VNextPriceCalculations.getPriceRepresentation(data.getServicePriceEdited()));
         Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPriceServiceName() +
-                serviceEdited), data.getServiceDescription() + serviceEdited);
+                data.getServiceEdited()), data.getServiceDescription() + data.getServiceEdited());
 
-		servicespage = leftMenu
+        leftMenu
                 .selectServicesMenu()
-                .searchServiceByServiceName(data.getPriceServiceName() + serviceEdited);
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
-                + serviceEdited));
-		servicespage.deleteServiceByServiceName(data.getPriceServiceName() + serviceEdited);
-		Assert.assertFalse(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
-                + serviceEdited));
-	}
+                .searchServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
+                + data.getServiceEdited()));
+        servicespage.deleteServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        Assert.assertFalse(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
+                + data.getServiceEdited()));
+    }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,
-            dependsOnMethods = { "testAddPercentageService" })
-	public void testEditPercentageService(String rowID, String description, JSONObject testData) {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEditPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNextBOServicesWebPage servicespage = leftMenu
+        VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
-                .searchServiceByServiceName(data.getPercentageServiceName());
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()));
-		VNextBOAddNewServiceDialog addnewservicedialog = servicespage
-                .clickEditServiceByServiceName(data.getPercentageServiceName());
-		Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
-		Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
-		Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
-		Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
-                VNextPriceCalculations.getPercentageRepresentation(data.getServicePrice()).replace("%", ""));
-		Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
+                .searchServiceByServiceName(data.getPercentageServiceName())
+                .deleteServiceIfPresent(data.getPercentageServiceName())
+                .deleteServiceIfPresent(data.getPercentageServiceName() + data.getServiceEdited());
 
-		addnewservicedialog.setServiceName(data.getPercentageServiceName() + data.getServiceEdited());
-		addnewservicedialog.selectServiceType(data.getServiceTypeEdited());
-		addnewservicedialog.setServiceDescription(data.getPercentageServiceDescription()
+        VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickAddNewServiceButton();
+        servicespage = addnewservicedialog.addNewPercentageService(data.getPercentageServiceName(),
+                data.getServiceType(), data.getPercentageServiceDescription(), data.getServicePercentageType(),
+                data.getServicePrice());
+        servicespage.searchServiceByServiceName(data.getPercentageServiceName());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()));
+
+        addnewservicedialog = servicespage
+                .clickEditServiceByServiceName(data.getPercentageServiceName());
+        Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
+        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
+//        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
+        Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
+                VNextPriceCalculations.getPercentageRepresentation(data.getServicePrice()).replace("%", ""));
+        Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
+
+        addnewservicedialog.setServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        addnewservicedialog.selectServiceType(data.getServiceTypeEdited());
+        addnewservicedialog.setServiceDescription(data.getPercentageServiceDescription()
                 + data.getServiceEdited());
-		addnewservicedialog.setServicePercentageValue(data.getServicePriceEdited());
-		servicespage = addnewservicedialog.saveNewService();
-		servicespage.searchServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
+        addnewservicedialog.setServicePercentageValue(data.getServicePriceEdited());
+        servicespage = addnewservicedialog.saveNewService();
+        servicespage.searchServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
                 + data.getServiceEdited()));
 
-		Assert.assertEquals(servicespage.getServiceTypeValue(data.getPercentageServiceName()
+        Assert.assertEquals(servicespage.getServiceTypeValue(data.getPercentageServiceName()
                 + data.getServiceEdited()), data.getServiceTypeEdited());
-		Assert.assertEquals(servicespage.getServicePriceValue(data.getPercentageServiceName()
+        Assert.assertEquals(servicespage.getServicePriceValue(data.getPercentageServiceName()
                 + data.getServiceEdited()), VNextPriceCalculations.getPercentageRepresentation(data.getServicePriceEdited()));
-		Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPercentageServiceName()
+        Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPercentageServiceName()
                 + data.getServiceEdited()), data.getPercentageServiceDescription() + data.getServiceEdited());
-	}
+    }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,
-            dependsOnMethods = { "testEditPercentageService" })
-	public void testRemovePercentageService(String rowID, String description, JSONObject testData) {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testRemovePercentageService(String rowID, String description, JSONObject testData) {
 
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
+        VNextBOServicesWebPage servicespage = leftMenu
+                .selectServicesMenu()
+                .searchServiceByServiceName(data.getPercentageServiceName())
+                .deleteServiceIfPresent(data.getPercentageServiceName())
+                .deleteServiceIfPresent(data.getPercentageServiceName() + data.getServiceEdited());
 
-		VNextBOServicesWebPage servicespage = leftMenu
+        VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickAddNewServiceButton();
+        servicespage = addnewservicedialog.addNewPercentageService(data.getPercentageServiceName(),
+                data.getServiceType(), data.getPercentageServiceDescription(), data.getServicePercentageType(),
+                data.getServicePrice());
+        servicespage.searchServiceByServiceName(data.getPercentageServiceName());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()));
+
+        addnewservicedialog = servicespage
+                .clickEditServiceByServiceName(data.getPercentageServiceName());
+        Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
+        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
+//        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
+        Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
+                VNextPriceCalculations.getPercentageRepresentation(data.getServicePrice()).replace("%", ""));
+        Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
+
+        addnewservicedialog.setServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        addnewservicedialog.selectServiceType(data.getServiceTypeEdited());
+        addnewservicedialog.setServiceDescription(data.getPercentageServiceDescription()
+                + data.getServiceEdited());
+        addnewservicedialog.setServicePercentageValue(data.getServicePriceEdited());
+        servicespage = addnewservicedialog.saveNewService();
+        servicespage.searchServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
+                + data.getServiceEdited()));
+
+        Assert.assertEquals(servicespage.getServiceTypeValue(data.getPercentageServiceName()
+                + data.getServiceEdited()), data.getServiceTypeEdited());
+        Assert.assertEquals(servicespage.getServicePriceValue(data.getPercentageServiceName()
+                + data.getServiceEdited()), VNextPriceCalculations.getPercentageRepresentation(data.getServicePriceEdited()));
+        Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPercentageServiceName()
+                + data.getServiceEdited()), data.getPercentageServiceDescription() + data.getServiceEdited());
+        leftMenu
                 .selectServicesMenu()
                 .searchServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
                 + data.getServiceEdited()));
-		servicespage.deleteServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
-		Assert.assertFalse(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
+        servicespage.deleteServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        Assert.assertFalse(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
                 + data.getServiceEdited()));
-	}
+    }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,
-            dependsOnMethods = { "testRemoveMoneyService" })
-	public void testResumeRemovedMoneyService(String rowID, String description, JSONObject testData) {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testResumeRemovedMoneyService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNextBOServicesWebPage servicespage = leftMenu.selectServicesMenu();
-		servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), true);
-		VNextConfirmationDialog confirmdialog = servicespage
+        VNextBOServicesWebPage servicespage = leftMenu
+                .selectServicesMenu()
+                .searchServiceByServiceName(data.getPriceServiceName())
+                .deleteServiceIfPresent(data.getPriceServiceName())
+                .deleteServiceIfPresent(data.getPriceServiceName() + data.getServiceEdited())
+                .clickAddNewServiceButton()
+                .addNewService(data.getPriceServiceName(), data.getServiceType(), data.getServiceDescription(),
+                        data.getServicePriceType(), data.getServicePrice());
+
+        leftMenu
+                .selectServicesMenu()
+                .searchServiceByServiceName(data.getPriceServiceName());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()));
+        VNextBOAddNewServiceDialog addNewServiceDialog = servicespage
+                .clickEditServiceByServiceName(data.getPriceServiceName());
+        Assert.assertEquals(addNewServiceDialog.getServiceName(), data.getPriceServiceName());
+        Assert.assertEquals(addNewServiceDialog.getServiceType(), data.getServiceType());
+//        Assert.assertEquals(addNewServiceDialog.getServiceDescription(), data.getServiceDescription());
+        Assert.assertEquals(addNewServiceDialog.getServicePricePercentageValueTxtField().getAttribute("value"),
+                VNextPriceCalculations.getPriceRepresentation(data.getServicePrice()));
+        Assert.assertTrue(addNewServiceDialog.isServicePriceTypeVisible());
+
+        addNewServiceDialog.setServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        String serviceTypeEdited = data.getServiceTypeEdited();
+        addNewServiceDialog.selectServiceType(serviceTypeEdited);
+        addNewServiceDialog.setServiceDescription(data.getServiceDescription() + data.getServiceEdited());
+        addNewServiceDialog.setServicePriceValue(data.getServicePriceEdited());
+        servicespage = addNewServiceDialog.clickSaveNewServiceButton();
+        servicespage.searchServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName() +
+                data.getServiceEdited()));
+
+        Assert.assertEquals(servicespage.getServiceTypeValue(data.getPriceServiceName() +
+                data.getServiceEdited()), serviceTypeEdited);
+        System.out.println(servicespage.getServicePriceValue(data.getPriceServiceName() + data.getServiceEdited()));
+        System.out.println(data.getServicePriceEdited());
+        Assert.assertEquals(servicespage.getServicePriceValue(data.getPriceServiceName() + data.getServiceEdited()),
+                VNextPriceCalculations.getPriceRepresentation(data.getServicePriceEdited()));
+        Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPriceServiceName() +
+                data.getServiceEdited()), data.getServiceDescription() + data.getServiceEdited());
+
+        leftMenu
+                .selectServicesMenu()
+                .searchServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
+                + data.getServiceEdited()));
+        servicespage.deleteServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        Assert.assertFalse(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
+                + data.getServiceEdited()));
+
+        leftMenu.selectServicesMenu();
+        servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), true);
+        VNextConfirmationDialog confirmdialog = servicespage
                 .clickUnarchiveButtonForService(data.getPriceServiceName() + data.getServiceEdited());
-		Assert.assertEquals(confirmdialog.clickNoAndGetConfirmationDialogMessage(), 
-				"Are you sure you want to restore \"" + data.getPriceServiceName() + data.getServiceEdited()
+        Assert.assertEquals(confirmdialog.clickNoAndGetConfirmationDialogMessage(),
+                "Are you sure you want to restore \"" + data.getPriceServiceName() + data.getServiceEdited()
                         + "\" service?");
-		servicespage.unarchiveServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
-		servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), false);
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
+        servicespage.unarchiveServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
+        servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), false);
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
                 + data.getServiceEdited()));
-		servicespage.deleteServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
-	}
+        servicespage.deleteServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
+    }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,
-            dependsOnMethods = { "testRemovePercentageService" })
-	public void testResumeRemovedPercentageService(String rowID, String description, JSONObject testData) {
+    //todo fix
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testResumeRemovedPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
+        VNextBOServicesWebPage servicespage = leftMenu
+                .selectServicesMenu()
+                .searchServiceByServiceName(data.getPercentageServiceName())
+                .deleteServiceIfPresent(data.getPercentageServiceName())
+                .deleteServiceIfPresent(data.getPercentageServiceName() + data.getServiceEdited());
 
-		VNextBOServicesWebPage servicespage = leftMenu.selectServicesMenu();
-		servicespage.advancedSearchService(data.getPercentageServiceName()
-                + data.getServiceEdited(), true);
-		VNextConfirmationDialog confirmdialog = servicespage
-                .clickUnarchiveButtonForService(data.getPercentageServiceName() + data.getServiceEdited());
-		Assert.assertEquals(confirmdialog.clickNoAndGetConfirmationDialogMessage(), 
-				"Are you sure you want to restore \"" + data.getPercentageServiceName()
-                        + data.getServiceEdited() + "\" service?");
-		servicespage.unarchiveServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
-		servicespage.advancedSearchService(data.getPercentageServiceName()
-                + data.getServiceEdited(), false);
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
+        VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickAddNewServiceButton();
+        servicespage = addnewservicedialog.addNewPercentageService(data.getPercentageServiceName(),
+                data.getServiceType(), data.getPercentageServiceDescription(), data.getServicePercentageType(),
+                data.getServicePrice());
+        servicespage.searchServiceByServiceName(data.getPercentageServiceName());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()));
+
+        addnewservicedialog = servicespage
+                .clickEditServiceByServiceName(data.getPercentageServiceName());
+        Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
+        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
+//        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
+        Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
+                VNextPriceCalculations.getPercentageRepresentation(data.getServicePrice()).replace("%", ""));
+        Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
+
+        addnewservicedialog.setServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        addnewservicedialog.selectServiceType(data.getServiceTypeEdited());
+        addnewservicedialog.setServiceDescription(data.getPercentageServiceDescription()
+                + data.getServiceEdited());
+        addnewservicedialog.setServicePercentageValue(data.getServicePriceEdited());
+        servicespage = addnewservicedialog.saveNewService();
+        servicespage.searchServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
                 + data.getServiceEdited()));
-		servicespage.deleteServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
-	}
+
+        Assert.assertEquals(servicespage.getServiceTypeValue(data.getPercentageServiceName()
+                + data.getServiceEdited()), data.getServiceTypeEdited());
+        Assert.assertEquals(servicespage.getServicePriceValue(data.getPercentageServiceName()
+                + data.getServiceEdited()), VNextPriceCalculations.getPercentageRepresentation(data.getServicePriceEdited()));
+        Assert.assertEquals(servicespage.getServiceDescriptionValue(data.getPercentageServiceName()
+                + data.getServiceEdited()), data.getPercentageServiceDescription() + data.getServiceEdited());
+        leftMenu
+                .selectServicesMenu()
+                .searchServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
+                + data.getServiceEdited()));
+        servicespage.deleteServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        Assert.assertFalse(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
+                + data.getServiceEdited()));
+
+        servicespage = leftMenu.selectServicesMenu();
+        servicespage.advancedSearchService(data.getPercentageServiceName()
+                + data.getServiceEdited(), true);
+        VNextConfirmationDialog confirmdialog = servicespage
+                .clickUnarchiveButtonForService(data.getPercentageServiceName() + data.getServiceEdited());
+        Assert.assertEquals(confirmdialog.clickNoAndGetConfirmationDialogMessage(),
+                "Are you sure you want to restore \"" + data.getPercentageServiceName()
+                        + data.getServiceEdited() + "\" service?");
+        servicespage.unarchiveServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+        servicespage.advancedSearchService(data.getPercentageServiceName()
+                + data.getServiceEdited(), false);
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPercentageServiceName()
+                + data.getServiceEdited()));
+        servicespage.deleteServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyErrorMessagesOnCreateEditServiceDialog(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNextBOServicesWebPage servicespage = leftMenu.selectServicesMenu();
-		VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickAddNewServiceButton();
-		addnewservicedialog.clickServiceAddButton();
-		Assert.assertEquals(addnewservicedialog.getErrorMessage(), "Service name is required!");
-		addnewservicedialog.setServiceName(data.getEmptyServiceName());
-		addnewservicedialog.clickServiceAddButton();
-		Assert.assertEquals(addnewservicedialog.getErrorMessage(), "Service name is required!");
-		addnewservicedialog.setServiceName(data.getServiceName());
-		addnewservicedialog.saveNewService();
-		servicespage.searchServiceByServiceName(data.getServiceName());
-		addnewservicedialog = servicespage.clickEditServiceByServiceName(data.getServiceName());
-		addnewservicedialog.setServiceName(data.getEmptyServiceName());
-		addnewservicedialog.clickServiceAddButton();
-		Assert.assertEquals(addnewservicedialog.getErrorMessage(), "Service name is required!");
-		servicespage = addnewservicedialog.closeNewServiceDialog();
-		servicespage.deleteServiceByServiceName(data.getServiceName());
-	}
+        VNextBOServicesWebPage servicespage = leftMenu.selectServicesMenu();
+        VNextBOAddNewServiceDialog addnewservicedialog = servicespage.clickAddNewServiceButton();
+        addnewservicedialog.clickServiceAddButton();
+        Assert.assertEquals(addnewservicedialog.getErrorMessage(), "Service name is required!");
+        addnewservicedialog.setServiceName(data.getEmptyServiceName());
+        addnewservicedialog.clickServiceAddButton();
+        Assert.assertEquals(addnewservicedialog.getErrorMessage(), "Service name is required!");
+        addnewservicedialog.setServiceName(data.getServiceName());
+        addnewservicedialog.saveNewService();
+        servicespage.searchServiceByServiceName(data.getServiceName());
+        addnewservicedialog = servicespage.clickEditServiceByServiceName(data.getServiceName());
+        addnewservicedialog.setServiceName(data.getEmptyServiceName());
+        addnewservicedialog.clickServiceAddButton();
+        Assert.assertEquals(addnewservicedialog.getErrorMessage(), "Service name is required!");
+        servicespage = addnewservicedialog.closeNewServiceDialog();
+        servicespage.deleteServiceByServiceName(data.getServiceName());
+    }
 
+    //todo start!!!
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testEditMatrixService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-		VNextBOServicesWebPage servicespage = leftMenu
+        VNextBOServicesWebPage servicespage = leftMenu
                 .selectServicesMenu()
                 .advancedSearchServiceByServiceType(data.getMatrixServiceType());
         String firstServiceNameInTableRow = servicespage.getFirstServiceNameInTableRow();
         servicespage
                 .clickEditServiceByServiceName(firstServiceNameInTableRow)
                 .setServiceName(data.getNewMatrixServiceName())
+                .setServiceDescription(data.getServiceDescription())
                 .saveNewService()
                 .searchServiceByServiceName(data.getNewMatrixServiceName());
-		Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getNewMatrixServiceName()));
-	}
+        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getNewMatrixServiceName()));
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddLaborPriceService(String rowID, String description, JSONObject testData) {

@@ -104,4 +104,20 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
 
         Assert.assertEquals(numberOfQuickNotes, quickNotesPage.getNumberOfQuickNotesDisplayed());
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanDeleteQuickNotes(String rowID, String description, JSONObject testData) {
+        VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
+
+        VNextBOQuickNotesWebPage quickNotesPage = leftMenu.selectQuickNotesMenu();
+        final int numberOfQuickNotes = quickNotesPage.getNumberOfQuickNotesDisplayed(data.getQuickNotesDescription());
+        quickNotesPage
+                .clickAddNotesButton()
+                .typeDescription(data.getQuickNotesDescription())
+                .clickQuickNotesDialogAddButton();
+        Assert.assertEquals(numberOfQuickNotes + 1,
+                quickNotesPage.getNumberOfQuickNotesDisplayed(data.getQuickNotesDescription()));
+//todo finish
+
+    }
 }

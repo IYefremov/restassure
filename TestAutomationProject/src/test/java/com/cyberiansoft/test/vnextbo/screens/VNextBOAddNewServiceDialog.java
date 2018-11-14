@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,7 +31,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     private WebElement servicetypecmb;
 
     @FindBy(xpath = "//textarea[@data-automation-id='servicePopup-description']")
-    private TextField servicedescfld;
+    private WebElement servicedescfld;
 
     //	@FindBy(xpath = "//span[@aria-owns='price-type_listbox']/span/span")
     @FindBy(xpath = "//span[@aria-owns='price-type_listbox']/span/span[@class='k-input']")
@@ -170,7 +171,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     public VNextBOAddNewServiceDialog setServiceName(String servicename) {
         wait.until(ExpectedConditions.elementToBeClickable(serviceNameField)).clear();
         serviceNameField.sendKeys(servicename);
-        waitABit(500);
+        waitABit(1000);
         return this;
     }
 
@@ -193,14 +194,22 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     }
 
     public VNextBOAddNewServiceDialog setServiceDescription(String servicedesc) {
-        wait.until(ExpectedConditions.elementToBeClickable(servicedescfld.getWrappedElement()));
-        servicedescfld.clearAndType(servicedesc);
-        waitABit(500);
+        try {
+            waitABit(1000);
+            wait.until(ExpectedConditions.elementToBeClickable(servicedescfld)).clear();
+            servicedescfld.sendKeys(servicedesc);
+            waitABit(1000);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
         return this;
     }
 
+    //    public String getServiceDescription() {
+//        return servicedescfld.getValue();
+//    }
     public String getServiceDescription() {
-        return servicedescfld.getValue();
+        return servicedescfld.getText();
     }
 
     public VNextBOAddNewServiceDialog selectServicePriceType(String servicepricetype) {
@@ -255,34 +264,27 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         return driver.findElements(By.xpath("//span[@aria-owns='price-type_listbox']/span/span")).size() > 0;
     }
 
+    /**
+     * Keys.chord is used to solve the problem with clear() method while editing
+     */
     public VNextBOAddNewServiceDialog setServicePriceValue(String servicepricevalue) {
-//		WebElement pricepercentagefld = getServicePricePercentageValueTxtField();
-//		Actions act = new Actions(driver);
-//		act.click(waitLong.until(ExpectedConditions.elementToBeClickable(pricepercentagefld)));
-//		pricepercentagefld.clear();
+        setAttributeWithJS(servicePriceTypingField, "style", "display: inline-block;");
+        servicePriceTypingField.sendKeys(Keys.chord(Keys.CONTROL, Keys.HOME));
+        servicePriceTypingField.sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END));
+        wait.until(ExpectedConditions.elementToBeClickable(servicePriceTypingField)).sendKeys(servicepricevalue);
+        servicePriceTypingField.sendKeys(Keys.TAB);
+        waitABit(1500);
 
-//        setAttributeWithJS(servicePriceTypingField, "style", "display: inline-block;");
-//        servicePriceTypingField.clear();
-//        servicePriceTypingField.sendKeys(servicepricevalue);
 
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(servicePriceField)).click();
-            wait.until(ExpectedConditions.elementToBeClickable(servicePriceTypingField)).clear();
-            try {
-                wait.until(ExpectedConditions.elementToBeClickable(servicePriceTypingField)).sendKeys(servicepricevalue);
-            } catch (TimeoutException ignored) {
-            }
-            setAttributeWithJS(servicePriceField, "aria-valuenow", servicepricevalue);
-            try {
-                servicePriceField.sendKeys(Keys.ENTER);
-            } catch (ElementNotInteractableException ignored) {
-            }
-            waitABit(1500);
-        } catch (Exception ignored) {
-            setAttributeWithJS(servicePriceTypingField, "aria-valuenow", servicepricevalue);
-            setAttributeWithJS(priceTypeDropDown, "aria-expanded", "false");
-            waitABit(500);
-        }
+//        wait.until(ExpectedConditions.elementToBeClickable(servicePriceField)).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(servicePriceTypingField)).clear();
+//        clearAndType(servicePriceTypingField, servicepricevalue);
+
+//        catch (Exception ignored) {
+//            setAttributeWithJS(servicePriceTypingField, "aria-valuenow", servicepricevalue);
+//            setAttributeWithJS(priceTypeDropDown, "aria-expanded", "false");
+//            waitABit(500);
+//        }
         return this;
     }
 
@@ -318,16 +320,10 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     }
 
     public VNextBOAddNewServiceDialog setServicePercentageValue(String servicepercentagevalue) {
-//        WebElement pricepercentagefld = getServicePricePercentageValueTxtField();
-//        Actions act = new Actions(driver);
-//        act.click(waitLong.until(ExpectedConditions.elementToBeClickable(pricepercentagefld)));
-//        pricepercentagefld.clear();
-//        waitLong.until(ExpectedConditions.elementToBeClickable(servicepercentagefld.getWrappedElement()));
-//        servicepercentagefld.clearAndType(servicepercentagevalue);
-        wait.until(ExpectedConditions.elementToBeClickable(servicePercentageField)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(servicePercentageTypingField)).clear();
-        wait.until(ExpectedConditions.elementToBeClickable(servicePercentageTypingField)).sendKeys(servicepercentagevalue);
-        waitABit(500);
+        wait.until(ExpectedConditions.elementToBeClickable(servicePercentageField));
+        servicePercentageField.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        new Actions(driver).sendKeys(servicepercentagevalue).build().perform();
+        waitABit(1500);
         return this;
     }
 
