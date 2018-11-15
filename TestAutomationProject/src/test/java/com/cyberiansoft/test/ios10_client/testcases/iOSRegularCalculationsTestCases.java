@@ -1312,6 +1312,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinvoicesscreen.selectInvoice(invoicenum);
 		myinvoicesscreen.clickEditPopup();
 		questionsscreen = new RegularQuestionsScreen();
+		questionsscreen.waitQuestionsScreenLoaded("Test Section");
 		invoiceinfoscreen = questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceinfoscreen.addWorkOrder(wo2);
 		invoiceinfoscreen.clickSave();
