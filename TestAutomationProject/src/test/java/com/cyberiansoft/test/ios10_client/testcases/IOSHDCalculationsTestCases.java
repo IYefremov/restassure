@@ -358,7 +358,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		workorderspage.makeSearchPanelVisible();
 		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		workorderspage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		workorderspage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
+		workorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		workorderspage.setSearchOrderNumber(wonumber28583);
 		workorderspage.unselectInvoiceFromDeviceCheckbox();
 		workorderspage.clickFindButton();
@@ -597,7 +597,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		wopage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		wopage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
+		wopage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		wopage.setSearchOrderNumber(wonumber29398);
 		wopage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
@@ -804,7 +804,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		wopage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		wopage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
+		wopage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		wopage.setSearchOrderNumber(wonumber31498);
 		wopage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();

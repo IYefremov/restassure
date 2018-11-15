@@ -828,7 +828,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
 		InspectionsWebPage inspectionspage = operationsWebPage.clickInspectionsLink();
-
+		inspectionspage.makeSearchPanelVisible();
+		inspectionspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		inspectionspage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 		inspectionspage.approveInspectionLinebylineApprovalByNumber(
 				inpectionnumber, iOSInternalProjectConstants.DISC_EX_SERVICE1, iOSInternalProjectConstants.DYE_SERVICE);
 

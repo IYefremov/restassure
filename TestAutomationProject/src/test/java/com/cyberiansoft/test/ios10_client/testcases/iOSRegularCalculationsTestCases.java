@@ -337,7 +337,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		wopage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		wopage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
+		wopage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		wopage.setSearchOrderNumber(wonumber28583);
 		wopage.unselectInvoiceFromDeviceCheckbox();
 		wopage.clickFindButton();
@@ -583,7 +583,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		wopage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		wopage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
+		wopage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		wopage.setSearchOrderNumber(wonumber29398);
 		wopage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
@@ -800,7 +800,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		wopage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		wopage.setSearchFromDate(BackOfficeUtils.getTomorrowDateFormatted());
+		wopage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		wopage.setSearchOrderNumber(wonumber31498);
 		wopage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
