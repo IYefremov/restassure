@@ -47,5 +47,25 @@
       "quickNotesDescription": "Test Description",
       "quickNotesDescriptionEdited": "Test Description for updating"
     }
+  ],
+
+  "verifyUserCannotSaveEmptyUpdatedQuickNote": [
+    {
+      "rowID": "verifyUserCannotSaveEmptyUpdatedQuickNote.01",
+      "description": "Test Case 79079:Verify user can't save empty updated \"Quick Notes\"",
+      "quickNotesDescription": "Test Description",
+      "quickNotesDescriptionEdited": ""
+    }
+  ],
+
+  "verifyUserCanMoveNotation": [
+    {
+      "rowID": "verifyUserCanMoveNotation.01",
+      "description": "Test Case 79081:Verify user can move notation",
+      "quickNotesDescriptionList": [
+        "Test Description",
+        "Test Description for drag and drop"
+      ]
+    }
   ]
 }

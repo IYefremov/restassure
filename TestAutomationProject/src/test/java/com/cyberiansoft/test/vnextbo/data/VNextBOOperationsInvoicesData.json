@@ -1,0 +1,29 @@
+{
+  "verifyUserCanVoidInvoice": [
+    {
+      "rowID": "verifyUserCanVoidInvoice.01",
+      "description": "Test Case 79457:Verify user can void invoice"
+    }
+  ],
+
+  "verifyUserCannotVoidInvoiceAfterClickingNo": [
+    {
+      "rowID": "verifyUserCannotVoidInvoiceAfterClickingNo.01",
+      "description": "Test Case 79457:Verify user can void invoice"
+    }
+  ],
+
+  "verifyUserCannotVoidInvoiceAfterClickingReject": [
+    {
+      "rowID": "verifyUserCannotVoidInvoiceAfterClickingReject.01",
+      "description": "Test Case 79460:Verify user can't void invoice if click reject icon"
+    }
+  ],
+
+  "verifyUserCanVoidInvoicesUsingCheckboxes": [
+    {
+      "rowID": "verifyUserCanVoidInvoicesUsingCheckboxes.01",
+      "description": "Test Case 79461:Verify user can void invoices using check-boxes"
+    }
+  ]
+}

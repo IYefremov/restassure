@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -28,6 +25,40 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
         wait.until(ExpectedConditions.visibilityOf(addQuickNotesButton));
     }
 
+    public VNextBOQuickNotesWebPage moveQuickNotes(String quickNoteSource, String quickNoteTarget) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(quickNotes));
+        WebElement source = getQuickNoteByName(quickNoteSource);
+        WebElement target = getQuickNoteByName(quickNoteTarget);
+        new Actions(driver).dragAndDrop(source, target).build().perform();
+        waitForLoading();
+        return this;
+    }
+
+    public VNextBOQuickNotesWebPage addQuickNotes(String ...quickNotes) {
+        for (String quickNote : quickNotes) {
+            clickAddNotesButton()
+                    .typeDescription(quickNote)
+                    .clickQuickNotesDialogAddButton();
+        }
+        return this;
+    }
+
+    public WebElement getQuickNoteByName(String quickNote) {
+        return wait
+                .until(ExpectedConditions.elementToBeClickable(driver
+                        .findElement(By.xpath("//div[text()='" + quickNote + "']"))));
+    }
+
+    public int getQuickNoteNumberInList(String quickNote) {
+        List<WebElement> quickNotesList = getQuickNotesList();
+        for (int i = 0; i < quickNotesList.size(); i++) {
+            if (quickNotesList.get(i).getText().equals(quickNote)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     public VNextBONewNotesDialog clickAddNotesButton() {
         wait.until(ExpectedConditions.elementToBeClickable(addQuickNotesButton)).click();
         waitForLoading();
@@ -38,6 +69,16 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
         return getQuickNotesList()
                 .stream()
                 .anyMatch(e -> e.getText().equals(quickNoteName));
+    }
+
+    public boolean areQuickNotesDisplayed(String ...quickNotes) {
+        for (String note : quickNotes) {
+            boolean displayed = getQuickNotesList()
+                    .stream()
+                    .anyMatch(e -> e.getText().equals(note));
+            Assert.assertTrue(displayed, "The quick Note " + note + " hasn't been displayed");
+        }
+        return true;
     }
 
     public VNextBOQuickNotesWebPage clickDeleteQuickNote(String quickNoteName) {
@@ -76,6 +117,13 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
     public VNextBOQuickNotesWebPage deleteQuickNotesIfPresent(String quickNoteName) {
         while (isQuickNoteDisplayed(quickNoteName)) {
             deleteQuickNote(quickNoteName);
+        }
+        return this;
+    }
+
+    public VNextBOQuickNotesWebPage deleteQuickNotesIfPresent(String ...quickNotes) {
+        for (String note: quickNotes) {
+            deleteQuickNotesIfPresent(note);
         }
         return this;
     }

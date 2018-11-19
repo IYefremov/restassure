@@ -10,11 +10,18 @@ public class VNextBOQuickNotesData {
     @JsonProperty("quickNotesDescriptionEdited")
     private String quickNotesDescriptionEdited;
 
+    @JsonProperty("quickNotesDescriptionList")
+    private String quickNotesDescriptionList[];
+
     public String getQuickNotesDescription() {
         return quickNotesDescription;
     }
 
     public String getQuickNotesDescriptionEdited() {
         return quickNotesDescriptionEdited;
+    }
+
+    public String[] getQuickNotesDescriptionList() {
+        return quickNotesDescriptionList;
     }
 }

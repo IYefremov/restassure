@@ -1,44 +1,123 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.List;
 
 public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']")
-	private WebElement invoiceslist;
+	private WebElement invoicesList;
+
+	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']//b")
+	private List<WebElement> invoiceNumbers;
 	
 	@FindBy(id = "invoice-details")
-	private WebElement invoicedetailspanel;
+	private WebElement invoiceDetailsPanel;
+
+	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']//div[@class='entity-list__item__description']")
+	private List<WebElement> invoicesDescriptionBlocks;
+
+	@FindBy(xpath = "//div[@id='invoice-details']//span[@title='Void Invoice']")
+	private WebElement voidButton;
+
+	@FindBy(xpath = "//section[@id='invoices-view']//div[@class='pull-right header-icons-group']")
+	private WebElement headerIcons;
+
+    @FindBy(xpath = "//span[@title='Void selected invoices']")
+    private WebElement headerIconVoidButton;
+
+	@FindBy(xpath = "//span[@title='Approve selected items']")
+	private WebElement headerIconApproveButton;
+
+	@FindBy(xpath = "//span[@title='Archive selected invoices']")
+	private WebElement headerIconArchiveButton;
+
+	@FindBy(xpath = "//div[@data-automation-id='invoiceList']")
+	private WebElement checkedItemsNote;
 	
 	public VNextBOInvoicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(invoiceslist));
+		wait.until(ExpectedConditions.visibilityOf(invoicesList));
 	}
-	
+
+	public boolean areHeaderIconsDisplayed() {
+	    wait.until(ExpectedConditions.visibilityOf(headerIcons));
+	    return headerIconVoidButton.isDisplayed() &&
+                headerIconApproveButton.isDisplayed() &&
+                headerIconArchiveButton.isDisplayed();
+    }
+
+    public VNextConfirmationDialog clickHeaderIconVoidButton() {
+	    wait.until(ExpectedConditions.elementToBeClickable(headerIconVoidButton)).click();
+	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+    }
+
 	public void selectInvoiceInTheList(String invoice) {
-		invoiceslist.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + invoice + "']")).click();
-		waitABit(4000);
+		getInvoiceByName(invoice).click();
+		waitForLoading();
 	}
-	
-	public String getSelectedInvoiceCustomerName() {
-		return invoicedetailspanel.findElement(By.xpath(".//h5[@data-bind='text: customer.clientName']")).getText();
+
+    public WebElement getInvoiceByName(String invoice) {
+        return invoicesList.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + invoice + "']"));
+    }
+
+    public VNextBOInvoicesWebPage clickCheckbox(String ...invoiceNames) {
+        for (String invoiceName : invoiceNames) {
+            getInvoiceByName(invoiceName).findElement(By.xpath(".//../../..//input")).click();
+            waitABit(1000);
+        }
+        return this;
+    }
+
+    public String getSelectedInvoiceCustomerName() {
+		return invoiceDetailsPanel.findElement(By.xpath(".//h5[@data-bind='text: customer.clientName']")).getText();
 	}
 	
 	public String getSelectedInvoiceNote() {
-		return invoicedetailspanel.findElement(By.xpath(".//p[@data-bind='text: note']")).getText();
+		return invoiceDetailsPanel.findElement(By.xpath(".//p[@data-bind='text: note']")).getText();
 	}
 
+    public String getFirstInvoiceName() {
+	    return wait.until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers)).get(0).getText();
+    }
+
+    public String[] getFirstInvoiceNames(int number) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers));
+        String[] invoices = new String[number];
+        for (int i = 0; i < number; i++) {
+            invoices[i] = invoiceNumbers.get(i).getText();
+        }
+        return invoices;
+    }
+
+    public VNextBOInvoicesWebPage clickFirstInvoice() {
+	    wait.until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers)).get(0).click();
+	    waitForLoading();
+	    return this;
+    }
+
+    public VNextConfirmationDialog clickVoidButton() {
+	    wait.until(ExpectedConditions.elementToBeClickable(voidButton)).click();
+	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+    }
+
+    public boolean isInvoiceDisplayed(String invoice) {
+        wait
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers));
+        return invoiceNumbers.stream().anyMatch(n -> n.getText().equals(invoice));
+    }
+
+    public String getCheckedItemsNote() {
+	    return wait.until(ExpectedConditions.visibilityOf(checkedItemsNote)).getText();
+	}
 }

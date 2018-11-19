@@ -161,4 +161,54 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
         Assert.assertFalse(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescriptionEdited()));
         quickNotesPage.deleteQuickNote(data.getQuickNotesDescription());
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCannotSaveEmptyUpdatedQuickNote(String rowID, String description, JSONObject testData) {
+        VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
+
+        VNextBOQuickNotesWebPage quickNotesPage = leftMenu.selectQuickNotesMenu();
+        quickNotesPage
+                .deleteQuickNotesIfPresent(data.getQuickNotesDescription())
+                .clickAddNotesButton()
+                .typeDescription(data.getQuickNotesDescription())
+                .clickQuickNotesDialogAddButton();
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
+
+        VNextBONewNotesDialog addNewNotesDialog = quickNotesPage
+                .clickEditQuickNote(data.getQuickNotesDescription())
+                .typeDescription(data.getQuickNotesDescriptionEdited());
+        addNewNotesDialog.clickQuickNotesDialogUpdateButton();
+
+        Assert.assertTrue(addNewNotesDialog.isQuickNotesDescriptionErrorMessageDisplayed());
+        addNewNotesDialog
+                .clickQuickNotesDialogCloseButton()
+                .deleteQuickNote(data.getQuickNotesDescription());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanMoveNotation(String rowID, String description, JSONObject testData) {
+        VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
+
+        VNextBOQuickNotesWebPage quickNotesPage = leftMenu.selectQuickNotesMenu();
+        quickNotesPage.deleteQuickNotesIfPresent(data.getQuickNotesDescriptionList());
+
+        quickNotesPage.addQuickNotes(data.getQuickNotesDescriptionList());
+
+        int firstQuickNoteNumber = quickNotesPage.getQuickNoteNumberInList(data.getQuickNotesDescriptionList()[0]);
+        System.out.println(firstQuickNoteNumber);
+        int secondQuickNoteNumber = quickNotesPage.getQuickNoteNumberInList(data.getQuickNotesDescriptionList()[1]);
+        System.out.println(secondQuickNoteNumber);
+        Assert.assertTrue(quickNotesPage.areQuickNotesDisplayed(data.getQuickNotesDescriptionList()));
+        quickNotesPage.moveQuickNotes(data.getQuickNotesDescriptionList()[1], data.getQuickNotesDescriptionList()[0]);
+
+        int firstQuickNoteNumberUpdated = quickNotesPage.getQuickNoteNumberInList(data.getQuickNotesDescriptionList()[0]);
+        int secondQuickNoteNumberUpdated = quickNotesPage.getQuickNoteNumberInList(data.getQuickNotesDescriptionList()[1]);
+        System.out.println(firstQuickNoteNumberUpdated);
+        System.out.println(secondQuickNoteNumberUpdated);
+
+        Assert.assertEquals(firstQuickNoteNumber, secondQuickNoteNumberUpdated);
+        Assert.assertEquals(secondQuickNoteNumber, firstQuickNoteNumberUpdated);
+
+        quickNotesPage.deleteQuickNotesIfPresent(data.getQuickNotesDescriptionList());
+    }
 }

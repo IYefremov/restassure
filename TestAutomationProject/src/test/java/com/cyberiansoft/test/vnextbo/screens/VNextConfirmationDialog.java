@@ -24,11 +24,19 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//button[@data-automation-id='modalConfirmButton']")
 	private WebElement yesbtn;
+
+	@FindBy(xpath = "//button[text()='No']")
+	private WebElement invoiceNoButton;
+
+	@FindBy(xpath = "//button[text()='Yes']")
+	private WebElement invoiceYesButton;
+
+	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCloseButton']")
+	private WebElement rejectButton;
 	
 	public VNextConfirmationDialog(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		//driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
 	}
 	
@@ -37,9 +45,23 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
                 .findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")));
 	}
 
+	public void clickInvoiceNoButton() {
+        clickModalDialogButton(invoiceNoButton);
+	}
+
     public void clickYesButton() {
 	    clickModalDialogButton(confirmDialog
                 .findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")));
+	    waitForLoading();
+	}
+
+    public void clickInvoiceYesButton() {
+	    clickModalDialogButton(invoiceYesButton);
+	    waitForLoading();
+	}
+
+    public void clickInvoiceRejectButton() {
+	    clickModalDialogButton(rejectButton);
 	    waitForLoading();
 	}
 
