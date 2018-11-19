@@ -172,6 +172,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         workordersscreen.changeCustomerToWholesailForWorkOrder(woNumber, testwholesailcustomer);
         Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
         workordersscreen.switchToTeamWorkordersView();
+        workordersscreen.searchWorkOrderByFreeText(woNumber);
         Assert.assertEquals(workordersscreen.getWorkOrderCustomerValue(woNumber), testwholesailcustomer.getFullName());
         workordersscreen.switchToMyWorkordersView();
         workordersscreen.clickBackButton();

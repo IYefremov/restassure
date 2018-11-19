@@ -3,14 +3,14 @@ package com.cyberiansoft.test.vnext.apiutils;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
+import com.cyberiansoft.test.dataclasses.r360.InvoiceDTO;
 import com.cyberiansoft.test.dataclasses.r360.WorkOrderDTO;
+import com.cyberiansoft.test.dataclasses.r360.WorkOrderForInvoiceDTO;
 import com.cyberiansoft.test.dataprovider.JsonUtils;
-import com.cyberiansoft.test.objectpoolsi.InspPool;
-import com.cyberiansoft.test.objectpoolsi.InspectionFactory;
-import com.cyberiansoft.test.objectpoolsi.WOPool;
-import com.cyberiansoft.test.objectpoolsi.WorkOrderFactory;
+import com.cyberiansoft.test.objectpoolsi.*;
 import com.cyberiansoft.test.vnext.config.VNextDataInfo;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
@@ -39,7 +39,7 @@ public class VNextAPIUtils {
                                                  String appLicenseEntity, int numberOfWorkOrdresToCreate) throws Exception {
         final String apiPath = getAPIDataFilesPath();
 
-        List<WorkOrderDTO> workOrderDTOS = new ArrayList<WorkOrderDTO>();
+        List<WorkOrderDTO> workOrderDTOS = new ArrayList<>();
         WOPool woPool = null;
 
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
@@ -96,6 +96,41 @@ public class VNextAPIUtils {
             }
         }
         return inspectionDTOS;
+    }
+
+    public List<InvoiceDTO> generateInvoices(String INVOICE_DATA_FILE, InvoiceTypes invoiceType,
+                                             WorkOrderForInvoiceDTO workOrderForInvoiceDTO, int numberOfInvoicessToCreate) throws Exception {
+        final String apiPath = getAPIDataFilesPath();
+
+        List<InvoiceDTO> invoiceDTOS = new ArrayList<>();
+        InvoicePool invoicePool = null;
+
+        GenericObjectPoolConfig config = new GenericObjectPoolConfig();
+        config.setMaxIdle(1);
+        config.setMaxTotal(numberOfInvoicessToCreate);
+
+
+        InvoiceDTO invoiceDTO = JsonUtils.getInvoiceDTO(new File(apiPath + INVOICE_DATA_FILE),
+                new File(apiPath + VNextDataInfo.getInstance().getDefaultDeviceInfoDataFileName()),
+                new File(apiPath + VNextDataInfo.getInstance().getDefaultInvoiceOrdersDataFileName()));
+
+        //ObjectMapper mapper = new ObjectMapper();
+       // mapper.writeValue(System.out, invoiceDTO);
+
+
+        config.setTestOnBorrow(true);
+        config.setTestOnReturn(true);
+        invoicePool = new InvoicePool(new InvoiceFactory(invoiceDTO, invoiceType, workOrderForInvoiceDTO), config);
+        for (int i = 0; i < invoicePool.getMaxTotal(); i++) {
+            try {
+                InvoiceDTO invoice = invoicePool.borrowObject();
+                invoiceDTOS.add(invoice);
+                invoicePool.invalidateObject(invoice);
+            } catch (SocketTimeoutException tm) {
+                System.out.println("SocketTimeoutException happen");
+            }
+        }
+        return invoiceDTOS;
     }
 
     private String getAPIDataFilesPath() {

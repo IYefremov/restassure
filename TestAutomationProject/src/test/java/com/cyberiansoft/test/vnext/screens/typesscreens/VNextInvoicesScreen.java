@@ -181,4 +181,8 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		WebElement invoicecell = getInvoiceCell(invoiceNumber);
 		return invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_paid']")).size() > 0;
 	}
+	public String getFirstInvoiceNumber() {
+		return invoiceslist.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
+	}
+
 }

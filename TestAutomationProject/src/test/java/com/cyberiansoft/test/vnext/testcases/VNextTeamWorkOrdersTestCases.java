@@ -252,7 +252,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		for (String service : servicesToSelect)
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service));
 		VNextWorkOrdersScreen workordersscreen = selectedServicesScreen.saveWorkOrderViaMenu();
-		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
+		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
 		workordersscreen.clickBackButton();		
 	}
 
@@ -332,6 +332,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 
 		workordersscreen.switchToTeamWorkordersView();
+		workordersscreen.searchWorkOrderByFreeText(woNumber);
 		AppiumUtils.setNetworkOff();
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		VNextInformationDialog informationDialog = workOrdersMenuScreen.clickEditWorkOrderMenuItemWithAlert();

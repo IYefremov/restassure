@@ -28,6 +28,8 @@
       "description": "Test Case 81098:Verify user can edit draft Inspection",
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "service": {"serviceName": "Battery Installation"
       }
     }
   ],
@@ -37,6 +39,28 @@
       "rowID": "testVerifyUserCantEditInspectionInStateFinal.01",
       "description": "Test Case 81099:Verify user can't edit Inspection in state Final",
       "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCanEditInspectionIfDraftModeEqualsOFF": [
+    {
+      "rowID": "testVerifyUserCanEditInspectionIfDraftModeEqualsOFF.01",
+      "description": "Test Case 81100:Verify user can edit Inspection if draft mode = OFF",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "service": {"serviceName": "Battery Installation"
+      }
+    }
+  ],
+
+  "testVerifyUserCantSaveFinalInspectionWithoutPopulateRequiredField": [
+    {
+      "rowID": "testVerifyUserCantSaveFinalInspectionWithoutPopulateRequiredField.01",
+      "description": "Test Case 81101:Verify user can't save Final Inspection without populate required field",
+      "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }

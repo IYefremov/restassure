@@ -55,6 +55,10 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 	}
 	
 	public VNextWorkOrdersMenuScreen clickOnWorkOrderByNumber(String wonumber) {
+		if (isTeamViewActive()) {
+			if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']"))
+				searchWorkOrderByFreeText(wonumber);
+		}
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='work orders-list']")));
 		tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
@@ -181,5 +185,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
 	public void searchWorkOrderByFreeText(String searchtext) {
 		searchByFreeText(searchtext);
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
 	}
 }

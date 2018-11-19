@@ -86,6 +86,8 @@ public class InspectionFactory extends BasePooledObjectFactory<InspectionDTO> {
         Response<InspectionsListResponse> res = ApiUtils.getAPIService().getLastMyInspection(licenceId,
                 deviceId, applicationId,userId , json, 0, 1, "-1",
                 searchText).execute();
+        System.out.println("++++++++++++" + res.raw().request().url());
+        System.out.println("++++++++++++" + res.raw().request().body());
         return res.body().getResult().get(0);
     }
 

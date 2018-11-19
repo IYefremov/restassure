@@ -26,6 +26,15 @@ public interface VNextAPIService  {
                                        @Query("json") boolean json,
                                        @Body WorkOrderDTO workOrderData);
 
+    @Headers("Content-Type: application/json")
+    @POST("invoices/save/{InvoiceId}")
+    Call<BasicResponse> saveInvoice(@Path("InvoiceId") String estimationId, @Query("licenceId") String licenceId,
+                                      @Query("deviceId") String deviceId,
+                                      @Query("applicationId") String applicationId,
+                                      @Query("userId") String userId,
+                                      @Query("json") boolean json,
+                                      @Body WorkOrderDTO workOrderData);
+
 
     @GET("inspections/")
     Call<InspectionsListResponse> getLastMyInspection(@Query("licenceId") String licenceId,
@@ -48,4 +57,24 @@ public interface VNextAPIService  {
                                                       @Query("pageSize") int pageSize,
                                                       @Query("orderStatusID") String orderStatusID,
                                                       @Query("searchText") String searchText);
+
+    @GET("invoices/")
+    Call<InvoicesListResponse> getLastMyInvoice(@Query("licenceId") String licenceId,
+                                                    @Query("deviceId") String deviceId,
+                                                    @Query("applicationId") String applicationId,
+                                                    @Query("userId") String userId,
+                                                    @Query("json") boolean json,
+                                                    @Query("pageIndex") int pageIndex,
+                                                    @Query("pageSize") int pageSize,
+                                                    @Query("status") String status,
+                                                    @Query("clientId") String clientId,
+                                                    @Query("searchText") String searchText);
+
+    @GET("orders/getfull/{OrderId}")
+    Call<WorkOrderForInvoiceListResponse> getFullWorkOrderForInvoiceInfo(@Path("OrderId") String estimationId, @Query("licenceId") String licenceId,
+                                                    @Query("deviceId") String deviceId,
+                                                    @Query("applicationId") String applicationId,
+                                                    @Query("userId") String userId,
+                                                    @Query("json") boolean json
+                                                    );
 }

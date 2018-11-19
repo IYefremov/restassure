@@ -44,4 +44,6 @@ public class VNextDataInfo {
     public String getDefaultDeviceInfoDataFileName() { return props.getProperty("default.deviceinfo"); }
 
     public String getDefaultCustomerDataFileName() { return props.getProperty("default.customerinfo"); }
+
+    public String getDefaultInvoiceOrdersDataFileName() { return props.getProperty("default.invoiceorders"); }
 }
