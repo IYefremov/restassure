@@ -127,6 +127,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         if (servicecell != null) {
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
+            servicecell = getSelectedServiceCell(serviceName);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
             tap(servicecell.findElement(By.xpath(".//div[@action='notes']")));

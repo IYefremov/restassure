@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.restclient;
 
 
 import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
+import com.cyberiansoft.test.dataclasses.r360.InvoiceDTO;
 import com.cyberiansoft.test.dataclasses.r360.WorkOrderDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -33,7 +34,7 @@ public interface VNextAPIService  {
                                       @Query("applicationId") String applicationId,
                                       @Query("userId") String userId,
                                       @Query("json") boolean json,
-                                      @Body WorkOrderDTO workOrderData);
+                                      @Body InvoiceDTO invoiceData);
 
 
     @GET("inspections/")

@@ -27,7 +27,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
     @BeforeClass(description="Team Draft Inspections Test Cases")
     public void beforeClass() throws Exception {
         JSONDataProvider.dataFile = DATA_FILE;
-        
+
     }
 
     @AfterClass()
