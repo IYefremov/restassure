@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnextbo.testcases;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInvoiceDetailsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;

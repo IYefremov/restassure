@@ -92,7 +92,7 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
         } else {
             for (WebElement row : rows) {
                 if (isCheckboxChecked(row.findElement(By.xpath("./td/input")))) {
-                    checked += checked;
+                    checked++;
                 }
             }
         }

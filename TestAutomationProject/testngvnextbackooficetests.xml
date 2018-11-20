@@ -28,24 +28,24 @@
             <methods>
                 <include name="verifyUserCanAddLaborPriceServiceWithUseLaborTimes"/>
                 <include name="verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName"/>
-                <include name="verifyUserCanChangeSequenceNumberForMoneyServiceOrder"/>
-                <include name="verifyUserCanDeletePartPriceService"/>
-                <include name="verifyUserCanEditLaborPriceService"/>
-                <include name="verifyUserCanRestoreDeletedPartPriceService"/>
-                <include name="verifyUserCannotAddLaborServiceWithClickedRejectIcon"/>
+                <!--<include name="verifyUserCanChangeSequenceNumberForMoneyServiceOrder"/>-->
+                <!--<include name="verifyUserCanDeletePartPriceService"/>-->
+                <!--<include name="verifyUserCanEditLaborPriceService"/>-->
+                <!--<include name="verifyUserCanRestoreDeletedPartPriceService"/>-->
+                <!--<include name="verifyUserCannotAddLaborServiceWithClickedRejectIcon"/>-->
             </methods>
         </class>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOOperationsInvoicesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">
-            <methods>
-                <include name="testCheckValidationErrorsOnTheCreateNewUserDialog"/>
-                <include name="testCreateUserWithExistingEmailAddress"/>
-                <include name="testCreateUserWithoutWebAccess"/>
-            </methods>
-        </class>
+        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>-->
+        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>-->
+        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>-->
+        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOOperationsInvoicesTestCases"/>-->
+        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">-->
+            <!--<methods>-->
+                <!--<include name="testCheckValidationErrorsOnTheCreateNewUserDialog"/>-->
+                <!--<include name="testCreateUserWithExistingEmailAddress"/>-->
+                <!--<include name="testCreateUserWithoutWebAccess"/>-->
+            <!--</methods>-->
+        <!--</class>-->
     </classes>
   </test>
 </suite>
