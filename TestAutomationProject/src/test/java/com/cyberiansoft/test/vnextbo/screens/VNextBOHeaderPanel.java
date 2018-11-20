@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,12 +30,10 @@ public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	
 	public void clickLogout() {
 		try {
-		    new WebDriverWait(driver, 5)
+		    waitShort
                     .until(ExpectedConditions.elementToBeClickable(logoutlink))
                     .click();
-		} catch (WebDriverException e) {
-			logoutlink.click();
-		}
+		} catch (WebDriverException ignored) {}
 	}
 	
 	public boolean logOutLinkExists() {
@@ -51,10 +48,8 @@ public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	}
 	
 	public VNextUpgradeInfoWebPage clickUpgradeNowBanner() {
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.elementToBeClickable(upgradenowbtn)).click();
+		waitShort.until(ExpectedConditions.elementToBeClickable(upgradenowbtn)).click();
 		return PageFactory.initElements(
 				driver, VNextUpgradeInfoWebPage.class);
 	}
-
 }

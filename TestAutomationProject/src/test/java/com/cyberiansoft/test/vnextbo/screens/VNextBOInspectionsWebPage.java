@@ -227,8 +227,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public void clickExpandAdvancedSearchPanel() {
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.elementToBeClickable((WebElement) driver.findElement(By.id("advSearchEstimation-caret")))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("advSearchEstimation-caret")))).click();
 	}
 	
 	public boolean isSavedAdvancedSearchFilterExists(String filterName) {

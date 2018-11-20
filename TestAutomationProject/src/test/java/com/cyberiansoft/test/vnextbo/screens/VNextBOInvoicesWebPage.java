@@ -42,11 +42,14 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//div[@data-automation-id='invoiceList']")
 	private WebElement checkedItemsNote;
+
+	@FindBy(id = "advSearchInvoice-caret")
+	private WebElement advancedSearchCaret;
 	
 	public VNextBOInvoicesWebPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(invoicesList));
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+        wait.until(ExpectedConditions.visibilityOf(invoicesList));
 	}
 
 	public boolean areHeaderIconsDisplayed() {
@@ -120,4 +123,9 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
     public String getCheckedItemsNote() {
 	    return wait.until(ExpectedConditions.visibilityOf(checkedItemsNote)).getText();
 	}
+
+	public AdvancedSearchInvoiceForm clickAdvancedSearchCaret() {
+	    wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCaret)).click();
+        return PageFactory.initElements(driver, AdvancedSearchInvoiceForm.class);
+    }
 }

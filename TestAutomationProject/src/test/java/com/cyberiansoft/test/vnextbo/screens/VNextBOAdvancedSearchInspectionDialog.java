@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,30 +9,26 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
+import java.util.concurrent.TimeUnit;
 
 public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 	
 	@FindBy(id = "advSearchEstimation-form")
 	private WebElement advancedsearchform;
 	
-	
-	
+		
 	public VNextBOAdvancedSearchInspectionDialog(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(advancedsearchform));
+		wait.until(ExpectedConditions.visibilityOf(advancedsearchform));
 		waitABit(2000);
 	}
 	
 	public void deleteSavedSearchFilter() {
 		advancedsearchform.findElement(By.xpath(".//span[contains(@data-bind, 'click: deleteSavedSearch')]")).click();
 		driver.switchTo().alert().accept();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOf(advancedsearchform));
+		wait.until(ExpectedConditions.invisibilityOf(advancedsearchform));
 	}
 	
 	public void setAdvancedSearchByInspectionNumber(String inspNumber) {
@@ -71,18 +66,20 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 	
 	public void selectAdvancedSearchByCustomer(String customername) {
 		advancedsearchform.findElement(By.id("advSearchEstimation-customer")).sendKeys(customername.substring(0, 4));
-		WebElement customerslist = new WebDriverWait(driver, 30)
+		WebElement customerslist = wait
 		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("advSearchEstimation-customer_listbox"))));
 		customerslist.findElement(By.xpath("./li[text()='" + customername + "']")).click();
 	}
 	
 	public void selectAdvancedSearchByStatus(String statussearch) {
-		WebElement statusDropDown = advancedsearchform.findElement(By.xpath("//*[@aria-owns='advSearchEstimation-status_listbox']/span/span"));
+		WebElement statusDropDown = advancedsearchform
+                .findElement(By.xpath("//*[@aria-owns='advSearchEstimation-status_listbox']/span/span"));
 		if (!statusDropDown.getText().trim().equals(statussearch)) {		
-			new WebDriverWait(driver, 30)
-			.until(ExpectedConditions.elementToBeClickable(advancedsearchform.findElement(By.id("advSearchEstimation-status_label")))).click();
-			WebElement statuseslist = new WebDriverWait(driver, 30)
-					.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("advSearchEstimation-status-list"))));
+			wait.until(ExpectedConditions
+                    .elementToBeClickable(advancedsearchform.findElement(By.id("advSearchEstimation-status_label"))))
+                    .click();
+			WebElement statuseslist = wait
+                    .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("advSearchEstimation-status-list"))));
 			waitABit(500);
 			statuseslist.findElement(By.xpath("//ul[@id='advSearchEstimation-status_listbox']/li[text()='" + statussearch + "']")).click();
 			waitABit(500);
@@ -102,8 +99,7 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 	}
 	
 	public void setAdvancedSearchFilterName(String filterName) {
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.visibilityOf(advancedsearchform.findElement(By.id("advSearchEstimation-SearchName")))).clear();
+		waitShort.until(ExpectedConditions.visibilityOf(advancedsearchform.findElement(By.id("advSearchEstimation-SearchName")))).clear();
 		advancedsearchform.findElement(By.id("advSearchEstimation-SearchName")).sendKeys(filterName);  
 	}
 	
@@ -114,8 +110,7 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 	
 	public void saveAdvancedSearchFilter() {
 		clickSaveButton();
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.invisibilityOf(advancedsearchform));
+		waitShort.until(ExpectedConditions.invisibilityOf(advancedsearchform));
 	}
 	
 	public void clickSaveButton() {
@@ -123,14 +118,11 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 	}
 	
 	public void clickSearchButton() {
-		new WebDriverWait(driver, 30)
-				  .until(ExpectedConditions.elementToBeClickable(advancedsearchform.findElement(By.xpath(".//*[@data-bind='click: search']")))).click();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOf(advancedsearchform));
+		wait.until(ExpectedConditions.elementToBeClickable(advancedsearchform.findElement(By.xpath(".//*[@data-bind='click: search']")))).click();
+		wait.until(ExpectedConditions.invisibilityOf(advancedsearchform));
 	}
 	
 	public void clickClearButton() {
 		advancedsearchform.findElement(By.xpath("//span[text()='Clear']")).click();
 	}
-
 }

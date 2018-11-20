@@ -63,8 +63,11 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		if (headerpanel.logOutLinkExists())
-			headerpanel.userLogout();		
-	}
+			headerpanel.userLogout();
+
+        if (DriverBuilder.getInstance().getDriver() != null)
+            DriverBuilder.getInstance().quitDriver();
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateUserWithoutWebAccess(String rowID, String description, JSONObject testData) {

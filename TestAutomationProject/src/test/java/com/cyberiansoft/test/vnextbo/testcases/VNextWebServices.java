@@ -54,6 +54,9 @@ public class VNextWebServices extends BaseTestCase {
                 VNextBOHeaderPanel.class);
         if (headerpanel.logOutLinkExists())
             headerpanel.userLogout();
+
+        if (DriverBuilder.getInstance().getDriver() != null)
+            DriverBuilder.getInstance().quitDriver();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

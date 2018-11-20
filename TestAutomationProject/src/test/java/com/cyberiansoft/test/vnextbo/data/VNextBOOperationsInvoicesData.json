@@ -9,7 +9,7 @@
   "verifyUserCannotVoidInvoiceAfterClickingNo": [
     {
       "rowID": "verifyUserCannotVoidInvoiceAfterClickingNo.01",
-      "description": "Test Case 79457:Verify user can void invoice"
+      "description": "Test Case 79459:Verify user can't void invoice if click \"No\" button"
     }
   ],
 
@@ -24,6 +24,14 @@
     {
       "rowID": "verifyUserCanVoidInvoicesUsingCheckboxes.01",
       "description": "Test Case 79461:Verify user can void invoices using check-boxes"
+    }
+  ],
+
+  "verifyUserCanUnvoidInvoice": [
+    {
+      "rowID": "verifyUserCanUnvoidInvoice.01",
+      "description": "Test Case 79462:Verify user can unvoid invoice",
+      "status": "Void"
     }
   ]
 }

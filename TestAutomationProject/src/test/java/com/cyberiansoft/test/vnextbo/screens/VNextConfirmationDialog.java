@@ -55,9 +55,10 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	    waitForLoading();
 	}
 
-    public void clickInvoiceYesButton() {
+    public VNextBOInvoicesWebPage clickInvoiceYesButton() {
 	    clickModalDialogButton(invoiceYesButton);
 	    waitForLoading();
+	    return PageFactory.initElements(driver, VNextBOInvoicesWebPage.class);
 	}
 
     public void clickInvoiceRejectButton() {

@@ -62,13 +62,12 @@ public abstract class VNextBOBaseWebPage {
     }
     
     public void waitForNewTab() { 
-		  WebDriverWait wait = new WebDriverWait(driver,30); 
-		  wait.until(new ExpectedCondition<Boolean>(){ 
+		  waitLong.until(new ExpectedCondition<Boolean>(){
 			  @Override
 	            public Boolean apply(WebDriver d) {
 	                return (d.getWindowHandles().size() != 1);
 	            }
-		  }); 
+		  });
 	}
     
     public void closeNewTab(String mainWindowHandle) {

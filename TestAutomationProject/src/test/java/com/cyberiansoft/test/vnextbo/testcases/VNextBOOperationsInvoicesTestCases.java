@@ -60,6 +60,9 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 VNextBOHeaderPanel.class);
         if (headerpanel.logOutLinkExists())
             headerpanel.userLogout();
+
+        if (DriverBuilder.getInstance().getDriver() != null)
+            DriverBuilder.getInstance().quitDriver();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -130,5 +133,24 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 "The invoice " + firstInvoiceNames[1] + " is displayed after clicking 'Yes' button");
             Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[2]),
                 "The invoice " + firstInvoiceNames[2] + " is displayed after clicking 'Yes' button");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanUnvoidInvoice(String rowID, String description, JSONObject testData) {
+        VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
+
+        VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+        final String invoiceNumber = invoicesPage.getFirstInvoiceName();
+        invoicesPage
+                .clickFirstInvoice()
+                .clickVoidButton()
+                .clickInvoiceYesButton()
+                .clickAdvancedSearchCaret()
+                .setInvoiceNumber(invoiceNumber)
+                .setStatus(data.getStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber),
+                "The invoice is not displayed after being voided");
     }
 }
