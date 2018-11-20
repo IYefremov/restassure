@@ -67,6 +67,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	public void selectPhoneNumberCountryCode(String countrycode) {
 		final String contrycodeXPath = "//li/a/span[contains(text(), '(+" + countrycode + ")')]";
 		tap(appiumdriver.findElement(By.xpath("//*[@data-name='phone']/i")));
+		BaseUtils.waitABit(1000);
 		if (!appiumdriver.findElement(By.xpath(contrycodeXPath)).isDisplayed()) {
 			/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 			new TouchAction(appiumdriver).longPress(point(appiumdriver.manage().window().getSize().getWidth()-230,appiumdriver.manage().window().getSize().getHeight()-330))

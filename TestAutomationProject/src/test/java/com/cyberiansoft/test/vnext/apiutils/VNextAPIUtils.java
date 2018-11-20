@@ -5,14 +5,16 @@ import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
 import com.cyberiansoft.test.dataclasses.r360.InvoiceDTO;
 import com.cyberiansoft.test.dataclasses.r360.WorkOrderDTO;
-import com.cyberiansoft.test.dataclasses.r360.WorkOrderForInvoiceDTO;
 import com.cyberiansoft.test.dataprovider.JsonUtils;
 import com.cyberiansoft.test.objectpoolsi.*;
 import com.cyberiansoft.test.vnext.config.VNextDataInfo;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.restclient.ApiUtils;
+import com.cyberiansoft.test.vnext.restclient.WorkOrderForInvoiceListResponse;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import retrofit2.Response;
 
 import java.io.File;
 import java.net.SocketTimeoutException;
@@ -98,8 +100,8 @@ public class VNextAPIUtils {
         return inspectionDTOS;
     }
 
-    public List<InvoiceDTO> generateInvoices(String INVOICE_DATA_FILE, InvoiceTypes invoiceType,
-                                             WorkOrderForInvoiceDTO workOrderForInvoiceDTO, int numberOfInvoicessToCreate) throws Exception {
+    public List<InvoiceDTO>generateInvoices(String INVOICE_DATA_FILE, InvoiceTypes invoiceType,
+                                             List<WorkOrderDTO> workOrderDTOS, String appID, int lastInvoiceNumber) throws Exception {
         final String apiPath = getAPIDataFilesPath();
 
         List<InvoiceDTO> invoiceDTOS = new ArrayList<>();
@@ -107,29 +109,37 @@ public class VNextAPIUtils {
 
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
         config.setMaxIdle(1);
-        config.setMaxTotal(numberOfInvoicessToCreate);
-
-
+        config.setMaxTotal(1);
+        config.setTestOnBorrow(true);
+        config.setTestOnReturn(true);
         InvoiceDTO invoiceDTO = JsonUtils.getInvoiceDTO(new File(apiPath + INVOICE_DATA_FILE),
                 new File(apiPath + VNextDataInfo.getInstance().getDefaultDeviceInfoDataFileName()),
                 new File(apiPath + VNextDataInfo.getInstance().getDefaultInvoiceOrdersDataFileName()));
 
+        int newInvoiceNumber = lastInvoiceNumber + 1;
+        for (WorkOrderDTO workOrderDTO : workOrderDTOS) {
+            Response<WorkOrderForInvoiceListResponse> ress = ApiUtils.getAPIService().getFullWorkOrderForInvoiceInfo(
+                    workOrderDTO.getOrderId(), workOrderDTO.getLicenceId()
+                    , workOrderDTO.getDevice().getDeviceId(), appID, workOrderDTO.getEmployeeId() , true
+            ).execute();
+            invoicePool = new InvoicePool(new InvoiceFactory(invoiceDTO, invoiceType, ress.body().getResult(), newInvoiceNumber), config);
+            for (int i = 0; i < invoicePool.getMaxTotal(); i++) {
+                try {
+                    InvoiceDTO invoice = invoicePool.borrowObject();
+                    invoiceDTOS.add(invoice);
+                    invoicePool.invalidateObject(invoice);
+                } catch (SocketTimeoutException tm) {
+                    System.out.println("SocketTimeoutException happen");
+                }
+            }
+            newInvoiceNumber = ++newInvoiceNumber;
+        }
+
+
+
         //ObjectMapper mapper = new ObjectMapper();
        // mapper.writeValue(System.out, invoiceDTO);
 
-
-        config.setTestOnBorrow(true);
-        config.setTestOnReturn(true);
-        invoicePool = new InvoicePool(new InvoiceFactory(invoiceDTO, invoiceType, workOrderForInvoiceDTO), config);
-        for (int i = 0; i < invoicePool.getMaxTotal(); i++) {
-            try {
-                InvoiceDTO invoice = invoicePool.borrowObject();
-                invoiceDTOS.add(invoice);
-                invoicePool.invalidateObject(invoice);
-            } catch (SocketTimeoutException tm) {
-                System.out.println("SocketTimeoutException happen");
-            }
-        }
         return invoiceDTOS;
     }
 

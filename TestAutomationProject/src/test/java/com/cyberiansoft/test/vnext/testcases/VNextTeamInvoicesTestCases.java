@@ -10,14 +10,17 @@ import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.Invoice;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.dataclasses.r360.InvoiceDTO;
 import com.cyberiansoft.test.dataclasses.r360.WorkOrderDTO;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
+import com.cyberiansoft.test.vnext.apiutils.VNextAPIUtils;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
+import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
@@ -46,18 +49,37 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	private final RetailCustomer testcustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
 	private final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 	private List<WorkOrderDTO> workOrderDTOS = new ArrayList<>();
+	List<InvoiceDTO> invoiceDTOS = new ArrayList<>();
 
 	@BeforeClass(description="Team Invoices Test Cases")
 	public void beforeClass() throws Exception {
 		JSONDataProvider.dataFile = DATA_FILE;
-		/*workOrderDTOS = VNextAPIUtils.getInstance().generateWorkOrders("team-base-workorder-data1.json",
+		workOrderDTOS = VNextAPIUtils.getInstance().generateWorkOrders("team-base-workorder-data1.json",
 				WorkOrderTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
-				appLicenseEntity, 30
+				appLicenseEntity, 20
 				);
-*/
+
+
+		List<WorkOrderDTO> workOrderDTOSForInvoices = VNextAPIUtils.getInstance().generateWorkOrders("team-base-workorder-data1.json",
+				WorkOrderTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
+				appLicenseEntity, 20
+		);
+
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		//VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
-		//statusScreen.updateMainDB();
+		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		String lastInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		invoicesScreen.clickBackButton();
+		lastInvoiceNumber = lastInvoiceNumber.substring(lastInvoiceNumber.lastIndexOf("-")+1, lastInvoiceNumber.length());
+		lastInvoiceNumber = lastInvoiceNumber.replaceFirst("^0+(?!$)", "");
+
+
+		invoiceDTOS = VNextAPIUtils.getInstance().generateInvoices("team-base-invoice-data.json",
+				InvoiceTypes.O_KRAMAR, workOrderDTOSForInvoices, appID, Integer.valueOf(lastInvoiceNumber)
+		);
+
+		VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
+		statusScreen.updateMainDB();
 
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.switchToRetailMode();
@@ -923,7 +945,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyCancelEmailTeamInvoice(String rowID,
-																			  String description, JSONObject testData)  {
+																			  String description, JSONObject testData) throws Exception {
 
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
@@ -932,22 +954,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		for (int i = 0; i < invoicesToCreate; i ++) {
-			String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
-
-			VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-			invoicesscreen.switchToMyInvoicesView();
-			VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-			workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
-
-			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
-			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
-			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-			invoices.add(invoiceinfoscreen.getInvoiceNumber());
-			invoiceinfoscreen.saveInvoiceAsFinal();
-			homescreen = invoicesscreen.clickBackButton();
+			invoices.add(createSimpleInvoice(invoice));
 		}
-		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		invoicesscreen.switchToTeamInvoicesView();
 		for (String invoiceNumber : invoices)
@@ -1171,7 +1179,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		String wonumber = "";
 		if (workOrderDTOS.size() > 0) {
 			WorkOrderDTO workOrderDTO = workOrderDTOS.remove(0);
-			wonumber = "O-" + appLicenseEntity + "-0" + workOrderDTO.getLocalNo();
+			wonumber = "O-" + appLicenseEntity + "-" +
+					getEntityStringNumber(workOrderDTO.getLocalNo());
 		} else {
 			VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 			VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -1187,4 +1196,41 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		return wonumber;
 	}
 
+
+	private String createSimpleInvoice(Invoice invoice) {
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		String invoiceNumber = "";
+		if (invoiceDTOS.size() > 0) {
+			InvoiceDTO invoiceDTO = invoiceDTOS.remove(0);
+			invoiceNumber = "I-" + appLicenseEntity + "-" +
+					getEntityStringNumber(invoiceDTO.getLocalNo());
+		} else {
+			String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
+
+			VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+			invoicesscreen.switchToMyInvoicesView();
+			VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
+			workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
+
+			VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+			invoiceinfoscreen.saveInvoiceAsFinal();
+			invoicesscreen.clickBackButton();
+		}
+		return invoiceNumber;
+	}
+
+	private String getEntityStringNumber(int entityNumber) {
+		String returnNumber = "";
+		final int maxLenght = 5;
+		String origNumber = Integer.toString(entityNumber);
+		int origNumberLenght = origNumber.length();
+		for (int i = 0; i < maxLenght - origNumberLenght; i++)
+			returnNumber = returnNumber + "0";
+		System.out.println("++++++cc " + returnNumber + origNumber);
+		return returnNumber + origNumber;
+
+	}
 }

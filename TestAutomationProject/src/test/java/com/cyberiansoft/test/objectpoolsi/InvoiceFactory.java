@@ -6,26 +6,31 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.globalutils.GlobalUtils;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypeData;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
+import com.cyberiansoft.test.vnext.restclient.ApiUtils;
+import com.cyberiansoft.test.vnext.restclient.BasicResponse;
 import com.google.gson.Gson;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
+import retrofit2.Response;
 
 public class InvoiceFactory extends BasePooledObjectFactory<InvoiceDTO> {
 
     private InvoiceDTO invoioceDTO;
     private InvoiceTypes invoiceTypes;
     private WorkOrderForInvoiceDTO workOrderForInvoiceDTO;
+    private int newInvoiceNumber;
 
     public InvoiceFactory(InvoiceDTO invoioceDTO, InvoiceTypes invoiceTypes,
-                          WorkOrderForInvoiceDTO workOrderForInvoiceDTO) {
+                          WorkOrderForInvoiceDTO workOrderForInvoiceDTO, int newInvoiceNumber) {
         super();
 
         this.invoioceDTO = invoioceDTO;
         this.invoiceTypes = invoiceTypes;
         this.workOrderForInvoiceDTO = workOrderForInvoiceDTO;
+        this.newInvoiceNumber = newInvoiceNumber;
 
     }
 
@@ -44,16 +49,22 @@ public class InvoiceFactory extends BasePooledObjectFactory<InvoiceDTO> {
                 .with("DeviceId", workOrderForInvoiceDTO.getDeviceLicences().getDeviceID())
                 .with("InvoiceTypeId", new InvoiceTypeData(invoiceTypes).getInvoiceTypeID())
                 .with("UTCTime", GlobalUtils.getVNextInspectionCreationTime())
-                .with("InvoiceDate", GlobalUtils.getVNextInspectionDate());
+                .with("InvoiceDate", GlobalUtils.getVNextInspectionDate())
+                .with("LicenceID", workOrderForInvoiceDTO.getDeviceLicences().getLicenceId())
+                .with("OrderNo", workOrderForInvoiceDTO.getOrderNo())
+                .with("OrderId", workOrderForInvoiceDTO.getOrderId())
+                .with("OrderTypeId", workOrderForInvoiceDTO.getOrderTypeId())
+                .with("OrderDate", workOrderForInvoiceDTO.getOrderDate())
+                .with("InvoiceOrderId", GlobalUtils.getUUID());
+
 
         String json = template.render(model);
-System.out.println("======xxx " + json);
         InvoiceDTO newInvoice = JSonDataParser.getTestDataFromJson(json, InvoiceDTO.class);
-        //newInvoice.setLocalNo(++inspnumber);
-        newInvoice.setLocalNo(46);
-        //Response<BasicResponse> res = ApiUtils.getAPIService().saveInvoice(newInvoice.getEstimationId(),
-        //        newInvoice.getLicenceID(),newInvoice.getDevice().getDeviceId(), appID,
-        //        newInvoice.getEmployeeId(), true, newInvoice).execute();
+        newInvoice.setLocalNo(newInvoiceNumber);
+        Response<BasicResponse> res = ApiUtils.getAPIService().saveInvoice(newInvoice.getInvoiceId(),
+                newInvoice.getLicenceID(),newInvoice.getDevice().getDeviceId(),
+                workOrderForInvoiceDTO.getClient().getApplicationId(),
+                workOrderForInvoiceDTO.getEmployeeId(), true, newInvoice).execute();
 
 
         return newInvoice;
