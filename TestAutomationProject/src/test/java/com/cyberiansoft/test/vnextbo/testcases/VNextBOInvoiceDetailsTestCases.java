@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInvoiceDetailsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -19,6 +18,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.UUID;
+
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 
@@ -38,7 +39,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
             e.printStackTrace();
         }
         webdriver = DriverBuilder.getInstance().getDriver();
-        WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
     }
 
     @AfterMethod
@@ -71,7 +72,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
 		
-		WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
+		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
 		BackOfficeLoginWebPage oldloginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		oldloginpage.UserLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(),

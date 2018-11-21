@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOSmokeData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -27,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebConstants.VNextBOErrorMessages.*;
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOSmokeTestCases extends BaseTestCase {
 
@@ -53,7 +53,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
             e.printStackTrace();
         }
         webdriver = DriverBuilder.getInstance().getDriver();
-        WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
 //        BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 //        loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 	}

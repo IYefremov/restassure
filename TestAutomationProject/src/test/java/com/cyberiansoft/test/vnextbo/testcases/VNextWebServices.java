@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextWebServicesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -24,6 +23,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
+
 
 public class VNextWebServices extends BaseTestCase {
 
@@ -45,7 +46,7 @@ public class VNextWebServices extends BaseTestCase {
             e.printStackTrace();
         }
         webdriver = DriverBuilder.getInstance().getDriver();
-        WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
     }
 
     @AfterMethod
@@ -64,7 +65,7 @@ public class VNextWebServices extends BaseTestCase {
 
         VNextWebServicesData  data = JSonDataParser.getTestDataFromJson(testData, VNextWebServicesData.class);
 
-		WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
 
 //		System.out.println("\nTesting 1 - Send Http POST request");
 		//sendPost();

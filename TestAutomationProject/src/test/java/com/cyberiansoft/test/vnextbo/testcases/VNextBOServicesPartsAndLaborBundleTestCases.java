@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOServicesPartsAndLaborBundleData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -12,7 +11,12 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOServicesPartsAndLaborBundleTestCases extends BaseTestCase {
 
@@ -38,7 +42,7 @@ public class VNextBOServicesPartsAndLaborBundleTestCases extends BaseTestCase {
         }
         webdriver = DriverBuilder.getInstance().getDriver();
 
-        WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
 		userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
 		userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
