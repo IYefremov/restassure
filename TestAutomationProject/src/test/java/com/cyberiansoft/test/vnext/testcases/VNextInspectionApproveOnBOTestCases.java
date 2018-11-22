@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
@@ -124,7 +125,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(webdriver);
 
 		confirmdialog.clickNoButton();
-		//BaseUtils.waitABit(500);
+		BaseUtils.waitABit(500);
 		insppage.approveInspection(approveNotes);
 		
 		insppage = leftmenu.selectInspectionsMenu();

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	
-	@FindBy(id = "dialogModal")
+	@FindBy(xpath = "//div[@class='modal fade in' and @id='dialogModal']")
 	private WebElement confirmDialog;
 	
 	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div[contains(@data-bind, 'html: html,')]")

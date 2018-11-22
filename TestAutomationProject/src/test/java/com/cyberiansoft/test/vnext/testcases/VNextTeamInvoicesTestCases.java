@@ -54,6 +54,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	@BeforeClass(description="Team Invoices Test Cases")
 	public void beforeClass() throws Exception {
 		JSONDataProvider.dataFile = DATA_FILE;
+
 		workOrderDTOS = VNextAPIUtils.getInstance().generateWorkOrders("team-base-workorder-data1.json",
 				WorkOrderTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
 				appLicenseEntity, 20
@@ -1229,7 +1230,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		int origNumberLenght = origNumber.length();
 		for (int i = 0; i < maxLenght - origNumberLenght; i++)
 			returnNumber = returnNumber + "0";
-		System.out.println("++++++cc " + returnNumber + origNumber);
 		return returnNumber + origNumber;
 
 	}
