@@ -109,4 +109,8 @@ public abstract class VNextBOBaseWebPage {
         }
         wait.until(ExpectedConditions.elementToBeClickable(textField)).sendKeys(name);
     }
+
+    public void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+    }
 }

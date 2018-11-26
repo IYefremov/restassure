@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +11,10 @@ import java.util.List;
 public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']")
-	private WebElement invoicesList;
+	private WebElement invoices;
+
+	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']/li")
+	private List<WebElement> invoicesList;
 
 	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']//b")
 	private List<WebElement> invoiceNumbers;
@@ -34,6 +34,9 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@title='Void selected invoices']")
     private WebElement headerIconVoidButton;
 
+    @FindBy(xpath = "//span[@title='Unvoid selected invoices']")
+    private WebElement headerIconUnvoidButton;
+
 	@FindBy(xpath = "//span[@title='Approve selected items']")
 	private WebElement headerIconApproveButton;
 
@@ -45,11 +48,20 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
 	@FindBy(id = "advSearchInvoice-caret")
 	private WebElement advancedSearchCaret;
+
+	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']/following-sibling::div[@class='progress-wrapper']")
+	private WebElement progressBar;
+
+	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']/following-sibling::div[@class='progress-wrapper progress--active']")
+	private WebElement progressBarActive;
+
+	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']/following-sibling::div/div[@class='progress-message' and text()]")
+	private WebElement progressMessage;
 	
 	public VNextBOInvoicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        wait.until(ExpectedConditions.visibilityOf(invoicesList));
+        wait.until(ExpectedConditions.visibilityOf(invoices));
 	}
 
 	public boolean areHeaderIconsDisplayed() {
@@ -64,13 +76,18 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
     }
 
+    public VNextConfirmationDialog clickHeaderIconUnvoidButton() {
+	    wait.until(ExpectedConditions.elementToBeClickable(headerIconUnvoidButton)).click();
+	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+    }
+
 	public void selectInvoiceInTheList(String invoice) {
 		getInvoiceByName(invoice).click();
 		waitForLoading();
 	}
 
     public WebElement getInvoiceByName(String invoice) {
-        return invoicesList.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + invoice + "']"));
+        return invoices.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + invoice + "']"));
     }
 
     public VNextBOInvoicesWebPage clickCheckbox(String ...invoiceNames) {
@@ -90,7 +107,11 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	}
 
     public String getFirstInvoiceName() {
-	    return wait.until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers)).get(0).getText();
+	    return getInvoiceName(0);
+    }
+
+    public String getInvoiceName(int index) {
+	    return wait.until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers)).get(index).getText();
     }
 
     public String[] getFirstInvoiceNames(int number) {
@@ -113,11 +134,28 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
     }
 
+    public void scrollInvoices() {
+        while (true) {
+            scrollDownToLastInvoice();
+            waitABit(1000);
+            try {
+                waitShort.until(ExpectedConditions.visibilityOf(progressMessage));
+                break;
+            } catch (Exception ignored) {}
+        }
+    }
+
     public boolean isInvoiceDisplayed(String invoice) {
         wait
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers));
         return invoiceNumbers.stream().anyMatch(n -> n.getText().equals(invoice));
+    }
+
+    private void scrollDownToLastInvoice() {
+        final WebElement invoice = waitShort
+                .until(ExpectedConditions.visibilityOf(invoicesList.get(invoicesList.size() - 1)));
+        scrollToElement(invoice);
     }
 
     public String getCheckedItemsNote() {

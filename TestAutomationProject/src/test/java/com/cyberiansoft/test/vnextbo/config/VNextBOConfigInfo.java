@@ -34,6 +34,10 @@ public class VNextBOConfigInfo {
         return properties.getProperty("vnextbo.url");
     }
 
+    public String getVNextBOCompanionappURL() {
+        return properties.getProperty("vnextbo.companionapp.url");
+    }
+
     public String getVNextBOMail() {
         return properties.getProperty("vnextbo.mail");
     }

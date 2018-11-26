@@ -33,5 +33,14 @@
       "description": "Test Case 79462:Verify user can unvoid invoice",
       "status": "Void"
     }
+  ],
+
+  "verifyUserCanUnvoidInvoicesUsingCheckboxes": [
+    {
+      "rowID": "verifyUserCanUnvoidInvoicesUsingCheckboxes.01",
+      "description": "Test Case 79463:Verify user can unvoid invoices using check-boxes",
+      "status": "Void",
+      "status2": "New"
+    }
   ]
 }

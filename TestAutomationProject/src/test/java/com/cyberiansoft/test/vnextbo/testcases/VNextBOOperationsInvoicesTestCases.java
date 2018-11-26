@@ -19,6 +19,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
@@ -128,11 +130,11 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 .clickHeaderIconVoidButton()
                 .clickInvoiceYesButton();
 
-            Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[0]),
+        Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[0]),
                 "The invoice " + firstInvoiceNames[0] + " is displayed after clicking 'Yes' button");
-            Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[1]),
+        Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[1]),
                 "The invoice " + firstInvoiceNames[1] + " is displayed after clicking 'Yes' button");
-            Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[2]),
+        Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[2]),
                 "The invoice " + firstInvoiceNames[2] + " is displayed after clicking 'Yes' button");
     }
 
@@ -153,5 +155,50 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
         Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber),
                 "The invoice is not displayed after being voided");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanUnvoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
+        VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
+
+        VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+        final String[] invoices = {
+                invoicesPage.getInvoiceName(0),
+                invoicesPage.getInvoiceName(1),
+                invoicesPage.getInvoiceName(2)
+        };
+
+        Arrays.stream(invoices)
+                .forEach((inv) -> invoicesPage
+                        .clickFirstInvoice()
+                        .clickVoidButton()
+                        .clickInvoiceYesButton());
+
+        invoicesPage
+                .clickAdvancedSearchCaret()
+                .setStatus(data.getStatus())
+                .clickSearchButton()
+                .scrollInvoices();
+
+        Arrays.stream(invoices)
+                .forEach((inv) -> Assert.assertTrue(invoicesPage
+                                .isInvoiceDisplayed(inv),
+                        "The invoice " + inv + " is not displayed after being voided"));
+
+        invoicesPage.clickCheckbox(invoices);
+        invoicesPage
+                .clickHeaderIconUnvoidButton()
+                .clickInvoiceYesButton();
+
+        invoicesPage
+                .clickAdvancedSearchCaret()
+                .setStatus(data.getStatus2())
+                .clickSearchButton();
+//                .scrollInvoices(); todo uncomment here, if the test becomes not stable
+
+        Arrays.stream(invoices)
+                .forEach((inv) -> Assert.assertTrue(invoicesPage
+                                .isInvoiceDisplayed(inv),
+                        "The invoice " + inv + " is not displayed after being unvoided"));
     }
 }

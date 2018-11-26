@@ -33,7 +33,7 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//*[@data-automation-id='users']")
     private WebElement usersmenu;
 
-    @FindBy(xpath = "//*[@data-automation-id='orders']")
+    @FindBy(xpath = "//li[@data-automation-id='orders']")
     private WebElement repairordersmenu;
 
     @FindBy(xpath = "//div[@class='left-menu-btn closed']")

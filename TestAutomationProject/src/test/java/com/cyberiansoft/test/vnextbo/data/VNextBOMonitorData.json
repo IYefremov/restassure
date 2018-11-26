@@ -1,0 +1,26 @@
+{
+  "verifyUserCanOpenMonitorWithFullSetOfElements": [
+    {
+      "rowID": "verifyUserCanOpenMonitorWithFullSetOfElements.01",
+      "description": "Test Case 81749:Verify user can open \"Monitor\" with full set of elements",
+      "location": "Best Location",
+      "titles": [
+        "Order / Type / Department",
+        "Customer / Vehicle / VIN#",
+        "Stock# / RO# / PO# / Invoice",
+        "Order Amount",
+        " Vendor Amount",
+        "Amount",
+        "Start Date / Target Date",
+        "Active Phase / Days in Phase",
+        "Completed (%)",
+        "Other"
+      ],
+
+      "titlesRepeater": [
+        "Order Amount",
+        " Vendor Amount"
+      ]
+    }
+  ]
+}

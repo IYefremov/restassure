@@ -42,12 +42,13 @@ public class AdvancedSearchInvoiceForm extends VNextBOBaseWebPage {
         wait.until(ExpectedConditions.attributeContains(statusCombobox, "aria-expanded", "true"));
         wait.until(ExpectedConditions.elementToBeClickable(statusDropDown
                 .findElement(By.xpath("//li[text()='" + status + "']")))).click();
-        waitABit(500);
+        waitABit(1500);
         return this;
     }
 
-    public void clickSearchButton() {
+    public VNextBOInvoicesWebPage clickSearchButton() {
         wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
         waitForLoading();
+        return PageFactory.initElements(driver, VNextBOInvoicesWebPage .class);
     }
 }

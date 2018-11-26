@@ -96,9 +96,13 @@ public abstract class BasePage {
 
     public BasePage scrollDownToText(String text) {
         WebElement element = driver.findElement(By.xpath("//*[text()='" + text + "']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        scrollToElement(element);
         waitABit(500);
         return this;
+    }
+
+    public void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public BasePage handleAlert() {
