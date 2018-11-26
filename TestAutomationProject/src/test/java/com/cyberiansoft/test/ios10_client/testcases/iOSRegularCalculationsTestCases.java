@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -1420,6 +1421,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
 		teaminspectionsscreen = new RegularTeamInspectionsScreen();
+		BaseUtils.waitABit(2000);
 		Assert.assertTrue(teaminspectionsscreen.checkInspectionIsApproved(inspectionnumber));
 		Assert.assertEquals(teaminspectionsscreen.getFirstInspectionAprovedPriceValue(), "$2,000.00");
 		Assert.assertEquals(teaminspectionsscreen.getFirstInspectionPriceValue(), "$2,050.00");
@@ -2605,6 +2607,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		ordersummaryscreen.saveWizard();
 		
 		myworkordersscreen.selectWorkOrderForEidt(wonumber1);
+		wonumber1 = vehiclescreen.getWorkOrderNumber();
         RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectService("Money_Pack_Price");
 		RegularInspectionToolBar toolaber = new RegularInspectionToolBar();		
@@ -2636,7 +2639,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.selectWorkOrder(wonumber2);	
 		myworkordersscreen.clickChangeCustomerPopupMenu();
 		customersscreen.swtchToRetailMode();
-		customersscreen.selectCustomer("19319");
+		customersscreen.selectCustomer("Avalon");
 		myworkordersscreen = new RegularMyWorkOrdersScreen();
 		Assert.assertFalse(myworkordersscreen.woExists(wonumber2), "Can't find work order: " + wonumber2);
 		myworkordersscreen.clickHomeButton();
@@ -3137,6 +3140,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen = new RegularMyInspectionsScreen();
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		visualInteriorScreen = new RegularVisualInteriorScreen();
+		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
         servicesscreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.SERVICES);
         RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		Assert.assertTrue(selectedServicesScreen.isServiceApproved(iOSInternalProjectConstants.BUNDLE1_DISC_EX));

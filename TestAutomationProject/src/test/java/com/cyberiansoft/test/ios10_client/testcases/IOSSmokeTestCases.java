@@ -2993,7 +2993,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickSearchSaveButton();
 		teamworkordersscreen.clickOnWO(wonum);
 		
-		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
+ 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
 		ordermonitorscreen.clickServiceStatusCell();		
