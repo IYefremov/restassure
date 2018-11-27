@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.testcases;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleVINHistoryScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
@@ -31,8 +30,8 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.setVIN(testVIN);
 		//AppiumUtils.clickHardwareBackButton();
 		vehicleinfoscreen.clickScreenForwardButton();
-		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
-		vehicleVINHistoryScreen.clickBackButton();
+		//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
+		//vehicleVINHistoryScreen.clickBackButton();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.selectServices(services);
@@ -40,7 +39,8 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		VNextWorkOrdersMenuScreen menuscreen = workordersscreen.clickOnWorkOrderByNumber(wonumber);
 		vehicleinfoscreen = menuscreen.clickEditWorkOrderMenuItem();
-		vehicleinfoscreen.swipeScreenLeft();
+		vehicleinfoscreen.clickScreenForwardButton();
+		//vehicleinfoscreen.swipeScreenLeft();
 		servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String servicename : services)

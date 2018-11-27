@@ -272,6 +272,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
 			vehicleVINHistoryScreen.clickBackButton();
 			vehicleinfoscreen.swipeScreenLeft();
+			vehicleinfoscreen.swipeScreenLeft();
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 			servicesscreen.switchToAvalableServicesView();
 			servicesscreen.selectService(serviceName);
@@ -328,6 +329,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleinfoscreen.clickScreenForwardButton();
 			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
 			vehicleVINHistoryScreen.clickBackButton();
+			vehicleinfoscreen.swipeScreenLeft();
 			vehicleinfoscreen.swipeScreenLeft();
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 			servicesscreen.selectService(serviceName);

@@ -135,6 +135,8 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	
 	public void clickInspectionApproveButton() {
 		wait.until(ExpectedConditions.visibilityOf(approveinspectionicon));
+		new WebDriverWait(driver, 30)
+				.until(ExpectedConditions.elementToBeClickable(approveinspectionicon));
 		approveinspectionicon.click();
 	}
 	

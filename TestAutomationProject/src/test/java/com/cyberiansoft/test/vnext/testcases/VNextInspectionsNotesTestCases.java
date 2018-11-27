@@ -566,7 +566,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			description = "Create Inspection with money service image notes")
 	public void testCreateInspectionWithMoneyServiceImageNotes() {
 		
-		final String[] servicestoadd = { "Dent Repair", "Aluminum Upcharge" };
+		final String[] servicestoadd = { "Dent Repair", "Facility Fee" };
 		final int addedpictures = 1;
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -613,7 +613,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 			description = "Create Inspection with matrix services image notes")
 	public void testCreateInspectionWithMatrixServicesImageNotes() {
 		
-		final String matrixservice = "Test Matrix Service";
+		final String matrixservice = "Hail Repair";
 		final String pricematrix = "State Farm";
 		final String[] vehiclepartnames = { "Hood", "Roof" };
 		final String[] vehiclepartsizes = { "Dime", "Dime" };	

@@ -37,7 +37,7 @@ import java.util.List;
 
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
-	final String[] servicesselect = { "Dent Repair", "Double Panel" };
+	final String[] servicesselect = { "Dent Repair", "Prior Damage" };
 	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 	final String testVIN = "1FMCU0DG4BK830800";
 	
@@ -428,7 +428,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Verify default price for service is shown correctly")
 	public void testVerifyDefaultPriceForServiceIsShownCorrectly() { 
 		
-		final String[] servicestoselect = { "Aluminum Upcharge", "Bumper Repair", "Double Panel", "R&I - Sunroof" };
+		final String[] servicestoselect = { "Facility Fee", "Bumper Repair", "Tax", "Dent Repair" };
 		final String[] servicesprices = { "20.000%", "$20.00", "25.000%", "$0.00" };
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -489,9 +489,9 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Edit inspection services")
 	public void testEditInspectionServices() {
 		
-		final String[] secondservices = { "Bumper Repair", "PART - Hood" }; 
+		final String[] secondservices = { "Dent Repair", "Scratch" };
 		final String[] secondservicesprices = { "20", "222" }; 
-		final String[] thirdservices = { "Double Panel", "Large Size Dent" };
+		final String[] thirdservices = { "Prior Damage", "Bumper Repair" };
 		final String[] thirdservicesprices = { "10", "0" };
 	
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -525,10 +525,10 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 
 		selectedServicesScreen.setServiceAmountValue(thirdservices[0], "5");
 
-		selectedServicesScreen.setServiceAmountValue(secondservices[1], "84.55");
-		selectedServicesScreen.setServiceQuantityValue(secondservices[1], "9.15");
+		selectedServicesScreen.setServiceAmountValue(thirdservices[1], "84.55");
+		selectedServicesScreen.setServiceQuantityValue(thirdservices[1], "9.15");
 		
-		Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), "$812.31");
+		Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), "$1000.63");
 		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
 		homescreen = inspectionsscreen.clickBackButton();
 	}
@@ -774,7 +774,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 	public void testEditServicePricePercentage() {
 		
 		final String moneyservice = "Dent Repair";
-		final String percentageservice = "Aluminum Upcharge";
+		final String percentageservice = "Facility Fee";
 		final String quantitylastdigit = "8";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -908,7 +908,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		final String moneyservice1 = "Dent Repair";
 		final String moneyservice2 = "Bumper Repair";
-		final String percentageservice = "Aluminum Upcharge";
+		final String percentageservice = "Facility Fee";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -941,7 +941,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Inspection total price should change when uselect some of the selected service on Services screen")
 	public void testInspectionTotalPriceShouldChangeWhenUselectSomeOfTheSelectedServiceOnServicesScreen() { 
 		
-		final String[] servicestoselect = { "Bumper Repair", "R&I - Sunroof" };
+		final String[] servicestoselect = { "Bumper Repair", "Dent Repair" };
 		final String[] servicesprices = { "10", "10" };
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -969,7 +969,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Services aren't became selected if user unselect them before clicking back button on Select Services screen")
 	public void testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen() { 
 		
-		final String[] servicestoselect = { "Bumper Repair", "R&I - Sunroof" };
+		final String[] servicestoselect = { "Bumper Repair", "Dent Repair" };
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -1032,12 +1032,12 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			description = "Total is not set to 0 if user adds Matrix Additional service with negative percentage service")
 	public void testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService() {
 		
-		final String matrixservice = "Test Matrix Service";
+		final String matrixservice = "Hail Repair";
 		final String pricematrix = "State Farm" ;
 		final String vehiclepartname = "Hood";
 		final String vehiclepartsize = "Dime";	
 		final String vehiclepartseverity = "Light 6 to 15";	
-		final String additionalservicename = "Aluminum Upcharge";	
+		final String additionalservicename = "Aluminum Upcharge";
 		final String additionalservicenprice = "-25";
 		
 		final String inspectiontotalprice = "$93.75";
@@ -1148,7 +1148,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		final int fakeimagescount = 50;
 		final String imagesummaryvalue = "+47";
-		final String[] services = { "Bumper Repair", "Facility Fee", "Aluminum Upcharge" };
+		final String[] services = { "Bumper Repair", "Facility Fee", "Scratch" };
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		AppiumUtils.setNetworkOff();
