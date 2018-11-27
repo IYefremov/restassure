@@ -4,7 +4,7 @@
   <parameter name="selenium.port" value="3737" />
   <parameter name="selenium.browser" value="chrome" />
   <parameter name="device.platform" value="android"  />
-  <parameter name="device.lecense" value="Automation_android_emulator2"  />
+  <parameter name="device.lecense" value="Automation_android_emulator3"  />
   <parameter name="appium.path" value="D:\npm\node_modules\appium\build\lib\main.js"  />
   <listeners>
 		<!--  <listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>-->
