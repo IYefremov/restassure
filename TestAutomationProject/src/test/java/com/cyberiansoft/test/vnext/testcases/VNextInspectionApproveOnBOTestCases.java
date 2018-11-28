@@ -45,7 +45,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		
 		//final String percservices = "Aluminum Upcharge"; 
 		final String moneyservices = "Dent Repair"; 
-		final String matrixservice = "Test Matrix Service";
+		final String matrixservice = "Hail Repair";
 		final String matrixsubservice = "State Farm";
 		final String moneyserviceprice = "58";
 		final String moneyservicequant = "1";

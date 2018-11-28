@@ -1,20 +1,17 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 
 public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 	
@@ -48,15 +45,15 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.setVIN(testVIN);
 		final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
 		
-		vehicleinfoscreen.changeScreen("Visual");
-		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		//vehicleinfoscreen.changeScreen("Visual");
+		//VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		vehicleinfoscreen.changeScreen("Services");
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		inspservicesscreen.selectService("Facility Fee");
 		inspservicesscreen.selectService("Other");
 		inspservicesscreen.clickScreenBackButton();
-		visualscreen = new VNextVisualScreen(appiumdriver);
-		visualscreen.clickScreenForwardButton();
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);;
+		claiminfoscreen.clickScreenForwardButton();
 		inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected("Facility Fee"));
@@ -73,7 +70,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), testVIN);
 		vehicleinfoscreen.changeScreen("Claim");
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
 		claiminfoscreen.changeScreen("Services");
 		inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
@@ -120,7 +117,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		claiminfoscreen.clickScreenForwardButton();
-		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		/*VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
 		for (int i = 0; i < damageTypes.length; i++) {
 			visualscreen.selectDefaultDamage(damageTypes[i]);
 			if (i == 0)
@@ -131,7 +128,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		}
 		Assert.assertEquals(visualscreen.getImageMarkers().size(), damageTypes.length);
 		
-		vehicleinfoscreen.clickScreenForwardButton();
+		vehicleinfoscreen.clickScreenForwardButton();*/
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		/*for (String selectedService : selectedServices)

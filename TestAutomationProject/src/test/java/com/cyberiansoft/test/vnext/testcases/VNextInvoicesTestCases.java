@@ -333,7 +333,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 			description = "Verify Invoice can be created from WO Wizard")
 	public void testVerifyInvoiceCanBeCreatedFromWOWizard() {
 		final String VIN = "19UUA66278A050105";
-		final String percservices = "Large Vehicle Upcharge"; 
+		final String percservices = "Facility Fee";
 		final String moneyservices = "Bumper Repair"; 		
 		final String ponumber = "123po";
 		
@@ -343,6 +343,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		vehicleinfoscreen.clickScreenForwardButton();
 		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
 		vehicleVINHistoryScreen.clickBackButton();
+		vehicleinfoscreen.swipeScreenLeft();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.selectService(moneyservices);
@@ -364,7 +365,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 			description = "Verify Invoice can be created from WO menu")
 	public void testVerifyInvoiceCanBeCreatedFromWOMenu() {
 		final String VIN = "19UUA66278A050105";
-		final String percservices = "Large Vehicle Upcharge"; 
+		final String percservices = "Facility Fee";
 		final String moneyservices = "Bumper Repair"; 		
 		final String ponumber = "123po";
 		
@@ -375,6 +376,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
 		vehicleVINHistoryScreen.clickBackButton();
 		final String wonumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.swipeScreenLeft();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		servicesscreen.selectService(moneyservices);

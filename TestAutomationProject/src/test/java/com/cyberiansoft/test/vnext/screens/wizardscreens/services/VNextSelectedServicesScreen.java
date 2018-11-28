@@ -127,6 +127,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         if (servicecell != null) {
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
+            BaseUtils.waitABit(1000);
             servicecell = getSelectedServiceCell(serviceName);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 tap(servicecell);
