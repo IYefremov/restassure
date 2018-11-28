@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -80,22 +78,42 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//table[@id='roTable']//th/div")
     private List<WebElement> tableHeaderRepeater;
 
+    @FindBy(xpath = ".//div[@class='intercom-launcher-close-icon']")
+    private WebElement intercomClosed;
+
+    @FindBy(id = "footer")
+    private WebElement footer;
+
+    @FindBy(xpath = "//a[@data-bind='click: showTermsAndConditions']")
+    private WebElement termsAndConditions;
+
+    @FindBy(xpath = "//a[@data-bind='click: showPrivacyPolicy']")
+    private WebElement privacyPolicy;
+
     public VNextBORepairOrdersWebPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//		new WebDriverWait(driver, 30)
-//		  .until(ExpectedConditions.visibilityOf(reapiroderstable));
     }
 
-    public boolean areTableHeaderTitlesDisplayed(List<String> titles, List<String> titlesRepeater) {
+    public boolean areTableHeaderTitlesDisplayed(List<String> titles, List<String> repeaterTitles) {
         List<String> extracted = new ArrayList<>();
+        List<String> copy = new ArrayList<>();
         waitShort
                 .until(ExpectedConditions.visibilityOfAllElements(tableHeader))
                 .forEach((title) -> extracted.add(title.getText()));
-        tableHeaderRepeater.forEach(title -> extracted.add(title.getText()));
-        extracted.forEach(System.out::println);
-        return titles.containsAll(titlesRepeater);
+
+        final String[] strings = extracted.get(3).split("\n");
+        extracted.remove(3);
+
+        for (int i = 0; i < titles.size(); i++) {
+            System.out.println(extracted.get(i));
+            System.out.println(titles.get(i));
+            System.out.println(extracted.get(i).equals(titles.get(i)));
+            System.out.println("&&&&&&&&&&&&\n");
+        }
+
+        return extracted.containsAll(titles) && Arrays.asList(strings).containsAll(repeaterTitles);
     }
 
     public VNextBORepairOrdersWebPage setLocation(String location) {
@@ -169,6 +187,61 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return wait.until(ExpectedConditions.visibilityOf(departmentsWideTab)).isDisplayed();
     }
 
+//    public boolean isIntercomLauncherDisplayed() {
+//        try {
+//            wait.until(ExpectedConditions.elementToBeClickable(intercomClosed));
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
+
+    public boolean isFooterDisplayed() {
+        return wait.until(ExpectedConditions.visibilityOf(footer)).isDisplayed();
+    }
+
+    public boolean footerContains(String text) {
+        return footerContains(footer, text);
+    }
+
+    public boolean isTermsAndConditionsLinkDisplayed() {
+        return footerContains(termsAndConditions, "Terms and Conditions");
+    }
+
+    public boolean isPrivacyPolicyLinkDisplayed() {
+        return footerContains(privacyPolicy, "Privacy Policy");
+    }
+
+    public boolean footerContains(WebElement element, String text) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element.getText().contains(text);
+    }
+
+    public VNextBOTermsAndConditionsDialog clickTermsAndConditionsLink() {
+        wait.until(ExpectedConditions.visibilityOf(termsAndConditions));
+        scrollToElement(termsAndConditions);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(termsAndConditions)).click();
+        } catch (WebDriverException e) {
+            waitABit(1000);
+            clickWithJS(termsAndConditions);
+        }
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBOTermsAndConditionsDialog.class);
+    }
+
+    public VNextBOPrivacyPolicyDialog clickPrivacyPolicyLink() {
+        wait.until(ExpectedConditions.visibilityOf(privacyPolicy));
+        scrollToElement(privacyPolicy);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(privacyPolicy)).click();
+        } catch (WebDriverException e) {
+            waitABit(1000);
+            clickWithJS(privacyPolicy);
+        }
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBOPrivacyPolicyDialog.class);
+    }
 
     private void makeTabActive(WebElement tab, WebElement tabActive) {
         try {

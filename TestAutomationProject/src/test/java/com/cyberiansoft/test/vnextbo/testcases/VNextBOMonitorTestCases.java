@@ -78,18 +78,62 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 //        Assert.assertTrue(repairOrdersPage.isDepartmentsTabDisplayed(),
 //                "The department tab isn't displayed");
 
-        Assert.assertTrue(repairOrdersPage.isDepartmentDropdownDisplayed(), "The department dropdown is not displayed");
+        Assert.assertTrue(repairOrdersPage.isDepartmentDropdownDisplayed(),
+                "The department dropdown is not displayed");
 
         repairOrdersPage.clickPhasesWide();
-        Assert.assertTrue(repairOrdersPage.isPhasesDropdownDisplayed(), "The phases dropdown is not displayed");
+        Assert.assertTrue(repairOrdersPage.isPhasesDropdownDisplayed(),
+                "The phases dropdown is not displayed");
 
 //        repairOrdersPage.makePhasesTabActive();
 //        Assert.assertTrue(repairOrdersPage.isPhasesTabDisplayed(),
 //                "The phases tab isn't displayed");
 
-        Assert.assertTrue(repairOrdersPage.isSearchInputFieldDisplayed(), "The search input field isn't displayed");
-        Assert.assertTrue(repairOrdersPage.isAdvancedSearchCaretDisplayed(), "The advanced search caret isn't displayed");
+        Assert.assertTrue(repairOrdersPage.isSearchInputFieldDisplayed(),
+                "The search input field isn't displayed");
+        Assert.assertTrue(repairOrdersPage.isAdvancedSearchCaretDisplayed(),
+                "The advanced search caret isn't displayed");
         Assert.assertTrue(repairOrdersPage.areTableHeaderTitlesDisplayed(data.getTitles(), data.getTitlesRepeater()),
                 "The table header titles aren't displayed");
+//        Assert.assertTrue(repairOrdersPage.isIntercomLauncherDisplayed(),
+//                "The Intercom launcher is not displayed");
+        Assert.assertTrue(repairOrdersPage.isFooterDisplayed(),
+                "The footer is not displayed");
+        Assert.assertTrue(repairOrdersPage.footerContains(data.getCopyright()),
+                "The footer doesn't contain text " + data.getCopyright());
+        Assert.assertTrue(repairOrdersPage.footerContains(data.getAMT()),
+                "The footer doesn't contain text " + data.getAMT());
+        Assert.assertTrue(repairOrdersPage.isTermsAndConditionsLinkDisplayed(),
+                "The footer doesn't contain Terms and Conditions link");
+        Assert.assertTrue(repairOrdersPage.isPrivacyPolicyLinkDisplayed(),
+                "The footer doesn't contain Privacy Policy link");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanOpenAndCloseTermsAndConditions(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickTermsAndConditionsLink()
+                .scrollTermsAndConditionsDown()
+                .rejectTermsAndConditions()
+                .clickTermsAndConditionsLink()
+                .acceptTermsAndConditions();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanOpenAndClosePrivacyPolicy(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickPrivacyPolicyLink()
+                .scrollPrivacyPolicyDown()
+                .rejectPrivacyPolicy()
+                .clickPrivacyPolicyLink()
+                .acceptPrivacyPolicy();
     }
 }

@@ -8,19 +8,34 @@
         "Order / Type / Department",
         "Customer / Vehicle / VIN#",
         "Stock# / RO# / PO# / Invoice",
-        "Order Amount",
-        " Vendor Amount",
         "Amount",
         "Start Date / Target Date",
         "Active Phase / Days in Phase",
         "Completed (%)",
         "Other"
       ],
-
       "titlesRepeater": [
         "Order Amount",
-        " Vendor Amount"
-      ]
+        "Vendor Amount"
+      ],
+      "copyright": "© Copyright",
+      "AMT": "AutoMobile Technologies, Inc."
+    }
+  ],
+
+  "verifyUserCanOpenAndCloseTermsAndConditions": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditions.01",
+      "description": "Test Case 81751:Verify user can open and close \"Terms&Conditions\"",
+      "location": "Best Location"
+    }
+  ],
+
+  "verifyUserCanOpenAndClosePrivacyPolicy": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicy.01",
+      "description": "Test Case 81752:Verify user can open and close \"Privacy Policy\"",
+      "location": "Best Location"
     }
   ]
 }

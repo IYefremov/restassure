@@ -10,6 +10,12 @@ public class VNextBOMonitorData  {
     @JsonProperty("location")
     private String location;
 
+    @JsonProperty("copyright")
+    private String copyright;
+
+    @JsonProperty("AMT")
+    private String AMT;
+
     @JsonProperty("titles")
     private String[] titles;
 
@@ -18,6 +24,14 @@ public class VNextBOMonitorData  {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public String getAMT() {
+        return AMT;
     }
 
     public List<String> getTitles() {
