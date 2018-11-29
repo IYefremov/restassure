@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.HailMatrixService;
 import com.cyberiansoft.test.dataclasses.InspectionData;
@@ -9,11 +10,14 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import io.appium.java_client.MobileElement;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -402,5 +406,129 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
         inspectionscreen.clickBackButton();
+    }
+
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen(String rowID,
+                                                                                      String description, JSONObject testData) {
+
+        final String selectdamage = "Detail";
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<ServiceData> moneyServices = inspdata.getMoneyServicesList();
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
+        VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        inspinfoscreen.setVIN(inspdata.getVinNumber());
+        inspinfoscreen.swipeScreenLeft();
+
+        inspinfoscreen.swipeScreenLeft();
+        VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+        //visualscreen.clickAddServiceButton();
+        visualscreen.selectDefaultDamage(selectdamage);
+        visualscreen.clickCarImageACoupleTimes(moneyServices.size());
+        BaseUtils.waitABit(1000);
+        int i = 0;
+
+        for (ServiceData moneyService : moneyServices) {
+            List<MobileElement> damagemarkers =  visualscreen.getImageMarkers();
+            VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker(damagemarkers.get(i));
+            servicedetailsscreen.setServiceAmountValue(moneyService.getServicePrice());
+            servicedetailsscreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+            servicedetailsscreen.clickServiceDetailsDoneButton();
+            visualscreen = new VNextVisualScreen(appiumdriver);
+            BaseUtils.waitABit(1000);
+            i++;
+        }
+        visualscreen.clickDamageCancelEditingButton();
+        Assert.assertEquals(visualscreen.getInspectionTotalPriceValue(), inspdata.getInspectionPrice());
+        inspectionsscreen = visualscreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsscreen.getFirstInspectionPrice(), inspdata.getInspectionPrice());
+        inspectionsscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen(String rowID,
+                                                                                            String description, JSONObject testData) {
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        final String panelName = "Detail";
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
+        VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        inspinfoscreen.setVIN(inspdata.getVinNumber());
+        inspinfoscreen.changeScreen("Visual");
+
+        VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+        visualscreen.clickAddServiceButton();
+        visualscreen.clickDefaultDamageType(inspdata.getMoneyServiceName());
+        visualscreen.clickCarImage();
+        BaseUtils.waitABit(1000);
+        VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
+        servicedetailsscreen.setServiceAmountValue(inspdata.getMoneyServicePrice());
+        servicedetailsscreen.setServiceQuantityValue(inspdata.getMoneyServiceQuantity());
+        servicedetailsscreen.clickServiceDetailsDoneButton();
+        visualscreen = new VNextVisualScreen(appiumdriver);
+
+        VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
+        selectdamagesscreen.selectAllDamagesTab();
+        VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(panelName);
+        visualscreen = visualservicesscreen.selectCustomService(inspdata.getPercentageServiceName());
+        BaseUtils.waitABit(1000);
+        visualscreen.clickCarImageSecondTime();
+
+        visualscreen.clickDamageCancelEditingButton();
+        Assert.assertEquals(visualscreen.getInspectionTotalPriceValue(), inspdata.getInspectionPrice());
+        inspectionsscreen = visualscreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsscreen.getFirstInspectionPrice(), inspdata.getInspectionPrice());
+        inspectionsscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testCreateInspectionWithNegativePrice(String rowID,
+                                                      String description, JSONObject testData) {
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+        vehicleinfoscreen.swipeScreenLeft();
+        vehicleinfoscreen.swipeScreenLeft();
+        VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+        visualscreen.clickAddServiceButton();
+        visualscreen.clickDefaultDamageType(inspdata.getMoneyServiceName());
+        visualscreen.clickCarImage();
+        BaseUtils.waitABit(1000);
+        VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
+        servicedetailsscreen.setServiceAmountValue(inspdata.getMoneyServicePrice());
+        servicedetailsscreen.clickServiceDetailsDoneButton();
+        visualscreen = new VNextVisualScreen(appiumdriver);
+
+        servicedetailsscreen = visualscreen.clickCarImageMarker();
+        servicedetailsscreen.clickServiceAmountField();
+        Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), inspdata.getMoneyServicePrice());
+        servicedetailsscreen.clickServiceDetailsDoneButton();
+        visualscreen = new VNextVisualScreen(appiumdriver);
+
+        visualscreen.clickDamageCancelEditingButton();
+        visualscreen.cancelInspection();
+        inspectionsscreen.clickBackButton();
     }
 }
