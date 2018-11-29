@@ -3,8 +3,10 @@
   <parameter name="selenium.port" value="3737" />
   <parameter name="selenium.browser" value="chrome" />
   <parameter name="device.platform" value="android"  />
+    <parameter name="device.lecense" value="OKramar_android2"  />
+    <parameter name="appium.path" value="c:\Users\Alex\AppData\Roaming\npm\node_modules\appium\build\lib\main.js"  />
   <listeners>
-      <listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
+      <listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListenerJS"/>
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
@@ -26,12 +28,9 @@
       	  <include name="testAddOneServiceToAlreadySelectedServicesWhenInspectionIsEdited" />
       	  <include name="testAddTheSameServiceMultipleTimes" />
       	  <include name="testEditInspectionServices" />
-      	  <include name="testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen" />
-          <include name="testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen" />
           <include name="testDeleteServiceFromServicesScreen" />
           <include name="testInspectionTotalPriceShouldChangeWhenUselectSomeOfTheSelectedServiceOnServicesScreen" />
           <include name="testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen" />
-          <include name="testCreateInspectionWithNegativePrice" />
           <include name="testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService" />
           <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
           <include name="testVerifySendingMoreThen100MessagesAfterReconnectInternet" />
@@ -43,8 +42,7 @@
       	  <include name="testSaveTextNoteOnTappingBackButtonEstimationLevel" />
       	  <include name="testAddSeveralQuickNotesForServiceInTheList" />
       	  <include name="testClearTextNotesForServiceInTheList" /> 
-      	  <include name="testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel" /> 	
-      	  <include name="testCreateInspectionWithBreakageServiceImageNotes" />
+      	  <include name="testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel" />
       	  <include name="testCreateInspectionWithMoneyServiceImageNotes" />
           <include name="testCreateInspectionWithMatrixServicesImageNotes" />  
       	</methods>
