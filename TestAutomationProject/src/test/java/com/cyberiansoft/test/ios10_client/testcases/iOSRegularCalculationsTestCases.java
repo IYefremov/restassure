@@ -2292,7 +2292,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();		
 	}
 	
-	@Test(testName = "Test Case 35030:WO: Regular - Verify that for bundle items price policy is applied", 
+	@Test(testName = "Test Case 35030:WO: Regular - Verify that for bundle items price policy is applied",
 			description = "WO: Regular - Verify that for bundle items price policy is applied")
 	public void testWOVerifyThatForBundleItemsPricePolicyIsApplied() {
 		
@@ -3153,8 +3153,8 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		EmailScreen mailscreen = myinspectionsscreen.clickSendEmail();
 
 		NadaEMailService nada = new NadaEMailService();
-		nada.setEmailId("test.cyberiansoft@amail.club");
-		mailscreen.sendInvoiceOnEmailAddress("test.cyberiansoft@amail.club");
+		nada.setEmailId("test.cyberiansoft@getnada.com");
+		mailscreen.sendInvoiceOnEmailAddress("test.cyberiansoft@getnada.com");
 		myinspectionsscreen.clickHomeButton();
         DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		final String inspreportfilenname = inspnumber + ".pdf";

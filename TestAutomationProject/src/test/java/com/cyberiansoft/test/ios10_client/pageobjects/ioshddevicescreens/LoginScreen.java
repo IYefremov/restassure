@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginScreen extends iOSHDBaseScreen {
 	
 	@iOSFindBy(accessibility = "CodeField1")
@@ -45,7 +47,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 		registerbtn.click();
 		//registerbtn.click();
 		
-		//appiumdriver.manage().timeouts().implicitlyWait(60*9, TimeUnit.SECONDS);
+		appiumdriver.manage().timeouts().implicitlyWait(60*9, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 600);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("UpdateMainDatabaseButton")));
 		appiumdriver.findElementByAccessibilityId("UpdateMainDatabaseButton");

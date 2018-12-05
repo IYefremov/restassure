@@ -2731,7 +2731,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		vehiclescreen.setVINFieldValue(VIN);
 		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.THE_VIN_IS_INCORRECT);
+		Assert.assertEquals(alertText, AlertsCaptions.THE_VIN_IS_INCORRECT_HD);
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.clickSave();
