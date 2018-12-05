@@ -5,6 +5,7 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -52,7 +53,11 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	public void setClaimNumber(String claimnum) {
 		tap(claimfld);
 		appiumdriver.getKeyboard().sendKeys(claimnum);
-		appiumdriver.hideKeyboard();
+		try {
+			appiumdriver.hideKeyboard();
+		} catch (WebDriverException e) {
+			//todo:
+		}
 	}
 	
 	public String getClaimNumber() {
@@ -70,7 +75,11 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 		VNextBaseScreenWithListSelection listscreen = new VNextBaseScreenWithListSelection(appiumdriver);
 		listscreen.selectListItem(insuranceCompany);*/
 		insurancecompanyfld.sendKeys(insuranceCompany);
-		appiumdriver.hideKeyboard();
+		try {
+			appiumdriver.hideKeyboard();
+		} catch (WebDriverException e) {
+			//todo:
+		}
 	}
 	
 	public String getInsuranceCompany() {

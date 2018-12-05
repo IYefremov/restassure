@@ -526,7 +526,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		webdriver.quit();
 	}
 	
-	@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet", 
+	@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet",
 			description = "Verify sending >100 messages after reconnect Internet")
 	public void testVerifySendingMoreThen100MessagesAfterReconnectInternet() {
 
