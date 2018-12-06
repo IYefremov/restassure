@@ -2075,10 +2075,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean checkPresenceOfServiceAdvisersByFilter(String filter) {
         wait.until(ExpectedConditions.visibilityOf(addsrvcustomercmb.getWrappedElement())).clear();
         addsrvcustomercmb.sendKeys(filter);
-        int index = RandomUtils.nextInt(0, 5);
+//        int index = RandomUtils.nextInt(0, 5);
+        int index = RandomUtils.nextInt(0, clients.size());
         try {
             wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
-                    By.xpath("//div[@id='Card_ddlClients_DropDown']//li"), 5));
+                    By.xpath("//div[@id='Card_ddlClients_DropDown']//li"), 1));
         } catch (TimeoutException e) {
             Assert.fail("The drop down list has not been displayed.", e);
         }
@@ -2094,7 +2095,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		}
     }
 
-	public String getServiceAdviserName() {
+	public String getFirstServiceAdviserName() {
 		getCustomerEditButton().click();
         try {
             wait.until(ExpectedConditions.elementToBeClickable(addsrvcustomercmb.getWrappedElement())).click();

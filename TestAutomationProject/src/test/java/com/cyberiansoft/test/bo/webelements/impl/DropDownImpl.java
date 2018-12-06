@@ -18,8 +18,12 @@ public class DropDownImpl extends AbstractWebElement implements DropDown {
 	@Override
     public void selectByVisibleText(String value) {
 		List<WebElement> options = wrappedElement.findElements(By.tagName("li"));
-        new WebDriverWait(DriverBuilder.getInstance().getDriver(), 20)
-                .until(ExpectedConditions.visibilityOfAllElements(options));
-		options.stream().filter(o -> o.getText().equals(value)).findFirst().ifPresent(WebElement::click);
+        try {
+            new WebDriverWait(DriverBuilder.getInstance().getDriver(), 20)
+                    .until(ExpectedConditions.visibilityOfAllElements(options));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        options.stream().filter(o -> o.getText().equals(value)).findFirst().ifPresent(WebElement::click);
     }
 }

@@ -2057,7 +2057,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsWebPage.getServiceAdviserName(), data.getCustomer());
+		Assert.assertEquals(serviceRequestsWebPage.getFirstServiceAdviserName(), data.getCustomer());
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

@@ -230,11 +230,13 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void clickNoneRadioButton() {
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_0")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_0")))).click();
 	}
 
 	public void clickWarningOnlyRadioButton() {
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_1")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_1")))).click();
 	}
 
 	public void selectOption(String optionName) {

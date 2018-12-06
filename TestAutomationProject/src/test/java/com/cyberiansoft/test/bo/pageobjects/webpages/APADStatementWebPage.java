@@ -147,15 +147,15 @@ public class APADStatementWebPage extends BaseWebPage {
     }
 
     private WebElement getDefaultParameter(String parameter, String defaultValue) {
-        return driver.findElement(By.xpath("//div[text()='"
-                + parameter + "']/../following-sibling::td/div[text()='(" + defaultValue + ")']"));
+        return wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[text()='"
+                + parameter + "']/../following-sibling::td/div[text()='(" + defaultValue + ")']"))));
     }
 
     private WebElement getParameter(String value) {
-        return driver.findElement(By.xpath("//div[text()='" + value + "']"));
+        return wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[text()='" + value + "']"))));
     }
 
     private WebElement getReportColumn(String column) {
-        return driver.findElement(By.xpath("//*[text()='" + column + "']"));
+        return wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[text()='" + column + "']"))));
     }
 }
