@@ -120,12 +120,12 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		vehicleinfoscreen.swipeScreenLeft();
-		//VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		//AppiumUtils.clickHardwareBackButton();
+		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		AppiumUtils.clickHardwareBackButton();
 		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		AppiumUtils.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		VNextAvailableServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.selectService(servicename);
 		vehicleinfoscreen = inspservicesscreen.goBackToInspectionVehicleInfoScreen();
 		AppiumUtils.clickHardwareBackButton();

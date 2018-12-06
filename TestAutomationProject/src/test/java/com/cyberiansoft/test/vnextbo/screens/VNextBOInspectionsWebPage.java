@@ -157,10 +157,11 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 			}
 		}
 		driver.switchTo().window(newwin);
+		driver.findElement(By.xpath("//p/button[@type='submit' and @class='btn icon ok']")).click();
 		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtAreaNotes2"))));
-		driver.findElement(By.name("txtAreaNotes2")).sendKeys(approveNotes);
-		driver.findElement(By.xpath("//div/button[@class='btn icon ok middle' and @value='4']")).click();
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtAreaNotes"))));
+		driver.findElement(By.name("txtAreaNotes")).sendKeys(approveNotes);
+		driver.findElement(By.xpath("//button[@id='btnApprove']")).click();
 		waitABit(5000);
 		driver.close();
 		driver.switchTo().window(parent);
@@ -180,14 +181,15 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 			}
 		}
 		driver.switchTo().window(newwin);
+		driver.findElement(By.xpath("//p/button[@type='submit' and @class='btn icon cancel']")).click();
 		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtAreaNotes2"))));
-		List<WebElement> serviceschkboxes = driver.findElements(By.name("cbService"));
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtDeclineNotes"))));
+		/*List<WebElement> serviceschkboxes = driver.findElements(By.name("cbService"));
 		for (WebElement serviceschkbox : serviceschkboxes)
 			serviceschkbox.click();
-		driver.findElement(By.xpath("//div/button[@class='btn icon cancel middle' and @value='2']")).click();
-		driver.findElement(By.name("txtAreaNotes2")).sendKeys(declineNotes);
-		driver.findElement(By.xpath("//button[@id='btnGeneralApprove']")).click();
+		driver.findElement(By.xpath("//button[@id='btnCancel']")).click();*/
+		driver.findElement(By.name("txtDeclineNotes")).sendKeys(declineNotes);
+		driver.findElement(By.xpath("//button[@class='btn icon cancel' and @id='btnDecline']")).click();
 		waitABit(5000);
 		driver.close();
 		driver.switchTo().window(parent);

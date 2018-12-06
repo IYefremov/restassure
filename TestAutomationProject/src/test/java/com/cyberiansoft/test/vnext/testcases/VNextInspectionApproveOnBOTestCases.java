@@ -157,7 +157,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		insppage.clickInspectionApproveButton();
 		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(webdriver);
 		confirmdialog.clickNoButton();
-		
+		BaseUtils.waitABit(1000);
 		insppage.declineInspection(approveNotes);
 		
 		insppage = leftmenu.selectInspectionsMenu();

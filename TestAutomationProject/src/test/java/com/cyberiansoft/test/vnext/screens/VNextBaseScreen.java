@@ -50,7 +50,11 @@ public class VNextBaseScreen {
 	public void setValue(WebElement element, String value) {
 		element.clear();
 		appiumdriver.getKeyboard().sendKeys(value);
-		appiumdriver.hideKeyboard();
+		try {
+			appiumdriver.hideKeyboard();
+		} catch (WebDriverException e) {
+			//todo:
+		}
 		BaseUtils.waitABit(500);
 	}
 	

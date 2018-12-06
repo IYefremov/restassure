@@ -751,4 +751,16 @@ public class InspectionsWebPage extends WebPageWithFilter {
     public String getInspectionsWindowHandle() {
         return driver.getWindowHandle();
     }
+
+	public InspectionMediaWebPage clickInspectionMediaAction(String inspectionnumber) {
+		String mainWindowHandle = driver.getWindowHandle();
+		clickInspectionSelectExpandableMenu(inspectionnumber, "Media");
+		waitForNewTab();
+		for (String activeHandle : driver.getWindowHandles()) {
+			if (!activeHandle.equals(mainWindowHandle)) {
+				driver.switchTo().window(activeHandle);
+			}
+		}
+		return PageFactory.initElements(driver, InspectionMediaWebPage.class);
+	}
 }

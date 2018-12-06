@@ -158,5 +158,47 @@
         }]},
       "inspPrice": "$2287.50"
     }
+  ],
+
+  "testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen": [
+    {
+      "rowID": "testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen.01",
+      "description": "Test Case 48947:vNext - Verify Total is correct when adding several money services on Visuals screen",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "moneyServices": [{"serviceName": "Dent Repair", "servicePrice": "20.00", "serviceQuantity": "10.58"
+      }, {"serviceName": "Dent Repair", "servicePrice": "647.99", "serviceQuantity": "6"
+      }],
+      "inspPrice": "$4099.54"
+    }
+  ],
+
+  "testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen": [
+    {
+      "rowID": "testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen.01",
+      "description": "Test Case 48955:vNext - Verify Total is correct when adding money and percentage services on Visuals screen",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "moneyService": {"serviceName": "Miscellanious", "servicePrice": "506.35", "serviceQuantity": "5.00"
+      },
+      "percentageService": {"serviceName": "APercent_QualityControl"
+      },
+      "inspPrice": "$2798.98"
+    }
+  ],
+
+  "testCreateInspectionWithNegativePrice": [
+    {
+      "rowID": "testCreateInspectionWithNegativePrice.01",
+      "description": "Test Case:vNext Create inspection with negative price",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "moneyService": {"serviceName": "Detail", "servicePrice": "-9"
+      },
+      "inspPrice": "$8.44"
+    }
   ]
 }

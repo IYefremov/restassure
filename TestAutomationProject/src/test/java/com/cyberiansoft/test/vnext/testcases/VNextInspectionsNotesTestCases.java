@@ -7,10 +7,7 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -499,64 +496,6 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.cancelInspection();
 		homescreen = inspectionsscreen.clickBackButton();
-	}
-	
-	@Test(testName= "Test Case 55441:vNext mobile: Create Inspection with breakage service image notes, "
-			+ "Test Case 55444:vNext: verify displaying image notes for the Inspection Visual Breakage service", 
-			description = "Create Inspection with breakage service image notes, "
-					+ "verify displaying image notes for the Inspection Visual Breakage service")
-	public void testCreateInspectionWithBreakageServiceImageNotes() {
-		
-		final String selectdamage = "Price Adjustment";
-		final String servicepercentage = "Corrosion Protection";
-		final int addedpictures = 1;
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		final String inspnumber = inspectionsscreen.getFirstInspectionNumber();
-		VNextInspectionsMenuScreen inspmenu = inspectionsscreen.clickOnInspectionByInspNumber(inspnumber);
-		VNextVehicleInfoScreen vehicleinfoscreen =  inspmenu.clickEditInspectionMenuItem();
-		vehicleinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
-		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
-		vehicleinfoscreen.swipeScreenLeft();
-		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-		visualscreen.clickAddServiceButton();
-		//VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
-		VNextSelectDamagesScreen selectdamagesscreen = new VNextSelectDamagesScreen(appiumdriver);
-		selectdamagesscreen.selectAllDamagesTab();
-		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
-		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
-		visualscreen.clickCarImage();
-		BaseUtils.waitABit(1000);
-		
-		VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
-		VNextNotesScreen notesscreen = servicedetailsscreen.clickServiceNotesOption();
-		//notesscreen.selectNotesPicturesTab();
-		notesscreen.addFakeImageNote();
-		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
-		notesscreen.clickNotesBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
-		servicedetailsscreen.clickServiceDetailsDoneButton();
-		visualscreen = new VNextVisualScreen(appiumdriver);
-		visualscreen.clickDamageCancelEditingButton();
-		inspectionsscreen = visualscreen.saveInspectionViaMenu();		
-		homescreen = inspectionsscreen.clickBackButton();
-		
-		BaseUtils.waitABit(30000);
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
-		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(deviceuser, devicepsw);
-		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
-				VNexBOLeftMenuPanel.class);
-		VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
-		inspectionspage.selectInspectionInTheList(inspnumber);
-		Assert.assertTrue(inspectionspage.isServicePresentForSelectedInspection(servicepercentage));
-		Assert.assertTrue(inspectionspage.isServiceNotesIconDisplayed(servicepercentage));
-		Assert.assertTrue(inspectionspage.isImageExistsForServiceNote(servicepercentage));
-		webdriver.quit();
 	}
 	
 	@Test(testName= "Test Case 55648:vNext mobile: Create Inspection with money service image notes,"

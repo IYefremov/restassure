@@ -6,6 +6,7 @@ public class AlertsCaptions {
 	public static final String ALERT_VIN_REQUIRED = "Warning!\nVIN# is required";
 	public static final String ALERT_MAKE_REQUIRED = "Warning!\nMake is required";
 	public static final String THE_VIN_IS_INCORRECT = "Warning!\nThe VIN# is incorrect.";
+	public static final String THE_VIN_IS_INCORRECT_HD = "The VIN# is incorrect.";
 	public static final String ALERT_ADVISOR_REQUIRED = "Warning!\nAdvisor is required";
 	public static final String ALERT_TOTAL_AMAUNT_NOT_EQUAL100 = "Warning!\nTotal amount is not equal 100%";
 	public static final String ALERT_TOTAL_AMAUNT_NOT_EQUAL = "Warning!\nTotal amount is not equal.";

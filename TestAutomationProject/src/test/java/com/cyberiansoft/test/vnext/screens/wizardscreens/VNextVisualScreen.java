@@ -56,6 +56,7 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 
 	public VNextSelectDamagesScreen clickAddServiceButton() {
 		tap(adddamagesbtn);
+		tap(appiumdriver.findElement(By.xpath("//a[@action='add-other']")));
 		return new VNextSelectDamagesScreen(appiumdriver);
 	}
 	
@@ -80,6 +81,13 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 		tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
 		BaseUtils.waitABit(300);	
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		if (appiumdriver.findElements(By.xpath("//div[@class='car-marker']")).size() < 2) {
+			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+			tch = new TouchAction(appiumdriver);
+			tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
+			BaseUtils.waitABit(300);
+			AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		}
 	}
 	
 	public void clickCarImageACoupleTimes(int touchTimes) {
