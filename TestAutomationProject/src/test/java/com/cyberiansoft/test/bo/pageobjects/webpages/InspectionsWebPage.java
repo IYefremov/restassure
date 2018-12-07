@@ -239,11 +239,13 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public void selectSearchCustomer(String customer) {
-		searchcustomercmb.click();
+		wait.until(ExpectedConditions.elementToBeClickable(searchcustomercmb.getWrappedElement())).click();
 		searchcustomercmb.clearAndType(customer);
 		waitABit(1000);
-		wait.until(ExpectedConditions.visibilityOf(searchcustomerdd.getWrappedElement()));
-		searchcustomerdd.selectByVisibleText(customer);
+		try {
+            wait.until(ExpectedConditions.visibilityOf(searchcustomerdd.getWrappedElement()));
+            searchcustomerdd.selectByVisibleText(customer);
+        } catch (Exception ignored) {}
 	}
 
 	public InspectionsWebPage selectSearchTimeframe(String timeframe) {

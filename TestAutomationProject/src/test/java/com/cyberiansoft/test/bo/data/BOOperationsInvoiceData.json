@@ -71,7 +71,9 @@
     {
       "rowID": "checkOperationInvoiceStatusApproved.01",
       "description": "Test Case 43708:Operation - Invoice: Status - Approved",
-      "poNum": "123"
+      "newStatus": "New",
+      "approvedStatus": "Approved",
+      "allStatus": "All"
     }
   ],
 
@@ -79,7 +81,9 @@
     {
       "rowID": "checkOperationInvoiceStatusExported.01",
       "description": "Test Case 43712:Operation - Invoice: Status - Exported",
-      "poNum": "123"
+      "newStatus": "New",
+      "exportedStatus": "Exported",
+      "allStatus": "All"
     }
   ],
 
@@ -87,7 +91,9 @@
     {
       "rowID": "checkOperationInvoiceStatusVoid.01",
       "description": "Test Case 43713:Operation - Invoice: Status - Void",
-      "poNum": "123"
+      "newStatus": "New",
+      "voidStatus": "Void",
+      "allStatus": "All"
     }
   ],
 
@@ -95,7 +101,9 @@
     {
       "rowID": "checkOperationInvoiceStatusExported.01",
       "description": "Test Case 43710:Operation - Invoice: Status - Export Failed",
-      "poNum": "123"
+      "newStatus": "New",
+      "exportFailedStatus": "Export Failed",
+      "allStatus": "All"
     }
   ],
 
@@ -103,7 +111,9 @@
     {
       "rowID": "checkOperationInvoiceStatusDraft.01",
       "description": "Test Case 43709:Operation - Invoice: Status - Draft",
-      "poNum": "123"
+      "newStatus": "New",
+      "draftStatus": "Draft",
+      "allStatus": "All"
     }
   ],
 

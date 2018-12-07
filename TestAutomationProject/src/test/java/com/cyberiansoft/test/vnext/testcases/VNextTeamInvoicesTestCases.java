@@ -208,7 +208,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_VOID);
 		invoicespage.clickFindButton();
 		
-		Assert.assertTrue(invoicespage.isInvoiceNumberExists(invoicenumber));
+		Assert.assertTrue(invoicespage.isInvoiceDisplayed(invoicenumber));
 		Assert.assertEquals(invoicespage.getInvoiceStatus(invoicenumber), 
 				WebConstants.InvoiceStatuses.INVOICESTATUS_VOID.getName());
 		DriverBuilder.getInstance().getDriver().quit();

@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -156,7 +157,11 @@ public class UsersWebPage extends WebPageWithPagination {
 	public WebElement getTableRowWithActiveUser(String firstname, String lastname) {
 		List<WebElement> rows = getUsersTableRows();
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[3]")).getText().contains(firstname + " " + lastname)) {
+			if (wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//td[3]"))))
+                    .getText()
+                    .contains(firstname + " " + lastname)) {
 				return row;
 			}
 		} 

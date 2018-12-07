@@ -78,10 +78,10 @@
     {
       "rowID": "testMonitorRepairLocationsClientsEdit.01",
       "description": "Test Case 30729:Monitor - Repair Locations: Clients Edit",
-      "repairLocationName": "test_loc",
+      "repairLocationName": "test_loc_automation",
       "repairLocationStatus": "Active",
       "repairLocationTimeZone": "Pacific Standard Time",
-      "repairLocationClient": "005 - Test Company_1WO"
+      "repairLocationClient": "007 - Test Company"
     }
   ],
 

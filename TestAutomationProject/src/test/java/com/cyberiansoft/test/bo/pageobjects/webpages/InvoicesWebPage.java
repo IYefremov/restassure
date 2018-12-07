@@ -307,8 +307,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 
-	public void selectSearchStatus(WebConstants.InvoiceStatuses status) {
+	public InvoicesWebPage selectSearchStatus(WebConstants.InvoiceStatuses status) {
 		selectComboboxValue(searchstatuscmb, searchstatusdd, status.getName());
+		return this;
 	}
 
 	public void setSearchAmountFrom(String amount) {
@@ -324,10 +325,9 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		clearAndType(searchinvoicenofld, invoicenum);
 	}
 
-	public boolean isInvoiceNumberExists(String invoicenum) {
+	public boolean isInvoiceDisplayed(String invoicenum) {
 		// By.xpath(".//tr/td/a[text()='" + invoicenum + "']")
-		boolean exists = invoicestable.getWrappedElement().findElements(By.partialLinkText(invoicenum)).size() > 0;
-		return exists;
+        return invoicestable.getWrappedElement().findElements(By.partialLinkText(invoicenum)).size() > 0;
 	}
 
 	public String getInvoiceStatus(String invoicenumber) {
@@ -619,6 +619,14 @@ public class InvoicesWebPage extends WebPageWithFilter {
         return "";
     }
 
+	public String getFirstInvoiceNameIfDisplayed() {
+	    try {
+            return wait.until(ExpectedConditions.visibilityOf(firstInvoiceName)).getText();
+        } catch (TimeoutException e) {
+	        return "";
+	    }
+    }
+
     public String selectEmailActivityOption() {
         return selectOptionForFirstInvoice(emailActivityOption);
     }
@@ -638,7 +646,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
     public void handlePaymentNote() {
         wait.until(ExpectedConditions.visibilityOf(paymentNote));
         paymentTextField.sendKeys("test");
-        markAsPaidButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(markAsPaidButton)).click();
         driver.switchTo().alert().accept();
         waitForLoading();
         driver.navigate().refresh();
@@ -738,11 +746,10 @@ public class InvoicesWebPage extends WebPageWithFilter {
 //            setAttribute(slideDisplayed, "")
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Mark as Unpaid"))).click();
 			actions.moveToElement(selectButton).click().build().perform();
-		} catch (WebDriverException e) {
-		    e.printStackTrace();
-			return false;
-		}
-		return true;
+            return true;
+        } catch (WebDriverException e) {
+            return false;
+        }
 	}
 
 	public void editVehicleInfo(String editText) {
@@ -935,7 +942,15 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		wait.until(ExpectedConditions
 				.elementToBeClickable((By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlStatus_Input")))).click();
 		wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//li[contains(text(), '" + s + "')]")))).click();
+		waitABit(1000);
 	}
+
+    public InvoicesWebPage findInvoice(WebConstants.TimeFrameValues timeframe, String status) {
+        selectSearchTimeFrame(timeframe);
+        selectSearchStatus(status);
+        clickFindButton();
+        return this;
+    }
 
 	public boolean checkWindowContent(String tab, String... content) {
 		driver.switchTo().window(tab);

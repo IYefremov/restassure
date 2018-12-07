@@ -41,6 +41,27 @@ public class BOOperationsInvoiceData {
     @JsonProperty("dateTo")
     private String dateTo;
 
+    @JsonProperty("newStatus")
+    private String newStatus;
+
+    @JsonProperty("approvedStatus")
+    private String approvedStatus;
+
+    @JsonProperty("allStatus")
+    private String allStatus;
+
+    @JsonProperty("exportedStatus")
+    private String exportedStatus;
+
+    @JsonProperty("voidStatus")
+    private String voidStatus;
+
+    @JsonProperty("draftStatus")
+    private String draftStatus;
+
+    @JsonProperty("exportFailedStatus")
+    private String exportFailedStatus;
+
     public String getCustomer() {
         return customer;
     }
@@ -91,5 +112,33 @@ public class BOOperationsInvoiceData {
 
     public String getDateTo() {
         return dateTo;
+    }
+
+    public String getNewStatus() {
+        return newStatus;
+    }
+
+    public String getApprovedStatus() {
+        return approvedStatus;
+    }
+
+    public String getAllStatus() {
+        return allStatus;
+    }
+
+    public String getExportedStatus() {
+        return exportedStatus;
+    }
+
+    public String getVoidStatus() {
+        return voidStatus;
+    }
+
+    public String getDraftStatus() {
+        return draftStatus;
+    }
+
+    public String getExportFailedStatus() {
+        return exportFailedStatus;
     }
 }

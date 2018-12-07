@@ -1887,7 +1887,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
-		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
+		Assert.assertTrue(invoiceswebpage.isInvoiceDisplayed(invoicenum));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
@@ -6161,7 +6161,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
-		Assert.assertTrue(invoiceswebpage.isInvoiceNumberExists(invoicenum));
+		Assert.assertTrue(invoiceswebpage.isInvoiceDisplayed(invoicenum));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
@@ -6444,7 +6444,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 		invoiceswebpage.archiveInvoiceByNumber(invoicenumber);
-		Assert.assertFalse(invoiceswebpage.isInvoiceNumberExists(invoicenumber));
+		Assert.assertFalse(invoiceswebpage.isInvoiceDisplayed(invoicenumber));
 		webdriver.quit();
 		
 		//Create second WO
