@@ -37,5 +37,93 @@
       "description": "Test Case 81752:Verify user can open and close \"Privacy Policy\"",
       "location": "Best Location"
     }
+  ],
+
+  "verifyUserCanOpenAndCloseIntercom": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseIntercom.01",
+      "description": "Test Case 81753:Verify user can open and close \"Intercom\"",
+      "location": "Best Location"
+    }
+  ],
+
+  "verifyUserCanChangeLocationUsingSearch": [
+    {
+      "rowID": "verifyUserCanChangeLocationUsingSearch.01",
+      "description": "Test Case 81901:Verify user can change location by using \"search\" field",
+      "searchLocation": "Anastasia",
+      "location": "Anastasia_Location"
+    }
+  ],
+
+  "verifyUserCanUsePaging": [
+    {
+      "rowID": "verifyUserCanUsePaging.01",
+      "description": "Test Case 81902:Verify user can use paging",
+      "location": "Best Location"
+    }
+  ],
+
+  "verifyUserCanSearchByVIN": [
+    {
+      "rowID": "verifyUserCanSearchByVIN.01",
+      "description": "Test Case 81905:User can search by VIN",
+      "location": "1111",
+      "vin": "32434234234234"
+    }
+  ],
+
+  "verifyUserCanSearchByOrderNum": [
+    {
+      "rowID": "verifyUserCanSearchByOrderNum.01",
+      "description": "Test Case 81906:User can search by OrderNum",
+      "location": "1111",
+      "orderNumber": "O-000-152292"
+    }
+  ],
+
+  "verifyUserCanSearchByRoNum": [
+    {
+      "rowID": "verifyUserCanSearchByRoNum.01",
+      "description": "Test Case 81908:User can search by RONo",
+      "location": "1111",
+      "roNumber": "O-000-152292"
+    }
+  ],
+
+  "verifyUserCanSearchByFirstName": [
+    {
+      "rowID": "verifyUserCanSearchByFirstName.01",
+      "description": "Test Case 81909:User can search by FirstName",
+      "location": "1111",
+      "firstName": "TestFirstName"
+    }
+  ],
+
+  "verifyUserCanSearchByLastName": [
+    {
+      "rowID": "verifyUserCanSearchByLastName.01",
+      "description": "Test Case 81910:User can search by LastName",
+      "location": "1111",
+      "lastName": "TestSecondName"
+    }
+  ],
+
+  "verifyUserCanSearchByEmail": [
+    {
+      "rowID": "verifyUserCanSearchByEmail.01",
+      "description": "Test Case 82104:User can search by Email",
+      "location": "1111",
+      "email": "test@email.com"
+    }
+  ],
+
+  "verifyUserCanSearchByCompanyName": [
+    {
+      "rowID": "verifyUserCanSearchByCompanyName.01",
+      "description": "Test Case 82105:User can search by CompanyName",
+      "location": "1111",
+      "company": "TestAutomationCompany"
+    }
   ]
 }

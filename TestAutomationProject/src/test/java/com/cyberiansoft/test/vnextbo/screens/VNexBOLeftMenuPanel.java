@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
@@ -41,6 +42,12 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@class='left-menu-btn']")
     private WebElement openedMenuButton;
+
+    @FindBy(id = "menuBtn")
+    private WebElement menuButton;
+
+    @FindBy(xpath = "//div[@class='WFSTACB']//button[text()='SKIP']")
+    private List<WebElement> welcomePopup;
 
     private static String MONITOR_MAINMENU_ITEM = "Monitor";
     private static String OPERATIONS_MAINMENU_ITEM = "Operations";
@@ -123,12 +130,17 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         return mainmenu.findElement(By.xpath(".//div[contains(text(), '" + meinmenu + "')]"));
     }
 
-    public void selectMenuItem(WebElement menuitem, String mainmenuitem) {
-        if (!isMainMenuExpanded(mainmenuitem))
+    private void selectMenuItem(WebElement menuitem, String mainmenuitem) {
+        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
+        if (!menuitem.isDisplayed()) {
             expandMainMenu(mainmenuitem);
-        waitABit(1000);
-        if (!menuitem.isDisplayed())
-            expandMainMenu(mainmenuitem);
-        waitLong.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
+        }
+//        if (!isMainMenuExpanded(mainmenuitem))
+//            expandMainMenu(mainmenuitem);
+//        waitABit(1000);
+//        if (!menuitem.isDisplayed())
+//            expandMainMenu(mainmenuitem);
+//        wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
     }
 }

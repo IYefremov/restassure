@@ -62,14 +62,16 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 		List<WebElement> rows = getUsersTableRows();
 		for (WebElement row : rows) {
             if (
-                    wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath("./td[" +
+                    wait
+                            .ignoring(StaleElementReferenceException.class)
+                            .until(ExpectedConditions.visibilityOf(row.findElement(By.xpath("./td[" +
                             userstable.getTableColumnIndex("Email") + "]"))))
                     .getText()
                     .equals(usermail)) {
 				userrow = row;
 				break;
-			}			
-		} 
+			}
+		}
 		return userrow;
 	}
 

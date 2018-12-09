@@ -136,4 +136,160 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .clickPrivacyPolicyLink()
                 .acceptPrivacyPolicy();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .openIntercom()
+                .closeIntercom();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeLocationUsingSearch(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        Assert.assertTrue(repairOrdersPage.isLocationSearched(data.getSearchLocation()),
+                "The location is not searched");
+        repairOrdersPage.clickLocationInDropDown(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSelected(data.getLocation()), "The location hasn't been selected");
+
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanUsePaging(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
+        repairOrdersPage.clickNextButton();
+        Assert.assertFalse(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
+        repairOrdersPage.clickPrevButton();
+        Assert.assertTrue(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByVIN(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .setRepairOrdersSearchText(data.getVin())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVin()),
+                "The work order is not displayed after search by VIN after clicking the 'Search' icon");
+        repairOrdersPage.clickCancelSearchIcon();
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getVin())
+                .clickEnterToSearch();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVin()),
+                "The work order is not displayed after search by VIN after clicking the 'Enter' key");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByOrderNum(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+        repairOrdersPage.clickCancelSearchIcon();
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickEnterToSearch();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRoNum(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .setRepairOrdersSearchText(data.getRoNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByRoNumber(data.getRoNumber()),
+                "The work order is not displayed after search by RO number after clicking the 'Search' icon");
+        repairOrdersPage.clickCancelSearchIcon();
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getRoNumber())
+                .clickEnterToSearch();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByRoNumber(data.getRoNumber()),
+                "The work order is not displayed after search by RO number after clicking the 'Enter' key");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByFirstName(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .setRepairOrdersSearchText(data.getFirstName())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByFirstName(data.getFirstName()),
+                "The work order is not displayed after search by first name after clicking the 'Search' icon");
+        repairOrdersPage.clickCancelSearchIcon();
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getFirstName())
+                .clickEnterToSearch();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByFirstName(data.getFirstName()),
+                "The work order is not displayed after search by first name after clicking the 'Enter' key");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByLastName(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .setRepairOrdersSearchText(data.getLastName())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByLastName(data.getLastName()),
+                "The work order is not displayed after search by last name after clicking the 'Search' icon");
+        repairOrdersPage.clickCancelSearchIcon();
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getLastName())
+                .clickEnterToSearch();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByLastName(data.getLastName()),
+                "The work order is not displayed after search by last name after clicking the 'Enter' key");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByEmail(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .setRepairOrdersSearchText(data.getEmail())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByEmail(data.getEmail()),
+                "The work order is not displayed after search by email after clicking the 'Search' icon");
+        repairOrdersPage.clickCancelSearchIcon();
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getEmail())
+                .clickEnterToSearch();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByEmail(data.getEmail()),
+                "The work order is not displayed after search by email after clicking the 'Enter' key");
+    }
 }
