@@ -95,8 +95,8 @@
     {
       "rowID": "verifyUserCanSearchByFirstName.01",
       "description": "Test Case 81909:User can search by FirstName",
-      "location": "1111",
-      "firstName": "TestFirstName"
+      "location": "Best Location",
+      "firstName": "Alex1"
     }
   ],
 
@@ -104,8 +104,8 @@
     {
       "rowID": "verifyUserCanSearchByLastName.01",
       "description": "Test Case 81910:User can search by LastName",
-      "location": "1111",
-      "lastName": "TestSecondName"
+      "location": "Best Location",
+      "lastName": "Zakaulov1"
     }
   ],
 
@@ -113,8 +113,10 @@
     {
       "rowID": "verifyUserCanSearchByEmail.01",
       "description": "Test Case 82104:User can search by Email",
-      "location": "1111",
-      "email": "test@email.com"
+      "location": "Best Location",
+      "email": "cyberiansoft.test@nada.ltd",
+      "firstName": "Alex1",
+      "lastName": "Zakaulov1"
     }
   ],
 

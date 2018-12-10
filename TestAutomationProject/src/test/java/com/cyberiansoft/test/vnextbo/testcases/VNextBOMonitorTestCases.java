@@ -157,7 +157,6 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 "The location is not searched");
         repairOrdersPage.clickLocationInDropDown(data.getLocation());
         Assert.assertTrue(repairOrdersPage.isLocationSelected(data.getLocation()), "The location hasn't been selected");
-
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -282,14 +281,16 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setLocation(data.getLocation())
                 .setRepairOrdersSearchText(data.getEmail())
                 .clickSearchIcon();
-        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByEmail(data.getEmail()),
+        Assert.assertTrue(repairOrdersPage
+                        .isWorkOrderDisplayedAfterEmailSearch(data.getFirstName() + " " + data.getLastName()),
                 "The work order is not displayed after search by email after clicking the 'Search' icon");
         repairOrdersPage.clickCancelSearchIcon();
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getEmail())
                 .clickEnterToSearch();
-        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByEmail(data.getEmail()),
+        Assert.assertTrue(repairOrdersPage
+                        .isWorkOrderDisplayedAfterEmailSearch(data.getFirstName() + " " + data.getLastName()),
                 "The work order is not displayed after search by email after clicking the 'Enter' key");
     }
 }

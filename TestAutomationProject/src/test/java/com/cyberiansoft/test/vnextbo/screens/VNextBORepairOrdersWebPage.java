@@ -223,7 +223,6 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         try {
             return waitShort.until(ExpectedConditions.attributeToBe(prevButton, "disabled", "true"));
         } catch (Exception ignored) {
-            ignored.printStackTrace();
             return false;
         }
     }
@@ -377,12 +376,24 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return isWorkOrderDisplayed(vin);
     }
 
-    private boolean isWorkOrderDisplayed(String vin) {
+    private boolean isWorkOrderDisplayed(String text) {
         try {
             return wait
                     .ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions.visibilityOfElementLocated(By
-                            .xpath("//tbody[@id='tableBody']//strong[text()='" + vin + "']")))
+                            .xpath("//tbody[@id='tableBody']//strong[text()='" + text + "']")))
+                    .isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean isWorkOrderDisplayedByPartialText(String text) {
+        try {
+            return wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOfElementLocated(By
+                            .xpath("//tbody[@id='tableBody']//strong[contains(text(), '" + text + "')]")))
                     .isDisplayed();
         } catch (Exception e) {
             return false;
@@ -398,15 +409,15 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public boolean isWorkOrderDisplayedByFirstName(String firstName) {
-        return isWorkOrderDisplayed(firstName);
+        return isWorkOrderDisplayedByPartialText(firstName);
     }
 
     public boolean isWorkOrderDisplayedByLastName(String lastName) {
-        return isWorkOrderDisplayed(lastName);
+        return isWorkOrderDisplayedByPartialText(lastName);
     }
 
-    public boolean isWorkOrderDisplayedByEmail(String email) {
-        return isWorkOrderDisplayed(email);
+    public boolean isWorkOrderDisplayedAfterEmailSearch(String name) {
+        return isWorkOrderDisplayed(name);
     }
 
     public VNextBORepairOrdersWebPage clickCancelSearchIcon() {

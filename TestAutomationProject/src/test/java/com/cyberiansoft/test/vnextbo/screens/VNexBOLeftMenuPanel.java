@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
@@ -43,11 +42,14 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@class='left-menu-btn']")
     private WebElement openedMenuButton;
 
-    @FindBy(id = "menuBtn")
+    @FindBy(xpath = "//div[@tabindex=0 and @class='left-menu__wrapper']")
     private WebElement menuButton;
 
-    @FindBy(xpath = "//div[@class='WFSTACB']//button[text()='SKIP']")
-    private List<WebElement> welcomePopup;
+    @FindBy(xpath = "//iframe[@id='embed']/following-sibling::div[5]//iframe")
+    private WebElement tutorialFrame;
+
+    @FindBy(xpath = "//button[text()='SKIP']")
+    private WebElement tutorialSkipButton;
 
     private static String MONITOR_MAINMENU_ITEM = "Monitor";
     private static String OPERATIONS_MAINMENU_ITEM = "Operations";
@@ -104,43 +106,43 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
                 driver, VNextBOQuickNotesWebPage.class);
     }
 
-    public boolean isMainMenuExpanded(String meinmenu) {
-        return getMainMenuItem(meinmenu).getAttribute("aria-expanded") != null;
+    public boolean isMainMenuExpanded(String mainMenu) {
+        return getMainMenuItem(mainMenu).getAttribute("aria-expanded") != null;
     }
 
-    public void expandMainMenu(String meinmenu) {
-        getMainMenuItem(meinmenu).click();
+    public void expandMainMenu(String mainMenu) {
+        getMainMenuItem(mainMenu).click();
         waitABit(1000);
-		/*if (!isMainMenuExpanded(meinmenu)) {
-			getMainMenuItem(meinmenu).click();
-		}*/
     }
 
-    public WebElement getMainMenuItem(String meinmenu) {
-        waitLong.until(ExpectedConditions.visibilityOf(mainmenu));
+    private WebElement getMainMenuItem(String mainMenu) {
+        waitLong.until(ExpectedConditions.visibilityOf(this.mainmenu));
         waitABit(1000);
-        try {
-            waitLong
-                    .until(ExpectedConditions.elementToBeClickable(mainmenu
-                            .findElement(By.xpath("./li/div[contains(text(), '" + meinmenu + "')]"))));
-        } catch (Exception e) {
-            wait.until(ExpectedConditions.elementToBeClickable(closedMenuButton)).click();
-            wait.until(ExpectedConditions.visibilityOf(openedMenuButton));
-        }
-        return mainmenu.findElement(By.xpath(".//div[contains(text(), '" + meinmenu + "')]"));
+        return this.mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"));
     }
 
     private void selectMenuItem(WebElement menuitem, String mainmenuitem) {
-        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
-        if (!menuitem.isDisplayed()) {
-            expandMainMenu(mainmenuitem);
+        try {
+            driver.switchTo().frame(tutorialFrame);
+            waitABit(1000);
+            wait.until(ExpectedConditions.elementToBeClickable(tutorialSkipButton)).click();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        driver.switchTo().defaultContent();
+        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+        expandMainMenu(mainmenuitem);
+        wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
+
+//        if (!menuitem.isDisplayed()) {
+//            expandMainMenu(mainmenuitem);
+//        }
+//
 //        if (!isMainMenuExpanded(mainmenuitem))
 //            expandMainMenu(mainmenuitem);
 //        waitABit(1000);
 //        if (!menuitem.isDisplayed())
 //            expandMainMenu(mainmenuitem);
-//        wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
     }
 }

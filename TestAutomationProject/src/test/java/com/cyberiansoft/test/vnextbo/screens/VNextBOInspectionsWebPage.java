@@ -53,13 +53,11 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(inspectionslist));
+		wait.until(ExpectedConditions.visibilityOf(inspectionslist));
 	}
 	
 	public void selectInspectionInTheList(String inspnumber) {
-		new WebDriverWait(driver, 15)
-		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']"))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']"))).click();
 		//inspectionslist.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']")).click();
 		waitABit(4000);
 	}
@@ -122,7 +120,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public boolean isImageExistsForServiceNote(String servicename) {
-		boolean exists = false;
+		boolean exists;
 		clickServiceNotesIcon(servicename);
 		WebElement notesmodaldlg = new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
@@ -130,7 +128,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		new WebDriverWait(driver, 30)
 				  .until(ExpectedConditions.elementToBeClickable(notesmodaldlg.findElement(By.xpath(".//button[@class='close']")))).click();
 		waitABit(500);
-		return exists;		
+		return exists;
 	}
 	
 	public void clickInspectionApproveButton() {
@@ -323,14 +321,12 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	
 	public void clickSearchFilterButton() {
 		searchfilterbtn.click();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(clearfilterbtn));
+		wait.until(ExpectedConditions.visibilityOf(clearfilterbtn));
 	}
 	
 	public void clickClearFilterIcon() {
 		clearfilterbtn.click();
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOf(clearfilterbtn));
+		wait.until(ExpectedConditions.invisibilityOf(clearfilterbtn));
 	}
 
 }
