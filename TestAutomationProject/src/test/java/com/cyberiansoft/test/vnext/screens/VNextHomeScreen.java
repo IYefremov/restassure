@@ -20,16 +20,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class VNextHomeScreen extends VNextBaseScreen {
 	
 	final String quemessagexpath = "//span[@class='letter-number']";
-	
-	//@FindBy(xpath="//div[@class='title' and text()='Customers']")
+
 	@FindBy(xpath="//*[@action='show-customers']")
 	private WebElement customerslist;
-	
-	//@FindBy(xpath="//div[@class='title' and text()='Inspections']")
+
+	@FindBy(xpath="//span[@class='client-mode']")
+	private WebElement clientmode;
+
 	@FindBy(xpath="//*[@action='show-inspections']")
 	private WebElement inspectionslist;
-	
-	//@FindBy(xpath="//div[@class='title' and text()='Work Orders']")
+
 	@FindBy(xpath="//*[@action='show-orders']")
 	private WebElement workorderslist;
 
@@ -38,12 +38,10 @@ public class VNextHomeScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//a[@class='tile-link tile-item more-tile']")
 	private WebElement morelist;
-	
-	//@FindBy(xpath="//div[@class='title' and text()='Settings']")
+
 	@FindBy(xpath="//*[@action='show-settings']")
 	private WebElement settingslist;
-	
-	//@FindBy(xpath="//div[@class='title' and text()='Status']")
+
 	@FindBy(xpath="//*[@action='show-status']")
 	private WebElement statuslist;
 	
@@ -172,5 +170,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
 		clickAddButton();
 		tap(newinspectionbtn);
 		return new VNextCustomersScreen(appiumdriver);
+	}
+
+	public String getDefaultCustomerValue() {
+		return clientmode.getText();
 	}
 }

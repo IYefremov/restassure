@@ -21,6 +21,9 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-page='customers-list']")
 	private WebElement customersscreen;
+
+	@FindBy(xpath="//span[@class='client-mode']")
+	private WebElement clientmode;
 	
 	@FindBy(xpath="//*[@data-autotests-id='customers-list']")
 	private WebElement customerslist;
@@ -95,12 +98,6 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		//tap(customersscreen.findElement(By.xpath(".//a[@action='add' and @class='customers-button']")));
 		return new VNextNewCustomerScreen(appiumdriver);
 	}
-
-	public VNextNewCustomerScreen clickAddR360CustomerButton() {
-		tap(customersscreen.findElement(By.xpath(".//a[@class='floating-button color-red']")));
-		tap(customersscreen.findElement(By.xpath(".//a[@action='add' and @class='customers-button']")));
-		return new VNextNewCustomerScreen(appiumdriver);
-	}
 	
 	public boolean isAddCustomerButtonDisplayed() {
 		return customersscreen.findElements(By.xpath(".//a[@action='add']")).size() > 0;
@@ -171,5 +168,15 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		selectCustomer(customer);
 		VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(appiumdriver);
 		return customersMenuScreen.clickEditCustomerMenuItem();
+	}
+
+	public VNextCustomersScreen setCustomerAsDefault(AppCustomer customer) {
+		selectCustomer(customer);
+		VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(appiumdriver);
+		return customersMenuScreen.clickSetCustomerAsDefault();
+	}
+
+	public String getDefaultCustomerValue() {
+		return clientmode.getText();
 	}
 }
