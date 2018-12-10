@@ -18,7 +18,7 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
 
     @Test(testName= "Test Case 82203:Verify user can preset retail customer",
             description = "Verify user can preset retail customer")
-    public void testVerifyUseкСanЗresetКetailСustomer() {
+    public void testVerifyUseСanPresetRetailCustomer() {
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
@@ -31,4 +31,6 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
         homescreen = new VNextHomeScreen(appiumdriver);
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), retailCustomer.getFullName());
     }
+
+    
 }
