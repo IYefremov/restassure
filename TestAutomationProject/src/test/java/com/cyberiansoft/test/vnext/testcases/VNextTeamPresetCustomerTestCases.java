@@ -18,9 +18,10 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
 
     @Test(testName= "Test Case 82203:Verify user can preset retail customer",
             description = "Verify user can preset retail customer")
-    public void testVerifyUseСanPresetRetailCustomer() {
+    public void testVerifyUseCanPresetRetailCustomer() {
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+        customersscreen.switchToRetailMode();
         VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
         newCustomerScreen.createNewCustomer(retailCustomer);
         customersscreen = new VNextCustomersScreen(appiumdriver);
@@ -32,5 +33,17 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), retailCustomer.getFullName());
     }
 
-    
+    @Test(testName= "Test Case 82204:Verify user can preset wholwsale customer",
+            description = "Verify user can preset wholwsale customer")
+    public void testVerifyUseCanPresetWholwsaleCustomer() {
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+        customersscreen.switchToWholesaleMode();
+        customersscreen.setCustomerAsDefault(testwholesailcustomer);
+
+        Assert.assertEquals(customersscreen.getDefaultCustomerValue(), testwholesailcustomer.getFullName());
+        customersscreen.clickBackButton();
+        homescreen = new VNextHomeScreen(appiumdriver);
+        Assert.assertEquals(homescreen.getDefaultCustomerValue(), testwholesailcustomer.getFullName());
+    }
 }
