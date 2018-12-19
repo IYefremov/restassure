@@ -17,10 +17,8 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
-import com.cyberiansoft.test.vnext.apiutils.VNextAPIUtils;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
-import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
@@ -55,7 +53,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void beforeClass() throws Exception {
 		JSONDataProvider.dataFile = DATA_FILE;
 
-		workOrderDTOS = VNextAPIUtils.getInstance().generateWorkOrders("team-base-workorder-data1.json",
+		/*workOrderDTOS = VNextAPIUtils.getInstance().generateWorkOrders("team-base-workorder-data1.json",
 				WorkOrderTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
 				appLicenseEntity, 20
 				);
@@ -65,10 +63,10 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 				WorkOrderTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
 				appLicenseEntity, 20
 		);
-
+*/
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		/*VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
 		String lastInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		invoicesScreen.clickBackButton();
 		lastInvoiceNumber = lastInvoiceNumber.substring(lastInvoiceNumber.lastIndexOf("-")+1, lastInvoiceNumber.length());
@@ -81,7 +79,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
 		statusScreen.updateMainDB();
-
+*/
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.switchToRetailMode();
 		if (!customersscreen.isCustomerExists(testcustomer1)) {
@@ -959,8 +957,10 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		}
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		invoicesscreen.switchToTeamInvoicesView();
-		for (String invoiceNumber : invoices)
+		for (String invoiceNumber : invoices) {
+			//invoicesscreen.searchInvoiceByFreeText(invoiceNumber);
 			invoicesscreen.selectInvoice(invoiceNumber);
+		}
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
 		AppiumUtils.clickHardwareBackButton();
@@ -1217,6 +1217,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
 			VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 			invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+			invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
 			invoiceinfoscreen.saveInvoiceAsFinal();
 			invoicesscreen.clickBackButton();
 		}

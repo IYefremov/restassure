@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -49,6 +50,11 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	public VNextCustomersScreen clickAddInspectionButton() {
         clickAddButton();
 		return new VNextCustomersScreen(appiumdriver);
+	}
+
+	public VNextInspectionTypesList clickAddInspectionWithPreselectedCustomerButton() {
+		clickAddButton();
+		return new VNextInspectionTypesList(appiumdriver);
 	}
 	
 	public boolean isAddInspectionButtonVisible() {

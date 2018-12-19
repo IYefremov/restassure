@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -48,6 +49,11 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 	public VNextCustomersScreen clickAddWorkOrderButton() {
         clickAddButton();
 		return new VNextCustomersScreen(appiumdriver);
+	}
+
+	public VNextWorkOrderTypesList clickAddWorkOrdernWithPreselectedCustomerButton() {
+		clickAddButton();
+		return new VNextWorkOrderTypesList(appiumdriver);
 	}
 	
 	public String getFirstWorkOrderNumber() {
