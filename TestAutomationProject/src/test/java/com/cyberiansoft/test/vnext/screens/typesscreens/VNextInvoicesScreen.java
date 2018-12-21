@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -69,6 +70,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		String poNumber = "";
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		expandInvoiceDetails(invoicenumber);
+		BaseUtils.waitABit(500);
 		poNumber = invoicecell.findElement(By.xpath(".//div[@class='accordion-item-content']")).
 					findElement(By.xpath(".//div[contains(text(), 'PO#')]")).getText();
 		poNumber = poNumber.substring(3, poNumber.length()).trim();
@@ -183,6 +185,11 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	}
 	public String getFirstInvoiceNumber() {
 		return invoiceslist.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
+	}
+
+	public void searchInvoiceByFreeText(String searchtext) {
+		searchByFreeText(searchtext);
+		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
 	}
 
 }

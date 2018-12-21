@@ -48,6 +48,9 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@action='select-wholesale']")
 	private WebElement wholesalecustomertab;
+
+	@FindBy(xpath="//div[@class='notice-plate']")
+	private WebElement presetcustomerpanel;
 	
 	public VNextCustomersScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);	
@@ -178,5 +181,13 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 
 	public String getDefaultCustomerValue() {
 		return clientmode.getText();
+	}
+
+	public String getPresetCustomerPanelValue() {
+		return presetcustomerpanel.findElement(By.xpath(".//div[@class='notice-plate-info-name']")).getText();
+	}
+
+	public void resetPresetCustomer() {
+		presetcustomerpanel.findElement(By.xpath(".//div[@class='notice-plate-remove']")).click();
 	}
 }

@@ -278,10 +278,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
 	
-	@Test(testName= "Test Case 67292:Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
-			+ "Test Case 67299:Verify Inspection displays on the list after DB update and after reconnect Internet", 
-			description = "Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
-					+ "Verify Inspection displays on the list after DB update and after reconnect Internet")
+	//@Test(testName= "Test Case 67292:Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
+	//		+ "Test Case 67299:Verify Inspection displays on the list after DB update and after reconnect Internet",
+	//		description = "Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
+	//				+ "Verify Inspection displays on the list after DB update and after reconnect Internet")
 	public void testVerifyTeamInspectionSavedIntoMobileDeviceAndBOLaterViaOutgoingMessageIfThereIsNoConnection() {
 
 		final String vinnumber = "123";
