@@ -348,6 +348,11 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return wait.until(ExpectedConditions.visibilityOf(advancedSearchCaret)).isDisplayed();
     }
 
+    public VNextBORepairOrdersAdvancedSearchDialog clickAdvancedSearchCaret() {
+        wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCaret)).click();
+        return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
+    }
+
     public void searchRepairOrderByNumber(String repairorderNumber) {
         setRepairOrdersSearchText(repairorderNumber);
         clickSearchIcon();
@@ -416,7 +421,15 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return isWorkOrderDisplayedByPartialText(lastName);
     }
 
-    public boolean isWorkOrderDisplayedAfterEmailSearch(String name) {
+    public boolean isWorkOrderDisplayedByName(String name) {
+        return isWorkOrderDisplayed(name);
+    }
+
+    public boolean isWorkOrderDisplayedAfterSearchByEmail(String name) {
+        return isWorkOrderDisplayed(name);
+    }
+
+    public boolean isWorkOrderDisplayedAfterSearchByCompanyName(String name) {
         return isWorkOrderDisplayed(name);
     }
 
@@ -500,5 +513,4 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         wotablerow.findElement(By.xpath(".//a/strong[text()='" + orderNumber + "']")).click();
         return new VNextBORepairOrderDetailsPage(driver);
     }
-
 }

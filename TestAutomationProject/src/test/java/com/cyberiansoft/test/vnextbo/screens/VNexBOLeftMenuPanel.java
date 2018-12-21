@@ -126,23 +126,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
             driver.switchTo().frame(tutorialFrame);
             waitABit(1000);
             wait.until(ExpectedConditions.elementToBeClickable(tutorialSkipButton)).click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
 
         driver.switchTo().defaultContent();
         wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
         expandMainMenu(mainmenuitem);
         wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
-
-//        if (!menuitem.isDisplayed()) {
-//            expandMainMenu(mainmenuitem);
-//        }
-//
-//        if (!isMainMenuExpanded(mainmenuitem))
-//            expandMainMenu(mainmenuitem);
-//        waitABit(1000);
-//        if (!menuitem.isDisplayed())
-//            expandMainMenu(mainmenuitem);
     }
 }

@@ -69,7 +69,7 @@
       "rowID": "verifyUserCanSearchByVIN.01",
       "description": "Test Case 81905:User can search by VIN",
       "location": "1111",
-      "vin": "32434234234234"
+      "vinNum": "32434234234234"
     }
   ],
 
@@ -124,8 +124,236 @@
     {
       "rowID": "verifyUserCanSearchByCompanyName.01",
       "description": "Test Case 82105:User can search by CompanyName",
-      "location": "1111",
-      "company": "TestAutomationCompany"
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "firstName": "Alex1",
+      "lastName": "Zakaulov1"
+    }
+  ],
+
+  "verifyUserCanSelectCustomer": [
+    {
+      "rowID": "verifyUserCanSelectCustomer.01",
+      "description": "Test Case 82212:User can select \"Customer\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1"
+    }
+  ],
+
+  "verifyUserCanSearchByEmployee": [
+    {
+      "rowID": "verifyUserCanSearchByEmployee.01",
+      "description": "Test Case 82213:User can search by \"Employee\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1",
+      "employee": "Criss Lai"
+    }
+  ],
+
+  "verifyUserCanSearchByPhase": [
+    {
+      "rowID": "verifyUserCanSearchByPhase.01",
+      "description": "Test Case 82214:User can search by \"Phase\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First"
+    }
+  ],
+
+  "verifyUserCanSearchByDepartment": [
+    {
+      "rowID": "verifyUserCanSearchByDepartment.01",
+      "description": "Test Case 82215:User can search by \"Department\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First",
+      "department": "Default"
+    }
+  ],
+
+  "verifyUserCanSearchByWoType": [
+    {
+      "rowID": "verifyUserCanSearchByWoType.01",
+      "description": "Test Case 82216:User can search by \"WO Type\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First",
+      "department": "Default",
+      "woType": "01ZalexWO_tp"
+    }
+  ],
+
+  "verifyUserCanSearchByWoNumber": [
+    {
+      "rowID": "verifyUserCanSearchByWoNum.01",
+      "description": "Test Case 82217:User can search by \"WO#\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First",
+      "department": "Default",
+      "woType": "01ZalexWO_tp",
+      "woNum": "O-000-149566"
+    }
+  ],
+
+  "verifyUserCanSearchByRoNumber": [
+    {
+      "rowID": "verifyUserCanSearchByRoNumber.01",
+      "description": "Test Case 82218:User can search by \"RO#\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First",
+      "department": "Default",
+      "woType": "01ZalexWO_tp",
+      "woNum": "O-000-149566",
+      "roNum": "RO#ForAuto"
+    }
+  ],
+
+  "verifyUserCanSearchByStockNumber": [
+    {
+      "rowID": "verifyUserCanSearchByStockNumber.01",
+      "description": "Test Case 82219:User can search by \"Stock#\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First",
+      "department": "Default",
+      "woType": "01ZalexWO_tp",
+      "woNum": "O-000-149566",
+      "roNum": "RO#ForAuto",
+      "stockNum": "StockForAuto"
+    }
+  ],
+
+  "verifyUserCanSearchByVinNumber": [
+    {
+      "rowID": "verifyUserCanSearchByVinNumber.01",
+      "description": "Test Case 82220:User can search by \"VIN\"",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "customer": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First",
+      "department": "Default",
+      "woType": "01ZalexWO_tp",
+      "woNum": "O-000-149566",
+      "roNum": "RO#ForAuto",
+      "stockNum": "StockForAuto",
+      "vinNum": "asdfasd"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInPhaseLess": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhaseLess.01",
+      "description": "Test Case 82224:User can search by 'Days in Phase' ('<')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInPhase": "<",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInPhaseLessOrEqual": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhaseLessOrEqual.01",
+      "description": "Test Case 82766:User can search by 'Days in Phase' ('<=')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInPhase": "<=",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInPhaseEqual": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhaseEqual.01",
+      "description": "Test Case 82767:User can search by 'Days in Phase' ('=')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInPhase": "=",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInPhaseMoreOrEqual": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhaseMoreOrEqual.01",
+      "description": "Test Case 82768:User can search by 'Days in Phase' ('>=')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInPhase": ">=",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInPhaseMore": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhaseMore.01",
+      "description": "Test Case 82769:User can search by 'Days in Phase' ('>')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInPhase": ">",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInPhaseBetween": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhaseBetween.01",
+      "description": "Test Case 82770:User can search by 'Days in Phase' ('Between')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInPhase": "Between",
+      "daysNumStart": "10",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInProcessLess": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcessLess.01",
+      "description": "Test Case 82747:User can search by 'Days in Process' ('<')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInProcess": "<",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInProcessLessOrEqual": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcessLessOrEqual.01",
+      "description": "Test Case 82749:User can search by 'Days in Process' ('<=')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInProcess": "<=",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInProcessEqual": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcessEqual.01",
+      "description": "Test Case 82754:User can search by 'Days in Process' ('=')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInProcess": "=",
+      "daysNum": "25"
     }
   ]
 }
