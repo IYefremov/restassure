@@ -714,4 +714,68 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByDaysInProcessMoreOrEqual(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setDaysInProcess(data.getDaysInProcess())
+                .typeDaysNumForDaysInProcessFromInput(data.getDaysNum())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByDaysInProcessMore(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setDaysInProcess(data.getDaysInProcess())
+                .typeDaysNumForDaysInProcessFromInput(data.getDaysNum())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByDaysInProcessBetween(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setDaysInProcess(data.getDaysInProcess())
+                .typeDaysNumForDaysInProcessFromInput(data.getDaysNumStart())
+                .typeDaysNumForDaysInProcessToInput(data.getDaysNum())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
 }

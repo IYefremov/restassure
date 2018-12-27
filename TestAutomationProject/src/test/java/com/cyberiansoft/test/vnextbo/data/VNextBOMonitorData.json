@@ -355,5 +355,39 @@
       "daysInProcess": "=",
       "daysNum": "25"
     }
+  ],
+
+  "verifyUserCanSearchByDaysInProcessMoreOrEqual": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcessMoreOrEqual.01",
+      "description": "Test Case 82755:User can search by \"Days in Process\" ('>=')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInProcess": ">=",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInProcessMore": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcessMore.01",
+      "description": "Test Case 82756:User can search by \"Days in Process\" ('>')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInProcess": ">",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInProcessBetween": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcessBetween.01",
+      "description": "Test Case 82760:User can search by \"Days in Process\" ('Between')",
+      "location": "Best Location",
+      "company": "TestAutomationCompany",
+      "daysInProcess": "Between",
+      "daysNumStart": "10",
+      "daysNum": "25"
+    }
   ]
 }
