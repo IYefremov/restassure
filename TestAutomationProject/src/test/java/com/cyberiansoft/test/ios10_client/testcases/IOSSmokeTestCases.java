@@ -1926,6 +1926,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 
 		questionsscreen.saveWizard();
+		BaseUtils.waitABit(90*1000);
 		myinspectionsscreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		visualscreen = new VisualInteriorScreen();
@@ -1981,10 +1982,11 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
 		customersscreen.clickHomeButton();
-		
+		BaseUtils.waitABit(60*1000);
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		visualscreen = new VisualInteriorScreen();
+        visualscreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
 		vehiclescreen =visualscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		Assert.assertTrue(vehiclescreen.getInspectionCustomer().contains(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER));
 		vehiclescreen.saveWizard();
@@ -2026,6 +2028,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		claimscreen.selectInsuranceCompany("USG");	
 		claimscreen.saveWizard();
 		myinspectionsscreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		BaseUtils.waitABit(30*1000);
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
 		vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
@@ -3461,7 +3464,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
 
 		NadaEMailService nada = new NadaEMailService();
-		nada.setEmailId("test.cyberiansoft@amail.club");
+		nada.setEmailId("test.cyberiansoft@banit.club");
 		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname);
 		Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + invoicenumber +
@@ -3525,7 +3528,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		final String invpoicereportfilenname = invoicenumber + ".pdf";
 		NadaEMailService nada = new NadaEMailService();
-		nada.setEmailId("test.cyberiansoft@amail.club");
+		nada.setEmailId("test.cyberiansoft@banit.club");
 		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(invoicenumber, invpoicereportfilenname);
 		Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + invoicenumber +
@@ -5930,6 +5933,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
+		visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_SPORT_CAR);
 		vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		NotesScreen notesscreen = vehiclescreen.clickNotesButton();
 		notesscreen.setNotes(inspectionnotes);

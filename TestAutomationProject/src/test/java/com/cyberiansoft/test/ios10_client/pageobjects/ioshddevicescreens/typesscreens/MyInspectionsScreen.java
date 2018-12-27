@@ -451,7 +451,10 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspnumber) {
-		return appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("ESTIMATION_NOTES"))
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+
+		IOSElement insptable  = (IOSElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("InspectionsPageTableLeft")));
+		return insptable.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("ESTIMATION_NOTES"))
 				.size() > 0;
 	}
 	

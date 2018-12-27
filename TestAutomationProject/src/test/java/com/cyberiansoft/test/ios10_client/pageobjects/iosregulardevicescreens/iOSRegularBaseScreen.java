@@ -4,9 +4,11 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +17,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
@@ -71,7 +74,7 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 	public void swipeToElement(WebElement elementtoswipe) {
 		boolean swipe = true;
 		int screenheight = (int) (appiumdriver.manage().window().getSize().getHeight()*0.90);
-		
+
 		while (swipe) {
 			//System.out.println("+++++1" + (elementtoswipe.getLocation().getY() > screenheight));
 			//System.out.println("+++++2" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.80));
@@ -80,7 +83,7 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 				swipe = false;
 				break;
 			} else if ((elementtoswipe.getLocation().getY() > screenheight)) {
-			//if (!elementtoswipe.isDisplayed())
+				//if (!elementtoswipe.isDisplayed())
 				/*JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
 		        HashMap scrollObject = new HashMap<>();
 		        scrollObject.put("element", ((RemoteWebElement) elementtoswipe).getId());
@@ -92,12 +95,33 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 				scrollObject1.put("direction", "up");
 				//scrollObject.put("element", ((IOSElement) ELEMENT).getId());
 				js1.executeScript("mobile: swipe", scrollObject1);
-				
+
 				//swipeScreenUp();
 				//swipeTableUp();
 			}
 			else
 				swipe = false;
+		}
+	}
+
+	public void swipeScrollViewElement(WebElement elementtoswipe) {
+		boolean swipe = true;
+
+		while (swipe) {
+			//System.out.println("+++++1" + (elementtoswipe.getLocation().getY() > screenheight));
+			//System.out.println("+++++2" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.80));
+			//System.out.println("+++++3" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.90));
+			if (elementtoswipe.isDisplayed()) {
+				swipe = false;
+				break;
+			} else {
+				Map<String, Object> args = new HashMap<>();
+				MobileElement list = (MobileElement) appiumdriver.findElement(By.className("XCUIElementTypeScrollView"));
+				args.put("direction", "down");
+				args.put("name", null);
+				args.put("element", list.getId());
+				appiumdriver.executeScript("mobile: scroll", args);
+			}
 		}
 	}
 
