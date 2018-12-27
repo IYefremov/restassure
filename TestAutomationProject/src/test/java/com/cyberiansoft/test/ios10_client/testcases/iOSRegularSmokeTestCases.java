@@ -2019,6 +2019,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		vehiclescreen.saveWizard();
 		myinspectionsscreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		BaseUtils.waitABit(1000*60);
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		RegularVisualInteriorScreen visualscreen = new RegularVisualInteriorScreen();
 		visualscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());

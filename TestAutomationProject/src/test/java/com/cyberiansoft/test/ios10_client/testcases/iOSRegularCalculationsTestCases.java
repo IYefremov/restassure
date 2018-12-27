@@ -177,29 +177,21 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         vehiclescreen = new RegularVehicleScreen();
         RegularVisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		Assert.assertTrue(visualinteriorscreen.isInteriorServicePresent("Miscellaneous"));
-		Assert.assertTrue(visualinteriorscreen.isInteriorServicePresent("Price Adjustment"));
-		Assert.assertTrue(visualinteriorscreen.isInteriorServicePresent("WHEEL REPAIR"));
-		visualinteriorscreen.switchToCustomTab();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
+
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
 		visualinteriorscreen.tapInterior();
 		RegularVisualInteriorScreen.tapInteriorWithCoords(100, 100);
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.clickServicesBackButton();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(150, 150);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 200);
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
 		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.switchToCustomTab();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
 		visualinteriorscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
 		RegularVisualInteriorScreen.tapExterior();
-		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.clickServicesBackButton();
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
+
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), PricesCalculations.getPriceRepresentation(_inspectionprice));
 		visualinteriorscreen.saveWizard();
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspection8434), PricesCalculations.getPriceRepresentation(_inspectionprice));
@@ -1598,9 +1590,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 
         RegularVisualInteriorScreen visualinteriorscreen =vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
+		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.switchToCustomTab();
-		visualinteriorscreen.selectService("Detail");
+		//visualinteriorscreen.switchToCustomTab();
+		//visualinteriorscreen.selectService("Detail");
 		visualinteriorscreen.selectSubService("Oksi_Part_SubCategory");
 		Helpers.tapRegularCarImage();
 		Helpers.tapRegularCarImage();
@@ -3104,8 +3097,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclePartScreen.saveVehiclePart();
 
         RegularVisualInteriorScreen visualinteriorscreen = pricematrix.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, "Future Sport Car");
+		visualinteriorscreen.waitVisualScreenLoaded("Future Sport Car");
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(150, 200);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 250);
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 300);

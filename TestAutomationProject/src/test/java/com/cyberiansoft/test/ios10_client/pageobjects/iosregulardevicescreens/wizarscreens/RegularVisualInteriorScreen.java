@@ -66,6 +66,7 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	}
 
 	public void selectSubService(String _subservice) {
+		swipeScrollViewElement(appiumdriver.findElementByAccessibilityId( _subservice));
 		appiumdriver.findElementByAccessibilityId( _subservice).click();
 	}
 

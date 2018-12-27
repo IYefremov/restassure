@@ -55,11 +55,11 @@ public class RegularSettingsScreen extends RegularBaseAppScreen {
 	}
 
 	public void setShowAllServicesOn() {
-		MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
+		/*MobileElement  table  = (MobileElement) appiumdriver.findElementByAccessibilityId("SettingsTable");
 		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeSwitch[@name='Inspections_ShowAllServices']/..")));
 		IOSElement option = ((IOSElement) table.findElement(By.name("Inspections_ShowAllServices")));
 		if (option.getAttribute("value").equals("0"))
-			option.click();
+			option.click();*/
 	}
 
 	public void setShowAvailableSelectedServicesOn() {
