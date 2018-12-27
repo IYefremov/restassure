@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class BOoperationsSRdata {
@@ -327,25 +328,26 @@ public class BOoperationsSRdata {
 
     public String getFirstDay() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-//        LocalDate localDate = LocalDate.now(ZoneOffset.of("-07:00"));
-        if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
-            return LocalDate.now().plusDays(3).format(formatter);
-        } else if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
-            return LocalDate.now().plusDays(2).format(formatter);
+        final LocalDate now = LocalDate.now(ZoneId.of("US/Pacific"));
+        if (now.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+            return now.plusDays(3).format(formatter);
+        } else if (now.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
+            return now.plusDays(2).format(formatter);
         } else {
-            return LocalDate.now().plusDays(1).format(formatter);
+            System.out.println(now.plusDays(1).format(formatter));
+            return now.plusDays(1).format(formatter);
         }
     }
 
     public String getSecondDay() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-//        LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
-        if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
-            return LocalDate.now().plusDays(4).format(formatter);
-        } else if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
-            return LocalDate.now().plusDays(3).format(formatter);
+        final LocalDate now = LocalDate.now(ZoneId.of("US/Pacific"));
+        if (now.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+            return now.plusDays(4).format(formatter);
+        } else if (now.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
+            return now.plusDays(3).format(formatter);
         } else {
-            return LocalDate.now().plusDays(2).format(formatter);
+            return now.plusDays(2).format(formatter);
         }
     }
 
@@ -386,25 +388,12 @@ public class BOoperationsSRdata {
     }
 
     public boolean isDateShifted() {
-//        LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
-        return LocalDate.now().getDayOfWeek().equals(DayOfWeek.FRIDAY)
-                || LocalDate.now().getDayOfWeek().equals(DayOfWeek.SATURDAY);
+        final LocalDate now = LocalDate.now(ZoneId.of("US/Pacific"));
+        return now.getDayOfWeek().equals(DayOfWeek.FRIDAY)
+                || now.getDayOfWeek().equals(DayOfWeek.SATURDAY);
     }
 
     public String getService() {
         return service;
     }
-//    public String getSRdataForSchedulerMonth() {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-//        LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
-//
-//        if (localDate.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
-//            return localDate.plusDays(3).format(formatter);
-//        } else if (localDate.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
-//            return localDate.plusDays(2).format(formatter);
-//        } else {
-//            return localDate.plusDays(1).format(formatter);
-//        }
-//        return new Object[][] {{ data.getClientName(), date }};
-//    }
 }

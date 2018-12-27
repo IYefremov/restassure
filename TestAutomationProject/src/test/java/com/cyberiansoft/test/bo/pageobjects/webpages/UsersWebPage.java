@@ -157,6 +157,7 @@ public class UsersWebPage extends WebPageWithPagination {
 	public WebElement getTableRowWithActiveUser(String firstname, String lastname) {
 		List<WebElement> rows = getUsersTableRows();
 		for (WebElement row : rows) {
+		    waitABit(1200);
 			if (wait
                     .ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//td[3]"))))

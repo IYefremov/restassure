@@ -1411,7 +1411,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		serviceRequestInfoBlocks.get(0).click();
 		wait.until(ExpectedConditions.elementToBeClickable(suggestedStart)).sendKeys(startDate);
 		wait.until(ExpectedConditions.elementToBeClickable(acceptGeneralInfoBTN)).click();
-
 	}
 
 	public boolean checkDefaultAppointmentDateFromSRedit(String startDate) {

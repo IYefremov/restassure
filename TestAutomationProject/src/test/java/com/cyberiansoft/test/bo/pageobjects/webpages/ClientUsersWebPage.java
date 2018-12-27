@@ -23,7 +23,7 @@ public class ClientUsersWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_Content_gv_ctl00")
 	private WebTable clientuserstable;
 
-	@FindBy(id = "ctl00_Content_gv_ctl00_ctl06_btnResend")
+	@FindBy(xpath = "//input[contains(@id, 'btnResend')]")
 	private WebElement resendButton;
 
 	public ClientUsersWebPage(WebDriver driver) {
@@ -104,8 +104,8 @@ public class ClientUsersWebPage extends BaseWebPage {
 	}
 
     public void verifyClientUserDoesNotExist(String clientUserName, String userFirstName) {
-        if (isClientUserPresentInTable( "test", "automation")){
-            clickDeleteClientUser( "test");
+        if (isClientUserPresentInTable( clientUserName, userFirstName)){
+            clickDeleteClientUser( clientUserName);
         }
     }
 }

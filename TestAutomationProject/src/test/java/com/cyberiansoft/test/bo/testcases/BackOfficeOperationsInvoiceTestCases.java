@@ -71,7 +71,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.setSearchAmountFrom(data.getAmountFrom());
 		invoicespage.setSearchAmountTo(data.getAmountTo());
 		invoicespage.clickFindButton();
-		Assert.assertEquals(invoicespage.getInvoicesTableRowCount(), 4);
+		Assert.assertEquals(invoicespage.getInvoicesTableRowCount(), 24);
 	}
 
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -783,7 +783,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
         OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
-		invoicesPage.selectSearchStatus("New");
+		invoicesPage.selectSearchStatus(data.getNewStatus());
 		invoicesPage.clickFindButton();
 		invoicesPage.selectIvoicesFromTop(3);
 		String mainWindow = invoicesPage.getMainWindow();

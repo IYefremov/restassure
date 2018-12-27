@@ -1180,6 +1180,8 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_ddlClients_Input")))
 					.sendKeys(customer);
+            wait.until(ExpectedConditions.elementToBeClickable(searchinvoicenofld.getWrappedElement())).clear();
+            searchinvoicenofld.sendKeys(invoice);
 
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")));

@@ -142,7 +142,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyJobsCRUD(String rowID, String description, JSONObject testData) throws Exception {
+	public void testCompanyJobsCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -199,7 +199,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyServiceAdvisorsCRUD(String rowID, String description, JSONObject testData) throws Exception {
+	public void testCompanyServiceAdvisorsCRUD(String rowID, String description, JSONObject testData) {
 
         BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);

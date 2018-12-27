@@ -395,7 +395,7 @@
       "description": "Test Case 57874:Operation - Service Request Life Cycle - Appointment - Estimate",
       "clientName": "Alex SASHAZ",
       "status": "Scheduled",
-      "customer": "002 - Test Company",
+      "customer": "004 - Test Company",
       "serviceRequestType": "Zak_Request_Type"
     }
   ],
@@ -428,7 +428,7 @@
       "description": "Test Case 57807:Operation - Service Request Life Cycle - WO Auto Creation",
       "clientName": "Alex SASHAZ",
       "status": "Scheduled",
-      "customer": "002 - Test Company",
+      "customer": "004 - Test Company",
       "serviceRequestType": "Oleksa_Auto",
       "vehicleStock": "123",
       "vehicleVIN": "123"

@@ -41,6 +41,14 @@ public class InspectionEditorWebPage extends BaseWebPage {
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 
+    public boolean isDateInputDisplayed() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(dateInput)).isDisplayed();
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
     public InspectionEditorWebPage clickDateInput() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(dateInput)).click();

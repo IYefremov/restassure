@@ -42,8 +42,14 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnCancel")
 	private WebElement newservicerequesttypecancelbtn;
 
+	@FindBy(xpath = "//div[@id='ctl00_ctl00_Content_Main_ctl01_ctl01_Card_tabs']//span[text()='General Settings']")
+	private WebElement generalSettingsTab;
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_cbAllowUndoReject")
 	private WebElement allowUndoCheckBox;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_pageGeneralSettings")
+	private WebElement generalSettingsPage;
 
 	public ServiceRequestTypesWebPage(WebDriver driver) {
 		super(driver);
@@ -64,8 +70,13 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 
 	public void selectNewServiceRequestTypeTeam(String srtypeteam) {
 		waitABit(1000);
-		wait.until(ExpectedConditions.visibilityOf(invoicetypeteamcmb));
-		invoicetypeteamcmb.click();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(invoicetypeteamcmb));
+        } catch (Exception e) {
+            waitABit(1000);
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(invoicetypeteamcmb)).click();
 		invoicetypeteamcmb.clear();
 		invoicetypeteamcmb.sendKeys(srtypeteam);
 		waitABit(300);
@@ -161,12 +172,20 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void openGeneralSettingsTab() {
+	    waitABit(1000);
+	    wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("General Settings"))).click();
         waitABit(1000);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("General Settings"))).click();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(generalSettingsPage));
+        } catch (Exception e) {
+            e.printStackTrace();
+            wait.until(ExpectedConditions.elementToBeClickable(generalSettingsTab)).click();
+            waitABit(1000);
+            wait.until(ExpectedConditions.visibilityOf(generalSettingsPage));
+        }
 	}
 
 	public void clickErrorWithBLockingRadioButton() {
-        waitABit(1000);
 		wait.until(ExpectedConditions
 				.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_2")))
 				.click();

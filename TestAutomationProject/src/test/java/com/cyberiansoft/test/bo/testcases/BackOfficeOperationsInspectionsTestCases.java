@@ -118,21 +118,23 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
         InspectionEditorWebPage inspectionEditorPage = inspectionsPage.clickEditInspection(firstInspection);
         Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
                 "The Inspection Editor has not been opened for inspection with New status");
-        inspectionEditorPage
-                .clickDateInput()
-                .clickPreviousMonthButton();
-        Assert.assertTrue(inspectionEditorPage.isNextMonthButtonEnabled(),
-                "The Next month button has not been enabled after clicking the Previous month button");
-        inspectionEditorPage
-                .selectDay(data.getDay())
-                .clickSaveInspectionButton()
-                .closeNewTab(windowHandle);
-        inspectionsPage.makeSearchPanelVisible()
-                .selectSearchStatus(data.getStatus())
-                .setInspectionNumberSearchCriteria(firstInspection)
-                .clickFindButton();
-        Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
-        Assert.assertEquals(changedInspectionDate, inspectionsPage.getFirstInspectionDate());
+        if (inspectionEditorPage.isDateInputDisplayed()) {
+            inspectionEditorPage
+                    .clickDateInput()
+                    .clickPreviousMonthButton();
+            Assert.assertTrue(inspectionEditorPage.isNextMonthButtonEnabled(),
+                    "The Next month button has not been enabled after clicking the Previous month button");
+            inspectionEditorPage
+                    .selectDay(data.getDay())
+                    .clickSaveInspectionButton()
+                    .closeNewTab(windowHandle);
+            inspectionsPage.makeSearchPanelVisible()
+                    .selectSearchStatus(data.getStatus())
+                    .setInspectionNumberSearchCriteria(firstInspection)
+                    .clickFindButton();
+            Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
+            Assert.assertEquals(changedInspectionDate, inspectionsPage.getFirstInspectionDate());
+        }
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

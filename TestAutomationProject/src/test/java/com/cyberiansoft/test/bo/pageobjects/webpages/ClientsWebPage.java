@@ -348,7 +348,6 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	public NewClientDialogWebPage clickEditClient(String clientname) {
-//		waitABit(8000);
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();

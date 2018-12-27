@@ -229,7 +229,8 @@
   "checkOperationsInvoiceExport": [
     {
       "rowID": "checkOperationsInvoiceExport.01",
-      "description": "Test Case 64968:Operations - Invoice: Export"
+      "description": "Test Case 64968:Operations - Invoice: Export",
+      "newStatus": "New"
     }
   ]
 }
