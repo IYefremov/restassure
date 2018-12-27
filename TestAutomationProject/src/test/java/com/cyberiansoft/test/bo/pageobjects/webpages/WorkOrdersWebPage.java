@@ -369,7 +369,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 	}
 
 	public boolean checkWorkOrdersSearchResults(String wo) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input"))).sendKeys("002 - Test Company");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input"))).sendKeys("004 - Test Company");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboServiceGroups_Input"))).click();
         selectComboboxValue(searchpackagecmb, searchpackagedd, "Dent Repear Package");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_Input"))).click();
