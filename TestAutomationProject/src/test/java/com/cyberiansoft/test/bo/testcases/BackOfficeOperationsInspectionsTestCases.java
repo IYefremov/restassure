@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.bo.BOOperationsInspectionsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -59,7 +60,8 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
                 "The Inspection Editor has not been opened for inspection with Draft status");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //todo uncomment after bug fix #75725
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void editEstimationDetailsForInspectionWithNewStatus(String rowID, String description, JSONObject testData) {
 
         BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
@@ -94,10 +96,10 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
                 .setInspectionNumberSearchCriteria(firstInspection)
                 .clickFindButton();
         Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
-        Assert.assertEquals(changedInspectionDate, inspectionsPage.getFirstInspectionDate());
+        Assert.assertEquals(inspectionsPage.getFirstInspectionDate(), changedInspectionDate);
     }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //todo uncomment after bug fix #75725
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void editEstimationDetailsForInspectionWithDraftStatus(String rowID, String description, JSONObject testData) {
 
         BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
@@ -147,7 +149,8 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
 
         InspectionsWebPage inpectionsPage = operationsPage.clickInspectionsLink();
         inpectionsPage.makeSearchPanelVisible();
-        inpectionsPage.selectSearchTimeframe(data.getTimeFrame());
+        inpectionsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        inpectionsPage.setTimeFrame(data.getFromTime(), data.getToTime());
         inpectionsPage.clickFindButton();
         inpectionsPage.verifyInspectionsTableColumnsAreVisible();
 

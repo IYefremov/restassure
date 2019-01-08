@@ -228,7 +228,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		Assert.assertEquals(data.getFirstName() + " " + data.getLastName(), serviceadvisorspage.getTableServiceAdvisorFullName(data.getFirstName(), data.getLastName()));
 		Assert.assertEquals(data.getEmail(), serviceadvisorspage.getTableServiceAdvisorEmail(data.getFirstName(), data.getLastName()));
-		Assert.assertEquals("..., NT", serviceadvisorspage.getTableServiceAdvisorAddress(data.getFirstName(), data.getLastName()).trim());
+		Assert.assertEquals("..., CA", serviceadvisorspage.getTableServiceAdvisorAddress(data.getFirstName(), data.getLastName()).trim());
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorPhone(data.getFirstName(), data.getLastName()).trim());
 		Assert.assertEquals(data.getRole(), serviceadvisorspage.getTableServiceAdvisorRoles(data.getFirstName(), data.getLastName()));
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorAccountingID(data.getFirstName(), data.getLastName()).trim());
@@ -397,7 +397,6 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		servicerequesttypespage.selectNewServiceRequestTypeTeam(data.getServiceTypeTeam());
 		servicerequesttypespage.clickNewServiceRequestTypeCancelButton();
 		Assert.assertEquals("", servicerequesttypespage.getTableServiceRequestTypeDescription(data.getServiceType()));
-
 
 		servicerequesttypespage.clickEditServiceRequestType(data.getServiceType());
 		servicerequesttypespage.setNewServiceRequestTypeName(data.getServiceTypeEdited());

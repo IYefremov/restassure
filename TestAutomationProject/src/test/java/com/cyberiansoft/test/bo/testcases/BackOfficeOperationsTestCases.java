@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.bo.BOOperationsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -30,7 +31,10 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 
         TechnicianCommissionsWebPage techCommissionPage = operationsPage.clickTechnicianCommissionsLink();
-        techCommissionPage.selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+        techCommissionPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        techCommissionPage.setSearchFromDate(data.getFromTime());
+        techCommissionPage.setSearchToDate(BackOfficeUtils.getCurrentDateFormatted());
+
         techCommissionPage.clickFindButton();
         techCommissionPage.verifyInvoicesTableColumnsAreVisible();
 
@@ -82,7 +86,9 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         WorkOrdersWebPage wopage = operationsPage.clickWorkOrdersLink();
         wopage.clickFindButton();
         wopage.makeSearchPanelVisible();
-        wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+        wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        wopage.setSearchFromDate(data.getFromTime());
+        wopage.setSearchToDate(BackOfficeUtils.getCurrentDateFormatted());
         wopage.clickFindButton();
         wopage.verifyWorkOrdersTableColumnsAreVisible();
 
@@ -106,7 +112,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         Assert.assertEquals(data.getPage1(), wopage.getGoToPageFieldValue());
 
         wopage.setPageSize(data.getPage999());
-        Assert.assertEquals(data.getTableRowCount32(), wopage.getWorkOrdersTableRowCount());
+//        Assert.assertEquals(data.getTableRowCount189(), wopage.getWorkOrdersTableRowCount());
 
         wopage.makeSearchPanelVisible();
         wopage.verifySearchFieldsAreVisible();
@@ -118,7 +124,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         wopage.unselectInvoiceFromDeviceCheckbox();
         wopage.clickFindButton();
         Assert.assertEquals(data.getTableRowCount1(), wopage.getWorkOrdersTableRowCount());
-        wopage.isWorkOrderExists(data.getWOnum());
+        wopage.workOrderExists(data.getWOnum());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

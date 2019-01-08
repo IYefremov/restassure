@@ -856,7 +856,7 @@
       "alert": "test appointment Appointment Failed",
       "selected": "My Service Requests",
       "serviceRequestType": "01_Alex2SRT",
-      "customer": "000 TOP",
+      "customer": "004 - Test Company",
       "notificationDropDown": "ServiceRequest Checked In",
       "eventNewName": "test appointment SR Checked In",
       "serviceRequestGeneralInfo": "Automation1 Primary  Tech",

@@ -158,13 +158,22 @@ public class UsersWebPage extends WebPageWithPagination {
 		List<WebElement> rows = getUsersTableRows();
 		for (WebElement row : rows) {
 		    waitABit(1200);
-			if (wait
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//td[3]"))))
-                    .getText()
-                    .contains(firstname + " " + lastname)) {
-				return row;
-			}
+		    try {
+                if (wait
+                        .ignoring(StaleElementReferenceException.class)
+                        .until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//td[3]"))))
+                        .getText()
+                        .contains(firstname + " " + lastname)) {
+                    return row;
+                }
+            } catch (Exception ignored) {
+		        waitABit(2000);
+                if (row.findElement(By.xpath(".//td[3]"))
+                        .getText()
+                        .contains(firstname + " " + lastname)) {
+                    return row;
+                }
+            }
 		} 
 		return null;
 	}

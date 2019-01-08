@@ -34,8 +34,8 @@ public class BOOperationsData {
     @JsonProperty("tableRowCount40")
     private int tableRowCount40;
 
-    @JsonProperty("tableRowCount32")
-    private int tableRowCount32;
+    @JsonProperty("tableRowCount189")
+    private int tableRowCount189;
 
     @JsonProperty("tableRowCount1")
     private int tableRowCount1;
@@ -152,8 +152,8 @@ public class BOOperationsData {
         return tableRowCount40;
     }
 
-    public int getTableRowCount32() {
-        return tableRowCount32;
+    public int getTableRowCount189() {
+        return tableRowCount189;
     }
 
     public int getTableRowCount1() {

@@ -139,7 +139,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		driver.findElement(By.xpath("//li[text()='" + technician + "']")).click();
 	}
 	
-	public void selectSearchTimeframe(WebConstants.TimeFrameValues timeframe) { 
+	public void selectSearchTimeFrame(WebConstants.TimeFrameValues timeframe) {
 		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe.getName());
 	}
 
@@ -167,6 +167,18 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 
+    public WebPageWithFilter setSearchFromDate(String date) {
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")))).clear();
+        driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys(date);
+        return PageFactory.initElements(driver, WebPageWithFilter.class);
+    }
+
+    public WebPageWithFilter setSearchToDate(String date) {
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")))).clear();
+        driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys(date);
+        return PageFactory.initElements(driver, WebPageWithFilter.class);
+    }
+
 	public void verifySearchResults(String ordernumber) {
 		wait.until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement()
 				.findElement(By.xpath(".//tr/td[text()='" + ordernumber + "']"))));
@@ -189,14 +201,17 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	}
 
 	public boolean checkResultsTable() {
-		try{
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Date')]")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Invoice #')]")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'WO #')]")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'RO #')]")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Customer')]")));
-
-		}catch(Exception e){
+		try {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Date']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Invoice #']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='WO #']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='RO #']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Customer']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Gross']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Net']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Tech. $']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Comm']")));
+		} catch(Exception e){
 			return false;
 		}
 		return true;

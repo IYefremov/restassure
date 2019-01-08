@@ -72,7 +72,13 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")
 	private WebElement findbtn;
-	
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_dpFrom_dateInput') and @type='text']")
+    private TextField searchdatefromfld;
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_dpTo_dateInput') and @type='text']")
+    private TextField searchdatetofld;
+
 	public VendorOrdersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
@@ -143,6 +149,8 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 		Assert.assertTrue(vendororderstable.tableColumnExists("Amount"));
 		Assert.assertTrue(vendororderstable.tableColumnExists("Retail Amount"));
 		Assert.assertTrue(vendororderstable.tableColumnExists("Start Date"));
+
+
 		Assert.assertTrue(vendororderstable.tableColumnExists("Target Date"));
 		Assert.assertTrue(vendororderstable.tableColumnExists("Active Phase"));
 		Assert.assertTrue(vendororderstable.tableColumnExists("Days In Process"));
@@ -159,7 +167,7 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 			if (row.findElement(By.xpath(".//td[2]/a")).getText().equals(orderno)) {
 				return row;
 			}
-		} 
+		}
 		return null;
 	}
 	
@@ -234,5 +242,13 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/span[text()='" + vin + "']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//tr/td/span[text()='" + customer + "']")).isDisplayed());
 		driver.navigate().back();
-	}	
+	}
+
+    public void setSearchFromDate(String dateformat) {
+        clearAndType(searchdatefromfld, dateformat);
+    }
+
+    public void setSearchToDate(String dateformat) {
+        clearAndType(searchdatetofld, dateformat);
+    }
 }

@@ -78,7 +78,9 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
         MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
 
         VendorOrdersWebPage vendororderspage = monitorPage.clickVendorOrdersLink();
-		vendororderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+		vendororderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        vendororderspage.setSearchFromDate(data.getFromDate());
+        vendororderspage.setSearchToDate(data.getToDate());
 		vendororderspage.selectSearchServiceStatus(data.getServiceStatus());
 		vendororderspage.clickFindButton();
 		vendororderspage.repairOrdersTableIsVisible();
@@ -110,8 +112,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		vendororderspage.setSearchVIN(data.getVIN()); 
 		vendororderspage.selectSearchCustomer(data.getCompany());
 		vendororderspage.setSearchWorkorderNumber(data.getWoNumber());
-		
-		vendororderspage.clickFindButton();
+
+        vendororderspage.clickFindButton();
 		Assert.assertEquals(1, vendororderspage.getRepairOrdersTableRowCount());
 		Assert.assertEquals(data.getVendor(), vendororderspage.getTeamVendorForVendorOrder(data.getWoNumber()));
 		Assert.assertEquals(data.getCompany(), vendororderspage.getCustomerForVendorOrder(data.getWoNumber()));

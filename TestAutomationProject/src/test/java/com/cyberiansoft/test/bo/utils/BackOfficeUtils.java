@@ -120,7 +120,6 @@ public class BackOfficeUtils {
 		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
 		localDate = localDate.minusMonths(1);
 		return localDate.withDayOfMonth(1);
-		
 	}
 	
 	public static LocalDate getLastMonthEndDate() {
@@ -163,23 +162,19 @@ public class BackOfficeUtils {
 	public static boolean isInteger(String value) {
 		try {
 			Integer.parseInt(value);
-		} catch(NumberFormatException e) {
-			return false;
-		} catch(NullPointerException e) {
+		} catch(NumberFormatException | NullPointerException e) {
 			return false;
 		}
-		return true;
+        return true;
 	}
 	
 	public static boolean isDouble(String value) {
 		try {
 			Double.parseDouble(value);
-		} catch(NumberFormatException e) {
-			return false;
-		} catch(NullPointerException e) {
+		} catch(NumberFormatException | NullPointerException e) {
 			return false;
 		}
-		return true;
+        return true;
 	}
 
 	public static float getServicePriceValue(String servicePriceString) {

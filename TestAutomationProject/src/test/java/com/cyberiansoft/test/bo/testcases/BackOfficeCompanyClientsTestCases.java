@@ -522,7 +522,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
                 .scrollDownToText(data.getClientName())
                 .clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
 
-        while (clientUsersWebPage.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName())){
+        while (clientUsersWebPage.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName())) {
 			clientUsersWebPage.clickDeleteClientUser(data.getUserName());
 		}
 		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();

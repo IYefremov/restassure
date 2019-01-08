@@ -5,12 +5,14 @@
       "description": "Test Case 15266:Monitor-Repair Order: Search",
       "woNumber": "O-000-149273",
       "searchLocation": "Default Location",
-      "searchTimeFrame": "Last Year",
+      "searchTimeFrame": "Custom",
       "company": "000 15.11 Companey",
       "VIN": "1GCPKSE70CF109506",
       "page1": "1",
       "page2": "2",
-      "page999": "999"
+      "page999": "999",
+      "fromDate": "8/30/2016",
+      "toDate": "5/7/2018"
     }
   ],
   
@@ -26,7 +28,9 @@
       "serviceStatus": "All Services",
       "page1": "1",
       "page2": "2",
-      "page999": "999"
+      "page999": "999",
+      "fromDate": "8/30/2017",
+      "toDate": "5/7/2018"
     }
   ],
   
@@ -80,8 +84,10 @@
       "orderStatus": "On Hold",
       "orderStatusReason": "testreason",
       "searchLocation": "Default Location",
-      "searchTimeFrame": "Last Year",
-      "repairOrderNumber": "O-062-00168"
+      "searchTimeFrame": "Custom",
+      "repairOrderNumber": "O-062-00168",
+      "fromDate": "4/30/2017",
+      "toDate": "5/7/2018"
     }
   ],
   
@@ -92,8 +98,10 @@
       "orderStatus": "Closed",
       "orderStatusReason": "testreason",
       "searchLocation": "Default Location",
-      "searchTimeFrame": "Last Year",
-      "repairOrderNumber": "O-062-00168"
+      "searchTimeFrame": "Custom",
+      "repairOrderNumber": "O-062-00168",
+      "fromDate": "4/30/2017",
+      "toDate": "5/7/2018"
     }
   ],
   

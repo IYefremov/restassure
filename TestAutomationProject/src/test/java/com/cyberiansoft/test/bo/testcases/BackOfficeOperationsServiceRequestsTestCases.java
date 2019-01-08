@@ -837,7 +837,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.goToMonthInScheduler();
 		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
 		serviceRequestsWebPage.applyTechniciansFromScheduler();
-		int countBeforeAnySelections = serviceRequestsWebPage.countSR();
+		serviceRequestsWebPage.countSR();
 		serviceRequestsWebPage.selectTechnicianFromSchedulerByIndex(0);
 		serviceRequestsWebPage.applyTechniciansFromScheduler();
 	}

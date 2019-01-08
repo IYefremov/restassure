@@ -307,6 +307,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(xpath = "//div[@id='itemContainer']/div[1]//a[@class='detailsPopover']")
     private WebElement firstServiceRequestDetails;
 
+	@FindBy(xpath = "//a[@class='detailsPopover']")
+    private List<WebElement> serviceRequestsPopoverList;
+
 	@FindBy(xpath = "//div[@class='editServiceRequestPanel']/iframe")
     private WebElement editServiceRequestPanelFrame;
 
@@ -445,11 +448,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	}
 
 	public ServiceRequestsListWebPage selectFirstServiceRequestFromList() {
-        Actions actions = new Actions(driver);
         try {
-            actions.moveToElement(firstServiceRequestDetails).click().build().perform();
+            new Actions(driver)
+                    .moveToElement(serviceRequestsPopoverList.get(0))
+                    .click()
+                    .build()
+                    .perform();
         } catch (NoSuchElementException | StaleElementReferenceException e) {
-            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", firstServiceRequestDetails);
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", serviceRequestsPopoverList.get(0));
         }
         waitForLoading();
         switchToServiceRequestInfoFrame();

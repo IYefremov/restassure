@@ -477,7 +477,7 @@
       "tabName": "Sending",
       "profileName": "Estimate JST",
       "documentType": "Estimation",
-      "entityType": "Default",
+      "entityType": "Best",
       "ruleName": "Include Selected Services",
       "ruleEntityType": "Services",
       "ruleFilterType": "Include Selected",

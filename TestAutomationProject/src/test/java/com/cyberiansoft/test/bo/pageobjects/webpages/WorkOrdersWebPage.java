@@ -203,10 +203,9 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		checkboxUnselect(invoicefromdevicechkbox);
 	}
 
-	public boolean isWorkOrderExists(String wordernumber) {
-		boolean exists = wotable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + wordernumber + "']"))
-				.size() > 0;
-		return exists;
+	public boolean workOrderExists(String wordernumber) {
+        return wotable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + wordernumber + "']"))
+                .size() > 0;
 	}
 
 	public boolean verifySearchResultsByVIN(String vin) {
@@ -405,15 +404,15 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		waitForLoading();
 	}
 
-	public void setSearchFromDate(String date) {
-		// Thread.sleep(1000);
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).clear();
+	public WebPageWithFilter setSearchFromDate(String date) {
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")))).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys(date);
+        return PageFactory.initElements(driver, WebPageWithFilter.class);
 	}
 
-	public void setSearchToDate(String date) {
-		// Thread.sleep(1000);
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).clear();
+	public WebPageWithFilter setSearchToDate(String date) {
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")))).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys(date);
+	    return PageFactory.initElements(driver, WebPageWithFilter.class);
 	}
 }

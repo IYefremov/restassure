@@ -80,10 +80,10 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		invoicetypeteamcmb.clear();
 		invoicetypeteamcmb.sendKeys(srtypeteam);
 		waitABit(300);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + srtypeteam + "']")))
+		wait
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/em[text()='" + srtypeteam + "']")))
 				.click();
 		waitABit(1000);
-
 	}
 
 	public void selectNewServiceRequestTypePackage(String srtypepackage) {

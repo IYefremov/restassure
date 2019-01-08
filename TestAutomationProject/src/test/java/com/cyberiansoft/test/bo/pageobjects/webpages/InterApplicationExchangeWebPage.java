@@ -337,7 +337,6 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
         Select unselectedUsersSelection = new Select(addRuleUnselectedUsersList);
         Select selectedUsersSelection = new Select(addRuleSelectedUsersList);
         while (unselectedUsersSelection.getOptions().size() > 0 && usersToAdd != 0) {
-            System.out.println("In while");
             int selectedSize = selectedUsersSelection.getOptions().size();
             unselectedUsersSelection.selectByIndex(RandomUtils.nextInt(0, unselectedUsersSelection.getOptions().size()));
             if (!getBrowserType().equalsIgnoreCase("Edge")) {

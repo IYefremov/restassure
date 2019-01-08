@@ -40,13 +40,14 @@
       "page1": "1",
       "page2": "2",
       "pageInt50": "50",
-      "timeFrame": "Last Year",
       "inspNum": "E-062-00119",
       "customer": "000 My Company",
       "status": "Approved",
       "technician": "Serhii Toropov",
       "technicianFull": "Serhii Toropov",
-      "tableRowCount1": 1
+      "tableRowCount1": 1,
+      "fromTime": "6/18/2017",
+      "toTime": "6/22/2018"
     }
   ],
 
