@@ -78,6 +78,11 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		new WebDriverWait(appiumdriver, 10)
 		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Vehicle Part"))).click();
 	}
+
+	public void clickTechniciansCell() {
+		new WebDriverWait(appiumdriver, 10)
+				.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Technicians"))).click();
+	}
 	
 	public RegularNotesScreen clickNotesCell() {
 		appiumdriver.findElementByAccessibilityId("Notes").click();
@@ -437,6 +442,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectCategory(String categoryname) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Category"))).click();
 		if (!appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + categoryname + "']")).isDisplayed()) {
 			swipeToElement(appiumdriver.
