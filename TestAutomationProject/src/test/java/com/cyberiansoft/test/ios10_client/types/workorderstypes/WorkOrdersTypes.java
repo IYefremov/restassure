@@ -32,7 +32,9 @@ public enum WorkOrdersTypes implements  IWorkOrdersTypes {
     WO_VIN_ONLY("WO_VIN_only"),
     WO_VEHICLE_TRIM_VALIDATION("WO_Vehicle_Trim_Validation"),
     WO_PANEL_GROUP("WO_Panel_group"),
-    WO_WITH_PART_SERVICE("WO_with_part_service");
+    WO_GROUP_SERVICE_TYPE("WO_group_Service_type"),
+    WO_WITH_PART_SERVICE("WO_with_part_service"),
+    WO_MONITOR_REQUIRED_START("WO_MOnitor_Required_Start");
 
     private final String woType;
 
@@ -81,7 +83,9 @@ public enum WorkOrdersTypes implements  IWorkOrdersTypes {
             case WO_VEHICLE_TRIM_VALIDATION:
             case WO_PANEL_GROUP:
             case WO_WITH_PART_SERVICE:
+            case WO_GROUP_SERVICE_TYPE:
             case WO_TYPE_WITH_JOB:
+            case WO_MONITOR_REQUIRED_START:
                 if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
                     return (T) new VehicleScreen();
                 else

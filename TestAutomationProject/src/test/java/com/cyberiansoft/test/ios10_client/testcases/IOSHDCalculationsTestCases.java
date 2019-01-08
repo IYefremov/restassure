@@ -746,9 +746,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	
 	@Test(testName="Test Case 31498:WO: HD - Verify that amount is calculated and rounded correctly", 
 			description = "Verify that amount is calculated and rounded correctly")
-	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1()
+	public void  testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1()
 			{
-		
+
 		final String VIN  = "JA4LS31H8YP047397";
 		final String[] prices  = { "160", "105", "400", "195", "2400", "180", "160", "105", "300" };
 		final String discount  = "-25";

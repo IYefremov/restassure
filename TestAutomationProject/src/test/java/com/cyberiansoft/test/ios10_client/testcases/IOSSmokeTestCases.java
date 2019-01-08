@@ -468,6 +468,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		
 		vehiclescreen.setVIN(VIN);
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+
 		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DYE_SERVICE));
 		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
@@ -1930,6 +1931,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		visualscreen = new VisualInteriorScreen();
+        visualscreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
 		vehiclescreen = visualscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		Assert.assertEquals(vehiclescreen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		vehiclescreen.saveWizard();
@@ -2031,6 +2033,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		BaseUtils.waitABit(30*1000);
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
+        visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
 		vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		Assert.assertEquals(vehiclescreen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		vehiclescreen.saveWizard();
@@ -2797,7 +2800,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
         VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_PRICE_MATRIX);
 		vehiclescreen.setVIN(VIN);
-		vehiclescreen.verifyMakeModelyearValues("Mercedes-Benz", "Sprinter", "2014");
+		vehiclescreen.verifyMakeModelyearValues("Mercedes-Benz", "Sprinter Passenger", "2014");
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesscreen.selectServicePriceMatrices("Price Matrix Zayats");
@@ -2838,7 +2841,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		VehicleScreen vehiclescreen = myinspectionsscreen.addInspection(InspectionsTypes.INSP_TYPE_FOR_PRICE_MATRIX);
 		vehiclescreen.setVIN(VIN);
-		vehiclescreen.verifyMakeModelyearValues("Mercedes-Benz", "Sprinter", "2014");
+		vehiclescreen.verifyMakeModelyearValues("Mercedes-Benz", "Sprinter Passenger", "2014");
 		String inspnum = vehiclescreen.getInspectionNumber();
 		PriceMatrixScreen pricematrix = vehiclescreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.PRICE_MATRIX_ZAYATS);
 		pricematrix.selectPriceMatrix("VP1 zayats");
@@ -7211,45 +7214,58 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickHomeButton();
 	}
 
-	@Test(testName = "testGenerateInvoices", description = "testGenerateInvoices")
-	public void testGenerateInvoices() {
+	@Test(testName = "Test Case 50029:WO: Regular - Verify that default tech is not changed when reset order split",
+			description = "Verify that default tech is not changed when reset order split")
+	public void testWOVerifyThatDefaultTechIsNotChangedWhenResetOrderSplit() {
 
-		final String VIN = "2A4RR4DE2AR286008";
-
-
+		final String VIN = "1D7HW48NX6S507810";
+		final String pricevalue = "21";
+		final String defaulttech = "Oksi Employee";
+		final String techname = "Oksana Zayats";
 
 		homescreen = new HomeScreen();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.swtchToWholesaleMode();
-		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		VehicleScreen vehiclescreen = myworkordersscreen.addOrderWithSelectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER,
+				WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		vehiclescreen.setVIN(VIN);
 
-		for (int i = 0; i < 5000; i++) {
-
-            VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
-			vehiclescreen.setVIN(VIN);
-
-			/*ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-			SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
-			selectedservicescreen.clickVehiclePartsCell();
-			selectedservicescreen.selectVehiclePart("Cowl, Other");
-			selectedservicescreen.selectVehiclePart("Hood");
-			selectedservicescreen.saveSelectedServiceDetails();
-			selectedservicescreen.saveSelectedServiceDetails();*/
-			OrderSummaryScreen ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-
-			ordersummaryscreen.checkApproveAndCreateInvoice();
-			SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
-			selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-			ordersummaryscreen.clickSave();
-			InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectDefaultInvoiceType();
+		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
+		questionsscreen.swipeScreenUp();
+		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
+		ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAULT_TECH_OKSI);
+		selectedServiceDetailsScreen.setServicePriceValue(pricevalue);
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(defaulttech));
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		servicesscreen.selectService("3/4\" - Penny Size");
 
 
-			invoiceinfoscreen.setPO("23");
-			invoiceinfoscreen.clickSaveAsFinal();
-			System.out.println("++++ Invoices created: " +  i);
-		}
-
+		vehiclescreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		vehiclescreen.clickTech();
+		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
+		selectedservicescreen.selecTechnician(techname);
+		selectedservicescreen.unselecTechnician("Employee Simple 20%");
+		String alerttext = selectedservicescreen
+				.saveTechnociansViewWithAlert();
+		Assert.assertEquals(alerttext, "Changing default employees for a work order will change split data for all services.");
+		vehiclescreen = new VehicleScreen();
+		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		selectedServiceDetailsScreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAULT_TECH_OKSI);
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(defaulttech));
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen = servicesscreen.openServiceDetails("3/4\" - Penny Size");
+		selectedServiceDetailsScreen.setServicePriceValue(pricevalue);
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(techname));
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		servicesscreen= new ServicesScreen();
+		servicesscreen.cancelWizard();
+		myworkordersscreen.clickHomeButton();
 	}
 
 }
