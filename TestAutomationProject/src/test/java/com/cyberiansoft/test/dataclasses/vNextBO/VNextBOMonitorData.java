@@ -76,6 +76,15 @@ public class VNextBOMonitorData  {
     @JsonProperty("daysInProcess")
     private String daysInProcess;
 
+    @JsonProperty("timeFrame")
+    private String timeFrame;
+
+    @JsonProperty("fromDate")
+    private String fromDate;
+
+    @JsonProperty("toDate")
+    private String toDate;
+
     @JsonProperty("titles")
     private String[] titles;
 
@@ -172,6 +181,18 @@ public class VNextBOMonitorData  {
 
     public String getDaysInProcess() {
         return daysInProcess;
+    }
+
+    public String getTimeFrame() {
+        return timeFrame;
+    }
+
+    public String getFromDate() {
+        return fromDate;
+    }
+
+    public String getToDate() {
+        return toDate;
     }
 
     public List<String> getTitles() {

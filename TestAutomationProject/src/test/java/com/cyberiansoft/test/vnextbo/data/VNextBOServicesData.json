@@ -164,5 +164,18 @@
       "newMatrixServiceName": "Test Matrix Service",
       "serviceDescription": "test edit matrix service"
     }
+  ],
+
+  "verifyUserCanAddLaborPriceService": [
+    {
+      "rowID": "verifyUserCanAddLaborPriceService.01",
+      "description": "Test Case 79095:Verify user can add \"Labor\" price service",
+      "serviceName": "New labor type test name",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "servicePrice": "5",
+      "serviceLaborRate": "45",
+      "serviceDefaultLaborTime": "50"
+    }
   ]
 }

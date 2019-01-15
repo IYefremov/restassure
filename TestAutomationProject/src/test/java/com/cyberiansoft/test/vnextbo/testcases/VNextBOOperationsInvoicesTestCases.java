@@ -46,14 +46,14 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         }
         webdriver = DriverBuilder.getInstance().getDriver();
 
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
         loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage
-                .userLogin(userName, userPassword)
-                .executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
+                .userLogin(userName, userPassword);
+//                .executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
         leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
     }
 

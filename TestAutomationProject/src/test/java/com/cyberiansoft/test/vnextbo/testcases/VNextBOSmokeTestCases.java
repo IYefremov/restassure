@@ -79,11 +79,11 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
-		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
+		VNexBOUsersWebPage usersWebPage = leftmenu.selectUsersMenu();
 		userMail = data.getUserMailPrefix() + RandomStringUtils.randomAlphanumeric(5) + data.getUserMailPostbox();
-		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
+		VNexBOAddNewUserDialog adduserdialog = usersWebPage.clickAddUserButton();
 		adduserdialog.createNewUser(data.getFirstName(), data.getLastName(), userMail, data.getUserPhone());
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(userMail));
+		Assert.assertTrue(usersWebPage.findUserInTableByUserEmail(userMail));
 		userslist.add(userMail);
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);

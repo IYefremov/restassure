@@ -65,6 +65,12 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     @FindBy(id = "orderDaysInPhaseDropdown_listbox")
     private WebElement daysInPhaseDropDown;
 
+    @FindBy(xpath = "//span[@aria-owns='orderTimeframeDropdown_listbox']")
+    private WebElement timeFrameListBox;
+
+    @FindBy(id = "orderTimeframeDropdown_listbox")
+    private WebElement timeFrameDropDown;//div[@class='k-widget k-calendar']//td[@aria-selected='true']
+
     @FindBy(xpath = "//span[@aria-owns='orderDaysInProcessDropdown_listbox']")
     private WebElement daysInProcessListBox;
 
@@ -92,6 +98,9 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     @FindBy(xpath = "//ul[@id='orderDaysInProcessDropdown_listbox']/li")
     private List<WebElement> daysInProcessAutoCompleteListBox;
 
+    @FindBy(xpath = "//ul[@id='orderTimeframeDropdown_listbox']/li")
+    private List<WebElement> timeFrameAutoCompleteListBox;
+
     @FindBy(xpath = "//input[contains(@data-bind, 'daysInPhaseFrom')]")
     private WebElement daysInPhaseFromInput;
 
@@ -103,6 +112,18 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
 
     @FindBy(xpath = "//input[contains(@data-bind, 'daysInProcessTo')]")
     private WebElement daysInProcessToInput;
+
+    @FindBy(id = "advSearch_fromDate")
+    private WebElement customTimeFrameFromInput;
+
+    @FindBy(xpath = "advSearch_toDate")
+    private WebElement customTimeFrameToInput;
+
+    @FindBy(xpath = "advSearch_fromDate_dateview")
+    private WebElement customTimeFromWidget;
+
+    @FindBy(xpath = "advSearch_toDate_dateview")
+    private WebElement customTimeToWidget;
 
     @FindBy(xpath = "//button[@class='btn-black pull-right']")
     private WebElement searchButton;
@@ -258,6 +279,12 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return this;
     }
 
+    public VNextBORepairOrdersAdvancedSearchDialog setTimeFrame(String timeFrame) {
+        clickTimeFrameBox();
+        selectTimeFrame(timeFrame);
+        return this;
+    }
+
     public VNextBORepairOrdersAdvancedSearchDialog typeDaysNumForDaysInPhaseFromInput(String days) {
         return typeDays(daysInPhaseFromInput, days);
     }
@@ -274,10 +301,25 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return typeDays(daysInProcessToInput, days);
     }
 
+    public VNextBORepairOrdersAdvancedSearchDialog selectCustomDateFromInput(String date) {
+        return setOneMonthPriorToCurrentDate(customTimeFrameFromInput, date);
+    }
+
+    public VNextBORepairOrdersAdvancedSearchDialog selectCustomDateToInput(String days) {
+        return setOneMonthPriorToCurrentDate(customTimeFrameToInput, days);
+    }
+
     private VNextBORepairOrdersAdvancedSearchDialog typeDays(WebElement daysInPhaseToInput, String days) {
         wait.until(ExpectedConditions.visibilityOf(daysInPhaseToInput));
         wait.until(ExpectedConditions.elementToBeClickable(daysInPhaseToInput)).clear();
         daysInPhaseToInput.sendKeys(days);
+        return this;
+    }
+
+    private VNextBORepairOrdersAdvancedSearchDialog setOneMonthPriorToCurrentDate(WebElement widget, String date) {
+        wait.until(ExpectedConditions.visibilityOf(customTimeFromWidget));
+        wait.until(ExpectedConditions.elementToBeClickable(widget)).clear();
+        widget.sendKeys(date);
         return this;
     }
 
@@ -312,6 +354,11 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return this;
     }
 
+    private VNextBORepairOrdersAdvancedSearchDialog clickTimeFrameBox() {
+        wait.until(ExpectedConditions.elementToBeClickable(timeFrameListBox)).click();
+        return this;
+    }
+
     private VNextBORepairOrdersAdvancedSearchDialog selectPhase(String phase) {
         return selectOptionInDropDown(phaseDropDown, phaseAutoCompleteListBox, phase);
     }
@@ -330,6 +377,10 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
 
     private VNextBORepairOrdersAdvancedSearchDialog selectDaysInProcess(String daysInProcess) {
         return selectOptionInDropDown(daysInProcessDropDown, daysInProcessAutoCompleteListBox, daysInProcess);
+    }
+
+    private VNextBORepairOrdersAdvancedSearchDialog selectTimeFrame(String timeFrame) {
+        return selectOptionInDropDown(timeFrameDropDown, timeFrameAutoCompleteListBox, timeFrame);
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox,

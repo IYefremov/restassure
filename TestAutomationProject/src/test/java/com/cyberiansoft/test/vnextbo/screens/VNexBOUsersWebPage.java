@@ -22,10 +22,10 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@id='users-list']/table")
 	private VNextWebTable userstable;
 	
-	@FindBy(xpath = "//div[@id='pagingPanel']/button[@data-automation-id='usersListNext']")
+	@FindBy(xpath = "//tfoot//button[contains(@data-bind, 'nextPage')]")
 	private WebElement nextpagebtn;
 	
-	@FindBy(xpath = "//div[@id='pagingPanel']/button[@data-automation-id='usersListPrev']")
+	@FindBy(xpath = "//tfoot//button[contains(@data-bind, 'previousPage')]")
 	private WebElement previouspagebtn;
 
 	@FindBy(id = "advSearchUsers-freeText")

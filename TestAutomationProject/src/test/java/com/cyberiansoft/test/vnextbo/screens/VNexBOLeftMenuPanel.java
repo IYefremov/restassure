@@ -10,10 +10,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
-    @FindBy(id = "mainMenu")
+    @FindBy(xpath = "//ul[@id='mainMenu']")
     private WebElement mainmenu;
+
+    @FindBy(id = "menuBtn")
+    private WebElement menuButton;
+
+    @FindBy(xpath = "//body[@class]")
+    private WebElement body;
 
     @FindBy(xpath = "//*[@data-automation-id='inspections']")
     private WebElement inspectionsmenu;
@@ -35,15 +42,6 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//li[@data-automation-id='orders']")
     private WebElement repairordersmenu;
-
-    @FindBy(xpath = "//div[@class='left-menu-btn closed']")
-    private WebElement closedMenuButton;
-
-    @FindBy(xpath = "//div[@class='left-menu-btn']")
-    private WebElement openedMenuButton;
-
-    @FindBy(xpath = "//div[@tabindex=0 and @class='left-menu__wrapper']")
-    private WebElement menuButton;
 
     @FindBy(xpath = "//iframe[@id='embed']/following-sibling::div[5]//iframe")
     private WebElement tutorialFrame;
@@ -87,8 +85,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     }
 
     public boolean isUsersMenuItemExists() {
-        if (!isMainMenuExpanded(SETTINGS_MAINMENU_ITEM))
-            expandMainMenu(SETTINGS_MAINMENU_ITEM);
+        if (!isMainMenuExpanded()) {
+            expandMainMenu();
+        }
         return driver.findElement(By.xpath("//*[@data-automation-id='users']")).isDisplayed();
     }
 
@@ -106,19 +105,25 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
                 driver, VNextBOQuickNotesWebPage.class);
     }
 
-    public boolean isMainMenuExpanded(String mainMenu) {
-        return getMainMenuItem(mainMenu).getAttribute("aria-expanded") != null;
+    private boolean isMainMenuExpanded() {
+        wait.until(ExpectedConditions.attributeContains(body, "class", "body-mobile--scroll-hidden"));
+        try {
+            return wait.until(ExpectedConditions.attributeContains(body, "class", "left-menu--open"));
+        } catch (Exception ignored) {
+            return false;
+        }
     }
 
-    public void expandMainMenu(String mainMenu) {
-        getMainMenuItem(mainMenu).click();
-        waitABit(1000);
+    public void expandMainMenu() {
+        if (!isMainMenuExpanded()) {
+            wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+            wait.until(ExpectedConditions.attributeContains(body, "class", "left-menu--open"));
+        }
     }
 
-    private WebElement getMainMenuItem(String mainMenu) {
-        waitLong.until(ExpectedConditions.visibilityOf(this.mainmenu));
+    private void clickMainMenuItem(String mainMenu) {
+        this.mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")).click();
         waitABit(1000);
-        return this.mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"));
     }
 
     private void selectMenuItem(WebElement menuitem, String mainmenuitem) {
@@ -129,8 +134,8 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         } catch (Exception ignored) {}
 
         driver.switchTo().defaultContent();
-        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
-        expandMainMenu(mainmenuitem);
+        expandMainMenu();
+        clickMainMenuItem(mainmenuitem);
         wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
     }
 }

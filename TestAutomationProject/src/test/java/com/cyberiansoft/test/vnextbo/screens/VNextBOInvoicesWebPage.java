@@ -61,8 +61,12 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	public VNextBOInvoicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        wait.until(ExpectedConditions.visibilityOf(invoices));
-	}
+        try {
+            wait.until(ExpectedConditions.visibilityOf(invoices));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	public boolean areHeaderIconsDisplayed() {
 	    wait.until(ExpectedConditions.visibilityOf(headerIcons));
