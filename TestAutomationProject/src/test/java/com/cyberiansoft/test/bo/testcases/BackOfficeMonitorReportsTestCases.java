@@ -164,16 +164,16 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		averagerepairtimereportpage.selectSearchLocation(data.getSearchLocation());
 
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/d/yyyy");
 
 		LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
-		LocalDateTime then = now.minusDays(7);
-		LocalDateTime after = now.plusDays(1);
-		averagerepairtimereportpage.setSearchFromDate(then.format(format));
+        LocalDateTime before = now.minusDays(7);
+        LocalDateTime after = now.plusDays(1);
+        averagerepairtimereportpage.setSearchFromDate(before.format(format));
 		averagerepairtimereportpage.setSearchToDate(after.format(format));
 
 		averagerepairtimereportpage.clickFindButton();
-//		Assert.assertFalse(averagerepairtimereportpage.areLocationResultsDisplayed(data.getSearchLocation())); todo find out, if it should be false
+		Assert.assertFalse(averagerepairtimereportpage.areLocationResultsDisplayed(data.getSearchLocation()));
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

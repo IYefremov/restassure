@@ -79,6 +79,12 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_rbcTechsForFilter_DropDown")
 	private DropDown techniciandd;
 
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_comboFilterSrTypes_Input")
+	private ComboBox serviceRequestcmb;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_comboFilterSrTypes_DropDown")
+	private DropDown serviceRequestdd;
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_tbSearchTags_tag")
 	private TextField tagsfld;
 
@@ -417,6 +423,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		selectComboboxValueWithTyping(techniciancmb, techniciandd, technician);
 	}
 
+	public void setServiceRequestType(String serviceRequest) {
+		selectComboboxValue(serviceRequestcmb, serviceRequestdd, serviceRequest);
+	}
+
 	public void setSearchFreeText(String anytext) {
 		freetextfld.clearAndType(anytext);
 	}
@@ -612,12 +622,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 				.getText();
 	}
 
-	public void clickGeneralInfoEditButton() {
+	public ServiceRequestsListWebPage clickGeneralInfoEditButton() {
 		click(getGeneralInfoEditButton());
+		return this;
 	}
 
-	public void clickCustomerEditButton() {
+	public ServiceRequestsListWebPage clickCustomerEditButton() {
 		click(getCustomerEditButton());
+		return this;
 	}
 
 	public void clickVehicleInforEditButton() {
@@ -676,20 +688,28 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		selectComboboxValueWithTyping(addsrvteamcmb, addsrvteamdd, value);
 	}
 
-	public void selectAddServiceRequestsComboboxValue(String value) {
+	public ServiceRequestsListWebPage selectAddServiceRequestsComboboxValue(String value) {
 		selectComboboxValue(addservicerequestcmb, addservicerequestdd, value);
+		return this;
 	}
 
-	public void setServiceRequestGeneralInfo(String _team, String assignedto, String po, String ro) {
+	public ServiceRequestsListWebPage setServiceRequestGeneralInfo(String _team, String assignedto, String po, String ro) {
+        setServiceRequestGeneralInfo(_team, assignedto);
+		clearAndType(addsrvponum, po);
+		clearAndType(addsrvronum, ro);
+		return this;
+	}
+
+	public ServiceRequestsListWebPage setServiceRequestGeneralInfo(String _team, String assignedto) {
 		setServiceRequestGeneralInfoTeam(_team);
 		waitABit(2000);
 		setServiceRequestGeneralInfoAssignedTo(assignedto);
-		clearAndType(addsrvponum, po);
-		clearAndType(addsrvronum, ro);
+		return this;
 	}
 
-	public void selectServiceRequestCustomer(String customer) {
+	public ServiceRequestsListWebPage selectServiceRequestCustomer(String customer) {
 		selectComboboxValueWithTyping(addsrvcustomercmb, addsrvcustomerdd, customer);
+		return this;
 	}
 
 	public void selectServiceRequestOwner(String owner) {
@@ -730,7 +750,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		selectComboboxValueWithTyping(addsrvinsurancecmb, addsrvinsurancedd, insurance);
 	}
 
-	public void clickDoneButton() {
+	public ServiceRequestsListWebPage clickDoneButton() {
 		waitABit(2000);
 		for (WebElement donebtn : donebtns) {
 		    try {
@@ -747,6 +767,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
                 }
 		    }
 		}
+		return this;
 	}
 
 	public boolean saveNewServiceRequest() {

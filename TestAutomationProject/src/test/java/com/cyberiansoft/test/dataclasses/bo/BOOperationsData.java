@@ -112,6 +112,15 @@ public class BOOperationsData {
     @JsonProperty("toTime")
     private String toTime;
 
+    @JsonProperty("serviceType")
+    private String serviceType;
+
+    @JsonProperty("serviceRequestGeneralInfo")
+    private String serviceRequestGeneralInfo;
+
+    @JsonProperty("serviceTypeVit")
+    private String serviceTypeVit;
+
     public String getInvoiceNumber() {
         return invoiceNumber;
     }
@@ -254,5 +263,17 @@ public class BOOperationsData {
 
     public String getToTime() {
         return toTime;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public String getServiceRequestGeneralInfo() {
+        return serviceRequestGeneralInfo;
+    }
+
+    public String getServiceTypeVit() {
+        return serviceTypeVit;
     }
 }

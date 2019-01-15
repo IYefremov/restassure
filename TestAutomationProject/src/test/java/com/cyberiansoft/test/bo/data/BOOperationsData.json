@@ -58,10 +58,12 @@
     {
       "rowID": "testOperationNewServiceRequest.01",
       "description": "Test Case 18475:Operation - New service request",
-      "SRtype": "Vit_All_Services",
-      "teamName": "Default team",
-      "textSearchParameter": "Alex SASHAZ",
-      "newServiceRequest": "Alex SASHAZ",
+      "serviceTypeVit": "Vit_All_Services",
+      "serviceType": "01_Alex2SRT",
+      "teamName": "01_TimeRep_team",
+      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
+      "textSearchParameter": "Automation Automation",
+      "newServiceRequest": "Automation Automation",
       "assignedTo": "Igor Baluev",
       "POnum": "D525",
       "ROnum": "Dfg 25",
@@ -71,7 +73,8 @@
       "year": "2001",
       "insurance": "Oranta",
       "label": "test",
-      "status": "Closed"
+      "status": "Closed",
+      "fromTime": "5/12/2017"
     }
   ],
 

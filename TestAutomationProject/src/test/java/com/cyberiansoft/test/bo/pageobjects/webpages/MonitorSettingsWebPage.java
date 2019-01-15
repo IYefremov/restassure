@@ -57,7 +57,7 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 		return null;
 	}
 	
-	public boolean isOrderStatusReasonExists(String orderstatusreason) {
+	public boolean isOrderStatusReasonPresent(String orderstatusreason) {
 		boolean exists =  orderstatusreasonstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + orderstatusreason + "']")).size() > 0;
 		return exists;
 	}
@@ -194,4 +194,9 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 		return true;
 	}
 
+    public void verifyOrderStatusReasonIsNotPresent(String reason) {
+        if (isOrderStatusReasonPresent(reason)) {
+            deleteOrderStatusReason(reason);
+        }
+    }
 }

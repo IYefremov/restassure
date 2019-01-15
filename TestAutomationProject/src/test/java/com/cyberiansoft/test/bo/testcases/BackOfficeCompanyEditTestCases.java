@@ -347,16 +347,16 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
 
 		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage srlistpage = operationspage.clickNewServiceRequestList();
-		srlistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
-		srlistpage.clickAddServiceRequestButton();
+		ServiceRequestsListWebPage serviceRequestsListPage = operationspage.clickNewServiceRequestList();
+		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceType());
+		serviceRequestsListPage.clickAddServiceRequestButton();
 
-        ServiceRequestListServiceDialog serviceDialog = srlistpage
+        ServiceRequestListServiceDialog serviceDialog = serviceRequestsListPage
                 .clickServiceEditButton()
                 .openServicesDropDown();
         Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
-		srlistpage.clickDoneButton();
-		srlistpage.cancelNewServiceRequest();
+		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListPage.cancelNewServiceRequest();
 
 		companypage = backOfficeHeader.clickCompanyLink();
 		servicerequesttypespage = companypage.clickServiceRequestTypesLink();
@@ -365,14 +365,14 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
 
 		operationspage = backOfficeHeader.clickOperationsLink();
-		srlistpage = operationspage.clickNewServiceRequestList();
-		srlistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
-		srlistpage.clickAddServiceRequestButton();
+		serviceRequestsListPage = operationspage.clickNewServiceRequestList();
+		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceType());
+		serviceRequestsListPage.clickAddServiceRequestButton();
 
-        srlistpage.clickServiceEditButton();
+        serviceRequestsListPage.clickServiceEditButton();
         Assert.assertEquals(serviceDialog.getAllAvailableServices(), "52");
-		srlistpage.clickDoneButton();
-		srlistpage.cancelNewServiceRequest();
+		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListPage.cancelNewServiceRequest();
 
 		companypage = backOfficeHeader.clickCompanyLink();
 		servicerequesttypespage = companypage.clickServiceRequestTypesLink();

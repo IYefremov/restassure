@@ -35,7 +35,7 @@ public class WebPageWithPagination extends BaseWebPage {
 	@FindBy(xpath = "//*[contains(@id, 'ChangePageSizeLinkButton')]")
 	private WebElement changesizebtn;
 		
-	@FindBy(xpath = "//input[contains(@id, 'GoToPageTextBox')]")
+	@FindBy(xpath = "//input[contains(@id, 'GoToPageTextBox') and @type='text']")
 	private WebElement gotopagefld;
 		
 	@FindBy(xpath = "//*[contains(@id, 'GoToPageLinkButton')]")

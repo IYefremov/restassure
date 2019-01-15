@@ -35,6 +35,8 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
 		repairorderspage.selectSearchLocation(data.getSearchLocation());
 		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
+		repairorderspage.setSearchFromDate(data.getFromDate());
+		repairorderspage.setSearchToDate(data.getToDate());
 		repairorderspage.clickFindButton();
 		Assert.assertEquals(data.getPage1(), repairorderspage.getCurrentlySelectedPageNumber());
 		Assert.assertEquals(data.getPage1(), repairorderspage.getGoToPageFieldValue());
@@ -208,17 +210,18 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
         MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
 
-        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();	
-		if (monitorsettingspage.isOrderStatusReasonExists(data.getOrderStatusReason())) {
-			monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
-		}		
-		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
+        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+
+        monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
+        monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
 		
 		monitorPage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation(data.getSearchLocation());
 		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
+        repairorderspage.setSearchFromDate(data.getFromDate());
+        repairorderspage.setSearchToDate(data.getToDate());
 		repairorderspage.setSearchWoNumber(data.getRepairOrderNumber());
 		repairorderspage.clickFindButton();
 		
@@ -240,18 +243,18 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
         MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
 
-        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();	
-		if (monitorsettingspage.isOrderStatusReasonExists(data.getOrderStatusReason())) {
-			monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
-		}		
-		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
+        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+        monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
+        monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
 		
 		monitorPage = backOfficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation(data.getSearchLocation());
-		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
-		repairorderspage.setSearchWoNumber(data.getRepairOrderNumber());
+        repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
+        repairorderspage.setSearchFromDate(data.getFromDate());
+        repairorderspage.setSearchToDate(data.getToDate());
+        repairorderspage.setSearchWoNumber(data.getRepairOrderNumber());
 		repairorderspage.clickFindButton();
 		
 		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(data.getRepairOrderNumber());
@@ -273,12 +276,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
         MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
         
         MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
-		if (monitorsettingspage.isOrderStatusReasonExists(data.getOrderStatusReason())) {
-			monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
-		}	
-		if (monitorsettingspage.isOrderStatusReasonExists(data.getOrderStatusReasonEdited())) {
-			monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReasonEdited());
-		}
+        monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
 		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
 		monitorsettingspage.clickEditOrderStatusReason(data.getOrderStatusReason());
 		Assert.assertEquals(data.getOrderStatus(), monitorsettingspage.getNewOrderStatus());

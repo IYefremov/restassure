@@ -180,21 +180,35 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
 
         ServiceRequestsListWebPage serviceRequestsListPage = operationsPage.clickNewServiceRequestList();
+
+        serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceType());
+        serviceRequestsListPage.clickAddServiceRequestButton();
+
+        serviceRequestsListPage
+                .clickGeneralInfoEditButton()
+                .setServiceRequestGeneralInfo(data.getTeamName(), data.getServiceRequestGeneralInfo())
+                .clickDoneButton()
+                .clickCustomerEditButton()
+                .selectServiceRequestCustomer(data.getNewServiceRequest())
+                .clickDoneButton()
+                .saveNewServiceRequest();
+
         serviceRequestsListPage.makeSearchPanelVisible();
 
         serviceRequestsListPage.verifySearchFieldsAreVisible();
 
         serviceRequestsListPage.selectSearchTeam(data.getTeamName());
         serviceRequestsListPage.setSearchFreeText(data.getTextSearchParameter());
+        serviceRequestsListPage.setServiceRequestType(data.getServiceType());
         serviceRequestsListPage.clickFindButton();
         serviceRequestsListPage.verifySearchResultsByServiceName(data.getTextSearchParameter());
 
-        serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getSRtype());
-        serviceRequestsListPage.clickAddServiceRequestButton();
-        serviceRequestsListPage.clickGeneralInfoEditButton();
-        serviceRequestsListPage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(),
-                data.getPOnum(), data.getROnum());
-        serviceRequestsListPage.clickDoneButton();
+        serviceRequestsListPage
+                .selectAddServiceRequestsComboboxValue(data.getServiceTypeVit())
+                .clickAddServiceRequestButton()
+                .clickGeneralInfoEditButton()
+                .setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPOnum(), data.getROnum())
+                .clickDoneButton();
 
         serviceRequestsListPage.clickCustomerEditButton();
         serviceRequestsListPage.selectServiceRequestCustomer(data.getNewServiceRequest());
@@ -216,6 +230,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
         serviceRequestsListPage.makeSearchPanelVisible();
         serviceRequestsListPage.setSearchFreeText(data.getNewServiceRequest());
+        serviceRequestsListPage.setServiceRequestType(data.getServiceTypeVit());
         serviceRequestsListPage.clickFindButton();
         Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByServiceName(data.getNewServiceRequest()));
         Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
@@ -227,7 +242,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         serviceRequestsListPage.setSearchFreeText(data.getNewServiceRequest());
         serviceRequestsListPage.clickFindButton();
         Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
-        Assert.assertEquals(data.getStatus(), serviceRequestsListPage.getFirstServiceRequestStatus());
+        Assert.assertEquals(serviceRequestsListPage.getFirstServiceRequestStatus(), data.getStatus());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
