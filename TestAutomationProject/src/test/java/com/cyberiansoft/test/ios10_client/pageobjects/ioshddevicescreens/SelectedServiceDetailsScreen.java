@@ -310,7 +310,9 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Technicians")));
 
+
 		IOSElement techsplittable =  getTechnicianSplitTable();
+		scrollTable(techsplittable, technician);
 		techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='unselected']")).click();
 	}
 	
@@ -468,6 +470,14 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 
+	public void cancelTechViewDetails() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Cancel")));
+		IOSElement navBar = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Technicians' and type = 'XCUIElementTypeNavigationBar'"));
+
+		navBar.findElementByAccessibilityId("Cancel").click();
+	}
+
 	public void clickAdjustments() {
 		appiumdriver.findElementByName("Adjustments").click();
 	}
@@ -542,6 +552,11 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
 	public WebElement getTableParentCell(String cellname) {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
+	}
+
+	public void clickTechniciansCell() {
+		new WebDriverWait(appiumdriver, 10)
+				.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Technicians"))).click();
 	}
 
 }
