@@ -4,6 +4,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
@@ -356,9 +357,10 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 
 	public void clickTech() {
-		if (!appiumdriver.findElementByAccessibilityId("Tech").isDisplayed())
-			scrollToElement("Tech");
-		appiumdriver.findElementByAccessibilityId("Tech").click();
+		MobileElement vehicleTable = (MobileElement) appiumdriver.findElementByAccessibilityId("VehicleTable");
+		if (!vehicleTable.findElementByAccessibilityId("Tech").isDisplayed())
+			scrollToElement(vehicleTable.findElementByAccessibilityId("Tech"));
+		vehicleTable.findElementByAccessibilityId("Tech").click();
 	}
 
 	public void setStock(String stock) {

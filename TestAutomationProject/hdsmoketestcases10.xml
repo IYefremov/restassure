@@ -9,10 +9,7 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
 
-
-
-          <include name="testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice" />
-
+            
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />  -->  
 		  <!--<include name="testUpdateDatabase" />           
@@ -29,7 +26,7 @@
           <include name="testApproveInspectionsOnDeviceViaAction" />
           <include name="testArchiveInspectionsOnDeviceViaAction" /> 
           <include name="testApproveInspectionOnBackOfficeFullInspectionApproval" /> 
-          <include name="testApproveInspectionOnBackOfficeLinebylineApproval" />
+
           <include name="testCreateInspectionFromWO" /> 
           <include name="testCreateInvoiceWithTwoWOsAndCopyVehicle" />
           <include name="testCreateInspectionFromInvoiceWithTwoWOs" /> 
@@ -149,7 +146,13 @@
 		  <include name="testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected" />  
 		  <include name="testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt" />
 		  <include name="testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON" />
-		    
+          <include name="testWOVerifyThatDefaultTechIsNotChangedWhenResetOrderSplit" />
+          <include name="testWOVerifyAssignTechToServiceTypeInsteadOfIndividualServices" />
+          <include name="testWOVerifyThatItIsPossibleToAssignTechWhenWOIsNotStarted" />
+          <include name="testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold" />
+          <include name="testWOVerifyThatTechSplitAssignedFormVehicleScreenIsSetToServicesUnderList" />
+          <include name="testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
+
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />    
         </methods>
       </class>

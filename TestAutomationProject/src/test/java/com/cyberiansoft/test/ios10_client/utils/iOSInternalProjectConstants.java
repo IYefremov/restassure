@@ -58,6 +58,7 @@ public class iOSInternalProjectConstants {
     public static final String CALC_MONEY_PP_VEHICLE = "Calc_Money_PP_Vehicle";
     public static final String CALC_MONEY_PP_PANEL = "Calc_Money_PP_Panel";
     public static final String CALC_MONEY_PP_SERVICE = "Calc_Money_PP_Service";
+    public static final String CALC_PRICE_MATRIX = "Calc_Price_Matrix";
     public static final String SERVICE_WITH_SUB_SERVICE = "Service_with_sub_service";
     public static final String SERVICE_WITH_DEFAULT_TECH_OKSI = "Service_with_default_Tech_oksi";
     

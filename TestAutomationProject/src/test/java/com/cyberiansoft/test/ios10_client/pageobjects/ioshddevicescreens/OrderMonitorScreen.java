@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -17,6 +18,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	
@@ -172,5 +176,38 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		if (appiumdriver.findElementsByAccessibilityId("checkbox unchecked").size() > 0)
 			appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();
 	}
+
+	public boolean isStartOrderButtonExists() {
+		return appiumdriver.findElementsByAccessibilityId("Start").size() > 0;
+	}
+
+	public void clickStartOrderButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Start")));
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Start")));
+		appiumdriver.findElementByAccessibilityId("Start").click();
+	}
+
+	public void clickTech() {
+		appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[6]").click();
+	}
+
+	public String getTechnicianValue() {
+		return appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[6]/XCUIElementTypeStaticText[2]").getAttribute("value");
+	}
+
+	public void changeStatusForWorkOrder(String newWOSTatus, String reason) {
+		MobileElement toolbar = (MobileElement) appiumdriver.findElementByAccessibilityId("Toolbar");
+		toolbar.findElementsByClassName("XCUIElementTypeButton").get(2).click();
+		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
+		pickerwhl.setValue(newWOSTatus);
+
+		IOSElement donebtn = (IOSElement) appiumdriver.findElementByAccessibilityId("StringPicker_Done");
+
+		new TouchAction(appiumdriver).tap(tapOptions().withElement(element(donebtn))).perform();
+		appiumdriver.findElementByAccessibilityId(reason).click();
+	}
+
 
 }
