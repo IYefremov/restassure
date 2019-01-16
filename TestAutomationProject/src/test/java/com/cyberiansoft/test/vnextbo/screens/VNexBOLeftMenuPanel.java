@@ -122,7 +122,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     }
 
     private void clickMainMenuItem(String mainMenu) {
-        this.mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")).click();
+        wait.until(ExpectedConditions
+                .elementToBeClickable(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
+                .click();
         waitABit(1000);
     }
 
