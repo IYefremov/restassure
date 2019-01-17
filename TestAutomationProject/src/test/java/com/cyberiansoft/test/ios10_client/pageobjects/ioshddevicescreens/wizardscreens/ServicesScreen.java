@@ -215,7 +215,10 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 	
 	public SelectedServiceDetailsScreen selectBundleServiceDetails(String servicename) {
-		appiumdriver.findElementByAccessibilityId(servicename).click();
+
+		if (!appiumdriver.findElementByAccessibilityId(servicename).isDisplayed()) {
+			scrollToElement(servicename);
+		}
 		appiumdriver.findElement(MobileBy.AccessibilityId(servicename))
 				.findElement(MobileBy.AccessibilityId("unselected")).click();
 		return new SelectedServiceDetailsScreen();

@@ -41,6 +41,7 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	}
 	
 	public void selectCategory(String categoryname) {
+		categorycell.click();
 		appiumdriver.findElementByAccessibilityId(categoryname).click();
 	}
 	
@@ -57,6 +58,7 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	public void selectServicePartSubcategoryPart(String subcategorypartname) {
 		partcell.click();
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {
@@ -65,7 +67,7 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	}
 	
 	public void saveSelectedServicePart() {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar[@name='Service Part']/XCUIElementTypeButton[@name='Save']")).click();
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeNavigationBar[@name='Service Parts']/XCUIElementTypeButton[@name='Save']")).click();
 	}
 	
 	public WebElement getTableParentCell(String cellname) {
