@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.OrderMonitorServiceDetailsPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -16,7 +17,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
@@ -63,14 +63,14 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public OrderMonitorScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Order Monitor")));
 	}
 	
-	public void selectPanel(String panelname) {
+	public OrderMonitorServiceDetailsPopup selectPanel(String panelname) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(panelname))).click();
+		return new OrderMonitorServiceDetailsPopup();
 	}
 	
 	public List<String> getPanelsStatuses(String panelname) {
@@ -96,11 +96,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public void clickDoneIcon() {
 		appiumdriver.findElementByAccessibilityId("Done icon").click();
 	}
-	
-	public void setCompletedServiceStatus() {
-		clickServiceStatusCell();
-		appiumdriver.findElementByAccessibilityId("Completed").click();
-	}
+
 	
 	public void setCompletedPhaseStatus() {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1][@name='Completed']").click();
@@ -111,27 +107,12 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public void clickChangeStatusCell() {
 		appiumdriver.findElementByAccessibilityId("Change Status").click();
 	}
-	
-	public void clickServiceStatusCell() {
-		appiumdriver.findElementByAccessibilityId("Service Status").click();
-	}
-	
-	
+
 	public void clickStartPhase() {
 		monitorservicestable.findElementByIosNsPredicate("name = 'Repair phase' and type = 'XCUIElementTypeCell'")
 				.findElementByAccessibilityId("btnStartReset").click();
 	}
-	
-	public OrderMonitorScreen clickServiceDetailsDoneButton() {
-		appiumdriver.findElementByAccessibilityId("Done icon").click();
-		return this;
-	}
-	
-	public boolean isStartServiceButtonPresent() {
-		return appiumdriver.findElementByAccessibilityId("Start Service").isDisplayed();
-	}
 
-	
 	public boolean isStartPhaseButtonPresent() {
 		return monitorservicestable.findElementByIosNsPredicate("name = 'Repair phase' and type = 'XCUIElementTypeCell'")
 				.findElementsByAccessibilityId("btnStartReset").size() > 0;
@@ -151,13 +132,9 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Repair phase"))).click();
 	}
 	
-	public void clickStartService() {
-		appiumdriver.findElementByAccessibilityId("Start Service").click();
-	}
+
 	
-	public boolean isServiceStartDateExists() { 
-		return appiumdriver.findElementsByAccessibilityId("Start Date").size() > 0;
-	}
+
 	
 	public TeamWorkOrdersScreen clickBackButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
@@ -187,14 +164,6 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Start")));
 		appiumdriver.findElementByAccessibilityId("Start").click();
-	}
-
-	public void clickTech() {
-		appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[6]").click();
-	}
-
-	public String getTechnicianValue() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[6]/XCUIElementTypeStaticText[2]").getAttribute("value");
 	}
 
 	public void changeStatusForWorkOrder(String newWOSTatus, String reason) {

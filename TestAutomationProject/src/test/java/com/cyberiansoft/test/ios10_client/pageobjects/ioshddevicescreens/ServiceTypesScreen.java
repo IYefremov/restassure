@@ -26,14 +26,14 @@ public class ServiceTypesScreen extends iOSHDBaseScreen {
         return serviceTypesTableView.findElementsByAccessibilityId(panelOrServiceName).size() > 0;
     }
 
-    public SelectedServiceDetailsScreen clickOnPanel(String panelName) {
+    public TechniciansPopup clickOnPanel(String panelName) {
         MobileElement serviceTypesTableView = (MobileElement) appiumdriver.findElementByAccessibilityId("ServiceTypesTableView");
         if (!appiumdriver.findElementByAccessibilityId(panelName).isDisplayed()) {
             swipeTableUp(appiumdriver.
                     findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + panelName + "']/..")), serviceTypesTableView);
         }
         serviceTypesTableView.findElementByAccessibilityId(panelName).click();
-        return new SelectedServiceDetailsScreen();
+        return new TechniciansPopup();
     }
 
     public ServicesScreen clickSaveButton() {

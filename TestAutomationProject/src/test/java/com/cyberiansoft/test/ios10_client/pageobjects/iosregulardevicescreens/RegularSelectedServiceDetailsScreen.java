@@ -241,15 +241,19 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectTechniciansCustomView() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Custom")));
-		appiumdriver.findElement(MobileBy.xpath("//UIASegmentedControl[1]/UIAButton[@name=\"Custom\"]")).click();
+		appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Custom")).click();
+	}
+
+	public boolean isCustomTabSelected() {
+		return appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Custom")).getAttribute("value") != null;
 	}
 
 	public void selectTechniciansEvenlyView() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Evenly")));
-		appiumdriver.findElement(MobileBy.xpath("//UIASegmentedControl[1]/UIAButton[@name=\"Evenly\"]")).click();
+		appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Evenly")).click();
+	}
+
+	public boolean isEvenlyTabSelected() {
+		return appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Evenly")).getAttribute("value") != null;
 	}
 	
 	public void removeService() {
@@ -348,7 +352,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		String techitianlabel = appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
 						+ technician + "\")]/XCUIElementTypeStaticText[1]").getAttribute("label");
 		
-		return techitianlabel.substring(techitianlabel.indexOf("%"), techitianlabel.indexOf(")"));
+		return techitianlabel.substring(techitianlabel.lastIndexOf("%"), techitianlabel.indexOf(")"));
 	}
 
 	public void setTechnicianCustomPercentageValue(String technician,

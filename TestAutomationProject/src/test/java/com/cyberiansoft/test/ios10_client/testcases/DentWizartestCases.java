@@ -282,17 +282,17 @@ public class DentWizartestCases extends BaseTestCase {
 			selectedservicescreen.selectVehiclePart(vehicleparts2[i]);
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.clickTechniciansIcon();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
+		TechniciansPopup techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), "$41.66");
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), "$41.66");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianB), "$41.67");
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianB), "$41.67");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianC), "$41.67");	
-		selectedservicescreen.saveSelectedServiceDetails();
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianC), "$41.67");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
@@ -306,20 +306,20 @@ public class DentWizartestCases extends BaseTestCase {
 			selectedservicescreen.selectVehiclePart(vehiclepartspaints[i]);
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.selectTechniciansCustomView();
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.selectTechniciansCustomView();
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup
 				.setTechnicianCustomPriceValue(UtilConstants.technicianA, "165");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB,
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB,
 				"50");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA),
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA),
 				"$165.00");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianB),
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianB),
 				"$50.00");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
@@ -802,12 +802,11 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehiclescreen.setStock(ExcelUtils.getStock(testcaserow));
-		vehiclescreen.clickTech();
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.selectTechniciansEvenlyView();
-		String alerttext = selectedservicescreen
+		TechniciansPopup techniciansPopup = vehiclescreen.clickTech();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.selectTechniciansEvenlyView();
+		String alerttext = techniciansPopup
 				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
@@ -815,7 +814,7 @@ public class DentWizartestCases extends BaseTestCase {
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
 		questionsscreen.waitQuestionsScreenLoaded();
         ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 
 		selectedservicescreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
@@ -842,19 +841,19 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(selectedservicescreen.getVehiclePartValue(),
 				vehicleparts[1]);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-		selectedservicescreen.clickTechniciansIcon();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianB));
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianB);
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsNotSelected(UtilConstants.technicianB));
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianB));
+		techniciansPopup.unselecTechnician(UtilConstants.technicianB);
+		Assert.assertTrue(techniciansPopup.isTechnicianIsNotSelected(UtilConstants.technicianB));
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA),
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA),
 				PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), "$70.00");
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), "$70.00");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianC), "$70.00");
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianC), "$70.00");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		for (int i = 2; i < vehicleparts.length; i++) {
@@ -870,23 +869,23 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(selectedservicescreen.getVehiclePartValue(),
 				vehicleparts[2]);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
-		selectedservicescreen.clickTechniciansIcon();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianB));
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianB);
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsNotSelected(UtilConstants.technicianB));
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianB));
+		techniciansPopup.unselecTechnician(UtilConstants.technicianB);
+		Assert.assertTrue(techniciansPopup.isTechnicianIsNotSelected(UtilConstants.technicianB));
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianD);
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
+		techniciansPopup.selecTechnician(UtilConstants.technicianD);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), "$30.00");
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), "$30.00");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianD), "$30.00");
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsNotSelected(UtilConstants.technicianA));
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianD), "$30.00");
+		techniciansPopup.unselecTechnician(UtilConstants.technicianA);
+		Assert.assertTrue(techniciansPopup.isTechnicianIsNotSelected(UtilConstants.technicianA));
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianD), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
-		selectedservicescreen.saveSelectedServiceDetails();
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianD), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		for (int i = 3; i < vehicleparts.length; i++) {
 			Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
@@ -950,28 +949,28 @@ public class DentWizartestCases extends BaseTestCase {
 			selectedservicescreen.selectVehiclePart(vehicleparts[i]);
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.clickTechniciansIcon();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
+		TechniciansPopup techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), "$47.50");
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), "$47.50");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianB), "$47.50");
-		selectedservicescreen.saveSelectedServiceDetails();
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianB), "$47.50");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_TOTAL_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-		selectedservicescreen.clickTechniciansIcon();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA),
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA),
 				"$175.00");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianB),
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianB),
 				"$175.00");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen = new ServicesScreen();
         OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
@@ -1003,25 +1002,24 @@ public class DentWizartestCases extends BaseTestCase {
 		vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehiclescreen.setStock(ExcelUtils.getStock(testcaserow));
-		vehiclescreen.clickTech();
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selectTechniciansCustomView();
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
+		TechniciansPopup techniciansPopup = vehiclescreen.clickTech();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selectTechniciansCustomView();
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA),
+				techniciansPopup.getTechnicianPercentage(UtilConstants.technicianA),
 				"%100.00");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, ExcelUtils.getServicePrice(testcaserow));
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianA, ExcelUtils.getServicePrice(testcaserow));
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA),
+				techniciansPopup.getTechnicianPercentage(UtilConstants.technicianA),
 				"%85.00");
 
-		String alerttext = selectedservicescreen
+		String alerttext = techniciansPopup
 				.saveTechnociansViewWithAlert();
 		Assert.assertTrue(alerttext.contains("Total amount is not equal 100%"));
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "15");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "15");
 
-		alerttext = selectedservicescreen.saveTechnociansViewWithAlert();
+		alerttext = techniciansPopup.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
@@ -1029,7 +1027,7 @@ public class DentWizartestCases extends BaseTestCase {
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
 		questionsscreen.waitQuestionsScreenLoaded();
         ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 
 		selectedservicescreen.clickVehiclePartsCell();
@@ -1041,17 +1039,17 @@ public class DentWizartestCases extends BaseTestCase {
 
 		servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_ND_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-		selectedservicescreen.clickTechniciansIcon();
-		Assert.assertEquals(selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), "$93.50");
-		Assert.assertEquals(selectedservicescreen.getTechnicianPrice(UtilConstants.technicianB), "$16.50");
-		selectedservicescreen.selectTechniciansCustomView();
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianC, "50");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianC), "%45.45");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "60");		
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%54.55");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), "$93.50");
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianB), "$16.50");
+		techniciansPopup.selectTechniciansCustomView();
+		techniciansPopup.unselecTechnician(UtilConstants.technicianA);
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianC, "50");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianC), "%45.45");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "60");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianB), "%54.55");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
         OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
@@ -1095,56 +1093,56 @@ public class DentWizartestCases extends BaseTestCase {
 		
 		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 0);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.selectTechniciansCustomView();
-		Assert.assertEquals(selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "45");	
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%36.00");
-		String alerttext = selectedservicescreen
+		TechniciansPopup techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.selectTechniciansCustomView();
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "45");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianB), "%36.00");
+		String alerttext = techniciansPopup
 				.saveTechnociansViewWithAlert();
 		Assert.assertTrue(alerttext.contains("Split amount should be equal to total amount."));
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "80");	
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianA), "%64.00");
-		selectedservicescreen.saveSelectedServiceDetails();		
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianA, "80");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianA), "%64.00");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 1);
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.selectTechniciansCustomView();
-		Assert.assertEquals(selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "25");	
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%20.00");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "100");	
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianA), "%80.00");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup= selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.selectTechniciansCustomView();
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "25");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianB), "%20.00");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianA, "100");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianA), "%80.00");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 2);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.selectTechniciansCustomView();
-		Assert.assertEquals(selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "50");	
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%40.00");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "75");	
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianA), "%60.00");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup= selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.selectTechniciansCustomView();
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "50");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianB), "%40.00");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianA, "75");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianA), "%60.00");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 3);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.selectTechniciansCustomView();
-		Assert.assertEquals(selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "30");	
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%24.00");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "95");	
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianA), "%76.00");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.selectTechniciansCustomView();
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "30");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianB), "%24.00");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianA, "95");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianA), "%76.00");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
         OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
@@ -1317,22 +1315,21 @@ public class DentWizartestCases extends BaseTestCase {
         VehicleScreen vehiclescreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-		vehiclescreen.clickTech();
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
-		selectedservicescreen.selectTechniciansEvenlyView();
+		TechniciansPopup techniciansPopup = vehiclescreen.clickTech();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
+		techniciansPopup.selectTechniciansEvenlyView();
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA),
+				techniciansPopup.getTechnicianPercentage(UtilConstants.technicianA),
 				"%33.34");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianB),
+				techniciansPopup.getTechnicianPercentage(UtilConstants.technicianB),
 				"%33.33");
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianC),
+				techniciansPopup.getTechnicianPercentage(UtilConstants.technicianC),
 				"%33.33");
-		String alerttext = selectedservicescreen
+		String alerttext = techniciansPopup
 				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
@@ -1363,13 +1360,14 @@ public class DentWizartestCases extends BaseTestCase {
 				UtilConstants.technicianC));
 
 		pricematrix.clickDiscaunt(ExcelUtils.getDiscount(retailhaildatarow));
+		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianC);
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.unselecTechnician(UtilConstants.technicianB);
+		techniciansPopup.unselecTechnician(UtilConstants.technicianC);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		selectedservicescreen.saveSelectedServiceDetails();
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
@@ -1386,14 +1384,14 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix.clickDiscaunt(ExcelUtils.getDiscount2(retailhaildatarow));
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianC);
-		selectedservicescreen.selecTechnician(UtilConstants.technicianD);
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.unselecTechnician(UtilConstants.technicianA);
+		techniciansPopup.unselecTechnician(UtilConstants.technicianB);
+		techniciansPopup.unselecTechnician(UtilConstants.technicianC);
+		techniciansPopup.selecTechnician(UtilConstants.technicianD);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianD), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
-		selectedservicescreen.saveSelectedServiceDetails();
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianD), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		pricematrix.clickSaveButton();
@@ -1446,13 +1444,13 @@ public class DentWizartestCases extends BaseTestCase {
 
 		pricematrix.clickDiscaunt(ExcelUtils.getDiscount(retailhaildatarow));
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
+		TechniciansPopup techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.unselecTechnician(UtilConstants.technicianA);
 
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
 
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianB), "$60.00");
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianB), "$60.00");
 
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -1462,10 +1460,9 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
-		pricematrix.clickOnTechnicians();
-		selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup = pricematrix.clickOnTechnicians();
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.saveTechViewDetails();
 		pricematrix = new PriceMatrixScreen();
 		pricematrix.clickDiscaunt(ExcelUtils.getDiscount2(retailhaildatarow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -1586,24 +1583,23 @@ public class DentWizartestCases extends BaseTestCase {
         VehicleScreen vehiclescreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-		vehiclescreen.clickTech();
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selectTechniciansCustomView();
+		TechniciansPopup techniciansPopup= vehiclescreen.clickTech();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selectTechniciansCustomView();
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA),
+				techniciansPopup.getTechnicianPercentage(UtilConstants.technicianA),
 				"%100.00");
 
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianA,
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.setTechnicianCustomPercentageValue(UtilConstants.technicianA,
 				"70");
-		String alerttext = selectedservicescreen
+		String alerttext = techniciansPopup
 				.saveTechnociansViewWithAlert();
 		Assert.assertTrue(alerttext.contains("Total amount is not equal 100%"));
 
-		selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianB,
+		techniciansPopup.setTechnicianCustomPercentageValue(UtilConstants.technicianB,
 				"30");
-		alerttext = selectedservicescreen.saveTechnociansViewWithAlert();
+		alerttext = techniciansPopup.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
@@ -1633,7 +1629,7 @@ public class DentWizartestCases extends BaseTestCase {
 				UtilConstants.technicianB));
 
 		pricematrix.clickDiscaunt(ExcelUtils.getDiscount(retailhaildatarow));
-		selectedservicescreen = new SelectedServiceDetailsScreen();
+		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), "%25.000");
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix = new PriceMatrixScreen();
@@ -1650,21 +1646,21 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix.clickDiscaunt(ExcelUtils.getDiscount2(retailhaildatarow));
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.selectTechniciansEvenlyView();
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.selectTechniciansEvenlyView();
+		techniciansPopup.unselecTechnician(UtilConstants.technicianA);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianB), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianB), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
+		techniciansPopup.unselecTechnician(UtilConstants.technicianB);
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianC), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
-		selectedservicescreen.saveSelectedServiceDetails();
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianC), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix = new PriceMatrixScreen();
 		pricematrix.clickSaveButton();
 		Helpers.acceptAlert();
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen();
@@ -1712,20 +1708,19 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		Assert.assertTrue(pricematrix.isNotesExists());
 		Assert.assertTrue(pricematrix.isTechniciansExists());
-		pricematrix.clickOnTechnicians();
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selectTechniciansCustomView();
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
+		TechniciansPopup techniciansPopup = pricematrix.clickOnTechnicians();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selectTechniciansCustomView();
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
 		Assert.assertEquals(
-				selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA),
+				techniciansPopup.getTechnicianPrice(UtilConstants.technicianA),
 				PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "285");
-		String alerttext = selectedservicescreen
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianA, "285");
+		String alerttext = techniciansPopup
 				.saveTechnociansViewWithAlert();
 		Assert.assertTrue(alerttext.contains("Split amount should be equal to total amount."));
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "40");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "40");
+		techniciansPopup.saveTechViewDetails();
 		pricematrix = new PriceMatrixScreen();
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
@@ -1733,7 +1728,7 @@ public class DentWizartestCases extends BaseTestCase {
 				UtilConstants.technicianB));
 
 		pricematrix.clickDiscaunt(ExcelUtils.getDiscount(retailhaildatarow));
-		selectedservicescreen = new SelectedServiceDetailsScreen();
+		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), "%25.000");
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix = new PriceMatrixScreen();
@@ -1743,14 +1738,13 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertTrue(pricematrix.isNotesExists());
 		Assert.assertTrue(pricematrix.isTechniciansExists());
 
-		pricematrix.clickOnTechnicians();
-		selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selectTechniciansCustomView();
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "125");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "75");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup = pricematrix.clickOnTechnicians();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selectTechniciansCustomView();
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianA, "125");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "75");
+		techniciansPopup.saveTechViewDetails();
 		pricematrix = new PriceMatrixScreen();
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
@@ -1761,22 +1755,22 @@ public class DentWizartestCases extends BaseTestCase {
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.selectTechniciansCustomView();
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "100");
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianC, "45");
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.selectTechniciansCustomView();
+		techniciansPopup.unselecTechnician(UtilConstants.technicianA);
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "100");
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianC, "45");
 
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		pricematrix = new PriceMatrixScreen();
 		pricematrix.clickSaveButton();
 		Helpers.acceptAlert();
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "121.25");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "121.25");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen = new ServicesScreen();
 		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
@@ -2387,16 +2381,15 @@ public class DentWizartestCases extends BaseTestCase {
 		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-		vehiclescreen.clickTech();
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.selectTechniciansCustomView();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.typeTechnicianValue("30");
+		TechniciansPopup techniciansPopup= vehiclescreen.clickTech();
+		techniciansPopup.selectTechniciansCustomView();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		techniciansPopup.typeTechnicianValue("30");
 		//selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianB, "30");
-		selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianA, "70");
+		techniciansPopup.setTechnicianCustomPercentageValue(UtilConstants.technicianA, "70");
 		
-		String alerttext = selectedservicescreen
+		String alerttext = techniciansPopup
 				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
@@ -2404,7 +2397,7 @@ public class DentWizartestCases extends BaseTestCase {
 
         ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
-		selectedservicescreen =  servicesscreen.openCustomServiceDetails(UtilConstants.DUELEATHER_SUBSERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen =  servicesscreen.openCustomServiceDetails(UtilConstants.DUELEATHER_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2419,17 +2412,17 @@ public class DentWizartestCases extends BaseTestCase {
 			selectedservicescreen.selectVehiclePart(vehicleparts[i]);
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.clickTechniciansIcon();
-		Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA), "$29.40");
-		Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianB), "$12.60");
-		selectedservicescreen.selectTechniciansCustomView();
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianC, "31.50");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianC), "%75.00");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "10.50");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%25.00");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		Assert.assertEquals(techniciansPopup.getTechnicianPercentage(UtilConstants.technicianA), "$29.40");
+		Assert.assertEquals(techniciansPopup.getTechnicianPercentage(UtilConstants.technicianB), "$12.60");
+		techniciansPopup.selectTechniciansCustomView();
+		techniciansPopup.unselecTechnician(UtilConstants.technicianA);
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianC, "31.50");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianC), "%75.00");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "10.50");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianB), "%25.00");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 	
 		servicesscreen.clickServiceTypesButton();
@@ -2443,18 +2436,18 @@ public class DentWizartestCases extends BaseTestCase {
 			selectedservicescreen.selectVehiclePart(vehiclepartswheel[i]);
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.clickTechniciansIcon();
-		Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA), "$70.00");
-		Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianB), "$30.00");
-		selectedservicescreen.selectTechniciansCustomView();
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianC, "28");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianC), "%28.00");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "67");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianA), "%67.00");
-		selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "5");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianB), "%5.00");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		Assert.assertEquals(techniciansPopup.getTechnicianPercentage(UtilConstants.technicianA), "$70.00");
+		Assert.assertEquals(techniciansPopup.getTechnicianPercentage(UtilConstants.technicianB), "$30.00");
+		techniciansPopup.selectTechniciansCustomView();
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianC, "28");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianC), "%28.00");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianA, "67");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianA), "%67.00");
+		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "5");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianB), "%5.00");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		servicesscreen.clickServiceTypesButton();
@@ -2481,14 +2474,13 @@ public class DentWizartestCases extends BaseTestCase {
 		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-		vehiclescreen.clickTech();
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-		selectedservicescreen.selecTechnician(UtilConstants.technicianB);
-		Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA), "%50.00");
-		Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianB), "%50.00");
+		TechniciansPopup techniciansPopup = vehiclescreen.clickTech();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
+		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		Assert.assertEquals(techniciansPopup.getTechnicianPercentage(UtilConstants.technicianA), "%50.00");
+		Assert.assertEquals(techniciansPopup.getTechnicianPercentage(UtilConstants.technicianB), "%50.00");
 
-		String alerttext = selectedservicescreen
+		String alerttext = techniciansPopup
 				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
@@ -2496,7 +2488,7 @@ public class DentWizartestCases extends BaseTestCase {
 
         ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectGroupServiceItem(UtilConstants.DETAIL_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FRONTLINEREADY_SUBSERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FRONTLINEREADY_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2505,13 +2497,13 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.selectGroupServiceItem(UtilConstants.OTHER_SERVICE);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
 
-		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));	
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.unselecTechnician(UtilConstants.technicianB);
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
-		Assert.assertEquals(selectedservicescreen.getTechnicianPrice(UtilConstants.technicianC), "$108.00");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianC), "%50.00");
-		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.unselecTechnician(UtilConstants.technicianB);
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianC), "$108.00");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianC), "%50.00");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 		
@@ -2524,11 +2516,11 @@ public class DentWizartestCases extends BaseTestCase {
 			selectedservicescreen.selectVehiclePart(vehicleparts[i]);
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.clickTechniciansIcon();
-		selectedservicescreen.selecTechnician(UtilConstants.technicianC);
-		Assert.assertEquals(selectedservicescreen.getTechnicianPrice(UtilConstants.technicianC), "$80.00");
-		Assert.assertEquals(selectedservicescreen.getCustomTechnicianPercentage(UtilConstants.technicianC), "%33.33");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
+		techniciansPopup.selecTechnician(UtilConstants.technicianC);
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianC), "$80.00");
+		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianC), "%33.33");
+		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.clickServiceTypesButton();
 

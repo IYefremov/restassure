@@ -7469,4 +7469,128 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	}
 
+	@Test(testName = "Test Case 68297:WO: HD - Verify price matrix item has money additional service - its main service's tech split amount is equal to main service's amount",
+			description = "Verify price matrix item has money additional service - its main service's tech split amount is equal to main service's amount")
+	public void testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount() {
+
+		final String VIN = "1D7HW48NX6S507810";
+		final String matrixServicePrice = "100";
+
+		homescreen = new RegularHomeScreen();
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_SMOKE_TEST);
+		vehiclescreen.setVIN(VIN);
+		final String wonumber = vehiclescreen.getWorkOrderNumber();
+
+		RegularOrderSummaryScreen ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.saveWizard();
+
+
+		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+		vehiclescreen = new RegularVehicleScreen();
+
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.CALC_PRICE_MATRIX);
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("Back Glass");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
+		vehiclePartScreen.setPrice(matrixServicePrice);
+		RegularSelectedServiceDetailsScreen regularSelectedServiceDetailsScreen = vehiclePartScreen.clickOnTechnicians();
+		Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianIsSelected("Employee Simple 20%"));
+		Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
+		Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice("Employee Simple 20%"), "$100.00");
+		Assert.assertTrue(regularSelectedServiceDetailsScreen.isEvenlyTabSelected());
+		Assert.assertFalse(regularSelectedServiceDetailsScreen.isCustomTabSelected());
+		regularSelectedServiceDetailsScreen.cancelSelectedServiceDetails();
+
+		vehiclePartScreen.selectDiscaunt("Calc_Money_PP_Panel");
+		Assert.assertEquals(vehiclePartScreen.getPriceMatrixTotalPriceValue(), "$110.00");
+		regularSelectedServiceDetailsScreen = vehiclePartScreen.clickOnTechnicians();
+		Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianIsSelected("Employee Simple 20%"));
+		Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
+		Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice("Employee Simple 20%"), "$100.00");
+		Assert.assertTrue(regularSelectedServiceDetailsScreen.isEvenlyTabSelected());
+		Assert.assertFalse(regularSelectedServiceDetailsScreen.isCustomTabSelected());
+		regularSelectedServiceDetailsScreen.cancelSelectedServiceDetails();
+
+		vehiclePartScreen.clickSave();
+		vehiclePartScreen.clickSave();
+		servicesscreen = new RegularServicesScreen();
+		Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$110.00");
+
+		servicesscreen.cancelWizard();
+		myworkordersscreen.clickHomeButton();
+
+	}
+
+	@Test(testName = "Test Case 68298:WO: Regular - price matrix item has percentage additional service - its main service's tech split amount is equal to main service's amount + additional percentage service's amount",
+			description = "Price matrix item has percentage additional service - its main service's tech split amount is equal to main service's amount + additional percentage service's amount")
+	public void testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage() {
+
+		final String VIN = "1D7HW48NX6S507810";
+		final String matrixServicePrice = "100";
+
+		homescreen = new RegularHomeScreen();
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_SMOKE_TEST);
+		vehiclescreen.setVIN(VIN);
+		final String wonumber = vehiclescreen.getWorkOrderNumber();
+
+		RegularOrderSummaryScreen ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.saveWizard();
+
+
+		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+		vehiclescreen = new RegularVehicleScreen();
+
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.CALC_PRICE_MATRIX);
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("Back Glass");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
+		vehiclePartScreen.setPrice(matrixServicePrice);
+		RegularSelectedServiceDetailsScreen regularSelectedServiceDetailsScreen = vehiclePartScreen.clickOnTechnicians();
+		Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianIsSelected("Employee Simple 20%"));
+		Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
+		Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice("Employee Simple 20%"), "$100.00");
+		Assert.assertTrue(regularSelectedServiceDetailsScreen.isEvenlyTabSelected());
+		Assert.assertFalse(regularSelectedServiceDetailsScreen.isCustomTabSelected());
+		regularSelectedServiceDetailsScreen.cancelSelectedServiceDetails();
+
+		vehiclePartScreen.clickDiscaunt("Calc_Discount");
+		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
+		selectedservicescreen.setServicePriceValue("-20");
+		selectedservicescreen.saveSelectedServiceDetails();
+
+		Assert.assertEquals(vehiclePartScreen.getPriceMatrixTotalPriceValue(), "$80.00");
+		regularSelectedServiceDetailsScreen = vehiclePartScreen.clickOnTechnicians();
+		Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianIsSelected("Employee Simple 20%"));
+		Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
+		Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice("Employee Simple 20%"), "$80.00");
+		Assert.assertTrue(regularSelectedServiceDetailsScreen.isEvenlyTabSelected());
+		Assert.assertFalse(regularSelectedServiceDetailsScreen.isCustomTabSelected());
+		regularSelectedServiceDetailsScreen.cancelSelectedServiceDetails();
+
+		vehiclePartScreen.clickSave();
+		vehiclePartScreen.clickSave();
+		servicesscreen = new RegularServicesScreen();
+		Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$80.00");
+
+		servicesscreen.cancelWizard();
+		myworkordersscreen.clickHomeButton();
+
+	}
+
 }

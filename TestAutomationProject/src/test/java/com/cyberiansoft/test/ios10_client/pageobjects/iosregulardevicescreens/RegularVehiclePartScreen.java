@@ -100,8 +100,9 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         return new RegularPriceMatrixScreen();
     }
 
-    public void clickOnTechnicians() {
+    public RegularSelectedServiceDetailsScreen clickOnTechnicians() {
         appiumdriver.findElementByAccessibilityId("Technicians").click();
+        return new RegularSelectedServiceDetailsScreen();
     }
 
     public boolean isDiscauntPresent(String discaunt) {
@@ -137,5 +138,10 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
         appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId("Back")).click();
         return new RegularPriceMatrixScreen();
+    }
+
+    public String getPriceMatrixTotalPriceValue() {
+        MobileElement toolBar = (MobileElement) appiumdriver.findElementByAccessibilityId("Toolbar");
+        return toolBar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
     }
 }

@@ -318,7 +318,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		return new TechRevenueScreen();
 	}
 	
-	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {
+	public TechniciansPopup selectWorkOrderTechniciansMenuItem(String wo) {
 		selectWorkOrder(wo);
 		if (!appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed()) {
 			swipeTableUp(appiumdriver.
@@ -328,7 +328,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 			//appiumdriver.findElementByAccessibilityId("Technicians").click();
 		}
 		appiumdriver.findElementByAccessibilityId("Technicians").click();
-		return new SelectedServiceDetailsScreen();
+		return new TechniciansPopup();
 	}
 	
 	public void selectWorkOrderForCopyVehicle(String wonumber) {
