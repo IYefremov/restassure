@@ -142,6 +142,8 @@
           <include name="testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold" />
           <include name="testWOVerifyThatTechSplitAssignedFormVehicleScreenIsSetToServicesUnderList" />
           <include name="testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
+          <include name="testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage" />
+          <include name="testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
           <!--<include name="testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices" />--> 

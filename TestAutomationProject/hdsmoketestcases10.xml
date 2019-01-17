@@ -9,7 +9,6 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
 
-            
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />  -->  
 		  <!--<include name="testUpdateDatabase" />           
@@ -152,6 +151,8 @@
           <include name="testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold" />
           <include name="testWOVerifyThatTechSplitAssignedFormVehicleScreenIsSetToServicesUnderList" />
           <include name="testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
+          <include name="testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage" />
+          <include name="testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />    
         </methods>
