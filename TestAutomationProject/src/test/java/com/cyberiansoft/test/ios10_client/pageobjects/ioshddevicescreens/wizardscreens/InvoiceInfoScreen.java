@@ -49,7 +49,7 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	public InvoiceInfoScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Info")));
 	}
 	

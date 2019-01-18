@@ -1452,7 +1452,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(
 				techniciansPopup.getTechnicianPrice(UtilConstants.technicianB), "$60.00");
 
-		selectedservicescreen.saveSelectedServiceDetails();
+        techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix = new PriceMatrixScreen();
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
@@ -1661,7 +1661,7 @@ public class DentWizartestCases extends BaseTestCase {
 		pricematrix.clickSaveButton();
 		Helpers.acceptAlert();
 		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
-		selectedservicescreen.saveSelectedServiceDetails();
+		techniciansPopup.saveTechViewDetails();
 		pricematrix.clickSaveButton();
 		servicesscreen = new ServicesScreen();
 		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
@@ -1969,7 +1969,7 @@ public class DentWizartestCases extends BaseTestCase {
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
@@ -1979,14 +1979,14 @@ public class DentWizartestCases extends BaseTestCase {
 		for (String status : statuses)
 			Assert.assertEquals(status, "Completed");
 
-		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.PAINT_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
  		ordermonitorscreen.setCompletedPhaseStatus();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 		for (String status : statuses)
 			Assert.assertEquals(status, "Completed");
 		
-		ordermonitorscreen.selectPanel(UtilConstants.WHEELS_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.WHEELS_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.WHEEL_SUBSERVICE);
@@ -2080,7 +2080,7 @@ public class DentWizartestCases extends BaseTestCase {
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE);
@@ -2110,7 +2110,7 @@ public class DentWizartestCases extends BaseTestCase {
 		for (String status : statuses)
 			Assert.assertEquals(status, "Queued");
 
-		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRPANEL_SUBSERVICE);
@@ -2120,7 +2120,7 @@ public class DentWizartestCases extends BaseTestCase {
 		for (String status : statuses)
 			Assert.assertEquals(status, "Active");
 
-		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.PAINT_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
@@ -2130,7 +2130,7 @@ public class DentWizartestCases extends BaseTestCase {
 		for (String status : statuses)
 			Assert.assertEquals(status, "Active");
 
-		ordermonitorscreen.selectPanel(UtilConstants.WHEELS_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.WHEELS_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE);
@@ -2828,6 +2828,7 @@ public class DentWizartestCases extends BaseTestCase {
 		servicesscreen.clickServiceTypesButton();
 
 		servicesscreen.clickSave();
+		invoiceinfoscreen = new InvoiceInfoScreen();
 		invoiceinfoscreen.clickSaveAsFinal();
 		homescreen = myinvoicesscreen.clickHomeButton();
 	}
@@ -2867,7 +2868,7 @@ public class DentWizartestCases extends BaseTestCase {
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(workOrderNumber);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE);
@@ -2877,7 +2878,7 @@ public class DentWizartestCases extends BaseTestCase {
 		for (String status : statuses)
 			Assert.assertEquals(status, "Active");
 
-		ordermonitorscreen.selectPanel("Interior Repair");
+		ordermonitorscreen.selectMainPanel("Interior Repair");
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE);
@@ -2988,7 +2989,7 @@ public class DentWizartestCases extends BaseTestCase {
 		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection1);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PDR_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		List<String> statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PDRVEHICLE_SUBSERVICE);
@@ -2997,7 +2998,7 @@ public class DentWizartestCases extends BaseTestCase {
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickOnWO(inspection2);
 		teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel("Interior Repair");
+		ordermonitorscreen.selectMainPanel("Interior Repair");
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.LEATHERREPAIR_SUBSERVICE);
@@ -3006,7 +3007,7 @@ public class DentWizartestCases extends BaseTestCase {
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickOnWO(inspection3);
 		teamworkordersscreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(UtilConstants.PAINT_SERVICE);
+		ordermonitorscreen.selectMainPanel(UtilConstants.PAINT_SERVICE);
 		ordermonitorscreen.clickChangeStatusCell();
 		ordermonitorscreen.setCompletedPhaseStatus();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.BLACKOUT_SUBSERVICE);

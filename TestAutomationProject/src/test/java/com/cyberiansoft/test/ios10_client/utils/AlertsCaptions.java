@@ -25,6 +25,11 @@ public class AlertsCaptions {
 	public static final String ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE = "Order Monitor You cannot change the status of services for this phase. You can only change the status of the whole phase.";
 	public static final String ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED = "Warning!\nQuestion 'Tax_Point_1' in section 'BATTERY PERFORMANCE' should be answered.";
 	public static final String ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED = "Warning!\nQuestion 'Signature' in section 'Follow up Requested' should be answered.";
-
+	public static final String ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT = "Technician Split\n" +
+			"Order's technician split will be assigned to this order service if you set zero amount.\n" +
+			"\n" +
+			"Continue?";
+	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT = "Technician Split\n" +
+			"Set non-zero amount for service to assign multiple technicians.";
 
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
@@ -105,8 +106,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void setServicePriceValue(String _price)	 {
-		
-		WebElement pricefld = null;
+
 		List<WebElement> priceflds = appiumdriver.findElementsByAccessibilityId("Price");
 		for (WebElement prc : priceflds)
 			if (prc.isDisplayed()) {
@@ -116,6 +116,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
 			appiumdriver.findElementByAccessibilityId("Clear text").click();
 		appiumdriver.getKeyboard().sendKeys(_price + "\n");
+		BaseUtils.waitABit(1000);
 	}
 
 	public void clickVehiclePartsCell() {
@@ -225,25 +226,31 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void saveSelectedServiceDetails() {
-		List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
+
+		MobileElement navBar = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeNavigationBar' AND visible == 1"));
+		navBar.findElementByAccessibilityId("Save").click();
+
+		/*List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
 		for (WebElement nv : navbars) {
 			if(nv.isDisplayed()) {
 			//if (nv.findElements(By.name("Save")).size() > 0) {
 				nv.findElement(By.name("Save")).click();
 				break;
 			}
-		}
+		}*/
 	}
 
 	public void clickCancelSelectedServiceDetails() {
-		List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
+		MobileElement navBar = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeNavigationBar' AND visible == 1"));
+		navBar.findElementByAccessibilityId("Cancel").click();
+		/*List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
 		for (WebElement nv : navbars) {
 			if(nv.isDisplayed()) {
 				//if (nv.findElements(By.name("Save")).size() > 0) {
 				nv.findElement(By.name("Cancel")).click();
 				break;
 			}
-		}
+		}*/
 	}
 
 	public String saveSelectedServiceDetailsWithAlert() {
