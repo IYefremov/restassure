@@ -29,8 +29,14 @@ public class AlertsCaptions {
 			"Order's technician split will be assigned to this order service if you set zero amount.\n" +
 			"\n" +
 			"Continue?";
-	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT = "Technician Split\n" +
+	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE = "Technician Split\n" +
 			"Set non-zero amount for service to assign multiple technicians.";
+	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART = "Technician Split\n" +
+			"Set non-zero amount for vehicle part to assign multiple technicians.";
 	public static final String ALERT_YOU_CANT_CREATE_WORK_ORDER_BECAUSE_VIN_EXISTS = "You cannot create work order of type '%1$s' with VIN '%2$s' because it already exists.";
+	public static final String ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT = "Technician Split\n" +
+			"Default technician split will be assigned to this vehicle part if you set zero amount.\n" +
+			"\n" +
+			"Continue?";
 
 }

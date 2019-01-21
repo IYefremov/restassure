@@ -100,9 +100,15 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         return new RegularPriceMatrixScreen();
     }
 
-    public RegularSelectedServiceDetailsScreen clickOnTechnicians() {
-        appiumdriver.findElementByAccessibilityId("Technicians").click();
+    public RegularSelectedServiceDetailsScreen openTechniciansPopup() {
+        clickOnTechnicians();
         return new RegularSelectedServiceDetailsScreen();
+    }
+
+    public void clickOnTechnicians() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Technicians"))).click();
+       // appiumdriver.findElementByAccessibilityId("Technicians").click();
     }
 
     public boolean isDiscauntPresent(String discaunt) {
@@ -123,6 +129,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         WebElement par = getTableParentCell("Price");
         WebElement cell = par.findElement(By.xpath("//XCUIElementTypeTextField"));
         cell.click();
+        cell.clear();
         cell.sendKeys(price + "\n");
         //((IOSDriver) appiumdriver).getKeyboard().pressKey(price);
         //((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");

@@ -7499,7 +7499,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("Back Glass");
 		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
 		vehiclePartScreen.setPrice(matrixServicePrice);
-		RegularSelectedServiceDetailsScreen regularSelectedServiceDetailsScreen = vehiclePartScreen.clickOnTechnicians();
+		RegularSelectedServiceDetailsScreen regularSelectedServiceDetailsScreen = vehiclePartScreen.openTechniciansPopup();
 		Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianIsSelected("Employee Simple 20%"));
 		Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
 		Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice("Employee Simple 20%"), "$100.00");
@@ -7509,7 +7509,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		vehiclePartScreen.selectDiscaunt("Calc_Money_PP_Panel");
 		Assert.assertEquals(vehiclePartScreen.getPriceMatrixTotalPriceValue(), "$110.00");
-		regularSelectedServiceDetailsScreen = vehiclePartScreen.clickOnTechnicians();
+		regularSelectedServiceDetailsScreen = vehiclePartScreen.openTechniciansPopup();
 		Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianIsSelected("Employee Simple 20%"));
 		Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
 		Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice("Employee Simple 20%"), "$100.00");
@@ -7559,7 +7559,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("Back Glass");
 		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
 		vehiclePartScreen.setPrice(matrixServicePrice);
-		RegularSelectedServiceDetailsScreen regularSelectedServiceDetailsScreen = vehiclePartScreen.clickOnTechnicians();
+		RegularSelectedServiceDetailsScreen regularSelectedServiceDetailsScreen = vehiclePartScreen.openTechniciansPopup();
 		Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianIsSelected("Employee Simple 20%"));
 		Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
 		Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice("Employee Simple 20%"), "$100.00");
@@ -7573,7 +7573,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		Assert.assertEquals(vehiclePartScreen.getPriceMatrixTotalPriceValue(), "$80.00");
-		regularSelectedServiceDetailsScreen = vehiclePartScreen.clickOnTechnicians();
+		regularSelectedServiceDetailsScreen = vehiclePartScreen.openTechniciansPopup();
 		Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianIsSelected("Employee Simple 20%"));
 		Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
 		Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice("Employee Simple 20%"), "$80.00");
@@ -7636,12 +7636,70 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		selectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
 		serviceDetailsScreen.clickTechniciansIcon();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT);
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
 		serviceDetailsScreen.isTechnicianIsSelected(defaulttech);
 		serviceDetailsScreen.cancelSelectedServiceDetails();
 		serviceDetailsScreen.cancelSelectedServiceDetails();
 		servicesscreen = new RegularServicesScreen();
 
+		servicesscreen.cancelWizard();
+		myworkordersscreen.clickHomeButton();
+
+	}
+
+	@Test(testName = "Test Case 81677:WO: Verify that correct tech split amount is shown for matrix service when change price to 0",
+			description = "Verify that correct tech split amount is shown for matrix service when change price to 0")
+	public void testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0() {
+
+		final String VIN = "1D7HW48NX6S507810";
+
+		final String servicePrice = "5";
+		final String serviceZeroPrice = "0";
+		final String defaulttech  = "Employee Simple 20%";
+
+		homescreen = new RegularHomeScreen();
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
+		vehiclescreen.setVIN(VIN);
+		final String wonumber = vehiclescreen.getWorkOrderNumber();
+
+		RegularOrderSummaryScreen ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.saveWizard();
+
+
+		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+		vehiclescreen = new RegularVehicleScreen();
+
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
+		vehiclePartScreen.setSizeAndSeverity("CENT", "MEDIUM");
+		vehiclePartScreen.setPrice(servicePrice);
+		vehiclePartScreen.clickSave();
+		vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
+
+		vehiclePartScreen.setPrice(serviceZeroPrice);
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT);
+
+		vehiclePartScreen.clickOnTechnicians();
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART);
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(defaulttech));
+		Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(defaulttech), PricesCalculations.getPriceRepresentation(serviceZeroPrice));
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		vehiclePartScreen = new RegularVehiclePartScreen();
+		vehiclePartScreen.clickSave();
+		vehiclePartScreen.clickSave();
+
+		servicesscreen = new RegularServicesScreen();
 		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 

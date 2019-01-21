@@ -6277,7 +6277,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		pricematrix.setSizeAndSeverity("CENT", "MEDIUM");
 		Assert.assertEquals(pricematrix.getTechniciansValue(), defaulttech);
 		pricematrix.setPrice(pricevalue);
-		TechniciansPopup techniciansPopup = pricematrix.clickOnTechnicians();
+		TechniciansPopup techniciansPopup = pricematrix.openTechniciansPopup();
 		techniciansPopup.selecTechnician(techname);
 		techniciansPopup.saveTechViewDetails();
 		Assert.assertEquals(pricematrix.getTechniciansValue(), defaulttech + ", " + techname);
@@ -7709,7 +7709,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen();
 		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
 		pricematrix.setPrice(matrixServicePrice);
-		TechniciansPopup techniciansPopup = pricematrix.clickOnTechnicians();
+		TechniciansPopup techniciansPopup = pricematrix.openTechniciansPopup();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected("Employee Simple 20%"));
 		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
 		Assert.assertEquals(techniciansPopup.getTechnicianPrice("Employee Simple 20%"), "$100.00");
@@ -7719,7 +7719,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		pricematrix.selectDiscaunt("Calc_Money_PP_Panel");
 		Assert.assertEquals(pricematrix.getPriceMatrixTotalPriceValue(), "$110.00");
-		techniciansPopup = pricematrix.clickOnTechnicians();
+		techniciansPopup = pricematrix.openTechniciansPopup();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected("Employee Simple 20%"));
 		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
 		Assert.assertEquals(techniciansPopup.getTechnicianPrice("Employee Simple 20%"), "$100.00");
@@ -7763,7 +7763,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen();
 		pricematrix.setSizeAndSeverity("CENT", "LIGHT");
 		pricematrix.setPrice(matrixServicePrice);
-		TechniciansPopup techniciansPopup = pricematrix.clickOnTechnicians();
+		TechniciansPopup techniciansPopup = pricematrix.openTechniciansPopup();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected("Employee Simple 20%"));
 		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
 		Assert.assertEquals(techniciansPopup.getTechnicianPrice("Employee Simple 20%"), "$100.00");
@@ -7776,7 +7776,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.setServicePriceValue("-20");
 		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertEquals(pricematrix.getPriceMatrixTotalPriceValue(), "$80.00");
-		techniciansPopup = pricematrix.clickOnTechnicians();
+		techniciansPopup = pricematrix.openTechniciansPopup();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected("Employee Simple 20%"));
 		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage("Employee Simple 20%"), "%100.00");
 		Assert.assertEquals(techniciansPopup.getTechnicianPrice("Employee Simple 20%"), "$80.00");
@@ -7833,12 +7833,62 @@ public class IOSSmokeTestCases extends BaseTestCase {
 
 		servicesscreen.openServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
 		techniciansPopup = serviceDetailsScreen.clickTechniciansIcon();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT);
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
 		techniciansPopup.isTechnicianIsSelected(defaulttech);
 		techniciansPopup.clickCancelButton();
 		serviceDetailsScreen.clickCancelSelectedServiceDetails();
 		servicesscreen = new ServicesScreen();
 
+		servicesscreen.cancelWizard();
+		myworkordersscreen.clickHomeButton();
+
+	}
+
+	@Test(testName = "Test Case 81677:WO: Verify that correct tech split amount is shown for matrix service when change price to 0",
+			description = "Verify that correct tech split amount is shown for matrix service when change price to 0")
+	public void testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0() {
+
+		final String VIN = "1D7HW48NX6S507810";
+		final String servicePrice = "5";
+		final String serviceZeroPrice = "0";
+		final String defaulttech  = "Employee Simple 20%";
+
+		homescreen = new HomeScreen();
+		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		VehicleScreen vehiclescreen = ((MyWorkOrdersScreen) myworkordersscreen).addOrderWithSelectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER,
+				WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
+		vehiclescreen.setVIN(VIN);
+		final String wonumber = vehiclescreen.getInspectionNumber();
+
+		OrderSummaryScreen ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.saveWizard();
+
+
+		myworkordersscreen.selectWorkOrderForEidt(wonumber);
+		vehiclescreen = new VehicleScreen();
+
+		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
+		servicesscreen.selectServicePriceMatrices("Price Matrix Zayats");
+		PriceMatrixScreen pricematrix = new PriceMatrixScreen();
+		pricematrix.selectPriceMatrix("VP1 zayats");
+		pricematrix.setSizeAndSeverity("CENT", "MEDIUM");
+		pricematrix.setPrice(servicePrice);
+		pricematrix.selectPriceMatrix("VP1 zayats");
+		pricematrix.setPrice(serviceZeroPrice);
+
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT);
+		pricematrix.clickOnTechnicians();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART);
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
+		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(defaulttech));
+		Assert.assertEquals(techniciansPopup.getTechnicianPrice(defaulttech), PricesCalculations.getPriceRepresentation(serviceZeroPrice));
+		techniciansPopup.saveTechViewDetails();
+		pricematrix = new PriceMatrixScreen();
+		pricematrix.clickSaveButton();
+
+		servicesscreen = new ServicesScreen();
 		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 

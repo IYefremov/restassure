@@ -1460,7 +1460,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
-		techniciansPopup = pricematrix.clickOnTechnicians();
+		techniciansPopup = pricematrix.openTechniciansPopup();
 		techniciansPopup.selecTechnician(UtilConstants.technicianB);
 		techniciansPopup.saveTechViewDetails();
 		pricematrix = new PriceMatrixScreen();
@@ -1708,7 +1708,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		Assert.assertTrue(pricematrix.isNotesExists());
 		Assert.assertTrue(pricematrix.isTechniciansExists());
-		TechniciansPopup techniciansPopup = pricematrix.clickOnTechnicians();
+		TechniciansPopup techniciansPopup = pricematrix.openTechniciansPopup();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
 		techniciansPopup.selectTechniciansCustomView();
 		techniciansPopup.selecTechnician(UtilConstants.technicianB);
@@ -1738,7 +1738,7 @@ public class DentWizartestCases extends BaseTestCase {
 		Assert.assertTrue(pricematrix.isNotesExists());
 		Assert.assertTrue(pricematrix.isTechniciansExists());
 
-		techniciansPopup = pricematrix.clickOnTechnicians();
+		techniciansPopup = pricematrix.openTechniciansPopup();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
 		techniciansPopup.selectTechniciansCustomView();
 		techniciansPopup.selecTechnician(UtilConstants.technicianB);

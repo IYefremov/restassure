@@ -101,7 +101,9 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public void setPrice(String price) {
-		appiumdriver.findElementByAccessibilityId("Price").click();
+		MobileElement priceCell = (MobileElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice");
+		priceCell.click();
+		priceCell.findElementByClassName("XCUIElementTypeTextField").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(price + "\n");
 	}
 
@@ -181,9 +183,13 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		.getAttribute("name");
 	}
 
-	public TechniciansPopup clickOnTechnicians() {
-		appiumdriver.findElementByAccessibilityId("Technicians").click();
+	public TechniciansPopup openTechniciansPopup() {
+		clickOnTechnicians();
 		return new TechniciansPopup();
+	}
+
+	public void clickOnTechnicians() {
+		appiumdriver.findElementByAccessibilityId("Technicians").click();
 	}
 	
 	public void clickNotesButton() {
