@@ -2286,10 +2286,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("4");
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation("4"));
 		ordersummaryscreen.clickSave();
-		String alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("You can't create Work Order for type '" + WorkOrdersTypes.WOTYPE_BLOCK_VIN_ON.getWorkOrderTypeName()
-				+ "' for VIN '" + VIN + "' because it was already created"));
-		ordersummaryscreen.cancelWizard();
+		ordersummaryscreen.waitForCustomWarningMessage(String.format(AlertsCaptions.ALERT_YOU_CANT_CREATE_WORK_ORDER_BECAUSE_VIN_EXISTS,
+				WorkOrdersTypes.WOTYPE_BLOCK_VIN_ON.getWorkOrderTypeName(), VIN), "Cancel");
 		myworkordersscreen.clickHomeButton();
 	}
 	

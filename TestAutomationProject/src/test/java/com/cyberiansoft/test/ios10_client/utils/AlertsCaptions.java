@@ -31,5 +31,6 @@ public class AlertsCaptions {
 			"Continue?";
 	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT = "Technician Split\n" +
 			"Set non-zero amount for service to assign multiple technicians.";
+	public static final String ALERT_YOU_CANT_CREATE_WORK_ORDER_BECAUSE_VIN_EXISTS = "You cannot create work order of type '%1$s' with VIN '%2$s' because it already exists.";
 
 }
