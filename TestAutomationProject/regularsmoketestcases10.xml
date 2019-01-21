@@ -144,6 +144,8 @@
           <include name="testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
           <include name="testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage" />
           <include name="testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
+          <include name="testWOVerifyIfServiceHasDefaultTechnicianAndItsAmountIs0ThenDefaultTechnicianShouldBeAssignedToTheService_NotTechnicianSplitAtWorkOrderLevel" />
+          <include name="testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0" />
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
           <!--<include name="testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices" />--> 
