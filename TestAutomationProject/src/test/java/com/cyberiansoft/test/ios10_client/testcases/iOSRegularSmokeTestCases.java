@@ -7705,4 +7705,66 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	}
 
+	@Test(testName = "Test Case 81699:WO: Monitor - Verify that tech split amount is shown correct under monitor for service with Adjustments",
+			description = "Verify that tech split amount is shown correct under monitor for service with Adjustments")
+	public void testWOVerifyThatTechSplitAmountIsShownCorrectUnderMonitorForServiceWithAdjustments() {
+
+		final String VIN = "1D7HW48NX6S507810";
+		final String servicePrice = "2000";
+		final String vehiclePart = "Hood";
+		final String adjustment = "OWO_Discount";
+		final String defaulttech  = "Oksana Zayats";
+
+		homescreen = new RegularHomeScreen();
+		RegularMainScreen mainScreen = homescreen.clickLogoutButton();
+		mainScreen.userLogin("Zayats", "1111");
+
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
+		vehiclescreen.setVIN(VIN);
+		final String wonumber = vehiclescreen.getWorkOrderNumber();
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularSelectedServiceDetailsScreen serviceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		serviceDetailsScreen.setServicePriceValue(servicePrice);
+		serviceDetailsScreen.clickAdjustments();
+		serviceDetailsScreen.selectAdjustment(adjustment);
+		serviceDetailsScreen.saveSelectedServiceDetails();
+
+		serviceDetailsScreen.clickVehiclePartsCell();
+		serviceDetailsScreen.selectVehiclePart(vehiclePart);
+		serviceDetailsScreen.saveSelectedServiceDetails();
+		serviceDetailsScreen.saveSelectedServiceDetails();
+
+
+		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.saveWizard();
+
+		myworkordersscreen.clickHomeButton();
+		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = homescreen.clickTeamWorkordersButton();
+		teamWorkOrdersScreen.clickOnWO(wonumber);
+		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		Assert.assertEquals(orderMonitorScreen.getMonitorServiceAmauntValue(iOSInternalProjectConstants.SR_S1_MONEY + " (Hood)"), "$1,600.00 x 1.00");
+		orderMonitorScreen.selectPanel(iOSInternalProjectConstants.SR_S1_MONEY + " (Hood)");
+		Assert.assertEquals(orderMonitorScreen.getServiceDetailsPriceValue(), "$2,000.00");
+		orderMonitorScreen.clickTech();
+		serviceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		Assert.assertTrue(serviceDetailsScreen.isTechnicianIsSelected(defaulttech));
+		Assert.assertEquals(serviceDetailsScreen.getTechnicianPrice(defaulttech), "$1,600.00");
+		Assert.assertEquals(serviceDetailsScreen.getCustomTechnicianPercentage(defaulttech), "%100.00");
+
+		serviceDetailsScreen.cancelSelectedServiceDetails();
+		orderMonitorScreen.clickServiceDetailsDoneButton();
+		orderMonitorScreen.clickBackButton();
+
+		teamWorkOrdersScreen.clickHomeButton();
+		homescreen.clickLogoutButton();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+	}
+
 }

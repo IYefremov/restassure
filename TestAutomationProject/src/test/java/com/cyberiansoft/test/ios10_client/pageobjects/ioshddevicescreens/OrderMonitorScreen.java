@@ -183,5 +183,14 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId(reason).click();
 	}
 
+	public String getMonitorServiceAmauntValue(String serviceName) {
+		return appiumdriver.findElementByAccessibilityId("MonitorOrderServicesList")
+				.findElement(MobileBy.AccessibilityId(serviceName))
+				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label");
+	}
 
+	public String getServiceDetailsPriceValue() {
+		return appiumdriver.findElementByAccessibilityId("MonitorDetailsCell_Amount")
+				.findElement(MobileBy.AccessibilityId("AmountTextControl")).getAttribute("value");
+	}
 }

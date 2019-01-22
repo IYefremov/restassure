@@ -229,28 +229,11 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 		MobileElement navBar = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeNavigationBar' AND visible == 1"));
 		navBar.findElementByAccessibilityId("Save").click();
-
-		/*List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
-		for (WebElement nv : navbars) {
-			if(nv.isDisplayed()) {
-			//if (nv.findElements(By.name("Save")).size() > 0) {
-				nv.findElement(By.name("Save")).click();
-				break;
-			}
-		}*/
 	}
 
 	public void clickCancelSelectedServiceDetails() {
 		MobileElement navBar = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeNavigationBar' AND visible == 1"));
 		navBar.findElementByAccessibilityId("Cancel").click();
-		/*List<WebElement> navbars = appiumdriver.findElementsByClassName("XCUIElementTypeNavigationBar");
-		for (WebElement nv : navbars) {
-			if(nv.isDisplayed()) {
-				//if (nv.findElements(By.name("Save")).size() > 0) {
-				nv.findElement(By.name("Cancel")).click();
-				break;
-			}
-		}*/
 	}
 
 	public String saveSelectedServiceDetailsWithAlert() {

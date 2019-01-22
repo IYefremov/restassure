@@ -64,4 +64,9 @@ public class OrderMonitorServiceDetailsPopup extends iOSHDBaseScreen {
         return monitorservicedetailstable.findElementsByAccessibilityId("btnStartReset").size() > 0;
     }
 
+    public String getServiceDetailsPriceValue() {
+        return monitorservicedetailstable.findElementByAccessibilityId("MonitorDetailsCell_Amount")
+                .findElementByAccessibilityId("AmountTextControl").getAttribute("value");
+    }
+
 }
