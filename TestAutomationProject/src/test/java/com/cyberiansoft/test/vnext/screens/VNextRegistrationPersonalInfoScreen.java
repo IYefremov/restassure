@@ -54,6 +54,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void setUserRegistrationInfo(String firstname, String lastname, String countrycode, String phonenumber, String usermail) {
+		BaseUtils.waitABit(2000);
 		setFirstName(firstname);
 		setLastName(lastname);
 		selectPhoneNumberCountryCode(countrycode);
@@ -66,7 +67,7 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	public void selectPhoneNumberCountryCode(String countrycode) {
 		final String contrycodeXPath = "//li/a/span[contains(text(), '(+" + countrycode + ")')]";
-		tap(appiumdriver.findElement(By.xpath("//*[@data-name='phone']/i")));
+		tap(appiumdriver.findElement(By.xpath("//*[@data-name='phone']/div/div/span")));
 		BaseUtils.waitABit(2000);
 		if (!appiumdriver.findElement(By.xpath(contrycodeXPath)).isDisplayed()) {
 			/*switchApplicationContext(AppContexts.NATIVE_CONTEXT);

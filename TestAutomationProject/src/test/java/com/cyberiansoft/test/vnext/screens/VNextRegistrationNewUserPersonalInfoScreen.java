@@ -105,6 +105,7 @@ public class VNextRegistrationNewUserPersonalInfoScreen extends VNextBaseScreen 
 	
 	public void selectNewUserCountry(String usercountry) {
 		tap(countryfld);
+		BaseUtils.waitABit(1000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(countriespage));
 		

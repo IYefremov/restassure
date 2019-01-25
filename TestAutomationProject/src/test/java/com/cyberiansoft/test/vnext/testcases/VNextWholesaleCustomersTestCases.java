@@ -93,7 +93,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-		homescreen = inspectionscreen.clickBackButton();
+		inspectionscreen.clickBackButton();
 	}
 
 }
