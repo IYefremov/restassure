@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -103,13 +104,23 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public RegularSelectedServiceDetailsScreen openSelectedServiceDetails(String service) {
+        clickOnSelectedService(service);
+        return new RegularSelectedServiceDetailsScreen();
+    }
+
+    public void clickOnSelectedService(String service) {
         List<MobileElement> selectedservices = selectedservicestable.findElementsByAccessibilityId(service);
         if (selectedservices.size() > 1) {
             ((WebElement) selectedservicestable.findElementsByAccessibilityId(service).get(1)).click();
         } else {
             selectedservices.get(0).click();
         }
-        return new RegularSelectedServiceDetailsScreen();
+    }
+
+    public RegularSelectedServiceBundleScreen openSelectBundleServiceDetails(String service) {
+        selectedservicestable.findElementByAccessibilityId(service).click();
+
+        return new RegularSelectedServiceBundleScreen();
     }
 
     public boolean isNotesIconPresentForSelectedService(String servicename) {

@@ -85,4 +85,8 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Override").click();
 	}
 
+	public void clickSaveButton() {
+		appiumdriver.findElementByAccessibilityId("Save").click();
+	}
+
 }

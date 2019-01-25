@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
@@ -143,8 +143,8 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public void selectService(String servicename) {
-		IOSElement tablelist = null;
-		if (!(elementExists("AvailableGroupItemList"))) {
+		MobileElement searchFld =  null;
+		/*if (!(elementExists("AvailableGroupItemList"))) {
 			if (typeContext.equals(TypeScreenContext.SERVICEREQUEST)) {
 				tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
 			} else
@@ -153,18 +153,38 @@ public class ServicesScreen extends BaseWizardScreen {
 			tablelist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableGroupItemList']/.."));
 
 		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		/*if (tablelist.findElementsByAccessibilityId("Clear text").size() > 0) {
-			tablelist.findElementByAccessibilityId("Clear text").click();
+		System.out.println("++++++++" + tablelist.getAttribute("name"));
 
-		}*/
 		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
         tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
         Helpers.waitABit(1000);
 		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).setValue(servicename);
 		//appiumdriver.getKeyboard().sendKeys(servicename);
 		appiumdriver.hideKeyboard();
+*/
 
+		IOSElement tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+		if (tablelist.getAttribute("type").equals("XCUIElementTypeOther"))
+			searchFld = ((MobileElement) tablelist.findElementByClassName("XCUIElementTypeSearchField"));
+		else
+			searchFld = ((MobileElement) appiumdriver.findElementsByClassName("XCUIElementTypeSearchField").get(1));
+		searchFld.click();
+		searchFld.clear();
+		searchFld.setValue(servicename);
+		//appiumdriver.getKeyboard().sendKeys(servicename);
+		appiumdriver.hideKeyboard();
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeTable")).findElement(MobileBy.AccessibilityId(servicename)).click();
+	}
+
+	public SelectedServiceBundleScreen openSelectBundleServiceDetails(String servicename) {
+		IOSElement tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
+		tablelist.findElement(MobileBy.AccessibilityId(servicename)).click();
+		return new SelectedServiceBundleScreen();
+	}
+
+	public void clickOnSelectService(String servicename) {
+		IOSElement tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
+		tablelist.findElement(MobileBy.AccessibilityId(servicename)).click();
 	}
 	
 	public void selectGroupServiceItem(String servicename) {

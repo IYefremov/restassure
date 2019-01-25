@@ -100,7 +100,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
+		customersscreen.selectCustomer(iOSInternalProjectConstants.RETAIL_CUSTOMER);
         RegularVehicleScreen vehicleScreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
         RegularClaimScreen claimScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimScreen.waitClaimScreenLoad();
@@ -154,7 +154,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER);
+		customersscreen.selectCustomer(iOSInternalProjectConstants.RETAIL_CUSTOMER);
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.DEFAULT);
 		vehiclescreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
@@ -3131,6 +3131,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		//approveinspscreen.selectStatusReason("Decline 1");
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
+		BaseUtils.waitABit(10*1000);
 		myinspectionsscreen = new RegularMyInspectionsScreen();
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		visualInteriorScreen = new RegularVisualInteriorScreen();

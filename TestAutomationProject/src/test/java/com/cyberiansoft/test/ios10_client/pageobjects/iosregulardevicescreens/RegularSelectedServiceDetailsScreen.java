@@ -95,6 +95,11 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		//return vehiclepartsfld.getAttribute("name");
 	}
 
+	public String getTechniciansValue() {
+		WebElement par = getTableParentCell("Technicians");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
+	}
+
 	public void answerQuestion(String answer) {
 
 		appiumdriver.findElementByAccessibilityId("Questions").click();
@@ -491,6 +496,11 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void clickSaveButton() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
+	}
+
+	public RegularPriceMatrixScreen selectPriceMatrices(String pricematrice) {
+		appiumdriver.findElementByAccessibilityId(pricematrice).click();
+		return new RegularPriceMatrixScreen();
 	}
 
 }

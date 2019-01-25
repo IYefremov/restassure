@@ -114,7 +114,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		final String customerValue = appiumdriver.findElementByAccessibilityId("Toolbar").
 				findElements(MobileBy.className("XCUIElementTypeButton")).get(2).getAttribute("label");
 		clickAddOrderButton();
-		if (customerValue.equals("Wholesale Mode"))
+		if (customerValue.equals("Wholesale Mode") | customerValue.equals("Retail Mode"))
 			selectCustomerAndWorkOrderType(customerName, workOrderType);
 		return workOrderType.getFirstVizardScreen();
 	}

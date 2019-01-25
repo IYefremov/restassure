@@ -104,8 +104,8 @@ public class TechniciansPopup extends iOSHDBaseScreen {
     }
 
     public void cancelSearchTechnician() {
-        appiumdriver.findElement(MobileBy.iOSNsPredicateString("name == 'Technicians' AND type == 'XCUIElementTypeNavigationBar'"))
-                .findElement(MobileBy.AccessibilityId("Cancel")).click();
+        ((IOSElement) appiumdriver.findElements(MobileBy.iOSNsPredicateString("name == 'Cancel' AND type == 'XCUIElementTypeButton'")).get(1)).click();
+                //.findElement(MobileBy.AccessibilityId("Cancel")).click();
         //appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Cancel']").click();
     }
 

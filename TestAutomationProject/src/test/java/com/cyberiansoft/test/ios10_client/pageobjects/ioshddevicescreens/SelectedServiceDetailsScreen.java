@@ -137,7 +137,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		WebElement par = getTableParentCell("Vehicle Part");
 		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
-	
+
+
+	public String getTechniciansValue() {
+		WebElement par = getTableParentCell("Technicians");
+		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
+	}
+
 	public String getServicePartValue() {
 		WebElement servicepartfld = ((IOSElement) appiumdriver.findElementByAccessibilityId("Service Part")).findElementsByClassName("XCUIElementTypeStaticText").get(1);	
 		return servicepartfld.getAttribute("value");
