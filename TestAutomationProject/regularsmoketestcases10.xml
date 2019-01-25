@@ -147,6 +147,9 @@
           <include name="testWOVerifyIfServiceHasDefaultTechnicianAndItsAmountIs0ThenDefaultTechnicianShouldBeAssignedToTheService_NotTechnicianSplitAtWorkOrderLevel" />
           <include name="testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0" />
           <include name="testWOVerifyThatTechSplitAmountIsShownCorrectUnderMonitorForServiceWithAdjustments" />
+          <include name="testVerifyThatRequiredServicesHasCorrectTech" />
+          <include name="testVerifyThatRequiredBundleItemsHasCorrectDefTech" />
+          <include name="testVerifyThatRequiredBundleItemsAndServiceWithExpensesAnd0PriceHasCorrectDefTechAfterEditWO" />
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
           <!--<include name="testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices" />--> 
