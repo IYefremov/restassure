@@ -23,6 +23,7 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderType
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -709,7 +710,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		availableServicesScreen.switchToSelectedServicesView();
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
-		availableServicesScreen.saveInspection();
+		availableServicesScreen.saveInspectionViaMenu();
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}
@@ -720,7 +721,33 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		if ((insptype.equals(InspectionTypes.O_KRAMAR) & (inspectionDTOs.size() > 0))) {
+		if (insptype.equals(InspectionTypes.INSP_TYPE_APPROV_REQUIRED)) {
+			inspectionscreen.switchToMyInspectionsView();
+			VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+			customersscreen.switchToWholesaleMode();
+			customersscreen.selectCustomer(inspcustomer);
+			VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+			insptypeslist.selectInspectionType(insptype);
+			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+			vehicleinfoscreen.setVIN(vinnumber);
+			inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+			vehicleinfoscreen.swipeScreenLeft();
+			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+			VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+			VNextQuestionsScreen questionsScreen = selectedServicesScreen.
+					clickServiceQuestionSection("Test_Service_PP_Panel", "zayats section1");
+			questionsScreen.selectAllRequiredQuestions(0);
+			questionsScreen.setAllRequiredQuestions("test 1");
+			questionsScreen.saveQuestions();
+			selectedServicesScreen.collapseServiceDetails("Test_Service_PP_Panel");
+			questionsScreen = selectedServicesScreen.
+					clickServiceQuestionSection("Vlad_Money", "Vovan Test 5");
+			questionsScreen.selectRequiredQuestion();
+			questionsScreen.clickDoneButton();
+
+			vehicleinfoscreen.saveInspectionViaMenu();
+
+		} else if ((insptype.equals(InspectionTypes.O_KRAMAR) & (inspectionDTOs.size() > 0))) {
 			InspectionDTO inspectionDTO = inspectionDTOs.remove(0);
 			inspnumber = "E-" + appLicenseEntity + "-0" + inspectionDTO.getLocalNo();
 		} else {

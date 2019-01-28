@@ -5,6 +5,7 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -120,6 +121,37 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
         return notesvalue;
+    }
+
+    public  WebElement expandServiceDetails(String serviceName) {
+        WebElement servicecell = getSelectedServiceCell(serviceName);
+        if (servicecell != null) {
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell);
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell);
+        }
+        return servicecell;
+    }
+
+    public  WebElement collapseServiceDetails(String serviceName) {
+        WebElement servicecell = getSelectedServiceCell(serviceName);
+        if (servicecell != null) {
+            if (servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                tap(servicecell.findElement(By.xpath(".//*[@action='toggle-item']")));
+        }
+        BaseUtils.waitABit(1000);
+        return servicecell;
+    }
+
+    public VNextQuestionsScreen clickServiceQuestionSection(String serviceName, String questionSectionName) {
+        WebElement servicecell = expandServiceDetails(serviceName);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+        wait.until(ExpectedConditions.elementToBeClickable(servicecell.findElement(By.xpath("//*[@action='select-question-section']/input[@value='" +
+                        questionSectionName + "']"))));
+        servicecell.findElement(By.xpath("//*[@action='select-question-section']/input[@value='" +
+                questionSectionName + "']")).click();
+        return new VNextQuestionsScreen(appiumdriver);
     }
 
     public VNextNotesScreen clickServiceNotesOption(String serviceName) {

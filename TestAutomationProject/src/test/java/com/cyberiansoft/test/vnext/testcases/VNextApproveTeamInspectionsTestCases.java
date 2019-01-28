@@ -1,21 +1,23 @@
 package com.cyberiansoft.test.vnext.testcases;
 
-import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 	
@@ -112,8 +114,21 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		
-		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+		vehicleinfoscreen.swipeScreenLeft();
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		VNextQuestionsScreen questionsScreen = selectedServicesScreen.
+				clickServiceQuestionSection("Test_Service_PP_Panel", "zayats section1");
+		questionsScreen.selectAllRequiredQuestions(0);
+		questionsScreen.setAllRequiredQuestions("test 1");
+		questionsScreen.saveQuestions();
+		selectedServicesScreen.collapseServiceDetails("Test_Service_PP_Panel");
+		questionsScreen = selectedServicesScreen.
+				clickServiceQuestionSection("Vlad_Money", "Vovan Test 5");
+		questionsScreen.selectRequiredQuestion();
+		questionsScreen.clickDoneButton();
+
+		vehicleinfoscreen.saveInspectionViaMenu();
 		return inspnumber;
 	}
 
