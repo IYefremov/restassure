@@ -66,15 +66,15 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 	
 	public void selectCustomer(AppCustomer customer) {
-		if (elementExists("//*[@data-automation-id='search-icon']"))
+		if (elementExists("//*[@data-automation-id='search-icon']")) {
 			searchCustomerByName(customer.getFullName());
+		}
 		if (customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
 			WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));
 			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
 			je.executeScript("arguments[0].scrollIntoView(true);",elem);	
 			//waitABit(1000);
 			tap(customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
-			
 		} else {
 			List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name']"));
 			WebElement elem = ctmrs.get(ctmrs.size()-1);
@@ -83,7 +83,6 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			//waitABit(1000);
 			tap(customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
 			//waitABit(1000);
-
 		}
 	}
 	
@@ -156,11 +155,12 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 			tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-clear']")));
 		}
 		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@data-autotests-id='search-input']"), appiumdriver);
-		tap(searchfld);
-		appiumdriver.getKeyboard().sendKeys(searchtxt);
+		//tap(searchfld);
+		searchfld.sendKeys(searchtxt);
+		//appiumdriver.getKeyboard().sendKeys(searchtxt);
 		//searchfld.clear();
 		//searchfld.sendKeys(searchtxt);
-		appiumdriver.hideKeyboard();
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public boolean isNothingFoundCaptionDisplayed() {

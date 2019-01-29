@@ -90,7 +90,8 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("Vehicle.VIN")));
 		vinfld.clear();
-		setValue(vinfld, vinnumber);
+		vinfld.sendKeys(vinnumber);
+		//setValue(vinfld, vinnumber);
 	}
 	
 	public String getVINFieldValue() {
