@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -143,8 +144,13 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
-		wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.elementToBeClickable(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")))).click();
+		try {
+			wait = new WebDriverWait(appiumdriver, 30);
+			wait.until(ExpectedConditions.elementToBeClickable(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")))).click();
+		} catch (WebDriverException e) {
+			BaseUtils.waitABit(500);
+			tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
+		}
 		//tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
 		return new VNextInspectionsMenuScreen(appiumdriver);
 	}

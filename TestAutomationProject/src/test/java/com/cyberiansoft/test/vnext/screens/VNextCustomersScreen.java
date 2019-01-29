@@ -157,6 +157,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@data-autotests-id='search-input']"), appiumdriver);
 		//tap(searchfld);
 		searchfld.sendKeys(searchtxt);
+		BaseUtils.waitABit(1000);
 		//appiumdriver.getKeyboard().sendKeys(searchtxt);
 		//searchfld.clear();
 		//searchfld.sendKeys(searchtxt);
