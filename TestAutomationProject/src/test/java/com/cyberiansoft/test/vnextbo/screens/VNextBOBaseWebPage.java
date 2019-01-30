@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,12 +22,14 @@ public abstract class VNextBOBaseWebPage {
     public static WebDriverWait wait;
     public static WebDriverWait waitLong;
     public static WebDriverWait waitShort;
+    public Actions actions;
 
 	public VNextBOBaseWebPage(WebDriver driver) {
 		this.driver = driver;
         wait = new WebDriverWait(driver, 15, 1);
         waitShort = new WebDriverWait(driver, 5, 1);
         waitLong = new WebDriverWait(driver, 30, 1);
+        actions = new Actions(driver);
 	}
 	
 	 /* Wait For */
@@ -112,5 +116,27 @@ public abstract class VNextBOBaseWebPage {
 
     public void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+    }
+
+    public void setZoom(int zoomPercentage) {
+        ((JavascriptExecutor)driver).executeScript("document.body.style.zoom='" + zoomPercentage + "%'", "");
+    }
+
+    public void refreshPage() {
+        driver.navigate().refresh();
+        waitABit(3500);
+    }
+
+    public void reduceZoom() {
+        actions.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT)).perform();
+    }
+
+    public void increaseZoom() {
+        actions.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD)).perform();
+    }
+
+    public void goToPreviousPage() {
+        driver.navigate().back();
+        waitForLoading();
     }
 }

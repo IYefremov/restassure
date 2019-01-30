@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.google.common.base.CharMatcher;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
 
@@ -32,7 +34,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(id = "locSearchInput")
     private WebElement locationSearchInput;
 
-    @FindBy(xpath = "//span[@class='menu-trigger location-name']")
+    @FindBy(xpath = "//span[contains(@class, 'location-name')]")
     private WebElement locationElement;
 
     @FindBy(xpath = "//div[@id='savedSearchContainer']/span[@class='k-widget k-dropdown k-header']")
@@ -51,7 +53,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     private WebElement phasesWideDropdownActive;
 
     @FindBy(xpath = "//li[@id='departmentsdropTab']")
-    private WebElement departmentsTab;
+    private WebElement departmentsNarrowTab;
 
     @FindBy(xpath = "//li[@id='departmentsWideDropTab']")
     private WebElement departmentsWideTab;
@@ -59,19 +61,40 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//li[@id='departmentsdropTab' and @class='active']")
     private WebElement departmentsTabActive;
 
+    @FindBy(xpath = "//div[@id='departmentTabwideScreen1']//span[@class='pull-right']")
+    private List<WebElement> allDepartmentsWideScreenValues;
+
+    @FindBy(xpath = "//div[@id='departmentTabwideScreen2']//span[@class='pull-right']")
+    private List<WebElement> allPhasesWideScreenValues;
+
+    @FindBy(xpath = "//div[@id='departmentTabNoWideScreen1']")
+    private WebElement departmentsTabPane;
+
+    @FindBy(xpath = "//div[@id='departmentTabNoWideScreen2']")
+    private WebElement phasesTabPane;
+
+    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@id='departmentsdrop_listbox']//span[@class='pull-right']")
+    private List<WebElement> allDepartmentsNarrowScreenValues;
+
+    @FindBy(xpath = "//div[@id='phasesdrop-list']//span[@class='pull-right']")
+    private List<WebElement> allPhasesNarrowScreenValues;
+
     @FindBy(xpath = "//li[@id='departmentsWideDropTab' and @class='active']")
     private WebElement departmentsWideTabActive;
 
+    @FindBy(xpath = "//li[@id='departmentsdropTab' and @class='active']")
+    private WebElement departmentsNarrowTabActive;
+
     @FindBy(xpath = "//li[@id='phasesdropTab']")
-    private WebElement phasesTab;
+    private WebElement phasesNarrowTab;
 
     @FindBy(xpath = "//li[@id='phasesWideDropTab']")
     private WebElement phasesWideTab;
 
     @FindBy(xpath = "//li[@id='phasesdropTab' and @class='active']")
-    private WebElement phasesTabActive;
+    private WebElement phasesNarrowTabActive;
 
-    @FindBy(xpath = "//li[@id='//li[@id='phasesWideDropTab']' and @class='active']")
+    @FindBy(xpath = "//li[@id='phasesWideDropTab' and @class='active']")
     private WebElement phasesWideTabActive;
 
     @FindBy(xpath = "//input[@id='repairOrdersFreeTextSearch']")
@@ -107,10 +130,10 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//a[@data-bind='click: showPrivacyPolicy']")
     private WebElement privacyPolicy;
 
-    @FindBy(xpath = "//div[@id='reconmonitor-orders']/div[@id='pagingPanel']/button[contains(@data-bind, 'paging.next.click')]")
+    @FindBy(xpath = "//div[@id='reconmonitor-orders']//tfoot//button[contains(@data-bind, 'pager.nextPage')]")
     private WebElement nextButton;
 
-    @FindBy(xpath = "//div[@id='reconmonitor-orders']/div[@id='pagingPanel']/button[contains(@data-bind, 'paging.prev.click')]")
+    @FindBy(xpath = "//div[@id='reconmonitor-orders']//tfoot//button[contains(@data-bind, 'pager.previousPage')]")
     private WebElement prevButton;
 
     @FindBy(xpath = "//div[@class='search-wrapper']//i[@class='icon-search']")
@@ -118,6 +141,42 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='customSearchContainer']//i[@class='icon-cancel-circle']")
     private WebElement cancelSearchIcon;
+
+    @FindBy(xpath = "//p[text()='Search']")
+    private WebElement searchText;
+
+    @FindBy(xpath = "//div[@id='departmentTabwideScreen1']//span[@title][not(@title='ALL')]")
+    private List<WebElement> departmentsOptionsForWideScreen;
+
+    @FindBy(xpath = "//div[@id='departmentTabwideScreen2']//span[@title][not(@title='ALL')]")
+    private List<WebElement> phasesOptionsForWideScreen;
+
+    @FindBy(xpath = "//div[@id='departmentTabNoWideScreen1']//span[@title]")
+    private WebElement departmentsNarrowScreen;
+
+    @FindBy(xpath = "//div[@id='departmentTabNoWideScreen2']//span[@title]")
+    private WebElement phasesNarrowScreen;
+
+    @FindBy(xpath = "departmentTabNoWideScreen1")
+    private WebElement narrowScreen;
+
+    @FindBy(xpath = "//div[@id='departmentTabNoWideScreen1' and contains(@class, 'active')]")
+    private WebElement wideScreen;
+
+    @FindBy(xpath = "//ul[@id='departmentsdrop_listbox' and @aria-hidden='false']//span[@class='pull-left']")
+    private List<WebElement> departmentsNarrowScreenDropDownOptions;
+
+    @FindBy(xpath = "//ul[@id='phasesdrop_listbox' and @aria-hidden='false']//span[@class='pull-left']")
+    private List<WebElement> phasesNarrowScreenDropDownOptions;
+
+    @FindBy(xpath = "//tbody[@id='tableBody' and @data-template='rowTemplate']/tr")
+    private List<WebElement> ordersDisplayedOnPage;
+
+    @FindBy(xpath = "//table[@id='roTable']")
+    private WebElement table;
+
+    @FindBy(xpath = "//p[contains(@data-bind, 'orders.result') and contains(text(), 'No records')]")
+    private WebElement noRecordsFound;
 
     public VNextBORepairOrdersWebPage(WebDriver driver) {
         super(driver);
@@ -127,7 +186,6 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
 
     public boolean areTableHeaderTitlesDisplayed(List<String> titles, List<String> repeaterTitles) {
         List<String> extracted = new ArrayList<>();
-        List<String> copy = new ArrayList<>();
         waitShort
                 .until(ExpectedConditions.visibilityOfAllElements(tableHeader))
                 .forEach((title) -> extracted.add(title.getText()));
@@ -148,29 +206,60 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     public VNextBORepairOrdersWebPage setLocation(String location) {
         try {
             wait.until(ExpectedConditions.visibilityOf(locationExpanded));
-            wait.until(ExpectedConditions
-                    .elementToBeClickable(locationExpanded.findElement(By.xpath(".//label[text()='" + location + "']"))))
-                    .click();
-            waitForLoading();
-            Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
-            closeLocationDropDown();
+            selectLocation(location);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.elementToBeClickable(locationElement));
-            wait.until(ExpectedConditions.visibilityOf(locationExpanded));
+            wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+            selectLocation(location);
         }
         return this;
     }
 
-    public boolean isLocationSearched(String searchLocation) {
-        wait.until(ExpectedConditions.visibilityOf(locationExpanded));
+    public boolean isLocationSet(String location) {
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElement(locationElement, location));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    private void selectLocation(String location) {
+        wait.until(ExpectedConditions
+                .elementToBeClickable(locationExpanded.findElement(By.xpath(".//label[text()='" + location + "']"))))
+                .click();
+        waitForLoading();
+        Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
+        closeLocationDropDown();
+    }
+
+    public boolean isLocationExpanded() {
+        try {
+            return waitShort.until(ExpectedConditions.visibilityOf(locationExpanded)).isDisplayed();
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public int clearAndTypeLocation(String searchLocation) {
         wait.until(ExpectedConditions.elementToBeClickable(locationSearchInput)).click();
         final int locationsNum = wait.until(ExpectedConditions.visibilityOfAllElements(locationLabels)).size();
         clearAndType(locationSearchInput, searchLocation);
+        return locationsNum;
+    }
+
+    public boolean isLocationSearched(String searchLocation) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(locationExpanded));
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+        }
+        final int locationsNum = clearAndTypeLocation(searchLocation);
         try {
             waitShort.until((ExpectedCondition<Boolean>) driver -> locationLabels.size() != locationsNum);
         } catch (Exception e) {
             waitABit(2000);
         }
+
         return locationLabels
                 .stream()
                 .allMatch(label -> label
@@ -185,7 +274,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return this;
     }
 
-    private void closeLocationDropDown() {
+    public void closeLocationDropDown() {
         try {
             wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
         } catch (Exception e) {
@@ -232,19 +321,208 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public boolean isDepartmentDropdownDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOf(departmentWideDropdownActive)).isDisplayed();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(departmentWideDropdownActive));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
     }
 
-    public void makeDepartmentsTabActive() {
-        makeTabActive(departmentsWideTab, departmentsWideTabActive);
+    public void setDepartmentsTabActive() {
+        makeTabActive(departmentsWideTab, departmentsWideTabActive, departmentsNarrowTab, departmentsNarrowTabActive);
+    }
+
+    public String getAllDepartmentsSum() {
+        return getCalculatedSum(allDepartmentsWideScreenValues);
+    }
+
+    public String getAllPhasesSum() {
+        return getCalculatedSum(allPhasesWideScreenValues);
+    }
+
+    private String getCalculatedSum(List<WebElement> values) {
+        if (areValuesDisplayed(values)) {
+            String sum = values.get(0).getText();
+            System.out.println("Sum: " + sum);
+            return sum;
+        }
+        return "";
+    }
+
+    public String getDepartmentsValues() {
+        return calculateSum(allDepartmentsWideScreenValues);
+    }
+
+    public String getPhasesValues() {
+        return calculateSum(allPhasesWideScreenValues);
+    }
+
+    private String calculateSum(List<WebElement> values) {
+        if (areValuesDisplayed(values)) {
+            final List<WebElement> collection = values.subList(1, values.size());
+            final String calculatedSum = collection
+                    .stream()
+                    .map(value -> {
+                        if (value.getText().equals("")) {
+                            return 0;
+                        }
+                        return Integer.valueOf(value.getText());
+                    })
+                    .collect(Collectors.toList())
+                    .stream()
+                    .reduce((val1, val2) -> val1 + val2)
+                    .get()
+                    .toString();
+            System.out.println("Sum calculation: " + calculatedSum);
+            return calculatedSum;
+        }
+        return "";
+    }
+
+    private boolean areValuesDisplayed(List<WebElement> values) {
+        try {
+            wait.until((ExpectedCondition<Boolean>) sum -> !values.get(0).getText().equals(""));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private String getValue(List<WebElement> values, int order) {
+        if (areValuesDisplayed(values)) {
+            return values.get(order).getText();
+        } else {
+            return null;
+        }
+    }
+
+    public String getDepartmentsValue(int order) {
+        return handleTabValues(order, allDepartmentsWideScreenValues, allDepartmentsNarrowScreenValues, departmentsTabPane);
+    }
+
+    public String getPhasesValue(int order) {
+        return handleTabValues(order, allPhasesWideScreenValues, allPhasesNarrowScreenValues, phasesTabPane);
+    }
+
+    private String handleTabValues(int order, List<WebElement> allPhasesWideScreenValues,
+                                   List<WebElement> allPhasesNarrowScreenValues, WebElement phasesTabPane) {
+        if (areValuesDisplayed(allPhasesWideScreenValues)) {
+            final String value = getValue(allPhasesWideScreenValues, order);
+            assert value != null;
+            return value.equals("") ? "0" : value;
+        } else {
+            try {
+                waitShort.until(ExpectedConditions.visibilityOfAllElements(allPhasesNarrowScreenValues));
+            } catch (Exception ignored) {
+                wait.until(ExpectedConditions.elementToBeClickable(phasesTabPane)).click();
+                waitABit(1000);
+            }
+            String value = getValue(allPhasesNarrowScreenValues, order);
+            System.out.println("VALUE: " + value + " ORDER: " + order);
+            if (value == null) {
+                value = "0";
+            }
+            System.out.println("VALUE after replacement: " + CharMatcher.inRange('0', '9').retainFrom(value));
+            value = CharMatcher.inRange('0', '9').retainFrom(value);
+            wait.until(ExpectedConditions.elementToBeClickable(phasesTabPane)).click();
+            return value.equals("") ? "0" : value;
+        }
+    }
+
+    public VNextBORepairOrdersWebPage clickDepartmentForWideScreen(String department) {
+        clickTabForWideScreen(department, departmentsOptionsForWideScreen);
+        return this;
+    }
+
+    public VNextBORepairOrdersWebPage clickDepartmentForNarrowScreen(String department) {
+        clickOptionForNarrowScreen(department, departmentsTabPane, departmentsNarrowScreenDropDownOptions);
+        return this;
+    }
+
+    public VNextBORepairOrdersWebPage clickPhaseForWideScreen(String phase) {
+        clickTabForWideScreen(phase, phasesOptionsForWideScreen);
+        return this;
+    }
+
+    public VNextBORepairOrdersWebPage clickPhaseForNarrowScreen(String phase) {
+        clickOptionForNarrowScreen(phase, phasesTabPane, phasesNarrowScreenDropDownOptions);
+        return this;
+    }
+
+    private void clickTabForWideScreen(String phase, List<WebElement> phasesOptionsForWideScreen) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(phasesOptionsForWideScreen));
+        final WebElement element = phasesOptionsForWideScreen
+                .stream()
+                .filter(ph -> ph.getText().equals(phase))
+                .findFirst()
+                .get();
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        waitForLoading();
+    }
+
+    private void clickOptionForNarrowScreen(String phase, WebElement phasesTabPane, List<WebElement> phasesNarrowScreenDropDownOptions) {
+        isDepartmentNarrowScreenClickable();
+//        departmentsNarrowScreen.click();
+        wait.until(ExpectedConditions.elementToBeClickable(phasesTabPane)).click();
+        waitABit(1000);
+        System.out.println(phase);
+        final WebElement element = phasesNarrowScreenDropDownOptions
+                .stream()
+                .filter(dep -> dep.getText().equals(phase))
+                .findFirst()
+                .get();
+        System.out.println("Getting text element: " + element.getText());
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        waitForLoading();
+    }
+
+    public boolean isDepartmentNarrowScreenClickable() {
+        return isScreenClickable(departmentsNarrowScreen);
+    }
+
+    public boolean isPhasesNarrowScreenClickable() {
+        return isScreenClickable(phasesNarrowScreen);
+    }
+
+    private boolean isScreenClickable(WebElement phasesNarrowScreen) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(phasesNarrowScreen));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public int getNumOfOrdersOnPage() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(ordersDisplayedOnPage));
+        return ordersDisplayedOnPage.size();
+    }
+
+    public boolean isTableDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(table));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public boolean isTextNoRecordsDisplayed() {
+        try {
+            waitShort.until(ExpectedConditions.visibilityOf(noRecordsFound));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
     }
 
     public boolean isPhasesDropdownDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(phasesWideDropdownActive)).isDisplayed();
     }
 
-    public void makePhasesTabActive() {
-        makeTabActive(phasesWideTab, phasesWideTabActive);
+    public void setPhasesTabActive() {
+        makeTabActive(phasesWideTab, phasesWideTabActive, phasesNarrowTab, phasesNarrowTabActive);
     }
 
     public boolean isSearchInputFieldDisplayed() {
@@ -252,11 +530,32 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public boolean isPhasesTabDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOf(phasesWideTab)).isDisplayed();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(phasesWideTab)).isDisplayed();
+            return true;
+        } catch (Exception ignored) {
+            try {
+                wait.until(ExpectedConditions.visibilityOf(phasesNarrowTab)).isDisplayed();
+                return true;
+            } catch (Exception ignored1) {
+                return false;
+            }
+        }
+
     }
 
     public boolean isDepartmentsTabDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOf(departmentsWideTab)).isDisplayed();
+        try {
+            wait.until(ExpectedConditions.visibilityOf(departmentsWideTab)).isDisplayed();
+            return true;
+        } catch (Exception ignored) {
+            try {
+                wait.until(ExpectedConditions.visibilityOf(departmentsNarrowTab)).isDisplayed();
+                return true;
+            } catch (Exception ignored1) {
+                return false;
+            }
+        }
     }
 
 //    public boolean isIntercomLauncherDisplayed() {
@@ -330,12 +629,17 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return PageFactory.initElements(driver, VNextBOPrivacyPolicyDialog.class);
     }
 
-    private void makeTabActive(WebElement tab, WebElement tabActive) {
+    private void makeTabActive(WebElement wideTab, WebElement wideTabActive, WebElement narrowTab, WebElement narrowTabActive) {
         try {
-            waitShort.until(ExpectedConditions.visibilityOf(tabActive));
+            waitShort.until(ExpectedConditions.visibilityOf(wideTabActive));
         } catch (Exception ignored) {
-            wait.until(ExpectedConditions.elementToBeClickable(tab)).click();
-            waitShort.until(ExpectedConditions.visibilityOf(tabActive));
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(wideTab)).click();
+                waitShort.until(ExpectedConditions.visibilityOf(wideTabActive));
+            } catch (Exception e) {
+                wait.until(ExpectedConditions.elementToBeClickable(narrowTab)).click();
+                waitShort.until(ExpectedConditions.visibilityOf(narrowTabActive));
+            }
         }
     }
 
@@ -360,9 +664,9 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
                 By.xpath("//div[@class='k-loading-mask']")));
     }
 
-    public VNextBORepairOrdersWebPage setRepairOrdersSearchText(String repairordertext) {
+    public VNextBORepairOrdersWebPage setRepairOrdersSearchText(String repairOrderText) {
         reapiroderssearchtextfld.clear();
-        reapiroderssearchtextfld.sendKeys(repairordertext);
+        reapiroderssearchtextfld.sendKeys(repairOrderText);
         waitABit(500);
         return this;
     }
@@ -393,6 +697,11 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         }
     }
 
+    public String getTableTitleDisplayed(int titleHeaderNumber) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(tableHeader));
+        return tableHeader.get(titleHeaderNumber).getText();
+    }
+
     private boolean isWorkOrderDisplayedByPartialText(String text) {
         try {
             return wait
@@ -403,6 +712,40 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public boolean isNoteForWorkOrderDisplayed(String woNumber) {
+        try {
+            wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[text()='" + woNumber
+                    + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']")));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public VNextBORepairOrdersWebPage closeNoteForWorkOrder(String woNumber) {
+        if (isNoteForWorkOrderDisplayed(woNumber)) {
+            wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(driver
+                            .findElement(By.xpath("//strong[text()='" + woNumber
+                                    + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']"))))
+                    .click();
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//strong[text()='" + woNumber
+                    + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']/div[@class='dark box']")));
+        }
+        return this;
+    }
+
+    public VNextBORepairOrderDetailsWebPage clickWoLink(String woNumber) {
+        wait.until(ExpectedConditions.elementToBeClickable(By
+                .xpath("//a[@class='order-no'][contains(@href, '" + woNumber + "')]")))
+                .click();
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBORepairOrderDetailsWebPage.class);
     }
 
     public boolean isWorkOrderDisplayedByOrderNumber(String orderNumber) {
@@ -512,5 +855,10 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         WebElement wotablerow = getTableRowWithWorkOrder(orderNumber);
         wotablerow.findElement(By.xpath(".//a/strong[text()='" + orderNumber + "']")).click();
         return new VNextBORepairOrderDetailsPage(driver);
+    }
+
+    public void clickSearchTextToCloseLocationDropDown() {
+        wait.until(ExpectedConditions.elementToBeClickable(searchText)).click();
+        wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
     }
 }

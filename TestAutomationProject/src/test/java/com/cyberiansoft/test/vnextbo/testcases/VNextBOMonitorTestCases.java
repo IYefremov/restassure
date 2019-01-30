@@ -16,6 +16,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOMonitorTestCases extends BaseTestCase {
@@ -71,7 +77,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertTrue(repairOrdersPage.isSavedSearchContainerDisplayed(),
                 "The search container isn't displayed");
 
-//        repairOrdersPage.makeDepartmentsTabActive(); todo add verifies for narrow screen, if necessary
+//        repairOrdersPage.setDepartmentsTabActive(); todo add verifies for narrow screen, if necessary
 //        Assert.assertTrue(repairOrdersPage.isDepartmentsTabDisplayed(),
 //                "The department tab isn't displayed");
 
@@ -143,6 +149,26 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setLocation(data.getLocation())
                 .openIntercom()
                 .closeIntercom();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeLocation(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getSearchLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSearched(data.getSearchLocation()),
+                "The location is not searched");
+        repairOrdersPage.clickLocationInDropDown(data.getSearchLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationExpanded(), "The location is not expanded");
+        repairOrdersPage.clickSearchTextToCloseLocationDropDown();
+        Assert.assertTrue(repairOrdersPage.isLocationSelected(data.getSearchLocation()), "The location has been changed");
+
+        Assert.assertTrue(repairOrdersPage.isLocationSearched(data.getLocation()),
+                "The location is not searched");
+        repairOrdersPage.clickLocationInDropDown(data.getLocation());
+
+        Assert.assertTrue(repairOrdersPage.isLocationSelected(data.getLocation()), "The location hasn't been selected");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -383,8 +409,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
-        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByName(data.getCustomer()),
-                "The work order hasn't been displayed");
+//        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByName(data.getCustomer()),
+//                "The work order hasn't been displayed"); todo uncomment after data update by manual QC!!!
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -777,5 +803,396 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByCustomTimeFrame(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        final VNextBOCalendarWidgetDialog calendarWidgetDialog = PageFactory
+                .initElements(webdriver, VNextBOCalendarWidgetDialog.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("M/d/yyyy");
+
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
+        final int monthValue = now.getMonthValue();
+        final int prevMonthValue = monthValue - 1;
+        LocalDateTime before = now.minusDays(7);
+
+        String beforeMinusMonth = calendarWidgetDialog.getMonthReplace(monthValue, prevMonthValue, before);
+        String nowMinusMonth = calendarWidgetDialog.getMonthReplace(monthValue, prevMonthValue, now);
+        System.out.println("beforeMinusMonth: " + beforeMinusMonth);
+        System.out.println("nowMinusMonth: " + nowMinusMonth);
+        String beforeFormatted = before.format(format);
+        String nowFormatted = now.format(format);
+        System.out.println("beforeFormatted: " + beforeFormatted);
+        System.out.println("nowFormatted: " + nowFormatted);
+
+        advancedSearchDialog.setTimeFrame(data.getTimeFrame())
+                .clickFromDateButton()
+                .selectFromDate(beforeMinusMonth, advancedSearchDialog)
+                .clickToDateButton()
+                .selectToDate(nowMinusMonth, advancedSearchDialog)
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusInProgressRework(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+
+//        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
+//                "The work order is not displayed after search by Repair order with status " + data.getRepairStatus());
+        // todo uncomment after data update by manual QC!!!
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusInProgressActive(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusInProgressQueued(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusInProgressOnHold(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusInProgressNotOnHold(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusInProgressQAReady(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusCompletedQAReady(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusCompletedNotBilled(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusCompletedOnSite(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatusCompletedAll(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
+                .setLocation(data.getLocation())
+                .clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchDialog
+                .setRepairStatus(data.getRepairStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanFilterRObyDepartments(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .setDepartmentsTabActive();
+
+        Assert.assertTrue(repairOrdersPage.isDepartmentsTabDisplayed());
+        Assert.assertEquals(repairOrdersPage.getAllDepartmentsSum(), repairOrdersPage.getDepartmentsValues(),
+                "The departments values are not calculated properly");
+        final List<Integer> departmentValues = new ArrayList<>();
+        departmentValues.add(Integer.valueOf(repairOrdersPage.getDepartmentsValue(1)));
+        departmentValues.add(Integer.valueOf(repairOrdersPage.getDepartmentsValue(2)));
+        if (repairOrdersPage.isDepartmentNarrowScreenClickable()) {
+            System.out.println("Narrow Screen");
+            for (int i = 0, j = 1; i < departmentValues.size(); i++, j++) {
+                System.out.println(j);
+                repairOrdersPage.clickDepartmentForNarrowScreen(data.getDepartments().get(j));
+                if (departmentValues.get(i) == 0) {
+                    Assert.assertFalse(repairOrdersPage.isTableDisplayed(), "The table shouldn't be displayed");
+                    Assert.assertTrue(repairOrdersPage.isTextNoRecordsDisplayed(),
+                            "The text notification is not displayed");
+                } else {
+                    Assert.assertTrue(departmentValues.get(0) >= repairOrdersPage.getNumOfOrdersOnPage(),
+                            "The departments repair orders number in table " +
+                                    "is less than value displayed in menu container");
+                }
+            }
+        } else {
+            System.out.println("Wide Screen");
+            for (int i = 0, j = 1; i < departmentValues.size(); i++, j++) {
+                System.out.println(j);
+                repairOrdersPage.clickDepartmentForWideScreen(data.getDepartments().get(j));
+                if (departmentValues.get(i) == 0) {
+                    Assert.assertFalse(repairOrdersPage.isTableDisplayed(), "The table shouldn't be displayed");
+                    Assert.assertTrue(repairOrdersPage.isTextNoRecordsDisplayed(),
+                            "The text notification is not displayed");
+                } else {
+                    Assert.assertTrue(departmentValues.get(0) >= repairOrdersPage.getNumOfOrdersOnPage(),
+                            "The departments repair orders number in table " +
+                                    "is less than value displayed in menu container");
+                }
+            }
+        }
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanFilterRObyPhases(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setLocation(data.getLocation())
+                .setPhasesTabActive();
+
+        Assert.assertTrue(repairOrdersPage.isPhasesTabDisplayed());
+        Assert.assertEquals(repairOrdersPage.getAllPhasesSum(), repairOrdersPage.getPhasesValues(),
+                "The phases values are not calculated properly");
+        final List<Integer> phasesValues = new ArrayList<>();
+        phasesValues.add(Integer.valueOf(repairOrdersPage.getPhasesValue(1)));
+        phasesValues.add(Integer.valueOf(repairOrdersPage.getPhasesValue(2)));
+        phasesValues.add(Integer.valueOf(repairOrdersPage.getPhasesValue(3)));
+
+        if (repairOrdersPage.isPhasesNarrowScreenClickable()) {
+            System.out.println("Narrow Screen");
+            for (int i = 0, j = 1; i < phasesValues.size(); i++, j++) {
+                repairOrdersPage.clickPhaseForNarrowScreen(data.getPhases().get(j));
+//                if (phasesValues.get(i) == 0) { todo uncomment after bug #70126 fix!!!
+//                    Assert.assertFalse(repairOrdersPage.isTableDisplayed(), "The table shouldn't be displayed");
+//                    Assert.assertTrue(repairOrdersPage.isTextNoRecordsDisplayed(),
+//                            "The text notification is not displayed");
+//                } else {
+//                    Assert.assertTrue(phasesValues.get(0) >= repairOrdersPage.getNumOfOrdersOnPage(),
+//                            "The phases repair orders number in table " +
+//                                    "is less than value displayed in menu container");
+//                }
+            }
+        } else {
+            System.out.println("Wide Screen");
+            for (int i = 0, j = 1; i < phasesValues.size(); i++, j++) {
+                System.out.println(j);
+                repairOrdersPage.clickPhaseForWideScreen(data.getPhases().get(j));
+//                if (phasesValues.get(i) == 0) { todo uncomment after bug #70126 fix!!!
+//                    Assert.assertFalse(repairOrdersPage.isTableDisplayed(), "The table shouldn't be displayed");
+//                    Assert.assertTrue(repairOrdersPage.isTextNoRecordsDisplayed(),
+//                            "The text notification is not displayed");
+//                } else {
+//                    Assert.assertTrue(phasesValues.get(0) >= repairOrdersPage.getNumOfOrdersOnPage(),
+//                            "The phases repair orders number in table " +
+//                                    "is less than value displayed in menu container");
+//                }
+            }
+        }
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectLocation(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchWoUsingSearchFilter(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()));
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getVinNum())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVinNum()),
+                "The work order is not displayed after search by VIN after clicking the 'Enter' key");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeAndChangeRoDetails(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()));
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getVinNum())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVinNum()),
+                "The work order is not displayed after search by VIN after clicking the 'Enter' key");
+
+        Assert.assertEquals(repairOrdersPage.getTableTitleDisplayed(0), data.getTitle(),
+                "The table title is incorrect");
+        final VNextBORepairOrderDetailsWebPage repairOrderDetailsPage = repairOrdersPage.clickWoLink(data.getVinNum());
+        Assert.assertTrue(repairOrderDetailsPage.isRoDetailsSectionDisplayed(),
+                "The RO details section hasn't been displayed");
+        repairOrderDetailsPage.goToPreviousPage();
+
+//        repairOrdersPage.closeNoteForWorkOrder(data.getVinNum());
     }
 }

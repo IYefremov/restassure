@@ -21,7 +21,7 @@
         <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>-->
         <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>-->
         <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOOperationsInvoicesTestCases"/>-->
-        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorTestCases"/>-->
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorTestCases"/>
         <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">-->
             <!--<methods>-->
                 <!--<include name="testCheckValidationErrorsOnTheCreateNewUserDialog"/>-->

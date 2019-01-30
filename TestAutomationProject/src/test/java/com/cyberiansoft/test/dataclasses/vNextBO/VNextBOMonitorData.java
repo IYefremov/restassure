@@ -49,6 +49,12 @@ public class VNextBOMonitorData  {
     @JsonProperty("department")
     private String department;
 
+    @JsonProperty("departments")
+    private List<String> departments;
+
+    @JsonProperty("phases")
+    private List<String> phases;
+
     @JsonProperty("woType")
     private String woType;
 
@@ -84,6 +90,12 @@ public class VNextBOMonitorData  {
 
     @JsonProperty("toDate")
     private String toDate;
+
+    @JsonProperty("repairStatus")
+    private String repairStatus;
+
+    @JsonProperty("title")
+    private String title;
 
     @JsonProperty("titles")
     private String[] titles;
@@ -195,11 +207,27 @@ public class VNextBOMonitorData  {
         return toDate;
     }
 
+    public String getRepairStatus() {
+        return repairStatus;
+    }
+
     public List<String> getTitles() {
         return Arrays.asList(titles);
     }
 
     public List<String> getTitlesRepeater() {
         return Arrays.asList(titlesRepeater);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public List<String> getDepartments() {
+        return departments;
+    }
+
+    public List<String> getPhases() {
+        return phases;
     }
 }

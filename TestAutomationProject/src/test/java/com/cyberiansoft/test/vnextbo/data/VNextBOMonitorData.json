@@ -47,6 +47,15 @@
     }
   ],
 
+  "verifyUserCanChangeLocation": [
+    {
+      "rowID": "verifyUserCanChangeLocation.01",
+      "description": "Test Case 81899:Verify user can change \"location\"",
+      "searchLocation": "1111",
+      "location": "Best Location"
+    }
+  ],
+
   "verifyUserCanChangeLocationUsingSearch": [
     {
       "rowID": "verifyUserCanChangeLocationUsingSearch.01",
@@ -375,9 +384,152 @@
       "rowID": "verifyUserCanSearchByCustomTimeFrame.01",
       "description": "Test Case 82660:User can search by \"Timeframe\" (Custom)",
       "location": "Best Location",
-      "timeFrame": "Custom",
-      "fromDate": "12/2/2018",
-      "toDate": "12/13/2018"
+      "timeFrame": "Custom"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusInProgressRework": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusInProgressRework.01",
+      "description": "Test Case 82666:User can search by \"Repair Status\"(In Progress - Rework)",
+      "location": "Best Location",
+      "repairStatus": "In Progress - Rework",
+      "orderNumber": "O-000-152414"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusInProgressActive": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusInProgressRework.01",
+      "description": "Test Case 82664:User can search by \"Repair Status\"(In Progress - Active)",
+      "location": "Best Location",
+      "repairStatus": "In Progress - Active"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusInProgressQueued": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusInProgressQueued.01",
+      "description": "Test Case 82665:User can search by \"Repair Status\"(In Progress - Queued)",
+      "location": "Best Location",
+      "repairStatus": "In Progress - Queued"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusInProgressOnHold": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusInProgressOnHold.01",
+      "description": "Test Case 82667:User can search by \"Repair Status\"(In Progress - On Hold)",
+      "location": "Best Location",
+      "repairStatus": "In Progress - On Hold"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusInProgressNotOnHold": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusInProgressNotOnHold.01",
+      "description": "Test Case 82668:User can search by \"Repair Status\"(In Progress - Not On Hold)",
+      "location": "Best Location",
+      "repairStatus": "In Progress - Not On Hold"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusInProgressQAReady": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusInProgressQAReady.01",
+      "description": "Test Case 82669:User can search by \"Repair Status\"(In Progress - QA Ready)",
+      "location": "Best Location",
+      "repairStatus": "In Progress - QA Ready"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusCompletedQAReady": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusCompletedQAReady.01",
+      "description": "Test Case 82670:User can search by \"Repair Status\"(Completed - QA Ready)",
+      "location": "Best Location",
+      "repairStatus": "Completed - QA Ready"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusCompletedNotBilled": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusCompletedNotBilled.01",
+      "description": "Test Case 82671:User can search by \"Repair Status\"(Completed - Not Billed)",
+      "location": "Best Location",
+      "repairStatus": "Completed - Not Billed"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusCompletedOnSite": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusCompletedOnSite.01",
+      "description": "Test Case 82672:User can search by \"Repair Status\"(Completed - On Site)",
+      "location": "Best Location",
+      "repairStatus": "Completed - On Site"
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatusCompletedAll": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatusCompletedAll.01",
+      "description": "Test Case 82673:User can search by \"Repair Status\"(Completed - All)",
+      "location": "Best Location",
+      "repairStatus": "Completed - All"
+    }
+  ],
+
+  "verifyUserCanFilterRObyDepartments": [
+    {
+      "rowID": "verifyUserCanFilterRObyDepartments.01",
+      "description": "Test Case 82624:User can filter RO by Departments",
+      "location": "1111",
+      "departments": [
+        "All",
+        "Default",
+        "dep_"
+      ]
+    }
+  ],
+
+  "verifyUserCanFilterRObyPhases": [
+    {
+      "rowID": "verifyUserCanFilterRObyPhases.01",
+      "description": "Test Case 82625:User can filter RO by Phases",
+      "location": "1111",
+      "phases": [
+        "All",
+        "Started",
+        "Completed",
+        "QC"
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectLocation": [
+    {
+      "rowID": "verifyUserCanSelectLocation.01",
+      "description": "Test Case 82657:User can select location",
+      "location": "1111"
+    }
+  ],
+
+  "verifyUserCanSearchWoUsingSearchFilter": [
+    {
+      "rowID": "verifyUserCanSearchWoUsingSearchFilter.01",
+      "description": "Test Case 82659:User can search WO using search filter",
+      "location": "1111",
+      "vinNum": "O-000-152073"
+    }
+  ],
+
+  "verifyUserCanSeeAndChangeRoDetails": [
+    {
+      "rowID": "verifyUserCanSeeAndChangeRoDetails.01",
+      "description": "Test Case 82627:User can see and change RO details",
+      "location": "1111",
+      "vinNum": "O-000-152073",
+      "title": "Order / Type / Department"
     }
   ]
 }
