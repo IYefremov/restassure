@@ -46,7 +46,7 @@ public class VNextQuestionsScreen extends VNextBaseWizardScreen {
         for (WebElement selectQuestionCell : selectQstns) {
             selectQuestionCell.findElement(By.xpath(".//textarea")).clear();
             selectQuestionCell.findElement(By.xpath(".//textarea")).sendKeys(answerText);
-            appiumdriver.hideKeyboard();
+            //appiumdriver.hideKeyboard();
         }
     }
 
