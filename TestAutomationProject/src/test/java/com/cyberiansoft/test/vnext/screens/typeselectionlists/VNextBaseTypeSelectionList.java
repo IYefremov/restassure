@@ -57,7 +57,8 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
     private void setSearchText(String searchtext) {
         tap(searchfld);
         searchfld.clear();
-        appiumdriver.getKeyboard().sendKeys(searchtext);
-        appiumdriver.hideKeyboard();
+        searchfld.sendKeys(searchtext);
+        //appiumdriver.getKeyboard().sendKeys(searchtext);
+        //appiumdriver.hideKeyboard();
     }
 }

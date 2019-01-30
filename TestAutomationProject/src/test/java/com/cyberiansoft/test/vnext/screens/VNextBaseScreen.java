@@ -81,6 +81,8 @@ public class VNextBaseScreen {
 						tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 				} catch (NoSuchElementException e) {
 				//do nothing
+				} catch (StaleElementReferenceException e1) {
+					//do nothing
 				}
 		}
 	}

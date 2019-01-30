@@ -91,6 +91,8 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("Vehicle.VIN")));
 		vinfld.clear();
 		vinfld.sendKeys(vinnumber);
+		BaseUtils.waitABit(1500);
+		//appiumdriver.hideKeyboard();
 		//setValue(vinfld, vinnumber);
 	}
 	
@@ -289,7 +291,12 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	}
 
 	public VNextCustomersScreen clickSelectOwnerCell() {
+		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+		je.executeScript("arguments[0].scrollIntoView(true);",selectownertn);
+
 		tap(selectownertn);
+		if (appiumdriver.findElements(By.xpath("//*[@action='select-owner']")).size() > 0)
+			tap(selectownertn);
 		return new VNextCustomersScreen(appiumdriver);
 	}
 
