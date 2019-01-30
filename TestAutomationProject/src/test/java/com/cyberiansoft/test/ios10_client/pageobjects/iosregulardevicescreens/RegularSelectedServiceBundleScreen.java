@@ -89,4 +89,11 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Save").click();
 	}
 
+	public void clickTechniciansIcon() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("technician")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("technician"))).click();
+	}
+
 }

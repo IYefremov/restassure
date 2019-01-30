@@ -1246,7 +1246,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		
 		//customer approval ON
 		myworkordersscreen.clickAddOrderButton();
-		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 		vehiclescreen.setVIN(VIN);
 		String wo1 = vehiclescreen.getWorkOrderNumber();
         RegularQuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
@@ -1268,7 +1268,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		ordersummaryscreen.saveWizard();
 		
 		myworkordersscreen.clickAddOrderButton();
-		vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 		vehiclescreen.setVIN(VIN);
 		String wo2 = vehiclescreen.getWorkOrderNumber();
         questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);

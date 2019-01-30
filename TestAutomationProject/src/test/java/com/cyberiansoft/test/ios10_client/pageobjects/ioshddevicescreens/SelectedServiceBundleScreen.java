@@ -111,4 +111,12 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 		navBar.findElementByAccessibilityId("Save").click();
 	}
 
+	public TechniciansPopup clickTechniciansIcon() {
+		List<IOSElement> techtoolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
+		for (IOSElement techtoolbar : techtoolbars)
+			if (techtoolbar.findElementsByAccessibilityId("technician").size() > 0)
+				techtoolbar.findElementByAccessibilityId("technician").click();
+		return new TechniciansPopup();
+	}
+
 }

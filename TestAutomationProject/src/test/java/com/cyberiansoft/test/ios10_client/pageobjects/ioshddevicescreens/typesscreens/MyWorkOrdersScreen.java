@@ -379,6 +379,8 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickInvoiceIcon() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
 		appiumdriver.findElementByAccessibilityId("invoice new").click();
 		BaseWizardScreen.typeContext = WOCONTEXT;
 	}

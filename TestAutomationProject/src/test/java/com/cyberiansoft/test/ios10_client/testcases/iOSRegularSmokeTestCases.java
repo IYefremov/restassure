@@ -8114,4 +8114,95 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
+	@Test(testName = "Test Case 82197:WO - Verify that selected services has correct tech split when change is during creating WO",
+			description = "Verify that selected services has correct tech split when change is during creating WO")
+	public void testVerifyThatSelectedServicesHaveCorrectTechSplitWhenChangeIsDuringCreatingWO() {
+
+		final String VIN = "1D7HW48NX6S507810";;
+		final String defaulttech = "Oksana Zayats";
+
+		final String tech1 = "Vladimir Avsievich";
+		final String tech2 = "Nikolay Lomeko";
+
+		homescreen = new RegularHomeScreen();
+		RegularMainScreen mainScreen = homescreen.clickLogoutButton();
+		mainScreen.userLogin("Zayats", "1111");
+
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_ALL_SERVICES);
+		vehiclescreen.setVIN(VIN);
+		final String wonumber = vehiclescreen.getWorkOrderNumber();
+		vehiclescreen.clickTech();
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		selectedServiceDetailsScreen.selecTechnician(tech1);
+		selectedServiceDetailsScreen.selecTechnician(tech2);
+		selectedServiceDetailsScreen.unselecTechnician(defaulttech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetailsWithAlert();
+
+
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesscreen.selectService("Turbo Service");
+		servicesscreen.selectService("Vovan Service");
+
+		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
+		selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails("Turbo Service");
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech1));
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech2));
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+
+		selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails("Vovan Service");
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech1));
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech2));
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		selectedServicesScreen.switchToAvailableServicesTab();
+
+		servicesscreen.selectSubService("Matrix Service");
+		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices("Test Matrix Labor");
+		RegularVehiclePartScreen vehiclePartScreen =  pricematrix.selectPriceMatrix("Back Glass");
+		vehiclePartScreen.setSizeAndSeverity("DIME", "LIGHT");
+		Assert.assertEquals(vehiclePartScreen.getTechniciansValue(), tech1 + ", " + tech2);
+		vehiclePartScreen.clickDiscaunt("Oksi_Service_PP_Vehicle");
+		selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech1));
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech2));
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		vehiclePartScreen.setTime("2");
+		vehiclePartScreen.clickSave();
+		vehiclePartScreen.clickSave();
+		servicesscreen = new RegularServicesScreen();
+
+		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
+		RegularSelectedServiceBundleScreen selectedservicebundlescreen = new RegularSelectedServiceBundleScreen();
+		selectedservicebundlescreen.clickTechniciansIcon();
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech1));
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech2));
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		selectedServiceDetailsScreen = selectedservicebundlescreen.openBundleInfo(iOSInternalProjectConstants.WHEEL_SERVICE);
+		Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), tech1 + ", " + tech2);
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		selectedservicebundlescreen.changeAmountOfBundleService("70");
+		selectedservicebundlescreen.clickSaveButton();
+		servicesscreen = new RegularServicesScreen();
+		selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
+		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
+		selectedServicesScreen.clickSaveAsFinal();
+		selectedServicesScreen.clickSave();
+		myworkordersscreen = new RegularMyWorkOrdersScreen();
+		Assert.assertTrue(myworkordersscreen.woExists(wonumber));
+		myworkordersscreen.clickHomeButton();
+		homescreen.clickLogoutButton();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+	}
+
 }
