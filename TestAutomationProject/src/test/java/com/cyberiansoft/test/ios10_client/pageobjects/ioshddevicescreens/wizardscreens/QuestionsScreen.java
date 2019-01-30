@@ -119,8 +119,6 @@ public class QuestionsScreen extends BaseWizardScreen {
 			//dragTable((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']/../.."));
 			scrollTable((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']/../.."),
 					ownerstate);
-
-			System.out.println("++++++++" + appiumdriver.findElementByName(ownerstate).isDisplayed());
 					//scrollToElementUp((MobileElement) appiumdriver.findElementByName(ownerstate));
 			//scrollToElement(ownerstate);
 			//swipeToElementUp((MobileElement) appiumdriver.findElementByName(ownerstate));

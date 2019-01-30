@@ -32,16 +32,16 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 	}
 
 	public void selectEdition(String businessedition) {
-		tap(editionfld);	
+		tap(editionfld);
 		BaseUtils.waitABit(500);
 		tap(appiumdriver.findElement(By.xpath("//ul/li/a/span[text()='" + businessedition + "']")));
 	}
 	
 	public void selectLineOfBusiness(String lineofbusiness) {
-		tap(businesstypefld);
+		//tap(businesstypefld);
 		BaseUtils.waitABit(500);
 		tap(appiumdriver.findElement(By.xpath("//ul/li/a/span[text()='" + lineofbusiness + "']")));
-		tap(appiumdriver.findElement(By.id("selection-list-view")).findElement(By.xpath(".//span[contains(@data-bind, 'click: onSubmit')]")));
+		tap(appiumdriver.findElement(By.id("business-type-view")).findElement(By.xpath(".//div[@class='pull-right']/div[contains(@data-bind, 'navigateNext')]")));
 	}
 	
 	public void clickDoneButton() {

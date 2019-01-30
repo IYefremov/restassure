@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,14 +8,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.concurrent.TimeUnit;
 
 public class VNextBOApproveAccountWebPage extends VNextBOBaseWebPage {
-	
+
 	@FindBy(id = "loginLogin2")
 	private WebElement loginlink;
 		
-	@FindBy(xpath = "//span[text()='Your account was successfully approved!']")
+	@FindBy(xpath = "//div[text()='has been approved!']")
 	private WebElement approvedmsg;
 	
 	
@@ -27,7 +26,7 @@ public class VNextBOApproveAccountWebPage extends VNextBOBaseWebPage {
 		new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.visibilityOf(approvedmsg));
 	}
-	
+
 	public VNextBOLoginScreenWebPage clickLoginLink() {
 		loginlink.click();
 		return PageFactory.initElements(

@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizard
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechniciansPopup;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -356,11 +357,12 @@ public class VehicleScreen extends BaseWizardScreen {
 			appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 
-	public void clickTech() {
+	public TechniciansPopup clickTech() {
 		MobileElement vehicleTable = (MobileElement) appiumdriver.findElementByAccessibilityId("VehicleTable");
 		if (!vehicleTable.findElementByAccessibilityId("Tech").isDisplayed())
 			scrollToElement(vehicleTable.findElementByAccessibilityId("Tech"));
 		vehicleTable.findElementByAccessibilityId("Tech").click();
+		return new TechniciansPopup();
 	}
 
 	public void setStock(String stock) {

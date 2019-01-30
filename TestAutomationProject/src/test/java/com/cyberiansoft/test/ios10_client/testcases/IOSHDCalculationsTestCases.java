@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -1254,12 +1255,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 		vehiclescreen.setVIN(VIN);
 		String wo1 = vehiclescreen.getInspectionNumber();
-		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
-		questionsscreen.swipeScreenUp();
-		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
@@ -1275,12 +1273,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.saveWizard();
 
-		myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 		vehiclescreen.setVIN(VIN);
 		String wo2 = vehiclescreen.getInspectionNumber();
-		questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
-		questionsscreen.swipeScreenUp();
-		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
@@ -1296,6 +1291,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.approveWorkOrderWithoutSignature(wo1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		myworkordersscreen.switchToTeamView();
 		myworkordersscreen.clickCreateInvoiceIconForWO(wo1);
 		myworkordersscreen.clickInvoiceIcon();
 
@@ -1311,10 +1307,12 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenum);
+
 		myinvoicesscreen.clickEditPopup();
 		questionsScreen = new QuestionsScreen();
 		questionsScreen.waitQuestionsScreenLoaded();
 		questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+		System.out.println("+++++++" + wo2);
 		invoiceinfoscreen.addWorkOrder(wo2);
 		invoiceinfoscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
@@ -3130,7 +3128,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		//approveinspscreen.selectStatusReason("Decline 1");
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
-		
+		BaseUtils.waitABit(10*1000);
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		visualinteriorScreen =new VisualInteriorScreen();
 		servicesscreen = visualinteriorScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.TEST_PACK_FOR_CALC);

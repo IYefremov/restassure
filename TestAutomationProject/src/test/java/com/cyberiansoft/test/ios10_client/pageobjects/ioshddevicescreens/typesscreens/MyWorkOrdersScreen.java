@@ -111,8 +111,11 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
 
 	public <T extends IBaseWizardScreen> T addOrderWithSelectCustomer(String customerName, IWorkOrdersTypes workOrderType) {
+		final String customerValue = appiumdriver.findElementByAccessibilityId("Toolbar").
+				findElements(MobileBy.className("XCUIElementTypeButton")).get(2).getAttribute("label");
 		clickAddOrderButton();
-		selectCustomerAndWorkOrderType(customerName, workOrderType);
+		if (customerValue.equals("Wholesale Mode") | customerValue.equals("Retail Mode"))
+			selectCustomerAndWorkOrderType(customerName, workOrderType);
 		return workOrderType.getFirstVizardScreen();
 	}
 
@@ -318,7 +321,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		return new TechRevenueScreen();
 	}
 	
-	public SelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String wo) {
+	public TechniciansPopup selectWorkOrderTechniciansMenuItem(String wo) {
 		selectWorkOrder(wo);
 		if (!appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed()) {
 			swipeTableUp(appiumdriver.
@@ -328,7 +331,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 			//appiumdriver.findElementByAccessibilityId("Technicians").click();
 		}
 		appiumdriver.findElementByAccessibilityId("Technicians").click();
-		return new SelectedServiceDetailsScreen();
+		return new TechniciansPopup();
 	}
 	
 	public void selectWorkOrderForCopyVehicle(String wonumber) {
@@ -376,6 +379,8 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickInvoiceIcon() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
 		appiumdriver.findElementByAccessibilityId("invoice new").click();
 		BaseWizardScreen.typeContext = WOCONTEXT;
 	}

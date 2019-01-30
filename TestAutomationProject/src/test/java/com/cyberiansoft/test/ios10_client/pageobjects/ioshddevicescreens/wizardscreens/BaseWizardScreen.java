@@ -69,5 +69,11 @@ public abstract class BaseWizardScreen extends iOSHDBaseScreen implements IBaseW
         return (T) TypesScreenFactory.getTypeScreen(typeContext);
     }
 
+    public void waitForCustomWarningMessage(String warningMessage, String buttonToClick) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(warningMessage)));
+        appiumdriver.findElementByAccessibilityId(buttonToClick).click();
+    }
+
 }
 

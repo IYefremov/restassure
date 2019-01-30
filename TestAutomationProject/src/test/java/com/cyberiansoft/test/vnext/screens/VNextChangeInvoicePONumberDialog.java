@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -46,7 +47,8 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 	public void setInvoicePONumber(String poNumber) {
 		changeponumberfld.clear();
 		changeponumberfld.sendKeys(poNumber);
-		appiumdriver.hideKeyboard();
+		BaseUtils.waitABit(1000);
+		//appiumdriver.hideKeyboard();
 	}
 
 	public String getInvoicePreviousPONumber() {

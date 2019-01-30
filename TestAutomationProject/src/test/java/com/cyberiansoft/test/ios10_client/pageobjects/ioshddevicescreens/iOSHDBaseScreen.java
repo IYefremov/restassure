@@ -45,24 +45,6 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("Cancel")));
 		appiumdriver.findElementByAccessibilityId("Cancel").click();		
 	}
-
-	public void closeDublicaterServicesWarningByClickingEdit() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("Duplicate services")));
-        appiumdriver.findElementByAccessibilityId("Edit").click();
-	}
-	
-	public void closeDublicaterServicesWarningByClickingCancel() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("Duplicate services")));
-        appiumdriver.findElementByXPath("//XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeButton[@name='Cancel']").click();
-	}
-	
-	public void closeDublicaterServicesWarningByClickingOverride() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("Duplicate services")));
-        appiumdriver.findElementByAccessibilityId("Override").click();
-	}
 	
 	public void swipeScreenRight() {
 		Dimension size = appiumdriver.manage().window().getSize();

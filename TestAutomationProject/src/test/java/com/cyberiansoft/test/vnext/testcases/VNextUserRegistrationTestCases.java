@@ -34,10 +34,10 @@ import java.util.List;
 public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
 
-	private String userregmail = "test.cyberiansoft@amail.club";
+	private String userregmail = "test.cyberiansoft11@banit.me";
 	final private String confirmpsw = "111111";
 	
-	final private String userregphone = "6267477836";
+	final private String userregphone = "6267477899";
 	final private String userphonecountrycode = "1";
 	
 	@BeforeClass(description = "Setting up new suite")
@@ -76,7 +76,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
 		final String boeditionname = "Repair360 Free";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
@@ -108,9 +108,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newuserpersonalinfoscreen.clickDoneButton();
 
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
 		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
@@ -173,7 +172,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String  expyear = "2019";
 		
 		final String boeditionname = "Repair360";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		
 
 		//userregmail = usermailprefix + "99999111" + usermailpostbox;
@@ -201,9 +200,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		appiumdriver.switchTo().defaultContent();
 		BaseUtils.waitABit(2000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
@@ -269,7 +268,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
 		final String boeditionname = "Repair360 Free";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
@@ -297,9 +296,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
 		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
@@ -359,7 +358,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
 		final String boeditionname = "Repair360 Free";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
@@ -387,9 +386,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
 		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
@@ -433,7 +432,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
 		final String boeditionname = "Repair360 Free";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
@@ -461,9 +460,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
 		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
@@ -479,6 +478,11 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		BaseUtils.waitABit(60*1000);
 		VNextAppUtils.resetApp();
 		BaseUtils.waitABit(10*1000);
+		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
+		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
+		environmentSelectionScreen.selectEnvironment("Development");
+		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
 		regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
@@ -507,7 +511,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
 		final String boeditionname = "Repair360 Free";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
 		final String ibsStartSearchPhrase = "Please use your Repair360 login to access the <a href=";
 		final String ibsEndSearchPhrase = " title=\"Client profile";
@@ -523,6 +527,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 		
 		regscreen.clickDoneButton();
+		BaseUtils.waitABit(2000);
 		VNextVerificationScreen verificationscreen = new VNextVerificationScreen(appiumdriver);
 		verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
 		verificationscreen.clickVerifyButton();
@@ -537,9 +542,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
 		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
@@ -619,7 +624,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String  expyear = "2019";
 		
 		final String boeditionname = "Repair360";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		
 		final String firstname = "Eric";
 		final String lastname = "Burn";
@@ -660,9 +665,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		appiumdriver.switchTo().defaultContent();
 		BaseUtils.waitABit(2000);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
@@ -750,11 +755,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String newusercity = "LA";
 		final String newuserzip = "5214BA63";
 		final String newusercountry = "United States of America";
-		final String newusercountryselected = "United States";
 		final String newuserstate = "California";
 		
 		final String boeditionname = "Repair360 Free";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		
 		final String firstname = "Eric";
 		final String lastname = "Burn";
@@ -793,9 +797,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 				newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		appiumdriver.switchTo().defaultContent();
 
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
@@ -809,7 +813,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		Assert.assertEquals(registrationoverviewscreen.getCityValue(), newusercity);
 		Assert.assertEquals(registrationoverviewscreen.getZipValue(), newuserzip);
 		Assert.assertEquals(registrationoverviewscreen.getStateValue(), newuserstate);
-		Assert.assertEquals(registrationoverviewscreen.getCountryValue(), newusercountryselected);
+		Assert.assertEquals(registrationoverviewscreen.getCountryValue(), newusercountry);
 		registrationoverviewscreen.clickDoneButton();
 		VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen = 
 				new VNextRegistrationOverviewLegalInfosScreen(appiumdriver);
@@ -862,7 +866,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
 		final String boeditionname = "Repair360 Free";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
 		
 		final String feedbackType = "Feature Request";
@@ -898,9 +902,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
 		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
@@ -944,7 +948,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String userfirstname = "QA";
 		final String userlastname = "QA";
 		final String boeditionname = "Repair360 Free";
-		final String bolineofbusiness = "PDR";
+		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
 		
 		
@@ -993,9 +997,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
 		newuserpersonalinfoscreen.clickDoneButton();
 		VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(appiumdriver);
-		reglineofbusinessscreen.selectEdition(boeditionname);
+		//reglineofbusinessscreen.selectEdition(boeditionname);
 		reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-		reglineofbusinessscreen.clickDoneButton();
+		//reglineofbusinessscreen.clickDoneButton();
 		VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(appiumdriver);
 		Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
 		Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
@@ -1040,6 +1044,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
 		
 		loginpage.userLogin(userregmail, confirmpsw);
+		VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
+				VNexBOLeftMenuPanel.class);
+		leftMenuPanel.expandMainMenu();
 		VNextBOHeaderPanel vnextboheaderpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		VNextUpgradeInfoWebPage upgradeinfopage = vnextboheaderpanel.clickUpgradeNowBanner();

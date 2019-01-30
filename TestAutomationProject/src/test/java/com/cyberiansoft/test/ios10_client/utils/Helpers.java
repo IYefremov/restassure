@@ -283,9 +283,6 @@ public abstract class Helpers {
 		
 		//element.tap(1, x, y, 1000);
 		waitABit(1000);
-		
-		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getX());
-		//System.out.println("++++++++++++++++++++++++" + element.getLocation().getY());
 		// JavascriptExecutor js = (JavascriptExecutor) driver;
 		// js.executeScript("target.frontMostApp().mainWindow().images()[\"car_exterior_color.png\"].tapWithOptions({tapOffset:{x:0.19, y:0.16}}) ;");
 	}

@@ -78,7 +78,8 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		//notestextfld.clear();
 		//notestextfld.sendKeys(notetext);
 		notestextfld.click();
-		setValue(notestextfld, notetext);
+		notestextfld.sendKeys(notetext);
+		//setValue(notestextfld, notetext);
 	}
 	
 	public void clickNotesBackButton() {

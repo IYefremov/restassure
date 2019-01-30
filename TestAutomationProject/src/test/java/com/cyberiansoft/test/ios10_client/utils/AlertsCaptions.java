@@ -25,6 +25,18 @@ public class AlertsCaptions {
 	public static final String ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE = "Order Monitor You cannot change the status of services for this phase. You can only change the status of the whole phase.";
 	public static final String ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED = "Warning!\nQuestion 'Tax_Point_1' in section 'BATTERY PERFORMANCE' should be answered.";
 	public static final String ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED = "Warning!\nQuestion 'Signature' in section 'Follow up Requested' should be answered.";
-
+	public static final String ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT = "Technician Split\n" +
+			"Order's technician split will be assigned to this order service if you set zero amount.\n" +
+			"\n" +
+			"Continue?";
+	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE = "Technician Split\n" +
+			"Set non-zero amount for service to assign multiple technicians.";
+	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART = "Technician Split\n" +
+			"Set non-zero amount for vehicle part to assign multiple technicians.";
+	public static final String ALERT_YOU_CANT_CREATE_WORK_ORDER_BECAUSE_VIN_EXISTS = "You cannot create work order of type '%1$s' with VIN '%2$s' because it already exists.";
+	public static final String ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT = "Technician Split\n" +
+			"Default technician split will be assigned to this vehicle part if you set zero amount.\n" +
+			"\n" +
+			"Continue?";
 
 }

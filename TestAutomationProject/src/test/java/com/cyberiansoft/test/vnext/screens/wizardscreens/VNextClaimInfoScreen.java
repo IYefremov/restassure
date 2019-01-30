@@ -52,12 +52,13 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	
 	public void setClaimNumber(String claimnum) {
 		tap(claimfld);
-		appiumdriver.getKeyboard().sendKeys(claimnum);
-		try {
+		claimfld.sendKeys(claimnum);
+		//appiumdriver.getKeyboard().sendKeys(claimnum);
+		/*try {
 			appiumdriver.hideKeyboard();
 		} catch (WebDriverException e) {
 			//todo:
-		}
+		}*/
 	}
 	
 	public String getClaimNumber() {

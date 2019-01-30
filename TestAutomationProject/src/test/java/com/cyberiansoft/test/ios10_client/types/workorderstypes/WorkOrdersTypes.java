@@ -34,7 +34,10 @@ public enum WorkOrdersTypes implements  IWorkOrdersTypes {
     WO_PANEL_GROUP("WO_Panel_group"),
     WO_GROUP_SERVICE_TYPE("WO_group_Service_type"),
     WO_WITH_PART_SERVICE("WO_with_part_service"),
-    WO_MONITOR_REQUIRED_START("WO_MOnitor_Required_Start");
+    WO_MONITOR_REQUIRED_START("WO_MOnitor_Required_Start"),
+    WO_BUNDLE_REQ_DEF_TECH("WO_bundle_req_def_tech"),
+    WO_ALL_SERVICES("WO_All_Services"),
+    WO_MONITOR_REQUIRED_SERVICES_ALL("WO_Monitor_required_services_All");
 
     private final String woType;
 
@@ -86,6 +89,9 @@ public enum WorkOrdersTypes implements  IWorkOrdersTypes {
             case WO_GROUP_SERVICE_TYPE:
             case WO_TYPE_WITH_JOB:
             case WO_MONITOR_REQUIRED_START:
+            case WO_BUNDLE_REQ_DEF_TECH:
+            case WO_ALL_SERVICES:
+            case WO_MONITOR_REQUIRED_SERVICES_ALL:
                 if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
                     return (T) new VehicleScreen();
                 else

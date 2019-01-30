@@ -9,9 +9,6 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
 
-            
-          <!--<include name="testGetDeviceRegistrationCode" />
-          <include name="testRegisterationiOSDdevice" />  -->  
 		  <!--<include name="testUpdateDatabase" />           
           <include name="testUpdateVIN" />
           <include name="testCreateRetailCustomer" />
@@ -152,6 +149,14 @@
           <include name="testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold" />
           <include name="testWOVerifyThatTechSplitAssignedFormVehicleScreenIsSetToServicesUnderList" />
           <include name="testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
+          <include name="testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage" />
+          <include name="testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount" />
+          <include name="testWOVerifyIfServiceHasDefaultTechnicianAndItsAmountIs0ThenDefaultTechnicianShouldBeAssignedToTheService_NotTechnicianSplitAtWorkOrderLevel" />
+          <include name="testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0" />
+          <include name="testWOVerifyThatTechSplitAmountIsShownCorrectUnderMonitorForServiceWithAdjustments" />
+          <include name="testVerifyThatRequiredServicesHasCorrectTech" />
+          <include name="testVerifyThatRequiredBundleItemsHasCorrectDefTech" />
+          <include name="testVerifyThatRequiredBundleItemsAndServiceWithExpensesAnd0PriceHasCorrectDefTechAfterEditWO" />
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />    
         </methods>

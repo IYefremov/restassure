@@ -34,6 +34,7 @@ public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	}
 	
 	public void setDeviceRegistrationCode(String regCode) {
+		//regfld1.sendKeys(regCode.substring(0, 4));
 		setValue(regfld1, regCode.substring(0, 4));
 		setValue(regfld2, regCode.substring(5, 9));
 		setValue(regfld3, regCode.substring(10, 14));

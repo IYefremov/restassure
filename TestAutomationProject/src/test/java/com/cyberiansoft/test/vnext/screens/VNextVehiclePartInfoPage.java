@@ -175,9 +175,10 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	}
 	
 	public void clickSaveVehiclePartInfo() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable(savebtn));
-		tap(savebtn);
+		clickScreenBackButton();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		//wait.until(ExpectedConditions.elementToBeClickable(savebtn));
+		//tap(savebtn);
 	}
 	
 	public VNextNotesScreen clickMatrixServiceNotesOption() {

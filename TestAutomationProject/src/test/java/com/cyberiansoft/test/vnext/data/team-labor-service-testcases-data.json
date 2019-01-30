@@ -5,15 +5,15 @@
       "description": "Test Case 73234:Verify user can select panel and parts for Labor service",
       "inspType": "O_Kramar",
       "vihicleInfo": {
-        "vinNumber": "777777777777777777"
+        "vinNumber": "YV4982CZ9A1538968"
       },
       "laborService":
         {
           "serviceName": "Labor_expence",
           "laborServicePanel": "Front Door",
-          "laborServicePart": "Refinish Left Front Door Cladding",
+          "laborServicePart": "Refinish Left Front Door Outside",
           "laborServiceRate": "$99.12",
-          "laborServiceTime": "1.03"
+          "laborServiceTime": "2.20"
         }
     }
   ],
@@ -24,7 +24,7 @@
       "description": "Test Case 73235:Verify user can't select Part without Panel",
       "inspType": "O_Kramar",
       "vihicleInfo": {
-        "vinNumber": "777777777777777777"
+        "vinNumber": "YV4982CZ9A1538968"
       },
       "laborService":
       {
@@ -38,7 +38,7 @@
       "rowID": "testVerifyUserDoesntNeedToSelectPanelWhenAddLaborServiceInMatrix.01",
       "description": "Test Case 73237:Verify user doesn't need to select Panel when add Labor service in matrix",
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "777777777777777777"
+      "vihicleInfo": {"vinNumber": "YV4982CZ9A1538968"
       },
       "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
         "matrixPart" : {"matrixPartName": "Anastasia Part", "partSize": "DIME", "partSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence" }
@@ -52,17 +52,17 @@
       "rowID": "testVerifyUserCanSavePartServiceInMatrix.01",
       "description": "Test Case 73238:Verify user can save Part service in matrix",
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "777777777777777777"
+      "vihicleInfo": {"vinNumber": "YV4982CZ9A1538968"
       },
       "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
         "matrixPart" : {"matrixPartName": "Anastasia Part", "partSize": "DIME", "partSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence",
-          "laborServicePart": "Refinish Cab Roof Panel",
+          "laborServicePart": "Refinish Left Roof Rail",
           "laborServiceRate": "99.12",
-          "laborServiceTime": "2.75",
-          "laborServiceNotes": "Cab Roof Panel - Refinish Cab Roof Panel" }
+          "laborServiceTime": "1.60",
+          "laborServiceNotes": "Left Roof Rail - Refinish Left Roof Rail" }
         }
       },
-      "inspPrice": "$272.58"
+      "inspPrice": "$158.59"
     }
   ],
 
@@ -72,7 +72,7 @@
       "description": "Test Case 73239:Verify user can cancel add panel and parts",
       "inspType": "O_Kramar",
       "vihicleInfo": {
-        "vinNumber": "777777777777777777"
+        "vinNumber": "YV4982CZ9A1538968"
       },
       "laborService":
       {

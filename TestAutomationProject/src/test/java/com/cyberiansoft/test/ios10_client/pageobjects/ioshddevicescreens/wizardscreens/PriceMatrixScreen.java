@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechniciansPopup;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -100,7 +101,9 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public void setPrice(String price) {
-		appiumdriver.findElementByAccessibilityId("Price").click();
+		MobileElement priceCell = (MobileElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice");
+		priceCell.click();
+		priceCell.findElementByClassName("XCUIElementTypeTextField").clear();
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(price + "\n");
 	}
 
@@ -180,6 +183,11 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		.getAttribute("name");
 	}
 
+	public TechniciansPopup openTechniciansPopup() {
+		clickOnTechnicians();
+		return new TechniciansPopup();
+	}
+
 	public void clickOnTechnicians() {
 		appiumdriver.findElementByAccessibilityId("Technicians").click();
 	}
@@ -210,5 +218,8 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
 	}
 
-
+	public String getPriceMatrixTotalPriceValue() {
+		MobileElement toolBar = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeButton[@name='Delete']/..");
+		return toolBar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
+	}
 }

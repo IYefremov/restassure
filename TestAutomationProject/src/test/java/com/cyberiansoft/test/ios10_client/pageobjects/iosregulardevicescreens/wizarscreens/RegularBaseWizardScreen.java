@@ -75,4 +75,10 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     public String getInspectionNumber() {
         return getInspectionNumberLabel().getText();
     }
+
+    public void waitForCustomWarningMessage(String warningMessage, String buttonToClick) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(warningMessage)));
+        appiumdriver.findElement(MobileBy.iOSNsPredicateString("name == '" + buttonToClick + "' AND visible == 1")).click();
+    }
 }

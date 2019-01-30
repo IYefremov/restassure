@@ -49,7 +49,8 @@ public class VNextBaseScreen {
 	
 	public void setValue(WebElement element, String value) {
 		element.clear();
-		appiumdriver.getKeyboard().sendKeys(value);
+		element.sendKeys(value);
+		//appiumdriver.getKeyboard().sendKeys(value);
 		try {
 			appiumdriver.hideKeyboard();
 		} catch (WebDriverException e) {
@@ -75,8 +76,14 @@ public class VNextBaseScreen {
 		for (int i = 0; i < screensnumber; i++) {
 			swipeScreenLeft();
 			if (checkHelpPopupPresence())
-				if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-					tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+				try {
+					if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+						tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+				} catch (NoSuchElementException e) {
+				//do nothing
+				} catch (StaleElementReferenceException e1) {
+					//do nothing
+				}
 		}
 	}
 	
