@@ -40,8 +40,8 @@ public class VNextWorkOrderClaimInfoScreen extends VNextBaseWizardScreen {
 	
 	public void setPolicyNumber(String policynum) {
 		tap(policyfld);
-		appiumdriver.getKeyboard().sendKeys(policynum);
-		appiumdriver.hideKeyboard();
+		policyfld.sendKeys(policynum);
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public String getPolicyNumber() {
@@ -54,8 +54,8 @@ public class VNextWorkOrderClaimInfoScreen extends VNextBaseWizardScreen {
 	
 	public void setClaimNumber(String claimnum) {
 		tap(claimfld);
-		appiumdriver.getKeyboard().sendKeys(claimnum);
-		appiumdriver.hideKeyboard();
+		claimfld.sendKeys(claimnum);
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public String getClaimNumber() {

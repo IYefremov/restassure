@@ -258,9 +258,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		ArrayList<String> addednotes = notesscreen.addNumberOfQuickNotes(10);
-		
-		
-		notesscreen.clickNotesBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
