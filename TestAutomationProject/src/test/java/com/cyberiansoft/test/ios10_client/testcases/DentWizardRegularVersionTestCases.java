@@ -3156,6 +3156,7 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 			ordersummaryscreen.clickSave();
 			String alerttext = Helpers.getAlertTextAndAccept();
 			ordersummaryscreen.setTotalSale(totalsale);

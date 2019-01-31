@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	
@@ -47,7 +46,6 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	public RegularApproveInspectionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectInspectionToApprove() {
@@ -60,7 +58,9 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 
 	public void clickApproveButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Approve"))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Approve")));
+		wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Approve"))).click();
 		//appiumdriver.findElement(MobileBy.AccessibilityId("Approve")).click();
 	}
 	
