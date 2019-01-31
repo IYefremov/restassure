@@ -149,7 +149,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 
 	public void changeInvoiceDayValue(LocalDate date) {
 		tap(invoicedate);
-		appiumdriver.hideKeyboard();
+		//appiumdriver.hideKeyboard();
 		setInvoiceSelectedDateValue(date);
 		closeInvoiceSelectDatePicker();
  	}

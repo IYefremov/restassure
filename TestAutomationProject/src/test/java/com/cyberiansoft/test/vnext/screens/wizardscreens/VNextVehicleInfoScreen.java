@@ -9,6 +9,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -190,7 +191,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	public void setLicPlate (String licplate) {
 		licplatefld.clear();
 		licplatefld.sendKeys(licplate);
-		appiumdriver.hideKeyboard();
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public String getLicPlate () {
@@ -219,7 +220,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	public void setRoNo (String rono) {
 		rofld.clear();
 		rofld.sendKeys(rono);
-		appiumdriver.hideKeyboard();
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public String getPoNo () {
@@ -229,7 +230,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	public void setPoNo (String pono) {
 		pofld.clear();
 		pofld.sendKeys(pono);
-		appiumdriver.hideKeyboard();
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public String getRoNo () {
@@ -295,8 +296,12 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 		je.executeScript("arguments[0].scrollIntoView(true);",selectownertn);
 
 		tap(selectownertn);
-		if (appiumdriver.findElements(By.xpath("//*[@action='select-owner']")).size() > 0)
-			tap(selectownertn);
+		try {
+			if (appiumdriver.findElements(By.xpath("//*[@action='select-owner']")).size() > 0)
+				tap(selectownertn);
+		} catch (TimeoutException e) {
+			//do nothing
+		}
 		return new VNextCustomersScreen(appiumdriver);
 	}
 

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -333,13 +334,14 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 
 		workordersscreen.switchToTeamWorkordersView();
 		workordersscreen.searchWorkOrderByFreeText(woNumber);
+		BaseUtils.waitABit(10*1000);
 		AppiumUtils.setNetworkOff();
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		VNextInformationDialog informationDialog = workOrdersMenuScreen.clickEditWorkOrderMenuItemWithAlert();
 		Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
 				VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
 		AppiumUtils.setNetworkOn();
-		workordersscreen.switchToTeamWorkordersView();
+		workordersscreen.switchToMyWorkordersView();
 		workordersscreen.clickBackButton();
 	}
 
