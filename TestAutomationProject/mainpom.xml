@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.4</version>
+            <version>2.8.5</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
@@ -33,12 +33,24 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.12.0</version>
-        </dependency> 
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>3.141.59</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>3.141.59</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.5</version>
+            <version>4.5.6</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -48,7 +60,7 @@
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
-            <version>3.2.6</version>
+            <version>3.2.8</version>
         </dependency>
 		<dependency>
   			<groupId>org.testng</groupId>
@@ -69,7 +81,7 @@
   		<dependency>
   			<groupId>io.appium</groupId>
   			<artifactId>java-client</artifactId>
-  			<version>6.1.0</version>
+  			<version>7.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pojosontheweb</groupId>
@@ -89,7 +101,7 @@
 		<dependency>
       		<groupId>org.springframework</groupId>
       		<artifactId>spring-context</artifactId>
-      		<version>5.0.5.RELEASE</version>
+      		<version>5.1.0.RELEASE</version>
       		<scope>compile</scope>
     	</dependency>
     	<dependency>
@@ -136,7 +148,7 @@
         <dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.7</version>
+			<version>3.8</version>
 		</dependency> 
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -171,6 +183,12 @@
             <version>2.6.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.ashot</groupId>
+            <artifactId>ashot</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-testng-adaptor</artifactId>
@@ -303,6 +321,14 @@
                 <version>2.9</version>
                 <configuration>
                     <reportVersion>2.6.0</reportVersion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>
