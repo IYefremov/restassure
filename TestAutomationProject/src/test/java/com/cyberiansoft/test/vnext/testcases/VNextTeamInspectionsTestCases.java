@@ -739,7 +739,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			questionsScreen.selectAllRequiredQuestions(0);
 			questionsScreen.setAllRequiredQuestions("test 1");
 			questionsScreen.saveQuestions();
-			selectedServicesScreen.collapseServiceDetails("Test_Service_PP_Panel");
+			selectedServicesScreen.switchToAvalableServicesView();
+			availableServicesScreen.switchToSelectedServicesView();
 			questionsScreen = selectedServicesScreen.
 					clickServiceQuestionSection("Vlad_Money", "Vovan Test 5");
 			questionsScreen.selectRequiredQuestion();

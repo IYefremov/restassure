@@ -52,8 +52,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 	@Test(testName= "Test Case 64250:Verify 'Clean' icon work correctly", 
 			description = "Verify 'Clean' icon work correctly")
 	public void testVerifyCleanIconWorkCorrectly() {
-		
-		final String inspType = "Insp_type_approv_req";
+
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -122,7 +121,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		questionsScreen.selectAllRequiredQuestions(0);
 		questionsScreen.setAllRequiredQuestions("test 1");
 		questionsScreen.saveQuestions();
-		selectedServicesScreen.collapseServiceDetails("Test_Service_PP_Panel");
+		selectedServicesScreen.switchToAvalableServicesView();
+		availableServicesScreen.switchToSelectedServicesView();
 		questionsScreen = selectedServicesScreen.
 				clickServiceQuestionSection("Vlad_Money", "Vovan Test 5");
 		questionsScreen.selectRequiredQuestion();

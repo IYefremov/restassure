@@ -36,16 +36,18 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
         if (!elementExists("//div[@class='item-title']/div[text()='" + typeName + "']")) {
             clickSearchButton();
             setSearchText(typeName);
-        }
-        //WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
-        if (!appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")).isDisplayed()) {
-            WebElement elem = appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']"));
-            JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-            je.executeScript("arguments[0].scrollIntoView(true);",elem);
-            BaseUtils.waitABit(500);
+            WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
+
+        } else {
+            WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
+            if (!appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")).isDisplayed()) {
+                WebElement elem = appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']"));
+                JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+                je.executeScript("arguments[0].scrollIntoView(true);", elem);
+                BaseUtils.waitABit(500);
+            }
         }
         tap(typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")));
     }
@@ -58,8 +60,6 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
         tap(searchfld);
         searchfld.clear();
         searchfld.sendKeys(searchtext);
-        BaseUtils.waitABit(1000);
-        //appiumdriver.getKeyboard().sendKeys(searchtext);
         //appiumdriver.hideKeyboard();
     }
 }

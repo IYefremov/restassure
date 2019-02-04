@@ -126,10 +126,14 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     public  WebElement expandServiceDetails(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
-            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded")) {
                 tap(servicecell);
-            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
+                BaseUtils.waitABit(1000);
+            }
+            if (!servicecell.getAttribute("class").contains("accordion-item-expanded")) {
                 tap(servicecell);
+                BaseUtils.waitABit(1000);
+            }
         }
         return servicecell;
     }
@@ -137,10 +141,13 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     public  WebElement collapseServiceDetails(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
-            if (servicecell.getAttribute("class").contains("accordion-item-expanded"))
+            if (servicecell.getAttribute("class").contains("accordion-item-expanded")) {
                 tap(servicecell.findElement(By.xpath(".//*[@action='toggle-item']")));
+                BaseUtils.waitABit(1000);
+            }
+
         }
-        BaseUtils.waitABit(1000);
+
         return servicecell;
     }
 
