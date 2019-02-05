@@ -10,6 +10,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -39,9 +40,12 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	
 	public VNextHomeScreen updateMainDB() {
 		clickUpdateAppdata();
-		//BaseUtils.waitABit(3000);
-		//if (elementExists("//span[text()='Start sync']"))
-		//	tap(appiumdriver.findElement(By.xpath("//span[text()='Start sync']")));
+		try {
+			WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 30);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Start sync']"))).click();
+		} catch (TimeoutException e) {
+			//do nothing
+		}
 		BaseUtils.waitABit(10000);
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 800);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='" +
