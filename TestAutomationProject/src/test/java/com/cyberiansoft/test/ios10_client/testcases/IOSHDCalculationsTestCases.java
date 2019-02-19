@@ -1291,8 +1291,8 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.approveWorkOrderWithoutSignature(wo1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		myworkordersscreen.switchToTeamView();
-		myworkordersscreen.clickCreateInvoiceIconForWO(wo1);
+		TeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrdersView();
+		teamWorkOrdersScreen.clickCreateInvoiceIconForWO(wo1);
 		myworkordersscreen.clickInvoiceIcon();
 
         QuestionsScreen questionsScreen = myworkordersscreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
@@ -1301,10 +1301,10 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		invoiceinfoscreen.setPO("123");
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
-		
-		myworkordersscreen.approveWorkOrderWithoutSignature(wo2, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+
+			myworkordersscreen.approveWorkOrderWithoutSignature(wo2, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen.clickHomeButton();
-		
+
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenum);
 
@@ -1312,7 +1312,6 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		questionsScreen = new QuestionsScreen();
 		questionsScreen.waitQuestionsScreenLoaded();
 		questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
-		System.out.println("+++++++" + wo2);
 		invoiceinfoscreen.addWorkOrder(wo2);
 		invoiceinfoscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();

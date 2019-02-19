@@ -22,6 +22,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.InvoicesTypes;
+import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
@@ -5253,7 +5254,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
 		homescreen = myworkordersscreen.clickHomeButton();
-		
+		BaseUtils.waitABit(1000*60);
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenumber);
 		myinvoicesscreen.clickEditPopup();
@@ -5346,7 +5347,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
 		homescreen = myworkordersscreen.clickHomeButton();
-		
+		BaseUtils.waitABit(1000*60);
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenumber);
 		myinvoicesscreen.clickEditPopup();
@@ -5440,6 +5441,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
 		homescreen = myworkordersscreen.clickHomeButton();
+		BaseUtils.waitABit(1000*60);
 		RegularTeamInvoicesScreen teaminvoicesscreen = homescreen.clickTeamInvoices();
 		teaminvoicesscreen.selectInvoice(invoicenumber);
 		teaminvoicesscreen.clickChangePOPopup();
@@ -5885,7 +5887,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+		BaseUtils.waitABit(1000*60);
 		RegularTeamInvoicesScreen teaminvoicesscreen = homescreen.clickTeamInvoices();
 		final String invoicenum = teaminvoicesscreen.getFirstInvoiceValue();
 		teaminvoicesscreen.selectInvoice(invoicenum);
@@ -8204,5 +8206,187 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen.clickLogoutButton();
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
+
+	@Test(testName = "Test Case 82200:WO - If service price is 0 and has def tech assign to service def tech",
+			description = "Verify If service price is 0 and has def tech assign to service def tech")
+	public void testVerifyIfServicePriceIs0AndHasDefTechAssignToServiceDefTech() {
+
+		final String VIN = "1D7HW48NX6S507810";;
+		final String defaulttech = "Oksana Zayats";
+
+		final String tech1 = "Vladimir Avsievich";
+		final String techDefSelected = "Employee Simple 20%";
+		final String serviceZaroPrice = "0";
+
+		homescreen = new RegularHomeScreen();
+		RegularMainScreen mainScreen = homescreen.clickLogoutButton();
+		mainScreen.userLogin("Zayats", "1111");
+
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		vehiclescreen.setVIN(VIN);
+		vehiclescreen.clickTech();
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		selectedServiceDetailsScreen.selecTechnician(tech1);
+		selectedServiceDetailsScreen.unselecTechnician(defaulttech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetailsWithAlert();
+
+
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
+
+		selectedServiceDetailsScreen.clickVehiclePartsCell();
+		selectedServiceDetailsScreen.selectVehiclePart("Grill");
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.setServicePriceValue(serviceZaroPrice);
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(techDefSelected));
+		Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(techDefSelected), "$0.00");
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+
+		servicesscreen = new RegularServicesScreen();
+		servicesscreen.cancelWizard();
+
+		myworkordersscreen.clickHomeButton();
+		homescreen.clickLogoutButton();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+	}
+
+    @Test(testName = "Test Case 82201:WO - If service price is 0 assign WO split to service in case no def tech",
+            description = "Verify If service price is 0 assign WO split to service in case no def tech")
+    public void testVerifyIfServicePriceIs0AssignWOSplitToServiceInCaseNoDefTech() {
+
+        final String VIN = "1D7HW48NX6S507810";;
+        final String defaulttech = "Oksana Zayats";
+
+        final String tech1 = "Vladimir Avsievich";
+        final String serviceZaroPrice = "0";
+
+        homescreen = new RegularHomeScreen();
+        RegularMainScreen mainScreen = homescreen.clickLogoutButton();
+        mainScreen.userLogin("Zayats", "1111");
+
+        RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+        customersscreen.swtchToWholesaleMode();
+        customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+        RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+        myworkordersscreen.clickAddOrderButton();
+        RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+        vehiclescreen.setVIN(VIN);
+        vehiclescreen.clickTech();
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.selecTechnician(tech1);
+        selectedServiceDetailsScreen.unselecTechnician(defaulttech);
+        selectedServiceDetailsScreen.saveSelectedServiceDetailsWithAlert();
+
+        RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+        selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
+        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), "$0.00");
+        selectedServiceDetailsScreen.clickTechniciansIcon();
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+        Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech1));
+        Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(tech1), "$0.00");
+        selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+        selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+
+        servicesscreen = new RegularServicesScreen();
+        servicesscreen.cancelWizard();
+
+        myworkordersscreen.clickHomeButton();
+        homescreen.clickLogoutButton();
+        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+    }
+
+    @Test(testName="Test Case 26115:WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required",
+            description = "WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required")
+    public void testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired() {
+
+        final String VIN  = "1D3HV13T19S825733";
+        final String _pricematrix = "HOOD";
+        final String _size = "NKL";
+        final String _severity = "VERY LIGHT";
+        final String defLocation = "Test Location check out required";
+
+        homescreen = new RegularHomeScreen();
+        RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+        customersscreen.swtchToWholesaleMode();
+        customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+        RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+        myworkordersscreen.clickAddOrderButton();
+        RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
+        vehiclescreen.setVIN(VIN);
+        vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
+        vehiclescreen.selectLocation(defLocation);
+        String wonum = vehiclescreen.getWorkOrderNumber();
+        RegularServicesScreen servicesscreen =  vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+        servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
+        servicesscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
+        servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
+        servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
+        servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+        servicesscreen.selectSubService(iOSInternalProjectConstants.VPS1_SERVICE);
+
+        servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+        RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
+        RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
+        vehiclePartScreen.setSizeAndSeverity(_size, _severity);
+        vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+        RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
+        selectedservicescreen.saveSelectedServiceDetails();
+        vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+        vehiclePartScreen.saveVehiclePart();
+        pricematrix.clickSave();
+
+
+        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        ordersummaryscreen.setTotalSale("5");
+        ordersummaryscreen.checkApproveAndSaveWorkOrder();
+        myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+        ordersummaryscreen.saveWizard();
+
+
+        RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
+        teamWorkOrdersScreen.clickSearchButton();
+        teamWorkOrdersScreen.selectSearchLocation(defLocation);
+        teamWorkOrdersScreen.clickSearchSaveButton();
+        teamWorkOrdersScreen.clickOnWO(wonum);
+        RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
+        ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+        ordermonitorscreen.clickServiceStatusCell();
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+        ordermonitorscreen.clickServiceDetailsCancelButton();
+
+        ordermonitorscreen.clickStartPhase();
+        ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+        ordermonitorscreen.clickServiceStatusCell();
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+        ordermonitorscreen.clickServiceDetailsCancelButton();
+
+        ordermonitorscreen.clickStartPhaseCheckOutButton();
+        ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+        ordermonitorscreen.clickServiceStatusCell();
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+        ordermonitorscreen.clickServiceDetailsCancelButton();
+
+        ordermonitorscreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
+        Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE),
+                OrderMonitorPhases.COMPLETED.getrderMonitorPhaseName());
+        ordermonitorscreen.clickBackButton();
+        homescreen = teamWorkOrdersScreen.clickHomeButton();
+    }
 
 }

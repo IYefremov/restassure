@@ -142,6 +142,7 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
 		appiumdriver.findElementByAccessibilityId(wonumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
+		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 
 	public void selectWorkOrderForApprove(String wonumber) {

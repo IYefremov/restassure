@@ -151,15 +151,17 @@ public class VehicleScreen extends BaseWizardScreen {
 		
 		clickVINField();
 
+		appiumdriver.findElementByAccessibilityId("VIN#").sendKeys(vin);
 		//appiumdriver.findElementByAccessibilityId("VIN#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
+		/*((IOSDriver) appiumdriver) .getKeyboard().pressKey(vin);
 		//Helpers.waitABit(500);
 		try {
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		} catch (WebDriverException e) {
 			
-		}
-		//((IOSDriver) appiumdriver).hideKeyboard();
+		}*/
+		//appiumdriver .pressKey(new KeyEvent(AndroidKey.ENTER));
+		((IOSDriver) appiumdriver).hideKeyboard();
 	}
 	
 	public void clearVINCode() {
@@ -278,20 +280,20 @@ public class VehicleScreen extends BaseWizardScreen {
 	
 	public void setMileage(String mileage) {
 		appiumdriver.findElementByAccessibilityId("Mileage").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(mileage);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("Mileage").sendKeys(mileage + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public void setFuelTankLevel(String fueltanklevel)  {
 		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(fueltanklevel);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").sendKeys(fueltanklevel + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public void setLicensePlate(String licplate)  {
 		appiumdriver.findElementByAccessibilityId("License Plate").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(licplate);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("License Plate").sendKeys(licplate + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public void selectOwnerT(String owner)  {
@@ -367,20 +369,20 @@ public class VehicleScreen extends BaseWizardScreen {
 
 	public void setStock(String stock) {
 		appiumdriver.findElementByAccessibilityId("Stock#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("Stock#").sendKeys(stock + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public void setRO(String ro)  {
 		appiumdriver.findElementByAccessibilityId("RO#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("RO#").sendKeys(ro + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public void setPO(String po)  {
 		appiumdriver.findElementByAccessibilityId("PO#").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("PO#").sendKeys(po + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public String getWorkOrderCustomer() {

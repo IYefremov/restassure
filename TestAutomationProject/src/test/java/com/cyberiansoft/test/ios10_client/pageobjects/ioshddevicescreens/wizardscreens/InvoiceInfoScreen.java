@@ -5,7 +5,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typessc
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -83,7 +82,7 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 
 	public void setPO(String _po) {
 		setPOWithoutHidingkeyboard(_po);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		((IOSElement) appiumdriver.findElementByAccessibilityId("txtPO")).setValue("\n");
 	}
 	
 	public void setPOWithoutHidingkeyboard(String _po) {

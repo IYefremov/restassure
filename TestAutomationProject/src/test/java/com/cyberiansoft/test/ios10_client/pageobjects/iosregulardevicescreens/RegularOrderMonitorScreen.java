@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -156,6 +157,11 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Saving...")));
 		return this;
 	}
+
+	public RegularOrderMonitorScreen clickServiceDetailsCancelButton() {
+		appiumdriver.findElementByAccessibilityId("NavigationBarItemClose").click();
+		return this;
+	}
 	
 	public boolean isStartServiceButtonPresent() {
 		return startservicebtn.isDisplayed();
@@ -275,5 +281,20 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	public String getServiceDetailsPriceValue() {
 		return appiumdriver.findElementByAccessibilityId("MonitorDetailsCell_Amount")
 				.findElement(MobileBy.AccessibilityId("AmountTextControl")).getAttribute("value");
+	}
+
+	public void clickStartPhaseCheckOutButton() {
+		monitorserviceslist.findElementByIosNsPredicate("name = 'Start phase' and type = 'XCUIElementTypeCell'").
+				findElementByAccessibilityId("btnCheckInOut").click();
+	}
+
+	public void changeStatusForStartPhase(OrderMonitorPhases orderMonitorPhase) {
+
+		monitorserviceslist.findElementByIosNsPredicate("name = 'Start phase' and type = 'XCUIElementTypeCell'").click();
+
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(orderMonitorPhase.getrderMonitorPhaseName()))).click();
+		wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 }

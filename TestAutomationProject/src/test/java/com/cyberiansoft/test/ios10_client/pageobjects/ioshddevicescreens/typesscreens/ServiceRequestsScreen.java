@@ -393,17 +393,17 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	public void setSubjectAppointmet(String _subject)  {
 		appiumdriver.findElementByAccessibilityId("Subject").click();
-		Helpers.keyboadrType(_subject+"\n");
+		appiumdriver.findElementByAccessibilityId("Subject").sendKeys(_subject+"\n");
 	}
 	
 	public void setAddressAppointmet(String _address)  {
 		appiumdriver.findElementByAccessibilityId("Address").click();
-		Helpers.keyboadrType(_address+"\n");
+		appiumdriver.findElementByAccessibilityId("Address").sendKeys(_address+"\n");
 	}
 	
 	public void setCityAppointmet(String _city)  {
 		appiumdriver.findElementByAccessibilityId("City").click();
-		Helpers.keyboadrType(_city+"\n");
+		appiumdriver.findElementByAccessibilityId("City").sendKeys(_city+"\n");
 	}
 	
 	/*public void selectSummaryRequestAction() {

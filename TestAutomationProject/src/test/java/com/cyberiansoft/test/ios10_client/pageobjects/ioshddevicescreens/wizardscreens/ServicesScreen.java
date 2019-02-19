@@ -5,7 +5,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.Selecte
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
@@ -138,7 +137,7 @@ public class ServicesScreen extends BaseWizardScreen {
 		IOSElement grouplist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/.."));
 		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
 		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(servicename);
+		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).setValue(servicename);
 		appiumdriver.hideKeyboard();
 	}
 
@@ -255,8 +254,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	public void searchSelectedService(String servicename) {
 		appiumdriver.findElementByAccessibilityId("SelectedServicesView").findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
 		appiumdriver.findElementByAccessibilityId("SelectedServicesView").findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(servicename);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("SelectedServicesView").findElement(MobileBy.className("XCUIElementTypeSearchField")).sendKeys(servicename + "\n");
 	}
 	
 	public void cancelSearchAvailableService() {

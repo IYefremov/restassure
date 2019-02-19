@@ -5,7 +5,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.Technic
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -104,14 +103,14 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		MobileElement priceCell = (MobileElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice");
 		priceCell.click();
 		priceCell.findElementByClassName("XCUIElementTypeTextField").clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(price + "\n");
+		priceCell.findElementByClassName("XCUIElementTypeTextField").setValue(price + "\n");
 	}
 
 	public void setTime(String timevalue) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Time")));
 		appiumdriver.findElementByAccessibilityId("Time").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(timevalue + "\n");
+		appiumdriver.findElementByAccessibilityId("Time").sendKeys(timevalue + "\n");
 	}
 
 	public String getPrice() {

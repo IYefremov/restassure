@@ -365,7 +365,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickCreateInvoiceIconForWO(String wonumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
 		appiumdriver.findElementByAccessibilityId(wonumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
 	}
@@ -381,7 +381,8 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public void clickInvoiceIcon() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
-		appiumdriver.findElementByAccessibilityId("invoice new").click();
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("invoice new"))).click();
 		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 
@@ -456,4 +457,9 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
         appiumdriver.findElementByAccessibilityId("Back").click();
         return new CarHistoryScreen();
     }
+
+    public TeamWorkOrdersScreen switchToTeamWorkOrdersView() {
+		switchToTeamView();
+		return new TeamWorkOrdersScreen();
+	}
 }

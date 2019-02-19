@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.OrderMonitorServiceDetailsPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -114,13 +115,16 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public void clickStartPhase() {
-		monitorservicestable.findElementByIosNsPredicate("name = 'Repair phase' and type = 'XCUIElementTypeCell'")
-				.findElementByAccessibilityId("btnStartReset").click();
+		monitorservicestable.findElementByAccessibilityId("btnStartReset").click();
+	}
+
+	public void clickStartPhaseCheckOutButton() {
+		monitorservicestable.findElementByIosNsPredicate("name = 'Start phase' and type = 'XCUIElementTypeCell'").
+				findElementByAccessibilityId("btnCheckInOut").click();
 	}
 
 	public boolean isStartPhaseButtonPresent() {
-		return monitorservicestable.findElementByIosNsPredicate("name = 'Repair phase' and type = 'XCUIElementTypeCell'")
-				.findElementsByAccessibilityId("btnStartReset").size() > 0;
+		return monitorservicestable.findElementsByAccessibilityId("btnStartReset").size() > 0;
 	}
 	
 	public void clickServicesButton() {
@@ -136,9 +140,6 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Repair phase"))).click();
 	}
-	
-
-	
 
 	
 	public TeamWorkOrdersScreen clickBackButton() {
@@ -192,5 +193,15 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public String getServiceDetailsPriceValue() {
 		return appiumdriver.findElementByAccessibilityId("MonitorDetailsCell_Amount")
 				.findElement(MobileBy.AccessibilityId("AmountTextControl")).getAttribute("value");
+	}
+
+	public void changeStatusForStartPhase(OrderMonitorPhases orderMonitorPhase) {
+
+		monitorservicestable.findElementByIosNsPredicate("name = 'Start phase' and type = 'XCUIElementTypeCell'").click();
+
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1][@name='" +
+				orderMonitorPhase.getrderMonitorPhaseName() + "']").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
 	}
 }

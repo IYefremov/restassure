@@ -38,5 +38,6 @@ public class AlertsCaptions {
 			"Default technician split will be assigned to this vehicle part if you set zero amount.\n" +
 			"\n" +
 			"Continue?";
-
+	public static final String YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE = "Order Monitor\n" +
+			"You cannot change the status of services for this phase. You can only change the status of the whole phase.";
 }

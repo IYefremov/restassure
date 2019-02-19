@@ -37,6 +37,11 @@ public class OrderMonitorServiceDetailsPopup extends iOSHDBaseScreen {
         return new OrderMonitorScreen();
     }
 
+    public OrderMonitorScreen clickServiceDetailsCancelButton() {
+        appiumdriver.findElementByAccessibilityId("NavigationBarItemClose").click();
+        return new OrderMonitorScreen();
+    }
+
     public boolean isServiceStartDateExists() {
         return monitorservicedetailstable.findElementsByAccessibilityId("MonitorDetailsCell_StartDate").size() > 0;
     }
