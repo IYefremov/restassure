@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;

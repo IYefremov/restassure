@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
@@ -33,9 +34,9 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
         PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
     }
 
-    public VNextCustomersScreen clickChangeCustomerMenuItem() {
+    public VNextChangeCustomerScreen clickChangeCustomerMenuItem() {
         clickMenuItem(changecustomerbtn);
-        return new VNextCustomersScreen(appiumdriver);
+        return new VNextChangeCustomerScreen(appiumdriver);
     }
 
     public boolean isChangeCustomerMenuPresent() {

@@ -3,7 +3,8 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
-import com.cyberiansoft.test.vnext.screens.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
+import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
@@ -158,8 +159,8 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
 	public VNextWorkOrdersScreen changeCustomerForWorkOrder(String workOrderNumber, AppCustomer newCustomer) {
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-		VNextCustomersScreen customersscreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
-		customersscreen.selectCustomer(newCustomer);
+		VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
+		changeCustomerScreen.selectCustomer(newCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
@@ -168,10 +169,10 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
 	public VNextWorkOrdersScreen changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-		VNextCustomersScreen customersscreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
-		customersscreen.switchToRetailMode();
-		customersscreen.searchCustomerByName(newCustomer.getFullName());
-		customersscreen.selectCustomer(newCustomer);
+		VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
+		changeCustomerScreen.switchToRetailMode();
+		changeCustomerScreen.searchCustomerByName(newCustomer.getFullName());
+		changeCustomerScreen.selectCustomer(newCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
@@ -180,9 +181,9 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
 	public VNextWorkOrdersScreen changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-		VNextCustomersScreen customersscreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
-		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(newWholesailCustomer);
+		VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
+		changeCustomerScreen.switchToWholesaleMode();
+		changeCustomerScreen.selectCustomer(newWholesailCustomer);
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickInformationDialogYesButton();
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
