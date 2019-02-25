@@ -5,6 +5,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -43,9 +44,12 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	public VNextRegistrationOverviewLegalInfosScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(registrationoverviewlegalinfoscreen));
-		BaseUtils.waitABit(3000);
+		try {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+			wait.until(ExpectedConditions.visibilityOf(registrationoverviewlegalinfoscreen));
+		} catch (WebDriverException e) {
+			BaseUtils.waitABit(3000);
+		}
 	}
 	
 	public String getPaymentPriceValue() {
@@ -84,8 +88,12 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(agreebtn));
 		tap(agreebtn);
-		wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.invisibilityOf(agreebtn));
+		try {
+			wait = new WebDriverWait(appiumdriver, 15);
+			wait.until(ExpectedConditions.invisibilityOf(agreebtn));
+		} catch (WebDriverException e) {
+			BaseUtils.waitABit(4000);
+		}
 	}
 	
 	public void clickDeclineButton() {

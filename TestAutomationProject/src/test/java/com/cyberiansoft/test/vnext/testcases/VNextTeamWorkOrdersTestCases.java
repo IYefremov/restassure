@@ -312,7 +312,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workordersscreen.clickBackButton();		
 	}
 
-	@Test(testName= "Verify it is not possible to edit Team Work Order with device on Fly-mode",
+	@Test(testName= "Test Case 68486:Verify user can edit WO if we have no internet connection",
 			description = "Verify it is not possible to edit Team Work Order with device on Fly-mode")
 	public void testVerifyItIsNotPossibleToEditTeamWorkOrderWithDeviceOnFlyMode() {
 
@@ -345,7 +345,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workordersscreen.clickBackButton();
 	}
 
-	@Test(testName= "Verify user can edit Team Work Order",
+	@Test(testName= "Test Case 68485:Verify user can edit Team WO",
 			description = "Verify user can edit Team Work Order")
 	public void testVerifyUserCanEditTeamWorkOrder() {
 

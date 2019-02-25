@@ -29,6 +29,9 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[text()='Download again']")
 	private WebElement downloadagainbtn;
+
+	@FindBy(xpath="//li[@data-name='verificationCode']/div[@class='validation-message']/div")
+	private WebElement regcodeerrormsg;
 	
 	public VNextVerificationScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
@@ -39,8 +42,10 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	
 	public void setDeviceRegistrationCode(String regcode) {	
 		tap(regfld);
-		appiumdriver.getKeyboard().pressKey(regcode);
-		appiumdriver.hideKeyboard();
+		regfld.clear();
+		regfld.sendKeys(regcode);
+		//appiumdriver.getKeyboard().pressKey(regcode);
+		//appiumdriver.hideKeyboard();
 	}
 	
 	public String getEnteredDeviceRegistrationCodeValue() {
@@ -72,6 +77,14 @@ public class VNextVerificationScreen extends VNextBaseScreen {
 	public void clickDownloadAgainButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		tap(wait.until(ExpectedConditions.visibilityOf(downloadagainbtn)));
+	}
+
+	public boolean isRegCodeErrorMessageVisible() {
+		return regcodeerrormsg.isDisplayed();
+	}
+
+	public String getRegCodeErrorMessage() {
+		return regcodeerrormsg.getText();
 	}
 	
 }

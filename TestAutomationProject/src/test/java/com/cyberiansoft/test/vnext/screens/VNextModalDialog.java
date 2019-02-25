@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VNextRegistrationScreensModalDialog extends VNextBaseScreen {
+public class VNextModalDialog extends VNextBaseScreen {
 
 	@FindBy(id="dialogModal")
 	private WebElement modaldlg;
@@ -18,7 +18,7 @@ public class VNextRegistrationScreensModalDialog extends VNextBaseScreen {
 	@FindBy(xpath="//*[@class='modal-body__content']")
 	private WebElement modaldlgmsg;
 	
-	public VNextRegistrationScreensModalDialog(AppiumDriver<MobileElement> appiumdriver) {
+	public VNextModalDialog(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 400);

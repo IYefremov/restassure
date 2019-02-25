@@ -33,4 +33,11 @@ public class VNextAlertMessages {
 	public static String CONNECTION_IS_NOT_AVAILABLE = "Connection is not available. Please try again later";
 	public static String PORO_FIELDIS_REQUIRED = "PO/RO field is required";
 	public static String AMOUNT_MAST_BE_GREATER_THEN_ZERO = "Amount must be greater than zero.";
+	public static String VERIFICATION_CODE_IS_REQUIRED = "Verification Code is required";
+	public static String VERIFICATION_CODE_IS_NOT_VALID = "Verification Code is not valid";
+	public static String PHONE_IS_REQUIRED = "Phone is required";
+	public static String EMAIL_IS_REQUIRED = "Email is required";
+	public static String FIRST_NAME_IS_REQUIRED = "First Name is required";
+    public static String PLEASE_SELECT_A_STATE_OR_PROVINCE = "Please select a state or province";
+	public static String PLEASE_SELECT_LINE_OF_BUSINESS = "Please select line of business";
 }

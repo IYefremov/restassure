@@ -93,16 +93,16 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions. visibilityOf(firstnamefld));
 		tap(firstnamefld);
-		appiumdriver.getKeyboard().pressKey(firstname);
-		//firstnamefld.clear();
-		//firstnamefld.sendKeys(firstname);
+		//appiumdriver.getKeyboard().pressKey(firstname);
+		firstnamefld.clear();
+		firstnamefld.sendKeys(firstname);
 	}
 	
 	public void setLastName(String lastname) {
 		tap(lastnamefld);
-		appiumdriver.getKeyboard().pressKey(lastname);
-		//lastnamefld.clear();
-		//lastnamefld.sendKeys(lastname);
+		//appiumdriver.getKeyboard().pressKey(lastname);
+		lastnamefld.clear();
+		lastnamefld.sendKeys(lastname);
 	}
 	
 	public void setPhoneNumber(String phonenumber) {
@@ -110,19 +110,19 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal-info-phone")));
 		tap(phonenumberfld);
-		appiumdriver.getKeyboard().pressKey(phonenumber);
-		appiumdriver.hideKeyboard();
-		//phonenumberfld.clear();
-		//phonenumberfld.sendKeys(phonenumber);
+		//appiumdriver.getKeyboard().pressKey(phonenumber);
+		//appiumdriver.hideKeyboard();
+		phonenumberfld.clear();
+		phonenumberfld.sendKeys(phonenumber);
 	}
 	
 	public void setEmail(String usermail) {
 		tap(emailfld);
 		emailfld.clear();
-		appiumdriver.getKeyboard().pressKey(usermail);
-		appiumdriver.hideKeyboard();
-		//emailfld.clear();
-		//emailfld.sendKeys(usermail);
+		//appiumdriver.getKeyboard().pressKey(usermail);
+		//appiumdriver.hideKeyboard();
+		emailfld.clear();
+		emailfld.sendKeys(usermail);
 	}
 	
 	public void clickDoneButton() {
@@ -136,5 +136,35 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	public void clickIHaveRigistrationCodeLink() {
 		tap(ihaveregcodelink);
+	}
+
+	public boolean isFirstNameErrorMessageVisible() {
+		return appiumdriver.findElement(By.xpath("//li[@data-name='firstName']"))
+				.findElement(By.xpath((".//div[@class='validation-message']/div"))).getText().length() > 1;
+	}
+
+	public String getFirstNameErrorMessage() {
+		return appiumdriver.findElement(By.xpath("//li[@data-name='firstName']"))
+				.findElement(By.xpath((".//div[@class='validation-message']/div"))).getText();
+	}
+
+	public String getPhoneErrorMessage() {
+		return appiumdriver.findElement(By.xpath("//li[@data-name='phone']"))
+				.findElement(By.xpath((".//div[@class='validation-message']/div"))).getText();
+	}
+
+	public boolean isPhoneErrorMessageVisible() {
+		return appiumdriver.findElement(By.xpath("//li[@data-name='phone']"))
+				.findElement(By.xpath((".//div[@class='validation-message']/div"))).getText().length() > 1;
+	}
+
+	public boolean isEMailErrorMessageVisible() {
+		return appiumdriver.findElement(By.xpath("//li[@data-name='email']"))
+				.findElement(By.xpath((".//div[@class='validation-message']/div"))).getText().length() > 1;
+	}
+
+	public String getEmailErrorMessage() {
+		return appiumdriver.findElement(By.xpath("//li[@data-name='email']"))
+				.findElement(By.xpath((".//div[@class='validation-message']/div"))).getText();
 	}
 }

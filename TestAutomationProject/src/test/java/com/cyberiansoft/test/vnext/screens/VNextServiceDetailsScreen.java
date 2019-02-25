@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import io.appium.java_client.AppiumDriver;
@@ -86,6 +87,12 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 		clickServiceQuantityField();
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 		keyboard.setFieldValue(getServiceQuantityValue(), quantity);
+	}
+
+	public VNextQuestionsScreen clickServiceQuestionSection(String questionSectionName) {
+		appiumdriver.findElement(By.xpath("//*[@action='select-question-section']/input[@value='" +
+				questionSectionName + "']")).click();
+		return new VNextQuestionsScreen(appiumdriver);
 	}
 
 }

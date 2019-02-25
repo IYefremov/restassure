@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
@@ -39,7 +40,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		final String vinnumber = "123";
 		final String notetext = "new notes";
-		final String quicknotenew = "1 note";
+		final String quicknotenew = "No damage found";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -196,7 +197,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		final String vinnumber = "123";
 		
-		final String[] quicknotes = { quicknote, "1 note" };
+		final String[] quicknotes = { quicknote, "No damage found" };
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -391,6 +392,10 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
 		notesscreen.clickNotesBackButton();
+		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
+		VNextQuestionsScreen questionsScreen = servicedetailsscreen.clickServiceQuestionSection("Test Section");
+		questionsScreen.setAllRequiredQuestions("test 1");
+		questionsScreen.clickDoneButton();
 		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
 		servicedetailsscreen.clickServiceDetailsDoneButton();
 		visualscreen = new VNextVisualScreen(appiumdriver);

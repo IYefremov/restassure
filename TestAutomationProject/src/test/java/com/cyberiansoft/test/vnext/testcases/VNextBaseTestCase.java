@@ -241,8 +241,8 @@ public class VNextBaseTestCase {
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
 		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("ReconPro Starter");
-		//environmentSelectionScreen.selectEnvironment("Integration");
-		environmentSelectionScreen.selectEnvironment("QC1");
+		environmentSelectionScreen.selectEnvironment("Integration");
+		//environmentSelectionScreen.selectEnvironment("QC1");
 
 		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		verificationscreen.setDeviceRegistrationCode(regCode);
