@@ -23,7 +23,6 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderType
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -731,7 +730,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
 			inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-			vehicleinfoscreen.swipeScreenLeft();
+			/*vehicleinfoscreen.swipeScreenLeft();
 			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
 			VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 			VNextQuestionsScreen questionsScreen = selectedServicesScreen.
@@ -745,7 +744,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 					clickServiceQuestionSection("Vlad_Money", "Vovan Test 5");
 			questionsScreen.selectRequiredQuestion();
 			questionsScreen.clickDoneButton();
-
+*/
 			vehicleinfoscreen.saveInspectionViaMenu();
 
 		} else if ((insptype.equals(InspectionTypes.O_KRAMAR) & (inspectionDTOs.size() > 0))) {

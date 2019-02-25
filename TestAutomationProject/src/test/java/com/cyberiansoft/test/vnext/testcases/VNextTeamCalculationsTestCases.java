@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
@@ -428,7 +429,6 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspinfoscreen.setVIN(inspdata.getVinNumber());
         inspinfoscreen.swipeScreenLeft();
 
-        inspinfoscreen.swipeScreenLeft();
         VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
         //visualscreen.clickAddServiceButton();
         visualscreen.selectDefaultDamage(selectdamage);
@@ -441,6 +441,10 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
             VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker(damagemarkers.get(i));
             servicedetailsscreen.setServiceAmountValue(moneyService.getServicePrice());
             servicedetailsscreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+            VNextQuestionsScreen questionsScreen = servicedetailsscreen.clickServiceQuestionSection("Test Section");
+            questionsScreen.setAllRequiredQuestions("test 1");
+            questionsScreen.clickDoneButton();
+            servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
             servicedetailsscreen.clickServiceDetailsDoneButton();
             visualscreen = new VNextVisualScreen(appiumdriver);
             BaseUtils.waitABit(1000);

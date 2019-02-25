@@ -9,10 +9,8 @@ import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import org.testng.Assert;
@@ -115,7 +113,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		/*VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		VNextQuestionsScreen questionsScreen = selectedServicesScreen.
 				clickServiceQuestionSection("Test_Service_PP_Panel", "zayats section1");
 		questionsScreen.selectAllRequiredQuestions(0);
@@ -127,8 +125,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 				clickServiceQuestionSection("Vlad_Money", "Vovan Test 5");
 		questionsScreen.selectRequiredQuestion();
 		questionsScreen.clickDoneButton();
-
-		vehicleinfoscreen.saveInspectionViaMenu();
+*/
+		availableServicesScreen.saveInspectionViaMenu();
 		return inspnumber;
 	}
 
