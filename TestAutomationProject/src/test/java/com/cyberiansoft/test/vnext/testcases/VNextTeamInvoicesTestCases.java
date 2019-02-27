@@ -93,6 +93,12 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			newcustomerscreen.createNewCustomer(testcustomer2);
 			customersscreen = new VNextCustomersScreen(appiumdriver);
 		}
+
+		if (!customersscreen.isCustomerExists(testcustomer)) {
+			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
+			newcustomerscreen.createNewCustomer(testcustomer);
+			customersscreen = new VNextCustomersScreen(appiumdriver);
+		}
 		customersscreen.clickBackButton();
 	}
 
