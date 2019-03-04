@@ -1,8 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	
@@ -23,14 +22,56 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	
 	@FindBy(id = "orderServices")
 	private WebElement orderservicestable;
-	
-	public VNextBORepairOrderDetailsPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(startorderbtn));
-	}
+
+    @FindBy(id = "reconmonitordetails-view")
+    private WebElement roDetailsSection;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'data.stockNo')]")
+    private WebElement stockNumInputField;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'data.roNo')]")
+    private WebElement roNumInputField;
+
+    @FindBy(xpath = "//span[text()='Phase']")
+    private WebElement phaseTextElement;
+
+    @FindBy(xpath = "//h5[@id='breadcrumb']//strong[text()='Repair Orders']")
+    private WebElement repairOrdersBackwardsLink;
+
+//    @FindBy(xpath = "//div[@class='status']//span[@title]")
+//    private WebElement statusDropDown; //todo use the locator instead of statusListBoxOptions.get(0)
+                                        // todo after the developers add the unique identifiers;
+
+    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']")
+    private WebElement statusDropDown;
+
+    @FindBy(xpath = "//div[@class='status']//span[@title]")
+    private WebElement statusListBox;
+
+    @FindBy(xpath = "//div[contains(@class, 'priority')]//span[@title]")
+    private WebElement priorityListBox;
+
+    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
+    private List<WebElement> statusListBoxOptions; //todo add unique identifiers
+
+    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
+    private List<WebElement> priorityListBoxOptions; //todo add unique identifiers
+
+    public VNextBORepairOrderDetailsPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        wait.until(ExpectedConditions.visibilityOf(startorderbtn));
+    }
+
+    public boolean isRoDetailsSectionDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(roDetailsSection));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
 	
 	public String getRepairOrderActivePhaseStatus() {
 		return orderdetails.findElement(By.id("phaseName")).getText().trim();
@@ -101,4 +142,60 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 		return servicerow;
 	}
 
+	public VNextBORepairOrdersWebPage clickBackwardsLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(repairOrdersBackwardsLink)).click();
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+    }
+
+	public VNextBORepairOrderDetailsPage typeStockNumber(String stockNumber) {
+        clearAndTypeOrderNumber(stockNumInputField, stockNumber);
+        return this;
+    }
+
+	public VNextBORepairOrderDetailsPage typeRoNumber(String roNumber) {
+        clearAndTypeOrderNumber(roNumInputField, roNumber);
+        return this;
+    }
+
+    private void clearAndTypeOrderNumber(WebElement inputField, String roNumber) {
+        clearAndType(inputField, roNumber);
+        wait.until(ExpectedConditions.elementToBeClickable(phaseTextElement)).click();
+    }
+
+    public VNextBORepairOrderDetailsPage setStatus(String status) {
+        clickStatusBox();
+        selectStatus(status);
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage clickStatusBox() {
+        waitForLoading();
+        wait.until(ExpectedConditions.elementToBeClickable(statusListBox)).click();
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage selectStatus(String status) {
+//        selectOptionInDropDown(statusDropDown, statusListBoxOptions, status); todo use this line after unique identifiers will be implemented
+        selectOptionInDropDown(statusListBoxOptions.get(0), statusListBoxOptions, status);
+        return this;
+    }
+
+    public VNextBORepairOrderDetailsPage setPriority(String priority) {
+        clickPriorityBox();
+        selectPriority(priority);
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage clickPriorityBox() {
+        waitForLoading();
+        wait.until(ExpectedConditions.elementToBeClickable(priorityListBox)).click();
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage selectPriority(String priority) {
+//        selectOptionInDropDown(priorityDropDown, priorityListBoxOptions, priority); todo use this line after unique identifiers will be implemented
+        selectOptionInDropDown(priorityListBoxOptions.get(0), priorityListBoxOptions, priority);
+        return this;
+    }
 }

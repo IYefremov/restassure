@@ -37,7 +37,11 @@ public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	}
 	
 	public boolean logOutLinkExists() {
-		return driver.findElements(By.xpath("//div[@class='login']/a")).size() > 0;
+	    try {
+            return driver.findElements(By.xpath("//div[@class='login']/a")).size() > 0;
+        } catch (Exception ignored) {
+	        return false;
+        }
 	}
 	
 	public VNextBOLoginScreenWebPage userLogout() {

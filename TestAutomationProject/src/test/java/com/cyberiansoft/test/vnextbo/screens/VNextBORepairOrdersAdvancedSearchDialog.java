@@ -7,8 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +33,9 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
 
     @FindBy(id = "orderVinInput")
     private WebElement vinInputField;
+
+    @FindBy(id = "orderSearchNameInput")
+    private WebElement searchNameInputField;
 
     @FindBy(id = "teamclientsAutocomplete-list")
     private WebElement customerAutoCompleteList;
@@ -62,8 +67,14 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     @FindBy(xpath = "//span[@aria-owns='orderDaysInPhaseDropdown_listbox']")
     private WebElement daysInPhaseListBox;
 
+    @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']")
+    private WebElement flagsListBox;
+
     @FindBy(id = "orderDaysInPhaseDropdown_listbox")
     private WebElement daysInPhaseDropDown;
+
+    @FindBy(id = "orderFlagDropdown_listbox")
+    private WebElement flagDropDown;
 
     @FindBy(xpath = "//span[@aria-owns='orderTimeframeDropdown_listbox']")
     private WebElement timeFrameListBox;
@@ -101,6 +112,9 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     @FindBy(xpath = "//ul[@id='orderDaysInPhaseDropdown_listbox']/li")
     private List<WebElement> daysInPhaseListBoxOptions;
 
+    @FindBy(xpath = "//ul[@id='orderFlagDropdown_listbox']/li//span[not(@class)]")
+    private List<WebElement> flagsListBoxOptions;
+
     @FindBy(xpath = "//ul[@id='orderDaysInProcessDropdown_listbox']/li")
     private List<WebElement> daysInProcessListBoxOptions;
 
@@ -134,8 +148,47 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     @FindBy(xpath = "//span[@aria-controls='advSearch_toDate_dateview']")
     private WebElement toDateButton;
 
+    @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']//span[@class='k-input']")
+    private WebElement flagDisplayed;
+
     @FindBy(xpath = "//button[@class='btn-black pull-right']")
     private WebElement searchButton;
+
+    @FindBy(xpath = "//div[@class='advSearch']//span[text()='Save']")
+    private WebElement saveButton;
+
+    @FindBy(xpath = "//div[@class='advSearch']//span[text()='Clear']")
+    private WebElement clearButton;
+
+    @FindBy(xpath = "//div[@class='advSearch']//i[@class='icon-close pull-right']")
+    private WebElement advancedSearchCloseButton;
+
+    @FindBy(xpath = "//ul[@id='teamclientsAutocomplete_listbox']/li")
+    private WebElement customerSelection;
+
+    @FindBy(xpath = "//ul[@id='repairOrdersSearchEmployees_listbox']/li")
+    private WebElement employeeSelection;
+
+    @FindBy(xpath = "//span[@aria-owns='orderPhaseDropdown_listbox']//span[@class='k-input']")
+    private WebElement phaseSelection;
+
+    @FindBy(xpath = "//span[@aria-owns='orderTimeframeDropdown_listbox']//span[@class='k-input']")
+    private WebElement timeFrameSelection;
+
+    @FindBy(xpath = "//span[@aria-owns='orderDepartmentDropdown_listbox']//span[@class='k-input']")
+    private WebElement departmentSelection;
+
+    @FindBy(xpath = "//span[@aria-owns='orderStatusDropdownlist_listbox']//span[@class='k-input']")
+    private WebElement repairStatusSelection;
+
+    @FindBy(xpath = "//span[@aria-owns='orderDaysInProcessDropdown_listbox']//span[@class='k-input']")
+    private WebElement daysInProcessSelection;
+
+    @FindBy(xpath = "//span[@aria-owns='orderDaysInPhaseDropdown_listbox']//span[@class='k-input']")
+    private WebElement daysInPhaseSelection;
+
+    @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']//span[@class='k-input']")
+    private WebElement flagSelection;
 
     public VNextBORepairOrdersAdvancedSearchDialog(WebDriver driver) {
         super(driver);
@@ -150,6 +203,16 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<String> getAdvancedSearchDialogElements() {
+        final String text = customerSelection.getText();
+        try {
+            waitShort.until((ExpectedCondition<Boolean>) driver -> !text.equals(customerSelection.getText()));
+        } catch (Exception ignored) {}
+        return Arrays.asList(customerSelection.getText(), employeeSelection.getText(), phaseSelection.getText(),
+                timeFrameSelection.getText(), departmentSelection.getText(), repairStatusSelection.getText(),
+                daysInProcessSelection.getText(), daysInPhaseSelection.getText(), flagSelection.getText());
     }
 
     public boolean isAdvancedSearchDialogNotDisplayed() {
@@ -183,8 +246,13 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return setData(vinInputField, vinNum);
     }
 
+    public VNextBORepairOrdersAdvancedSearchDialog setSearchName(String searchName) {
+        return setData(searchNameInputField, searchName);
+    }
+
     private VNextBORepairOrdersAdvancedSearchDialog setData(WebElement woInputField, String data) {
         wait.until(ExpectedConditions.elementToBeClickable(woInputField)).click();
+        woInputField.clear();
         woInputField.sendKeys(data);
         return this;
     }
@@ -203,6 +271,9 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectDataFromBoxList(List<WebElement> listBox, WebElement list, String data) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        } catch (Exception ignored) {}
         for (WebElement selected : listBox) {
             if (selected.getText().equals(data)) {
                 new Actions(driver)
@@ -216,8 +287,12 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         try {
             wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
         } catch (Exception e) {
-            list.sendKeys(Keys.ENTER);
-            wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
+            try {
+                actions.moveToElement(list).sendKeys(Keys.ENTER).build().perform();
+                wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
+            } catch (Exception ignored) {
+                waitABit(1000);
+            }
         }
         return this;
     }
@@ -282,6 +357,20 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return this;
     }
 
+    public VNextBORepairOrdersAdvancedSearchDialog setFlag(String flag) {
+        clickFlagBox();
+        selectFlag(flag);
+        return this;
+    }
+
+    public String getFlagSelected() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(flagDisplayed)).getText();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public VNextBORepairOrdersAdvancedSearchDialog setDaysInProcess(String daysInProcess) {
         clickDaysInProcessBox();
         selectDaysInProcess(daysInProcess);
@@ -300,19 +389,19 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return this;
     }
 
-    public VNextBORepairOrdersAdvancedSearchDialog typeDaysNumForDaysInPhaseFromInput(String days) {
+    public VNextBORepairOrdersAdvancedSearchDialog typeNumberOfDaysForDaysInPhaseFromInput(String days) {
         return typeDays(daysInPhaseFromInput, days);
     }
 
-    public VNextBORepairOrdersAdvancedSearchDialog typeDaysNumForDaysInPhaseToInput(String days) {
+    public VNextBORepairOrdersAdvancedSearchDialog typeNumberOfDaysForDaysInPhaseToInput(String days) {
         return typeDays(daysInPhaseToInput, days);
     }
 
-    public VNextBORepairOrdersAdvancedSearchDialog typeDaysNumForDaysInProcessFromInput(String days) {
+    public VNextBORepairOrdersAdvancedSearchDialog typeNumberOfDaysForDaysInProcessFromInput(String days) {
         return typeDays(daysInProcessFromInput, days);
     }
 
-    public VNextBORepairOrdersAdvancedSearchDialog typeDaysNumForDaysInProcessToInput(String days) {
+    public VNextBORepairOrdersAdvancedSearchDialog typeNumberOfDaysForDaysInProcessToInput(String days) {
         return typeDays(daysInProcessToInput, days);
     }
 
@@ -343,6 +432,18 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
     }
 
+    public VNextBORepairOrdersWebPage clickSaveButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(saveButton)).click();
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+    }
+
+    public VNextBORepairOrdersWebPage clickClearButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(clearButton)).click();
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+    }
+
     private VNextBORepairOrdersAdvancedSearchDialog clickPhaseBox() {
         wait.until(ExpectedConditions.elementToBeClickable(phaseListBox)).click();
         return this;
@@ -363,6 +464,11 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return this;
     }
 
+    private VNextBORepairOrdersAdvancedSearchDialog clickFlagBox() {
+        wait.until(ExpectedConditions.elementToBeClickable(flagsListBox)).click();
+        return this;
+    }
+
     private VNextBORepairOrdersAdvancedSearchDialog clickDaysInProcessBox() {
         wait.until(ExpectedConditions.elementToBeClickable(daysInProcessListBox)).click();
         return this;
@@ -379,44 +485,64 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectPhase(String phase) {
-        return selectOptionInDropDown(phaseDropDown, phaseListBoxOptions, phase);
+        selectOptionInDropDown(phaseDropDown, phaseListBoxOptions, phase);
+        return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectDepartment(String phase) {
-        return selectOptionInDropDown(departmentDropDown, departmentListBoxOptions, phase);
+        selectOptionInDropDown(departmentDropDown, departmentListBoxOptions, phase);
+        return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectWoType(String woType) {
-        return selectOptionInDropDown(woTypeDropDown, woTypeListBoxOptions, woType);
+        selectOptionInDropDown(woTypeDropDown, woTypeListBoxOptions, woType);
+        return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectDaysInPhase(String daysInPhase) {
-        return selectOptionInDropDown(daysInPhaseDropDown, daysInPhaseListBoxOptions, daysInPhase);
+        selectOptionInDropDown(daysInPhaseDropDown, daysInPhaseListBoxOptions, daysInPhase);
+        return this;
+    }
+
+    private VNextBORepairOrdersAdvancedSearchDialog selectFlag(String flag) {
+//        wait.until(ExpectedConditions.visibilityOf(flagDropDown));
+//        final Select select = new Select(flagDropDown);
+//        select.selectByVisibleText(flag);
+        selectOptionInDropDown(flagDropDown, flagsListBoxOptions, flag);
+        return this;
+    }
+
+    public VNextBORepairOrdersWebPage clickAdvancedSearchCloseButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCloseButton)).click();
+        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectDaysInProcess(String daysInProcess) {
-        return selectOptionInDropDown(daysInProcessDropDown, daysInProcessListBoxOptions, daysInProcess);
+        selectOptionInDropDown(daysInProcessDropDown, daysInProcessListBoxOptions, daysInProcess);
+        return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectTimeFrame(String timeFrame) {
-        return selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame);
+        selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame);
+        return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectRepairStatus(String repairStatus) {
-        return selectOptionInDropDown(repairStatusDropDown, repairStatusListBoxOptions, repairStatus);
-    }
-
-    private VNextBORepairOrdersAdvancedSearchDialog selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox,
-                                                                          String selection) {
-        wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
-        wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
-        for (WebElement option : listBox) {
-            if (option.getText().equals(selection)) {
-                new Actions(driver).moveToElement(option).click().build().perform();
-                wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
-                break;
-            }
-        }
+        selectOptionInDropDown(repairStatusDropDown, repairStatusListBoxOptions, repairStatus);
         return this;
     }
+//
+//    private VNextBORepairOrdersAdvancedSearchDialog selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox,
+//                                                                          String selection) {
+//        wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
+//        wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
+//        for (WebElement option : listBox) {
+//            if (option.getText().equals(selection)) {
+//                new Actions(driver).moveToElement(option).click().build().perform();
+//                wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
+//                break;
+//            }
+//        }
+//        return this;
+//    }
 }

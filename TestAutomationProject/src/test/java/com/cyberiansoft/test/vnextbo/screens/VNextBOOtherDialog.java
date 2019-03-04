@@ -9,20 +9,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
 
-public class VNextBORepairOrderDetailsWebPage extends VNextBOBaseWebPage {
+public class VNextBOOtherDialog extends VNextBOBaseWebPage {
 
-    @FindBy(id = "reconmonitordetails-view")
-    private WebElement roDetailsSection;
+    @FindBy(xpath = "//div[contains(@data-bind, 'isMenuUp') and not(@id)]")
+    private WebElement otherDialog;
 
-    public VNextBORepairOrderDetailsWebPage(WebDriver driver) {
+    public VNextBOOtherDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    public boolean isRoDetailsSectionDisplayed() {
+    public boolean isOtherDialogDisplayed() {
         try {
-            wait.until(ExpectedConditions.visibilityOf(roDetailsSection));
+            wait.until(ExpectedConditions.visibilityOf(otherDialog));
             return true;
         } catch (Exception ignored) {
             return false;

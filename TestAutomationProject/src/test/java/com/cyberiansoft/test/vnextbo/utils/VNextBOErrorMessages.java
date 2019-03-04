@@ -1,4 +1,4 @@
-//package com.cyberiansoft.test.vnextbo.utils;
+package com.cyberiansoft.test.vnextbo.utils;//package com.cyberiansoft.test.vnextbo.utils;
 //
 //public enum VNextBOErrorMessages {
 //

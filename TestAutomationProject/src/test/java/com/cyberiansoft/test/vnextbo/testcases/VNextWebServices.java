@@ -63,7 +63,7 @@ public class VNextWebServices extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testSetupConfigurationToRunInvoiceListSuite(String rowID, String description, JSONObject testData) throws Exception {
 
-        VNextWebServicesData  data = JSonDataParser.getTestDataFromJson(testData, VNextWebServicesData.class);
+        VNextWebServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextWebServicesData.class);
 
 		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
 

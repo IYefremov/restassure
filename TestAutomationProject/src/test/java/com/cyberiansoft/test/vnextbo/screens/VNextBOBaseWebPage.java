@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -11,28 +8,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public abstract class VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@class='k-loading-mask']")
     private WebElement loadingProcess;
-	
-	public WebDriver driver;
+
+    public WebDriver driver;
     public static WebDriverWait wait;
     public static WebDriverWait waitLong;
     public static WebDriverWait waitShort;
     public Actions actions;
 
-	public VNextBOBaseWebPage(WebDriver driver) {
-		this.driver = driver;
+    public VNextBOBaseWebPage(WebDriver driver) {
+        this.driver = driver;
         wait = new WebDriverWait(driver, 15, 1);
         waitShort = new WebDriverWait(driver, 5, 1);
         waitLong = new WebDriverWait(driver, 30, 1);
         actions = new Actions(driver);
-	}
-	
-	 /* Wait For */
+    }
+
+    /* Wait For */
     public void waitABit(int milliseconds) {
         if (milliseconds > 0) {
             try {
@@ -43,48 +43,64 @@ public abstract class VNextBOBaseWebPage {
             }
         }
     }
-    
+
     public void checkboxSelect(WebElement checkbox) {
-    	if (!isCheckboxChecked(checkbox)) 
-    		checkbox.click();
+        if (!isCheckboxChecked(checkbox))
+            checkbox.click();
     }
-    
+
     public void checkboxUnselect(WebElement checkbox) {
-    	if (isCheckboxChecked(checkbox)) {
+        if (isCheckboxChecked(checkbox)) {
             wait.until(ExpectedConditions.elementToBeClickable(checkbox)).click();
         }
     }
-    
-    public boolean isCheckboxChecked(WebElement element) {
-    	boolean result = false;
-    	String selected = element.getAttribute("checked");
-		if (selected !=null) {
-			if (selected.equals("true"))
-				result = true;
-		}
-		return result;
-    }
-    
-    public void waitForNewTab() { 
-		  waitLong.until(new ExpectedCondition<Boolean>(){
-			  @Override
-	            public Boolean apply(WebDriver d) {
-	                return (d.getWindowHandles().size() != 1);
-	            }
-		  });
-	}
-    
-    public void closeNewTab(String mainWindowHandle) {
-		driver.close();
-		driver.switchTo().window(mainWindowHandle);
-	}
 
-	public void waitForLoading() {
+    public boolean isCheckboxChecked(WebElement element) {
+        boolean result = false;
+        String selected = element.getAttribute("checked");
+        if (selected != null) {
+            if (selected.equals("true"))
+                result = true;
+        }
+        return result;
+    }
+
+    public void waitForNewTab() {
+        waitLong.until((ExpectedCondition<Boolean>) driver -> (
+                Objects
+                        .requireNonNull(driver)
+                        .getWindowHandles()
+                        .size() != 1));
+    }
+
+    public void closeNewTab(String mainWindowHandle) {
+        driver.close();
+        driver.switchTo().window(mainWindowHandle);
+    }
+
+    public void closeMainWindow(String mainWindow) {
+        driver.switchTo().window(mainWindow);
+        driver.close();
+        waitABit(1000);
+    }
+
+    public void closeWindows() {
+        final Set<String> windowHandles = driver.getWindowHandles();
+        for (String window : windowHandles) {
+            driver.switchTo().window(window);
+            driver.close();
+            waitABit(1000);
+        }
+    }
+
+    public void waitForLoading() {
         try {
             wait.until(ExpectedConditions.visibilityOf(loadingProcess));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         try {
             wait.until(ExpectedConditions.invisibilityOf(loadingProcess));
+            waitABit(500);
         } catch (Exception ignored) {
             waitABit(2000);
         }
@@ -119,7 +135,7 @@ public abstract class VNextBOBaseWebPage {
     }
 
     public void setZoom(int zoomPercentage) {
-        ((JavascriptExecutor)driver).executeScript("document.body.style.zoom='" + zoomPercentage + "%'", "");
+        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='" + zoomPercentage + "%'", "");
     }
 
     public void refreshPage() {
@@ -138,5 +154,22 @@ public abstract class VNextBOBaseWebPage {
     public void goToPreviousPage() {
         driver.navigate().back();
         waitForLoading();
+    }
+
+    void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
+        try {
+            wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
+        } catch (Exception ignored) {}
+        wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        for (WebElement option : listBox) {
+            if (option.getText().equals(selection)) {
+                actions.moveToElement(option).click().build().perform();
+                try {
+                    wait.ignoring(StaleElementReferenceException.class)
+                            .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
+                } catch (Exception ignored) {}
+                break;
+            }
+        }
     }
 }

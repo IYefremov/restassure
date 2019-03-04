@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class VNextBOMonitorData  {
 
@@ -94,14 +96,86 @@ public class VNextBOMonitorData  {
     @JsonProperty("repairStatus")
     private String repairStatus;
 
+    @JsonProperty("status")
+    private String status;
+
+    @JsonProperty("priority")
+    private String priority;
+
     @JsonProperty("title")
     private String title;
+
+    @JsonProperty("flag")
+    private String flag;
+
+    @JsonProperty("searchName")
+    private String searchName;
+
+    @JsonProperty("phaseText")
+    private String phaseText;
+
+    @JsonProperty("departmentText")
+    private String departmentText;
+
+    @JsonProperty("woTypeText")
+    private String woTypeText;
+
+    @JsonProperty("timeFrameText")
+    private String timeFrameText;
+
+    @JsonProperty("repairStatusText")
+    private String repairStatusText;
+
+    @JsonProperty("daysInProcessText")
+    private String daysInProcessText;
+
+    @JsonProperty("daysInPhaseText")
+    private String daysInPhaseText;
+
+    @JsonProperty("flagText")
+    private String flagText;
+
+    @JsonProperty("customerText")
+    private String customerText;
+
+    @JsonProperty("stockNumText")
+    private String stockNumText;
+
+    @JsonProperty("vinNumText")
+    private String vinNumText;
+
+    @JsonProperty("roNumText")
+    private String roNumText;
+
+    @JsonProperty("woNumText")
+    private String woNumText;
+
+    @JsonProperty("employeeText")
+    private String employeeText;
+
+    @JsonProperty("invoiceNumber")
+    private String invoiceNumber;
 
     @JsonProperty("titles")
     private String[] titles;
 
     @JsonProperty("titlesRepeater")
     private String[] titlesRepeater;
+
+    @JsonProperty("flags")
+    private String[] flags;
+
+    @JsonProperty("locations")
+    private String[] locations;
+
+    @JsonProperty("daysNumList")
+    private String[] daysNumList;
+
+    @JsonProperty("stockNumbers")
+    private String[] stockNumbers;
+
+    @JsonProperty("roNumbers")
+    private String[] roNumbers;
 
     public String getLocation() {
         return location;
@@ -211,6 +285,14 @@ public class VNextBOMonitorData  {
         return repairStatus;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
     public List<String> getTitles() {
         return Arrays.asList(titles);
     }
@@ -219,8 +301,37 @@ public class VNextBOMonitorData  {
         return Arrays.asList(titlesRepeater);
     }
 
+    public List<String> getfullAdvancedSearchElementsList() {
+        return Stream.of(departmentText, phaseText, customerText, stockNumText, vinNumText, roNumText, woNumText,
+                employeeText, woTypeText, timeFrameText, repairStatusText, daysInProcessText, daysInPhaseText, flagText)
+                .map(String::trim)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getAdvancedSearchDialogElements() {
+        return Arrays.asList(phase, timeFrame, department,
+                repairStatus, daysInProcess, daysInPhase, flag);
+    }
+
+    public List<String> getAdvancedSearchDialogDefaultTextList() {
+        return Arrays.asList(phaseText, timeFrameText, departmentText,
+                repairStatusText, daysInProcessText, daysInPhaseText, flagText);
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
     }
 
     public List<String> getDepartments() {
@@ -229,5 +340,25 @@ public class VNextBOMonitorData  {
 
     public List<String> getPhases() {
         return phases;
+    }
+
+    public String[] getDaysNumList() {
+        return daysNumList;
+    }
+
+    public String[] getFlags() {
+        return flags;
+    }
+
+    public String[] getLocations() {
+        return locations;
+    }
+
+    public String[] getStockNumbers() {
+        return stockNumbers;
+    }
+
+    public String[] getRoNumbers() {
+        return roNumbers;
     }
 }

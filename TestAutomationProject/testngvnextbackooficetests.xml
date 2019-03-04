@@ -9,19 +9,21 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases">
             <methods>
                 <include name="verifyUserCanAddLaborPriceServiceWithUseLaborTimes"/>
-                <!--<include name="verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName"/>-->
-                <!--<include name="verifyUserCanChangeSequenceNumberForMoneyServiceOrder"/>-->
-                <!--<include name="verifyUserCanDeletePartPriceService"/>-->
-                <!--<include name="verifyUserCanEditLaborPriceService"/>-->
-                <!--<include name="verifyUserCanRestoreDeletedPartPriceService"/>-->
-                <!--<include name="verifyUserCannotAddLaborServiceWithClickedRejectIcon"/>-->
+                <include name="verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName"/>
+                <include name="verifyUserCanChangeSequenceNumberForMoneyServiceOrder"/>
+                <include name="verifyUserCanDeletePartPriceService"/>
+                <include name="verifyUserCanEditLaborPriceService"/>
+                <include name="verifyUserCanRestoreDeletedPartPriceService"/>
+                <include name="verifyUserCannotAddLaborServiceWithClickedRejectIcon"/>
             </methods>
         </class>
-        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>-->
-        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>-->
-        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>-->
-        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOOperationsInvoicesTestCases"/>-->
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOOperationsInvoicesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorAdvancedSearchTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorSimpleSearchTestCases"/>
         <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">-->
             <!--<methods>-->
                 <!--<include name="testCheckValidationErrorsOnTheCreateNewUserDialog"/>-->

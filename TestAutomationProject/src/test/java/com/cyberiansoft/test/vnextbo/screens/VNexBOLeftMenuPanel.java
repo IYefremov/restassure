@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -122,9 +123,14 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     }
 
     private void clickMainMenuItem(String mainMenu) {
-        wait.until(ExpectedConditions
-                .elementToBeClickable(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
-                .click();
+        try {
+            wait.until(ExpectedConditions
+                    .elementToBeClickable(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
+                    .click();
+        } catch (Exception e) {
+            scrollToElement(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            clickWithJS(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+        }
         waitABit(1000);
     }
 
@@ -138,6 +144,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         driver.switchTo().defaultContent();
         expandMainMenu();
         clickMainMenuItem(mainmenuitem);
-        wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
+        } catch (TimeoutException e) {
+            scrollToElement(menuitem);
+            clickWithJS(menuitem);
+        }
     }
 }

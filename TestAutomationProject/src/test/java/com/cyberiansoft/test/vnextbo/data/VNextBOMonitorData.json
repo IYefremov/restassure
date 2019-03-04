@@ -73,412 +73,6 @@
     }
   ],
 
-  "verifyUserCanSearchByVIN": [
-    {
-      "rowID": "verifyUserCanSearchByVIN.01",
-      "description": "Test Case 81905:User can search by VIN",
-      "location": "1111",
-      "vinNum": "32434234234234"
-    }
-  ],
-
-  "verifyUserCanSearchByOrderNum": [
-    {
-      "rowID": "verifyUserCanSearchByOrderNum.01",
-      "description": "Test Case 81906:User can search by OrderNum",
-      "location": "1111",
-      "orderNumber": "O-000-152292"
-    }
-  ],
-
-  "verifyUserCanSearchByRoNum": [
-    {
-      "rowID": "verifyUserCanSearchByRoNum.01",
-      "description": "Test Case 81908:User can search by RONo",
-      "location": "1111",
-      "roNumber": "O-000-152292"
-    }
-  ],
-
-  "verifyUserCanSearchByFirstName": [
-    {
-      "rowID": "verifyUserCanSearchByFirstName.01",
-      "description": "Test Case 81909:User can search by FirstName",
-      "location": "Best Location",
-      "firstName": "Alex1"
-    }
-  ],
-
-  "verifyUserCanSearchByLastName": [
-    {
-      "rowID": "verifyUserCanSearchByLastName.01",
-      "description": "Test Case 81910:User can search by LastName",
-      "location": "Best Location",
-      "lastName": "Zakaulov1"
-    }
-  ],
-
-  "verifyUserCanSearchByEmail": [
-    {
-      "rowID": "verifyUserCanSearchByEmail.01",
-      "description": "Test Case 82104:User can search by Email",
-      "location": "Best Location",
-      "email": "cyberiansoft.test@nada.ltd",
-      "firstName": "Alex1",
-      "lastName": "Zakaulov1"
-    }
-  ],
-
-  "verifyUserCanSearchByCompanyName": [
-    {
-      "rowID": "verifyUserCanSearchByCompanyName.01",
-      "description": "Test Case 82105:User can search by CompanyName",
-      "location": "Best Location",
-      "company": "TestAutomationCompany",
-      "firstName": "Alex1",
-      "lastName": "Zakaulov1"
-    }
-  ],
-
-  "verifyUserCanSelectCustomer": [
-    {
-      "rowID": "verifyUserCanSelectCustomer.01",
-      "description": "Test Case 82212:User can select \"Customer\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1"
-    }
-  ],
-
-  "verifyUserCanSearchByEmployee": [
-    {
-      "rowID": "verifyUserCanSearchByEmployee.01",
-      "description": "Test Case 82213:User can search by \"Employee\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai"
-    }
-  ],
-
-  "verifyUserCanSearchByPhase": [
-    {
-      "rowID": "verifyUserCanSearchByPhase.01",
-      "description": "Test Case 82214:User can search by \"Phase\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First"
-    }
-  ],
-
-  "verifyUserCanSearchByDepartment": [
-    {
-      "rowID": "verifyUserCanSearchByDepartment.01",
-      "description": "Test Case 82215:User can search by \"Department\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default"
-    }
-  ],
-
-  "verifyUserCanSearchByWoType": [
-    {
-      "rowID": "verifyUserCanSearchByWoType.01",
-      "description": "Test Case 82216:User can search by \"WO Type\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp"
-    }
-  ],
-
-  "verifyUserCanSearchByWoNumber": [
-    {
-      "rowID": "verifyUserCanSearchByWoNum.01",
-      "description": "Test Case 82217:User can search by \"WO#\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp",
-      "woNum": "O-000-149566"
-    }
-  ],
-
-  "verifyUserCanSearchByRoNumber": [
-    {
-      "rowID": "verifyUserCanSearchByRoNumber.01",
-      "description": "Test Case 82218:User can search by \"RO#\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp",
-      "woNum": "O-000-149566",
-      "roNum": "RO#ForAuto"
-    }
-  ],
-
-  "verifyUserCanSearchByStockNumber": [
-    {
-      "rowID": "verifyUserCanSearchByStockNumber.01",
-      "description": "Test Case 82219:User can search by \"Stock#\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp",
-      "woNum": "O-000-149566",
-      "roNum": "RO#ForAuto",
-      "stockNum": "StockForAuto"
-    }
-  ],
-
-  "verifyUserCanSearchByVinNumber": [
-    {
-      "rowID": "verifyUserCanSearchByVinNumber.01",
-      "description": "Test Case 82220:User can search by \"VIN\"",
-      "location": "Best Location",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp",
-      "woNum": "O-000-149566",
-      "roNum": "RO#ForAuto",
-      "stockNum": "StockForAuto",
-      "vinNum": "asdfasd"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInPhaseLess": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInPhaseLess.01",
-      "description": "Test Case 82224:User can search by 'Days in Phase' ('<')",
-      "location": "Best Location",
-      "daysInPhase": "<",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInPhaseLessOrEqual": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInPhaseLessOrEqual.01",
-      "description": "Test Case 82766:User can search by 'Days in Phase' ('<=')",
-      "location": "Best Location",
-      "daysInPhase": "<=",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInPhaseEqual": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInPhaseEqual.01",
-      "description": "Test Case 82767:User can search by 'Days in Phase' ('=')",
-      "location": "Best Location",
-      "daysInPhase": "=",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInPhaseMoreOrEqual": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInPhaseMoreOrEqual.01",
-      "description": "Test Case 82768:User can search by 'Days in Phase' ('>=')",
-      "location": "Best Location",
-      "daysInPhase": ">=",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInPhaseMore": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInPhaseMore.01",
-      "description": "Test Case 82769:User can search by 'Days in Phase' ('>')",
-      "location": "Best Location",
-      "daysInPhase": ">",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInPhaseBetween": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInPhaseBetween.01",
-      "description": "Test Case 82770:User can search by 'Days in Phase' ('Between')",
-      "location": "Best Location",
-      "daysInPhase": "Between",
-      "daysNumStart": "10",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInProcessLess": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInProcessLess.01",
-      "description": "Test Case 82747:User can search by 'Days in Process' ('<')",
-      "location": "Best Location",
-      "daysInProcess": "<",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInProcessLessOrEqual": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInProcessLessOrEqual.01",
-      "description": "Test Case 82749:User can search by 'Days in Process' ('<=')",
-      "location": "Best Location",
-      "daysInProcess": "<=",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInProcessEqual": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInProcessEqual.01",
-      "description": "Test Case 82754:User can search by 'Days in Process' ('=')",
-      "location": "Best Location",
-      "daysInProcess": "=",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInProcessMoreOrEqual": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInProcessMoreOrEqual.01",
-      "description": "Test Case 82755:User can search by \"Days in Process\" ('>=')",
-      "location": "Best Location",
-      "daysInProcess": ">=",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInProcessMore": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInProcessMore.01",
-      "description": "Test Case 82756:User can search by \"Days in Process\" ('>')",
-      "location": "Best Location",
-      "daysInProcess": ">",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByDaysInProcessBetween": [
-    {
-      "rowID": "verifyUserCanSearchByDaysInProcessBetween.01",
-      "description": "Test Case 82760:User can search by \"Days in Process\" ('Between')",
-      "location": "Best Location",
-      "daysInProcess": "Between",
-      "daysNumStart": "10",
-      "daysNum": "25"
-    }
-  ],
-
-  "verifyUserCanSearchByCustomTimeFrame": [
-    {
-      "rowID": "verifyUserCanSearchByCustomTimeFrame.01",
-      "description": "Test Case 82660:User can search by \"Timeframe\" (Custom)",
-      "location": "Best Location",
-      "timeFrame": "Custom"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusInProgressRework": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusInProgressRework.01",
-      "description": "Test Case 82666:User can search by \"Repair Status\"(In Progress - Rework)",
-      "location": "Best Location",
-      "repairStatus": "In Progress - Rework",
-      "orderNumber": "O-000-152414"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusInProgressActive": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusInProgressRework.01",
-      "description": "Test Case 82664:User can search by \"Repair Status\"(In Progress - Active)",
-      "location": "Best Location",
-      "repairStatus": "In Progress - Active"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusInProgressQueued": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusInProgressQueued.01",
-      "description": "Test Case 82665:User can search by \"Repair Status\"(In Progress - Queued)",
-      "location": "Best Location",
-      "repairStatus": "In Progress - Queued"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusInProgressOnHold": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusInProgressOnHold.01",
-      "description": "Test Case 82667:User can search by \"Repair Status\"(In Progress - On Hold)",
-      "location": "Best Location",
-      "repairStatus": "In Progress - On Hold"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusInProgressNotOnHold": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusInProgressNotOnHold.01",
-      "description": "Test Case 82668:User can search by \"Repair Status\"(In Progress - Not On Hold)",
-      "location": "Best Location",
-      "repairStatus": "In Progress - Not On Hold"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusInProgressQAReady": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusInProgressQAReady.01",
-      "description": "Test Case 82669:User can search by \"Repair Status\"(In Progress - QA Ready)",
-      "location": "Best Location",
-      "repairStatus": "In Progress - QA Ready"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusCompletedQAReady": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusCompletedQAReady.01",
-      "description": "Test Case 82670:User can search by \"Repair Status\"(Completed - QA Ready)",
-      "location": "Best Location",
-      "repairStatus": "Completed - QA Ready"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusCompletedNotBilled": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusCompletedNotBilled.01",
-      "description": "Test Case 82671:User can search by \"Repair Status\"(Completed - Not Billed)",
-      "location": "Best Location",
-      "repairStatus": "Completed - Not Billed"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusCompletedOnSite": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusCompletedOnSite.01",
-      "description": "Test Case 82672:User can search by \"Repair Status\"(Completed - On Site)",
-      "location": "Best Location",
-      "repairStatus": "Completed - On Site"
-    }
-  ],
-
-  "verifyUserCanSearchByRepairStatusCompletedAll": [
-    {
-      "rowID": "verifyUserCanSearchByRepairStatusCompletedAll.01",
-      "description": "Test Case 82673:User can search by \"Repair Status\"(Completed - All)",
-      "location": "Best Location",
-      "repairStatus": "Completed - All"
-    }
-  ],
-
   "verifyUserCanFilterRObyDepartments": [
     {
       "rowID": "verifyUserCanFilterRObyDepartments.01",
@@ -529,7 +123,196 @@
       "description": "Test Case 82627:User can see and change RO details",
       "location": "1111",
       "vinNum": "O-000-152073",
-      "title": "Order / Type / Department"
+      "title": "Order / Type / Department",
+      "woType": "WO_Monitor_new",
+      "departments": [
+        "Default"
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatus": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.01",
+      "description": "Test Case 82222:User can search by \"Repair Status\"(In Progress - All)",
+      "location": "1111",
+      "vinNum": "O-000-152073",
+      "title": "Order / Type / Department",
+      "woType": "WO_Monitor_new",
+      "departments": [
+        "Default",
+        "dep_"
+      ]
+    }
+  ],
+
+  "verifyUserCannotChangePoForInvoicedOrders": [
+    {
+      "rowID": "verifyUserCannotChangePoForInvoicedOrders.01",
+      "description": "Test Case 84986:Verify user can't change \"PO#\" for invoiced orders",
+      "location": "Best Location",
+      "orderNumber": "O-062-00197"
+    }
+  ],
+
+  "verifyUserCanSeeInvoiceOfRo": [
+    {
+      "rowID": "verifyUserCanSeeInvoiceOfRo.01",
+      "description": "Test Case 83641:User can see Invoice of RO",
+      "location": "New_zayats_location",
+      "orderNumber": "O-000-152441",
+      "invoiceNumber": "I-000-00997"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoToCheckInCheckOut": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoToCheckInCheckOut.01",
+      "description": "Test Case 82691:User can change status of RO to Check In/ Check Out",
+      "location": "Best Location",
+      "orderNumber": "O-000-147159"
+    }
+  ],
+
+  "verifyUserCanShowOrCloseNotesToTheLeftOfRo": [
+    {
+      "rowID": "verifyUserCanShowOrCloseNotesToTheLeftOfRo.01",
+      "description": "Test Case 83258:User can show or close Notes to the left of RO",
+      "location": "1111",
+      "orderNumber": "O-000-152073"
+    }
+  ],
+
+  "verifyUserCanTypeAndNotSaveNotesWithXIcon": [
+    {
+      "rowID": "verifyUserCanTypeAndNotSaveNotesWithXIcon.01",
+      "description": "Test Case 83261:User can type and not save notes (X-icon) (Left of RO)",
+      "location": "1111",
+      "orderNumber": "O-000-152073"
+    }
+  ],
+
+  "verifyUserCanTypeAndNotSaveNotesWithClose": [
+    {
+      "rowID": "verifyUserCanTypeAndNotSaveNotesWithClose.01",
+      "description": "Test Case 83262:User can type and not save notes (Close) (Left of RO)",
+      "location": "1111",
+      "orderNumber": "O-000-152073"
+    }
+  ],
+
+  "verifyUserCanOpenRoDetails": [
+    {
+      "rowID": "verifyUserCanOpenRoDetails.01",
+      "description": "Test Case 82726:Repair Order details",
+      "location": "1111",
+      "orderNumber": "O-000-152073"
+    }
+  ],
+
+  "verifyUserCanChangeStockOfRo": [
+    {
+      "rowID": "verifyUserCanChangeStockOfRo.01",
+      "description": "Test Case 82882:User can change \"Stock#\" of RO",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "stockNumbers": [
+        "Test",
+        "autotest"
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeRoNumOfRo": [
+    {
+      "rowID": "verifyUserCanChangeRoNumOfRo.01",
+      "description": "Test Case 82885:User can change \"RO#\" of RO",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "roNumbers": [
+        "auto",
+        "++__"
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoToNew": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoToNew.01",
+      "description": "Test Case 82858:User can change Status of RO to \"New\"",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "New"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoToOnHold": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoToOnHold.01",
+      "description": "Test Case 82861:User can change Status of RO to \"On Hold\"",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "On Hold"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoToApproved": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoToApproved.01",
+      "description": "Test Case 82863:User can change Status of RO to \"Approved\"",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoToDraft": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoToDraft.01",
+      "description": "Test Case 82865:User can change Status of RO to \"Draft\"",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Draft"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoToClosed": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoToClosed.01",
+      "description": "Test Case 85902:User can change Status of RO to \"Closed\"",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Draft"
+    }
+  ],
+
+  "verifyUserCanChangePriorityOfRoToLow": [
+    {
+      "rowID": "verifyUserCanChangePriorityOfRoToLow.01",
+      "description": "Test Case 82771:User can change Priority of RO to \"Low\"",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priority": "Low"
+    }
+  ],
+
+  "verifyUserCanChangePriorityOfRoToNormal": [
+    {
+      "rowID": "verifyUserCanChangePriorityOfRoToNormal.01",
+      "description": "Test Case 82775:User can change Priority of RO to \"Normal\"",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priority": "Normal"
+    }
+  ],
+
+  "verifyUserCanChangePriorityOfRoToHigh": [
+    {
+      "rowID": "verifyUserCanChangePriorityOfRoToHigh.01",
+      "description": "Test Case 82777:User can change Priority of RO to \"High\"",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priority": "High"
     }
   ]
 }
