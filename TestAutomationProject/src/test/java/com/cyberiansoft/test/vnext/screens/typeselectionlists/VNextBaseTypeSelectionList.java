@@ -49,7 +49,7 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
                 BaseUtils.waitABit(500);
             }
         }
-        tap(typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")));
+        typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")).click();
     }
 
     public void clickSearchButton() {

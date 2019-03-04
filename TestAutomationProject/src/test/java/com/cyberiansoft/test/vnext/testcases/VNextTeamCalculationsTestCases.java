@@ -514,8 +514,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.swipeScreenLeft();
-        vehicleinfoscreen.swipeScreenLeft();
+        vehicleinfoscreen.changeScreen("Visual");
         VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
         visualscreen.clickAddServiceButton();
         visualscreen.clickDefaultDamageType(inspdata.getMoneyServiceName());
