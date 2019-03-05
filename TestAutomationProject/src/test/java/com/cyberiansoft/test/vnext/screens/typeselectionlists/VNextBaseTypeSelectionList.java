@@ -7,6 +7,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -49,7 +50,12 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
                 BaseUtils.waitABit(500);
             }
         }
-        typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")).click();
+        try {
+            typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")).click();
+        } catch (StaleElementReferenceException e) {
+            BaseUtils.waitABit(1000);
+            typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")).click();
+        }
     }
 
     public void clickSearchButton() {
