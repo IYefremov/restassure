@@ -83,7 +83,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		//selectservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
@@ -218,7 +218,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		inspservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);

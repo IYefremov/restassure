@@ -102,6 +102,10 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 	public boolean isApproveMenuPresent() {
 		return approveinspectionbtn.isDisplayed();
 	}
+
+	public boolean isArchivwMenuPresent() {
+		return archiveinspectionbtn.isDisplayed();
+	}
 	
 	public VNextViewScreen clickViewInspectionMenuItem() {
 		clickMenuItem(viewinspectionbtn);

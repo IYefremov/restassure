@@ -1,0 +1,33 @@
+{
+
+  "testVerifyUserCanArchiveCreatedInspection": [
+    {
+      "rowID": "testVerifyUserCanArchiveCreatedInspection.01",
+      "description": "Test Case 75366:Verify user can archive created Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCantArchiveTeamInspection": [
+    {
+      "rowID": "testVerifyUserCantArchiveTeamInspection.01",
+      "description": "Test Case 75367:Verify user can't archive Team Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCanArchiveSeveralInspections": [
+    {
+      "rowID": "testVerifyUserCanArchiveSeveralInspections.01",
+      "description": "Test Case 75369:Verify user can archive several Inspections",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ]
+
+}

@@ -33,6 +33,9 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
 	@FindBy(xpath="//*[@action='multiselect-actions-approve']")
 	private WebElement multiselectinspapprovebtn;
+
+	@FindBy(xpath="//*[@action='multiselect-actions-archive']")
+	private WebElement multiselectinsparchivebtn;
 	
 	final public static int MAX_NUMBER_OF_INPECTIONS = 50;
 	
@@ -179,12 +182,19 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 		return getInspectionsList().size();
 	}
 	
-	public VNextInspectionsScreen archiveInspection(String inspnumber) {
-		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspnumber);
+	public VNextInspectionsScreen archiveInspection(String inspectionNumber) {
+		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspectionNumber);
 		inspmenulist.archiveInspection();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.invisibilityOf(inspectionslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']"))));
+		wait.until(ExpectedConditions.invisibilityOf(inspectionslist.
+				findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']"))));
 		return new VNextInspectionsScreen(appiumdriver);
+	}
+
+	public boolean waitUntilInspectionDisappears(String inspectionNumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		return wait.until(ExpectedConditions.invisibilityOfElementLocated(
+				By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']")));
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
@@ -233,6 +243,10 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButton() {
 		tap(multiselectinspapprovebtn);
 		return new VNextApproveInspectionsScreen(appiumdriver);
+	}
+
+	public void clickMultiselectInspectionsArchiveButton() {
+		tap(multiselectinsparchivebtn);
 	}
 
 	public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButtonAndSelectCustomer(AppCustomer customer) {

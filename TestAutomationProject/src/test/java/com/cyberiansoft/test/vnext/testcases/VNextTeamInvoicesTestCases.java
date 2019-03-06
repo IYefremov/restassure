@@ -538,7 +538,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
 		final String notetext = "Test";
-		final String quicknote = "1 note";
+		final String quicknote = "No damage found";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);

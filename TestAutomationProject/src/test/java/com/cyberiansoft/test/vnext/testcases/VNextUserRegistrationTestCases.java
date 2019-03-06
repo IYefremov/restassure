@@ -727,7 +727,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		for (int i = 0; i < availablepricematrixes.length; i++) {
 			VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-			VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[i]);
+			VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(availablepricematrixes[i]);
 			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 			vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 			vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverities[i]);

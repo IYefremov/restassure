@@ -552,7 +552,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		VNextAvailableServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(availablepricematrixes[2]);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
@@ -587,7 +587,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
 		for (String pricematrix : availablepricematrixes)
 			Assert.assertTrue(pricematrixesscreen.isPriceMatrixExistsInTheList(pricematrix));
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(availablepricematrixes[2]);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
@@ -622,7 +622,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		VNextAvailableServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(availablepricematrixes[2]);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(availablepricematrixes[2]);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
@@ -926,7 +926,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		
 		VNextAvailableServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
