@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,29 +12,37 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
+
 public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_comboLocations_Input")
-	WebElement locationField;
+	private WebElement locationField;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_BtnFind")
-	WebElement findBTN;
+	private WebElement findBTN;
 
 	@FindBy(className = "rcbList")
-	WebElement listWithItems;
+	private WebElement listWithItems;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_ddlTimeframe_Input")
-	WebElement timeFrameField;
+	private WebElement timeFrameField;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_chbPhasesInRow")
-	WebElement phasesInRowCheckBox;
+	private WebElement phasesInRowCheckBox;
 
-	@FindBy(id = "VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")
-	WebElement reportContent;
+	@FindBy(xpath = "//div[@id='VisibleReportContentctl00_ctl00_Content_Main_report_ctl09']")
+	private WebElement reportContent;
 
 	// @FindBy(xpath = "//a[text()='Subscriptions']")
 	@FindBy(linkText = "Subscriptions")
-	WebElement subscriptionsBTN;
+	private WebElement subscriptionsBTN;
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_dpDateFrom_dateInput') and @type='text']")
+    private TextField searchdatefromfld;
+
+    @FindBy(xpath = "//input[contains(@id, 'filterer_dpDateTo_dateInput') and @type='text']")
+    private TextField searchdatetofld;
 
 	public ActiveVechicleByPhaseWebPage(WebDriver driver) {
 		super(driver);
@@ -62,7 +71,7 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 	}
 
 	public void clickFindButton() {
-		findBTN.click();
+		wait.until(ExpectedConditions.elementToBeClickable(findBTN)).click();
 	}
 
 	public void setLocationFilter(String location) {
@@ -88,19 +97,20 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	public boolean checkSearchResults(String string) {
 		try {
-			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
+			wait.until(ExpectedConditions.visibilityOf(reportContent));
 			reportContent.findElement(By.xpath("//div[text()='" + string + "']"));
 
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='WO Date']")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='WO No']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Customer']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Phase']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Service']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='VIN']")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Year']")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Make']")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Model']")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Stock#']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Stock No.']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='RO No.']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Open']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Closed']")));
 			return true;
 		} catch (Exception e) {
+		    e.printStackTrace();
 			return false;
 		}
 	}
@@ -189,6 +199,14 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		return null;
 	}
 
+    public void setSearchFromDate(String dateformat) {
+        clearAndType(searchdatefromfld, dateformat);
+    }
+
+    public void setSearchToDate(String dateformat) {
+        clearAndType(searchdatetofld, dateformat);
+    }
+
 	public int countLocationsInResultTable() {
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ctl00_ctl00_Content_Main_report_fixedTable"))));
 		return driver.findElements(By.xpath("//span[contains(text(), 'Location')]")).size();
@@ -196,13 +214,14 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	public boolean checkTimeFrameFilter() {
 		try {
-			timeFrameField.click();
+			wait.until(ExpectedConditions.elementToBeClickable(timeFrameField)).click();
 			return listWithItems.findElements(By.tagName("li")).stream()
 					.allMatch(e -> e.getText().equals("Last 30 Days") || e.getText().equals("Last 90 Days")
 							|| e.getText().equals("Last 180 Days") || e.getText().equals("Last 365 Days")
 							|| e.getText().equals("Custom Dates"));
 
 		} catch (Exception e) {
+		    e.printStackTrace();
 			return false;
 		}
 	}
@@ -222,13 +241,5 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		} catch (Exception e) {
 			return false;
 		}
-	}
-
-	public int countRowsInResultTable() {
-		List<WebElement> rows = driver.findElements(By.xpath("//td[cosplan='4']")).get(1).findElements(By.tagName("tr"));
-		rows.remove(0);
-		rows.remove(0);
-		rows.remove(0);
-		return rows.size();
 	}
 }

@@ -203,15 +203,16 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
         vendorordersservicespage.setServicesStatus(data.getServicesStatus());
         vendorordersservicespage.clickBackToROLink();
 
-        monitorpage = backOfficeHeader.clickMonitorLink();
-        RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickVehicleTimeTrackingLink();
-        repairlocationtimetrackingpage.makeSearchPanelVisible();
-        repairlocationtimetrackingpage.selectSearchLocation(data.getSearchLocation());
-
-		repairlocationtimetrackingpage.setSearchFromDate(then.format(formatter));
-		repairlocationtimetrackingpage.setSearchToDate(after.format(formatter));
-
-		repairlocationtimetrackingpage.clickFindButton();
+        // commented because the section Vehicle Time Tracking has been deleted
+//        monitorpage = backOfficeHeader.clickMonitorLink();
+//        RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorpage.clickVehicleTimeTrackingLink();
+//        repairlocationtimetrackingpage.makeSearchPanelVisible();
+//        repairlocationtimetrackingpage.selectSearchLocation(data.getSearchLocation());
+//
+//		repairlocationtimetrackingpage.setSearchFromDate(then.format(formatter));
+//		repairlocationtimetrackingpage.setSearchToDate(after.format(formatter));
+//
+//		repairlocationtimetrackingpage.clickFindButton();
 //  todo uncomment after the wo will be displayed
 //		Assert.assertTrue(repairlocationtimetrackingpage.searchWorkOrderInTable(data.getWoNumber()));
 	}

@@ -41,10 +41,10 @@ public class MonitorWebPage extends BaseWebPage {
 	private WebElement whiteBoardLink;
 	
 	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl14_Label1")
-	private WebElement serviceCountLink;
+	private WebElement wipSummaryLink;
 	
 	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl13_Label1")
-	private WebElement activeVehiclesByPhaseLink;
+	private WebElement serviceCountLink;
 
 	@FindBy(id="ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl08_Label1")
 	private WebElement productionDashboardLink;
@@ -124,14 +124,14 @@ public class MonitorWebPage extends BaseWebPage {
 				driver, ProductionDashboardWebPage.class);
 	}
 
-	public ServiceCountWebPage clickServiceCountLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(serviceCountLink)).click();
+	public ServiceCountWebPage clickWipSummaryLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(wipSummaryLink)).click();
 		return PageFactory.initElements(
 				driver, ServiceCountWebPage.class);
 	}
 	
-	public ActiveVechicleByPhaseWebPage clickActiveVehiclesByPhaseLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(activeVehiclesByPhaseLink)).click();
+	public ActiveVechicleByPhaseWebPage clickServiceCountLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(serviceCountLink)).click();
 		return PageFactory.initElements(
 				driver, ActiveVechicleByPhaseWebPage.class);
 	}

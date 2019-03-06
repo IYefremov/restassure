@@ -3,7 +3,8 @@
     {
       "rowID": "testCompanyInsuranceCompanyInServiceRequestClaimInfoEdit.01",
       "description": "Test Case 27888:Company- Insurance Company: in Service Request Claim info Edit",
-      "insuranceCompanyName": "Oranta"
+      "insuranceCompanyName": "Oranta",
+      "serviceType": "01_Alex2SRT"
     }
   ],
 
@@ -144,7 +145,7 @@
       "invoiceType": "TestIntInvTeam",
       "questionTemplate": "PrintIntForm",
       "questionForm": "IntForm",
-      "clientName": "004 - Test Company"
+      "clientName": "007 - Test Company"
     }
   ],
 

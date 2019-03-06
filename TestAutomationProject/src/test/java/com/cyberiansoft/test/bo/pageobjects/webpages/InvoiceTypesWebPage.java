@@ -149,8 +149,8 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isAssignedClientSelected(String clientname) {
-		boolean exists =  assignedclientstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
-		return exists;
+        return assignedclientstable.getWrappedElement()
+                .findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
 	}
 	
 	public List<WebElement>  getAssignedClientsTableRows() {

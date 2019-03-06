@@ -142,18 +142,22 @@
     {
       "rowID": "checkMonitorReportsActiveVehiclesByPhaseGeneral.01",
       "description": "Test Case 65433:Monitor: Reports - Active Vehicles by Phase General",
-      "searchLocation": "ALM - Recon Facility"
+      "searchLocation": "ALM - Recon Facility",
+      "fromDate": "8/30/2017",
+      "toDate": "5/7/2018"
     }
   ],
   
-  "checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases": [
+  "checkMonitorReportsActiveVehiclesByPhaseLocationAndPhases": [
     {
-      "rowID": "checkMonitorReportsActiveVechiclesByPhaseLocationAndPhases.01",
+      "rowID": "checkMonitorReportsActiveVehiclesByPhaseLocationAndPhases.01",
       "description": "Test Case 65434:Monitor: Reports - Active Vehicles by Phase Location and Phases",
       "searchLocation": "ALM - Recon Facility",
       "phase1": "PDR Station",
       "status1": "Active",
       "phase2": "PDI",
+      "fromDate": "8/30/2017",
+      "toDate": "5/7/2018",
       "statuses2": [
         "Queued",
         "Active",

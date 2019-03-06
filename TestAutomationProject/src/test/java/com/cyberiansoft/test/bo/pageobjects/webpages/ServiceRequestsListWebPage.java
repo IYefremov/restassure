@@ -1438,7 +1438,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		serviceRequestInfoBlocks.get(0).click();
 		wait.until(ExpectedConditions.elementToBeClickable(suggestedStart)).sendKeys(startDate);
 		wait.until(ExpectedConditions.elementToBeClickable(acceptGeneralInfoBTN)).click();
-	}
+    }
 
 	public boolean checkDefaultAppointmentDateFromSRedit(String startDate) {
         switchToServiceRequestInfoFrame();
@@ -1451,7 +1451,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		if (!(appointmentFromDateSRedit.getAttribute("value").equals(startDate)
 //				&& appointmentFromTimeSRedit.getAttribute("value").equals("12:00 AM") //todo uncomment ??? fails for TC 56835
 				&& appointmentToDateSRedit.getAttribute("value").equals(startDate))) {
-			return false;
+            return false;
 		}
 
 //		if (!wait.until(ExpectedConditions.visibilityOf(subjectField)).getAttribute("value").equals("Alex SASHAZ")) {
@@ -1625,7 +1625,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
-	public boolean alpyAndCheck5TecniciansFromScheduler() {
+	public boolean applyAndCheck5TechniciansFromScheduler() {
 		arrowInTechniciansList.click();
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
@@ -1903,12 +1903,14 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean goToWOfromLifeCycle() {
         waitForLoading();
         try {
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to Work Order')]")))
-					.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to')]"))).click();
             waitForSRLoading();
             waitForLoading();
 			wait.until(ExpectedConditions
-					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
+					.presenceOfElementLocated(By
+                            .xpath("//table[contains(@id, 'Content_Main_report_fixedTable')]//div[contains(text(), 'Service Request')]")));
+//			wait.until(ExpectedConditions
+//					.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Tag/Lic. Plate #:')]")));
             return true;
         } catch (Exception e) {
             e.printStackTrace();

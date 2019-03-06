@@ -793,7 +793,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDay());
+		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.reloadPage();
@@ -812,7 +812,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.goToMonthInScheduler();
 		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
 		Assert.assertTrue(serviceRequestsWebPage.checkIf5TechiciansIsMaximum());
-		Assert.assertTrue(serviceRequestsWebPage.alpyAndCheck5TecniciansFromScheduler());
+		Assert.assertTrue(serviceRequestsWebPage.applyAndCheck5TechniciansFromScheduler());
 	}
 
     //todo edge
@@ -831,7 +831,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDay());
+		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.goToMonthInScheduler();
@@ -858,13 +858,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDay());
+		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.goToMonthInScheduler();
 		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
 		Assert.assertTrue(serviceRequestsWebPage.checkIf5TechiciansIsMaximum());
-		Assert.assertTrue(serviceRequestsWebPage.alpyAndCheck5TecniciansFromScheduler());
+		Assert.assertTrue(serviceRequestsWebPage.applyAndCheck5TechniciansFromScheduler());
 		serviceRequestsWebPage.resetAndCheckTecniciansFromScheduler();
 	}
 
@@ -914,7 +914,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDay());
+		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();

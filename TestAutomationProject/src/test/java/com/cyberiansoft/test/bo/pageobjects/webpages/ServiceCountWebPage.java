@@ -47,10 +47,11 @@ public class ServiceCountWebPage extends BaseWebPage {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		waitABit(1500);
 		try {
-			if (!wait.until(ExpectedConditions.attributeToBe(locationField, "value", "(all)"))) {
+			if (!wait.until(ExpectedConditions.attributeToBe(locationField, "value", "(All)"))) {
 				return false;
 			}
 			StringBuilder criteriaDate = new StringBuilder(formatter.format(now.minusWeeks(1)));
+            System.out.println(criteriaDate);
             if (!wait.until(ExpectedConditions.attributeToBe(searchDateFrom, "value", criteriaDate.toString()))) {
 				return false;
 			}
@@ -81,9 +82,9 @@ public class ServiceCountWebPage extends BaseWebPage {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='RO No.']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Open']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Closed']")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Customer']")));
 			return true;
 		} catch (TimeoutException e) {
+		    e.printStackTrace();
 			return false;
 		}
 	}

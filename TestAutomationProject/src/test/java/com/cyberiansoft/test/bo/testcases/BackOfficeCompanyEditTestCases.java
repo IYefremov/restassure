@@ -40,8 +40,9 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickClaimInfoEditButton();
+        servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
+        servicerequestslistpage.clickAddServiceRequestButton();
+        servicerequestslistpage.clickClaimInfoEditButton();
 		servicerequestslistpage.selectServiceRequestInsurance(data.getInsuranceCompanyName());
 		servicerequestslistpage.clickDoneButton();
 

@@ -254,6 +254,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 			String newwin = it.next();
             waitABit(1000);
             driver.switchTo().window(newwin);
+            waitForLoading();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='fullGrid']")));
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='VIN']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='StockNo']")).isDisplayed());

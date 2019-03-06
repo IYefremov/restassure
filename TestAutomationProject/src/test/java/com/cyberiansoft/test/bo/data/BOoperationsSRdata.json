@@ -406,7 +406,7 @@
       "description": "Test Case 56838:Operation - Service Request - Appointment - Scheduler - Technicians filter",
       "clientName": "Alex SASHAZ",
       "status": "Scheduled",
-      "customer": "004 - Test Company",
+      "customer": "007 - Test Company",
       "serviceRequestType": "Zak_Request_Type"
     }
   ],
@@ -856,7 +856,7 @@
       "alert": "test appointment Appointment Failed",
       "selected": "My Service Requests",
       "serviceRequestType": "01_Alex2SRT",
-      "customer": "004 - Test Company",
+      "customer": "007 - Test Company",
       "notificationDropDown": "ServiceRequest Checked In",
       "eventNewName": "test appointment SR Checked In",
       "serviceRequestGeneralInfo": "Automation1 Primary  Tech",

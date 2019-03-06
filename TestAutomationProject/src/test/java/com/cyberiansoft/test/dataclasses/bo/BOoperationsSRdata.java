@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
@@ -329,6 +330,21 @@ public class BOoperationsSRdata {
     public String getFirstDay() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
         final LocalDate now = LocalDate.now(ZoneId.of("US/Pacific"));
+        System.out.println(now.format(formatter));
+        if (now.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+            return now.plusDays(3).format(formatter);
+        } else if (now.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
+            return now.plusDays(2).format(formatter);
+        } else {
+            System.out.println(now.plusDays(1).format(formatter));
+            return now.plusDays(1).format(formatter);
+        }
+    }
+
+    public String getFirstDayTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        final LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
+        System.out.println(now.format(formatter));
         if (now.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
             return now.plusDays(3).format(formatter);
         } else if (now.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {

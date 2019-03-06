@@ -46,7 +46,7 @@ public class WebElementsBot {
 	    waitABit(4500);
 	}
 	
-	public static void selectComboboxValue(ComboBox combobox, DropDown droplist, String value){
+	public static void selectComboboxValue(ComboBox combobox, DropDown droplist, String value) {
         WebDriverWait wait = clickCombobox(combobox, droplist);
 		try {
 		    List<WebElement> items = droplist.getWrappedElement().findElements(By.tagName("li"));
@@ -55,7 +55,7 @@ public class WebElementsBot {
             } catch (Exception ignored) {}
             items.stream().filter(w -> w.getText().equals(value)).findFirst().ifPresent(WebElement::click);
         } catch (Exception e) {
-		    System.err.println("The value has not been found! " + e);
+		    System.out.println("The value has not been found! " + e);
         }
         waitUntilDropListDisappears(droplist, wait);
     }
