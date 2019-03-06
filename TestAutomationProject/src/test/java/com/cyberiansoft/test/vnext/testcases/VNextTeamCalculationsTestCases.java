@@ -302,7 +302,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
         VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
+        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
         List<HailMatrixService>  hailMatrixServices = inspdata.getMatrixServiceData().getHailMatrixServices();
         for (HailMatrixService  hailMatrixService : hailMatrixServices) {
             VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
@@ -345,7 +345,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
         VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
+        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
         List<HailMatrixService>  hailMatrixServices = inspdata.getMatrixServiceData().getHailMatrixServices();
         for (HailMatrixService  hailMatrixService : hailMatrixServices) {
             VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
@@ -388,7 +388,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 
         VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
+        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
         List<HailMatrixService>  hailMatrixServices = inspdata.getMatrixServiceData().getHailMatrixServices();
         for (HailMatrixService  hailMatrixService : hailMatrixServices) {
             VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
@@ -514,8 +514,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.swipeScreenLeft();
-        vehicleinfoscreen.swipeScreenLeft();
+        vehicleinfoscreen.changeScreen("Visual");
         VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
         visualscreen.clickAddServiceButton();
         visualscreen.clickDefaultDamageType(inspdata.getMoneyServiceName());

@@ -167,7 +167,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         vehicleinfoscreen.changeScreen("Services");
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
         availableServicesScreen.selectService(inspectionData.getServiceName());
-        availableServicesScreen.saveInspection();
+        availableServicesScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
                 InspectionStatuses.NEW.getInspectionStatusValue());
 

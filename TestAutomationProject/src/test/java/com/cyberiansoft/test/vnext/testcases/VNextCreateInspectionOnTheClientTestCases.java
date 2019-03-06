@@ -78,7 +78,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		inspservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
@@ -152,7 +152,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		visualscreen = new VNextVisualScreen(appiumdriver);
 		VNextAvailableServicesScreen inspservicesscreen = inspinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
@@ -246,7 +246,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 		VNextAvailableServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
 
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
 		for (String vehiclepartname : vehiclepartsname) {
 			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 			vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);

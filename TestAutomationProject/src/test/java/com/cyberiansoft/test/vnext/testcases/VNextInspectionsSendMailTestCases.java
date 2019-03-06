@@ -109,7 +109,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
 		VNextAvailableServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
 		pricematrixesscreen.clickScreenBackButton();
 		servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
@@ -178,7 +178,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
 		VNextAvailableServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(pricematrix);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
 		pricematrixesscreen.clickScreenBackButton();
 		servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
 		VNextSelectedServicesScreen selectservicesscreen = servicesscreen.switchToSelectedServicesView();

@@ -375,12 +375,13 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		availableservicesscreen.switchToAvalableServicesView();
 
 		VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
+		//VNextVehiclePartInfoPage vehiclepartinfoscreen = pricematrixesscreen.selectPriceMatrix1(inspdata.getMatrixServiceData().getHailMatrixName());
 		MatrixServiceData matrixServiceData = inspdata.getMatrixServiceData();
 		List<MatrixPartData> matrixPartDatas = matrixServiceData.getMatrixPartsData();
 
 		for (MatrixPartData  matrixPartData : matrixPartDatas) {
-			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
+			VNextVehiclePartInfoPage vehiclepartinfoscreen = pricematrixesscreen.selectPriceMatrix(matrixPartData.getMatrixPartName());
+			//VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
 			vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
 			vehiclepartinfoscreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
 			if (matrixPartData.getMatrixAdditionalServices() != null) {
@@ -388,9 +389,10 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 				vehiclepartinfoscreen.selectVehiclePartAdditionalServices(additionalServices);
 			}
 			vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-			vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+			//vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 		}
-		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		VNextVehiclePartsScreen vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+
 		availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 
 		Assert.assertEquals(availableservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());

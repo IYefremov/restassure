@@ -84,6 +84,7 @@ public class VNextBaseScreen {
 				} catch (StaleElementReferenceException e1) {
 					//do nothing
 				}
+			BaseUtils.waitABit(1000);
 		}
 	}
 	

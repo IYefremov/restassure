@@ -74,7 +74,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		servicesscreen.selectService(percservices);
 		servicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
@@ -243,7 +243,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		servicesscreen.selectService(percservices);
 		servicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
@@ -299,7 +299,7 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);;
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(matrixsubservice);
+		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
 		for (String vehiclepartname : vehiclepartsname) {
 			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 			vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);

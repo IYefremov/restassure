@@ -113,16 +113,16 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+
         vehicleinfoscreen.swipeScreensLeft(2);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.switchToAvalableServicesView();
 
-        VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
+        VNextVehiclePartsScreen pricematrixesscreen = availableservicesscreen.openSelectedMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
+        //VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
 
         MatrixPartData matrixPartData = inspdata.getMatrixServiceData().getMatrixPartData();
-        VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
+        VNextVehiclePartInfoPage vehiclepartinfoscreen = pricematrixesscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
         vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
         vehiclepartinfoscreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
 
@@ -135,10 +135,10 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         laborServiceDetailsScreen.saveLaborServiceDetails();
         vehiclepartinfoscreen = new VNextVehiclePartInfoPage(appiumdriver);
         vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-        vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+        VNextVehiclePartsScreen vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
         vehiclepartsscreen.clickVehiclePartsSaveButton();
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -162,11 +162,11 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
         availableservicesscreen.switchToAvalableServicesView();
 
-        VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectPriceMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
+        VNextVehiclePartsScreen pricematrixesscreen = availableservicesscreen.openSelectedMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
+        //VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
 
         MatrixPartData matrixPartData = inspdata.getMatrixServiceData().getMatrixPartData();
-        VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
+        VNextVehiclePartInfoPage vehiclepartinfoscreen = pricematrixesscreen.selectVehiclePart(matrixPartData.getMatrixPartName());
         vehiclepartinfoscreen.selectVehiclePartSize(matrixPartData.getPartSize());
         vehiclepartinfoscreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
 
@@ -186,11 +186,11 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
                 inspdata.getInspectionPrice());
 
         vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-        vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-        availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+        VNextVehiclePartsScreen vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+        vehiclepartsscreen.clickVehiclePartsSaveButton();
 
-        inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-        homescreen = inspectionscreen.clickBackButton();
+        inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
+        inspectionscreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

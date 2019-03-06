@@ -16,10 +16,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
-	
-	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
-	final String testVIN = "1FMCU0DG4BK830800";
-	final String testInsurenceCompany = "Test Insurance Company";
+
+	private final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
+	private final String testVIN = "1FMCU0DG4BK830800";
+	private final String testInsurenceCompany = "Test Insurance Company";
 	
 	@Test(testName= "Test Case 43325:vNext - Verify VIN is decoded correctly for Inspection", 
 			description = "Verify VIN is decoded correctly for Inspection")
@@ -41,7 +41,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), vehiclemodel);
 		Assert.assertEquals(vehicleinfoscreen.getYear(), vehicleyear);
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 43511:vNext - Save inspection using option from hamburger menu (general case)", 
@@ -60,7 +60,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		inspservicesscreen.selectServices(secondservices);
 		inspservicesscreen.clickSaveInspectionMenuButton();
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 39549:vNext - Inspections - Navigate to screen with required fields on 'Save Inspection' called from humburger menu (first step)", 
@@ -82,7 +82,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(msg, VNextAlertMessages.VIN_REQUIRED_MSG);
 		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.cancelInspection();
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 43330:vNext - Navigate by swipe through wizard steps for Inspeciton", 
@@ -100,7 +100,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		inspservicesscreen.clickSaveButton();
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);	
 		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnumber);		
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 43331:vNext - Navigate through wizard steps for Inspection by hardware 'Back' button", 
@@ -137,7 +137,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		
 		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);	
 		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnumber);		
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 43512:vNext - Edit inspection Vehicle Info", 
@@ -179,7 +179,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(vehicleinfoscreen.getRoNo(), freetext.toUpperCase());
 		Assert.assertEquals(vehicleinfoscreen.getLicPlate(), milage);
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 	
 	@Test(testName= "Test Case 43525:vNext - Create customer along with Inspection", 
@@ -226,12 +226,11 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(newcustomerscreen.getCustomerZIP(), customerzip);
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
-		homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
-	@Test(testName= "Test Case Archive Inspection", 
-			description = "Archive Inspection")
-	public void testArchiveInspection() { 
+	@Test(testName= "Automate Test Case 75366:Verify user can archive created Inspection",
+			description = "Verify user can archive created Inspection")
+	public void testVerifyUserCanArchiveCreatedInspection() {
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -248,13 +247,13 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		inspectionsscreen = inspectionsscreen.archiveInspection(inspnumber);
 		Assert.assertFalse(inspectionsscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
 			" still exists, but shouldn't");
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 		
 	}
 	
-	@Test(testName= "Test Case Archive Multiple Inspections", 
-			description = "Archive Multiple Inspections")
-	public void testArchiveMultipleInspections() { 
+	@Test(testName= "Automate Test Case 75369:Verify user can archive several Inspections",
+			description = "Verify user can archive several Inspections")
+	public void testVerifyUserCanArchiveSeveralInspections() {
 		
 		final int INSP_TO_ARCHIVE = 3;
 		
@@ -269,7 +268,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		}
 		Assert.assertEquals(inspectionsscreen.getInspectionsList().size(),inspnumbers - INSP_TO_ARCHIVE);
 		
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 		
 	}
 
