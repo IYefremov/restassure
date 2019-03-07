@@ -20,6 +20,26 @@
     }
   ],
 
+  "testVerifyUserCanArchiveInspectionUsingSearch": [
+    {
+      "rowID": "testVerifyUserCanArchiveInspectionUsingSearch.01",
+      "description": "Test Case 75368:Verify user can archive Inspection using search",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
+  "testVerifyUserCanCancelArchivingInspection": [
+    {
+      "rowID": "testVerifyUserCanCancelArchivingInspection.01",
+      "description": "Test Case 75370:Verify user can cancel archiving Inspection",
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ],
+
   "testVerifyUserCanArchiveSeveralInspections": [
     {
       "rowID": "testVerifyUserCanArchiveSeveralInspections.01",
