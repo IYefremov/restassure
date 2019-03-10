@@ -45,7 +45,7 @@
       "description": "Test Case 27877:Company- Jobs: CRUD",
       "job": "Test job",
       "jobDesc": "Test job description",
-      "customer": "004 - Test Company",
+      "customer": "007 - Test Company",
       "parentCustomer": "007 - Test Company",
       "jobAccId": "testID",
       "jobAcc2Id": "testID2",

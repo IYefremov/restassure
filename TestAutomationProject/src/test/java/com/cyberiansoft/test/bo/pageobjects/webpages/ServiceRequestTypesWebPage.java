@@ -97,7 +97,8 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		invoicetypepackagecmb.clear();
 		invoicetypepackagecmb.sendKeys(srtypepackage);
 		waitABit(300);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/em[text()='" + srtypepackage + "']")))
+		wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//li/em[text()='" + srtypepackage + "']")))
 				.click();
 		waitABit(1000);
 

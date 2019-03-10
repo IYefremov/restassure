@@ -199,7 +199,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(data.getCompanyName());
 		clientspage.verifyClientIsPresentInActiveTab(data.getCompanyName());
-		for (int i = 0; i < 3; i ++) {
+		for (int i = 0; i < 3; i++) {
 			clientspage.deleteClient(data.getCompanyName());
 			clientspage.searchClientByName(data.getCompanyName());
 			Assert.assertFalse(clientspage.isClientPresentInTable(data.getCompanyName()));
