@@ -22,6 +22,8 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsTestCases">
       </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamArchiveInspectionsTestCases">
+      </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoicesTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersTestCases">
