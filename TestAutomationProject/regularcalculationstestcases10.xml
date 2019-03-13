@@ -9,11 +9,6 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularCalculationsTestCases">
         <methods>
 
-            <include name="testWOVerifyCalculationWithPriceMatrixLaborType_1" />
-            <include name="testRegularIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
-            <include name="testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation" />
-            <include name="testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection" />
-
         <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 

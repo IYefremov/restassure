@@ -112,7 +112,7 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 	public WebElement getTableRowWithRepairOrderService(String servicename) {
 		List<WebElement> rows = getRepairOrderServiceTableRows();
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[1]")).getText().contains(servicename)) {
+			if (row.findElement(By.xpath(".//td[" + servicestable.getTableColumnIndex("Service")  + "]")).getText().contains(servicename)) {
 				return row;
 			}
 		} 

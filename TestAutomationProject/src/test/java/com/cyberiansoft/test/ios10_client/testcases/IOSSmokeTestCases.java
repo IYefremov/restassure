@@ -8292,6 +8292,7 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		final String tech1 = "Vladimir Avsievich";
 		final String tech2 = "Nikolay Lomeko";
 
+
 		homescreen = new HomeScreen();
 		MainScreen mainScreen = homescreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
@@ -8458,168 +8459,16 @@ public class IOSSmokeTestCases extends BaseTestCase {
 	}
 
 	@Test(testName="Test Case 26115:WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required",
-            description = "WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required")
-    public void testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired() {
+			description = "WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required")
+	public void testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired() {
 
-        final String VIN  = "1D3HV13T19S825733";
-        final String _pricematrix = "HOOD";
-        final String _size = "NKL";
-        final String _severity = "VERY LIGHT";
-        final String defLocation = "Test Location check out required";
-
-        homescreen = new HomeScreen();
-        CustomersScreen customersscreen = homescreen.clickCustomersButton();
-        customersscreen.swtchToWholesaleMode();
-        customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
-
-        SettingsScreen settingsscreen = homescreen.clickSettingsButton();
-        settingsscreen.setInspectionToNonSinglePageInspection();
-        settingsscreen.clickHomeButton();
-
-        MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-        VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_MONITOR_DEVICE);
-        vehiclescreen.setVIN(VIN);
-        vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
-        vehiclescreen.selectLocation(defLocation);
-        String wonum = vehiclescreen.getInspectionNumber();
-        ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
-        servicesscreen.selectService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
-        servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
-        servicesscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
-        servicesscreen.selectService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
-        servicesscreen.selectService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-        servicesscreen.selectService(iOSInternalProjectConstants.VPS1_SERVICE);
-
-        servicesscreen.selectService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        PriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
-        pricematrix.selectPriceMatrix(_pricematrix);
-        pricematrix.setSizeAndSeverity(_size, _severity);
-        pricematrix.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
-        pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-        pricematrix.clickSaveButton();
-        Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE));
-
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        ordersummaryscreen.setTotalSale("5");
-        ordersummaryscreen.checkApproveAndSaveWorkOrder();
-        SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
-        selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-        ordersummaryscreen.saveWizard();
-
-        TeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrdersView();
-        teamWorkOrdersScreen.clickSearchButton();
-        teamWorkOrdersScreen.selectSearchLocation(defLocation);
-        teamWorkOrdersScreen.clickSearchSaveButton();
-        teamWorkOrdersScreen.clickOnWO(wonum);
-        OrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-        OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
-        serviceDetailsPopup.clickServiceDetailsCancelButton();
-
-        ordermonitorscreen.clickStartPhase();
-        serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
-        serviceDetailsPopup.clickServiceDetailsCancelButton();
-
-        ordermonitorscreen.clickStartPhaseCheckOutButton();
-        serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
-        serviceDetailsPopup.clickServiceDetailsCancelButton();
-
-        ordermonitorscreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
-        Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE),
-                OrderMonitorPhases.COMPLETED.getrderMonitorPhaseName());
-        ordermonitorscreen.clickBackButton();
-        homescreen = teamWorkOrdersScreen.clickHomeButton();
-    }
-
-    @Test(testName="Test Case 29181:WO Monitor: Verify that when option 'Phase enforcement' is OFF and 'Start service required' it possible to start service from inactive phase",
-            description = "WO Monitor: Verify that when option 'Phase enforcement' is OFF and 'Start service required' it possible to start service from inactive phase")
-    public void testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase() {
-
-        final String VIN  = "1D3HV13T19S825733";
-        final String _pricematrix = "HOOD";
-        final String _size = "NKL";
-        final String _severity = "VERY LIGHT";
-        final String defLocation = "Test Location ZZZ";
-
-        homescreen = new HomeScreen();
-        CustomersScreen customersscreen = homescreen.clickCustomersButton();
-        customersscreen.swtchToWholesaleMode();
-        customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
-
-        SettingsScreen settingsscreen = homescreen.clickSettingsButton();
-        settingsscreen.setInspectionToNonSinglePageInspection();
-        settingsscreen.clickHomeButton();
-
-        MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-        VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_MONITOR_DEVICE);
-        vehiclescreen.setVIN(VIN);
-        vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
-        vehiclescreen.selectLocation(defLocation);
-        String wonum = vehiclescreen.getInspectionNumber();
-        ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
-        servicesscreen.selectService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
-        servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
-        servicesscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
-        servicesscreen.selectService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
-        servicesscreen.selectService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-        servicesscreen.selectService(iOSInternalProjectConstants.VPS1_SERVICE);
-
-        servicesscreen.selectService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        PriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
-        pricematrix.selectPriceMatrix(_pricematrix);
-        pricematrix.setSizeAndSeverity(_size, _severity);
-        pricematrix.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
-        pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-        pricematrix.clickSaveButton();
-        Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE));
-
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        ordersummaryscreen.setTotalSale("5");
-        ordersummaryscreen.checkApproveAndSaveWorkOrder();
-        SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
-        selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-        ordersummaryscreen.saveWizard();
-
-        TeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrdersView();
-        teamWorkOrdersScreen.clickSearchButton();
-        teamWorkOrdersScreen.selectSearchLocation(defLocation);
-        teamWorkOrdersScreen.clickSearchSaveButton();
-        teamWorkOrdersScreen.clickOnWO(wonum);
-        OrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-        OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
-        Assert.assertTrue(serviceDetailsPopup.isStartServiceButtonPresent());
-        serviceDetailsPopup.clickServiceDetailsDoneButton();
-
-        Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
-        ordermonitorscreen.clickStartPhase();
-        Assert.assertFalse(ordermonitorscreen.isStartPhaseButtonPresent());
-        ordermonitorscreen.clickBackButton();
-        homescreen = teamWorkOrdersScreen.clickHomeButton();
-    }
-
-	@Test(testName="Test Case 30546:WO Monitor:  Verify that Tech who is not assigned to order service cannot start order",
-			description = "WO Monitor: Verify that Tech who is not assigned to order service cannot start order")
-	public void testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder() {
-
-		final String VIN = "1D3HV13T19S825733";
-		final String defServicePrice = "5";
-		final String defaultTech = "Employee Simple 20%";
-		final String newtech = "Vladimir Avsievich";
-		final String vehiclePart = "Hood";
-		final String defLocation = "All locations";
+		final String VIN  = "1D3HV13T19S825733";
+		final String _pricematrix = "HOOD";
+		final String _size = "NKL";
+		final String _severity = "VERY LIGHT";
+		final String defLocation = "Test Location check out required";
 
 		homescreen = new HomeScreen();
-
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -8630,174 +8479,66 @@ public class IOSSmokeTestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_DELAY_START);
+		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
-		String wonum = vehiclescreen.getInspectionNumber();
-
 		vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
-		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
-		selectedServiceDetailsScreen.setServicePriceValue(defServicePrice);
-		TechniciansPopup techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-		techniciansPopup.selecTechnician(newtech);
-		techniciansPopup.unselecTechnician(defaultTech);
-		techniciansPopup.saveTechViewDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		vehiclescreen.selectLocation(defLocation);
+		String wonum = vehiclescreen.getInspectionNumber();
+		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		servicesscreen.selectService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
+		servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
+		servicesscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
+		servicesscreen.selectService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
+		servicesscreen.selectService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		servicesscreen.selectService(iOSInternalProjectConstants.VPS1_SERVICE);
 
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
-		techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-		techniciansPopup.selecTechnician(newtech);
-		techniciansPopup.unselecTechnician(defaultTech);
-		techniciansPopup.saveTechViewDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-		techniciansPopup.selecTechnician(newtech);
-		techniciansPopup.unselecTechnician(defaultTech);
-		techniciansPopup.saveTechViewDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
-		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-		techniciansPopup.selecTechnician(newtech);
-		techniciansPopup.unselecTechnician(defaultTech);
-		techniciansPopup.saveTechViewDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		servicesscreen.selectService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		PriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
+		pricematrix.selectPriceMatrix(_pricematrix);
+		pricematrix.setSizeAndSeverity(_size, _severity);
+		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+		pricematrix.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		pricematrix.clickSaveButton();
+		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE));
 
 		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.checkApproveAndSaveWorkOrder();
+		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
+		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 
 		TeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrdersView();
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(defLocation);
-		teamWorkOrdersScreen.setSearchWorkOrderNumber(wonum);
 		teamWorkOrdersScreen.clickSearchSaveButton();
 		teamWorkOrdersScreen.clickOnWO(wonum);
-
 		OrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-		ordermonitorscreen.clickStartOrderButton();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
-		ordermonitorscreen = new OrderMonitorScreen();
-
-		ordermonitorscreen.clickBackButton();
-		teamWorkOrdersScreen.clickHomeButton();
-
-	}
-
-	@Test(testName="Test Case 30547:WO Monitor: Verify that is it impossible to change status for service/phase when order is not started",
-			description = "WO Monitor: Verify that is it impossible to change status for service/phase when order is not started")
-	public void testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted() {
-
-		final String VIN = "1D3HV13T19S825733";
-		final String defServicePrice = "5";
-		final String defaultTech = "Oksana Zayats";
-		final String newtech = "Vladimir Avsievich";
-		final String vehiclePart = "Hood";
-		final String defLocation = "All locations";
-
-		homescreen = new HomeScreen();
-		MainScreen mainScreen = homescreen.clickLogoutButton();
-		mainScreen.userLogin("Zayats", "1111");
-
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.swtchToWholesaleMode();
-		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
-
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
-		settingsscreen.setInspectionToNonSinglePageInspection();
-		settingsscreen.clickHomeButton();
-
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_DELAY_START);
-		vehiclescreen.setVIN(VIN);
-		String wonum = vehiclescreen.getInspectionNumber();
-
-		vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
-		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
-		selectedServiceDetailsScreen.setServicePriceValue(defServicePrice);
-		TechniciansPopup techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-		techniciansPopup.selecTechnician(newtech);
-		techniciansPopup.unselecTechnician(defaultTech);
-		techniciansPopup.saveTechViewDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
-		techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-		techniciansPopup.selecTechnician(newtech);
-		techniciansPopup.unselecTechnician(defaultTech);
-		techniciansPopup.saveTechViewDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-		techniciansPopup.selecTechnician(newtech);
-		techniciansPopup.unselecTechnician(defaultTech);
-		techniciansPopup.saveTechViewDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
-		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-		techniciansPopup.selecTechnician(newtech);
-		techniciansPopup.unselecTechnician(defaultTech);
-		techniciansPopup.saveTechViewDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("5");
-		ordersummaryscreen.saveWizard();
-
-		TeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrdersView();
-		teamWorkOrdersScreen.clickSearchButton();
-		teamWorkOrdersScreen.selectSearchLocation(defLocation);
-		teamWorkOrdersScreen.setSearchWorkOrderNumber(wonum);
-		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(wonum);
-
-		OrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-		Assert.assertEquals(ordermonitorscreen.getPanelStatus("3/4\" - Penny Size"),
-				OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
-		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE),
-				OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
-		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE),
-				OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
-		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY),
-				OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
-
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.SR_S1_MONEY);
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		serviceDetailsPopup.clickServiceStatusCell();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
+				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
 		serviceDetailsPopup.clickServiceDetailsCancelButton();
 
-		ordermonitorscreen.clickOrderStartDateButton();
-		LocalDate date = LocalDate.now();
-		ordermonitorscreen.setOrderStartYearValue(date.getYear()+1);
-		Assert.assertEquals(ordermonitorscreen.getOrderStartYearValue(), Integer.toString(date.getYear()));
-		ordermonitorscreen.setOrderStartYearValue(date.getYear()-1);
-		Assert.assertEquals(ordermonitorscreen.getOrderStartYearValue(), Integer.toString(date.getYear()-1));
-		ordermonitorscreen.closeSelectorderDatePicker();
+		ordermonitorscreen.clickStartPhase();
+		serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		serviceDetailsPopup.clickServiceStatusCell();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+		serviceDetailsPopup.clickServiceDetailsCancelButton();
 
+		ordermonitorscreen.clickStartPhaseCheckOutButton();
+		serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		serviceDetailsPopup.clickServiceStatusCell();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+		serviceDetailsPopup.clickServiceDetailsCancelButton();
+
+		ordermonitorscreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE),
+				OrderMonitorPhases.COMPLETED.getrderMonitorPhaseName());
 		ordermonitorscreen.clickBackButton();
-		teamWorkOrdersScreen.clickHomeButton();
-
-		homescreen.clickLogoutButton();
-		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		homescreen = teamWorkOrdersScreen.clickHomeButton();
 	}
+
 }

@@ -1680,30 +1680,29 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
         final String inspNumber = vehiclescreen.getInspectionNumber();
 		RegularVisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
 		visualinteriorscreen.tapInterior();
 
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR,  ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);	
 		Helpers.tapRegularCarImage();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$180.50");
 		
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
 		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);	
 		RegularVisualInteriorScreen.tapExterior();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$250.50");
 			
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR,  ScreenNamesConstants.FUTiRE_JET_CAR);
 		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTiRE_JET_CAR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(_discaunt_us);
-		visualinteriorscreen.clickServicesToolbarButton();
+		visualinteriorscreen.selectService(visualjetservice);
 		Helpers.tapRegularCarImage();
 		visualinteriorscreen.selectService(visualjetservice);
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$240.50");
@@ -3016,6 +3015,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 
+		myworkordersscreen.woExists(wonum);
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
 	
@@ -8388,269 +8388,5 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
         ordermonitorscreen.clickBackButton();
         homescreen = teamWorkOrdersScreen.clickHomeButton();
     }
-
-    @Test(testName="Test Case 29181:WO Monitor: Verify that when option 'Phase enforcement' is OFF and 'Start service required' it possible to start service from inactive phase",
-            description = "WO Monitor: Verify that when option 'Phase enforcement' is OFF and 'Start service required' it possible to start service from inactive phase")
-    public void testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase() {
-
-        final String VIN = "1D3HV13T19S825733";
-        final String _pricematrix = "HOOD";
-        final String _size = "NKL";
-        final String _severity = "VERY LIGHT";
-        final String defLocation = "Test Location ZZZ";
-
-        homescreen = new RegularHomeScreen();
-        RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
-        customersscreen.swtchToWholesaleMode();
-        customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
-        RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-        myworkordersscreen.clickAddOrderButton();
-        RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
-        vehiclescreen.setVIN(VIN);
-        vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
-        vehiclescreen.selectLocation(defLocation);
-        String wonum = vehiclescreen.getWorkOrderNumber();
-        RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.VPS1_SERVICE);
-
-        servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
-        RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
-        vehiclePartScreen.setSizeAndSeverity(_size, _severity);
-        vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-        selectedservicescreen.saveSelectedServiceDetails();
-        vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-        vehiclePartScreen.saveVehiclePart();
-        pricematrix.clickSave();
-
-
-        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        ordersummaryscreen.setTotalSale("5");
-        ordersummaryscreen.checkApproveAndSaveWorkOrder();
-        myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-        ordersummaryscreen.saveWizard();
-
-
-        RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
-        teamWorkOrdersScreen.clickSearchButton();
-        teamWorkOrdersScreen.selectSearchLocation(defLocation);
-        teamWorkOrdersScreen.clickSearchSaveButton();
-        teamWorkOrdersScreen.clickOnWO(wonum);
-        RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-        ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
-        Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
-        ordermonitorscreen.clickServiceDetailsDoneButton();
-
-        Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonExists());
-        ordermonitorscreen.clickStartPhaseButton();
-        Assert.assertFalse(ordermonitorscreen.isStartPhaseButtonExists());
-        ordermonitorscreen.clickBackButton();
-        homescreen = teamWorkOrdersScreen.clickHomeButton();
-    }
-
-    @Test(testName="Test Case 30546:WO Monitor:  Verify that Tech who is not assigned to order service cannot start order",
-            description = "WO Monitor: Verify that Tech who is not assigned to order service cannot start order")
-    public void testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder() {
-
-        final String VIN = "1D3HV13T19S825733";
-        final String defServicePrice = "5";
-		final String defaultTech = "Employee Simple 20%";
-        final String newtech = "Vladimir Avsievich";
-        final String vehiclePart = "Hood";
-        final String defLocation = "Test Location ZZZ";
-
-        homescreen = new RegularHomeScreen();
-
-
-        RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
-        customersscreen.swtchToWholesaleMode();
-        customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
-        RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-        myworkordersscreen.clickAddOrderButton();
-        RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_DELAY_START);
-        vehiclescreen.setVIN(VIN);
-        vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
-        vehiclescreen.selectLocation(defLocation);
-        String wonum = vehiclescreen.getWorkOrderNumber();
-        RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
-        selectedServiceDetailsScreen.setServicePriceValue(defServicePrice);
-        selectedServiceDetailsScreen.clickTechniciansIcon();
-        selectedServiceDetailsScreen.selecTechnician(newtech);
-        selectedServiceDetailsScreen.unselecTechnician(defaultTech);
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-        selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
-        selectedServiceDetailsScreen.clickTechniciansIcon();
-        selectedServiceDetailsScreen.selecTechnician(newtech);
-        selectedServiceDetailsScreen.unselecTechnician(defaultTech);
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-        selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-        selectedServiceDetailsScreen.clickVehiclePartsCell();
-        selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.clickTechniciansIcon();
-        selectedServiceDetailsScreen.selecTechnician(newtech);
-        selectedServiceDetailsScreen.unselecTechnician(defaultTech);
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-        selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
-        selectedServiceDetailsScreen.clickVehiclePartsCell();
-        selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.clickTechniciansIcon();
-        selectedServiceDetailsScreen.selecTechnician(newtech);
-        selectedServiceDetailsScreen.unselecTechnician(defaultTech);
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-
-        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        ordersummaryscreen.setTotalSale("5");
-        ordersummaryscreen.saveWizard();
-
-
-        RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
-        teamWorkOrdersScreen.clickSearchButton();
-        teamWorkOrdersScreen.selectSearchLocation(defLocation);
-        teamWorkOrdersScreen.clickSearchSaveButton();
-        teamWorkOrdersScreen.clickOnWO(wonum);
-        RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-
-        ordermonitorscreen.clickStartOrderButton();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
-        ordermonitorscreen = new RegularOrderMonitorScreen();
-
-
-        ordermonitorscreen.clickBackButton();
-        teamWorkOrdersScreen.clickHomeButton();
-
-    }
-
-	@Test(testName="Test Case 30547:WO Monitor: Verify that is it impossible to change status for service/phase when order is not started," +
-			"Test Case 30548:WO Monitor: Verify that when order is not started Start date can be changed but not for future",
-			description = "WO Monitor: Verify that is it impossible to change status for service/phase when order is not started," +
-					"Verify that when order is not started Start date can be changed but not for future")
-	public void testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted() {
-
-		final String VIN = "1D3HV13T19S825733";
-		final String defServicePrice = "5";
-		 final String defaultTech = "Oksana Zayats";
-		final String newtech = "Vladimir Avsievich";
-		final String vehiclePart = "Hood";
-		final String defLocation = "Test Location ZZZ";
-
-		homescreen = new RegularHomeScreen();
-		RegularMainScreen mainScreen = homescreen.clickLogoutButton();
-		mainScreen.userLogin("Zayats", "1111");
-
-		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.swtchToWholesaleMode();
-		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
-		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-
-		myworkordersscreen.clickAddOrderButton();
-		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_DELAY_START);
-		vehiclescreen.setVIN(VIN);
-		vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
-		vehiclescreen.selectLocation(defLocation);
-		String wonum = vehiclescreen.getWorkOrderNumber();
-		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
-		selectedServiceDetailsScreen.setServicePriceValue(defServicePrice);
-		selectedServiceDetailsScreen.clickTechniciansIcon();
-		selectedServiceDetailsScreen.selecTechnician(newtech);
-		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
-		selectedServiceDetailsScreen.clickTechniciansIcon();
-		selectedServiceDetailsScreen.selecTechnician(newtech);
-		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
-		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.clickTechniciansIcon();
-		selectedServiceDetailsScreen.selecTechnician(newtech);
-		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
-		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.clickTechniciansIcon();
-		selectedServiceDetailsScreen.selecTechnician(newtech);
-		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("5");
-		ordersummaryscreen.saveWizard();
-
-		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
-		teamWorkOrdersScreen.clickSearchButton();
-		teamWorkOrdersScreen.selectSearchLocation(defLocation);
-		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(wonum);
-		RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-
-        Assert.assertEquals(ordermonitorscreen.getPanelStatus("3/4\" - Penny Size"),
-                OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
-        Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE),
-                OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
-        Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE +
-                " (" + vehiclePart + ")"),
-                OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
-        Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY +
-                        " (" + vehiclePart + ")"),
-                OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
-
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.SR_S1_MONEY +
-				" (" + vehiclePart + ")");
-
-		ordermonitorscreen.clickServiceStatusCell();
-
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
-		ordermonitorscreen.clickServiceDetailsCancelButton();
-		ordermonitorscreen = new RegularOrderMonitorScreen();
-		ordermonitorscreen.clickOrderStartDateButton();
-		LocalDate date = LocalDate.now();
-		ordermonitorscreen.setOrderStartYearValue(date.getYear()+1);
-		Assert.assertEquals(ordermonitorscreen.getOrderStartYearValue(), Integer.toString(date.getYear()));
-		ordermonitorscreen.setOrderStartYearValue(date.getYear()-1);
-		Assert.assertEquals(ordermonitorscreen.getOrderStartYearValue(), Integer.toString(date.getYear()-1));
-		ordermonitorscreen.closeSelectorderDatePicker();
-		ordermonitorscreen = new RegularOrderMonitorScreen();
-		ordermonitorscreen.clickBackButton();
-		teamWorkOrdersScreen.clickHomeButton();
-
-		homescreen.clickLogoutButton();
-		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-	}
 
 }

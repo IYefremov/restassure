@@ -9,18 +9,6 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularSmokeTestCases">
         <methods>
 
-          <include name="testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted" />
-          <include name="testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder" />
-
-          <include name="testCopyInspections" />
-          <include name="testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn" />
-          <include name="testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval" />
-          <include name="testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold" />
-
-
-            <include name="testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase" />
-
-
         <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />-->
           <include name="testUpdateDatabase" /> 
@@ -162,11 +150,6 @@
           <include name="testVerifyThatRequiredServicesHasCorrectTech" />
           <include name="testVerifyThatRequiredBundleItemsHasCorrectDefTech" />
           <include name="testVerifyThatRequiredBundleItemsAndServiceWithExpensesAnd0PriceHasCorrectDefTechAfterEditWO" />
-          <include name="testVerifyThatSelectedServicesHaveCorrectTechSplitWhenChangeIsDuringCreatingWO" />
-          <include name="testVerifyIfServicePriceIs0AndHasDefTechAssignToServiceDefTech" />
-          <include name="testVerifyIfServicePriceIs0AssignWOSplitToServiceInCaseNoDefTech" />
-          <include name="testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired" />
-
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
           <!--<include name="testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices" />--> 

@@ -7,7 +7,10 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.EdgeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import org.awaitility.Duration;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -54,7 +57,7 @@ public class DriverBuilder {
 		DesiredCapabilities webcap = null;
 		switch (browserType) {
 		case FIREFOX:
-			WebDriverManager.firefoxdriver().setup();
+			FirefoxDriverManager.getInstance().setup();
 
 			FirefoxOptions ffOpts = new FirefoxOptions();
 			FirefoxProfile ffProfile = new FirefoxProfile();
@@ -64,12 +67,12 @@ public class DriverBuilder {
             webDriver.set(new FirefoxDriver(ffOpts.merge(webcap)));
 			break;
 		case IE:
-			WebDriverManager.iedriver().arch64().setup();
+			InternetExplorerDriverManager.getInstance().arch64().setup();
 			webcap = new IEConfiguration().getInternetExplorerCapabilities();
 			webDriver.set(new RemoteWebDriver(webcap));
 			break;
         case EDGE:
-			WebDriverManager.edgedriver().arch64().setup();
+			EdgeDriverManager.getInstance().arch64().setup();
 			webcap = DesiredCapabilities.edge();
             try {
                 webDriver.set(new EdgeDriver());
@@ -78,7 +81,7 @@ public class DriverBuilder {
             }
 			break;
 		case CHROME:
-			WebDriverManager.chromedriver().setup();
+			ChromeDriverManager.getInstance().setup();
 			webcap = DesiredCapabilities.chrome();
 			try {
                 webDriver.set(new ChromeDriver());

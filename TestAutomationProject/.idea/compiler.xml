@@ -13,7 +13,7 @@
     <bytecodeTargetLevel>
       <module name="botests (1)" target="1.5" />
       <module name="botests (2)" target="1.5" />
-      <module name="TestAutomationProject" target="8" />
+      <module name="TestAutomationProject" target="1.8" />
       <module name="testcases" target="1.7" />
       <module name="testcases (1)" target="1.7" />
       <module name="testcases (1) (com.cyberiansoft.test)" target="1.5" />

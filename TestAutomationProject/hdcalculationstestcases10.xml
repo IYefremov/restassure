@@ -9,7 +9,7 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
         <methods>
 
-            <include name="testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation" />
+
             <include name="testWOVerifyRoundingInCalculationScriptWithPriceMatrix" />
 
             <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />

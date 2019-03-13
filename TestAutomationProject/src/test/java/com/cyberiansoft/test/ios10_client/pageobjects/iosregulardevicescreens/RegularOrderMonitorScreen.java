@@ -18,8 +18,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -221,14 +219,13 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickStartPhaseButton() {
-        monitorserviceslist.findElementByAccessibilityId("btnStartReset").click();
+		startphasebtn.click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(monitorserviceslist));
 	}
 	
 	public boolean isStartPhaseButtonExists() {
-		return monitorserviceslist.
-                findElementsByAccessibilityId("btnStartReset").size() > 0;
+		return appiumdriver.findElementsByAccessibilityId("btnStartReset").size() > 0;
 	}
 
 	public boolean isStartOrderButtonExists() {
@@ -299,23 +296,5 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(orderMonitorPhase.getrderMonitorPhaseName()))).click();
 		wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Team Order Loading...")));
-	}
-
-	public void clickOrderStartDateButton() {
-		LocalDate date = LocalDate.now();
-		appiumdriver.findElementByAccessibilityId(date.format(DateTimeFormatter.ofPattern("M/d/uu"))).click();
-	}
-
-	public void setOrderStartYearValue(int year) {
-		((MobileElement) appiumdriver.findElementsByClassName("XCUIElementTypePickerWheel").get(2)).setValue(Integer.toString(year));
-	}
-
-	public String getOrderStartYearValue() {
-		return ((MobileElement) appiumdriver.findElementsByClassName("XCUIElementTypePickerWheel").get(2)).getAttribute("value");
-	}
-
-
-	public void closeSelectorderDatePicker() {
-		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 }
