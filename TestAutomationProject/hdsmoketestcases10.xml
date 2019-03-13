@@ -8,8 +8,14 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
+          <include name="testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted" />
+          <include name="testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder" />
 
-		  <!--<include name="testUpdateDatabase" />           
+
+
+          <include name="testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase" />
+
+          <!--<include name="testUpdateDatabase" />
           <include name="testUpdateVIN" />
           <include name="testCreateRetailCustomer" />
           <include name="testEditRetailCustomer" />
@@ -157,6 +163,12 @@
           <include name="testVerifyThatRequiredServicesHasCorrectTech" />
           <include name="testVerifyThatRequiredBundleItemsHasCorrectDefTech" />
           <include name="testVerifyThatRequiredBundleItemsAndServiceWithExpensesAnd0PriceHasCorrectDefTechAfterEditWO" />
+          <include name="testVerifyThatSelectedServicesHaveCorrectTechSplitWhenChangeIsDuringCreatingWO" />
+          <include name="testVerifyIfServicePriceIs0AndHasDefTechAssignToServiceDefTech" />
+          <include name="testVerifyIfServicePriceIs0AssignWOSplitToServiceInCaseNoDefTech" />
+          <include name="testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired" />
+
+
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />    
         </methods>
