@@ -1,9 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -51,11 +49,17 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class, 'priority')]//span[@title]")
     private WebElement priorityListBox;
 
+    @FindBy(id = "reconmonitordetails-view-add-order-button")
+    private WebElement addNewServiceButton;
+
     @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
     private List<WebElement> statusListBoxOptions; //todo add unique identifiers
 
     @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
     private List<WebElement> priorityListBoxOptions; //todo add unique identifiers
+
+    @FindBy(xpath = "//i[@class='switchTable icon-arrow-down5']")
+    private WebElement servicesExpandArrow;
 
     public VNextBORepairOrderDetailsPage(WebDriver driver) {
         super(driver);
@@ -197,5 +201,61 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 //        selectOptionInDropDown(priorityDropDown, priorityListBoxOptions, priority); todo use this line after unique identifiers will be implemented
         selectOptionInDropDown(priorityListBoxOptions.get(0), priorityListBoxOptions, priority);
         return this;
+    }
+
+    public VNextBORepairOrderDetailsPage expandServicesTable() {
+        wait.until(ExpectedConditions.elementToBeClickable(servicesExpandArrow)).click();
+        wait.until(ExpectedConditions.invisibilityOf(servicesExpandArrow));
+        return this;
+    }
+
+    public String getServiceDescription(String serviceId) {
+        return wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
+                        + serviceId + "']/div[@class='clmn_2']/div[@title]")))
+                .getText();
+    }
+
+    public String getServiceQuantity(String serviceId) {
+        return getTextValue(serviceId, "/div[@class='clmn_2_1 grid__number']/span", ".000");
+    }
+
+    public String getServiceLaborTime(String serviceId) {
+        return getTextValue(serviceId, "/div[@class='clmn_2_1 grid__number']/span", ".00 hr");
+    }
+
+    public String getServicePrice(String serviceId) {
+        return getTextValue(serviceId, "/div[@class='clmn_3 grid__number']/span", ".00")
+                .replace("$", "");
+    }
+
+    private String getTextValue(String serviceId, String xpath, String replacement) {
+        final By element = By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
+                + serviceId + "']" + xpath);
+        setAttributeWithJS(driver.findElement(element), "style", "display: block;");
+        final String text = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(element)).getText().replace(replacement, "");
+        setAttributeWithJS(driver.findElement(element), "style", "display: none;");
+        return text;
+    }
+
+    public String getServiceId(String description) {
+        try {
+            final WebElement element = driver.findElement(By.xpath("//div[text()='" + description + "']"));
+            final String id = wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOf(element))
+                    .findElement(By.xpath(".//../..")).getAttribute("data-order-service-id");
+            System.out.println(id);
+            return id;
+        } catch (NoSuchElementException ignored) {
+            return "";
+        }
+    }
+
+    public VNextBOAddNewServiceMonitorDialog clickAddNewServiceButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(addNewServiceButton)).click();
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBOAddNewServiceMonitorDialog.class);
     }
 }

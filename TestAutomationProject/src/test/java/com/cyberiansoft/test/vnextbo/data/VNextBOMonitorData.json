@@ -282,7 +282,7 @@
       "description": "Test Case 85902:User can change Status of RO to \"Closed\"",
       "location": "1111",
       "orderNumber": "O-000-152073",
-      "status": "Draft"
+      "status": "Closed"
     }
   ],
 
@@ -313,6 +313,107 @@
       "location": "1111",
       "orderNumber": "O-000-152073",
       "priority": "High"
+    }
+  ],
+
+  "verifyUserCanAddNewService": [
+    {
+      "rowID": "verifyUserCanAddNewService.01",
+      "description": "Test Case 82732:User can add new service",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priceType": "All",
+      "service": "Test service zayats",
+      "serviceDescription": "autotest",
+      "servicePrice": "90",
+      "serviceQuantity": "1"
+    }
+  ],
+
+  "verifyUserCanAddNewMoneyService": [
+    {
+      "rowID": "verifyUserCanAddNewMoneyService.01",
+      "description": "Test Case 86118:User can add new service (Money)",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priceType": "Money",
+      "service": "Test service zayats",
+      "serviceDescription": "autotest",
+      "servicePrice": "100",
+      "serviceQuantity": "1"
+    }
+  ],
+
+  "verifyUserCanAddNewLaborService": [
+    {
+      "rowID": "verifyUserCanAddNewLaborService.01",
+      "description": "Test Case 86121:User can add new service (Labour)",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priceType": "Labor",
+      "service": "Test service with questions",
+      "serviceDescription": "testtt",
+      "serviceLaborRate": "110",
+      "serviceLaborTime": "2"
+    }
+  ],
+
+  "verifyUserCanAddNewPartService": [
+    {
+      "rowID": "verifyUserCanAddNewPartService.01",
+      "description": "Test Case 86122:User can add new service (Part)",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priceType": "Part",
+      "service": "Oksi Part service - Category",
+      "serviceDescription": "TestPart",
+      "serviceCategory": "Body",
+      "serviceParts": [
+        "Air Dam",
+        "Air Dam Clip"
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon": [
+    {
+      "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon.01",
+      "description": "Test Case 82744:User can select details of \"Add new Service\" and not add it (X-icon)",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priceType": "All",
+      "service": "Test service zayats",
+      "serviceDescription": "autotest",
+      "servicePrice": "100",
+      "serviceQuantity": "1"
+    }
+  ],
+
+  "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton": [
+    {
+      "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton.01",
+      "description": "Test Case 82759:User can select details of \"Add new Service\" and not add it (Cancel)",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priceType": "All",
+      "service": "Test service zayats",
+      "serviceDescription": "autotest",
+      "servicePrice": "90",
+      "serviceQuantity": "1"
+    }
+  ],
+
+  "verifyUserCanSeeChangesOfDepartmentsInLogInfo": [
+    {
+      "rowID": "verifyUserCanSeeChangesOfDepartmentsInLogInfo.01",
+      "description": "Test Case 82900:User can see changes of Departments in Log Info",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "priceType": "All",
+      "service": "Test service zayats",
+      "serviceDescription": "autotest",
+      "servicePrice": "90",
+      "serviceQuantity": "1"
     }
   ]
 }

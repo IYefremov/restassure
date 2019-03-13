@@ -865,6 +865,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBORepairOrderDetailsPage clickWoLink(String woNumber) {
+        waitForLoading();
         wait.until(ExpectedConditions.elementToBeClickable(By
                 .xpath("//a[@class='order-no'][contains(@href, '" + woNumber + "')]")))
                 .click();

@@ -156,6 +156,36 @@ public class VNextBOMonitorData  {
     @JsonProperty("invoiceNumber")
     private String invoiceNumber;
 
+    @JsonProperty("priceType")
+    private String priceType;
+
+    @JsonProperty("service")
+    private String service;
+
+    @JsonProperty("serviceDescription")
+    private String serviceDescription;
+
+    @JsonProperty("servicePrice")
+    private String servicePrice;
+
+    @JsonProperty("serviceQuantity")
+    private String serviceQuantity;
+
+    @JsonProperty("serviceLaborRate")
+    private String serviceLaborRate;
+
+    @JsonProperty("serviceLaborTime")
+    private String serviceLaborTime;
+
+    @JsonProperty("serviceCategory")
+    private String serviceCategory;
+
+    @JsonProperty("serviceSubcategory")
+    private String serviceSubcategory;
+
+    @JsonProperty("serviceParts")
+    private String[] serviceParts;
+
     @JsonProperty("titles")
     private String[] titles;
 
@@ -293,6 +323,18 @@ public class VNextBOMonitorData  {
         return priority;
     }
 
+    public String getServiceCategory() {
+        return serviceCategory;
+    }
+
+    public String getServiceSubcategory() {
+        return serviceSubcategory;
+    }
+
+    public String[] getServiceParts() {
+        return serviceParts;
+    }
+
     public List<String> getTitles() {
         return Arrays.asList(titles);
     }
@@ -332,6 +374,34 @@ public class VNextBOMonitorData  {
 
     public String getInvoiceNumber() {
         return invoiceNumber;
+    }
+
+    public String getPriceType() {
+        return priceType;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public String getServiceDescription() {
+        return serviceDescription;
+    }
+
+    public String getServicePrice() {
+        return servicePrice;
+    }
+
+    public String getServiceQuantity() {
+        return serviceQuantity;
+    }
+
+    public String getServiceLaborRate() {
+        return serviceLaborRate;
+    }
+
+    public String getServiceLaborTime() {
+        return serviceLaborTime;
     }
 
     public List<String> getDepartments() {

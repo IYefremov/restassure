@@ -450,17 +450,17 @@ public class VNextBOServicesTestCases extends BaseTestCase {
     public void testEditMatrixService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
 
-        VNextBOServicesWebPage servicespage = leftMenu
+        VNextBOServicesWebPage servicesPage = leftMenu
                 .selectServicesMenu()
                 .advancedSearchServiceByServiceType(data.getMatrixServiceType());
-        String firstServiceNameInTableRow = servicespage.getFirstServiceNameInTableRow();
-        servicespage
+        String firstServiceNameInTableRow = servicesPage.getFirstServiceNameInTableRow();
+        servicesPage
                 .clickEditServiceByServiceName(firstServiceNameInTableRow)
                 .setServiceName(data.getNewMatrixServiceName())
                 .setServiceDescription(data.getServiceDescription())
                 .saveNewService()
                 .searchServiceByServiceName(data.getNewMatrixServiceName());
-        Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getNewMatrixServiceName()));
+        Assert.assertTrue(servicesPage.isServicePresentOnCurrentPageByServiceName(data.getNewMatrixServiceName()));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

@@ -50,7 +50,7 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='advSearchServices-type_listbox']/span")
     private WebElement advancedsearchtypefld;
 
-    @FindBy(xpath = "//button[@class='btn btn-black btn-wide']")
+    @FindBy(xpath = "//form[@id='advSearchServices-form']//button[@class='btn btn-black btn-wide']")
     private WebElement advancedSearchButton;
 
     @FindBy(xpath = "//span[@data-bind='click: unArchiveService']")

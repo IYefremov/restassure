@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -140,7 +141,7 @@ public abstract class VNextBOBaseWebPage {
 
     public void refreshPage() {
         driver.navigate().refresh();
-        waitABit(3500);
+        waitForLoading();
     }
 
     public void reduceZoom() {
@@ -159,7 +160,8 @@ public abstract class VNextBOBaseWebPage {
     void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
         try {
             wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
         for (WebElement option : listBox) {
             if (option.getText().equals(selection)) {
@@ -167,9 +169,26 @@ public abstract class VNextBOBaseWebPage {
                 try {
                     wait.ignoring(StaleElementReferenceException.class)
                             .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
                 break;
             }
         }
+    }
+
+    String selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox) {
+        try {
+            wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
+        } catch (Exception ignored) {}
+        wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        final int random = RandomUtils.nextInt(0, listBox.size());
+        System.out.println(random);
+        final WebElement selectedValue = listBox.get(random);
+        actions.moveToElement(selectedValue).click().build().perform();
+        try {
+            wait.ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
+        } catch (Exception ignored) {}
+        return selectedValue.getText();
     }
 }
