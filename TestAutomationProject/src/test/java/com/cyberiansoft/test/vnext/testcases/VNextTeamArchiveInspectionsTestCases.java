@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
@@ -183,5 +184,69 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
                     "Inspection: " + inspNumber + " still exists, but shouldn't");
         }
         inspectionscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyArchivedInspectionsDoesntDispalysOnTheListAfterDBUpdate(String rowID,
+                                                          String description, JSONObject testData) {
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+        inspectionscreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+
+        inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+
+        inspectionscreen = inspectionscreen.archiveInspection(inspnumber);
+        Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
+                " still exists, but shouldn't");
+        inspectionscreen.clickBackButton();
+
+        VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
+        statusScreen.updateMainDB();
+        inspectionscreen = homescreen.clickInspectionsMenuItem();
+        Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
+                " still exists, but shouldn't");
+        inspectionscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyArchivedInspectionsDoesntDispalysOnTheTeamList(String rowID,
+                                                                                  String description, JSONObject testData) {
+
+        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
+        inspectionscreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
+        customersscreen.switchToRetailMode();
+        customersscreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
+        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+
+        inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
+
+        inspectionscreen = inspectionscreen.archiveInspection(inspnumber);
+        Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
+                " still exists, but shouldn't");
+        inspectionscreen.switchToTeamInspectionsView();
+        inspectionscreen.searchInpectionByFreeText(inspnumber);
+        Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
+                " still exists, but shouldn't");
+        inspectionscreen.clickBackButton();
+
     }
 }

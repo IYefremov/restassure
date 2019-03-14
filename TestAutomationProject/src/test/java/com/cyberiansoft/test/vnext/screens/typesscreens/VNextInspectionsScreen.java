@@ -75,7 +75,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 		VNextCustomersScreen customersscreen = clickAddInspectionButton();
 		customersscreen.selectCustomer(new RetailCustomer("Retail", "Automation"));
 		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		inspinfoscreen.setVIN("TESTVINN");
+		inspinfoscreen.setVIN("1D7HW48NX6S507810");
 		inspinfoscreen.swipeScreenLeft();
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
