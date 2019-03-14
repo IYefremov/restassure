@@ -45,7 +45,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 	private String regCode;
 	private RegularHomeScreen homescreen;
-	
+
 	private final String firstname = "supermy12";
 	private final String firstnamenew = "supernewmy12";
 	private final String lastname = "super";
@@ -72,9 +72,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		if (DriverBuilder.getInstance().getAppiumDriver() != null)
 			= DriverBuilder.getInstance().getAppiumDriver();
 	}*/
-	
+
 	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword, String licensename) {
+											  String userName, String userPassword, String licensename) {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
@@ -116,7 +116,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		//.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
-		
+
 		//LoginScreen loginscreen = new LoginScreen();
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen();
@@ -125,7 +125,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		settingscreen.setShowAvailableSelectedServicesOn();
 		homescreen = settingscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 8438:Update database on the device
 	@Test(testName = "Test Case 8438:Update database on the device" ,description = "Update Database")
 	public void testUpdateDatabase() {
@@ -137,7 +137,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen.clickStatusButton();
 		homescreen.updateDatabase();
 		mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 	}
 
 	//Test Case 8437:Updating VIN decoder
@@ -158,7 +158,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 8441:Add Retail Customer in regular build", description = "Create retail customer")
 	public void testCreateRetailCustomer() {
 
-		//resrtartApplication();	
+		//resrtartApplication();
 		//MainScreen mainscreen = new MainScreen();
 		//HomeScreen homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USER_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		homescreen = new RegularHomeScreen();
@@ -175,7 +175,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		//homescreen.clickLogoutButton();
 	}
 
-	//Test Case 8439:Edit Customer 
+	//Test Case 8439:Edit Customer
 	@Test(testName = "Test Case 8439:Edit Customer ", description = "Edit retail customer")
 	public void testEditRetailCustomer() {
 		final String lastname = "superedited";
@@ -185,8 +185,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String zip = "79035";
 		final String phone = "723-1234576";
 		final String mail = "test123@cyberiansoft.com";
-		
-		//resrtartApplication();	
+
+		//resrtartApplication();
 		//MainScreen mainscreen = new MainScreen();
 		//HomeScreen homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USER_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		homescreen = new RegularHomeScreen();
@@ -223,7 +223,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		clientspage.deleteUserViaSearch(firstnamenew);
 
 		DriverBuilder.getInstance().getDriver().quit();
-	
+
 		RegularMainScreen mainscreen = new RegularMainScreen();
 		mainscreen.updateDatabase();
 		RegularHomeScreen homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -233,8 +233,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 		//homescreen.clickLogoutButton();
 	}
-	
-	
+
+
 	//Test Case 8435:Create Retail Inspection (HD Single page)
 	@Test(testName = "Test Case 8435:Create Retail Inspection", description = "Create Retail Inspection")
 	public void testCreateRetailInspection() {
@@ -242,7 +242,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
 		final String _color = "Red";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
@@ -258,7 +258,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.clickSave();
 		alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("Make is required"));
-		
+
 		vehiclescreen.setMakeAndModel(_make, _model);
 		vehiclescreen.setColor(_color);
 		vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
@@ -273,13 +273,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 8434:Add Services to visual inspection", description = "Add Services To Visual Inspection")
 	public void testAddServicesToVisualInspection() {
 		final String _inspectionprice = "275";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectFirstInspection();
 		myinspectionsscreen.clickEditInspectionButton();
 		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
-        final String inspNumber = vehiclescreen.getInspectionNumber();
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 		RegularVisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
 		visualinteriorscreen.clickServicesToolbarButton();
 		Assert.assertTrue(visualinteriorscreen.isInteriorServicePresent("Miscellaneous"));
@@ -310,14 +310,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 	}
 
-	//Test Case 8433:Change Quantity of services in Visual Inspection 
+	//Test Case 8433:Change Quantity of services in Visual Inspection
 	@Test(testName = "Test Case 8433:Change Quantity of services in Visual Inspection", description = "Change Quantity Of Services In Visual Inspection")
 	public void testChangeQuantityOfServicesInVisualInspection() {
 		final String _quantity = "3.00";
 		final String _quantityexterior = "2.00";
 		final String _inspectionpricevisual = "275";
 		final String _inspectionprice = "325";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectFirstInspection();
@@ -344,7 +344,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	@Test(testName = "Test Case 8432:Edit the retail Inspection Notes", description = "Edit Retail Inspection Notes")
 	public void testEditRetailInspectionNotes() {
 		final String _notes1 = "Test\nTest 2";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectFirstInspection();
@@ -375,7 +375,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
 		final String _color = "Red";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
@@ -390,7 +390,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setMakeAndModel(_make, _model);
 		vehiclescreen.setColor(_color);
 		vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-        final String inspNumber = vehiclescreen.getInspectionNumber();
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 		vehiclescreen.saveWizard();
 		myinspectionsscreen.selectInspectionForApprove(inspNumber);
 		// approveinspscreen.selectInspectionToApprove();
@@ -413,7 +413,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Acura";
 		final String _model = "ILX";
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
@@ -427,7 +427,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setMakeAndModel(_make, _model);
 		vehiclescreen.setColor(_color);
 		vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-        final String inspNumber = vehiclescreen.getInspectionNumber();
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 		vehiclescreen.saveWizard();
 		myinspectionsscreen.clickHomeButton();
 
@@ -436,7 +436,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				"Reason 2");
 		Assert.assertTrue(myinspectionsscreen.checkInspectionDoesntExists(inspNumber));
 		myinspectionsscreen.clickHomeButton();
-		
+
 	}
 
 	//Test Case 8430:Create work order with type is assigned to a specific client
@@ -445,7 +445,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String VIN = "ZWERTYASDFDDXZBVB";
 		final String _po = "1111 2222";
 		final String summ = "71.40";
-		
+
 		final String license = "Iphone_Test_Spec_Client";
 
 		RegularMainScreen mainscreen = homescreen.clickLogoutButton();
@@ -472,7 +472,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		//LoginScreen loginscreen = new LoginScreen();
 		loginscreen.registeriOSDevice(regCode);
 		mainscreen.userLogin(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
@@ -494,7 +494,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(summ));
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		ordersummaryscreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
@@ -518,7 +518,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 	//Test Case 8429:Creating complex calculation WO
 	@Test(testName = "Test Case 8429:Creating complex calculation WO,"
 			+ "Test Case 8428:Copy services of WO (regular version)", description = "Createing Complex calculation WO,"
-					+ "Copy Cervices Of WO")
+			+ "Copy Cervices Of WO")
 	public void testCreateWorkOrderWithTeamSharingOption() {
 
 		final String VIN = "1FTRX02W35K097028";
@@ -539,10 +539,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _price = "$100.00";
 		final String _discaunt_us = "Discount 10-20$";
 
-		//resrtartApplication();	
+		//resrtartApplication();
 		//MainScreen mainscreen = new MainScreen();
 		//HomeScreen homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USER_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		homescreen = new RegularHomeScreen();	
+		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
@@ -553,14 +553,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.clickSave();
 		String alerttxt = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
-		
+
 		vehiclescreen.setVIN(VIN);
 
 		String wonum = vehiclescreen.getWorkOrderNumber();
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		//servicesscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
-		
+
 		Assert.assertEquals(selectedservicescreen.getServicePriceValue(), _dye_price);
 		Assert.assertEquals(selectedservicescreen.getServiceAdjustmentsValue(), _dye_adjustments);
 		selectedservicescreen.setServiceQuantityValue("3.00");
@@ -620,7 +620,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(summ));
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
-	
+
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.selectWorkOrder(wonum);
 		myworkordersscreen.selectCopyServices();
@@ -648,7 +648,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _model = "1.6 EL";
 		final String _color = "Red";
 		String[] inpections = { "", "" };
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
@@ -671,11 +671,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		for (int i = 0; i < 2; i++) {
 			myinspectionsscreen.selectInspectionForAction(inpections[i]);
 		}
-		
+
 		myinspectionsscreen.clickApproveInspections();
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		//Helpers.waitABit(2000);
-		
+
 		//Helpers.acceptAlert();
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();
 		for (int i = 0; i < 2; i++) {
@@ -684,7 +684,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		}
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
-		
+
 		// }
 
 		// approveinspscreen.clickBackButton();
@@ -704,7 +704,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _model = "1.6 EL";
 		final String _color = "Red";
 		String[] inpections = { "", "" };
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
@@ -764,7 +764,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 		RegularMainScreen mainscreen = homescreen.clickLogoutButton();
 		mainscreen.updateDatabase();
-		
+
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
@@ -780,14 +780,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		inspectionspage.approveInspectionByNumber(inpectionnumber);
 
 		DriverBuilder.getInstance().getDriver().quit();
-		
+
 		mainscreen.updateDatabase();
 		mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		Assert.assertTrue(myinspectionsscreen.isInspectionIsApproved(inpectionnumber));
 
 		myinspectionsscreen.clickHomeButton();
-		
+
 	}
 
 	//Test Case 8463:Approve inspection on back office (line-by-line approval)
@@ -798,7 +798,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Acura";
 		final String _model = "1.6 EL";
 		final String _color = "Red";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
@@ -856,7 +856,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String servicerequest = "Fn1 Lm1";
 		final String price = "314.15";
 
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -921,9 +921,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		inspectionspage.assertInspectionPrice(inspnumber, PricesCalculations.getPriceRepresentation(price));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
-	
+
 	String srtowo = "";
-	
+
 	//Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device
 	@Test(testName = "Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device", description = "Creating Service Request with Inspection, WO and Appointment required on device")
 	public void testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice() {
@@ -935,20 +935,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String fueltanklevel = "25";
 		final String _type = "Used";
 		final String stock = "Stock1";
-		final String _ro = "123";	
+		final String _ro = "123";
 		final String licplate = "456";
 		//final String _year = "2012";
-		
+
 		final String teamname= "Default team";
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
-		
+
+
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		
+
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
 
@@ -972,8 +972,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		//vehiclescreen.setLicensePlate(licplate);
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.WHEEL_SERVICE);
-		
-		
+
+
 		servicesscreen.selectService(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
 		servicesscreen.selectService("Quest_Req_Serv");
 		RegularSelectedServiceDetailsScreen selectedservicedetailsscreen =  servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.WHEEL_SERVICE);
@@ -1005,7 +1005,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        servicerequestsscreen = new RegularServiceRequestsScreen();
+		servicerequestsscreen = new RegularServiceRequestsScreen();
 		srtowo = servicerequestsscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srtowo), "On Hold");
 		Assert.assertTrue(servicerequestsscreen.getServiceRequestClient(srtowo).contains(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER));
@@ -1013,8 +1013,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestsscreen.getServiceRequestDetails(srtowo).contains("WERTYU123"));
 		servicerequestsscreen.clickHomeButton();
 		Helpers.waitABit(10*1000);
-	
-		
+
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -1022,14 +1022,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
+				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		
+
 		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
-		
+
 		servicerequestslistpage.verifySearchFieldsAreVisible();
-		
+
 		//servicerequestslistpage.selectSearchStatus("All On Scheduled");
 
 		servicerequestslistpage.selectSearchTeam(teamname);
@@ -1051,13 +1051,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("Wheel $70.00 (3.00)"));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
-	
+
 	//Test Case 21582:Create Inspection from Service request
 	@Test(testName = "Test Case 21582:Create Inspection from Service request", description = "Create Inspection from Service request"/*,
 			dependsOnMethods = { "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice" }*/)
 	public void testCreateInspectionFromServiceRequest()  {
 		final String summ= "438.60";
-			
+
 		homescreen = new RegularHomeScreen();
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 
@@ -1092,19 +1092,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnumber), PricesCalculations.getPriceRepresentation(summ));
 		myinspectionsscreen.clickActionButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
-		
+
 		myinspectionsscreen.clickApproveInspections();
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		//Helpers.acceptAlert();
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();
-		approveinspscreen.selectInspection(inspnumber);		
+		approveinspscreen.selectInspection(inspnumber);
 		approveinspscreen.clickApproveButton();
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
 		//myinspectionsscreen.clickDoneButton();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 21585:Create WO from Service Request
 	@Test(testName = "Test Case 21585:Create WO from Service Request", description = "Create WO from Service Request"/*,
 			dependsOnMethods = { "testCreateInspectionFromServiceRequest" }*/)
@@ -1112,7 +1112,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		/*.closeApp();
 		Thread.sleep(60*1000*15);
-		
+
 		Inicialize();
 		String srnum = "R-00006200";
 		RegularMainScreen mainscreen = new RegularMainScreen();
@@ -1143,16 +1143,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				.click();
 		servicerequestsscreen= new RegularServiceRequestsScreen();
 		servicerequestsscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.woExists(wonumber);
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 16640:Create Inspection from Invoice with two WOs
 	@Test(testName = "Test Case 16640:Create Inspection from Invoice with two WOs", description = "Create Inspection from Invoice with two WOs")
 	public void testCreateInspectionFromInvoiceWithTwoWOs() {
-		
+
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
 		final String _model = "323i U";
@@ -1160,16 +1160,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _color = "Black";
 		final String mileage = "77777";
 		final String fueltanklevel = "25";
-		final String _type = "Used";	
+		final String _type = "Used";
 		final String stock = "Stock1";
 		final String _ro = "123";
 		final String ordersumm = "13.50";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -1196,7 +1196,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen = new RegularServicesScreen();
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ordersumm));
-		
+
 		ordersummaryscreen.clickSave();
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name("Warning!")).isDisplayed());
@@ -1204,7 +1204,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				MobileBy.name("Yes"))
 				.click();
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-			
+
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		myworkordersscreen.selectCopyVehicle();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -1230,21 +1230,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceinfoscreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 16664:Create Invoice from WO in "My WOs" list
 	@Test(testName = "Test Case 16664:Create Invoice from WO in \"My WOs\" list", description = "Create Invoice from WO in My WOs list")
 	public void testCreateInvoiceFromWOInMyWOsList() {
-		
+
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
 		final String _model = "323i U";
 		//final String _year = "2012";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -1259,21 +1259,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
 		selectedservicescreen.setServiceQuantityValue("3");
 		selectedservicescreen.saveSelectedServiceDetails();
-		
+
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISC_EX_SERVICE1);
 		selectedservicescreen.clickAdjustments();
 		selectedservicescreen.selectAdjustment("For_SP_Cl");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$108.50");
-		
+
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.BUNDLE1_DISC_EX);
 		selectedservicescreen.selectBundle(iOSInternalProjectConstants.DYE_SERVICE);
 		selectedservicescreen.changeBundleQuantity(iOSInternalProjectConstants.WHEEL_SERVICE, "2");
-		
+
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
+
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
@@ -1313,13 +1313,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceinfoscreen.setPO(iOSInternalProjectConstants.USER_PASSWORD);
 		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
-		
+
 		myworkordersscreen.clickHomeButton();
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.myInvoiceExists(invoicenumber);
 		myinvoicesscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode
 	@Test(testName = "Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode", description = "Don't allow to select billed and not billed orders together in multi selection mode")
 	public void testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode() {
@@ -1331,16 +1331,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _color = "Black";
 		final String mileage = "77777";
 		final String fueltanklevel = "25";
-		final String _type = "Used";	
+		final String _type = "Used";
 		final String stock = "Stock1";
 		final String _ro = "123";
-		
+
 		//Create WO1
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
@@ -1362,7 +1362,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.clickSave();
-		
+
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		DriverBuilder.getInstance().getAppiumDriver().findElement(
@@ -1399,17 +1399,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.clickSave();
-		
+
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name("Yes"))
 				.click();
-			
+
 		//Test case
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen.approveWorkOrder(wonumber2, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber1);
 		myworkordersscreen.clickInvoiceIcon();
 		RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
@@ -1418,26 +1418,26 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.clickFilterButton();
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
-		
-		myworkordersscreen.clickActionButton();		
+
+		myworkordersscreen.clickActionButton();
 		myworkordersscreen.selectWorkOrderForAction(wonumber1);
 		//myworkordersscreen.woExistsViaSearch(wonumber1);
 		myworkordersscreen.clickDoneButton();
 		myworkordersscreen.clickFilterButton();
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
-		
+
 		myworkordersscreen.clickActionButton();
 		myworkordersscreen.selectWorkOrderForAction(wonumber2);
 		//myworkordersscreen.woExistsViaSearch(wonumber2);
 		myworkordersscreen.clickDoneButton();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 18436:Don't allow to change billed orders
 	@Test(testName = "Test Case 18436:Don't allow to change billed orders", description = "Don't allow to change billed orders")
 	public void testDontAlowToChangeBilledOrders() {
-		
+
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
 		final String _model = "323i U";
@@ -1445,14 +1445,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _color = "Black";
 		final String mileage = "77777";
 		final String fueltanklevel = "25";
-		final String _type = "Used";	
+		final String _type = "Used";
 		final String stock = "Stock1";
 		final String _ro = "123";
 		final String[] menuitemstoverify = { "Edit" , "Notes", "Change\nstatus", "Delete", "Create\nInvoices" };
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		
+
 		//Create WO1
 		homescreen = new RegularHomeScreen();
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -1485,17 +1485,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.clickSave();
-		
+
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name("Yes"))
 				.click();
-	
-		
+
+
 		//Test case
-		
-		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);		
+
+		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber1);
 		myworkordersscreen.clickInvoiceIcon();
 		RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
@@ -1516,11 +1516,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen = new RegularMyWorkOrdersScreen();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 18439:Change customer for invoice
 	@Test(testName = "Test Case 18439:Change customer for invoice", description = "Change customer for invoice")
 	public void testChangeCustomerForInvoice() {
-		
+
 		final String VIN = "QWERTYUI123";
 		final String _make = "BMW";
 		final String _model = "323i U";
@@ -1528,15 +1528,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _color = "Black";
 		final String mileage = "77777";
 		final String fueltanklevel = "25";
-		final String _type = "Used";	
+		final String _type = "Used";
 		final String stock = "Stock1";
-		final String _ro = "123";	
+		final String _ro = "123";
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		//Create WO1
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
@@ -1566,13 +1566,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.saveWizardAndAcceptAlert();
 
 		//Test case
-		
+
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber1);
 		myworkordersscreen.clickInvoiceIcon();
 		RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
 		invoiceinfoscreen.setPO("first123");
-		String invoicenumber = invoiceinfoscreen.getInvoiceNumber(); 
+		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
@@ -1584,21 +1584,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(invoiceinfoscreen.getInvoiceCustomer(), iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		invoiceinfoscreen.clickWO(wonumber1);
 		vehiclescreen = new RegularVehicleScreen();
- 		Assert.assertEquals(vehiclescreen.getWorkOrderCustomer(), iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
+		Assert.assertEquals(vehiclescreen.getWorkOrderCustomer(), iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.cancelWizard();
 
 		invoiceinfoscreen.cancelInvoice();
 		myinvoicesscreen.clickHomeButton();
 	}
-	
-	//Test Case 10498:Regression test: test bug with crash on "Copy Vehicle" 
+
+	//Test Case 10498:Regression test: test bug with crash on "Copy Vehicle"
 	@Test(testName = "Test Case 10498:Regression test: test bug with crash on \"Copy Vehicle\"", description = "Regression test: test bug with crash on Copy Vehicle")
 	public void testBugWithCrashOnCopyVehicle() {
 
 		final String vin = "SHDHBEVDHDHDGDVDG";
 		final String vehicleinfo = "Black, BMW, 323i U";
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -1622,11 +1622,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		carhistoryscreen.clickBackButton();
 		carhistoryscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 16239:Copy Inspections
 	@Test(testName = "Test Case 16239:Copy Inspections", description = "Copy Inspections")
 	public void testCopyInspections() {
-		
+
 		final String VIN = "QWERTYUI123";
 		final String _make = "Audi";
 		final String _model = "A1";
@@ -1634,12 +1634,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _color = "Black";
 		final String mileage = "55555";
 		final String fueltanklevel = "25";
-		final String _type = "New";	
+		final String _type = "New";
 		final String stock = "Stock1";
-		final String _ro = "123";	
+		final String _ro = "123";
 
 		final String visualjetservice = "Price Adjustment";
-		
+
 		//Services variables
 		final String _dye_price = "$10.00";
 		final String _dye_adjustments = "$0.50";
@@ -1658,7 +1658,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.FOR_COPY_INSP_INSPTYPE);
@@ -1677,32 +1677,33 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setType(_type);
 		vehiclescreen.setStock(stock);
 		vehiclescreen.setRO(_ro);
-        final String inspNumber = vehiclescreen.getInspectionNumber();
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 		RegularVisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
 		visualinteriorscreen.tapInterior();
 
 		visualinteriorscreen = visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR,  ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);	
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Helpers.tapRegularCarImage();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$180.50");
-		
+
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
 		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);	
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		RegularVisualInteriorScreen.tapExterior();
-		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
+		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$250.50");
-			
+
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR,  ScreenNamesConstants.FUTiRE_JET_CAR);
 		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTiRE_JET_CAR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		visualinteriorscreen.selectService(visualjetservice);
+		visualinteriorscreen.selectService(_discaunt_us);
+		visualinteriorscreen.clickServicesToolbarButton();
 		Helpers.tapRegularCarImage();
 		visualinteriorscreen.selectService(visualjetservice);
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$240.50");
@@ -1713,7 +1714,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen = new RegularQuestionsScreen();
 		questionsscreen.setJustOnePossibleAnswer("One");
-		
+
 		questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.FOLLOW_UP_REQUESTED);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.drawRegularSignature();
@@ -1721,16 +1722,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen = new RegularQuestionsScreen();
 		questionsscreen.setSampleQuestion("Answers 1");
-		
+
 		questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS,"BATTERY PERFORMANCE");
 		questionsscreen.setBetteryTerminalsAnswer("Immediate Attention Required");
 		questionsscreen.swipeScreenUp();
 		questionsscreen.setCheckConditionOfBatteryAnswer("Immediate Attention Required");
-		
+
 		questionsscreen.swipeScreenUp();
 		questionsscreen = new RegularQuestionsScreen();
 		questionsscreen.selectTaxPoint("Test Answer 1");
-		
+
 		//Select services
 		RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		//servicesscreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
@@ -1798,7 +1799,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen = new RegularVehicleScreen();
 		Assert.assertEquals(vehiclescreen.getMake(), _make);
 		Assert.assertEquals(vehiclescreen.getModel(), _model);
-		
+
 		visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
 		visualinteriorscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
 		visualinteriorscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
@@ -1831,11 +1832,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspNumber), "$837.99");
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 16507:Create inspection from WO
 	@Test(testName = "Test Case 16507:Create inspection from WO", description = "Create inspection from WO")
 	public void testCreateInspectionFromWO() {
-		
+
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
 		final String _model = "Electra";
@@ -1843,16 +1844,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _color = "Black";
 		final String mileage = "77777";
 		final String fueltanklevel = "25";
-		final String _type = "Used";	
+		final String _type = "Used";
 		final String stock = "Stock1";
 		final String _ro = "123";
 		final String pricevalue = "0";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		//Create WO1
 		Instant star = Instant.now();
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
@@ -1864,9 +1865,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String wonumber1 = vehiclescreen.getWorkOrderNumber();
 		vehiclescreen.setMakeAndModel(_make, _model);
 		vehiclescreen.setColor(_color);
-	
+
 		//vehiclescreen.setYear(_year);
-		
+
 		vehiclescreen.setMileage(mileage);
 		vehiclescreen.setFuelTankLevel(fueltanklevel);
 		vehiclescreen.setType(_type);
@@ -1875,25 +1876,25 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);ordersummaryscreen.clickSave();
-		
+
 		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name("Warning!")).isDisplayed());
 		DriverBuilder.getInstance().getAppiumDriver().findElement(
 				MobileBy.name("Yes"))
 				.click();
-		
+
 		//Test case
 		myworkordersscreen = new RegularMyWorkOrdersScreen();
 		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber1), PricesCalculations.getPriceRepresentation(pricevalue));
 		myworkordersscreen.selectWorkOrderNewInspection(wonumber1);
 		vehiclescreen = new RegularVehicleScreen();
 		vehiclescreen.cancelOrder();
-		myworkordersscreen.clickHomeButton();		
+		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName = "Test Case 26266:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
 	public void testCreateInvoiceWithTwoWOsAndCopyVehicle() {
-		
+
 		final String VIN = "QWERTYUI123";
 		final String _make = "Buick";
 		final String _model = "Electra";
@@ -1901,16 +1902,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _color = "Black";
 		final String mileage = "77777";
 		final String fueltanklevel = "25";
-		final String _type = "Used";	
+		final String _type = "Used";
 		final String stock = "Stock1";
 		final String _ro = "123";
 		final String[] vehicleparts = { "Cowl, Other", "Hood", };
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		//Create WO1
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
@@ -1984,25 +1985,25 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(invoiceswebpage.isInvoiceDisplayed(invoicenum));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
-	
+
 	//Test Case 23401:Test 'Change customer' option for inspection
 	@Test(testName = "Test Case 23401:Test 'Change customer' option for inspection", description = "Test 'Change customer' option for inspection")
 	public void testChangeCustomerOptionForInspection() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
-		
+
 		//resrtartApplication();
 		//RegularMainScreen mainscreen = new RegularMainScreen();
 		//RegularHomeScreen homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2027,24 +2028,24 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen = visualscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		Assert.assertEquals(vehiclescreen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		vehiclescreen.saveWizard();
-		
+
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'
 	@Test(testName = "Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'", description = "Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'")
 	public void testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2059,18 +2060,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		claimscreen.selectInsuranceCompany("USG");
 		RegularQuestionsScreen questionsscreen = claimscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
-		questionsscreen.selectAnswerForQuestion("Question 2", "A2");	
+		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		vehiclescreen.saveWizard();
 		myinspectionsscreen.selectInspection(inspectionnumber);
-		myinspectionsscreen.clickChangeCustomerpopupMenu();		
+		myinspectionsscreen.clickChangeCustomerpopupMenu();
 		myinspectionsscreen.customersPopupSwitchToRetailMode();
 		myinspectionsscreen.selectCustomer(iOSInternalProjectConstants.RETAIL_CUSTOMER);
-				
+
 		myinspectionsscreen.clickHomeButton();
 		customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
 		customersscreen.clickHomeButton();
-		
+
 		myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		RegularVisualInteriorScreen visualscreen = new RegularVisualInteriorScreen();
@@ -2078,25 +2079,25 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen = visualscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		Assert.assertTrue(vehiclescreen.getInspectionCustomer().contains(iOSInternalProjectConstants.RETAIL_CUSTOMER));
 		vehiclescreen.saveWizard();
-		
+
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies
 	@Test(testName = "Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies", description = "Test 'Change customer' option for Inspections based on type with preselected Companies")
 	public void testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2108,7 +2109,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String inspectionnumber = vehiclescreen.getInspectionNumber();
 
 		RegularClaimScreen claimscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.CLAIM);
-		claimscreen.selectInsuranceCompany("USG");	
+		claimscreen.selectInsuranceCompany("USG");
 		claimscreen.saveWizard();
 		myinspectionsscreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		BaseUtils.waitABit(60*1000);
@@ -2118,24 +2119,24 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		Assert.assertEquals(vehiclescreen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		vehiclescreen.saveWizard();
-		
+
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23422:Test 'Change customer' option for Work Order
 	@Test(testName = "Test Case 23422:Test 'Change customer' option for Work Order", description = "Test 'Change customer' option for Work Order")
 	public void testChangeCustomerOptionForWorkOrder()  {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2153,31 +2154,31 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 		RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("3");
-		
+
 		ordersummaryscreen.saveWizard();
-        myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		myworkordersscreen.openWorkOrderDetails(wonumber);
 		vehiclescreen = new RegularVehicleScreen();
 		Assert.assertEquals(vehiclescreen.getWorkOrderCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		servicesscreen.clickCancel();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies
 	@Test(testName = "Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies", description = "Test 'Change customer' option for WO based on type with preselected Companies")
 	public void testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2197,7 +2198,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("4");
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation("4"));
 		ordersummaryscreen.saveWizard();
-		
+
 		Helpers.waitABit(45*1000);
 		//testlogger.log(LogStatus.INFO, wonumber);
 		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -2207,21 +2208,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickCancel();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'
 	@Test(testName = "Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'", description = "Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'")
 	public void testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2241,7 +2242,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("4");
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation("4"));
 		ordersummaryscreen.saveWizard();
-		myworkordersscreen.selectWorkOrder(wonumber);	
+		myworkordersscreen.selectWorkOrder(wonumber);
 		myworkordersscreen.clickChangeCustomerPopupMenu();
 		myworkordersscreen.customersPopupSwitchToRetailMode();
 		myworkordersscreen.selectCustomer(iOSInternalProjectConstants.RETAIL_CUSTOMER);
@@ -2249,7 +2250,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToRetailMode();
 		customersscreen.clickHomeButton();
-		
+
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.openWorkOrderDetails(wonumber);
 		vehiclescreen = new RegularVehicleScreen();
@@ -2257,11 +2258,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickCancel();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN
 	@Test(testName = "Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN", description = "'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN")
 	public void testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
@@ -2291,11 +2292,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				WorkOrdersTypes.WOTYPE_BLOCK_VIN_ON.getWorkOrderTypeName(), VIN), "Cancel");
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23459:'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service
 	@Test(testName = "Test Case 23459:'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service", description = "'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service")
 	public void testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
@@ -2305,7 +2306,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2325,25 +2326,25 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("4");
 		ordersummaryscreen.clickSave();
 		ordersummaryscreen.closeDublicaterServicesWarningByClickingCancel();
-		
+
 		//Helpers.text_exact("Cancel").click();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO
 	@Test(testName="Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO", description = "'WO: Test 'Edit' option of 'Duplicate services' message for WO")
 	public void testEditOptionOfDuplicateServicesMessageForWO() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2371,7 +2372,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedServicesScreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO.
 	@Test(testName="Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO", description = "'WO: Test 'Override' option of 'Duplicate services' message for WO.")
 	public void testOverrideOptionOfDuplicateServicesMessageForWO() {
@@ -2380,12 +2381,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2403,7 +2404,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 		RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("4");	
+		ordersummaryscreen.setTotalSale("4");
 		ordersummaryscreen.clickSave();
 		ordersummaryscreen.closeDublicaterServicesWarningByClickingOverride();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -2411,21 +2412,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(myworkordersscreen.woExists(wonumber));
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO
 	@Test(testName="Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO", description = "'WO: Test 'Cancel' option of 'Duplicate services' message for WO.")
 	public void testCancelOptionOfDuplicateServicesMessageForWO() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
-		final String _color = "Black";		
-		
+		final String _color = "Black";
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2438,7 +2439,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectSubService("3/4\" - Penny Size");
 		servicesscreen.selectSubService("AMoneyService_AdjustHeadlight");
-		
+
 		RegularQuestionsScreen questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
@@ -2450,31 +2451,31 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 23966:Inspections: Test saving inspectiontypes with three matrix
 	//Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price
 	@Test(testName="Test Case 23966:Inspections: Test saving inspectiontypes with three matrix, "
 			+ "Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price", description = "'Inspections: Test saving inspectiontypes with three matrix")
 	public void testSavingInspectionsWithThreeMatrix() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
 		final String _type = "New";
 		final String _po = "1111";
-		
+
 		final String _pricematrix1 = "Hood";
 		final String _pricematrix2 = "Left Roof Rail";
 		final String _pricematrix3 = "Back Glass";
 		final String _pricematrix4 = "Front Bumper";
 		final String _pricematrix5 = "Roof";
-	
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2487,7 +2488,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String inspnumber = vehiclescreen.getInspectionNumber();
 
 		RegularClaimScreen claimscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.CLAIM);
-		claimscreen.selectInsuranceCompany("USG");	
+		claimscreen.selectInsuranceCompany("USG");
 		claimscreen.setClaim("QWERTY");
 		claimscreen.setAccidentDate();
 		RegularVisualInteriorScreen visualinteriorscreen = claimscreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
@@ -2544,14 +2545,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		regularselectedservicedetailsscreen.selectVehiclePart("Roof");
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
-		
+
 		regularselectedservicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		regularselectedservicedetailsscreen = new RegularSelectedServiceDetailsScreen();
 		regularselectedservicedetailsscreen.clickVehiclePartsCell();
 		regularselectedservicedetailsscreen.selectVehiclePart("Front Bumper");
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
 		regularselectedservicedetailsscreen.saveSelectedServiceDetails();
-		
+
 		pricematrix = servicesscreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, "Test matrix33");
 		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix5);
 		vehiclePartScreen.switchOffOption("PDR");
@@ -2568,14 +2569,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		visualinteriorscreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
 		Assert.assertEquals(visualinteriorscreen.getTotalPrice(), "$13,145.50");
 		Assert.assertEquals(visualinteriorscreen.getSubTotalPrice(), "$80.00");
-		
+
 		visualinteriorscreen.saveWizard();
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		vehiclescreen = new RegularVehicleScreen();
 		pricematrix = vehiclescreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.DEFAULT);
 		Assert.assertTrue(pricematrix.isPriceMatrixContainsPriceValue(_pricematrix1, "$6,100.00"));
 		Assert.assertTrue(pricematrix.isPriceMatrixContainsPriceValue(_pricematrix2, "$75.00"));
-		
+
 		pricematrix.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.MATRIX_LABOR);
 		Assert.assertTrue(pricematrix.isPriceMatrixContainsPriceValue(_pricematrix3, "$25.00"));
 		Assert.assertTrue(pricematrix.isPriceMatrixContainsPriceValue(_pricematrix4, "$1,105.50"));
@@ -2589,12 +2590,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(copiedinspnumber));
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR
 	@Test(testName="Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR", description = "Test that selected services on SR are copied to Inspection based on SR")
 	public void testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR() {
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		/*RegularSettingsScreen settingscreen =  homescreen.clickSettingsButton();
 		settingscreen.setShowAllServicesOn();
 		homescreen = settingscreen.clickHomeButton();*/
@@ -2652,12 +2653,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickBackButton();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 24657:WO: Test that auto-saved WO is created correctly
 	//Test Case 23435:WO: Test 'Continue' option of 'Auto-saved' WO
 	//Test Case 23436:WO: Test 'Discard' option of 'Auto-saved' WO
 	@Test(testName="Test Case 24657:WO: Test that auto-saved WO is created correctly, " +
-			"Test Case 23435:WO: Test 'Continue' option of 'Auto-saved' WO, " + 
+			"Test Case 23435:WO: Test 'Continue' option of 'Auto-saved' WO, " +
 			"Test Case 23436:WO: Test 'Discard' option of 'Auto-saved' WO", description = "WO: Test that auto-saved WO is created correctly")
 	public void testThatAutoSavedWOIsCreatedCorrectly() {
 		final String VIN  = "1FMFU18L53LC13897";
@@ -2669,7 +2670,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-			
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_CLIENT_CHANGING_ON);
 		vehiclescreen.setVIN(VIN);
@@ -2699,8 +2700,8 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertFalse(myworkordersscreen.isAutosavedWorkOrderExists());
 		myworkordersscreen.clickHomeButton();
 	}
-	
-	//Test Case 21578:SR: Add appointment to Service Request 
+
+	//Test Case 21578:SR: Add appointment to Service Request
 	@Test(testName = "Test Case 21578:SR: Add appointment to Service Request", description = "SR: Add appointment to Service Request")
 	public void testSRAddAppointmentToServiceRequest() {
 		final String VIN = "QWERTYUI123";
@@ -2709,9 +2710,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-					
+
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-			
+
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
 
@@ -2732,7 +2733,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				.click();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
 		questionsscreen.swipeScreenUp();
-		questionsscreen.swipeScreenUp();		
+		questionsscreen.swipeScreenUp();
 		questionsscreen.selectTaxPoint("Test Answer 1");
 		servicesscreen.clickSave();
 		alerttext = Helpers.getAlertTextAndCancel();
@@ -2746,7 +2747,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectTodayToAppointmet();
 		final String fromapp = servicerequestsscreen.getFromAppointmetValue();
 		final String toapp = servicerequestsscreen.getToAppointmetValue();
-		
+
 		servicerequestsscreen.setSubjectAppointmet("SR-APP");
 		servicerequestsscreen.setAddressAppointmet("Maidan");
 		servicerequestsscreen.setCityAppointmet("Kiev");
@@ -2755,14 +2756,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		homescreen = servicerequestsscreen.clickHomeButton();
 		servicerequestsscreen = homescreen.clickServiceRequestsButton();
-		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");	
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectRejectAction();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		servicerequestsscreen.clickHomeButton();
 	}
-	
+
 	//Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar
 	@Test(testName = "Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar", description = "SR: Verify 'Summary' action for appointment on SR's calendar")
 	public void testSRVerifySummaryActionForAppointmentOnSRsCalendar() {
@@ -2770,12 +2771,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String srappsubject = "SR-APP";
 		final String srappaddress = "Maidan";
 		final String srappcity = "Kiev";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-				
+
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
@@ -2809,14 +2810,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		final String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
-		
+
 		servicerequestsscreen.selectAppointmentRequestAction();
 		servicerequestsscreen.clickAddButton();
 		servicerequestsscreen.selectTodayFromAppointmet();
 		servicerequestsscreen.selectTodayToAppointmet();
 		final String fromapp = servicerequestsscreen.getFromAppointmetValue();
 		final String toapp = servicerequestsscreen.getToAppointmetValue();
-			
+
 		servicerequestsscreen.setSubjectAppointmet(srappsubject);
 		servicerequestsscreen.setAddressAppointmet(srappaddress);
 		servicerequestsscreen.setCityAppointmet(srappcity);
@@ -2826,14 +2827,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen = servicerequestsscreen.clickHomeButton();
 		servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
-		servicerequestsscreen.selectServiceRequest(srnumber);		
-		servicerequestsscreen.selectDetailsRequestAction();	
+		servicerequestsscreen.selectServiceRequest(srnumber);
+		servicerequestsscreen.selectDetailsRequestAction();
 
 		//String summaryapp = servicerequestsscreen.getSummaryAppointmentsInformation();
-		String expectedsummaryapp = "Subject: " + srappsubject + ", In: " + fromapp + ", Out: " + toapp + ", Location: " + srappaddress 
+		String expectedsummaryapp = "Subject: " + srappsubject + ", In: " + fromapp + ", Out: " + toapp + ", Location: " + srappaddress
 				+ ", " + srappcity + ", US";
 		Assert.assertTrue(servicerequestsscreen.isSRSummaryAppointmentsInformation());
-		
+
 		servicerequestsscreen.clickBackButton();
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		servicerequestsscreen.selectServiceRequest(srnumber);
@@ -2842,10 +2843,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		servicerequestsscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName="Test Case 25403:WO Regular: Verify that only assigned services on Matrix Panel is available as additional services", description = "WO Regular: Verify that only assigned services on Matrix Panel is available as additional services")
 	public void testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices() {
-		
+
 		final String VIN  = "WDZPE7CD9E5889222";
 
 		homescreen = new RegularHomeScreen();
@@ -2853,15 +2854,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-			
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_PRICE_MATRIX);
 		vehiclescreen.setVIN(VIN);
 		vehiclescreen.verifyMakeModelyearValues("Mercedes-Benz", "Sprinter Passenger", "2014");
 		RegularServicesScreen servicesscreen =  vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectPriceMatrices("Price Matrix Zayats");	
-		servicesscreen.selectPriceMatrices("VP1 zayats");		
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
+		servicesscreen.selectPriceMatrices("VP1 zayats");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP1 zayats");
 		vehiclePartScreen.switchOffOption("PDR");
@@ -2882,13 +2883,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		servicesscreen =  questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
 		servicesscreen.cancelWizard();
-		
+
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName="Test Case 25011:Inspections: verify that only assigned services on Matrix Panel is available as additional services", description = "Inspections: verify that only assigned services on Matrix Panel is available as additional services")
 	public void testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices() {
-		
+
 		final String VIN  = "WDZPE7CD9E5889222";
 
 		homescreen = new RegularHomeScreen();
@@ -2920,18 +2921,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspnum));
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName="Test Case 25421:WO: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services", description = "WO HD: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services")
 	public void testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices() {
-		
+
 		final String VIN  = "2C3CDXBG2EH174681";
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INV_PRINT);
 		vehiclescreen.setVIN(VIN);
@@ -2960,7 +2961,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected("Test service price matrix"));
 		RegularOrderSummaryScreen ordersummaryscreen = selectedServicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("5");	
+		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.saveWizard();
 
 		myworkordersscreen.selectWorkOrderForApprove(wonum);
@@ -2975,7 +2976,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen = new RegularMyWorkOrdersScreen();
 		homescreen = myworkordersscreen.clickHomeButton();
-		
+
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoicenum);
 		myinvoicesscreen.clickSummaryPopup();
@@ -2983,19 +2984,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.clickHomeButton();
 		myinvoicesscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName="Test Case 26054:WO Monitor: Regular - Create WO for monitor", description = "WO Monitor: Regular - Create WO for monitor")
 	public void testWOMonitorCreateWOForMonitor() {
-		
+
 		final String VIN  = "1D3HV13T19S825733";
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
@@ -3015,22 +3016,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 
-		myworkordersscreen.woExists(wonum);
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName="Test Case 26091:WO Monitor: Regular - Verify that it is not possible to change Service Status before Start Service", description = "WO Monitor: Regular - Verify that it is not possible to change Service Status before Start Service")
 	public void testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService() {
-		
+
 		final String VIN  = "1D3HV13T19S825733";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
@@ -3050,7 +3050,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.woExists(wonum);
-		
+
 		homescreen = myworkordersscreen.clickHomeButton();
 
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3058,11 +3058,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.selectSearchLocation("Test Location ZZZ");
 		teamworkordersscreen.clickSearchSaveButton();
 		teamworkordersscreen.clickOnWO(wonum);
-		
+
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
-		ordermonitorscreen.clickServiceStatusCell();		
+		ordermonitorscreen.clickServiceStatusCell();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("You must start the service before you can change its status."));
 		ordermonitorscreen.clickStartService();
@@ -3072,19 +3072,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName="Test Case 26092:WO Monitor: Regular - Verify that it is not possible to change Phase Status before Start phase", description = "WO Monitor: HD - Verify that it is not possible to change Phase Status before Start phase")
 	public void testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase() {
-		
+
 		final String VIN  = "1D3HV13T19S825733";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
@@ -3104,16 +3104,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.woExists(wonum);
-		
+
 		homescreen = myworkordersscreen.clickHomeButton();
-		
+
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickSearchButton();
 		teamworkordersscreen.selectSearchLocation("Test Location ZZZ");
 		teamworkordersscreen.clickSearchSaveButton();
 
 		teamworkordersscreen.clickOnWO(wonum);
-		
+
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 
 		Assert.assertTrue(ordermonitorscreen.isRepairPhaseExists());
@@ -3126,12 +3126,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		Assert.assertFalse(ordermonitorscreen.isStartPhaseButtonExists());
 		Assert.assertTrue(ordermonitorscreen.isServiceStartDateExists());
-		
+
 		ordermonitorscreen.clickServiceStatusCell();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("You cannot change the status of services for this phase. You can only change the status of the whole phase."));
 		ordermonitorscreen.clickServiceDetailsDoneButton();
-		
+
 		ordermonitorscreen.clicksRepairPhaseLine();
 		ordermonitorscreen.clickCompletedPhaseCell();
 
@@ -3139,20 +3139,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
-	}	
-	
+	}
+
 	@Test(testName="Test Case 26094:WO Monitor: Regular - Verify that Start date is set when Start Service", description = "WO Monitor: Regular - Verify that Start date is set when Start Service")
 	public void testWOMonitorVerifyThatStartDateIsSetWhenStartService() {
-		
+
 		final String VIN  = "1D3HV13T19S825733";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
@@ -3173,14 +3173,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.woExists(wonum);
-		
+
 		homescreen = myworkordersscreen.clickHomeButton();
 
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickSearchButton();
 		teamworkordersscreen.selectSearchLocation("Test Location ZZZ");
 		teamworkordersscreen.clickSearchSaveButton();
-		teamworkordersscreen.clickOnWO(wonum);		
+		teamworkordersscreen.clickOnWO(wonum);
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertFalse(ordermonitorscreen.isServiceStartDateExists());
@@ -3188,23 +3188,23 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isServiceStartDateExists());
 		ordermonitorscreen.clickServiceDetailsDoneButton();
-		
+
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
 	}
-	
+
 	//@Test(testName="Test Case 26016:WO Monitor: Regular - Verify that for % service message about change status is not shown", description = "WO Monitor: Regular - Verify that for % service message about change status is not shown")
 	public void testWOMonitorVerifyThatForPercentServiceMessageAboutChangeStatusIsNotShown() {
-		
+
 		final String VIN  = "1D3HV13T19S825733";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
@@ -3225,7 +3225,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.woExists(wonum);
-		
+
 		homescreen = myworkordersscreen.clickHomeButton();
 
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3236,29 +3236,29 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.VPS1_SERVICE);
 		ordermonitorscreen.clickServiceDetailsDoneButton();
-		
+
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 26013:WO Monitor: Regular - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase", 
+
+	@Test(testName="Test Case 26013:WO Monitor: Regular - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase",
 			description = "WO Monitor: Regular - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase")
 	public void testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase() {
-		
+
 		final String VIN  = "1D3HV13T19S825733";
 		final String _pricematrix = "HOOD";
 		final String _size = "NKL";
 		final String _severity = "VERY LIGHT";
 		final String _price = "$100.00";
 		final String _discaunt_us = "Discount 10-20$";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
@@ -3272,7 +3272,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.VPS1_SERVICE);
-		
+
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
@@ -3294,7 +3294,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.woExists(wonum);
-		
+
 		homescreen = myworkordersscreen.clickHomeButton();
 
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3304,7 +3304,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.clickOnWO(wonum);
 
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		
+
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
 		ordermonitorscreen.clickStartService();
@@ -3314,7 +3314,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonExists());
 		ordermonitorscreen.clickStartPhaseButton();
-		
+
 		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		ordermonitorscreen.clickServiceStatusCell();;
 		String alerttext = Helpers.getAlertTextAndAccept();
@@ -3335,26 +3335,26 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen = new RegularOrderMonitorScreen();
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
-	}	
-	
-	@Test(testName="Test Case 26093:WO Monitor: Regular - Verify that %Service is not Started when Start phase", 
+	}
+
+	@Test(testName="Test Case 26093:WO Monitor: Regular - Verify that %Service is not Started when Start phase",
 			description = "WO Monitor: Regular - Verify that %Service is not Started when Start phase")
 	public void testWOMonitorVerifyThatPercentageServiceIsNotStartedWhenStartPhase() {
-		
+
 		final String VIN  = "1D3HV13T19S825733";
 		final String _pricematrix = "HOOD";
 		final String _size = "NKL";
 		final String _severity = "VERY LIGHT";
 		final String _price = "$100.00";
 		final String _discaunt_us = "Discount 10-20$";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
@@ -3368,7 +3368,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.VPS1_SERVICE);
-		
+
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
@@ -3390,7 +3390,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.woExists(wonum);
-		
+
 		homescreen = myworkordersscreen.clickHomeButton();
 
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
@@ -3398,9 +3398,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen.selectSearchLocation("Test Location ZZZ");
 		teamworkordersscreen.clickSearchSaveButton();
 		teamworkordersscreen.clickOnWO(wonum);
-		
+
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
-		
+
 		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
 		ordermonitorscreen.clickStartService();
@@ -3408,7 +3408,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.setCompletedServiceStatus();
 		//ordermonitorscreen.clickServiceDetailsDoneButton();
 		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.WHEEL_SERVICE), "Completed");
-		
+
 		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.DYE_SERVICE);
 		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
 		ordermonitorscreen.clickPhaseStatusCell();
@@ -3419,31 +3419,31 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordermonitorscreen.setCompletedPhaseStatus();
 		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
 		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1), "Completed");
-		
+
 		ordermonitorscreen.selectPanelToChangeStatus(iOSInternalProjectConstants.TEST_TAX_SERVICE);
 		Assert.assertFalse(ordermonitorscreen.isServiceStartDateExists());
 		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(iOSInternalProjectConstants.TEST_TAX_SERVICE), "Completed");
-		
+
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickHomeButton();
-	}	
-	
-	@Test(testName="Test Case 28473:Invoices: HD - Verify that red 'A' icon is present for invoice with customer approval ON and no signature", 
+	}
+
+	@Test(testName="Test Case 28473:Invoices: HD - Verify that red 'A' icon is present for invoice with customer approval ON and no signature",
 			description = "Invoices: Regular - Verify that red 'A' icon is present for invoice with customer approval ON and no signature")
 	public void testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature() {
-		
+
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
 
 		//RegularMainScreen mainscreen = new RegularMainScreen();
 		//homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INV_PRINT);
 		vehiclescreen.setVIN(VIN);
@@ -3456,7 +3456,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSave();
-		
+
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -3467,23 +3467,23 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumber));
 		myinvoicesscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 28476:Invoices: HD&Regular - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature", 
+
+	@Test(testName="Test Case 28476:Invoices: HD&Regular - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature",
 			description = "Invoices: Regular - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature")
 	public void testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature() {
-		
+
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
 		//Inicialize();
 		//RegularMainScreen mainscreen = new RegularMainScreen();
 		//homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-				
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INV_PRINT);
 		vehiclescreen.setVIN(VIN);
@@ -3496,7 +3496,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSave();
-		
+
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALOFF_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -3507,21 +3507,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumber));
 		myinvoicesscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 28478:Invoices: Regular - Verify that 'A' icon is not present for invoice when signature exists", 
+
+	@Test(testName="Test Case 28478:Invoices: Regular - Verify that 'A' icon is not present for invoice when signature exists",
 			description = "Invoices: Regular - Verify that 'A' icon is not present for invoice when signature exists")
 	public void testRegularVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists() {
-		
+
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po = "123";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		//customer approval ON
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INV_PRINT);
@@ -3535,7 +3535,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSave();
-		
+
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
 		final String invoicenumberapproveon = invoiceinfoscreen.getInvoiceNumber();
@@ -3550,12 +3550,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.drawApprovalSignature();
 		//approveinspscreen.clickDoneButton();
 		myinvoicesscreen = new RegularMyInvoicesScreen();
-		
+
 		Assert.assertFalse(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumberapproveon));
 		myinvoicesscreen.clickHomeButton();
-		
+
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		//customer approval OFF
 		myworkordersscreen.clickAddOrderButton();
 		myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INV_PRINT);
@@ -3569,7 +3569,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSave();
-		
+
 		invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALOFF_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
 		final String invoicenumbeapprovaloff = invoiceinfoscreen.getInvoiceNumber();
@@ -3583,21 +3583,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickApproveButton();
 		approveinspscreen.drawApprovalSignature();
 		myinvoicesscreen = new RegularMyInvoicesScreen();
-		Assert.assertFalse(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumbeapprovaloff));	
+		Assert.assertFalse(myinvoicesscreen.isInvoiceApproveButtonExists(invoicenumbeapprovaloff));
 		myinvoicesscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 29022:SR: Regular - Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech", 
+
+	@Test(testName="Test Case 29022:SR: Regular - Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech",
 			description = "Test Case 29022:SR: Regular - Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech")
 	public void testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		//Create first SR
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		RegularVehicleScreen vehiclescreen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
@@ -3630,22 +3630,22 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.saveWizard();
 
 		String srnumber2 = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber2), "Scheduled");	
+		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber2), "Scheduled");
 		servicerequestsscreen.selectServiceRequest(srnumber2);
 		servicerequestsscreen.selectRejectAction();
 		Helpers.acceptAlert();
 
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 29029:SR: Regular - Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech", 
+
+	@Test(testName="Test Case 29029:SR: Regular - Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech",
 			description = "Test Case 29029:SR: Regular - Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech")
 	public void testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -3669,7 +3669,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "On Hold");
-		
+
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isRejectActionExists());
 		servicerequestsscreen.selectCreateInspectionRequestAction();
@@ -3685,7 +3685,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(teaminspectionsscreen.isInspectionExists(inspectnumber));
 		teaminspectionsscreen.clickActionButton();
 		teaminspectionsscreen.selectInspectionForAction(inspectnumber);
-		
+
 		teaminspectionsscreen.clickApproveInspections();
 		teaminspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 
@@ -3707,27 +3707,27 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 				servicerequestsscreen.clickHomeButton();
 				Helpers.waitABit(30*1000);
 			} else {
-				
+
 				onhold = true;
 				break;
 			}
 		}
-		
-		Assert.assertTrue(onhold);	
+
+		Assert.assertTrue(onhold);
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectRejectAction();
 		Helpers.acceptAlert();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 29082:SR: Regular - Verify that Reject action is not displayed for SR in Status OnHold (Insp or WO) and not assign for Tech", 
+
+	@Test(testName="Test Case 29082:SR: Regular - Verify that Reject action is not displayed for SR in Status OnHold (Insp or WO) and not assign for Tech",
 			description = "Test Case 29082:SR: Regular - Verify that Reject action is not displayed for SR in Status OnHold (Insp or WO) and not assign for Tech")
 	public void testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -3740,19 +3740,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ALL_PHASES.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
-		
+
 		srlistwebpage.clickCustomerEditButton();
 		srlistwebpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		srlistwebpage.clickDoneButton();
-		
+
 		srlistwebpage.clickVehicleInforEditButton();
 		srlistwebpage.setServiceRequestVIN(VIN);
 		srlistwebpage.decodeAndVerifyServiceRequestVIN(_make, _model);
 		srlistwebpage.clickDoneButton();
-		
+
 		srlistwebpage.saveNewServiceRequest();
 		srlistwebpage.acceptFirstServiceRequestFromList();
-		
+
 		//DriverBuilder.getInstance().getDriver().quit();
 		//DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		//DriverBuilder.getInstance().getAppiumDriver().launchApp();
@@ -3770,17 +3770,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectCancelAction();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 29083:SR: Regular - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech", 
+
+	@Test(testName="Test Case 29083:SR: Regular - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech",
 			description = "SR: Regular - Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech")
 	public void testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
 		final String[] servicestoadd = { "VPS1", "Dye" };
 		final String[] servicestoadd2 = { "Oksi_Service_PP_Panel", "Oksi_Service_PP_Vehicle" };
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -3793,11 +3793,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ServiceRequestsListWebPage srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
-		
+
 		srlistwebpage.clickCustomerEditButton();
 		srlistwebpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		srlistwebpage.clickDoneButton();
-		
+
 		srlistwebpage.clickVehicleInforEditButton();
 		srlistwebpage.setServiceRequestVIN(VIN);
 		srlistwebpage.decodeAndVerifyServiceRequestVIN(_make, _model);
@@ -3806,9 +3806,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		srlistwebpage.saveNewServiceRequest();
 		String srnumber = srlistwebpage.getFirstInTheListServiceRequestNumber();
 		srlistwebpage.acceptFirstServiceRequestFromList();
-		
+
 		DriverBuilder.getInstance().getDriver().quit();
-		
+
 		//homescreen = new RegularHomeScreen();
 		RegularMainScreen mainscr = homescreen.clickLogoutButton();
 		mainscr.updateDatabase();
@@ -3819,7 +3819,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertFalse(servicerequestsscreen.isRejectActionExists());
 		servicerequestsscreen.selectCancelAction();
 		servicerequestsscreen.clickHomeButton();
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		loginpage = PageFactory.initElements(webdriver,
@@ -3832,11 +3832,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		srlistwebpage = operationspage.clickNewServiceRequestList();
 		srlistwebpage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE.getServiceRequestTypeName());
 		srlistwebpage.clickAddServiceRequestButton();
-		
+
 		srlistwebpage.clickCustomerEditButton();
 		srlistwebpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 		srlistwebpage.clickDoneButton();
-		
+
 		srlistwebpage.clickVehicleInforEditButton();
 		srlistwebpage.setServiceRequestVIN(VIN);
 		srlistwebpage.decodeAndVerifyServiceRequestVIN(_make, _model);
@@ -3845,7 +3845,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		srlistwebpage.saveNewServiceRequest();
 		srnumber = srlistwebpage.getFirstInTheListServiceRequestNumber();
 		srlistwebpage.acceptFirstServiceRequestFromList();
-		
+
 		DriverBuilder.getInstance().getDriver().quit();
 
 		homescreen = new RegularHomeScreen();
@@ -3862,21 +3862,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.saveWizard();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 33165:WO: Regular - Not multiple Service with required Panels is added one time to WO after selecting", 
+
+	@Test(testName = "Test Case 33165:WO: Regular - Not multiple Service with required Panels is added one time to WO after selecting",
 			description = "WO: Regular - Not multiple Service with required Panels is added one time to WO after selecting")
 	public void testWORegularNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting()  {
-				
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
-			
-		homescreen = new RegularHomeScreen();			
+
+		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-			
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 
@@ -3908,16 +3908,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName = "Test Case 34562:WO: Verify that Bundle Items are shown when create WO from inspection", description = "WO: Verify that Bundle Items are shown when create WO from inspection")
 	public void testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection() {
-		
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
 
-		homescreen = new RegularHomeScreen();		
+		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -3963,16 +3963,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.cancelWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
 
-	@Test(testName="Test Case 31743:SR: Regular - Verify that when option 'Allow to close SR' is set to ON action 'Close' is shown for selected SR on status 'Scheduled' or 'On-Hold'", 
+
+	@Test(testName="Test Case 31743:SR: Regular - Verify that when option 'Allow to close SR' is set to ON action 'Close' is shown for selected SR on status 'Scheduled' or 'On-Hold'",
 			description = "SR Regular - Verify that when option 'Allow to close SR' is set to ON action 'Close' is shown for selected SR on status 'Scheduled' or 'On-Hold'")
 	public void testSRRegularVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -3990,21 +3990,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srnumber), "Scheduled");
-		
+
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isCloseActionExists());
 		servicerequestsscreen.clickCancel();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 31748:SR: Regular - Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'", 
+
+	@Test(testName="Test Case 31748:SR: Regular - Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'",
 			description = "SR: Regular - Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'")
 	public void testSRRegularVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4026,15 +4026,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickCancel();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 31749:SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press No alert message is close", 
+
+	@Test(testName="Test Case 31749:SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press No alert message is close",
 			description = "SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press No alert message is close")
 	public void testSRRegularVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4057,18 +4057,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectCloseAction();
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
-		
+
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 31750:SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown", 
+
+	@Test(testName="Test Case 31750:SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown",
 			description = "SR: Regular - Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown")
 	public void testSRRegularVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4094,15 +4094,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickCancelCloseReasonDialog();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 31752:SR: Regular - Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO", 
+
+	@Test(testName="Test Case 31752:SR: Regular - Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO",
 			description = "SR: Regular - Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO")
 	public void testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4134,15 +4134,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 31753:SR: Regular - Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO", 
+
+	@Test(testName="Test Case 31753:SR: Regular - Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO",
 			description = "SR: Regular - Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO")
 	public void testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4170,15 +4170,15 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 30083:SR: Regular - Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services", 
+
+	@Test(testName="Test Case 30083:SR: Regular - Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services",
 			description = "SR: Regular - Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services")
 	public void testSRRegularVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4202,7 +4202,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		String srnumber = servicerequestsscreen.getFirstServiceRequestNumber();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateWorkOrderRequestAction();
-		
+
 		servicerequestsscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.verifyMakeModelyearValues("Chrysler", "Town and Country", "2010");
 		String wonumber = vehiclescreen.getWorkOrderNumber();
@@ -4215,29 +4215,29 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = selectedServicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("3");
 		ordersummaryscreen.clickSave();
-		
+
 		for (int i = 0; i < 3; i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.lastIndexOf("'"));
 			selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 			RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = selectedServicesScreen.openSelectedServiceDetails(servicedetails);
-			
+
 			selectedservicedetailsscreen.clickVehiclePartsCell();
 			switch (servicedetails) {
-			//case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
-			//	 selectedservicedetailsscreen.selectVehiclePart("Hood");
-	        //     break;
-			case iOSInternalProjectConstants.SR_S1_MONEY_PANEL:
-				 selectedservicedetailsscreen.selectVehiclePart("Back Glass");
-	             break;     
-			case iOSInternalProjectConstants.SR_S1_MONEY:
-				 selectedservicedetailsscreen.selectVehiclePart("Hood");
-	             break;
-			case iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE:
-				 selectedservicedetailsscreen.selectVehiclePart("Grill");
-	             break;
+				//case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
+				//	 selectedservicedetailsscreen.selectVehiclePart("Hood");
+				//     break;
+				case iOSInternalProjectConstants.SR_S1_MONEY_PANEL:
+					selectedservicedetailsscreen.selectVehiclePart("Back Glass");
+					break;
+				case iOSInternalProjectConstants.SR_S1_MONEY:
+					selectedservicedetailsscreen.selectVehiclePart("Hood");
+					break;
+				case iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE:
+					selectedservicedetailsscreen.selectVehiclePart("Grill");
+					break;
 			}
-			
+
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
 			servicesscreen = new RegularServicesScreen();
@@ -4254,13 +4254,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 30084:SR: Regular - Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services", 
+
+	@Test(testName="Test Case 30084:SR: Regular - Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services",
 			description = "SR: Regular - Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services")
 	public void testSRRegularVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -4295,26 +4295,26 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		//Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_DISC_20_PERCENT));
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.SR_S1_MONEY_PANEL));
 		selectedServicesScreen.clickSave();
-		
+
 		for (int i = 0; i < 3; i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.lastIndexOf("'"));
 			RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = selectedServicesScreen.openSelectedServiceDetails(servicedetails);
-			
+
 			selectedservicedetailsscreen.clickVehiclePartsCell();
 			switch (servicedetails) {
-			case iOSInternalProjectConstants.SR_S1_MONEY_PANEL:
-				 selectedservicedetailsscreen.selectVehiclePart("Hood");
-	             break;
-			case iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE:
-				 selectedservicedetailsscreen.selectVehiclePart("Back Glass");
-	             break;     
-			//case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
-			//	 selectedservicedetailsscreen.selectVehiclePart("Hood");
-	        //     break;
-			case iOSInternalProjectConstants.SR_S1_MONEY:
-				 selectedservicedetailsscreen.selectVehiclePart("Grill");
-	             break;
+				case iOSInternalProjectConstants.SR_S1_MONEY_PANEL:
+					selectedservicedetailsscreen.selectVehiclePart("Hood");
+					break;
+				case iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE:
+					selectedservicedetailsscreen.selectVehiclePart("Back Glass");
+					break;
+				//case iOSInternalProjectConstants.SR_DISC_20_PERCENT:
+				//	 selectedservicedetailsscreen.selectVehiclePart("Hood");
+				//     break;
+				case iOSInternalProjectConstants.SR_S1_MONEY:
+					selectedservicedetailsscreen.selectVehiclePart("Grill");
+					break;
 			}
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
 			selectedservicedetailsscreen.saveSelectedServiceDetails();
@@ -4331,22 +4331,22 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 38749:Inspections: Regular - Verify that on inspection approval screen selected price matrix value is shown", 
+
+	@Test(testName = "Test Case 38749:Inspections: Regular - Verify that on inspection approval screen selected price matrix value is shown",
 			description = "Verify that on inspection approval screen selected price matrix value is shown")
 	public void testRegularVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown() {
-			
+
 		final String VIN = "111111111111111";
 		final String _make = "Acura";
 		final String _model = "CL";
 		final String _color = "Black";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
@@ -4360,10 +4360,10 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
 		vehiclePartScreen.setSizeAndSeverity("CENT", "LIGHT");
 		vehiclePartScreen.saveVehiclePart();
-		RegularInspectionToolBar toolaber = new RegularInspectionToolBar();		
+		RegularInspectionToolBar toolaber = new RegularInspectionToolBar();
 		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$100.00");
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$100.00");
-		
+
 		pricematrix.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.HAIL_MATRIX);
 		vehiclePartScreen = pricematrix.selectPriceMatrix("L QUARTER");
 		vehiclePartScreen.setSizeAndSeverity("DIME", "VERY LIGHT");
@@ -4376,9 +4376,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A2");
 		questionsscreen.saveWizard();
 		myinspectionsscreen.selectInspectionForAction(inspectionnumber);
-		
+
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();
 		approveinspscreen.selectInspection(inspectionnumber);
 		Assert.assertTrue(approveinspscreen.isInspectionServiceExistsForApprove("Dent Removal"));
@@ -4406,19 +4406,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickCancelButton();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 31451:Inspection - Regular: Verify that question section is shown per service for first selected panel when QF is not required", 
+
+	@Test(testName = "Test Case 31451:Inspection - Regular: Verify that question section is shown per service for first selected panel when QF is not required",
 			description = "Verify that question section is shown per service for first selected panel when QF is not required")
 	public void testRegularVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired() {
 
 		final String[] vehicleparts = { "Front Bumper", "Grill", "Hood", "Left Fender" };
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_FOR_CALC);
@@ -4429,7 +4429,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			selectedservicedetailscreen.selectVehiclePart(vehiclepart);
 		selectedservicedetailscreen.clickSaveButton();
 		final String selectedhehicleparts = servicesscreen.getListOfSelectedVehicleParts();
-		
+
 		for (String vehiclepart : vehicleparts)
 			Assert.assertTrue(selectedhehicleparts.contains(vehiclepart));
 		servicesscreen.clickSave();
@@ -4444,17 +4444,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.cancelWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 31963:Inspections: Regular - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
+
+	@Test(testName = "Test Case 31963:Inspections: Regular - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen",
 			description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
 	public void testRegularVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() {
 
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSPECTION_VIN_ONLY);
@@ -4465,20 +4465,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.cancelOrder();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 42376:Inspections: Regular - Verify that when edit inspection selected vehicle parts for services are present", 
+
+	@Test(testName = "Test Case 42376:Inspections: Regular - Verify that when edit inspection selected vehicle parts for services are present",
 			description = "Verify that when edit inspection selected vehicle parts for services are present")
 	public void testRegularVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent() {
 
 		final String VIN = "1D7HW48NX6S507810";
 		final String[] vehicleparts = { "Deck Lid", "Hood", "Roof" };
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
@@ -4510,13 +4510,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedServicesScreen.cancelWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName="Test Case 42388:Inspections: Regular - Verify that it is possible to save as Final inspection linked to SR", description = "Verify that it is possible to save as Final inspection linked to SR")
 	public void testRegularVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR() {
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4568,19 +4568,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.clickBackButton();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	
-	@Test(testName = "Test Case 33117:Inspections: Regular - Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)", 
+
+
+	@Test(testName = "Test Case 33117:Inspections: Regular - Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)",
 			description = "Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)")
 	public void testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_DRAFT_MODE);
@@ -4597,7 +4597,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicedetailsscreen.selectVehiclePart("Back Glass");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.saveSelectedServiceDetails();
-		
+
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen();
 		RegularPriceMatrixScreen pricematrix = priceMatricesScreen.selectPriceMatrice("Price Matrix Zayats");
@@ -4606,18 +4606,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.selectDiscaunt("Test service zayats");
 		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickSave();
-		
+
 		servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.selectVehiclePart("Grill");
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.saveSelectedServiceDetails();
-        servicesscreen.clickSave();
+		servicesscreen.clickSave();
 		servicesscreen.clickSaveAsFinal();
 		myinspectionsscreen = new RegularMyInspectionsScreen();
 		myinspectionsscreen.clickActionButton();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
-		
+
 		myinspectionsscreen.clickApproveInspections();
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen();
@@ -4627,7 +4627,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.isInspectionServiceExistsForApprove("Test service zayats");
 		approveinspscreen.isInspectionServiceExistsForApprove(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
 		approveinspscreen.isInspectionServiceExistsForApprove(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		
+
 		approveinspscreen.clickApproveAllServicesButton();
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
@@ -4644,18 +4644,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen = new RegularMyInspectionsScreen();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName = "Test Case 33116:Inspections: Regular - Verify that text notes are copied to new inspectiontypes when use copy action", description = "Verify that text notes are copied to new inspectiontypes when use copy action")
 	public void testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction() {
-			
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String _notes = "Test for copy";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.DEFAULT);
@@ -4676,14 +4676,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		notesscreen.clickSaveButton();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 33154:Inspections: Regular - Verify that it is possible to approve Team Inspections use multi select", 
+
+	@Test(testName = "Test Case 33154:Inspections: Regular - Verify that it is possible to approve Team Inspections use multi select",
 			description = "Verify that it is possible to approve Team Inspections use multi select")
 	public void testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		List<String> inspnumbers = new ArrayList<String>();
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -4711,7 +4711,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		for (int i = 0; i < 3; i++) {
 			teaminspectionsscreen.selectInspectionForAction(inspnumbers.get(i));
 		}
-		
+
 		teaminspectionsscreen.clickApproveInspections();
 		teaminspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();
@@ -4734,19 +4734,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teaminspectionsscreen.clickDoneButton();
 		teaminspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 33869:Inspections: Regular - Verify that Services on Service Package are grouped by type selected on Insp type->Wizard", 
+
+	@Test(testName = "Test Case 33869:Inspections: Regular - Verify that Services on Service Package are grouped by type selected on Insp type->Wizard",
 			description = "Verify that Services on Service Package are grouped by type selected on Insp type->Wizard")
 	public void testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		List<String> inspnumbers = new ArrayList<>();
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSPECTION_GROUP_SERVICE);
@@ -4760,7 +4760,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen = servicesscreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.TEST_PACK_FOR_CALC);
 		servicesscreen.selectPriceMatrices("Back Glass");
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("Oksi_Service_PP_Vehicle");
-		selectedservicedetailscreen.answerQuestion2("A1");	
+		selectedservicedetailscreen.answerQuestion2("A1");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		//servicesscreen.clickBackServicesButton();
 		servicesscreen = servicesscreen.selectNextScreen(WizardScreenTypes.SERVICES, "SR_FeeBundle");
@@ -4796,22 +4796,22 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspnumber));
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 44407:Inspections: Regular - Verify that all instances of one service are copied from inspection to WO", 
+
+	@Test(testName = "Test Case 44407:Inspections: Regular - Verify that all instances of one service are copied from inspection to WO",
 			description = "Verify that all instances of one service are copied from inspection to WO")
 	public void testVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String firstprice = "43";
 		final String secondprice = "33";
 		final String secondquantity = "4";
 		final String[] vehicleparts = { "Front Bumper", "Grill", "Hood" };
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_FOR_CALC);
@@ -4854,18 +4854,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedServicesScreen.cancelWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 33918:Inspections: Regular - Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type", 
+
+	@Test(testName = "Test Case 33918:Inspections: Regular - Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type",
 			description = "Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type")
 	public void testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSPECTION_DIRECT_ASSIGN);
@@ -4883,18 +4883,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinspectionsscreen.clickBackButton();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 34285:Inspections: Regular - Verify that during Line approval ''Select All'' buttons are working correctly", 
+
+	@Test(testName = "Test Case 34285:Inspections: Regular - Verify that during Line approval ''Select All'' buttons are working correctly",
 			description = "Verify that during Line approval ''Select All'' buttons are working correctly")
 	public void testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
@@ -4919,7 +4919,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.saveWizard();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();
 		approveinspscreen.selectInspection(inspnumber);
 		Assert.assertTrue(approveinspscreen.isInspectionServiceExistsForApprove("Oksi_Service_PP_Panel (Grill)"));
@@ -4936,19 +4936,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickDoneButton();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 30012:Inspections: Regular - Verify that Approve option is not present for approved inspection in multi-select mode", 
+
+	@Test(testName = "Test Case 30012:Inspections: Regular - Verify that Approve option is not present for approved inspection in multi-select mode",
 			description = "Verify that Approve option is not present for approved inspection in multi-select mode")
 	public void testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		ArrayList<String> inspections = new ArrayList<String>();
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		for (int i = 0; i <2; i++) {
 			myinspectionsscreen.clickAddInspectionButton();
@@ -4964,7 +4964,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			servicesscreen.saveWizard();
 			myinspectionsscreen.selectInspectionForAction(inspections.get(i));
 			myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-			
+
 			RegularApproveInspectionsScreen approveinspscreen = new RegularApproveInspectionsScreen();
 			approveinspscreen.selectInspection(inspections.get(i));
 			approveinspscreen.clickApproveAllServicesButton();
@@ -4973,7 +4973,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 			approveinspscreen.clickDoneButton();
 			myinspectionsscreen = new RegularMyInspectionsScreen();
 		}
-		
+
 		myinspectionsscreen.clickActionButton();
 		for (int i = 0; i < 2; i++) {
 			myinspectionsscreen.selectInspectionForAction(inspections.get(i));
@@ -4994,19 +4994,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teaminspectionsscreen.clickDoneButton();
 		teaminspectionsscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName = "Test Case 30013:Inspections: Regular - Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected",
 			description = "Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected")
 	public void testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		ArrayList<String> inspections = new ArrayList<String>();
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		for (int i = 0; i <2; i++) {
 			myinspectionsscreen.clickAddInspectionButton();
@@ -5050,20 +5050,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teaminspectionsscreen.clickDoneButton();
 		teaminspectionsscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName = "Test Case 30853:Inspections: Regular - Verify that when option ''Draft Mode'' is set to ON - when save inspection provide prompt to a user to select either Draft or Final,"
-			+ "Test Case 30855:Inspections: Regular - Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)", 
+			+ "Test Case 30855:Inspections: Regular - Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)",
 			description = "Verify that when option ''Draft Mode'' is set to ON - when save inspection provide prompt to a user to select either Draft or Final,"
 					+ "Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)")
 	public void testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_DRAFT_MODE);
@@ -5094,22 +5094,22 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen = myinspectionsscreen.clickHomeButton();
 		RegularTeamInspectionsScreen teaminspectionsscreen = homescreen.clickTeamInspectionsButton();
 		Assert.assertTrue(teaminspectionsscreen.isDraftIconPresentForInspection(inspnumber));
-		
-		
-		teaminspectionsscreen.clickHomeButton();		
+
+
+		teaminspectionsscreen.clickHomeButton();
 	}
-	
+
 	@Test(testName = "Test Case 32286:Inspections: Regular - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
 	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 		RegularVehicleScreen vehiclescreen = myinspectionsscreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
@@ -5125,20 +5125,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicedetailscreen.selectVehiclePart("Hood");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
+
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
+
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart("Grill");
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		servicesscreen.saveWizard();
-		
+
 		myinspectionsscreen.selectInspectionForApprove(inspnumber);
 		myinspectionsscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen();
@@ -5146,7 +5146,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickDeclineAllServicesButton();
 		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S1_MONEY + " (Grill)");
 		approveinspscreen.clickSaveButton();
-		
+
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
 		myinspectionsscreen.clickHomeButton();
@@ -5165,26 +5165,26 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		inspectionspage.selectSearchStatus("All active");
 		inspectionspage.selectSearchTimeframe("Custom");
 		inspectionspage.setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
-		inspectionspage.searchInspectionByNumber(inspnumber);		
+		inspectionspage.searchInspectionByNumber(inspnumber);
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspnumber), "$2,000.00");
 		Assert.assertEquals(inspectionspage.getInspectionStatus(inspnumber), "Approved");
 		Assert.assertEquals(inspectionspage.getInspectionApprovedTotal(inspnumber), "$2,000.00");
 		DriverBuilder.getInstance().getDriver().quit();
 	}
-	
-	@Test(testName="Test Case 51336:WO: Regular - Verify that approve WO is working correct under Team WO", 
+
+	@Test(testName="Test Case 51336:WO: Regular - Verify that approve WO is working correct under Team WO",
 			description = "WO: Regular - Verify that approve WO is working correct under Team WO")
 	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO() {
-		
+
 		final String VIN  = "JA4LS31H8YP047397";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		//customer approval ON
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
@@ -5207,11 +5207,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(teamworkordersscreen.isWorkOrderHasActionIcon(wonumber));
 		teamworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 27717:Invoices: Regular - Verify that it is posible to add payment from device for draft invoice", 
+
+	@Test(testName="Test Case 27717:Invoices: Regular - Verify that it is posible to add payment from device for draft invoice",
 			description = "Invoices: Regular - Verify that it is posible to add payment from device for draft invoice")
 	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice() {
-		
+
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";
 		final String cashcheckamount = "100";
@@ -5222,14 +5222,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-			
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		vehiclescreen.setVIN(VIN);
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
 		vehiclePartScreen.switchOffOption("PDR");
@@ -5238,7 +5238,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.selectDiscaunt("Test service zayats");
 		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickSave();
-		
+
 		servicesscreen = new RegularServicesScreen();
 		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
@@ -5247,7 +5247,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");		
+		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");
 		ordersummaryscreen.clickSave();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -5268,7 +5268,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceinfoscreen.clickSaveAsDraft();
 		homescreen = myinvoicesscreen.clickHomeButton();
 		Helpers.waitABit(10000);
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -5286,24 +5286,24 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 
 		invoiceswebpage.clickFindButton();
-	
+
 		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), _po);
 		Assert.assertEquals(invoiceswebpage.getInvoicePOPaidValue(invoicenumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		String mainWindowHandle = webdriver.getWindowHandle();
 		InvoicePaymentsTabWebPage invoicepayments = invoiceswebpage.clickInvoicePayments(invoicenumber);
 		Assert.assertEquals(invoicepayments.getPaymentsTypeAmountValue("Cash/Check"), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		Assert.assertEquals(invoicepayments.getPaymentsTypeCreatedByValue("Cash/Check"), "Employee Simple 20%");
-		
+
 		Assert.assertEquals(invoicepayments.getPaymentsTypeAmountValue("PO/RO"), PricesCalculations.getPriceRepresentation("0"));
 		Assert.assertEquals(invoicepayments.getPaymentsTypeCreatedByValue("PO/RO"), "Back Office");
 		invoicepayments.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}
-	
-	@Test(testName="Test Case 27739:Invoices: Regular - Verify that payment is send to BO when PO# is changed under My invoice", 
+
+	@Test(testName="Test Case 27739:Invoices: Regular - Verify that payment is send to BO when PO# is changed under My invoice",
 			description = "Invoices: Regular - Verify that payment is send to BO when PO# is changed under My invoice")
 	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice() {
-		
+
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";
 		final String newpo  = "New test PO";
@@ -5315,14 +5315,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-			
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		vehiclescreen.setVIN(VIN);
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
 		vehiclePartScreen.switchOffOption("PDR");
@@ -5331,7 +5331,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.selectDiscaunt("Test service zayats");
 		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickSave();
-		
+
 		servicesscreen = new RegularServicesScreen();
 		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
@@ -5340,7 +5340,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");		
+		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");
 		ordersummaryscreen.clickSave();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -5365,7 +5365,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.changePO(newpo);
 		myinvoicesscreen.clickHomeButton();
 		Helpers.waitABit(10000);
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -5382,21 +5382,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
-	
+
 		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), newpo);
 		Assert.assertEquals(invoiceswebpage.getInvoicePOPaidValue(invoicenumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		String mainWindowHandle = webdriver.getWindowHandle();
 		InvoicePaymentsTabWebPage invoicepayments = invoiceswebpage.clickInvoicePayments(invoicenumber);
-		
+
 		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + newpo), PricesCalculations.getPriceRepresentation("0"));
 		invoicepayments.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}
-	
-	@Test(testName="Test Case 27741:Invoices: Regular - Verify that payment is send to BO when PO# is changed under Team invoice", 
+
+	@Test(testName="Test Case 27741:Invoices: Regular - Verify that payment is send to BO when PO# is changed under Team invoice",
 			description = "Invoices: Regular - Verify that payment is send to BO when PO# is changed under Team invoice")
 	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice() {
-		
+
 		final String VIN  = "WDZPE7CD9E5889222";
 		final String _po  = "12345";
 		final String newpo  = "New test PO from Team";
@@ -5407,14 +5407,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-			
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		vehiclescreen.setVIN(VIN);
 
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectPriceMatrices("Price Matrix Zayats");		
+		servicesscreen.selectPriceMatrices("Price Matrix Zayats");
 		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
 		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix("VP2 zayats");
 		vehiclePartScreen.switchOffOption("PDR");
@@ -5423,7 +5423,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.selectDiscaunt("Test service zayats");
 		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickSave();
-		
+
 		servicesscreen = new RegularServicesScreen();
 		//servicesscreen.clickCancelButton();
 		//servicesscreen.searchServiceByName(iOSInternalProjectConstants.SR_S4_Bl_I1_M);
@@ -5434,7 +5434,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale("5");
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation("5"));
 		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");		
+		ordersummaryscreen.selectEmployeeAndTypePassword("Zayats", "1111");
 		ordersummaryscreen.clickSave();
 		RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALON_INVOICETYPE);
 		invoiceinfoscreen.setPO(_po);
@@ -5447,9 +5447,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teaminvoicesscreen.clickChangePOPopup();
 		teaminvoicesscreen.changePO(newpo);
 		teaminvoicesscreen.clickHomeButton();
-		
+
 		Helpers.waitABit(5000);
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -5466,21 +5466,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
-	
+
 		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), newpo);
 		//Assert.assertEquals(invoiceswebpage.getInvoicePOPaidValue(invoicenumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		String mainWindowHandle = webdriver.getWindowHandle();
 		InvoicePaymentsTabWebPage invoicepayments = invoiceswebpage.clickInvoicePayments(invoicenumber);
-		
+
 		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + newpo), PricesCalculations.getPriceRepresentation("0"));
 		invoicepayments.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}
-	
-	@Test(testName="Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in", 
+
+	@Test(testName="Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in",
 			description = "WO: Regular - Verify filter for Team WO that returns only work assigned to tech who is logged in")
 	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn() {
-		
+
 		final String VIN  = "WDZPE7CD9E5889222";
 
 		homescreen = new RegularHomeScreen();
@@ -5489,7 +5489,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-			
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
 		vehiclescreen.setVIN(VIN);
@@ -5497,21 +5497,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
 		//servicesscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
-		
+
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
 		selectedservicescreen.clickTechniciansIcon();
 		selectedservicescreen.selecTechnician("Oksana Zayats");
 		selectedservicescreen.unselecTechnician("Employee Simple 20%");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
+
 		//servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.WHEEL_SERVICE);
 		selectedservicescreen.clickTechniciansIcon();
 		selectedservicescreen.selecTechnician("Oksana Zayats");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
+
 		servicesscreen.selectSubService(iOSInternalProjectConstants.VPS1_SERVICE);
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("5");
@@ -5522,19 +5522,19 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.switchToTeamView();
 		RegularTeamWorkOrdersScreen teamworkordersscreen = new RegularTeamWorkOrdersScreen();
 		teamworkordersscreen.clickOnWO(wonum);
-		
+
 		RegularOrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.checkMyWorkCheckbox();
 		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
 		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
 		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
-		homescreen = teamworkordersscreen.clickHomeButton();		
+		homescreen = teamworkordersscreen.clickHomeButton();
 		RegularMainScreen mainscreen = homescreen.clickLogoutButton();
-		
+
 		homescreen = mainscreen.userLogin("Zayats", "1111");
 		teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		teamworkordersscreen.clickOnWO(wonum);	
+		teamworkordersscreen.clickOnWO(wonum);
 
 		ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.checkMyWorkCheckbox();
@@ -5542,24 +5542,24 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
 		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
-		homescreen = teamworkordersscreen.clickHomeButton();		
+		homescreen = teamworkordersscreen.clickHomeButton();
 		mainscreen = homescreen.clickLogoutButton();
-		
+
 
 		homescreen = mainscreen.userLogin("Inspector", "12345");
 		teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		teamworkordersscreen.clickOnWO(wonum);		
+		teamworkordersscreen.clickOnWO(wonum);
 		ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.checkMyWorkCheckbox();
 		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
 		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
 		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
-        teamworkordersscreen = ordermonitorscreen.clickBackButton();
-		homescreen = teamworkordersscreen.clickHomeButton();		
+		teamworkordersscreen = ordermonitorscreen.clickBackButton();
+		homescreen = teamworkordersscreen.clickHomeButton();
 		mainscreen = homescreen.clickLogoutButton();
-		
+
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -5578,16 +5578,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		repairorderspage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
 		repairorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
 		repairorderspage.clickFindButton();
-		
+
 		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(wonum);
 		vendororderservicespage.changeRepairOrderServiceVendor(iOSInternalProjectConstants.DYE_SERVICE, "Device Team");
 		vendororderservicespage.waitABit(1000);
 		Assert.assertEquals(vendororderservicespage.getRepairOrderServiceTechnician(iOSInternalProjectConstants.DYE_SERVICE), "Oksi User");
 		DriverBuilder.getInstance().getDriver().quit();
-		
-		
+
+
 		teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		teamworkordersscreen.clickOnWO(wonum);		
+		teamworkordersscreen.clickOnWO(wonum);
 		ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		//ordermonitorscreen.checkMyWorkCheckbox();
 		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
@@ -5596,32 +5596,32 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		homescreen = teamworkordersscreen.clickHomeButton();
 		mainscreen = homescreen.clickLogoutButton();
-		
+
 		homescreen = mainscreen.userLogin("Zayats", "1111");
 		teamworkordersscreen = homescreen.clickTeamWorkordersButton();
-		teamworkordersscreen.clickOnWO(wonum);		
+		teamworkordersscreen.clickOnWO(wonum);
 		ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
 		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
 		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
-		homescreen = teamworkordersscreen.clickHomeButton();		
+		homescreen = teamworkordersscreen.clickHomeButton();
 		mainscreen = homescreen.clickLogoutButton();
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
-	
+
 	@Test(testName="Test Case 45251:SR: Regular - Verify multiple inspectiontypes and multiple work orders to be tied to a Service Request",
 			description = "SR: Regular - Verify multiple inspectiontypes and multiple work orders to be tied to a Service Request")
 	public void testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest() {
-		
+
 		final String VIN  = "WDZPE7CD9E5889222";
 		List<String> inspnumbers = new ArrayList<>();
 		List<String> wonumbers = new ArrayList<>();
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
 		RegularVehicleScreen vehiclescreen = servicerequestsscreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
 		vehiclescreen.setVIN(VIN);
@@ -5643,7 +5643,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectCreateInspectionRequestAction();
 		servicerequestsscreen.selectInspectionType(InspectionsTypes.INSP_FOR_CALC);
-		inspnumbers.add(vehiclescreen.getInspectionNumber());	
+		inspnumbers.add(vehiclescreen.getInspectionNumber());
 		questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.waitQuestionsScreenLoaded(ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.saveWizard();
@@ -5653,7 +5653,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularTeamInspectionsScreen teaminspectionsscreen = new RegularTeamInspectionsScreen();
 		for (String inspectnumber : inspnumbers)
 			Assert.assertTrue(teaminspectionsscreen.isInspectionExists(inspectnumber));
-		
+
 		teaminspectionsscreen.clickBackButton();
 		servicerequestsscreen.clickBackButton();
 		servicerequestsscreen = new RegularServiceRequestsScreen();
@@ -5684,11 +5684,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		servicerequestsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 45128:Inspections: Regular - Verify that service level notes are copied from Inspection to WO when it is auto created after approval", 
+
+	@Test(testName = "Test Case 45128:Inspections: Regular - Verify that service level notes are copied from Inspection to WO when it is auto created after approval",
 			description = "Verify that service level notes are copied from Inspection to WO when it is auto created after approval")
 	public void testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String _price1  = "10";
 		final String _price2  = "100";
@@ -5697,12 +5697,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		final String _pricematrix2 = "Grill";
 		final String inspectionnotes = "Inspection notes";
 		final String servicenotes = "Service Notes";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		myinspectionsscreen.clickAddInspectionButton();
 
@@ -5717,7 +5717,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		servicedetailsscreen.setServicePriceValue(_price1);
 		servicedetailsscreen.saveSelectedServiceDetails();
-		
+
 		servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SALES_TAX);
 		servicesscreen.saveWizard();
@@ -5737,13 +5737,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		notesscreen.setNotes(servicenotes);
 		notesscreen.clickSaveButton();
 		servicedetailsscreen.saveSelectedServiceDetails();
-		
+
 		servicedetailsscreen = selectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SALES_TAX);
 		notesscreen = servicedetailsscreen.clickNotesCell();
 		notesscreen.setNotes(servicenotes);
-		notesscreen.clickSaveButton();		
+		notesscreen.clickSaveButton();
 		servicedetailsscreen.saveSelectedServiceDetails();
-		
+
 		servicedetailsscreen = selectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		notesscreen = servicedetailsscreen.clickNotesCell();
 		notesscreen.setNotes(servicenotes);
@@ -5759,7 +5759,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.setSizeAndSeverity("DIME", "VERY LIGHT");
 		vehiclePartScreen.setPrice(_price2);
 		vehiclePartScreen.saveVehiclePart();
-		
+
 		servicesscreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.MATRIX_LABOR);
 		vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix2);
 		vehiclePartScreen.switchOffOption("PDR");
@@ -5767,7 +5767,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		vehiclePartScreen.saveVehiclePart();
 		pricematrix.saveWizard();
-		
+
 		Assert.assertTrue(myinspectionsscreen.isNotesIconPresentForInspection(inspnumber));
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		//SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
@@ -5778,12 +5778,12 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.clickSingnAndDrawApprovalSignature();
 		approveinspscreen.clickDoneButton();
-		
+
 		homescreen = myinspectionsscreen.clickHomeButton();
-		
+
 		RegularTeamWorkOrdersScreen teamwoscreen = homescreen.clickTeamWorkordersButton();
 		homescreen = teamwoscreen.clickHomeButton();
-		
+
 		for (int i = 0; i < timetowaitwo; i++) {
 			Helpers.waitABit(60*1000);
 			teamwoscreen = homescreen.clickTeamWorkordersButton();
@@ -5794,34 +5794,34 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teamwoscreen.setSearchType(WorkOrdersTypes.WO_TYPE_FOR_MONITOR.getWorkOrderTypeName());
 		teamwoscreen.selectSearchLocation("All locations");
 		teamwoscreen.clickSearchSaveButton();
-		
+
 		final String wonumber = teamwoscreen.getFirstWorkOrderNumberValue();
 		teamwoscreen.selectWorkOrderForEidt(wonumber);
-		
+
 		vehiclescreen = new RegularVehicleScreen();
 		Assert.assertEquals(vehiclescreen.getEst(), inspnumber);
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		notesscreen = vehiclescreen.clickNotesButton();
 		Assert.assertTrue(notesscreen.getNotesValue().length() > 0);
 		notesscreen.clickSaveButton();
-		
+
 		servicesscreen = new RegularServicesScreen();
-		/*servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");		
+		/*servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
 		notesscreen = servicedetailsscreen.clickNotesCell();
 		Assert.assertEquals(notesscreen.getNotesValue(), servicenotes);
 		notesscreen.clickSaveButton();
 		servicedetailsscreen.saveSelectedServiceDetails();*/
 		RegularSelectedServicesScreen regularSelectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
 		Assert.assertTrue(regularSelectedServicesScreen.isNotesIconPresentForSelectedWorkOrderService("3/4\" - Penny Size"));
-		
-		/*servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SALES_TAX);		
+
+		/*servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SALES_TAX);
 		notesscreen = servicedetailsscreen.clickNotesCell();
 		Assert.assertEquals(notesscreen.getNotesValue(), servicenotes);
-		notesscreen.clickSaveButton();		
+		notesscreen.clickSaveButton();
 		servicedetailsscreen.saveSelectedServiceDetails();*/
 		Assert.assertTrue(regularSelectedServicesScreen.isNotesIconPresentForSelectedWorkOrderService(iOSInternalProjectConstants.SALES_TAX));
-		
-		/*servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);		
+
+		/*servicedetailsscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		notesscreen = servicedetailsscreen.clickNotesCell();
 		Assert.assertEquals(notesscreen.getNotesValue(), servicenotes);
 		notesscreen.clickSaveButton();
@@ -5830,13 +5830,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.cancelWizard();
 		teamwoscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 32989:Inspections: Regular - Verify that question section is shown per service with must panels when questions are required", 
+
+	@Test(testName = "Test Case 32989:Inspections: Regular - Verify that question section is shown per service with must panels when questions are required",
 			description = "Verify that question section is shown per service with must panels when questions are required")
 	public void testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -5867,22 +5867,22 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicedetailsscreen.isQuestionFormCellExists());
 		Assert.assertEquals(servicedetailsscreen.getQuestion2Value(), "A3");
 		servicedetailsscreen.saveSelectedServiceDetails();
-		
+
 		for (int i = 1; i < 4; i++) {
 			selectedServicesScreen.openServiceDetailsByIndex(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE, i);
 			Assert.assertFalse(servicedetailsscreen.isQuestionFormCellExists());
 			servicedetailsscreen.saveSelectedServiceDetails();
 		}
 		selectedServicesScreen.saveWizard();
-		myinspectionsscreen.clickHomeButton();		
+		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 30509:Invoices: Regular - Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices", 
+
+	@Test(testName = "Test Case 30509:Invoices: Regular - Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices",
 			description = "Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices")
 	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices() {
-		
+
 		final String emptypo = "";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -5898,18 +5898,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		teaminvoicesscreen.clickCancel();
 		teaminvoicesscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 30510:Invoices: Regular - Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices", 
+
+	@Test(testName = "Test Case 30510:Invoices: Regular - Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices",
 			description = "Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices")
 	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices() {
-		
+
 		final String emptypo = "";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		final String invoicenum = myinvoicesscreen.getFirstInvoiceValue();
 		myinvoicesscreen.selectInvoice(invoicenum);
@@ -5920,24 +5920,24 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myinvoicesscreen.clickCancel();
 		myinvoicesscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 33115:WO: Regular - Verify that Tech splits is saved in price matrices", 
+
+	@Test(testName = "Test Case 33115:WO: Regular - Verify that Tech splits is saved in price matrices",
 			description = "Verify that Tech splits is saved in price matrices")
 	public void testWOVerifyThatTechSplitsIsSavedInPriceMatrices() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String pricevalue  = "100";
 		final String totalsale = "5";
 		final String defaulttech  = "Employee Simple 20%";
 		final String techname  = "Oksana Zayats";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.setVIN(VIN);
@@ -5967,13 +5967,13 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale(totalsale);
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation(totalsale));
 		ordersummaryscreen.clickSave();
-		
+
 		RegularTechRevenueScreen techrevenuescreen = myworkordersscreen.selectWorkOrderTechRevenueMenuItem(wonumber);
 		Assert.assertTrue(techrevenuescreen.isTechIsPresentInReport(techname));
 		Assert.assertTrue(techrevenuescreen.isTechIsPresentInReport(defaulttech));
 		techrevenuescreen.clickBackButton();
 		myworkordersscreen = new RegularMyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();	
+		myworkordersscreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 34551:WO: Regular - Verify that it is not possible to change default tech via service type split",
@@ -6027,27 +6027,27 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation(totalsale));
 		ordersummaryscreen.saveWizard();
 		Assert.assertTrue(myworkordersscreen.woExists(wonumber));
-		
-		myworkordersscreen.clickHomeButton();	
+
+		myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 45097:WO: Regular - Verify that when use Copy Services action for WO all service instances should be copied", 
+
+	@Test(testName = "Test Case 45097:WO: Regular - Verify that when use Copy Services action for WO all service instances should be copied",
 			description = "Verify that when use Copy Services action for WO all service instances should be copied")
 	public void testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "5";
 		final String[] servicestoadd = { iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL, iOSInternalProjectConstants.TEST_SERVICE_WITH_QF_PP_VEHICLE};
 		final String[] vehicleparts = { "Dashboard", "Deck Lid"};
-		
-		
+
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.setVIN(VIN);
@@ -6066,7 +6066,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		for (String serviceadd : servicestoadd) {
 			Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(serviceadd));
 		}
-		
+
 		Assert.assertEquals(servicesscreen.getSubTotalAmaunt(), "$44.00");
 		RegularQuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
@@ -6076,7 +6076,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		ordersummaryscreen.setTotalSale(totalsale);
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation(totalsale));
 		ordersummaryscreen.saveWizard();
-		
+
 		myworkordersscreen.selectWorkOrderForCopyServices(wonumber);
 		myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -6086,32 +6086,32 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		}
 		Assert.assertEquals(servicesscreen.getSubTotalAmaunt(), "$44.00");
 		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();	
+		myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 50250:WO: Regular - Verify that WO number is not duplicated", 
+
+	@Test(testName="Test Case 50250:WO: Regular - Verify that WO number is not duplicated",
 			description = "WO: - Verify that WO number is not duplicated")
 	public void testWOVerifyThatWONumberIsNotDuplicated() {
-		
+
 		final String VIN  = "JA4LS31H8YP047397";
 		final String _po  = "12345";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		//customer approval ON
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		vehiclescreen.setVIN(VIN);
-		
+
 		final String wonumber1 = vehiclescreen.getWorkOrderNumber();
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		
+
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.approveWorkOrder(wonumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -6125,7 +6125,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 		invoiceinfoscreen.clickSaveAsFinal();
 		Helpers.waitABit(10000);
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -6144,20 +6144,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		invoiceswebpage.archiveInvoiceByNumber(invoicenumber);
 		Assert.assertFalse(invoiceswebpage.isInvoiceDisplayed(invoicenumber));
 		webdriver.quit();
-		
+
 		//Create second WO
 		myworkordersscreen.clickAddOrderButton();
 		myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		vehiclescreen.setVIN(VIN);
-		
+
 		final String wonumber2 = vehiclescreen.getWorkOrderNumber();
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.saveWizard();
-		
-		myworkordersscreen.approveWorkOrder(wonumber2, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);	
-		
+
+		myworkordersscreen.approveWorkOrder(wonumber2, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+
 		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber2);
 		myworkordersscreen.clickInvoiceIcon();
 		myworkordersscreen.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
@@ -6172,22 +6172,22 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen.updateDatabase();
 		RegularMainScreen mainscreen = new RegularMainScreen();
 		homescreen = mainscreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		
+
 		//Create third WO
 		myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		vehiclescreen.setVIN(VIN);
-		
+
 		final String wonumber3 = vehiclescreen.getWorkOrderNumber();
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		
+
 		ordersummaryscreen.setTotalSale("5");
 		ordersummaryscreen.saveWizard();
 		homescreen = myworkordersscreen.clickHomeButton();
 		Helpers.waitABit(10000);
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		loginpage = PageFactory.initElements(webdriver,
@@ -6210,50 +6210,50 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(workorderspage.getWorkOrdersTableRowCount(), 1);
 		webdriver.quit();
 	}
-	
-	@Test(testName="Test Case 39573:WO: Regular - Verify that in case valid VIN is decoded, replace existing make and model with new one", 
+
+	@Test(testName="Test Case 39573:WO: Regular - Verify that in case valid VIN is decoded, replace existing make and model with new one",
 			description = "WO: - Verify that in case valid VIN is decoded, replace existing make and model with new one")
 	public void testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne() {
-		
+
 		final String[] VINs  = { "2A8GP54L87R279721", "1FMDU32X0PUB50142", "GFFGG"} ;
 		final String makes[]  = { "Chrysler", "Ford", null } ;
 		final String models[]  = { "Town and Country", "Explorer",  null };
 
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		//customer approval ON
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		for (int i = 0; i < VINs.length; i++) {
 			vehiclescreen.setVIN(VINs[i]);
 			Assert.assertEquals(vehiclescreen.getMake(), makes[i]);
-			Assert.assertEquals(vehiclescreen.getModel(), models[i]);			
+			Assert.assertEquals(vehiclescreen.getModel(), models[i]);
 			vehiclescreen.clearVINCode();
 		}
 
 		vehiclescreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 34626:WO: Regular - Verify that when service do not have questions and select several panels do not underline anyone", 
+
+	@Test(testName="Test Case 34626:WO: Regular - Verify that when service do not have questions and select several panels do not underline anyone",
 			description = "WO: - Verify that when service do not have questions and select several panels do not underline anyone")
 	public void testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone() {
 		final String VIN  = "2A8GP54L87R279721";
 		final String[] vehicleparts  = { "Center Rear Passenger Seat", "Dashboard" };
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		//customer approval ON
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
@@ -6276,18 +6276,18 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 	}
 
-	@Test(testName = "Test Case 31964:WO: Regular - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen", 
-				description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
+	@Test(testName = "Test Case 31964:WO: Regular - Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen",
+			description = "Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen")
 	public void testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen() {
-			
+
 		final String VIN = "2A8GP54L87R279721";
 
-			
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
-			
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -6299,11 +6299,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.cancelOrder();
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 53824:WO: Regular - Verify that message is shown for Money and Labor service when price is changed to 0$ under WO", 
+
+	@Test(testName = "Test Case 53824:WO: Regular - Verify that message is shown for Money and Labor service when price is changed to 0$ under WO",
 			description = "Verify that message is shown for Money and Labor service when price is changed to 0$ under WO")
 	public void testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "5";
 		final String servicezeroprice = "0";
@@ -6313,9 +6313,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_SMOKE_MONITOR);
 		vehiclescreen.setVIN(VIN);
@@ -6326,21 +6326,21 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale(totalsale);
 		ordersummaryscreen.saveWizard();
-		
+
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
-        vehiclescreen = new RegularVehicleScreen();
+		vehiclescreen = new RegularVehicleScreen();
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		//servicesscreen.selectService(iOSInternalProjectConstants.AMONEYVEHICLEFF_WASHING);
-		
+
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.AMONEYVEHICLEFF_WASHING);
 		selectedservicescreen.setServicePriceValue(servicezeroprice);
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Order's technician split will be assigned to this order service if you set zero amount."));
-		
+
 		selectedservicescreen.clickTechniciansIcon();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Set non-zero amount for service to assign multiple technicians."));
-		
+
 		selectedservicescreen.searchTechnician("Manager");
 		selectedservicescreen.selecTechnician("Manager 1");
 		selectedservicescreen.cancelSearchTechnician();
@@ -6351,7 +6351,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected("Oksana Zayats"));
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
+
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.CALC_LABOR);
 		selectedservicescreen.clickTechniciansIcon();
 		alerttext = Helpers.getAlertTextAndAccept();
@@ -6359,7 +6359,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.cancelSelectedServiceDetails();
 		selectedservicescreen.setServiceRateValue(servicecalclaborprice);
 		selectedservicescreen.clickTechniciansIcon();
-		
+
 		selectedservicescreen.searchTechnician("Manager");
 		selectedservicescreen.selecTechnician("Manager 1");
 		selectedservicescreen.cancelSearchTechnician();
@@ -6373,11 +6373,11 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.cancelWizard();
 		homescreen =  myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 45252:WO: Regular - Verify that validation is present for vehicle trim field", 
+
+	@Test(testName = "Test Case 45252:WO: Regular - Verify that validation is present for vehicle trim field",
 			description = "Verify that validation is present for vehicle trim field")
 	public void testWOVerifyThatValidationIsPresentForVehicleTrimField() {
-		
+
 		final String VIN  = "TESTVINN";
 		final String _make = "Acura";
 		final String _model = "CL";
@@ -6387,9 +6387,9 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_VEHICLE_TRIM_VALIDATION);
 		vehiclescreen.setVIN(VIN);
@@ -6409,20 +6409,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.saveWizard();
 		homescreen =  myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 35375:WO: Regular - Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF", 
+
+	@Test(testName = "Test Case 35375:WO: Regular - Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF",
 			description = "Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF")
 	public void testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TOTAL_SALE_NOT_REQUIRED);
 		vehiclescreen.setVIN(VIN);
@@ -6436,7 +6436,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertFalse(ordersummaryscreen.isTotalSaleFieldPresent());
 		ordersummaryscreen.saveWizard();
 		homescreen = myworkordersscreen.clickHomeButton();
-		
+
 		RegularTeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
 		teamworkordersscreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreen = new RegularVehicleScreen();
@@ -6446,23 +6446,23 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		homescreen = teamworkordersscreen.clickHomeButton();
 	}
 
-	@Test(testName = "Test Case 40821:WO: Regular - Verify that it is possible to assign tech to order by action Technicians", 
+	@Test(testName = "Test Case 40821:WO: Regular - Verify that it is possible to assign tech to order by action Technicians",
 			description = "Verify that it is possible to assign tech to order by action Technicians")
 	public void testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String pricevalue  = "21";
 		final String totalsale = "5";
 		final String defaulttech  = "Employee Simple 20%";
 		final String techname  = "Oksana Zayats";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.setVIN(VIN);
@@ -6481,14 +6481,14 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.setServiceQuantityValue("2.00");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
+
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
 		selectedservicescreen.clickVehiclePartsCell();
 		selectedservicescreen.selectVehiclePart("Front Bumper");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
+
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		selectedservicescreen.clickVehiclePartsCell();
 		selectedservicescreen.selectVehiclePart("Hood");
@@ -6506,7 +6506,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclePartScreen.saveVehiclePart();
 		pricematrix.clickSave();
 		servicesscreen = new RegularServicesScreen();
-		
+
 		servicesscreen.selectSubService(iOSInternalProjectConstants.TAX_DISCOUNT);
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SALES_TAX);
 		selectedservicescreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
@@ -6518,27 +6518,27 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale(totalsale);
 		ordersummaryscreen.saveWizard();
-		
+
 		selectedservicescreen = myworkordersscreen.selectWorkOrderTechniciansMenuItem(wonumber);
 		//selectedservicescreen.selecTechnician(defaulttech);
 		selectedservicescreen.selecTechnician(techname);
 		selectedservicescreen.saveSelectedServiceDetails();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Changing default employees for a work order will change split data for all services."));
-		
+
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreen = new RegularVehicleScreen();
 		Assert.assertEquals(vehiclescreen.getTechnician(), techname + ", " + defaulttech);
 		vehiclescreen.cancelOrder();
-		myworkordersscreen.clickHomeButton();	
+		myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 58663:Inspections: Regular - Verify that when Panel grouping is used for package for selected Panel only linked services are shown", 
+
+	@Test(testName = "Test Case 58663:Inspections: Regular - Verify that when Panel grouping is used for package for selected Panel only linked services are shown",
 			description = "Verify that when Panel grouping is used for package for selected Panel only linked services are shown")
 	public void testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
@@ -6567,23 +6567,23 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		servicesscreen.clickBackServicesButton();
 		servicesscreen = new RegularServicesScreen();
 		servicesscreen.saveWizard();
-		myinspectionsscreen.clickHomeButton();	
+		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 57101:WO: Regular - Verify that WO is saved correct with selected sub service (no message with incorrect tech split)", 
+
+	@Test(testName = "Test Case 57101:WO: Regular - Verify that WO is saved correct with selected sub service (no message with incorrect tech split)",
 			description = "Verify that WO is saved correct with selected sub service (no message with incorrect tech split)")
 	public void testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
 		final String totalsale = "10";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.setVIN(VIN);
@@ -6594,16 +6594,16 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		RegularOrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale(totalsale);
 		ordersummaryscreen.saveWizard();
-		
+
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreen = new RegularVehicleScreen();
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		
+
 		servicesscreen.selectService(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE);
 		servicesscreen.hideKeyboard();
 		servicesscreen.selectServiceSubSrvice(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE + " (Wash partly)");
 		//servicesscreen.clickToolButton();
-		
+
 		servicesscreen.selectService(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE);
 		servicesscreen.selectServiceSubSrvice(iOSInternalProjectConstants.SERVICE_WITH_SUB_SERVICE + " (Wash whole)");
 		servicesscreen.hideKeyboard();
@@ -6616,20 +6616,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedServicesScreen.saveWizard();
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 54542:WO: Regular - Verify that answer services are correctly added for WO when Panel group is set", 
+
+	@Test(testName = "Test Case 54542:WO: Regular - Verify that answer services are correctly added for WO when Panel group is set",
 			description = "Verify that answer services are correctly added for WO when Panel group is set")
 	public void testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_PANEL_GROUP);
 		vehiclescreen.setVIN(VIN);
@@ -6649,20 +6649,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedServicesScreen.cancelWizard();
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 43408:WO: Regular - Verify that search bar is present for service pack screen", 
+
+	@Test(testName = "Test Case 43408:WO: Regular - Verify that search bar is present for service pack screen",
 			description = "Verify that search bar is present for service pack screen")
 	public void testWOVerifyThatSearchBarIsPresentForServicePackScreen() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.setVIN(VIN);
@@ -6674,7 +6674,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedservicescreen.selectVehiclePart("Dashboard");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		
+
 		//servicesscreen.searchServiceByName("Tax");
 		servicesscreen.selectSubService(iOSInternalProjectConstants.SALES_TAX);
 
@@ -6685,20 +6685,20 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		selectedServicesScreen.cancelWizard();
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 42178:WO: Regular - Verify that Cancel message is shown for New/Existing WO", 
+
+	@Test(testName = "Test Case 42178:WO: Regular - Verify that Cancel message is shown for New/Existing WO",
 			description = "Verify that Cancel message is shown for New/Existing WO")
 	public void testWOVerifyThatCancelMessageIsShownForNewOrExistingWO() {
-		
+
 		final String VIN  = "1D7HW48NX6S507810";
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		
+
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		
+
 		myworkordersscreen.clickAddOrderButton();
 		RegularVehicleScreen vehiclescreen =  myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_SMOKE_TEST);
 		vehiclescreen.clickChangeScreen();
@@ -6708,7 +6708,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.clickCancel();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, "Stop Work Order Creation\nAny unsaved changes will be lost. Are you sure you want to stop creating this Work Order?");
-		
+
 		String wonumber = myworkordersscreen.getFirstWorkOrderNumberValue();
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreen = new RegularVehicleScreen();
@@ -6719,23 +6719,23 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.clickCancel();
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, "Stop Work Order Edit\nAny unsaved changes will be lost. Are you sure you want to stop editing this Work Order?");
-		
+
 		myworkordersscreen.openWorkOrderDetails(wonumber);
 		vehiclescreen = new RegularVehicleScreen();
 		vehiclescreen.clickChangeScreen();
 		vehiclescreen.clickCancel();
-		
+
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName="Test Case 35951:SR: Reqular - Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed", 
+
+	@Test(testName="Test Case 35951:SR: Reqular - Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed",
 			description = "Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed")
 	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -6745,26 +6745,26 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
-		
+
 		ServiceRequestsListWebPage servicerequestslistpage = operationsWebPage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.clickVehicleInforEditButton();
 		servicerequestslistpage.setServiceRequestVIN(VIN);
 		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.saveNewServiceRequest();
 		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
 		DriverBuilder.getInstance().getDriver().quit();
-		
-		
+
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -6775,7 +6775,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
 		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
 		servicerequestsscreen.selectAcceptAction();
-		
+
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
 		servicerequestsscreen = new RegularServiceRequestsScreen();
@@ -6785,17 +6785,17 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertFalse(servicerequestsscreen.isDeclineActionExists());
 		servicerequestsscreen.clickCancel();
 		servicerequestsscreen.clickHomeButton();
-	
+
 	}
-	
-	@Test(testName="Test Case 35953:SR: Regular - Verify that when SR is declined status reason should be selected", 
+
+	@Test(testName="Test Case 35953:SR: Regular - Verify that when SR is declined status reason should be selected",
 			description = "Verify that when SR is declined status reason should be selected")
 	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -6805,26 +6805,26 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
-		
+
 		ServiceRequestsListWebPage servicerequestslistpage = operationsWebPage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.clickVehicleInforEditButton();
 		servicerequestslistpage.setServiceRequestVIN(VIN);
 		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.saveNewServiceRequest();
 		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
 		DriverBuilder.getInstance().getDriver().quit();
-		
-		
+
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -6835,24 +6835,24 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
 		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
 		servicerequestsscreen.selectDeclineAction();
-		
+
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_DECLINE_SERVICEREQUEST);
 		servicerequestsscreen.clickDoneCloseReasonDialog();
 		servicerequestsscreen = new RegularServiceRequestsScreen();
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));
 		servicerequestsscreen.clickHomeButton();
-	
+
 	}
-	
-	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it", 
+
+	@Test(testName="Test Case 35954:SR: Regular - Verify that SR is not accepted when employee review or update it",
 			description = "Verify that SR is not accepted when employee review or update it")
 	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
-		
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -6862,26 +6862,26 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
-		
+
 		ServiceRequestsListWebPage servicerequestslistpage = operationsWebPage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.clickVehicleInforEditButton();
 		servicerequestslistpage.setServiceRequestVIN(VIN);
 		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.saveNewServiceRequest();
 		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
 		DriverBuilder.getInstance().getDriver().quit();
-		
-		
+
+
 		homescreen = new RegularHomeScreen();
-		
+
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -6894,29 +6894,29 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		vehiclescreen.setTech("Simple 20%");
 		RegularQuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
-		questionsscreen.selectAnswerForQuestion("Question 2", "A1");		
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
 		questionsscreen.saveWizard();
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		Assert.assertTrue(servicerequestsscreen.isAcceptActionExists());
 		Assert.assertTrue(servicerequestsscreen.isDeclineActionExists());
 		servicerequestsscreen.clickCancel();
-		
+
 		servicerequestsscreen.clickHomeButton();
-	
+
 	}
-	
-	@Test(testName="Test Case 36004:SR: Regular - Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON", 
+
+	@Test(testName="Test Case 36004:SR: Regular - Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON",
 			description = "Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON")
 	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON() {
-		
+
 		final String VIN = "2A4RR4DE2AR286008";
 		final String _make = "Chrysler";
 		final String _model = "Town and Country";
-		
+
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		String startDate = LocalDate.now().plusDays(1).format(formatter);
 		String endDate = LocalDate.now().plusDays(2).format(formatter);
-	
+
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -6926,45 +6926,45 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsWebPage = backofficeheader.clickOperationsLink();
-		
+
 		ServiceRequestsListWebPage servicerequestslistpage = operationsWebPage.clickNewServiceRequestList();
 		servicerequestslistpage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		servicerequestslistpage.clickAddServiceRequestButton();
-		
+
 		servicerequestslistpage.clickGeneralInfoEditButton();
 		servicerequestslistpage.setServiceRequestGeneralInfoAssignedTo("Employee Simple 20%");
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.clickCustomerEditButton();
 		servicerequestslistpage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.clickVehicleInforEditButton();
 		servicerequestslistpage.setServiceRequestVIN(VIN);
 		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
 		servicerequestslistpage.clickDoneButton();
-		
+
 		servicerequestslistpage.saveNewServiceRequest();
 		final String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(servicerequestslistpage.addAppointmentFromSRlist(startDate, endDate, "Employee Simple 20%"));
 		DriverBuilder.getInstance().getDriver().quit();
-		
+
 		homescreen = new RegularHomeScreen();
 		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
-				
+
 		servicerequestsscreen.selectServiceRequest(srnumber);
 		servicerequestsscreen.selectAppointmentRequestAction();
 		Assert.assertTrue(servicerequestsscreen.isAcceptAppointmentRequestActionExists());
 		Assert.assertTrue(servicerequestsscreen.isDeclineAppointmentRequestActionExists());
 		servicerequestsscreen.clickBackButton();
-		
+
 		servicerequestsscreen.clickHomeButton();
-	
+
 	}
 
 	@Test(testName = "Test Case 34427:WO: Regular - Verify Assign tech to service type, instead of individual services",
-		 description = "Verify Assign tech to service type, instead of individual services")
+			description = "Verify Assign tech to service type, instead of individual services")
 	public void testWOVerifyAssignTechToServiceTypeInsteadOfIndividualServices() {
 
 		final String VIN  = "1D7HW48NX6S507810";
@@ -7692,7 +7692,7 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT);
 
 		vehiclePartScreen.clickOnTechnicians();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART);
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART);
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(defaulttech));
 		Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(defaulttech), PricesCalculations.getPriceRepresentation(serviceZeroPrice));
@@ -8260,133 +8260,397 @@ public class iOSRegularSmokeTestCases extends BaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-    @Test(testName = "Test Case 82201:WO - If service price is 0 assign WO split to service in case no def tech",
-            description = "Verify If service price is 0 assign WO split to service in case no def tech")
-    public void testVerifyIfServicePriceIs0AssignWOSplitToServiceInCaseNoDefTech() {
+	@Test(testName = "Test Case 82201:WO - If service price is 0 assign WO split to service in case no def tech",
+			description = "Verify If service price is 0 assign WO split to service in case no def tech")
+	public void testVerifyIfServicePriceIs0AssignWOSplitToServiceInCaseNoDefTech() {
 
-        final String VIN = "1D7HW48NX6S507810";;
-        final String defaulttech = "Oksana Zayats";
+		final String VIN = "1D7HW48NX6S507810";;
+		final String defaulttech = "Oksana Zayats";
 
-        final String tech1 = "Vladimir Avsievich";
-        final String serviceZaroPrice = "0";
+		final String tech1 = "Vladimir Avsievich";
+		final String serviceZaroPrice = "0";
 
-        homescreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homescreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+		homescreen = new RegularHomeScreen();
+		RegularMainScreen mainScreen = homescreen.clickLogoutButton();
+		mainScreen.userLogin("Zayats", "1111");
 
-        RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
-        customersscreen.swtchToWholesaleMode();
-        customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-        RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
-        myworkordersscreen.clickAddOrderButton();
-        RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
-        vehiclescreen.setVIN(VIN);
-        vehiclescreen.clickTech();
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.selecTechnician(tech1);
-        selectedServiceDetailsScreen.unselecTechnician(defaulttech);
-        selectedServiceDetailsScreen.saveSelectedServiceDetailsWithAlert();
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		vehiclescreen.setVIN(VIN);
+		vehiclescreen.clickTech();
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		selectedServiceDetailsScreen.selecTechnician(tech1);
+		selectedServiceDetailsScreen.unselecTechnician(defaulttech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetailsWithAlert();
 
-        RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), "$0.00");
-        selectedServiceDetailsScreen.clickTechniciansIcon();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
-        Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech1));
-        Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(tech1), "$0.00");
-        selectedServiceDetailsScreen.cancelSelectedServiceDetails();
-        selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
+		Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), "$0.00");
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(tech1));
+		Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(tech1), "$0.00");
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
 
-        servicesscreen = new RegularServicesScreen();
-        servicesscreen.cancelWizard();
+		servicesscreen = new RegularServicesScreen();
+		servicesscreen.cancelWizard();
 
-        myworkordersscreen.clickHomeButton();
-        homescreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-    }
+		myworkordersscreen.clickHomeButton();
+		homescreen.clickLogoutButton();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+	}
 
-    @Test(testName="Test Case 26115:WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required",
-            description = "WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required")
-    public void testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired() {
+	@Test(testName="Test Case 26115:WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required",
+			description = "WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required")
+	public void testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired() {
 
-        final String VIN  = "1D3HV13T19S825733";
-        final String _pricematrix = "HOOD";
-        final String _size = "NKL";
-        final String _severity = "VERY LIGHT";
-        final String defLocation = "Test Location check out required";
+		final String VIN  = "1D3HV13T19S825733";
+		final String _pricematrix = "HOOD";
+		final String _size = "NKL";
+		final String _severity = "VERY LIGHT";
+		final String defLocation = "Test Location check out required";
 
-        homescreen = new RegularHomeScreen();
-        RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
-        customersscreen.swtchToWholesaleMode();
-        customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		homescreen = new RegularHomeScreen();
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-        RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 
-        myworkordersscreen.clickAddOrderButton();
-        RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
-        vehiclescreen.setVIN(VIN);
-        vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
-        vehiclescreen.selectLocation(defLocation);
-        String wonum = vehiclescreen.getWorkOrderNumber();
-        RegularServicesScreen servicesscreen =  vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-        servicesscreen.selectSubService(iOSInternalProjectConstants.VPS1_SERVICE);
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
+		vehiclescreen.setVIN(VIN);
+		vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
+		vehiclescreen.selectLocation(defLocation);
+		String wonum = vehiclescreen.getWorkOrderNumber();
+		RegularServicesScreen servicesscreen =  vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.VPS1_SERVICE);
 
-        servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
-        RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
-        vehiclePartScreen.setSizeAndSeverity(_size, _severity);
-        vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-        selectedservicescreen.saveSelectedServiceDetails();
-        vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-        vehiclePartScreen.saveVehiclePart();
-        pricematrix.clickSave();
-
-
-        RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        ordersummaryscreen.setTotalSale("5");
-        ordersummaryscreen.checkApproveAndSaveWorkOrder();
-        myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-        ordersummaryscreen.saveWizard();
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
+		vehiclePartScreen.setSizeAndSeverity(_size, _severity);
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
+		selectedservicescreen.saveSelectedServiceDetails();
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		vehiclePartScreen.saveVehiclePart();
+		pricematrix.clickSave();
 
 
-        RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
-        teamWorkOrdersScreen.clickSearchButton();
-        teamWorkOrdersScreen.selectSearchLocation(defLocation);
-        teamWorkOrdersScreen.clickSearchSaveButton();
-        teamWorkOrdersScreen.clickOnWO(wonum);
-        RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-        ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        ordermonitorscreen.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
-        ordermonitorscreen.clickServiceDetailsCancelButton();
+		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.checkApproveAndSaveWorkOrder();
+		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ordersummaryscreen.saveWizard();
 
-        ordermonitorscreen.clickStartPhase();
-        ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        ordermonitorscreen.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
-        ordermonitorscreen.clickServiceDetailsCancelButton();
 
-        ordermonitorscreen.clickStartPhaseCheckOutButton();
-        ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-        ordermonitorscreen.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
-        ordermonitorscreen.clickServiceDetailsCancelButton();
+		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
+		teamWorkOrdersScreen.clickSearchButton();
+		teamWorkOrdersScreen.selectSearchLocation(defLocation);
+		teamWorkOrdersScreen.clickSearchSaveButton();
+		teamWorkOrdersScreen.clickOnWO(wonum);
+		RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
+		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		ordermonitorscreen.clickServiceStatusCell();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+		ordermonitorscreen.clickServiceDetailsCancelButton();
 
-        ordermonitorscreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
-        Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE),
-                OrderMonitorPhases.COMPLETED.getrderMonitorPhaseName());
-        ordermonitorscreen.clickBackButton();
-        homescreen = teamWorkOrdersScreen.clickHomeButton();
-    }
+		ordermonitorscreen.clickStartPhase();
+		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		ordermonitorscreen.clickServiceStatusCell();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+		ordermonitorscreen.clickServiceDetailsCancelButton();
+
+		ordermonitorscreen.clickStartPhaseCheckOutButton();
+		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		ordermonitorscreen.clickServiceStatusCell();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+		ordermonitorscreen.clickServiceDetailsCancelButton();
+
+		ordermonitorscreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE),
+				OrderMonitorPhases.COMPLETED.getrderMonitorPhaseName());
+		ordermonitorscreen.clickBackButton();
+		homescreen = teamWorkOrdersScreen.clickHomeButton();
+	}
+
+	@Test(testName="Test Case 29181:WO Monitor: Verify that when option 'Phase enforcement' is OFF and 'Start service required' it possible to start service from inactive phase",
+			description = "WO Monitor: Verify that when option 'Phase enforcement' is OFF and 'Start service required' it possible to start service from inactive phase")
+	public void testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase() {
+
+		final String VIN = "1D3HV13T19S825733";
+		final String _pricematrix = "HOOD";
+		final String _size = "NKL";
+		final String _severity = "VERY LIGHT";
+		final String defLocation = "Test Location ZZZ";
+
+		homescreen = new RegularHomeScreen();
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_MONITOR_DEVICE);
+		vehiclescreen.setVIN(VIN);
+		vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
+		vehiclescreen.selectLocation(defLocation);
+		String wonum = vehiclescreen.getWorkOrderNumber();
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		servicesscreen.selectSubService(iOSInternalProjectConstants.VPS1_SERVICE);
+
+		servicesscreen.selectSubService(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		RegularPriceMatrixScreen pricematrix = servicesscreen.selectServicePriceMatrices(iOSInternalProjectConstants.HAIL_MATRIX_SERVICE);
+		RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(_pricematrix);
+		vehiclePartScreen.setSizeAndSeverity(_size, _severity);
+		vehiclePartScreen.clickDiscaunt(iOSInternalProjectConstants.DYE_SERVICE);
+		RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
+		selectedservicescreen.saveSelectedServiceDetails();
+		vehiclePartScreen.selectDiscaunt(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
+		vehiclePartScreen.saveVehiclePart();
+		pricematrix.clickSave();
+
+
+		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.checkApproveAndSaveWorkOrder();
+		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		ordersummaryscreen.saveWizard();
+
+
+		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
+		teamWorkOrdersScreen.clickSearchButton();
+		teamWorkOrdersScreen.selectSearchLocation(defLocation);
+		teamWorkOrdersScreen.clickSearchSaveButton();
+		teamWorkOrdersScreen.clickOnWO(wonum);
+		RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
+		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
+		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
+		ordermonitorscreen.clickServiceDetailsDoneButton();
+
+		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonExists());
+		ordermonitorscreen.clickStartPhaseButton();
+		Assert.assertFalse(ordermonitorscreen.isStartPhaseButtonExists());
+		ordermonitorscreen.clickBackButton();
+		homescreen = teamWorkOrdersScreen.clickHomeButton();
+	}
+
+	@Test(testName="Test Case 30546:WO Monitor:  Verify that Tech who is not assigned to order service cannot start order",
+			description = "WO Monitor: Verify that Tech who is not assigned to order service cannot start order")
+	public void testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder() {
+
+		final String VIN = "1D3HV13T19S825733";
+		final String defServicePrice = "5";
+		final String defaultTech = "Employee Simple 20%";
+		final String newtech = "Vladimir Avsievich";
+		final String vehiclePart = "Hood";
+		final String defLocation = "Test Location ZZZ";
+
+		homescreen = new RegularHomeScreen();
+
+
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_DELAY_START);
+		vehiclescreen.setVIN(VIN);
+		vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
+		vehiclescreen.selectLocation(defLocation);
+		String wonum = vehiclescreen.getWorkOrderNumber();
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
+		selectedServiceDetailsScreen.setServicePriceValue(defServicePrice);
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		selectedServiceDetailsScreen.selecTechnician(newtech);
+		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		selectedServiceDetailsScreen.selecTechnician(newtech);
+		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		selectedServiceDetailsScreen.clickVehiclePartsCell();
+		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		selectedServiceDetailsScreen.selecTechnician(newtech);
+		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedServiceDetailsScreen.clickVehiclePartsCell();
+		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		selectedServiceDetailsScreen.selecTechnician(newtech);
+		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+
+		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.saveWizard();
+
+
+		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
+		teamWorkOrdersScreen.clickSearchButton();
+		teamWorkOrdersScreen.selectSearchLocation(defLocation);
+		teamWorkOrdersScreen.clickSearchSaveButton();
+		teamWorkOrdersScreen.clickOnWO(wonum);
+		RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
+
+		ordermonitorscreen.clickStartOrderButton();
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+				AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
+		ordermonitorscreen = new RegularOrderMonitorScreen();
+
+
+		ordermonitorscreen.clickBackButton();
+		teamWorkOrdersScreen.clickHomeButton();
+
+	}
+
+	@Test(testName="Test Case 30547:WO Monitor: Verify that is it impossible to change status for service/phase when order is not started," +
+			"Test Case 30548:WO Monitor: Verify that when order is not started Start date can be changed but not for future",
+			description = "WO Monitor: Verify that is it impossible to change status for service/phase when order is not started," +
+					"Verify that when order is not started Start date can be changed but not for future")
+	public void testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted() {
+
+		final String VIN = "1D3HV13T19S825733";
+		final String defServicePrice = "5";
+		final String defaultTech = "Oksana Zayats";
+		final String newtech = "Vladimir Avsievich";
+		final String vehiclePart = "Hood";
+		final String defLocation = "Test Location ZZZ";
+
+		homescreen = new RegularHomeScreen();
+		RegularMainScreen mainScreen = homescreen.clickLogoutButton();
+		mainScreen.userLogin("Zayats", "1111");
+
+		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		customersscreen.swtchToWholesaleMode();
+		customersscreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		myworkordersscreen.clickAddOrderButton();
+		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_DELAY_START);
+		vehiclescreen.setVIN(VIN);
+		vehiclescreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
+		vehiclescreen.selectLocation(defLocation);
+		String wonum = vehiclescreen.getWorkOrderNumber();
+		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
+		selectedServiceDetailsScreen.setServicePriceValue(defServicePrice);
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		selectedServiceDetailsScreen.selecTechnician(newtech);
+		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE);
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		selectedServiceDetailsScreen.selecTechnician(newtech);
+		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE);
+		selectedServiceDetailsScreen.clickVehiclePartsCell();
+		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		selectedServiceDetailsScreen.selecTechnician(newtech);
+		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+		selectedServiceDetailsScreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedServiceDetailsScreen.clickVehiclePartsCell();
+		selectedServiceDetailsScreen.selectVehiclePart(vehiclePart);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.clickTechniciansIcon();
+		selectedServiceDetailsScreen.selecTechnician(newtech);
+		selectedServiceDetailsScreen.unselecTechnician(defaultTech);
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.saveWizard();
+
+		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
+		teamWorkOrdersScreen.clickSearchButton();
+		teamWorkOrdersScreen.selectSearchLocation(defLocation);
+		teamWorkOrdersScreen.clickSearchSaveButton();
+		teamWorkOrdersScreen.clickOnWO(wonum);
+		RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
+
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus("3/4\" - Penny Size"),
+				OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY_FLATFEE),
+				OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY_VEHICLE +
+						" (" + vehiclePart + ")"),
+				OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
+		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.SR_S1_MONEY +
+						" (" + vehiclePart + ")"),
+				OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
+
+		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.SR_S1_MONEY +
+				" (" + vehiclePart + ")");
+
+		ordermonitorscreen.clickServiceStatusCell();
+
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
+				AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
+		ordermonitorscreen.clickServiceDetailsCancelButton();
+		ordermonitorscreen = new RegularOrderMonitorScreen();
+		ordermonitorscreen.clickOrderStartDateButton();
+		LocalDate date = LocalDate.now();
+		ordermonitorscreen.setOrderStartYearValue(date.getYear()+1);
+		Assert.assertEquals(ordermonitorscreen.getOrderStartYearValue(), Integer.toString(date.getYear()));
+		ordermonitorscreen.setOrderStartYearValue(date.getYear()-1);
+		Assert.assertEquals(ordermonitorscreen.getOrderStartYearValue(), Integer.toString(date.getYear()-1));
+		ordermonitorscreen.closeSelectorderDatePicker();
+		ordermonitorscreen = new RegularOrderMonitorScreen();
+		ordermonitorscreen.clickBackButton();
+		teamWorkOrdersScreen.clickHomeButton();
+
+		homescreen.clickLogoutButton();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+	}
 
 }

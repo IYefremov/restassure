@@ -23,22 +23,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
 	private final TypeScreenContext TEAMWOCONTEXT = TypeScreenContext.TEAMWORKORDER;
-	
+
 	/*@iOSFindBy(accessibility  = "Monitor")
     private IOSElement womonitor;
-	
+
 	@iOSFindBy(accessibility = "Search")
     private IOSElement searchbtn;
-	
+
 	@iOSFindBy(accessibility = "Edit")
     private IOSElement editmanu;
-	
+
 	@iOSFindBy(accessibility = "invoice new")
     private IOSElement invoicenewbtn;
-	
+
 	@iOSFindBy(accessibility = "Location")
     private IOSElement locationfld;
-	
+
 	@iOSFindBy(accessibility = "Save")
     private IOSElement searccsavebtn;*/
 
@@ -49,7 +49,7 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 35);
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersPageTableLeft"))); 
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersPageTableLeft")));
 	}
 
 	public void clickAddOrderButton() {
@@ -58,31 +58,31 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 			appiumdriver.findElementByAccessibilityId("Discard").click();
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
-	
+
 	public void clickOnWO(String wonumber) {
 		appiumdriver.findElementByAccessibilityId(wonumber).click();
 	}
-	
+
 	public OrderMonitorScreen selectWOMonitor() {
 		appiumdriver.findElementByAccessibilityId("Monitor").click();
 		return new OrderMonitorScreen();
 	}
-	
+
 	public void selectEditWO() {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
-	
+
 	public InvoiceInfoScreen selectWOInvoiceType(IInvoicesTypes invoiceType) {
 		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 		return new InvoiceInfoScreen();
 	}
-	
+
 	public boolean isCreateInvoiceActivated(String wonumber) {
 		return appiumdriver.findElementsByAccessibilityId("invoice new").size() > 0;
 	}
-	
+
 	public void clickiCreateInvoiceButton()  {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
@@ -108,11 +108,11 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
-	
+
 	public void clickSearchButton() {
 		appiumdriver.findElementByAccessibilityId("Search").click();
 	}
-	
+
 	public void clickSearchSaveButton() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
@@ -121,12 +121,16 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		}
 		new TeamWorkOrdersScreen();
 	}
-	
+
 	public void selectSearchLocation(String _location) {
 		appiumdriver.findElementByAccessibilityId("Location").click();
 		appiumdriver.findElementByName(_location).click();
 	}
-	
+
+	public void setSearchWorkOrderNumber(String woNumber) {
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(woNumber);
+	}
+
 	public void setSearchType(String workordertype)  {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Type']").click();
 		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));

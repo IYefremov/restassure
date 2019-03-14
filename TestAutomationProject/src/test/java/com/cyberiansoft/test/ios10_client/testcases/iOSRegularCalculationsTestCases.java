@@ -417,7 +417,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		servicedetailsscreen.saveSelectedServiceDetails();
 		servicedetailsscreen.answerQuestion2("A3");
 		servicedetailsscreen.saveSelectedServiceDetails();
-        Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$35.00");
+        Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$56.00");
 		
 		servicesscreen.cancelWizard();
 		myworkordersscreen.clickHomeButton();
@@ -1948,7 +1948,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
 		
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$542.68");
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$545.68");
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
 	

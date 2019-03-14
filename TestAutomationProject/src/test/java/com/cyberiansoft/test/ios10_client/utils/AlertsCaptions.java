@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.ios10_client.utils;
 
 public class AlertsCaptions {
-	
+
 	public static final String ALERT_CHANGE_DEFAULT_EMPLOYEES = "Changing default employees for a work order will change split data for all services.";
 	public static final String ALERT_VIN_REQUIRED = "Warning!\nVIN# is required";
 	public static final String ALERT_MAKE_REQUIRED = "Warning!\nMake is required";
@@ -40,4 +40,8 @@ public class AlertsCaptions {
 			"Continue?";
 	public static final String YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE = "Order Monitor\n" +
 			"You cannot change the status of services for this phase. You can only change the status of the whole phase.";
+	public static final String YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES = "Order Monitor\n" +
+			"You can not start repair order because you are not assigned to order services.";
+	public static final String YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES = "Order Monitor\n" +
+			"You must start the repair order before you can change the status of the service.";
 }
