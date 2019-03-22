@@ -279,10 +279,12 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
 	
-	//@Test(testName= "Test Case 67292:Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
-	//		+ "Test Case 67299:Verify Inspection displays on the list after DB update and after reconnect Internet",
-	//		description = "Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
-	//				+ "Verify Inspection displays on the list after DB update and after reconnect Internet")
+	@Test(testName= "Test Case 67292:Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
+			+ "Test Case 67299:Verify Inspection displays on the list after DB update and after reconnect Internet," +
+			"Test Case 67320:Verify user can't send sms if internet connection is lost",
+			description = "Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
+					+ "Verify Inspection displays on the list after DB update and after reconnect Internet," +
+					"Verify user can't send sms if internet connection is lost")
 	public void testVerifyTeamInspectionSavedIntoMobileDeviceAndBOLaterViaOutgoingMessageIfThereIsNoConnection() {
 
 		final String vinnumber = "123";
@@ -337,8 +339,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.clickBackButton();
 	}
 	
-	@Test(testName= "Test Case 67293:Verify saving team inspection online doesn't affected to Settings > Manual send option", 
-			description = "Verify saving team inspection online doesn't affected to Settings > Manual send option")
+	@Test(testName= "Test Case 67293:Verify saving team inspection online doesn't affected to Settings > Manual send optionб" +
+			"Test Case 67295:Verify Inspection displays in the list after DB updating",
+			description = "Verify saving team inspection online doesn't affected to Settings > Manual send optionб" +
+					"Verify Inspection displays in the list after DB updating")
 	public void testVerifySavingTeamInspectionOnlineDoesntAffectedToSettingsManualSendOption() {
 
 		final String vinnumber = "123";
@@ -655,7 +659,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			description = "Automate Verify user can edit team Work Order (add and remove services)")
 	public void testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices() {
 
-		final String workorderType = "O_Kramar";
 		final String vinnumber = "TEST";
 		final String moneyservice = "Battery Installation";
 		final String percentageservice = "Bundle Discount";
@@ -664,7 +667,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final int defaultCountForMoneyService = 1;
 
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		new VNextHomeScreen(appiumdriver);
 		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
 
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
