@@ -8,6 +8,8 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
+import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
@@ -58,6 +60,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
 	@BeforeMethod(description = "Setting up new suite")
 	public void resetApk() throws IOException, UnirestException {
+
+		EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userregmail);
         nada.deleteAllMessages();
@@ -67,7 +71,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
 		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
-		environmentSelectionScreen.selectEnvironment("Development");
+		environmentSelectionScreen.selectEnvironment(envType);
 		//BaseUtils.waitABit(15*1000);
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
@@ -274,6 +278,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String boeditionname = "Repair360 Free";
 		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
+
+		EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
 		
 		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
 		//userregmail = usermailprefix + "99999111" + usermailpostbox;
@@ -323,7 +329,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
 		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
-		environmentSelectionScreen.selectEnvironment("Development");
+		environmentSelectionScreen.selectEnvironment(envType);
 		//BaseUtils.waitABit(15*1000);
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
@@ -361,10 +367,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String boeditionname = "Repair360 Free";
 		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
-		
-		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		//userregmail = usermailprefix + "99999111" + usermailpostbox;
-		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+
+		EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
@@ -410,7 +414,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
 		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
-		environmentSelectionScreen.selectEnvironment("Development");
+		environmentSelectionScreen.selectEnvironment(envType);
 		//BaseUtils.waitABit(15*1000);
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
@@ -435,10 +439,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		final String boeditionname = "Repair360 Free";
 		final String bolineofbusiness = "PDR/Hail";
 		final String userstate = "California";
-		
-		//userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-		//userregmail = usermailprefix + "99999111" + usermailpostbox;
-		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
+
+		EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
 		VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 		regscreen.setUserRegistrationInfo(userfirstname, userlastname , userphonecountrycode, userregphone, userregmail);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));
@@ -482,7 +484,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
 		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
-		environmentSelectionScreen.selectEnvironment("Development");
+		environmentSelectionScreen.selectEnvironment(envType);
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		//appiumdriver.switchTo().frame(appiumdriver.findElement(By.xpath("//iframe")));

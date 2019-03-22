@@ -16,6 +16,7 @@ import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextToolsInfo;
 import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
+import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
@@ -156,6 +157,8 @@ public class VNextBaseTestCase {
 	public void registerDevice() throws Exception {
 		String phonecountrycode = "1";
 		String phonenumber = "14122264998";
+
+        EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
 	
 		if (buildproduction) {
 			phonecountrycode = VNextUserRegistrationInfo.getInstance().getProductionDeviceRegistrationUserPhoneCountryCode();
@@ -173,7 +176,7 @@ public class VNextBaseTestCase {
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
 		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
-		environmentSelectionScreen.selectEnvironment("Development");
+		environmentSelectionScreen.selectEnvironment(envType);
 		BaseUtils.waitABit(15*1000);
 		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
@@ -210,9 +213,18 @@ public class VNextBaseTestCase {
 	public void registerTeamEdition(String licensename) {
 
 
+        EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
+        String BOURL = "";
+        if (envType.equals(EnvironmentType.DEVELOPMENT))
+            BOURL = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
+        else if (envType.equals(EnvironmentType.INTEGRATION))
+            BOURL = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
+        else if (envType.equals(EnvironmentType.QC1))
+            BOURL = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
+
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
-		WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
+		WebDriverUtils.webdriverGotoWebPage(BOURL);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -241,9 +253,7 @@ public class VNextBaseTestCase {
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
 		VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("ReconPro Starter");
-		//environmentSelectionScreen.selectEnvironment("Development");
-		environmentSelectionScreen.selectEnvironment("Integration");
-		//environmentSelectionScreen.selectEnvironment("QC1");
+		environmentSelectionScreen.selectEnvironment(envType);
 
 		VNextTeamEditionVerificationScreen verificationscreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
 		verificationscreen.setDeviceRegistrationCode(regCode);
@@ -260,7 +270,7 @@ public class VNextBaseTestCase {
 
         DriverBuilder.getInstance().setDriver(browsertype);
         webdriver = DriverBuilder.getInstance().getDriver();
-        WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
+        WebDriverUtils.webdriverGotoWebPage(BOURL);
 
         loginpage = PageFactory.initElements(webdriver,
                 BackOfficeLoginWebPage.class);

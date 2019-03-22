@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
@@ -206,7 +207,14 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 		//return !wait.until(ExpectedConditions.invisibilityOf(inspectionslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']"))));
 		return inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspnumber + "']")).size() > 0;
 	}
-	
+
+	public void hidePickerWheel() {
+		if (appiumdriver.findElements(By.xpath("//div[@class='picker-item']")).size() > 0) {
+			AppiumUtils.clickHardwareBackButton();
+		}
+	}
+
+
 	public void switchToTeamInspectionsView() {
         switchToTeamView();
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
