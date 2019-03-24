@@ -29,8 +29,11 @@ public class VNextConfigInfo {
         if (_instance == null)
             _instance = new VNextConfigInfo();
         return _instance;
-    }		 
-	
+    }
+	public String getEnvironmentType() {
+		return props.getProperty("environment.type");
+	}
+
 	public String getBackOfficeCapiURL() {
 	      return props.getProperty("backofficecapi.url");
 	}

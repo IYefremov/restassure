@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -25,9 +26,9 @@ public class VNextEnvironmentSelectionScreen extends VNextBaseScreen {
         wait.until(ExpectedConditions.visibilityOf(environmentlistscreeen));
     }
 
-    public void selectEnvironment(String environmentName) {
+    public void selectEnvironment(EnvironmentType environmentType) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-env-name='" + environmentName + "']")));
-        tap(envlist.findElement(By.xpath(".//div[@data-env-name='" + environmentName + "']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-env-name='" + environmentType.getEnvironmentTypeName() + "']")));
+        tap(envlist.findElement(By.xpath(".//div[@data-env-name='" + environmentType.getEnvironmentTypeName() + "']")));
     }
 }

@@ -29,10 +29,18 @@ public class VNextTeamRegistrationInfo {
         if (_instance == null)
             _instance = new VNextTeamRegistrationInfo();
         return _instance;
-    }		 
-	
+    }
+
 	public String getBackOfficeStagingURL() {
-	      return props.getProperty("backofficestage.url");
+		return props.getProperty("backoffice.development");
+	}
+
+	public String getBackOfficeIntegrationURL() {
+		return props.getProperty("backoffice.integration");
+	}
+
+	public String getBackOfficeQC1URL() {
+	      return props.getProperty("backoffice.qc1");
 	}
 	
 	public String getBackOfficeStagingUserName() {
