@@ -183,6 +183,15 @@ public class VNextBOMonitorData  {
     @JsonProperty("serviceSubcategory")
     private String serviceSubcategory;
 
+    @JsonProperty("vendor")
+    private String vendor;
+
+    @JsonProperty("technician")
+    private String technician;
+
+    @JsonProperty("servicesTableFields")
+    private String[] servicesTableFields;
+
     @JsonProperty("serviceParts")
     private String[] serviceParts;
 
@@ -206,6 +215,15 @@ public class VNextBOMonitorData  {
 
     @JsonProperty("roNumbers")
     private String[] roNumbers;
+
+    @JsonProperty("serviceVendorPrices")
+    private String[] serviceVendorPrices;
+
+    @JsonProperty("serviceStatuses")
+    private String[] serviceStatuses;
+
+    @JsonProperty("auditLogTabs")
+    private String[] auditLogTabs;
 
     public String getLocation() {
         return location;
@@ -331,6 +349,18 @@ public class VNextBOMonitorData  {
         return serviceSubcategory;
     }
 
+    public String getVendor() {
+        return vendor;
+    }
+
+    public String getTechnician() {
+        return technician;
+    }
+
+    public String[] getServicesTableFields() {
+        return servicesTableFields;
+    }
+
     public String[] getServiceParts() {
         return serviceParts;
     }
@@ -430,5 +460,17 @@ public class VNextBOMonitorData  {
 
     public String[] getRoNumbers() {
         return roNumbers;
+    }
+
+    public String[] getServiceVendorPrices() {
+        return serviceVendorPrices;
+    }
+
+    public String[] getServiceStatuses() {
+        return serviceStatuses;
+    }
+
+    public String[] getAuditLogTabs() {
+        return auditLogTabs;
     }
 }

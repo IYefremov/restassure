@@ -18,17 +18,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.json:json:20160810" level="project" />
-    <orderEntry type="library" name="Maven: org.jtwig:jtwig-core:5.87.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.jtwig:jtwig-reflection:5.87.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.parboiled:parboiled-java:1.1.7" level="project" />
-    <orderEntry type="library" name="Maven: org.parboiled:parboiled-core:1.1.7" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm-tree:5.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm-analysis:5.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.ow2.asm:asm-util:5.0.3" level="project" />
-    <orderEntry type="library" name="Maven: com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.4.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.6.0" level="project" />
-    <orderEntry type="library" name="Maven: com.squareup.retrofit2:retrofit:2.4.0" level="project" />
-    <orderEntry type="library" name="Maven: com.squareup.retrofit2:converter-gson:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
@@ -108,11 +97,9 @@
     <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi-scratchpad:3.12" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.8" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.github.bonigarcia:webdrivermanager:2.2.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.rauschig:jarchivelib:0.7.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-compress:1.9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.github.bonigarcia:webdrivermanager:3.3.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.rauschig:jarchivelib:1.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-compress:1.18" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.16" level="project" />
     <orderEntry type="library" name="Maven: com.mashape.unirest:unirest-java:1.4.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpasyncclient:4.1.1" level="project" />

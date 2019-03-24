@@ -403,17 +403,200 @@
     }
   ],
 
+  "verifyUserCanChangeFlagOfRoToWhite": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRoToWhite.01",
+      "description": "Test Case 82908:User can change a Flag of RO to white",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "flag": "White"
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRoToRed": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRoToRed.01",
+      "description": "Test Case 82910:User can change a Flag of RO to red",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "flag": "Red"
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRoToOrange": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRoToOrange.01",
+      "description": "Test Case 82912:User can change a Flag of RO to orange",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "flag": "Orange"
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRoToYellow": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRoToYellow.01",
+      "description": "Test Case 82914:User can change a Flag of RO to yellow",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "flag": "Yellow"
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRoToGreen": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRoToGreen.01",
+      "description": "Test Case 82916:User can change a Flag of RO to green",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "flag": "Green"
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRoToBlue": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRoToBlue.01",
+      "description": "Test Case 82918:User can change a Flag of RO to blue",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "flag": "Blue"
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRoToPurple": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRoToPurple.01",
+      "description": "Test Case 82920:User can change a Flag of RO to purple",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "flag": "Purple"
+    }
+  ],
+
+  "verifyUserCanSeeChangesOfServicesActivityInLogInfo": [
+    {
+      "rowID": "verifyUserCanSeeChangesOfServicesActivityInLogInfo.01",
+      "description": "Test Case 82904:User can see changes of Services Activity in Log Info",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Labor_base_vehicle_data_Remove/Install",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ],
+      "auditLogTabs": [
+        "Phases",
+        "Departments",
+        "Services Activity",
+        "Parts"
+      ]
+    }
+  ],
+
   "verifyUserCanSeeChangesOfDepartmentsInLogInfo": [
     {
       "rowID": "verifyUserCanSeeChangesOfDepartmentsInLogInfo.01",
       "description": "Test Case 82900:User can see changes of Departments in Log Info",
       "location": "1111",
-      "orderNumber": "O-000-152073",
+      "orderNumber": "O-000-152449",
+      "status": "Approved",
       "priceType": "All",
-      "service": "Test service zayats",
-      "serviceDescription": "autotest",
-      "servicePrice": "90",
-      "serviceQuantity": "1"
+      "service": "A brand new demo service",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ],
+      "auditLogTabs": [
+        "Phases",
+        "Departments",
+        "Services Activity",
+        "Parts"
+      ]
+    }
+  ],
+
+  "verifyUserCanSeeServicesOfRo": [
+    {
+      "rowID": "verifyUserCanSeeServicesOfRo.01",
+      "description": "Test Case 82955:User can see Services of RO",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "servicesTableFields": [
+        "Service",
+        "Qty",
+        "Price",
+        "Vendor Price",
+        "Vendor / Technician",
+        "Status",
+        "Started / Completed",
+        "Actions"
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeVendorPriceOfRo": [
+    {
+      "rowID": "verifyUserCanChangeVendorPriceOfRo.01",
+      "description": "Test Case 82967:User can change Vendor Price of RO",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "serviceVendorPrices": [
+        "0",
+        "100"
+        ]
+    }
+  ],
+
+  "verifyUserCanChangeVendorTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeVendorTechnicianOfRo.01",
+      "description": "Test Case 82968:User can change Vendor/Technician of RO",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ]
+    }
+  ],
+
+  "verifyUserCanCreateNoteOfServiceOfRo": [
+    {
+      "rowID": "verifyUserCanCreateNoteOfServiceOfRo.01",
+      "description": "Test Case 82970:User can create Note of the Service of RO",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "serviceVendorPrices": [
+        "0",
+        "100"
+        ]
+    }
+  ],
+
+  "verifyUserCanChangeTargetDateOfRo": [
+    {
+      "rowID": "verifyUserCanChangeTargetDateOfRo.01",
+      "description": "Test Case 82926:User can change Target Date of RO",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ]
     }
   ]
 }

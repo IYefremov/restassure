@@ -160,9 +160,10 @@ public abstract class VNextBOBaseWebPage {
     void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
         try {
             wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
-        } catch (Exception ignored) {
-        }
-        wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        } catch (Exception ignored) {}
+        try {
+            waitShort.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        } catch (Exception ignored) {}
         for (WebElement option : listBox) {
             if (option.getText().equals(selection)) {
                 actions.moveToElement(option).click().build().perform();
@@ -170,6 +171,7 @@ public abstract class VNextBOBaseWebPage {
                     wait.ignoring(StaleElementReferenceException.class)
                             .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
                 } catch (Exception ignored) {
+                    waitABit(1000);
                 }
                 break;
             }

@@ -18,6 +18,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
@@ -458,7 +459,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getVinNum())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVinNum()),
-                "The work order is not displayed after search by VIN after clicking the 'Enter' key");
+                "The work order is not displayed after search by VIN after clicking the 'Search' icon");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -474,7 +475,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(vinNum)
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(vinNum),
-                "The work order is not displayed after search by VIN after clicking the 'Enter' key");
+                "The work order is not displayed after search by VIN after clicking the 'Search' icon");
 
         Assert.assertEquals(repairOrdersPage.getTableTitleDisplayed(0), data.getTitle(),
                 "The table title is incorrect");
@@ -604,7 +605,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -622,7 +623,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -643,7 +644,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -664,7 +665,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -684,7 +685,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -704,7 +705,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -724,7 +725,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -744,7 +745,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -764,7 +765,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -792,7 +793,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -822,7 +823,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -850,7 +851,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -897,7 +898,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -944,7 +945,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -991,7 +992,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -1034,7 +1035,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -1070,7 +1071,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Enter' key");
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -1092,5 +1093,443 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         final String serviceId = detailsPage.getServiceId(serviceDescription);
         Assert.assertEquals(serviceId, "",
                 "The service has been added after closing the 'New Service Dialog' with X button");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeFlagOfRoToWhite(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        detailsPage.clickFlagIcon();
+        Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+        detailsPage.selectFlagColor(data.getFlag());
+        Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeFlagOfRoToRed(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        detailsPage.clickFlagIcon();
+        Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+        detailsPage.selectFlagColor(data.getFlag());
+        Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeFlagOfRoToOrange(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        detailsPage.clickFlagIcon();
+        Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+        detailsPage.selectFlagColor(data.getFlag());
+        Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeFlagOfRoToYellow(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        detailsPage.clickFlagIcon();
+        Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+        detailsPage.selectFlagColor(data.getFlag());
+        Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeFlagOfRoToGreen(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        detailsPage.clickFlagIcon();
+        Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+        detailsPage.selectFlagColor(data.getFlag());
+        Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeFlagOfRoToBlue(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        detailsPage.clickFlagIcon();
+        Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+        detailsPage.selectFlagColor(data.getFlag());
+        Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeFlagOfRoToPurple(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        detailsPage.clickFlagIcon();
+        Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+        detailsPage.selectFlagColor(data.getFlag());
+        Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeChangesOfServicesActivityInLogInfo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+        final String serviceId = detailsPage.getServiceId(data.getService());
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
+
+        final VNextBOAuditLogDialog auditLogDialog = detailsPage.clickLogInfoButton();
+        Assert.assertTrue(auditLogDialog.isAuditLogDialogDisplayed(), "The audit log modal dialog hasn't been opened");
+
+        auditLogDialog.getAuditLogsTabsNames().forEach(System.out::println);
+        System.out.println("*****************************************");
+        System.out.println();
+
+        final List<String> tabs = Arrays.asList(data.getAuditLogTabs());
+        tabs.forEach(System.out::println);
+        System.out.println("*****************************************");
+        System.out.println();
+
+        Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
+                "The audit logs tabs are not displayed");
+
+        auditLogDialog.clickAuditLogsTab(data.getAuditLogTabs()[2]);
+        final String servicesActivityTimeFirstRecord = auditLogDialog.getServicesActivityTimeFirstRecord();
+        final String actualLocalDateTime = auditLogDialog.getActualLocalDateTime();
+        final String actualLocalDateTimeMinusMinute = auditLogDialog.getActualLocalDateTimeMinusMinute();
+        final String actualLocalDateTimeMinusTwoMinutes = auditLogDialog.getActualLocalDateTimeMinusTwoMinutes();
+        if (servicesActivityTimeFirstRecord.equals(actualLocalDateTime)) {
+            Assert.assertEquals(servicesActivityTimeFirstRecord, actualLocalDateTime);
+        }
+        if (servicesActivityTimeFirstRecord.equals(actualLocalDateTimeMinusMinute)) {
+            Assert.assertEquals(servicesActivityTimeFirstRecord, actualLocalDateTimeMinusMinute);
+        }
+        if (servicesActivityTimeFirstRecord.equals(actualLocalDateTimeMinusTwoMinutes)) {
+            Assert.assertEquals(servicesActivityTimeFirstRecord, actualLocalDateTimeMinusTwoMinutes);
+        }
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeChangesOfDepartmentsInLogInfo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+        final String serviceId = detailsPage.getServiceId(data.getService());
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+
+        final VNextBOAuditLogDialog auditLogDialog = detailsPage.clickLogInfoButton();
+        Assert.assertTrue(auditLogDialog.isAuditLogDialogDisplayed(), "The audit log modal dialog hasn't been opened");
+
+        auditLogDialog.getAuditLogsTabsNames().forEach(System.out::println);
+        System.out.println("*****************************************");
+        System.out.println();
+
+        final List<String> tabs = Arrays.asList(data.getAuditLogTabs());
+        tabs.forEach(System.out::println);
+        System.out.println("*****************************************");
+        System.out.println();
+
+        Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
+                "The audit logs tabs are not displayed");
+
+        auditLogDialog.clickAuditLogsTab(data.getAuditLogTabs()[1]);
+        final String departmentsLastRecord = auditLogDialog.getDepartmentsLastRecord();
+        final String actualLocalDateTime = auditLogDialog.getActualLocalDateTime();
+        final String actualLocalDateTimePlusMinute = auditLogDialog.getActualLocalDateTimePlusMinute();
+        if (departmentsLastRecord.equals(actualLocalDateTime)) {
+            Assert.assertEquals(departmentsLastRecord, actualLocalDateTime);
+        } else {
+            Assert.assertEquals(departmentsLastRecord, actualLocalDateTimePlusMinute);
+        }
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeServicesOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage.getServicesTableHeaderValues().forEach(System.out::println);
+        System.out.println("*****************************************");
+        System.out.println();
+
+        final List<String> fields = Arrays.asList(data.getServicesTableFields());
+        fields.forEach(System.out::println);
+        System.out.println("*****************************************");
+        System.out.println();
+
+        Assert.assertTrue(detailsPage.getServicesTableHeaderValues()
+                .containsAll(fields),
+                "The services table header values have not been displayed properly");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeVendorPriceOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
+        detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[0]);
+        Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[0],
+                "The Vendor Price hasn't been changed");
+
+        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
+        detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[1]);
+        Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[1],
+                "The Vendor Price hasn't been changed");
+
+        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeVendorTechnicianOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage
+                .setServiceStatusForService(serviceId, data.getServiceStatuses()[0])
+                .setVendor(serviceId, data.getVendor())
+                .setTechnician(serviceId, data.getTechnician());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCreateNoteOfServiceOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+
+        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
+        detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[0]);
+        Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[0],
+                "The Vendor Price hasn't been changed");
+
+        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
+        detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[1]);
+        Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[1],
+                "The Vendor Price hasn't been changed");
+
+        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeTargetDateOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage
+                .setServiceStatusForService(serviceId, data.getServiceStatuses()[0])
+                .setVendor(serviceId, data.getVendor())
+                .setTechnician(serviceId, data.getTechnician());
     }
 }

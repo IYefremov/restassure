@@ -6,9 +6,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	
@@ -56,10 +60,34 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     private List<WebElement> statusListBoxOptions; //todo add unique identifiers
 
     @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
+    private List<WebElement> vendorListBoxOptions; //todo add unique identifiers
+
+    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
+    private List<WebElement> technicianListBoxOptions; //todo add unique identifiers
+
+    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
     private List<WebElement> priorityListBoxOptions; //todo add unique identifiers
+
+    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
+    private List<WebElement> serviceStatusListBoxOptions;
 
     @FindBy(xpath = "//i[@class='switchTable icon-arrow-down5']")
     private WebElement servicesExpandArrow;
+
+    @FindBy(xpath = "//div[@id='order']//i[contains(@class, 'icon-flag')]")
+    private WebElement flagIcon;
+
+    @FindBy(xpath = "//div[@id='order']//div[@class='drop flags']")
+    private WebElement flagsDropDown;
+
+    @FindBy(xpath = "//button[@title='Log Info']")
+    private WebElement logInfoButton;
+
+    @FindBy(xpath = "//div[@data-template='order-service-item-template']//div[@class='clmn_5']//span[@title]")
+    private List<WebElement> servicesStatusWidgetList;
+
+    @FindBy(xpath = "//div[@class='serviceRow theader clearfix']/div")
+    private List<WebElement> servicesTableColumns;
 
     public VNextBORepairOrderDetailsPage(WebDriver driver) {
         super(driver);
@@ -75,6 +103,35 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         } catch (Exception ignored) {
             return false;
         }
+    }
+
+    public VNextBORepairOrderDetailsPage clickFlagIcon() {
+        waitForLoading();
+        wait.until(ExpectedConditions.elementToBeClickable(flagIcon)).click();
+        return this;
+    }
+
+    public boolean isFlagsDropDownOpened() {
+        try {
+            waitShort.until(ExpectedConditions.visibilityOf(flagsDropDown));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public VNextBORepairOrderDetailsPage selectFlagColor(String color) {
+        final WebElement flagColorElement =
+                driver.findElement(By.xpath("//div[@class='drop flags']//span[contains(@data-bind, '" + color + "')]"));
+        try {
+            wait.until(ExpectedConditions
+                    .elementToBeClickable(flagColorElement)).click();
+            wait.until(ExpectedConditions.attributeToBe(flagColorElement, "class", "active"));
+            wait.until(ExpectedConditions.invisibilityOf(flagsDropDown));
+        } catch (Exception e) {
+            Assert.fail(e.toString());
+        }
+        return this;
     }
 	
 	public String getRepairOrderActivePhaseStatus() {
@@ -185,6 +242,48 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         return this;
     }
 
+    public VNextBORepairOrderDetailsPage setVendor(String serviceId, String vendor) {
+        clickVendorBox(serviceId);
+        selectVendor(vendor);
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage clickVendorBox(String serviceId) {
+        waitForLoading();
+//        wait.until(ExpectedConditions.elementToBeClickable(statusListBox)).click();
+        WebElement element = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+                + "']//span[contains(@class, 'team-dropdown')]"));
+        actions.moveToElement(element);
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage selectVendor(String vendor) {
+//        selectOptionInDropDown(vendorDropDown, vendorListBoxOptions, vendor); todo use this line after unique identifiers will be implemented
+        selectOptionInDropDown(vendorListBoxOptions.get(0), vendorListBoxOptions, vendor);
+        return this;
+    }
+
+    public VNextBORepairOrderDetailsPage setTechnician(String serviceId, String technician) {
+        clickTechnicianBox(serviceId);
+        selectTechnician(technician);
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage clickTechnicianBox(String serviceId) {
+        waitForLoading();
+//        wait.until(ExpectedConditions.elementToBeClickable(statusListBox)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-order-service-id='" + serviceId
+                + "']//span[contains(@class, 'technician-dropdown')]"))).click();
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage selectTechnician(String technician) {
+//        selectOptionInDropDown(vendorDropDown, vendorListBoxOptions, vendor); todo use this line after unique identifiers will be implemented
+        selectOptionInDropDown(technicianListBoxOptions.get(0), technicianListBoxOptions, technician);
+        return this;
+    }
+
     public VNextBORepairOrderDetailsPage setPriority(String priority) {
         clickPriorityBox();
         selectPriority(priority);
@@ -229,27 +328,70 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
                 .replace("$", "");
     }
 
+    public String getServiceVendorPrice(String serviceId) {
+        return getTextValue(serviceId, "/div[@class='clmn_3_1']/span", ".00")
+                .replace("$", "");
+    }
+
+    public VNextBORepairOrderDetailsPage setServiceVendorPrice(String serviceId, String serviceDescription, String newValue) {
+        setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
+        return this;
+    }
+
+    public VNextBORepairOrderDetailsPage setServiceVendor(String serviceId, String serviceDescription, String newValue) { //todo!!!
+        setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
+        return this;
+    }
+
     private String getTextValue(String serviceId, String xpath, String replacement) {
-        final By element = By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
-                + serviceId + "']" + xpath);
-        setAttributeWithJS(driver.findElement(element), "style", "display: block;");
+        final WebElement element = getElementInServicesTable(serviceId, xpath);
+        setAttributeWithJS(element, "style", "display: block;");
         final String text = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(element)).getText().replace(replacement, "");
-        setAttributeWithJS(driver.findElement(element), "style", "display: none;");
+                .visibilityOf(element)).getText().replace(replacement, "");
+        setAttributeWithJS(element, "style", "display: none;");
         return text;
     }
 
+    private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
+        final WebElement element = getElementInServicesTable(serviceId, xpath);
+        scrollToElement(element);
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        actions.sendKeys(element, Keys.DELETE);
+        element.sendKeys(newValue);
+        clickServiceDescriptionName(serviceDescription);
+    }
+
+    private void clickServiceDescriptionName(String serviceDescription) {
+        Objects.requireNonNull(wait.until(ExpectedConditions
+                .elementToBeClickable(getServiceByName(serviceDescription))))
+                .click();
+    }
+
+    private WebElement getElementInServicesTable(String serviceId, String xpath) {
+        return driver.findElement(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
+                    + serviceId + "']" + xpath));
+    }
+
     public String getServiceId(String description) {
-        try {
-            final WebElement element = driver.findElement(By.xpath("//div[text()='" + description + "']"));
+        final WebElement serviceElement = getServiceByName(description);
+        if (serviceElement != null) {
             final String id = wait
                     .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.visibilityOf(element))
+                    .until(ExpectedConditions.visibilityOf(serviceElement))
                     .findElement(By.xpath(".//../..")).getAttribute("data-order-service-id");
             System.out.println(id);
             return id;
-        } catch (NoSuchElementException ignored) {
+        }
             return "";
+    }
+
+    @Nullable
+    private WebElement getServiceByName(String service) {
+        try {
+            return wait.until(ExpectedConditions
+                    .visibilityOf(driver.findElement(By.xpath("//div[text()='" + service + "']"))));
+        } catch (NoSuchElementException ignored) {
+            return null;
         }
     }
 
@@ -257,5 +399,68 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         wait.until(ExpectedConditions.elementToBeClickable(addNewServiceButton)).click();
         waitForLoading();
         return PageFactory.initElements(driver, VNextBOAddNewServiceMonitorDialog.class);
+    }
+
+//    public VNextBOAddNewServiceMonitorDialog selectServiceStatusForFirstService() {
+//        wait.until(ExpectedConditions.visibilityOfAllElements(servicesStatusWidgetList));
+//        final WebElement serviceStatus = servicesStatusWidgetList.get(0);
+//        wait.until(ExpectedConditions.elementToBeClickable(serviceStatus)).click();
+//        wait.until(ExpectedConditions.attributeContains(serviceStatus, "aria-expanded", "true"));
+//    }
+
+
+    public VNextBORepairOrderDetailsPage setServiceStatusForService(String serviceId, String status) {
+        clickServiceStatusBox(serviceId);
+        selectServiceStatus(status);
+        return this;
+    }
+    public VNextBORepairOrderDetailsPage setServiceStatusForService(int order, String status) {
+        clickServiceStatusBox(order);
+        selectServiceStatus(status);
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage clickServiceStatusBox(int order) {
+        waitForLoading();
+        final WebElement serviceStatus = servicesStatusWidgetList.get(order);
+        wait.until(ExpectedConditions.elementToBeClickable(serviceStatus)).click();
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage clickServiceStatusBox(String serviceId) {
+        waitForLoading();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-order-service-id='" + serviceId
+                + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"))).click();
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage selectServiceStatus(String status) {
+//        selectOptionInDropDown(statusDropDown, statusListBoxOptions, status); todo use this line after unique identifiers will be implemented
+        selectOptionInDropDown(serviceStatusListBoxOptions.get(0), serviceStatusListBoxOptions, status);
+        return this;
+    }
+
+    public List<String> getServicesTableHeaderValues() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(servicesTableColumns));
+        final List<String> stringCollection = servicesTableColumns
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        return stringCollection.subList(1, stringCollection.size());
+    }
+
+    public String getServiceStatusValue(String serviceId) {
+        final WebElement serviceStatusValue = driver.findElement(By.xpath(
+                "//div[@data-order-service-id='" + serviceId + "']//div[contains(@data-bind, 'orderServiceStatusName')]"));
+        setAttributeWithJS(serviceStatusValue, "style", "display: block;");
+        final String value = serviceStatusValue.getText();
+        setAttributeWithJS(serviceStatusValue, "style", "display: none;");
+        return value;
+    }
+
+    public VNextBOAuditLogDialog clickLogInfoButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(logInfoButton)).click();
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBOAuditLogDialog.class);
     }
 }

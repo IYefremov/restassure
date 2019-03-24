@@ -46,7 +46,7 @@
    			<groupId>org.uncommons</groupId>
    			<artifactId>reportng</artifactId>
    			<version>1.1.4</version>
-  		</dependency> 
+  		</dependency>
   		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -106,7 +106,13 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
-		</dependency>       	
+		</dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>16.0.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 	<build>
 		<plugins>
@@ -135,7 +141,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>			
+			</plugin>
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -170,7 +176,7 @@
          			</property>
      			</properties>
        			</configuration>
-      		</plugin>	
+      		</plugin>
 		</plugins>
 	</build>
 </project>
