@@ -1914,7 +1914,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
 		
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$545.68");
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$542.68");
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
 	

@@ -5,9 +5,7 @@ import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
@@ -1912,7 +1910,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
 		
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$545.68");
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$542.68");
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
 
