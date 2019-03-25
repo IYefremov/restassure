@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
@@ -210,7 +209,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
 	public void hidePickerWheel() {
 		if (appiumdriver.findElements(By.xpath("//div[@class='picker-item']")).size() > 0) {
-			AppiumUtils.clickHardwareBackButton();
+			tap(appiumdriver.findElement(By.xpath("//div[@class='toolbar-panel-right ']/a[@class='link close-picker']")));
 		}
 	}
 
