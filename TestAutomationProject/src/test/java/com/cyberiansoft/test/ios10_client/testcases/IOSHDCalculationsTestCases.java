@@ -16,6 +16,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescr
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
+import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.InvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
@@ -30,49 +31,18 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class IOSHDCalculationsTestCases extends BaseTestCase {
-	
-	private String regCode;
+
 	private HomeScreen homescreen;
 	
 	@BeforeClass
 	public void setUpSuite() {
 		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
-				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		testRegisterationiOSDdevice();
-	}
-	
-	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword) {
 
-		final String searchlicensecriteria = "Vit_Iph";
 
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
-
-		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
-		devicespage.setSearchCriteriaByName(searchlicensecriteria);
-		regCode = devicespage.getFirstRegCodeInTable();
-		DriverBuilder.getInstance().getDriver().quit();
-	}
-
-	public void testRegisterationiOSDdevice() {
-		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
-        DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
-        DriverBuilder.getInstance().getAppiumDriver().quit();
-		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
-		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
-		loginscreen.registeriOSDevice(regCode);
+		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Vit_Iph",
+				"QC Environment");
 		MainScreen mainscr = new MainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();

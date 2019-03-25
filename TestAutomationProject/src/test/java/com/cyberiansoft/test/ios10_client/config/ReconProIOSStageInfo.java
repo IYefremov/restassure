@@ -58,4 +58,12 @@ public class ReconProIOSStageInfo {
     public String getTestMailPassword() {
         return props.getProperty("testmail.password");
     }
+
+    public boolean installNewBuild() {
+        boolean installNewBuild = false;
+        String newBuild= props.getProperty("new.build");
+        if (newBuild.equalsIgnoreCase("true"))
+            installNewBuild = true;
+        return installNewBuild;
+    }
 }
