@@ -44,7 +44,7 @@
       },
       "percentageService": {"serviceName": "Aluminum Panel", "servicePrice": "25"
       },
-      "inspPrice": "($11.25)"
+      "inspPrice": "-$11.25"
     }
   ],
 
@@ -59,7 +59,7 @@
       },
       "percentageService": {"serviceName": "Aluminum Panel", "servicePrice": "25"
       },
-      "inspPrice": "$24998725001.25"
+      "inspPrice": "$24,998,725,001.25"
     }
   ],
 
@@ -140,7 +140,7 @@
         }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "NKL", "hailMatrixSeverity": "Roof (251 - 300)"
         }, {"hailMatrixServiceName": "Left Other", "hailMatrixSize": "HLF", "hailMatrixSeverity": "6-15"
         }]},
-      "inspPrice": "$1531.25"
+      "inspPrice": "$1,531.25"
     }
   ],
 
@@ -156,7 +156,7 @@
         }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Quarter", "hailMatrixSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)"
         }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "Light 6 to 15"
         }]},
-      "inspPrice": "$2287.50"
+      "inspPrice": "$2,287.50"
     }
   ],
 
@@ -170,7 +170,7 @@
       "moneyServices": [{"serviceName": "Dent Repair", "servicePrice": "20.00", "serviceQuantity": "10.58"
       }, {"serviceName": "Dent Repair", "servicePrice": "647.99", "serviceQuantity": "6"
       }],
-      "inspPrice": "$4099.54"
+      "inspPrice": "$4,099.54"
     }
   ],
 
@@ -185,7 +185,7 @@
       },
       "percentageService": {"serviceName": "APercent_QualityControl"
       },
-      "inspPrice": "$2798.98"
+      "inspPrice": "$2,798.98"
     }
   ],
 
