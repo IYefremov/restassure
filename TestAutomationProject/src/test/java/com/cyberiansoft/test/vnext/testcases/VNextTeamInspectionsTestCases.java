@@ -532,8 +532,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		webdriver.quit();
 	}
 	
-	@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet",
-			description = "Verify sending >100 messages after reconnect Internet")
+	//@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet",
+	//		description = "Verify sending >100 messages after reconnect Internet")
 	public void testVerifySendingMoreThen100MessagesAfterReconnectInternet() {
 
 		final String vinnumber = "123";
@@ -765,7 +765,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
 			inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-
 			vehicleinfoscreen.saveInspectionViaMenu();
 		}
 		return inspnumber;
