@@ -214,17 +214,16 @@ public class VNextBaseTestCase {
 
 
         EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
-        String BOURL = "";
         if (envType.equals(EnvironmentType.DEVELOPMENT))
-            BOURL = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
         else if (envType.equals(EnvironmentType.INTEGRATION))
-            BOURL = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
         else if (envType.equals(EnvironmentType.QC1))
-            BOURL = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
 
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
-		WebDriverUtils.webdriverGotoWebPage(BOURL);
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -270,7 +269,7 @@ public class VNextBaseTestCase {
 
         DriverBuilder.getInstance().setDriver(browsertype);
         webdriver = DriverBuilder.getInstance().getDriver();
-        WebDriverUtils.webdriverGotoWebPage(BOURL);
+        WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
         loginpage = PageFactory.initElements(webdriver,
                 BackOfficeLoginWebPage.class);
