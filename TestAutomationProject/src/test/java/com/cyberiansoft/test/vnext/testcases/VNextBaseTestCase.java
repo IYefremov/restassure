@@ -65,6 +65,7 @@ public class VNextBaseTestCase {
 	protected static BrowserType browsertype;
 	protected static MobilePlatform mobilePlatform;
 	protected static Employee employee;
+	protected static EnvironmentType envType;
 
 
 	protected static String deviceID;
@@ -77,10 +78,18 @@ public class VNextBaseTestCase {
 	@BeforeSuite
 	@Parameters("appium.path")
 	public void startServer(String appiumPath)  {
+
+		envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
+		if (envType.equals(EnvironmentType.DEVELOPMENT))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
+		else if (envType.equals(EnvironmentType.INTEGRATION))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
+		else if (envType.equals(EnvironmentType.QC1))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
 		
 		browsertype = BaseUtils.getBrowserType(VNextToolsInfo.getInstance().getDefaultBrowser());
 		mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
-		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
+
 
 		service.set(new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
 				.usingAnyFreePort().withArgument(SESSION_OVERRIDE)
@@ -159,7 +168,7 @@ public class VNextBaseTestCase {
 		String phonenumber = "14122264998";
 
         EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
-	
+		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
 		if (buildproduction) {
 			phonecountrycode = VNextUserRegistrationInfo.getInstance().getProductionDeviceRegistrationUserPhoneCountryCode();
 			/*initiateWebDriver();
@@ -213,13 +222,7 @@ public class VNextBaseTestCase {
 	public void registerTeamEdition(String licensename) {
 
 
-        EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
-        if (envType.equals(EnvironmentType.DEVELOPMENT))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
-        else if (envType.equals(EnvironmentType.INTEGRATION))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
-        else if (envType.equals(EnvironmentType.QC1))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
+
 
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();
