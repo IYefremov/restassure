@@ -1487,21 +1487,19 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         final String serviceId = detailsPage.getServiceId(service);
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+        final VNextBOOrderServiceNotesDialog notesDialog = detailsPage.openNotesDialog(serviceId);
+        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
+        final int notesNumber = notesDialog.getNotesListNumber();
 
-        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
-        detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[0]);
-        Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[0],
-                "The Vendor Price hasn't been changed");
-
-        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
-        detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[1]);
-        Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[1],
-                "The Vendor Price hasn't been changed");
-
-        System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
+        notesDialog.typeNotesMessage(data.getServiceNotesMessage())
+                .clickNotesAddButton()
+                .openNotesDialog(serviceId);
+        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
+        Assert.assertEquals(notesNumber + 1, notesDialog.getNotesListNumber(),
+                "The services notes list number is not updated");
     }
 
+    //todo change because of UI changes
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeTargetDateOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
@@ -1531,5 +1529,393 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setServiceStatusForService(serviceId, data.getServiceStatuses()[0])
                 .setVendor(serviceId, data.getVendor())
                 .setTechnician(serviceId, data.getTechnician());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeMoreInformationOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .openMoreInformation();
+        final List<String> infoFields = Arrays.asList(data.getInformationFields());
+        System.out.println();
+        infoFields.forEach(System.out::println);
+        System.out.println();
+
+        Assert.assertTrue(detailsPage
+                .getMoreInformationFieldsText()
+                .containsAll(infoFields),
+                "The More Information fields haven't been fully displayed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanTypeAndNotSaveNoteOfRoService(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        final VNextBOOrderServiceNotesDialog notesDialog = detailsPage.openNotesDialog(serviceId);
+        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
+        final int notesNumber = notesDialog.getNotesListNumber();
+
+        notesDialog
+                .typeNotesMessage(data.getServiceNotesMessage())
+                .clickNotesXbutton();
+        Assert.assertFalse(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been closed");
+
+        detailsPage.openNotesDialog(serviceId);
+        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
+        Assert.assertEquals(notesNumber, notesDialog.getNotesListNumber(),
+                "The services notes list number has been updated, although the 'X' button was clicked");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStatusOfRoServiceToActive(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
+
+        final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
+        Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
+                "The service started date is wrong");
+        Assert.assertFalse(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+                "The service completed date shouldn't be displayed with the Active status");
+
+        detailsPage.hoverOverServiceHelperIcon(serviceId);
+        Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[0]));
+
+        System.out.println("JSON: " + data.getServicePhase());
+        System.out.println(detailsPage.getOrderCurrentPhase());
+
+        Assert.assertEquals(detailsPage.getOrderCurrentPhase(), data.getServicePhase(),
+                "The Current Phase is not displayed properly");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStatusOfRoServiceToCompleted(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+
+        final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
+        final String serviceCompletedDate = detailsPage.getServiceCompletedDate(serviceId);
+        Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
+                "The service started date is wrong");
+
+        Assert.assertTrue(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+                "The service completed date should be displayed with the Completed status");
+        System.out.println(serviceCompletedDate);
+        System.out.println(data.getServiceCompletedDate());
+        Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
+                "The service completed date is wrong");
+
+        detailsPage.hoverOverServiceHelperIcon(serviceId);
+        Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+                "The helper info dialog isn't displayed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStatusOfRoServiceToAudited(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+
+        final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
+        final String serviceCompletedDate = detailsPage.getServiceCompletedDate(serviceId);
+        Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
+                "The service started date is wrong");
+
+        Assert.assertTrue(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+                "The service completed date should be displayed with the Audited status");
+        System.out.println(serviceCompletedDate);
+        System.out.println(data.getServiceCompletedDate());
+        Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
+                "The service completed date is wrong");
+
+        detailsPage.hoverOverServiceHelperIcon(serviceId);
+        Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+                "The helper info dialog isn't displayed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStatusOfRoServiceToRefused(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+
+        final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
+        final String serviceCompletedDate = detailsPage.getServiceCompletedDate(serviceId);
+        Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
+                "The service started date is wrong");
+
+        Assert.assertTrue(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+                "The service completed date should be displayed with the Refused status");
+        System.out.println(serviceCompletedDate);
+        System.out.println(data.getServiceCompletedDate());
+        Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
+                "The service completed date is wrong");
+
+        detailsPage.hoverOverServiceHelperIcon(serviceId);
+        Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+                "The helper info dialog isn't displayed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStatusOfRoServiceToRework(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+
+        final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
+        Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
+                "The service started date is wrong");
+        Assert.assertFalse(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+                "The service completed date shouldn't be displayed with the Rework status");
+
+        detailsPage.hoverOverServiceHelperIcon(serviceId);
+        Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+                "The helper info dialog isn't displayed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStatusOfRoServiceToSkipped(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final String service = data.getService();
+        final String serviceId = detailsPage.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+
+        final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
+        final String serviceCompletedDate = detailsPage.getServiceCompletedDate(serviceId);
+        Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
+                "The service started date is wrong");
+
+        Assert.assertTrue(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+                "The service completed date should be displayed with the Refused status");
+        System.out.println(serviceCompletedDate);
+        System.out.println(data.getServiceCompletedDate());
+        Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
+                "The service completed date is wrong");
+
+        detailsPage.hoverOverServiceHelperIcon(serviceId);
+        Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+                "The helper info dialog isn't displayed");
+    }
+
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeChangesOfPhasesInLogInfo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+        final String serviceId = detailsPage.getServiceId(data.getService());
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
+
+        detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+
+        final VNextBOAuditLogDialog auditLogDialog = detailsPage.clickLogInfoButton();
+        Assert.assertTrue(auditLogDialog.isAuditLogDialogDisplayed(), "The audit log modal dialog hasn't been opened");
+
+        auditLogDialog.getAuditLogsTabsNames().forEach(System.out::println);
+        System.out.println("*****************************************");
+        System.out.println();
+
+        final List<String> tabs = Arrays.asList(data.getAuditLogTabs());
+        tabs.forEach(System.out::println);
+        System.out.println("*****************************************");
+        System.out.println();
+
+        Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
+                "The audit logs tabs are not displayed");
+
+        auditLogDialog.clickAuditLogsTab(data.getAuditLogTabs()[0]);
+        final String departmentsLastRecord = auditLogDialog.getDepartmentsLastRecord();
+        final String actualLocalDateTime = auditLogDialog.getActualLocalDateTime();
+        final String actualLocalDateTimePlusMinute = auditLogDialog.getActualLocalDateTimePlusMinute();
+        if (departmentsLastRecord.equals(actualLocalDateTime)) {
+            Assert.assertEquals(departmentsLastRecord, actualLocalDateTime);
+        } else {
+            Assert.assertEquals(departmentsLastRecord, actualLocalDateTimePlusMinute);
+        }
     }
 }

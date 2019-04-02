@@ -20,8 +20,11 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	private WebElement startorderbtn;
 	
 	@FindBy(xpath = "//div[@class='order-info-details']/div")
-	private WebElement orderdetails;
-	
+	private WebElement orderDetails;
+
+	@FindBy(xpath = "//div[@class='order-info-details']/div//strong[@id='phaseName']")
+	private WebElement orderDetailsPhaseName;
+
 	@FindBy(id = "orderServices")
 	private WebElement orderservicestable;
 
@@ -83,17 +86,28 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@title='Log Info']")
     private WebElement logInfoButton;
 
+    @FindBy(xpath = "//div[@class='order-info-details']//span[text()='More information']")
+    private WebElement moreInformationLink;
+
+    @FindBy(xpath = "//div[@class='order-info-details']//span[text()='Less information']")
+    private WebElement lessInformationLink;
+
+    @FindBy(xpath = "//div[@class='orderInfoWrapper secondLine clearfix']")
+    private WebElement moreInformationBlock;
+
     @FindBy(xpath = "//div[@data-template='order-service-item-template']//div[@class='clmn_5']//span[@title]")
     private List<WebElement> servicesStatusWidgetList;
 
     @FindBy(xpath = "//div[@class='serviceRow theader clearfix']/div")
     private List<WebElement> servicesTableColumns;
 
+    @FindBy(xpath = "//div[@class='row order-info-content']//p/span[text()]")
+    private List<WebElement> moreInformationFields;
+
     public VNextBORepairOrderDetailsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        wait.until(ExpectedConditions.visibilityOf(startorderbtn));
     }
 
     public boolean isRoDetailsSectionDisplayed() {
@@ -135,11 +149,11 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     }
 	
 	public String getRepairOrderActivePhaseStatus() {
-		return orderdetails.findElement(By.id("phaseName")).getText().trim();
+		return wait.until(ExpectedConditions.visibilityOf(orderDetails.findElement(By.id("phaseName")))).getText().trim();
 	}
 	
 	public String getRepairOrderCompletedValue() {
-		return orderdetails.findElement(By.id("progressBarText")).getText().trim();
+		return wait.until(ExpectedConditions.visibilityOf(orderDetails.findElement(By.id("progressBarText")))).getText().trim();
 	}
 	
 	public void expandRepairOrderServiceDetailsTable() {
@@ -391,6 +405,11 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
             return wait.until(ExpectedConditions
                     .visibilityOf(driver.findElement(By.xpath("//div[text()='" + service + "']"))));
         } catch (NoSuchElementException ignored) {
+            try {
+                final WebElement element = driver.findElement(By.xpath("//div[contains(text(), '" + service + "')]"));
+                wait.until(ExpectedConditions.visibilityOf(element));
+                return element.getText().trim().equals(service) ? element : null;
+            } catch (NoSuchElementException ignore) {}
             return null;
         }
     }
@@ -462,5 +481,125 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         wait.until(ExpectedConditions.elementToBeClickable(logInfoButton)).click();
         waitForLoading();
         return PageFactory.initElements(driver, VNextBOAuditLogDialog.class);
+    }
+
+    private WebElement clickActionsIcon(String serviceId) {
+        final WebElement actionsIcon = driver.findElement(By
+                .xpath("//div[@class='serviceRow' and @data-order-service-id='" +
+                        serviceId + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]"));
+        actions.moveToElement(actionsIcon);
+        wait.until(ExpectedConditions.elementToBeClickable(actionsIcon)).click();
+        wait.until(ExpectedConditions.visibilityOf(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']"))));
+        return actionsIcon;
+    }
+
+    public VNextBOOrderServiceNotesDialog openNotesDialog(String serviceId) {
+        clickActionsIcon(serviceId);
+        wait.until(ExpectedConditions.elementToBeClickable(By
+                .xpath("//div[@class='serviceRow' and @data-order-service-id='" + serviceId
+                        + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]//label[text()='Notes']")))
+                .click();
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBOOrderServiceNotesDialog.class);
+    }
+
+    public VNextBORepairOrderDetailsPage openMoreInformation() {
+        clickMoreInformationLink();
+        wait.until(ExpectedConditions.visibilityOf(moreInformationBlock));
+        return this;
+    }
+
+    public VNextBORepairOrderDetailsPage closeMoreInformation() {
+        clickLessInformationLink();
+        wait.until(ExpectedConditions.invisibilityOf(moreInformationBlock));
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage clickMoreInformationLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(moreInformationLink)).click();
+        return this;
+    }
+
+    private VNextBORepairOrderDetailsPage clickLessInformationLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(lessInformationLink)).click();
+        return this;
+    }
+
+    public List<String> getMoreInformationFieldsText() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(moreInformationFields));
+        return moreInformationFields
+                .stream()
+                .map(WebElement::getText)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+    }
+
+    public String getServiceStartedDate(String serviceId) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
+                    + "']//div[@class='clmn_6']//span[text()][1]"))).getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public String getServiceCompletedDate(String serviceId) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
+                    + "']//div[@class='clmn_6']//span[text()][2]"))).getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public VNextBORepairOrderDetailsPage hoverOverServiceHelperIcon(String serviceId) {
+        try {
+//            final WebElement helpInfo = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+//                    + "']//span[@class='helpInfo']/.."));
+            final WebElement helpInfo = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+                    + "']//i[@class='help']"));
+            wait.until(ExpectedConditions.visibilityOf(helpInfo));
+            actions.moveToElement(helpInfo).build().perform();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+    public boolean isHelpInfoDialogDisplayed(String serviceId, String status) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(driver.findElement(By
+                    .xpath("//div[@data-order-service-id='" + serviceId
+                            + "']//i[@class='help']/span[text()='" + status + "']"))))
+                    .isDisplayed();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean isServiceCompletedDateDisplayed(String serviceId) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
+                    + "']//div[@class='clmn_6']//span[text()][2]"))).getText();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String getOrderCurrentPhase() {
+        try {
+            actions
+                    .moveToElement(wait.until(ExpectedConditions.visibilityOf(orderDetailsPhaseName)))
+                    .build()
+                    .perform();
+            return orderDetailsPhaseName.getText();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

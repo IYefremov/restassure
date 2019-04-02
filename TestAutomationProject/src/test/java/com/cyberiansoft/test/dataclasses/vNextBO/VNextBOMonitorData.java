@@ -2,6 +2,9 @@ package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -189,6 +192,18 @@ public class VNextBOMonitorData  {
     @JsonProperty("technician")
     private String technician;
 
+    @JsonProperty("serviceNotesMessage")
+    private String serviceNotesMessage;
+
+    @JsonProperty("serviceStartedDate")
+    private String serviceStartedDate;
+
+    @JsonProperty("serviceCompletedDate")
+    private String serviceCompletedDate;
+
+    @JsonProperty("servicePhase")
+    private String servicePhase;
+
     @JsonProperty("servicesTableFields")
     private String[] servicesTableFields;
 
@@ -224,6 +239,9 @@ public class VNextBOMonitorData  {
 
     @JsonProperty("auditLogTabs")
     private String[] auditLogTabs;
+
+    @JsonProperty("informationFields")
+    private String[] informationFields;
 
     public String getLocation() {
         return location;
@@ -357,6 +375,14 @@ public class VNextBOMonitorData  {
         return technician;
     }
 
+    public String getServiceNotesMessage() {
+        return serviceNotesMessage;
+    }
+
+    public String getServicePhase() {
+        return servicePhase;
+    }
+
     public String[] getServicesTableFields() {
         return servicesTableFields;
     }
@@ -373,7 +399,7 @@ public class VNextBOMonitorData  {
         return Arrays.asList(titlesRepeater);
     }
 
-    public List<String> getfullAdvancedSearchElementsList() {
+    public List<String> getFullAdvancedSearchElementsList() {
         return Stream.of(departmentText, phaseText, customerText, stockNumText, vinNumText, roNumText, woNumText,
                 employeeText, woTypeText, timeFrameText, repairStatusText, daysInProcessText, daysInPhaseText, flagText)
                 .map(String::trim)
@@ -434,6 +460,15 @@ public class VNextBOMonitorData  {
         return serviceLaborTime;
     }
 
+    public String getServiceStartedDate() {
+        return serviceStartedDate;
+    }
+
+    public String getServiceCompletedDate() {
+        LocalDate date = LocalDate.now(ZoneId.of("US/Pacific"));
+        return date.format(DateTimeFormatter.ofPattern("MM/dd/uuuu"));
+    }
+
     public List<String> getDepartments() {
         return departments;
     }
@@ -472,5 +507,9 @@ public class VNextBOMonitorData  {
 
     public String[] getAuditLogTabs() {
         return auditLogTabs;
+    }
+
+    public String[] getInformationFields() {
+        return informationFields;
     }
 }

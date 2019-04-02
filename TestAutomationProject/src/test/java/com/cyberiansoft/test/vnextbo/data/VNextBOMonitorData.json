@@ -576,14 +576,11 @@
       "status": "Approved",
       "orderNumber": "O-000-152073",
       "service": "zayatsPriceMatrixService",
-      "serviceVendorPrices": [
-        "0",
-        "100"
-        ]
+      "serviceNotesMessage": "Autotest"
     }
   ],
 
-  "verifyUserCanChangeTargetDateOfRo": [
+  "verifyUserCanChangeTargetDateOfRoTODO": [
     {
       "rowID": "verifyUserCanChangeTargetDateOfRo.01",
       "description": "Test Case 82926:User can change Target Date of RO",
@@ -596,6 +593,173 @@
       "serviceStatuses": [
         "Active",
         "Completed"
+      ]
+    }
+  ],
+
+  "verifyUserCanSeeMoreInformationOfRo": [
+    {
+      "rowID": "verifyUserCanSeeMoreInformationOfRo.01",
+      "description": "Test Case 82949:User can see More Information of RO",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "informationFields": [
+        "Mileage:",
+        "Plate:",
+        "Type:",
+        "Completed (Repair) Time:",
+        "Delivered:",
+        "Created:"
+      ]
+    }
+  ],
+
+  "verifyUserCanTypeAndNotSaveNoteOfRoService": [
+    {
+      "rowID": "verifyUserCanTypeAndNotSaveNoteOfRoService.01",
+      "description": "Test Case 82973:User can type and not save Note of the Service of RO",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ],
+      "serviceNotesMessage": "Autotest"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoServiceToActive": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoServiceToActive.01",
+      "description": "Test Case 82971:User can change Status of RO to \"Active\"",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "servicePhase": "Started",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ],
+      "serviceStartedDate": "04/20/2018"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoServiceToCompleted": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoServiceToCompleted.01",
+      "description": "Test Case 82969:User can change Status of RO to \"Complete\"",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ],
+      "serviceStartedDate": "04/20/2018"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoServiceToAudited": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoServiceToAudited.01",
+      "description": "Test Case 83619:User can change Status of RO to \"Audited\"",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "serviceStatuses": [
+        "Active",
+        "Audited"
+      ],
+      "serviceStartedDate": "04/20/2018"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoServiceToRework": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoServiceToRework.01",
+      "description": "Test Case 83636:User can change Status of RO to \"Rework\"",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "serviceStatuses": [
+        "Active",
+        "Rework"
+      ],
+      "serviceStartedDate": "04/20/2018"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoServiceToRefused": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoServiceToRefused.01",
+      "description": "Test Case 83635:User can change Status of RO to \"Refused\"",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "serviceStatuses": [
+        "Active",
+        "Refused"
+      ],
+      "serviceStartedDate": "04/20/2018"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoServiceToSkipped": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoServiceToSkipped.01",
+      "description": "Test Case 83637:User can change Status of RO to \"Skipped\"",
+      "location": "1111",
+      "status": "Approved",
+      "orderNumber": "O-000-152073",
+      "service": "zayatsPriceMatrixService",
+      "vendor": "ALM Vendor",
+      "technician": "Jhon Jnonson",
+      "serviceStatuses": [
+        "Active",
+        "Skipped"
+      ],
+      "serviceStartedDate": "04/20/2018"
+    }
+  ],
+
+  "verifyUserCanSeeChangesOfPhasesInLogInfo": [
+    {
+      "rowID": "verifyUserCanSeeChangesOfPhasesInLogInfo.01",
+      "description": "Test Case 82897:User can see changes of Phases in Log Info",
+      "location": "1111",
+      "orderNumber": "O-000-152449",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Labor_base_vehicle_data_all",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ],
+      "auditLogTabs": [
+        "Phases",
+        "Departments",
+        "Services Activity",
+        "Parts"
       ]
     }
   ]

@@ -1251,7 +1251,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         System.out.println();
         System.out.println("Displayed values");
-        final List<String> advancedSearchDialogElements = data.getfullAdvancedSearchElementsList();
+        final List<String> advancedSearchDialogElements = data.getFullAdvancedSearchElementsList();
         advancedSearchDialogElements.forEach(System.out::println);
 
         Assert.assertTrue(searchResultsList.containsAll(advancedSearchDialogElements),
