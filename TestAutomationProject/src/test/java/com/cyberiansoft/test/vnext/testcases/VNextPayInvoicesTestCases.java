@@ -1087,4 +1087,90 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
 
         invoicesscreen.clickBackButton();
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayMyInvoice(String rowID,
+                                                                                          String description, JSONObject testData) {
+
+        Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
+        vehicleinfoscreen.changeScreen("Services");
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.changeScreen("Summary");
+        VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
+        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
+        VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        VNextPayInvoicesScreen payInvoicesScreen = invoicemenuscreen.clickPayCreditCardMenuItem();
+        BaseUtils.waitABit(3000);
+        payInvoicesScreen.clickPayButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickInformationDialogOKButtonAndGetMessage();
+        Assert.assertTrue(payInvoicesScreen.isCardNumberRequiredErrorDisplayed());
+        Assert.assertTrue(payInvoicesScreen.isExpirationMonthRequiredErrorDisplayed());
+        Assert.assertTrue(payInvoicesScreen.isExpirationYearRequiredErrorDisplayed());
+        Assert.assertTrue(payInvoicesScreen.isCVCRequiredErrorDisplayed());
+        invoicesscreen = payInvoicesScreen.clickBackButton();
+        invoicesscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyYourCardWasDeclinedOnPayInvoiceWith4000000000000002(String rowID,
+                                                                                  String description, JSONObject testData) {
+
+        Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen.setVIN(invoice.getWorkOrderData().getVinNumber());
+        vehicleinfoscreen.changeScreen("Services");
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.changeScreen("Summary");
+        VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
+        wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
+        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
+
+        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
+        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
+        VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
+        VNextInvoiceMenuScreen invoicemenuscreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        VNextPayInvoicesScreen payInvoicesScreen = invoicemenuscreen.clickPayCreditCardMenuItem();
+        payInvoicesScreen.setCardNumber(invoice.getCreditCardData().getCardNumber());
+        payInvoicesScreen.selectExpirationMonth(invoice.getCreditCardData().getExpirationMonth());
+        payInvoicesScreen.selectExpirationYear(invoice.getCreditCardData().getExpirationYear());
+        payInvoicesScreen.setCVC(invoice.getCreditCardData().getCVC());
+        payInvoicesScreen.clickPayButton();
+
+
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+                VNextAlertMessages.YOUR_CARD_WAS_DECLINED);
+
+        invoicesscreen = payInvoicesScreen.clickBackButton();
+        invoicesscreen.clickBackButton();
+    }
 }

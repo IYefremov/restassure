@@ -394,5 +394,38 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayMyInvoice": [
+    {
+      "rowID": "testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayMyInvoice.01",
+      "description": "Test Case 72308:R360 client: verify error message is displayed if Card info is not populated on Pay My invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyYourCardWasDeclinedOnPayInvoiceWith4000000000000002": [
+    {
+      "rowID": "testVerifyYourCardWasDeclinedOnPayInvoiceWith4000000000000002.01",
+      "description": "Test Case 72309:R360 client: Verify 'Your card was declined' on Pay invoice with 4000000000000002 ",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4000000000000002", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
   ]
 }

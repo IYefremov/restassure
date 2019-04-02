@@ -647,7 +647,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
 				" in mail box " + nada.getEmailId() + ". At time " +
 				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
-	}
+		}
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
