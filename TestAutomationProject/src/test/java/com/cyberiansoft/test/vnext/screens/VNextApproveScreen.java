@@ -90,7 +90,7 @@ public class VNextApproveScreen extends VNextBaseScreen {
 
 	public String getApprovePriceValue() {
 		return appiumdriver.findElement(By.xpath("//div[@class='approve-page-placeholder approve-page-row']")).
-				findElement(By.xpath(".//div[@class='text-bold']")).getText();
+				findElement(By.xpath(".//div[@class='text-bold approve-total']")).getText();
 	}
 
 

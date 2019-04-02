@@ -1,16 +1,7 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.core.IOSHDDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.driverutils.AppiumInicializator;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
@@ -18,12 +9,12 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescr
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
+import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -33,7 +24,7 @@ import java.util.List;
 
 public class DentWizartestCases extends BaseTestCase {
 
-	private String regCode;
+
 	private final String customer = "Abc Rental Center";
 	public HomeScreen homescreen;
 	
@@ -41,53 +32,20 @@ public class DentWizartestCases extends BaseTestCase {
 	public void setUpSuite() throws Exception {
 		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-		testGetDeviceRegistrationCode(DentWizardIOSInfo.getInstance().getBackOfficeURL(),
-				DentWizardIOSInfo.getInstance().getUserName(), DentWizardIOSInfo.getInstance().getUserPassword());
-		testRegisterationiOSDdevice();
-		ExcelUtils.setDentWizardExcelFile();
-	}
 
-	//@Test(description = "Get registration code on back-office for iOS device")
-	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword) {
 
-		final String searchlicensecriteria = "Mac mini_olkr";
-		
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
-
-		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
-
-		devicespage.setSearchCriteriaByName(searchlicensecriteria);
-		regCode = devicespage.getFirstRegCodeInTable();
-		DriverBuilder.getInstance().getDriver().quit();
-	}
-
-	//@Test(description = "Register iOS Ddevice")
-	public void testRegisterationiOSDdevice() {
-		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
-
-		DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSHDDeviceInfo.getInstance().getDeviceBundleId());
-		DriverBuilder.getInstance().getAppiumDriver().quit();
-		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
-		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
-		loginscreen.registeriOSDevice(regCode);
+		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, DentWizardIOSInfo.getInstance().getBackOfficeURL(),
+				DentWizardIOSInfo.getInstance().getUserName(), DentWizardIOSInfo.getInstance().getUserPassword(), "Mac mini_olkr",
+				"QC Environment");
 		MainScreen mainscr = new MainScreen();
 		homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.setInsvoicesCustomLayoutOff();
 		settingsscreen.clickHomeButton();
-		
+
+		ExcelUtils.setDentWizardExcelFile();
 	}
 	
 	@BeforeMethod

@@ -406,7 +406,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		BaseUtils.waitABit(30000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),

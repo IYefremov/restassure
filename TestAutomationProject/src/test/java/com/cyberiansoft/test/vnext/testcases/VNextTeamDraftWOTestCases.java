@@ -154,6 +154,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
         workordersscreen.switchToMyWorkordersView();
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
+        customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
         wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);

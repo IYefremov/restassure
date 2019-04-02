@@ -5,20 +5,18 @@ import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.InvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
@@ -35,49 +33,17 @@ import java.io.File;
 import java.time.LocalDateTime;
 
 public class iOSRegularCalculationsTestCases extends BaseTestCase {
-	
-	private String regCode;
+
 	private RegularHomeScreen homescreen;
 	
 	@BeforeClass
 	public void setUpSuite() {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		testGetDeviceRegistrationCode(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
-				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		testRegisterationiOSDdevice();
-	}
-	
-	public void testGetDeviceRegistrationCode(String backofficeurl,
-			String userName, String userPassword) {
+		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "AutomationCalculations_Regular2",
+				"QC Environment");
 
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
-
-		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
-
-		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
-
-		devicespage.setSearchCriteriaByName("AutomationCalculations_Regular2");
-		regCode = devicespage.getFirstRegCodeInTable();
-
-		DriverBuilder.getInstance().getDriver().quit();
-	}
-
-	public void testRegisterationiOSDdevice() {
-        AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-        DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
-        DriverBuilder.getInstance().getAppiumDriver().quit();
-		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
-		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularSettingsScreen settingscreen =  homescreen.clickSettingsButton();
@@ -337,7 +303,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		String mainWindowHandle = webdriver.getWindowHandle();
 		
 		WorkOrderInfoTabWebPage woinfotab = wopage.clickWorkOrderInTable(wonumber28583);
-		Assert.assertTrue(woinfotab.isServicePriceCorrectForWorkOrder("$36.00"));
+ 		Assert.assertTrue(woinfotab.isServicePriceCorrectForWorkOrder("$36.00"));
 		Assert.assertTrue(woinfotab.isServiceSelectedForWorkOrder("Service_in_2_fee_packs"));
 		Assert.assertTrue(woinfotab.isServiceSelectedForWorkOrder("Oksi_Test1"));
 		Assert.assertTrue(woinfotab.isServiceSelectedForWorkOrder("Oksi_Test2"));
@@ -1948,7 +1914,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.setFilterBilling("All");
 		myworkordersscreen.clickSaveFilter();
 		
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$545.68");
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$542.68");
 		homescreen = myworkordersscreen.clickHomeButton();
 	}
 	

@@ -210,7 +210,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		List<WebElement> inspections = inspectionscreen.getInspectionsList();
 		for (WebElement inspcell : inspections) {
-			Assert.assertEquals(testwholesailcustomer.getFullName(), inspectionscreen.getInspectionCustomerValue(inspcell));
+			Assert.assertTrue(inspectionscreen.getInspectionCustomerValue(inspcell).contains(testwholesailcustomer.getFullName()));
 		}
 		final String inspSubNumber = inspnumber.substring(6, inspnumber.length());
 		inspectionscreen.searchInpectionByFreeText(inspSubNumber);
@@ -515,7 +515,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.clickBackButton();
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
@@ -532,8 +532,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		webdriver.quit();
 	}
 	
-	@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet",
-			description = "Verify sending >100 messages after reconnect Internet")
+	//@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet",
+	//		description = "Verify sending >100 messages after reconnect Internet")
 	public void testVerifySendingMoreThen100MessagesAfterReconnectInternet() {
 
 		final String vinnumber = "123";
@@ -765,7 +765,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
 			inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-
 			vehicleinfoscreen.saveInspectionViaMenu();
 		}
 		return inspnumber;

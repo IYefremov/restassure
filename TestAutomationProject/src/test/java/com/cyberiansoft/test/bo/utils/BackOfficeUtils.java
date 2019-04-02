@@ -193,7 +193,8 @@ public class BackOfficeUtils {
 	}
 
 	public static String getFormattedServicePriceValue(float servicePrice) {
-		String servicePriceFormatted= MONEY_SYMBOL + String.format("%.2f", servicePrice);
+
+		String servicePriceFormatted= MONEY_SYMBOL + String.format("%,.2f", servicePrice);
 		return servicePriceFormatted;
 	}
 

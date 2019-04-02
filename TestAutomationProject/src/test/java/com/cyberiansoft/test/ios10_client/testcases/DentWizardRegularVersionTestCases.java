@@ -1,17 +1,8 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
@@ -22,13 +13,13 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import io.appium.java_client.ios.IOSElement;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -36,18 +27,25 @@ import org.testng.annotations.Test;
 
 public class DentWizardRegularVersionTestCases extends BaseTestCase {
 
-		private String regCode;
-		public RegularHomeScreen homescreen;
+	public RegularHomeScreen homescreen;
 		
-		@BeforeClass
-		public void setUpSuite() throws Exception {
-			mobilePlatform = MobilePlatform.IOS_REGULAR;
-			initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-			testGetDeviceRegistrationCode(DentWizardIOSInfo.getInstance().getBackOfficeURL(),
-					DentWizardIOSInfo.getInstance().getUserName(), DentWizardIOSInfo.getInstance().getUserPassword());
-			testRegisterationiOSDdevice();
-			ExcelUtils.setDentWizardExcelFile();
-		}
+	@BeforeClass
+	public void setUpSuite() throws Exception {
+		mobilePlatform = MobilePlatform.IOS_REGULAR;
+		initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
+
+		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, DentWizardIOSInfo.getInstance().getBackOfficeURL(),
+				DentWizardIOSInfo.getInstance().getUserName(), DentWizardIOSInfo.getInstance().getUserPassword(), "DW_Automation3",
+				"QC Environment");
+
+		RegularMainScreen mainscr = new RegularMainScreen();
+		homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
+		RegularSettingsScreen settingscreen = homescreen.clickSettingsButton();
+		settingscreen.setShowAvailableSelectedServicesOn();
+		settingscreen.setInsvoicesCustomLayoutOff();
+		homescreen = settingscreen.clickHomeButton();
+		ExcelUtils.setDentWizardExcelFile();
+	}
 
 	@BeforeMethod
 	public void setUpCustomer() {
@@ -57,48 +55,6 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 			homescreen = customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		}
 	}
-
-		//@Test(description = "Get registration code on back-office for iOS device")
-		public void testGetDeviceRegistrationCode(String backofficeurl,
-				String userName, String userPassword) {
-
-			//final String searchlicensecriteria = "Mac mini_olkr";
-			final String searchlicensecriteria = "DW_Automation3";
-
-			webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-			WebDriverUtils.webdriverGotoWebPage(backofficeurl);
-
-			BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-					BackOfficeLoginWebPage.class);
-			loginpage.UserLogin(userName, userPassword);
-			BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-					BackOfficeHeaderPanel.class);
-			CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
-
-			ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
-
-			devicespage.setSearchCriteriaByName(searchlicensecriteria);
-			regCode = devicespage.getFirstRegCodeInTable();
-			DriverBuilder.getInstance().getDriver().quit();
-		}
-
-		//@Test(description = "Register iOS Ddevice")
-		public void testRegisterationiOSDdevice() {
-			AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-			DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
-			DriverBuilder.getInstance().getAppiumDriver().quit();
-			AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-			RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
-			LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
-			loginscreen.registeriOSDevice(regCode);
-			RegularMainScreen mainscr = new RegularMainScreen();
-			homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-			RegularSettingsScreen settingsScreen = homescreen.clickSettingsButton();
-			settingsScreen.setShowAvailableSelectedServicesOn();
-			settingsScreen.setInsvoicesCustomLayoutOff();
-
-			settingsScreen.clickHomeButton();
-		}
 
 		@Test(testName = "Test Case 10264:Test Valid VIN Check", description = "Test Valid VIN Check")
 		public void testValidVINCheck() {
