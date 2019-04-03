@@ -427,5 +427,23 @@
         "expirationYear" : "2022",  "cvc" : "123"
       }
     }
+  ],
+
+  "testVerifyYourCardsSecurityCodeIsIncorrectOnPayInvoiceWith4000000000000127": [
+    {
+      "rowID": "testVerifyYourCardsSecurityCodeIsIncorrectOnPayInvoiceWith4000000000000127.01",
+      "description": "Test Case 72310:R360 client: Verify 'Your card's security code is incorrect' on Pay invoice with 4000000000000127",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      },
+      "creditCardData" : {"cardNumber": "4000000000000127", "expirationMonth" : "04",
+        "expirationYear" : "2022",  "cvc" : "123"
+      }
+    }
   ]
 }

@@ -41,7 +41,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		final String vinnumber = "123";
 		final String notetext = "new notes";
-		final String quicknotenew = "No damage found";
+		final String quicknotenew = "Warranty expired";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -198,7 +198,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		
 		final String vinnumber = "123";
 		
-		final String[] quicknotes = { quicknote, "No damage found" };
+		final String[] quicknotes = { quicknote, "Warranty expired" };
 		final String notetext = "new notes";
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
@@ -241,6 +241,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 	public void testVerifyUserCanAddSeveralQuickNotes() {
 		
 		final String vinnumber = "123";
+		final int numberOfQuickNotesToAdd = 4;
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
@@ -259,14 +260,15 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
-		ArrayList<String> addednotes = notesscreen.addNumberOfQuickNotes(10);
+		ArrayList<String> addednotes = notesscreen.addNumberOfQuickNotes(numberOfQuickNotesToAdd);
 		AppiumUtils.clickHardwareBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
-		for (String quicknote: addednotes)
+		for (String quicknote: addednotes) {
 			Assert.assertTrue(notesscreen.getSelectedNotes().contains(quicknote));
+		}
 		notesscreen.clickNotesBackButton();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
