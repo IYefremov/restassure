@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -70,20 +71,13 @@ public class TechniciansPopup extends iOSHDBaseScreen {
                                                    String percentage) {
         FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeCell[contains(@name, '"
-                + technician + "')]"))).click();
-        if (appiumdriver.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
-                + technician + "')]").findElements(MobileBy.AccessibilityId("Clear text")).size() > 0)
-            appiumdriver.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
-                    + technician + "')]").findElement(MobileBy.AccessibilityId("Clear text")).click();
-        //}
-        typeTechnicianValue(percentage);
-
-    }
-
-    public void typeTechnicianValue(String percentage) {
-        ((IOSDriver) appiumdriver).getKeyboard().pressKey(percentage);
-        ((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+        MobileElement techCell = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeCell[contains(@name, '"
+                + technician + "')]")));
+        techCell.click();
+        if (techCell.findElements(MobileBy.AccessibilityId("Clear text")).size() > 0)
+            techCell.findElement(MobileBy.AccessibilityId("Clear text")).click();
+        techCell.findElement(MobileBy.className("XCUIElementTypeTextField")).sendKeys(percentage);
+        techCell.findElement(MobileBy.className("XCUIElementTypeTextField")).sendKeys("\n");
     }
 
     public void selecTechnician(String technician) {
@@ -179,7 +173,9 @@ public class TechniciansPopup extends iOSHDBaseScreen {
                 + technician + "')]/XCUIElementTypeTextField[1]").size() > 0)
             techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
                     + technician + "')]/XCUIElementTypeTextField[1]").clear();
-        ((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
-        ((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+        techsplittable.findElementByXPath("//XCUIElementTypeCell[contains(@name, '"
+                + technician + "')]/XCUIElementTypeTextField[1]").sendKeys(_quantity + "\n");
+        //((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
+        //((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
     }
 }

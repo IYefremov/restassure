@@ -65,24 +65,30 @@ public class QuestionsScreen extends BaseWizardScreen {
 
 	public void setOwnerName(String ownername) {
 		appiumdriver.findElementByAccessibilityId("Owner Name_TextView_Cell").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(ownername);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("Owner Name_TextView_Cell").sendKeys(ownername + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().sendKeys(ownername);
+		//((IOSDriver) appiumdriver).getKeyboard().sendKeys("\n");
 		appiumdriver.hideKeyboard();
 		
 	}
 
 	public void setOwnerAddress(String owneraddress) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[@name='Owner Address_TextView_Cell']").click();
+		appiumdriver.findElementByAccessibilityId("Owner Address_TextView").click();
+		appiumdriver.findElementByAccessibilityId("Owner Address_TextView").sendKeys(owneraddress + "\n");
+		//appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[@name='Owner Address_TextView_Cell']").click();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeTable/XCUIElementTypeCell[@name='Owner Address_TextView_Cell']")
+		//		.sendKeys(owneraddress + "\n");
 		//appiumdriver.findElementByAccessibilityId("Owner Address_TextView_Cell").click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(owneraddress);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(owneraddress);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		appiumdriver.hideKeyboard();
 	}
 
 	public void setOwnerCity(String ownercity) {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("Owner City_TextView_Cell")).click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(ownercity);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("Owner City_TextView_Cell").sendKeys(ownercity + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(ownercity);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		appiumdriver.hideKeyboard();
 	}
 
@@ -93,8 +99,9 @@ public class QuestionsScreen extends BaseWizardScreen {
 
 	public void setOwnerZip(String ownerzip)  {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("Owner Zip_TextView_Cell")).click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(ownerzip);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		appiumdriver.findElementByAccessibilityId("Owner Zip_TextView_Cell").sendKeys(ownerzip + "\n");
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(ownerzip);
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 		appiumdriver.hideKeyboard();
 	}
 	

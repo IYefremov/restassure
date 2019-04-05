@@ -76,7 +76,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	@iOSFindBy(accessibility = "Vehicle Part")
 	private IOSElement vehiclepartscell;
 
-	@iOSFindBy(accessibility = "Service Part")
+	@iOSFindBy(accessibility = "Part")
 	private IOSElement servicepartscell;
 
 	@iOSFindBy(accessibility = "Vehicle Parts")
@@ -135,7 +135,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public String getServicePartValue() {
-		WebElement servicepartfld = ((IOSElement) appiumdriver.findElementByAccessibilityId("Service Part")).findElementsByClassName("XCUIElementTypeStaticText").get(1);	
+		WebElement servicepartfld = ((IOSElement) appiumdriver.findElementByAccessibilityId("Part")).findElementsByClassName("XCUIElementTypeStaticText").get(1);
 		return servicepartfld.getAttribute("value");
 	}
 

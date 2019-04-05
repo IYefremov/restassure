@@ -8,7 +8,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.Summary
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -250,7 +250,10 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public void enterEmailAddress(String email) {
 		//((IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeTextField")).setValue(email);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(email);
+		MobileElement mailAlert = (MobileElement) appiumdriver.findElementByAccessibilityId("Enter email address");
+		mailAlert.findElementByClassName("XCUIElementTypeCollectionView").findElementByClassName("XCUIElementTypeTextField").sendKeys(email);
+
+		//((IOSDriver) appiumdriver).getKeyboard().pressKey(email);
 		Helpers.acceptAlert();
 	}
 	

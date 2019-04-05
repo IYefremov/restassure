@@ -2343,7 +2343,7 @@ public class DentWizartestCases extends BaseTestCase {
 		techniciansPopup.selectTechniciansCustomView();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
 		techniciansPopup.selecTechnician(UtilConstants.technicianB);
-		techniciansPopup.typeTechnicianValue("30");
+		techniciansPopup.setTechnicianCustomPercentageValue(UtilConstants.technicianA, "30");
 		//selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianB, "30");
 		techniciansPopup.setTechnicianCustomPercentageValue(UtilConstants.technicianA, "70");
 		
