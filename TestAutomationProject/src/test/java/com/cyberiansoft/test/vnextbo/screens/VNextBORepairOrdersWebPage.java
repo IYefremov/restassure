@@ -776,6 +776,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBORepairOrdersWebPage setRepairOrdersSearchText(String repairOrderText) {
+        wait.until(ExpectedConditions.visibilityOf(reapiroderssearchtextfld));
         reapiroderssearchtextfld.clear();
         reapiroderssearchtextfld.sendKeys(repairOrderText);
         waitABit(500);

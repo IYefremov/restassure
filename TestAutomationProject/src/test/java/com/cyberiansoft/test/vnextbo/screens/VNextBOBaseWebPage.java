@@ -122,6 +122,13 @@ public abstract class VNextBOBaseWebPage {
         wait.until(ExpectedConditions.attributeContains(element, attribute, value));
     }
 
+    public void sendKeysWithJS(WebElement element, String value) {
+        ((JavascriptExecutor) driver).executeScript("arguments[1].value = arguments[0]; ", value, element);
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElement(element, value));
+        } catch (Exception ignored) {}
+    }
+
     public void clearAndType(WebElement textField, String name) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(textField)).clear();

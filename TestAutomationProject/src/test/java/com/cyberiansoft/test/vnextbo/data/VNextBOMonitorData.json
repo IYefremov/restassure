@@ -747,7 +747,7 @@
       "rowID": "verifyUserCanSeeChangesOfPhasesInLogInfo.01",
       "description": "Test Case 82897:User can see changes of Phases in Log Info",
       "location": "1111",
-      "orderNumber": "O-000-152449",
+      "orderNumber": "O-000-152073",
       "status": "Approved",
       "priceType": "All",
       "service": "Labor_base_vehicle_data_all",
@@ -760,6 +760,133 @@
         "Departments",
         "Services Activity",
         "Parts"
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeQuantityForService": [
+    {
+      "rowID": "verifyUserCanChangeQuantityForService.01",
+      "description": "Test Case 84990:Verify user can change quantity for service",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "serviceQuantity": "125"
+    }
+  ],
+
+  "verifyUserCanEnterNegativeNumberForServiceQuantity": [
+    {
+      "rowID": "verifyUserCanEnterNegativeNumberForServiceQuantity.01",
+      "description": "Test Case 84992:Verify user can't enter a negative number for service quantity",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element"
+    }
+  ],
+
+  "verifyUserCannotEnterTextForServiceQuantity": [
+    {
+      "rowID": "verifyUserCannotEnterTextForServiceQuantity.01",
+      "description": "Test Case 84993:Verify user can't enter text for service quantity",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "serviceQuantity": "d"
+    }
+  ],
+
+  "verifyUserCanChangePriceForService": [
+    {
+      "rowID": "verifyUserCanChangePriceForService.01",
+      "description": "Test Case 84994:Verify user can change price for service",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "servicePrice": "45"
+    }
+  ],
+
+  "verifyUserCanEnterNegativeNumberForServicePrice": [
+    {
+      "rowID": "verifyUserCanEnterNegativeNumberForServicePrice.01",
+      "description": "Test Case 84995:Verify user can enter a negative number for service price",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element"
+    }
+  ],
+
+  "verifyUserCannotEnterTextForServicePrice": [
+    {
+      "rowID": "verifyUserCannotEnterTextForServicePrice.01",
+      "description": "Test Case 84996:Verify user can't enter a text for service price",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "servicePrice": "d"
+    }
+  ],
+
+  "verifyUserCanSeePhaseOfRo": [
+    {
+      "rowID": "verifyUserCanSeePhaseOfRo.01",
+      "description": "Test Case 82960:User can see Phase of RO",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "servicePhaseHeaders": [
+        "Started",
+        "Change Technician",
+        "Active"
+      ]
+    }
+  ],
+
+  "verifyUserCanSeeStartedPrice": [
+    {
+      "rowID": "verifyUserCanSeeStartedPrice.01",
+      "description": "Test Case 82974:User can see \"Started\" → Price",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "servicePhaseHeaders": [
+        "Started",
+        "Change Technician",
+        "Active"
+      ]
+    }
+  ],
+
+  "verifyUserCanSeeStartedVendorPrice": [
+    {
+      "rowID": "verifyUserCanSeeStartedVendorPrice.01",
+      "description": "Test Case 82974:User can see \"Started\" → Price",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "servicePhaseHeaders": [
+        "Started",
+        "Change Technician",
+        "Active"
       ]
     }
   ]

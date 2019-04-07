@@ -243,6 +243,9 @@ public class VNextBOMonitorData  {
     @JsonProperty("informationFields")
     private String[] informationFields;
 
+    @JsonProperty("servicePhaseHeaders")
+    private String[] servicePhaseHeaders;
+
     public String getLocation() {
         return location;
     }
@@ -511,5 +514,9 @@ public class VNextBOMonitorData  {
 
     public String[] getInformationFields() {
         return informationFields;
+    }
+
+    public String[] getServicePhaseHeaders() {
+        return servicePhaseHeaders;
     }
 }

@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -95,6 +96,21 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@class='orderInfoWrapper secondLine clearfix']")
     private WebElement moreInformationBlock;
 
+    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_2']")
+    private WebElement phaseName;
+
+    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_3_1']/span")
+    private WebElement phaseVendorPrice;
+
+    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_4']/div")
+    private WebElement phaseVendorTechnician;
+
+    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_5']//div[contains(@data-bind, 'statusText')]")
+    private WebElement phaseStatus;
+
+    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]")
+    private WebElement phaseActionsTrigger;
+
     @FindBy(xpath = "//div[@data-template='order-service-item-template']//div[@class='clmn_5']//span[@title]")
     private List<WebElement> servicesStatusWidgetList;
 
@@ -104,10 +120,33 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@class='row order-info-content']//p/span[text()]")
     private List<WebElement> moreInformationFields;
 
+    @FindBy(xpath = "//strong[contains(@data-bind, 'amountField.totalAmountF')]")
+    private WebElement totalServicePrice;
+
+    @FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/span")
+    private List<WebElement> vendorPricesList;
+
     public VNextBORepairOrderDetailsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public List<String> getVendorPricesValuesList() {
+        waitABit(1000);
+        for (WebElement vendorPrice : vendorPricesList) {
+            setAttributeWithJS(vendorPrice, "style", "display: block");
+        }
+        wait.until(ExpectedConditions.visibilityOfAllElements(vendorPricesList));
+        final List<String> vendorPricesValuesList = vendorPricesList.stream()
+                .map(WebElement::getText)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+
+        for (WebElement vendorPrice : vendorPricesList) {
+            setAttributeWithJS(vendorPrice, "style", "display: none");
+        }
+        return vendorPricesValuesList;
     }
 
     public boolean isRoDetailsSectionDisplayed() {
@@ -357,6 +396,16 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         return this;
     }
 
+    public VNextBORepairOrderDetailsPage setServiceQuantity(String serviceId, String serviceDescription, String newValue) {
+        setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
+        return this;
+    }
+
+    public VNextBORepairOrderDetailsPage setServicePrice(String serviceId, String serviceDescription, String newValue) {
+        setTextValue(serviceId, serviceDescription, "//div[@class='clmn_3 grid__number']/input", newValue);
+        return this;
+    }
+
     private String getTextValue(String serviceId, String xpath, String replacement) {
         final WebElement element = getElementInServicesTable(serviceId, xpath);
         setAttributeWithJS(element, "style", "display: block;");
@@ -369,9 +418,20 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
         final WebElement element = getElementInServicesTable(serviceId, xpath);
         scrollToElement(element);
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-        actions.sendKeys(element, Keys.DELETE);
-        element.sendKeys(newValue);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        actions
+                .clickAndHold(element)
+                .sendKeys(Keys.DELETE)
+                .sendKeys(newValue)
+                .build()
+                .perform();
+//        final WebElement element1 = element.findElement(By.xpath(".//preceding-sibling::span"));
+//        setAttributeWithJS(element1, "style", "display: block");
+//        sendKeysWithJS(element1, newValue);
+//        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+//        todo delete if works fine -->
+//        actions.sendKeys(element, Keys.DELETE);
+//        element.sendKeys(newValue);
         clickServiceDescriptionName(serviceDescription);
     }
 
@@ -580,6 +640,52 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         }
     }
 
+    public String getPhaseNameValue() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(phaseName)).getText().trim();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public String getPhaseVendorPriceValue() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(phaseVendorPrice)).getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public String getPhaseVendorTechnicianValue() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(phaseVendorTechnician)).getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public String getPhaseStatusValue() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(phaseStatus)).getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public boolean isPhaseActionsTriggerDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(phaseActionsTrigger)).isDisplayed();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean isServiceCompletedDateDisplayed(String serviceId) {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
@@ -600,6 +706,36 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         } catch (TimeoutException e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    public String getTotalServicesPrice() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
+            actions.moveToElement(totalServicePrice).build().perform();
+            return totalServicePrice.getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public boolean updateTotalServicePrice(String totalPrice) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
+            actions.moveToElement(totalServicePrice).build().perform();
+            wait.until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
+            return true;
+        } catch (Exception ignored) {
+            refreshPage();
+            try {
+                wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
+                actions.moveToElement(totalServicePrice).build().perform();
+                wait.until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
+            } catch (Exception e) {
+                return false;
+            }
+            return true;
         }
     }
 }
