@@ -96,7 +96,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public MyWorkOrdersScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 40);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrdersPageTableLeft")));
 		wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("OrdersPageTableLeft")));

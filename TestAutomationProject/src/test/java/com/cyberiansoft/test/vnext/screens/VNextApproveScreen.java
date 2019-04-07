@@ -35,7 +35,7 @@ public class VNextApproveScreen extends VNextBaseScreen {
 	public VNextApproveScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 45);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(approcescreen));
 	}
 	

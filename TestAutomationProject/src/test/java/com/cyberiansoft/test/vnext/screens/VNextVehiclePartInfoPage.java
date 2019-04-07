@@ -18,7 +18,7 @@ import java.util.List;
 
 public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[@data-page='info']")
+	@FindBy(xpath="//div[@data-page='matrix-info']")
 	private WebElement vehiclepartinfoscreen;
 	
 	@FindBy(xpath="//div[@action='size']")

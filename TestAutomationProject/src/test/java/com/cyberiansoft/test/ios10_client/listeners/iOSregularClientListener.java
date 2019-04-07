@@ -14,10 +14,12 @@ import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 import com.cyberiansoft.test.ios10_client.utils.TestUser;
 import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.listeners.TestNG_ConsoleRunner;
-import org.apache.commons.io.FileUtils;
 import org.testng.*;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,11 +35,11 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
         public synchronized void onStart(ITestContext context) {
         ExtentManager.createInstance("report/" +
                 VNextConfigInfo.getInstance().getReportFileName());
-            try {
+            /*try {
                 FileUtils.cleanDirectory(new File("report"));
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
         @Override

@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basesc
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.AddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -70,13 +69,13 @@ public class CustomersScreen extends BaseAppScreen {
 		if (elementExists("ClientsView")) {
 			appiumdriver.findElementByAccessibilityId("Search").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
-			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
+			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer);
 			appiumdriver.findElementByAccessibilityId("Close").click();
 		} else {
 			
 			appiumdriver.findElementByAccessibilityId("Search").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
-			((IOSDriver) appiumdriver).getKeyboard().pressKey(customer);
+			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer);
 		}
 	}
 

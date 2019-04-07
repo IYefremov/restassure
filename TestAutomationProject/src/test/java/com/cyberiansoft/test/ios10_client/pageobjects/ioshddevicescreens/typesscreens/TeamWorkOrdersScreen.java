@@ -7,6 +7,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectE
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestdetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.MobileBy;
@@ -187,6 +188,23 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public ServiceRequestdetailsScreen clickServiceRequestButton() {
 		appiumdriver.findElementByAccessibilityId("Service Request").click();
 		return new ServiceRequestdetailsScreen();
+	}
+
+	public void clickInvoiceIcon() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("invoice new"))).click();
+	}
+
+	public void clickInvoiceType(IInvoicesTypes invoiceType) {
+		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
+		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
+	}
+
+	public <T extends IBaseWizardScreen>T selectInvoiceType(IInvoicesTypes invoiceType) {
+		clickInvoiceType(invoiceType);
+		return invoiceType.getFirstVizardScreen();
 	}
 
 }

@@ -43,11 +43,12 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     public VNextPayInvoicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+        BaseUtils.waitABit(3000);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(payscreen));
         wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//iframe[@class='invoice-pay-iframe']")));
-        BaseUtils.waitABit(3000);
+
         appiumdriver.switchTo().frame(payframe);
     }
 

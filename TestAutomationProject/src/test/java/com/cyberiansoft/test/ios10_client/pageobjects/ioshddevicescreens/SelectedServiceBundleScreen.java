@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -117,6 +118,17 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 			if (techtoolbar.findElementsByAccessibilityId("technician").size() > 0)
 				techtoolbar.findElementByAccessibilityId("technician").click();
 		return new TechniciansPopup();
+	}
+
+	public void setServicePriceValue(String _price)	 {
+
+		WebElement pricefldparent = appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='Price']/..");
+		WebElement pricefld = pricefldparent.findElement(MobileBy.className("XCUIElementTypeTextField"));
+		pricefld.click();
+		if (pricefld.findElements(MobileBy.AccessibilityId("Clear text")).size() > 0)
+			pricefld.findElement(MobileBy.AccessibilityId("Clear text")).click();
+		pricefld.sendKeys(_price + "\n");
+		BaseUtils.waitABit(1000);
 	}
 
 }
