@@ -19,6 +19,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+
 public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 	
 	@FindBy(xpath="//div[contains(@class, 'page work-orders-list')]")
@@ -193,5 +195,35 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 	public void searchWorkOrderByFreeText(String searchtext) {
 		searchByFreeText(searchtext);
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
+	}
+
+	public void createSeparateInvoice(String workOrderNumber) {
+		selectWorkOrder(workOrderNumber);
+		clickCreateInvoiceIcon();
+
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSeparateInvoicesButton();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
+		wait.until(ExpectedConditions.visibilityOf(
+				appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
+		wait = new WebDriverWait(appiumdriver, 120);
+		wait.until(ExpectedConditions.invisibilityOf(
+				appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
+	}
+
+	public void createSeparateInvoices(ArrayList<String> workOrders) {
+		for (String workOrderNumber : workOrders)
+			selectWorkOrder(workOrderNumber);
+		clickCreateInvoiceIcon();
+
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSeparateInvoicesButton();
+		final String invoicesCreatedTxt = workOrders.size() + " Invoices have been created";
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
+		wait.until(ExpectedConditions.presenceOfElementLocated(
+				By.xpath("//*[text()='" + invoicesCreatedTxt + "']")));
+		wait = new WebDriverWait(appiumdriver, 120);
+		wait.until(ExpectedConditions.invisibilityOf(
+				appiumdriver.findElement(By.xpath("//*[text()='" + invoicesCreatedTxt + "']"))));
 	}
 }
