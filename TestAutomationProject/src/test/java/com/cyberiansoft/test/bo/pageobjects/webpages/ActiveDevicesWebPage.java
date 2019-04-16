@@ -72,15 +72,17 @@ public class ActiveDevicesWebPage extends BasePage {
 	public String getFirstRegCodeInTable() {
 		wait.until(ExpectedConditions.visibilityOf(devicestable.getWrappedElement()));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));
-		if (regcodefld.getText().isEmpty())
-			replacemarker.click();
-		else {
+		if (devicestable.getWrappedElement().findElements(By.xpath(".//a[text()='x']")).size() > 0) {
 			devicestable.getWrappedElement().findElement(By.xpath(".//a[text()='x']")).click();
 			//waitABit(3000);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));
 			replacemarker.click();
 		}
-		waitABit(3000);
+		else {
+			replacemarker.click();
+		}
+		WebElement deviceDialog = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td[@class='ModalDialog']")));
+		deviceDialog.findElement(By.xpath(".//input[@type='image' and @alt='OK']")).click();
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", devicestable.getWrappedElement().findElement(By.xpath(".//th[text()='Reg Code']")));	
 		return regcodefld.getText();
 	}
