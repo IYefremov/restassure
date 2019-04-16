@@ -51,7 +51,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		informationDialog.clickSingleInvoiceButton();
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
 		for (String wonumber : workOrders) {
-			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		final String invoiceNumber = invoiceinfoscren.getInvoiceNumber();
@@ -108,7 +108,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
 		for (String wonumber : workOrders) {
-			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		final String invoiceNumber = invoiceinfoscren.getInvoiceNumber();
@@ -166,7 +166,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
 		for (String wonumber : workOrders) {
-			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		final String invoiceNumber = invoiceinfoscren.getInvoiceNumber();
@@ -226,7 +226,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
 		for (String wonumber : workOrders) {
-			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		invoiceinfoscren.clickInvoiceInfoBackButton();
@@ -291,7 +291,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		informationDialog.clickSingleInvoiceButton();
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
 		for (String wonumber : workOrders) {
-			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		Assert.assertEquals(invoiceinfoscren.getInvoiceTotalAmount(), totalAmount);
@@ -351,7 +351,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen.selectCustomer(testcustomers[1]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
 		for (String wonumber : workOrders) {
-			invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber);
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		Assert.assertEquals(invoiceinfoscren.getInvoiceTotalAmount(), totalAmount);

@@ -1182,6 +1182,140 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	}
 
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanCreateSeparateInvoicesFromOneWO(String rowID,
+																	   String description, JSONObject testData) {
+
+		final int invoiceStringLenght = 6;
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice);
+
+		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+
+		invoicesScreen.clickBackButton();
+
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		workordersscreen.createSeparateInvoice(wonumber);
+		workordersscreen.clickBackButton();
+
+		invoicesScreen = homescreen.clickInvoicesMenuItem();
+		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNuber+1);
+		invoicesScreen.clickBackButton();
+	}
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanCreateSeparateInvoicesFromSeveralWOs(String rowID,
+																 String description, JSONObject testData) {
+
+		final int invoiceStringLenght = 6;
+		final int numberInvoicesToCreate = 3;
+		ArrayList<String> workOrders = new ArrayList<>();
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		for (int i = 0; i< numberInvoicesToCreate; i++)
+			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice));
+
+		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+
+		invoicesScreen.clickBackButton();
+
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		workordersscreen.createSeparateInvoices(workOrders);
+		workordersscreen.clickBackButton();
+
+		invoicesScreen = homescreen.clickInvoicesMenuItem();
+		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNuber+numberInvoicesToCreate);
+		invoicesScreen.clickBackButton();
+	}
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanCreateSingleInvoicesFromOneWO(String rowID,
+                                                                 String description, JSONObject testData) {
+
+        final int invoiceStringLenght = 6;
+        final String ponumber = "123po";
+
+        Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice);
+
+        VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+        final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+        final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+
+        invoicesScreen.clickBackButton();
+
+        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        workordersscreen.selectWorkOrder(wonumber);
+        workordersscreen.clickCreateInvoiceIcon();
+
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickSingleInvoiceButton();
+        VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
+        Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
+        invoiceinfoscren.setInvoicePONumber(ponumber);
+        final String newInvoiceNumber = invoiceinfoscren.getInvoiceNumber();
+        invoicesScreen = invoiceinfoscren.saveInvoiceAsFinal();
+        Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
+        final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+        Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNuber+1);
+        invoicesScreen.clickBackButton();
+    }
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanCreateSingleInvoicesFromSeveralWOs(String rowID,
+															   String description, JSONObject testData) {
+
+		final int invoiceStringLenght = 6;
+		final String ponumber = "123po";
+		final int numberInvoicesToCreate = 3;
+		ArrayList<String> workOrders = new ArrayList<>();
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		for (int i= 0; i < numberInvoicesToCreate; i++)
+			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice));
+
+		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+
+		invoicesScreen.clickBackButton();
+
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		for (String wonumber : workOrders)
+			workordersscreen.selectWorkOrder(wonumber);
+		workordersscreen.clickCreateInvoiceIcon();
+
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSingleInvoiceButton();
+		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(appiumdriver);
+		for (String wonumber : workOrders)
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
+		invoiceinfoscren.setInvoicePONumber(ponumber);
+		final String newInvoiceNumber = invoiceinfoscren.getInvoiceNumber();
+		invoicesScreen = invoiceinfoscren.saveInvoiceAsFinal();
+		Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
+		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNuber+1);
+		invoicesScreen.clickBackButton();
+	}
+
 	public String createSimpleWorkOrder(WorkOrderTypes wotype, Invoice invoice) {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		String wonumber = "";

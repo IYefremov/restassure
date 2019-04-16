@@ -299,6 +299,66 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyUserCanCreateSeparateInvoicesFromOneWO": [
+    {
+      "rowID": "testVerifyUserCanCreateSeparateInvoicesFromOneWO.01",
+      "description": "Test Case 83732:Verify user can create separate Invoices from one WO.",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanCreateSeparateInvoicesFromSeveralWOs": [
+    {
+      "rowID": "testVerifyUserCanCreateSeparateInvoicesFromSeveralWOs.01",
+      "description": "Test Case 83733:Verify user can create separate Invoices from several WOs.",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanCreateSingleInvoicesFromOneWO": [
+    {
+      "rowID": "testVerifyUserCanCreateSingleInvoicesFromOneWO.01",
+      "description": "Test Case 83734:Verify user can create single Invoice from one WO",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanCreateSingleInvoicesFromSeveralWOs": [
+    {
+      "rowID": "testVerifyUserCanCreateSingleInvoicesFromSeveralWOs.01",
+      "description": "Test Case 83735:Verify user can create single Invoice from several WO.",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 
 }

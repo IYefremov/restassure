@@ -434,7 +434,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		customersscreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+ 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
