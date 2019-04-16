@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 public class NadaEMailService {
 
-    private static final String NADA_EMAIL_DOMAIN = "@banit.club";
+    private static final String NADA_EMAIL_DOMAIN = "@getnada.com";
     private static final String INBOX_MESSAGE_KEY_NAME = "msgs";
     private static final String EMAIL_ID_ROUTE_PARAM = "email-id";
     private static final String MESSAGE_ID_ROUTE_PARAM = "message-id";
