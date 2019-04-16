@@ -15,6 +15,9 @@ public class VNextBOMonitorData  {
     @JsonProperty("location")
     private String location;
 
+    @JsonProperty("locationChanged")
+    private String locationChanged;
+
     @JsonProperty("searchLocation")
     private String searchLocation;
 
@@ -168,6 +171,9 @@ public class VNextBOMonitorData  {
     @JsonProperty("serviceDescription")
     private String serviceDescription;
 
+    @JsonProperty("serviceDetails")
+    private String serviceDetails;
+
     @JsonProperty("servicePrice")
     private String servicePrice;
 
@@ -248,6 +254,10 @@ public class VNextBOMonitorData  {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getLocationChanged() {
+        return locationChanged;
     }
 
     public String getSearchLocation() {
@@ -445,6 +455,10 @@ public class VNextBOMonitorData  {
 
     public String getServiceDescription() {
         return serviceDescription;
+    }
+
+    public String getServiceDetails() {
+        return serviceDetails;
     }
 
     public String getServicePrice() {

@@ -67,7 +67,11 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	}
 
     private void clickModalDialogButton(WebElement button) {
-        wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+        } catch (Exception e) {
+            clickWithJS(button);
+        }
         try {
             wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
         } catch (TimeoutException e) {

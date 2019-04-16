@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,6 +33,12 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(id = "reconmonitordetails-view")
     private WebElement roDetailsSection;
 
+    @FindBy(xpath = "//div[@class='status']//span[@class='k-widget k-dropdown k-header']//span[@class='k-input']")
+    private WebElement roStatus;
+
+    @FindBy(xpath = "//div[@class='order-info-details']/div[contains(@class, 'on-hold')]")
+    private WebElement onHoldValue;
+
     @FindBy(xpath = "//input[contains(@data-bind, 'data.stockNo')]")
     private WebElement stockNumInputField;
 
@@ -41,8 +48,14 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[text()='Phase']")
     private WebElement phaseTextElement;
 
-    @FindBy(xpath = "//h5[@id='breadcrumb']//strong[text()='Repair Orders']")
-    private WebElement repairOrdersBackwardsLink;
+    @FindBy(className = "breadcrumbs")
+    private WebElement mainBreadCrumbsLink;
+
+    @FindBy(xpath = "//strong[contains(@data-bind, 'breadcrumb.last')]")
+    private WebElement lastBreadCrumb;
+
+    @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
+    private WebElement locationExpanded;
 
 //    @FindBy(xpath = "//div[@class='status']//span[@title]")
 //    private WebElement statusDropDown; //todo use the locator instead of statusListBoxOptions.get(0)
@@ -111,6 +124,9 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]")
     private WebElement phaseActionsTrigger;
 
+    @FindBy(xpath = "//span[contains(@class, 'location-name')]")
+    private WebElement locationElement;
+
     @FindBy(xpath = "//div[@data-template='order-service-item-template']//div[@class='clmn_5']//span[@title]")
     private List<WebElement> servicesStatusWidgetList;
 
@@ -126,10 +142,13 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/span")
     private List<WebElement> vendorPricesList;
 
+    final VNextBORepairOrdersWebPage repairOrdersPage;
+
     public VNextBORepairOrderDetailsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        repairOrdersPage = new VNextBORepairOrdersWebPage(driver);
     }
 
     public List<String> getVendorPricesValuesList() {
@@ -152,6 +171,23 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     public boolean isRoDetailsSectionDisplayed() {
         try {
             wait.until(ExpectedConditions.visibilityOf(roDetailsSection));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public String getRoStatus() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(roStatus)).getText();
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
+
+    public boolean isImageOnHoldStatusDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(onHoldValue));
             return true;
         } catch (Exception ignored) {
             return false;
@@ -256,10 +292,27 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 		return servicerow;
 	}
 
-	public VNextBORepairOrdersWebPage clickBackwardsLink() {
-        wait.until(ExpectedConditions.elementToBeClickable(repairOrdersBackwardsLink)).click();
+	public VNextBORepairOrdersWebPage clickRepairOrdersBackwardsLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink)).click();
         waitForLoading();
         return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+    }
+
+	public boolean isLastBreadCrumbDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(lastBreadCrumb));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+	public String getLastBreadCrumbText() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(lastBreadCrumb)).getText();
+        } catch (Exception ignored) {
+            return "";
+        }
     }
 
 	public VNextBORepairOrderDetailsPage typeStockNumber(String stockNumber) {
@@ -377,8 +430,8 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     }
 
     public String getServicePrice(String serviceId) {
-        return getTextValue(serviceId, "/div[@class='clmn_3 grid__number']/span", ".00")
-                .replace("$", "");
+        String result = getTextValue(serviceId, "/div[@class='clmn_3 grid__number']/span");
+        return StringUtils.substringBefore(result, ",");
     }
 
     public String getServiceVendorPrice(String serviceId) {
@@ -411,6 +464,14 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         setAttributeWithJS(element, "style", "display: block;");
         final String text = wait.until(ExpectedConditions
                 .visibilityOf(element)).getText().replace(replacement, "");
+        setAttributeWithJS(element, "style", "display: none;");
+        return text;
+    }
+
+    private String getTextValue(String serviceId, String xpath) {
+        final WebElement element = getElementInServicesTable(serviceId, xpath);
+        setAttributeWithJS(element, "style", "display: block;");
+        final String text = wait.until(ExpectedConditions.visibilityOf(element)).getText();
         setAttributeWithJS(element, "style", "display: none;");
         return text;
     }
@@ -720,6 +781,59 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         }
     }
 
+    public boolean isLocationExpanded() {
+        try {
+            return waitShort.until(ExpectedConditions.visibilityOf(locationExpanded)).isDisplayed();
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    private void selectLocation(String location) {
+        wait.until(ExpectedConditions
+                .elementToBeClickable(locationExpanded.findElement(By.xpath(".//label[text()='" + location + "']"))))
+                .click();
+        waitForLoading();
+        Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
+        closeLocationDropDown();
+    }
+
+    public void closeLocationDropDown() {
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
+        } catch (Exception e) {
+            locationElement.click();
+            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
+        }
+    }
+
+    public boolean isLocationSelected(String location) {
+        try {
+            wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.presenceOfElementLocated(By
+                            .xpath("//div[@class='add-notes-item menu-item active']//label[text()='" + location + "']")));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public VNextBORepairOrdersWebPage setLocation(String location) {
+        if (isLocationExpanded()) {
+            selectLocation(location);
+        } else {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+            } catch (Exception ignored) {
+                waitABit(2000);
+                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+            }
+            selectLocation(location);
+        }
+        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+    }
+
     public boolean updateTotalServicePrice(String totalPrice) {
         try {
             wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
@@ -736,6 +850,24 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
                 return false;
             }
             return true;
+        }
+    }
+
+    public boolean isBreadCrumbClickable() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isLocationSet(String location) {
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElement(locationElement, location));
+            return true;
+        } catch (Exception ignored) {
+            return false;
         }
     }
 }

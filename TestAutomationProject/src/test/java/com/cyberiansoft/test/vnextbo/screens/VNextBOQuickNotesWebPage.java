@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,7 +24,7 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
     public VNextBOQuickNotesWebPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        wait.until(ExpectedConditions.visibilityOf(addQuickNotesButton));
+//        wait.until(ExpectedConditions.visibilityOf(addQuickNotesButton));
     }
 
     public VNextBOQuickNotesWebPage moveQuickNotes(String quickNoteSource, String quickNoteTarget) {
@@ -38,7 +37,7 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
         scrollToElement(source);
         waitABit(1000);
 
-        new Actions(driver).dragAndDrop(source, target).build().perform();   //variant 1
+        actions.dragAndDrop(source, target).build().perform();   //variant 1
 //        new Actions(driver).clickAndHold(source).moveToElement(target).release().perform();   //variant 2
 //        String xto=Integer.toString(source.getLocation().x);   //variant 3
 //        String yto=Integer.toString(target.getLocation().y);

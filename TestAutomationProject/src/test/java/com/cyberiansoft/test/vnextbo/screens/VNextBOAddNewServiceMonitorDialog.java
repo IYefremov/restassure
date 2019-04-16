@@ -21,6 +21,9 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//textarea[contains(@data-bind, 'serviceDescription')]")
     private WebElement serviceDescription;
 
+    @FindBy(id = "service-instance-form-service-details")
+    private WebElement serviceDetails;
+
     @FindBy(xpath = "//label[text()='Price']/..//input[@title]")
     private WebElement servicePrice;
 
@@ -96,7 +99,7 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@data-bind='text: part.selectedPartsCounter']")
     private WebElement selectedAddPartsCounter;
 
-    @FindBy(xpath = "//ul[@id='service-instance-form-service_listbox']//div[contains(@class, 'item__text')]")
+    @FindBy(xpath = "//ul[@id='service-instance-form-service_listbox']/li")
     private List<WebElement> serviceListBoxOptions;
 
     @FindBy(xpath = "//tr[@data-order-service-id]//div[contains(@data-bind, 'visible: partDescription')]")
@@ -218,6 +221,12 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
 
     public VNextBOAddNewServiceMonitorDialog setServiceDescription(String description) {
         clearAndType(serviceDescription, description);
+        return this;
+    }
+
+    public VNextBOAddNewServiceMonitorDialog setServiceDetails(String serviceDetail) {
+        waitABit(300);
+        clearAndType(serviceDetails, serviceDetail);
         return this;
     }
 

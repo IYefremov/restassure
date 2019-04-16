@@ -115,7 +115,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-labelledby='servicePopup-laborTime-operation_label']")
     private WebElement operationLabel;
 
-    @FindBy(xpath = "//button[@data-automation-id='servicePopup-add-part']")
+    @FindBy(xpath = "//button[contains(@data-bind, 'presetParts.add')]")
     private WebElement servicePopupAddButton;
 
     @FindBy(xpath = "//div[@id='preset-parts-list']//span")
@@ -391,8 +391,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     public VNextBOAddNewServiceDialog clickNewServicePopupAddButton() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(servicePopupAddButton)).click();
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
         return this;
     }
 
@@ -401,6 +400,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         return servicePartsInfoList
                 .stream()
                 .map(WebElement::getText)
+                .peek(System.out::println)
                 .collect(Collectors.toList());
     }
 

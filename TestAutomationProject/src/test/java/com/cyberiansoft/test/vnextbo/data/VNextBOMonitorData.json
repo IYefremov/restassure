@@ -94,8 +94,7 @@
       "phases": [
         "All",
         "Started",
-        "Completed",
-        "QC"
+        "Completed"
       ]
     }
   ],
@@ -324,6 +323,7 @@
       "orderNumber": "O-000-152073",
       "priceType": "All",
       "service": "Test service zayats",
+      "serviceDetails": "roof",
       "serviceDescription": "autotest",
       "servicePrice": "90",
       "serviceQuantity": "1"
@@ -338,6 +338,7 @@
       "orderNumber": "O-000-152073",
       "priceType": "Money",
       "service": "Test service zayats",
+      "serviceDetails": "roof",
       "serviceDescription": "autotest",
       "servicePrice": "100",
       "serviceQuantity": "1"
@@ -580,7 +581,7 @@
     }
   ],
 
-  "verifyUserCanChangeTargetDateOfRoTODO": [
+  "verifyUserCanChangeTargetDateOfRo": [
     {
       "rowID": "verifyUserCanChangeTargetDateOfRo.01",
       "description": "Test Case 82926:User can change Target Date of RO",
@@ -888,6 +889,42 @@
         "Change Technician",
         "Active"
       ]
+    }
+  ],
+
+  "verifyUserCanSeeBreadCrumb": [
+    {
+      "rowID": "verifyUserCanSeeBreadCrumb.01",
+      "description": "Test Case 87414:User can see breadcrumb",
+      "location": "1111"
+    }
+  ],
+
+  "verifyUserCanSeeWoInBreadCrumb": [
+    {
+      "rowID": "verifyUserCanSeeWoInBreadCrumb.01",
+      "description": "Test Case 87415:User can see WO in the breadcrumb",
+      "location": "1111",
+      "orderNumber": "O-000-152073"
+    }
+  ],
+
+  "verifyUserCanChangeLocationOnDetailsPage": [
+    {
+      "rowID": "verifyUserCanChangeLocationOnDetailsPage.01",
+      "description": "Test Case 87416:User can change location being on detail's page of WO",
+      "location": "1111",
+      "locationChanged": "Rozstalnoy_location",
+      "orderNumber": "O-000-152073"
+    }
+  ],
+
+  "verifyUserCanReturnToMainPageOfWo": [
+    {
+      "rowID": "verifyUserCanReturnToMainPageOfWo.01",
+      "description": "Test Case 87417:User can return to the main page of WO",
+      "location": "1111",
+      "orderNumber": "O-000-152073"
     }
   ]
 }

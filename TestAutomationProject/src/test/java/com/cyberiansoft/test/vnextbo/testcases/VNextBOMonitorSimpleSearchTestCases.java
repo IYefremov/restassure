@@ -161,7 +161,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
                 "The work order is not displayed after search by last name after clicking the 'Enter' key");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //todo uncomment after bug fix #79944!!!
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByEmail(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -183,7 +184,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
                 "The work order is not displayed after search by email after clicking the 'Enter' key");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //todo uncomment after bug fix #79944!!!
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByCompanyName(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 

@@ -92,6 +92,14 @@ public class VNextBOAuditLogDialog extends VNextBOBaseWebPage {
         return localDateTimeVariant.format(formatter);
     }
 
+    public String getActualLocalDateTimePlusTwoMinutes() {
+        LocalDateTime localDate = LocalDateTime.now(ZoneId.of("US/Pacific"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy H:mm a");
+        final LocalDateTime localDateTime = localDate.minusHours(2); //todo remove minusHours(2) method, if fixed
+        final LocalDateTime localDateTimeVariant = localDateTime.plusMinutes(2);
+        return localDateTimeVariant.format(formatter);
+    }
+
     public String getActualLocalDateTimeMinusMinute() {
         LocalDateTime localDate = LocalDateTime.now(ZoneId.of("US/Pacific"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy H:mm a");

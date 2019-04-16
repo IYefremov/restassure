@@ -1,4 +1,5 @@
 <suite name="Cyberiansoft R360 ReconPro tests" verbose="10" configfailurepolicy="continue">
+       <!--parallel="classes" thread-count="3"-->>
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
     </listeners>

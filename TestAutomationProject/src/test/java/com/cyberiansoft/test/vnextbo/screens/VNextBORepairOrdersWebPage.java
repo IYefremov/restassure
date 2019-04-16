@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//*[@id='reconmonitor-orders']/table")
-    private WebElement reapiroderstable;
+    private WebElement repairOrdersTable;
 
     @FindBy(xpath = "//*[@id='repairOrdersFreeTextSearch']")
     private WebElement reapiroderssearchtextfld;
@@ -108,16 +108,16 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//table[@id='roTable']//th/div")
     private List<WebElement> tableHeaderRepeater;
 
-    @FindBy(xpath = "//div[@class='intercom-launcher-close-icon']")
+    @FindBy(xpath = "//div[@aria-label='Close Intercom Messenger']")
     private WebElement closeIntercomButton;
 
-    @FindBy(xpath = "//div[@class='intercom-launcher']")
+    @FindBy(xpath = "//div[contains(@class, 'intercom-launcher')]")
     private WebElement intercom;
 
     @FindBy(xpath = "//iframe[@name='intercom-launcher-frame']")
     private WebElement intercomFrame;
 
-    @FindBy(xpath = "//div[@class='intercom-launcher intercom-launcher-active']")
+    @FindBy(xpath = "//div[contains(@class, 'intercom-launcher' ) and contains (@class, 'active')]")
     private WebElement intercomOpen;
 
     @FindBy(id = "footer")
@@ -207,6 +207,9 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//i[@class='icon-arrow-up']")
     private WebElement arrowUp;
 
+    @FindBy(className = "breadcrumbs")
+    private WebElement mainBreadCrumbsLink;
+
     @FindBy(xpath = "//ul[@data-template='repairOrders-filterInfoList-item']/li")
     private List<WebElement> searchOptions;
 
@@ -274,8 +277,6 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         }
         return this;
     }
-
-
 
     public boolean isLocationSet(String location) {
         try {
@@ -420,7 +421,12 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public boolean isSavedSearchContainerDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOf(savedSearchContainer)).isDisplayed();
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(savedSearchContainer)).isDisplayed();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean isDepartmentDropdownDisplayed() {
@@ -828,12 +834,17 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public boolean isNoteForWorkOrderDisplayed(String woNumber) {
-        return isArrowDisplayed(woNumber, "']/../../..//div[@class='dark box']");
+//        return isArrowDisplayed(woNumber, "']/../../..//div[@class='dark box']");//strong[text()='O-000-152073']/../../..
+        return isArrowDisplayed(woNumber, "/../../..//div[@class='dark box']");//strong[text()='O-000-152073']/../../..
     }
 
     public VNextBORepairOrdersWebPage closeNoteForWorkOrder(String woNumber) {
         if (isNoteForWorkOrderDisplayed(woNumber)) {
+            System.out.println("Yes, displayed");
             clickNoteForWo(woNumber);
+            System.out.println("clicked");
+        } else {
+            System.out.println("not displayed");
         }
         return this;
     }
@@ -861,14 +872,21 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
                         .findElement(By.xpath("//strong[text()='" + woNumber
                                 + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']"))))
                 .click();
-//        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//strong[text()='" + woNumber
-//                + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']/div[@class='dark box']")));
+    }
+
+    public boolean isMainBreadCrumbClickable() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public VNextBORepairOrderDetailsPage clickWoLink(String woNumber) {
         waitForLoading();
         wait.until(ExpectedConditions.elementToBeClickable(By
-                .xpath("//a[@class='order-no'][contains(@href, '" + woNumber + "')]")))
+                .xpath("//a[@class='order-no']/strong[text()='" + woNumber + "']/..")))
                 .click();
         waitForLoading();
         return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
@@ -903,10 +921,11 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBOBaseWebPage setWoDepartment(String woNumber, String department) {
-        wait.until(ExpectedConditions.elementToBeClickable(tableBody.findElement(By.xpath("//a[@class='order-no'][contains(@href, '" +
-                woNumber + "')]/following-sibling::div/i[@class='menu-trigger']")))).click();
-        final WebElement departmentDropDown = tableBody.findElement(By.xpath("//a[@class='order-no'][contains(@href, '" +
-                woNumber + "')]/following-sibling::div/div[@class='drop department-drop']"));
+        closeNoteForWorkOrder(woNumber);
+        wait.until(ExpectedConditions.elementToBeClickable(tableBody.findElement(By.xpath("//a[@class='order-no']" +
+                "/strong[text()='" + woNumber + "']/../following-sibling::div/i[@class='menu-trigger']")))).click();
+        final WebElement departmentDropDown = tableBody.findElement(By.xpath("//a[@class='order-no']/strong[text()='"
+                + woNumber + "']/../..//div[@class='drop department-drop']"));
         wait.until(ExpectedConditions.visibilityOf(departmentDropDown));
         final List<WebElement> dropDownOptions = departmentDropDown.findElements(By.xpath(".//label"));
         wait.until(ExpectedConditions.visibilityOfAllElements(dropDownOptions));

@@ -462,22 +462,4 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 .searchServiceByServiceName(data.getNewMatrixServiceName());
         Assert.assertTrue(servicesPage.isServicePresentOnCurrentPageByServiceName(data.getNewMatrixServiceName()));
     }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanAddLaborPriceService(String rowID, String description, JSONObject testData) {
-        VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
-
-        VNextBOServicesWebPage servicesPage = leftMenu
-                .selectServicesMenu()
-                .searchServiceByServiceName(data.getServiceName())
-                .deleteServiceIfPresent(data.getServiceName())
-                .clickAddNewServiceButton()
-                .setServiceName(data.getServiceName())
-                .setServiceDescription(data.getServiceDescription())
-                .selectServicePriceType(data.getServicePriceType())
-                .setServicePriceValue(data.getServicePrice())
-                .clickSaveNewServiceButton()
-                .searchServiceByServiceName(data.getServiceName());
-        Assert.assertTrue(servicesPage.isServicePresentOnCurrentPageByServiceName(data.getServiceName()));
-    }
 }
