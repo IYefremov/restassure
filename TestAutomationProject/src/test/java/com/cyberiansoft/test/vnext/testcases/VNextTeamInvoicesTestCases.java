@@ -1316,6 +1316,42 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton(String rowID,
+															   String description, JSONObject testData) {
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice);
+
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		workordersscreen.selectWorkOrder(wonumber);
+		workordersscreen.clickCreateInvoiceIcon();
+
+		AppiumUtils.clickHardwareBackButton();
+		new VNextHomeScreen(appiumdriver);
+
+	}
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices(String rowID,
+																			  String description, JSONObject testData) {
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice);
+
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		workordersscreen.selectWorkOrder(wonumber);
+		workordersscreen.clickCreateInvoiceIcon();
+
+		AppiumUtils.clickHardwareBackButton();
+		new VNextHomeScreen(appiumdriver);
+
+	}
+
 	public String createSimpleWorkOrder(WorkOrderTypes wotype, Invoice invoice) {
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		String wonumber = "";

@@ -359,6 +359,36 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton": [
+    {
+      "rowID": "testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton.01",
+      "description": "Test Case 83736:Verify user can cancel Invoice creation using hardware back button",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ],
+
+  "testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices": [
+    {
+      "rowID": "testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices.01",
+      "description": "Test Case 83738:Verify user can cancel Invoice creation using pop-up (Separate Invoices)",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 
 }
