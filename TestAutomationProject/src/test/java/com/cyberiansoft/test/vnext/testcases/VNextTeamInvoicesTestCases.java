@@ -1160,6 +1160,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		homescreen = workordersscreen.clickBackButton();
 
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		invoicesscreen.switchToMyInvoicesView();
 		workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
@@ -1194,6 +1195,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice);
 
 		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		invoicesScreen.switchToMyInvoicesView();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
 
@@ -1225,6 +1227,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice));
 
 		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		invoicesScreen.switchToMyInvoicesView();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
 
@@ -1254,6 +1257,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
         String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice);
 
         VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		invoicesScreen.switchToMyInvoicesView();
         final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
         final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
 
@@ -1292,6 +1296,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice));
 
 		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		invoicesScreen.switchToMyInvoicesView();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
 
@@ -1338,18 +1343,74 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices(String rowID,
 																			  String description, JSONObject testData) {
 
+		final int invoiceStringLenght = 6;
+		final int numberInvoicesToCreate = 3;
+		ArrayList<String> workOrders = new ArrayList<>();
+
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice);
+		for (int i= 0; i < numberInvoicesToCreate; i++)
+			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, invoice));
+
+		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		final int lastInvoiceNuber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+
+		invoicesScreen.clickBackButton();
+
+		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		workordersscreen.switchToMyWorkordersView();
+		for (String wonumber : workOrders)
+			workordersscreen.selectWorkOrder(wonumber);
+		workordersscreen.clickCreateInvoiceIcon();
+
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSeparateInvoicesButton();
+
+        workordersscreen.cancelCreatingSeparateInvoice();
+
+		workordersscreen.clickBackButton();
+		invoicesScreen = homescreen.clickInvoicesMenuItem();
+		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+
+		Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
+		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNuber+1);
+		invoicesScreen.clickBackButton();
+
+	}
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO(String rowID,
+															   String description, JSONObject testData) {
+
+		final String NO_AVAILABLE_WO_MESSAGE = "No available Work Order for Invoice creation";
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
+
+		VNextInvoicesScreen invoicesScreen = homescreen.clickInvoicesMenuItem();
+		invoicesScreen.switchToMyInvoicesView();
+		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+
+		invoicesScreen.clickBackButton();
 
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		workordersscreen.selectWorkOrder(wonumber);
 		workordersscreen.clickCreateInvoiceIcon();
 
-		AppiumUtils.clickHardwareBackButton();
-		new VNextHomeScreen(appiumdriver);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+		informationDialog.clickSeparateInvoicesButton();
+		workordersscreen.waitForWorkOrderScreenInfoMessage(NO_AVAILABLE_WO_MESSAGE);
 
+		workordersscreen.clickBackButton();
+		homescreen.clickInvoicesMenuItem();
+		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		Assert.assertEquals( newInvoiceNumber, invoiceNumber);
+		invoicesScreen.clickBackButton();
 	}
 
 	public String createSimpleWorkOrder(WorkOrderTypes wotype, Invoice invoice) {

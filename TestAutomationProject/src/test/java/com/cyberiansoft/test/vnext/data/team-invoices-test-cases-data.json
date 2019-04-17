@@ -389,6 +389,21 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO": [
+    {
+      "rowID": "testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO.01",
+      "description": "Test Case 83739:Verify user can't create Separate Invoice if Invoice type is not assigned to WO",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        },
+        "service": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 
 }
