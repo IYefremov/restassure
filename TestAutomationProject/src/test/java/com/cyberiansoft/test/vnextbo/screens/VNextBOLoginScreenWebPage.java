@@ -7,49 +7,67 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
 
 public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
-	
+
 	@FindBy(xpath = "//div[@class='loginForm']")
-	private WebElement loginform;
+	private WebElement loginForm;
 	
 	@FindBy(id = "email")
-	private TextField emailfld;
+	private TextField emailField;
 	
 	@FindBy(id = "password")
-	private TextField passwordfld;
+	private TextField passwordField;
 	
 	@FindBy(xpath = "//input[@value='Login']")
-	private WebElement loginbtn;
+	private WebElement loginButton;
 	
 	@FindBy(xpath = "//a[text()='Forgot password?']")
-	private WebElement forgotpswlink;
+	private WebElement forgotPasswordLink;
 	
 	public VNextBOLoginScreenWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(loginform));
+		waitLong.until(ExpectedConditions.visibilityOf(loginForm));
 	}
 	
 	public VNextBOHeaderPanel userLogin(String username, String userpsw) {
-		clearAndType(emailfld.getWrappedElement(), username);
-		clearAndType(passwordfld.getWrappedElement(), userpsw);
-		click(loginbtn);
+		clearAndType(emailField.getWrappedElement(), username);
+		clearAndType(passwordField.getWrappedElement(), userpsw);
+		click(loginButton);
 		waitABit(2000);
 		return PageFactory.initElements(
 				driver, VNextBOHeaderPanel.class); 
 	}
 	
 	public VNextBOForgotPasswordWebPage clickForgotPasswordLink() {
-		forgotpswlink.click();
+		forgotPasswordLink.click();
 		return PageFactory.initElements(
 				driver, VNextBOForgotPasswordWebPage.class);
 	}
+
+    public boolean isLoginFormDisplayed() {
+        return isElementDisplayed(loginForm);
+    }
+
+    public boolean isEmailFieldDisplayed() {
+        return isElementDisplayed(emailField.getWrappedElement());
+    }
+
+    public boolean isPasswordFieldDisplayed() {
+        return isElementDisplayed(passwordField.getWrappedElement());
+    }
+
+    public boolean isLoginButtonDisplayed() {
+        return isElementDisplayed(loginButton);
+    }
+
+    public boolean isForgotPasswordLinkDisplayed() {
+        return isElementDisplayed(forgotPasswordLink);
+    }
 }

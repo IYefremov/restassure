@@ -841,6 +841,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     public VNextBORepairOrdersWebPage closeNoteForWorkOrder(String woNumber) {
         if (isNoteForWorkOrderDisplayed(woNumber)) {
             System.out.println("Yes, displayed");
+            waitForLoading();
             clickNoteForWo(woNumber);
             System.out.println("clicked");
         } else {
@@ -941,8 +942,8 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
 
     public String getWoDepartment(String woNumber) {
         return wait.until(ExpectedConditions
-                .visibilityOf(tableBody.findElement(By.xpath("//a[@class='order-no'][contains(@href, '" +
-                        woNumber + "')]/following-sibling::div/i[@class='menu-trigger']"))))
+                .visibilityOf(tableBody.findElement(By.xpath("//a[@class='order-no']" +
+                        "/strong[text()='" + woNumber + "']/../following-sibling::div/i[@class='menu-trigger']"))))
                 .getText();
     }
 

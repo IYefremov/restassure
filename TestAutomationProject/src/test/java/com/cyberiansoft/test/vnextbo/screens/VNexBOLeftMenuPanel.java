@@ -20,7 +20,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(id = "menuBtn")
     private WebElement menuButton;
 
-    @FindBy(xpath = "//body[@class]")
+//    @FindBy(xpath = "//body[contains(@class, 'body-mobile--scroll-hidden')]")
+//    private WebElement body;
+
+//    @FindBy(xpath = "//body[contains(@class, 'body')]")
+    @FindBy(xpath = "//div[@id='page-wrapper']/parent::body")
     private WebElement body;
 
     @FindBy(xpath = "//*[@data-automation-id='inspections']")
@@ -106,8 +110,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
                 driver, VNextBOQuickNotesWebPage.class);
     }
 
-    private boolean isMainMenuExpanded() {
-        wait.until(ExpectedConditions.attributeContains(body, "class", "body-mobile--scroll-hidden"));
+    public boolean isMainMenuExpanded() {
+        driver.switchTo().defaultContent();
+        wait.until(ExpectedConditions.visibilityOf(body));
         try {
             return wait.until(ExpectedConditions.attributeContains(body, "class", "left-menu--open"));
         } catch (Exception ignored) {
@@ -119,6 +124,13 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         if (!isMainMenuExpanded()) {
             wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
             wait.until(ExpectedConditions.attributeContains(body, "class", "left-menu--open"));
+        }
+    }
+
+    public void collapseMainMenu() {
+        if (isMainMenuExpanded()) {
+            wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+            wait.until(ExpectedConditions.attributeToBe(body, "class", "body-mobile--scroll-hidden"));
         }
     }
 
@@ -134,21 +146,32 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         waitABit(1000);
     }
 
-    private void selectMenuItem(WebElement menuitem, String mainmenuitem) {
+    private void selectMenuItem(WebElement menuitem, String mainMenuItem) {
         try {
             driver.switchTo().frame(tutorialFrame);
             waitABit(1000);
             wait.until(ExpectedConditions.elementToBeClickable(tutorialSkipButton)).click();
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         driver.switchTo().defaultContent();
         expandMainMenu();
-        clickMainMenuItem(mainmenuitem);
+        clickMainMenuItem(mainMenuItem);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
         } catch (TimeoutException e) {
             scrollToElement(menuitem);
             clickWithJS(menuitem);
+        }
+    }
+
+    public boolean isMenuButtonDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(menuButton));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

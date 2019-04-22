@@ -1,0 +1,98 @@
+{
+  "verifyUserCanSeeHomePage": [
+    {
+      "rowID": "verifyUserCanSeeHomePage.01",
+      "description": "Test Case 84373:Verify user can see \"Home page\""
+    }
+  ],
+
+  "verifyUserCanMaximizeMinimizeMenu": [
+    {
+      "rowID": "verifyUserCanMaximizeMinimizeMenu.01",
+      "description": "Test Case 84374:User can maximize/minimize the menu"
+    }
+  ],
+
+  "verifyUserCanMinimizeMaximizeMenu": [
+    {
+      "rowID": "verifyUserCanMinimizeMaximizeMenu.01",
+      "description": "Test Case 87848:User can maximize/minimize the menu (wide screen)"
+    }
+  ],
+
+  "verifyUserCanSeeHomePageAfterClickingOnAMTLogo": [
+    {
+      "rowID": "verifyUserCanSeeHomePageAfterClickingOnAMTLogo.01",
+      "description": "Test Case 84375:User can see Home page clicking on AMT logo"
+    }
+  ],
+
+  "verifyUserCanSeeEditWindowOfHisProfile": [
+    {
+      "rowID": "verifyUserCanSeeEditWindowOfHisProfile.01",
+      "description": "Test Case 84378:User can see window of edit of his profile"
+    }
+  ],
+
+  "verifyUserCanLogoutFromHisProfile": [
+    {
+      "rowID": "verifyUserCanLogoutFromHisProfile.01",
+      "description": "Test Case 84379:User can logout from his profile"
+    }
+  ],
+
+  "verifyUserCanOpenHelpPage": [
+    {
+      "rowID": "verifyUserCanOpenHelpPage.01",
+      "description": "Test Case 84380:User can open \"Help\" page",
+      "url": "api.cyberianconcepts.com/HelpNote"
+    }
+  ],
+
+  "verifyUserCanOpenLearnPage": [
+    {
+      "rowID": "verifyUserCanOpenLearnPage.01",
+      "description": "Test Case 84381:User can open \"Learn\" page",
+      "url": "college.amt360.net"
+    }
+  ],
+
+  "verifyUserCanClickOnAccessClientPortalLink": [
+    {
+      "rowID": "verifyUserCanClickOnAccessClientPortalLink.01",
+      "description": "Test Case 84382:User can click on \"Access Client Portal\"",
+      "url": "ibs.cyberianconcepts.com/Billing"
+    }
+  ],
+
+  "verifyUserCanClickOnAccessReconProBOLink": [
+    {
+      "rowID": "verifyUserCanClickOnAccessReconProBOLink.01",
+      "description": "Test Case 84383:User can click on \"Access ReconPro BackOffice\"",
+      "url": "reconpro-a.dev.cyberianconcepts.com"
+    }
+  ],
+
+  "verifyUserCanOpenSupportForBOPage": [
+    {
+      "rowID": "verifyUserCanOpenSupportForBOPage.01",
+      "description": "Test Case 84384:User can open \"Support for Back Office\"",
+      "url": "https://intercom.help/amt/repair360-back-office"
+    }
+  ],
+
+  "verifyUserCanOpenSupportForMobileAppPage": [
+    {
+      "rowID": "verifyUserCanOpenSupportForMobileAppPage.01",
+      "description": "Test Case 84385:User can open \"Support for Mobile App\"",
+      "url": "https://intercom.help/amt/repair360-mobile-app"
+    }
+  ],
+
+  "verifyUserCanOpenAndCloseIntercom": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseIntercom.01",
+      "description": "Test Case 84386:User can open and close \"Intercom\""
+    }
+  ]
+}

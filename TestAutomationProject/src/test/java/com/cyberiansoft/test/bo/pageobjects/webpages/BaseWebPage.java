@@ -269,4 +269,14 @@ public abstract class BaseWebPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         return this;
     }
+
+    public boolean isElementDisplayed(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

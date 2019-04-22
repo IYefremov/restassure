@@ -67,11 +67,15 @@ public abstract class VNextBOBaseWebPage {
     }
 
     public void waitForNewTab() {
-        waitLong.until((ExpectedCondition<Boolean>) driver -> (
-                Objects
-                        .requireNonNull(driver)
-                        .getWindowHandles()
-                        .size() != 1));
+        try {
+            waitLong.until((ExpectedCondition<Boolean>) driver -> (
+                    Objects
+                            .requireNonNull(driver)
+                            .getWindowHandles()
+                            .size() != 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void closeNewTab(String mainWindowHandle) {
@@ -185,6 +189,16 @@ public abstract class VNextBOBaseWebPage {
         }
     }
 
+    String getNewTab(String mainWindow) {
+        for (String activeHandle : driver.getWindowHandles()) {
+            if (!activeHandle.equals(mainWindow)) {
+                driver.switchTo().window(activeHandle);
+                return activeHandle;
+            }
+        }
+        return "";
+    }
+
     String selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox) {
         try {
             wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
@@ -199,5 +213,15 @@ public abstract class VNextBOBaseWebPage {
                     .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
         } catch (Exception ignored) {}
         return selectedValue.getText();
+    }
+
+    protected boolean isElementDisplayed(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
