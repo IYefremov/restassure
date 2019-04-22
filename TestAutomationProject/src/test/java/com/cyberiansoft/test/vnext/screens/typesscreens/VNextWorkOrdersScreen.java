@@ -197,18 +197,23 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
 	}
 
+	public void waitForWorkOrderScreenInfoMessage(String infoMessage) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(
+				appiumdriver.findElement(By.xpath("//*[text()='" + infoMessage + "']"))));
+		wait = new WebDriverWait(appiumdriver, 40);
+		wait.until(ExpectedConditions.invisibilityOf(
+				appiumdriver.findElement(By.xpath("//*[text()='" + infoMessage + "']"))));
+
+	}
+
 	public void createSeparateInvoice(String workOrderNumber) {
 		selectWorkOrder(workOrderNumber);
 		clickCreateInvoiceIcon();
 
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickSeparateInvoicesButton();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
-		wait.until(ExpectedConditions.visibilityOf(
-				appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
-		wait = new WebDriverWait(appiumdriver, 120);
-		wait.until(ExpectedConditions.invisibilityOf(
-				appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
+        waitForWorkOrderScreenInfoMessage("Invoice has been created");
 	}
 
 	public void createSeparateInvoices(ArrayList<String> workOrders) {
@@ -219,11 +224,26 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickSeparateInvoicesButton();
 		final String invoicesCreatedTxt = workOrders.size() + " Invoices have been created";
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
-		wait.until(ExpectedConditions.presenceOfElementLocated(
-				By.xpath("//*[text()='" + invoicesCreatedTxt + "']")));
+        waitForWorkOrderScreenInfoMessage(invoicesCreatedTxt);
+	}
+
+	public void cancelCreatingSeparateInvoice() {
+        BaseUtils.waitABit(2000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement modalDlg = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='modal modal-loading modal-in']")));
+
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']"))));
+		//BaseUtils.waitABit(1000);
+		tap(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']")));
+		tap(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']")));
+
+		System.out.println("--------------------------------------");
+		wait.until(ExpectedConditions.visibilityOf(
+				appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
 		wait = new WebDriverWait(appiumdriver, 120);
 		wait.until(ExpectedConditions.invisibilityOf(
-				appiumdriver.findElement(By.xpath("//*[text()='" + invoicesCreatedTxt + "']"))));
+				appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
+
 	}
 }

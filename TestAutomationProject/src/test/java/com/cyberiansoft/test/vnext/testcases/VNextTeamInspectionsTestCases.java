@@ -80,7 +80,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String vinnumber = "TEST";
 		final String ponumber = "12345";
 
-		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.INSP_TYPE_APPROV_REQUIRED, vinnumber);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
 
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
@@ -616,7 +616,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		final String customereMail = "test.cyberiansoft@gmail.com";
 		final String vinnumber = "TEST";
 
-		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.INSP_TYPE_APPROV_REQUIRED, vinnumber);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(customereMail);
@@ -736,21 +736,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 			vehicleinfoscreen.setVIN(vinnumber);
 			inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-			/*vehicleinfoscreen.swipeScreenLeft();
-			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
-			VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-			VNextQuestionsScreen questionsScreen = selectedServicesScreen.
-					clickServiceQuestionSection("Test_Service_PP_Panel", "zayats section1");
-			questionsScreen.selectAllRequiredQuestions(0);
-			questionsScreen.setAllRequiredQuestions("test 1");
-			questionsScreen.saveQuestions();
-			selectedServicesScreen.switchToAvalableServicesView();
-			availableServicesScreen.switchToSelectedServicesView();
-			questionsScreen = selectedServicesScreen.
-					clickServiceQuestionSection("Vlad_Money", "Vovan Test 5");
-			questionsScreen.selectRequiredQuestion();
-			questionsScreen.clickDoneButton();
-*/
 			vehicleinfoscreen.saveInspectionViaMenu();
 
 		} else if ((insptype.equals(InspectionTypes.O_KRAMAR) & (inspectionDTOs.size() > 0))) {

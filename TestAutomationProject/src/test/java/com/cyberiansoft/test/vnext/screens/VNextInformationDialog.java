@@ -168,4 +168,8 @@ public class VNextInformationDialog extends VNextBaseScreen {
 	public void clickSeparateInvoicesButton() {
 		tap(modaldlg.findElement(By.xpath(".//span[ text()='Separate Invoices']")));
 	}
+
+	public void clickCancelLoadingButton() {
+		tap(modaldlg.findElement(By.xpath(".//span[ text()='Cancel loading']")));
+	}
 }

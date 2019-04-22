@@ -28,12 +28,11 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 			+ "Verify user can create Inspection in status 'New'", 
 			description = "Verify user can approve Inspection after creating")
 	public void testVerifyUserCanApproveInspectionAfterCreating() {
-		
-		final String inspType = "Insp_type_approv_req";
+
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.INSP_TYPE_APPROV_REQUIRED, vinnumber);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -54,7 +53,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.INSP_TYPE_APPROV_REQUIRED, vinnumber);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -75,12 +74,11 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 	@Test(testName= "Test Case 64264:Verify user can create WO only for Approved Inspections", 
 			description = "Verify user can create WO only for Approved Inspections")
 	public void testVerifyUserCanCreateWOOnlyForApprovedInspections() {
-		
-		final String inspType = "Insp_type_approv_req";
+
 		final String vinnumber = "TEST";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
-		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.INSP_TYPE_APPROV_REQUIRED, vinnumber);
+		final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
 		VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
 		VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -111,6 +109,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.swipeScreenLeft();
 		vehicleinfoscreen.swipeScreenLeft();
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
 		/*VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
