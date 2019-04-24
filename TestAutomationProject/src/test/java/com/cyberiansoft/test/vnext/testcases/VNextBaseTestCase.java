@@ -97,7 +97,10 @@ public class VNextBaseTestCase {
 				.withArgument(LOG_LEVEL, "error")
 				.build());
 		else
-			service.set(new AppiumServiceBuilder()
+			service.set(new AppiumServiceBuilder().
+					usingDriverExecutable(new File("/usr/local/bin/node"))
+					.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+					.withIPAddress("127.0.0.1")
 					.usingAnyFreePort().withArgument(SESSION_OVERRIDE)
 					.withArgument(LOG_LEVEL, "error")
 					.build());
