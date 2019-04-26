@@ -46,8 +46,8 @@ public class BaseTestCase {
 		 * GraphicsConfiguration gc = GraphicsEnvironment
 		 * .getLocalGraphicsEnvironment().getDefaultScreenDevice()
 		 * .getDefaultConfiguration();
-		 * 
-		 * 
+		 *
+		 *
 		 * screenRecorder = new ScreenRecorder(gc, new Format(MediaTypeKey,
 		 * MediaType.FILE, MimeTypeKey, MIME_AVI), new Format( MediaTypeKey,
 		 * MediaType.VIDEO, EncodingKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
@@ -60,9 +60,10 @@ public class BaseTestCase {
 		 * System.out.println("++++++++++" +
 		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
 		 */
-		 
-		 AppiumDriverServiceBuilder.getInstance().buildAppiumService();
-	     browsertype = BaseUtils.getBrowserType(ReconProIOSStageInfo.getInstance().getDefaultBrowser());
+
+		AppiumDriverServiceBuilder.getInstance().buildAppiumService();
+		browsertype = BaseUtils.getBrowserType(ReconProIOSStageInfo.getInstance().getDefaultBrowser());
+
 	}
 
 	public static WebElement wait(By locator) {

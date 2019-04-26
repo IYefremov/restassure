@@ -1215,11 +1215,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 		vehiclescreen.setVIN(VIN);
 		String wo1 = vehiclescreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
+        /*RegularQuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
-		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");*/
 
-        RegularServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+        RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		RegularSelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedservicedetailscreen.setServicePriceValue("999999.00");
 		selectedservicedetailscreen.setServiceQuantityValue("987");
@@ -1237,9 +1237,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 		vehiclescreen.setVIN(VIN);
 		String wo2 = vehiclescreen.getWorkOrderNumber();
-        questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
+        /*questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.swipeScreenUp();
-		questionsscreen.selectAnswerForQuestion("Question 2", "A1");
+		questionsscreen.selectAnswerForQuestion("Question 2", "A1");*/
 
         servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
@@ -1259,6 +1259,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		myworkordersscreen.clickInvoiceIcon();
 		
 		myworkordersscreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
 		RegularInvoiceInfoScreen invoiceinfoscreen = questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceinfoscreen.setPO("123");
 		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -1509,11 +1510,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
 		selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
+		//
 		selectedservicescreen.selectServicePartSubcategory("Filters");
 		selectedservicescreen.selectServicePartSubcategoryPart("Engine Oil Filter");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Oil Cooler");
-		selectedservicescreen.saveSelectedServiceDetails();	
+		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("2.35");
 		selectedservicescreen.saveSelectedServiceDetails();
 
@@ -1529,7 +1531,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectServicePartSubcategory("Bumper");
 		selectedservicescreen.selectServicePartSubcategoryPart("Bumper");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Rear Upper");
-		selectedservicescreen.saveSelectedServiceDetails();	
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("5.09");
 		//selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.answerQuestionCheckButton();		
@@ -1541,17 +1543,18 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectServicePartSubcategory("Filters");
 		selectedservicescreen.selectServicePartSubcategoryPart("Air Filter");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Inner");
-		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("7");
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_SubCategory");
 		selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Body");
-		Assert.assertEquals(selectedservicescreen.getServicePartSubCategoryValue(), "Bumper");
+
 		selectedservicescreen.selectServicePartSubcategoryPart("Bumper Air Shield");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Front Lower");
-		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Body");
+		Assert.assertEquals(selectedservicescreen.getServicePartSubCategoryValue(), "Bumper");
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("4.31");
 		selectedservicescreen.saveSelectedServiceDetails();
 
@@ -1565,11 +1568,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		Helpers.tapRegularCarImage();
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen();
 		selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Body");
-		Assert.assertEquals(selectedservicescreen.getServicePartSubCategoryValue(), "Bumper");
 		selectedservicescreen.selectServicePartSubcategoryPart("Bumper Assembly");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Front");
-		selectedservicescreen.saveSelectedServiceDetails();	
+		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Body");
+		Assert.assertEquals(selectedservicescreen.getServicePartSubCategoryValue(), "Bumper");
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("6.43");
 		selectedservicescreen.saveSelectedServiceDetails();
 
@@ -1580,10 +1583,11 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclePartScreen.clickDiscaunt("Oksi_Part_Category");
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen();
 		selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
+
 		selectedservicescreen.selectServicePartSubcategory("Electrical Connectors");
 		selectedservicescreen.selectServicePartSubcategoryPart("Engine Brake Relay Connector");
-		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Brake Relay Connector (N/A)");
 		selectedservicescreen.setServicePriceValue("12.44");
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -1594,7 +1598,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.clickServicePartCell();		
 		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Belts and Cooling");
 		Assert.assertEquals(selectedservicescreen.getServicePartSubCategoryValue(), "Hardware");
-		selectedservicescreen.saveSelectedServiceDetails();	
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("2.13");
 		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$24.57");
@@ -1680,11 +1684,12 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
         RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
 		selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
+
 		selectedservicescreen.selectServicePartSubcategory("Filters");
 		selectedservicescreen.selectServicePartSubcategoryPart("Engine Oil Filter");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Oil Cooler");
-		selectedservicescreen.saveSelectedServiceDetails();	
+		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("2.35");
 		selectedservicescreen.saveSelectedServiceDetails();
 
@@ -1700,7 +1705,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectServicePartSubcategory("Bumper");
 		selectedservicescreen.selectServicePartSubcategoryPart("Bumper");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Rear Upper");
-		selectedservicescreen.saveSelectedServiceDetails();	
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("5.09");
 		selectedservicescreen.answerQuestionCheckButton();		
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -1711,17 +1716,17 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.selectServicePartSubcategory("Filters");
 		selectedservicescreen.selectServicePartSubcategoryPart("Air Filter");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Inner");
-		selectedservicescreen.saveSelectedServiceDetails();
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("7");
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_SubCategory");
 		selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Body");
-		Assert.assertEquals(selectedservicescreen.getServicePartSubCategoryValue(), "Bumper");
 		selectedservicescreen.selectServicePartSubcategoryPart("Bumper Air Shield");
 		selectedservicescreen.selectServicePartSubcategoryPosition("Front Lower");
-		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Body");
+		Assert.assertEquals(selectedservicescreen.getServicePartSubCategoryValue(), "Bumper");
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("4.31");
 		selectedservicescreen.saveSelectedServiceDetails();
 		
@@ -1734,10 +1739,10 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		vehiclePartScreen.clickDiscaunt("Oksi_Part_Category");
 		selectedservicescreen = new RegularSelectedServiceDetailsScreen();
 		selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
 		selectedservicescreen.selectServicePartSubcategory("Electrical Connectors");
 		selectedservicescreen.selectServicePartSubcategoryPart("Engine Brake Relay Connector");
-		selectedservicescreen.saveSelectedServiceDetails();
+		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Engine");
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Brake Relay Connector (N/A)");
 		selectedservicescreen.setServicePriceValue("12.44");
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -1748,7 +1753,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		selectedservicescreen.clickServicePartCell();		
 		Assert.assertEquals(selectedservicescreen.getServicePartCategoryValue(), "Belts and Cooling");
 		Assert.assertEquals(selectedservicescreen.getServicePartSubCategoryValue(), "Hardware");
-		selectedservicescreen.saveSelectedServiceDetails();	
+		selectedservicescreen.clickSelectedServiceDetailsDoneButton();
 		selectedservicescreen.setServicePriceValue("2.13");
 		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartSubTotalPrice(), "$24.57");

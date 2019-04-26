@@ -240,6 +240,11 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
 	}
 
+	public void clickSelectedServiceDetailsDoneButton() {
+		appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
+	}
+
+
 	public String saveSelectedServiceDetailsWithAlert() {
 		saveSelectedServiceDetails();
 		return Helpers.getAlertTextAndAccept();
@@ -431,7 +436,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	//Service Parts /////////
 	
 	public String getServicePartValue() {
-		WebElement par = getTableParentCell("Service Part");
+		WebElement par = getTableParentCell("Part");
 		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")) .getAttribute("value");
 	}
 	
@@ -441,7 +446,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectServicePartCategory(String categoryname) {
-		appiumdriver.findElementByAccessibilityId("Category").click();
+		//appiumdriver.findElementByAccessibilityId("Category").click();
 		appiumdriver.findElementByAccessibilityId(categoryname).click();
 	}
 	
@@ -451,8 +456,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectCategory(String categoryname) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Category"))).click();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Category"))).click();
 		if (!appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + categoryname + "']")).isDisplayed()) {
 			swipeToElement(appiumdriver.
@@ -463,9 +468,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectServicePartSubcategory(String subcategoryname) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Subcategory")));
-		appiumdriver.findElementByAccessibilityId("Subcategory").click();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Subcategory")));
+		//appiumdriver.findElementByAccessibilityId("Subcategory").click();
 		appiumdriver.findElementByAccessibilityId(subcategoryname).click();
 		//appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(subcategoryname), 1000);
 		//appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + subcategoryname + "']")).click();
@@ -478,15 +483,15 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectServicePartSubcategoryPart(String subcategorypartname) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Part")));
-		appiumdriver.findElementByAccessibilityId("Part").click();
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Part")));
+		//appiumdriver.findElementByAccessibilityId("Part").click();
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {
-		appiumdriver.findElementByAccessibilityId("Position").click();
+		//appiumdriver.findElementByAccessibilityId("Position").click();
 		appiumdriver.findElementByAccessibilityId(subcategorypositionname).click();
 	}
 	
