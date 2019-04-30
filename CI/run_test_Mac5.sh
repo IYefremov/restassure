@@ -9,7 +9,7 @@ echo "------------------"
 export JAVA_HOME=$(/usr/libexec/java_home)
 export ANDROID_HOME=/Users/aqc/Library/android/sdk
 
-export PATH=/usr/local/Cellar/maven/3.6./bin:$JAVA_HOME/bin:$PATH
+export PATH=/usr/local/Cellar/maven/3.6.1/bin:$JAVA_HOME/bin:$PATH
 
 
 mvn clean install test -DsuiteXmlFile=$1
