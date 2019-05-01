@@ -154,10 +154,10 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     @FindBy(xpath = "//button[@class='btn-black pull-right']")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//div[@class='advSearch']//span[text()='Save']")
+    @FindBy(xpath = "//div[@class='advSearch']//button[text()='Save']")
     private WebElement saveButton;
 
-    @FindBy(xpath = "//div[@class='advSearch']//span[text()='Clear']")
+    @FindBy(xpath = "//div[@class='advSearch']//button[text()='Clear']")
     private WebElement clearButton;
 
     @FindBy(xpath = "//div[@class='advSearch']//i[@class='icon-close pull-right']")

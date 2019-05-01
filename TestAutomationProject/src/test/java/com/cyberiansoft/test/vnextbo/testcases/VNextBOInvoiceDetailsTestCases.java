@@ -8,6 +8,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -16,8 +17,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.UUID;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
@@ -64,7 +63,8 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
-		final String usermail = data.getUserMailPrefix() + UUID.randomUUID() + data.getUserMailPostbox();
+		final String usermail = data.getUserMailPrefix() + RandomUtils.nextInt(100000, 1000000) + data.getUserMailPostbox();
+        System.out.println(usermail);
 		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
 		adduserdialog.createNewUser(data.getTechFirstName(), data.getTechLastName(), usermail, data.getTechUserPhone(), false);
 		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));

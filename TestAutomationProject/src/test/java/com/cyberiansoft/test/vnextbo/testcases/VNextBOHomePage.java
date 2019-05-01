@@ -202,7 +202,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         final String helpWindow = homePage.openHelpWindow(mainWindow);
-        final String currentUrl = webdriver.getCurrentUrl();
+        final String currentUrl = homePage.getUrl();
         System.out.println(mainWindow);
         System.out.println(helpWindow);
 
@@ -222,11 +222,11 @@ public class VNextBOHomePage extends BaseTestCase {
         final String learnWindow = homePage.openLearnWindow(mainWindow);
         String currentUrl;
         try {
-            currentUrl = webdriver.getCurrentUrl();
+            currentUrl = homePage.getUrl();
         } catch (Exception e) {
             e.printStackTrace();
             webdriver.switchTo().window(learnWindow);
-            currentUrl = webdriver.getCurrentUrl();
+            currentUrl = homePage.getUrl();
         }
         System.out.println(mainWindow);
         System.out.println(learnWindow);
@@ -245,7 +245,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         final String AccessClientPortalWindow = homePage.openAccessClientPortalWindow(mainWindow);
-        final String currentUrl = webdriver.getCurrentUrl();
+        final String currentUrl = homePage.getUrl();
         System.out.println(mainWindow);
         System.out.println(AccessClientPortalWindow);
 
@@ -263,7 +263,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         homePage.openAccessReconProBOWindow(mainWindow);
-        final String currentUrl = webdriver.getCurrentUrl();
+        final String currentUrl = homePage.getUrl();
         System.out.println(mainWindow);
 
         System.out.println("actual Access Client Portal Url: " + currentUrl);
@@ -280,7 +280,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         final String AccessClientPortalWindow = homePage.openSupportForBOWindow(mainWindow);
-        final String currentUrl = webdriver.getCurrentUrl();
+        final String currentUrl = homePage.getUrl();
         System.out.println(mainWindow);
         System.out.println(AccessClientPortalWindow);
 
@@ -298,7 +298,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         final String AccessClientPortalWindow = homePage.openSupportForMobileAppWindow(mainWindow);
-        final String currentUrl = webdriver.getCurrentUrl();
+        final String currentUrl = homePage.getUrl();
         System.out.println(mainWindow);
         System.out.println(AccessClientPortalWindow);
 
@@ -318,5 +318,41 @@ public class VNextBOHomePage extends BaseTestCase {
         Assert.assertTrue(homePage.isIntercomOpened(), "The Intercom hasn't been opened");
         homePage.closeIntercom();
         Assert.assertFalse(homePage.isIntercomOpened(), "The Intercom hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanOpenAndCloseTermsAndConditionsWithOkButtonOnHomePage(String rowID, String description, JSONObject testData) {
+        VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
+
+        homePage
+                .clickTermsAndConditionsLink()
+                .acceptTermsAndConditions();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanOpenAndCloseTermsAndConditionsWithXButtonOnHomePage(String rowID, String description, JSONObject testData) {
+        VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
+
+        homePage
+                .clickTermsAndConditionsLink()
+                .rejectTermsAndConditions();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanOpenAndClosePrivacyPolicyWithOkButtonOnHomePage(String rowID, String description, JSONObject testData) {
+        VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
+
+        homePage
+                .clickPrivacyPolicyLink()
+                .acceptPrivacyPolicy();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanOpenAndClosePrivacyPolicyWithXButtonOnHomePage(String rowID, String description, JSONObject testData) {
+        VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
+
+        homePage
+                .clickPrivacyPolicyLink()
+                .rejectPrivacyPolicy();
     }
 }

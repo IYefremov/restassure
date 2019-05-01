@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import static org.awaitility.Awaitility.await;
 
 public abstract class VNextBOBaseWebPage {
 
@@ -76,6 +79,17 @@ public abstract class VNextBOBaseWebPage {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getUrl() {
+        try {
+            await().atMost(15, TimeUnit.SECONDS)
+                    .ignoreExceptions()
+                    .pollInterval(500, TimeUnit.MILLISECONDS)
+                    .until(driver::getCurrentUrl);
+        } catch (ConditionTimeoutException ignored) {}
+
+        return driver.getCurrentUrl();
     }
 
     public void closeNewTab(String mainWindowHandle) {

@@ -94,5 +94,33 @@
       "rowID": "verifyUserCanOpenAndCloseIntercom.01",
       "description": "Test Case 84386:User can open and close \"Intercom\""
     }
+  ],
+
+  "verifyUserCanOpenAndCloseTermsAndConditionsWithOkButtonOnHomePage": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsWithOkButtonOnHomePage.01",
+      "description": "Test Case 84390:Verify user can open and close \"Terms&Conditions\" (OK)"
+    }
+  ],
+
+  "verifyUserCanOpenAndCloseTermsAndConditionsWithXButtonOnHomePage": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsWithXButtonOnHomePage.01",
+      "description": "Test Case 84391:Verify user can open and close \"Terms&Conditions\" (X-icon)"
+    }
+  ],
+
+  "verifyUserCanOpenAndClosePrivacyPolicyWithOkButtonOnHomePage": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyWithOkButtonOnHomePage.01",
+      "description": "Test Case 84392:Verify user can open and close \"Privacy Policy\" (OK)"
+    }
+  ],
+
+  "verifyUserCanOpenAndClosePrivacyPolicyWithXButtonOnHomePage": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyWithXButtonOnHomePage.01",
+      "description": "Test Case 84393:Verify user can open and close \"Privacy Policy\" (X-icon)"
+    }
   ]
 }

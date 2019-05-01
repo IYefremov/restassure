@@ -180,16 +180,16 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@id='tableBody']")
     private WebElement tableBody;
 
-    @FindBy(xpath = "//div[@id='savedSearchContainer']//span[@aria-label='select']")
+    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']//span[@aria-label='select']")
     private WebElement savedSearchArrow;
 
-    @FindBy(xpath = "//div[@id='savedSearch-list' and contains(@style, 'block')]//ul[@id='savedSearch_listbox']/li/span")
+    @FindBy(xpath = "//div[@id='reconmonitor-saved-search-select-list' and @aria-hidden='false']//ul/li/span")
     private List<WebElement> savedSearchDropDownOptions;
 
-    @FindBy(xpath = "//div[@id='savedSearchContainer']/span[@title]")
+    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']/span[@title]")
     private WebElement savedSearchDropDown;
 
-    @FindBy(xpath = "//div[@id='savedSearchContainer']/span[@class='icon-pencil']")
+    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']/span[@class='icon-pencil']")
     private WebElement savedSearchEditIcon;
 
     @FindBy(className = "searchResults")

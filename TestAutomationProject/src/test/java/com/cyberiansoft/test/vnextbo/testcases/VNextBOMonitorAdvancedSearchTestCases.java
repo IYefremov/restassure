@@ -132,7 +132,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class) //todo fails, needs clarifications from V.Dubinenko
     public void verifyUserCanSearchByDepartment(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1131,6 +1131,10 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
+
+        //todo delete refreshing the page after #80090 bug is fixed
+        //todo https://cyb.tpondemand.com/RestUI/Board.aspx#page=board/4692469321793274828&appConfig=eyJhY2lkIjoiMTA1MTA5MDU0OEY2QTUyQjlFM0JCODkwRjYwQUVGMEIifQ==&boardPopup=Bug/80090/silent
+        repairOrdersPage.refreshPage();
 
         leftMenu
                 .selectRepairOrdersMenu()
