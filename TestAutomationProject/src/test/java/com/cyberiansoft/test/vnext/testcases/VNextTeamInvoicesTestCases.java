@@ -344,6 +344,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
 		
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
+		invoicesscreen.switchToMyInvoicesView();
 		VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
@@ -965,11 +966,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		invoicesscreen.switchToTeamInvoicesView();
 		for (String invoiceNumber : invoices) {
-			//invoicesscreen.searchInvoiceByFreeText(invoiceNumber);
+			invoicesscreen.searchInvoiceByFreeText(invoiceNumber);
 			invoicesscreen.selectInvoice(invoiceNumber);
 		}
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
-		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
+		new VNextEmailScreen(appiumdriver);
 		AppiumUtils.clickHardwareBackButton();
 		invoicesscreen = new VNextInvoicesScreen(appiumdriver);
 		invoicesscreen.unselectAllSelectedInvoices();
@@ -1339,7 +1340,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	//@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices(String rowID,
 																			  String description, JSONObject testData) {
 

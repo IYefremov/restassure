@@ -310,4 +310,12 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 		return appiumdriver.findElement(By.id("vehicleInfoOwner")).getAttribute("value");
 	}
 
+	public boolean isVINValidationMessageExists() {
+		return vehiclefieldslist.findElement(By.xpath(".//div[@class='input-with-validation-message']")).isDisplayed();
+	}
+
+	public String getVINValidationMessageBackgroundColor() {
+		return vehiclefieldslist.findElement(By.xpath(".//div[@class='input-with-validation-message']")).getCssValue("background-color");
+	}
+
 }

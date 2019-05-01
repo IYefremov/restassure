@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -83,7 +82,7 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     public void clickPayButton() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@value='Pay']")));
-        WaitUtils.click(paybtn);
+        tap(paybtn);
         appiumdriver.switchTo().defaultContent();
     }
 
