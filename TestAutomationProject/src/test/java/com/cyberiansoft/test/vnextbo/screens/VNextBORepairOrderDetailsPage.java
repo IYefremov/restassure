@@ -234,8 +234,8 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	public void expandRepairOrderServiceDetailsTable() {
 		if (orderservicestable.findElement(By.xpath(".//i[@class='switchTable icon-arrow-down5']")).isDisplayed()) {
 			orderservicestable.findElement(By.xpath(".//i[@class='switchTable icon-arrow-down5']")).click();
-			new WebDriverWait(driver, 30)
-			  .until(ExpectedConditions.visibilityOf(orderservicestable.findElement(By.xpath(".//i[@class='switchTable icon-arrow-up5']"))));
+			waitLong.until(ExpectedConditions.visibilityOf(orderservicestable
+                    .findElement(By.xpath(".//i[@class='switchTable icon-arrow-up5']"))));
 		}
 	}
 	
@@ -409,9 +409,23 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     }
 
     public VNextBORepairOrderDetailsPage expandServicesTable() {
-        wait.until(ExpectedConditions.elementToBeClickable(servicesExpandArrow)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(servicesExpandArrow)).click();
+        } catch (Exception ignored) {}
         wait.until(ExpectedConditions.invisibilityOf(servicesExpandArrow));
         return this;
+    }
+
+    public int getNumberOfVendorTechnicianOptionsByName(String name) {
+        try {
+            return wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@data-template='" +
+                    "order-service-item-template']//div[@class='clmn_4']//span[@class='k-input' and text()='" +
+                    name + "']"))).size();
+        } catch (Exception ignored) {
+            return 0;
+        }
     }
 
     public String getServiceDescription(String serviceId) {
@@ -687,6 +701,11 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
             e.printStackTrace();
         }
         return this;
+    }
+
+    public VNextBOChangeTechnicianDialog clickPhaseVendorTechnicianLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(phaseVendorTechnician)).click();
+        return PageFactory.initElements(driver, VNextBOChangeTechnicianDialog.class);
     }
 
     public boolean isHelpInfoDialogDisplayed(String serviceId, String status) {

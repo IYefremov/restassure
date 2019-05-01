@@ -198,6 +198,12 @@ public class VNextBOMonitorData  {
     @JsonProperty("technician")
     private String technician;
 
+    @JsonProperty("vendor1")
+    private String vendor1;
+
+    @JsonProperty("technician1")
+    private String technician1;
+
     @JsonProperty("serviceNotesMessage")
     private String serviceNotesMessage;
 
@@ -386,6 +392,14 @@ public class VNextBOMonitorData  {
 
     public String getTechnician() {
         return technician;
+    }
+
+    public String getVendor1() {
+        return vendor1;
+    }
+
+    public String getTechnician1() {
+        return technician1;
     }
 
     public String getServiceNotesMessage() {

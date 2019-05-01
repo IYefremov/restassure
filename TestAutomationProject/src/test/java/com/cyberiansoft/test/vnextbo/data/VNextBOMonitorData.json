@@ -878,7 +878,7 @@
   "verifyUserCanSeeStartedVendorPrice": [
     {
       "rowID": "verifyUserCanSeeStartedVendorPrice.01",
-      "description": "Test Case 82974:User can see \"Started\" → Price",
+      "description": "Test Case 82975:User can see \"Started\" → Vendor Price",
       "location": "1111",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -925,6 +925,50 @@
       "description": "Test Case 87417:User can return to the main page of WO",
       "location": "1111",
       "orderNumber": "O-000-152073"
+    }
+  ],
+
+  "verifyUserCanChangeTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeTechnicianOfRo.01",
+      "description": "Test Case 82976:User can change Technician of RO",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "vendor": "Default team",
+      "technician": "Andy Maclean",
+      "vendor1": "zayats test team",
+      "technician1": "OKSI HOUSE - All role"
+    }
+  ],
+
+  "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo.01",
+      "description": "Test Case 83089:User can change and not save Technician of RO (X-icon)",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "vendor": "Default team",
+      "technician": "Andy Maclean"
+    }
+  ],
+
+  "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo.01",
+      "description": "Test Case 83090:User can change and not save Technician of RO (Cancel)",
+      "location": "1111",
+      "orderNumber": "O-000-152073",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Air Filter Element",
+      "vendor": "Default team",
+      "technician": "Andy Maclean"
     }
   ]
 }

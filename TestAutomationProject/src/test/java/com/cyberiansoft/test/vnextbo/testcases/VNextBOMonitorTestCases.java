@@ -2148,4 +2148,142 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         System.out.println("Sum: " + sum);
 //        Assert.assertEquals(sum, Double.valueOf(calculatedVendorPrice), "The sum hasn't been calculated properly");
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeTechnicianOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        final VNextBOChangeTechnicianDialog changeTechnicianDialog = detailsPage
+                .setStatus(data.getStatus())
+                .clickPhaseVendorTechnicianLink();
+
+        Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
+                "The Change Technician dialog hasn't been opened");
+
+        changeTechnicianDialog.setVendor(data.getVendor());
+        Assert.assertEquals(changeTechnicianDialog.getVendor(), data.getVendor(),
+                "The vendor hasn't been set");
+
+        changeTechnicianDialog.setTechnician(data.getTechnician());
+        Assert.assertEquals(changeTechnicianDialog.getTechnician(), data.getTechnician(),
+                "The technician hasn't been set");
+
+        changeTechnicianDialog
+                .clickOkButton()
+                .expandServicesTable();
+
+        Assert.assertNotEquals(detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()), 0);
+        Assert.assertNotEquals(detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()), 0);
+        Assert.assertEquals(detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
+                detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
+                "The vendor and technician options haven't been changed for all repair orders with the 'Active' status");
+
+        // clearing the test data
+        detailsPage
+                .setStatus(data.getStatus())
+                .clickPhaseVendorTechnicianLink();
+
+        Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
+                "The Change Technician dialog hasn't been opened");
+
+        changeTechnicianDialog
+                .setVendor(data.getVendor1())
+                .setTechnician(data.getTechnician1())
+                .clickOkButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final int numberOfVendorOptions = detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor());
+        final int numberOfTechnicianOptions = detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician());
+
+        final VNextBOChangeTechnicianDialog changeTechnicianDialog = detailsPage.clickPhaseVendorTechnicianLink();
+
+        Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
+                "The Change Technician dialog hasn't been opened");
+
+        changeTechnicianDialog
+                .setVendor(data.getVendor())
+                .setTechnician(data.getTechnician())
+                .clickXButton();
+
+        Assert.assertEquals(numberOfVendorOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
+                "The vendor options number has been changed for repair orders with the 'Active' status");
+
+        Assert.assertEquals(numberOfTechnicianOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
+                "The vendor options number has been changed for repair orders with the 'Active' status");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage.setLocation(data.getLocation());
+        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setStatus(data.getStatus())
+                .expandServicesTable();
+
+        final int numberOfVendorOptions = detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor());
+        final int numberOfTechnicianOptions = detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician());
+
+        final VNextBOChangeTechnicianDialog changeTechnicianDialog = detailsPage.clickPhaseVendorTechnicianLink();
+
+        Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
+                "The Change Technician dialog hasn't been opened");
+
+        changeTechnicianDialog
+                .setVendor(data.getVendor())
+                .setTechnician(data.getTechnician())
+                .clickXButton();
+
+        Assert.assertEquals(numberOfVendorOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
+                "The vendor options number has been changed for repair orders with the 'Active' status");
+
+        Assert.assertEquals(numberOfTechnicianOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
+                "The vendor options number has been changed for repair orders with the 'Active' status");
+    }
 }
