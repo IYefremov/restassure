@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
@@ -99,7 +98,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		return getAdjustmentsValue();
 	}
 
-	public void setServicePriceValue(String _price)	 {
+	/*public void setServicePriceValue(String _price)	 {
 
 		WebElement pricefld = appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Price' and type = 'XCUIElementTypeCell' AND visible == 1"));
 		pricefld.click();
@@ -107,6 +106,15 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 			pricefld.findElement(MobileBy.AccessibilityId("Clear text")).click();
 		pricefld.sendKeys(_price + "\n");
 		BaseUtils.waitABit(1000);
+	}*/
+
+
+	public void setServicePriceValue(String _price) {
+		appiumdriver.findElementByAccessibilityId("Price").click();
+		if (appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0)
+			appiumdriver.findElementByAccessibilityId("Clear text").click();
+
+		appiumdriver.findElementByAccessibilityId("Price").sendKeys(_price + "\n");
 	}
 
 	public void clickVehiclePartsCell() {

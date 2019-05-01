@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.OsUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
@@ -90,11 +91,19 @@ public class VNextBaseTestCase {
 		browsertype = BaseUtils.getBrowserType(VNextToolsInfo.getInstance().getDefaultBrowser());
 		mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
 
-
-		service.set(new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
+		if (OsUtils.isWindows())
+			service.set(new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
 				.usingAnyFreePort().withArgument(SESSION_OVERRIDE)
 				.withArgument(LOG_LEVEL, "error")
 				.build());
+		else
+			service.set(new AppiumServiceBuilder().
+					usingDriverExecutable(new File("/usr/local/bin/node"))
+					.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+					.withIPAddress("127.0.0.1")
+					.usingAnyFreePort().withArgument(SESSION_OVERRIDE)
+					.withArgument(LOG_LEVEL, "error")
+					.build());
 		service.get().start();
 
 		if (service.get() == null || !service.get().isRunning()) {
