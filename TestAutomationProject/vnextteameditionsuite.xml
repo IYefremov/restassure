@@ -50,6 +50,8 @@
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamDraftInspectionsTestCases">
       </class>
+      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamVehicleInfoTestCases">
+      </class>
     </classes>
   </test>
 </suite>
