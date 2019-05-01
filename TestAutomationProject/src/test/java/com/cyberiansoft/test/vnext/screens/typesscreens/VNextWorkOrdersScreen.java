@@ -133,8 +133,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 	public void clickCreateInvoiceMenuItem() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(createinvoicemenu));
-		WaitUtils.click(createinvoicemenu);
-		//tap(createinvoicemenu);
+		tap(createinvoicemenu);
 	}
 	
 	public void clickCreateInvoiceIcon() {
@@ -235,7 +234,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']"))));
 		//BaseUtils.waitABit(1000);
-		tap(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']")));
 		tap(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']")));
 
 		System.out.println("--------------------------------------");

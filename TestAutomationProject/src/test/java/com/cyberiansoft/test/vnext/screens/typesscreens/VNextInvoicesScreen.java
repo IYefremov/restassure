@@ -37,6 +37,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-autotests-id='invoices-list']")));
 		WaitUtils.waitUntilElementIsClickable(By.xpath("//div[@data-autotests-id='invoices-list']"));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
+		clearSearchField();
 	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
@@ -123,6 +124,11 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	public VNextInvoiceMenuScreen clickOnInvoiceByInvoiceNumber(String invoicenumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-autotests-id='invoices-list']")));
+		WebElement invoiceCell = invoiceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoicenumber + "']"));
+		if (!invoiceCell.isDisplayed()) {
+			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+			je.executeScript("arguments[0].scrollIntoView(true);",invoiceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoicenumber + "']")));
+		}
 		tap(invoiceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoicenumber + "']")));
 		return new VNextInvoiceMenuScreen(appiumdriver);
 	}
@@ -160,6 +166,8 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	
 	public void selectInvoice(String invoiceNumber) {
 		WebElement invoicecell = getInvoiceCell(invoiceNumber);
+		JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+		je.executeScript("arguments[0].scrollIntoView(true);",invoicecell);
 		if (invoicecell.findElement(By.xpath(".//input[@action='check-item']")).getAttribute("checked") == null)
 			tap(invoicecell.findElement(By.xpath(".//input[@action='check-item']")));
 	}

@@ -126,15 +126,12 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
 
     public void typeSearchParameters(String searchtxt) {
         if (appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")).isDisplayed())
-            tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")));
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(searchfld));
+            appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")).click();
+
         if (searchfld.getAttribute("value").length() > 0) {
-            WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@data-automation-id='search-clear']"), appiumdriver);
-            tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-clear']")));
+            searchfld.clear();
         }
         WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@data-autotests-id='search-input']"), appiumdriver);
-        //tap(searchfld);
         searchfld.sendKeys(searchtxt);
         BaseUtils.waitABit(1000);
     }

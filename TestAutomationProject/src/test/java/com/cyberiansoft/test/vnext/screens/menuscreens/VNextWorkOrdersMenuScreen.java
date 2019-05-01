@@ -44,7 +44,7 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
     }
 
     public void clickDeleteWorkOrderMenuButton() {
-        tap(deleteorderbtn);
+        clickMenuItem(deleteorderbtn);
     }
 
     public VNextWorkOrdersScreen deleteWorkOrder() {

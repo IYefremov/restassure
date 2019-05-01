@@ -2,10 +2,10 @@ package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypeData;
-import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypeData;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypeData;
+import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
@@ -40,7 +40,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@handler='_save']")
 	private WebElement saveinspectionmenu;
 	
-	@FindBy(xpath="//a[@handler='_save']")
+	@FindBy(xpath="//a[@handler='_save']/span[2]/span")
 	private WebElement saveworkordermenu;
 	
 	@FindBy(xpath="//a[@handler='_notes']")
@@ -136,6 +136,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		clickMenuButton();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(saveworkordermenu));
+		BaseUtils.waitABit(1500);
 		tap(saveworkordermenu);
 	}
 	
