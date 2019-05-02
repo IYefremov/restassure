@@ -20,8 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ServicesScreen extends BaseWizardScreen {
 
-	final static String defaultServiceValue = "Test Tax";
-	final static String servicesscreencapt = "Services";
+	private final static String defaultServiceValue = "Test Tax";
+	private final static String servicesscreencapt = "Services";
 	
 	/*@iOSXCUITFindBy(accessibility  = "Save")
     private IOSElement savebtn;
@@ -89,13 +89,11 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 	
 	public boolean checkServiceIsSelectedWithServiceValues(String servicename, String vehiclepart, String servicepriceandquantity) {
-		boolean selected = false;
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
 		IOSElement servicecell = (IOSElement)  selectedservices.findElementByClassName("XCUIElementTypeTable").
 				findElementByXPath("XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[@name='" + vehiclepart + "']/..");
-		selected = servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
+		return servicecell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
 				servicepriceandquantity.replaceAll(" ", ""));
-		return selected;
 	}
 	
 	public boolean checkServiceIsSelectedWithServiceValues(String servicename, String servicepriceandquantity) {
@@ -111,10 +109,6 @@ public class ServicesScreen extends BaseWizardScreen {
 			}
 		}
 		return selected;
-	}
-
-	public int getServiceSelectedNumber(String service) {
-		return appiumdriver.findElements(MobileBy.IosUIAutomation(".scrollViews()[0].elements()['SelectedServicesView'].tableViews()[0]cells()['" + service + "']")).size();
 	}
 
 	public String getTotalAmaunt() {
@@ -259,7 +253,7 @@ public class ServicesScreen extends BaseWizardScreen {
 		return new SelectedServiceDetailsScreen();
 	}
 	
-	public void setSelectedServiceRequestServicesQuantity(String service, String _quantity) throws InterruptedException {
+	public void setSelectedServiceRequestServicesQuantity(String service, String _quantity) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeOther[@name='SelectedServiceRequestServicesView']/XCUIElementTypeTable[1]/XCUIElementTypeCell[@name=\""
 				+ service + "\"]/XCUIElementTypeTextField[1]"))).click();
@@ -299,10 +293,6 @@ public class ServicesScreen extends BaseWizardScreen {
 	
 	public void clickNotesButton() {
 		appiumdriver.findElementByAccessibilityId("Compose").click();
-	}
-
-	public static String getServicesScreenCaption() {
-		return servicesscreencapt;
 	}
 	
 	public boolean isServiceApproved(String srvname) {
