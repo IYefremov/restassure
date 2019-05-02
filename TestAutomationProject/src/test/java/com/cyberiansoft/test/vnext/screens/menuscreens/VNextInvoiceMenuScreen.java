@@ -44,15 +44,11 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 
 	@FindBy(xpath="//a[@data-name='cancel']")
 	private WebElement invoicecancelmenubtn;
-	
-	//@FindBy(xpath="//div[@class='actions-layer popup modal-in' and @data-menu='popup']")
-	//private WebElement invoicemenuscreen;
+
 	
 	public VNextInvoiceMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.visibilityOf(invoicemenuscreen));
 	}
 	
 	public VNextEmailScreen clickEmailInvoiceMenuItem() {

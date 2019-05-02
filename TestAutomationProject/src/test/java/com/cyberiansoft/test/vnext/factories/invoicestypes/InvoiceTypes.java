@@ -2,7 +2,9 @@ package com.cyberiansoft.test.vnext.factories.invoicestypes;
 
 public enum InvoiceTypes {
 
-    O_KRAMAR("O_Kramar");
+    O_KRAMAR("O_Kramar"),
+    O_KRAMAR2("O_Kramar2"),
+    O_KRAMAR_AUTO("O_Kramar_auto");
 
     private final String invoiceType;
 

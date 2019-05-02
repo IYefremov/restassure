@@ -4,8 +4,12 @@ import com.cyberiansoft.test.dataclasses.Invoice;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
@@ -54,7 +58,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -77,7 +81,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -106,7 +110,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -141,7 +145,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -166,7 +170,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -195,7 +199,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -224,7 +228,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -249,7 +253,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -284,7 +288,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -316,7 +320,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -344,7 +348,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -369,7 +373,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -403,7 +407,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
             VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
             workordersscreen.clickCreateInvoiceFromWorkOrder(workOrders.get(0));
             VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-            invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+            invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
             VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
             invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -444,7 +448,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrders.get(0));
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(invoice.getInvoiceData().getInvoiceType());
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());

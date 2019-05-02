@@ -1,13 +1,13 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,7 +31,7 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
 
     public VNextWorkOrdersMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
     public VNextChangeCustomerScreen clickChangeCustomerMenuItem() {

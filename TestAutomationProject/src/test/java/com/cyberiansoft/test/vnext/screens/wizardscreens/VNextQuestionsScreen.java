@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +23,7 @@ public class VNextQuestionsScreen extends VNextBaseWizardScreen {
 
     public VNextQuestionsScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.visibilityOf(questionsscreen));
     }

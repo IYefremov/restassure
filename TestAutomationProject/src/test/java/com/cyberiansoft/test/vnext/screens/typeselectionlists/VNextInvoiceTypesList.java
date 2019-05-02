@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typeselectionlists;
 
+import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -13,7 +14,7 @@ public class VNextInvoiceTypesList extends VNextBaseTypeSelectionList {
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
-    public void selectInvoiceType(String invoiceType) {
-        selectType(invoiceType);
+    public void selectInvoiceType(InvoiceTypes invoiceType) {
+        selectType(invoiceType.getInvoiceTypeName());
     }
 }
