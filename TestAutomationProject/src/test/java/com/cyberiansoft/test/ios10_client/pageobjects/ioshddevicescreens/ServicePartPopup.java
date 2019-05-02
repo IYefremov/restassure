@@ -3,7 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -12,16 +12,16 @@ import java.util.concurrent.TimeUnit;
 
 public class ServicePartPopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "Category")
+	@iOSXCUITFindBy(accessibility = "Category")
     private IOSElement categorycell;
 	
-	@iOSFindBy(accessibility = "Subcategory")
+	@iOSXCUITFindBy(accessibility = "Subcategory")
     private IOSElement subcategorycell;
 	
-	@iOSFindBy(accessibility = "Part")
+	@iOSXCUITFindBy(accessibility = "Part")
     private IOSElement partcell;
 	
-	@iOSFindBy(accessibility = "Position")
+	@iOSXCUITFindBy(accessibility = "Position")
     private IOSElement positioncell;
 	
 	public ServicePartPopup() {

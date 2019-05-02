@@ -25,61 +25,61 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	private final TypeScreenContext INSPECTIONCONTEXT = TypeScreenContext.INSPECTION;
 
-	/*@iOSFindBy(accessibility = "Add")
+	/*@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addinspbtn;
 	
-	@iOSFindBy(accessibility = "MyInspectionsTable")
+	@iOSXCUITFindBy(accessibility = "MyInspectionsTable")
 	private IOSElement inspectiontable;
 	
-	@iOSFindBy(accessibility = "Edit")
+	@iOSXCUITFindBy(accessibility = "Edit")
     private IOSElement editpopupmenu;
 	
-	@iOSFindBy(accessibility = "Approve")
+	@iOSXCUITFindBy(accessibility = "Approve")
     private IOSElement approvepopupmenu;
 	
-	@iOSFindBy(accessibility ="Send\nEmail")
+	@iOSXCUITFindBy(accessibility ="Send\nEmail")
     private IOSElement sendmailpopupmenu;
 	
-	@iOSFindBy(accessibility = "Copy")
+	@iOSXCUITFindBy(accessibility = "Copy")
     private IOSElement copypopupmenu;
 	
-	@iOSFindBy(accessibility = "Archive")
+	@iOSXCUITFindBy(accessibility = "Archive")
     private IOSElement archivepopupmenu;
 	
-	@iOSFindBy(accessibility ="Notes")
+	@iOSXCUITFindBy(accessibility ="Notes")
     private IOSElement notespopupmenu;
 	
-	@iOSFindBy(accessibility = "Change\nCustomer")
+	@iOSXCUITFindBy(accessibility = "Change\nCustomer")
     private IOSElement changecustomerpopupmenu;
 	
-	@iOSFindBy(accessibility = "Show\nWOs")
+	@iOSXCUITFindBy(accessibility = "Show\nWOs")
     private IOSElement showwospopupmenu;
 	
-	@iOSFindBy(accessibility = "Create\nWO")
+	@iOSXCUITFindBy(accessibility = "Create\nWO")
     private IOSElement createwopopupmenu;
 	
-	@iOSFindBy(accessibility = "Status Reason")
+	@iOSXCUITFindBy(accessibility = "Status Reason")
     private IOSElement statusreasonbtn;
 	
-	@iOSFindBy(accessibility = "Summary")
+	@iOSXCUITFindBy(accessibility = "Summary")
     private IOSElement summarybtn;
 	
-	@iOSFindBy(accessibility = "Assign")
+	@iOSXCUITFindBy(accessibility = "Assign")
     private IOSElement assignbtn;
 	
-	@iOSFindBy(accessibility = "Done")
+	@iOSXCUITFindBy(accessibility = "Done")
     private IOSElement popupdonebtn;
 	
-	@iOSFindBy(accessibility = "Close")
+	@iOSXCUITFindBy(accessibility = "Close")
     private IOSElement closeflterpopupbtn;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement saveflterpopupbtn;
 	
-	@iOSFindBy(accessibility = "Done")
+	@iOSXCUITFindBy(accessibility = "Done")
     private IOSElement toolbardonebtn;
 	
-	@iOSFindBy(accessibility = "Search")
+	@iOSXCUITFindBy(accessibility = "Search")
     private IOSElement searchbtn;*/
 	
 	public RegularMyInspectionsScreen() {

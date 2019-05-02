@@ -13,28 +13,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CustomersScreen extends BaseAppScreen {
 	
-	/*@iOSFindBy(accessibility  = "btnWholesale")
+	/*@iOSXCUITFindBy(accessibility  = "btnWholesale")
     private IOSElement btnwholesale;
 	
-	@iOSFindBy(accessibility  = "btnRetail")
+	@iOSXCUITFindBy(accessibility  = "btnRetail")
     private IOSElement btnretail;
 	
-	@iOSFindBy(accessibility = "Add")
+	@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addcustomerbtn;
 	
-	@iOSFindBy(accessibility = "btnSearch")
+	@iOSXCUITFindBy(accessibility = "btnSearch")
     private IOSElement searchbtn;
 	
-	@iOSFindBy(accessibility = "Close")
+	@iOSXCUITFindBy(accessibility = "Close")
     private IOSElement closesearchbtn;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeSearchBar[1]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeSearchBar[1]")
     private IOSElement searchbar;
 	
-	@iOSFindBy(accessibility  = "Edit")
+	@iOSXCUITFindBy(accessibility  = "Edit")
     private IOSElement editpopupmenu;
 	
-	@iOSFindBy(accessibility  = "Select")
+	@iOSXCUITFindBy(accessibility  = "Select")
     private IOSElement selectpopupmenu;*/
 	
 	public CustomersScreen() {

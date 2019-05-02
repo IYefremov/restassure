@@ -8,7 +8,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.support.PageFactory;
@@ -25,23 +25,23 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 	final static String visualinteriorcapt = "Interior";
 	final static String visualexteriorcapt = "Exterior";
 	
-	/*@iOSFindBy(accessibility  = "Custom")
+	/*@iOSXCUITFindBy(accessibility  = "Custom")
     private IOSElement customtab;
 	
-	@iOSFindBy(accessibility  = "Quantity")
+	@iOSXCUITFindBy(accessibility  = "Quantity")
     private IOSElement quantityfld;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeCell[@name=\"Quantity\"]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"Quantity\"]/XCUIElementTypeTextField[1]")
     private IOSElement quantityfldvalue;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[7]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[7]")
     private IOSElement toolbarvisualpricevalue;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[8]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[8]")
     private IOSElement toolbarpricevalue;*/
 	
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
 
 	public VisualInteriorScreen() {

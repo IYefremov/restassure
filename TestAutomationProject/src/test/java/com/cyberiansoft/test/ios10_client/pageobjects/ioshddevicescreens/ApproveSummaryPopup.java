@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApproveSummaryPopup extends iOSHDBaseScreen {
 	
-	//@iOSFindBy(accessibility ="Approve")
+	//@iOSXCUITFindBy(accessibility ="Approve")
     //private IOSElement approvebtn;
 	
 	public ApproveSummaryPopup() {

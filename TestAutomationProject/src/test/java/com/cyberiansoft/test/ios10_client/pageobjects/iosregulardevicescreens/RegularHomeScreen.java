@@ -1,57 +1,57 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
   import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+  import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+  import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
+  import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
+  import com.cyberiansoft.test.ios10_client.utils.Helpers;
+  import io.appium.java_client.MobileBy;
+  import io.appium.java_client.ios.IOSElement;
+  import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+  import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+  import org.openqa.selenium.support.PageFactory;
+  import org.openqa.selenium.support.ui.ExpectedConditions;
+  import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
-	/*@iOSFindBy(accessibility = "Customers")
+	/*@iOSXCUITFindBy(accessibility = "Customers")
     private IOSElement customersbtn;
 	
-	@iOSFindBy(accessibility = "My Inspections")
+	@iOSXCUITFindBy(accessibility = "My Inspections")
     private IOSElement myinspectionsbtn;
 	
-	@iOSFindBy(accessibility  = "Team Inspections")
+	@iOSXCUITFindBy(accessibility  = "Team Inspections")
     private IOSElement teaminspectionsbtn;
 	
-	@iOSFindBy(accessibility = "My Work Orders")
+	@iOSXCUITFindBy(accessibility = "My Work Orders")
     private IOSElement myworkordersbtn;
 	
-	@iOSFindBy(accessibility = "Car History")
+	@iOSXCUITFindBy(accessibility = "Car History")
     private IOSElement carhistorybtn;
 	
-	@iOSFindBy(accessibility = "My Invoices")
+	@iOSXCUITFindBy(accessibility = "My Invoices")
     private IOSElement myinvoicesbtn;
 	
-	@iOSFindBy(accessibility = "Team Invoices")
+	@iOSXCUITFindBy(accessibility = "Team Invoices")
     private IOSElement teaminvoicesbtn;
 	
-	@iOSFindBy(accessibility = "Service Requests")
+	@iOSXCUITFindBy(accessibility = "Service Requests")
     private IOSElement servicerequestsbtn;
 	
-	@iOSFindBy(accessibility = "Status")
+	@iOSXCUITFindBy(accessibility = "Status")
     private IOSElement statustsbtn;
 	
-	@iOSFindBy(accessibility = "Team Work Orders")
+	@iOSXCUITFindBy(accessibility = "Team Work Orders")
     private IOSElement temworkorderstsbtn;
 	
-	@iOSFindBy(accessibility = "Settings")
+	@iOSXCUITFindBy(accessibility = "Settings")
     private IOSElement settingstsbtn;*/
 	
-	@iOSFindBy(accessibility = "logout")
+	@iOSXCUITFindBy(accessibility = "logout")
     private IOSElement logoutbtn;
 
-	@iOSFindBy(accessibility = "viewPrompt")
+	@iOSXCUITFindBy(accessibility = "viewPrompt")
 	private IOSElement activecustomer;
 	
 	public RegularHomeScreen() {

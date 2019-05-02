@@ -15,14 +15,14 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	
 	
-	//@iOSFindBy(uiAutomator = ".navigationBars()[0].buttons()[\"Back\"].withValueForKey(1, \"isVisible\")")
-	//@iOSFindBy(accessibility = "Back")
+	//@iOSXCUITFindByuiAutomator = ".navigationBars()[0].buttons()[\"Back\"].withValueForKey(1, \"isVisible\")")
+	//@iOSXCUITFindBy(accessibility = "Back")
 	//private IOSElement backbtn;
 	
-	/*@iOSFindBy(accessibility  = "Save")
+	/*@iOSXCUITFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility  = "Cancel")
+	@iOSXCUITFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;*/
 
 	

@@ -9,7 +9,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,25 +27,25 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	private By discardbtnxpath = By.name("Discard");
 	
-	@iOSFindBy(accessibility = "Monitor")
+	@iOSXCUITFindBy(accessibility = "Monitor")
     private IOSElement womonitor;
 	
-	@iOSFindBy(accessibility = "Search")
+	@iOSXCUITFindBy(accessibility = "Search")
     private IOSElement searchbtn;
 	
-	@iOSFindBy(accessibility = "Edit")
+	@iOSXCUITFindBy(accessibility = "Edit")
     private IOSElement editmanu;
 	
-	@iOSFindBy(accessibility = "invoice new")
+	@iOSXCUITFindBy(accessibility = "invoice new")
     private IOSElement invoicenewbtn;
 	
-	@iOSFindBy(accessibility = "Location")
+	@iOSXCUITFindBy(accessibility = "Location")
     private IOSElement locationfld;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement searccsavebtn;
 	
-	@iOSFindBy(accessibility = "Approve")
+	@iOSXCUITFindBy(accessibility = "Approve")
     private IOSElement approvebtn;
 	
 	public RegularTeamWorkOrdersScreen() {

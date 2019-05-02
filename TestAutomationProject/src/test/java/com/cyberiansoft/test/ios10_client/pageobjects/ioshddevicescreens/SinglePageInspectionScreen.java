@@ -14,10 +14,10 @@ import java.util.concurrent.TimeUnit;
 
 public class SinglePageInspectionScreen extends BaseWizardScreen {
 	
-	//@iOSFindBy(accessibility  = "window screen")
+	//@iOSXCUITFindBy(accessibility  = "window screen")
     //private IOSElement windowscreen;
 	
-	//@iOSFindBy(accessibility  = "notes")
+	//@iOSXCUITFindBy(accessibility  = "notes")
    // private IOSElement signatureelement;
 	
 	

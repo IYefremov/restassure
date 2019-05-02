@@ -8,7 +8,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,40 +27,40 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class  OrderMonitorScreen extends iOSHDBaseScreen {
 
-	/*@iOSFindBy(accessibility = "Change Status")
+	/*@iOSXCUITFindBy(accessibility = "Change Status")
     private IOSElement phasestatuscell;
 
-	@iOSFindBy(accessibility = "Service Status")
+	@iOSXCUITFindBy(accessibility = "Service Status")
     private IOSElement servicestatuscell;
 
-	@iOSFindBy(accessibility = "Start Service")
+	@iOSXCUITFindBy(accessibility = "Start Service")
     private IOSElement startservice;
 
-	@iOSFindBy(accessibility = "Completed")
+	@iOSXCUITFindBy(accessibility = "Completed")
     private IOSElement completedcell;
 
-	@iOSFindBy(accessibility = "Done icon")
+	@iOSXCUITFindBy(accessibility = "Done icon")
     private IOSElement servicedetailsdonebtn;
 
-	@iOSFindBy(accessibility  = "custom detail button")
+	@iOSXCUITFindBy(accessibility  = "custom detail button")
     private IOSElement customservicestatusbtn;
 
-	@iOSFindBy(accessibility  = "Start Service")
+	@iOSXCUITFindBy(accessibility  = "Start Service")
     private IOSElement startservicebtn;
 
-	@iOSFindBy(accessibility  = "Start phase")
+	@iOSXCUITFindBy(accessibility  = "Start phase")
     private IOSElement startphasebtn;
 
-	@iOSFindBy(accessibility = "Services")
+	@iOSXCUITFindBy(accessibility = "Services")
     private IOSElement servicesbtn;
 
-	@iOSFindBy(accessibility = "Active")
+	@iOSXCUITFindBy(accessibility = "Active")
     private IOSElement activecaption;*/
 
-	@iOSFindBy(accessibility = "MonitorOrderServicesList")
+	@iOSXCUITFindBy(accessibility = "MonitorOrderServicesList")
 	private IOSElement monitorservicestable;
 
-	@iOSFindBy(accessibility = "Back")
+	@iOSXCUITFindBy(accessibility = "Back")
 	private IOSElement backbtn;
 
 	public OrderMonitorScreen() {

@@ -35,64 +35,64 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	final String firstinspxpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]";
 	private By discardbtnxpath = By.name("Discard");
 	
-	/*@iOSFindBy(accessibility = "Add")
+	/*@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addinspbtn;
 	
-	@iOSFindBy(accessibility  = "Edit")
+	@iOSXCUITFindBy(accessibility  = "Edit")
     private IOSElement editpopupmenu;
 	
-	@iOSFindBy(accessibility  = "Approve")
+	@iOSXCUITFindBy(accessibility  = "Approve")
     private IOSElement approvepopupmenu;
 	
-	@iOSFindBy(accessibility  = "Create Work Order")
+	@iOSXCUITFindBy(accessibility  = "Create Work Order")
     private IOSElement createwopopupmenu;
 	
-	@iOSFindBy(accessibility  = "Send Email")
+	@iOSXCUITFindBy(accessibility  = "Send Email")
     private IOSElement sendmailpopupmenu;
 	
-	@iOSFindBy(accessibility  = "Copy")
+	@iOSXCUITFindBy(accessibility  = "Copy")
     private IOSElement copypopupmenu;
 	
-	@iOSFindBy(accessibility = "Notes")
+	@iOSXCUITFindBy(accessibility = "Notes")
     private IOSElement notespopupmenu;
 	
-	@iOSFindBy(accessibility  = "Archive")
+	@iOSXCUITFindBy(accessibility  = "Archive")
     private IOSElement archivepopupmenu;
 	
-	@iOSFindBy(accessibility  = "Assign")
+	@iOSXCUITFindBy(accessibility  = "Assign")
     private IOSElement assignpopupmenu;
 	
-	@iOSFindBy(accessibility  = "Change Customer")
+	@iOSXCUITFindBy(accessibility  = "Change Customer")
     private IOSElement changecustomerpopupmenu;
 	
-	@iOSFindBy(accessibility  = "Service Request")
+	@iOSXCUITFindBy(accessibility  = "Service Request")
     private IOSElement backservicerequestsbtn;
 	
-	@iOSFindBy(accessibility  = "Show Work Orders")
+	@iOSXCUITFindBy(accessibility  = "Show Work Orders")
     private IOSElement showwospopupmenu;
 	
-	@iOSFindBy(accessibility = "Status Reason")
+	@iOSXCUITFindBy(accessibility = "Status Reason")
     private IOSElement statusreasonbtn;*/
 	
-	/*@iOSFindBy(xpath = firstinspxpath)
+	/*@iOSXCUITFindBy(xpath = firstinspxpath)
     private IOSElement firstinspection;
 	
-	@iOSFindBy(xpath = firstinspxpath + "/XCUIElementTypeStaticText[1]")
+	@iOSXCUITFindBy(xpath = firstinspxpath + "/XCUIElementTypeStaticText[1]")
     private IOSElement firstinspectionnumber;
 	
-	@iOSFindBy(xpath = firstinspxpath + "/XCUIElementTypeStaticText[3]")
+	@iOSXCUITFindBy(xpath = firstinspxpath + "/XCUIElementTypeStaticText[3]")
     private IOSElement firstinspectionprice;
 	
-	@iOSFindBy(xpath = firstinspxpath + "/XCUIElementTypeStaticText[4]")
+	@iOSXCUITFindBy(xpath = firstinspxpath + "/XCUIElementTypeStaticText[4]")
     private IOSElement firstinspectiontotalprice;*/
 	
-	/*@iOSFindBy(accessibility = "Close")
+	/*@iOSXCUITFindBy(accessibility = "Close")
     private IOSElement closeflterpopupbtn;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement saveflterpopupbtn;
 	
-	@iOSFindBy(accessibility  = "Done")
+	@iOSXCUITFindBy(accessibility  = "Done")
     private IOSElement toolbardonebtn;*/
 	
 	public MyInspectionsScreen() {

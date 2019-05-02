@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SelectEmployeePopup extends iOSHDBaseScreen {
 	
-	//@iOSFindBy(accessibility = "Enter password here")
+	//@iOSXCUITFindBy(accessibility = "Enter password here")
     //private IOSElement securefld;
 	
 	public SelectEmployeePopup() {

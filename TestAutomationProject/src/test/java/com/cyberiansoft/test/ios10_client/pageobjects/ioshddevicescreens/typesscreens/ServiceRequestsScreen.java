@@ -16,7 +16,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,92 +34,92 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 
 	private final TypeScreenContext SRCONTEXT = TypeScreenContext.SERVICEREQUEST;
 	
-	/*@iOSFindBy(accessibility  = "Add")
+	/*@iOSXCUITFindBy(accessibility  = "Add")
     private IOSElement addbtn;
 	
-	@iOSFindBy(accessibility  = "Refresh")
+	@iOSXCUITFindBy(accessibility  = "Refresh")
     private IOSElement refreshbtn;
 	
-	@iOSFindBy(accessibility  = "Create Work Order")
+	@iOSXCUITFindBy(accessibility  = "Create Work Order")
     private IOSElement createworkordermenu;
 	
-	@iOSFindBy(accessibility  = "Appointments")
+	@iOSXCUITFindBy(accessibility  = "Appointments")
     private IOSElement appointmentmenu;
 	
-	@iOSFindBy(accessibility  = "Check In") 
+	@iOSXCUITFindBy(accessibility  = "Check In")
     private IOSElement checkinmenu;
 
-	@iOSFindBy(accessibility  = "Undo Check In")
+	@iOSXCUITFindBy(accessibility  = "Undo Check In")
     private IOSElement undocheckinmenu;
 	
-	@iOSFindBy(accessibility  = "Close")
+	@iOSXCUITFindBy(accessibility  = "Close")
     private IOSElement closemenu;
 	
-	@iOSFindBy(accessibility  = "Reject")
+	@iOSXCUITFindBy(accessibility  = "Reject")
     private IOSElement rejectmenu;
 	
-	@iOSFindBy(accessibility  = "Edit")
+	@iOSXCUITFindBy(accessibility  = "Edit")
     private IOSElement editmenu;
 	
-	@iOSFindBy(accessibility = "Accept")
+	@iOSXCUITFindBy(accessibility = "Accept")
     private IOSElement acceptsrmenu;
 	
-	@iOSFindBy(accessibility = "Decline")
+	@iOSXCUITFindBy(accessibility = "Decline")
     private IOSElement declinesrmenu;
 	
-	@iOSFindBy(accessibility  = "Cancel")
+	@iOSXCUITFindBy(accessibility  = "Cancel")
     private IOSElement cancelmenu;
 	
-	@iOSFindBy(accessibility  = "Close")
+	@iOSXCUITFindBy(accessibility  = "Close")
     private IOSElement closebtn;
 	
 	//Appointment
-	@iOSFindBy(xpath = "//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeNavigationBar[@name='AppointmentsView']/XCUIElementTypeButton[@name='Add']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeNavigationBar[@name='AppointmentsView']/XCUIElementTypeButton[@name='Add']")
     private IOSElement addappointmentbtn;
 	
-	@iOSFindBy(accessibility  = "From")
+	@iOSXCUITFindBy(accessibility  = "From")
     private IOSElement fromfld;
 	
-	@iOSFindBy(accessibility  = "To")
+	@iOSXCUITFindBy(accessibility  = "To")
     private IOSElement tofld;
 	
-	@iOSFindBy(accessibility  = "Done")
+	@iOSXCUITFindBy(accessibility  = "Done")
     private IOSElement donebtn;
 	
-	@iOSFindBy(accessibility  = "Subject")
+	@iOSXCUITFindBy(accessibility  = "Subject")
     private IOSElement subjectfld;
 	
-	@iOSFindBy(accessibility  = "Address")
+	@iOSXCUITFindBy(accessibility  = "Address")
     private IOSElement addressfld;
 	
-	@iOSFindBy(accessibility  = "City")
+	@iOSXCUITFindBy(accessibility  = "City")
     private IOSElement cityfld;
 	
-	@iOSFindBy(accessibility  = "Summary")
+	@iOSXCUITFindBy(accessibility  = "Summary")
     private IOSElement summarybtn;
 	
-	@iOSFindBy(accessibility = "Search")
+	@iOSXCUITFindBy(accessibility = "Search")
     private IOSElement searchbtn;
 	
-	@iOSFindBy(accessibility = "Not Checked In")
+	@iOSXCUITFindBy(accessibility = "Not Checked In")
     private IOSElement notcheckedinfilteritem;
 	
-	@iOSFindBy(accessibility = "Delete")
+	@iOSXCUITFindBy(accessibility = "Delete")
     private IOSElement deletefilterbtn;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savefilterbtn;
 	
-	@iOSFindBy(accessibility  = "ServiceRequestSummaryInspectionsButton")
+	@iOSXCUITFindBy(accessibility  = "ServiceRequestSummaryInspectionsButton")
     private IOSElement srsummaryinspectionsbtn;
 	
-	@iOSFindBy(accessibility  = "Work Orders")
+	@iOSXCUITFindBy(accessibility  = "Work Orders")
     private IOSElement srsummaryordrersbtn;
 	
-	@iOSFindBy(accessibility  = "Save")
+	@iOSXCUITFindBy(accessibility  = "Save")
     private IOSElement savebtn;*/
 
-	@iOSFindBy(accessibility  = "Create Inspection")
+	@iOSXCUITFindBy(accessibility  = "Create Inspection")
 	private IOSElement createinspectionmenu;
 	
 	public ServiceRequestsScreen() {

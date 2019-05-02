@@ -4,26 +4,26 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility  = "UpdateMainDatabaseButton")
+	@iOSXCUITFindBy(accessibility  = "UpdateMainDatabaseButton")
     private IOSElement mainbtn;
 	
-	@iOSFindBy(accessibility  = "UpdateVinDatabaseButton")
+	@iOSXCUITFindBy(accessibility  = "UpdateVinDatabaseButton")
     private IOSElement updatevin;
 	
-	@iOSFindBy(accessibility = "Enter Password")
+	@iOSXCUITFindBy(accessibility = "Enter Password")
     private IOSElement securefld;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeButton[@name='Login']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeButton[@name='Login']")
     private IOSElement loginbtn;
 	
-	@iOSFindBy(accessibility  = "Licenses")
+	@iOSXCUITFindBy(accessibility  = "Licenses")
     private IOSElement licenses;
 	
 	//final static String mainbtnxpath = "//UIAApplication[1]/UIAWindow[1]/UIAToolbar[2]/UIAButton[1]";

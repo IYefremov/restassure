@@ -5,7 +5,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,70 +21,70 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		
 	final static String vehiclescreencapt = "Vehicle";	
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeButton")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeButton")
     private IOSElement makecustombtn;
 	
-	/*@iOSFindBy(accessibility = "Save")
+	/*@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility = "Advisor")
+	@iOSXCUITFindBy(accessibility = "Advisor")
     private IOSElement advisorfld;
 	
-	@iOSFindBy(accessibility = "Color")
+	@iOSXCUITFindBy(accessibility = "Color")
     private IOSElement colorfld;
 	
-	@iOSFindBy(accessibility = "Mileage")
+	@iOSXCUITFindBy(accessibility = "Mileage")
     private IOSElement mileagefld;
 	
-	@iOSFindBy(accessibility = "Fuel Tank Level")
+	@iOSXCUITFindBy(accessibility = "Fuel Tank Level")
     private IOSElement fueltanklevelfld;
 	
-	@iOSFindBy(accessibility = "License Plate")
+	@iOSXCUITFindBy(accessibility = "License Plate")
     private IOSElement licenseplatefld;
 	
-	@iOSFindBy(accessibility = "Tech")
+	@iOSXCUITFindBy(accessibility = "Tech")
     private IOSElement techfld;
 	
-	@iOSFindBy(accessibility = "Location")
+	@iOSXCUITFindBy(accessibility = "Location")
     private IOSElement locationfld;
 	
-	@iOSFindBy(accessibility = "Type")
+	@iOSXCUITFindBy(accessibility = "Type")
     private IOSElement typefld;
 	
-	@iOSFindBy(accessibility = "Year")
+	@iOSXCUITFindBy(accessibility = "Year")
     private IOSElement yearfld;
 	
-	@iOSFindBy(accessibility = "Trim")
+	@iOSXCUITFindBy(accessibility = "Trim")
     private IOSElement trimfld;
 	
-	@iOSFindBy(accessibility = "Stock#")
+	@iOSXCUITFindBy(accessibility = "Stock#")
     private IOSElement stockfld;
 	
-	@iOSFindBy(accessibility = "RO#")
+	@iOSXCUITFindBy(accessibility = "RO#")
     private IOSElement rofld;
 	
-	@iOSFindBy(accessibility = "PO#")
+	@iOSXCUITFindBy(accessibility = "PO#")
     private IOSElement pofld;*/
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[3]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[3]")
     private IOSElement inspnumberlabel;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[2]")
     private IOSElement regularinspnumberlabel;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
     private IOSElement regularwotypelabel;
 	
-	/*@iOSFindBy(accessibility = "Done")
+	/*@iOSXCUITFindBy(accessibility = "Done")
     private IOSElement toolbardonebtn;
 	
-	@iOSFindBy(accessibility = "Compose")
+	@iOSXCUITFindBy(accessibility = "Compose")
     private IOSElement composebtn;
 	
-	@iOSFindBy(accessibility = "Cancel")
+	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;*/
 
-	@iOSFindBy(accessibility = "VehicleInfoTable")
+	@iOSXCUITFindBy(accessibility = "VehicleInfoTable")
 	private IOSElement vehicleinfotbl;
 	
 	public RegularVehicleScreen() {

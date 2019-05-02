@@ -7,38 +7,38 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularCustomersScreen extends RegularBaseAppScreen {
 	
-	/*@iOSFindBy(accessibility = "btnWholesale")
+	/*@iOSXCUITFindBy(accessibility = "btnWholesale")
     private IOSElement btnwholesale;
 	
-	@iOSFindBy(accessibility = "btnRetail")
+	@iOSXCUITFindBy(accessibility = "btnRetail")
     private IOSElement btnretail;
 	
-	@iOSFindBy(accessibility = "Add")
+	@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addcustomerbtn;
 	
-	@iOSFindBy(accessibility = "Search")
+	@iOSXCUITFindBy(accessibility = "Search")
     private IOSElement searchbtn;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIASearchBar[1]")
+	@iOSXCUITFindBy(xpath = "//UIAPopover[1]/UIASearchBar[1]")
     private IOSElement searchbar;
 	
-	@iOSFindBy(accessibility = "Edit")
+	@iOSXCUITFindBy(accessibility = "Edit")
     private IOSElement editpopupmenu;
 	
-	@iOSFindBy(accessibility = "Select")
+	@iOSXCUITFindBy(accessibility = "Select")
     private IOSElement selectpopupmenu;
 	
-	@iOSFindBy(accessibility = "Top Customers")
+	@iOSXCUITFindBy(accessibility = "Top Customers")
 	private List<IOSElement> topcustomers;*/
 
-	@iOSFindBy(accessibility = "Search")
+	@iOSXCUITFindBy(accessibility = "Search")
 	private IOSElement searchbtn;
 	
 	public RegularCustomersScreen() {

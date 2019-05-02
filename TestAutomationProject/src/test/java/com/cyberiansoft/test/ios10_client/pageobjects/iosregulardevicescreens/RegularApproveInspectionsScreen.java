@@ -6,7 +6,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
@@ -19,28 +19,28 @@ import java.time.Duration;
 
 public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(xpath ="//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
+	@iOSXCUITFindBy(xpath ="//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
     private IOSElement cancelbtn;
 	
-	@iOSFindBy(accessibility ="Approve")
+	@iOSXCUITFindBy(accessibility ="Approve")
     private IOSElement approvebtn;
 	
-	@iOSFindBy(accessibility ="ApproveAll")
+	@iOSXCUITFindBy(accessibility ="ApproveAll")
     private IOSElement approveallbtn;
 	
-	@iOSFindBy(accessibility ="DeclineAll")
+	@iOSXCUITFindBy(accessibility ="DeclineAll")
     private IOSElement declineallbtn;
 	
-	@iOSFindBy(accessibility ="SkipAll")
+	@iOSXCUITFindBy(accessibility ="SkipAll")
     private IOSElement skipallbtn;
 	
-	@iOSFindBy(xpath ="//XCUIElementTypeToolbar/XCUIElementTypeButton[@name='Cancel']")
+	@iOSXCUITFindBy(xpath ="//XCUIElementTypeToolbar/XCUIElementTypeButton[@name='Cancel']")
     private IOSElement cancelstatusreasonbtn;
 	
-	@iOSFindBy(accessibility  ="Done")
+	@iOSXCUITFindBy(accessibility  ="Done")
     private IOSElement donestatusreasonbtn;
 	
 	public RegularApproveInspectionsScreen() {

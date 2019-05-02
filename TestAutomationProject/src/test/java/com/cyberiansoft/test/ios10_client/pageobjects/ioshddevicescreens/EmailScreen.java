@@ -4,7 +4,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iO
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,10 +15,10 @@ import java.util.concurrent.TimeUnit;
 
 public class EmailScreen extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(accessibility = "Send")
+	@iOSXCUITFindBy(accessibility = "Send")
     private IOSElement toolbarsendbtn;
 	
-	@iOSFindBy(accessibility = "Add")
+	@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addemailbtn;
 	
 	public EmailScreen() {

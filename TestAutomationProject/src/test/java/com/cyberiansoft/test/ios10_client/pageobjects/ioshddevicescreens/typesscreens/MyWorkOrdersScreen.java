@@ -14,7 +14,7 @@ import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -30,67 +30,67 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	private By btnwholesale = By.name("btnWholesale");
 	private By btnretail = By.name("btnRetail");
 	
-	/*@iOSFindBy(accessibility = "Add")
+	/*@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addinspbtn;
 	
-	@iOSFindBy(accessibility  = "Discard")
+	@iOSXCUITFindBy(accessibility  = "Discard")
     private IOSElement discardbtn;
 	
-	@iOSFindBy(accessibility  = "Copy Services")
+	@iOSXCUITFindBy(accessibility  = "Copy Services")
     private IOSElement copyservicesmenu;
 	
-	@iOSFindBy(accessibility  = "New Inspection")
+	@iOSXCUITFindBy(accessibility  = "New Inspection")
     private IOSElement newinspectionmenu;
 	
-	@iOSFindBy(accessibility  = "Continue")
+	@iOSXCUITFindBy(accessibility  = "Continue")
     private IOSElement continuemenu;
 	
-	@iOSFindBy(accessibility  = "Discard")
+	@iOSXCUITFindBy(accessibility  = "Discard")
     private IOSElement discardmenu;
 	
-	@iOSFindBy(accessibility  = "Notes")
+	@iOSXCUITFindBy(accessibility  = "Notes")
     private IOSElement notesmenu;*/
 	
-	//@iOSFindBy(xpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")
+	//@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")
     //private IOSElement firswointable;
 	
-	/*@iOSFindBy(accessibility = "Share")
+	/*@iOSXCUITFindBy(accessibility = "Share")
     private IOSElement sharebtn;
 	
-	@iOSFindBy(accessibility = "filter")
+	@iOSXCUITFindBy(accessibility = "filter")
     private IOSElement filterbtn;
 	
-	@iOSFindBy(accessibility = "Done")
+	@iOSXCUITFindBy(accessibility = "Done")
     private IOSElement donebtn;
 	
-	@iOSFindBy(accessibility  = "invoice new")
+	@iOSXCUITFindBy(accessibility  = "invoice new")
     private IOSElement newinvoice;
 	
-	@iOSFindBy(accessibility  = "Delete")
+	@iOSXCUITFindBy(accessibility  = "Delete")
     private IOSElement deletebtn;
 	
-	@iOSFindBy(accessibility  = "Edit")
+	@iOSXCUITFindBy(accessibility  = "Edit")
     private IOSElement editbtn;
 	
-	@iOSFindBy(accessibility  = "Tech Revenue")
+	@iOSXCUITFindBy(accessibility  = "Tech Revenue")
     private IOSElement techrevenuebtn;
 	
-	@iOSFindBy(accessibility  = "Technicians")
+	@iOSXCUITFindBy(accessibility  = "Technicians")
     private IOSElement techniciansmenubtn;
 	
-	@iOSFindBy(accessibility  = "Service Request")
+	@iOSXCUITFindBy(accessibility  = "Service Request")
     private IOSElement servicerequestbtn;*/
 
-	@iOSFindBy(accessibility = "Add")
+	@iOSXCUITFindBy(accessibility = "Add")
 	private IOSElement addorderbtn;
 
-    @iOSFindBy(accessibility  = "Change Customer")
+    @iOSXCUITFindBy(accessibility  = "Change Customer")
     private IOSElement changecustomermenu;
 
-    @iOSFindBy(accessibility  = "Copy Vehicle")
+    @iOSXCUITFindBy(accessibility  = "Copy Vehicle")
     private IOSElement copyvehiclemenu;
 
-    @iOSFindBy(accessibility  = "Details")
+    @iOSXCUITFindBy(accessibility  = "Details")
     private IOSElement detailsmenu;
 
 	public MyWorkOrdersScreen() {

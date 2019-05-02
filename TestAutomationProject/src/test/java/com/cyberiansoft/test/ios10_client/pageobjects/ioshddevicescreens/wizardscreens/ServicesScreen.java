@@ -23,28 +23,28 @@ public class ServicesScreen extends BaseWizardScreen {
 	final static String defaultServiceValue = "Test Tax";
 	final static String servicesscreencapt = "Services";
 	
-	/*@iOSFindBy(accessibility  = "Save")
+	/*@iOSXCUITFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility  = "Cancel")
+	@iOSXCUITFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;
 	
-	@iOSFindBy(accessibility  = "Delete")
+	@iOSXCUITFindBy(accessibility  = "Delete")
     private IOSElement deletebtn;
 	
-	@iOSFindBy(accessibility  = "AvailableServicesSwitchButton")
+	@iOSXCUITFindBy(accessibility  = "AvailableServicesSwitchButton")
     private IOSElement servicetypesbtn;
 	
-	@iOSFindBy(accessibility  = "Price Matrices")
+	@iOSXCUITFindBy(accessibility  = "Price Matrices")
     private IOSElement pricematrixespopupname;
 	
-	@iOSFindBy(accessibility  = "Compose")
+	@iOSXCUITFindBy(accessibility  = "Compose")
     private IOSElement composebtn;
 	
-	@iOSFindBy(accessibility = "Final")
+	@iOSXCUITFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 	
-	@iOSFindBy(accessibility = "Draft")
+	@iOSXCUITFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;*/
 	
 	public ServicesScreen() {

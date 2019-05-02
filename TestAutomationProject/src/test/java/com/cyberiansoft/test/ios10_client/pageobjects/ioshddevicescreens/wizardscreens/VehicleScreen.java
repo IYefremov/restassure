@@ -29,65 +29,65 @@ public class VehicleScreen extends BaseWizardScreen {
 		
 	final static String vehiclescreencapt = "Vehicle";	
 	
-	//@iOSFindBy(accessibility  = "Advisor")
+	//@iOSXCUITFindBy(accessibility  = "Advisor")
     //private IOSElement advisorfld;
 	
-	//@iOSFindBy(accessibility  = "Color")
+	//@iOSXCUITFindBy(accessibility  = "Color")
     //private IOSElement colorfld;
 	
-	//@iOSFindBy(accessibility  = "Mileage")
+	//@iOSXCUITFindBy(accessibility  = "Mileage")
    // private IOSElement mileagefld;
 	
-	//@iOSFindBy(accessibility  = "Fuel Tank Level")
+	//@iOSXCUITFindBy(accessibility  = "Fuel Tank Level")
     //private IOSElement fueltanklevelfld;
 	
-	//@iOSFindBy(accessibility  = "License Plate")
+	//@iOSXCUITFindBy(accessibility  = "License Plate")
     //private IOSElement licenseplatefld;
 	
-	//@iOSFindBy(accessibility  = "Owner")
+	//@iOSXCUITFindBy(accessibility  = "Owner")
     //private IOSElement ownerfld;
 	
-	//@iOSFindBy(accessibility  = "Tech")
+	//@iOSXCUITFindBy(accessibility  = "Tech")
    // private IOSElement techfld;
 	
-	//@iOSFindBy(accessibility  = "Location")
+	//@iOSXCUITFindBy(accessibility  = "Location")
     //private IOSElement locationfld;
 	
-	//@iOSFindBy(accessibility  = "Type")
+	//@iOSXCUITFindBy(accessibility  = "Type")
     //private IOSElement typefld;
 	
-	//@iOSFindBy(accessibility  = "Year")
+	//@iOSXCUITFindBy(accessibility  = "Year")
     //private IOSElement yearfld;
 	
-	//@iOSFindBy(accessibility  = "Trim")
+	//@iOSXCUITFindBy(accessibility  = "Trim")
     //private IOSElement trimfld;
 	
-	//@iOSFindBy(accessibility  = "Stock#")
+	//@iOSXCUITFindBy(accessibility  = "Stock#")
     //private IOSElement stockfld;
 	
-	//@iOSFindBy(accessibility  = "RO#")
+	//@iOSXCUITFindBy(accessibility  = "RO#")
     //private IOSElement rofld;
 	
-	//@iOSFindBy(accessibility  = "PO#")
+	//@iOSXCUITFindBy(accessibility  = "PO#")
     //private IOSElement pofld;
 	
-	//@iOSFindBy(xpath = "//XCUIElementTypeCell[@name=\"PO#\"]/XCUIElementTypeTextField")
+	//@iOSXCUITFindBy(xpath = "//XCUIElementTypeCell[@name=\"PO#\"]/XCUIElementTypeTextField")
    // private IOSElement pofldvalue;
 	
-	//@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[3]")
+	//@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[3]")
     //private IOSElement inspnumberlabel;
 	
-	//@iOSFindBy(accessibility = "Done")
+	//@iOSXCUITFindBy(accessibility = "Done")
     //private IOSElement toolbardonebtn;
 
 	
-	//@iOSFindBy(accessibility  = "Compose")
+	//@iOSXCUITFindBy(accessibility  = "Compose")
     //private IOSElement composebtn;
 	
-	//@iOSFindBy(accessibility  = "Cancel")
+	//@iOSXCUITFindBy(accessibility  = "Cancel")
     //private IOSElement cancelbtn;
 	
-	//@iOSFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[4]")
+	//@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[4]")
     //private IOSElement wotypelabel;
 	
 	public VehicleScreen() {

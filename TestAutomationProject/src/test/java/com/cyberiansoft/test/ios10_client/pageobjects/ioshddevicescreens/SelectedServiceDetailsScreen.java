@@ -6,7 +6,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,64 +21,64 @@ import java.util.concurrent.TimeUnit;
 public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
 	
-	//@iOSFindBy(accessibility = "Price")
+	//@iOSXCUITFindBy(accessibility = "Price")
     // IOSElement servicepricefld;
 	
-	/*@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Price']/XCUIElementTypeTextField[1]")
+	/*@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Price']/XCUIElementTypeTextField[1]")
     private IOSElement servicepricevaluefld;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Adjustments']/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Adjustments']/XCUIElementTypeTextField[1]")
     private IOSElement serviceadjustmentsfld;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Vehicle Part']/XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Vehicle Part']/XCUIElementTypeStaticText[2]")
     private IOSElement vehiclepartsfld;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Service Part']/XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Service Part']/XCUIElementTypeStaticText[2]")
     private IOSElement servicepartfld;*/
 	
-	/*@iOSFindBy(accessibility = "Vehicle Part")
+	/*@iOSXCUITFindBy(accessibility = "Vehicle Part")
     private IOSElement vehiclepartscell;
 	
-	@iOSFindBy(accessibility = "Service Part")
+	@iOSXCUITFindBy(accessibility = "Service Part")
     private IOSElement servicepartscell;
 	
-	@iOSFindBy(accessibility = "Questions")
+	@iOSXCUITFindBy(accessibility = "Questions")
     private IOSElement questionsfld;
 	
-	@iOSFindBy(accessibility = "Remove")
+	@iOSXCUITFindBy(accessibility = "Remove")
     private IOSElement removeservice;
 	
-	@iOSFindBy(accessibility = "Quantity")
+	@iOSXCUITFindBy(accessibility = "Quantity")
     private IOSElement quantityfld;
 	
-	@iOSFindBy(accessibility  = "Notes")
+	@iOSXCUITFindBy(accessibility  = "Notes")
     private IOSElement notesfld;
 	
-	@iOSFindBy(accessibility = "Vehicle Parts")
+	@iOSXCUITFindBy(accessibility = "Vehicle Parts")
     private IOSElement vehiclepartsfldname;
 	
-	@iOSFindBy(accessibility = "Custom")
+	@iOSXCUITFindBy(accessibility = "Custom")
     private IOSElement technitianscustomview;
 	
-	@iOSFindBy(accessibility = "Evenly")
+	@iOSXCUITFindBy(accessibility = "Evenly")
     private IOSElement technitiansevenlyview;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
     private IOSElement cancelbtn;
 	
-	@iOSFindBy(accessibility = "PercentageGroupsView")
+	@iOSXCUITFindBy(accessibility = "PercentageGroupsView")
     private IOSElement adjustmentstable;
 	
-	@iOSFindBy(accessibility = "BundleItemsView")
+	@iOSXCUITFindBy(accessibility = "BundleItemsView")
     private IOSElement bundleitemstable;*/
 
-	@iOSFindBy(accessibility = "Vehicle Part")
+	@iOSXCUITFindBy(accessibility = "Vehicle Part")
 	private IOSElement vehiclepartscell;
 
-	@iOSFindBy(accessibility = "Part")
+	@iOSXCUITFindBy(accessibility = "Part")
 	private IOSElement servicepartscell;
 
-	@iOSFindBy(accessibility = "Vehicle Parts")
+	@iOSXCUITFindBy(accessibility = "Vehicle Parts")
 	private IOSElement vehiclepartsfldname;
 	
 	public SelectedServiceDetailsScreen() {

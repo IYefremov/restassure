@@ -5,7 +5,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -32,37 +32,37 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	public final static String SEVERE_SEVERITY = "Severe (76-100 Dents)";
 	public final static String QUICK_QUOTE_SEVERITY = "Quick Quote";
 	
-	/*@iOSFindBy(xpath = "//UIATableCell[@name=\"Price\"]/UIAStaticText[@name=\"Price\"]")
+	/*@iOSXCUITFindBy(xpath = "//UIATableCell[@name=\"Price\"]/UIAStaticText[@name=\"Price\"]")
     private IOSElement pricecell;
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"Time\"]/UIAStaticText[@name=\"Time\"]")
+	@iOSXCUITFindBy(xpath = "//UIATableCell[@name=\"Time\"]/UIAStaticText[@name=\"Time\"]")
     private IOSElement timecell;
 	
-	@iOSFindBy(xpath = "//UIATableView/UIATableCell[@name=\"Price\"]/UIATextField[1]")
+	@iOSXCUITFindBy(xpath = "//UIATableView/UIATableCell[@name=\"Price\"]/UIATextField[1]")
     private IOSElement pricevaluefld;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='Notes']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='Notes']")
     private IOSElement notescell;
 	
-	@iOSFindBy(accessibility = "Technicians")
+	@iOSXCUITFindBy(accessibility = "Technicians")
     private IOSElement technicianscell;
 	
-	@iOSFindBy(accessibility = "Compose")
+	@iOSXCUITFindBy(accessibility = "Compose")
     private IOSElement composecell;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility = "Delete")
+	@iOSXCUITFindBy(accessibility = "Delete")
     private IOSElement toolbardeletebtn;
 	
-	@iOSFindBy(accessibility = "Cancel")
+	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
 	
-	@iOSFindBy(accessibility = "Services")
+	@iOSXCUITFindBy(accessibility = "Services")
     private IOSElement servicesbtn;*/
 	
-	@iOSFindBy(accessibility = "Back")
+	@iOSXCUITFindBy(accessibility = "Back")
     private IOSElement backbtn;
 	
 	public RegularPriceMatrixScreen() {

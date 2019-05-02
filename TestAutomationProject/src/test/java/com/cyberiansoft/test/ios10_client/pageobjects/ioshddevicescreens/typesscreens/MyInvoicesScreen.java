@@ -11,7 +11,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,50 +24,50 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 
 	private final TypeScreenContext INVOICECONTEXT = TypeScreenContext.INVOICE;
 
-	/*@iOSFindBy(accessibility  = "My Invoices")
+	/*@iOSXCUITFindBy(accessibility  = "My Invoices")
     private IOSElement myinvoicesmenu;
 	
-	@iOSFindBy(accessibility  = "Team Invoices")
+	@iOSXCUITFindBy(accessibility  = "Team Invoices")
     private IOSElement teaminvoicesmenu;
 	
-	@iOSFindBy(accessibility  = "Done")
+	@iOSXCUITFindBy(accessibility  = "Done")
     private IOSElement donebtn;
 	
-	@iOSFindBy(accessibility  = "Single Email")
+	@iOSXCUITFindBy(accessibility  = "Single Email")
     private IOSElement singlemailbtn;
 	
-	@iOSFindBy(accessibility  = "Send Email")
+	@iOSXCUITFindBy(accessibility  = "Send Email")
     private IOSElement sendemailbtn;
 	
-	@iOSFindBy(accessibility = "Send")
+	@iOSXCUITFindBy(accessibility = "Send")
     private IOSElement sendbtn;
 	
-	@iOSFindBy(accessibility = "Add")
+	@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement sendmailaddmailbtn;*/
 
-	@iOSFindBy(accessibility  = "InvoicesPageTableLeft")
+	@iOSXCUITFindBy(accessibility  = "InvoicesPageTableLeft")
 	private IOSElement invoicestable;
 
 
-	@iOSFindBy(accessibility  = "Notes")
+	@iOSXCUITFindBy(accessibility  = "Notes")
 	private IOSElement notesmenu;
 
-	@iOSFindBy(accessibility  = "Approve")
+	@iOSXCUITFindBy(accessibility  = "Approve")
 	private IOSElement approvemenu;
 
-	@iOSFindBy(accessibility  = "Change Customer")
+	@iOSXCUITFindBy(accessibility  = "Change Customer")
 	private IOSElement changecustomermenu;
 
-	@iOSFindBy(accessibility  = "Print")
+	@iOSXCUITFindBy(accessibility  = "Print")
 	private IOSElement printmenu;
 
-	@iOSFindBy(accessibility  = "Change PO#")
+	@iOSXCUITFindBy(accessibility  = "Change PO#")
 	private IOSElement changeponumbermenu;
 
-	@iOSFindBy(accessibility  = "Edit")
+	@iOSXCUITFindBy(accessibility  = "Edit")
 	private IOSElement editmenu;
 
-	@iOSFindBy(accessibility  = "Summary")
+	@iOSXCUITFindBy(accessibility  = "Summary")
 	private IOSElement summarymenu;
 	
 	public MyInvoicesScreen() {

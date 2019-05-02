@@ -6,7 +6,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -18,13 +18,13 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	final static String defaultServiceValue = "Test Tax";
 	final static String ordersummaryscreencapt = "Summary";
 	
-	/*@iOSFindBy(accessibility = "Default")
+	/*@iOSXCUITFindBy(accessibility = "Default")
     private IOSElement defaultinvoicetype;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;*/
 
-	@iOSFindBy(accessibility = "TotalAmount")
+	@iOSXCUITFindBy(accessibility = "TotalAmount")
 	private IOSElement wototalamaunt;
 	
 	private By approveandcreateinvoicechekbox = MobileBy.AccessibilityId("checkbox unchecked");

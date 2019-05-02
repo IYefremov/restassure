@@ -5,7 +5,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
@@ -18,26 +18,26 @@ import java.util.concurrent.TimeUnit;
 
 public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	
-	//@iOSFindBy(accessibility = "TouchInputViewInPopover")
-	@iOSFindBy(accessibility = "TouchInputView")
+	//@iOSXCUITFindBy(accessibility = "TouchInputViewInPopover")
+	@iOSXCUITFindBy(accessibility = "TouchInputView")
     private IOSElement approvepopup;
 	
-	@iOSFindBy(accessibility = "Approve")
+	@iOSXCUITFindBy(accessibility = "Approve")
     private IOSElement approvebtn;
 	
-	@iOSFindBy(accessibility = "ApproveAll")
+	@iOSXCUITFindBy(accessibility = "ApproveAll")
     private IOSElement approveallbtn;
 	
-	@iOSFindBy(accessibility = "SkipAll")
+	@iOSXCUITFindBy(accessibility = "SkipAll")
     private IOSElement skipallbtn;
 	
-	@iOSFindBy(accessibility = "DeclineAll")
+	@iOSXCUITFindBy(accessibility = "DeclineAll")
     private IOSElement declineallbtn;
 	
-	@iOSFindBy(accessibility ="Cancel")
+	@iOSXCUITFindBy(accessibility ="Cancel")
     private IOSElement cancelstatusreasonbtn;
 	
-	@iOSFindBy(accessibility ="Done")
+	@iOSXCUITFindBy(accessibility ="Done")
     private IOSElement donebtn;
 	
 	public ApproveInspectionsScreen() {

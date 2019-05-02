@@ -3,7 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,10 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 public class PrintSelectorPopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar[@name='Print Selector']/XCUIElementTypeButton[@name='Print']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeNavigationBar[@name='Print Selector']/XCUIElementTypeButton[@name='Print']")
     private IOSElement printserverprintbtn;
 	
-	@iOSFindBy(accessibility = "Print")
+	@iOSXCUITFindBy(accessibility = "Print")
 	 private IOSElement printoptionsprintbtn;
 	
 	public PrintSelectorPopup() {

@@ -5,7 +5,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 
-	@iOSFindBy(accessibility ="Change PO#")
+	@iOSXCUITFindBy(accessibility ="Change PO#")
 	private IOSElement changepo;
 	
 	public TeamInvoicesScreen() {
