@@ -6,7 +6,6 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -76,28 +75,16 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 		int screenheight = (int) (appiumdriver.manage().window().getSize().getHeight()*0.90);
 
 		while (swipe) {
-			//System.out.println("+++++1" + (elementtoswipe.getLocation().getY() > screenheight));
-			//System.out.println("+++++2" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.80));
-			//System.out.println("+++++3" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.90));
 			if (elementtoswipe.isDisplayed()) {
 				swipe = false;
 				break;
 			} else if ((elementtoswipe.getLocation().getY() > screenheight)) {
-				//if (!elementtoswipe.isDisplayed())
-				/*JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-		        HashMap scrollObject = new HashMap<>();
-		        scrollObject.put("element", ((RemoteWebElement) elementtoswipe).getId());
-	            //scrollObject.put("toVisible", "true"); // optional but needed sometimes
-	            js.executeScript("mobile:scroll", scrollObject);
-	           */
+
 				JavascriptExecutor js1 = (JavascriptExecutor) appiumdriver;
 				HashMap<String, String> scrollObject1 = new HashMap<String, String>();
 				scrollObject1.put("direction", "up");
-				//scrollObject.put("element", ((IOSElement) ELEMENT).getId());
 				js1.executeScript("mobile: swipe", scrollObject1);
 
-				//swipeScreenUp();
-				//swipeTableUp();
 			}
 			else
 				swipe = false;
@@ -108,9 +95,6 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 		boolean swipe = true;
 
 		while (swipe) {
-			//System.out.println("+++++1" + (elementtoswipe.getLocation().getY() > screenheight));
-			//System.out.println("+++++2" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.80));
-			//System.out.println("+++++3" + (elementtoswipe.getLocation().getY() > appiumdriver.manage().window().getSize().getHeight()*0.90));
 			if (elementtoswipe.isDisplayed()) {
 				swipe = false;
 				break;
@@ -123,14 +107,6 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 				appiumdriver.executeScript("mobile: scroll", args);
 			}
 		}
-	}
-
-	public void swipeTableUp(WebElement elementtoswipe) {
-		JavascriptExecutor js1 = (JavascriptExecutor) appiumdriver;
-		HashMap<String, String> scrollObject1 = new HashMap<>();
-		scrollObject1.put("direction", "up");
-		scrollObject1.put("element", ((IOSElement) elementtoswipe).getId());
-		js1.executeScript("mobile: swipe", scrollObject1);
 	}
 
 	public void scrollToElement(String elementValue) {

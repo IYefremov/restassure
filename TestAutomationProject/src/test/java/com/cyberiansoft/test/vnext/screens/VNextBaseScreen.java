@@ -27,48 +27,9 @@ public class VNextBaseScreen {
 	public void tap(WebElement element) {
 
 		BaseUtils.waitABit(300);
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		//wait.until(ExpectedConditions.elementToBeClickable(element));
-
-
-
-
 		WaitUtils.click(element);
-		//tapOldAndroidversion(element);
-
-		//JavascriptExecutor executor = (JavascriptExecutor)appiumdriver;
-		//executor.executeScript("arguments[0].click();", element);
-
-		//element.click();
-		//new TouchActions(appiumdriver).singleTap(element).perform();
-		/*Action tapAction = new SingleTapAction(appiumdriver.getTouch(),  (org.openqa.selenium.interactions.internal.Locatable) element);
-		CompositeAction action = new CompositeAction();
-		action.addAction(tapAction).perform();*/
-		
-		/*if (VNextAppiumDriverBuilder.getPlatformName().toLowerCase().equals("android")) {
-			new TouchActions(appiumdriver).singleTap(element).perform();
-			
-		} else {
-			int xx = element.getLocation().getX() + element.getSize().getWidth()/2;
-			int yy = element.getLocation().getY() + element.getSize().getHeight()/2;
-			
-			new TouchAction(appiumdriver).tap(xx, yy).perform();
-		}		
-		waitABit(300);*/
 		
 	}
-
-	/*public void tapOldAndroidversion(WebElement element){
-		float[] elementLocation = getElementCenter(element);
-		int elementCoordinateX = (int) Math.round(elementLocation[0]);
-		int elementCoordinateY = (int) Math.round(elementLocation[1]);
-		System.out.println("+++++" + elementCoordinateX);
-		System.out.println("+++++" + elementCoordinateY);
-		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		TouchAction action = new TouchAction(appiumdriver);
-		new TouchAction((MobileDriver) appiumdriver).tap(PointOption.point((int) elementCoordinateX, (int) elementCoordinateY)).perform();
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-	}*/
 
 	private float[] getElementCenter(WebElement element){
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
@@ -130,7 +91,6 @@ public class VNextBaseScreen {
 		BaseUtils.waitABit(1000);
 		scrollablelist.findElement(By.xpath(".//div[contains(text(), '" + value + "')]")).click();
 
-		//tap(scrollablelist.findElement(By.xpath(".//div[contains(text(), '" + value + "')]")));
 	}
 	
 	public void swipeScreenLeft() {	
@@ -195,10 +155,6 @@ public class VNextBaseScreen {
 		clickScreenTitleCaption();	
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
-		//BaseUtils.waitABit(1000);
-		//AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		//appiumdriver.findElementByXPath("//android.view.View[@content-desc='Services All Services']").click();
-		//AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		tap(changescrenpopover.findElement(By.xpath(".//span[text()='" + screenName + "']")));
 
 	}

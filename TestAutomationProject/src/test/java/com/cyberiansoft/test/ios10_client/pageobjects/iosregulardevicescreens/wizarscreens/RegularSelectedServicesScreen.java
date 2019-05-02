@@ -6,7 +6,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +18,7 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
 
     final static String defaultServiceValue = "Test Tax";
 
-    @iOSFindBy(accessibility = "SelectedServicesView")
+    @iOSXCUITFindBy(accessibility = "SelectedServicesView")
     private IOSElement selectedservicestable;
 
     public RegularSelectedServicesScreen() {

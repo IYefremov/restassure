@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,7 +30,7 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
 
     public VNextPayCashCheckScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
     public void setPaymentCheckNumber(String checkNumber) {

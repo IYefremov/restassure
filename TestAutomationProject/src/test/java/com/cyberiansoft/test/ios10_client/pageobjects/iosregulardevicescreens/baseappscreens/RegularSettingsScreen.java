@@ -3,7 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.b
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularSettingsScreen extends RegularBaseAppScreen {
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeSwitch[@name='Show all services']")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeSwitch[@name='Show all services']")
     private IOSElement showallservicestoggle;
 	
 	public RegularSettingsScreen() {

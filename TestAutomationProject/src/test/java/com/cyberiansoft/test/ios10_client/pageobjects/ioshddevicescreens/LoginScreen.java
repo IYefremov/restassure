@@ -4,7 +4,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,19 +13,19 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "CodeField1")
+	@iOSXCUITFindBy(accessibility = "CodeField1")
     private IOSElement firstcode;
 	
-	@iOSFindBy(accessibility = "CodeField2")
+	@iOSXCUITFindBy(accessibility = "CodeField2")
     private IOSElement secondcode;
 	
-	@iOSFindBy(accessibility = "CodeField3")
+	@iOSXCUITFindBy(accessibility = "CodeField3")
     private IOSElement thirdcode;
 	
-	@iOSFindBy(accessibility = "Verify")
+	@iOSXCUITFindBy(accessibility = "Verify")
     private IOSElement registerbtn;
 	
-	@iOSFindBy(accessibility = "Don't Allow")
+	@iOSXCUITFindBy(accessibility = "Don't Allow")
     private IOSElement dontallowbtn;
 	
 	public LoginScreen() {

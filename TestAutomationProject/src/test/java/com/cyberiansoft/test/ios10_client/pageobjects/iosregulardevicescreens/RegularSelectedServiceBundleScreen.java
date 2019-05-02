@@ -16,10 +16,10 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	
-	/*@iOSFindBy(accessibility = "services")
+	/*@iOSXCUITFindBy(accessibility = "services")
 	private IOSElement tollbarservicesbtn;
 	
-	@iOSFindBy(accessibility = "Close")
+	@iOSXCUITFindBy(accessibility = "Close")
 	private IOSElement tollbarcloseservicesbtn;*/
 	
 	public RegularSelectedServiceBundleScreen() {

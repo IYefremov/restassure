@@ -6,7 +6,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
@@ -15,41 +15,41 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 
 	final static String scrollviewxpath = "//XCUIElementTypeTable";
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[1]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[1]/XCUIElementTypeTextField[1]")
     private IOSElement firstnamefld;
 	
-	//@iOSFindBy(uiAutomator = scrollviewxpath + ".cells()['Last Name'].textFields()[0]")
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[2]/XCUIElementTypeTextField[1]")
+	//@iOSXCUITFindByuiAutomator = scrollviewxpath + ".cells()['Last Name'].textFields()[0]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[2]/XCUIElementTypeTextField[1]")
     private IOSElement lastnamefld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[3]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[3]/XCUIElementTypeTextField[1]")
     private IOSElement companyfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[6]/XCUIElementTypeTextView[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[6]/XCUIElementTypeTextView[1]")
     private IOSElement streetfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[8]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[8]/XCUIElementTypeTextField[1]")
     private IOSElement cityfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[10]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[10]/XCUIElementTypeTextField[1]")
     private IOSElement statefld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[9]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[9]/XCUIElementTypeTextField[1]")
     private IOSElement countryfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[11]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[11]/XCUIElementTypeTextField[1]")
     private IOSElement zipfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[5]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[5]/XCUIElementTypeTextField[1]")
     private IOSElement phonefld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[4]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[4]/XCUIElementTypeTextField[1]")
     private IOSElement mailfld;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility = "Clients")
+	@iOSXCUITFindBy(accessibility = "Clients")
     private IOSElement clientsbtn;
 	
 	public RegularAddCustomerScreen() {

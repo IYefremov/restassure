@@ -3,7 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -11,20 +11,20 @@ import java.util.concurrent.TimeUnit;
 public class RegularEnterpriseBeforeDamageScreen extends RegularBaseWizardScreen {
 	
 	final static String enterprisebeforedamagescreencapt = "Enterprise Before Damage";
-	
-	@iOSFindBy(xpath = "//UIAScrollView[2]/UIATableView[1]/UIATableCell[2]")
+
+	@iOSXCUITFindBy(xpath = "//UIAScrollView[2]/UIATableView[1]/UIATableCell[2]")
     private IOSElement vinbtn;
 	
-	@iOSFindBy(xpath = "//UIAScrollView[2]/UIATableView[1]/UIATableCell[4]")
+	@iOSXCUITFindBy(xpath = "//UIAScrollView[2]/UIATableView[1]/UIATableCell[4]")
     private IOSElement licenseplatebtn;
 	
-	@iOSFindBy(xpath = "//UIAButton[@name=\"PhotoCapture\"]")
+	@iOSXCUITFindBy(xpath = "//UIAButton[@name=\"PhotoCapture\"]")
     private IOSElement photocapturebtn;
 	
-	@iOSFindBy(xpath = "//UIAButton[@name=\"Use Photo\"]")
+	@iOSXCUITFindBy(xpath = "//UIAButton[@name=\"Use Photo\"]")
     private IOSElement usephotobtn;
 	
-	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name=\"Back\"]")
+	@iOSXCUITFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name=\"Back\"]")
     private IOSElement backbtn;
 	
 	public RegularEnterpriseBeforeDamageScreen() {

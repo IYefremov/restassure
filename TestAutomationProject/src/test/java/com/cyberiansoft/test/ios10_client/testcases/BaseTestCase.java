@@ -39,28 +39,6 @@ public class BaseTestCase {
 
 	@BeforeSuite
 	public void setUp() {
-
-		// Parameters for WebDriver
-
-		/*
-		 * GraphicsConfiguration gc = GraphicsEnvironment
-		 * .getLocalGraphicsEnvironment().getDefaultScreenDevice()
-		 * .getDefaultConfiguration();
-		 *
-		 *
-		 * screenRecorder = new ScreenRecorder(gc, new Format(MediaTypeKey,
-		 * MediaType.FILE, MimeTypeKey, MIME_AVI), new Format( MediaTypeKey,
-		 * MediaType.VIDEO, EncodingKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
-		 * CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE, DepthKey,
-		 * (int) 24, FrameRateKey, Rational.valueOf(15), QualityKey, 1.0f,
-		 * KeyFrameIntervalKey, (int) (15 * 60)), new Format(MediaTypeKey,
-		 * MediaType.VIDEO, EncodingKey, "black", FrameRateKey,
-		 * Rational.valueOf(30)), null); screenRecorder.start();
-		 * System.out.println("++++++++++" + screenRecorder.getState().name());
-		 * System.out.println("++++++++++" +
-		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
-		 */
-
 		AppiumDriverServiceBuilder.getInstance().buildAppiumService();
 		browsertype = BaseUtils.getBrowserType(ReconProIOSStageInfo.getInstance().getDefaultBrowser());
 
@@ -69,26 +47,6 @@ public class BaseTestCase {
 	public static WebElement wait(By locator) {
 		return Helpers.wait(locator);
 	}
-
-	/*public void appiumdriverInicialize(String buildtype)  {
-		//appiumdriver = new IOSDriver<>(service.getUrl(), appiumcap);
-		//appiumdriver = new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), appiumcap);
-
-		//PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		this.buildtype = buildtype;
-		if (buildtype.toLowerCase().equals("hd"))
-			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_HD, service.getUrl());
-			//appiumdriver = AndroidDriverBuilder.forIOSHD().againstHost(service.getUrl()).newInstance();
-			//appiumdriver = AndroidDriverBuilder.forIOSHD().againstLocalhost().newInstance();
-		else
-			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_REGULAR, service.getUrl());
-			//appiumdriver = AndroidDriverBuilder.forIOSRegular().againstHost(service.getUrl()).newInstance();
-			//appiumdriver = AndroidDriverBuilder.forIOSRegular().againstLocalhost().newInstance();
-		appiumdriver = (IOSDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver();
-		appiumdriver.manage().timeouts().implicitlyWait(800, TimeUnit.SECONDS);
-		
-		Helpers.init(appiumdriver);
-	}*/
 
 	@AfterSuite
 	public void tearDown() {
@@ -100,26 +58,5 @@ public class BaseTestCase {
 			AppiumDriverServiceBuilder.getInstance().getAppiumService().stop();
         }
 	}
-	
-	/*public void resrtartApplication() throws MalformedURLException {
-		try {
-			DriverBuilder.getInstance().getAppiumDriver().closeApp();
-		} catch (NoSuchSessionException e) {
-			AppiumInicializator.getInstance().initAppium(mobilePlatform);
-		}
-		Helpers.waitABit(7000);
-		try {
-			DriverBuilder.getInstance().getAppiumDriver().launchApp();
-			Helpers.waitABit(7000);
-		} catch (WebDriverException e) {
-			try {
-				Thread.sleep(7000);
-			} catch (InterruptedException e1) {
-				// do nothing
-			}
-			DriverBuilder.getInstance().getAppiumDriver().launchApp();
-			Helpers.waitABit(2000);
-		}
-	}*/
 
 }

@@ -2,13 +2,13 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,7 +44,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
 
     public VNextBaseTypeScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
     protected WebElement getListCell(WebElement typesList, String cellValue) {

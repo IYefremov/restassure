@@ -4,50 +4,50 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class AddCustomerScreen extends iOSHDBaseScreen {
 
 	final static String scrollviewxpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther";
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[1]")
     private IOSElement firstnamefld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[2]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[2]")
     private IOSElement lastnamefld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[3]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[3]")
     private IOSElement companyfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[4]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[4]")
     private IOSElement streetfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[6]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[6]")
     private IOSElement cityfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[7]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[7]")
     private IOSElement statefld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[8]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[8]")
     private IOSElement zipfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[9]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[9]")
     private IOSElement phonefld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[10]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[10]")
     private IOSElement mailfld;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[1]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[1]")
     private IOSElement statebtn;
 	
-	@iOSFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[2]")
+	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[2]")
     private IOSElement countrybtn;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility = "Clients")
+	@iOSXCUITFindBy(accessibility = "Clients")
     private IOSElement clientsbtn;
 	
 	public AddCustomerScreen() {

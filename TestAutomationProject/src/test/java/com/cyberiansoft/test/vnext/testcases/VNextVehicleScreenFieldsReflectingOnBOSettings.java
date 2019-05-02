@@ -485,12 +485,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		InspectionTypesVehicleInfoSettingsWebPage vehicleinfosettingspage = insptypepage.clickInspectionVehicleInfoSettingLink(inspectiontype);
 		List<WebElement> elementfields = vehicleinfosettingspage.getDisplayedColumnsListItems();
-		/*for (WebElement elm : elements) {
-			if (!elm.getText().equals("Owner") & !elm.getText().equals("Fuel Tank Level") & !elm.getText().equals("Advisor"))
-				System.out.println("++++++" + elm.getText());
-		}*/
-		
-		List<String> fields = new ArrayList<String>();
+
+		List<String> fields = new ArrayList<>();
     	for (WebElement element : elementfields)
     		if (!element.getText().equals("Owner") & !element.getText().equals("Fuel Tank Level") & !element.getText().equals("Advisor"))
     			fields.add(element.getText());
@@ -505,28 +501,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		List<String> vehicleelements = vehicleinfoscreen.getDisplayedVehicleFieldsListItems();
 		Iterator<String> it1 = fields.iterator();
 		Iterator<String> it2 = vehicleelements.iterator();
-		/*for (WebElement vhclfld : vehicleelements) {
-			System.out.println("++++++" + vhclfld.getText());
-		}*/
+
 		while (it1.hasNext() && it2.hasNext()) {
 			String fldbovalue = it1.next();
 			String flddevvalue = it2.next();
-			
-			System.out.println("++++++" + fldbovalue);
-			System.out.println("++++++" + flddevvalue);
-			System.out.println("++++++" + fldbovalue.contains(flddevvalue.substring(0, flddevvalue.length()-2)));
-			System.out.println("++++++" + flddevvalue.substring(0, flddevvalue.length()-2));
-			
-			/*if (fldvalue.equals("Vehicle Type"))
-				Assert.assertTrue(it2.next().getText().equals("Type"));
-			else if (fldvalue.equals("Tag # (Lic. Plate)"))
-				Assert.assertTrue(it2.next().getText().equals("Lic. Plate"));
-			else if (fldvalue.equals("PO #"))
-				Assert.assertTrue(it2.next().getText().equals("PO#"));
-			else if (fldvalue.equals("Stock #"))
-				Assert.assertTrue(it2.next().getText().equals("Stock#"));
-			else if (fldvalue.equals("RO #"))
-				Assert.assertTrue(it2.next().getText().equals("RO#"));*/
 		}
 		
 	}

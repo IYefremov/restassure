@@ -14,6 +14,7 @@ import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -76,7 +77,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 					+ "Verify user can create Invoice in status 'New'")
 	public void testVerifyUserCanCreateInvoiceFromInspections() {
 
-		final String invoiceType = "O_Kramar2";
 		final String vinnumber = "TEST";
 		final String ponumber = "12345";
 
@@ -102,7 +102,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextWorkOrderSummaryScreen wosummaryscreen = new VNextWorkOrderSummaryScreen(appiumdriver);
 		wosummaryscreen.clickCreateInvoiceOptionAndSaveWO();
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-		invoiceTypesScreen.selectInvoiceType(invoiceType);
+		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR2);
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(ponumber);

@@ -7,7 +7,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -21,25 +21,25 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	private final TypeScreenContext INVOICEINFOCONTEXT = TypeScreenContext.INVOICEINFO;
 	private static TypeScreenContext INVOICEINFOExCONTEXT = null;
 	
-	@iOSFindBy(accessibility = "Draft")
+	@iOSXCUITFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
 	
-	@iOSFindBy(accessibility = "Final")
+	@iOSXCUITFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 
-	@iOSFindBy(accessibility  = "action pay")
+	@iOSXCUITFindBy(accessibility  = "action pay")
     private IOSElement invoicepaybtn;
 	
-	@iOSFindBy(accessibility  = "Payment_Tab_Cash")
+	@iOSXCUITFindBy(accessibility  = "Payment_Tab_Cash")
     private IOSElement cashnormalbtn;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility = "Cancel")
+	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
 	
-	@iOSFindBy(xpath = "//UIAKeyboard[1]/UIAButton[@name=\"Return\"]")
+	@iOSXCUITFindBy(xpath = "//UIAKeyboard[1]/UIAButton[@name=\"Return\"]")
     private IOSElement hidekeyboardbtn;
 
 	public RegularInvoiceInfoScreen() {
@@ -104,8 +104,6 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	}
 
 	public <T extends RegularBaseTypeScreen> T cancelInvoice() {
-		System.out.println("+++++" + INVOICEINFOExCONTEXT.toString());
-		System.out.println("+++++" + RegularBaseWizardScreen.typeContext.toString());
 		if (INVOICEINFOExCONTEXT != null)
 			RegularBaseWizardScreen.typeContext = INVOICEINFOExCONTEXT;
 		clickCancelButton();
@@ -123,9 +121,7 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	
 	public void addWorkOrder(String wonumber)  {
 		appiumdriver.findElementByAccessibilityId("Insert").click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[3]").click();
 		WebElement par = getTableParentCell(wonumber);
-		//par.findElement(By.xpath(".//XCUIElementTypeTextField[1]"));
 		par.findElement(By.xpath("//XCUIElementTypeButton[@name=\"unselected\"]")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
@@ -133,7 +129,6 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	public String getInvoiceNumber() {
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByIosNsPredicate("name CONTAINS 'I-'").getAttribute("value");
-		//return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"I-\")]").getAttribute("value");
 	}
 	
 	public String getInvoiceCustomer() {

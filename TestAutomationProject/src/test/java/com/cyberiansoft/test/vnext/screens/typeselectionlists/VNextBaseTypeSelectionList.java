@@ -33,27 +33,28 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
     }
 
     public void selectType(String typeName) {
-        if (!elementExists("//div[@class='item-title']/div[text()='" + typeName + "']")) {
+        final By typeXpath = By.xpath("//*[@class='item-title']/div[text()='" + typeName + "']");
+        if (!(appiumdriver.findElements(typeXpath).size() > 0)) {
             clickSearchButton();
             setSearchText(typeName);
             WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
+            wait.until(ExpectedConditions.elementToBeClickable(typeXpath));
 
         } else {
             WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")));
-            if (!appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']")).isDisplayed()) {
-                WebElement elem = appiumdriver.findElement(By.xpath("//div[@class='item-title']/div[text()='" + typeName + "']"));
+            wait.until(ExpectedConditions.elementToBeClickable(typeXpath));
+            if (!appiumdriver.findElement(typeXpath).isDisplayed()) {
+                WebElement elem = appiumdriver.findElement(typeXpath);
                 JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
                 je.executeScript("arguments[0].scrollIntoView(true);", elem);
                 BaseUtils.waitABit(500);
             }
         }
         try {
-            typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")).click();
+            tap(appiumdriver.findElement(typeXpath));
         } catch (StaleElementReferenceException e) {
             BaseUtils.waitABit(1000);
-            typeslist.findElement(By.xpath(".//div[@class='item-title']/div[text()='" + typeName + "']")).click();
+            appiumdriver.findElement(typeXpath).click();
         }
     }
 

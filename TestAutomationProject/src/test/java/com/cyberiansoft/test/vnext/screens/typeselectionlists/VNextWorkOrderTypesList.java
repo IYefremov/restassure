@@ -12,7 +12,6 @@ public class VNextWorkOrderTypesList extends VNextBaseTypeSelectionList {
 	
 	public VNextWorkOrderTypesList(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		//PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 	

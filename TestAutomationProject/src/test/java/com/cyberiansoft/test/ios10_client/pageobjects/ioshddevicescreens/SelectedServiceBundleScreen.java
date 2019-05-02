@@ -16,13 +16,13 @@ import java.util.List;
 
 public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	
-	/*@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
+	/*@iOSXCUITFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Cancel']")
 	private IOSElement cancelbundlepopupbtn;
 	
-	@iOSFindBy(accessibility = "services")
+	@iOSXCUITFindBy(accessibility = "services")
 	private IOSElement tollbarservicesbtn;
 	
-	@iOSFindBy(accessibility = "Close")
+	@iOSXCUITFindBy(accessibility = "Close")
 	private IOSElement tollbarcloseservicesbtn;*/
 	
 	public SelectedServiceBundleScreen() {

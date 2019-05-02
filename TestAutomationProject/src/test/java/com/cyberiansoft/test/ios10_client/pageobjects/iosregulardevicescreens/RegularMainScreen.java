@@ -6,7 +6,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,22 +15,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularMainScreen extends iOSBaseScreen {
 	
-	@iOSFindBy(accessibility = "UpdateMainDatabaseButton")
+	@iOSXCUITFindBy(accessibility = "UpdateMainDatabaseButton")
     private IOSElement mainbtn;
 	
-	@iOSFindBy(accessibility = "UpdateVinDatabaseButton")
+	@iOSXCUITFindBy(accessibility = "UpdateVinDatabaseButton")
     private IOSElement updatevin;
 	
-	@iOSFindBy(accessibility = "Enter password here")
+	@iOSXCUITFindBy(accessibility = "Enter password here")
     private IOSElement securefld;
 	
-	@iOSFindBy(accessibility = "OK")
+	@iOSXCUITFindBy(accessibility = "OK")
     private IOSElement loginbtn;
 
-	@iOSFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name='Search']")
+	@iOSXCUITFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name='Search']")
     private IOSElement searchbtn;
 
-	@iOSFindBy(accessibility = "Licenses")
+	@iOSXCUITFindBy(accessibility = "Licenses")
     private IOSElement licenses;
 
 	public RegularMainScreen() {

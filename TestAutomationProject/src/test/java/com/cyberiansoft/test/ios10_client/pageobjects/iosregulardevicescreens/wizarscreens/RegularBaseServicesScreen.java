@@ -4,17 +4,17 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularBaseServicesScreen extends RegularBaseWizardScreen {
 
-    @iOSFindBy(accessibility = "Available")
+    @iOSXCUITFindBy(accessibility = "Available")
     private IOSElement availabletab;
 
-    @iOSFindBy(accessibility = "Selected")
+    @iOSXCUITFindBy(accessibility = "Selected")
     private IOSElement selectedtab;
 
     public RegularBaseServicesScreen() {

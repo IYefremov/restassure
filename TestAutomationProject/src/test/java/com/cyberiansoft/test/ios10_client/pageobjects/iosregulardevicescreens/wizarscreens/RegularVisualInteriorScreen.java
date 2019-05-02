@@ -5,7 +5,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,25 +16,25 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	final static String visualinteriorcapt = "Interior";
 	final static String visualexteriorcapt = "Exterior";
 	
-	/*@iOSFindBy(accessibility = "Quantity")
+	/*@iOSXCUITFindBy(accessibility = "Quantity")
     private IOSElement quantityfld;
 	
-	@iOSFindBy(accessibility = "Price")
+	@iOSXCUITFindBy(accessibility = "Price")
     private IOSElement pricefld;
 	
-	@iOSFindBy(xpath = "//UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
+	@iOSXCUITFindBy(xpath = "//UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
     private IOSElement quantityfldvalue;
 	
-	@iOSFindBy(accessibility = "SubtotalAmount")
+	@iOSXCUITFindBy(accessibility = "SubtotalAmount")
     private IOSElement toolbarvisualpricevalue;
 	
-	@iOSFindBy(accessibility = "TotalAmount")
+	@iOSXCUITFindBy(accessibility = "TotalAmount")
     private IOSElement toolbarpricevalue;
 	
-	@iOSFindBy(accessibility = "Save")
+	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;*/
 
-	@iOSFindBy(accessibility = "services")
+	@iOSXCUITFindBy(accessibility = "services")
 	private IOSElement servicetoolbarrtn;
 
 	public RegularVisualInteriorScreen() {

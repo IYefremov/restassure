@@ -19,16 +19,16 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 
 	private final TypeScreenContext TEAMINSPECTIONCONTEXT = TypeScreenContext.TEAMINSPECTION;
 	
-	/*@iOSFindBy(accessibility = "InspectionsTable")
+	/*@iOSXCUITFindBy(accessibility = "InspectionsTable")
 	private IOSElement inspectiontable;
 	
-	@iOSFindBy(accessibility = "Edit")
+	@iOSXCUITFindBy(accessibility = "Edit")
     private IOSElement editpopupmenu;
 	
-	@iOSFindBy(accessibility = "Approve")
+	@iOSXCUITFindBy(accessibility = "Approve")
     private IOSElement approvepopupmenu;
 	
-	@iOSFindBy(accessibility = "Done")
+	@iOSXCUITFindBy(accessibility = "Done")
     private IOSElement toolbardonebtn;*/
 	
 	public RegularTeamInspectionsScreen() {

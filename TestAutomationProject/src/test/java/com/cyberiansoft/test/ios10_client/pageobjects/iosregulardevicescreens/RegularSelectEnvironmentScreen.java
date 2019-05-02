@@ -3,7 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularSelectEnvironmentScreen extends iOSRegularBaseScreen {
 
-	@iOSFindBy(accessibility = "Select Environment")
+	@iOSXCUITFindBy(accessibility = "Select Environment")
 	private IOSElement environmentspopup;
 	
 	public RegularSelectEnvironmentScreen() {

@@ -7,7 +7,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -19,29 +19,29 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
-	/*@iOSFindBy(accessibility = "Vehicle Part")
+	/*@iOSXCUITFindBy(accessibility = "Vehicle Part")
     private IOSElement vehiclepartscell;
 	
-	@iOSFindBy(accessibility = "Questions")
+	@iOSXCUITFindBy(accessibility = "Questions")
     private IOSElement questionsfld;
 
 	
-	@iOSFindBy(accessibility = "Notes")
+	@iOSXCUITFindBy(accessibility = "Notes")
     private IOSElement notesfld;
 	
-	@iOSFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"Vehicle Parts\"]")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeNavigationBar[@name=\"Vehicle Parts\"]")
     private IOSElement vehiclepartsfldname;
 	
-	@iOSFindBy(accessibility  = "Service Part")
+	@iOSXCUITFindBy(accessibility  = "Service Part")
     private IOSElement servicepartcell;
 	
-	@iOSFindBy(xpath = "//UIASegmentedControl[1]/UIAButton[@name=\"Custom\"]")
+	@iOSXCUITFindBy(xpath = "//UIASegmentedControl[1]/UIAButton[@name=\"Custom\"]")
     private IOSElement technitianscustomview;
 	
-	@iOSFindBy(xpath = "//UIASegmentedControl[1]/UIAButton[@name=\"Evenly\"]")
+	@iOSXCUITFindBy(xpath = "//UIASegmentedControl[1]/UIAButton[@name=\"Evenly\"]")
     private IOSElement technitiansevenlyview;*/
 	
-	@iOSFindBy(accessibility = "Cancel")
+	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
 	
 	

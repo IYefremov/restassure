@@ -2,17 +2,17 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
 public class RegularInspectionToolBar extends iOSRegularBaseScreen {
 	
-	@iOSFindBy(accessibility = "SubtotalAmount")
+	@iOSXCUITFindBy(accessibility = "SubtotalAmount")
     private IOSElement inspsubtotal;
 	
-	@iOSFindBy(accessibility = "TotalAmount")
+	@iOSXCUITFindBy(accessibility = "TotalAmount")
     private IOSElement insptotal;
 	
 	public RegularInspectionToolBar() {

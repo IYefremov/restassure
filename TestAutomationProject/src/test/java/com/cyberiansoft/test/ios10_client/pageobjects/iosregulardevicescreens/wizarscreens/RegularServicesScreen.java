@@ -9,7 +9,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -23,31 +23,31 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 
 	final static String servicesscreencapt = "Services";
 	
-	/*@iOSFindBy(accessibility = "Save")
+	/*@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility = "Cancel")
+	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
 	
-	@iOSFindBy(accessibility = "Delete")
+	@iOSXCUITFindBy(accessibility = "Delete")
     private IOSElement deletebtn;
 	
-	@iOSFindBy(accessibility = "AvailableServicesSwitchButton")
+	@iOSXCUITFindBy(accessibility = "AvailableServicesSwitchButton")
     private IOSElement servicetypesbtn;
 	
-	@iOSFindBy(accessibility = "Price Matrices")
+	@iOSXCUITFindBy(accessibility = "Price Matrices")
     private IOSElement pricematrixespopupname;
 	
-	@iOSFindBy(accessibility = "Compose")
+	@iOSXCUITFindBy(accessibility = "Compose")
     private IOSElement composebtn;
 	
-	@iOSFindBy(accessibility = "Vehicle Part")
+	@iOSXCUITFindBy(accessibility = "Vehicle Part")
     private IOSElement vehiclepartsbtn;
 	
-	@iOSFindBy(accessibility = "Final")
+	@iOSXCUITFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;*/
 
-	@iOSFindBy(accessibility = "AvailableServiceList")
+	@iOSXCUITFindBy(accessibility = "AvailableServiceList")
 	private IOSElement availableservicestbl;
 	
 	public RegularServicesScreen() {

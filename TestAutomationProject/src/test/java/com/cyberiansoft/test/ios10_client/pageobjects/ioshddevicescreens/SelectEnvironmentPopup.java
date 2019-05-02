@@ -2,7 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SelectEnvironmentPopup extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "EnvironmentSelection")
+	@iOSXCUITFindBy(accessibility = "EnvironmentSelection")
     private IOSElement envselectiontable;
 	
 	public SelectEnvironmentPopup() {

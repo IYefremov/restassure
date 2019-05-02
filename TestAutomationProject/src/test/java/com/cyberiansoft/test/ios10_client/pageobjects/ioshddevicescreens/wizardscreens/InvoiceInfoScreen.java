@@ -7,7 +7,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,28 +21,28 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	private final TypeScreenContext INVOICEINFOCONTEXT = TypeScreenContext.INVOICEINFO;
 	private static TypeScreenContext INVOICEINFOExCONTEXT = null;
 	
-	/*@iOSFindBy(accessibility = "Draft")
+	/*@iOSXCUITFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
 	
-	@iOSFindBy(accessibility = "Final")
+	@iOSXCUITFindBy(accessibility = "Final")
     private IOSElement finalalertbtn;
 	
-	@iOSFindBy(accessibility = "InvoiceOrdersTable")
+	@iOSXCUITFindBy(accessibility = "InvoiceOrdersTable")
     private IOSElement invoicewostable;
 	
-	@iOSFindBy(accessibility  = "action pay")
+	@iOSXCUITFindBy(accessibility  = "action pay")
     private IOSElement invoicepaybtn;
 	
-	@iOSFindBy(accessibility  = "cash normal")
+	@iOSXCUITFindBy(accessibility  = "cash normal")
     private IOSElement cashnormalbtn;
 	
-	@iOSFindBy(accessibility  = "Save")
+	@iOSXCUITFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 	
-	@iOSFindBy(accessibility  = "Cancel")
+	@iOSXCUITFindBy(accessibility  = "Cancel")
     private IOSElement cancelbtn;*/
 
-	@iOSFindBy(accessibility = "txtPO")
+	@iOSXCUITFindBy(accessibility = "txtPO")
 	private IOSElement setpofld;
 
 	public InvoiceInfoScreen() {

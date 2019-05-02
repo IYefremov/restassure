@@ -4,7 +4,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,16 +15,16 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	
-	@iOSFindBy(accessibility = "Search")
+	@iOSXCUITFindBy(accessibility = "Search")
     private IOSElement searchbtn;
 	
-	@iOSFindBy(xpath = "//UIAPopover[1]/UIASearchBar[1]")
+	@iOSXCUITFindBy(xpath = "//UIAPopover[1]/UIASearchBar[1]")
     private IOSElement searchbar;
 	
-	@iOSFindBy(accessibility = "Close")
+	@iOSXCUITFindBy(accessibility = "Close")
     private IOSElement closesearchbtn;
-	
-	@iOSFindBy(accessibility = "Switch to online")
+
+	@iOSXCUITFindBy(accessibility = "Switch to online")
     private IOSElement switchtowebbtn;
 	
 	public RegularCarHistoryScreen() {

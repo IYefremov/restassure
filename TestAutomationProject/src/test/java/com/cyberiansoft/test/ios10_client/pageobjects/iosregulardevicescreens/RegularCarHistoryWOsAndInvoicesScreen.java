@@ -5,7 +5,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,10 +14,10 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularCarHistoryWOsAndInvoicesScreen extends iOSRegularBaseScreen {
 
-    @iOSFindBy(accessibility = "Invoices")
+    @iOSXCUITFindBy(accessibility = "Invoices")
     private IOSElement invoicesmenu;
 
-    @iOSFindBy(accessibility = "Work Orders")
+    @iOSXCUITFindBy(accessibility = "Work Orders")
     private IOSElement myworkordersmenumenu;
 
     public RegularCarHistoryWOsAndInvoicesScreen() {

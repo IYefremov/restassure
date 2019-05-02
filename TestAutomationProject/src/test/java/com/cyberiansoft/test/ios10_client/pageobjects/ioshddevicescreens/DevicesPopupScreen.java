@@ -3,18 +3,18 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
 public class DevicesPopupScreen extends iOSHDBaseScreen {
 	
-	@iOSFindBy(accessibility = "Assign")
+	@iOSXCUITFindBy(accessibility = "Assign")
     private IOSElement assignlbtn;
 	
 	
-	@iOSFindBy(accessibility = "Cancel")
+	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
 	
 	

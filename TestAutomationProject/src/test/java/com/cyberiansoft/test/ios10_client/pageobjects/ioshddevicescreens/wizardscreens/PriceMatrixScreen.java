@@ -7,7 +7,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,37 +31,37 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	public final static String SEVERE_SEVERITY = "Severe (76-100 Dents)";
 	public final static String QUICK_QUOTE_SEVERITY = "Quick Quote";
 	
-	//@iOSFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Price\"]")
+	//@iOSXCUITFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Price\"]")
     //private IOSElement pricecell;
 	
-	//@iOSFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Time\"]")
+	//@iOSXCUITFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Time\"]")
     //private IOSElement timecell;
 	
-	//@iOSFindBy(uiAutomator = "//XCUIElementTypeCell[@name=\"Price\"]/XCUIElementTypeTextField[1]")
+	//@iOSXCUITFindByuiAutomator = "//XCUIElementTypeCell[@name=\"Price\"]/XCUIElementTypeTextField[1]")
     //private IOSElement pricevaluefld;
 	
-	//@iOSFindBy(accessibility = "Technicians")
+	//@iOSXCUITFindBy(accessibility = "Technicians")
     //private IOSElement technicianscell;
 	
-	//@iOSFindBy(xpath = "//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\"Technicians\")]/XCUIElementTypeStaticText[2]")
+	//@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable[@name='PriceMatrixItemDetails']/XCUIElementTypeCell[contains(@name,\"Technicians\")]/XCUIElementTypeStaticText[2]")
    // private IOSElement technicianscellvalue;
 
-	/*@iOSFindBy(accessibility  = "Compose")
+	/*@iOSXCUITFindBy(accessibility  = "Compose")
     private IOSElement composecell;
 
-	@iOSFindBy(accessibility = "Clear")
+	@iOSXCUITFindBy(accessibility = "Clear")
     private IOSElement clearvehiclepartdatabtn;
 
-	@iOSFindBy(accessibility  = "Save")
+	@iOSXCUITFindBy(accessibility  = "Save")
     private IOSElement savebtn;
 
-	@iOSFindBy(accessibility = "Cancel")
+	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;*/
 
-	@iOSFindBy(accessibility = "Technicians")
+	@iOSXCUITFindBy(accessibility = "Technicians")
 	private IOSElement technicianscell;
 
-	@iOSFindBy(accessibility = "Notes")
+	@iOSXCUITFindBy(accessibility = "Notes")
 	private IOSElement notescell;
 
 	private static String viewMode = "PdrView";

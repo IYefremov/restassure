@@ -39,56 +39,6 @@ public class BaseTestCase {
 	String bundleid = "";
 	protected static AppiumDriverLocalService service;
 
-//	@BeforeClass
-//	@Parameters({ "selenium.browser", "ios.bundleid" })
-//	public void setUp(@Optional("chrome") String browser, String bundleid) throws Exception {
-//		/*
-//		 * GraphicsConfiguration gc = GraphicsEnvironment
-//		 * .getLocalGraphicsEnvironment().getDefaultScreenDevice()
-//		 * .getDefaultConfiguration();
-//		 *
-//		 *
-//		 * screenRecorder = new ScreenRecorder(gc, new Format(MediaTypeKey,
-//		 * MediaType.FILE, MimeTypeKey, MIME_AVI), new Format( MediaTypeKey,
-//		 * MediaType.VIDEO, EncodingKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
-//		 * CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE, DepthKey,
-//		 * (int) 24, FrameRateKey, Rational.valueOf(15), QualityKey, 1.0f,
-//		 * KeyFrameIntervalKey, (int) (15 * 60)), new Format(MediaTypeKey,
-//		 * MediaType.VIDEO, EncodingKey, "black", FrameRateKey,
-//		 * Rational.valueOf(30)), null); screenRecorder.start();
-//		 * System.out.println("++++++++++" + screenRecorder.getState().name());
-//		 * System.
-//		 *
-//		 *
-//		 *
-//		 * out.println("++++++++++" +
-//		 * screenRecorder.getCreatedMovieFiles().get(0).getPath());
-//		 */
-//
-////		service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
-////				 .usingAnyFreePort().withArgument(SESSION_OVERRIDE)
-////				 .withArgument(LOG_LEVEL, "error")
-////				 .build();
-////	        service.start();
-////
-////	    if (service == null || !service.isRunning()) {
-////	    	throw new AppiumServerHasNotBeenStartedLocallyException("An appium server node is not started!");
-////	    }
-//	    this.bundleid =  bundleid;
-//		browserType = BaseUtils.getBrowserType(browser);
-//
-//		DriverBuilder.getInstance().setDriver(browserType);
-//		webdriver = DriverBuilder.getInstance().getDriver();
-//		webdriver.navigate().refresh();
-//	}
-
-//	@BeforeSuite
-//	public void setUp() {
-//		browserType = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
-//		DriverBuilder.getInstance().setDriver(browserType);
-//		webdriver = DriverBuilder.getInstance().getDriver();
-//		webdriver.navigate().refresh();
-//	}
 
 	public void setDriver() {
         webdriver = DriverBuilder.getInstance().getDriver();
@@ -116,20 +66,9 @@ public class BaseTestCase {
 //            await().atMost(30, TimeUnit.SECONDS).ignoreExceptions().until(() -> DriverBuilder.getInstance().setDriver(browserType));
         }
         webdriver = DriverBuilder.getInstance().getDriver();
-//        if (webdriver != null) {
-//            webdriver.navigate().refresh();
-//        } else {
-//            DriverBuilder.getInstance().quitDriver();
-//            webdriver = DriverBuilder.getInstance().getDriver();
-//            webdriver.navigate().refresh();
-//        }
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
         loginpage.UserLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
-    }
-
-    public void setBrowser() {
-        DriverBuilder.getInstance().setDriver(browserType);
     }
 
     @AfterMethod

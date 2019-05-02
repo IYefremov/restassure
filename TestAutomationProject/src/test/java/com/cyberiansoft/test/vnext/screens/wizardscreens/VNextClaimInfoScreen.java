@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +30,7 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	
 	public VNextClaimInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
+		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(policyfld));
 	}
@@ -52,12 +52,6 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	public void setClaimNumber(String claimnum) {
 		tap(claimfld);
 		claimfld.sendKeys(claimnum);
-		//appiumdriver.getKeyboard().sendKeys(claimnum);
-		/*try {
-			appiumdriver.hideKeyboard();
-		} catch (WebDriverException e) {
-			//todo:
-		}*/
 	}
 	
 	public String getClaimNumber() {
@@ -71,15 +65,8 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	public void selectInsuranceCompany (String insuranceCompany) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(insurancecompanyfld));
-		/*tap(appiumdriver.findElement(By.xpath("//*[@action='company']/a")));
-		VNextBaseScreenWithListSelection listscreen = new VNextBaseScreenWithListSelection(appiumdriver);
-		listscreen.selectListItem(insuranceCompany);*/
 		insurancecompanyfld.sendKeys(insuranceCompany);
-		/*try {
-			appiumdriver.hideKeyboard();
-		} catch (WebDriverException e) {
-			//todo:
-		}*/
+
 	}
 	
 	public String getInsuranceCompany() {
