@@ -90,7 +90,7 @@ public class DeviceRegistrator {
                 loginscreen.registeriOSDevice(regCode);
             } else {
                 SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
-                LoginScreen loginscreen = selectenvscreen.selectEnvironment("QC Environment");
+                LoginScreen loginscreen = selectenvscreen.selectEnvironment(environmentName);
 
                 loginscreen.registeriOSDevice(regCode);
             }

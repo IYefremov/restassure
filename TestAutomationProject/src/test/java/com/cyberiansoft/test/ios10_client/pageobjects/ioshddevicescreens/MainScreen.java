@@ -25,12 +25,6 @@ public class MainScreen extends iOSHDBaseScreen {
 	
 	@iOSXCUITFindBy(accessibility  = "Licenses")
     private IOSElement licenses;
-	
-	//final static String mainbtnxpath = "//UIAApplication[1]/UIAWindow[1]/UIAToolbar[2]/UIAButton[1]";
-	//final static String updatevinxpath = "//UIAApplication[1]/UIAWindow[1]/UIAToolbar[2]/UIAButton[2]";
-	//final static String securefldxpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIASecureTextField[1]";
-	//final static String loginbtnxpath = "//UIAApplication[1]/UIAWindow[1]/UIAPopover[1]/UIAButton[1]";
-	//final static String licensesxpath = "//UIAToolbar[1]/UIAButton[@name=\"Licences\"]";
 
 	public MainScreen() {
 		super();
