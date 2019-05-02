@@ -67,32 +67,6 @@ public class VNextWebServices extends BaseTestCase {
 
 		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
 
-//		System.out.println("\nTesting 1 - Send Http POST request");
-		//sendPost();
-		/*URL url = new URL("https://api.cyberianconcepts.com/v1/userInfo/actions/generateRegCode?email=danyl@cyberiansoft.com");
-		  HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-		  httpCon.setDoOutput(true);
-		  httpCon.setRequestMethod("POST");
-		  OutputStreamWriter out = new OutputStreamWriter(
-		      httpCon.getOutputStream());
-		  System.out.println(httpCon.getResponseCode());
-		  System.out.println(httpCon.getResponseMessage());
-		  BufferedReader in = new BufferedReader(
-			        new InputStreamReader(httpCon.getInputStream()));
-		  String inputLine;
-		  StringBuffer response = new StringBuffer();
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-
-			//print result
-			System.out.println(response.toString());        
-		  out.close();*/
-		  
-		 // ++++++++++++++
-
 		System.out.println("\nTesting 2 - Send Http POST request");
 		//sendPost();
 		URL url = new URL("https://api.cyberianconcepts.com/v1/userInfo/actions/getRegCode?email=danyl@cyberiansoft.com");

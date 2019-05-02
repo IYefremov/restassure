@@ -143,25 +143,6 @@ public class ServicesScreen extends BaseWizardScreen {
 
 	public void selectService(String servicename) {
 		MobileElement searchFld =  null;
-		/*if (!(elementExists("AvailableGroupItemList"))) {
-			if (typeContext.equals(TypeScreenContext.SERVICEREQUEST)) {
-				tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
-			} else
-				tablelist = (IOSElement) appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableServiceList']/.."));
-		} else
-			tablelist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[@name='AvailableGroupItemList']/.."));
-
-		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		System.out.println("++++++++" + tablelist.getAttribute("name"));
-
-		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
-        tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
-        Helpers.waitABit(1000);
-		tablelist.findElement(MobileBy.className("XCUIElementTypeSearchField")).setValue(servicename);
-		//appiumdriver.getKeyboard().sendKeys(servicename);
-		appiumdriver.hideKeyboard();
-*/
-
 		IOSElement tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
 		if (tablelist.getAttribute("type").equals("XCUIElementTypeOther"))
 			searchFld = ((MobileElement) tablelist.findElementByClassName("XCUIElementTypeSearchField"));
@@ -170,7 +151,6 @@ public class ServicesScreen extends BaseWizardScreen {
 		searchFld.click();
 		searchFld.clear();
 		searchFld.setValue(servicename);
-		//appiumdriver.getKeyboard().sendKeys(servicename);
 		appiumdriver.hideKeyboard();
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeTable")).findElement(MobileBy.AccessibilityId(servicename)).click();
 	}

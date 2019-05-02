@@ -169,8 +169,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 
 	public void setInvoiceSelectedDateValue(LocalDate date) {
 		WebElement pickerwheeldatecolumn = getDatePickerWheelDateColumn();
-		System.out.println("++++" + ".//div[@data-picker-value='" + date.getDayOfMonth() + "']");
-		System.out.println("++++" + (pickerwheeldatecolumn == null));
 		tap(pickerwheeldatecolumn.findElement(By.xpath(".//div[@data-picker-value='" + date.getDayOfMonth() + "']")));
 	}
 

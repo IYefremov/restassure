@@ -966,7 +966,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
 		invoicesscreen.switchToTeamInvoicesView();
 		for (String invoiceNumber : invoices) {
-			invoicesscreen.searchInvoiceByFreeText(invoiceNumber);
+			//invoicesscreen.searchInvoiceByFreeText(invoiceNumber);
 			invoicesscreen.selectInvoice(invoiceNumber);
 		}
 		invoicesscreen.clickOnSelectedInvoicesMailButton();

@@ -296,7 +296,6 @@ public class DentWizartestCases extends BaseTestCase {
 		myworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
 		final String wosubstring = wo1 + ", " + wo2;
-		System.out.println("+++++" + invoicenumber);
 		Assert.assertEquals(myinvoicesscreen.getInvoiceInfoLabel(invoicenumber), wosubstring);
 		myinvoicesscreen.clickHomeButton();
 	}

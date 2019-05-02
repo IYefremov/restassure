@@ -57,11 +57,6 @@ public class InspectionFactory implements ObjectFactory <InspectionDTO> {
         Response<BasicResponse> res = ApiUtils.getAPIService().saveInspection(estimationId, device.getLicenceId(),
                 device.getDeviceId(), appID,
                 employee.getEmployeeID(), true, inspection).execute();
-        System.out.println("++++++++++" + getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, GlobalUtils.getInspectionSymbol() + appLicenseEntity).getLocalNo());
-        System.out.println("++++++++++" + getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, GlobalUtils.getInspectionSymbol() + appLicenseEntity).getEstimationId());
-
         return getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
                 employee.getEmployeeID(), true, GlobalUtils.getInspectionSymbol() + appLicenseEntity);
     }

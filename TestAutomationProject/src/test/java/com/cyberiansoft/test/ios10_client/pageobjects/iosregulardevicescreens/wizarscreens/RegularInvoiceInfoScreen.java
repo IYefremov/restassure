@@ -104,8 +104,6 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	}
 
 	public <T extends RegularBaseTypeScreen> T cancelInvoice() {
-		System.out.println("+++++" + INVOICEINFOExCONTEXT.toString());
-		System.out.println("+++++" + RegularBaseWizardScreen.typeContext.toString());
 		if (INVOICEINFOExCONTEXT != null)
 			RegularBaseWizardScreen.typeContext = INVOICEINFOExCONTEXT;
 		clickCancelButton();
@@ -123,9 +121,7 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	
 	public void addWorkOrder(String wonumber)  {
 		appiumdriver.findElementByAccessibilityId("Insert").click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[3]").click();
 		WebElement par = getTableParentCell(wonumber);
-		//par.findElement(By.xpath(".//XCUIElementTypeTextField[1]"));
 		par.findElement(By.xpath("//XCUIElementTypeButton[@name=\"unselected\"]")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
@@ -133,7 +129,6 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	public String getInvoiceNumber() {
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByIosNsPredicate("name CONTAINS 'I-'").getAttribute("value");
-		//return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"I-\")]").getAttribute("value");
 	}
 	
 	public String getInvoiceCustomer() {
