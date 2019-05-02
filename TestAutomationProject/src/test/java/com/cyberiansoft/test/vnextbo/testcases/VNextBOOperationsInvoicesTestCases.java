@@ -6,10 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.screens.*;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -31,9 +28,6 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-    private String userName;
-    private String userPassword;
-    private VNextBOLoginScreenWebPage loginPage;
     private VNexBOLeftMenuPanel leftMenu;
 
     @BeforeMethod
@@ -47,10 +41,10 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         webdriver = DriverBuilder.getInstance().getDriver();
 
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-        userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+        String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+        String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
+        VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage
                 .userLogin(userName, userPassword);
 //                .executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
@@ -88,6 +82,21 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+
+        final AdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchInvoiceForm
+                .setTimeFrame(data.getTimeFrame())
+                .setFromDate(data.getFromDate())
+                .setStatus(data.getStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+
         final String firstInvoiceNumber = invoicesPage.getFirstInvoiceName();
         invoicesPage
                 .clickFirstInvoice()
@@ -103,6 +112,21 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+
+        final AdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchInvoiceForm
+                .setTimeFrame(data.getTimeFrame())
+                .setFromDate(data.getFromDate())
+                .setStatus(data.getStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+
         final String firstInvoiceNumber = invoicesPage.getFirstInvoiceName();
         invoicesPage
                 .clickFirstInvoice()
@@ -110,7 +134,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 .clickInvoiceRejectButton();
 
         Assert.assertTrue(invoicesPage.isInvoiceDisplayed(firstInvoiceNumber),
-                "The invoice is not displayed after clicking 'No' button");
+                "The invoice is not displayed after clicking the 'No' button");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -118,6 +142,21 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+
+        final AdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchInvoiceForm
+                .setTimeFrame(data.getTimeFrame())
+                .setFromDate(data.getFromDate())
+                .setStatus(data.getStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+
         final int selected = 3;
         final String[] firstInvoiceNames = invoicesPage.getFirstInvoiceNames(selected);
 
@@ -131,11 +170,11 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 .clickInvoiceYesButton();
 
         Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[0]),
-                "The invoice " + firstInvoiceNames[0] + " is displayed after clicking 'Yes' button");
+                "The invoice " + firstInvoiceNames[0] + " is displayed after clicking the 'Yes' button");
         Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[1]),
-                "The invoice " + firstInvoiceNames[1] + " is displayed after clicking 'Yes' button");
+                "The invoice " + firstInvoiceNames[1] + " is displayed after clicking the 'Yes' button");
         Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[2]),
-                "The invoice " + firstInvoiceNames[2] + " is displayed after clicking 'Yes' button");
+                "The invoice " + firstInvoiceNames[2] + " is displayed after clicking the 'Yes' button");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -162,6 +201,21 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+
+        final AdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchInvoiceForm
+                .setTimeFrame(data.getTimeFrame())
+                .setFromDate(data.getFromDate())
+                .setStatus(data.getStatus())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+
         final String[] invoices = {
                 invoicesPage.getInvoiceName(0),
                 invoicesPage.getInvoiceName(1),
@@ -171,7 +225,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         Arrays.stream(invoices)
                 .forEach((inv) -> invoicesPage
                         .clickFirstInvoice()
-                        .clickVoidButton()
+                        .clickUnvoidButton()
                         .clickInvoiceYesButton());
 
         invoicesPage

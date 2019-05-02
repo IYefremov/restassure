@@ -8,9 +8,8 @@
         "Order / Type / Department",
         "Customer / Vehicle / VIN#",
         "Stock# / RO# / PO# / Invoice",
-        "Amount",
         "Start Date / Target Date",
-        "Active Phase / Days in Phase",
+        "Current Phase / Days in Phase",
         "Completed (%)",
         "Other"
       ],

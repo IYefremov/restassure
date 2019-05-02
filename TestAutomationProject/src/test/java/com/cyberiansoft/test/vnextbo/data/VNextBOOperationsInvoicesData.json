@@ -2,28 +2,40 @@
   "verifyUserCanVoidInvoice": [
     {
       "rowID": "verifyUserCanVoidInvoice.01",
-      "description": "Test Case 79457:Verify user can void invoice"
+      "description": "Test Case 79457:Verify user can void invoice",
+      "timeFrame": "Custom",
+      "status": "All Active",
+      "fromDate": "02/01/2017"
     }
   ],
 
   "verifyUserCannotVoidInvoiceAfterClickingNo": [
     {
       "rowID": "verifyUserCannotVoidInvoiceAfterClickingNo.01",
-      "description": "Test Case 79459:Verify user can't void invoice if click \"No\" button"
+      "description": "Test Case 79459:Verify user can't void invoice if click \"No\" button",
+      "timeFrame": "Custom",
+      "status": "All Active",
+      "fromDate": "02/01/2017"
     }
   ],
 
   "verifyUserCannotVoidInvoiceAfterClickingReject": [
     {
       "rowID": "verifyUserCannotVoidInvoiceAfterClickingReject.01",
-      "description": "Test Case 79460:Verify user can't void invoice if click reject icon"
+      "description": "Test Case 79460:Verify user can't void invoice if click reject icon",
+      "timeFrame": "Custom",
+      "status": "All Active",
+      "fromDate": "02/01/2017"
     }
   ],
 
   "verifyUserCanVoidInvoicesUsingCheckboxes": [
     {
       "rowID": "verifyUserCanVoidInvoicesUsingCheckboxes.01",
-      "description": "Test Case 79461:Verify user can void invoices using check-boxes"
+      "description": "Test Case 79461:Verify user can void invoices using check-boxes",
+      "timeFrame": "Custom",
+      "status": "All Active",
+      "fromDate": "02/01/2017"
     }
   ],
 
@@ -31,7 +43,9 @@
     {
       "rowID": "verifyUserCanUnvoidInvoice.01",
       "description": "Test Case 79462:Verify user can unvoid invoice",
-      "status": "Void"
+      "status": "Void",
+      "timeFrame": "Custom",
+      "fromDate": "02/01/2017"
     }
   ],
 
@@ -40,7 +54,9 @@
       "rowID": "verifyUserCanUnvoidInvoicesUsingCheckboxes.01",
       "description": "Test Case 79463:Verify user can unvoid invoices using check-boxes",
       "status": "Void",
-      "status2": "New"
+      "status2": "New",
+      "timeFrame": "Custom",
+      "fromDate": "02/01/2017"
     }
   ]
 }

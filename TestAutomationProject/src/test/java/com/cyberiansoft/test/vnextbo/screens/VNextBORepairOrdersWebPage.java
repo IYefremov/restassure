@@ -36,7 +36,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[contains(@class, 'location-name')]")
     private WebElement locationElement;
 
-    @FindBy(xpath = "//div[@id='savedSearchContainer']/span[@class='k-widget k-dropdown k-header']")
+    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']/span[@class='k-widget k-dropdown k-header']")
     private WebElement savedSearchContainer;
 
     @FindBy(xpath = "//div[@class='tab-pane active' and @id='departmentTabNoWideScreen1']")

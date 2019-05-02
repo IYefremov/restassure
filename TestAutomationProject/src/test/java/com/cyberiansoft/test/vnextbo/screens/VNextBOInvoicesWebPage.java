@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -27,6 +28,9 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//div[@id='invoice-details']//span[@title='Void Invoice']")
 	private WebElement voidButton;
+
+	@FindBy(xpath = "//div[@id='invoice-details']//span[@title='Unvoid Invoice']")
+	private WebElement unvoidButton;
 
 	@FindBy(xpath = "//section[@id='invoices-view']//div[@class='pull-right header-icons-group']")
 	private WebElement headerIcons;
@@ -57,6 +61,12 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']/following-sibling::div/div[@class='progress-message' and text()]")
 	private WebElement progressMessage;
+
+    @FindBy(xpath = "//span[contains(@class, 'location-name')]")
+    private WebElement locationElement;
+
+    @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
+    private WebElement locationExpanded;
 	
 	public VNextBOInvoicesWebPage(WebDriver driver) {
 		super(driver);
@@ -135,6 +145,13 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
     public VNextConfirmationDialog clickVoidButton() {
 	    wait.until(ExpectedConditions.elementToBeClickable(voidButton)).click();
+        waitForLoading();
+	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+    }
+
+    public VNextConfirmationDialog clickUnvoidButton() {
+	    wait.until(ExpectedConditions.elementToBeClickable(unvoidButton)).click();
+	    waitForLoading();
 	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
     }
 
@@ -169,5 +186,59 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	public AdvancedSearchInvoiceForm clickAdvancedSearchCaret() {
 	    wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCaret)).click();
         return PageFactory.initElements(driver, AdvancedSearchInvoiceForm.class);
+    }
+
+    public VNextBOInvoicesWebPage setLocation(String location) {
+        if (isLocationExpanded()) {
+            selectLocation(location);
+        } else {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+            } catch (Exception ignored) {
+                waitABit(2000);
+                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+            }
+            selectLocation(location);
+        }
+        return this;
+    }
+
+    private void selectLocation(String location) {
+        wait.until(ExpectedConditions
+                .elementToBeClickable(locationExpanded.findElement(By.xpath(".//label[text()='" + location + "']"))))
+                .click();
+        waitForLoading();
+        Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
+        closeLocationDropDown();
+    }
+
+    public boolean isLocationExpanded() {
+        try {
+            return waitShort.until(ExpectedConditions.visibilityOf(locationExpanded)).isDisplayed();
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public void closeLocationDropDown() {
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
+        } catch (Exception e) {
+            locationElement.click();
+            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
+        }
+    }
+
+    public boolean isLocationSelected(String location) {
+        try {
+            wait
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions
+                            .presenceOfElementLocated(By
+                                    .xpath("//div[@class='add-notes-item menu-item active']//label[text()='" + location + "']")));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
     }
 }
