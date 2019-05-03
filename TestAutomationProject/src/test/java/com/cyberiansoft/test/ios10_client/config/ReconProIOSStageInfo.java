@@ -31,9 +31,26 @@ public class ReconProIOSStageInfo {
         return _instance;
     }
 
-    public String getBackOfficeStageURL() {
-        return props.getProperty("backofficestage.url");
+    public String getEnvironmentType() {
+        return props.getProperty("environment.type");
     }
+
+    public String getBackOfficeStagingURL() {
+        return props.getProperty("backoffice.integration");
+    }
+
+    public String getBackOfficeDevelopmentURL() {
+        return props.getProperty("backoffice.development");
+    }
+
+    public String getDentWizardBackOfficeStagingURL() {
+        return props.getProperty("backofficedw.integration");
+    }
+
+    public String getDentWizardBackOfficeDevelopmentURL() {
+        return props.getProperty("backofficedw.development");
+    }
+
 
     public String getUserStageMail() {
         return props.getProperty("userstage.mail");

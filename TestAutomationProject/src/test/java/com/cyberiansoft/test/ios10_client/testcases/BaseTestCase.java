@@ -6,28 +6,24 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumDriverServiceBuilder;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
+import com.cyberiansoft.test.ios10_client.types.envtypes.IOSReconproEnvironmentType;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.TestUser;
-import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseTestCase {
 
-	private ScreenRecorder screenRecorder;
-	//protected AppiumDriver<MobileElement> appiumdriver;
+	protected static String deviceofficeurl;
 	protected WebDriver webdriver;
-	protected DesiredCapabilities appiumcap;
-	protected DesiredCapabilities webcap;
 	protected static BrowserType browsertype;
 	public static MobilePlatform mobilePlatform;
 	public static boolean inspSinglePageMode = false;
 	protected TestUser testuser;
-	protected String userpsw;
+	protected static IOSReconproEnvironmentType envType;
 
 	public void initTestUser(String username,  String userpsw) {
 		this.testuser = new TestUser(username, userpsw);
@@ -41,7 +37,6 @@ public class BaseTestCase {
 	public void setUp() {
 		AppiumDriverServiceBuilder.getInstance().buildAppiumService();
 		browsertype = BaseUtils.getBrowserType(ReconProIOSStageInfo.getInstance().getDefaultBrowser());
-
 	}
 
 	public static WebElement wait(By locator) {

@@ -2,7 +2,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
+import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
@@ -17,7 +17,6 @@ import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOr
 import com.cyberiansoft.test.ios10_client.utils.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -35,9 +34,9 @@ public class DentWizartestCases extends BaseTestCase {
 
 
 
-		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, DentWizardIOSInfo.getInstance().getBackOfficeURL(),
-				DentWizardIOSInfo.getInstance().getUserName(), DentWizardIOSInfo.getInstance().getUserPassword(), "Mac mini_olkr",
-				"QC Environment");
+		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,
+                ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(),
+                "Mac mini_olkr", envType);
 		MainScreen mainscr = new MainScreen();
 		homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
@@ -46,14 +45,6 @@ public class DentWizartestCases extends BaseTestCase {
 		settingsscreen.clickHomeButton();
 
 		ExcelUtils.setDentWizardExcelFile();
-	}
-	
-	@BeforeMethod
-	public void restartApps() {
-		//resrtartApplication();	
-		//MainScreen mainscr = new MainScreen();
-		//homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-		System.out.println("================================ NEW TESTACASE ====================================");
 	}
 
 	@Test(testName = "Test Case 10264:Test Valid VIN Check", description = "Test Valid VIN Check")
