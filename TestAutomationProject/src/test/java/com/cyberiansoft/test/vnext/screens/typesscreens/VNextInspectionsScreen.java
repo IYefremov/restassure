@@ -21,6 +21,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VNextInspectionsScreen extends VNextBaseTypeScreen {
@@ -82,20 +83,38 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public String getFirstInspectionNumber() {
-		return inspectionslist.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
+		return inspectionslist.findElement(By.xpath(".//*[@action='select']/*[@class='checkbox-item-title']")).getText();
 	}
 	
 	public String getInspectionNumberValue(WebElement inspcell) {
-		return inspcell.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
+		return inspcell.findElement(By.xpath(".//*[@action='select']/*[@class='checkbox-item-title']")).getText();
 	}
 	
 	public String getInspectionCustomerValue(String inspectionnumber) {
 		WebElement inspcell = getInspectionCell(inspectionnumber);
-		return inspcell.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title']")).getText();
+		return inspcell.findElement(By.xpath(".//*[@action='select' and @class='entity-item-title']")).getText();
 	}
 	
 	public String getInspectionCustomerValue(WebElement inspcell) {
-		return inspcell.findElement(By.xpath(".//div[@action='select' and @class='entity-item-title']")).getText();
+		return inspcell.findElement(By.xpath(".//*[@action='select' and @class='entity-item-title']")).getText();
+	}
+
+	public List<String> getAllInspectionsCustomers() {
+		List<String> inspsCustomers = new ArrayList<>();
+		List<WebElement> inspections = getInspectionsList();
+		for (WebElement inspcell : inspections) {
+			inspsCustomers.add(getInspectionCustomerValue(inspcell));
+		}
+		return  inspsCustomers;
+	}
+
+	public List<String> getAllInspectionsNumbers() {
+		List<String> inspsNumbers = new ArrayList<>();
+		List<WebElement> inspections = getInspectionsList();
+		for (WebElement inspcell : inspections) {
+			inspsNumbers.add(getInspectionNumberValue(inspcell));
+		}
+		return  inspsNumbers;
 	}
 	
 	public String getInspectionStatusValue(String inspectionnumber) {
@@ -173,8 +192,12 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 		return inspmenulist.clickNotesInspectionMenuItem();
 	}
 	
-	public List<WebElement> getInspectionsList() {
+	private List<WebElement> getInspectionsList() {
 		return inspectionslist.findElements(By.xpath("./div[@class='entity-item accordion-item']"));
+	}
+
+	public int getNumberOfInspectionsInList() {
+		return getInspectionsList().size();
 	}
 	
 	public int getNumberOfInspectionsOnTheScreen() {

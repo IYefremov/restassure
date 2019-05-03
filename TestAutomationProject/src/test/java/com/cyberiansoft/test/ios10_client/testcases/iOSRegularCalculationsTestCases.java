@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.time.LocalDateTime;
 
-public class iOSRegularCalculationsTestCases extends BaseTestCase {
+public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	private RegularHomeScreen homescreen;
 	
@@ -40,9 +40,9 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 	public void setUpSuite() {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
+		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "AutomationCalculations_Regular2",
-				"QC Environment");
+				envType);
 
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -283,7 +283,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			description = "WO: Regular - If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity")
 	public void testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -529,7 +529,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			description = "Verify that Fee Bundle services is calculated for additional matrix services")
 	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -746,7 +746,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			description = "Verify that amount is calculated and rounded correctly")
 	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -828,7 +828,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			description = "Verify that inspection is saved as declined when all services are skipped or declined")
 	public void testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2()  {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -916,7 +916,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
 	public void testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -997,7 +997,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			description = "Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount")
 	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -1928,7 +1928,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			description = "WO: Regular - Verify calculation with price matrix Labor type")
 	public void testWOVerifyCalculationWithPriceMatrixLaborType_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -2046,7 +2046,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 			description = "Invoices: Regular - Verify rounding money amount values")
 	public void testInvoicesVerifyRoundingMoneyAmountValues_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -3000,7 +3000,7 @@ public class iOSRegularCalculationsTestCases extends BaseTestCase {
 		Assert.assertFalse(servicerequestsscreen.isServiceRequestExists(srnumber));		
 		servicerequestsscreen.clickHomeButton();	
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);

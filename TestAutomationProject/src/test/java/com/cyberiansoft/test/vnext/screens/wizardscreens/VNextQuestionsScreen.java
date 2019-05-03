@@ -42,8 +42,9 @@ public class VNextQuestionsScreen extends VNextBaseWizardScreen {
     }
 
     public void setAllRequiredQuestions(String answerText) {
-        List<WebElement> selectQstns = questionslist.findElements(By.xpath(".//div[@class='question-answer-bar form-fieldset required-question']"));
+        List<WebElement> selectQstns = questionslist.findElements(By.xpath(".//*[@class='question-answer-bar form-fieldset required-question']"));
         for (WebElement selectQuestionCell : selectQstns) {
+            selectQuestionCell.findElement(By.xpath(".//*[@class='question-answer-bar-title']")).click();
             selectQuestionCell.findElement(By.xpath(".//textarea")).clear();
             selectQuestionCell.findElement(By.xpath(".//textarea")).sendKeys(answerText);
             //appiumdriver.hideKeyboard();
@@ -51,7 +52,9 @@ public class VNextQuestionsScreen extends VNextBaseWizardScreen {
     }
 
     public void clickDoneButton() {
-        tap(questionsscreen.findElement(By.xpath(".//span[@action='save']")));
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='save']")));
+        tap(questionsscreen.findElement(By.xpath(".//*[@action='save']")));
     }
 
     public VNextSelectedServicesScreen saveQuestions() {

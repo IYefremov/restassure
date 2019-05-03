@@ -2,7 +2,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.ios10_client.config.DentWizardIOSInfo;
+import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
@@ -34,9 +34,9 @@ public class DentWizardRegularVersionTestCases extends BaseTestCase {
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
 
-		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, DentWizardIOSInfo.getInstance().getBackOfficeURL(),
-				DentWizardIOSInfo.getInstance().getUserName(), DentWizardIOSInfo.getInstance().getUserPassword(), "DW_Automation3",
-				"QC Environment");
+		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,
+				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(),
+				"DW_Automation3", envType);
 
 		RegularMainScreen mainscr = new RegularMainScreen();
 		homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);

@@ -28,7 +28,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class IOSHDCalculationsTestCases extends BaseTestCase {
+public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 	private HomeScreen homescreen;
 	
@@ -38,9 +38,9 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
 
-		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, ReconProIOSStageInfo.getInstance().getBackOfficeStageURL(),
+		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Vit_Iph",
-				"QC Environment");
+				envType);
 		MainScreen mainscr = new MainScreen();
 		homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
@@ -314,7 +314,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	public void testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2()
 			 {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -553,7 +553,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 			 {
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -760,7 +760,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2()
 			 {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -844,7 +844,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 			description = "Verify that inspection is saved as declined when all services are skipped or declined")
 	public void testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -937,7 +937,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
 	public void testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2()  {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -1018,7 +1018,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2() {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -1917,7 +1917,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 			description = "WO: HD - Verify calculation with price matrix Labor type")
 	public void testWOVerifyCalculationWithPriceMatrixLaborType_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -2035,7 +2035,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 			description = "Invoices: HD - Verify rounding money amount values")
 	public void testInvoicesVerifyRoundingMoneyAmountValues_2() {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -2998,7 +2998,7 @@ public class IOSHDCalculationsTestCases extends BaseTestCase {
 		servicerequestsscreen.clickHomeButton();	
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(ReconProIOSStageInfo.getInstance().getBackOfficeStageURL());
+		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
