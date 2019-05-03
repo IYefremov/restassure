@@ -36,6 +36,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
     private String userPassword;
     private VNextBOLoginScreenWebPage loginPage;
     private VNexBOLeftMenuPanel leftMenu;
+    private VNextBOBreadCrumbPanel breadCrumbPanel;
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -54,6 +55,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
         leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
+        breadCrumbPanel = PageFactory.initElements(webdriver, VNextBOBreadCrumbPanel.class);
     }
 
     @AfterMethod
@@ -76,7 +78,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
+        breadCrumbPanel.setLocation(data.getLocation());
 
         Assert.assertTrue(repairOrdersPage.isSavedSearchContainerDisplayed(),
                 "The search container isn't displayed");
@@ -121,8 +123,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .clickTermsAndConditionsLink()
                 .scrollTermsAndConditionsDown()
                 .rejectTermsAndConditions()
@@ -135,8 +137,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .clickPrivacyPolicyLink()
                 .scrollPrivacyPolicyDown()
                 .rejectPrivacyPolicy()
@@ -149,8 +151,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .openIntercom()
                 .closeIntercom();
     }
@@ -160,19 +162,19 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getSearchLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSearched(data.getSearchLocation()),
+        breadCrumbPanel.setLocation(data.getSearchLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSearched(data.getSearchLocation()),
                 "The location is not searched");
         repairOrdersPage.clickLocationInDropDown(data.getSearchLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationExpanded(), "The location is not expanded");
+        Assert.assertTrue(breadCrumbPanel.isLocationExpanded(), "The location is not expanded");
         repairOrdersPage.clickSearchTextToCloseLocationDropDown();
-        Assert.assertTrue(repairOrdersPage.isLocationSelected(data.getSearchLocation()), "The location has been changed");
+        Assert.assertTrue(breadCrumbPanel.isLocationSelected(data.getSearchLocation()), "The location has been changed");
 
-        Assert.assertTrue(repairOrdersPage.isLocationSearched(data.getLocation()),
+        Assert.assertTrue(breadCrumbPanel.isLocationSearched(data.getLocation()),
                 "The location is not searched");
         repairOrdersPage.clickLocationInDropDown(data.getLocation());
 
-        Assert.assertTrue(repairOrdersPage.isLocationSelected(data.getLocation()), "The location hasn't been selected");
+        Assert.assertTrue(breadCrumbPanel.isLocationSelected(data.getLocation()), "The location hasn't been selected");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -180,10 +182,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        Assert.assertTrue(repairOrdersPage.isLocationSearched(data.getSearchLocation()),
+        Assert.assertTrue(breadCrumbPanel.isLocationSearched(data.getSearchLocation()),
                 "The location is not searched");
         repairOrdersPage.clickLocationInDropDown(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSelected(data.getLocation()), "The location hasn't been selected");
+        Assert.assertTrue(breadCrumbPanel.isLocationSelected(data.getLocation()), "The location hasn't been selected");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -191,7 +193,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
+        breadCrumbPanel.setLocation(data.getLocation());
         Assert.assertTrue(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
         repairOrdersPage.clickNextButton();
         Assert.assertFalse(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
@@ -204,9 +206,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage
-                .setLocation(data.getLocation())
-                .setDepartmentsTabActive();
+        breadCrumbPanel.setLocation(data.getLocation());
+        repairOrdersPage.setDepartmentsTabActive();
 
         Assert.assertTrue(repairOrdersPage.isDepartmentsTabDisplayed());
         Assert.assertEquals(repairOrdersPage.getAllDepartmentsSum(), repairOrdersPage.getDepartmentsValues(),
@@ -252,9 +253,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage
-                .setLocation(data.getLocation())
-                .setPhasesTabActive();
+        breadCrumbPanel.setLocation(data.getLocation());
+        repairOrdersPage.setPhasesTabActive();
 
         Assert.assertTrue(repairOrdersPage.isPhasesTabDisplayed());
         Assert.assertEquals(repairOrdersPage.getAllPhasesSum(), repairOrdersPage.getPhasesValues(),
@@ -301,8 +301,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -310,8 +310,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getVinNum())
@@ -325,8 +325,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         final String vinNum = data.getVinNum();
         repairOrdersPage
@@ -359,8 +359,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation(), true);
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation(), true);
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -377,8 +377,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage.searchRepairOrderByNumber(data.getOrderNumber());
         final VNextBOInvoicesDescriptionWindow invoicesDescription = repairOrdersPage
@@ -392,8 +392,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage.searchRepairOrderByNumber(data.getOrderNumber());
         repairOrdersPage.openOtherDropDownMenu(data.getOrderNumber());
@@ -405,8 +405,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -424,8 +424,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -439,8 +439,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -454,8 +454,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -472,8 +472,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -493,8 +493,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -514,8 +514,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -535,8 +535,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -558,8 +558,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -579,8 +579,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -600,8 +600,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -621,8 +621,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -649,8 +649,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -679,8 +679,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -707,8 +707,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -755,8 +755,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -803,8 +803,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -850,8 +850,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -897,8 +897,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -933,8 +933,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -969,8 +969,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -991,8 +991,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1013,8 +1013,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1035,8 +1035,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1057,8 +1057,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1079,8 +1079,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1101,8 +1101,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1123,8 +1123,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1182,8 +1182,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1258,8 +1258,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1289,8 +1289,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1327,8 +1327,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1358,8 +1358,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1396,8 +1396,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1427,8 +1427,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1458,8 +1458,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1498,8 +1498,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1542,8 +1542,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1587,8 +1587,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1632,8 +1632,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1677,8 +1677,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1716,8 +1716,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1761,8 +1761,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1809,8 +1809,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1847,8 +1847,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1885,8 +1885,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1919,8 +1919,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1957,8 +1957,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -1996,8 +1996,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -2030,8 +2030,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -2066,8 +2066,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -2110,8 +2110,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -2154,8 +2154,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -2210,8 +2210,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
@@ -2251,8 +2251,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
 
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())

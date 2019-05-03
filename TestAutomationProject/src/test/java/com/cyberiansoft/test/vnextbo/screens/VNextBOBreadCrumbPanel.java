@@ -11,7 +11,7 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class VNextBOLocationComponent extends VNextBOBaseWebPage {
+public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
     private WebElement locationExpanded;
@@ -25,10 +25,51 @@ public class VNextBOLocationComponent extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[contains(@class, 'location-name')]")
     private WebElement locationElement;
 
-    public VNextBOLocationComponent(WebDriver driver) {
+    @FindBy(className = "breadcrumbs")
+    private WebElement mainBreadCrumbsLink;
+
+    @FindBy(xpath = "//strong[contains(@data-bind, 'breadcrumb.last')]")
+    private WebElement lastBreadCrumb;
+
+    public VNextBOBreadCrumbPanel(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public boolean isMainBreadCrumbClickable() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isLastBreadCrumbDisplayed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(lastBreadCrumb));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public String getLastBreadCrumbText() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(lastBreadCrumb)).getText();
+        } catch (Exception ignored) {
+            return "";
+        }
+    }
+
+    public boolean isBreadCrumbClickable() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public VNextBOBaseWebPage setLocation(String location) {

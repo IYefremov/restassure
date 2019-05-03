@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -29,11 +30,12 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
     }
 
     private VNexBOLeftMenuPanel leftMenu;
-    private VNextBOLocationComponent locationComponent;
+    private VNextBOBreadCrumbPanel breadCrumbPanel;
     private VNextBODashboardPanel dashboardPanel;
     private VNextBOPartsManagementSearchPanel partsManagementSearch;
     private VNextBOPartsManagementROListPanel roListPanel;
     private VNextBOFooterPanel footerPanel;
+    private VNextBOPartsDetailsPanel partsDetailsPanel;
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -53,12 +55,13 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
         loginPage.userLogin(userName, userPassword);
 
         leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
-        locationComponent = PageFactory.initElements(webdriver, VNextBOLocationComponent.class);
+        breadCrumbPanel = PageFactory.initElements(webdriver, VNextBOBreadCrumbPanel.class);
         dashboardPanel = PageFactory.initElements(webdriver, VNextBODashboardPanel.class);
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
         roListPanel = PageFactory.initElements(webdriver, VNextBOPartsManagementROListPanel.class);
         footerPanel = PageFactory.initElements(webdriver, VNextBOFooterPanel.class);
+        partsDetailsPanel = PageFactory.initElements(webdriver, VNextBOPartsDetailsPanel.class);
     }
 
     @AfterMethod
@@ -77,11 +80,11 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
         leftMenu.selectPartsManagementMenu();
-        locationComponent.setLocation(data.getLocation());
+        breadCrumbPanel.setLocation(data.getLocation());
 
         Assert.assertTrue(dashboardPanel
-                .getDashboardItemsNames()
-                .containsAll(Arrays.asList(data.getDashboardItemsNames())),
+                        .getDashboardItemsNames()
+                        .containsAll(Arrays.asList(data.getDashboardItemsNames())),
                 "The dashboard items names haven't been displayed");
         Assert.assertTrue(partsManagementSearch.isPartsManagementSearchPanelDisplayed(),
                 "The Parts Management search panel hasn't been displayed");
@@ -95,5 +98,25 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
                 "The Parts Management Privacy Policy link hasn't been displayed");
         Assert.assertTrue(footerPanel.isIntercomDisplayed(),
                 "The Intercom link hasn't been displayed on the Parts Management page");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeePartsDetailsOfDifferentROs(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        final int roListSize = roListPanel.getROListSize();
+        final WebElement randomRO = roListPanel.getRandomRO();
+        final String breadCrumbRONumber = breadCrumbPanel.getLastBreadCrumbText();
+        roListPanel.clickRO(randomRO);
+
+        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
+                "The Parts Details table hasn't been displayed");
+
+        if (roListSize > 1) {
+            Assert.assertNotEquals(breadCrumbRONumber, breadCrumbPanel.getLastBreadCrumbText());
+        }
     }
 }

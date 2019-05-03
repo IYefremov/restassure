@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -251,87 +250,6 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return extracted.containsAll(titles) && Arrays.asList(strings).containsAll(repeaterTitles);
     }
 
-    public VNextBORepairOrdersWebPage setLocation(String location) {
-        if (isLocationExpanded()) {
-            selectLocation(location);
-        } else {
-            try {
-                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
-            } catch (Exception ignored) {
-                waitABit(2000);
-                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
-            }
-            selectLocation(location);
-        }
-        return this;
-    }
-
-    public VNextBORepairOrdersWebPage setLocation(String location, boolean isSetWithEnter) {
-        if (isSetWithEnter) {
-            System.out.println("isSetWithEnter");
-            isLocationSearched(location);
-            actions.sendKeys(Keys.ENTER);
-            setLocation(location);
-        } else {
-            setLocation(location);
-        }
-        return this;
-    }
-
-    public boolean isLocationSet(String location) {
-        try {
-            wait.until(ExpectedConditions.textToBePresentInElement(locationElement, location));
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
-
-    private void selectLocation(String location) {
-        wait.until(ExpectedConditions
-                .elementToBeClickable(locationExpanded.findElement(By.xpath(".//label[text()='" + location + "']"))))
-                .click();
-        waitForLoading();
-        Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
-        closeLocationDropDown();
-    }
-
-    public boolean isLocationExpanded() {
-        try {
-            return waitShort.until(ExpectedConditions.visibilityOf(locationExpanded)).isDisplayed();
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
-
-    public int clearAndTypeLocation(String searchLocation) {
-        wait.until(ExpectedConditions.elementToBeClickable(locationSearchInput)).click();
-        final int locationsNum = wait.until(ExpectedConditions.visibilityOfAllElements(locationLabels)).size();
-        clearAndType(locationSearchInput, searchLocation);
-        return locationsNum;
-    }
-
-    public boolean isLocationSearched(String searchLocation) {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(locationExpanded));
-        } catch (Exception e) {
-            wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
-        }
-        final int locationsNum = clearAndTypeLocation(searchLocation);
-        try {
-            waitShort.until((ExpectedCondition<Boolean>) driver -> locationLabels.size() != locationsNum);
-        } catch (Exception e) {
-            waitABit(2000);
-        }
-
-        return locationLabels
-                .stream()
-                .allMatch(label -> label
-                        .getText()
-                        .toLowerCase()
-                        .contains(searchLocation.toLowerCase()));
-    }
-
     public VNextBORepairOrdersWebPage clickLocationInDropDown(String location) {
         locationLabels.stream().filter(loc -> loc.getText().contains(location)).findFirst().ifPresent(WebElement::click);
         waitForLoading();
@@ -375,28 +293,6 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
             //todo bug - the edit icon is opened only after the second click
             wait.until(ExpectedConditions.elementToBeClickable(savedSearchEditIcon)).click();
             return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
-        }
-    }
-
-    public void closeLocationDropDown() {
-        try {
-            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
-        } catch (Exception e) {
-            locationElement.click();
-            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
-        }
-    }
-
-    public boolean isLocationSelected(String location) {
-        try {
-            wait
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions
-                            .presenceOfElementLocated(By
-                                    .xpath("//div[@class='add-notes-item menu-item active']//label[text()='" + location + "']")));
-            return true;
-        } catch (Exception ignored) {
-            return false;
         }
     }
 
@@ -873,15 +769,6 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
                         .findElement(By.xpath("//strong[text()='" + woNumber
                                 + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']"))))
                 .click();
-    }
-
-    public boolean isMainBreadCrumbClickable() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     public VNextBORepairOrderDetailsPage clickWoLink(String woNumber) {

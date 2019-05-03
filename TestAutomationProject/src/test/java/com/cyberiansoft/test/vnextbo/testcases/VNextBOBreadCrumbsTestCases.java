@@ -28,6 +28,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     }
 
     private VNexBOLeftMenuPanel leftMenu;
+    private VNextBOBreadCrumbPanel breadCrumbPanel;
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -45,7 +46,9 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
 
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
+
         leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
+        breadCrumbPanel = PageFactory.initElements(webdriver, VNextBOBreadCrumbPanel.class);
     }
 
     @AfterMethod
@@ -67,10 +70,10 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanSeeBreadCrumb(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
-        Assert.assertTrue(repairOrdersPage.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
+        leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
+        Assert.assertTrue(breadCrumbPanel.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -78,9 +81,9 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
-        Assert.assertTrue(repairOrdersPage.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
+        Assert.assertTrue(breadCrumbPanel.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
@@ -91,12 +94,12 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-        Assert.assertTrue(detailsPage.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        Assert.assertTrue(detailsPage.isLocationSet(data.getLocation()),
+        Assert.assertTrue(breadCrumbPanel.isBreadCrumbClickable(), "The breadCrumb is not clickable");
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()),
                 "The location hasn't been displayed on the RO details page");
-        Assert.assertTrue(detailsPage.isLastBreadCrumbDisplayed(),
+        Assert.assertTrue(breadCrumbPanel.isLastBreadCrumbDisplayed(),
                 "The RO# hasn't been displayed on the RO details page");
-        Assert.assertEquals(detailsPage.getLastBreadCrumbText(), data.getOrderNumber(),
+        Assert.assertEquals(breadCrumbPanel.getLastBreadCrumbText(), data.getOrderNumber(),
                 "The RO details page breadCrumb with RO# hasn't been displayed");
     }
 
@@ -105,9 +108,9 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
-        Assert.assertTrue(repairOrdersPage.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
+        Assert.assertTrue(breadCrumbPanel.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
@@ -118,16 +121,16 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-        Assert.assertTrue(detailsPage.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        Assert.assertTrue(detailsPage.isLocationSet(data.getLocation()),
+        Assert.assertTrue(breadCrumbPanel.isBreadCrumbClickable(), "The breadCrumb is not clickable");
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()),
                 "The location hasn't been displayed on the RO details page");
-        Assert.assertTrue(detailsPage.isLastBreadCrumbDisplayed(),
+        Assert.assertTrue(breadCrumbPanel.isLastBreadCrumbDisplayed(),
                 "The RO# hasn't been displayed on the RO details page");
-        Assert.assertEquals(detailsPage.getLastBreadCrumbText(), data.getOrderNumber(),
+        Assert.assertEquals(breadCrumbPanel.getLastBreadCrumbText(), data.getOrderNumber(),
                 "The RO details page breadCrumb with RO# hasn't been displayed");
 
-        detailsPage.setLocation(data.getLocationChanged());
-        Assert.assertTrue(detailsPage.isLocationSet(data.getLocationChanged()),
+        breadCrumbPanel.setLocation(data.getLocationChanged());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocationChanged()),
                 "The location hasn't been changed on the Order Details page");
     }
 
@@ -136,9 +139,9 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage.setLocation(data.getLocation());
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
-        Assert.assertTrue(repairOrdersPage.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
+        Assert.assertTrue(breadCrumbPanel.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
         repairOrdersPage
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
@@ -149,17 +152,17 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-        Assert.assertTrue(detailsPage.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        Assert.assertTrue(detailsPage.isLocationSet(data.getLocation()),
+        Assert.assertTrue(breadCrumbPanel.isBreadCrumbClickable(), "The breadCrumb is not clickable");
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()),
                 "The location hasn't been displayed on the RO details page");
-        Assert.assertTrue(detailsPage.isLastBreadCrumbDisplayed(),
+        Assert.assertTrue(breadCrumbPanel.isLastBreadCrumbDisplayed(),
                 "The RO# hasn't been displayed on the RO details page");
-        Assert.assertEquals(detailsPage.getLastBreadCrumbText(), data.getOrderNumber(),
+        Assert.assertEquals(breadCrumbPanel.getLastBreadCrumbText(), data.getOrderNumber(),
                 "The RO details page breadCrumb with RO# hasn't been displayed");
 
         detailsPage.waitForLoading();
         detailsPage.clickRepairOrdersBackwardsLink();
-        Assert.assertTrue(repairOrdersPage.isLocationSet(data.getLocation()), "The location hasn't been set");
-        Assert.assertTrue(repairOrdersPage.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
+        Assert.assertTrue(breadCrumbPanel.isMainBreadCrumbClickable(), "The breadCrumb is not clickable");
     }
 }

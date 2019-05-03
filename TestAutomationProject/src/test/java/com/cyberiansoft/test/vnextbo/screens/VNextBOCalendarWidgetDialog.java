@@ -42,10 +42,10 @@ public class VNextBOCalendarWidgetDialog extends VNextBOBaseWebPage {
 
     public VNextBORepairOrdersAdvancedSearchDialog selectFromDate(String date, VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog) {
         if (isCalendarOpened(fromDateCalendarWidget)) {
-            WebElement toDate = driver.findElements(By.xpath("//a[@data-value='" + date + "']")).get(0);
-            wait.until(ExpectedConditions.elementToBeClickable(toDate)).click();
+            WebElement fromDate = driver.findElements(By.xpath("//a[@data-value='" + date + "']")).get(0);
+            wait.until(ExpectedConditions.elementToBeClickable(fromDate)).click();
             try {
-                waitShort.until(ExpectedConditions.attributeContains(toDate, "aria-selected", "true"));
+                waitShort.until(ExpectedConditions.attributeContains(fromDate, "aria-selected", "true"));
             } catch (Exception ignored) {}
         } else {
             System.out.println("In else From Date");

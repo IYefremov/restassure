@@ -10,5 +10,13 @@
         "Completed"
       ]
     }
+  ],
+
+  "verifyUserCanSeePartsDetailsOfDifferentROs": [
+    {
+      "rowID": "verifyUserCanSeePartsDetailsOfDifferentROs.01",
+      "description": "Test Case 83856:User can see Part's details of different RO's",
+      "location": "Best Location"
+    }
   ]
 }

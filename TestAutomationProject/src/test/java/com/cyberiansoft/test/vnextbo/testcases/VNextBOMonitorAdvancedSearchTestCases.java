@@ -34,6 +34,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     }
 
     private VNexBOLeftMenuPanel leftMenu;
+    private VNextBOBreadCrumbPanel breadCrumbPanel;
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -51,7 +52,9 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
+
         leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
+        breadCrumbPanel = PageFactory.initElements(webdriver, VNextBOBreadCrumbPanel.class);
     }
 
     @AfterMethod
@@ -70,9 +73,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -87,9 +89,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -114,9 +115,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -137,9 +137,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -160,9 +159,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -183,9 +181,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -206,9 +203,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -229,9 +225,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -252,9 +247,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -275,9 +269,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -296,9 +289,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -322,9 +314,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -346,9 +337,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -372,9 +362,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -398,9 +387,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -424,9 +412,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -450,9 +437,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -476,9 +462,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -502,9 +487,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -523,9 +507,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -544,9 +527,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -565,9 +547,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -586,9 +567,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -608,9 +588,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -629,9 +608,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -650,9 +628,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -671,9 +648,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -692,9 +668,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -713,9 +688,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -738,9 +712,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 .initElements(webdriver, VNextBOCalendarWidgetDialog.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -761,7 +734,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         System.out.println("beforeFormatted: " + beforeFormatted);
         System.out.println("nowFormatted: " + nowFormatted);
 
-        advancedSearchDialog.setTimeFrame(data.getTimeFrame())
+        advancedSearchDialog
+                .setTimeFrame(data.getTimeFrame())
                 .clickFromDateButton()
                 .selectFromDate(beforeMinusMonth, advancedSearchDialog)
                 .clickToDateButton()
@@ -777,9 +751,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -803,9 +776,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -826,9 +798,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -846,9 +817,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -866,9 +836,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -886,9 +855,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -906,9 +874,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -926,9 +893,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -946,9 +912,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -966,9 +931,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -986,9 +950,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -1006,9 +969,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -1026,9 +988,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -1057,9 +1018,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -1079,9 +1039,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocations()[0])
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocations()[0]);
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -1095,9 +1054,9 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
 
+        breadCrumbPanel.setLocation(data.getLocations()[1]);
+        breadCrumbPanel.setLocation(data.getLocations()[0]);
         repairOrdersPage
-                .setLocation(data.getLocations()[1])
-                .setLocation(data.getLocations()[0])
                 .setSavedSearchOption(searchName)
                 .clickEditIconForSavedSearch()
                 .setFlag(data.getFlags()[1])
@@ -1116,9 +1075,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -1136,9 +1094,10 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         //todo https://cyb.tpondemand.com/RestUI/Board.aspx#page=board/4692469321793274828&appConfig=eyJhY2lkIjoiMTA1MTA5MDU0OEY2QTUyQjlFM0JCODkwRjYwQUVGMEIifQ==&boardPopup=Bug/80090/silent
         repairOrdersPage.refreshPage();
 
-        leftMenu
-                .selectRepairOrdersMenu()
-                .setLocation(data.getLocation())
+        leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        repairOrdersPage
                 .setSavedSearchOption(searchName)
                 .clickAdvancedSearchCaret()
                 .setFlag(data.getFlag())
@@ -1151,9 +1110,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -1169,9 +1127,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -1213,9 +1170,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage
-                .setLocation(data.getLocation())
-                .clickAdvancedSearchCaret();
+        breadCrumbPanel.setLocation(data.getLocation());
+        final VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog = repairOrdersPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");

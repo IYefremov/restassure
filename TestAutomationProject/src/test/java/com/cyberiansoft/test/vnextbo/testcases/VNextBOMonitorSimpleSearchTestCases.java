@@ -6,10 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBORepairOrdersWebPage;
+import com.cyberiansoft.test.vnextbo.screens.*;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -30,6 +27,7 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
     }
 
     private VNexBOLeftMenuPanel leftMenu;
+    private VNextBOBreadCrumbPanel breadCrumbPanel;
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -47,7 +45,9 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
 
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
+
         leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
+        breadCrumbPanel = PageFactory.initElements(webdriver, VNextBOBreadCrumbPanel.class);
     }
 
     @AfterMethod
@@ -66,8 +66,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .setRepairOrdersSearchText(data.getVinNum())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVinNum()),
@@ -86,8 +86,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .setRepairOrdersSearchText(data.getOrderNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
@@ -106,8 +106,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .setRepairOrdersSearchText(data.getRoNumber())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByRoNumber(data.getRoNumber()),
@@ -126,8 +126,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .setRepairOrdersSearchText(data.getFirstName())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByFirstName(data.getFirstName()),
@@ -146,8 +146,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .setRepairOrdersSearchText(data.getLastName())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByLastName(data.getLastName()),
@@ -167,8 +167,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .setRepairOrdersSearchText(data.getEmail())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage
@@ -190,8 +190,8 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
         repairOrdersPage
-                .setLocation(data.getLocation())
                 .setRepairOrdersSearchText(data.getCompany())
                 .clickSearchIcon();
         Assert.assertTrue(repairOrdersPage

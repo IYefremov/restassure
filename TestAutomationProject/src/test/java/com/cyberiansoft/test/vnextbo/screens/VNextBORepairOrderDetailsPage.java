@@ -298,23 +298,6 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
     }
 
-	public boolean isLastBreadCrumbDisplayed() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(lastBreadCrumb));
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
-
-	public String getLastBreadCrumbText() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(lastBreadCrumb)).getText();
-        } catch (Exception ignored) {
-            return "";
-        }
-    }
-
 	public VNextBORepairOrderDetailsPage typeStockNumber(String stockNumber) {
         clearAndTypeOrderNumber(stockNumInputField, stockNumber);
         return this;
@@ -800,59 +783,6 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         }
     }
 
-    public boolean isLocationExpanded() {
-        try {
-            return waitShort.until(ExpectedConditions.visibilityOf(locationExpanded)).isDisplayed();
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
-
-    private void selectLocation(String location) {
-        wait.until(ExpectedConditions
-                .elementToBeClickable(locationExpanded.findElement(By.xpath(".//label[text()='" + location + "']"))))
-                .click();
-        waitForLoading();
-        Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
-        closeLocationDropDown();
-    }
-
-    public void closeLocationDropDown() {
-        try {
-            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
-        } catch (Exception e) {
-            locationElement.click();
-            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
-        }
-    }
-
-    public boolean isLocationSelected(String location) {
-        try {
-            wait
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.presenceOfElementLocated(By
-                            .xpath("//div[@class='add-notes-item menu-item active']//label[text()='" + location + "']")));
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
-
-    public VNextBORepairOrdersWebPage setLocation(String location) {
-        if (isLocationExpanded()) {
-            selectLocation(location);
-        } else {
-            try {
-                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
-            } catch (Exception ignored) {
-                waitABit(2000);
-                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
-            }
-            selectLocation(location);
-        }
-        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
-    }
-
     public boolean updateTotalServicePrice(String totalPrice) {
         try {
             wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
@@ -869,24 +799,6 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
                 return false;
             }
             return true;
-        }
-    }
-
-    public boolean isBreadCrumbClickable() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean isLocationSet(String location) {
-        try {
-            wait.until(ExpectedConditions.textToBePresentInElement(locationElement, location));
-            return true;
-        } catch (Exception ignored) {
-            return false;
         }
     }
 }
