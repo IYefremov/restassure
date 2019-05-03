@@ -1,0 +1,14 @@
+{
+  "verifyUserCanOpenOperationsPartsManagementWithFullSetOfElements": [
+    {
+      "rowID": "verifyUserCanOpenOperationsPartsManagementWithFullSetOfElements.01",
+      "description": "Test Case 83749:Verify user can open \"Operations → Parts Management\" with full set of elements",
+      "location": "Best Location",
+      "dashboardItemsNames": [
+        "Past Due Parts",
+        "In Progress",
+        "Completed"
+      ]
+    }
+  ]
+}

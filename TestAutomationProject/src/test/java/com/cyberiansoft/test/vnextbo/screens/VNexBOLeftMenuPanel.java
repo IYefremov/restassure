@@ -28,25 +28,28 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     private WebElement body;
 
     @FindBy(xpath = "//*[@data-automation-id='inspections']")
-    private WebElement inspectionsmenu;
+    private WebElement inspectionsMenu;
 
     @FindBy(xpath = "//*[@data-automation-id='invoices']")
-    private WebElement invoicesmenu;
+    private WebElement invoicesMenu;
+
+    @FindBy(xpath = "//li[@data-automation-id='parts']")
+    private WebElement partsManagementMenu;
 
     @FindBy(xpath = "//*[@data-automation-id='services']")
-    private WebElement servicesmenu;
+    private WebElement servicesMenu;
 
     @FindBy(xpath = "//*[@data-automation-id='quick-notes']")
     private WebElement quickNotesMenu;
 
     @FindBy(xpath = "//*[@data-automation-id='company-info']")
-    private WebElement companyinfomenu;
+    private WebElement companyInfoMenu;
 
     @FindBy(xpath = "//*[@data-automation-id='users']")
-    private WebElement usersmenu;
+    private WebElement usersMenu;
 
     @FindBy(xpath = "//li[@data-automation-id='orders']")
-    private WebElement repairordersmenu;
+    private WebElement repairOrdersMenu;
 
     @FindBy(xpath = "//iframe[@id='embed']/following-sibling::div[5]//iframe")
     private WebElement tutorialFrame;
@@ -65,39 +68,39 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOInspectionsWebPage selectInspectionsMenu() {
-        selectMenuItem(inspectionsmenu, OPERATIONS_MAINMENU_ITEM);
+        selectMenuItem(inspectionsMenu, OPERATIONS_MAINMENU_ITEM);
         return PageFactory.initElements(
                 driver, VNextBOInspectionsWebPage.class);
     }
 
     public VNextBOInvoicesWebPage selectInvoicesMenu() {
-        selectMenuItem(invoicesmenu, OPERATIONS_MAINMENU_ITEM);
+        selectMenuItem(invoicesMenu, OPERATIONS_MAINMENU_ITEM);
         waitABit(4000);
         return PageFactory.initElements(
                 driver, VNextBOInvoicesWebPage.class);
     }
 
+    public VNextBOPartsManagementWebPage selectPartsManagementMenu() {
+        selectMenuItem(partsManagementMenu, OPERATIONS_MAINMENU_ITEM);
+        waitABit(4000);
+        return PageFactory.initElements(
+                driver, VNextBOPartsManagementWebPage.class);
+    }
+
     public VNexBOUsersWebPage selectUsersMenu() {
-        selectMenuItem(usersmenu, SETTINGS_MAINMENU_ITEM);
+        selectMenuItem(usersMenu, SETTINGS_MAINMENU_ITEM);
         return PageFactory.initElements(
                 driver, VNexBOUsersWebPage.class);
     }
 
     public VNextBORepairOrdersWebPage selectRepairOrdersMenu() {
-        selectMenuItem(repairordersmenu, MONITOR_MAINMENU_ITEM);
+        selectMenuItem(repairOrdersMenu, MONITOR_MAINMENU_ITEM);
         return PageFactory.initElements(
                 driver, VNextBORepairOrdersWebPage.class);
     }
 
-    public boolean isUsersMenuItemExists() {
-        if (!isMainMenuExpanded()) {
-            expandMainMenu();
-        }
-        return driver.findElement(By.xpath("//*[@data-automation-id='users']")).isDisplayed();
-    }
-
     public VNextBOServicesWebPage selectServicesMenu() {
-        selectMenuItem(servicesmenu, SETTINGS_MAINMENU_ITEM);
+        selectMenuItem(servicesMenu, SETTINGS_MAINMENU_ITEM);
         waitForLoading();
         return PageFactory.initElements(
                 driver, VNextBOServicesWebPage.class);
@@ -108,6 +111,13 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         waitForLoading();
         return PageFactory.initElements(
                 driver, VNextBOQuickNotesWebPage.class);
+    }
+
+    public boolean isUsersMenuItemExists() {
+        if (!isMainMenuExpanded()) {
+            expandMainMenu();
+        }
+        return driver.findElement(By.xpath("//*[@data-automation-id='users']")).isDisplayed();
     }
 
     public boolean isMainMenuExpanded() {
