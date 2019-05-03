@@ -309,7 +309,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workordersscreen.switchToMyWorkordersView();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR2);
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
@@ -349,7 +349,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR_AUTO);
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
@@ -540,7 +540,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 		
 		final String notetext = "Test";
-		final String quicknote = "No damage found";
+		final String quicknote = "Warranty expired";
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		String wonumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
@@ -588,7 +588,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
 		workordersscreen.clickCreateInvoiceFromWorkOrder(wonumber);
 		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR2);
 		
 		VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
 		invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());

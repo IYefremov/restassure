@@ -81,7 +81,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
         workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(appiumdriver);
-        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR2);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(appiumdriver);
         invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());

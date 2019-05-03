@@ -259,14 +259,14 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		int inspnumbers = inspectionsscreen.getInspectionsList().size();
+		int inspnumbers = inspectionsscreen.getNumberOfInspectionsInList();
 		
 		for (int i = 0; i < INSP_TO_ARCHIVE; i++) {
 			String inspnumber = inspectionsscreen.getFirstInspectionNumber();
 			inspectionsscreen = inspectionsscreen.archiveInspection(inspnumber);
 			Assert.assertFalse(inspectionsscreen.isInspectionExists(inspnumber));
 		}
-		Assert.assertEquals(inspectionsscreen.getInspectionsList().size(),inspnumbers - INSP_TO_ARCHIVE);
+		Assert.assertEquals(inspectionsscreen.getNumberOfInspectionsInList(),inspnumbers - INSP_TO_ARCHIVE);
 		
 		inspectionsscreen.clickBackButton();
 		

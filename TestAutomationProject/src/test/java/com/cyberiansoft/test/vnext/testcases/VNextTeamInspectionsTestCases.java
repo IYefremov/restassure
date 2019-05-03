@@ -31,7 +31,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -209,16 +208,16 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
 		inspectionscreen.searchInpectionByFreeText(testwholesailcustomer.getFullName());
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
-		List<WebElement> inspections = inspectionscreen.getInspectionsList();
-		for (WebElement inspcell : inspections) {
-			Assert.assertTrue(inspectionscreen.getInspectionCustomerValue(inspcell).contains(testwholesailcustomer.getFullName()));
+		List<String> inspsCustomers =  inspectionscreen.getAllInspectionsCustomers();
+		for (String inspCustomers : inspsCustomers) {
+			Assert.assertTrue(inspCustomers.contains(testwholesailcustomer.getFullName()));
 		}
 		final String inspSubNumber = inspnumber.substring(6, inspnumber.length());
 		inspectionscreen.searchInpectionByFreeText(inspSubNumber);
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
-		inspections = inspectionscreen.getInspectionsList();
-		for (WebElement inspcell : inspections) {
-			Assert.assertTrue(inspectionscreen.getInspectionNumberValue(inspcell).contains(inspSubNumber));
+		List<String> inspsNumbers =  inspectionscreen.getAllInspectionsNumbers();
+		for (String inspNumbers : inspsNumbers) {
+			Assert.assertTrue(inspNumbers.contains(inspSubNumber));
 		}
 
 		Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
