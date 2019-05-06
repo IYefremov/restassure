@@ -388,9 +388,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 				List<ServiceData> additionalServices = matrixPartData.getMatrixAdditionalServices();
 				vehiclepartinfoscreen.selectVehiclePartAdditionalServices(additionalServices);
 			}
-			vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-			//vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
-		}
+			vehiclepartinfoscreen.clickSaveVehiclePartInfo(); }
 		VNextVehiclePartsScreen vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
 
 		availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();

@@ -69,6 +69,7 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     }
 
     public VNextInvoicesScreen payInvoice() {
+        BaseUtils.waitABit(1000);
         tap(paybtn);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogOKButtonAndGetMessage();
