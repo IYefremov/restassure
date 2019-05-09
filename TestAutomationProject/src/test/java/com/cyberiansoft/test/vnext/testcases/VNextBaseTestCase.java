@@ -164,14 +164,6 @@ public class VNextBaseTestCase {
 		String phonecountrycode = "1";
 		String phonenumber = "14122264998";
 
-		deviceuser = VNextFreeRegistrationInfo.getInstance().getR360UserUserName();
-		devicepsw = VNextFreeRegistrationInfo.getInstance().getR360UserPassword();
-
-		if (envType.equals(EnvironmentType.DEVELOPMENT))
-			deviceofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeStagingURL();
-		else if (envType.equals(EnvironmentType.INTEGRATION))
-			deviceofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeIntegrationURL();
-
 		if (buildproduction) {
 			phonecountrycode = VNextUserRegistrationInfo.getInstance().getProductionDeviceRegistrationUserPhoneCountryCode();
 			/*initiateWebDriver();
@@ -223,14 +215,6 @@ public class VNextBaseTestCase {
 	}
 
 	public void registerTeamEdition(String licensename) {
-
-
-		if (envType.equals(EnvironmentType.DEVELOPMENT))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
-		else if (envType.equals(EnvironmentType.INTEGRATION))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
-		else if (envType.equals(EnvironmentType.QC1))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
 
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();

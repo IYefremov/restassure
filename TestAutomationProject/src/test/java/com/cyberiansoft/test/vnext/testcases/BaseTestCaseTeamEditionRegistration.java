@@ -5,6 +5,8 @@ import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
+import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
+import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.ITestContext;
@@ -26,6 +28,12 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
 	@Parameters("device.lecense")
 	public void beforeTest(ITestContext context, String deviceLicense) throws Exception {
 		setUp();
+		if (envType.equals(EnvironmentType.DEVELOPMENT))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
+		else if (envType.equals(EnvironmentType.INTEGRATION))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
+		else if (envType.equals(EnvironmentType.QC1))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
 		employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/team-device-employee.json"), Employee.class);
 
 		if (VNextEnvironmentInfo.getInstance().installNewBuild()) {
