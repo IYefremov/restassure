@@ -13,10 +13,7 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
-import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
-import com.cyberiansoft.test.vnext.config.VNextToolsInfo;
-import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
+import com.cyberiansoft.test.vnext.config.*;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -80,14 +77,8 @@ public class VNextBaseTestCase {
 	@Parameters("appium.path")
 	public void startServer(String appiumPath)  {
 
-		envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
-		if (envType.equals(EnvironmentType.DEVELOPMENT))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
-		else if (envType.equals(EnvironmentType.INTEGRATION))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
-		else if (envType.equals(EnvironmentType.QC1))
-			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
-		
+		envType = EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType());
+
 		browsertype = BaseUtils.getBrowserType(VNextToolsInfo.getInstance().getDefaultBrowser());
 		mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
 
@@ -116,7 +107,7 @@ public class VNextBaseTestCase {
 		else {
 			AppiumInicializator.getInstance().initAppium(MobilePlatform.ANDROID, service.get().getUrl());
 			//DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
-			if (VNextConfigInfo.getInstance().installNewBuild()) {
+			if (VNextEnvironmentInfo.getInstance().installNewBuild()) {
 				DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.ReconProClient");
 				//DriverBuilder.getInstance().getAppiumDriver().removeApp("com.automobiletechnologies.repair360");
 				DriverBuilder.getInstance().getAppiumDriver().quit();
@@ -128,9 +119,7 @@ public class VNextBaseTestCase {
 			appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		}
 
-		deviceuser = VNextConfigInfo.getInstance().getUserCapiUserName();
-		devicepsw = VNextConfigInfo.getInstance().getUserCapiUserPassword();
-		if (VNextConfigInfo.getInstance().getBuildProductionAttribute().equals("true"))
+		if (VNextEnvironmentInfo.getInstance().getBuildProductionAttribute().equals("true"))
 			buildproduction = true;
 		else
 			buildproduction = false;
@@ -139,7 +128,7 @@ public class VNextBaseTestCase {
 	public Employee getDeviceEmployee() {
 		return employee;
 	}
-	
+
 	public void setUp() {
 		AppiumUtils.setNetworkOn();
 	}
@@ -171,13 +160,18 @@ public class VNextBaseTestCase {
 		return regcode;
 	}
 
-	
 	public void registerDevice() throws Exception {
 		String phonecountrycode = "1";
 		String phonenumber = "14122264998";
 
-        EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextConfigInfo.getInstance().getEnvironmentType());
-		deviceofficeurl = VNextConfigInfo.getInstance().getBackOfficeCapiURL();
+		deviceuser = VNextFreeRegistrationInfo.getInstance().getR360UserUserName();
+		devicepsw = VNextFreeRegistrationInfo.getInstance().getR360UserPassword();
+
+		if (envType.equals(EnvironmentType.DEVELOPMENT))
+			deviceofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeStagingURL();
+		else if (envType.equals(EnvironmentType.INTEGRATION))
+			deviceofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeIntegrationURL();
+
 		if (buildproduction) {
 			phonecountrycode = VNextUserRegistrationInfo.getInstance().getProductionDeviceRegistrationUserPhoneCountryCode();
 			/*initiateWebDriver();
@@ -231,7 +225,12 @@ public class VNextBaseTestCase {
 	public void registerTeamEdition(String licensename) {
 
 
-
+		if (envType.equals(EnvironmentType.DEVELOPMENT))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
+		else if (envType.equals(EnvironmentType.INTEGRATION))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
+		else if (envType.equals(EnvironmentType.QC1))
+			deviceofficeurl = VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
 
 		DriverBuilder.getInstance().setDriver(browsertype);
 		webdriver = DriverBuilder.getInstance().getDriver();

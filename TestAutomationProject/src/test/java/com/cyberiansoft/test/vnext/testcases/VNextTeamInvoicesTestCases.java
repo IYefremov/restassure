@@ -17,7 +17,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -835,11 +835,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
 		emailscren.clickToEmailAddressRemoveButton();
-		emailscren.sentToCCEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());		
+		emailscren.sentToCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
 		String msg= emailscren.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 		
-		emailscren.sentToBCCEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());		
+		emailscren.sentToBCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
 		msg= emailscren.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 		emailscren.clickScreenBackButton();
@@ -882,7 +882,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
 		emailscren.clickToEmailAddressRemoveButton();
-		final String wrongMail = VNextConfigInfo.getInstance().getUserCapiMail().substring(0, VNextConfigInfo.getInstance().getUserCapiMail().indexOf(mailsymbol));
+		final String wrongMail = VNextFreeRegistrationInfo.getInstance().getR360UserMail().
+				substring(0, VNextFreeRegistrationInfo.getInstance().getR360UserMail().indexOf(mailsymbol));
 		emailscren.sentToEmailAddress(wrongMail);		
 		String msg= emailscren.sendEmail();
 		Assert.assertEquals(msg, String.format(VNextAlertMessages.THE_EMAIL_ADDRESS_IS_NOT_VALID, wrongMail));
@@ -1013,11 +1014,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
 		emailscren.clickToEmailAddressRemoveButton();
-		emailscren.sentToCCEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());		
+		emailscren.sentToCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
 		String msg= emailscren.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 		
-		emailscren.sentToBCCEmailAddress(VNextConfigInfo.getInstance().getUserCapiMail());		
+		emailscren.sentToBCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
 		msg= emailscren.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 		emailscren.clickScreenBackButton();
@@ -1062,7 +1063,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesscreen.clickOnSelectedInvoicesMailButton();
 		VNextEmailScreen emailscren = new VNextEmailScreen(appiumdriver);
 		emailscren.clickToEmailAddressRemoveButton();
-		final String wrongMail = VNextConfigInfo.getInstance().getUserCapiMail().substring(0, VNextConfigInfo.getInstance().getUserCapiMail().indexOf(mailsymbol));
+		final String wrongMail = VNextFreeRegistrationInfo.getInstance().getR360UserMail().
+				substring(0, VNextFreeRegistrationInfo.getInstance().getR360UserMail().indexOf(mailsymbol));
 		emailscren.sentToEmailAddress(wrongMail);		
 		String msg= emailscren.sendEmail();
 		Assert.assertEquals(msg, String.format(VNextAlertMessages.THE_EMAIL_ADDRESS_IS_NOT_VALID, wrongMail));

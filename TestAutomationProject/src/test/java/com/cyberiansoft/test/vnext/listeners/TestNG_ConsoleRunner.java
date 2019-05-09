@@ -1,10 +1,9 @@
 package com.cyberiansoft.test.vnext.listeners;
 
+import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
-
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -265,7 +264,7 @@ public class TestNG_ConsoleRunner extends TestListenerAdapter {
     public void writeTestngLog(String logFile,String line) {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date date = new Date();
-        File directory = new File(VNextConfigInfo.getInstance().getReportFolderPath());
+        File directory = new File(VNextEnvironmentInfo.getInstance().getReportFolderPath());
         File file = new File(logFile);
 
         try {

@@ -220,7 +220,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	}
 	
 	public boolean isInspectionExists(String inspnumber) {
-		if (!elementExists("//*[@data-autotests-id='inspections-list']"))
+		if (!inspectionslist.isDisplayed())
 			return false;
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.visibilityOf(inspectionslist));

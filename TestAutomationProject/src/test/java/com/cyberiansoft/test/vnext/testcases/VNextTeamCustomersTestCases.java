@@ -11,7 +11,7 @@ import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
@@ -63,7 +63,8 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceofficeurl);
         BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(webdriver);
-        loginpage.UserLogin(VNextConfigInfo.getInstance().getUserVnextDevUserName(), VNextConfigInfo.getInstance().getUserVnextDevUserPassword());
+        loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
+                VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
         BackOfficeHeaderPanel backofficeheader = new BackOfficeHeaderPanel(webdriver);
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
         ClientsWebPage clientspage = companypage.clickClientsLink();
@@ -153,7 +154,8 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceofficeurl);
         BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(webdriver);
-        loginpage.UserLogin(VNextConfigInfo.getInstance().getUserVnextDevUserName(), VNextConfigInfo.getInstance().getUserVnextDevUserPassword());
+        loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
+                VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
         BackOfficeHeaderPanel backofficeheader = new BackOfficeHeaderPanel(webdriver);
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
         ClientsWebPage clientspage = companypage.clickClientsLink();

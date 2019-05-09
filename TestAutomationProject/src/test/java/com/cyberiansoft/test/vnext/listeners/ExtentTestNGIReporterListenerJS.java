@@ -7,7 +7,7 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.extentreportproviders.ExtentTestManager;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
@@ -29,8 +29,8 @@ public class ExtentTestNGIReporterListenerJS extends TestListenerAdapter impleme
 
     @Override
     public synchronized void onStart(ITestContext context) {
-        ExtentManager.createInstance(VNextConfigInfo.getInstance().getReportFolderPath() +
-                VNextConfigInfo.getInstance().getReportFileName());
+        ExtentManager.createInstance(VNextEnvironmentInfo.getInstance().getReportFolderPath() +
+                VNextEnvironmentInfo.getInstance().getReportFileName());
 
 
         File allureResults = new File("./allure-results");
@@ -108,7 +108,7 @@ public class ExtentTestNGIReporterListenerJS extends TestListenerAdapter impleme
         try {
             AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
             AppiumUtils.attachAllureScreenshot();
-            extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot(VNextConfigInfo.getInstance().getReportFolderPath(), "fail")).build());
+            extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot(VNextEnvironmentInfo.getInstance().getReportFolderPath(), "fail")).build());
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
