@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class VNextTeamVehicleInfoTestCases extends BaseTestCaseTeamEditionRegistration {
 
     @BeforeClass(description="Team Vehicle Info Test Cases")
-    public void beforeClass() throws Exception {
+    public void beforeClass() {
     }
 
     @Test(testName= "Test Case 72794:R360 client - Verify letters I,O,Q are trimmed while manual entry, "

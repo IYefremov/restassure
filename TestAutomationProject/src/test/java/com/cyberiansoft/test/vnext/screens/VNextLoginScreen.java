@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,8 +62,10 @@ public class VNextLoginScreen extends VNextBaseScreen {
 	
 	public VNextHomeScreen userLogin(String username, String userpsw) {
 		selectEmployee(username);
-		setUserLoginPassword(userpsw);
-		tapLoginButton();
+		if (!StringUtils.isEmpty(userpsw)) {
+			setUserLoginPassword(userpsw);
+			tapLoginButton();
+		}
 		return new VNextHomeScreen(appiumdriver);
 	}
 	
