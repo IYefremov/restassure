@@ -9,7 +9,7 @@ import com.cyberiansoft.test.email.emaildata.EmailFolder;
 import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
@@ -189,13 +189,13 @@ public class VNextInvoicesTestCases  extends BaseTestCaseWithDeviceRegistrationA
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
 		Assert.assertEquals(invoicesscreen.getInvoicePriceValue(invoicenumbertc48094), PricesCalculations.getPriceRepresentation(insppriceexp));
 		VNextEmailScreen emailscreen = invoicesscreen.clickOnInvoiceToEmail(invoicenumbertc48094);
-		if (!emailscreen.getToEmailFieldValue().equals(VNextConfigInfo.getInstance().getOutlookMail()))
-			emailscreen.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+		if (!emailscreen.getToEmailFieldValue().equals(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail()))
+			emailscreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
 		
 		emailscreen.sendEmail();
 		final String inspectionreportfilenname = invoicenumbertc48094 + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
 
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(invoicenumbertc48094, inspectionreportfilenname)

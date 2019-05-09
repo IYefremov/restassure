@@ -7,10 +7,10 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
+import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.MainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 import com.cyberiansoft.test.ios10_client.utils.TestUser;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 import com.cyberiansoft.test.vnext.listeners.TestNG_ConsoleRunner;
 import org.testng.*;
 
@@ -29,8 +29,8 @@ public class iOSHDClientListener extends TestListenerAdapter implements IInvoked
 	
     @Override
 	public synchronized void onStart(ITestContext context) {
-    	ExtentManager.createInstance("report/" +
-    			VNextConfigInfo.getInstance().getReportFileName());
+    	ExtentManager.createInstance(ReconProIOSStageInfo.getInstance().getReportFolder() +
+				ReconProIOSStageInfo.getInstance().getReportFileName());
     	//ExtentTest parent = extent.createTest(getClass().getName());
         //parentTest.set(parent);
 	}

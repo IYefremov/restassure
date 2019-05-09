@@ -4,6 +4,8 @@ package com.cyberiansoft.test.vnext.testcases;
 import com.cyberiansoft.test.baseutils.StringUtils;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
+import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextCustomersMenuScreen;
@@ -21,16 +23,20 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
 
 
 public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/customers-testcases-data.json";
-
+	private static String settingsbofficeurl;
 
 	@BeforeClass(description="Team Customers Test Cases")
 	public void beforeClass() {
+
+		if (envType.equals(EnvironmentType.DEVELOPMENT))
+			settingsbofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeSettingsStagingURL();
+		else if (envType.equals(EnvironmentType.INTEGRATION))
+			settingsbofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeSettingsIntegrationURL();
 		JSONDataProvider.dataFile = DATA_FILE;
 	}
 	
@@ -68,10 +74,11 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		BaseUtils.waitABit(45000);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeVnextDevURL());
+		webdriver.get(settingsbofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(VNextConfigInfo.getInstance().getUserVnextDevUserName(), VNextConfigInfo.getInstance().getUserVnextDevUserPassword());
+		loginpage.UserLogin(VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserName(),
+				VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -162,10 +169,11 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 			customerDelete = firstName;
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeVnextDevURL());
+		webdriver.get(settingsbofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(VNextConfigInfo.getInstance().getUserVnextDevUserName(), VNextConfigInfo.getInstance().getUserVnextDevUserPassword());
+		loginpage.UserLogin(VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserName(),
+				VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();

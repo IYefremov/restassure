@@ -52,6 +52,7 @@ public class ReconProIOSStageInfo {
     }
 
 
+
     public String getUserStageMail() {
         return props.getProperty("userstage.mail");
     }
@@ -62,6 +63,14 @@ public class ReconProIOSStageInfo {
 
     public String getUserStageUserPassword() {
         return props.getProperty("userstage.password");
+    }
+
+    public String getReportFileName() {
+        return props.getProperty("report.filename");
+    }
+
+    public String getReportFolder() {
+        return props.getProperty("report.folder");
     }
 
     public String getDefaultBrowser() {

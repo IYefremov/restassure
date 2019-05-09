@@ -10,7 +10,7 @@ import com.cyberiansoft.test.email.EmailUtils;
 import com.cyberiansoft.test.email.emaildata.EmailFolder;
 import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -109,7 +109,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(userMail));
 
 		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userMail,
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.INBOX);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubject("ReconPro vNext Dev: REGISTRATION")
 				.unreadOnlyMessages(true).maxMessagesToSearch(5);
@@ -187,7 +187,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		leftmenu.selectUsersMenu();
 
 		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userMail,
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+		VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.INBOX);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubject("ReconPro vNext Dev: PASSWORD RESET")
 				.unreadOnlyMessages(true).maxMessagesToSearch(5);
@@ -222,7 +222,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 		loginpage = forgotpswpage.sendConfirmationMail(userMail);
 
 		EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userMail,
-				VNextConfigInfo.getInstance().getUserCapiUserPassword(), EmailFolder.INBOX);
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.INBOX);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubject("ReconPro vNext Dev: PASSWORD RESET")
 				.unreadOnlyMessages(true).maxMessagesToSearch(5);

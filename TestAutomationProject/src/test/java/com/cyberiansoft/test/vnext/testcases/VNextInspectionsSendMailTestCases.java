@@ -6,7 +6,7 @@ import com.cyberiansoft.test.email.EmailUtils;
 import com.cyberiansoft.test.email.emaildata.EmailFolder;
 import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -61,14 +61,14 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+		emailscreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
 
 		final String inspectionreportfilenname = inspnumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
 		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
@@ -126,14 +126,14 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(VNextConfigInfo.getInstance().getOutlookMail());
+		emailscreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
 		emailscreen.sendEmail();
 		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
 		inspectionscreen.clickBackButton();
 
 		final String inspectionreportfilenname = inspnumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
 		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
@@ -201,8 +201,8 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen.clickBackButton();
 
 		final String inspectionreportfilenname = inspnumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
 		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
@@ -262,8 +262,8 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionscreen.clickBackButton();
 
 		final String inspectionreportfilenname = inspnumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextConfigInfo.getInstance().getOutlookMail(),
-				VNextConfigInfo.getInstance().getUserCapiMailPassword(), EmailFolder.JUNK);
+		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
 				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
 		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);

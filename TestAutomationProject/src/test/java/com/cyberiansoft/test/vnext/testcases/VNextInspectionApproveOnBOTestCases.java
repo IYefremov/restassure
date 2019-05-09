@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
-import com.cyberiansoft.test.vnext.config.VNextConfigInfo;
+import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
@@ -112,12 +112,12 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		createInspectionWithPopulatedVehicleInfoForCurrentDay();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
+		webdriver.get(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.waitABit(1000*20);
-		loginpage.userLogin(VNextConfigInfo.getInstance().getUserCapiUserName(), 
-				VNextConfigInfo.getInstance().getUserCapiUserPassword());
+		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
@@ -145,12 +145,12 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		createInspectionWithPopulatedVehicleInfoForCurrentDay();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
+		webdriver.get(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.waitABit(1000*15);
-		loginpage.userLogin(VNextConfigInfo.getInstance().getUserCapiUserName(), 
-				VNextConfigInfo.getInstance().getUserCapiUserPassword());
+		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
@@ -237,12 +237,12 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		inspectionsscreen.clickBackButton();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(VNextConfigInfo.getInstance().getBackOfficeCapiURL());
+		webdriver.get(deviceofficeurl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.waitABit(1000*15);
-		loginpage.userLogin(VNextConfigInfo.getInstance().getUserCapiUserName(), 
-				VNextConfigInfo.getInstance().getUserCapiUserPassword());
+		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+				VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
