@@ -1,1 +1,8 @@
-{"employeeName":"QA QA","employeePassword":""}
+{
+  "employeeFirstName":"QA",
+  "employeeLastName":"QA",
+  "employeePassword":"",
+  "employeeEmail":"test.cyberiansoft@banit.me",
+  "phoneCountryCode":"380",
+  "phoneNumber":"972205440"
+}

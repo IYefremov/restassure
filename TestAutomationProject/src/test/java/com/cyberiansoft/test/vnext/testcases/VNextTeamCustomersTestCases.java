@@ -41,6 +41,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
 
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+        customersscreen.switchToRetailMode();
         VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
         newcustomerscreen.createNewCustomer(testcustomer);
         customersscreen = new VNextCustomersScreen(appiumdriver);
@@ -87,6 +88,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         AppiumUtils.setNetworkOff();
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+        customersscreen.switchToRetailMode();
         VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
         newcustomerscreen.createNewCustomer(testcustomer);
         AppiumUtils.setAndroidNetworkOn();
@@ -120,6 +122,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
 
         VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
+        customersscreen.switchToRetailMode();
         VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
         newcustomerscreen.createNewCustomer(testcustomer);
         customersscreen = new VNextCustomersScreen(appiumdriver);

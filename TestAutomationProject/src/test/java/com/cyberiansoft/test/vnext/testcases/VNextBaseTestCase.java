@@ -14,10 +14,10 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextToolsInfo;
-import com.cyberiansoft.test.vnext.config.VNextUserRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -102,17 +102,6 @@ public class VNextBaseTestCase {
     }
 
     public void registerDevice() throws Exception {
-        String phoneCountryCode;
-        String phoneNumber;
-        String userRegMail = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserMail();
-        EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType());
-        if (buildproduction) {
-            phoneCountryCode = VNextUserRegistrationInfo.getInstance().getProductionDeviceRegistrationUserPhoneCountryCode();
-            phoneNumber = phoneCountryCode;
-        } else {
-            phoneCountryCode = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneCountryCode();
-            phoneNumber = VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserPhoneNumber();
-        }
 
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
         VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);
@@ -126,25 +115,19 @@ public class VNextBaseTestCase {
 
         VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(appiumdriver);
 
-        regscreen.setUserRegistrationInfoAndSend(VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserFirstName(),
-                VNextUserRegistrationInfo.getInstance().getDeviceRegistrationUserLastName(),
-                phoneCountryCode, phoneNumber, userRegMail);
+        regscreen.setUserRegistrationInfoAndSend(employee.getEmployeeFirstName(), employee.getEmployeeLastName(),
+                employee.getEmployeePhoneCountryCode(), employee.getEmployeePhoneNumber(), employee.getEmployeeEmail());
         BaseUtils.waitABit(15000);
         VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
         if (buildproduction)
-            verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(phoneNumber));
+            verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getProdRegCode(employee.getEmployeePhoneNumber()));
         else
-            verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(userRegMail).replaceAll("\"", ""));
+            verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getDevicePhoneVerificationCode(employee.getEmployeeEmail()).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
 
-        //VNextRegistrationScreensModalDialog registrationinformationdlg = new VNextRegistrationScreensModalDialog(DriverBuilder.getInstance().getAppiumDriver());
-        //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
         BaseUtils.waitABit(25 * 1000);
         if (DriverBuilder.getInstance().getMobilePlatform().equals(MobilePlatform.ANDROID)) {
-            AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-            DriverBuilder.getInstance().getAppiumDriver().closeApp();
-            DriverBuilder.getInstance().getAppiumDriver().launchApp();
-            AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+            VNextAppUtils.restartApp();
         }
 
         WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 340);
