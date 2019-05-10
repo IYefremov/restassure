@@ -53,18 +53,6 @@ public class VNextTeamRegistrationInfo {
         return props.getProperty("userstage.password");
     }
 
-    public String getDeviceEmployeeName() {
-        return props.getProperty("employee.name");
-    }
-
-    public String getDeviceEmployeePassword() {
-        return props.getProperty("employee.password");
-    }
-
-    public String getDeviceDefaultLicenseName() {
-        return props.getProperty("defaultlicense.name");
-    }
-
     public String getDeviceEmployeeSearchLicenseName() {
         return props.getProperty("employeesearchlicense.name");
     }

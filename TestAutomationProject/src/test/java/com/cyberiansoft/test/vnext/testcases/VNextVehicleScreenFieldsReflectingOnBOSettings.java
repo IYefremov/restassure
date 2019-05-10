@@ -48,7 +48,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -67,7 +67,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		loginscreen = homescreen.clickLogoutButton();
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -103,7 +103,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -123,7 +123,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		loginscreen = homescreen.clickLogoutButton();
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -159,7 +159,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -179,7 +179,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		loginscreen = homescreen.clickLogoutButton();
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -215,7 +215,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -234,7 +234,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		loginscreen = homescreen.clickLogoutButton();
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -270,7 +270,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -289,7 +289,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		loginscreen = homescreen.clickLogoutButton();
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -325,7 +325,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -344,7 +344,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		loginscreen = homescreen.clickLogoutButton();
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -380,7 +380,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -399,7 +399,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		loginscreen = homescreen.clickLogoutButton();
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -435,7 +435,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -454,7 +454,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		loginscreen = homescreen.clickLogoutButton();
 		loginscreen.updateMainDB();
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
@@ -493,7 +493,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		
-		homescreen = loginscreen.userLogin(testEmployee, testEmployeePsw);
+		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
