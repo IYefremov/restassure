@@ -27,7 +27,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		//webdriver.navigate().refresh();
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeReconProURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
+		loginpage.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
 				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 	}
 

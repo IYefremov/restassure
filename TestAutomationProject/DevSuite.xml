@@ -1,0 +1,16 @@
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+    <parameter name="selenium.host" value="localhost"/>
+    <parameter name="selenium.port" value="3737"/>
+    <parameter name="selenium.browser" value="chrome"/>
+    <parameter name="device.platform" value="android"/>
+    <parameter name="device.lecense" value="OKramar_android2"/>
+    <parameter name="appium.path" value="c:\Users\admin\AppData\Roaming\npm\node_modules\appium\build\lib\main.js"/>
+<!--    <listeners>-->
+<!--        <listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListenerJS"/>-->
+<!--    </listeners>-->
+    <test name="Tests for VNext client" preserve-order="true">
+        <classes>
+            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersList"/>
+        </classes>
+    </test>
+</suite>

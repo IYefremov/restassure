@@ -318,7 +318,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -557,7 +557,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -764,7 +764,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -848,7 +848,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -941,7 +941,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -1022,7 +1022,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -1921,7 +1921,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -2039,7 +2039,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -3002,7 +3002,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+		loginpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);

@@ -46,7 +46,7 @@ public class BaseTestCase {
 //        webdriver = DriverBuilder.getInstance().getDriver();
 //        WebDriverUtils.webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
 //        BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-//        loginpage.UserLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
+//        loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 //    }
 
     public void setBrowser() {

@@ -20,8 +20,6 @@ public class VNextDownloadDataScreen extends VNextBaseScreen {
 	public VNextDownloadDataScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(downloaddatapage));
 	}
 	
 	public void waitUntilDatabasesDownloaded() {

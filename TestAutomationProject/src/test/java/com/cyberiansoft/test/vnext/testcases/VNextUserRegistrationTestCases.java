@@ -8,6 +8,8 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
+import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
+import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
@@ -46,8 +48,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	
 	@BeforeClass(description = "Setting up new suite")
 	public void settingUp() {
-		setUp();
-		AppiumUtils.setNetworkOn();		
+		AppiumUtils.setAndroidNetworkOn();
 	}
 	
 	@AfterClass(description = "Setting up new suite")
@@ -59,11 +60,11 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 	@BeforeMethod(description = "Setting up new suite")
 	public void resetApk() throws IOException, UnirestException {
 
-		NadaEMailService nada = new NadaEMailService();
+		EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType());
+        NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userregmail);
         nada.deleteAllMessages();
 		VNextAppUtils.resetApp();
-		setUp();
 		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 
 		VNextEditionsScreen editionsScreen = new VNextEditionsScreen(appiumdriver);

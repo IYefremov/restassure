@@ -1830,11 +1830,11 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 //        ConfirmPasswordWebPage confirmpasswordpage = PageFactory.initElements(webdriver, ConfirmPasswordWebPage.class);
 //
 //        BackOfficeLoginWebPage loginpage = confirmpasswordpage.confirmUserPassword(confirmpsw);
-//        loginpage.UserLogin(userName, userPassword);
+//        loginpage.userLogin(userName, userPassword);
 //        backOfficeHeader.clickHomeLink();
 //
 //        backOfficeHeader.clickLogout();
-//        loginpage.UserLogin(userName, userPassword);
+//        loginpage.userLogin(userName, userPassword);
 //        companypage = backOfficeHeader.clickCompanyLink();
 //        serviceadvisorspage = companypage.clickServiceAdvisorsLink();
 //        serviceadvisorspage.makeSearchPanelVisible();

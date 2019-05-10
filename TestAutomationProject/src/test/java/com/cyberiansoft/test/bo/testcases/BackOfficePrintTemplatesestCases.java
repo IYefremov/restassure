@@ -35,7 +35,7 @@
 //		WebDriverUtils.goToWebPage(backofficeurl);
 //		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 //				BackOfficeLoginWebPage.class);
-//		loginpage.UserLogin(userName, userPassword);
+//		loginpage.userLogin(userName, userPassword);
 //		Thread.sleep(2000);
 //	}
 //
@@ -44,7 +44,7 @@
 ////        System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());
 ////        WebDriverUtils.goToWebPage(BOConfigInfo.getInstance().getBackOfficeCapiURL());
 ////        BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-////        loginPage.UserLogin(BOConfigInfo.getInstance().getUserCapiName(),
+////        loginPage.userLogin(BOConfigInfo.getInstance().getUserCapiName(),
 ////                BOConfigInfo.getInstance().getUserCapiPassword());
 ////    }
 ////
@@ -801,7 +801,7 @@
 //		backOfficeHeader.clickLogout();
 //		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 //				BackOfficeLoginWebPage.class);
-//		loginpage.UserLogin(userName, userPassword);
+//		loginpage.userLogin(userName, userPassword);
 //		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
 //		ActiveDevicesWebPage activedevicespage = companypage.clickManageDevicesLink();
 //		activedevicespage.setSearchCriteriaByName(licensename);

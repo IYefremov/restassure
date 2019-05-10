@@ -6,8 +6,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	
@@ -29,8 +27,6 @@ public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	public VNextTeamEditionVerificationScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(verifyBtn));
 	}
 	
 	public void setDeviceRegistrationCode(String regCode) {

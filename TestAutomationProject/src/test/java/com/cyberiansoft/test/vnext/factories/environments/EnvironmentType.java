@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.factories.environments;
 
+import java.util.stream.Stream;
+
 public enum EnvironmentType {
     INTEGRATION("Integration"),
     DEVELOPMENT("Development"),
@@ -15,14 +17,10 @@ public enum EnvironmentType {
         return environmentType;
     }
 
-    public static EnvironmentType getEnvironmentType(String environmentType){
-        for(EnvironmentType type : values()){
-            if(type.getEnvironmentTypeName().toLowerCase().equals(environmentType.toLowerCase())){
-                return type;
-            }
-        }
-
-        throw new IllegalArgumentException(environmentType + " is not a valid Environment Type");
+    public static EnvironmentType getEnvironmentType(String environmentType) {
+        return Stream.of(values())
+                .filter(value -> value.getEnvironmentTypeName().equals(environmentType))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(environmentType + " is not a valid Environment Type"));
     }
-
 }

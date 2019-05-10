@@ -126,11 +126,11 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 			extentTest.get().log(Status.INFO, "STACKTRACE" + getStrackTrace(result));
 		}
 		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		VNextAppUtils.restartApp();
 
 		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
-		Employee employee = ((VNextBaseTestCase) result.getInstance()).getDeviceEmployee();
+		Employee employee = VNextBaseTestCase.getEmployee();
 		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 		new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 	}

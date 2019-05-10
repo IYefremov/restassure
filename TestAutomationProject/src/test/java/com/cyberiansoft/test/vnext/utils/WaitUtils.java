@@ -13,6 +13,24 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class WaitUtils {
+    public static void executeUntilSuccess(CodeBlockForFluentWait codeBlock) {
+        new FluentWait<>(DriverBuilder.getInstance().getAppiumDriver())
+                .ignoring(AssertionError.class)
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .ignoring(IndexOutOfBoundsException.class)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofMillis(300))
+                .until(driver -> {
+                    codeBlock.execute();
+                    return true;
+                });
+    }
+
+    @FunctionalInterface
+    public interface CodeBlockForFluentWait {
+        void execute();
+    }
 
     public static WebElement waitUntilElementIsClickable(final By locator) {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
@@ -27,8 +45,10 @@ public class WaitUtils {
             }
         });
 
-        return  element;
-    };
+        return element;
+    }
+
+    ;
 
     public static WebElement waitUntilElementIsClickable(final By locator, AppiumDriver<MobileElement> appiumdriver) {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(appiumdriver)
@@ -39,8 +59,10 @@ public class WaitUtils {
 
         WebElement element = wait.until(driver -> driver.findElement(locator));
 
-        return  element;
-    };
+        return element;
+    }
+
+    ;
 
     public static WebElement waitUntilElementIsClickable(final WebElement webElement) {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
@@ -50,8 +72,10 @@ public class WaitUtils {
 
         WebElement element = wait.until(driver -> webElement);
 
-        return  element;
-    };
+        return element;
+    }
+
+    ;
 
     public static WebElement waitUntilElementIsPresent(final WebElement webElement) {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
@@ -65,8 +89,10 @@ public class WaitUtils {
             }
         });
 
-        return  element;
-    };
+        return element;
+    }
+
+    ;
 
     public static void click(final By locator) {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
@@ -81,7 +107,9 @@ public class WaitUtils {
                 return true;
             }
         });
-    };
+    }
+
+    ;
 
     public static void click(final WebElement webElement) {
         org.openqa.selenium.support.ui.Wait<WebDriver> wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
@@ -95,7 +123,9 @@ public class WaitUtils {
                 return true;
             }
         });
-    };
+    }
+
+    ;
 
     public static void waitUntilElementInvisible(final By locator) {
         DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);

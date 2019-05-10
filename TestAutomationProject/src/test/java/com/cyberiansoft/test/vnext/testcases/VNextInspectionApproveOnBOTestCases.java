@@ -112,7 +112,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		createInspectionWithPopulatedVehicleInfoForCurrentDay();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.waitABit(1000*20);
@@ -145,7 +145,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		createInspectionWithPopulatedVehicleInfoForCurrentDay();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.waitABit(1000*15);
@@ -237,7 +237,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		inspectionsscreen.clickBackButton();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.waitABit(1000*15);

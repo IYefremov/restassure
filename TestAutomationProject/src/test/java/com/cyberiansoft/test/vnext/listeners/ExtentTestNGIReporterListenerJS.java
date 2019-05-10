@@ -117,7 +117,7 @@ public class ExtentTestNGIReporterListenerJS extends TestListenerAdapter impleme
             extentTest.get().log(Status.INFO, "STACKTRACE" + getStrackTrace(result));
         }
         extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
-        AppiumUtils.setNetworkOn();
+        AppiumUtils.setAndroidNetworkOn();
         VNextAppUtils.restartApp();
         new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
     }

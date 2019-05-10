@@ -77,7 +77,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		webdriver.get(settingsbofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserName(),
+		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserName(),
 				VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -104,7 +104,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 		newcustomerscreen.createNewCustomer(testcustomer);
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		customersscreen = new VNextCustomersScreen(appiumdriver);
 		customersscreen.clickBackButton();
 		homescreen = new VNextHomeScreen(appiumdriver);
@@ -172,7 +172,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		webdriver.get(settingsbofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserName(),
+		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserName(),
 				VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);

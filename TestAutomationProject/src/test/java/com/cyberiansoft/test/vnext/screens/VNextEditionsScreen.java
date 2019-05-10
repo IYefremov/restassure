@@ -3,26 +3,24 @@ package com.cyberiansoft.test.vnext.screens;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Getter
 public class VNextEditionsScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//*[@data-page='editions-list']")
+    @FindBy(xpath = "//*[@data-page='editions-list']")
     private WebElement editionslistscreeen;
 
-    @FindBy(xpath="//*[@data-autotests-id='editions-list']")
+    @FindBy(xpath = "//*[@data-autotests-id='editions-list']")
     private WebElement editionslist;
 
     public VNextEditionsScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        wait.until(ExpectedConditions.visibilityOf(editionslistscreeen));
     }
 
     public VNextEnvironmentSelectionScreen selectEdition(String editionName) {

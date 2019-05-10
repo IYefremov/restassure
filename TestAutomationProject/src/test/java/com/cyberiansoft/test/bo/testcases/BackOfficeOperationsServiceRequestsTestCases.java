@@ -400,7 +400,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		backOfficeHeader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
+        loginpage.userLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
 		HomeWebPage homepage = backOfficeHeader.clickHomeLink();
 		ServiceRequestsListWebPage servicerequestslistpage = homepage.clickNewServiceRequestLink();
 		servicerequestslistpage.makeSearchPanelVisible();
@@ -429,7 +429,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
         backOfficeHeader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
+		loginpage.userLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
 		backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		HomeWebPage homepage = backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);
@@ -446,7 +446,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		backOfficeHeader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
+		loginpage.userLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
 		backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
 		servicerequestslistpage = operationspage.clickNewServiceRequestList();
@@ -460,7 +460,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		backOfficeHeader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
 
-        loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
+        loginpage.userLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
         backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		homepage = backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);
@@ -486,7 +486,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
         backOfficeHeader.clickLogout();
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginpage.UserLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
+        loginpage.userLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
 		backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		HomeWebPage homepage = backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);

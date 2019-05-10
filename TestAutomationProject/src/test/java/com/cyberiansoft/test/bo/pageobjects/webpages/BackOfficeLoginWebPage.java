@@ -11,31 +11,30 @@ import org.openqa.selenium.support.PageFactory;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.clearAndType;
 
 public class BackOfficeLoginWebPage extends BaseWebPage {
+    @FindBy(id = "UserName")
+    private TextField usernamefld;
 
-	@FindBy(id = "UserName")
-	private TextField usernamefld;
+    @FindBy(id = "Password")
+    private TextField userpasswordfld;
 
-	@FindBy(id = "Password")
-	private TextField userpasswordfld;
-	
-	@FindBy(id = "ctl00_Content_Login1_LoginButton")
-	private WebElement loginbtn;
+    @FindBy(id = "ctl00_Content_Login1_LoginButton")
+    private WebElement loginbtn;
 
-	public BackOfficeLoginWebPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-	}
+    public BackOfficeLoginWebPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+    }
 
-	public void UserLogin(String userName, String userPassword) {
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		driver.navigate().refresh();
-		executor.executeScript("window.focus();");
-		clearAndType(usernamefld, userName);
-		clearAndType(userpasswordfld, userPassword);
-		executor.executeScript("arguments[0].click();", loginbtn);
-	}
-	
-	public WebElement getLoginButton() {
-		return loginbtn;
-	}
+    public void userLogin(String userName, String userPassword) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        driver.navigate().refresh();
+        executor.executeScript("window.focus();");
+        clearAndType(usernamefld, userName);
+        clearAndType(userpasswordfld, userPassword);
+        executor.executeScript("arguments[0].click();", loginbtn);
+    }
+
+    public WebElement getLoginButton() {
+        return loginbtn;
+    }
 }

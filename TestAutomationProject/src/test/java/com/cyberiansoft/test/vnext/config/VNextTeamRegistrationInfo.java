@@ -1,28 +1,30 @@
 package com.cyberiansoft.test.vnext.config;
 
+import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class VNextTeamRegistrationInfo {
-	
-	private static VNextTeamRegistrationInfo _instance = null;
+
+    private static VNextTeamRegistrationInfo _instance = null;
 
     private Properties props = null;
 
     private VNextTeamRegistrationInfo() {
-    	props = new Properties();
-    	File file =
+        props = new Properties();
+        File file =
                 new File("src/test/java/com/cyberiansoft/test/vnext/config/vnextteamreginfo.properties");
         try {
-        	FileInputStream fileInput = new FileInputStream(file);
-			props.load(fileInput);
-			fileInput.close();
-		} catch (IOException e) {
-			System.out.println("Can't load VNext environment properties");
-			e.printStackTrace();
-		}       
+            FileInputStream fileInput = new FileInputStream(file);
+            props.load(fileInput);
+            fileInput.close();
+        } catch (IOException e) {
+            System.out.println("Can't load VNext environment properties");
+            e.printStackTrace();
+        }
     }
 
     public synchronized static VNextTeamRegistrationInfo getInstance() {
@@ -31,40 +33,52 @@ public class VNextTeamRegistrationInfo {
         return _instance;
     }
 
-	public String getBackOfficeStagingURL() {
-		return props.getProperty("backoffice.development");
-	}
+    public String getBackOfficeStagingURL() {
+        return props.getProperty("backoffice.development");
+    }
 
-	public String getBackOfficeIntegrationURL() {
-		return props.getProperty("backoffice.integration");
-	}
+    public String getBackOfficeIntegrationURL() {
+        return props.getProperty("backoffice.integration");
+    }
 
-	public String getBackOfficeQC1URL() {
-	      return props.getProperty("backoffice.qc1");
-	}
-	
-	public String getBackOfficeStagingUserName() {
-	      return props.getProperty("userstage.name");
-	}
-	
-	public String getBackOfficeStagingUserPassword() {
-	      return props.getProperty("userstage.password");
-	}
-	
-	public String getDeviceEmployeeName() {
-	      return props.getProperty("employee.name");
-	}
-	
-	public String getDeviceEmployeePassword() {
-	      return props.getProperty("employee.password");
-	}
-	
-	public String getDeviceDefaultLicenseName() {
-	      return props.getProperty("defaultlicense.name");
-	}
-	
-	public String getDeviceEmployeeSearchLicenseName() {
-	      return props.getProperty("employeesearchlicense.name");
-	}
+    public String getBackOfficeQC1URL() {
+        return props.getProperty("backoffice.qc1");
+    }
 
+    public String getBackOfficeStagingUserName() {
+        return props.getProperty("userstage.name");
+    }
+
+    public String getBackOfficeStagingUserPassword() {
+        return props.getProperty("userstage.password");
+    }
+
+    public String getDeviceEmployeeName() {
+        return props.getProperty("employee.name");
+    }
+
+    public String getDeviceEmployeePassword() {
+        return props.getProperty("employee.password");
+    }
+
+    public String getDeviceDefaultLicenseName() {
+        return props.getProperty("defaultlicense.name");
+    }
+
+    public String getDeviceEmployeeSearchLicenseName() {
+        return props.getProperty("employeesearchlicense.name");
+    }
+
+    public String getBackOfficeUrlFromEnvType(EnvironmentType environmentType) {
+        switch (environmentType) {
+            case DEVELOPMENT:
+                return VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
+            case INTEGRATION:
+                return VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
+            case QC1:
+                return VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
+            default:
+                throw new RuntimeException("Cannot resolve url for env type:" + environmentType.getEnvironmentTypeName());
+        }
+    }
 }

@@ -52,7 +52,7 @@ public class DeviceRegistrator {
 
         BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
                 BackOfficeLoginWebPage.class);
-        loginpage.UserLogin(userName, userPassword);
+        loginpage.userLogin(userName, userPassword);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
                 BackOfficeHeaderPanel.class);
         CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();

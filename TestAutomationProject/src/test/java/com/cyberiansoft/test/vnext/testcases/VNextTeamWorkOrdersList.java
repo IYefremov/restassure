@@ -168,7 +168,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         vehicleinfoscreen.cancelWorkOrder();
         workordersscreen.clickBackButton();
         Assert.assertEquals(Integer.valueOf(homescreen.getQueueMessageValue()).intValue(), 1);
-        AppiumUtils.setNetworkOn();
+        AppiumUtils.setAndroidNetworkOn();
         homescreen.waitUntilQueueMessageInvisible();
     }
 
@@ -214,7 +214,7 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         vehicleinfoscreen.cancelWorkOrder();
         workordersscreen.clickBackButton();
         Assert.assertEquals(Integer.valueOf(homescreen.getQueueMessageValue()).intValue(), 1);
-        AppiumUtils.setNetworkOn();
+        AppiumUtils.setAndroidNetworkOn();
         homescreen.waitUntilQueueMessageInvisible();
 
         VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();

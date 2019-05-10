@@ -1,5 +1,7 @@
 *.classpath
 *.project
+*.iml
+workspace.xml
 /.settings/
 /report/
 /Reports/
@@ -9,3 +11,7 @@
 /out/
 /reprortR360/
 /allure-results/
+/.idea/
+/TestAutomationProject/.idea/*
+/TestAutomationProject/.idea/workspace.xml
+/TestAutomationProject/data/Repair360AndroidTeam.apk

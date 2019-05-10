@@ -75,7 +75,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
 		BackOfficeLoginWebPage oldloginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		oldloginpage.UserLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(),
+		oldloginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(),
                 VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);

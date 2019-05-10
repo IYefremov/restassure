@@ -61,9 +61,9 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         BaseUtils.waitABit(45000);
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-        webdriver.get(deviceofficeurl);
+        webdriver.get(deviceOfficeUrl);
         BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(webdriver);
-        loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
+        loginpage.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
                 VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
         BackOfficeHeaderPanel backofficeheader = new BackOfficeHeaderPanel(webdriver);
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -89,7 +89,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
         newcustomerscreen.createNewCustomer(testcustomer);
-        AppiumUtils.setNetworkOn();
+        AppiumUtils.setAndroidNetworkOn();
         customersscreen = new VNextCustomersScreen(appiumdriver);
         customersscreen.clickBackButton();
         homescreen = new VNextHomeScreen(appiumdriver);
@@ -152,9 +152,9 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
             customerDelete = firstName;
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-        webdriver.get(deviceofficeurl);
+        webdriver.get(deviceOfficeUrl);
         BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(webdriver);
-        loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
+        loginpage.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
                 VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
         BackOfficeHeaderPanel backofficeheader = new BackOfficeHeaderPanel(webdriver);
         CompanyWebPage companypage = backofficeheader.clickCompanyLink();

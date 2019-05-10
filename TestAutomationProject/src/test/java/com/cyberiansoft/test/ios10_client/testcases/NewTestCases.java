@@ -53,7 +53,7 @@ public class NewTestCases extends BaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.userLogin(userName, userPassword);
 
 		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
 				ActiveDevicesWebPage.class);
@@ -241,7 +241,7 @@ public class NewTestCases extends BaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.userLogin(userName, userPassword);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -281,7 +281,7 @@ public class NewTestCases extends BaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.userLogin(userName, userPassword);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);		
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
@@ -336,7 +336,7 @@ public class NewTestCases extends BaseTestCase {
 
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(userName, userPassword);
+		loginpage.userLogin(userName, userPassword);
 
 		ActiveDevicesWebPage devicespage = PageFactory.initElements(webdriver,
 				ActiveDevicesWebPage.class);

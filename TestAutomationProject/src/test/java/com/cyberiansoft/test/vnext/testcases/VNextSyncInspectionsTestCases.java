@@ -76,7 +76,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		for (int i = 0; i < 4; i++)
 			inspectionsscreen.createSimpleInspection();
 		homescreen = inspectionsscreen.clickBackButton();
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
@@ -94,7 +94,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		homescreen.clickQueueMessageIcon();
 		BaseUtils.waitABit(3000);
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 	}
 	
 }

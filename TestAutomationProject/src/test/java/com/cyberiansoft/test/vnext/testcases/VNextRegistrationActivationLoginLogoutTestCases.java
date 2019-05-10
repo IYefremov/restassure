@@ -52,7 +52,7 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		verificationscreen.clickVerifyButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB);   
 	}
 	
@@ -70,7 +70,7 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		AppiumUtils.setNetworkOff();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB); 
 		Assert.assertTrue(verificationscreen.isDownloadAgainButtonAppears());
 		VNextAppUtils.resetApp();
@@ -97,7 +97,7 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
 		
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB); 
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		VNextAppUtils.resetApp();
 		regcode = getDeviceRegistrationCode(deviceofficeurl, deviceuser, devicepsw, licensename);
 	}
@@ -116,7 +116,7 @@ public class VNextRegistrationActivationLoginLogoutTestCases extends BaseTestCas
 		AppiumUtils.setNetworkOff();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		Assert.assertEquals(msg, VNextAlertMessages.CANT_DOWNLOAD_DB);
 		verificationscreen.clickDownloadAgainButton();
 		

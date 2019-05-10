@@ -32,10 +32,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 			
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -87,10 +87,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -143,10 +143,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -199,10 +199,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -254,10 +254,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -309,10 +309,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -364,10 +364,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -419,10 +419,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -474,10 +474,10 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();

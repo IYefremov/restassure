@@ -316,7 +316,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 	
 		homescreen = inspectionscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 		inspectionscreen = homescreen.clickInspectionsMenuItem();		
@@ -413,7 +413,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.switchToMyInspectionsView();
 		homescreen = inspectionscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
@@ -446,7 +446,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		homescreen = inspectionscreen.clickBackButton();
 		Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		homescreen.waitUntilQueueMessageInvisible();
 		Assert.assertFalse(homescreen.isQueueMessageVisible());
 	}
@@ -515,10 +515,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		inspectionscreen.clickBackButton();
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
+		loginpage.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
 				VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
@@ -582,7 +582,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		BaseUtils.waitABit(10000);
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
-		AppiumUtils.setNetworkOn();	
+		AppiumUtils.setAndroidNetworkOn();
 		statusscreen.clickUpdateAppdata();	
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogStartSyncButton();
@@ -651,7 +651,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextInformationDialog informationDialog = inspectionsMenuScreen.clickEditInspectionMenuItemWithAlert();
 		Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
 				VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}

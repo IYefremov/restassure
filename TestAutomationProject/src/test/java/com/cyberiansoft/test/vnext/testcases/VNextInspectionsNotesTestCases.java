@@ -532,7 +532,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		
 		BaseUtils.waitABit(30000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(deviceuser, devicepsw);
@@ -591,7 +591,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		BaseUtils.waitABit(30000);
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
+		WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(deviceuser, devicepsw);

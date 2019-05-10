@@ -386,10 +386,10 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 	public void testShowAllAssignedToServicePackageServicesAsAvailableOnes(String deviceuser, String devicepsw) { 
 	
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
-		loginpage.UserLogin(deviceuser, devicepsw);
+		loginpage.userLogin(deviceuser, devicepsw);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
 		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
@@ -1060,7 +1060,7 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		BaseUtils.waitABit(10000);
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogOKButton();
-		AppiumUtils.setNetworkOn();	
+		AppiumUtils.setAndroidNetworkOn();
 		statusscreen.clickUpdateAppdata();	
 		informationdlg = new VNextInformationDialog(appiumdriver);
 		informationdlg.clickInformationDialogStartSyncButton();

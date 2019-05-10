@@ -8,9 +8,7 @@ public class BaseTestCaseWithDeviceRegistration extends VNextBaseTestCase {
 	
 	@BeforeClass(description = "Setting up new suite")	
 	public void settingUp() throws Exception {
-		setUp();	
 		VNextAppUtils.resetApp();
 		registerDevice();		
 	}
-
 }

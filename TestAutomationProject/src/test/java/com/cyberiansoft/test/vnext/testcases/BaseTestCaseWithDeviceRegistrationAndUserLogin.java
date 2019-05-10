@@ -24,11 +24,10 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
 		devicepsw = VNextFreeRegistrationInfo.getInstance().getR360UserPassword();
 
 		if (envType.equals(EnvironmentType.DEVELOPMENT))
-			deviceofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeStagingURL();
+			deviceOfficeUrl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeStagingURL();
 		else if (envType.equals(EnvironmentType.INTEGRATION))
-			deviceofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeIntegrationURL();
+			deviceOfficeUrl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeIntegrationURL();
 
-		setUp();
 		if (VNextEnvironmentInfo.getInstance().installNewBuild()) {
 			//VNextAppUtils.resetApp();
 			registerDevice();

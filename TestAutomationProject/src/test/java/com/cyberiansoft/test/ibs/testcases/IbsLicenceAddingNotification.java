@@ -47,7 +47,7 @@ public class IbsLicenceAddingNotification extends BaseTestCase {
 
         goToWebPage(IBSConfigInfo.getInstance().getReconProDevicesUrl());
         BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+        loginPage.userLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 
         ActiveDevicesWebPage activeDevicesPage = PageFactory.initElements(webdriver, ActiveDevicesWebPage.class);
         String license = activeDevicesPage
@@ -80,7 +80,7 @@ public class IbsLicenceAddingNotification extends BaseTestCase {
 
         goToWebPage(IBSConfigInfo.getInstance().getReconProDevicesUrl());
         BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+        loginPage.userLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 
         ActiveDevicesWebPage activeDevicesPage = PageFactory.initElements(webdriver, ActiveDevicesWebPage.class);
         String license = activeDevicesPage
@@ -110,7 +110,7 @@ public class IbsLicenceAddingNotification extends BaseTestCase {
 
         goToWebPage(IBSConfigInfo.getInstance().getReconProDevicesUrl());
         BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+        loginPage.userLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 
         ActiveDevicesWebPage activeDevicesPage = PageFactory.initElements(webdriver, ActiveDevicesWebPage.class);
         String license = activeDevicesPage
@@ -137,7 +137,7 @@ public class IbsLicenceAddingNotification extends BaseTestCase {
 
         goToWebPage(IBSConfigInfo.getInstance().getReconProDevicesUrl());
         BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-        loginPage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+        loginPage.userLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 
         ActiveDevicesWebPage activeDevicesPage = PageFactory.initElements(webdriver, ActiveDevicesWebPage.class);
         String license = activeDevicesPage

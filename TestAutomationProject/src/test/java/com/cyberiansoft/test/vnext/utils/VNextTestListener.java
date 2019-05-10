@@ -30,10 +30,10 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    }
 	    
 	    /*if (appiumdriver.findElements(By.xpath("//div[@data-page='null']")).size() < 1) {
-	    	AppiumUtils.setNetworkOn();
+	    	AppiumUtils.setAndroidNetworkOn();
 	    	((VNextBaseTestCase) currentClass).resetApp();
 	    	((VNextBaseTestCase) currentClass).setUp();
-	    	//((VNextBaseTestCase) currentClass).setNetworkOn();
+	    	//((VNextBaseTestCase) currentClass).setAndroidNetworkOn();
 	    	try {
 	    		((VNextBaseTestCase) currentClass).registerDevice();
 	    	} catch (Exception e) {
@@ -47,7 +47,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    		e.printStackTrace();
 	    	}
 	    }*/
-	    AppiumUtils.setNetworkOn();
+	    AppiumUtils.setAndroidNetworkOn();
 	    VNextAppUtils.restartApp();
 	    VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 	}

@@ -55,7 +55,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         webdriver = DriverBuilder.getInstance().getDriver();
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
 //        BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
-//        loginpage.UserLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
+//        loginpage.userLogin(BOConfigInfo.getInstance().getUserName(), BOConfigInfo.getInstance().getUserPassword());
 	}
 	
 	@AfterMethod

@@ -341,7 +341,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextInformationDialog informationDialog = workOrdersMenuScreen.clickEditWorkOrderMenuItemWithAlert();
 		Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
 				VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
-		AppiumUtils.setNetworkOn();
+		AppiumUtils.setAndroidNetworkOn();
 		workordersscreen.switchToMyWorkordersView();
 		workordersscreen.clickBackButton();
 	}

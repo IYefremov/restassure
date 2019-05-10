@@ -184,7 +184,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String inspTotalPrice = "$ 267.81";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -207,7 +207,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String inspTotalPrice = "$ 267.81";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -230,7 +230,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String inspTotalPrice = "$ 267.81";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -253,7 +253,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String inspTotalPrice = "$ 267.81";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -276,7 +276,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String inspTotalPrice = "$ 267.81";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -299,7 +299,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String inspTotalPrice = "$ 267.81";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -322,7 +322,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String inspTotalPrice = "$ 267.81";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -346,7 +346,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String filterName = "test12345";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -378,7 +378,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String filterNameEdited = "test12345edited";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -411,7 +411,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		final String filterNameEdited = "test12345edited";
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -442,7 +442,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 		
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
@@ -466,7 +466,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 	public void testVerifyPosibilityToResetInspectionSearchFilterOnBO()  {
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-		webdriver.get(deviceofficeurl);
+		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),

@@ -22,8 +22,6 @@ public class VNextEnvironmentSelectionScreen extends VNextBaseScreen {
     public VNextEnvironmentSelectionScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        wait.until(ExpectedConditions.visibilityOf(environmentlistscreeen));
     }
 
     public void selectEnvironment(EnvironmentType environmentType) {
