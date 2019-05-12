@@ -68,10 +68,30 @@ public class AppiumUtils {
 
     public static void setAndroidNetworkOn() {
         switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-        AndroidDriver androidDriver = (AndroidDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver();
-        if (!androidDriver.getConnection().isWiFiEnabled())
-            androidDriver.setConnection(new ConnectionState(ConnectionState.WIFI_MASK));
+        ConnectionState state = ((AndroidDriver<MobileElement>)DriverBuilder.getInstance().getAppiumDriver()).getConnection();
+        if (!state.isWiFiEnabled()) {
+            try {
+                Runtime.getRuntime().exec("adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings");
+                BaseUtils.waitABit(2000);
+                //System.out.println("===" + DriverBuilder.getInstance().getAppiumDriver().findElement(By.className("android.widget.Switch")).getAttribute("text"));
+                DriverBuilder.getInstance().getAppiumDriver().findElement(By.className("android.widget.Switch")).click();
+                ((AndroidDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver()).pressKey(new KeyEvent().withKey(AndroidKey.BACK));
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+			/*try {
+				Runtime.getRuntime().exec("adb shell am broadcast -a io.appium.settings.wifi --es setstatus enable");
+				Runtime.getRuntime().exec("adb shell am broadcast -a io.appium.settings.data_connection --es setstatus enable");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
         switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+        BaseUtils.waitABit(3000);
     }
 
     public static void clickHardwareBackButton() {
