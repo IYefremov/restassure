@@ -10,7 +10,7 @@
 <!--    </listeners>-->
     <test name="Tests for VNext client" preserve-order="true">
         <classes>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersList"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.VNextWorkOrdersFromApprovedInspections"/>
         </classes>
     </test>
 </suite>

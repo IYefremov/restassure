@@ -13,23 +13,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class WaitUtils {
-    public static void executeUntilSuccess(CodeBlockForFluentWait codeBlock) {
-        new FluentWait<>(DriverBuilder.getInstance().getAppiumDriver())
-                .ignoring(AssertionError.class)
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class)
-                .ignoring(IndexOutOfBoundsException.class)
+    public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible){
+        FluentWait wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(300))
-                .until(driver -> {
-                    codeBlock.execute();
-                    return true;
-                });
-    }
-
-    @FunctionalInterface
-    public interface CodeBlockForFluentWait {
-        void execute();
+                .ignoring(WebDriverException.class)
+                .ignoring(InvalidElementStateException.class);
+        wait.until((webDriver) -> {
+            if (shoulBeVisible)
+                return element.isDisplayed();
+            else
+                return !element.isDisplayed();
+        });
     }
 
     public static WebElement waitUntilElementIsClickable(final By locator) {
