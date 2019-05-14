@@ -21,12 +21,18 @@ public class VehicleInfoData {
 
 	@JsonProperty("vehicleYear")
 	String vehicleYear;
+
+	@JsonProperty("vehicleType")
+	String vehicleType;
 	 
 	@JsonProperty("roNumber")
 	String roNumber;
 
 	@JsonProperty("mileage")
 	String mileage;
+
+	@JsonProperty("licPlate")
+	String licPlate;
 	
 	public String getVINNumber() {
 		 return vinNumber;
@@ -60,4 +66,11 @@ public class VehicleInfoData {
 		return mileage;
 	}
 
+	public String getVehicleType() {
+		return vehicleType;
+	}
+
+	public String getVehicleLicensePlate() {
+		return licPlate;
+	}
 }

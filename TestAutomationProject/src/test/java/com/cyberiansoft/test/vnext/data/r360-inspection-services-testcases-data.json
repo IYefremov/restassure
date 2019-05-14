@@ -1,0 +1,314 @@
+{
+  "testShowSelectedServicesAfterInspectionIsSaved": [
+    {
+      "rowID": "testShowSelectedServicesAfterInspectionIsSaved.01",
+      "description": "Test Case 37006:vNext - Show selected services after inspection is saved",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "services": [{"serviceName": "Dent Repair"
+       }, {"serviceName": "Prior Damage"
+      }]
+    }
+  ],
+
+  "testShowSelectedServicesForInspectionWhenNavigatingFromServicesScreen": [
+    {
+      "rowID": "testShowSelectedServicesForInspectionWhenNavigatingFromServicesScreen.01",
+      "description": "Test Case 37008:vNext - Show selected services for inspection when navigating from 'Services' screen",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "services": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Prior Damage"
+      }]
+    }
+  ],
+
+  "testAddOneServiceToAlreadySelectedServicesWhenInspectionIsEdited": [
+    {
+      "rowID": "testAddOneServiceToAlreadySelectedServicesWhenInspectionIsEdited.01",
+      "description": "Test Case 37011:vNext - Add one service to already selected services when inspection is edited",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "services": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Prior Damage"
+      }, {"serviceName": "Bumper Repair"
+      }]
+    }],
+
+    "testAddSeveralServicesToAlreadySelectedServicesWhenInspectionIsEdited": [
+    {
+    "rowID": "testAddSeveralServicesToAlreadySelectedServicesWhenInspectionIsEdited.01",
+    "description": "Test Case 37012:vNext - Add several services to already selected services when inspection is edited",
+    "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+    },
+    "services": [{"serviceName": "Dent Repair"
+    }, {"serviceName": "Prior Damage"
+    }, {"serviceName": "Bumper Repair"
+    }, {"serviceName": "Other"
+    }]
+    }
+  ],
+
+  "testVerifySelectedServicesAreSavedToBO": [
+    {
+      "rowID": "testVerifySelectedServicesAreSavedToBO.01",
+      "description": "Test Case 38567:vNext - Verify selected services are saved to BO",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "services": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Prior Damage"
+      }]
+    }
+  ],
+
+  "testVerifyLettersIOQAreTrimmedWhileManualEntry": [
+    {
+      "rowID": "testVerifyLettersIOQAreTrimmedWhileManualEntry.01",
+      "description": "Test Case 37028:vNext - Verify letters I,O,Q are trimmed while manual entry, Test Case 37153:vNext - Verify letters less than 17-digit VIN is treated as valid while manual entry",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyNotAllowedCharactersAreTrimmedWhileManualEntry": [
+    {
+      "rowID": "testVerifyNotAllowedCharactersAreTrimmedWhileManualEntry.01",
+      "description": "Test Case 37086:vNext - Verify not allowed characters are trimmed while manual entry",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyLettersAreCapitalizedWhileManualEntry": [
+    {
+      "rowID": "testVerifyLettersAreCapitalizedWhileManualEntry.01",
+      "description": "Test Case 37160:vNext - Verify letters are capitalized while manual entry",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyServicesAreSavedWhenSaveInspectionOptionWasUsedFromHumburgerMenu": [
+    {
+      "rowID": "testVerifyServicesAreSavedWhenSaveInspectionOptionWasUsedFromHumburgerMenu.01",
+      "description": "Test Case 39552:vNext - Inspections - Verify services are saved when 'Save Inspection' option was used from humburger menu",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "services": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Prior Damage"
+      }]
+    }
+  ],
+
+  "testVerifyVehicleClaimAreSavedWhenSaveInspectionOptionWasUsedFromHumburgerMenu": [
+    {
+      "rowID": "testVerifyVehicleClaimAreSavedWhenSaveInspectionOptionWasUsedFromHumburgerMenu.01",
+      "description": "Test Case 39553:vNext - Inspections - Verify Vehicle/Claim Info are saved when 'Save Inspection' option was used from humburger menu",
+      "vihicleInfo": {"vinNumber": "1GCJC33G22E688420", "vehicleMake" : "Chevrolet", "vehicleModel" : "Silverado 3500",
+        "vehicleYear" : "2002", "vehicleType" : "New", "mileage" : "12345", "stockNumber" : "stock123",
+        "roNumber" : "ro12345", "licPlate" : "Lic 123"
+      }
+    }
+  ],
+
+  "testExitCancelInspectionStateCalledFromHumburgerMenu_FirstStep": [
+    {
+      "rowID": "testExitCancelInspectionStateCalledFromHumburgerMenu_FirstStep.01",
+      "description": "Test Case 39550:vNext - Inspections - Exit 'Cancel inspection' state called from humburger menu (first step)",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testShowAllAssignedToServicePackageServicesAsAvailableOnes": [
+    {
+      "rowID": "testShowAllAssignedToServicePackageServicesAsAvailableOnes.01",
+      "description": "Test Case 38576:vNext - Show all assigned to Service Package services as available ones",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyDefaultPriceForServiceIsShownCorrectly": [
+    {
+      "rowID": "testVerifyDefaultPriceForServiceIsShownCorrectly.01",
+      "description": "Test Case 38577:vNext -Verify default price for service is shown correctly",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "moneyServices": [{"serviceName": "Bumper Repair", "servicePrice": "20.00"
+      }, {"serviceName": "Dent Repair", "servicePrice": "0.00"
+      }],
+      "percentageServices": [{"serviceName": "Facility Fee", "servicePrice": "20.000"
+      }, {"serviceName": "Tax", "servicePrice": "25.000"
+      }]
+    }
+  ],
+
+  "testAddTheSameServiceMultipleTimes": [
+    {
+      "rowID": "testAddTheSameServiceMultipleTimes.01",
+      "description": "Test Case 41561:vNext - Add the same service multiple times",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "services": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Prior Damage"
+      }]
+    }
+  ],
+
+  "testEditInspectionServices": [
+    {
+      "rowID": "testEditInspectionServices.01",
+      "description": "Test Case 43516:vNext - Edit inspection services",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "services": [{"serviceName": "Dent Repair", "servicePrice": "20"
+      }, {"serviceName": "Scratch", "servicePrice": "222"
+      }],
+      "moneyServices": [{"serviceName": "Prior Damage", "servicePrice": "10"
+      }, {"serviceName": "Bumper Repair", "servicePrice": "0"
+      }],
+      "inspPrice": "$1000.63"
+    }
+  ],
+
+  "testVerifyPriceMatrixAddedToServicePackageIsAvailableToChooseWhenAddEditInspection": [
+    {
+      "rowID": "testVerifyPriceMatrixAddedToServicePackageIsAvailableToChooseWhenAddEditInspection.01",
+      "description": "Test Case 37843:vNext - Verify Price Matrix added to service package is available to choose when add/edit inspection",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyListOfAvailablePriceMatricesIsLoadedWhenChoosingMatrixService": [
+    {
+      "rowID": "testVerifyListOfAvailablePriceMatricesIsLoadedWhenChoosingMatrixService.01",
+      "description": "Test Case 37844:vNext - Verify list of available Price Matrices is loaded when choosing Matrix Service",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyPriceMatrixNameIsShownOnSelectServicesScreenAfterSelection": [
+    {
+      "rowID": "testVerifyPriceMatrixNameIsShownOnSelectServicesScreenAfterSelection.01",
+      "description": "Test Case 37845:vNext - Verify Price Matrix name is shown on 'Select Services' screen after selection, Test Case 43617:vNext - Show Matrix Service name on 'Price Matrices' screen",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyCorrectPriceIsShownInServicesListAfterEditingServicePricePercentage": [
+    {
+      "rowID": "testVerifyCorrectPriceIsShownInServicesListAfterEditingServicePricePercentage.01",
+      "description": "Test Case 45902:vNext - Verify correct price is shown in Services list after editing service price (Percentage)",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testEditServicePriceOnVisualsScreenePercentage": [
+    {
+      "rowID": "testEditServicePriceOnVisualsScreenePercentage.01",
+      "description": "Test Case 45903:vNext - Edit service price on Visuals screen (Percentage)",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyCorrectTotalIsShownAfterEditingPercentageService": [
+    {
+      "rowID": "testVerifyCorrectTotalIsShownAfterEditingPercentageService.01",
+      "description": "Test Case 45906:vNext - Verify correct Total is shown after editing Percentage service)",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testVerifyCorrectPriceIsShownInTotalOnVisualsScreenAfterEditingServicePrice_Money": [
+    {
+      "rowID": "testVerifyCorrectPriceIsShownInTotalOnVisualsScreenAfterEditingServicePrice_Money.01",
+      "description": "Test Case 45967:vNext - Verify correct price is shown in Total on Visuals screen after editing service price (Money)",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testEditServicePricePercentage": [
+    {
+      "rowID": "testEditServicePricePercentage.01",
+      "description": "Test Case 41562:vNext - Edit service price (Percentage)",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testEditServicePriceMoney": [
+    {
+      "rowID": "testEditServicePriceMoney.01",
+      "description": "Test Case 41563:vNext - Edit service price (Money)",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+  "testDeleteServiceFromServicesScreen": [
+    {
+      "rowID": "testDeleteServiceFromServicesScreen.01",
+      "description": "Test Case 41571:vNext - INSP - Delete service from Services screen",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "percentageServices": [{"serviceName": "Facility Fee"
+      }],
+      "moneyServices": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Bumper Repair"
+      }]
+    }
+  ],
+
+  "testInspectionTotalPriceShouldChangeWhenUselectSomeOfTheSelectedServiceOnServicesScreen": [
+    {
+      "rowID": "testInspectionTotalPriceShouldChangeWhenUselectSomeOfTheSelectedServiceOnServicesScreen.01",
+      "description": "Test Case:vNext Inspection total price should change when uselect some of the selected service on Services screen",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "moneyServices": [{"serviceName": "Dent Repair", "servicePrice": "10"
+      }, {"serviceName": "Bumper Repair", "servicePrice": "10"
+      }],
+      "inspPrice": "$20.00"
+    }
+  ],
+
+  "testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen": [
+    {
+      "rowID": "testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen.01",
+      "description": "Test Case:vNext Services aren't became selected if user unselect them before clicking back button on Select Services screen",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "moneyServices": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Bumper Repair"
+      }]
+    }
+  ],
+
+  "testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService": [
+    {
+      "rowID": "testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService.01",
+      "description": "Test Case :vNext - Total is not set to 0 if user adds Matrix Additional service with negative percentage service",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "inspPrice": "$93.75"
+    }
+  ],
+
+  "testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen": [
+    {
+      "rowID": "testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen.01",
+      "description": "Test Case 47440:vNext - Verify services are saved correctly when saving inspection from Visual screen",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      }
+    }
+  ],
+
+}
