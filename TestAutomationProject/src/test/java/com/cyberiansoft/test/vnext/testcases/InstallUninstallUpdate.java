@@ -6,12 +6,17 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 
 public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
+
+	@BeforeClass(description="R360 Install/Uninstall/Update Test Cases")
+	public void beforeClass() {
+	}
 	
 	final static String testEmployee = "Test User";
 	final static String testEmployeePsw = "1111";

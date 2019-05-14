@@ -11,11 +11,14 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
-	
-	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
+
+	@BeforeClass(description="R360 Work Orders Test Cases")
+	public void beforeClass() {
+	}
 	final String testVIN = "1FMCU0DG4BK830800";
 	
 	@Test(testName= "Test Case 43334:vNext - Show selected services after WO is saved", 

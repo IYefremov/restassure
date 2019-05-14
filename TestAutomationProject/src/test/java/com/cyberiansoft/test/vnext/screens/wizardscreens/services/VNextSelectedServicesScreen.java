@@ -102,7 +102,6 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
             wait.until(ExpectedConditions.elementToBeClickable(servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']"))));
             servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).clear();
             servicecell.findElement(By.xpath(".//textarea[@data-name='Notes.desc']")).sendKeys(notes);
-            appiumdriver.hideKeyboard();
             tap(appiumdriver.findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + serviceName + "']")));
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);

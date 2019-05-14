@@ -32,7 +32,7 @@ public class vNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/customers-testcases-data.json";
 	private static String settingsbofficeurl;
 
-	@BeforeClass(description="Team Customers Test Cases")
+	@BeforeClass(description="R360 Customers Test Cases")
 	public void beforeClass() {
 
 		if (envType.equals(EnvironmentType.DEVELOPMENT))

@@ -20,9 +20,14 @@ import com.cyberiansoft.test.vnextbo.screens.VNextConfirmationDialog;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
+
+	@BeforeClass(description="R360 Inspection Approve On BO Test Cases")
+	public void beforeClass() {
+	}
 	
 	String inspnumber = "";
 	final String VIN = "3N1AB7AP3HY327077";

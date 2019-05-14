@@ -1,0 +1,69 @@
+{
+
+  "testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveInspection": [
+    {
+      "rowID": "testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveInspection.01",
+      "description": "Test Case 36311: Verify outgoing sync message is pushed into queue when save inspection",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveSeveralInspection": [
+    {
+      "rowID": "testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveSeveralInspection.01",
+      "description": "Test Case 36312:vNext - Manual - Verify outgoing sync message is pushed into queue when save several inspectiontypes",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSendMessageFromTheQueueInAutomaticModeSuccessPath": [
+    {
+      "rowID": "testSendMessageFromTheQueueInAutomaticModeSuccessPath.01",
+      "description": "Test Case 36449:vNext - Send message from the queue in Automatic Mode (success path)",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSendMessageFromTheQueueInManualModeSuccessPath": [
+    {
+      "rowID": "testSendMessageFromTheQueueInManualModeSuccessPath.01",
+      "description": "Test Case 36490:vNext - Send message from the queue in Manual Mode (success path)",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork": [
+    {
+      "rowID": "testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork.01",
+      "description": "Test Case 36510:vNext - Send messages automatically from the queue in Automatic Mode after reconnect to network",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSendMessageFromTheQueueInAutomaticModeFailPath": [
+    {
+      "rowID": "testSendMessageFromTheQueueInAutomaticModeFailPath.01",
+      "description": "Test Case 36497:vNext - Send message from the queue in Automatic Mode (fail path)",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ]
+
+}

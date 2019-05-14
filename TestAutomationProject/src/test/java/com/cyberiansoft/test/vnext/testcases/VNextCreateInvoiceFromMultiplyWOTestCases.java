@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -11,23 +12,32 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
-	
+
 	final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
 	final private String testVIN = "1FMCU0DG4BK830800";
-	
-	
-	@Test(testName= "Test Case 65591:Verify user can create Invoice from multiply WO", 
+
+	@BeforeClass(description="R360 Create Invoice FromMultiply WO Test Cases")
+	public void beforeClass() {
+
+	}
+
+
+	@Test(testName= "Test Case 65591:Verify user can create Invoice from multiply WO",
 			description = "Verify user can create Invoice from multiply WO")
 	public void testVerifyUserCanCreateInvoiceFromMultiplyWO() {
-		
+
 		final String ponumber = "123po";
 		ArrayList<String> workOrders = new ArrayList<>();
-		
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (int i = 0; i<3; i++) {
@@ -42,7 +52,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 
 			vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
-		
+
 		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (String wonumber : workOrders) {
 			workordersscreen.selectWorkOrder(wonumber);
@@ -64,11 +74,11 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		invoicesscreen.clickBackButton();
 	}
 
-	
-	@Test(testName= "Test Case 65640:Verify user can't create Invoice with Multiple WO and different Customers", 
+
+	@Test(testName= "Test Case 65640:Verify user can't create Invoice with Multiple WO and different Customers",
 			description = "Verify user can't create Invoice with Multiple WO and different Customers")
 	public void testVerifyUserCantCreateInvoiceWithMultipleWOAndDifferentCustomers() {
-		
+
 		final String ponumber = "123po";
 		ArrayList<String> workOrders = new ArrayList<>();
 		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
@@ -97,7 +107,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
-		
+
 		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (String wonumber : workOrders) {
 			workordersscreen.selectWorkOrder(wonumber);
@@ -108,9 +118,9 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (String wonumber : workOrders) {
-			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
-		}
+		Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(0)));
+		Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(1)));
+		Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(2)));
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		final String invoiceNumber = invoiceinfoscren.getInvoiceNumber();
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoiceAsFinal();
@@ -118,18 +128,19 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		Assert.assertEquals(wonumbers.size(), 1);
 		for (String wonumber : wonumbers) {
 			Assert.assertTrue(wonumber.contains(invoicedetails));
-		} 
+		}
 		invoicesscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 65645:Verify user can create Invoice with a few WO", 
+
+	@Test(testName= "Test Case 65645:Verify user can create Invoice with a few WO",
 			description = "Verify user can create Invoice with a few WO")
 	public void testVerifyUserCantCreateInvoiceWithAFewWO() {
-		
+
 		final String ponumber = "123po";
-		ArrayList<String> workOrders = new ArrayList<>();
+		final int wosToCreate = 2;
+		Map<String, List<String>> workOrdersMap = new HashMap<>();
 		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
-				
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		for (RetailCustomer customer : testcustomers) {
@@ -143,7 +154,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (RetailCustomer customer : testcustomers) {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < wosToCreate; i++) {
 				customersscreen = workordersscreen.clickAddWorkOrderButton();
 				customersscreen.selectCustomer(customer);
 				VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -151,14 +162,16 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 				vehicleinfoscreen.clickScreenForwardButton();
 				VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
 				vehicleVINHistoryScreen.clickBackButton();
-				workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
+				workOrdersMap.computeIfAbsent(customer.getFullName(), k -> new ArrayList<>()).add(vehicleinfoscreen.getNewInspectionNumber());
 				vehicleinfoscreen.saveWorkOrderViaMenu();
 			}
 		}
-		
+
 		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (String wonumber : workOrders) {
-			workordersscreen.selectWorkOrder(wonumber);
+		for (int i = 0; i < testcustomers.length; i++) {
+			for (int j = 0; j < wosToCreate; j++) {
+				workordersscreen.selectWorkOrder(workOrdersMap.get(testcustomers[i].getFullName()).get(j));
+			}
 		}
 		workordersscreen.clickCreateInvoiceIcon();
 		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
@@ -166,32 +179,37 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (String wonumber : workOrders) {
-			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
+		for (int j = 0; j < wosToCreate; j++) {
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrdersMap.get(testcustomers[0].getFullName()).get(j)));
 		}
+
+		for (int i = 1; i < testcustomers.length; i++) {
+			for (int j = 0; j < wosToCreate; j++) {
+				Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrdersMap.get(testcustomers[i].getFullName()).get(j)));
+			}
+		}
+
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		final String invoiceNumber = invoiceinfoscren.getInvoiceNumber();
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoiceAsFinal();
 		ArrayList<String> wonumbers = invoicesscreen.getInvoiceWorkOrders(invoiceNumber);
 		Assert.assertEquals(wonumbers.size(), 2);
-		for (String wonumber : wonumbers) {
 
-			Assert.assertTrue(workOrders.contains(wonumber));
-		} 
 		invoicesscreen.clickBackButton();
 	}
-	
+
 
 	@Test(testName= "Test Case 65646:Verify user can cancel creating Invoice with Multiply WO on 'Info' screen, "
-			+ "Test Case 65647:Verify user can cancel creating Invoice with Multiply WO on 'Select Customer' screen", 
+			+ "Test Case 65647:Verify user can cancel creating Invoice with Multiply WO on 'Select Customer' screen",
 			description = "Verify user can cancel creating Invoice with Multiply WO on 'Info' screen, "
 					+ "Verify user can cancel creating Invoice with Multiply WO on 'Select Customer' screen")
 	public void testVerifyUserCanCancelCreatingInvoiceWithMultiplyWOOnInfoScreen() {
-		
+
 		final String ponumber = "123po";
 		ArrayList<String> workOrders = new ArrayList<>();
+
 		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
-				
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		for (RetailCustomer customer : testcustomers) {
@@ -215,7 +233,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
-		
+
 		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (String wonumber : workOrders) {
 			workordersscreen.selectWorkOrder(wonumber);
@@ -226,24 +244,24 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		customersscreen.selectCustomer(testcustomers[0]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (String wonumber : workOrders) {
-			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
-		}
+		Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(0)));
+		Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(1)));
+		Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(2)));
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		invoiceinfoscren.clickInvoiceInfoBackButton();
 		VNextInformationDialog informationdialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-		Assert.assertEquals(informationdialog.clickInformationDialogNoButtonAndGetMessage(), 
+		Assert.assertEquals(informationdialog.clickInformationDialogNoButtonAndGetMessage(),
 				VNextAlertMessages.CANCEL_CREATING_INVOICE);
 		invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		invoiceinfoscren.clickInvoiceInfoBackButton();
 		informationdialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-		
-		Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(), 
+
+		Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
 				VNextAlertMessages.CANCEL_CREATING_INVOICE);
 		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (String wonumber : workOrders)
 			workordersscreen.selectWorkOrder(wonumber);
-		
+
 		workordersscreen.clickCreateInvoiceIcon();
 		informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationDialog.clickSingleInvoiceButton();
@@ -252,17 +270,17 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		workordersscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 66102:Verify total amount displays for all selected WO with same customer", 
+
+	@Test(testName= "Test Case 66102:Verify total amount displays for all selected WO with same customer",
 			description = "Verify total amount displays for all selected WO with same customer")
 	public void testVerifyTotalAmountDisplaysForAllSelectedWOWithTheSameCustomer() {
-		
+
 		final String ponumber = "123po";
 		final String serviceName = "Bumper Repair";
 		final String[] servicePrices = { "10", "14.50", "12.50" };
 		final String totalAmount = "$37.00";
 		ArrayList<String> workOrders = new ArrayList<>();
-		
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (String servicePrice : servicePrices) {
@@ -299,18 +317,18 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoiceAsFinal();
 		invoicesscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 66113:Verify total amount for selected WO with different customers", 
+
+	@Test(testName= "Test Case 66113:Verify total amount for selected WO with different customers",
 			description = "Verify total amount for selected WO with different customers")
 	public void testVerifyTotalAmountDisplaysForAllSelectedWOWithDifferentCustomers() {
-		
+
 		final String ponumber = "123po";
 		ArrayList<String> workOrders = new ArrayList<>();
-		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer3") };
+		final RetailCustomer[] testcustomers = { new RetailCustomer("Test", "Custonmer1"), new RetailCustomer("Test", "Custonmer2"), new RetailCustomer("Test", "Custonmer2") };
 		final String serviceName = "Bumper Repair";
 		final String[] servicePrices = { "10", "14.50", "12.50" };
-		final String totalAmount = "$14.50";
-		
+		final String totalAmount = "$27.00";
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		for (RetailCustomer customer : testcustomers) {
@@ -340,7 +358,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
-		
+
 		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (String wonumber : workOrders) {
 			workordersscreen.selectWorkOrder(wonumber);
@@ -351,12 +369,12 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		customersscreen.selectCustomer(testcustomers[1]);
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (String wonumber : workOrders) {
-			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(wonumber));
+		for (int i = 1; i < testcustomers.length; i++) {
+			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(i)));
 		}
 		invoiceinfoscren.setInvoicePONumber(ponumber);
 		Assert.assertEquals(invoiceinfoscren.getInvoiceTotalAmount(), totalAmount);
 		VNextInvoicesScreen invoicesscreen = invoiceinfoscren.saveInvoiceAsFinal();
 		invoicesscreen.clickBackButton();
 	}
-}
+} 

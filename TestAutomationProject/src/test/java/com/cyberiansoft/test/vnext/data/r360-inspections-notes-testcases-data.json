@@ -1,0 +1,212 @@
+{
+
+  "testValidateMakeFieldOnVehicleScreenReflectsVisibleONOFF": [
+    {
+      "rowID": "testValidateMakeFieldOnVehicleScreenReflectsVisibleONOFF.01",
+      "description": "Test Case 40322:vNext - Add several quick notes for Service in the list",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "service": {"serviceName": "Dent Repair"
+      }
+    }
+  ],
+
+  "testVerifyQuickNotesAreAddedAsNewLinesOfText": [
+    {
+      "rowID": "testVerifyQuickNotesAreAddedAsNewLinesOfText.01",
+      "description": "Test Case 37673:vNext - Verify quick notes are added as new lines of text",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "service": {"serviceName": "Dent Repair"
+      }
+    }
+  ],
+
+  "testValidateTextContentIsValidatedOnTappingBackButton": [
+    {
+      "rowID": "testValidateTextContentIsValidatedOnTappingBackButton.01",
+      "description": "Test Case 40335:vNext - Verify text content is validated on tapping 'Back' button",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "services": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Bumper Repair"
+      }]
+    }
+  ],
+
+  "testVerifyTextContentIsValidatedOnTappingHardwareBackButton": [
+    {
+      "rowID": "testVerifyTextContentIsValidatedOnTappingHardwareBackButton.01",
+      "description": "Test Case 40336:vNext - Verify text content is validated on tapping hardware 'Back' button",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "services": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Bumper Repair"
+      }]
+    }
+  ],
+
+  "testVerifyNotesOptionIsAvailableAtDifferentWizardSteps": [
+    {
+      "rowID": "testVerifyNotesOptionIsAvailableAtDifferentWizardSteps.01",
+      "description": "Test Case 37670:vNext - Validate 'Notes' option is available at different wizard steps",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testAddTextNotesForServiceInTheList": [
+    {
+      "rowID": "testAddTextNotesForServiceInTheList.01",
+      "description": "Test Case 37671:vNext - Add text notes for Service in the list",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "service": {"serviceName": "Dent Repair"
+      }
+    }
+  ],
+
+  "testAddQuickNoteForServiceInTheList": [
+    {
+      "rowID": "testAddQuickNoteForServiceInTheList.01",
+      "description": "Test Case 37672:vNext - Add quick note for Service in the list",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "service": {"serviceName": "Dent Repair"
+      }
+    }
+  ],
+
+  "testAddSeveralQuickNotesForServiceInTheList": [
+    {
+      "rowID": "testAddSeveralQuickNotesForServiceInTheList.01",
+      "description": "Add several quick notes for Service in the list",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "service": {"serviceName": "Dent Repair"
+      }
+    }
+  ],
+
+  "testClearTextNotesForServiceInTheList": [
+    {
+      "rowID": "testClearTextNotesForServiceInTheList.01",
+      "description": "Test Case 43333:vNext - Clear text notes for Service in the list",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "service": {"serviceName": "Dent Repair"
+      }
+    }
+  ],
+
+  "testSaveTextNoteOnTappingBackButtonEstimationLevel": [
+    {
+      "rowID": "testSaveTextNoteOnTappingBackButtonEstimationLevel.01",
+      "description": "Test Case 40287:vNext - Save text note on tapping hardware 'Back' button (Estimation level)",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSaveTextNoteOnTappingBackButtonEstimationLevel_CheckAfterInspectionSave": [
+    {
+      "rowID": "testSaveTextNoteOnTappingBackButtonEstimationLevel_CheckAfterInspectionSave.01",
+      "description": "Test Case 40286:vNext - Save text note on tapping 'Back' button (Estimation level) - check after inspection save",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSaveTextNoteOnTappingHardwareBackButtonEstimationLevel": [
+    {
+      "rowID": "testSaveTextNoteOnTappingHardwareBackButtonEstimationLevel.01",
+      "description": "Test Case 40287:vNext - Save text note on tapping hardware 'Back' button (Estimation level)",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSavePhotoAsANoteOnTappingHardwareBackButtonEstimationLevel": [
+    {
+      "rowID": "testSavePhotoAsANoteOnTappingHardwareBackButtonEstimationLevel.01",
+      "description": "Test Case 40294:vNext - Save photo as a note on tapping hardware 'Back' button (Estimation level)",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSavePictureNoteOnTappingBackButtonEstimationLevel": [
+    {
+      "rowID": "testSavePictureNoteOnTappingBackButtonEstimationLevel.01",
+      "description": "Test Case 40332:vNext - Save picture note on tapping 'Back' button (Estimation level) - check after inspection save",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel": [
+    {
+      "rowID": "testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel.01",
+      "description": "Test Case 40332:vNext - Save picture note on tapping 'Back' button (Estimation level) - check after inspection save",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testCreateInspectionWithMoneyServiceImageNotes": [
+    {
+      "rowID": "testCreateInspectionWithMoneyServiceImageNotes.01",
+      "description": "Test Case 55648:Create Inspection with money service image notes, Test Case 55649:Create Inspection with percentage service image notes, Test Case 55662:verify displaying image notes for the Inspection Money service, Test Case 55663:verify displaying image notes for the Percentage service",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "services": [{"serviceName": "Dent Repair"
+      }, {"serviceName": "Facility Fee"
+      }]
+    }
+  ],
+
+  "testCreateInspectionWithMatrixServicesImageNotes": [
+    {
+      "rowID": "testCreateInspectionWithMatrixServicesImageNotes.01",
+      "description": "Test Case 55650:vNext mobile: Create Inspection with matrix services image notes",
+      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },
+      "matrixService": {"matrixServiceName" : "Hail Repair", "hailMatrixName" : "State Farm",
+        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15"
+        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15"
+        }]}
+    }
+  ]
+}
