@@ -517,7 +517,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		notesscreen.clickNotesBackButton();
 		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionsscreen = selectedServicesScreen.cancelInspection();
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -546,7 +546,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		//notesscreen.clickNotesBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.cancelInspection();
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -574,7 +574,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		}
 
 		inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
-		homescreen = inspectionsscreen.clickBackButton();
+		inspectionsscreen.clickBackButton();
 
 		BaseUtils.waitABit(30000);
 		WebDriver webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
