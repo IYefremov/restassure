@@ -28,6 +28,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -35,7 +36,10 @@ import java.io.File;
 
 public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
-    final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
+    @BeforeClass(description="R360 Invoices Test Cases")
+    public void beforeClass() {
+    }
+
     final String testVIN = "1FMCU0DG4BK830800";
 
     String invoicenumbertc48094 = "";

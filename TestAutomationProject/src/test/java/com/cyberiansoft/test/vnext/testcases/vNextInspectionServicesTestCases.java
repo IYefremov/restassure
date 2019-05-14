@@ -6,6 +6,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicePackagesWebPage;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
@@ -30,6 +31,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -38,8 +40,11 @@ import java.util.List;
 
 public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
+    @BeforeClass(description="R360 Inspection Services Test Cases")
+    public void beforeClass() {
+    }
+
     final private String[] servicesselect = {"Dent Repair", "Prior Damage"};
-    final private RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
     final private String testVIN = "1FMCU0DG4BK830800";
 
     @Test(testName = "Test Case 37006:vNext - Show selected services after inspection is saved",
@@ -530,7 +535,8 @@ public class vNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
         selectedServicesScreen.setServiceAmountValue(thirdservices[1], "84.55");
         selectedServicesScreen.setServiceQuantityValue(thirdservices[1], "9.15");
 
-        Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), "$1000.63");
+        Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(),
+                BackOfficeUtils.getFormattedServicePriceValue(BackOfficeUtils.getServicePriceValue("$1000.63")));
         inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
         inspectionsscreen.clickBackButton();
     }

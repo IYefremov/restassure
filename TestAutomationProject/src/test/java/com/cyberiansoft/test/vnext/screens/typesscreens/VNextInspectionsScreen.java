@@ -71,17 +71,6 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 		return new VNextHomeScreen(appiumdriver);
 	}
 	
-	public VNextInspectionsScreen createSimpleInspection() {	
-		VNextCustomersScreen customersscreen = clickAddInspectionButton();
-		customersscreen.selectCustomer(new RetailCustomer("Retail", "Automation"));
-		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
-		inspinfoscreen.setVIN("1D7HW48NX6S507810");
-		inspinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
-		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
-		return claiminfoscreen.saveInspectionViaMenu();
-	}
-	
 	public String getFirstInspectionNumber() {
 		return inspectionslist.findElement(By.xpath(".//*[@action='select']/*[@class='checkbox-item-title']")).getText();
 	}

@@ -1,0 +1,39 @@
+{
+
+  "testNavigatingByActionScreenForAndroid": [
+    {
+      "rowID": "testNavigatingByActionScreenForAndroid.01",
+      "description": "Test Case 63497:Navigating by action screen for Android",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testVerifyUserCanNavigateByActionScreenInInspectionsForAndroid": [
+    {
+      "rowID": "testVerifyUserCanNavigateByActionScreenInInspectionsForAndroid.01",
+      "description": "Test Case 63502:Verify user can navigate by action screen in Inspections for Android",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "services": [{"serviceName": "Facility Fee"
+      }, {"serviceName": "Other"
+      }]
+    }
+  ],
+
+  "testVerifyActionScreenWorksCorrectly": [
+    {
+      "rowID": "testVerifyActionScreenWorksCorrectly.01",
+      "description": "Test Case 63509:Verify action screen works correctly",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810", "vehicleColor" : "Red", "vehicleYear" : "2005"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ]
+
+}

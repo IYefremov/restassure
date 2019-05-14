@@ -15,6 +15,12 @@ public class VehicleInfoData {
 
 	@JsonProperty("stockNumber")
 	String stockNumber;
+
+	@JsonProperty("vehicleColor")
+	String vehicleColor;
+
+	@JsonProperty("vehicleYear")
+	String vehicleYear;
 	 
 	@JsonProperty("roNumber")
 	String roNumber;
@@ -32,6 +38,14 @@ public class VehicleInfoData {
 
 	public String getVehicleModel() {
 		return vehicleModel;
+	}
+
+	public String getVehicleYear() {
+		return vehicleYear;
+	}
+
+	public String getVehicleColor() {
+		return vehicleColor;
 	}
 	 
 	public String getStockNumber() {
