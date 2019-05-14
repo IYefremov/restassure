@@ -20,8 +20,8 @@ public class AppiumInicializator {
     }
 
     public AppiumDriver<MobileElement> initAppium(MobilePlatform mobilePlatform) {
-        if (AppiumDriverServiceBuilder.getInstance().getAppiumService() != null) {
-            initAppium(mobilePlatform, AppiumDriverServiceBuilder.getInstance().getAppiumService().getUrl());
+        if (AppiumServiceManager.getAppiumService() != null) {
+            initAppium(mobilePlatform, (AppiumServiceManager.getAppiumService().getUrl()));
         } else
             DriverBuilder.getInstance().setAppiumDriver(mobilePlatform);
         return DriverBuilder.getInstance().getAppiumDriver();

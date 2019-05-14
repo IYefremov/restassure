@@ -3,7 +3,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.driverutils.AppiumDriverServiceBuilder;
+import com.cyberiansoft.test.driverutils.AppiumServiceManager;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.types.envtypes.IOSReconproEnvironmentType;
@@ -17,41 +17,41 @@ import org.testng.annotations.BeforeSuite;
 
 public class BaseTestCase {
 
-	protected static String deviceofficeurl;
-	protected WebDriver webdriver;
-	protected static BrowserType browsertype;
-	public static MobilePlatform mobilePlatform;
-	public static boolean inspSinglePageMode = false;
-	protected TestUser testuser;
-	protected static IOSReconproEnvironmentType envType;
+    protected static String deviceofficeurl;
+    protected WebDriver webdriver;
+    protected static BrowserType browsertype;
+    public static MobilePlatform mobilePlatform;
+    public static boolean inspSinglePageMode = false;
+    protected TestUser testuser;
+    protected static IOSReconproEnvironmentType envType;
 
-	public void initTestUser(String username,  String userpsw) {
-		this.testuser = new TestUser(username, userpsw);
-	}
-	
-	public TestUser getTestUser() {
-		return testuser;
-	}
+    public void initTestUser(String username, String userpsw) {
+        this.testuser = new TestUser(username, userpsw);
+    }
 
-	@BeforeSuite
-	public void setUp() {
-		AppiumDriverServiceBuilder.getInstance().buildAppiumService();
-		browsertype = BaseUtils.getBrowserType(ReconProIOSStageInfo.getInstance().getDefaultBrowser());
-	}
+    public TestUser getTestUser() {
+        return testuser;
+    }
 
-	public static WebElement wait(By locator) {
-		return Helpers.wait(locator);
-	}
+    @BeforeSuite
+    public void setUp() {
+        AppiumServiceManager.startAppium();
+        browsertype = BaseUtils.getBrowserType(ReconProIOSStageInfo.getInstance().getDefaultBrowser());
+    }
 
-	@AfterSuite
-	public void tearDown() {
-		if (DriverBuilder.getInstance().getDriver() != null)
-				DriverBuilder.getInstance().getDriver().quit();
-		if (DriverBuilder.getInstance().getAppiumDriver() != null)
-			DriverBuilder.getInstance().getAppiumDriver().quit();
-		if (AppiumDriverServiceBuilder.getInstance().getAppiumService() != null) {
-			AppiumDriverServiceBuilder.getInstance().getAppiumService().stop();
+    public static WebElement wait(By locator) {
+        return Helpers.wait(locator);
+    }
+
+    @AfterSuite
+    public void tearDown() {
+        if (DriverBuilder.getInstance().getDriver() != null)
+            DriverBuilder.getInstance().getDriver().quit();
+        if (DriverBuilder.getInstance().getAppiumDriver() != null)
+            DriverBuilder.getInstance().getAppiumDriver().quit();
+        if (AppiumServiceManager.getAppiumService() != null) {
+            AppiumServiceManager.getAppiumService().stop();
         }
-	}
+    }
 
 }
