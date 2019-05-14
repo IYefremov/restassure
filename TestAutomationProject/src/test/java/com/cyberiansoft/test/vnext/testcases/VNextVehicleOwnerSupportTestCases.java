@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.globalutils.GlobalUtils;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -23,13 +24,13 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
     @BeforeClass(description="Vehicle Owner Support Cases")
     public void beforeClass() {
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         if (!customersscreen.isCustomerExists(testcustomer2)) {
             VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
             newcustomerscreen.createNewCustomer(testcustomer2);
-            customersscreen = new VNextCustomersScreen(appiumdriver);
+            customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
         customersscreen.clickBackButton();
     }
@@ -40,15 +41,15 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
         final String vinnumber = "TEST";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToMyInspectionsView();
         VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(vinnumber);
         VNextCustomersScreen customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
         customersScreen.switchToRetailMode();
@@ -56,7 +57,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         final String customerFirstName = StringUtils.capitalize(GlobalUtils.getUUID());
         final String customerLastName = StringUtils.capitalize(GlobalUtils.getUUID());
         nextNewCustomerScreen.createNewCustomer(new RetailCustomer(customerFirstName, customerLastName));
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), customerFirstName + " " + customerLastName);
         vehicleinfoscreen.saveInspectionViaMenu();
         inspectionscreen.clickBackButton();
@@ -68,20 +69,20 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
         final String vinnumber = "TEST";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToMyInspectionsView();
         VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(vinnumber);
         VNextCustomersScreen customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer2);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
         vehicleinfoscreen.saveInspectionViaMenu();
         inspectionscreen.clickBackButton();
@@ -93,20 +94,20 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
         final String vinnumber = "TEST";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToMyInspectionsView();
         VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(vinnumber);
         VNextCustomersScreen customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer2);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
 
         customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
@@ -123,15 +124,15 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
         final String vinnumber = "TEST";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToMyInspectionsView();
         VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(vinnumber);
         VNextCustomersScreen customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
         customersScreen.switchToWholesaleMode();
@@ -141,7 +142,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer2);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
         vehicleinfoscreen.saveInspectionViaMenu();
         inspectionscreen.clickBackButton();
@@ -153,35 +154,35 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
         final String vinnumber = "TEST";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToMyInspectionsView();
         VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(vinnumber);
         final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         VNextCustomersScreen customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer2);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
         vehicleinfoscreen.saveInspectionViaMenu();
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickApproveInspectionMenuItem();
-        VNextApproveScreen approveScreen = new VNextApproveScreen(appiumdriver);
+        VNextApproveScreen approveScreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
         approveScreen.drawSignature();
         approveScreen.saveApprovedInspection();
-        inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+        inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
         vehicleinfoscreen.saveWorkOrderViaMenu();
 
@@ -194,40 +195,40 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
 
         final String vinnumber = "TEST";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToMyInspectionsView();
         VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
         customersscreen.switchToRetailMode();
         customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(vinnumber);
         final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         VNextCustomersScreen customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer2);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
         vehicleinfoscreen.saveInspectionViaMenu();
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickApproveInspectionMenuItem();
-        VNextApproveScreen approveScreen = new VNextApproveScreen(appiumdriver);
+        VNextApproveScreen approveScreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
         approveScreen.drawSignature();
         approveScreen.saveApprovedInspection();
-        inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+        inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(appiumdriver);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer2.getFullName());
         customersScreen = vehicleinfoscreen.clickSelectOwnerCell();
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehicleinfoscreen.getOwnerCellValue(), testcustomer.getFullName());
 
         vehicleinfoscreen.saveWorkOrderViaMenu();

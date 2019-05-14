@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
@@ -30,9 +31,9 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
 			VNextAppUtils.resetApp();
 			registerDevice();
 
-			VNextLoginScreen loginScreen = new VNextLoginScreen(appiumdriver);
+			VNextLoginScreen loginScreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
 			loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 		}
-		new VNextHomeScreen(appiumdriver);
+		new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 	}
 }

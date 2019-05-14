@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -32,25 +33,25 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 	public void testVerifyUserCanDeleteWOIfAllowDeleteON() { 
 		final String vinnumber = "TEST";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickNewWorkOrderPopupMenu();
 		
 		//VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		//VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
 		VNextWorkOrdersMenuScreen womenu = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		womenu.clickDeleteWorkOrderMenuButton();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationdlg.clickInformationDialogDontDeleteButton();
-		workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
+		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
 		womenu = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 				
@@ -75,22 +76,22 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String claimNumber = "4Bc";
 		final String policyNumber = "12345";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickNewWorkOrderPopupMenu();
 		
 		//VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		//VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO2);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		servicesscreen.swipeScreenLeft();
-		VNextWorkOrderClaimInfoScreen claiminfoscreen = new VNextWorkOrderClaimInfoScreen(appiumdriver);
+		VNextWorkOrderClaimInfoScreen claiminfoscreen = new VNextWorkOrderClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany(insuranceCompany);
 		claiminfoscreen.setClaimNumber(claimNumber);
 		claiminfoscreen.setPolicyNumber(policyNumber);
@@ -111,16 +112,16 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String searchtext = "E-357-00295";
 		final String vinnumber = "TEST";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
 		inspectionscreen.searchInpectionByFreeText(searchtext);
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspectionscreen.getFirstInspectionNumber());
 		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
 		
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -140,15 +141,15 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String vinnumber = "TEST";
 		final String servicesToSelect[] = { "Aluminum Panel", "Damage Service" };
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToMyInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();		
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -160,13 +161,13 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
 		
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (String service : servicesToSelect)
 			servicesscreen.selectService(service);
 		VNextWorkOrdersScreen workordersscreen = servicesscreen.saveWorkOrderViaMenu();
@@ -178,7 +179,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextWorkOrdersMenuScreen womenuscreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		vehicleinfoscreen = womenuscreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
-		servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String service : servicesToSelect)
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service));
@@ -190,7 +191,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 			description = "Verify user can create WO only from Approved Team Inspection")
 	public void testVerifyUserCanCreateWOOnlyFromApprovedTeamInspection() { 
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		
 		inspectionscreen.switchToTeamInspectionsView();
@@ -212,22 +213,22 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String vinnumber = "TEST";
 		final String servicesToSelect[] = { "Aluminum Panel", "Damage Service" };
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		claiminfoscreen.swipeScreenLeft();		
-		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (String service : servicesToSelect)
 			inspservicesscreen.selectService(service);
 		inspservicesscreen.saveInspectionViaMenu();
@@ -236,20 +237,20 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickApproveInspectionMenuItem();
-		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
+		VNextApproveScreen approvescreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
 		approvescreen.drawSignature();
 		approvescreen.clickSaveButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
 		
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String service : servicesToSelect)
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service));
@@ -267,15 +268,15 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 
 		final String vinnumber = "TEST";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();				
 		vehicleinfoscreen.saveInspectionViaMenu();
@@ -284,17 +285,17 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 
 		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickApproveInspectionMenuItem();
-		VNextApproveScreen approvescreen = new VNextApproveScreen(appiumdriver);
+		VNextApproveScreen approvescreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
 		approvescreen.drawSignature();
 		approvescreen.clickSaveButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspectionmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
 		
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		
@@ -302,9 +303,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workordersscreen.switchToMyWorkordersView();
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		workOrdersMenuScreen.clickDeleteWorkOrderMenuButton();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationdlg.clickInformationDialogDeleteButton();
-		workordersscreen = new VNextWorkOrdersScreen(appiumdriver);
+		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertFalse(workordersscreen.isWorkOrderExists(woNumber));
 		
 		workordersscreen.switchToTeamWorkordersView();
@@ -319,16 +320,16 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 
 		final String vinnumber = "TEST";
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickNewWorkOrderPopupMenu();
 
 		//VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		//VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -353,16 +354,16 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String vinnumber = "TEST";
 		final String newvinnumber = "77777777777777777";
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		workordersscreen.switchToMyWorkordersView();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -393,16 +394,16 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final int defaultCountForMoneyService = 1;
 
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		workordersscreen.switchToMyWorkordersView();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -412,7 +413,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (int i = 0; i < amountToSelect; i++)
 			availableServicesScreen.selectService(moneyservice);
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), amountToSelect);
@@ -427,7 +428,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
-		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), amountToSelect);
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -465,16 +466,16 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String totalprice = "$10.09";
 
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		workordersscreen.switchToMyWorkordersView();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
@@ -484,16 +485,16 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextServiceDetailsScreen serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(moneyservice);
 		serviceDetailsScreen.setServiceAmountValue(moneyserviceamaunt);
 		serviceDetailsScreen.setServiceQuantityValue(moneyservicequantity);
 		serviceDetailsScreen.clickServiceDetailsDoneButton();
-		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(percentageservice);
 		serviceDetailsScreen.setServiceAmountValue(percentageserviceamaunt);
 		serviceDetailsScreen.clickServiceDetailsDoneButton();
-		availableServicesScreen = new VNextAvailableServicesScreen(appiumdriver);
+		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), totalprice);
 		availableServicesScreen.saveWorkOrderViaMenu();
 		Assert.assertEquals(workordersscreen.getWorkOrderPriceValue(woNumber), totalprice,
@@ -518,20 +519,20 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String amountTotalEdited = "$26.26";
 
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		workordersscreen.switchToMyWorkordersView();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.switchToRetailMode();
 		customersscreen.selectCustomer(testcustomer);
-		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(appiumdriver);
+		VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_3_SERVICE_GROUPING);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.changeScreen("Services");
-		VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen(appiumdriver);
+		VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextAvailableGroupServicesList availableGroupServicesList = groupServicesScreen.openServiceGroup(servicegroup1);
 		availableGroupServicesList.selectService(moneyservice1);
 		availableGroupServicesList.clickBackButton();
@@ -545,7 +546,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
 		vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.changeScreen("Services");
-		groupServicesScreen = new VNextGroupServicesScreen(appiumdriver);
+		groupServicesScreen = new VNextGroupServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedGroupServicesScreen selectedGroupServicesScreen = groupServicesScreen.switchToSelectedGroupServicesView();
 		selectedGroupServicesScreen.uselectService(moneyservice1);
 		selectedGroupServicesScreen.switchToGroupServicesScreen();

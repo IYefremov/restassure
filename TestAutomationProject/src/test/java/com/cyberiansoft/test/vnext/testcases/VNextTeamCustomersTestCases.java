@@ -10,6 +10,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -18,6 +19,7 @@ import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextCustomersMenuScreen;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -26,12 +28,12 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/customers-testcases-data.json";
 
 
-    @BeforeClass(description="Team Customers Test Cases")
+    @BeforeClass(description = "Team Customers Test Cases")
     public void beforeClass() {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateNewCustomerWithEmptyFirstNameAndLastName(String rowID,
                                                                    String description, JSONObject testData) {
 
@@ -39,14 +41,14 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
 
         deleteCustomerOnBackOffice(testcustomer.getCompany(), "");
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
         newcustomerscreen.createNewCustomer(testcustomer);
-        customersscreen = new VNextCustomersScreen(appiumdriver);
+        customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         customersscreen.selectCustomerByCompanyName(testcustomer.getCompany());
-        VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(appiumdriver);
+        VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(DriverBuilder.getInstance().getAppiumDriver());
         newcustomerscreen = customersMenuScreen.clickEditCustomerMenuItem();
         Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());
         Assert.assertEquals(newcustomerscreen.getCustomerLastName(), testcustomer.getLastName());
@@ -61,7 +63,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
 
         BaseUtils.waitABit(45000);
 
-        webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+        WebDriver webdriver = DriverBuilder.getInstance().getDriver();
         webdriver.get(deviceOfficeUrl);
         BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(webdriver);
         loginpage.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
@@ -77,7 +79,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         webdriver.quit();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate(String rowID,
                                                                                String description, JSONObject testData) {
 
@@ -85,16 +87,16 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
 
         deleteCustomerOnBackOffice(testcustomer.getFirstName(), testcustomer.getLastName());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         AppiumUtils.setNetworkOff();
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
         newcustomerscreen.createNewCustomer(testcustomer);
         AppiumUtils.setAndroidNetworkOn();
-        customersscreen = new VNextCustomersScreen(appiumdriver);
+        customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
         statusscreen.updateMainDB();
         //homescreen = statusscreen.clickBackButton();
@@ -112,7 +114,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         customersscreen.clickBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyNewCustomerIsAvailableAfterDBUpdate(String rowID,
                                                               String description, JSONObject testData) {
 
@@ -120,14 +122,14 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
 
         deleteCustomerOnBackOffice(testcustomer.getFirstName(), testcustomer.getLastName());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
         newcustomerscreen.createNewCustomer(testcustomer);
-        customersscreen = new VNextCustomersScreen(appiumdriver);
+        customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
         statusscreen.updateMainDB();
         //homescreen = statusscreen.clickBackButton();
@@ -154,7 +156,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         else
             customerDelete = firstName;
 
-        webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+        WebDriver webdriver = DriverBuilder.getInstance().getDriver();
         webdriver.get(deviceOfficeUrl);
         BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(webdriver);
         loginpage.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),

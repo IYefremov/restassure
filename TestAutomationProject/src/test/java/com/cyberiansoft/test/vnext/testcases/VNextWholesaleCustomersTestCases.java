@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -29,7 +30,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		
 		final WholesailCustomer wholesalecustomer = new WholesailCustomer();
 		wholesalecustomer.setCompanyName("Test_Wholesale_BO");
-		
+		WebDriver
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
@@ -47,7 +48,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		newclientpage.createWholesaleClient(wholesalecustomer.getCompany());
 		DriverBuilder.getInstance().getDriver().quit();
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
 		//homescreen = statusscreen.clickBackButton();
@@ -56,7 +57,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		customersscreen.switchToWholesaleMode();
 		customersscreen.searchCustomerByName(wholesalecustomer.getCompany());
 		customersscreen.selectCustomer(wholesalecustomer);
-		VNextNewCustomerScreen newcustomerscreen = new VNextNewCustomerScreen(appiumdriver);
+		VNextNewCustomerScreen newcustomerscreen = new VNextNewCustomerScreen(DriverBuilder.getInstance().getAppiumDriver());
 		//newcustomerscreen.g
 	}
 	
@@ -66,7 +67,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		
 		final String wholesalecustomerNonExists = "XXXXXXXXXXXX";
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 			
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		customersscreen.switchToWholesaleMode();
@@ -75,7 +76,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 		Assert.assertTrue(customersscreen.isNothingFoundCaptionDisplayed());
 		customersscreen.clickCancelSearchButton();
 		customersscreen.clickBackButton();
-		homescreen = new VNextHomeScreen(appiumdriver);
+		homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 	}
 	
 	@Test(testName= "Test Case 63629:Verify user can select Wholesale customer when create Inspection", 
@@ -84,14 +85,14 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
 
 		final String vinnumber = "TEST";
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 		inspectionscreen.clickBackButton();

@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -16,6 +17,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -43,15 +45,15 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String notetext = "new notes";
 		final String quicknotenew = "Warranty expired";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -62,7 +64,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		notesscreen.addQuickNote(quicknote);
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
@@ -70,14 +72,14 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.setNoteText(notetext);
 		notesscreen.addQuickNote(quicknotenew);
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknotenew);
 		
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		homescreen = inspectionscreen.clickBackButton();
 		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
 		statusscreen.updateMainDB();
@@ -89,7 +91,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknotenew);
 		
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 	}
 	
@@ -103,15 +105,15 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		final String notetext = "new notes";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToMyInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -126,7 +128,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		notesscreen.addFakeImageNote();
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 		inspectionscreen.switchToTeamInspectionsView();
@@ -136,7 +138,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}
@@ -153,15 +155,15 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		final String notetext = "new notes";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -177,7 +179,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		notesscreen.addFakeImageNote();
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
  		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 		inspectionscreen.switchToMyInspectionsView();
@@ -188,7 +190,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 	}
 	
@@ -201,15 +203,15 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String[] quicknotes = { quicknote, "Warranty expired" };
 		final String notetext = "new notes";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -223,7 +225,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			notesscreen.addQuickNote(quicknote);
 		
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
@@ -232,7 +234,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			notesfinal = notesfinal + quicknote + "\n";
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notesfinal.trim());
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 	}
 	
@@ -243,15 +245,15 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final String vinnumber = "123";
 		final int numberOfQuickNotesToAdd = 4;
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -262,7 +264,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		VNextNotesScreen notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
 		ArrayList<String> addednotes = notesscreen.addNumberOfQuickNotes(numberOfQuickNotesToAdd);
 		AppiumUtils.clickHardwareBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
 		notesscreen = inspmenuscreen.clickNotesInspectionMenuItem();
@@ -270,7 +272,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 			Assert.assertTrue(notesscreen.getSelectedNotes().contains(quicknote));
 		}
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 	}
 	
@@ -283,15 +285,15 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 
 		final String notetext = "new notes";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -305,7 +307,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		notesscreen.addFakeImageNote();
 		AppiumUtils.clickHardwareBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionscreen.isNotesIconPresentForInspection(inspnumber));
 			
@@ -314,7 +316,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		Assert.assertEquals(notesscreen.getSelectedNotes(), notetext + "\n" + quicknote);
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), 2);
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 	}
 	
@@ -327,15 +329,15 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final int numberOfImages = 3;
 
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();		
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -351,7 +353,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.deletePictureFromNotes();
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), numberOfImages-1);
 		notesscreen.clickNotesBackButton();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.switchToMyInspectionsView();
 		inspectionscreen.clickBackButton();
 	}
@@ -367,22 +369,22 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		final int addedpictures = 1;
 		final String vinnumber = "123";
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToTeamInspectionsView();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		customersscreen.switchToWholesaleMode();
 		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
+		VNextVisualScreen visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 		visualscreen.clickAddServiceButton();
 		//VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();
-		VNextSelectDamagesScreen selectdamagesscreen = new VNextSelectDamagesScreen(appiumdriver);
+		VNextSelectDamagesScreen selectdamagesscreen = new VNextSelectDamagesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		selectdamagesscreen.selectAllDamagesTab();
 		VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(selectdamage);
 		visualscreen = visualservicesscreen.selectCustomService(servicepercentage);
@@ -395,18 +397,19 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		notesscreen.addFakeImageNote();
 		Assert.assertEquals(notesscreen.getNumberOfAddedNotesPictures(), addedpictures);
 		notesscreen.clickNotesBackButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
+		servicedetailsscreen = new VNextServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextQuestionsScreen questionsScreen = servicedetailsscreen.clickServiceQuestionSection("Test Section");
 		questionsScreen.setAllRequiredQuestions("test 1");
 		questionsScreen.clickDoneButton();
-		servicedetailsscreen = new VNextServiceDetailsScreen(appiumdriver);
+		servicedetailsscreen = new VNextServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		servicedetailsscreen.clickServiceDetailsDoneButton();
-		visualscreen = new VNextVisualScreen(appiumdriver);
+		visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 		visualscreen.clickDamageCancelEditingButton();
 		inspectionscreen = visualscreen.saveInspectionViaMenu();
 		inspectionscreen.clickBackButton();
 
 		BaseUtils.waitABit(30000);
+		WebDriver
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,

@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.email.EmailUtils;
 import com.cyberiansoft.test.email.emaildata.EmailFolder;
 import com.cyberiansoft.test.email.emaildata.EmailHost;
@@ -45,7 +46,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 
 		final String vinnumber = "TEST";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		if (!customersscreen.isCustomerExists(testcustomer)) {
@@ -53,9 +54,9 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 			newcustomerscreen.createNewCustomer(testcustomer);
 		} else
 			customersscreen.selectCustomer(testcustomer);
-		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		//insptypeslist.selectInspectionType(inspType);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();		
 		inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
@@ -63,7 +64,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
 		emailscreen.sendEmail();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 
 		final String inspectionreportfilenname = inspnumber + ".pdf";
@@ -94,7 +95,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		final String vehiclepartname = "Left Fender";
 		final String vehiclepartname2 = "Trunk Lid";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		if (!customersscreen.isCustomerExists(testcustomer)) {
@@ -102,33 +103,33 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 			newcustomerscreen.createNewCustomer(testcustomer);
 		} else
 			customersscreen.selectCustomer(testcustomer);
-		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		//insptypeslist.selectInspectionType(inspType);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
 		VNextAvailableServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
 		pricematrixesscreen.clickScreenBackButton();
-		servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		vehiclepartsscreen = selectedServicesScreen.openSelectedMatrixServiceDetails(matrixservice);
 		
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		vehiclepartinfoscreen.clickScreenBackButton();
-		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname2);
 		vehiclepartinfoscreen.clickScreenBackButton();
 		vehiclepartinfoscreen.clickScreenBackButton();
-		selectedServicesScreen = new VNextSelectedServicesScreen(appiumdriver);
+		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
 		emailscreen.sendEmail();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 
 		final String inspectionreportfilenname = inspnumber + ".pdf";
@@ -163,7 +164,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		final String vehiclepartname = "Left Fender";
 		final String vehiclepartname2 = "Trunk Lid";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		if (!customersscreen.isCustomerExists(testcustomer)) {
@@ -171,33 +172,33 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 			newcustomerscreen.createNewCustomer(testcustomer);
 		} else
 			customersscreen.selectCustomer(testcustomer);
-		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		//insptypeslist.selectInspectionType(inspType);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
 		VNextAvailableServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
 		pricematrixesscreen.clickScreenBackButton();
-		servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectservicesscreen = servicesscreen.switchToSelectedServicesView();
 		vehiclepartsscreen = selectservicesscreen.openSelectedMatrixServiceDetails(matrixservice);
 		
 		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
 		AppiumUtils.clickHardwareBackButton();
-		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname2);
 		AppiumUtils.clickHardwareBackButton();
 		AppiumUtils.clickHardwareBackButton();
-		selectservicesscreen = new VNextSelectedServicesScreen(appiumdriver);
+		selectservicesscreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen = selectservicesscreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
 		emailscreen.sendEmail();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 
 		final String inspectionreportfilenname = inspnumber + ".pdf";
@@ -232,7 +233,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		final String[] moneyservicesamounts = { "$0.10", "$0.98" };
 		final String total = "$1.08";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
 		if (!customersscreen.isCustomerExists(testcustomer)) {
@@ -240,9 +241,9 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 			newcustomerscreen.createNewCustomer(testcustomer);
 		} else
 			customersscreen.selectCustomer(testcustomer);
-		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(appiumdriver);
+		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		//insptypeslist.selectInspectionType(inspType);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
 		VNextAvailableServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
@@ -258,7 +259,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
 		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
 		emailscreen.sendEmail();
-		inspectionscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionscreen.clickBackButton();
 
 		final String inspectionreportfilenname = inspnumber + ".pdf";

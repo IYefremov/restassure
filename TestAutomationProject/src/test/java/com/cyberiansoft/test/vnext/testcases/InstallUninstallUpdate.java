@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
@@ -18,7 +19,7 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistrationAn
 	@Test(testName= "Test Case 35900:vNext - Verify 'Password' dialog is shown when user selects an employee from the list, Test Case 35903:vNext - Close Log in dialog", 
 			description = "Verify 'Password' dialog is shown when user selects an employee from the list, Test Case 35903:vNext - Close Log in dialog")
 	public void testVerifyPasswordDialogIsShownWhenUserSelectsAnEmployeeFromTheList() {
-		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
 		loginscreen.selectEmployee(testEmployee);
 		loginscreen.tapLoginDialogCancelButton();	
 	}
@@ -28,13 +29,13 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistrationAn
 		
 		final String testEmployeeWrongPsw = "111222";
 		
-		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
 		loginscreen.incorrectUserLogin(testEmployee, testEmployeeWrongPsw);
 	}
 	
 	@Test(testName= "Test Case 35904:vNext - Close Log in dialog with Hardware 'Back' button", description = "Close Log in dialog with Hardware 'Back' button")
 	public void testCloseLogInDialogWithHardwareBackButton() {		
-		VNextLoginScreen loginscreen = new VNextLoginScreen(appiumdriver);
+		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
 		loginscreen.selectEmployee(testEmployee);
 		AppiumUtils.clickHardwareBackButton();
 		loginscreen.waitUserListVisibility();
@@ -43,9 +44,9 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistrationAn
 	@Test(testName= "Test Case 35901:vNext - Log in from the list of available users (success case)", description = "Log in from the list of available users (success case)")
 	public void testLogInSuccessCase() {
 		VNextAppUtils.restartApp();
-		//VNextLoginScreen loginScreen = new VNextLoginScreen(appiumdriver);
+		//VNextLoginScreen loginScreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
 		//loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
-		new VNextHomeScreen(appiumdriver);
+		new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 	}
 
 }

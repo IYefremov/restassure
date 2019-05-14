@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,7 +15,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 	@Test(testName= "Test Case 36311:vNext - Manual - Verify outgoing sync message is pushed into queue when save inspection", 
 			description = "Manual - Verify outgoing sync message is pushed into queue when save inspection")
 	public void testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveInspection() {
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -27,7 +28,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 	@Test(testName= "Test Case 36312:vNext - Manual - Verify outgoing sync message is pushed into queue when save several inspectiontypes",
 			description = "Manual - Verify outgoing sync message is pushed into queue when save several inspectiontypes")
 	public void testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveSeveralInspection() {
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -40,7 +41,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 	@Test(testName= "Test Case 36449:vNext - Send message from the queue in Automatic Mode (success path)", 
 			description = "Send message from the queue in Automatic Mode (success path)")
 	public void testSendMessageFromTheQueueInAutomaticModeSuccessPath() {
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOff().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -52,7 +53,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 	@Test(testName= "Test Case 36490:vNext - Send message from the queue in Manual Mode (success path)", 
 			description = "Send message from the queue in Manual Mode (success path)")
 	public void testSendMessageFromTheQueueInManualModeSuccessPath() {
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOn().clickBackButton();
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -67,7 +68,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 	@Test(testName= "Test Case 36510:vNext - Send messages automatically from the queue in Automatic Mode after reconnect to network", 
 			description = "Send messages automatically from the queue in Automatic Mode after reconnect to network")
 	public void testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork() {
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		AppiumUtils.setNetworkOff();
 		BaseUtils.waitABit(13000);
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
@@ -84,7 +85,7 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 	@Test(testName= "Test Case 36497:vNext - Send message from the queue in Automatic Mode (fail path)", 
 			description = "Send message from the queue in Automatic Mode (fail path)")
 	public void testSendMessageFromTheQueueInAutomaticModeFailPath() {
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		AppiumUtils.setNetworkOff();
 		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
 		homescreen = settingsscreen.setManualSendOff().clickBackButton();

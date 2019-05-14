@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -29,11 +30,11 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		final String vehiclemodel= "Escape";
 		final String vehicleyear = "2011";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(testVIN);
 		BaseUtils.waitABit(2000);
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), testVIN);
@@ -43,122 +44,122 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 43511:vNext - Save inspection using option from hamburger menu (general case)", 
+
+	@Test(testName= "Test Case 43511:vNext - Save inspection using option from hamburger menu (general case)",
 			description = "Save inspection using option from hamburger menu (general case)")
-	public void testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase() { 
-		
-		final String[] secondservices = { "Bumper Repair", "Other" }; 
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+	public void testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase() {
+
+		final String[] secondservices = { "Bumper Repair", "Other" };
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(testVIN);
 		VNextAvailableServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.selectServices(secondservices);
 		inspservicesscreen.clickSaveInspectionMenuButton();
-		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);
+		inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionsscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 39549:vNext - Inspections - Navigate to screen with required fields on 'Save Inspection' called from humburger menu (first step)", 
+
+	@Test(testName= "Test Case 39549:vNext - Inspections - Navigate to screen with required fields on 'Save Inspection' called from humburger menu (first step)",
 			description = "Navigate to screen with required fields on 'Save Inspection' called from humburger menu (first step)")
-	public void testNavigateToScreenWithRequiredFieldsOnSaveInspectionCalledFromHumburgerMenu_FirstStep() { 
-	
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+	public void testNavigateToScreenWithRequiredFieldsOnSaveInspectionCalledFromHumburgerMenu_FirstStep() {
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.clickCancelMenuItem();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertTrue(msg.contains(VNextAlertMessages.CANCEL_INSPECTION_ALERT));
 		vehicleinfoscreen.swipeScreenLeft();
-		informationdlg = new VNextInformationDialog(appiumdriver);
+		informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.VIN_REQUIRED_MSG);
-		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 43330:vNext - Navigate by swipe through wizard steps for Inspeciton", 
+
+	@Test(testName= "Test Case 43330:vNext - Navigate by swipe through wizard steps for Inspeciton",
 			description = "Navigate by swipe through wizard steps for Inspeciton")
-	public void testNavigateBySwipeThroughWizardStepsForInspeciton() { 
-	
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+	public void testNavigateBySwipeThroughWizardStepsForInspeciton() {
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.setVIN(testVIN);
 		VNextAvailableServicesScreen inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.clickSaveButton();
-		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);	
-		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnumber);		
+		inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnumber);
 		inspectionsscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 43331:vNext - Navigate through wizard steps for Inspection by hardware 'Back' button", 
+
+	@Test(testName= "Test Case 43331:vNext - Navigate through wizard steps for Inspection by hardware 'Back' button",
 			description = "Navigate through wizard steps for Inspection by hardware 'Back' button")
-	public void testNavigateThroughWizardStepsForInspectionByHardwareBackButton() { 
-	
+	public void testNavigateThroughWizardStepsForInspectionByHardwareBackButton() {
+
 		final String servicename = "Dent Repair";
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(testVIN);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		AppiumUtils.clickHardwareBackButton();
-		claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		AppiumUtils.clickHardwareBackButton();
-		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.selectService(servicename);
 		vehicleinfoscreen = inspservicesscreen.goBackToInspectionVehicleInfoScreen();
 		AppiumUtils.clickHardwareBackButton();
 		BaseUtils.waitABit(3000);
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.ARE_YOU_SURE_STOP_CREATING_INSPECTION);
 		vehicleinfoscreen.clickSaveInspectionMenuButton();
-		
-		inspectionsscreen = new VNextInspectionsScreen(appiumdriver);	
-		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnumber);		
+
+		inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnumber);
 		inspectionsscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 43512:vNext - Edit inspection Vehicle Info", 
+
+	@Test(testName= "Test Case 43512:vNext - Edit inspection Vehicle Info",
 			description = "Edit inspection Vehicle Info")
-	public void testEditInspectionVehicleInfo() { 
-	
+	public void testEditInspectionVehicleInfo() {
+
 		final String newVIN = "1GCJTCFE7B8448756";
 		final String _make = "Chevrolet";
 		final String _model = "Colorado";
 		final String _year = "2011";
 		final String milage = "34561";
 		final String freetext = "Lorem ipsum dolor sit amet";
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(testVIN);
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany(testInsurenceCompany);
 		inspectionsscreen = claiminfoscreen.saveInspectionViaMenu();
 		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
@@ -168,7 +169,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleinfoscreen.setRoNo(freetext);
 		vehicleinfoscreen.setLicPlate(milage);
 		inspectionsscreen = vehicleinfoscreen.saveInspectionViaMenu();
-		
+
 		vehicleinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
 		Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
 		Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
@@ -181,19 +182,19 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 43525:vNext - Create customer along with Inspection", 
+
+	@Test(testName= "Test Case 43525:vNext - Create customer along with Inspection",
 			description = "Create customer along with Inspection")
-	public void testCreateCustomerAlongWithInspection() { 
-		
+	public void testCreateCustomerAlongWithInspection() {
+
 		final RetailCustomer customer = new RetailCustomer("Eric", "Burn");
 		final String customeraddress = "Stryis'ka, 223";
 		final String customercity = "L'viv";
 		final String customerzip = "79051";
 		final String customeremail = "osmak.oksana+408222@gmail.com";
-		
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
@@ -205,14 +206,14 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		newcustomerscreen.setCustomerZIP(customerzip);
 		newcustomerscreen.clickSaveCustomerButton();
 		BaseUtils.waitABit(7000);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(vehicleinfoscreen.getCustomercontextValue(), customer.getFullName());
 		final String inspnum = vehicleinfoscreen.getNewInspectionNumber();
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany(testInsurenceCompany);
 		claiminfoscreen.swipeScreenRight();
-		vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionsscreen = vehicleinfoscreen.saveInspectionfromFirstScreen();
 		Assert.assertEquals(inspectionsscreen.getFirstInspectionNumber(), inspnum);
 		Assert.assertEquals(inspectionsscreen.getInspectionCustomerValue(inspnum), customer.getFullName());
@@ -227,37 +228,37 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 	}
-	
+
 	@Test(testName= "Automate Test Case 75366:Verify user can archive created Inspection",
 			description = "Verify user can archive created Inspection")
 	public void testVerifyUserCanArchiveCreatedInspection() {
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspinfoscreen.setVIN(testVIN);
 		final String inspnumber = inspinfoscreen.getNewInspectionNumber();
 		inspinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany(testInsurenceCompany);
 		inspectionsscreen = claiminfoscreen.saveInspectionViaMenu();
-		
+
 		inspectionsscreen = inspectionsscreen.archiveInspection(inspnumber);
 		Assert.assertFalse(inspectionsscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
 			" still exists, but shouldn't");
 		inspectionsscreen.clickBackButton();
-		
+
 	}
-	
+
 	@Test(testName= "Automate Test Case 75369:Verify user can archive several Inspections",
 			description = "Verify user can archive several Inspections")
 	public void testVerifyUserCanArchiveSeveralInspections() {
-		
+
 		final int INSP_TO_ARCHIVE = 3;
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		int inspnumbers = inspectionsscreen.getNumberOfInspectionsInList();
 		

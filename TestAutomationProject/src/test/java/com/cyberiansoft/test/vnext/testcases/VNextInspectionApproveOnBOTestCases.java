@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
@@ -16,6 +17,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextConfirmationDialog;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -56,11 +58,11 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		final String additionalservice = "Aluminum Upcharge";
 		final String insppriceexp = "214.25";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspinfoscreen.setVIN(VIN);
 		Assert.assertEquals(inspinfoscreen.getMakeInfo(), _make);
 		Assert.assertEquals(inspinfoscreen.getModelInfo(), _model);		
@@ -73,13 +75,13 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 			
 		inspnumber = inspinfoscreen.getNewInspectionNumber();
 		inspinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany(insurencecompany);
 		claiminfoscreen.setClaimNumber(claimNumber);
 		claiminfoscreen.setPolicyNumber(policyNumber);
 		claiminfoscreen.setDeductibleValue(deductibleValue);
 		inspinfoscreen.changeScreen("Services");
-		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		//selectservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
@@ -89,7 +91,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
 		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
 		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
@@ -110,7 +112,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		final String inspStausExpected = "Approved";
  		
 		createInspectionWithPopulatedVehicleInfoForCurrentDay();
-		
+		WebDriver
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
@@ -143,7 +145,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		final String inspStausExpected = "Declined";
  		
 		createInspectionWithPopulatedVehicleInfoForCurrentDay();
-		
+		WebDriver
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
@@ -191,11 +193,11 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		
 		final String inspStatus = "Archived";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspinfoscreen.setVIN(VIN);
 		Assert.assertEquals(inspinfoscreen.getMakeInfo(), _make);
 		Assert.assertEquals(inspinfoscreen.getModelInfo(), _model);		
@@ -208,13 +210,13 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		
 		final String archivedinspnumber = inspinfoscreen.getNewInspectionNumber();
 		inspinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
+		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany(insurencecompany);
 		claiminfoscreen.setClaimNumber(claimNumber);
 		claiminfoscreen.setPolicyNumber(policyNumber);
 		claiminfoscreen.setDeductibleValue(deductibleValue);
 		inspinfoscreen.changeScreen("Services");
-		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(moneyservices);
 		VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
@@ -224,7 +226,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
 		vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
 		vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-		vehiclepartsscreen = new VNextVehiclePartsScreen(appiumdriver);
+		vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
 		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
@@ -235,7 +237,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 
 		inspectionsscreen.archiveInspection(archivedinspnumber);
 		inspectionsscreen.clickBackButton();
-		
+		WebDriver
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceOfficeUrl);
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,

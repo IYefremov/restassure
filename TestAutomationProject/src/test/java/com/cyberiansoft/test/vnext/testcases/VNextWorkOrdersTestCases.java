@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases;
 
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleVINHistoryScreen;
@@ -23,25 +24,25 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 	
 		final String[] services = { "Bumper Repair", "Other" }; 
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(testVIN);
 		//AppiumUtils.clickHardwareBackButton();
 		vehicleinfoscreen.clickScreenForwardButton();
-		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(appiumdriver);
+		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleVINHistoryScreen.clickBackButton();
 		vehicleinfoscreen.changeScreen("Services");
-		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		servicesscreen.selectServices(services);
 		workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		VNextWorkOrdersMenuScreen menuscreen = workordersscreen.clickOnWorkOrderByNumber(wonumber);
 		vehicleinfoscreen = menuscreen.clickEditWorkOrderMenuItem();
 		vehicleinfoscreen.changeScreen("Services");
-		servicesscreen = new VNextAvailableServicesScreen(appiumdriver);
+		servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (String servicename : services)
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(servicename));

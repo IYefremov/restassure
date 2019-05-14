@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -43,33 +44,33 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanPresetRetailCustomer(String rowID,
                                                       String description, JSONObject testData) {
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         if (!customersscreen.isCustomerExists(retailCustomer1)) {
             VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
             newCustomerScreen.createNewCustomer(retailCustomer1);
-            customersscreen = new VNextCustomersScreen(appiumdriver);
+            customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
         customersscreen.setCustomerAsDefault(retailCustomer1);
 
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanPresetWholesaleCustomer(String rowID,
                                                          String description, JSONObject testData) {
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToWholesaleMode();
         customersscreen.setCustomerAsDefault(testwholesailcustomer);
 
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), testwholesailcustomer.getFullName());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), testwholesailcustomer.getFullName());
     }
 
@@ -82,7 +83,7 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
             add(retailCustomer2);
         }};
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         for (RetailCustomer retailCustomer : retailCustomers) {
             VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
@@ -90,13 +91,13 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
             if (!customersscreen.isCustomerExists(retailCustomer)) {
                 VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
                 newCustomerScreen.createNewCustomer(retailCustomer);
-                customersscreen = new VNextCustomersScreen(appiumdriver);
+                customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
             }
             customersscreen.setCustomerAsDefault(retailCustomer);
 
             Assert.assertEquals(customersscreen.getDefaultCustomerValue(), retailCustomer.getFullName());
             customersscreen.clickBackButton();
-            homescreen = new VNextHomeScreen(appiumdriver);
+            homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
             Assert.assertEquals(homescreen.getDefaultCustomerValue(), retailCustomer.getFullName());
         }
     }
@@ -107,25 +108,25 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         if (!customersscreen.isCustomerExists(retailCustomer1)) {
             VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
             newCustomerScreen.createNewCustomer(retailCustomer1);
-            customersscreen = new VNextCustomersScreen(appiumdriver);
+            customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
         customersscreen.setCustomerAsDefault(retailCustomer1);
 
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
 
         VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
         VNextInspectionTypesList inspectionTypesList = inspectionsScreen.clickAddInspectionWithPreselectedCustomerButton();
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.saveInspectionViaMenu();
@@ -140,25 +141,25 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         if (!customersscreen.isCustomerExists(retailCustomer1)) {
             VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
             newCustomerScreen.createNewCustomer(retailCustomer1);
-            customersscreen = new VNextCustomersScreen(appiumdriver);
+            customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
         customersscreen.setCustomerAsDefault(retailCustomer1);
 
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
 
         VNextWorkOrdersScreen workOrdersScreen = homescreen.clickWorkOrdersMenuItem();
         VNextWorkOrderTypesList workOrderTypesList = workOrdersScreen.clickAddWorkOrdernWithPreselectedCustomerButton();
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.saveWorkOrderViaMenu();
@@ -170,26 +171,26 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanCancelPresetCustomer(String rowID,
                                                       String description, JSONObject testData) {
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         if (!customersscreen.isCustomerExists(retailCustomer1)) {
             VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
             newCustomerScreen.createNewCustomer(retailCustomer1);
-            customersscreen = new VNextCustomersScreen(appiumdriver);
+            customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
         customersscreen.setCustomerAsDefault(retailCustomer1);
 
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
         homescreen.clickCustomersMenuItem();
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
         customersscreen.resetPresetCustomer();
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), defaultRetailCustomer.getFullName().trim());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), defaultRetailCustomer.getFullName().trim());
 
     }
@@ -201,33 +202,33 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
         WholesailCustomer defaultWholesailCustomer = new WholesailCustomer();
         defaultWholesailCustomer.setCompanyName("Wholesale");
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         if (!customersscreen.isCustomerExists(retailCustomer1)) {
             VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
             newCustomerScreen.createNewCustomer(retailCustomer1);
-            customersscreen = new VNextCustomersScreen(appiumdriver);
+            customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
         customersscreen.setCustomerAsDefault(retailCustomer1);
 
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), retailCustomer1.getFullName());
         homescreen.clickCustomersMenuItem();
 
         customersscreen.switchToWholesaleMode();
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), defaultWholesailCustomer.getFullName());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), defaultWholesailCustomer.getFullName());
 
         homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
         Assert.assertEquals(customersscreen.getDefaultCustomerValue(), defaultRetailCustomer.getFullName().trim());
         customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(appiumdriver);
+        homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(homescreen.getDefaultCustomerValue(), defaultRetailCustomer.getFullName().trim());
     }
 }
