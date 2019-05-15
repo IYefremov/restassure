@@ -149,4 +149,16 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		return appiumdriver.findElement(By.xpath("//*[@id='total']")).getText().trim();
 	}
 
+	public boolean isSaveButtonVisible() {
+		return saveinspectionmenu.isDisplayed();
+	}
+
+	public boolean isCancelButtonVisible() {
+		return cancelinspectionmenu.isDisplayed();
+	}
+
+	public boolean isNotesButtonVisible() {
+		return inspectionnotesmenu.isDisplayed();
+	}
+
 }

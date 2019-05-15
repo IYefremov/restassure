@@ -9,8 +9,10 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -27,11 +29,14 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -45,10 +50,13 @@ import java.util.List;
 
 public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-inspections-testcases-data.json";
     private List<InspectionDTO> inspectionDTOs = new ArrayList<>();
 
     @BeforeClass(description = "Team Inspections Test Cases")
     public void beforeClass() throws Exception {
+        JSONDataProvider.dataFile = DATA_FILE;
+
 		/*inspectionDTOs = VNextAPIUtils.getInstance().generateInspections("team-base-inspection-data1.json",
 				InspectionTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,
 				appLicenseEntity, 30
@@ -70,18 +78,14 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         }
     }
 
-    @Test(testName = "Test Case 64494:Verify user can approve Invoice after creating, "
-            + "Test Case 64497:Verify user can create Invoice from Inspection, "
-            + "Test Case 64266:Verify user can create Invoice in status 'New'",
-            description = "Verify user can approve Invoice after creating, "
-                    + "Verify user can create Invoice from Inspection, "
-                    + "Verify user can create Invoice in status 'New'")
-    public void testVerifyUserCanCreateInvoiceFromInspections() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanCreateInvoiceFromInspections(String rowID,
+                                                                                                   String description, JSONObject testData) {
 
-        final String vinnumber = "TEST";
-        final String ponumber = "12345";
+        Inspection inspectionData = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
+        Invoice invoiceData = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 
-        final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
+        final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData.getInspectionData().getVinNumber());
 
         VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(inspectionscreen.getInspectionStatusValue(inspnumber), VNextInspectionStatuses.NEW);
@@ -106,23 +110,23 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR2);
 
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(ponumber);
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
+        invoiceinfoscreen.setInvoicePONumber(invoiceData.getInvoiceData().getInvoicePONumber());
+        final String invoicNnumber = invoiceinfoscreen.getInvoiceNumber();
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoice();
         invoicesscreen.switchToMyInvoicesView();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
+        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicNnumber), VNextInspectionStatuses.NEW);
 
         invoicesscreen.clickBackButton();
     }
 
 
-    @Test(testName = "Test Case 66276:Verify Team Inspection displays on the screen",
-            description = "Verify Team Inspection displays on the screen")
-    public void testVerifyTeamInspectionDisplaysOnTheScreen() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyTeamInspectionDisplaysOnTheScreen(String rowID,
+                                                              String description, JSONObject testData) {
 
-        final String vinnumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
+        final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData.getVinNumber());
         VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionscreen.switchToTeamInspectionsView();
         Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
@@ -132,9 +136,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Test Case 66286:Verify when user go back from inspectiontypes screen to Home we save last selected mode",
-            description = "Verify when user go back from inspectiontypes screen to Home we save last selected mode")
-    public void testVerifyWhenUserGoBackFromInspectionsScreenToHomeWeSaveLastSelectedMode() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyWhenUserGoBackFromInspectionsScreenToHomeWeSaveLastSelectedMode(String rowID,
+                                                            String description, JSONObject testData) {
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -151,14 +155,11 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Test Case 66295:Verify user can create Inspection without Team Sharing",
-            description = "Verify user can create Inspection without Team Sharing")
-    public void testVerifyUserCanCreateInspectionWithoutTeamSharing() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanCreateInspectionWithoutTeamSharing(String rowID,
+                                                            String description, JSONObject testData) {
 
-        final String vinnumber = "TEST";
-        final String insuranceCompany = "Oranta";
-        final String claimNumber = "123";
-        final String policyNumber = "099";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -169,28 +170,28 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.swipeScreenLeft();
         VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        claiminfoscreen.selectInsuranceCompany(insuranceCompany);
-        claiminfoscreen.setClaimNumber(claimNumber);
-        claiminfoscreen.setPolicyNumber(policyNumber);
+        claiminfoscreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+        claiminfoscreen.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
+        claiminfoscreen.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
         inspectionscreen = claiminfoscreen.saveInspectionViaMenu();
 
         inspectionscreen.switchToTeamInspectionsView();
         Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Team inspection exists: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertFalse(inspectionscreen.isInspectionExists(inspNumber), "Team inspection exists: " + inspNumber);
         inspectionscreen.switchToMyInspectionsView();
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Test Case 66284:Verify only when user tap 'search' button we perform search and refresh team inspectiontypes list",
-            description = "Verify only when user tap 'search' button we perform search and refresh team inspectiontypes list")
-    public void testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList(String rowID,
+                                                                    String description, JSONObject testData) {
 
-        final String vinnumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -200,21 +201,21 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 
         inspectionscreen.switchToTeamInspectionsView();
         Assert.assertTrue(inspectionscreen.isTeamInspectionsViewActive());
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
         inspectionscreen.searchInpectionByFreeText(testwholesailcustomer.getFullName());
         Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
         List<String> inspsCustomers = inspectionscreen.getAllInspectionsCustomers();
         for (String inspCustomers : inspsCustomers) {
             Assert.assertTrue(inspCustomers.contains(testwholesailcustomer.getFullName()));
         }
-        final String inspSubNumber = inspnumber.substring(6, inspnumber.length());
+        final String inspSubNumber = inspNumber.substring(6, inspNumber.length());
         inspectionscreen.searchInpectionByFreeText(inspSubNumber);
         Assert.assertTrue(inspectionscreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
         List<String> inspsNumbers = inspectionscreen.getAllInspectionsNumbers();
@@ -227,11 +228,11 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Test Case 66858:Verify user can view Team Inspection",
-            description = "Verify user can view Team Inspection")
-    public void testVerifyUserCanViewTeamInspection() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanViewTeamInspection(String rowID,
+                                                    String description, JSONObject testData) {
 
-        final String vinnumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -241,27 +242,25 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 
         inspectionscreen.switchToTeamInspectionsView();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
-        VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
+        VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
         VNextViewScreen viewscreen = inspmenuscreen.clickViewInspectionMenuItem();
         viewscreen.clickScreenBackButton();
         inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Test Case 67290:Verify user can create Team Inspection, "
-            + "Test Case 67291:Verify Team Inspection save into mobile device and BO immediately if internet connection is available",
-            description = "Verify user can create Team Inspection, "
-                    + "Verify Team Inspection save into mobile device and BO immediately if internet connection is available")
-    public void testVerifyUserCanCreateTeamInspection() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanCreateTeamInspection(String rowID,
+                                                    String description, JSONObject testData) {
 
-        final String vinnumber = "123";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -272,24 +271,20 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
         homescreen = inspectionscreen.clickBackButton();
         Assert.assertFalse(homescreen.isQueueMessageVisible());
     }
 
-    @Test(testName = "Test Case 67292:Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
-            + "Test Case 67299:Verify Inspection displays on the list after DB update and after reconnect Internet," +
-            "Test Case 67320:Verify user can't send sms if internet connection is lost",
-            description = "Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, "
-                    + "Verify Inspection displays on the list after DB update and after reconnect Internet," +
-                    "Verify user can't send sms if internet connection is lost")
-    public void testVerifyTeamInspectionSavedIntoMobileDeviceAndBOLaterViaOutgoingMessageIfThereIsNoConnection() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyTeamInspectionSavedIntoMobileDeviceAndBOLaterViaOutgoingMessageIfThereIsNoConnection(String rowID,
+                                                      String description, JSONObject testData) {
 
-        final String vinnumber = "123";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
@@ -309,8 +304,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.clickSaveInspectionMenuButton();
         informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         informationdlg.clickInformationDialogOKButton();
@@ -323,10 +318,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertFalse(homescreen.isQueueMessageVisible());
         inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToTeamInspectionsView();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
         inspectionscreen.switchToMyInspectionsView();
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber));
         homescreen = inspectionscreen.clickBackButton();
 
         VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
@@ -335,20 +330,18 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToTeamInspectionsView();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
         inspectionscreen.switchToMyInspectionsView();
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber));
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Test Case 67293:Verify saving team inspection online doesn't affected to Settings > Manual send optionб" +
-            "Test Case 67295:Verify Inspection displays in the list after DB updating",
-            description = "Verify saving team inspection online doesn't affected to Settings > Manual send optionб" +
-                    "Verify Inspection displays in the list after DB updating")
-    public void testVerifySavingTeamInspectionOnlineDoesntAffectedToSettingsManualSendOption() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifySavingTeamInspectionOnlineDoesntAffectedToSettingsManualSendOption(String rowID,
+                                                                                             String description, JSONObject testData) {
 
-        final String vinnumber = "123";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
@@ -362,13 +355,13 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
         inspectionscreen.switchToMyInspectionsView();
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber));
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber));
         homescreen = inspectionscreen.clickBackButton();
 
         VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
@@ -377,18 +370,19 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         inspectionscreen = homescreen.clickInspectionsMenuItem();
         inspectionscreen.switchToTeamInspectionsView();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
         inspectionscreen.switchToMyInspectionsView();
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Test Case 67330:Verify user can edit Inspection if we have no internet connection",
-            description = "Verify user can edit Inspection if we have no internet connection")
-    public void testVerifyUserCanEditInspectionIfWeHaveNoInternetConnection() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanEditInspectionIfWeHaveNoInternetConnection(String rowID,
+                                                                            String description, JSONObject testData) {
 
-        final String vinnumber = "123";
-        final String newvinnumber = "TEST456";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String newVinNumber = "1FMCU0DG4BK830800";
+        final String queueMessage = "1";
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -399,33 +393,34 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
-        VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
+        VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
         vehicleinfoscreen = inspmenuscreen.clickEditInspectionMenuItem();
         AppiumUtils.setNetworkOff();
-        vehicleinfoscreen.setVIN(newvinnumber);
+        vehicleinfoscreen.setVIN(newVinNumber);
         vehicleinfoscreen.clickSaveInspectionMenuButton();
         BaseUtils.waitABit(10000);
         VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         informationdlg.clickInformationDialogOKButton();
         inspectionscreen.switchToMyInspectionsView();
         homescreen = inspectionscreen.clickBackButton();
-        Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
+        Assert.assertEquals(homescreen.getQueueMessageValue(), queueMessage);
         AppiumUtils.setAndroidNetworkOn();
         homescreen.waitUntilQueueMessageInvisible();
         Assert.assertFalse(homescreen.isQueueMessageVisible());
     }
 
-    @Test(testName = "Test Case 67331:Verify user can edit 'My inspectiontypes' if we have no internet connection",
-            description = "Verify user can edit 'My inspectiontypes' if we have no internet connection")
-    public void testVerifyUserCanEditMyInspectionsIfWeHaveNoInternetConnection() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanEditMyInspectionsIfWeHaveNoInternetConnection(String rowID,
+                                                                            String description, JSONObject testData) {
 
-        final String vinnumber = "123";
-        final String newvinnumber = "TEST456";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String newVinNumber = "1FMCU0DG4BK830800";
+        final String queueMessage = "1";
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -436,40 +431,29 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
         inspectionscreen.switchToMyInspectionsView();
         AppiumUtils.setNetworkOff();
 
-        VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+        VNextInspectionsMenuScreen inspmenuscreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
         vehicleinfoscreen = inspmenuscreen.clickEditInspectionMenuItem();
-        vehicleinfoscreen.setVIN(newvinnumber);
+        vehicleinfoscreen.setVIN(newVinNumber);
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
         homescreen = inspectionscreen.clickBackButton();
-        Assert.assertEquals(homescreen.getQueueMessageValue(), "1");
+        Assert.assertEquals(homescreen.getQueueMessageValue(), queueMessage);
         AppiumUtils.setAndroidNetworkOn();
         homescreen.waitUntilQueueMessageInvisible();
         Assert.assertFalse(homescreen.isQueueMessageVisible());
     }
 
-    @Test(testName = "Test Case 67326:Verify user can edit Team Inspection, "
-            + "Test Case 67332:Verify immediately saving on BO if user edit Team Inspection",
-            description = "Verify user can edit Team Inspection, "
-                    + "Verify immediately saving on BO if user edit Team Inspection")
-    public void testVerifyUserCanEditTeamInspection() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanEditTeamInspection(String rowID,
+                                                    String description, JSONObject testData) {
 
-        final String vinnumber = "123";
-
-        final String newVIN = "1FMCU0DG4BK830800";
-        final String _make = "Ford";
-        final String _model = "Escape";
-        final String _year = "2011";
-        final String licPlate = "123";
-        final String mileage = "100000";
-        final String stockNumber = "123ABC";
-        final String roNumber = "123ASD";
-        final String insuranceCompany = "Miami Beach Insurance";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String newVinNumber = "1FMCU0DG4BK830800";
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -480,39 +464,39 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
 
-        vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspnumber);
-        vehicleinfoscreen.setVIN(newVIN);
+        vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspNumber);
+        vehicleinfoscreen.setVIN(newVinNumber);
         //vehicleinfoscreen.selectModelColor(color);
-        vehicleinfoscreen.setLicPlate(licPlate);
-        vehicleinfoscreen.setMilage(mileage);
-        vehicleinfoscreen.setStockNo(stockNumber);
-        vehicleinfoscreen.setRoNo(roNumber);
+        vehicleinfoscreen.setLicPlate(inspectionData.getVehicleInfo().getVehicleLicensePlate());
+        vehicleinfoscreen.setMilage(inspectionData.getVehicleInfo().getMileage());
+        vehicleinfoscreen.setStockNo(inspectionData.getVehicleInfo().getStockNumber());
+        vehicleinfoscreen.setRoNo(inspectionData.getVehicleInfo().getRoNumber());
         vehicleinfoscreen.changeScreen("Claim");
         VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        claiminfoscreen.selectInsuranceCompany(insuranceCompany);
+        claiminfoscreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claiminfoscreen.saveInspectionViaMenu();
 
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
 
-        vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspnumber);
-        Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), newVIN);
-        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
-        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
-        Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
-        Assert.assertEquals(vehicleinfoscreen.getLicPlate(), licPlate);
-        Assert.assertEquals(vehicleinfoscreen.getMilage(), mileage);
-        Assert.assertEquals(vehicleinfoscreen.getStockNo(), stockNumber);
-        Assert.assertEquals(vehicleinfoscreen.getRoNo(), roNumber);
+        vehicleinfoscreen = inspectionscreen.clickOpenInspectionToEdit(inspNumber);
+        Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), newVinNumber);
+        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
+        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
+        Assert.assertEquals(vehicleinfoscreen.getYear(), inspectionData.getVehicleInfo().getVehicleYear());
+        Assert.assertEquals(vehicleinfoscreen.getLicPlate(), inspectionData.getVehicleInfo().getVehicleLicensePlate());
+        Assert.assertEquals(vehicleinfoscreen.getMilage(), inspectionData.getVehicleInfo().getMileage());
+        Assert.assertEquals(vehicleinfoscreen.getStockNo(), inspectionData.getVehicleInfo().getStockNumber());
+        Assert.assertEquals(vehicleinfoscreen.getRoNo(), inspectionData.getVehicleInfo().getRoNumber());
         vehicleinfoscreen.changeScreen("Claim");
         claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(claiminfoscreen.getInsuranceCompany(), insuranceCompany);
+        Assert.assertEquals(claiminfoscreen.getInsuranceCompany(), inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claiminfoscreen.cancelInspection();
         inspectionscreen.clickBackButton();
 
@@ -530,19 +514,19 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         inspectionspage.makeSearchPanelVisible()
                 .selectSearchTimeframe(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName())
                 .setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted())
-                .searchInspectionByNumber(inspnumber);
-        inspectionspage.verifyVINIsPresentForInspection(inspnumber, newVIN);
+                .searchInspectionByNumber(inspNumber);
+        inspectionspage.verifyVINIsPresentForInspection(inspNumber, newVinNumber);
         webdriver.quit();
     }
 
-    //@Test(testName= "Test Case 68042:Verify sending >100 messages after reconnect Internet",
-    //		description = "Verify sending >100 messages after reconnect Internet")
-    public void testVerifySendingMoreThen100MessagesAfterReconnectInternet() {
+    //@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifySendingMoreThen100MessagesAfterReconnectInternet(String rowID,
+                                                    String description, JSONObject testData) {
 
-        final String vinnumber = "123";
-        final int fakeimagescount = 50;
-        final String imagesummaryvalue = "+47";
-        final String[] services = {"Battery Installation", "Aluminum Panel", "Damage Service"};
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        final int fakeImagesNumber = 50;
+        final String imageSummaryValue = "+47";
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         AppiumUtils.setNetworkOff();
@@ -557,19 +541,18 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspinfoscreen.setVIN(vinnumber);
-        final String inspnumber = inspinfoscreen.getNewInspectionNumber();
+        inspinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = inspinfoscreen.getNewInspectionNumber();
         inspinfoscreen.swipeScreenLeft();
         VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
         claiminfoscreen.swipeScreenLeft();
         VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        for (String srv : services)
-            inspservicesscreen.selectService(srv);
+        inspservicesscreen.selectServices(inspectionData.getServicesList());
         VNextSelectedServicesScreen selectedservicesscreen = inspservicesscreen.switchToSelectedServicesView();
-        for (String srv : services) {
-            VNextNotesScreen notesscreen = selectedservicesscreen.clickServiceNotesOption(srv);
-            for (int i = 0; i < fakeimagescount; i++)
+        for (ServiceData serviceData : inspectionData.getServicesList()) {
+            VNextNotesScreen notesscreen = selectedservicesscreen.clickServiceNotesOption(serviceData.getServiceName());
+            for (int i = 0; i < fakeImagesNumber; i++)
                 notesscreen.addFakeImageNote();
             notesscreen.clickScreenBackButton();
             selectedservicesscreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -595,43 +578,45 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         homescreen = statusscreen.clickBackButton();
         inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        Assert.assertTrue(inspectionsscreen.isInspectionExists(inspnumber));
-        inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspnumber);
+        Assert.assertTrue(inspectionsscreen.isInspectionExists(inspNumber));
+        inspinfoscreen = inspectionsscreen.clickOpenInspectionToEdit(inspNumber);
         inspinfoscreen.swipeScreenLeft();
         claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         claiminfoscreen.swipeScreenLeft();
         inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         selectedservicesscreen = inspservicesscreen.switchToSelectedServicesView();
-        for (String srv : services) {
-            selectedservicesscreen.isServiceSelected(srv);
-            Assert.assertEquals(selectedservicesscreen.getSelectedServiceImageSummaryValue(srv), imagesummaryvalue);
+        for (ServiceData serviceData : inspectionData.getServicesList()) {
+            selectedservicesscreen.isServiceSelected(serviceData.getServiceName());
+            Assert.assertEquals(selectedservicesscreen.getSelectedServiceImageSummaryValue(serviceData.getServiceName()),
+                    imageSummaryValue);
         }
         inspectionsscreen = inspservicesscreen.cancelInspection();
         inspectionsscreen.clickBackButton();
     }
 
-    @Test(testName = "Test Case 67756:Verify message 'Your email message has been added to the queue.' displays after sending",
-            description = "Verify message 'Your email message has been added to the queue.' displays after sending")
-    public void testVerifyMessageYourEmailMessageHasBeenAddedtoTheQueueDisplaysAfterSending() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyMessageYourEmailMessageHasBeenAddedtoTheQueueDisplaysAfterSending(String rowID,
+                                                    String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         final String customereMail = "test.cyberiansoft@gmail.com";
-        final String vinnumber = "TEST";
 
-        final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
+        final String inspNumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData.getVinNumber());
         VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
+        VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspNumber);
         emailscreen.sentToEmailAddress(customereMail);
         emailscreen.sendEmail();
         inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Verify it is not possible to edit Team Inspection with device on Fly-mode",
-            description = "Verify it is not possible to edit Team Inspection with device on Fly-mode")
-    public void testVerifyItIsNotPossibleToEditTeamInspectionWithDeviceOnFlyMode() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyItIsNotPossibleToEditTeamInspectionWithDeviceOnFlyMode(String rowID,
+                                                                                            String description, JSONObject testData) {
 
-        final String vinnumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
@@ -642,15 +627,15 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR3);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(vinnumber);
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
 
         vehicleinfoscreen.saveInspectionAsDraft();
         inspectionscreen.switchToTeamInspectionsView();
-        inspectionscreen.searchInpectionByFreeText(inspnumber);
-        Assert.assertTrue(inspectionscreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);
+        inspectionscreen.searchInpectionByFreeText(inspNumber);
+        Assert.assertTrue(inspectionscreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
         AppiumUtils.setNetworkOff();
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
+        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspNumber);
         VNextInformationDialog informationDialog = inspectionsMenuScreen.clickEditInspectionMenuItemWithAlert();
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
@@ -659,20 +644,18 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         inspectionscreen.clickBackButton();
     }
 
-    @Test(testName = "Automate Verify user can edit team Work Order (add and remove services)",
-            description = "Automate Verify user can edit team Work Order (add and remove services)")
-    public void testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices() {
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices(String rowID,
+                                                                                 String description, JSONObject testData) {
 
-        final String vinnumber = "TEST";
-        final String moneyservice = "Battery Installation";
-        final String percentageservice = "Bundle Discount";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         final int amountToSelect = 3;
         final int defaultCountForMoneyService = 1;
 
 
         new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, vinnumber);
+        final String inspnumber = createSimpleInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData.getVinNumber());
 
         VNextInspectionsScreen inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionscreen.switchToTeamInspectionsView();
@@ -683,14 +666,14 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         vehicleinfoscreen.swipeScreenLeft();
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         for (int i = 0; i < amountToSelect; i++)
-            availableServicesScreen.selectService(moneyservice);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), amountToSelect);
+            availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceName()), amountToSelect);
         for (int i = 0; i < amountToSelect; i++)
-            availableServicesScreen.selectService(percentageservice);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
+            availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceName()), amountToSelect);
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceName()), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceName()), amountToSelect);
 
         selectedServicesScreen.saveInspectionViaMenu();
         inspectionsMenuScreen = inspectionscreen.clickOnInspectionByInspNumber(inspnumber);
@@ -698,28 +681,96 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         vehicleinfoscreen.swipeScreenLeft();
         vehicleinfoscreen.swipeScreenLeft();
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), amountToSelect);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), amountToSelect);
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceName()), amountToSelect);
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceName()), amountToSelect);
         selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
-        selectedServicesScreen.uselectService(percentageservice);
-        selectedServicesScreen.uselectService(percentageservice);
-        selectedServicesScreen.uselectService(moneyservice);
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), defaultCountForMoneyService);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceName()), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceName()), amountToSelect);
+        selectedServicesScreen.uselectService(inspectionData.getPercentageServiceName());
+        selectedServicesScreen.uselectService(inspectionData.getPercentageServiceName());
+        selectedServicesScreen.uselectService(inspectionData.getMoneyServiceName());
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceName()), defaultCountForMoneyService);
         selectedServicesScreen.switchToAvalableServicesView();
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(moneyservice), 2);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(percentageservice), defaultCountForMoneyService);
-        availableServicesScreen.selectService(percentageservice);
-        availableServicesScreen.selectService(percentageservice);
-        availableServicesScreen.selectService(moneyservice);
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceName()), 2);
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceName()), defaultCountForMoneyService);
+        availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
+        availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
+        availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
 
         availableServicesScreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(moneyservice), amountToSelect);
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(percentageservice), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceName()), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceName()), amountToSelect);
         availableServicesScreen.saveInspectionViaMenu();
         inspectionscreen.switchToMyInspectionsView();
         inspectionscreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanCloseMyInspectionActionScreenInAndroid(String rowID,
+                                                             String description, JSONObject testData) {
+
+        final String inspNumber = InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR);
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+        AppiumUtils.clickHardwareBackButton();;
+        new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyUserCanNavigateInMyInspectionWizardUsingActionScreenWwizardMenuInAndroid(String rowID,
+                                                                        String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        homeScreen.clickInspectionsMenuItem();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen.switchToMyInspectionsView();
+        inspectionsScreen.clickAddInspectionButton();
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen("Visual");
+        VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        visualScreen.changeScreen("Services");
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.changeScreen("Claim");
+        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        claimInfoScreen.clickScreenForwardButton();
+        availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        selectedServicesScreen.isServiceSelected(inspectionData.getServiceName());
+        selectedServicesScreen.clickScreenBackButton();
+        claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        claimInfoScreen.clickScreenBackButton();
+        vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.clickMenuButton();
+        Assert.assertTrue(vehicleInfoScreen.isSaveButtonVisible());
+        Assert.assertTrue(vehicleInfoScreen.isCancelButtonVisible());
+        Assert.assertTrue(vehicleInfoScreen.isNotesButtonVisible());
+        AppiumUtils.clickHardwareBackButton();
+        vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(vehicleInfoScreen.getVINFieldValue(), inspectionData.getVinNumber());
+        vehicleInfoScreen.clickScreenTitleCaption();
+        AppiumUtils.clickHardwareBackButton();
+        vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(vehicleInfoScreen.getVINFieldValue(), inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen("Services");
+        availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.clickMenuButton();
+        Assert.assertTrue(availableServicesScreen.isSaveButtonVisible());
+        Assert.assertTrue(availableServicesScreen.isCancelButtonVisible());
+        Assert.assertTrue(availableServicesScreen.isNotesButtonVisible());
+        AppiumUtils.clickHardwareBackButton();
+        availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.saveInspectionViaMenu();
+        inspectionsScreen.clickBackButton();
     }
 
     private String createSimpleInspection(AppCustomer inspcustomer, InspectionTypes insptype, String vinnumber) {

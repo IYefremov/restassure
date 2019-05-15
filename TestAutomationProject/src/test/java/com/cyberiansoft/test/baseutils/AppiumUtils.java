@@ -56,7 +56,8 @@ public class AppiumUtils {
                 BaseUtils.waitABit(2000);
                 DriverBuilder.getInstance().getAppiumDriver().findElement(By.className("android.widget.Switch")).click();
                 ((AndroidDriver<MobileElement>) DriverBuilder.getInstance().getAppiumDriver()).pressKey(new KeyEvent().withKey(AndroidKey.BACK));
-
+                Runtime.getRuntime().exec("adb shell svc data disable");
+                BaseUtils.waitABit(2000);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

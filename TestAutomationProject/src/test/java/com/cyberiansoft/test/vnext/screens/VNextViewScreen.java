@@ -20,7 +20,7 @@ public class VNextViewScreen extends VNextBaseScreen {
 	public VNextViewScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, Duration.ofSeconds(10)), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(viewscreen));
 		if (checkHelpPopupPresence()) {
 			wait = new WebDriverWait(appiumdriver, 15);
