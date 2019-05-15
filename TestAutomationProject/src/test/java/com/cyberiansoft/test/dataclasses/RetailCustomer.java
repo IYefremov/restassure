@@ -12,15 +12,32 @@ public class RetailCustomer implements AppCustomer {
 
 	@JsonProperty("clientId")
 	private String clientId;
-	
+
+	@JsonProperty("companyName")
 	private String companyName;
+
+	@JsonProperty("mailAddress")
 	private String mailAddress;
+
+	@JsonProperty("customerPhone")
 	private String customerPhone;
+
+	@JsonProperty("customerAddress1")
 	private String customerAddress1;
+
+	@JsonProperty("customerAddress2")
 	private String customerAddress2;
+
+	@JsonProperty("customerCity")
 	private String customerCity;
+
+	@JsonProperty("customerCountry")
 	private String customerCountry;
+
+	@JsonProperty("customerState")
 	private String customerState;
+
+	@JsonProperty("customerZipCode")
 	private String customerZipCode;
 	
 	public RetailCustomer() {

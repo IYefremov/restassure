@@ -35,8 +35,6 @@ import java.util.List;
 public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionRegistration {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-invoice-editing-testcases-data.json";
-    //final RetailCustomer testcustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
-    //final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
     @BeforeClass(description = "Team Invoice Editing Test Cases")
     public void settingUp() {

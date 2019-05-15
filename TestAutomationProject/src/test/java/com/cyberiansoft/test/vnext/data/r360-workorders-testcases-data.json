@@ -1,0 +1,16 @@
+{
+
+  "testShowSelectedServicesAfterWOIsSaved": [
+    {
+      "rowID": "testShowSelectedServicesAfterWOIsSaved.01",
+      "description": "Test Case 43334:vNext - Show selected services after WO is saved",
+      "workOrderType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "services": [{"serviceName": "Bumper Repair"
+      }, {"serviceName": "Other"
+      }]
+    }
+  ]
+
+}

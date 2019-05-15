@@ -1,0 +1,88 @@
+{
+
+  "testVerifyVINIsDecodedCorrectlyForInspection": [
+    {
+      "rowID": "testVerifyVINIsDecodedCorrectlyForInspection.01",
+      "description": "Test Case 43325:vNext - Verify VIN is decoded correctly for Inspection",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800", "vehicleMake" : "Ford", "vehicleModel" : "Escape", "vehicleYear" : "2011"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
+    }
+  ],
+
+  "testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase": [
+    {
+      "rowID": "testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase.01",
+      "description": "Test Case 43511:vNext - Save inspection using option from hamburger menu (general case)",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "services": [{"serviceName": "Bumper Repair"
+      }, {"serviceName": "Other"
+      }]
+    }
+  ],
+
+  "testNavigateToScreenWithRequiredFieldsOnSaveInspectionCalledFromHumburgerMenu_FirstStep": [
+    {
+      "rowID": "testNavigateToScreenWithRequiredFieldsOnSaveInspectionCalledFromHumburgerMenu_FirstStep.01",
+      "description": "Test Case 39549:vNext - Inspections - Navigate to screen with required fields on 'Save Inspection' called from humburger menu (first step)",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      }
+    }
+  ],
+
+  "testNavigateBySwipeThroughWizardStepsForInspeciton": [
+    {
+      "rowID": "testNavigateBySwipeThroughWizardStepsForInspeciton.01",
+      "description": "Test Case 43330:vNext - Navigate by swipe through wizard steps for Inspeciton",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      }
+    }
+  ],
+
+  "testNavigateThroughWizardStepsForInspectionByHardwareBackButton": [
+    {
+      "rowID": "testNavigateThroughWizardStepsForInspectionByHardwareBackButton.01",
+      "description": "Test Case 43331:vNext - Navigate through wizard steps for Inspection by hardware 'Back' button",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      },
+      "moneyService" : "Dent Repair"
+    }
+  ],
+
+  "testCreateCustomerAlongWithInspection": [
+    {
+      "rowID": "testCreateCustomerAlongWithInspection.01",
+      "description": "Test Case 43525:vNext - Create customer along with Inspection",
+      "vihicleInfo": {"vinNumber": "1GCJTCFE7B8448756"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
+      "retailCustomer": {"firstName": "Eric", "lastName" : "Burn", "customerAddress1" : "Stryis'ka, 223",
+        "customerCity" : "L'viv", "customerZipCode" : "79031", "mailAddress" : "testadresssmy+408222@gmail.com"
+      }
+    }
+  ],
+
+  "testVerifyUserCanArchiveCreatedInspection": [
+    {
+      "rowID": "testVerifyUserCanArchiveCreatedInspection.01",
+      "description": "Test Case 75366:Verify user can archive created Inspection",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      }
+    }
+  ],
+
+  "testVerifyUserCanArchiveSeveralInspections": [
+    {
+      "rowID": "testVerifyUserCanArchiveSeveralInspections.01",
+      "description": "Test Case 75369:Verify user can archive several Inspections",
+      "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
+      }
+    }
+  ]
+
+}

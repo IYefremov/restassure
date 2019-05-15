@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScree
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -54,8 +55,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
         final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
 
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
-
-        inspectionscreen = inspectionscreen.archiveInspection(inspnumber);
+        InspectionSteps.archiveInspection(inspnumber);
         Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
                 " still exists, but shouldn't");
         inspectionscreen.clickBackButton();
@@ -207,7 +207,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
 
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 
-        inspectionscreen = inspectionscreen.archiveInspection(inspnumber);
+        InspectionSteps.archiveInspection(inspnumber);
         Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
                 " still exists, but shouldn't");
         inspectionscreen.clickBackButton();
@@ -240,7 +240,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
 
         inspectionscreen = vehicleinfoscreen.saveInspectionViaMenu();
 
-        inspectionscreen = inspectionscreen.archiveInspection(inspnumber);
+        InspectionSteps.archiveInspection(inspnumber);
         Assert.assertFalse(inspectionscreen.isInspectionExists(inspnumber), "Inspection: " + inspnumber +
                 " still exists, but shouldn't");
         inspectionscreen.switchToTeamInspectionsView();
