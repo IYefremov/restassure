@@ -1,0 +1,137 @@
+{
+
+  "testCreateInvoiceWithMatrixService": [
+    {
+      "rowID": "testCreateInvoiceWithMatrixService.01",
+      "description": "Test Case 45878:vNext: Create Invoice with matrix service",
+      "workOrderData" : {
+        "vihicleInfo": {"vinNumber": "19UUA66278A050105", "vehicleMake" : "Acura", "vehicleModel" : "TL",
+          "vehicleColor" : "Red", "vehicleYear" : "2008"
+        },
+        "moneyService": {"serviceName": "Dent Repair", "servicePrice": "58", "serviceQuantity": "1"
+        },
+        "percentageService": {"serviceName": "Aluminum Upcharge"
+        },
+        "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
+          "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }]
+          }]},
+        "workOrderPrice": "$267.81"
+      },
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testCreateInvoiceWithTextNote": [
+    {
+      "rowID": "testCreateInvoiceWithTextNote.01",
+      "description": "Test Case 46415:vNext: Create Invoice with image and text note, Test Case 38642:vNext: Verify text note on Invoice detail",
+      "workOrderData" : {
+        "vihicleInfo": {"vinNumber": "19UUA66278A050105", "vehicleMake" : "Acura", "vehicleModel" : "TL",
+          "vehicleColor" : "Red", "vehicleYear" : "2008"
+        },
+        "workOrderPrice": "$0.00"
+      },
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity": [
+    {
+      "rowID": "testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity.01",
+      "description": "Test Case 48094:vNext mobile: Create Invoice which contains price services with decimal quantity, Test Case 38638:vNext: Verify Customer Info on Invoice detail",
+      "workOrderData" : {
+        "vihicleInfo": {"vinNumber": "19UUA66278A050105", "vehicleMake" : "Acura", "vehicleModel" : "TL",
+          "vehicleColor" : "Red", "vehicleYear" : "2008"
+        },
+        "moneyService": {"serviceName": "Bumper Repair", "servicePrice": "1.96", "serviceQuantity": "1.96"
+        },
+        "service": {"serviceName": "Dent", "servicePrice": "0.99"
+        },
+        "workOrderPrice": "$0.00"
+      },
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testCreateInvoiceWithSetPO": [
+    {
+      "rowID": "testCreateInvoiceWithSetPO.01",
+      "description": "Test Case 49787:vNext: Create Invoice with set PO",
+      "workOrderData" : {
+        "vihicleInfo": {"vinNumber": "19UUA66278A050105", "vehicleMake" : "Acura", "vehicleModel" : "TL",
+          "vehicleColor" : "Red", "vehicleYear" : "2008"
+        },
+        "moneyService": {"serviceName": "Dent Repair", "servicePrice": "58", "serviceQuantity": "1"
+        },
+        "percentageService": {"serviceName": "Aluminum Upcharge"
+        },
+        "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
+          "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }]
+          }]},
+        "workOrderPrice": "$267.81"
+      },
+      "invoiceData" : {"poNumber" : "Edyfycydydyftwfxfxhxgdy2555*&*-\"4*-\"&\"-\"55$6'+'&*6"
+      }
+    }
+  ],
+
+  "testCreateAndEmailInvoiceWithTwoMatrixPanel": [
+    {
+      "rowID": "testCreateAndEmailInvoiceWithTwoMatrixPanel.01",
+      "description": "Test Case 52817:vNext mobile: create and email Invoice with two matrix panel",
+      "workOrderData" : {
+        "vihicleInfo": {"vinNumber": "JT3AC11R4N1023558", "vehicleMake" : "Toyota", "vehicleModel" : "Previa",
+          "vehicleYear" : "1992"
+        },
+        "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
+          "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15"
+          },
+            {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15"
+            }]},
+        "workOrderPrice": "$660.00"
+      },
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testVerifyInvoiceCanBeCreatedFromWOWizard": [
+    {
+      "rowID": "testVerifyInvoiceCanBeCreatedFromWOWizard.01",
+      "description": "Test Case 49221:vNext - Verify Invoice can be created from WO Wizard",
+      "workOrderData" : {
+        "vihicleInfo": {"vinNumber": "19UUA66278A050105", "vehicleMake" : "Acura", "vehicleModel" : "TL",
+          "vehicleColor" : "Red", "vehicleYear" : "2008"
+        },
+        "moneyService": {"serviceName": "Bumper Repair"
+        },
+        "percentageService": {"serviceName": "Facility Fee"
+        }
+      },
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testVerifyInvoiceCanBeCreatedFromWOMenu": [
+    {
+      "rowID": "testVerifyInvoiceCanBeCreatedFromWOMenu.01",
+      "description": "Test Case 49436:vNext - Verify Invoice can be created from WO menu",
+      "workOrderData" : {
+        "vihicleInfo": {"vinNumber": "19UUA66278A050105", "vehicleMake" : "Acura", "vehicleModel" : "TL",
+          "vehicleColor" : "Red", "vehicleYear" : "2008"
+        },
+        "moneyService": {"serviceName": "Bumper Repair"
+        },
+        "percentageService": {"serviceName": "Facility Fee"
+        }
+      },
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ]
+
+}

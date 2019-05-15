@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
@@ -191,15 +190,6 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 	
 	public int getNumberOfInspectionsOnTheScreen() {
 		return getInspectionsList().size();
-	}
-	
-	public VNextInspectionsScreen archiveInspection(String inspectionNumber) {
-		VNextInspectionsMenuScreen inspmenulist = clickOnInspectionByInspNumber(inspectionNumber);
-		inspmenulist.archiveInspection();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.invisibilityOf(inspectionslist.
-				findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']"))));
-		return new VNextInspectionsScreen(appiumdriver);
 	}
 
 	public boolean waitUntilInspectionDisappears(String inspectionNumber) {

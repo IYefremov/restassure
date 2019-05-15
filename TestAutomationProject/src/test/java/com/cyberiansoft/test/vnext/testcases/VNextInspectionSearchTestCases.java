@@ -15,6 +15,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOAdvancedSearchInspectionDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
@@ -173,7 +174,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 
         inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(archivedinspnumber), PricesCalculations.getPriceRepresentation(insppriceexp));
-        inspectionsscreen.archiveInspection(archivedinspnumber);
+        InspectionSteps.archiveInspection(archivedinspnumber);
 
         inspectionsscreen.clickBackButton();
     }

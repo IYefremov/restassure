@@ -21,6 +21,18 @@ public class WorkOrderData {
     @JsonProperty("workOrderPrice")
     String workOrderPrice;
 
+    @JsonProperty("moneyService")
+    ServiceData moneyService;
+
+    @JsonProperty("percentageService")
+    ServiceData percentageService;
+
+    @JsonProperty("matrixService")
+    MatrixServiceData matrixService;
+
+    @JsonProperty("laborService")
+    LaborServiceData laborService;
+
     public String getWorkOrderType() {
         return workOrderType;
     }
@@ -37,6 +49,10 @@ public class WorkOrderData {
         return service.getServiceName();
     }
 
+    public String getServicePrice() {
+        return service.getServicePrice();
+    }
+
     public List<ServiceData> getServicesList() {
         return services;
     }
@@ -44,5 +60,27 @@ public class WorkOrderData {
     public String getWorkOrderPrice() {
         return workOrderPrice;
     }
+
+    public String getMoneyServiceName() {
+        return moneyService.getServiceName();
+    }
+
+    public String getMoneyServicePrice() {
+        return moneyService.getServicePrice();
+    }
+
+    public String getMoneyServiceQuantity() { return moneyService.getServiceQuantity(); }
+
+    public String getPercentageServiceName() {
+        return percentageService.getServiceName();
+    }
+
+    public String getPercentageServicePrice() {
+        return percentageService.getServicePrice();
+    }
+
+    public MatrixServiceData getMatrixServiceData() { return matrixService; }
+
+    public LaborServiceData getLaborServiceData() { return laborService; }
 
 }

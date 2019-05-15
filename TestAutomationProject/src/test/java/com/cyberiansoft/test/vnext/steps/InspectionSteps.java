@@ -6,10 +6,14 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InspectionSteps {
     public static String createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
@@ -44,6 +48,15 @@ public class InspectionSteps {
         vehicleInfoScreen.clickSaveInspectionMenuButton();
         new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         return inspectionNumber;
+    }
+
+    public static void archiveInspection(String inspectionNumber) {
+        VNextInspectionsScreen inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsscreen.clickOnInspectionByInspNumber(inspectionNumber);
+        inspectionsMenuScreen.archiveInspection();
+        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 30);
+        wait.until(ExpectedConditions.invisibilityOf(DriverBuilder.getInstance().getAppiumDriver().
+                findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']"))));
     }
 
     public static void openInspectionMenu(String inspectionId) {
