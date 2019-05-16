@@ -15,7 +15,6 @@ public enum InspectionStatus {
         this.status = statusValue;
     }
 
-    @JsonProperty("status1")
     public String getStatus() {
         return status;
     }

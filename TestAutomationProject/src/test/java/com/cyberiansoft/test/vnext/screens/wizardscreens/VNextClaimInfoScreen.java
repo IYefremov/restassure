@@ -79,6 +79,7 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	
 	public void setDeductibleValue(String deductiblevalue) {
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-deductible']")));
+		tap(appiumdriver.findElement(By.xpath("//*[@action='select-deductible']")));
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 		keyboard.setFieldValue(deductiblefld.getAttribute("value"), deductiblevalue);
 	}

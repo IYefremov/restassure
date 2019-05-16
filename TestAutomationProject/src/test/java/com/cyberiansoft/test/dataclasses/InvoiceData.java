@@ -10,6 +10,9 @@ public class InvoiceData {
     @JsonProperty("poNumber")
     String poNumber;
 
+    @JsonProperty("invoiceTotal")
+    String invoiceTotal;
+
     public String getInvoiceType() {
         return invoiceType;
     }
@@ -18,4 +21,7 @@ public class InvoiceData {
         return poNumber;
     }
 
+    public String getInvoiceTotal() {
+        return invoiceTotal;
+    }
 }

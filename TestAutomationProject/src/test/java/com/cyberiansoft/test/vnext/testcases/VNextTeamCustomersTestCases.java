@@ -62,7 +62,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         customersscreen.clickBackButton();
 
         BaseUtils.waitABit(45000);
-
+        DriverBuilder.getInstance().setDriver(browsertype);
         WebDriver webdriver = DriverBuilder.getInstance().getDriver();
         webdriver.get(deviceOfficeUrl);
         BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(webdriver);
@@ -155,7 +155,7 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
             customerDelete = firstName + " " + lastName;
         else
             customerDelete = firstName;
-
+        DriverBuilder.getInstance().setDriver(browsertype);
         WebDriver webdriver = DriverBuilder.getInstance().getDriver();
         webdriver.get(deviceOfficeUrl);
         BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(webdriver);
@@ -170,6 +170,6 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
         while (clientspage.isClientPresentInTable(customerDelete))
             clientspage.deleteClient(customerDelete);
         Assert.assertFalse(clientspage.isClientPresentInTable(customerDelete));
-        webdriver.quit();
+        DriverBuilder.getInstance().getDriver().quit();
     }
 }

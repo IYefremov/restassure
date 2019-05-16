@@ -1,0 +1,105 @@
+{
+
+  "testVerifyUserCanCreateInvoiceFromMultiplyWO": [
+    {
+      "rowID": "testVerifyUserCanCreateInvoiceFromMultiplyWO.01",
+      "description": "Test Case 65591:Verify user can create Invoice from multiply WO",
+      "workOrdersData" : [{"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      }
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      }
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      }
+      }],
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testVerifyUserCantCreateInvoiceWithMultipleWOAndDifferentCustomers": [
+    {
+      "rowID": "testVerifyUserCantCreateInvoiceWithMultipleWOAndDifferentCustomers.01",
+      "description": "Test Case 65640:Verify user can't create Invoice with Multiple WO and different Customers",
+      "workOrdersData" : [{"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+        },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer1"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+        },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer2"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+        },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer3"}
+      }],
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testVerifyUserCantCreateInvoiceWithAFewWO": [
+    {
+      "rowID": "testVerifyUserCantCreateInvoiceWithAFewWO.01",
+      "description": "Test Case 65645:Verify user can create Invoice with a few WO",
+      "workOrdersData" : [{"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer1"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer2"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer3"}
+      }],
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testVerifyUserCanCancelCreatingInvoiceWithMultiplyWOOnInfoScreen": [
+    {
+      "rowID": "testVerifyUserCanCancelCreatingInvoiceWithMultiplyWOOnInfoScreen.01",
+      "description": "Test Case 65646:Verify user can cancel creating Invoice with Multiply WO on 'Info' screen, Test Case 65647:Verify user can cancel creating Invoice with Multiply WO on 'Select Customer' screen",
+      "workOrdersData" : [{"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer1"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer2"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer3"}
+      }],
+      "invoiceData" : {"poNumber" : "123po"
+      }
+    }
+  ],
+
+  "testVerifyTotalAmountDisplaysForAllSelectedWOWithTheSameCustomer": [
+    {
+      "rowID": "testVerifyTotalAmountDisplaysForAllSelectedWOWithTheSameCustomer.01",
+      "description": "Test Case 66102:Verify total amount displays for all selected WO with same custome",
+      "workOrdersData" : [{"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer1"},
+        "moneyService" : {"serviceName" : "Bumper Repair", "servicePrice" : "10"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer1"},
+        "moneyService" : {"serviceName" : "Bumper Repair", "servicePrice" : "14.50"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer1"},
+        "moneyService" : {"serviceName" : "Bumper Repair", "servicePrice" : "12.50"}
+      }],
+      "invoiceData" : {"poNumber" : "123po", "invoiceTotal" : "$37.00"
+      }
+    }
+  ],
+
+  "testVerifyTotalAmountDisplaysForAllSelectedWOWithDifferentCustomers": [
+    {
+      "rowID": "testVerifyTotalAmountDisplaysForAllSelectedWOWithDifferentCustomers.01",
+      "description": "Test Case 66113:Verify total amount for selected WO with different customers",
+      "workOrdersData" : [{"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer1"},
+        "moneyService" : {"serviceName" : "Bumper Repair", "servicePrice" : "10"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer2"},
+        "moneyService" : {"serviceName" : "Bumper Repair", "servicePrice" : "14.50"}
+      }, {"vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      },"retailCustomer" : {"firstName" : "Test", "lastName" : "Custonmer2"},
+        "moneyService" : {"serviceName" : "Bumper Repair", "servicePrice" : "12.50"}
+      }],
+      "invoiceData" : {"poNumber" : "123po", "invoiceTotal" : "$27.00"
+      }
+    }
+  ]
+
+}

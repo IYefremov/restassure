@@ -33,6 +33,9 @@ public class WorkOrderData {
     @JsonProperty("laborService")
     LaborServiceData laborService;
 
+    @JsonProperty("retailCustomer")
+    RetailCustomer retailCustomer;
+
     public String getWorkOrderType() {
         return workOrderType;
     }
@@ -82,5 +85,9 @@ public class WorkOrderData {
     public MatrixServiceData getMatrixServiceData() { return matrixService; }
 
     public LaborServiceData getLaborServiceData() { return laborService; }
+
+    public RetailCustomer getWorlOrderRetailCustomer() {
+        return retailCustomer;
+    }
 
 }
