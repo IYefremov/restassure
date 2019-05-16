@@ -18,6 +18,9 @@ public class MatrixPartData {
     @JsonProperty("laborService")
     LaborServiceData laborService;
 
+    @JsonProperty("matrixAdditionalService")
+    ServiceData matrixAdditionalService;
+
     @JsonProperty("matrixAdditionalServices")
     List<ServiceData> matrixAdditionalServices;
 
@@ -35,6 +38,10 @@ public class MatrixPartData {
 
     public List<ServiceData> getMatrixAdditionalServices() {
         return matrixAdditionalServices;
+    }
+
+    public ServiceData getMatrixAdditionalService() {
+        return matrixAdditionalService;
     }
 
     public LaborServiceData getMatrixAdditionalLaborService() {

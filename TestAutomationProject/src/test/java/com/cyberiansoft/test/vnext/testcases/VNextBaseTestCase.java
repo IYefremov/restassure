@@ -139,7 +139,7 @@ public class VNextBaseTestCase {
         licenseID = activeDevicesWebPage.getLicenseID();
         appID = activeDevicesWebPage.getApplicationID();
         appLicenseEntity = activeDevicesWebPage.getLicenseEntityName();
-
+        DriverBuilder.getInstance().getDriver().quit();
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
         editionsScreen.selectEdition("ReconPro Starter");

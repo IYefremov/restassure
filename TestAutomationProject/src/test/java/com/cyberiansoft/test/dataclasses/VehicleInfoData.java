@@ -28,6 +28,9 @@ public class VehicleInfoData {
 	@JsonProperty("roNumber")
 	String roNumber;
 
+	@JsonProperty("poNumber")
+	String poNumber;
+
 	@JsonProperty("mileage")
 	String mileage;
 
@@ -60,6 +63,10 @@ public class VehicleInfoData {
 	 
 	public String getRoNumber() {
 		 return roNumber;
+	}
+
+	public String getPoNumber() {
+		return poNumber;
 	}
 
 	public String getMileage() {

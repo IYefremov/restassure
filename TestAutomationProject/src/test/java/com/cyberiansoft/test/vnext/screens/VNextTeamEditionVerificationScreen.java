@@ -3,9 +3,12 @@ package com.cyberiansoft.test.vnext.screens;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	
@@ -30,7 +33,8 @@ public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	}
 	
 	public void setDeviceRegistrationCode(String regCode) {
-		//regfld1.sendKeys(regCode.substring(0, 4));
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@data-autotests-id='reg-code-1']")));
 		setValue(regfld1, regCode.substring(0, 4));
 		setValue(regfld2, regCode.substring(5, 9));
 		setValue(regfld3, regCode.substring(10, 14));
