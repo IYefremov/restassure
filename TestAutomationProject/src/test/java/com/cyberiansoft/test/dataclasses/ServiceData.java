@@ -1,43 +1,24 @@
 package com.cyberiansoft.test.dataclasses;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class ServiceData {
-	
-	@JsonProperty("serviceName")
-	String serviceName;
+    @JsonProperty("serviceName")
+    private String serviceName;
+    @JsonProperty("servicePrice")
+    private String servicePrice;
+    @JsonProperty("servicePrice2")
+    private String servicePrice2;
+    @JsonProperty("serviceQuantity")
+    private String serviceQuantity;
+    @JsonProperty("serviceStatus")
+    private String serviceStatus;
 
-	@JsonProperty("servicePrice")
-	String servicePrice;
-
-	@JsonProperty("servicePrice2")
-	String servicePrice2;
-	 
-	@JsonProperty("serviceQuantity")
-	String serviceQuantity;
-	
-	@JsonProperty("serviceStatus")
-	String serviceStatus;
-
-	public String getServiceName() {
-		return serviceName; 
-	}
-	 
-	public String getServicePrice() {
-		return servicePrice; 
-	}
-
-	public String getServicePrice2() {
-		return servicePrice2;
-	}
-	 
-	public String getServiceQuantity() {
-		return serviceQuantity; 
-	}
-
-	public ServiceStatus getServiceStatus() {
-		return ServiceStatus.getStatus(serviceStatus);
-	}
-
+    public ServiceStatus getServiceStatus() {
+        return ServiceStatus.getStatus(serviceStatus);
+    }
 }
