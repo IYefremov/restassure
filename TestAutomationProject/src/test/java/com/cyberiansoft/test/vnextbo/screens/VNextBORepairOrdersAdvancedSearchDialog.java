@@ -250,10 +250,10 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return setData(searchNameInputField, searchName);
     }
 
-    private VNextBORepairOrdersAdvancedSearchDialog setData(WebElement woInputField, String data) {
-        wait.until(ExpectedConditions.elementToBeClickable(woInputField)).click();
-        woInputField.clear();
-        woInputField.sendKeys(data);
+    VNextBORepairOrdersAdvancedSearchDialog setData(WebElement inputField, String data) {
+        wait.until(ExpectedConditions.elementToBeClickable(inputField)).click();
+        inputField.clear();
+        inputField.sendKeys(data);
         return this;
     }
 

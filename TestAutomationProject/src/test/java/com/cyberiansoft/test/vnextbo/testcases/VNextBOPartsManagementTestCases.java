@@ -33,7 +33,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
     private VNextBOBreadCrumbPanel breadCrumbPanel;
     private VNextBODashboardPanel dashboardPanel;
     private VNextBOPartsManagementSearchPanel partsManagementSearch;
-    private VNextBOPartsManagementROListPanel roListPanel;
+    private VNextBOPartsOrdersListPanel partsOrdersListPanel;
     private VNextBOFooterPanel footerPanel;
     private VNextBOPartsDetailsPanel partsDetailsPanel;
 
@@ -59,7 +59,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
         dashboardPanel = PageFactory.initElements(webdriver, VNextBODashboardPanel.class);
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
-        roListPanel = PageFactory.initElements(webdriver, VNextBOPartsManagementROListPanel.class);
+        partsOrdersListPanel = PageFactory.initElements(webdriver, VNextBOPartsOrdersListPanel.class);
         footerPanel = PageFactory.initElements(webdriver, VNextBOFooterPanel.class);
         partsDetailsPanel = PageFactory.initElements(webdriver, VNextBOPartsDetailsPanel.class);
     }
@@ -88,7 +88,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
                 "The dashboard items names haven't been displayed");
         Assert.assertTrue(partsManagementSearch.isPartsManagementSearchPanelDisplayed(),
                 "The Parts Management search panel hasn't been displayed");
-        Assert.assertTrue(roListPanel.isPartsManagementROListDisplayed(),
+        Assert.assertTrue(partsOrdersListPanel.isPartsOrdersListDisplayed(),
                 "The Parts Management RO list panel hasn't been displayed");
         Assert.assertTrue(footerPanel.isFooterPanelDisplayed(),
                 "The Parts Management footer panel hasn't been displayed");
@@ -107,16 +107,168 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
         leftMenu.selectPartsManagementMenu();
         breadCrumbPanel.setLocation(data.getLocation());
 
-        final int roListSize = roListPanel.getROListSize();
-        final WebElement randomRO = roListPanel.getRandomRO();
+        final int partsOrderListSize = partsOrdersListPanel.getPartsOrderListSize();
+        final WebElement randomPartsOrder = partsOrdersListPanel.getRandomPartsOrder();
         final String breadCrumbRONumber = breadCrumbPanel.getLastBreadCrumbText();
-        roListPanel.clickRO(randomRO);
+        partsOrdersListPanel.clickPartsOrder(randomPartsOrder);
 
         Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
                 "The Parts Details table hasn't been displayed");
 
-        if (roListSize > 1) {
+        if (partsOrderListSize > 1) {
             Assert.assertNotEquals(breadCrumbRONumber, breadCrumbPanel.getLastBreadCrumbText());
         }
+    }
+
+    //todo often fails, bug!!! Sometimes forbidden status option is displayed for Past Due Parts search
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectOrdersWithPastDuePartsOption(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        dashboardPanel.clickPastDuePartsLink();
+        Assert.assertTrue(dashboardPanel.isPastDuePartsOptionSelected(),
+                "The Past Due Parts Option hasn't been selected");
+
+        final int partsOrderListSize = partsOrdersListPanel.getPartsOrderListSize();
+        final WebElement randomPartsOrder = partsOrdersListPanel.getRandomPartsOrder();
+        final String breadCrumbRONumber = breadCrumbPanel.getLastBreadCrumbText();
+        partsDetailsPanel = partsOrdersListPanel.clickPartsOrder(randomPartsOrder);
+
+        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
+                "The Parts Details table hasn't been displayed");
+
+        if (partsOrderListSize > 1) {
+            Assert.assertNotEquals(breadCrumbRONumber, breadCrumbPanel.getLastBreadCrumbText());
+        }
+
+        final WebElement randomPartsOption = partsDetailsPanel.getRandomPartsDetailsOption();
+        final String partsOrderStatusValue = partsDetailsPanel.getPartsOrderStatusValue(randomPartsOption);
+
+        System.out.println("Parts order status value: " + partsOrderStatusValue + "\nAvailable statuses values:");
+        Arrays.stream(data.getStatusesList()).forEach(System.out::println);
+        final boolean present = Arrays
+                .stream(data.getStatusesList())
+                .anyMatch(part -> part.equals(partsOrderStatusValue));
+        Assert.assertTrue(present,
+                "The status " + partsOrderStatusValue + " is not allowed for the Past Due Parts option");
+
+        final String estimatedTimeArrivalValue = partsDetailsPanel.getEstimatedTimeArrivalValue(randomPartsOption);
+        Assert.assertNotNull(estimatedTimeArrivalValue,
+                "The Estimated Time Arrival Value cannot be null");
+
+        System.out.println("Displayed date: " + estimatedTimeArrivalValue);
+        System.out.println("Current date: " + data.getCurrentDate());
+
+        if (estimatedTimeArrivalValue.equals("")) {
+            System.out.println("The Estimated Time Arrival Value is empty");
+            Assert.assertTrue(true, "The Estimated Time Arrival Value is not empty");
+        } else {
+            System.out.println("The Estimated Time Arrival Value is before the current date");
+            Assert.assertTrue(partsDetailsPanel.isDateBefore(
+                    estimatedTimeArrivalValue, data.getCurrentDate()),
+                    "The Estimated Time Arrival Value isn't before the current date");
+        }
+    }
+
+    //todo often fails, bug!!! Sometimes forbidden status option is displayed for In Progress search
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectOrdersWithInProgressOption(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        dashboardPanel.clickInProgressItemLink();
+        Assert.assertTrue(dashboardPanel.isInProgressOptionSelected(),
+                "The In Progress Option hasn't been selected");
+
+        final int partsOrderListSize = partsOrdersListPanel.getPartsOrderListSize();
+        final WebElement randomPartsOrder = partsOrdersListPanel.getRandomPartsOrder();
+        final String breadCrumbRONumber = breadCrumbPanel.getLastBreadCrumbText();
+        partsDetailsPanel = partsOrdersListPanel.clickPartsOrder(randomPartsOrder);
+
+        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
+                "The Parts Details table hasn't been displayed");
+
+        if (partsOrderListSize > 1) {
+            Assert.assertNotEquals(breadCrumbRONumber, breadCrumbPanel.getLastBreadCrumbText());
+        }
+
+        final WebElement randomPartsOption = partsDetailsPanel.getRandomPartsDetailsOption();
+        final String partsOrderStatusValue = partsDetailsPanel.getPartsOrderStatusValue(randomPartsOption);
+
+        System.out.println("Parts order status value: " + partsOrderStatusValue + "\nAvailable statuses values:");
+        Arrays.stream(data.getStatusesList()).forEach(System.out::println);
+        final boolean present = Arrays
+                .stream(data.getStatusesList())
+                .anyMatch(part -> part.equals(partsOrderStatusValue));
+        Assert.assertTrue(present,
+                "The status " + partsOrderStatusValue + " is not allowed for the In Progress option");
+
+        final String estimatedTimeArrivalValue = partsDetailsPanel.getEstimatedTimeArrivalValue(randomPartsOption);
+        Assert.assertNotNull(estimatedTimeArrivalValue,
+                "The Estimated Time Arrival Value cannot be null");
+
+        System.out.println("Displayed date: " + estimatedTimeArrivalValue);
+        System.out.println("Current date: " + data.getCurrentDate());
+
+        final boolean dateAfter = partsDetailsPanel.isDateAfter(estimatedTimeArrivalValue, data.getCurrentDate());
+        final boolean dateBefore = partsDetailsPanel.isDateBefore(estimatedTimeArrivalValue, data.getCurrentDate());
+        final boolean dateEqual = partsDetailsPanel.isDateEqual(estimatedTimeArrivalValue, data.getCurrentDate());
+
+        if (estimatedTimeArrivalValue.equals("")) {
+            System.out.println("The Estimated Time Arrival Value is empty");
+            Assert.assertTrue(true, "The Estimated Time Arrival Value is not empty");
+        } else if (dateAfter) {
+            System.out.println("The Estimated Time Arrival Value is after the current date");
+            Assert.assertTrue(true, "The Estimated Time Arrival Value isn't after the current date");
+        } else if (dateBefore) {
+            System.out.println("The Estimated Time Arrival Value is before the current date, but has to be equal or after");
+            Assert.fail("The Estimated Time Arrival Value is before the current date, but has to be equal or after");
+        } else if (dateEqual) {
+            System.out.println("The Estimated Time Arrival Value is equal to the current date");
+            Assert.assertTrue(true, "The Estimated Time Arrival Value is equal to the current date");
+        }
+    }
+
+    //todo often fails, bug!!! Sometimes forbidden status option is displayed for Completed search
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectOrdersWithCompletedOption(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        dashboardPanel.clickCompletedItemLink();
+        Assert.assertTrue(dashboardPanel.isCompletedOptionSelected(),
+                "The Completed Option hasn't been selected");
+
+        final int partsOrderListSize = partsOrdersListPanel.getPartsOrderListSize();
+        final WebElement randomPartsOrder = partsOrdersListPanel.getRandomPartsOrder();
+        final String breadCrumbRONumber = breadCrumbPanel.getLastBreadCrumbText();
+        partsDetailsPanel = partsOrdersListPanel.clickPartsOrder(randomPartsOrder);
+
+        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
+                "The Parts Details table hasn't been displayed");
+
+        if (partsOrderListSize > 1) {
+            Assert.assertNotEquals(breadCrumbRONumber, breadCrumbPanel.getLastBreadCrumbText());
+        }
+
+        final WebElement randomPartsOption = partsDetailsPanel.getRandomPartsDetailsOption();
+        final String partsOrderStatusValue = partsDetailsPanel.getPartsOrderStatusValue(randomPartsOption);
+
+        System.out.println("Parts order status value: " + partsOrderStatusValue + "\nAvailable statuses values:");
+        Arrays.stream(data.getStatusesList()).forEach(System.out::println);
+        final boolean present = Arrays.stream(data
+                .getStatusesList())
+                .anyMatch(part -> part.equals(partsOrderStatusValue));
+        Assert.assertTrue(present, "The status " + partsOrderStatusValue + " is not allowed for the Completed option");
+
+        final String estimatedTimeArrivalValue = partsDetailsPanel.getEstimatedTimeArrivalValue(randomPartsOption);
+        Assert.assertNotNull(estimatedTimeArrivalValue, "The Estimated Time Arrival Value cannot be null");
     }
 }

@@ -229,9 +229,19 @@ public abstract class VNextBOBaseWebPage {
         return selectedValue.getText();
     }
 
-    protected boolean isElementDisplayed(WebElement element) {
+    boolean isElementDisplayed(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    boolean areElementsDisplayed(List<WebElement> element) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(element));
             return true;
         } catch (Exception e) {
             e.printStackTrace();

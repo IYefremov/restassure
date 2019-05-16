@@ -1,0 +1,65 @@
+{
+  "verifyUserCanSearchROUsingSearch": [
+    {
+      "rowID": "verifyUserCanSearchROUsingSearch.01",
+      "description": "Test Case 83750:User can search RO using \"Search\"",
+      "location": "Best Location",
+      "type": "123"
+    }
+  ],
+
+  "verifyUserCanDeleteSearchOptions": [
+    {
+      "rowID": "verifyUserCanDeleteSearchOptions.01",
+      "description": "Test Case 83751:User can delete search options",
+      "location": "Best Location",
+      "type": "123"
+    }
+  ],
+
+  "verifyUserCanUseAdvancedSearchForROSearch": [
+    {
+      "rowID": "verifyUserCanUseAdvancedSearchForROSearch.01",
+      "description": "Test Case 83752:User can use Advanced Search to the search of RO",
+      "location": "Best Location",
+      "type": "123"
+    }
+  ],
+
+  "verifyUserCanSearchROByCustomerUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByCustomerUsingAdvancedSearch.01",
+      "description": "Test Case 83754:User can search RO by \"Customer\" using Advanced Search",
+      "location": "Best Location",
+      "type": "mik",
+      "customer": "Mike's Techs"
+    }
+  ],
+
+  "verifyUserCanSearchROByPhaseUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByPhaseUsingAdvancedSearch.01",
+      "description": "Test Case 83755:User can search RO by \"Phase\" using Advanced Search",
+      "location": "Best Location",
+      "phase": "Third"
+    }
+  ],
+
+  "verifyUserCanSearchROByWONumUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByWONumUsingAdvancedSearch.01",
+      "description": "Test Case 83758:User can search RO by \"WO#\" using Advanced Search",
+      "location": "Best Location",
+      "woNum": "O-062-00068"
+    }
+  ],
+
+  "verifyUserCanSearchROByWOTypeUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByWOTypeUsingAdvancedSearch.01",
+      "description": "Test Case 83759:User can search RO by \"WO Type\" using Advanced Search",
+      "location": "Best Location",
+      "woType": "Best"
+    }
+  ]
+}
