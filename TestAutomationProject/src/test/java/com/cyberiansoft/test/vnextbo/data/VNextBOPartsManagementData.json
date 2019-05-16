@@ -18,5 +18,46 @@
       "description": "Test Case 83856:User can see Part's details of different RO's",
       "location": "Best Location"
     }
+  ],
+
+  "verifyUserCanSelectOrdersWithPastDuePartsOption": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithPastDuePartsOption.01",
+      "description": "Test Case 87783:User can select orders with \"Past Due Parts\" Parts",
+      "location": "Best Location",
+      "statusesList": [
+        "Open",
+        "On Hold",
+        "Quote Received",
+        "Refused",
+        "Audited",
+        "Problem"
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithInProgressOption": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithInProgressOption.01",
+      "description": "Test Case 87785:User can select orders with \"In Progress\" Parts",
+      "location": "Best Location",
+      "statusesList": [
+        "Return to Vendor (RTV)",
+        "Ordered",
+        "Re-Ordered"
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithCompletedOption": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithCompletedOption.01",
+      "description": "Test Case 87786:User can select orders with \"Completed\" Parts",
+      "location": "Best Location",
+      "statusesList": [
+        "Received (final)",
+        "RTV Complete (final)"
+      ]
+    }
   ]
 }
