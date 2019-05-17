@@ -14,11 +14,24 @@
     {
       "rowID": "testVerifyUserCanNavigateInMyInspectionWizardUsingActionScreenWwizardMenuInAndroid.01",
       "description": "Test Case 72781:Verify user can navigate in My Inspection Wizard using action screen wizard menu ( Android )",
-      "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
       "service": {"serviceName": "Battery Installation"
       }
+    }
+  ],
+
+  "testVerifyMyInspectionActionScreenWorksCorrectly": [
+    {
+      "rowID": "testVerifyMyInspectionActionScreenWorksCorrectly.01",
+      "description": "Test Case 72785:Verify My Inspection action screen works correctly.",
+      "vihicleInfo": {"vinNumber": "7777777777777", "vehicleYear" : "2005", "vehicleColor" : "Blue"
+      },
+      "service": {"serviceName": "Battery Installation"
+      },
+      "damagesData": [{"damageServiceName": "Miscellanious"
+      }, {"damageServiceName": "Price Adjustment"
+      }]
     }
   ],
 

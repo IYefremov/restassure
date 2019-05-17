@@ -15,6 +15,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
@@ -772,6 +773,100 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         AppiumUtils.clickHardwareBackButton();
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.saveInspectionViaMenu();
+        inspectionsScreen.clickBackButton();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyMyInspectionActionScreenWorksCorrectly(String rowID,
+                                                                 String description, JSONObject testData) {
+
+        final String inpectionNote = "Test Note";
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        homeScreen.clickInspectionsMenuItem();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen.switchToMyInspectionsView();
+        inspectionsScreen.clickAddInspectionButton();
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
+        BaseUtils.waitABit(1000*20);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+
+        vehicleInfoScreen.changeScreen("Services");
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.saveInspectionViaMenu();
+
+        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+        Assert.assertTrue(inspectionsMenuScreen.isApproveMenuPresent());
+        Assert.assertTrue(inspectionsMenuScreen.isChangeCustomerMenuPresent());
+        Assert.assertTrue(inspectionsMenuScreen.isEditInspectionMenuButtonExists());
+        Assert.assertTrue(inspectionsMenuScreen.isArchivwMenuPresent());
+        Assert.assertTrue(inspectionsMenuScreen.isViewInspectionMenuPresent());
+        Assert.assertTrue(inspectionsMenuScreen.isNotesMenuPresent());
+        Assert.assertTrue(inspectionsMenuScreen.isEmailInspectionMenuPresent());
+        VNextViewScreen viewScreen = inspectionsMenuScreen.clickViewInspectionMenuItem();
+        viewScreen.clickScreenBackButton();
+        inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        vehicleInfoScreen.selectModelColor(inspectionData.getVehicleInfo().getVehicleColor());
+        vehicleInfoScreen.setYear(inspectionData.getVehicleInfo().getVehicleYear());
+        vehicleInfoScreen.clickMenuButton();
+        Assert.assertTrue(vehicleInfoScreen.isSaveButtonVisible());
+        Assert.assertTrue(vehicleInfoScreen.isCancelButtonVisible());
+        Assert.assertTrue(vehicleInfoScreen.isNotesButtonVisible());
+        AppiumUtils.clickHardwareBackButton();
+        vehicleInfoScreen.clickCancelMenuItem();
+        VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        informationdlg.clickInformationDialogNoButton();
+        vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.clickScreenForwardButton();
+        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        claimInfoScreen.clickScreenForwardButton();
+        availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.clickScreenForwardButton();
+        VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+        int markerCount = 0;
+        for (DamageData damageData : inspectionData.getDamagesData()) {
+            VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
+            selectDamagesScreen.clickDefaultDamageType(damageData.getDamageServiceName());
+            visualScreen.clickCarImageACoupleTimes(markerCount+1);
+            markerCount++;
+        }
+
+        Assert.assertEquals(visualScreen.getImageMarkers().size(), inspectionData.getDamagesData().size());
+        visualScreen.changeScreen("Services");
+        availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.clickMenuButton();
+        Assert.assertTrue(availableServicesScreen.isSaveButtonVisible());
+        Assert.assertTrue(availableServicesScreen.isCancelButtonVisible());
+        Assert.assertTrue(availableServicesScreen.isNotesButtonVisible());
+        AppiumUtils.clickHardwareBackButton();
+        VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
+        notesScreen.setNoteText(inpectionNote);
+        notesScreen.clickNotesBackButton();
+        availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.saveInspectionViaMenu();
+        inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+        inspectionsMenuScreen.clickNotesInspectionMenuItem();
+        Assert.assertEquals(notesScreen.getSelectedNotes(), inpectionNote);
+        notesScreen.clickNotesBackButton();
+
+        inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+        VNextEmailScreen emailScreen = inspectionsMenuScreen.clickEmailInspectionMenuItem();
+        emailScreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
+        emailScreen.sendEmail();
+        inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsScreen.clickBackButton();
     }
 
