@@ -84,7 +84,6 @@ public class TechniciansPopup extends iOSHDBaseScreen {
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Technicians")));
 
-
         IOSElement techsplittable =  getTechnicianSplitTable();
         scrollTable(techsplittable, technician);
         techsplittable.findElement(By.xpath("//XCUIElementTypeCell[contains(@name, '" + technician + "')]/XCUIElementTypeButton[@name='unselected']")).click();
@@ -97,9 +96,7 @@ public class TechniciansPopup extends iOSHDBaseScreen {
     }
 
     public void cancelSearchTechnician() {
-        ((IOSElement) appiumdriver.findElements(MobileBy.iOSNsPredicateString("name == 'Cancel' AND type == 'XCUIElementTypeButton'")).get(1)).click();
-                //.findElement(MobileBy.AccessibilityId("Cancel")).click();
-        //appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Cancel']").click();
+        appiumdriver.findElement(MobileBy.iOSNsPredicateString("name == 'Cancel' AND type == 'XCUIElementTypeButton' AND visible == 1")).click();
     }
 
     public void unselecTechnician(String technician) {
