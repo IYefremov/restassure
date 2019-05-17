@@ -2,19 +2,24 @@ package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class DamageData {
 
-    @JsonProperty("damageServiceName")
-    String damageServiceName;
+    @JsonProperty("damageGroupName")
+    String damageGroupName;
 
     @JsonProperty("moneyService")
     ServiceData moneyService;
 
+    @JsonProperty("moneyService")
+    List<ServiceData> moneyServices;
+
     @JsonProperty("percentageService")
     ServiceData percentageService;
 
-    public String getDamageServiceName() {
-        return damageServiceName;
+    public String getDamageGroupName() {
+        return damageGroupName;
     }
 
     public ServiceData getMoneyServiceData() {
@@ -23,5 +28,9 @@ public class DamageData {
 
     public ServiceData getPercentageServiceData() {
         return percentageService;
+    }
+
+    public List<ServiceData> getMoneyServicesData() {
+        return moneyServices;
     }
 }

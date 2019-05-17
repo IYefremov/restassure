@@ -13,7 +13,7 @@
       }]
     }
   ],
-  
+
   "testVerifyUserCanApproveDeclineAndSkipDifferentServicesInOneInspection": [
     {
       "rowID": "testVerifyUserCanApproveDeclineAndSkipDifferentServicesInOneInspection.01",
@@ -29,7 +29,7 @@
       "inspApprovedPrice": "$9.00"
     }
   ],
-  
+
   "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON": [
     {
       "rowID": "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON.01",
@@ -44,7 +44,7 @@
       "declineReason": "No repair needed"
     }
   ],
-  
+
   "testVerifyUserCantApproveOrDeclineServicesIfLineApprovalEqualsOFF": [
     {
       "rowID": "testVerifyUserCantApproveOrDeclineServicesIfLineApprovalEqualsOFF.01",
@@ -57,7 +57,7 @@
       "inspApprovedPrice": "$9.00"
     }
   ],
-  
+
   "testVerifyStateChangedToNewIfUserEditInspection": [
     {
       "rowID": "testVerifyStateChangedToNewIfUserEditInspection.01",

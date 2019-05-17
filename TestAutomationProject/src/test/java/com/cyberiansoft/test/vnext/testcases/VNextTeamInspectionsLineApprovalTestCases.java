@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -55,7 +56,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreensLeft(2);
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		
 		List<ServiceData> services = inspdata.getServicesList();
@@ -94,7 +95,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreensLeft(2);
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		
 		List<ServiceData> services = inspdata.getServicesList();
@@ -136,7 +137,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreensLeft(2);
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		
 		List<ServiceData> services = inspdata.getServicesList();
@@ -176,7 +177,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreensLeft(2);
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		availableservicesscreen.selectService(inspdata.getServiceName());
 		
@@ -210,7 +211,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreensLeft(2);
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		List<ServiceData> services = inspdata.getServicesList();
 		for (ServiceData service : services)
@@ -248,7 +249,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreensLeft(2);
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		List<ServiceData> services = inspdata.getServicesList();
@@ -290,7 +291,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(inspdata.getVinNumber());
         final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.swipeScreensLeft(2);
+        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         List<ServiceData> services = inspdata.getServicesList();
@@ -328,7 +329,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreensLeft(2);
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		List<ServiceData> services = inspdata.getServicesList();
@@ -371,7 +372,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-		vehicleinfoscreen.swipeScreensLeft(2);
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		availableservicesscreen.switchToAvalableServicesView();
 
@@ -432,7 +433,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
-			vehicleinfoscreen.swipeScreensLeft(2);
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 			List<ServiceData> services = inspdata.getServicesList();
@@ -476,7 +477,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
 			//inspNumbers.add(vehicleinfoscreen.getNewInspectionNumber());
-			vehicleinfoscreen.swipeScreensLeft(2);
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 			List<ServiceData> services = inspdata.getServicesList();
@@ -525,7 +526,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
-			vehicleinfoscreen.swipeScreensLeft(2);
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 			List<ServiceData> services = inspdata.getServicesList();
@@ -572,7 +573,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
-			vehicleinfoscreen.swipeScreensLeft(2);
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 			List<ServiceData> services = inspdata.getServicesList();
@@ -630,7 +631,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
-			vehicleinfoscreen.swipeScreensLeft(2);
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 			List<ServiceData> services = inspdata.getServicesList();
@@ -686,7 +687,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
-			vehicleinfoscreen.swipeScreensLeft(2);
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 			List<ServiceData> services = inspdata.getServicesList();
@@ -750,7 +751,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleinfoscreen.setVIN(inspdata.getVinNumber());
 			inspdata.setInspectionNumber(vehicleinfoscreen.getNewInspectionNumber());
-			vehicleinfoscreen.swipeScreensLeft(2);
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 			List<ServiceData> services = inspdata.getServicesList();

@@ -33,8 +33,17 @@ public class WorkOrderData {
     @JsonProperty("laborService")
     LaborServiceData laborService;
 
+    @JsonProperty("insuranceCompany")
+    InsuranceCompanyData insuranceCompany;
+
     @JsonProperty("retailCustomer")
     RetailCustomer retailCustomer;
+
+    @JsonProperty("damageData")
+    DamageData damageData;
+
+    @JsonProperty("damagesData")
+    List<DamageData> damagesData;
 
     public String getWorkOrderType() {
         return workOrderType;
@@ -86,8 +95,20 @@ public class WorkOrderData {
 
     public LaborServiceData getLaborServiceData() { return laborService; }
 
+    public InsuranceCompanyData getInsuranceCompanyData() {
+        return insuranceCompany;
+    }
+
     public RetailCustomer getWorlOrderRetailCustomer() {
         return retailCustomer;
+    }
+
+    public DamageData getDamageData() {
+        return damageData;
+    }
+
+    public List<DamageData> getDamagesData() {
+        return damagesData;
     }
 
 }
