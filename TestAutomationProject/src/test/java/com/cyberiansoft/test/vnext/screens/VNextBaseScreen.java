@@ -131,6 +131,8 @@ public class VNextBaseScreen {
 	}
 	
 	public void clickScreenForwardButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='forward']")));
 		tap(appiumdriver.findElementByXPath("//*[@action='forward']"));
 	}
 	

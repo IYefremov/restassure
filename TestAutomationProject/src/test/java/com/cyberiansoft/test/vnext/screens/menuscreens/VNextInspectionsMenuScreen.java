@@ -110,6 +110,18 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
         return archiveinspectionbtn.isDisplayed();
     }
 
+    public boolean isViewInspectionMenuPresent() {
+        return viewinspectionbtn.isDisplayed();
+    }
+
+    public boolean isNotesMenuPresent() {
+        return notesinspectionbtn.isDisplayed();
+    }
+
+    public boolean isEmailInspectionMenuPresent() {
+        return emailinspectionbtn.isDisplayed();
+    }
+
     public VNextViewScreen clickViewInspectionMenuItem() {
         clickMenuItem(viewinspectionbtn);
         BaseUtils.waitABit(3000);

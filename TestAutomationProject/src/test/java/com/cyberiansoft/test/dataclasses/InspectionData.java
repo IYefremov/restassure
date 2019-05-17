@@ -60,6 +60,12 @@ public class InspectionData {
 
 	@JsonProperty("retailCustomer")
 	RetailCustomer retailCustomer;
+
+	@JsonProperty("damageData")
+	DamageData damageData;
+
+	@JsonProperty("damagesData")
+	List<DamageData> damagesData;
 	 
 	 public String getInspectionType() {
 		 return inspType;
@@ -166,5 +172,13 @@ public class InspectionData {
 
 	public RetailCustomer getInspectionRetailCustomer() {
 	 	return retailCustomer;
+	}
+
+	public DamageData getDamageData() {
+		return damageData;
+	}
+
+	public List<DamageData> getDamagesData() {
+		return damagesData;
 	}
 }

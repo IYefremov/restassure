@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -31,23 +30,10 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/r360-inspection-approve-on-bo-testcases-data.json";
 
-
 	@BeforeClass(description="R360 Inspection Approve On BO Test Cases")
 	public void beforeClass() {
 		JSONDataProvider.dataFile = DATA_FILE;
 	}
-	
-	/*String inspnumber = "";
-	final String VIN = "3N1AB7AP3HY327077";
-	final String _make = "Nissan";
-	final String _model = "Sentra";
-	final String _color = "Red";
-	final String year = "2017";
-	final String mileage = "123";
-	final String stock = "123";
-	final String ro = "321";
-	final String po = "987";
-	final String licPlate = "qwerty";*/
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyPosibilityToApproveNewInspectionOnBO(String rowID,
@@ -55,23 +41,6 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final String approveNotes = "Approve Inspection via QuickAccess";
-
-		/*final String insurencecompany = "Test Insurance Company";
-		final String claimNumber = "qwerty";
-		final String policyNumber = "oops";
-		final String deductibleValue = "122";
-		
-		//final String percservices = "Aluminum Upcharge"; 
-		final String moneyservices = "Dent Repair"; 
-		final String matrixservice = "Hail Repair";
-		final String matrixsubservice = "State Farm";
-		final String moneyserviceprice = "58";
-		final String moneyservicequant = "1";
-		final String vehiclepartname = "Hood";
-		final String vehiclepartsize = "Dime";	
-		final String vehiclepartseverity = "Light 6 to 15";
-		final String additionalservice = "Aluminum Upcharge";
-		final String insppriceexp = "214.25";*/
 		
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
@@ -153,9 +122,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 																	  String description, JSONObject testData) {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-		
 		final String approveNotes = "Decline Inspection via QuickAccess";
-
 
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
