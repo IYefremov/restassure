@@ -838,7 +838,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         int markerCount = 0;
         for (DamageData damageData : inspectionData.getDamagesData()) {
             VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
-            selectDamagesScreen.clickDefaultDamageType(damageData.getDamageServiceName());
+            selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
             visualScreen.clickCarImageACoupleTimes(markerCount+1);
             markerCount++;
         }

@@ -1,9 +1,12 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
@@ -15,9 +18,24 @@ import org.testng.Assert;
 import java.util.List;
 
 public class WorkOrderSteps {
-    public static void createWorkOrder(WorkOrderTypes workOrderTypes) {
+
+    public static String createSimpleWorkOrder(AppCustomer customer, WorkOrderTypes workOrderType) {
+        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextWorkOrdersScreen workOrdersScreen = homescreen.clickWorkOrdersMenuItem();
+        VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(customer);
+        createWorkOrder(workOrderType);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN("7777777777777");
+        final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.saveWorkOrderViaMenu();
+        return workOrderNumber;
+    }
+
+    public static void createWorkOrder(WorkOrderTypes workOrderType) {
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        workOrderTypesList.selectWorkOrderType(workOrderTypes);
+        workOrderTypesList.selectWorkOrderType(workOrderType);
     }
 
     public static void openServiceScreen() {

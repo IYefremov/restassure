@@ -131,7 +131,11 @@ public class VNextBaseScreen {
     }
 
     public void clickScreenForwardButton() {
-        tap(appiumdriver.findElementByXPath("//*[@action='forward']"));
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='forward']")));
+        wait = new WebDriverWait(appiumdriver, 5);
+        WebElement forwardBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@action='forward']")));
+        tap(forwardBtn);
     }
 
     public void swipeScreensRight(int screensnumber) {

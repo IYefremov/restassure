@@ -79,7 +79,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 	public VNextVehicleInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@data-autotests-id, '-vehicle-info')]")));
 		BaseUtils.waitABit(1000);
 		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)

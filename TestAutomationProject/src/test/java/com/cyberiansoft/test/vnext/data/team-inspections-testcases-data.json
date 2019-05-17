@@ -29,8 +29,8 @@
       },
       "service": {"serviceName": "Battery Installation"
       },
-      "damagesData": [{"damageServiceName": "Miscellanious"
-      }, {"damageServiceName": "Price Adjustment"
+      "damagesData": [{"damageGroupName": "Miscellanious"
+      }, {"damageGroupName": "Price Adjustment"
       }]
     }
   ],
