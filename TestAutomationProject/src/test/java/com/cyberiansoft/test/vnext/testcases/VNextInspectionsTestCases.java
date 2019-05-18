@@ -139,7 +139,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspservicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
 		inspservicesscreen.selectService(inspectionData.getMoneyServiceName());
-		vehicleinfoscreen = inspservicesscreen.goBackToInspectionVehicleInfoScreen();
+		inspservicesscreen.swipeScreensRight(2);
+		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		AppiumUtils.clickHardwareBackButton();
 		BaseUtils.waitABit(3000);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
@@ -184,9 +185,9 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		Assert.assertEquals(vehicleinfoscreen.getYear(), inspectionData.getVehicleInfo().getVehicleYear());
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), inspectionData.getVehicleInfo().getVINNumber());
 		Assert.assertEquals(vehicleinfoscreen.getMilage(), inspectionData.getVehicleInfo().getMileage());
-		Assert.assertEquals(vehicleinfoscreen.getStockNo(), inspectionData.getVehicleInfo().getStockNumber());
-		Assert.assertEquals(vehicleinfoscreen.getRoNo(), inspectionData.getVehicleInfo().getRoNumber());
-		Assert.assertEquals(vehicleinfoscreen.getLicPlate(), inspectionData.getVehicleInfo().getVehicleLicensePlate());
+		Assert.assertEquals(vehicleinfoscreen.getStockNo(), inspectionData.getVehicleInfo().getStockNumber().toUpperCase());
+		Assert.assertEquals(vehicleinfoscreen.getRoNo(), inspectionData.getVehicleInfo().getRoNumber().toUpperCase());
+		Assert.assertEquals(vehicleinfoscreen.getLicPlate(), inspectionData.getVehicleInfo().getVehicleLicensePlate().toUpperCase());
 		inspectionsscreen = vehicleinfoscreen.cancelInspection();
 		inspectionsscreen.clickBackButton();
 	}

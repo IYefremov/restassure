@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.Invoice;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
@@ -46,7 +47,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
 			customersscreen.selectCustomer(testcustomer);
 			VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-			vehicleinfoscreen.setVIN(invoiceData.getWorkOrderData().getVinNumber());
+			vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
 			vehicleinfoscreen.clickScreenForwardButton();
 			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleVINHistoryScreen.clickBackButton();
@@ -175,6 +176,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		workordersscreen.clickCreateInvoiceIcon();
 		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationDialog.clickSingleInvoiceButton();
+		BaseUtils.waitABit(20000);
 		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		customersscreen.selectCustomer(invoiceData.getWorkOrdersData().get(0).getWorlOrderRetailCustomer());
 		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());

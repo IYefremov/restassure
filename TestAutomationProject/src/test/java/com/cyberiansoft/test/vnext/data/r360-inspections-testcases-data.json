@@ -49,7 +49,19 @@
       "description": "Test Case 43331:vNext - Navigate through wizard steps for Inspection by hardware 'Back' button",
       "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
       },
-      "moneyService" : "Dent Repair"
+      "moneyService" : {"serviceName": "Dent Repair"}
+    }
+  ],
+
+  "testEditInspectionVehicleInfo": [
+    {
+      "rowID": "testEditInspectionVehicleInfo.01",
+      "description": "Test Case 43512:vNext - Edit inspection Vehicle Info",
+      "vihicleInfo": {"vinNumber": "1GCJTCFE7B8448756", "vehicleMake" : "Chevrolet", "vehicleModel" : "Colorado", "vehicleYear" : "2011",
+        "mileage" : "34561", "stockNumber" : "Lorem ipsum dolor sit amet", "roNumber" : "asdfgh", "licPlate" : "asd-123"
+      },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      }
     }
   ],
 

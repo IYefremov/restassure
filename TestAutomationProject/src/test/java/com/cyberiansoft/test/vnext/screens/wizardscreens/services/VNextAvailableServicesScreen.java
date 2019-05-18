@@ -1,13 +1,10 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.screens.VNextLaborServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -63,27 +60,8 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 		tap(savebtn);
 	}
 	
-	public VNextVehicleInfoScreen goBackToInspectionVehicleInfoScreen() {
-		BaseUtils.waitABit(2000);
-		swipeScreensRight(3);
-		//swipeScreenLeft();
-		//swipeScreenLeft(); 
-		//swipeScreenLeft();
-		//swipeScreenLeft();
-		return new VNextVehicleInfoScreen(appiumdriver);
-	}
-	
-	public VNextInspectionsScreen saveInspection() {
-		tap(savebtn);
-		return new VNextInspectionsScreen(appiumdriver);
-	}
-	
 	public List<WebElement> getAllServicesListItems() {	
 		return allserviceslist.findElements(By.xpath(".//div[contains(@class, 'checked-accordion-item')]"));
-	}
-	
-	public String getUnselectedServiceListItemName(WebElement srvlistitem) {
-		return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
 	}
 	
 	public void selectService(String serviceName) {
