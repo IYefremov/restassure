@@ -33,7 +33,6 @@
           <include name="testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen" />
           <include name="testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService" />
           <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
-          <include name="testVerifySendingMoreThen100MessagesAfterReconnectInternet" />
       	 </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
@@ -55,8 +54,8 @@
           <include name="testCreateCustomerAlongWithInspection" />              
           <include name="testNavigateBySwipeThroughWizardStepsForInspeciton" />
           <include name="testNavigateThroughWizardStepsForInspectionByHardwareBackButton" />
-          <include name="testEditInspectionVehicleInfo" />
-          <include name="testArchiveInspection" />
+          <include name="testVerifyUserCanArchiveCreatedInspection" />
+            <include name="testVerifyUserCanArchiveSeveralInspections" />
         </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.vNextCustomersTestCases">
@@ -87,20 +86,6 @@
       <class name="com.cyberiansoft.test.vnext.testcases.VNextCreateInvoiceFromMultiplyWOTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionApproveOnBOTestCases">
-      </class>
-     <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
-     <methods>                   
-          <include name="testVerifyCreatingBOWithJumpStartEdition_PDR" />
-          <include name="testVerifyCreatingBOWithTechnicianEdition_PDR" />
-          <include name="testVerifyPhoneDoesntMatchThisEmailEmailMeMyPhoneNumberErrorForNonExistingPhone" />
-          <include name="testVerifyEmailDoesntMatchThisPhoneErrorForNonExistingEmail" />
-          <include name="testVerifyPhoneNumberOrEmailAddressDoesntMatchTheUsersAccountInformationErrorForExistingEmailPhone" />  
-          <include name="testUserCantCreatePasswordForIBSAfterCreatingPasswordForVNextBO" /> 
-          <include name="testVerifyUserCanCreateRepair360Edition" />  
-          <include name="testVerifyUserCanCreateRepair360FreeEdition" /> 
-          <include name="testSubmitCustomerFeedbackFromRepair360FreeEdiition" /> 
-          <include name="testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree" />
-      </methods>
       </class>
     </classes>
   </test>
