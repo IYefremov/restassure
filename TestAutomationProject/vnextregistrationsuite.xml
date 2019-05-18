@@ -1,0 +1,29 @@
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+  <parameter name="selenium.host" value="localhost" />
+  <parameter name="selenium.port" value="3737" />
+  <parameter name="selenium.browser" value="chrome" />
+  <parameter name="device.platform" value="android"  />
+    <parameter name="device.lecense" value="OKramar_android2"  />
+    <parameter name="appium.path" value="c:\Users\Alex\AppData\Roaming\npm\node_modules\appium\build\lib\main.js"  />
+  <listeners>
+      <listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListenerJS"/>
+  </listeners>
+  <test name="Tests for VNext client" preserve-order="true">
+    <classes>
+     <class name="com.cyberiansoft.test.vnext.testcases.VNextUserRegistrationTestCases">
+     <methods>                   
+          <include name="testVerifyCreatingBOWithJumpStartEdition_PDR" />
+          <include name="testVerifyCreatingBOWithTechnicianEdition_PDR" />
+          <include name="testVerifyPhoneDoesntMatchThisEmailEmailMeMyPhoneNumberErrorForNonExistingPhone" />
+          <include name="testVerifyEmailDoesntMatchThisPhoneErrorForNonExistingEmail" />
+          <include name="testVerifyPhoneNumberOrEmailAddressDoesntMatchTheUsersAccountInformationErrorForExistingEmailPhone" />  
+          <include name="testUserCantCreatePasswordForIBSAfterCreatingPasswordForVNextBO" /> 
+          <include name="testVerifyUserCanCreateRepair360Edition" />  
+          <include name="testVerifyUserCanCreateRepair360FreeEdition" /> 
+          <include name="testSubmitCustomerFeedbackFromRepair360FreeEdiition" /> 
+          <include name="testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree" />
+      </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
