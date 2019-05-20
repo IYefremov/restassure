@@ -1,8 +1,13 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
+import com.cyberiansoft.test.dataclasses.InspectionData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -16,113 +21,110 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 
 public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRegistration {
-	
+
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-claim-info-screen-testcases-data.json";
+
 	@BeforeClass(description="Team Claim Info Test Cases")
 	public void beforeClass() {
+		JSONDataProvider.dataFile = DATA_FILE;
 	}
-	
-	@Test(testName= "Test Case 64814:Verify Claim Info screen visible for Inspection if 'Claim Info = ON'", 
-			description = "Verify Claim Info screen visible for Inspection if 'Claim Info = ON'")
-	public void testVerifyClaimInfoScreenVisibleForInspectionIfClaimInfoEqualsON() {
 
-		final String vinnumber = "TEST";
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyClaimInfoScreenVisibleForInspectionIfClaimInfoEqualsON(String rowID,
+																		String description, JSONObject testData) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleinfoscreen.setVIN(vinnumber);
-		vehicleinfoscreen.changeScreen("Claim");
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		Assert.assertTrue(claiminfoscreen.isInsuranceCompanyFieldVisible());
-		Assert.assertTrue(claiminfoscreen.isClaimNumberFieldVisible());
-		Assert.assertTrue(claiminfoscreen.isPolicyNumberFieldVisible());
-		Assert.assertTrue(claiminfoscreen.isDeductibleFieldVisible());
-		//LocalDate now = LocalDate.now();
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
-		//Assert.assertEquals(claiminfoscreen.getAccidentDateValue(), now.format(formatter));
-		
-		inspectionscreen = claiminfoscreen.cancelInspection();
-		homescreen = inspectionscreen.clickBackButton();
+		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+		customersScreen.switchToWholesaleMode();
+		customersScreen.selectCustomer(testwholesailcustomer);
+		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
+		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		Assert.assertTrue(claimInfoScreen.isInsuranceCompanyFieldVisible());
+		Assert.assertTrue(claimInfoScreen.isClaimNumberFieldVisible());
+		Assert.assertTrue(claimInfoScreen.isPolicyNumberFieldVisible());
+		Assert.assertTrue(claimInfoScreen.isDeductibleFieldVisible());
+
+		inspectionsScreen = claimInfoScreen.cancelInspection();
+		inspectionsScreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 64845:Verify Claim Info screen is not visible for Inspection if 'Claim Info = OFF'", 
-			description = "Verify Claim Info screen is not visible for Inspection if 'Claim Info = OFF'")
-	public void testVerifyClaimInfoScreenIsNotVisibleForInspectionIfClaimInfoEqualsOFF() {
 
-		final String vinnumber = "TEST";
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyClaimInfoScreenIsNotVisibleForInspectionIfClaimInfoEqualsOFF(String rowID,
+																				 String description, JSONObject testData) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleinfoscreen.setVIN(vinnumber);
-		vehicleinfoscreen.clickScreenTitleCaption();
-		Assert.assertFalse(vehicleinfoscreen.isScreenPresentInChangeScreenPopoverList("Claim"));
+		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+		customersScreen.switchToWholesaleMode();
+		customersScreen.selectCustomer(testwholesailcustomer);
+		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		vehicleInfoScreen.clickScreenTitleCaption();
+		Assert.assertFalse(vehicleInfoScreen.isScreenPresentInChangeScreenPopoverList(ScreenType.CLAIM.name()));
 		AppiumUtils.clickHardwareBackButton();
-		
-		inspectionscreen = vehicleinfoscreen.cancelInspection();
-		homescreen = inspectionscreen.clickBackButton();
+
+		inspectionsScreen = vehicleInfoScreen.cancelInspection();
+		inspectionsScreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 64846:Verify Claim Info screen visible for WO if 'Claim Info = ON'", 
-			description = "Verify Claim Info screen visible for WO if 'Claim Info = ON'")
-	public void testVerifyClaimInfoScreenVisibleForWOIfClaimInfoEqualsON() {
 
-		final String vinnumber = "TEST";
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyClaimInfoScreenVisibleForWOIfClaimInfoEqualsON(String rowID,
+																					   String description, JSONObject testData) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleinfoscreen.setVIN(vinnumber);
-		vehicleinfoscreen.changeScreen("Claim");
-		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		Assert.assertTrue(claiminfoscreen.isInsuranceCompanyFieldVisible());
-		Assert.assertTrue(claiminfoscreen.isClaimNumberFieldVisible());
-		Assert.assertTrue(claiminfoscreen.isPolicyNumberFieldVisible());
-		Assert.assertTrue(claiminfoscreen.isDeductibleFieldVisible());
-		//LocalDate now = LocalDate.now();
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
-		//Assert.assertEquals(claiminfoscreen.getAccidentDateValue(), now.format(formatter));
-		
-		inspectionscreen = claiminfoscreen.cancelInspection();
-		homescreen = inspectionscreen.clickBackButton();
+		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+		customersScreen.switchToWholesaleMode();
+		customersScreen.selectCustomer(testwholesailcustomer);
+		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
+		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		Assert.assertTrue(claimInfoScreen.isInsuranceCompanyFieldVisible());
+		Assert.assertTrue(claimInfoScreen.isClaimNumberFieldVisible());
+		Assert.assertTrue(claimInfoScreen.isPolicyNumberFieldVisible());
+		Assert.assertTrue(claimInfoScreen.isDeductibleFieldVisible());
+
+		inspectionsScreen = claimInfoScreen.cancelInspection();
+		inspectionsScreen.clickBackButton();
 	}
-	
-	@Test(testName= "Test Case 64847:Verify Claim Info screen is not visible for WO if 'Claim Info = OFF'", 
-			description = "Verify Claim Info screen is not visible for WO if 'Claim Info = OFF'")
-	public void testVerifyClaimInfoScreenIsNotVisibleForWOIfClaimInfoEqualsOFF() {
 
-		final String vinnumber = "TEST";
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyClaimInfoScreenIsNotVisibleForWOIfClaimInfoEqualsOFF(String rowID,
+																		 String description, JSONObject testData) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleinfoscreen.setVIN(vinnumber);
-		vehicleinfoscreen.clickScreenTitleCaption();
-		Assert.assertFalse(vehicleinfoscreen.isScreenPresentInChangeScreenPopoverList("Claim"));
+		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+		customersScreen.switchToWholesaleMode();
+		customersScreen.selectCustomer(testwholesailcustomer);
+		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		vehicleInfoScreen.clickScreenTitleCaption();
+		Assert.assertFalse(vehicleInfoScreen.isScreenPresentInChangeScreenPopoverList("Claim"));
 		AppiumUtils.clickHardwareBackButton();
-		
-		inspectionscreen = vehicleinfoscreen.cancelInspection();
-		homescreen = inspectionscreen.clickBackButton();
+
+		inspectionsScreen = vehicleInfoScreen.cancelInspection();
+		inspectionsScreen.clickBackButton();
 	}
 
 }
