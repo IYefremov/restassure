@@ -1,0 +1,17 @@
+{
+
+  "testVerifyUserCanEditWOInDraftInvoice": [
+    {
+      "rowID": "testVerifyUserCanEditWOInDraftInvoice.01",
+      "description": "Test Case 75786:Verify user can edit WO in draft Invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }, "moneyService": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
+  ]
+
+}

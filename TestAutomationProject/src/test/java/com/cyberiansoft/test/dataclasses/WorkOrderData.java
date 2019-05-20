@@ -45,6 +45,9 @@ public class WorkOrderData {
     @JsonProperty("damagesData")
     List<DamageData> damagesData;
 
+    @JsonProperty("inspectionData")
+    InspectionData inspectionData;
+
     public String getWorkOrderType() {
         return workOrderType;
     }
@@ -111,4 +114,7 @@ public class WorkOrderData {
         return damagesData;
     }
 
+    public InspectionData getInspectionData() {
+        return inspectionData;
+    }
 }

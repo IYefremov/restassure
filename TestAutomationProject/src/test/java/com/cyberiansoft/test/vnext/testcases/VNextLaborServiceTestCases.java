@@ -24,7 +24,7 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-labor-service-testcases-data.json";
 
-    @BeforeClass(description = "Team Inspections Line Approval Test Cases")
+    @BeforeClass(description = "Team Labor Service Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = DATA_FILE;
     }

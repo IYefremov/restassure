@@ -1,0 +1,38 @@
+{
+
+  "userCanSelectUnselectServicesInWorkorder": [
+    {
+      "rowID": "userCanSelectUnselectServicesInWorkorder.01",
+      "description": "Test Case 84294:Verify all services copied from Inspection when create WO, Test Case 84295:Verify user can add new services to WO when create WO from Inspection, Test Case 84296:Verify user can unselect services when create WO from Inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          },
+          {
+            "serviceName": "Aluminum Panel"
+          }
+        ]
+      },
+      "services": [
+        {
+          "serviceName": "Damage Service"
+        },
+        {
+          "serviceName": "Labor"
+        }
+      ]
+    }
+  ],
+
+  "userCanCreateWoFromApprovedInspection": [
+    {
+      "rowID": "userCanCreateWoFromApprovedInspection.01",
+      "description": "Test Case 84292:Verify user can create WO from approved Inspection, Test Case 84293:Verify user can't create WO from not approved Inspection"
+    }
+  ]
+
+}
