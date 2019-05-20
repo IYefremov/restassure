@@ -33,8 +33,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamDraftWOTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamDraftInspectionsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamVehicleInfoTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextWorkOrdersFromApprovedInspections"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextWorkOrderServicesFromApprovedInspection"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases"/>
         </classes>
     </test>
 </suite>
