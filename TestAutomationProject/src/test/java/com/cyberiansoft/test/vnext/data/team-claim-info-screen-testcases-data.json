@@ -1,0 +1,43 @@
+{
+
+  "testVerifyClaimInfoScreenVisibleForInspectionIfClaimInfoEqualsON": [
+    {
+      "rowID": "testVerifyClaimInfoScreenVisibleForInspectionIfClaimInfoEqualsON.01",
+      "description": "Test Case 64814:Verify Claim Info screen visible for Inspection if 'Claim Info = ON'",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifyClaimInfoScreenIsNotVisibleForInspectionIfClaimInfoEqualsOFF": [
+    {
+      "rowID": "testVerifyClaimInfoScreenIsNotVisibleForInspectionIfClaimInfoEqualsOFF.01",
+      "description": "Test Case 64845:Verify Claim Info screen is not visible for Inspection if 'Claim Info = OFF'",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifyClaimInfoScreenVisibleForWOIfClaimInfoEqualsON": [
+    {
+      "rowID": "testVerifyClaimInfoScreenVisibleForWOIfClaimInfoEqualsON.01",
+      "description": "Test Case 64846:Verify Claim Info screen visible for WO if 'Claim Info = ON'",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifyClaimInfoScreenIsNotVisibleForWOIfClaimInfoEqualsOFF": [
+    {
+      "rowID": "testVerifyClaimInfoScreenIsNotVisibleForWOIfClaimInfoEqualsOFF.01",
+      "description": "Test Case 64847:Verify Claim Info screen is not visible for WO if 'Claim Info = OFF'",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ]
+
+}

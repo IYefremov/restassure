@@ -1,0 +1,85 @@
+{
+
+  "testVerifyUserAddNotesForTeamInspection": [
+    {
+      "rowID": "testVerifyUserAddNotesForTeamInspection.01",
+      "description": "Test Case 67743:Verify user can add Notes for Team Inspection, Test Case 67744:Verify User can edit Notes from Team Inspection list, Test Case 67746:Verify Notes changes is saved after DB update",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifyNotesDisplaysOnTeamInspectionListAfterAddingOnMyInspectionList": [
+    {
+      "rowID": "testVerifyNotesDisplaysOnTeamInspectionListAfterAddingOnMyInspectionList.01",
+      "description": "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, Test Case 67748:Verify Notes icon displays if user add Notes for Inspection My/Team",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifyNotesDisplaysOnMyInspectionListAfterAddingOnTeamInspectionList": [
+    {
+      "rowID": "testVerifyNotesDisplaysOnMyInspectionListAfterAddingOnTeamInspectionList.01",
+      "description": "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, Test Case 67748:Verify Notes icon displays if user add Notes for Inspection My/Team, Test Case 67750:Verify saving text note on tapping 'Back' button",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifyQuickNotesAreAddedAsNewLinesOfText": [
+    {
+      "rowID": "testVerifyQuickNotesAreAddedAsNewLinesOfText.01",
+      "description": "Test Case 67751:Verify quick notes are added as new lines of text",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifyUserCanAddSeveralQuickNotes": [
+    {
+      "rowID": "testVerifyUserCanAddSeveralQuickNotes.01",
+      "description": "Test Case 67754:Verify user can add several Quick notes",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifySavingTextNoteOnTappingHardwareBackButton": [
+    {
+      "rowID": "testVerifySavingTextNoteOnTappingHardwareBackButton.01",
+      "description": "Test Case 67749:Verify saving text note on tapping hardware 'Back' button",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testVerifyUserCanRemovePicturesFromNotes": [
+    {
+      "rowID": "testVerifyUserCanRemovePicturesFromNotes.01",
+      "description": "Test Case 67752:Verify user can remove pictures from Notes",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
+  "testCreateInspectionWithBreakageServiceImageNotes": [
+    {
+      "rowID": "testCreateInspectionWithBreakageServiceImageNotes.01",
+      "description": "Test Case 55441:vNext mobile: Create Inspection with breakage service image notes, Test Case 55444:vNext: verify displaying image notes for the Inspection Visual Breakage service",
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      },
+      "damageData": {"damageGroupName": "Detail", "moneyService" : {"serviceName" : "Body Shop 1"}
+      }
+    }
+  ]
+
+}
