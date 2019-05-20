@@ -12,28 +12,28 @@
     </listeners>
     <test name="Tests for VNext client" preserve-order="true">
         <classes>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextWholesaleCustomersTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamCustomersTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionNotestTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextApproveTeamInspectionsTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamClaimInfoScreenTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamArchiveInspectionsTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoicesTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamSupplementsTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInspectionsLineApprovalTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamCalculationsTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextPayInvoicesTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersChangeCustomerTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamInvoiceEditingTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersList"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextLaborServiceTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextVehicleOwnerSupportTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamDraftWOTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamDraftInspectionsTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamVehicleInfoTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamCustomersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionNotestTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextApproveTeamInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamClaimInfoScreenTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamArchiveInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamSupplementsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsLineApprovalTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamCalculationsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextPayInvoicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersChangeCustomerTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoiceEditingTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersList"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextLaborServiceTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextVehicleOwnerSupportTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamDraftWOTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamDraftInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamVehicleInfoTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases"/>
         </classes>
     </test>
 </suite>
