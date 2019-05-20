@@ -1,8 +1,10 @@
 <suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
-  <parameter name="selenium.host" value="localhost" />
-  <parameter name="selenium.port" value="3737" />
-  <parameter name="selenium.browser" value="chrome" />
-  <parameter name="device.platform" value="android"  />
+    <parameter name="selenium.host" value="localhost" />
+    <parameter name="selenium.port" value="3737" />
+    <parameter name="selenium.browser" value="chrome" />
+    <parameter name="device.platform" value="android"  />
+    <parameter name="device.lecense" value="OKramar_android2"  />
+    <parameter name="appium.path" value="c:\Users\Alex\AppData\Roaming\npm\node_modules\appium\build\lib\main.js"  />
   <listeners>
 		<!--<listener class-name="com.cyberiansoft.test.vnext.utils.VNextTestListener"/>-->
       <listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
@@ -86,17 +88,13 @@
           <include name="testVerifyPhoneNumberOrEmailAddressDoesntMatchTheUsersAccountInformationErrorForExistingEmailPhone" />      
       </methods>
       </class>-->
-      
-     
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextTeamWorkOrdersList">
-     <methods>
-         <include name="testVerifyUserCanSearchWOByCustomerName" />
-          <!--<include name="testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList" />-->
-     	  <!--<include name="testVerifyServicesAreSavedCorrectlyWhenSavingInspectionFromVisualScreen" />--> 
-    	  <!--<include name="testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree" />
-    	  <include name="testVerifyUserCanCreateRepair360Edition" />-->
-      </methods>
-      </class>
+
+
+        <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases">
+            <!--<methods>
+                <include name="userCanSelectUnselectServicesInWorkorder" />
+            </methods>-->
+        </class>
 
       
       

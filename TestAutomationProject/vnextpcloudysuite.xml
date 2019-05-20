@@ -10,20 +10,20 @@
   </listeners>
   <test name="Tests for VNext client" preserve-order="true">
     <classes>
-    <class name="com.cyberiansoft.test.vnext.testcases.InstallUninstallUpdate">
+    <class name="com.cyberiansoft.test.vnext.testcases.r360free.registrationandnavigation.InstallUninstallUpdate">
         <methods>                   
           <include name="testLogInSuccessCase" />
         </methods>
       </class>
-    <class name="com.cyberiansoft.test.vnext.testcases.VNextSyncInspectionsTestCases">
+    <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextSyncInspectionsTestCases">
         <methods>                   
           <include name="testManualVerifyOutgoingSyncMessageIsPushedIntoQueueWhenSaveInspection" />
           <include name="testSendMessageFromTheQueueInManualModeSuccessPath" />
           <include name="testSendMessageAutomaticallyFromTheQueueInAutomaticModeAfterReconnectToNetwork" /> 
         </methods>
       </class>
-      <class name="com.cyberiansoft.test.vnext.testcases.vNextInspectionServicesTestCases">
-      	<methods>   
+      <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionServicesTestCases">
+      	<methods>
       	  <include name="testShowSelectedServicesAfterInspectionIsSaved" />
       	  <include name="testAddOneServiceToAlreadySelectedServicesWhenInspectionIsEdited" />
       	  <include name="testAddTheSameServiceMultipleTimes" />
@@ -35,7 +35,7 @@
           <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
       	 </methods>
       </class>
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsNotesTestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionsNotesTestCases">
       	<methods>  
       	  <include name="testAddTextNotesForServiceInTheList" />
       	  <include name="testSaveTextNoteOnTappingBackButtonEstimationLevel" />
@@ -46,8 +46,8 @@
           <include name="testCreateInspectionWithMatrixServicesImageNotes" />  
       	</methods>
       </class>
-     <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionsTestCases">
-        <methods>   
+     <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionsTestCases">
+        <methods>
           <include name="testVerifyVINIsDecodedCorrectlyForInspection" />
           <include name="testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase" /> 
           <include name="testEditInspectionVehicleInfo" /> 
@@ -58,34 +58,34 @@
             <include name="testVerifyUserCanArchiveSeveralInspections" />
         </methods>
       </class>
-      <class name="com.cyberiansoft.test.vnext.testcases.vNextCustomersTestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.r360free.customers.VNextCustomersTestCases">
      	<methods>        
      	  <include name="testVerifyNewCustomerIsAvailableAfterDBUpdate" />           
           <include name="testCreateNewCustomerWithEmptyFirstNameAndLastName" />
           <include name="testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate" />
         </methods>
       </class>
-     <class name="com.cyberiansoft.test.vnext.testcases.VNextWorkOrdersTestCases">
+     <class name="com.cyberiansoft.test.vnext.testcases.r360free.workorders.VNextWorkOrdersTestCases">
      <methods>                   
           <include name="testShowSelectedServicesAfterWOIsSaved" />
         </methods>
      </class>
-     <class name="com.cyberiansoft.test.vnext.testcases.VNextInvoicesTestCases">
+     <class name="com.cyberiansoft.test.vnext.testcases.r360free.invoices.VNextInvoicesTestCases">
      <methods>                   
           <include name="testVerifyInvoiceCanBeCreatedFromWOWizard" />
           <include name="testVerifyInvoiceCanBeCreatedFromWOMenu" />
       </methods>
       </class>
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextNavigationTestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.r360free.registrationandnavigation.VNextNavigationTestCases">
      <methods>                   
           <include name="testVerifyUserCanNavigateByActionScreenInInspectionsForAndroid" />
           <include name="testNavigatingByActionScreenForAndroid" />
           <include name="testVerifyActionScreenWorksCorrectly" />
       </methods>
       </class>
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextCreateInvoiceFromMultiplyWOTestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.r360free.invoices.VNextCreateInvoiceFromMultiplyWOTestCases">
       </class>
-      <class name="com.cyberiansoft.test.vnext.testcases.VNextInspectionApproveOnBOTestCases">
+      <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionApproveOnBOTestCases">
       </class>
     </classes>
   </test>
