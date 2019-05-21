@@ -12,6 +12,21 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
       }
     }
+  ],
+
+  "testVerifyWOTotalAmountChangedIfUserAddServiceToWOInDraftInvoice": [
+    {
+      "rowID": "testVerifyWOTotalAmountChangedIfUserAddServiceToWOInDraftInvoice.01",
+      "description": "Test Case 75787:Verify WO total amount changed if user add service to WO in draft Invoice",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }, "moneyService": {"serviceName": "Battery Installation", "servicePrice": "9"
+        }, "service" : {"serviceName": "Aluminum Panel" },
+        "workOrderPrice" : "$9.00"
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345", "invoiceTotal" : "$11.25"
+      }
+    }
   ]
 
 }

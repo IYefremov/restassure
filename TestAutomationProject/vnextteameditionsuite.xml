@@ -34,6 +34,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamDraftInspectionsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamVehicleInfoTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesEditWOInInvoiceTestCases"/>
         </classes>
     </test>
 </suite>
