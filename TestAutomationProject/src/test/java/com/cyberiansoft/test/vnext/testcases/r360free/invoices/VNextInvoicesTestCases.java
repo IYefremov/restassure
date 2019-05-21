@@ -13,6 +13,7 @@ import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
+import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
@@ -39,11 +40,9 @@ import java.io.File;
 
 public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/r360-invoices-testcases-data.json";
-
     @BeforeClass(description="R360 Invoices Test Cases")
     public void beforeClass() {
-        JSONDataProvider.dataFile = DATA_FILE;
+        JSONDataProvider.dataFile = VNextFreeTestCasesDataPaths.getInstance().getInvoicesTestCasesDataPath();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

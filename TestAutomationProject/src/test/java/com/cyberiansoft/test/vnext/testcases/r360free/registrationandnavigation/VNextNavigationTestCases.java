@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
@@ -24,12 +25,9 @@ import org.testng.annotations.Test;
 
 public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
-
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/r360-navigation-testcases.json";
-
 	@BeforeClass(description="R360 Navigation Test Cases")
 	public void beforeClass() {
-		JSONDataProvider.dataFile = DATA_FILE;
+		JSONDataProvider.dataFile = VNextFreeTestCasesDataPaths.getInstance().getNavigationTestCasesDataPath();
 
 	}
 

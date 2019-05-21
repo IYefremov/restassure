@@ -17,6 +17,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -52,12 +53,11 @@ import java.util.List;
 
 public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-inspections-testcases-data.json";
     private List<InspectionDTO> inspectionDTOs = new ArrayList<>();
 
     @BeforeClass(description = "Team Inspections Test Cases")
     public void beforeClass() throws Exception {
-        JSONDataProvider.dataFile = DATA_FILE;
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInspectionsTestCasesDataPath();
 
 		/*inspectionDTOs = VNextAPIUtils.getInstance().generateInspections("team-base-inspection-data1.json",
 				InspectionTypes.O_KRAMAR, testcustomer, employee, licenseID, deviceID, appID,

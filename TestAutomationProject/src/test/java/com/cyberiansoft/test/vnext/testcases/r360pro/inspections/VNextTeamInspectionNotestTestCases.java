@@ -10,6 +10,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -32,12 +33,11 @@ import java.util.ArrayList;
 
 public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionRegistration {
 
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-inspection-notes-testcases-data.json";
 	final private String quicknote = "Test Quick Note 1";
 
 	@BeforeClass(description="Team Inspection Notest Test Cases")
 	public void beforeClass() {
-		JSONDataProvider.dataFile = DATA_FILE;
+		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInspectionNotesTestCasesDataPath();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.InspectionStatuses;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -24,11 +25,9 @@ import org.testng.annotations.Test;
 
 public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-draft-inspections-testcases-data.json";
-
     @BeforeClass(description="Team Draft Inspections Test Cases")
-    public void beforeClass() throws Exception {
-        JSONDataProvider.dataFile = DATA_FILE;
+    public void beforeClass() {
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getDraftInspectionsTestCasesDataPath();
 
     }
 
