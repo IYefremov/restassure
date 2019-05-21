@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -32,7 +33,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeamEditionRegistration {
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-workorders-change-customer-testcases-data.json";
 
     final RetailCustomer testcustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
     final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
@@ -40,7 +40,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
 
     @BeforeClass(description = "Work Orders Change Customer Test Cases")
     public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getWorkOrdersChangeCustomerTestCasesDataPath();
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();

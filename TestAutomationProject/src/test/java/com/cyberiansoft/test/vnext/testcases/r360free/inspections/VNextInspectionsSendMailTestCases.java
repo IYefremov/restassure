@@ -22,9 +22,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
-	
-	
-	
+
 	RetailCustomer testcustomer = new RetailCustomer("Customer", "MailInspection");
 	final String customerstateShort = "CL";
 	

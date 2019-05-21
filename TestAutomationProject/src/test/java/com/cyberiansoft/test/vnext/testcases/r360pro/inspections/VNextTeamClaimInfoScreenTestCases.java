@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
@@ -22,11 +23,9 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 
 public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRegistration {
 
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-claim-info-screen-testcases-data.json";
-
 	@BeforeClass(description="Team Claim Info Test Cases")
 	public void beforeClass() {
-		JSONDataProvider.dataFile = DATA_FILE;
+		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getClaimInfoScreenTestCasesDataPath();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

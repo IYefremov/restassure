@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -18,11 +19,9 @@ import org.testng.annotations.Test;
 
 public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-approve-inspections-testcases-data.json";
-
 	@BeforeClass(description="Approve Team Inspections Test Cases")
 	public void beforeClass()  {
-		JSONDataProvider.dataFile = DATA_FILE;
+		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getApproveInspectionsTestCasesDataPath();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

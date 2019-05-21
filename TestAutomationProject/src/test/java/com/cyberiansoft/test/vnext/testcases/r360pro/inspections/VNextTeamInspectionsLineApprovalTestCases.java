@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -25,12 +26,10 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamEditionRegistration {
-	
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-inspections-line-approval-data.json";
-	
+
 	@BeforeClass(description = "Team Inspections Line Approval Test Cases")
 	public void settingUp() {
-		JSONDataProvider.dataFile = DATA_FILE;
+		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInspectionsLineApprovalTestCasesDataPath();
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
 		inspectionscreen.switchToMyInspectionsView();

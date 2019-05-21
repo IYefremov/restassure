@@ -1,0 +1,44 @@
+{
+  "testCreateNewCustomerWithEmptyFirstNameAndLastName": [
+    {
+      "rowID": "testCreateNewCustomerWithEmptyFirstNameAndLastName.01",
+      "description": "Test Case 43519:vNext - Create new Customer with empty First Name and Last Name",
+      "companyName": "AquaAuto",
+      "mailAddress": "",
+      "customerAddress1": "Test address street, 1",
+      "customerPhone": "444-51-09",
+      "customerCountry": "Mexico",
+      "customerState": "Colima"
+    }
+  ],
+
+  "testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate": [
+    {
+      "rowID": "testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate.01",
+      "description": "Test Case 43522:vNext - Verify customer created in Offline mode is available after DB update",
+      "firstName": "Christofer",
+      "lastName": "Nolan",
+      "companyName": "Toyota-Diamant",
+      "customerAddress1": "",
+      "mailAddress": "",
+      "customerPhone": "032-449-56",
+      "customerCountry": "Germany",
+      "customerState": "Saarland"
+    }
+  ],
+
+  "testVerifyNewCustomerIsAvailableAfterDBUpdate": [
+    {
+      "rowID": "testVerifyNewCustomerIsAvailableAfterDBUpdate.01",
+      "description": "Verify new customer is available after DB update",
+      "firstName": "Test",
+      "lastName": "DBUpdateCustomer",
+      "companyName": "Toyota-Diamant",
+      "customerAddress1": "",
+      "mailAddress": "cnolan@gmail.com",
+      "customerPhone": "032-449-56",
+      "customerCountry": "Germany",
+      "customerState": "Saarland"
+    }
+  ]
+}

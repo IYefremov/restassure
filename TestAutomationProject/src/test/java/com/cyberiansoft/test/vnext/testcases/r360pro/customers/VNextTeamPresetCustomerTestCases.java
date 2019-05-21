@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -28,9 +29,6 @@ import java.util.List;
 
 public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionRegistration {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-preset-customer-testcases-data.json";
-
-
     RetailCustomer retailCustomer1 = new RetailCustomer("Preset1", "RetailCustomer1");
     RetailCustomer retailCustomer2 = new RetailCustomer("Preset2", "RetailCustomer2");
 
@@ -39,7 +37,7 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
 
     @BeforeClass(description="Team Preset Customer Test Cases")
     public void beforeClass() {
-        JSONDataProvider.dataFile = DATA_FILE;
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getPresetCustomerTestCasesDataPath();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

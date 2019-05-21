@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -26,11 +27,9 @@ import org.testng.annotations.Test;
 
 public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-workorders-list-testcases-data.json";
-
     @BeforeClass(description="Team Work Orders List Test Cases")
     public void beforeClass() {
-        JSONDataProvider.dataFile = DATA_FILE;
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getWorkOrdersListTestCasesDataPath();
     }
 
     @AfterClass()

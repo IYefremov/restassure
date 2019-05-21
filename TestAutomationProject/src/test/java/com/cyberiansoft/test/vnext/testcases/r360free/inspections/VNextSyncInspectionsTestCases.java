@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import org.json.simple.JSONObject;
@@ -19,11 +20,9 @@ import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
 
 public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/r360-sync-inspections-testcases-data.json";
-
 	@BeforeClass(description="R360 Sync Inspections Test Cases")
 	public void beforeClass() {
-		JSONDataProvider.dataFile = DATA_FILE;
+		JSONDataProvider.dataFile = VNextFreeTestCasesDataPaths.getInstance().getSyncInspectionsTestCasesDataPath();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

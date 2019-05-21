@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.Invoice;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -28,11 +29,9 @@ import org.testng.annotations.Test;
 
 public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestCaseTeamEditionRegistration {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/team-invoices-edit-wo-invoice-testcases-data.json";
-
     @BeforeClass(description = "Team Invoice Editing Test Cases")
     public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInvoicesEditWOInvoiceTestCasesDataPath();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
+import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -30,7 +31,6 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 
 public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/customers-testcases-data.json";
 	private static String settingsbofficeurl;
 
 	@BeforeClass(description="R360 Customers Test Cases")
@@ -40,7 +40,7 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 			settingsbofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeSettingsStagingURL();
 		else if (envType.equals(EnvironmentType.INTEGRATION))
 			settingsbofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeSettingsIntegrationURL();
-		JSONDataProvider.dataFile = DATA_FILE;
+		JSONDataProvider.dataFile = VNextFreeTestCasesDataPaths.getInstance().getCustomersTestCasesDataPath();
 	}
 	
 	/*@AfterSuite
