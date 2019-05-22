@@ -112,8 +112,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		inspectionsScreen.switchToTeamInspectionsView();
 		inspectionsScreen.searchInpectionByFreeText(searchtext);
-		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionsScreen.getFirstInspectionNumber());
-		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
+		VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionsScreen.getFirstInspectionNumber());
+		inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 		
 		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
@@ -153,8 +153,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		inspectionsScreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);;
 
-		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionsScreen.clickOnInspectionByInspNumber(inspnumber);
-		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
+		VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspnumber);
+		inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 		
 		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
@@ -189,13 +189,13 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();		
 		
 		inspectionsScreen.switchToTeamInspectionsView();
-		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatus());
-		Assert.assertFalse(inspectionmenuscreen.isCreateWorkOrderMenuPresent());
-		inspectionmenuscreen.clickCloseInspectionMenuButton();
+		VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatus());
+		Assert.assertFalse(inspectionMenuScreen.isCreateWorkOrderMenuPresent());
+		inspectionMenuScreen.clickCloseInspectionMenuButton();
 		
-		inspectionmenuscreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatus());
-		Assert.assertTrue(inspectionmenuscreen.isCreateWorkOrderMenuPresent());
-		inspectionmenuscreen.clickCloseInspectionMenuButton();
+		inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatus());
+		Assert.assertTrue(inspectionMenuScreen.isCreateWorkOrderMenuPresent());
+		inspectionMenuScreen.clickCloseInspectionMenuButton();
 		inspectionsScreen.switchToMyInspectionsView();
 		inspectionsScreen.clickBackButton();		
 	}
@@ -227,15 +227,15 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		inspectionsScreen.searchInpectionByFreeText(inspnumber);
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspnumber), "Can't find inspection: " + inspnumber);;
 
-		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionsScreen.clickOnInspectionByInspNumber(inspnumber);
-		inspectionmenuscreen.clickApproveInspectionMenuItem();
+		VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspnumber);
+		inspectionMenuScreen.clickApproveInspectionMenuItem();
 		VNextApproveScreen approveScreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
 		approveScreen.drawSignature();
 		approveScreen.clickSaveButton();
 		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsScreen.searchInpectionByFreeText(inspnumber);
-		inspectionmenuscreen = inspectionsScreen.clickOnInspectionByInspNumber(inspnumber);
-		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
+		inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspnumber);
+		inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 		
 		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
@@ -272,15 +272,15 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		inspectionsScreen.searchInpectionByFreeText(inspNumber);
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);;
 
-		VNextInspectionsMenuScreen inspectionmenuscreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
-		inspectionmenuscreen.clickApproveInspectionMenuItem();
+		VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+		inspectionMenuScreen.clickApproveInspectionMenuItem();
 		VNextApproveScreen approvescreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
 		approvescreen.drawSignature();
 		approvescreen.clickSaveButton();
 		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionsScreen.searchInpectionByFreeText(inspNumber);
-		inspectionmenuscreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
-		inspectionmenuscreen.clickCreateWorkOrderInspectionMenuItem();
+		inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+		inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 		
 		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);

@@ -36,7 +36,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         InspectionSteps.openServiceScreen();
-        InspectionSteps.selectServices(workOrderData.getInspectionData().getServicesList());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getInspectionData().getServicesList());
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
         InspectionMenuSteps.approveInspection();
@@ -44,11 +44,11 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR);
         WorkOrderSteps.openServiceScreen();
-        WorkOrderSteps.verifySelectedOrders(workOrderData.getInspectionData().getServicesList());
-        WorkOrderSteps.selectServices(workOrderData.getServicesList());
-        WorkOrderSteps.verifySelectedOrders(summaryServiceList);
-        WorkOrderSteps.unselectServices(workOrderData.getInspectionData().getServicesList());
-        WorkOrderSteps.verifySelectedOrders(workOrderData.getServicesList());
+        SelectedServicesScreenSteps.verifySelectedServices(workOrderData.getInspectionData().getServicesList());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getServicesList());
+        SelectedServicesScreenSteps.verifySelectedServices(summaryServiceList);
+        SelectedServicesScreenSteps.unselectServices(workOrderData.getInspectionData().getServicesList());
+        SelectedServicesScreenSteps.verifySelectedServices(workOrderData.getServicesList());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
         WorkOrderSteps.workOrderShouldBePresent(workOrderId);
         GeneralSteps.pressBackButton();

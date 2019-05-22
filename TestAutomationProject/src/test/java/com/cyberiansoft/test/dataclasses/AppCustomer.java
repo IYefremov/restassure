@@ -19,5 +19,7 @@ public interface AppCustomer {
 	public void setCompanyName(String companyName);
 	
 	public String getFullName();
+
+	public boolean isWholesale();
 	
 }

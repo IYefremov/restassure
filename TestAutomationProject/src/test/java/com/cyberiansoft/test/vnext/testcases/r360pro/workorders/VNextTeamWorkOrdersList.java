@@ -42,23 +42,23 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
-        workordersscreen.switchToMyWorkordersView();
-        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
-        customersscreen.selectCustomer(testcustomer);
-        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
-        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
-        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+        workOrdersScreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
+        customersScreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
+        workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 
-        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-        workordersscreen.switchToTeamWorkordersView();
-        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-        workordersscreen.switchToMyWorkordersView();
-        workordersscreen.clickBackButton();
+        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
+        workOrdersScreen.switchToTeamWorkordersView();
+        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
+        workOrdersScreen.switchToMyWorkordersView();
+        workOrdersScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -67,25 +67,25 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
-        workordersscreen.switchToMyWorkordersView();
-        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
-        customersscreen.selectCustomer(testcustomer);
-        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
-        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
-        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+        workOrdersScreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
+        customersScreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
+        workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 
-        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-        workordersscreen.switchToTeamWorkordersView();
-        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-        workordersscreen.searchWorkOrderByFreeText(testcustomer.getFullName());
-        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-        workordersscreen.switchToMyWorkordersView();
-        workordersscreen.clickBackButton();
+        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
+        workOrdersScreen.switchToTeamWorkordersView();
+        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
+        workOrdersScreen.searchWorkOrderByFreeText(testcustomer.getFullName());
+        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
+        workOrdersScreen.switchToMyWorkordersView();
+        workOrdersScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -94,37 +94,37 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
-        workordersscreen.switchToMyWorkordersView();
-        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
-        customersscreen.selectCustomer(testcustomer);
-        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        wotypes.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
-        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
-        workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+        workOrdersScreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
+        customersScreen.selectCustomer(testcustomer);
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
+        workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 
-        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
-        workordersscreen.switchToTeamWorkordersView();
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        vehicleinfoscreen.selectMakeAndModel(workOrderData.getVehicleInfoData().getVehicleMake(),
+        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
+        workOrdersScreen.switchToTeamWorkordersView();
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.selectMakeAndModel(workOrderData.getVehicleInfoData().getVehicleMake(),
                 workOrderData.getVehicleInfoData().getVehicleModel());
-        vehicleinfoscreen.saveWorkOrderViaMenu();
-        workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
-        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
-        vehicleinfoscreen.saveWorkOrderViaMenu();
-        workordersscreen.switchToMyWorkordersView();
-        workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
-        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
-        vehicleinfoscreen.saveWorkOrderViaMenu();
-        workordersscreen.clickBackButton();
+        vehicleInfoScreen.saveWorkOrderViaMenu();
+        workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
+        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
+        vehicleInfoScreen.saveWorkOrderViaMenu();
+        workOrdersScreen.switchToMyWorkordersView();
+        workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
+        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
+        vehicleInfoScreen.saveWorkOrderViaMenu();
+        workOrdersScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -133,44 +133,44 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
         inspectionsScreen.switchToTeamInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer);
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.selectCustomer(testcustomer);
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
-        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.saveInspectionViaMenu();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.saveInspectionViaMenu();
         inspectionsScreen.searchInpectionByFreeText(inspNumber);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 
-        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR2);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
-        VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
-        workordersscreen.switchToMyWorkordersView();
-        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR2);
+        vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
+        VNextWorkOrdersScreen workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+        workOrdersScreen.switchToMyWorkordersView();
+        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
 
         AppiumUtils.setNetworkOff();
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        vehicleinfoscreen.selectMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(),
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.selectMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(),
                 inspectionData.getVehicleInfo().getVehicleModel());
-        vehicleinfoscreen.saveWorkOrderViaMenu();
-        workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
-        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
-        vehicleinfoscreen.cancelWorkOrder();
-        workordersscreen.clickBackButton();
-        Assert.assertEquals(Integer.valueOf(homescreen.getQueueMessageValue()).intValue(), 1);
+        vehicleInfoScreen.saveWorkOrderViaMenu();
+        workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
+        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
+        vehicleInfoScreen.cancelWorkOrder();
+        workOrdersScreen.clickBackButton();
+        Assert.assertEquals(Integer.valueOf(homeScreen.getQueueMessageValue()).intValue(), 1);
         AppiumUtils.setAndroidNetworkOn();
-        homescreen.waitUntilQueueMessageInvisible();
+        homeScreen.waitUntilQueueMessageInvisible();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -179,54 +179,54 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
         inspectionsScreen.switchToTeamInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer);
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.selectCustomer(testcustomer);
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
-        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.saveInspectionViaMenu();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.saveInspectionViaMenu();
         inspectionsScreen.searchInpectionByFreeText(inspNumber);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
 
-        VNextWorkOrderTypesList wotypes = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        wotypes.selectWorkOrderType(WorkOrderTypes.O_KRAMAR2);
-        vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String woNumber = vehicleinfoscreen.getNewInspectionNumber();
-        VNextWorkOrdersScreen workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
-        workordersscreen.switchToMyWorkordersView();
-        Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber));
+        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR2);
+        vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
+        VNextWorkOrdersScreen workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+        workOrdersScreen.switchToMyWorkordersView();
+        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
 
         AppiumUtils.setNetworkOff();
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        vehicleinfoscreen.selectMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(),
+        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.selectMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(),
                 inspectionData.getVehicleInfo().getVehicleModel());
-        vehicleinfoscreen.saveWorkOrderViaMenu();
-        workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
-        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
-        vehicleinfoscreen.cancelWorkOrder();
-        workordersscreen.clickBackButton();
-        Assert.assertEquals(Integer.valueOf(homescreen.getQueueMessageValue()).intValue(), 1);
+        vehicleInfoScreen.saveWorkOrderViaMenu();
+        workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
+        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
+        vehicleInfoScreen.cancelWorkOrder();
+        workOrdersScreen.clickBackButton();
+        Assert.assertEquals(Integer.valueOf(homeScreen.getQueueMessageValue()).intValue(), 1);
         AppiumUtils.setAndroidNetworkOn();
-        homescreen.waitUntilQueueMessageInvisible();
+        homeScreen.waitUntilQueueMessageInvisible();
 
-        VNextStatusScreen statusScreen = homescreen.clickStatusMenuItem();
+        VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
         statusScreen.updateMainDB();
         //statusScreen.clickBackButton();
-        homescreen.clickWorkOrdersMenuItem();
-        workOrdersMenuScreen = workordersscreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleinfoscreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
-        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
-        vehicleinfoscreen.cancelWorkOrder();
-        workordersscreen.clickBackButton();
+        homeScreen.clickWorkOrdersMenuItem();
+        workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
+        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
+        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
+        vehicleInfoScreen.cancelWorkOrder();
+        workOrdersScreen.clickBackButton();
     }
 }

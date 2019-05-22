@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
@@ -52,19 +53,19 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        invoicesscreen.clickBackButton();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -74,20 +75,20 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        invoicesscreen.switchToMyInvoicesView();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        invoicesScreen.switchToMyInvoicesView();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR2);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoice();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
-        invoicesscreen.clickBackButton();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoice();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -103,33 +104,33 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        invoiceinfoscreen.setInvoicePONumber(invoice.getNewPONumber());
-        invoiceinfoscreen.changeInvoiceDayValue(date);
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceInfoScreen.setInvoicePONumber(invoice.getNewPONumber());
+        invoiceInfoScreen.changeInvoiceDayValue(date);
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
 
-        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber),invoice.getNewPONumber());
-        Assert.assertEquals(invoicesscreen.getInvoiceDateValue(invoicenumber), date.format(dateFormat));
-        invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        Assert.assertEquals(invoiceinfoscreen.getInvoicePONumberValue(),invoice.getNewPONumber());
-        Assert.assertEquals(invoiceinfoscreen.getInvoiceDateValue(), date.format(dateFormatlong));
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        invoicesscreen.clickBackButton();
+        Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber),invoice.getNewPONumber());
+        Assert.assertEquals(invoicesScreen.getInvoiceDateValue(invoiceNumber), date.format(dateFormat));
+        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        Assert.assertEquals(invoiceInfoScreen.getInvoicePONumberValue(),invoice.getNewPONumber());
+        Assert.assertEquals(invoiceInfoScreen.getInvoiceDateValue(), date.format(dateFormatlong));
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -138,23 +139,23 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
 
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         Assert.assertFalse(invoiceMenuScreen.isInvoiceEditMenuItemExists());
         invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesscreen.clickBackButton();
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -164,25 +165,25 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        invoiceinfoscreen.setInvoicePONumber(invoice.getNewPONumber());
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber),invoice.getNewPONumber());
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        invoicesscreen.clickBackButton();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceInfoScreen.setInvoicePONumber(invoice.getNewPONumber());
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber),invoice.getNewPONumber());
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        invoicesScreen.clickBackButton();
 
     }
 
@@ -193,26 +194,27 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        invoiceinfoscreen.setInvoicePONumber(invoice.getNewPONumber());
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
-        final String invoicePOnumber = invoice.getNewPONumber();
-        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), invoicePOnumber, "PO number is " + invoicePOnumber);
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
-        invoicesscreen.clickBackButton();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceInfoScreen.setInvoicePONumber(invoice.getNewPONumber());
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
+        final String invoicePONumber = invoice.getNewPONumber();
+        Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), invoicePONumber,
+                "PO number is " + invoicePONumber);
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -222,22 +224,22 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         Assert.assertFalse(invoiceMenuScreen.isApproveInvoiceMenuItemExists());
         invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesscreen.clickBackButton();
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -247,32 +249,32 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        invoiceinfoscreen.setInvoicePONumber(invoice.getNewPONumber());
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
-        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber),invoice.getNewPONumber());
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceInfoScreen.setInvoicePONumber(invoice.getNewPONumber());
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
+        Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber),invoice.getNewPONumber());
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
 
-        invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         VNextApproveScreen approveScreen = invoiceMenuScreen.clickApproveInvoiceMenuItem();
         approveScreen.drawSignature();
         approveScreen.saveApprovedInspection();
-        invoicesscreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.NEW);
-        invoicesscreen.clickBackButton();
+        invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -282,27 +284,27 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        invoicesscreen.switchToTeamInvoicesView();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        invoiceinfoscreen.setInvoicePONumber(invoice.getNewPONumber());
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber),invoice.getNewPONumber());
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        invoicesscreen.switchToMyInvoicesView();
-        invoicesscreen.clickBackButton();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        invoicesScreen.switchToTeamInvoicesView();
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceInfoScreen.setInvoicePONumber(invoice.getNewPONumber());
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber),invoice.getNewPONumber());
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        invoicesScreen.switchToMyInvoicesView();
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -314,25 +316,25 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        invoiceinfoscreen.addTextNoteToInvoice(txtNotes);
-        invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        Assert.assertTrue(invoicesscreen.isInvoiceHasNotesIcon(invoicenumber));
-        invoicesscreen.clickBackButton();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceInfoScreen.addTextNoteToInvoice(txtNotes);
+        invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        Assert.assertTrue(invoicesScreen.isInvoiceHasNotesIcon(invoiceNumber));
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -342,22 +344,22 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoiceinfoscreen.cancelInvoice();
-        workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
-        homescreen = workordersscreen.clickBackButton();
-        invoicesscreen = homescreen.clickInvoicesMenuItem();
-        Assert.assertFalse(invoicesscreen.isInvoiceExists(invoicenumber));
-        invoicesscreen.clickBackButton();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoiceInfoScreen.cancelInvoice();
+        workOrdersScreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        homeScreen = workOrdersScreen.clickBackButton();
+        invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        Assert.assertFalse(invoicesScreen.isInvoiceExists(invoiceNumber));
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -367,28 +369,28 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
         final String workOrderNumber = createWorkOrder(invoice.getWorkOrderData());
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
-        invoiceinfoscreen.setInvoicePONumber(invoice.getNewPONumber());
-        invoiceinfoscreen.clickInvoiceInfoBackButton();
-        VNextInformationDialog informationdialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceInfoScreen.setInvoicePONumber(invoice.getNewPONumber());
+        invoiceInfoScreen.clickInvoiceInfoBackButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(informationDialog.clickInformationDialogYesButtonAndGetMessage(),
                 VNextAlertMessages.CANCEL_ETING_INVOICE);
-        invoicesscreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(invoicesscreen.getInvoicePONumberValue(invoicenumber), invoice.getInvoiceData().getInvoicePONumber());
-        invoicesscreen.clickBackButton();
+        invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), invoice.getInvoiceData().getInvoicePONumber());
+        invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -401,35 +403,35 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
             for (WorkOrderData woData : invoice.getWorkOrdersData())
                 workOrders.add(createWorkOrder(woData));
 
-            VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-            VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-            VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-            workordersscreen.clickCreateInvoiceFromWorkOrder(workOrders.get(0));
+            VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+            VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+            VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+            workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrders.get(0));
             VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
             invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-            VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-            invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-            final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-            invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-            Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-            VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-            invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+            VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+            invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+            final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+            invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+            Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+            VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+            invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
             List<String> workOrdersToAdd = workOrders.subList(1, workOrders.size());
-            invoiceinfoscreen.addWorkOrdersToInvoice(workOrdersToAdd);
-            invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-            invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-            invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+            invoiceInfoScreen.addWorkOrdersToInvoice(workOrdersToAdd);
+            invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+            invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+            invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
             for (String woNumber : workOrders)
-                invoiceinfoscreen.isWorkOrderSelectedForInvoice(woNumber);
-            invoiceinfoscreen.clickInvoiceInfoBackButton();
-            VNextInformationDialog informationdialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-            Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
+                invoiceInfoScreen.isWorkOrderSelectedForInvoice(woNumber);
+            invoiceInfoScreen.clickInvoiceInfoBackButton();
+            VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+            Assert.assertEquals(informationDialog.clickInformationDialogYesButtonAndGetMessage(),
                     VNextAlertMessages.CANCEL_ETING_INVOICE);
-            invoicesscreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+            invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
             for (String woNumber : workOrders)
-                Assert.assertTrue(invoicesscreen.getInvoiceWorkOrders(invoicenumber).contains(woNumber));
-            invoicesscreen.clickBackButton();
+                Assert.assertTrue(invoicesScreen.getInvoiceWorkOrders(invoiceNumber).contains(woNumber));
+            invoicesScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -442,69 +444,69 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestCaseTeamEditionReg
         for (WorkOrderData woData : invoice.getWorkOrdersData())
             workOrders.add(createWorkOrder(woData));
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInvoicesScreen invoicesscreen = homescreen.clickInvoicesMenuItem();
-        VNextWorkOrdersScreen workordersscreen = invoicesscreen.clickAddInvoiceButton();
-        workordersscreen.clickCreateInvoiceFromWorkOrder(workOrders.get(0));
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+        VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+        workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrders.get(0));
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
 
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-        final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        Assert.assertEquals(invoicesscreen.getInvoiceStatusValue(invoicenumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
+        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         final List<String> workOrdersToAdd = workOrders.subList(1, workOrders.size());
-        invoiceinfoscreen.addWorkOrdersToInvoice(workOrdersToAdd);
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
-        invoiceinfoscreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
+        invoiceInfoScreen.addWorkOrdersToInvoice(workOrdersToAdd);
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         for (String woNumber : workOrders)
-            invoiceinfoscreen.isWorkOrderSelectedForInvoice(woNumber);
+            invoiceInfoScreen.isWorkOrderSelectedForInvoice(woNumber);
 
-        invoiceinfoscreen.deattechWorkOrdersFromInvoice(workOrders);
+        invoiceInfoScreen.deattechWorkOrdersFromInvoice(workOrders);
         VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOU_CANNOT_DEATTACH_THE_LAST_WORK_ORDER_FROM_INVOICE);
-        invoicesscreen = invoiceinfoscreen.saveInvoiceAsDraft();
-        invoiceMenuScreen = invoicesscreen.clickOnInvoiceByInvoiceNumber(invoicenumber);
+        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 
         invoiceMenuScreen.clickVoidInvoiceMenuItem();
-        VNextInformationDialog informationdialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(informationdialog.clickInformationDialogVoidButtonAndGetMessage(),
-                String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoicenumber));
-        invoicesscreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoicesscreen.waitUntilInvoiceDisappearsFromList(invoicenumber);
+        informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(informationDialog.clickInformationDialogVoidButtonAndGetMessage(),
+                String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoiceNumber));
+        invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoicesScreen.waitUntilInvoiceDisappearsFromList(invoiceNumber);
 
-        homescreen = invoicesscreen.clickBackButton();
-        workordersscreen = homescreen.clickWorkOrdersMenuItem();
+        homeScreen = invoicesScreen.clickBackButton();
+        workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
         final List<String> workOrdersDeleted = workOrders.subList(0, workOrders.size()-1);
         for (String woNumber : workOrdersDeleted)
-            Assert.assertTrue(workordersscreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
-        workordersscreen.clickBackButton();
+            Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
+        workOrdersScreen.clickBackButton();
     }
 
     public String createWorkOrder(WorkOrderData woData) {
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
-        workordersscreen.switchToMyWorkordersView();
-        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
-        customersscreen.selectCustomer(testcustomer);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+        workOrdersScreen.switchToMyWorkordersView();
+        VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
+        customersScreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(woData.getVinNumber());
         final String workOrderNumber = vehicleinfoscreen.getNewInspectionNumber();
         if (woData.getServicesList() != null) {
-            vehicleinfoscreen.changeScreen("Services");
+            vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
             VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
             servicesScreen.selectServices(woData.getServicesList());
-            workordersscreen = servicesScreen.saveWorkOrderViaMenu();
+            workOrdersScreen = servicesScreen.saveWorkOrderViaMenu();
         } else
-            workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
-        workordersscreen.clickBackButton();
+            workOrdersScreen = vehicleinfoscreen.saveWorkOrderViaMenu();
+        workOrdersScreen.clickBackButton();
         return workOrderNumber;
     }
 
