@@ -57,7 +57,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void userCanCreateWoFromApprovedInspection(String rowID,
                                                          String description, JSONObject testData) {
-
+        HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
