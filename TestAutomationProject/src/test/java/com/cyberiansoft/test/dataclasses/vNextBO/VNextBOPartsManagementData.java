@@ -2,11 +2,7 @@ package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-
-public class VNextBOPartsManagementData {
+public class VNextBOPartsManagementData extends VNextBOBaseData {
 
     @JsonProperty("location")
     private String location;
@@ -19,12 +15,6 @@ public class VNextBOPartsManagementData {
 
     public String getLocation() {
         return location;
-    }
-
-    public String getCurrentDate() {
-        LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        return localDate.format(formatter);
     }
 
     public String[] getDashboardItemsNames() {

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
 
@@ -26,6 +27,9 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='editOrderServiceNotesModal']//ul[@data-role='listview']/li")
     private List<WebElement> notesList;
+
+    @FindBy(xpath = "//ul[@data-template='order-service-note-template']/li")
+    private List<WebElement> notesTextList;
 
     public VNextBOOrderServiceNotesDialog(WebDriver driver) {
         super(driver);
@@ -66,6 +70,15 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
             return wait.until(ExpectedConditions.visibilityOfAllElements(notesList)).size();
         } catch (Exception ignored) {
             return 0;
+        }
+    }
+
+    public List<String> getNotesListValues() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(notesTextList)).size();
+            return notesTextList.stream().map(WebElement::getText).collect(Collectors.toList());
+        } catch (Exception ignored) {
+            return null;
         }
     }
 }

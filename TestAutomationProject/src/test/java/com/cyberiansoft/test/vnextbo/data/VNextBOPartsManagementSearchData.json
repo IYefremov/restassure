@@ -59,7 +59,68 @@
       "rowID": "verifyUserCanSearchROByWOTypeUsingAdvancedSearch.01",
       "description": "Test Case 83759:User can search RO by \"WO Type\" using Advanced Search",
       "location": "Best Location",
-      "woType": "Best"
+      "stockType": "Best"
+    }
+  ],
+
+  "verifyUserCanSearchROByStockNumUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByStockNumUsingAdvancedSearch.01",
+      "description": "Test Case 83781:User can search RO by \"Stock#\" using Advanced Search",
+      "location": "Best Location",
+      "stockNum": "Autotests"
+    }
+  ],
+
+  "verifyUserCanSearchROByETAFromUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByETAFromUsingAdvancedSearch.01",
+      "description": "Test Case 83786:User can search RO by \"ETA From\" using Advanced Search",
+      "location": "Best Location"
+    }
+  ],
+
+  "verifyUserCanSearchROByETAToUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByETAToUsingAdvancedSearch.01",
+      "description": "Test Case 83787:User can search RO by \"ETA To\" using Advanced Search",
+      "location": "Best Location"
+    }
+  ],
+
+  "verifyUserCanSearchROByVINNumUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByVINNumUsingAdvancedSearch.01",
+      "description": "Test Case 83788:User can search RO by \"VIN\" using Advanced Search",
+      "location": "Best Location",
+      "VINNum": "11111"
+    }
+  ],
+
+  "verifyUserCanSearchROByOEMNumUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByOEMNumUsingAdvancedSearch.01",
+      "description": "Test Case 83789:User can search RO by \"OEM#\" using Advanced Search",
+      "location": "Best Location",
+      "OEMNum": "My OEM"
+    }
+  ],
+
+  "verifyUserCanSearchROByNotesUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByNotesUsingAdvancedSearch.01",
+      "description": "Test Case 83790:User can search RO by \"Notes\" using Advanced Search",
+      "location": "Best Location",
+      "notes": "Autotest258"
+    }
+  ],
+
+  "verifyUserCanSearchROByOrderedFromUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByOrderedFromUsingAdvancedSearch.01",
+      "description": "Test Case 83796:User can search RO by \"Ordered From\" using Advanced Search",
+      "location": "Best Location",
+      "orderedFrom": "Test Team"
     }
   ]
 }

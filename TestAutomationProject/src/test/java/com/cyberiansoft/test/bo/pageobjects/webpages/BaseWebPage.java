@@ -223,7 +223,7 @@ public abstract class BaseWebPage {
 		return result;
 	}
 
-	public void labeledCheckBoxSelect(WebElement checkbox) {
+	void labeledCheckBoxSelect(WebElement checkbox) {
         if (!isCheckboxChecked(checkbox)) {
             WebElement parent = checkbox.findElement(By.xpath("parent::*"));
             parent.findElement(By.xpath("./label")).click();
@@ -270,7 +270,7 @@ public abstract class BaseWebPage {
         return this;
     }
 
-    public boolean isElementDisplayed(WebElement element) {
+    protected boolean isElementDisplayed(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;

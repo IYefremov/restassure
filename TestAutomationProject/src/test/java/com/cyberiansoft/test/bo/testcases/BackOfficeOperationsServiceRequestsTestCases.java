@@ -734,7 +734,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		Assert.assertTrue(serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay()));
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkShowHideTeches(data.getFirstDay(), data.getSecondDay()));
+		Assert.assertTrue(serviceRequestsWebPage.checkShowHideTechs(data.getFirstDay(), data.getSecondDay()));
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getStatus()));
 	}
 
@@ -901,7 +901,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkSRLCestimate(String rowID, String description, JSONObject testData) {
+    public void checkSRLCEstimate(String rowID, String description, JSONObject testData) {
 
         BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
         BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
@@ -918,7 +918,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		serviceRequestsWebPage.addAppointmentWithoutDescription(data.getFirstDay(), data.getSecondDay());
+        serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
+        serviceRequestsWebPage.clickGetAppointmentButton();
 		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getStatus()));
 		Assert.assertTrue(serviceRequestsWebPage.checkLifeCycleDate());
 	}

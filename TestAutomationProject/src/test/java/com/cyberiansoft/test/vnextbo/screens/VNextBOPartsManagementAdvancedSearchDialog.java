@@ -68,6 +68,9 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     @FindBy(xpath = "//ul[@id='partsOrdersSearchPhaseInput_listbox']/li")
     private List<WebElement> phaseListBoxOptions;
 
+    @FindBy(xpath = "//ul[@id='advSearchPartsOrdering-orderedFrom_listbox']/li")
+    private List<WebElement> orderedFromListBoxOptions;
+
     @FindBy(xpath = "//span[@aria-owns='partsOrdersSearchWOTypesInput_listbox']")
     private WebElement woTypeListBox;
 
@@ -82,6 +85,24 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
 
     @FindBy(id = "advSearchPartsOrdering-orderedFrom-list")
     private WebElement orderedFromDropDown;
+
+    @FindBy(xpath = "//span[@aria-controls='partsOrdersSearchEtaFromInput_dateview']")
+    private WebElement etaFromDateCalendarButton;
+
+    @FindBy(xpath = "//span[@aria-controls='partsOrdersSearchEtaToInput_dateview']")
+    private WebElement etaToDateCalendarButton;
+
+    @FindBy(id = "partsOrdersSearchEtaFromInput_dateview")
+    private WebElement fromDateCalendarWidget;
+
+    @FindBy(id = "partsOrdersSearchEtaToInput_dateview")
+    private WebElement toDateCalendarWidget;
+
+    @FindBy(xpath = "//div[@id='partsOrdersSearchEtaFromInput_dateview']//td[contains(@id, 'cell_selected')]")
+    private WebElement focusedDateInFromDateCalendarWidget;
+
+    @FindBy(xpath = "//div[@id='partsOrdersSearchEtaToInput_dateview']//td[contains(@id, 'cell_selected')]")
+    private WebElement focusedDateInToDateCalendarWidget;
 
     @FindBy(xpath = "//form[@id='advSearchPartsOrdering-form']//button[contains(text(), 'Search')]")
     private WebElement searchButton;
@@ -231,6 +252,11 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
         return this;
     }
 
+    private VNextBOPartsManagementAdvancedSearchDialog clickOrderedFromBox() {
+        wait.until(ExpectedConditions.elementToBeClickable(orderedFromListBox)).click();
+        return this;
+    }
+
     private VNextBOPartsManagementAdvancedSearchDialog clickWoTypeBox() {
         wait.until(ExpectedConditions.elementToBeClickable(woTypeListBox)).click();
         return this;
@@ -238,6 +264,11 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
 
     private VNextBOPartsManagementAdvancedSearchDialog selectPhase(String phase) {
         selectOptionInDropDown(phaseDropDown, phaseListBoxOptions, phase);
+        return this;
+    }
+
+    private VNextBOPartsManagementAdvancedSearchDialog selectOrderedFrom(String orderedFrom) {
+        selectOptionInDropDown(orderedFromDropDown, orderedFromListBoxOptions, orderedFrom);
         return this;
     }
 
@@ -273,6 +304,12 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
         return this;
     }
 
+    public VNextBOPartsManagementAdvancedSearchDialog setOrderedFrom(String orderedFrom) {
+        clickOrderedFromBox();
+        selectOrderedFrom(orderedFrom);
+        return this;
+    }
+
     public VNextBOPartsManagementAdvancedSearchDialog setWoType(String woType) {
         clickWoTypeBox();
         selectWoType(woType);
@@ -281,6 +318,55 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
 
     public VNextBOPartsManagementAdvancedSearchDialog setWoNum(String woNum) {
         return setData(woNumInputField, woNum);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog setStockNum(String stockNum) {
+        return setData(stockNumInputField, stockNum);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog setETAFrom(String etaFrom) {
+        return setData(etaFromInputField, etaFrom);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog setETATo(String etaTo) {
+        return setData(etaToInputField, etaTo);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog setVin(String vinNum) {
+        return setData(vinInputField, vinNum);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog setOEMNum(String oemNum) {
+        return setData(oemNumInputField, oemNum);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog setNotes(String notes) {
+        return setData(notesInputField, notes);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog setFromDate(String fromDate) {
+        return setData(fromDateInputField, fromDate);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog setToDate(String toDate) {
+        return setData(toDateInputField, toDate);
+    }
+
+    public String getETAFromInputField() {
+        return getETAValue(etaFromInputField);
+    }
+
+    public String getETAToInputField() {
+        return getETAValue(etaToInputField);
+    }
+
+    private String getETAValue(WebElement etaToInputField) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(etaToInputField)).getAttribute("value");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public boolean isCustomerDisplayed(String customer) {
@@ -304,5 +390,34 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
             e.printStackTrace();
             return false;
         }
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog openETAFromCalendarWidget() {
+        return openCalendarWidget(etaFromDateCalendarButton, fromDateCalendarWidget);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog openETAToCalendarWidget() {
+        return openCalendarWidget(etaToDateCalendarButton, toDateCalendarWidget);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog clickFocusedDateInFromDateCalendarWidget() {
+        clickFocusedDate(fromDateCalendarWidget, focusedDateInFromDateCalendarWidget);
+        return this;
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog clickFocusedDateInToDateCalendarWidget() {
+        clickFocusedDate(toDateCalendarWidget, focusedDateInToDateCalendarWidget);
+        return this;
+    }
+
+    private VNextBOPartsManagementAdvancedSearchDialog openCalendarWidget(WebElement calendarButton, WebElement widget) {
+        wait.until(ExpectedConditions.elementToBeClickable(calendarButton)).click();
+        wait.until(ExpectedConditions.visibilityOf(widget));
+        return this;
+    }
+
+    private void clickFocusedDate(WebElement calendarWidget, WebElement focusedDateInCalendarWidget) {
+        wait.until(ExpectedConditions.elementToBeClickable(focusedDateInCalendarWidget)).click();
+        wait.until(ExpectedConditions.invisibilityOf(calendarWidget));
     }
 }

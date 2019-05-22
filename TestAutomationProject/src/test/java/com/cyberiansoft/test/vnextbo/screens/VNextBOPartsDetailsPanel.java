@@ -10,8 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -23,13 +21,10 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='partsTable']/div[@role='option']")
     private List<WebElement> partsDetailsOptions;
 
-    private final DateTimeFormatter formatter;
-
     public VNextBOPartsDetailsPanel(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     }
 
     public boolean isPartsDetailsTableDisplayed() {
@@ -88,23 +83,5 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public boolean isDateBefore(String before, String after) {
-        LocalDate dateBefore = LocalDate.parse(before, formatter);
-        LocalDate dateAfter = LocalDate.parse(after, formatter);
-        return dateBefore.isBefore(dateAfter);
-    }
-
-    public boolean isDateAfter(String before, String after) {
-        LocalDate dateBefore = LocalDate.parse(before, formatter);
-        LocalDate dateAfter = LocalDate.parse(after, formatter);
-        return dateBefore.isAfter(dateAfter);
-    }
-
-    public boolean isDateEqual(String before, String after) {
-        LocalDate dateBefore = LocalDate.parse(before, formatter);
-        LocalDate dateAfter = LocalDate.parse(after, formatter);
-        return dateBefore.isEqual(dateAfter);
     }
 }

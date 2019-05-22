@@ -686,7 +686,12 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBORepairOrdersWebPage clickSearchIcon() {
-        wait.until(ExpectedConditions.elementToBeClickable(searchIcon)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(searchIcon));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        actions.moveToElement(searchIcon).click().build().perform();
         waitForLoading();
         return this;
     }

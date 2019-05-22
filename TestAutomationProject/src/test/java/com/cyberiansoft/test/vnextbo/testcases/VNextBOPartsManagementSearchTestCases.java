@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -22,12 +23,6 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOPartsManagementSearchData.json";
-
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
-
     private VNexBOLeftMenuPanel leftMenu;
     private VNextBOBreadCrumbPanel breadCrumbPanel;
     private VNextBODashboardPanel dashboardPanel;
@@ -35,6 +30,11 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     private VNextBOPartsOrdersListPanel partsOrdersListPanel;
     private VNextBOFooterPanel footerPanel;
     private VNextBOPartsDetailsPanel partsDetailsPanel;
+
+    @BeforeClass
+    public void settingUp() {
+        JSONDataProvider.dataFile = DATA_FILE;
+    }
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -191,8 +191,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
                 "Not all saved search names are displayed in dropdown");
 
-        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog =
-                partsManagementSearch.clickAdvancedSearchOption();
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                        .clickAdvancedSearchOption();
 
         advancedSearchDialog.typeCustomerName(data.getType());
         Assert.assertTrue(advancedSearchDialog.isCustomerDisplayed(data.getCustomer()));
@@ -208,7 +208,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         advancedSearchDialog.clickSearchButton();
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog hasn't been closed");
-        final List<String> optionsNames = partsOrdersListPanel.getPartsOrdersListOptionsNames();
+        final List<String> optionsNames = partsOrdersListPanel.getNamesListOptions();
         Assert.assertEquals(optionsNames.get(0), data.getCustomer(),
                 "The list orders first option name doesn't correspond to the search parameter");
     }
@@ -228,10 +228,9 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
                 "Not all saved search names are displayed in dropdown");
 
-        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog =
-                partsManagementSearch.clickAdvancedSearchOption();
-
-        advancedSearchDialog.setPhase(data.getPhase());
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .setPhase(data.getPhase());
 
         Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
                 "The advanced search dialog Clear button hasn't been displayed");
@@ -243,7 +242,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         advancedSearchDialog.clickSearchButton();
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog hasn't been closed");
-        final List<String> optionsPhases = partsOrdersListPanel.getPartsOrdersListOptionsPhases();
+        final List<String> optionsPhases = partsOrdersListPanel.getPhasesListOptions();
         Assert.assertTrue(optionsPhases.get(0).contains(data.getPhase()),
                 "The list orders first option name doesn't contain the search parameter");
     }
@@ -263,10 +262,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
                 "Not all saved search names are displayed in dropdown");
 
-        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog =
-                partsManagementSearch.clickAdvancedSearchOption();
-
-        advancedSearchDialog
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
                 .setWoNum(data.getWoNum())
                 .clickAdvancedSearchHeader();
 
@@ -280,7 +277,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         advancedSearchDialog.clickSearchButton();
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog hasn't been closed");
-        final List<String> optionsWONums = partsOrdersListPanel.getPartsOrdersListOptionsWONums();
+        final List<String> optionsWONums = partsOrdersListPanel.getWONumsListOptions();
         Assert.assertEquals(optionsWONums.get(0), data.getWoNum(),
                 "The list orders first option name doesn't correspond to the search parameter");
     }
@@ -300,10 +297,9 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
                 "Not all saved search names are displayed in dropdown");
 
-        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog =
-                partsManagementSearch.clickAdvancedSearchOption();
-
-        advancedSearchDialog.setWoType(data.getWoType());
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .setWoType(data.getWoType());
 
         Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
                 "The advanced search dialog Clear button hasn't been displayed");
@@ -315,7 +311,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         advancedSearchDialog.clickSearchButton();
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog hasn't been closed");
-        final List<String> optionsWONums = partsOrdersListPanel.getPartsOrdersListOptionsWONums();
+        final List<String> optionsWONums = partsOrdersListPanel.getWONumsListOptions();
         final String firstWONum = optionsWONums.get(0);
 
         final VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
@@ -326,5 +322,310 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
                 "The work order type is not displayed after search by order number");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchROByStockNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch.clickSearchCaret();
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
+                "Advanced Search option is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchSettingsIconDisplayed(),
+                "Advanced Search Settings icon is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
+                "Not all saved search names are displayed in dropdown");
+
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .setStockNum(data.getStockNum())
+                .clickAdvancedSearchHeader();
+
+        Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
+                "The advanced search dialog Clear button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSaveButtonDisplayed(),
+                "The advanced search dialog Save button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSearchNameInputFieldDisplayed(),
+                "The advanced search dialog Search Name input field hasn't been displayed");
+
+        advancedSearchDialog.clickSearchButton();
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog hasn't been closed");
+        final List<String> stockNums = partsOrdersListPanel.getStockNumsListOptions();
+        System.out.println(stockNums.get(0));
+        System.out.println(data.getStockNum());
+        Assert.assertTrue(stockNums.get(0).contains(data.getStockNum()),
+                "The list orders first option name doesn't correspond to the search parameter");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchROByETAFromUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch.clickSearchCaret();
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
+                "Advanced Search option is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchSettingsIconDisplayed(),
+                "Advanced Search Settings icon is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
+                "Not all saved search names are displayed in dropdown");
+
+        final String currentDate = data.getCurrentDate(false);
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .openETAFromCalendarWidget()
+                .clickFocusedDateInFromDateCalendarWidget()
+                .clickAdvancedSearchHeader();
+
+        Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
+                "The Clear button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSaveButtonDisplayed(),
+                "The Save button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSearchNameInputFieldDisplayed(),
+                "The Search Name input field hasn't been displayed");
+        Assert.assertEquals(advancedSearchDialog.getETAFromInputField(), currentDate,
+                "The ETA From input field value hasn't been displayed properly");
+
+        advancedSearchDialog.clickSearchButton();
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog hasn't been closed");
+
+        final List<String> etaDataValues = partsOrdersListPanel.getETADataValues();
+        final String etaDate = etaDataValues.get(0);
+        System.out.println("etaDate: " + etaDate);
+        System.out.println("currentDate: "+ currentDate);
+//        Assert.assertTrue(etaDate.equals(currentDate) || etaDate.equals("")
+//                        || partsDetailsPanel.isDateAfter(etaDate, currentDate), // todo uncomment after bug #81900 fix
+//            "The ETA date is neither equal to the current date, nor after it, nor empty");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchROByETAToUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch.clickSearchCaret();
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
+                "Advanced Search option is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchSettingsIconDisplayed(),
+                "Advanced Search Settings icon is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
+                "Not all saved search names are displayed in dropdown");
+
+        final String currentDate = data.getCurrentDate(false);
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .openETAToCalendarWidget()
+                .clickFocusedDateInToDateCalendarWidget()
+                .clickAdvancedSearchHeader();
+
+        Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
+                "The Clear button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSaveButtonDisplayed(),
+                "The Save button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSearchNameInputFieldDisplayed(),
+                "The Search Name input field hasn't been displayed");
+        Assert.assertEquals(advancedSearchDialog.getETAToInputField(), currentDate,
+                "The ETA From input field value hasn't been displayed properly");
+
+        advancedSearchDialog.clickSearchButton();
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog hasn't been closed");
+
+        final List<String> etaDataValues = partsOrdersListPanel.getETADataValues();
+        final String etaDate = etaDataValues.get(0);
+        System.out.println("etaDate: " + etaDate);
+        System.out.println("currentDate: "+ currentDate);
+        Assert.assertTrue(etaDate.equals("") || partsDetailsPanel.isDateBefore(etaDate, currentDate),
+            "The ETA date is neither empty, nor before the current date");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchROByVINNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch.clickSearchCaret();
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
+                "Advanced Search option is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchSettingsIconDisplayed(),
+                "Advanced Search Settings icon is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
+                "Not all saved search names are displayed in dropdown");
+
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .setVin(data.getVINNum())
+                .clickAdvancedSearchHeader();
+
+        Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
+                "The advanced search dialog Clear button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSaveButtonDisplayed(),
+                "The advanced search dialog Save button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSearchNameInputFieldDisplayed(),
+                "The advanced search dialog Search Name input field hasn't been displayed");
+
+        advancedSearchDialog.clickSearchButton();
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog hasn't been closed");
+        final List<String> vinNums = partsOrdersListPanel.getVinNumsListOptions();
+        System.out.println(vinNums.get(0));
+        System.out.println(data.getVINNum());
+        Assert.assertTrue(vinNums.get(0).contains(data.getVINNum()),
+                "The list orders first option name doesn't correspond to the search parameter");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchROByOEMNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch.clickSearchCaret();
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
+                "Advanced Search option is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchSettingsIconDisplayed(),
+                "Advanced Search Settings icon is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
+                "Not all saved search names are displayed in dropdown");
+
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .setOEMNum(data.getOEMNum())
+                .clickAdvancedSearchHeader();
+
+        Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
+                "The advanced search dialog Clear button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSaveButtonDisplayed(),
+                "The advanced search dialog Save button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSearchNameInputFieldDisplayed(),
+                "The advanced search dialog Search Name input field hasn't been displayed");
+
+        advancedSearchDialog.clickSearchButton();
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog hasn't been closed");
+        final List<String> oemNums = partsOrdersListPanel.getOemNumsListOptions();
+        System.out.println(oemNums.get(0));
+        System.out.println(data.getOEMNum());
+        Assert.assertEquals(oemNums.get(0), data.getOEMNum(),
+                "The list orders first option name doesn't correspond to the search parameter");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchROByNotesUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch.clickSearchCaret();
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
+                "Advanced Search option is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchSettingsIconDisplayed(),
+                "Advanced Search Settings icon is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
+                "Not all saved search names are displayed in dropdown");
+
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .setNotes(data.getNotes())
+                .clickAdvancedSearchHeader();
+
+        Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
+                "The advanced search dialog Clear button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSaveButtonDisplayed(),
+                "The advanced search dialog Save button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSearchNameInputFieldDisplayed(),
+                "The advanced search dialog Search Name input field hasn't been displayed");
+
+        advancedSearchDialog.clickSearchButton();
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog hasn't been closed");
+
+        final List<String> optionsWONums = partsOrdersListPanel.getWONumsListOptions();
+        final String firstWONum = optionsWONums.get(0);
+
+        final VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setRepairOrdersSearchText(firstWONum)
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+        Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
+                "The work order type is not displayed after search by order number");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(firstWONum);
+        final String partId = detailsPage.getFirstPartIdFromPartsList();
+        Assert.assertNotEquals(partId, "", "The service hasn't been displayed");
+
+        final WebElement partActionsIcon = detailsPage.clickFirstPartActionsIcon();
+        final VNextBOOrderServiceNotesDialog notesDialog = detailsPage.openNotesDialogForPart(partActionsIcon);
+
+        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
+
+        final List<String> notesListValues = notesDialog.getNotesListValues();
+        System.out.println(notesListValues);
+        Assert.assertTrue(notesListValues.contains(data.getNotes()), "The Note hasn't been displayed");
+
+        notesDialog.clickNotesXbutton();
+        Assert.assertFalse(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been closed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchROByOrderedFromUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch.clickSearchCaret();
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
+                "Advanced Search option is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.isAdvancedSearchSettingsIconDisplayed(),
+                "Advanced Search Settings icon is not displayed in dropdown");
+        Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
+                "Not all saved search names are displayed in dropdown");
+
+        final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
+                .clickAdvancedSearchOption()
+                .setOrderedFrom(data.getOrderedFrom());
+
+        Assert.assertTrue(advancedSearchDialog.isClearButtonDisplayed(),
+                "The advanced search dialog Clear button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSaveButtonDisplayed(),
+                "The advanced search dialog Save button hasn't been displayed");
+        Assert.assertTrue(advancedSearchDialog.isSearchNameInputFieldDisplayed(),
+                "The advanced search dialog Search Name input field hasn't been displayed");
+
+        advancedSearchDialog.clickSearchButton();
+        Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog hasn't been closed");
+
+        final List<String> optionsWONums = partsOrdersListPanel.getWONumsListOptions();
+        final String firstWONum = optionsWONums.get(0);
+
+        final VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        repairOrdersPage
+                .setRepairOrdersSearchText(firstWONum)
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+        Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
+                "The work order type is not displayed after search by order number");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(firstWONum);
+        Assert.assertEquals(detailsPage.getPartsOrderedFromTableValues().get(0), data.getOrderedFrom(),
+                "The Parts 'Ordered From' value is not the same as it has been set for order");
     }
 }

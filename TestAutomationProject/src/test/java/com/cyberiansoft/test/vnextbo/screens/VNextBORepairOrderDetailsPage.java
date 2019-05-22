@@ -142,6 +142,15 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/span")
     private List<WebElement> vendorPricesList;
 
+    @FindBy(xpath = "//tbody[contains(@data-template, 'part-list') and not (contains(@data-bind, 'Cached'))]/tr")
+    private List<WebElement> partsList;
+
+    @FindBy(xpath = "//div[contains(@data-bind, 'partActionsVisible')]")
+    private List<WebElement> partsActions;
+
+    @FindBy(xpath = "//div[@id='reconmonitordetails-parts']//td[@class='grid__centered'][4]/div")
+    private List<WebElement> partsOrderedFromTableValues;
+
     final VNextBORepairOrdersWebPage repairOrdersPage;
 
     public VNextBORepairOrderDetailsPage(WebDriver driver) {
@@ -800,5 +809,34 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
             }
             return true;
         }
+    }
+
+    public String getFirstPartIdFromPartsList() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(partsList));
+        return partsList.get(0).getAttribute("data-order-service-id");
+    }
+
+    public WebElement clickFirstPartActionsIcon() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(partsActions));
+        final WebElement firstPartAction = partsActions.get(0);
+        wait.until(ExpectedConditions.elementToBeClickable(firstPartAction)).click();
+        wait.until(ExpectedConditions.visibilityOf(firstPartAction.findElement(By.xpath("./div[@class='drop checkout']"))));
+        return firstPartAction;
+    }
+
+    public VNextBOOrderServiceNotesDialog openNotesDialogForPart(WebElement partsAction) {
+        wait.until(ExpectedConditions.elementToBeClickable(partsAction
+                .findElement(By.xpath(".//label[text()='Notes']"))))
+                .click();
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBOOrderServiceNotesDialog.class);
+    }
+
+    public List<String> getPartsOrderedFromTableValues() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(partsOrderedFromTableValues));
+        return partsOrderedFromTableValues
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 }
