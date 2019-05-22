@@ -70,6 +70,7 @@ public class ClientUsersWebPage extends BaseWebPage {
 	}
 
 	public void clickDeleteClientUser(String userfstname) {
+	    waitABit(1500);
 		WebElement clientstablerow = getTableRowWithUser(userfstname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();

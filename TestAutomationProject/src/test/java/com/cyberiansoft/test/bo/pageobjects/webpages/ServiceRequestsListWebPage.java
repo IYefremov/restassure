@@ -53,7 +53,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(xpath = "//a[text()='Search']")
 	private WebElement searchbtn;
 
-	@FindBy(id = "itemContainer")
+	@FindBy(xpath = "//div[@id='itemContainer']")
 	private WebElement servicerequestslist;
 
 	@FindBy(id = "lbAddServiceRequest")
@@ -376,6 +376,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "Card_rcbAppLocations_Arrow")
 	private WebElement arrow;
 
+	@FindBy(xpath = "//input[@id='Card_btnAddApp']")
+	private WebElement appointmentDialogAddButton;
+
     @FindBy(xpath = "//*[contains(@id, 'ddlTimeframe_Input')]")
     private ComboBox searchtimeframecmb;
 
@@ -451,8 +454,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
     }
 
 	public WebElement getFirstServiceRequestFromList() {
-		if (servicerequestslist.findElements(By.xpath("./div[contains(@class,'item')]")).size() > 0) {
-			return servicerequestslist.findElement(By.xpath("./div[contains(@class,'item')]"));
+		if (servicerequestslist.findElements(By.xpath("./div[@class='item']")).size() > 0) {
+			return servicerequestslist.findElement(By.xpath("./div[@class='item']"));
 		}
 		return null;
 	}
@@ -1268,6 +1271,15 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		return true;
 	}
 
+	public void clickGetAppointmentButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(appointmentDialogAddButton)).click();
+        try {
+            waitShort.until(ExpectedConditions.invisibilityOf(appointmentTable));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 	public boolean checkStatus(String status) {
 		driver.switchTo().defaultContent();
 		System.out.println(driver.findElement(By.className("serviceRequestStatus")).getText());
@@ -1282,16 +1294,21 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	private void verifyAddAppointmentButtonIsClickableForFirstServiceRequest() {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+            clickAddAppointmentButtonFromSREdit();
         } catch (TimeoutException e) {
             driver.switchTo().defaultContent();
             selectFirstServiceRequestFromList();
-            wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+            clickAddAppointmentButtonFromSREdit();
         }
-        wait.until(ExpectedConditions.attributeToBe(appointmentTable, "visibility", "visible"));
+        wait.until(ExpectedConditions.visibilityOf(appointmentTable));
     }
 
-	public boolean checkShowHideTeches(String startDate, String endDate) {
+    public void clickAddAppointmentButtonFromSREdit() {
+        wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+        wait.until(ExpectedConditions.visibilityOf(appointmentTable));
+    }
+
+	public boolean checkShowHideTechs(String startDate, String endDate) {
         verifyAddAppointmentButtonIsClickableForFirstServiceRequest();
 
         wait.until(ExpectedConditions.visibilityOf(appointmentFromDateSRedit)).clear();
@@ -1442,9 +1459,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkDefaultAppointmentDateFromSRedit(String startDate) {
         switchToServiceRequestInfoFrame();
-        wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+        clickAddAppointmentButtonFromSREdit();
 
-		if (!wait.until(ExpectedConditions.visibilityOf(phaseField)).getAttribute("value").equals("Estimating"))
+        if (!wait.until(ExpectedConditions.visibilityOf(phaseField)).getAttribute("value").equals("Estimating"))
 			return false;
 
 		wait.until(ExpectedConditions.visibilityOf(appointmentFromDateSRedit));
@@ -1781,7 +1798,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void addAppointmentWithoutDescription(String startDate, String toDate) {
         switchToServiceRequestInfoFrame();
 
-        wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+        clickAddAppointmentButtonFromSREdit();
         wait.until(ExpectedConditions.visibilityOf(appointmentFromDateSRedit));
         wait.until(ExpectedConditions.visibilityOf(appointmentToDateSRedit));
         wait.until(ExpectedConditions.visibilityOf(appointmentFromTimeSRedit));
@@ -2009,7 +2026,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		waitABit(3000);
         switchToServiceRequestInfoFrame();
 
-        wait.until(ExpectedConditions.elementToBeClickable(addAppointmentBTNfromSRedit)).click();
+        clickAddAppointmentButtonFromSREdit();
         wait.until(ExpectedConditions.visibilityOf(appointmentFromDateSRedit));
         wait.until(ExpectedConditions.visibilityOf(appointmentToDateSRedit));
         wait.until(ExpectedConditions.visibilityOf(appointmentFromTimeSRedit));
@@ -2022,8 +2039,8 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 		appointmentFromDateSRedit.sendKeys(startDate);
 		appointmentToDateSRedit.sendKeys(endDate);
-		appointmentFromTimeSRedit.sendKeys("6:00 AM");
-		appointmentToTimeSRedit.sendKeys("7:00 AM");
+		appointmentFromTimeSRedit.sendKeys("11:00 AM");
+		appointmentToTimeSRedit.sendKeys("11:30 AM");
 		timePopupLink.click();
         wait.until(ExpectedConditions.attributeToBe(endTimeDialog, "visibility", "hidden"));
         wait.until(ExpectedConditions.elementToBeClickable(techniciansField)).click();

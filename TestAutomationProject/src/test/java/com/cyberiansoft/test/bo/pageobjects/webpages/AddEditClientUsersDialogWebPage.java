@@ -333,7 +333,7 @@ public class AddEditClientUsersDialogWebPage extends BaseWebPage{
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbAddress")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbCity")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_countryState_ddlCountry_Input")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_countryState_txtState")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_countryState_ddlCountry_Input")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbZip")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbPhone")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_ctl01_ctl01_Card_tbAccountingID")));

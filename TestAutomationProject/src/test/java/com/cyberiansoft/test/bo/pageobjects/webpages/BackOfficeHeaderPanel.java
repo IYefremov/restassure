@@ -114,7 +114,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public MiscellaneousWebPage clickMiscellaneousLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(miscellaneoustab)).click();
+	    new Actions(driver).moveToElement(miscellaneoustab).click().build().perform();
 		return PageFactory.initElements(
 				driver, MiscellaneousWebPage.class);
 	}
@@ -123,13 +123,12 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(reportstab)).click();
 		return PageFactory.initElements(
 				driver, ReportsWebPage.class);
-		
 	}
 
 	public void refresh() {
 		try{
 			driver.switchTo().alert().accept();
-		} catch (Exception e) {}
+		} catch (Exception ignored) {}
 		driver.navigate().refresh();
 	}
 

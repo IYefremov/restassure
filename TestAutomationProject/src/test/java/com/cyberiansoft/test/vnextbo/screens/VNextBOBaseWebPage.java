@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -27,6 +29,7 @@ public abstract class VNextBOBaseWebPage {
     public static WebDriverWait waitLong;
     public static WebDriverWait waitShort;
     public Actions actions;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
     public VNextBOBaseWebPage(WebDriver driver) {
         this.driver = driver;
@@ -247,5 +250,21 @@ public abstract class VNextBOBaseWebPage {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean isDateBefore(String from, String to) {
+        return getDate(from).isBefore(getDate(to));
+    }
+
+    public boolean isDateAfter(String from, String to) {
+        return getDate(from).isAfter(getDate(to));
+    }
+
+    public boolean isDateEqual(String from, String to) {
+        return getDate(from).isEqual(getDate(to));
+    }
+
+    private LocalDate getDate(String date) {
+        return LocalDate.parse(date, formatter);
     }
 }
