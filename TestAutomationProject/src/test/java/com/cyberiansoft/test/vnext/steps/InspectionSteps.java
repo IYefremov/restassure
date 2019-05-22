@@ -23,19 +23,14 @@ import java.util.List;
 
 public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
-        InspectionSteps.selectCustomer(customer);
+        CustomersSreenSteps.selectCustomer(customer);
         InspectionSteps.selectInspectionType(inspectionTypes);
-        InspectionSteps.setVehicleInfo("777777");
+        VehicleInfoScreenSteps.setVIN("777777");
     }
 
     public static void openServiceScreen() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         baseWizardScreen.changeScreen(ScreenType.SERVICES);
-    }
-
-    public static void selectServices(List<ServiceData> serviceDataList) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.selectServices(serviceDataList);
     }
 
     public static String saveInspection() {
@@ -55,7 +50,7 @@ public class InspectionSteps {
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
         if (inspectionData.getInsuranceCompanyData() != null) {
-            vehicleInfoScreen.changeScreen("Claim");
+            vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
             VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
             claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         }
@@ -78,20 +73,8 @@ public class InspectionSteps {
         inspectionsScreen.clickOnInspectionByInspNumber(inspectionId);
     }
 
-    public static void selectCustomer(AppCustomer customer) {
-        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
-        customersScreen.selectCustomer(customer);
-    }
-
     public static void selectInspectionType(InspectionTypes inspectionTypes) {
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList();
         inspectionTypesList.selectInspectionType(inspectionTypes);
-    }
-
-    public static void setVehicleInfo(String vin) {
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WaitUtils.waitUntilElementIsPresent(vehicleInfoScreen.getRootElement());
-        GeneralSteps.dismissHelpingScreenIfPresent();
-        vehicleInfoScreen.setVIN(vin);
     }
 }

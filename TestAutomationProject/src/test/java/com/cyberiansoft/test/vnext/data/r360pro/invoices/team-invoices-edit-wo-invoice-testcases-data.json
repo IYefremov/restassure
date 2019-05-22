@@ -27,6 +27,20 @@
       "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345", "invoiceTotal" : "$11.25"
       }
     }
+  ],
+
+  "testVerifyUserCanAddWOToDraftInvoiceAndEditThisWO": [
+    {
+      "rowID": "testVerifyUserCanEditWOInDraftInvoice.01",
+      "description": "Test Case 75788:Verify user can add WO to draft Invoice and edit this WO",
+      "workOrderData" : {"workOrderType": "O_Kramar",
+        "vihicleInfo": {"vinNumber": "7777777777777"
+        }, "moneyService": {"serviceName": "Battery Installation"
+        }
+      },
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      }
+    }
   ]
 
 }

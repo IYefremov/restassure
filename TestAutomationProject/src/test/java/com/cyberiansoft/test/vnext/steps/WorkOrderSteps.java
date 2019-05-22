@@ -22,18 +22,12 @@ public class WorkOrderSteps {
     public static String createSimpleWorkOrder(AppCustomer customer, WorkOrderTypes workOrderType) {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
-        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-
         homeScreen.clickWorkOrdersMenuItem();
         workOrdersScreen.clickAddWorkOrderButton();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(customer);
+        CustomersSreenSteps.selectCustomer(customer);
         createWorkOrder(workOrderType);
-        vehicleInfoScreen.setVIN("7777777777777");
-        final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.saveWorkOrderViaMenu();
-        return workOrderNumber;
+        VehicleInfoScreenSteps.setVIN("7777777777777");
+        return saveWorkOrder();
     }
 
     public static void createWorkOrder(WorkOrderTypes workOrderType) {
@@ -55,30 +49,10 @@ public class WorkOrderSteps {
         return workOrderNumber;
     }
 
-    public static void verifySelectedOrders(List<ServiceData> expectedServiceList) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-        servicesScreen.switchToSelectedServicesView();
-        expectedServiceList.forEach(serviceData -> Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName())));
-        servicesScreen.switchToAvalableServicesView();
-    }
-
     public static void workOrderShouldBePresent(String workOrderId) {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         workOrdersScreen.switchToMyWorkordersView();
         Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderId));
     }
 
-    public static void selectServices(List<ServiceData> serviceDataList) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.selectServices(serviceDataList);
-    }
-
-    public static void unselectServices(List<ServiceData> serviceDataList) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-        servicesScreen.switchToSelectedServicesView();
-        serviceDataList.forEach(service -> selectedServicesScreen.uselectService(service.getServiceName()));
-        servicesScreen.switchToAvalableServicesView();
-    }
 }

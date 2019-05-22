@@ -52,6 +52,11 @@ public class WholesailCustomer implements AppCustomer {
 	}
 
 	@Override
+	public boolean isWholesale() {
+		return true;
+	}
+
+	@Override
 	public String getCompany() {
 		return companyName;
 	}
