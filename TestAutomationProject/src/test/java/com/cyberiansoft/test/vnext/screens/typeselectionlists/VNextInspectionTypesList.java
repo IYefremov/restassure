@@ -12,10 +12,12 @@ public class VNextInspectionTypesList extends VNextBaseTypeSelectionList {
 	
 	public VNextInspectionTypesList(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
-		//PageFactory.initElements(new ExtendedFieldDecorator(appiumdriver), this);	
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
-	
+
+	public VNextInspectionTypesList() {
+	}
+
 	public void selectInspectionType(InspectionTypes inspectionType) {
 		selectType(inspectionType.getInspectionTypeName());
 		VNextBaseWizardScreen.inspectionType = inspectionType;

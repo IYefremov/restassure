@@ -49,15 +49,15 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
     @FindBy(xpath = "//a[@data-name='changeCustomer']")
     private WebElement changecustomerbtn;
 
-    //@FindBy(xpath="//body/div[@data-menu='popup']")
-    //private WebElement inspectionsmenuscreen;
-
     @FindBy(xpath = "//div[@class='close-popup close-actions']")
     private WebElement closebtn;
 
     public VNextInspectionsMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+    }
+
+    public VNextInspectionsMenuScreen() {
     }
 
     public VNextVehicleInfoScreen clickEditInspectionMenuItem() {

@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
 
 public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
 
-    @FindBy(xpath="//div[@data-page='services-list']")
+    @FindBy(xpath = "//div[@data-page='services-list']")
     private WebElement servicesscreen;
 
-    @FindBy(xpath="//div[@data-page='services-add']")
+    @FindBy(xpath = "//div[@data-page='services-add']")
     private WebElement selectservicesscreen;
 
     public VNextSelectedServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
@@ -36,6 +36,8 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
+    public VNextSelectedServicesScreen() {
+    }
 
     public void setServiceAmountValue(String serviceName, String amount) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
@@ -44,7 +46,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
                 tap(servicecell);
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
                 WaitUtils.click(servicecell);
-             BaseUtils.waitABit(500);
+            BaseUtils.waitABit(500);
             tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
             VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
             String defAmaunt = servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value");
@@ -122,7 +124,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         return notesvalue;
     }
 
-    public  WebElement expandServiceDetails(String serviceName) {
+    public WebElement expandServiceDetails(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
             if (!servicecell.getAttribute("class").contains("accordion-item-expanded")) {
@@ -137,7 +139,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         return servicecell;
     }
 
-    public  WebElement collapseServiceDetails(String serviceName) {
+    public WebElement collapseServiceDetails(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
             if (servicecell.getAttribute("class").contains("accordion-item-expanded")) {
@@ -154,7 +156,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         WebElement servicecell = expandServiceDetails(serviceName);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(servicecell.findElement(By.xpath("//*[@action='select-question-section']/input[@value='" +
-                        questionSectionName + "']"))));
+                questionSectionName + "']"))));
         servicecell.findElement(By.xpath("//*[@action='select-question-section']/input[@value='" +
                 questionSectionName + "']")).click();
         return new VNextQuestionsScreen(appiumdriver);
@@ -215,7 +217,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         boolean exists = false;
         appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         if (servicesscreen.findElement(By.xpath(".//div[@data-autotests-id='all-services']")).isDisplayed())
-            exists =  getSelectedServicesList().findElements(By.xpath((".//div[@class='checkbox-item-title' and text()='" + servicename + "']"))).size() > 0;
+            exists = getSelectedServicesList().findElements(By.xpath((".//div[@class='checkbox-item-title' and text()='" + servicename + "']"))).size() > 0;
         appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return exists;
     }
@@ -224,9 +226,9 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     public WebElement getSelectedServiceCell(String servicename) {
         WebElement serviceListItem = null;
         List<WebElement> services = getServicesListItems();
-        for (WebElement srv: services)
+        for (WebElement srv : services)
             if (getServiceListItemName(srv).equals(servicename)) {
-                serviceListItem =  srv;
+                serviceListItem = srv;
                 break;
             }
         return serviceListItem;

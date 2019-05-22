@@ -19,38 +19,41 @@ import java.util.List;
 
 public class VNextBaseCustomersScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//span[@class='client-mode']")
+    @FindBy(xpath = "//span[@class='client-mode']")
     private WebElement clientmode;
 
-    @FindBy(xpath="//*[@data-autotests-id='customers-list']")
+    @FindBy(xpath = "//*[@data-autotests-id='customers-list']")
     private WebElement customerslist;
 
-    @FindBy(xpath="//a[@action='select-customer']")
+    @FindBy(xpath = "//a[@action='select-customer']")
     private WebElement firstcustomer;
 
-    @FindBy(xpath="//a[@action='add']")
+    @FindBy(xpath = "//a[@action='add']")
     private WebElement addcustomerbtn;
 
-    @FindBy(xpath="//*[@action='search']")
+    @FindBy(xpath = "//*[@action='search']")
     private WebElement searchbtn;
 
-    @FindBy(xpath="//*[@data-autotests-id='search-input']")
+    @FindBy(xpath = "//*[@data-autotests-id='search-input']")
     private WebElement searchfld;
 
-    @FindBy(xpath="//*[@data-autotests-id='search-cancel']")
+    @FindBy(xpath = "//*[@data-autotests-id='search-cancel']")
     WebElement cancelsearchbtn;
 
-    @FindBy(xpath="//*[@action='select-retail']")
+    @FindBy(xpath = "//*[@action='select-retail']")
     private WebElement retailcustomertab;
 
-    @FindBy(xpath="//*[@action='select-wholesale']")
+    @FindBy(xpath = "//*[@action='select-wholesale']")
     private WebElement wholesalecustomertab;
 
-    @FindBy(xpath="//div[@class='notice-plate']")
+    @FindBy(xpath = "//div[@class='notice-plate']")
     private WebElement presetcustomerpanel;
 
     public VNextBaseCustomersScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
+    }
+
+    public VNextBaseCustomersScreen() {
     }
 
     public void selectCustomer(AppCustomer customer) {
@@ -60,14 +63,14 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
         if (customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
             WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));
             JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-            je.executeScript("arguments[0].scrollIntoView(true);",elem);
+            je.executeScript("arguments[0].scrollIntoView(true);", elem);
             //waitABit(1000);
             tap(customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
         } else {
             List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name']"));
-            WebElement elem = ctmrs.get(ctmrs.size()-1);
+            WebElement elem = ctmrs.get(ctmrs.size() - 1);
             JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-            je.executeScript("arguments[0].scrollIntoView(true);",elem);
+            je.executeScript("arguments[0].scrollIntoView(true);", elem);
             //waitABit(1000);
             tap(customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
             //waitABit(1000);
@@ -77,11 +80,10 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
     public void selectCustomerByCompanyName(String customercompany) {
         WebElement elem = customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]"));
         JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-        je.executeScript("arguments[0].scrollIntoView(true);",elem);
+        je.executeScript("arguments[0].scrollIntoView(true);", elem);
         tap(customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]")));
         BaseUtils.waitABit(1000);
     }
-
 
 
     public boolean isAddCustomerButtonExists() {

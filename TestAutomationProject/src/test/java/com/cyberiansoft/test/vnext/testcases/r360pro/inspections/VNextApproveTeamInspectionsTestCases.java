@@ -8,6 +8,7 @@ import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -27,7 +28,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanApproveInspectionAfterCreating(String rowID,
 													  String description, JSONObject testData) {
-
+		HomeScreenSteps.openCreateNewInspection();
 		InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
 		String inspectionNumber = InspectionSteps.saveInspection();
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -45,7 +46,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyCleanIconWorkCorrectly(String rowID,
 																String description, JSONObject testData) {
-
+		HomeScreenSteps.openCreateNewInspection();
 		InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
 		String inspectionNumber = InspectionSteps.saveInspection();
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -68,7 +69,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanCreateWOOnlyForApprovedInspections(String rowID,
 												 String description, JSONObject testData) {
-
+		HomeScreenSteps.openCreateNewInspection();
 		InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
 		String inspectionNumber = InspectionSteps.saveInspection();
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());

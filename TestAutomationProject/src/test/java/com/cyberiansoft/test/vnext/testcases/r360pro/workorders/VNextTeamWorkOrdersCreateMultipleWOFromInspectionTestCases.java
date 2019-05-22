@@ -4,15 +4,10 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.InspectionMenuSteps;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -22,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends BaseTestCaseTeamEditionRegistration {
+
 
     @BeforeClass(description="Team Work Orders Create Multiple WO From Inspection Test Cases")
     public void beforeClass() {
@@ -37,6 +33,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         summaryServiceList.addAll(workOrderData.getInspectionData().getServicesList());
         summaryServiceList.addAll(workOrderData.getServicesList());
 
+        HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         InspectionSteps.openServiceScreen();
         InspectionSteps.selectServices(workOrderData.getInspectionData().getServicesList());
@@ -46,7 +43,6 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         InspectionSteps.openInspectionMenu(inspectionNumber);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR);
-        new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         WorkOrderSteps.openServiceScreen();
         WorkOrderSteps.verifySelectedOrders(workOrderData.getInspectionData().getServicesList());
         WorkOrderSteps.selectServices(workOrderData.getServicesList());
@@ -55,8 +51,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         WorkOrderSteps.verifySelectedOrders(workOrderData.getServicesList());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
         WorkOrderSteps.workOrderShouldBePresent(workOrderId);
-        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
-        workOrdersScreen.clickBackButton();
+        GeneralSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -72,10 +67,8 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         InspectionMenuSteps.createWorkOrderMenuItemShouldBeVisible(true);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR);
-        new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
         WorkOrderSteps.workOrderShouldBePresent(workOrderId);
-        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
-        workOrdersScreen.clickBackButton();
+        GeneralSteps.pressBackButton();
     }
 }

@@ -5,6 +5,7 @@ import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Getter
 public class VNextBaseTypeSelectionList extends VNextBaseScreen {
 
     @FindBy(xpath="//div[@data-page='entity-types']")
@@ -30,6 +32,9 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
         wait.until(ExpectedConditions.visibilityOf(typeslist));
+    }
+
+    public VNextBaseTypeSelectionList() {
     }
 
     public void selectType(String typeName) {

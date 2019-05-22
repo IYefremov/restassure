@@ -14,7 +14,10 @@ public class VNextWorkOrderTypesList extends VNextBaseTypeSelectionList {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
-	
+
+	public VNextWorkOrderTypesList() {
+	}
+
 	public void selectWorkOrderType(WorkOrderTypes workorderType) {
 		selectType(workorderType.getWorkOrderTypeName());
 		VNextBaseWizardScreen.typeScreenContext = VNextTypeScreenContext.WORKORDER;

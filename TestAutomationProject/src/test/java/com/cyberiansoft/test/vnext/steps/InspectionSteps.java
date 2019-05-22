@@ -6,7 +6,6 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
@@ -15,6 +14,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,31 +23,23 @@ import java.util.List;
 
 public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        homeScreen.clickInspectionsMenuItem();
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionsScreen.clickAddInspectionButton();
-        VNextCustomersScreen customersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(customer);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionTypesList.selectInspectionType(inspectionTypes);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.setVIN("777777");
+        InspectionSteps.selectCustomer(customer);
+        InspectionSteps.selectInspectionType(inspectionTypes);
+        InspectionSteps.setVehicleInfo("777777");
     }
 
     public static void openServiceScreen() {
-        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         baseWizardScreen.changeScreen(ScreenType.SERVICES);
     }
 
     public static void selectServices(List<ServiceData> serviceDataList) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         servicesScreen.selectServices(serviceDataList);
     }
 
     public static String saveInspection() {
-        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveInspectionViaMenu();
         return inspectionNumber;
@@ -82,7 +74,24 @@ public class InspectionSteps {
     }
 
     public static void openInspectionMenu(String inspectionId) {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.clickOnInspectionByInspNumber(inspectionId);
+    }
+
+    public static void selectCustomer(AppCustomer customer) {
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+        customersScreen.selectCustomer(customer);
+    }
+
+    public static void selectInspectionType(InspectionTypes inspectionTypes) {
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList();
+        inspectionTypesList.selectInspectionType(inspectionTypes);
+    }
+
+    public static void setVehicleInfo(String vin) {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.waitUntilElementIsPresent(vehicleInfoScreen.getRootElement());
+        GeneralSteps.dismissHelpingScreenIfPresent();
+        vehicleInfoScreen.setVIN(vin);
     }
 }

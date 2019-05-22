@@ -21,30 +21,33 @@ import java.util.List;
 
 public class VNextBaseTypeScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//*[@data-automation-id='search-icon']")
+    @FindBy(xpath = "//*[@data-automation-id='search-icon']")
     private WebElement searchbtn;
 
-    @FindBy(xpath="//*[@data-autotests-id='search-input']")
+    @FindBy(xpath = "//*[@data-autotests-id='search-input']")
     private WebElement searchfld;
 
-    @FindBy(xpath="//*[@data-autotests-id='search-cancel']")
+    @FindBy(xpath = "//*[@data-autotests-id='search-cancel']")
     private WebElement cancelsearchbtn;
 
-    @FindBy(xpath="//*[@data-automation-id='search-clear']")
+    @FindBy(xpath = "//*[@data-automation-id='search-clear']")
     private WebElement clearsearchicon;
 
-    @FindBy(xpath="//*[@action='my']")
+    @FindBy(xpath = "//*[@action='my']")
     private WebElement myviewtab;
 
-    @FindBy(xpath="//*[@action='team']")
+    @FindBy(xpath = "//*[@action='team']")
     private WebElement teamviewtab;
 
-    @FindBy(xpath="//*[@action='add']")
+    @FindBy(xpath = "//*[@action='add']")
     private WebElement addbtn;
 
     public VNextBaseTypeScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+    }
+
+    public VNextBaseTypeScreen() {
     }
 
     protected WebElement getListCell(WebElement typesList, String cellValue) {
@@ -57,7 +60,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
                         .getText().trim().equals(cellValue))
                 .findFirst().orElse(null);
         if (tableCell == null)
-            Assert.fail( "Can't find cell in the list: " + cellValue);
+            Assert.fail("Can't find cell in the list: " + cellValue);
         return tableCell;
     }
 

@@ -54,6 +54,9 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
+	public VNextBaseWizardScreen() {
+	}
+
 	public VNextInspectionsScreen cancelInspection() {
 		clickCancelMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);

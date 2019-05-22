@@ -9,6 +9,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+@Getter
 public class VNextApproveScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-automations-id='approve']")
@@ -37,6 +39,10 @@ public class VNextApproveScreen extends VNextBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(approcescreen));
+	}
+
+	public VNextApproveScreen(){
+
 	}
 	
 	public void clickSignatureCanvas() {

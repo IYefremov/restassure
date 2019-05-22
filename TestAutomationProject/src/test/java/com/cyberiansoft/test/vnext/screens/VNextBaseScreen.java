@@ -2,13 +2,16 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,11 +28,14 @@ public class VNextBaseScreen {
         this.appiumdriver = driver;
     }
 
-    public void tap(WebElement element) {
+    public VNextBaseScreen() {
+        appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+    }
 
+    public void tap(WebElement element) {
         BaseUtils.waitABit(300);
         WaitUtils.click(element);
-
     }
 
     private float[] getElementCenter(WebElement element) {

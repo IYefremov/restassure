@@ -26,6 +26,8 @@ public class VNextBasicMenuScreen extends VNextBaseScreen {
         wait.until(ExpectedConditions.visibilityOf(menuscreen));
     }
 
+    public VNextBasicMenuScreen(){}
+
     void clickMenuItem(WebElement menuItem) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(menuItem));
