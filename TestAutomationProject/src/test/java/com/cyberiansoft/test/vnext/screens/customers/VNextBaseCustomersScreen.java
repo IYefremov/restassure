@@ -58,10 +58,13 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
 
     public void selectCustomer(AppCustomer customer) {
         if (elementExists("//*[@action='select-retail']"))
-            if (customer.isWholesale())
-                switchToWholesaleMode();
-            else
-                switchToRetailMode();
+            if (customer.isWholesale()) {
+                if (wholesalecustomertab.isDisplayed())
+                    switchToWholesaleMode();
+            } else {
+                if (retailcustomertab.isDisplayed())
+                    switchToRetailMode();
+            }
         if (elementExists("//*[@data-automation-id='search-icon']")) {
             searchCustomerByName(customer.getFullName());
         }
