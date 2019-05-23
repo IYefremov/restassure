@@ -274,9 +274,9 @@
     }
   ],
 
-  "testVerifyUserCantAprroveInspectionsWithDifferentCustomers": [
+  "testVerifyUserCantApproveInspectionsWithDifferentCustomers": [
     {
-      "rowID": "testVerifyUserCantAprroveInspectionsWithDifferentCustomers.01",
+      "rowID": "testVerifyUserCantApproveInspectionsWithDifferentCustomers.01",
       "description": "Test Case 74191:Verify user can't aprrove Inspections with different customers",
       "inspectionDatas" : [{"inspType": "O_Kramar3",
         "retailCustomer": {"firstName": "Retail", "lastName" : "Automation"

@@ -9,6 +9,7 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -723,7 +724,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         vehicleinfoscreen.swipeScreenLeft();
         VNextClaimInfoScreen claimscren = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimscren.selectInsuranceCompany("Test Insurance Company");
-        vehicleinfoscreen.swipeScreensLeft(2);
+        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         for (int i = 0; i < availablepricematrixes.length; i++) {
             VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);

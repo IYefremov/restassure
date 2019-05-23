@@ -193,6 +193,8 @@
       "description": "Test Case 68042:Verify sending >100 messages after reconnect Internet",
       "vihicleInfo": {"vinNumber": "7777777777777"
       },
+      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      },
       "services": [{"serviceName": "Battery Installation"
       }, {"serviceName": "Aluminum Panel"
       }, {"serviceName": "Damage Service"

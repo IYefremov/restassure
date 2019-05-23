@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleModelsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleTypeScreen;
@@ -29,7 +30,8 @@ import java.util.List;
 @Getter
 public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 
-    @FindBy(xpath = "//*[contains(@data-autotests-id, '-vehicle-info')]")
+    //@FindBy(xpath = "//*[contains(@data-autotests-id, '-vehicle-info')]")
+    @FindBy(xpath = "//*[@data-page='info']")
     private WebElement rootElement;
 
     @FindBy(xpath = "//div[@data-page='info']")
@@ -285,18 +287,6 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
         //swipeScreenLeft();
         //swipeScreenLeft();
         return new VNextAvailableServicesScreen(appiumdriver);
-    }
-
-    public VNextWorkOrderSummaryScreen goToWorkOrderSummaryScreen() {
-        BaseUtils.waitABit(5000);
-        swipeScreensLeft(2);
-        //swipeScreenLeft();
-        //swipeScreenLeft();
-        //swipeScreenLeft();
-        //swipeScreenLeft();
-        if (appiumdriver.findElements(By.xpath("//div[@data-page='summary']")).size() > 0)
-            swipeScreenLeft();
-        return new VNextWorkOrderSummaryScreen(appiumdriver);
     }
 
     public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color) {
