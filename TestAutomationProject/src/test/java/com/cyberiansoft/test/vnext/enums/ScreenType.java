@@ -5,6 +5,8 @@ import lombok.Getter;
 public enum ScreenType {
     SERVICES("Services"),
     CLAIM("Claim"),
+    WORKORDER_SUMMARY("Summary"),
+    VISUAL("Visual"),
     VEHICLE_INFO("Vehicle Info");
 
     @Getter

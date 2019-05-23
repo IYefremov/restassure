@@ -5,6 +5,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
@@ -88,7 +89,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         claiminfoscreen.setClaimNumber(claimNumber);
         claiminfoscreen.setPolicyNumber(policyNumber);
         claiminfoscreen.setDeductibleValue(deductibleValue);
-        inspinfoscreen.swipeScreensLeft(2);
+        inspinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspservicesscreen.selectService(percservices);
         inspservicesscreen.selectService(moneyservices);
@@ -155,7 +156,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         claiminfoscreen.setClaimNumber(claimNumber);
         claiminfoscreen.setPolicyNumber(policyNumber);
         claiminfoscreen.setDeductibleValue(deductibleValue);
-        inspinfoscreen.swipeScreensLeft(2);
+        inspinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspservicesscreen.selectService(percservices);
         inspservicesscreen.selectService(moneyservices);

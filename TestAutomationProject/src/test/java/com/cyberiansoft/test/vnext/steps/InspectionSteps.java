@@ -28,6 +28,12 @@ public class InspectionSteps {
         VehicleInfoScreenSteps.setVIN("777777");
     }
 
+    public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes, InspectionData inspectionData) {
+        CustomersSreenSteps.selectCustomer(customer);
+        InspectionSteps.selectInspectionType(inspectionTypes);
+        VehicleInfoScreenSteps.setVIN(inspectionData.getVinNumber());
+    }
+
     public static void openServiceScreen() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         baseWizardScreen.changeScreen(ScreenType.SERVICES);

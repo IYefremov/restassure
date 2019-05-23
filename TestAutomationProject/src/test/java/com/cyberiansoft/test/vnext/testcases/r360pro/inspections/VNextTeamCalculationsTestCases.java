@@ -9,6 +9,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -46,369 +47,369 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
     public void testVerifyCorrectTotalIsShownAfterEditingPercentageServiceInMyInspection(String rowID,
                                                                                    String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.changeScreen("Services");
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen.selectService(inspdata.getServiceName());
-        availableservicesscreen.selectService(inspdata.getPercentageServicesList().get(0).getServiceName());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getPercentageServicesList().get(0).getServiceName());
 
-        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
-        List<ServiceData> percentageServices = inspdata.getPercentageServicesList();
+        List<ServiceData> percentageServices = inspectionData.getPercentageServicesList();
         for (ServiceData percentageService : percentageServices) {
             selectedServicesScreen.setServiceAmountValue(percentageService.getServiceName(), percentageService.getServicePrice());
-            float moneyServicePrice = BackOfficeUtils.getServicePriceValue(inspdata.getServicePrice());
-            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(percentageService.getServicePrice())/100);
-            Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), newprice);
+            float moneyServicePrice = BackOfficeUtils.getServicePriceValue(inspectionData.getServicePrice());
+            String newPrice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(percentageService.getServicePrice())/100);
+            Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), newPrice);
         }
 
-        inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-        inspectionscreen.clickBackButton();
+        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCorrectTotalIsShownAfterEditingMoneyServiceInMyInspection(String rowID,
                                                                                          String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen.selectService(inspdata.getServiceName());
-        availableservicesscreen.selectService(inspdata.getMoneyServicesList().get(0).getServiceName());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getMoneyServicesList().get(0).getServiceName());
 
-        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
-        List<ServiceData> moneyServices = inspdata.getMoneyServicesList();
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
+        List<ServiceData> moneyServices = inspectionData.getMoneyServicesList();
         for (ServiceData moneyService : moneyServices) {
             selectedServicesScreen.setServiceAmountValue(moneyService.getServiceName(), moneyService.getServicePrice());
             float moneyServicePrice = BackOfficeUtils.getServicePriceValue(moneyService.getServicePrice());
-            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspdata.getServicePrice())/100);
+            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspectionData.getServicePrice())/100);
             Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), newprice);
         }
 
-        inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-        inspectionscreen.clickBackButton();
+        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyMyInspectionTotalAmountCantBeLessThan0(String rowID,
                                                                                     String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen.selectService(inspdata.getMoneyServiceName());
-        availableservicesscreen.selectService(inspdata.getPercentageServiceName());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
+        availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
 
-        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
-        selectedServicesScreen.setServiceAmountValue(inspdata.getMoneyServiceName(), inspdata.getMoneyServicePrice());
-        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServicePrice());
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
         selectedServicesScreen.clickSaveInspectionMenuButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.TOTAL_AMOUNT_OF_INSPECTION_CANT_BE_LESS_THAN_0);
-        inspectionscreen = availableservicesscreen.cancelInspection();
-        inspectionscreen.clickBackButton();
+        inspectionsScreen = availableServicesScreen.cancelInspection();
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyMyInspectionTotalAmountCantBeMoreThanOneMillion(String rowID,
                                                                  String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen.selectService(inspdata.getMoneyServiceName());
-        availableservicesscreen.selectService(inspdata.getPercentageServiceName());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
+        availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
 
-        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
-        selectedServicesScreen.setServiceAmountValue(inspdata.getMoneyServiceName(), inspdata.getMoneyServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(inspdata.getMoneyServiceName(), inspdata.getMoneyServiceQuantity());
-        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServicePrice());
+        selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServiceQuantity());
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
         selectedServicesScreen.clickSaveInspectionMenuButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.TOTAL_AMOUNT_OF_INSPECTION_EXCEEDS_THE_MAXIMUM_ALLOWED);
-        inspectionscreen = availableservicesscreen.cancelInspection();
-        inspectionscreen.clickBackButton();
+        inspectionsScreen = availableServicesScreen.cancelInspection();
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCorrectTotalIsShownAfterEditingMoneyServiceQTYInMyInspection(String rowID,
                                                                                     String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen.selectService(inspdata.getServiceName());
-        availableservicesscreen.selectService(inspdata.getMoneyServicesList().get(0).getServiceName());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getMoneyServicesList().get(0).getServiceName());
 
-        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
-        List<ServiceData> moneyServices = inspdata.getMoneyServicesList();
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
+        List<ServiceData> moneyServices = inspectionData.getMoneyServicesList();
         for (ServiceData moneyService : moneyServices) {
             selectedServicesScreen.setServiceQuantityValue(moneyService.getServiceName(), moneyService.getServiceQuantity());
             float moneyServicePrice = BackOfficeUtils.getServicePriceValue(moneyService.getServicePrice())*
                     BackOfficeUtils.getServiceQuantityValue(moneyService.getServiceQuantity());
-            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspdata.getServicePrice())/100);
+            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspectionData.getServicePrice())/100);
             Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), newprice);
         }
 
-        inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-        inspectionscreen.clickBackButton();
+        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCorrectTotalIsShownMyInspectionWithNegativeAndPositivePercentageServices(String rowID,
                                                                                          String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen.selectService(inspdata.getServiceName());
-        List<ServiceData> percentageServices = inspdata.getPercentageServicesList();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(inspectionData.getServiceName());
+        List<ServiceData> percentageServices = inspectionData.getPercentageServicesList();
         for (ServiceData percentageService : percentageServices)
-            availableservicesscreen.selectService(percentageService.getServiceName());
+            availableServicesScreen.selectService(percentageService.getServiceName());
 
-        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
         for (ServiceData percentageService : percentageServices)
             selectedServicesScreen.setServiceAmountValue(percentageService.getServiceName(), percentageService.getServicePrice());
 
-        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
-        inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        inspectionscreen.clickBackButton();
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
+        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspNumber), inspectionData.getInspectionPrice());
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCorrectTotalIsShownForMyInspectionWithFewMoneyServices(String rowID,
                                                                                        String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        List<ServiceData> moneyServices = inspdata.getMoneyServicesList();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        List<ServiceData> moneyServices = inspectionData.getMoneyServicesList();
         for (ServiceData moneyService : moneyServices)
-            availableservicesscreen.selectService(moneyService.getServiceName());
-        VNextSelectedServicesScreen selectedServicesScreen = availableservicesscreen.switchToSelectedServicesView();
+            availableServicesScreen.selectService(moneyService.getServiceName());
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData moneyService : moneyServices) {
             selectedServicesScreen.setServiceAmountValue(moneyService.getServiceName(), moneyService.getServicePrice());
             selectedServicesScreen.setServiceQuantityValue(moneyService.getServiceName(), moneyService.getServiceQuantity());
         }
-        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspdata.getInspectionPrice());
-        inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        inspectionscreen.clickBackButton();
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
+        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspNumber), inspectionData.getInspectionPrice());
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCorrectTotalIsShownForMyInspectionWithPanelsStateFarmMatrix(String rowID,
                                                                                  String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-        VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
-        List<HailMatrixService>  hailMatrixServices = inspdata.getMatrixServiceData().getHailMatrixServices();
+        VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
+        VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
+        List<HailMatrixService>  hailMatrixServices = inspectionData.getMatrixServiceData().getHailMatrixServices();
         for (HailMatrixService  hailMatrixService : hailMatrixServices) {
-            VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-            vehiclepartinfoscreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-            vehiclepartinfoscreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
+            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
+            vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
+            vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
             if (hailMatrixService.getMatrixAdditionalServices() != null) {
                 List<ServiceData> additionalServices = hailMatrixService.getMatrixAdditionalServices();
                 for (ServiceData additionalService : additionalServices)
-                    vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
+                    vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
-            vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-            vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+            vehiclePartInfoScreen.clickSaveVehiclePartInfo();
+            vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
-        vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
-        Assert.assertEquals(availableservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
-        inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        inspectionscreen.clickBackButton();
+        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+        Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
+        inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspNumber), inspectionData.getInspectionPrice());
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCorrectTotalIsShownForMyInspectionWithPanelsNationwideInsuranceMatrix(String rowID,
                                                                                                 String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-        VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
-        List<HailMatrixService>  hailMatrixServices = inspdata.getMatrixServiceData().getHailMatrixServices();
+        VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
+        VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
+        List<HailMatrixService>  hailMatrixServices = inspectionData.getMatrixServiceData().getHailMatrixServices();
         for (HailMatrixService  hailMatrixService : hailMatrixServices) {
-            VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-            vehiclepartinfoscreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-            vehiclepartinfoscreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
+            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
+            vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
+            vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
             if (hailMatrixService.getMatrixAdditionalServices() != null) {
                 List<ServiceData> additionalServices = hailMatrixService.getMatrixAdditionalServices();
                 for (ServiceData additionalService : additionalServices)
-                    vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
+                    vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
-            vehiclepartinfoscreen.clickSaveVehiclePartInfo();
+            vehiclePartInfoScreen.clickSaveVehiclePartInfo();
         }
-        vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
 
-        Assert.assertEquals(availableservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
-        inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        inspectionscreen.clickBackButton();
+        Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
+        inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspNumber), inspectionData.getInspectionPrice());
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCorrectTotalIsShownForMyInspectionWithPanelsProgressiveMatrix(String rowID,
                                                                                                 String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-        inspectionscreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-        customersscreen.switchToRetailMode();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.swipeScreensLeft(2);
-        VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.switchToMyInspectionsView();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.switchToRetailMode();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-        VNextPriceMatrixesScreen pricematrixesscreen = availableservicesscreen.openMatrixServiceDetails(  inspdata.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspdata.getMatrixServiceData().getHailMatrixName());
-        List<HailMatrixService>  hailMatrixServices = inspdata.getMatrixServiceData().getHailMatrixServices();
+        VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
+        VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
+        List<HailMatrixService>  hailMatrixServices = inspectionData.getMatrixServiceData().getHailMatrixServices();
         for (HailMatrixService  hailMatrixService : hailMatrixServices) {
-            VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-            vehiclepartinfoscreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-            vehiclepartinfoscreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
+            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
+            vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
+            vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
             if (hailMatrixService.getMatrixAdditionalServices() != null) {
                 List<ServiceData> additionalServices = hailMatrixService.getMatrixAdditionalServices();
                 for (ServiceData additionalService : additionalServices)
-                    vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
+                    vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
-            vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-            vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+            vehiclePartInfoScreen.clickSaveVehiclePartInfo();
+            vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
-        vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
-        Assert.assertEquals(availableservicesscreen.getTotalPriceValue(), inspdata.getInspectionPrice());
-        inspectionscreen = availableservicesscreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionscreen.getInspectionPriceValue(inspnumber), inspdata.getInspectionPrice());
-        inspectionscreen.clickBackButton();
+        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+        Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
+        inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspNumber), inspectionData.getInspectionPrice());
+        inspectionsScreen.clickBackButton();
     }
 
 
@@ -418,122 +419,122 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
 
         final String selectdamage = "Detail";
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-        List<ServiceData> moneyServices = inspdata.getMoneyServicesList();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<ServiceData> moneyServices = inspectionData.getMoneyServicesList();
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
         VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspinfoscreen.setVIN(inspdata.getVinNumber());
+        inspinfoscreen.setVIN(inspectionData.getVinNumber());
         inspinfoscreen.swipeScreenLeft();
 
-        VNextVisualScreen visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
-        //visualscreen.clickAddServiceButton();
-        visualscreen.selectDefaultDamage(selectdamage);
-        visualscreen.clickCarImageACoupleTimes(moneyServices.size());
+        VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //visualScreen.clickAddServiceButton();
+        visualScreen.selectDefaultDamage(selectdamage);
+        visualScreen.clickCarImageACoupleTimes(moneyServices.size());
         BaseUtils.waitABit(1000);
         int i = 0;
 
         for (ServiceData moneyService : moneyServices) {
-            List<MobileElement> damagemarkers =  visualscreen.getImageMarkers();
-            VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker(damagemarkers.get(i));
-            servicedetailsscreen.setServiceAmountValue(moneyService.getServicePrice());
-            servicedetailsscreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            VNextQuestionsScreen questionsScreen = servicedetailsscreen.clickServiceQuestionSection("Test Section");
+            List<MobileElement> damagemarkers =  visualScreen.getImageMarkers();
+            VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker(damagemarkers.get(i));
+            serviceDetailsScreen.setServiceAmountValue(moneyService.getServicePrice());
+            serviceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+            VNextQuestionsScreen questionsScreen = serviceDetailsScreen.clickServiceQuestionSection("Test Section");
             questionsScreen.setAllRequiredQuestions("test 1");
             questionsScreen.clickDoneButton();
-            servicedetailsscreen = new VNextServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
-            servicedetailsscreen.clickServiceDetailsDoneButton();
-            visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+            serviceDetailsScreen = new VNextServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
+            serviceDetailsScreen.clickServiceDetailsDoneButton();
+            visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
             BaseUtils.waitABit(1000);
             i++;
         }
-        visualscreen.clickDamageCancelEditingButton();
-        Assert.assertEquals(visualscreen.getInspectionTotalPriceValue(), inspdata.getInspectionPrice());
-        inspectionsscreen = visualscreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsscreen.getFirstInspectionPrice(), inspdata.getInspectionPrice());
-        inspectionsscreen.clickBackButton();
+        visualScreen.clickDamageCancelEditingButton();
+        Assert.assertEquals(visualScreen.getInspectionTotalPriceValue(), inspectionData.getInspectionPrice());
+        inspectionsScreen = visualScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getFirstInspectionPrice(), inspectionData.getInspectionPrice());
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen(String rowID,
                                                                                             String description, JSONObject testData) {
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         final String panelName = "Detail";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
         VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspinfoscreen.setVIN(inspdata.getVinNumber());
-        inspinfoscreen.changeScreen("Visual");
+        inspinfoscreen.setVIN(inspectionData.getVinNumber());
+        inspinfoscreen.changeScreen(ScreenType.VISUAL);
 
-        VNextVisualScreen visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
-        visualscreen.clickAddServiceButton();
-        visualscreen.clickDefaultDamageType(inspdata.getMoneyServiceName());
-        visualscreen.clickCarImage();
+        VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        visualScreen.clickAddServiceButton();
+        visualScreen.clickDefaultDamageType(inspectionData.getMoneyServiceName());
+        visualScreen.clickCarImage();
         BaseUtils.waitABit(1000);
-        VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
-        servicedetailsscreen.setServiceAmountValue(inspdata.getMoneyServicePrice());
-        servicedetailsscreen.setServiceQuantityValue(inspdata.getMoneyServiceQuantity());
-        servicedetailsscreen.clickServiceDetailsDoneButton();
-        visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker();
+        serviceDetailsScreen.setServiceAmountValue(inspectionData.getMoneyServicePrice());
+        serviceDetailsScreen.setServiceQuantityValue(inspectionData.getMoneyServiceQuantity());
+        serviceDetailsScreen.clickServiceDetailsDoneButton();
+        visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-        VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickAddServiceButton();
+        VNextSelectDamagesScreen selectdamagesscreen = visualScreen.clickAddServiceButton();
         selectdamagesscreen.selectAllDamagesTab();
-        VNextVisualServicesScreen visualservicesscreen = selectdamagesscreen.clickCustomDamageType(panelName);
-        visualscreen = visualservicesscreen.selectCustomService(inspdata.getPercentageServiceName());
+        VNextVisualServicesScreen visualServicesScreen = selectdamagesscreen.clickCustomDamageType(panelName);
+        visualScreen = visualServicesScreen.selectCustomService(inspectionData.getPercentageServiceName());
         BaseUtils.waitABit(1000);
-        visualscreen.clickCarImageSecondTime();
+        visualScreen.clickCarImageSecondTime();
 
-        visualscreen.clickDamageCancelEditingButton();
-        Assert.assertEquals(visualscreen.getInspectionTotalPriceValue(), inspdata.getInspectionPrice());
-        inspectionsscreen = visualscreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsscreen.getFirstInspectionPrice(), inspdata.getInspectionPrice());
-        inspectionsscreen.clickBackButton();
+        visualScreen.clickDamageCancelEditingButton();
+        Assert.assertEquals(visualScreen.getInspectionTotalPriceValue(), inspectionData.getInspectionPrice());
+        inspectionsScreen = visualScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getFirstInspectionPrice(), inspectionData.getInspectionPrice());
+        inspectionsScreen.clickBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testCreateInspectionWithNegativePrice(String rowID,
                                                       String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR2);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(inspdata.getVinNumber());
-        vehicleinfoscreen.changeScreen("Visual");
-        VNextVisualScreen visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
-        visualscreen.clickAddServiceButton();
-        visualscreen.clickDefaultDamageType(inspdata.getMoneyServiceName());
-        visualscreen.clickCarImage();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.selectCustomer(testcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
+        VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        visualScreen.clickAddServiceButton();
+        visualScreen.clickDefaultDamageType(inspectionData.getMoneyServiceName());
+        visualScreen.clickCarImage();
         BaseUtils.waitABit(1000);
-        VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
-        servicedetailsscreen.setServiceAmountValue(inspdata.getMoneyServicePrice());
-        servicedetailsscreen.clickServiceDetailsDoneButton();
-        visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker();
+        serviceDetailsScreen.setServiceAmountValue(inspectionData.getMoneyServicePrice());
+        serviceDetailsScreen.clickServiceDetailsDoneButton();
+        visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-        servicedetailsscreen = visualscreen.clickCarImageMarker();
-        servicedetailsscreen.clickServiceAmountField();
-        Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), inspdata.getMoneyServicePrice());
-        servicedetailsscreen.clickServiceDetailsDoneButton();
-        visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        serviceDetailsScreen = visualScreen.clickCarImageMarker();
+        serviceDetailsScreen.clickServiceAmountField();
+        Assert.assertEquals(serviceDetailsScreen.getServiceAmountValue(), inspectionData.getMoneyServicePrice());
+        serviceDetailsScreen.clickServiceDetailsDoneButton();
+        visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-        visualscreen.clickDamageCancelEditingButton();
-        visualscreen.cancelInspection();
-        inspectionsscreen.clickBackButton();
+        visualScreen.clickDamageCancelEditingButton();
+        visualScreen.cancelInspection();
+        inspectionsScreen.clickBackButton();
     }
 }

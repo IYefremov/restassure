@@ -105,22 +105,6 @@ public class VNextBaseScreen {
         BaseUtils.waitABit(1000);
     }
 
-    public void swipeScreensLeft(int screensnumber) {
-        for (int i = 0; i < screensnumber; i++) {
-            swipeScreenLeft();
-            if (checkHelpPopupPresence())
-                try {
-                    if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-                        tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-                } catch (NoSuchElementException e) {
-                    //do nothing
-                } catch (StaleElementReferenceException e1) {
-                    //do nothing
-                }
-            BaseUtils.waitABit(1000);
-        }
-    }
-
     public void swipeScreenRight() {
 
         if (appiumdriver instanceof JavascriptExecutor)
