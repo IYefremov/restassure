@@ -17,7 +17,7 @@
   "testVerifyWOTotalAmountChangedIfUserAddServiceToWOInDraftInvoice": [
     {
       "rowID": "testVerifyWOTotalAmountChangedIfUserAddServiceToWOInDraftInvoice.01",
-      "description": "Test Case 75787:Verify WO total amount changed if user add service to WO in draft Invoice",
+      "description": "Test Case 75787:Verify WO total amount changed if user add service to WO in draft Invoice, Test Case 75789:Verify WO details changed after edit WO in draft Invoice",
       "workOrderData" : {"workOrderType": "O_Kramar",
         "vihicleInfo": {"vinNumber": "7777777777777"
         }, "moneyService": {"serviceName": "Battery Installation", "servicePrice": "9"

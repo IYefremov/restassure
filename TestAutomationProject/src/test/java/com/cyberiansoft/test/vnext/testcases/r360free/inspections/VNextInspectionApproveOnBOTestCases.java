@@ -9,6 +9,7 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
@@ -66,7 +67,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		claiminfoscreen.setClaimNumber(insuranceCompanyData.getClaimNumber());
 		claiminfoscreen.setPolicyNumber(insuranceCompanyData.getPolicyNumber());
 		claiminfoscreen.setDeductibleValue(insuranceCompanyData.getDeductible());
-		inspinfoscreen.changeScreen("Services");
+		inspinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		//selectservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(inspectionData.getMoneyServiceName());
@@ -148,7 +149,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		claiminfoscreen.setClaimNumber(insuranceCompanyData.getClaimNumber());
 		claiminfoscreen.setPolicyNumber(insuranceCompanyData.getPolicyNumber());
 		claiminfoscreen.setDeductibleValue(insuranceCompanyData.getDeductible());
-		inspinfoscreen.changeScreen("Services");
+		inspinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		//selectservicesscreen.selectService(percservices);
 		inspservicesscreen.selectService(inspectionData.getMoneyServiceName());

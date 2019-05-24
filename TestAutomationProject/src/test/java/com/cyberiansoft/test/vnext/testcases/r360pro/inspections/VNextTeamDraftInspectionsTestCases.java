@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -50,7 +51,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.changeScreen("Services");
+        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceName());
 
@@ -105,7 +106,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleinfoscreen.changeScreen("Services");
+        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceName());
         availableServicesScreen.saveInspectionAsDraft();
@@ -165,7 +166,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleinfoscreen.changeScreen("Services");
+        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceName());
         availableServicesScreen.saveInspectionViaMenu();
