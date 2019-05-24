@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -41,6 +42,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//*[@action='show-invoices']")
     private WebElement invoiceslist;
+
+    @FindBy(xpath = "//*[@action='show-monitor']")
+    private WebElement monitor;
 
     @FindBy(xpath = "//a[@class='tile-link tile-item more-tile']")
     private WebElement morelist;
@@ -182,5 +186,10 @@ public class VNextHomeScreen extends VNextBaseScreen {
 
     public String getDefaultCustomerValue() {
         return clientmode.getText();
+    }
+
+    public void clickMonitor() {
+        WaitUtils.elementShouldBeVisible(monitor,true);
+        monitor.click();
     }
 }

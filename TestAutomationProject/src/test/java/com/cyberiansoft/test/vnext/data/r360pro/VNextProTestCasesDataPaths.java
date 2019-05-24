@@ -76,4 +76,6 @@ public class VNextProTestCasesDataPaths {
     public String getWorkOrdersListTestCasesDataPath() { return props.getProperty("workorders.list.td"); }
 
     public String getWorkOrdersTestCasesDataPath() { return props.getProperty("workorders.td"); }
+
+    public String getMonitoringBaseCaseDataPath() { return props.getProperty("monitoring.basic.flow"); }
 }

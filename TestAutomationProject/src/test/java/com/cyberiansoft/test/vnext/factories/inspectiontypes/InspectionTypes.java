@@ -6,7 +6,8 @@ public enum InspectionTypes {
     O_KRAMAR2("O_Kramar2"),
     O_KRAMAR3("O_Kramar3"),
     INSP_TYPE_APPROV_REQUIRED("Insp_type_approv_req"),
-    O_KRAMAR_NO_SHARING("O_Kramar_No_Sharing");
+    O_KRAMAR_NO_SHARING("O_Kramar_No_Sharing"),
+    AUTOMATION_MONITORING("automationMonitoring");
 
     private final String inspType;
 

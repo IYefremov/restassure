@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class WaitUtils {
-    public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible){
+    public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible) {
         FluentWait wait = new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
-                .withTimeout(Duration.ofSeconds(30))
+                .withTimeout(Duration.ofSeconds(60))
                 .pollingEvery(Duration.ofMillis(300))
                 .ignoring(WebDriverException.class)
                 .ignoring(InvalidElementStateException.class);
@@ -126,5 +126,14 @@ public class WaitUtils {
         DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 30).until(ExpectedConditions.invisibilityOfElementLocated(locator));
         DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+
+    //TODO: timeout and polling should be readed from some .prop file
+    public static FluentWait getGeneralFluentWait() {
+        return
+                new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
+                        .withTimeout(Duration.ofSeconds(30))
+                        .pollingEvery(Duration.ofMillis(300))
+                        .ignoring(WebDriverException.class);
     }
 }

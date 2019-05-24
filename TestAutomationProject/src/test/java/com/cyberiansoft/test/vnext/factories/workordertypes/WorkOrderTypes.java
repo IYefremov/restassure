@@ -8,7 +8,8 @@ public enum WorkOrderTypes {
     KRAMAR_AUTO2("Kramar_auto2"),
     O_KRAMAR_INVOICE("O_Kramar_Invoice"),
     O_KRAMAR_3_SERVICE_GROUPING("O_Kramar 3 Service grouping"),
-    ALL_AUTO_PHASES("All_auto_Phases");
+    ALL_AUTO_PHASES("All_auto_Phases"),
+    AUTOMATION_MONITORING("automationMonitoring");
 
     private final String woType;
 
@@ -20,9 +21,9 @@ public enum WorkOrderTypes {
         return woType;
     }
 
-    public WorkOrderTypes getWorkOrderType(){
-        for(WorkOrderTypes type : values()){
-            if(type.getWorkOrderTypeName().equals(woType)){
+    public WorkOrderTypes getWorkOrderType() {
+        for (WorkOrderTypes type : values()) {
+            if (type.getWorkOrderTypeName().equals(woType)) {
                 return type;
             }
         }
