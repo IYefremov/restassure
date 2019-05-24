@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
@@ -286,8 +287,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleinfoscreen.clickScreenForwardButton();
 			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleVINHistoryScreen.clickBackButton();
-			vehicleinfoscreen.swipeScreenLeft();
-			vehicleinfoscreen.swipeScreenLeft();
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 			servicesscreen.switchToAvalableServicesView();
 			servicesscreen.selectService(workOrderData.getMoneyServiceName());
@@ -341,8 +341,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleinfoscreen.clickScreenForwardButton();
 			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleVINHistoryScreen.clickBackButton();
-			vehicleinfoscreen.swipeScreenLeft();
-			vehicleinfoscreen.swipeScreenLeft();
+			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 			servicesscreen.selectService(workOrderData.getMoneyServiceName());
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();

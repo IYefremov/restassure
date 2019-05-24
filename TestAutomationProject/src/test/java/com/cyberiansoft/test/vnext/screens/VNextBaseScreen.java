@@ -128,11 +128,6 @@ public class VNextBaseScreen {
         tap(forwardBtn);
     }
 
-    public void swipeScreensRight(int screensnumber) {
-        for (int i = 0; i < screensnumber; i++)
-            swipeScreenRight();
-    }
-
     protected boolean checkHelpPopupPresence() {
         appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         boolean exists = false;

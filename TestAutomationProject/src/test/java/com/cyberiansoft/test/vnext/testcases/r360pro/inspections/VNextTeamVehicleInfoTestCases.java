@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -45,7 +46,7 @@ public class VNextTeamVehicleInfoTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertTrue(vehicleInfoScreen.isVINValidationMessageExists());
         Assert.assertEquals(vehicleInfoScreen.getVINValidationMessageBackgroundColor(), redRGBColor);
         vehicleInfoScreen.setVIN(inspectionData.getNewVinNumber());
-        vehicleInfoScreen.swipeScreenLeft();
+        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimInfoScreen.cancelInspection();
         inspectionsScreen.clickBackButton();
@@ -71,7 +72,7 @@ public class VNextTeamVehicleInfoTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertTrue(vehicleInfoScreen.isVINValidationMessageExists());
         Assert.assertEquals(vehicleInfoScreen.getVINValidationMessageBackgroundColor(), greyRGBColor);
         Assert.assertEquals(vehicleInfoScreen.getVINFieldValue(),inspectionData.getVinNumber().substring(0, inspectionData.getVinNumber().length()-1));
-        vehicleInfoScreen.swipeScreenLeft();
+        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimInfoScreen.cancelInspection();
         inspectionsScreen.clickBackButton();

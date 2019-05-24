@@ -721,7 +721,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         newcustomerscreen.clickSaveCustomerButton();
         VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleinfoscreen.setVIN(testVIN);
-        vehicleinfoscreen.swipeScreenLeft();
+        vehicleinfoscreen.changeScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimscren = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimscren.selectInsuranceCompany("Test Insurance Company");
         vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
