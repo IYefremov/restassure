@@ -428,9 +428,9 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         customersScreen.selectCustomer(testcustomer);
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
-        VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspinfoscreen.setVIN(inspectionData.getVinNumber());
-        inspinfoscreen.swipeScreenLeft();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
 
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
         //visualScreen.clickAddServiceButton();
@@ -473,9 +473,9 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         customersScreen.selectCustomer(testcustomer);
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
-        VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspinfoscreen.setVIN(inspectionData.getVinNumber());
-        inspinfoscreen.changeScreen(ScreenType.VISUAL);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
 
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
         visualScreen.clickAddServiceButton();

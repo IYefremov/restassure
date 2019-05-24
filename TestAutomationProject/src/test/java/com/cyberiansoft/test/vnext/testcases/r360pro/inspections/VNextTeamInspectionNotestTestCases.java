@@ -11,6 +11,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -368,7 +369,7 @@ public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionR
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
 		final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-		vehicleInfoScreen.swipeScreenLeft();
+		vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
 		VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 		visualScreen.clickAddServiceButton();
 		//VNextSelectDamagesScreen selectdamagesscreen = visualscreen.clickOtherServiceOption();

@@ -538,10 +538,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         customersScreen.selectCustomer(testwholesailcustomer);
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen inspinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspinfoscreen.setVIN(inspectionData.getVinNumber());
-        final String inspectionNumber = inspinfoscreen.getNewInspectionNumber();
-        inspinfoscreen.changeScreen(ScreenType.CLAIM);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claimInfoScreen.changeScreen(ScreenType.SERVICES);
@@ -577,8 +577,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         homeScreen = statusScreen.clickBackButton();
         inspectionsScreen = homeScreen.clickInspectionsMenuItem();
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber));
-        inspinfoscreen = inspectionsScreen.clickOpenInspectionToEdit(inspectionNumber);
-        inspinfoscreen.changeScreen(ScreenType.CLAIM);
+        vehicleInfoScreen = inspectionsScreen.clickOpenInspectionToEdit(inspectionNumber);
+        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
         claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         claimInfoScreen.changeScreen(ScreenType.SERVICES);

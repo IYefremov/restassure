@@ -269,26 +269,6 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
         return vehiclepage.findElement(By.xpath(".//span[@class='client-mode']")).getText();
     }
 
-    public VNextAvailableServicesScreen goToInspectionServicesScreen() {
-        BaseUtils.waitABit(1000);
-        swipeScreenLeft();
-        VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(appiumdriver);
-        claiminfoscreen.selectInsuranceCompany("Test Insurance Company");
-        claiminfoscreen.swipeScreenLeft();
-//		VNextVisualScreen visualscreen = new VNextVisualScreen(appiumdriver);
-        //	BaseUtils.waitABit(1000);
-        //	visualscreen.swipeScreenLeft();
-        //new VNextVisualScreen(appiumdriver);
-        //swipeScreenLeft();
-        //new VNextVisualScreen(appiumdriver);
-        //swipeScreenLeft();
-        //swipeScreenLeft();
-        //swipeScreenLeft();
-        //swipeScreenLeft();
-        //swipeScreenLeft();
-        return new VNextAvailableServicesScreen(appiumdriver);
-    }
-
     public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color) {
         setVIN(VIN);
         selectModelColor(color);

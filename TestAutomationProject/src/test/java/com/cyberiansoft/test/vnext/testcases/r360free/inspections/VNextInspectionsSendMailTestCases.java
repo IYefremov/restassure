@@ -8,6 +8,7 @@ import com.cyberiansoft.test.email.emaildata.EmailFolder;
 import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -106,8 +107,9 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		//insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
-		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
-		VNextAvailableServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
 		pricematrixesscreen.clickScreenBackButton();
@@ -175,8 +177,9 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		//insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
-		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
-		VNextAvailableServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
 		pricematrixesscreen.clickScreenBackButton();
@@ -244,8 +247,9 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		//insptypeslist.selectInspectionType(inspType);
 		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleinfoscreen.setVIN(vinnumber);
-		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();	
-		VNextAvailableServicesScreen servicesscreen = vehicleinfoscreen.goToInspectionServicesScreen();
+		final String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
+		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		servicesscreen.selectServices(moneyservices);
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (int i = 0; i < moneyservices.length; i++) {
