@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -98,7 +99,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
-        vehicleInfoScreen.changeScreen("Summary");
+        vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen summaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         summaryScreen.clickCreateInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
@@ -138,7 +139,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceMenuScreen.clickEditInvoiceMenuItem();
         invoiceInfoScreen.clickOnWorkOrder(woNumber);
-        vehicleInfoScreen.changeScreen("Services");
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
         availableServicesScreen.clickSaveWorkOrderMenuButton();
@@ -163,7 +164,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
-        vehicleInfoScreen.changeScreen("Summary");
+        vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen summaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrdersScreen = summaryScreen.saveWorkOrderAsDraft();
         Assert.assertEquals(workOrdersScreen.getWorkOrderStatusValue(woNumber),
@@ -171,7 +172,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
 
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
         workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        vehicleInfoScreen.changeScreen("Services");
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(workOrderData.getServiceName());
         availableServicesScreen.saveWorkOrderViaMenu();
@@ -227,7 +228,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
 
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
         workOrdersMenuScreen.clickEditWorkOrderMenuItem();
-        vehicleInfoScreen.changeScreen("Services");
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(workOrderData.getServiceName());
         availableServicesScreen.saveWorkOrderViaMenu();

@@ -10,9 +10,9 @@ public enum ScreenType {
     VEHICLE_INFO("Vehicle Info");
 
     @Getter
-    private String screenIndentificator;
+    private String screenIdentificator;
 
-    ScreenType(String screenIndentificator) {
-        this.screenIndentificator = screenIndentificator;
+    ScreenType(String screenIdentificator) {
+        this.screenIdentificator = screenIdentificator;
     }
 }

@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleVINHistoryScreen;
@@ -43,14 +44,14 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.clickScreenForwardButton();
 		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleVINHistoryScreen.clickBackButton();
-		vehicleinfoscreen.changeScreen("Services");
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		servicesscreen.selectServices(workOrderData.getServicesList());
 		workordersscreen = servicesscreen.saveWorkOrderViaMenu();
 		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
 		VNextWorkOrdersMenuScreen menuscreen = workordersscreen.clickOnWorkOrderByNumber(wonumber);
 		vehicleinfoscreen = menuscreen.clickEditWorkOrderMenuItem();
-		vehicleinfoscreen.changeScreen("Services");
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
 		for (ServiceData serviceData : workOrderData.getServicesList())

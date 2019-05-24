@@ -146,14 +146,10 @@ public class VNextBaseScreen {
     }
 
     public void changeScreen(ScreenType screen) {
-        changeScreen(screen.getScreenIndentificator());
-    }
-
-    public void changeScreen(String screenName) {
         clickScreenTitleCaption();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
-        tap(changescrenpopover.findElement(By.xpath(".//span[text()='" + screenName + "']")));
+        tap(changescrenpopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
     }
 
     public boolean isScreenPresentInChangeScreenPopoverList(String screenName) {

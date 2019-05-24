@@ -475,7 +475,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         vehicleInfoScreen.setMilage(inspectionData.getVehicleInfo().getMileage());
         vehicleInfoScreen.setStockNo(inspectionData.getVehicleInfo().getStockNumber());
         vehicleInfoScreen.setRoNo(inspectionData.getVehicleInfo().getRoNumber());
-        vehicleInfoScreen.changeScreen("Claim");
+        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claimInfoScreen.saveInspectionViaMenu();
@@ -492,7 +492,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertEquals(vehicleInfoScreen.getMilage(), inspectionData.getVehicleInfo().getMileage());
         Assert.assertEquals(vehicleInfoScreen.getStockNo(), inspectionData.getVehicleInfo().getStockNumber());
         Assert.assertEquals(vehicleInfoScreen.getRoNo(), inspectionData.getVehicleInfo().getRoNumber());
-        vehicleInfoScreen.changeScreen("Claim");
+        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
         claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(claimInfoScreen.getInsuranceCompany(), inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claimInfoScreen.cancelInspection();
@@ -737,12 +737,12 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
-        vehicleInfoScreen.changeScreen("Visual");
+        vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
         visualScreen.changeScreen(ScreenType.SERVICES);;
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceName());
-        availableServicesScreen.changeScreen("Claim");
+        availableServicesScreen.changeScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimInfoScreen.clickScreenForwardButton();
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());

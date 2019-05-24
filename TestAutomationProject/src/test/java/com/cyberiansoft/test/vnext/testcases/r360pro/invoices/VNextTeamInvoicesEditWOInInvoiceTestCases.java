@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -117,6 +118,13 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestCaseTeamE
 
         invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(invoiceInfoScreen.getInvoiceTotalAmount(), invoiceData.getInvoiceData().getInvoiceTotal());
+        invoiceInfoScreen.clickOnWorkOrder(workOrderNumber);
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        Assert.assertTrue(selectedServicesScreen.isServiceSelected(invoiceData.getWorkOrderData().getMoneyServiceName()));
+        Assert.assertTrue(selectedServicesScreen.isServiceSelected(invoiceData.getWorkOrderData().getServiceName()));
+        selectedServicesScreen.clickSaveWorkOrderMenuButton();
         invoiceInfoScreen.saveInvoiceAsFinal();
         invoicesScreen.clickBackButton();
     }

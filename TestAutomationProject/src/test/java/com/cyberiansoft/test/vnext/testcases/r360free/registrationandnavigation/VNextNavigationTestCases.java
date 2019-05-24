@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
@@ -61,7 +62,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
 		final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
 
-		vehicleinfoscreen.changeScreen("Services");
+		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (ServiceData service: inspectionData.getServicesList())
 			inspservicesscreen.selectService(service.getServiceName());
@@ -73,7 +74,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		for (ServiceData service: inspectionData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
 
-		inspservicesscreen.changeScreen("Vehicle Info");
+		inspservicesscreen.changeScreen(ScreenType.VEHICLE_INFO);
 		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), inspectionData.getVinNumber());
 		vehicleinfoscreen.clickMenuButton();
@@ -83,10 +84,10 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		AppiumUtils.clickHardwareBackButton();
 		vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(vehicleinfoscreen.getVINFieldValue(), inspectionData.getVinNumber());
-		vehicleinfoscreen.changeScreen("Claim");
+		vehicleinfoscreen.changeScreen(ScreenType.CLAIM);
 		claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-		claiminfoscreen.changeScreen("Services");
+		claiminfoscreen.changeScreen(ScreenType.SERVICES);
 		inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 		for (ServiceData service: inspectionData.getServicesList())
