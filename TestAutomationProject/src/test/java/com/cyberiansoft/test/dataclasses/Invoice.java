@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Invoice {
 
+    @JsonProperty("inspectionData")
+    InspectionData inspectionData;
+
     @JsonProperty("workOrderData")
     WorkOrderData workOrderData;
 
@@ -20,6 +23,8 @@ public class Invoice {
 
     @JsonProperty("newPoNumber")
     String newPoNumber;
+
+    public InspectionData getInspectionData() { return inspectionData; }
 
     public WorkOrderData getWorkOrderData() { return workOrderData; }
 

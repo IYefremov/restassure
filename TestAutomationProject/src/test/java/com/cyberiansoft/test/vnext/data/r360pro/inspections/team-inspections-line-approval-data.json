@@ -135,7 +135,7 @@
     {
       "rowID": "testVerifyUserCanApproveSeveralInspectionsWithOneCustomersWithLineApproveAndWithoutLineApprove.01",
       "description": "Test Case 73111:Verify user can approve several inspections with one customers with line approve and without line approve",
-      "inspectionDatas" : [{"inspType": "O_KRAMAR",
+      "inspectionsData" : [{"inspType": "O_KRAMAR",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation"
@@ -157,7 +157,7 @@
     {
       "rowID": "testVerifyUserCanSelectServiceForApproveOnMultiLineApproveScreenIfLineApprovalEqualsONForThisInspection.01",
       "description": "Test Case 73113:Verify user can select service for approve on multi line approve screen if line approval = ON for this Inspection",
-      "inspectionDatas" : [{"inspType": "O_Kramar3",
+      "inspectionsData" : [{"inspType": "O_Kramar3",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation", "servicePrice": "1"
@@ -179,7 +179,7 @@
     {
       "rowID": "testVerifyUserCanDeleteInspectionFromLineApproveList.01",
       "description": "Test Case 73116:Verify user can delete Inspection from line approve list",
-      "inspectionDatas" : [{"inspType": "O_Kramar3",
+      "inspectionsData" : [{"inspType": "O_Kramar3",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation", "servicePrice": "1"
@@ -201,7 +201,7 @@
     {
       "rowID": "testVerifyTotalApprovalAmountIncludeOnlySUMOfApprovedService.01",
       "description": "Test Case 73117:Verify Total approval amount include only SUM of approved service",
-      "inspectionDatas" : [{"inspType": "O_Kramar3",
+      "inspectionsData" : [{"inspType": "O_Kramar3",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
@@ -225,7 +225,7 @@
     {
       "rowID": "testVerifyUserNeedToSelectReasonForAllDeclinedInspection.01",
       "description": "Test Case 73118:Verify user need to select reason for all declined Inspection",
-      "inspectionDatas" : [{"inspType": "O_Kramar3",
+      "inspectionsData" : [{"inspType": "O_Kramar3",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation"
@@ -251,7 +251,7 @@
     {
       "rowID": "testVerifyInspectionStatusUpdatedAfterApproveDecline.01",
       "description": "Test Case 74190:Verify Inspection Status updated after approve/decline",
-      "inspectionDatas" : [{"inspType": "O_Kramar3",
+      "inspectionsData" : [{"inspType": "O_Kramar3",
         "vihicleInfo": {"vinNumber": "7777777777777"
         },
         "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
@@ -278,7 +278,7 @@
     {
       "rowID": "testVerifyUserCantApproveInspectionsWithDifferentCustomers.01",
       "description": "Test Case 74191:Verify user can't aprrove Inspections with different customers",
-      "inspectionDatas" : [{"inspType": "O_Kramar3",
+      "inspectionsData" : [{"inspType": "O_Kramar3",
         "retailCustomer": {"firstName": "Retail", "lastName" : "Automation"
         },
         "vihicleInfo": {"vinNumber": "7777777777777"

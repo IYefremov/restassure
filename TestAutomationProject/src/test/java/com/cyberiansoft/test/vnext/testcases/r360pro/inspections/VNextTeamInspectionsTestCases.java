@@ -55,7 +55,7 @@ import java.util.List;
 public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegistration {
 
     @BeforeClass(description = "Team Inspections Test Cases")
-    public void beforeClass() throws Exception {
+    public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInspectionsTestCasesDataPath();
     }
 
@@ -74,11 +74,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
     public void testVerifyUserCanCreateInvoiceFromInspections(String rowID,
                                                               String description, JSONObject testData) {
 
-        Inspection inspectionData = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
         Invoice invoiceData = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 
         HomeScreenSteps.openCreateNewInspection();
-        InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData.getInspectionData());
+        InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, invoiceData.getInspectionData());
         final String inspectionNumber = InspectionSteps.saveInspection();
         
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -842,7 +841,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
             markerCount++;
         }
 
-        Assert.assertEquals(visualScreen.getImageMarkers().size(), inspectionData.getDamagesData().size());
+        Assert.assertEquals(visualScreen.getNumberOfImageMarkers(), inspectionData.getDamagesData().size());
         visualScreen.changeScreen(ScreenType.SERVICES);;
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.clickMenuButton();

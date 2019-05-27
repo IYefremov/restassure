@@ -6,17 +6,10 @@ import java.util.List;
 
 public class Inspection {
 
-    @JsonProperty("inspectionData")
-    InspectionData inspectionData;
+    @JsonProperty("inspectionsData")
+    List<InspectionData> inspectionsData;
 
-    @JsonProperty("inspectionDatas")
-    List<InspectionData> inspectionDatas;
-
-    public InspectionData getInspectionData() {
-        return inspectionData;
-    }
-
-    public List<InspectionData> getInspectionDatasList() {
-        return inspectionDatas;
+    public List<InspectionData> getInspectionsData() {
+        return inspectionsData;
     }
 }

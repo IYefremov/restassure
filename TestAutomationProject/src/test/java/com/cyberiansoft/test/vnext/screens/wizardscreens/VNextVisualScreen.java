@@ -71,7 +71,11 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 	}
 	
 	public void clickCarImage() {
-		tap(carimage);
+		int servicesAdded = getNumberOfImageMarkers();
+		if (servicesAdded > 0) {
+			clickCarImageSecondTime();
+		} else
+			tap(carimage);
 	}
 	
 	public void clickCarImageSecondTime() {
@@ -108,8 +112,8 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 	
-	public VNextServiceDetailsScreen clickCarImageMarker(WebElement markeritem) {
-		tap(markeritem);
+	public VNextServiceDetailsScreen clickCarImageMarker(int markerItemIndex) {
+		tap(appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img")).get(markerItemIndex));
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 	
@@ -119,8 +123,8 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 		tap(visualscreen.findElement(By.xpath(".//span[@class='icon cancel-editing-button']")));
 	}
 	
-	public List<MobileElement> getImageMarkers() {
-		return appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img"));
+	public int getNumberOfImageMarkers() {
+		return appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img")).size();
 	}
 	
 	public VNextVisualScreen clickDefaultDamageType(String damagetype) {

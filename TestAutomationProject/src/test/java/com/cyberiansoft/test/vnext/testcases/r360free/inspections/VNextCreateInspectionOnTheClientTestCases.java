@@ -33,8 +33,6 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
-
-    final RetailCustomer testcustomer = new RetailCustomer("Retail", "Automation");
     final String VIN = "19UUA66278A050105";
 
     String inspnumbertc47229 = "";
@@ -44,7 +42,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(testName = "Test Case 46975:vNext: Check Approved ammount is calculated correctly for Approved inspection",
             description = "Check Approved ammount is calculated correctly for Approved inspection")
-    public void testCheckApprovedAmmountIsCalculatedCorrectlyForApprovedInspection() throws Exception {
+    public void testCheckApprovedAmountIsCalculatedCorrectlyForApprovedInspection() throws Exception {
 
         final String _make = "Acura";
         final String _model = "TL";
@@ -61,43 +59,43 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         final String additionalservice = "Aluminum Upcharge";
         final String insppriceexp = "267.81";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(VIN);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.selectCustomer(testcustomer);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(VIN);
         BaseUtils.waitABit(1000);
-        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
-        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
-        Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
-        inspnumbertc46975 = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspservicesscreen.selectService(percservices);
-        inspservicesscreen.selectService(moneyservices);
-        VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
-        VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
-        vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
-        vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
-        vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
-        vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-        vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
-        VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), _make);
+        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), _model);
+        Assert.assertEquals(vehicleInfoScreen.getYear(), _year);
+        inspnumbertc46975 = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen.selectService(percservices);
+        availableServicesScreen.selectService(moneyservices);
+        VNextPriceMatrixesScreen priceMatrixessScreen = availableServicesScreen.openMatrixServiceDetails(matrixservice);
+        VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixessScreen.selectHailMatrix(matrixsubservice);
+        VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclepartname);
+        vehiclePartInfoScreen.selectVehiclePartSize(vehiclepartsize);
+        vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclepartseverity);
+        vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalservice);
+        vehiclePartInfoScreen.clickSaveVehiclePartInfo();
+        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), matrixsubservice);
 
         selectedServicesScreen.setServiceAmountValue(moneyservices, moneyserviceprice);
         selectedServicesScreen.setServiceQuantityValue(moneyservices, moneyservicequant);
 
-        inspectionsscreen = inspservicesscreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumbertc46975), PricesCalculations.getPriceRepresentation(insppriceexp));
-        VNextEmailScreen emailscreen = inspectionsscreen.clickOnInspectionToEmail(inspnumbertc46975);
-        if (!emailscreen.getToEmailFieldValue().equals(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail()))
-            emailscreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
+        inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspnumbertc46975), PricesCalculations.getPriceRepresentation(insppriceexp));
+        VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspnumbertc46975);
+        if (!emailScreen.getToEmailFieldValue().equals(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail()))
+            emailScreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
 
-        emailscreen.sendEmail();
+        emailScreen.sendEmail();
 
         final String inspectionreportfilenname = inspnumbertc46975 + ".pdf";
         EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
@@ -106,12 +104,12 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
                 .withSubjectAndAttachmentFileName(inspnumbertc46975, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
         Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumbertc46975);
 
-        File pdfdoc = new File(inspectionreportfilenname);
-        String pdftext = PDFReader.getPDFText(pdfdoc);
-        Assert.assertTrue(pdftext.contains(VIN));
-        Assert.assertTrue(pdftext.contains(percservices));
-        Assert.assertTrue(pdftext.contains(moneyservices));
-        Assert.assertTrue(pdftext.contains(insppriceexp));
+        File pdfDoc = new File(inspectionreportfilenname);
+        String pdfText = PDFReader.getPDFText(pdfDoc);
+        Assert.assertTrue(pdfText.contains(VIN));
+        Assert.assertTrue(pdfText.contains(percservices));
+        Assert.assertTrue(pdfText.contains(moneyservices));
+        Assert.assertTrue(pdfText.contains(insppriceexp));
     }
 
     @Test(testName = "Test Case 47229:vNext mobile: Create Inspection which contains breakage service with big quantity",
@@ -130,43 +128,43 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         final String vehiclepartseverity = "Light 6 to 15";
         final String additionalservice = "Aluminum Upcharge";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleInfoScreen.setVIN(VIN);
         inspnumbertc47229 = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
-        VNextVisualScreen visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
-        visualscreen.clickAddServiceButton();
-        visualscreen.clickDefaultDamageType(selectdamage);
-        visualscreen.clickCarImage();
+        VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        visualScreen.clickAddServiceButton();
+        visualScreen.clickDefaultDamageType(selectdamage);
+        visualScreen.clickCarImage();
         BaseUtils.waitABit(1000);
-        VNextServiceDetailsScreen servicedetailsscreen = visualscreen.clickCarImageMarker();
+        VNextServiceDetailsScreen servicedetailsscreen = visualScreen.clickCarImageMarker();
         servicedetailsscreen.setServiceAmountValue(amountvalue);
         Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), amountvalue);
         servicedetailsscreen.setServiceQuantityValue("1");
         servicedetailsscreen.clickServiceDetailsDoneButton();
-        visualscreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
-        visualscreen.changeScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
-        VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
-        vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
-        vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
-        vehiclepartinfoscreen.selectVehiclePartAdditionalService(additionalservice);
-        vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-        vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
-        VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+        visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
+        visualScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextPriceMatrixesScreen priceMatrixessScreen = availableServicesScreen.openMatrixServiceDetails(matrixservice);
+        VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixessScreen.selectHailMatrix(pricematrix);
+        VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclepartname);
+        vehiclePartInfoScreen.selectVehiclePartSize(vehiclepartsize);
+        vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclepartseverity);
+        vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalservice);
+        vehiclePartInfoScreen.clickSaveVehiclePartInfo();
+        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixservice));
         Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), pricematrix);
 
-        inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumbertc47229), finalprice);
-        homescreen = inspectionsscreen.clickBackButton();
+        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspnumbertc47229), finalprice);
+        homeScreen = inspectionsScreen.clickBackButton();
     }
 
     @Test(testName = "Test Case 47231:vNext mobile: Create Inspection with full populated customer info",
@@ -177,19 +175,19 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         testcustomer.setMailAddress("osmak.oksana+408222@gmail.com");
         testcustomer.setCustomerPhone("978385064");
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-        newcustomerscreen.createNewCustomer(testcustomer);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+        newCustomerScreen.createNewCustomer(testcustomer);
 
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleInfoScreen.setVIN(VIN);
-        final String inspectionnumber = vehicleInfoScreen.getNewInspectionNumber();
+        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
 
-        inspectionsscreen = vehicleInfoScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspectionnumber), "$0.00");
-        homescreen = inspectionsscreen.clickBackButton();
+        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), "$0.00");
+        homeScreen = inspectionsScreen.clickBackButton();
     }
 
     @Test(testName = "Test Case 47233:vNext mobile: Create Inspection with customer with First name only",
@@ -201,19 +199,19 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         testcustomer.setMailAddress("osmak.oksana+408222@gmail.com");
         testcustomer.setCustomerPhone("978385064");
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-        newcustomerscreen.createNewCustomer(testcustomer);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+        newCustomerScreen.createNewCustomer(testcustomer);
 
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleInfoScreen.setVIN(VIN);
         inspnumbertc47233 = vehicleInfoScreen.getNewInspectionNumber();
 
-        inspectionsscreen = vehicleInfoScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumbertc47233), "$0.00");
-        homescreen = inspectionsscreen.clickBackButton();
+        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspnumbertc47233), "$0.00");
+        homeScreen = inspectionsScreen.clickBackButton();
     }
 
     @Test(testName = "Test Case 52818:vNext mobile: create and email Inspection with two matrix panel",
@@ -232,44 +230,44 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         final String vehiclepartseverity = "Light 6 to 15";
         final String finalprice = "$660.00";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleinfoscreen.setVIN(VIN);
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        customersScreen.selectCustomer(testcustomer);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen.setVIN(VIN);
         BaseUtils.waitABit(1000);
-        Assert.assertEquals(vehicleinfoscreen.getMakeInfo(), _make);
-        Assert.assertEquals(vehicleinfoscreen.getModelInfo(), _model);
-        Assert.assertEquals(vehicleinfoscreen.getYear(), _year);
-        String inspnumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextPriceMatrixesScreen pricematrixesscreen = inspservicesscreen.openMatrixServiceDetails(matrixservice);
+        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), _make);
+        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), _model);
+        Assert.assertEquals(vehicleInfoScreen.getYear(), _year);
+        String inspnumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextPriceMatrixesScreen priceMatrixessScreen = availableServicesScreen.openMatrixServiceDetails(matrixservice);
 
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(matrixsubservice);
-        for (String vehiclepartname : vehiclepartsname) {
-            VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
-            vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
-            vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverity);
-            vehiclepartinfoscreen.selectAllAvailableAdditionalServices();
-            vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-            vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixessScreen.selectHailMatrix(matrixsubservice);
+        for (String vehiclePartName : vehiclepartsname) {
+            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartName);
+            vehiclePartInfoScreen.selectVehiclePartSize(vehiclepartsize);
+            vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclepartseverity);
+            vehiclePartInfoScreen.selectAllAvailableAdditionalServices();
+            vehiclePartInfoScreen.clickSaveVehiclePartInfo();
+            vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         }
-        inspservicesscreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
-        VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixservice));
 
-        inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsscreen.getInspectionPriceValue(inspnumber), finalprice);
-        VNextEmailScreen emailscreen = inspectionsscreen.clickOnInspectionToEmail(inspnumber);
-        if (!emailscreen.getToEmailFieldValue().equals(usermail))
-            emailscreen.sentToEmailAddress(usermail);
+        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspnumber), finalprice);
+        VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspnumber);
+        if (!emailScreen.getToEmailFieldValue().equals(usermail))
+            emailScreen.sentToEmailAddress(usermail);
 
-        emailscreen.sendEmail();
-        inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        homescreen = inspectionsscreen.clickBackButton();
+        emailScreen.sendEmail();
+        inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        homeScreen = inspectionsScreen.clickBackButton();
     }
 
     @Test(testName = "Test Case 40794:vNext: verify displaying inspection which contains breakage service with big quantity",
@@ -280,23 +278,23 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(bourl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+        VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
                 VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(username, userpsw);
-        VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+        loginPage.userLogin(username, userpsw);
+        VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
-        VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
-        inspectionspage.selectInspectionInTheList(inspnumbertc47229);
-        Assert.assertEquals(inspectionspage.getSelectedInspectionCustomerName(), testcustomer);
-        Assert.assertTrue(inspectionspage.isServicePresentForSelectedInspection("Dent Repair"));
-        Assert.assertTrue(inspectionspage.isServicePresentForSelectedInspection("Hail Dent Repair"));
-        Assert.assertTrue(inspectionspage.isImageLegendContainsBreakageIcon("Hail Damage"));
-        Assert.assertTrue(inspectionspage.isImageLegendContainsBreakageIcon("Dent"));
+        VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
+        inspectionsWebPage.selectInspectionInTheList(inspnumbertc47229);
+        Assert.assertEquals(inspectionsWebPage.getSelectedInspectionCustomerName(), testcustomer);
+        Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection("Dent Repair"));
+        Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection("Hail Dent Repair"));
+        Assert.assertTrue(inspectionsWebPage.isImageLegendContainsBreakageIcon("Hail Damage"));
+        Assert.assertTrue(inspectionsWebPage.isImageLegendContainsBreakageIcon("Dent"));
     }
 
     @Test(testName = "Test Case 47236:vNext: verify displaying approved amount for Inspection",
             description = "Verify displaying approved amount for Inspection",
-            dependsOnMethods = {"testCheckApprovedAmmountIsCalculatedCorrectlyForApprovedInspection"})
+            dependsOnMethods = {"testCheckApprovedAmountIsCalculatedCorrectlyForApprovedInspection"})
     @Parameters({"backofficecapi.url", "usercapi.name", "usercapi.psw"})
     public void testVerifyDisplayingApprovedAmountForInspection(String bourl, String username, String userpsw) {
 
@@ -304,18 +302,18 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(bourl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+        VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
                 VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(username, userpsw);
-        VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+        loginPage.userLogin(username, userpsw);
+        VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
-        VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
-        inspectionspage.selectInspectionInTheList(inspnumbertc46975);
-        Assert.assertEquals(inspectionspage.getSelectedInspectionTotalAmauntValue(), insppriceexp);
+        VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
+        inspectionsWebPage.selectInspectionInTheList(inspnumbertc46975);
+        Assert.assertEquals(inspectionsWebPage.getSelectedInspectionTotalAmauntValue(), insppriceexp);
         String mainWindowHandle = webdriver.getWindowHandle();
 
-        VNextBOInspectionInfoWebPage inspectioninfopage = inspectionspage.clickSelectedInspectionPrintIcon();
-        inspectioninfopage.closeNewTab(mainWindowHandle);
+        VNextBOInspectionInfoWebPage inspectionInfoWebPage = inspectionsWebPage.clickSelectedInspectionPrintIcon();
+        inspectionInfoWebPage.closeNewTab(mainWindowHandle);
     }
 
     @Test(testName = "Test Case 47237:vNext: verify displaying Inspection with customer with First name only",
@@ -327,14 +325,14 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(bourl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+        VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
                 VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(username, userpsw);
-        VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
+        loginPage.userLogin(username, userpsw);
+        VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
-        VNextBOInspectionsWebPage inspectionspage = leftmenu.selectInspectionsMenu();
-        inspectionspage.selectInspectionInTheList(inspnumbertc47233);
-        Assert.assertEquals(inspectionspage.getSelectedInspectionCustomerName(), firstname);
+        VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
+        inspectionsWebPage.selectInspectionInTheList(inspnumbertc47233);
+        Assert.assertEquals(inspectionsWebPage.getSelectedInspectionCustomerName(), firstname);
     }
 
 }
