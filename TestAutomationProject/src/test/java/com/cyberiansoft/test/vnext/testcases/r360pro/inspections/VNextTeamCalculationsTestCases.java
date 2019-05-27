@@ -437,11 +437,10 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         visualScreen.selectDefaultDamage(selectdamage);
         visualScreen.clickCarImageACoupleTimes(moneyServices.size());
         BaseUtils.waitABit(1000);
-        int i = 0;
+        int markerIndex = 0;
 
         for (ServiceData moneyService : moneyServices) {
-            List<MobileElement> damagemarkers =  visualScreen.getImageMarkers();
-            VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker(damagemarkers.get(i));
+            VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker(markerIndex);
             serviceDetailsScreen.setServiceAmountValue(moneyService.getServicePrice());
             serviceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             VNextQuestionsScreen questionsScreen = serviceDetailsScreen.clickServiceQuestionSection("Test Section");
@@ -451,7 +450,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
             serviceDetailsScreen.clickServiceDetailsDoneButton();
             visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
             BaseUtils.waitABit(1000);
-            i++;
+            markerIndex++;
         }
         visualScreen.clickDamageCancelEditingButton();
         Assert.assertEquals(visualScreen.getInspectionTotalPriceValue(), inspectionData.getInspectionPrice());

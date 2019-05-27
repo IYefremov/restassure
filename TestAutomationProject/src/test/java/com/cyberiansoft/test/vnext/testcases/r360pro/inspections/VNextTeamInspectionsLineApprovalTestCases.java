@@ -420,7 +420,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 																 String description, JSONObject testData) {
 
 		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+		List<InspectionData> inspectionsData = inspection.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -463,7 +463,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 																											   String description, JSONObject testData) {
 
 		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+		List<InspectionData> inspectionsData = inspection.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -513,7 +513,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 																	 String description, JSONObject testData) {
 
 		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+		List<InspectionData> inspectionsData = inspection.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -560,7 +560,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 																														String description, JSONObject testData) {
 
 		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+		List<InspectionData> inspectionsData = inspection.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -618,7 +618,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 																			 String description, JSONObject testData) {
 
 		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+		List<InspectionData> inspectionsData = inspection.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -674,7 +674,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 																			 String description, JSONObject testData) {
 
 		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+		List<InspectionData> inspectionsData = inspection.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -738,7 +738,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 																	 String description, JSONObject testData) {
 
 		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionDatasList();
+		List<InspectionData> inspectionsData = inspection.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();

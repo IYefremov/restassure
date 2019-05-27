@@ -53,6 +53,8 @@ public class VNextProTestCasesDataPaths {
 
     public String getInspectionsTestCasesDataPath() { return props.getProperty("inspections.td"); }
 
+    public String getInspectionsServicesTestCasesDataPath() { return props.getProperty("inspections.services.td"); }
+
     public String getLaborServiceTestCasesDataPath() { return props.getProperty("labor.service.td"); }
 
     public String getSupplementsTestCasesDataPath() { return props.getProperty("supplements.td"); }
