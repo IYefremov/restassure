@@ -159,10 +159,10 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspnumber) {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
         wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")));
         try {
-            wait = new WebDriverWait(appiumdriver, 30);
+            wait = new WebDriverWait(appiumdriver, 60);
             wait.until(ExpectedConditions.elementToBeClickable(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspnumber + "']")))).click();
         } catch (WebDriverException e) {
             BaseUtils.waitABit(500);

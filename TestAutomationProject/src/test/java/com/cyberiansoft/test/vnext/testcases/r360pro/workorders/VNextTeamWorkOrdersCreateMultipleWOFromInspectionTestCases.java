@@ -18,7 +18,6 @@ import java.util.List;
 
 public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends BaseTestCaseTeamEditionRegistration {
 
-
     @BeforeClass(description="Team Work Orders Create Multiple WO From Inspection Test Cases")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getCreateMultipleWOFromInspectionTestCasesDataPath();

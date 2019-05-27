@@ -1,12 +1,16 @@
 package com.cyberiansoft.test.vnext.dto;
 
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@Builder
+@AllArgsConstructor
 public class RepairOrderDto {
+    @JsonProperty("phaseName")
     private String phaseName;
+    @JsonProperty("vin")
     private String vin;
+    @JsonProperty("completePercentage")
     private String completePercentage;
 }

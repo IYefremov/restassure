@@ -1,9 +1,24 @@
 {
-
   "userCanCompleteBasicROFlow": [
     {
       "rowID": "userCanCompleteBasicROFlow.01",
-      "description": "TC 00001, TC00002"
+      "description": "TC 00001, TC00002",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "services": [
+        {
+          "serviceName": "Expenses_money (AM)"
+        }
+      ],
+      "monitoring": {
+        "location": "automationMonitoring",
+        "repairOrderData": {
+          "phaseName": "Not Started",
+          "vin": "777777",
+          "completePercentage": "0%"
+        }
+      }
     }
   ]
 }

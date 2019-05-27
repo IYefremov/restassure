@@ -49,10 +49,6 @@ public class RepairOrderListElement implements IWebElement {
 
     public RepairOrderDto getRepairOrderDto() {
         WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderIdLocator)), true);
-        return RepairOrderDto.builder()
-                .completePercentage(getStatusValue())
-                .vin(getVin())
-                .phaseName(getPhase())
-                .build();
+        return new RepairOrderDto(getPhase(), getVin(), getStatusValue());
     }
 }

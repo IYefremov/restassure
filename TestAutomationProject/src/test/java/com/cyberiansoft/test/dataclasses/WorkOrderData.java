@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -47,6 +48,10 @@ public class WorkOrderData {
 
     @JsonProperty("inspectionData")
     InspectionData inspectionData;
+
+    @Getter
+    @JsonProperty("monitoring")
+    Monitoring monitoring;
 
     public String getWorkOrderType() {
         return workOrderType;
