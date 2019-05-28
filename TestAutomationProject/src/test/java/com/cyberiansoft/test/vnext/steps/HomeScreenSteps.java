@@ -7,8 +7,8 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextHelpingScreen;
 public class HomeScreenSteps {
     public static void openCreateNewInspection() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-
         HomeScreenSteps.openInspections();
+        inspectionsScreen.switchToMyInspectionsView();
         inspectionsScreen.clickAddInspectionButton();
     }
 

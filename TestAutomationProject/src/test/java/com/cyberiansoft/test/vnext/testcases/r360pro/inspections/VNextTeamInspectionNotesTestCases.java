@@ -32,11 +32,11 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-public class VNextTeamInspectionNotestTestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRegistration {
 
 	final private String quicknote = "Test Quick Note 1";
 
-	@BeforeClass(description="Team Inspection Notest Test Cases")
+	@BeforeClass(description="Team Inspection Notes Test Cases")
 	public void beforeClass() {
 		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInspectionNotesTestCasesDataPath();
 	}

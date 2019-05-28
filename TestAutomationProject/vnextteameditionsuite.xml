@@ -14,11 +14,12 @@
         <classes>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamCustomersTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionNotestTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionNotesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextApproveTeamInspectionsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamClaimInfoScreenTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamArchiveInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsServicesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamSupplementsTestCases"/>

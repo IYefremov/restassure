@@ -10,6 +10,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.offset.PointOption;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,10 +20,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+@Getter
 public class VNextVisualScreen extends VNextBaseWizardScreen {
 	
 	@FindBy(xpath="//div[contains(@data-page, 'visual')]")
-	private WebElement visualscreen;
+	private WebElement rootElement;
 	
 	@FindBy(xpath="//div[@class='car-image-wrapper']/img")
 	private WebElement carimage;
@@ -52,6 +54,9 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 		
 		
+	}
+
+	public VNextVisualScreen() {
 	}
 
 	public VNextSelectDamagesScreen clickAddServiceButton() {
@@ -120,7 +125,7 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 	public void clickDamageCancelEditingButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='icon cancel-editing-button']")));
-		tap(visualscreen.findElement(By.xpath(".//span[@class='icon cancel-editing-button']")));
+		tap(rootElement.findElement(By.xpath(".//span[@class='icon cancel-editing-button']")));
 	}
 	
 	public int getNumberOfImageMarkers() {

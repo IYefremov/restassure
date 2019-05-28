@@ -27,6 +27,9 @@ public class VNextInformationDialog extends VNextBaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
+    public VNextInformationDialog() {
+    }
+
     public String getInformationDialogMessage() {
         BaseUtils.waitABit(300);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
