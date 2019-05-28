@@ -8,6 +8,37 @@
       },
       "damagesData" : [{"damageGroupName" : "PDR"}, {"damageGroupName" : "Wheel Repair"}]
     }
+  ],
+
+  "testAddSeveralServicesFromAllListOnVisualsScreen": [
+    {
+      "rowID": "testAddSeveralServicesFromAllListOnVisualsScreen.01",
+      "description": "Test Case 47438:vNext - Add several services from 'All' list on Visuals screen",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "damagesData" : [{"damageGroupName" : "PDR"}, {"damageGroupName" : "Wheel Repair"}]
+    }
+  ],
+
+  "testAddSeveralServicesOnVisualsScreenSwitchingBetweenDefaultAndAllMode": [
+    {
+      "rowID": "testAddSeveralServicesOnVisualsScreenSwitchingBetweenDefaultAndAllMode.01",
+      "description": "Test Case 47439:vNext - Add services on Visuals sceeen switching between 'Defaiult' and 'All' mode",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "damagesData" : [{"damageGroupName" : "PDR"}, {"damageGroupName" : "Wheel Repair", "moneyService" : {"serviceName" : "Wheel repair"}}]
+    }
+  ],
+
+  "testEditServiceOnVisualScreenAfterServiceWasAdded": [
+    {
+      "rowID": "testEditServiceOnVisualScreenAfterServiceWasAdded.01",
+      "description": "Test Case 47441:vNext - Edit service on Visual screen after service was added",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "damageData" : {"damageGroupName" : "Wheel Repair", "moneyService" : {"serviceName" : "Wheel repair",
+      "servicePrice" : "$99.99"}}
+    }
   ]
 
 }

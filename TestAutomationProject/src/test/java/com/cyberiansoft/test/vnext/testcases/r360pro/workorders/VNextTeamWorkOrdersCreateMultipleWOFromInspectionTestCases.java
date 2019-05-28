@@ -34,7 +34,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
 
         HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
-        InspectionSteps.openServiceScreen();
+        WizardScreenSteps.navigateToServicesScreen();
         AvailableServicesScreenSteps.selectServices(workOrderData.getInspectionData().getServicesList());
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);

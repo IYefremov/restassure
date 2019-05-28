@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+@Getter
 public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//span[@action='save']")
@@ -23,13 +25,16 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	private WebElement notesbutton;
 	
 	@FindBy(xpath="//div[@data-page='details']")
-	private WebElement servicedetailssscreen;
+	private WebElement rootElement;
 	
 	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(servicedetailssscreen));
+		wait.until(ExpectedConditions.visibilityOf(rootElement));
+	}
+
+	public VNextServiceDetailsScreen() {
 	}
 	
 	public VNextNotesScreen clickServiceNotesOption() {
@@ -50,7 +55,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickDeleteServiceIcon() {
-		tap(servicedetailssscreen.findElement(By.xpath(".//i[@action='remove']")));;
+		tap(rootElement.findElement(By.xpath(".//i[@action='remove']")));;
 	}
 	
 	public VNextAvailableServicesScreen deleteService() {
@@ -64,23 +69,23 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	public void setServiceAmountValue(String amount) {
 		clickServiceAmountField();	
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
-		keyboard.setFieldValue(servicedetailssscreen.findElement(By.id("serviceDetailsPrice")).getAttribute("value"), amount);
+		keyboard.setFieldValue(rootElement.findElement(By.id("serviceDetailsPrice")).getAttribute("value"), amount);
 	}
 	
 	public String getServiceAmountValue() {
-		return servicedetailssscreen.findElement(By.id("serviceDetailsPrice")).getAttribute("value");
+		return rootElement.findElement(By.id("serviceDetailsPrice")).getAttribute("value");
 	}
 	
 	public String getServiceQuantityValue() {
-		return servicedetailssscreen.findElement(By.id("serviceDetailsQuantityFloat")).getAttribute("value");
+		return rootElement.findElement(By.id("serviceDetailsQuantityFloat")).getAttribute("value");
 	}
 	
 	public void clickServiceAmountField() {
-		tap(servicedetailssscreen.findElement(By.id("serviceDetailsPrice")));
+		tap(rootElement.findElement(By.id("serviceDetailsPrice")));
 	}
 	
 	public void clickServiceQuantityField() {
-		tap(servicedetailssscreen.findElement(By.id("serviceDetailsQuantityFloat")));
+		tap(rootElement.findElement(By.id("serviceDetailsQuantityFloat")));
 	}
 	
 	public void setServiceQuantityValue(String quantity) {

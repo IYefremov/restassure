@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
@@ -18,6 +19,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -33,19 +35,6 @@ public class InspectionSteps {
         InspectionSteps.selectInspectionType(inspectionTypes);
         VehicleInfoScreenSteps.setVIN(inspectionData.getVinNumber());
     }
-
-    public static void openServiceScreen() {
-        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        baseWizardScreen.changeScreen(ScreenType.SERVICES);
-    }
-
-    public static String saveInspection() {
-        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
-        baseWizardScreen.saveInspectionViaMenu();
-        return inspectionNumber;
-    }
-
 
     public static String createR360Inspection(AppCustomer customer, InspectionData inspectionData) {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -79,8 +68,37 @@ public class InspectionSteps {
         inspectionsScreen.clickOnInspectionByInspNumber(inspectionId);
     }
 
+    public static void openInspectionToEdit(String inspectionId) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.clickOpenInspectionToEdit(inspectionId);
+    }
+
     public static void selectInspectionType(InspectionTypes inspectionTypes) {
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList();
         inspectionTypesList.selectInspectionType(inspectionTypes);
+    }
+
+    public static String saveInspection() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
+        baseWizardScreen.saveInspectionViaMenu();
+        return inspectionNumber;
+    }
+
+    public static void cancelInspection() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickCancelMenuItem();
+        VNextInformationDialog informationDialog = new VNextInformationDialog();
+        informationDialog.clickInformationDialogYesButton();
+    }
+
+    public static void navigateHomeScreen() {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.clickBackButton();
+    }
+
+    public static void verifyInspectionTotalPrice(String inspectionId, String expectedPrice) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionId), expectedPrice);
     }
 }
