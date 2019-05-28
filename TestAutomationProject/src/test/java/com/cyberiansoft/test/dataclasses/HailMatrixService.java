@@ -18,6 +18,9 @@ public class HailMatrixService {
     @JsonProperty("matrixAdditionalServices")
     List<ServiceData> matrixAdditionalServices;
 
+    @JsonProperty("hailMatrixPrice")
+    String hailMatrixPrice;
+
     public String getHailMatrixServiceName() {
         return hailMatrixServiceName;
     }
@@ -28,6 +31,10 @@ public class HailMatrixService {
 
     public String getHailMatrixSeverity() {
         return hailMatrixSeverity;
+    }
+
+    public String getHailMatrixPrice() {
+        return hailMatrixPrice;
     }
 
     public List<ServiceData> getMatrixAdditionalServices() {

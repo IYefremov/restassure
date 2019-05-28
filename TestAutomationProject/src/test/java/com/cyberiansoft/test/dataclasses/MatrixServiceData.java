@@ -15,6 +15,9 @@ public class MatrixServiceData {
     @JsonProperty("hailMatrixServices")
     List<HailMatrixService> hailMatrixServices;
 
+    @JsonProperty("hailMatrixService")
+    HailMatrixService hailMatrixService;
+
     @JsonProperty("matrixPart")
     MatrixPartData matrixPart;
 
@@ -31,6 +34,10 @@ public class MatrixServiceData {
 
     public List<HailMatrixService> getHailMatrixServices() {
         return hailMatrixServices;
+    }
+
+    public HailMatrixService getHailMatrixService() {
+        return hailMatrixService;
     }
 
     public MatrixPartData getMatrixPartData() {

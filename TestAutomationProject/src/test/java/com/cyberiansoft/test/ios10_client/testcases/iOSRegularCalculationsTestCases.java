@@ -1561,8 +1561,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularVisualInteriorScreen visualinteriorscreen =vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.clickServicesToolbarButton();
-		//visualinteriorscreen.switchToCustomTab();
-		//visualinteriorscreen.selectService("Detail");
+		visualinteriorscreen.switchToCustomTab();
+		visualinteriorscreen.selectService("Detail");
 		visualinteriorscreen.selectSubService("Oksi_Part_SubCategory");
 		Helpers.tapRegularCarImage();
 		Helpers.tapRegularCarImage();

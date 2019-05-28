@@ -21,6 +21,7 @@ public class iOSInternalProjectConstants {
     public static final String MISCELLANEOUS_SERVICE = "Miscellaneous";
     public static final String DYE_SERVICE = "Dye";
     public static final String WHEEL_REPAIR_SERVICE = "WHEEL REPAIR";
+    public static final String PRICE_ADJUSTMENT = "Price Adjustment";
     public static final String WHEEL_SERVICE = "Wheel";
     public static final String WHEEL_SUBSERVICE = "Wheel";
     public static final String DISC_EX_SERVICE1 = "Disc_Ex_Service1";
