@@ -1,0 +1,137 @@
+{
+
+  "testCreateInspectionOnTheDeviceWithApprovalRequired": [
+    {
+      "rowID": "testCreateInspectionOnTheDeviceWithApprovalRequired.01",
+      "description": "Test Case 8553:Create inspection on the device with approval required",
+      "vihicleInfo": {
+        "vinNumber": "TESTVINNO", "vehicleMake" : "Acura", "vehicleModel" : "1.6 EL", "vehicleColor" : "Black"
+      }
+    }
+  ],
+
+  "testCreateRetailInspection": [
+    {
+      "rowID": "testCreateRetailInspection.01",
+      "description": "Test Case 8435:Create Retail Inspection (HD Single page)",
+      "vihicleInfo": {
+        "vinNumber": "ZWERTYASDFEWSDRZG", "vehicleMake" : "Acura", "vehicleModel" : "1.6 EL", "vehicleColor" : "Black"
+      }
+    }
+  ],
+
+  "testAddServicesToVisualInspection": [
+    {
+      "rowID": "testAddServicesToVisualInspection.01",
+      "description": "Test Case 8434:Add Services to visual inspection",
+      "vihicleInfo": {
+        "vinNumber": "ZWERTYASDFEWSDRZG"
+      },
+      "inspPrice" : "275"
+    }
+  ],
+
+  "testChangeQuantityOfServicesInVisualInspection": [
+    {
+      "rowID": "testChangeQuantityOfServicesInVisualInspection.01",
+      "description": "Test Case 8433:Change Quantity of services in Visual Inspection",
+      "vihicleInfo": {
+        "vinNumber": "ZWERTYASDFEWSDRZG"
+      },
+      "damagesData" : [{"damageGroupName": "Miscellaneous", "moneyService" : {"serviceName" : "Dye", "serviceQuantity" : "3.00"}},
+        {"damageGroupName": "WHEEL REPAIR", "moneyService" : {"serviceName" : "Wheel", "serviceQuantity" : "2.00"}}],
+      "inspPrice" : "275"
+    }
+  ],
+
+  "testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart": [
+    {
+      "rowID": "testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart.01",
+      "description": "Test Case 28580:WO: If fee bundle item price policy = 'Panel' then it will be added once for many associated service instances with same vehicle part.",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+      },
+      "services" : [{"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "12.00", "servicePrice2" : "$33.00", "vehiclePart" : {"vehiclePartName" : "Grill" }},
+        {"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "13", "servicePrice2" : "$34.00", "vehiclePart" : {"vehiclePartName" : "Grill" }},
+        {"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "12", "servicePrice2" : "$67.00", "vehiclePart" : {"vehiclePartName" : "Driver Seat" }}]
+    }
+  ],
+
+  "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1": [
+    {
+      "rowID": "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1.01",
+      "description": "Test Case 28583:WO: If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+      },
+      "service" : {"serviceName" : "Service_in_2_fee_packs", "servicePrice" : "$36.00", "vehiclePart" : {"vehiclePartName" : "Grill" }}
+    }
+  ],
+
+  "testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices": [
+    {
+      "rowID": "testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices.01",
+      "description": "Test Case 28585:WO: Verify that package price of fee bundle item is override the price of wholesale and retail prices",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+      },
+      "service" : {"serviceName" : "Service_for_override"},
+      "workOrderPrice" : "$27.00"
+    }
+  ],
+
+  "testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances": [
+    {
+      "rowID": "testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances.01",
+      "description": "Test Case 28600:WO: If fee bundle item price policy = 'Vehicle' then it will be added once for many associated service instances",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+      },
+      "services" : [{"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "13.00", "servicePrice2" : "$34.00", "vehiclePart" : {"vehiclePartName" : "Back Glass" }},
+        {"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "14", "servicePrice2" : "$35.00", "vehiclePart" : {"vehiclePartName" : "Back Glass" }},
+        {"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "14", "servicePrice2" : "$56.00", "vehiclePart" : {"vehiclePartName" : "Left Headlight" }}]
+    }
+  ],
+
+  "testVerifyIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO": [
+    {
+      "rowID": "testVerifyIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO.01",
+      "description": "Test Case 28601:WO: If fee bundle item price policy = 'Service' or 'Flat Fee' then it will be added to WO every time when associated service instance will add to WO.",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+      },
+      "services" : [{"serviceName" : "Oksi_Service_PP_Service", "servicePrice" : "10.00", "servicePrice2" : "$22.00", "vehiclePart" : {"vehiclePartName" : "Hood" }},
+        {"serviceName" : "Oksi_Service_PP_Service", "servicePrice" : "12", "servicePrice2" : "$46.00", "vehiclePart" : {"vehiclePartName" : "Hood" }},
+        {"serviceName" : "Oksi_Service_PP_Service", "servicePrice" : "10", "servicePrice2" : "$68.00", "vehiclePart" : {"vehiclePartName" : "Cowl, Other" }}]
+    }
+  ],
+
+  "testVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem": [
+    {
+      "rowID": "testVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem.01",
+      "description": "Test Case 28602:WO: Verify that for Wholesale and Retail customers fee is added depends on the price accordingly to price of the fee bundle item",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+      },
+      "services" : [{"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "12.00", "servicePrice2" : "$33.00", "vehiclePart" : {"vehiclePartName" : "Grill" }},
+        {"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "13", "servicePrice2" : "$34.00", "vehiclePart" : {"vehiclePartName" : "Grill" }},
+        {"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "12", "servicePrice2" : "$67.00", "vehiclePart" : {"vehiclePartName" : "Driver Seat" }}]
+    }
+  ],
+
+  "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1": [
+    {
+      "rowID": "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1.01",
+      "description": "Test Case 29398:WO: Verify that Fee Bundle services is calculated for additional matrix services",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "matrixService": {"matrixServiceName" : "SR_S5_Matrix_DE_TE",
+        "hailMatrixService" : {"hailMatrixServiceName": "Roof", "hailMatrixPrice" : "54", "matrixAdditionalServices" : [{ "serviceName" : "SR_S1_Money" },
+          { "serviceName" : "SR_S5_Mt_Money" }, { "serviceName" : "SR_S5_Mt_Upcharge_25" }]
+        }},
+      "workOrderPrice" : "$2,127.50"
+    }
+  ],
+
+}

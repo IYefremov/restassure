@@ -17,6 +17,8 @@ public class ServiceData {
     private String serviceQuantity;
     @JsonProperty("serviceStatus")
     private String serviceStatus;
+    @JsonProperty("vehiclePart")
+    private VehiclePartData vehiclePart;
 
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);
