@@ -49,8 +49,8 @@ import java.util.List;
 
 public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistration {
 
-	private final RetailCustomer testСustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
-	private final RetailCustomer testСustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
+	private final RetailCustomer testCustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
+	private final RetailCustomer testCustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
 	@BeforeClass(description="Team Invoices Test Cases")
 	public void beforeClass() {
@@ -59,14 +59,14 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextCustomersScreen customersScreen = homeScreen.clickCustomersMenuItem();
 		customersScreen.switchToRetailMode();
-		if (!customersScreen.isCustomerExists(testСustomer1)) {
+		if (!customersScreen.isCustomerExists(testCustomer1)) {
 			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
-			newCustomerScreen.createNewCustomer(testСustomer1);
+			newCustomerScreen.createNewCustomer(testCustomer1);
 			customersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		}
-		if (!customersScreen.isCustomerExists(testСustomer2)) {
+		if (!customersScreen.isCustomerExists(testCustomer2)) {
 			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
-			newCustomerScreen.createNewCustomer(testСustomer2);
+			newCustomerScreen.createNewCustomer(testCustomer2);
 			customersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		}
 
@@ -682,9 +682,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
 			customersScreen.switchToRetailMode();
 			if (i == 0) {
-				customersScreen.selectCustomer(testСustomer1);
+				customersScreen.selectCustomer(testCustomer1);
 			} else {
-				customersScreen.selectCustomer(testСustomer2);
+				customersScreen.selectCustomer(testCustomer2);
 			}
 
 			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
@@ -709,7 +709,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesScreen.selectInvoice(invoiceNumber);
 		invoicesScreen.clickOnSelectedInvoicesMailButton();
 		VNextCustomersScreen customersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
-		customersScreen.selectCustomer(testСustomer2);
+		customersScreen.selectCustomer(testCustomer2);
 		VNextEmailScreen emailScreen = new VNextEmailScreen(DriverBuilder.getInstance().getAppiumDriver());
 		NadaEMailService nada = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nada.getEmailId());
@@ -884,10 +884,10 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			workOrdersScreen.switchToTeamWorkordersView();
 			VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
 			customersScreen.switchToRetailMode();
-			customersScreen.selectCustomer(testСustomer1);
+			customersScreen.selectCustomer(testCustomer1);
 
-			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-			wotypeslist.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+			VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
+			workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 			vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 			vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
@@ -1068,9 +1068,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
 			customersScreen.switchToRetailMode();
 			if (i == 0) {
-				customersScreen.selectCustomer(testСustomer1);
+				customersScreen.selectCustomer(testCustomer1);
 			} else {
-				customersScreen.selectCustomer(testСustomer2);
+				customersScreen.selectCustomer(testCustomer2);
 			}
 
 			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
@@ -1096,7 +1096,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			invoicesScreen.selectInvoice(invoiceNumber);
 		invoicesScreen.clickOnSelectedInvoicesMailButton();
 		VNextCustomersScreen customersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
-		customersScreen.selectCustomer(testСustomer2);
+		customersScreen.selectCustomer(testCustomer2);
 		VNextEmailScreen emailScreen = new VNextEmailScreen(DriverBuilder.getInstance().getAppiumDriver());
 		NadaEMailService nada = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nada.getEmailId());
