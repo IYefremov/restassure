@@ -26,9 +26,8 @@ public class AppiumServiceManager {
             e.printStackTrace();
         }
         appiumService.set(
-                new AppiumServiceBuilder().usingDriverExecutable(new File("/usr/local/bin/node"))
-                        .withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
-                        .withIPAddress("127.0.0.1")
+                new AppiumServiceBuilder()
+                        .withIPAddress(localIPAddress)
                         .usingAnyFreePort()
                         .withArgument(SESSION_OVERRIDE)
                         .withArgument(LOG_LEVEL, "error")
