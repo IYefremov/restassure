@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
@@ -229,13 +230,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void saveSelectedServiceDetails() {
 
-		MobileElement navBar = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeNavigationBar' AND visible == 1 name == 'Save'"));
-		navBar.findElementByAccessibilityId("Save").click();
+		MobileElement saveButton = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND visible == 1 AND name == 'Save'"));
+		saveButton.click();
 	}
 
 	public void clickCancelSelectedServiceDetails() {
-		MobileElement navBar = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeNavigationBar' AND visible == 1 AND name == 'Cancel'"));
-		navBar.findElementByAccessibilityId("Cancel").click();
+		MobileElement cancelButton = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND visible == 1 AND name == 'Cancel'"));
+		cancelButton.click();
 	}
 
 	public String saveSelectedServiceDetailsWithAlert() {
@@ -316,6 +317,16 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 				scrollToElement(vehiclepartstable.findElementByAccessibilityId(vehiclepart));
 			}
 			vehiclepartstable.findElementByAccessibilityId(vehiclepart).click();
+		}
+	}
+
+	public void selectVehicleParts(List<VehiclePartData> vehiclePartsData) {
+		IOSElement vehiclepartstable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'VehiclePartSelectorView' and type = 'XCUIElementTypeTable'"));
+		for (VehiclePartData vehiclePartData : vehiclePartsData) {
+			if (!vehiclepartstable.findElementByAccessibilityId(vehiclePartData.getVehiclePartName()).isDisplayed()) {
+				scrollToElement(vehiclepartstable.findElementByAccessibilityId(vehiclePartData.getVehiclePartName()));
+			}
+			vehiclepartstable.findElementByAccessibilityId(vehiclePartData.getVehiclePartName()).click();
 		}
 	}
 

@@ -122,13 +122,13 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         VNextVehiclePartsScreen priceMatrixesScreen = availableServicesScreen.openSelectedMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
         //VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
 
-        MatrixPartData matrixPartData = inspectionData.getMatrixServiceData().getMatrixPartData();
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectVehiclePart(matrixPartData.getMatrixPartName());
-        vehiclePartInfoScreen.selectVehiclePartSize(matrixPartData.getPartSize());
-        vehiclePartInfoScreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
+        VehiclePartData vehiclePartData = inspectionData.getMatrixServiceData().getVehiclePartData();
+        VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+        vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+        vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = vehiclePartInfoScreen.openVehiclePartLaborServiceDetails(matrixPartData.getMatrixAdditionalLaborService().getServiceName());
-        VNextLaborServicePartsList laborServicePartsList = laborServiceDetailsScreen.clickSelectPanelsAndPartsForLaborService(matrixPartData.getMatrixAdditionalLaborService());
+        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = vehiclePartInfoScreen.openVehiclePartLaborServiceDetails(vehiclePartData.getMatrixAdditionalLaborService().getServiceName());
+        VNextLaborServicePartsList laborServicePartsList = laborServiceDetailsScreen.clickSelectPanelsAndPartsForLaborService(vehiclePartData.getMatrixAdditionalLaborService());
         Assert.assertTrue(laborServicePartsList.isPartsTabEnabled());
         laborServicePartsList.clickBackButton();
         laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -166,22 +166,22 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         VNextVehiclePartsScreen priceMatrixesScreen = availableServicesScreen.openSelectedMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
         //VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
 
-        MatrixPartData matrixPartData = inspectionData.getMatrixServiceData().getMatrixPartData();
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectVehiclePart(matrixPartData.getMatrixPartName());
-        vehiclePartInfoScreen.selectVehiclePartSize(matrixPartData.getPartSize());
-        vehiclePartInfoScreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
+        VehiclePartData vehiclePartData = inspectionData.getMatrixServiceData().getVehiclePartData();
+        VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+        vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+        vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = vehiclePartInfoScreen.openVehiclePartLaborServiceDetails(matrixPartData.getMatrixAdditionalLaborService().getServiceName());
-        VNextLaborServicePartsList laborServicePartsList = laborServiceDetailsScreen.clickSelectPanelsAndPartsForLaborService(matrixPartData.getMatrixAdditionalLaborService());
+        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = vehiclePartInfoScreen.openVehiclePartLaborServiceDetails(vehiclePartData.getMatrixAdditionalLaborService().getServiceName());
+        VNextLaborServicePartsList laborServicePartsList = laborServiceDetailsScreen.clickSelectPanelsAndPartsForLaborService(vehiclePartData.getMatrixAdditionalLaborService());
         Assert.assertTrue(laborServicePartsList.isPartsTabEnabled());
-        laborServicePartsList.selectServiceLaborPart(matrixPartData.getMatrixAdditionalLaborService().getLaborServicePart());
+        laborServicePartsList.selectServiceLaborPart(vehiclePartData.getMatrixAdditionalLaborService().getLaborServicePart());
         laborServiceDetailsScreen = laborServicePartsList.saveLaborServiceParts();
-                Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceRate(matrixPartData.getMatrixAdditionalLaborService()),
-                matrixPartData.getMatrixAdditionalLaborService().getLaborServiceRate());
-        Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceTime(matrixPartData.getMatrixAdditionalLaborService()),
-                matrixPartData.getMatrixAdditionalLaborService().getLaborServiceTime());
-        Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceNotes(matrixPartData.getMatrixAdditionalLaborService()),
-                matrixPartData.getMatrixAdditionalLaborService().getLaborServiceNotes());
+                Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceRate(vehiclePartData.getMatrixAdditionalLaborService()),
+                        vehiclePartData.getMatrixAdditionalLaborService().getLaborServiceRate());
+        Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceTime(vehiclePartData.getMatrixAdditionalLaborService()),
+                vehiclePartData.getMatrixAdditionalLaborService().getLaborServiceTime());
+        Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceNotes(vehiclePartData.getMatrixAdditionalLaborService()),
+                vehiclePartData.getMatrixAdditionalLaborService().getLaborServiceNotes());
         laborServiceDetailsScreen.saveLaborServiceDetails();
         Assert.assertEquals(vehiclePartInfoScreen.getMatrixServiceTotalPriceValue(),
                 inspectionData.getInspectionPrice());

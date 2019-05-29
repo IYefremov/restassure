@@ -5,6 +5,7 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
+import java.io.File;
 import java.net.SocketException;
 
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.LOG_LEVEL;

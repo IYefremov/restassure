@@ -6,179 +6,199 @@ import java.util.List;
 
 
 public class InspectionData {
-	
-	 @JsonProperty("inspType")
-	 String inspType;
 
-	 @JsonProperty("vihicleInfo")
-	 VehicleInfoData vihicleInfo;
-	 
-	 @JsonProperty("newVinNumber")
-	 String newVinNumber;
-	 
-	 @JsonProperty("service")
-	 ServiceData service;
+    @JsonProperty("inspType")
+    String inspType;
 
-	 @JsonProperty("moneyService")
-	 ServiceData moneyService;
+    @JsonProperty("vihicleInfo")
+    VehicleInfoData vihicleInfo;
 
-	 @JsonProperty("percentageService")
-	 ServiceData percentageService;
+    @JsonProperty("newVinNumber")
+    String newVinNumber;
 
-	 @JsonProperty("services")
-	 List<ServiceData> services;
+    @JsonProperty("service")
+    ServiceData service;
 
-	 @JsonProperty("moneyServices")
-	 List<ServiceData> moneyServices;
+    @JsonProperty("moneyService")
+    ServiceData moneyService;
 
-	 @JsonProperty("percentageServices")
-	 List<ServiceData> percentageServices;
+    @JsonProperty("percentageService")
+    ServiceData percentageService;
 
-	 @JsonProperty("matrixService")
-	 MatrixServiceData matrixService;
+    @JsonProperty("services")
+    List<ServiceData> services;
 
-	 @JsonProperty("laborService")
-	 LaborServiceData laborService;
+    @JsonProperty("moneyServices")
+    List<ServiceData> moneyServices;
 
-	 @JsonProperty("insuranceCompany")
-	 InsuranceCompanyData insuranceCompany;
-	 
-	 @JsonProperty("inspPrice")
-	 String inspPrice;
-	 
-	 @JsonProperty("inspApprovedPrice")
-	 String inspApprovedPrice;
-	 
-	 @JsonProperty("declineReason")
-	 String declineReason;
+    @JsonProperty("percentageServices")
+    List<ServiceData> percentageServices;
 
-	@JsonProperty("inspectionNumber")
-	String inspectionNumber;
+    @JsonProperty("matrixService")
+    MatrixServiceData matrixService;
 
-	@JsonProperty("inspectionStatus")
-	String inspectionStatus;
+    @JsonProperty("vehiclePartData")
+    VehiclePartData vehiclePartData;
 
-	@JsonProperty("retailCustomer")
-	RetailCustomer retailCustomer;
+    @JsonProperty("vehiclePartsData")
+    List<VehiclePartData> vehiclePartsData;
 
-	@JsonProperty("damageData")
-	DamageData damageData;
+    @JsonProperty("laborService")
+    LaborServiceData laborService;
 
-	@JsonProperty("damagesData")
-	List<DamageData> damagesData;
-	 
-	 public String getInspectionType() {
-		 return inspType;
-	 }
-	 
-	 public String getInspectionPrice() {
-		 return inspPrice;
-	 }
-	 
-	 public String getInspectionApprovedPrice() {
-		 return inspApprovedPrice;
-	 }
-	 
-	 public String getDeclineReason() {
-		 return declineReason;
-	 }
+    @JsonProperty("insuranceCompany")
+    InsuranceCompanyData insuranceCompany;
 
-	public VehicleInfoData getVehicleInfo() {
-		return vihicleInfo;
-	}
-	 
-	 public String getVinNumber() {
-		 return vihicleInfo.getVINNumber();
-	 }
- 
-	 public String getNewVinNumber() {
-		 return newVinNumber;
-	 }
-	 
-	 public ServiceStatus getServiceStatus() {
-		 return service.getServiceStatus();
-	 }
-	 
-	 public String getServiceName() {
-		 return service.getServiceName();
-	 }
-	 
-	 public String getServicePrice() {
-		 return service.getServicePrice();
-	 }
+    @JsonProperty("inspPrice")
+    String inspPrice;
 
-	 public String getMoneyServiceName() {
-		return moneyService.getServiceName();
-	}
+    @JsonProperty("inspApprovedPrice")
+    String inspApprovedPrice;
 
-	 public String getMoneyServicePrice() {
-		return moneyService.getServicePrice();
-	}
+    @JsonProperty("declineReason")
+    String declineReason;
 
-	 public String getMoneyServiceQuantity() { return moneyService.getServiceQuantity(); }
+    @JsonProperty("inspectionNumber")
+    String inspectionNumber;
 
-	 public String getPercentageServiceName() {
-		return percentageService.getServiceName();
-	}
+    @JsonProperty("inspectionStatus")
+    String inspectionStatus;
 
-	 public String getPercentageServicePrice() {
-		return percentageService.getServicePrice();
-	}
-	 
-	 public List<ServiceData> getServicesList() {
-		 return services;
-	 }
+    @JsonProperty("retailCustomer")
+    RetailCustomer retailCustomer;
 
-	 public List<ServiceData> getMoneyServicesList() {
-		return moneyServices;
-	}
+    @JsonProperty("damageData")
+    DamageData damageData;
 
-	 public List<ServiceData> getPercentageServicesList() {
-		return percentageServices;
-	}
+    @JsonProperty("damagesData")
+    List<DamageData> damagesData;
 
-	 public MatrixServiceData getMatrixServiceData() { return matrixService; }
+    public String getInspectionType() {
+        return inspType;
+    }
 
-	public LaborServiceData getLaborServiceData() { return laborService; }
+    public String getInspectionPrice() {
+        return inspPrice;
+    }
 
-	 public String getServiceNameByIndex(int serviceIndex) {
-		 return services.get(serviceIndex).getServiceName();
-	 }
-	 
-	 public String getServiceQuantityByIndex(int serviceIndex) {
-		 return services.get(serviceIndex).getServiceQuantity();
-	 } 
-	 
-	 public String getServicePriceByIndex(int serviceIndex) {
-		 return services.get(serviceIndex).getServicePrice();
-	 } 
-	 
-	 public InsuranceCompanyData getInsuranceCompanyData() {
-		 return insuranceCompany;
-	 }
+    public String getInspectionApprovedPrice() {
+        return inspApprovedPrice;
+    }
 
-	 public String getInspectionNumber() {
-		return inspectionNumber;
-	}
+    public String getDeclineReason() {
+        return declineReason;
+    }
 
-	 public void setInspectionNumber(String inspNumber) {
+    public VehicleInfoData getVehicleInfo() {
+        return vihicleInfo;
+    }
 
-	 	this.inspectionNumber =inspNumber;
-	}
+    public String getVinNumber() {
+        return vihicleInfo.getVINNumber();
+    }
 
-	public InspectionStatus getInspectionStatus() {
-		return InspectionStatus.getStatus(inspectionStatus);
-	}
+    public String getNewVinNumber() {
+        return newVinNumber;
+    }
 
-	public RetailCustomer getInspectionRetailCustomer() {
-	 	return retailCustomer;
-	}
+    public ServiceStatus getServiceStatus() {
+        return service.getServiceStatus();
+    }
 
-	public DamageData getDamageData() {
-		return damageData;
-	}
+    public String getServiceName() {
+        return service.getServiceName();
+    }
 
-	public List<DamageData> getDamagesData() {
-		return damagesData;
-	}
+    public String getServicePrice() {
+        return service.getServicePrice();
+    }
+
+    public String getMoneyServiceName() {
+        return moneyService.getServiceName();
+    }
+
+    public String getMoneyServicePrice() {
+        return moneyService.getServicePrice();
+    }
+
+    public String getMoneyServiceQuantity() {
+        return moneyService.getServiceQuantity();
+    }
+
+    public String getPercentageServiceName() {
+        return percentageService.getServiceName();
+    }
+
+    public String getPercentageServicePrice() {
+        return percentageService.getServicePrice();
+    }
+
+    public List<ServiceData> getServicesList() {
+        return services;
+    }
+
+    public List<ServiceData> getMoneyServicesList() {
+        return moneyServices;
+    }
+
+    public List<ServiceData> getPercentageServicesList() {
+        return percentageServices;
+    }
+
+    public MatrixServiceData getMatrixServiceData() {
+        return matrixService;
+    }
+
+    public VehiclePartData getVehiclePartData() {
+        return vehiclePartData;
+    }
+
+    public List<VehiclePartData> getVehiclePartsData() {
+        return vehiclePartsData;
+    }
+
+    public LaborServiceData getLaborServiceData() {
+        return laborService;
+    }
+
+    public String getServiceNameByIndex(int serviceIndex) {
+        return services.get(serviceIndex).getServiceName();
+    }
+
+    public String getServiceQuantityByIndex(int serviceIndex) {
+        return services.get(serviceIndex).getServiceQuantity();
+    }
+
+    public String getServicePriceByIndex(int serviceIndex) {
+        return services.get(serviceIndex).getServicePrice();
+    }
+
+    public InsuranceCompanyData getInsuranceCompanyData() {
+        return insuranceCompany;
+    }
+
+    public String getInspectionNumber() {
+        return inspectionNumber;
+    }
+
+    public void setInspectionNumber(String inspNumber) {
+
+        this.inspectionNumber = inspNumber;
+    }
+
+    public InspectionStatus getInspectionStatus() {
+        return InspectionStatus.getStatus(inspectionStatus);
+    }
+
+    public RetailCustomer getInspectionRetailCustomer() {
+        return retailCustomer;
+    }
+
+    public DamageData getDamageData() {
+        return damageData;
+    }
+
+    public List<DamageData> getDamagesData() {
+        return damagesData;
+    }
 }

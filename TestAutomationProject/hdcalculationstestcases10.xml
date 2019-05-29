@@ -9,14 +9,11 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
         <methods>
 
-
-            <include name="testWOVerifyRoundingInCalculationScriptWithPriceMatrix" />
-
-            <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
+            <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
-        <include name="testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1" /> 
-        <include name="testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1" /> 
+        <include name="testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1" />
+        <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1" />
         <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1" />
         <include name="testWOVerifyCalculationWithPriceMatrixLaborType_1" />
         <include name="testInvoicesVerifyRoundingMoneyAmountValues_1" />
@@ -26,14 +23,14 @@
         	<include name="testCreateRetailInspection" />   
             <include name="testAddServicesToVisualInspection" /> 
             <include name="testChangeQuantityOfServicesInVisualInspection" />
-            <include name="testHDIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
-            <include name="testHDVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
-            <include name="testHDIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
-            <include name="testHDIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
-            <include name="testHDVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem" />
-            <include name="testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095" />
-            <include name="testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003" />
-            <include name="testHDVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005" /> 
+            <include name="testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
+            <include name="testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
+            <include name="testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
+            <include name="testVerifyIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
+            <include name="testVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem" />
+            <include name="testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095" />
+            <include name="testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003" />
+            <include name="testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005" />
             <include name="testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal" />
             <include name="testHDVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode" />
             <include name="testWOVerifyThatMessageIsShownTotalIsOverLimitation" />

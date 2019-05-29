@@ -9,8 +9,8 @@ import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.MatrixPartData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
@@ -117,10 +117,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         claimscreen.setAccidentDate();
 
         RegularPriceMatrixScreen pricematrix = claimscreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, "State Farm");
-        for (MatrixPartData matrixPartData : inspdata.getMatrixServiceData().getMatrixPartsData()) {
-            RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(matrixPartData.getMatrixPartName());
-            vehiclePartScreen.setSizeAndSeverity(matrixPartData.getPartSize(), matrixPartData.getPartSeverity());
-            for (ServiceData service : matrixPartData.getMatrixAdditionalServices())
+        for (VehiclePartData vehiclePartData : inspdata.getMatrixServiceData().getVehiclePartsData()) {
+            RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+            vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
+            for (ServiceData service : vehiclePartData.getVehiclePartAdditionalServices())
                 vehiclePartScreen.selectDiscaunt(service.getServiceName());
             vehiclePartScreen.clickSave();
             pricematrix = new RegularPriceMatrixScreen();

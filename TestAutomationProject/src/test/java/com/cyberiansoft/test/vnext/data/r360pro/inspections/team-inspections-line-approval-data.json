@@ -124,8 +124,8 @@
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
       "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
-        "matrixParts" : [{"matrixPartName": "Anastasia Part", "partSize": "Nickel", "partSeverity": "VERY LIGHT", "matrixAdditionalServices" : [{ "serviceName" : "Anastasia Labor Avarage Data" }, { "serviceName" : "Igor Labor Service" }, { "serviceName" : "Labor_expence" }]
-        }, {"matrixPartName": "Hood", "partSize": "Quarter", "partSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)", "matrixAdditionalServices" : [{ "serviceName" : "A new demo service" }, { "serviceName" : "PREFIX Hood" }, { "serviceName" : "Aluminum Panel" }]
+        "vehiclePartsData" : [{"vehiclePartName": "Anastasia Part", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "VERY LIGHT", "vehiclePartAdditionalServices" : [{ "serviceName" : "Anastasia Labor Avarage Data" }, { "serviceName" : "Igor Labor Service" }, { "serviceName" : "Labor_expence" }]
+        }, {"vehiclePartName": "Hood", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)", "vehiclePartAdditionalServices" : [{ "serviceName" : "A new demo service" }, { "serviceName" : "PREFIX Hood" }, { "serviceName" : "Aluminum Panel" }]
         }]},
       "inspPrice": "$501.13"
     }

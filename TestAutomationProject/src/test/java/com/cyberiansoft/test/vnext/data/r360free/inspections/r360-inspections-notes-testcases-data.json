@@ -204,8 +204,8 @@
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
       "matrixService": {"matrixServiceName" : "Hail Repair", "hailMatrixName" : "State Farm",
-        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15"
-        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15"
+        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15"
+        }, {"hailMatrixServiceName": "Roof", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15"
         }]}
     }
   ]

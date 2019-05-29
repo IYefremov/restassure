@@ -379,15 +379,15 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
 		//VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectPriceMatrix1(inspectionData.getMatrixServiceData().getHailMatrixName());
 		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
-		List<MatrixPartData> matrixPartDatas = matrixServiceData.getMatrixPartsData();
+		List<VehiclePartData> vehiclePartsData = matrixServiceData.getVehiclePartsData();
 
-		for (MatrixPartData  matrixPartData : matrixPartDatas) {
-			VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectPriceMatrix(matrixPartData.getMatrixPartName());
+		for (VehiclePartData  vehiclePartData : vehiclePartsData) {
+			VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
 			//VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(matrixPartData.getMatrixPartName());
-			vehiclePartInfoScreen.selectVehiclePartSize(matrixPartData.getPartSize());
-			vehiclePartInfoScreen.selectVehiclePartSeverity(matrixPartData.getPartSeverity());
-			if (matrixPartData.getMatrixAdditionalServices() != null) {
-				List<ServiceData> additionalServices = matrixPartData.getMatrixAdditionalServices();
+			vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+			vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
+			if (vehiclePartData.getVehiclePartAdditionalServices() != null) {
+				List<ServiceData> additionalServices = vehiclePartData.getVehiclePartAdditionalServices();
 				vehiclePartInfoScreen.selectVehiclePartAdditionalServices(additionalServices);
 			}
 			vehiclePartInfoScreen.clickSaveVehiclePartInfo(); }
