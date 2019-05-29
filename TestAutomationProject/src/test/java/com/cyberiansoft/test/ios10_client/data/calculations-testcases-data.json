@@ -89,7 +89,7 @@
       },
       "services" : [{"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "13.00", "servicePrice2" : "$34.00", "vehiclePart" : {"vehiclePartName" : "Back Glass" }},
         {"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "14", "servicePrice2" : "$35.00", "vehiclePart" : {"vehiclePartName" : "Back Glass" }},
-        {"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "14", "servicePrice2" : "$56.00", "vehiclePart" : {"vehiclePartName" : "Left Headlight" }}]
+        {"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "14", "servicePrice2" : "$35.00", "vehiclePart" : {"vehiclePartName" : "Left Headlight" }}]
     }
   ],
 
@@ -127,11 +127,131 @@
         "vinNumber": "JA4LS31H8YP047397"
       },
       "matrixService": {"matrixServiceName" : "SR_S5_Matrix_DE_TE",
-        "hailMatrixService" : {"hailMatrixServiceName": "Roof", "hailMatrixPrice" : "54", "matrixAdditionalServices" : [{ "serviceName" : "SR_S1_Money" },
-          { "serviceName" : "SR_S5_Mt_Money" }, { "serviceName" : "SR_S5_Mt_Upcharge_25" }]
+        "vehiclePartData" : {"vehiclePartName": "Roof", "vehiclePartPrice" : "54", "vehiclePartAdditionalServices" : [{ "serviceName" : "SR_S1_Money" },
+          { "serviceName" : "SR_S5_Mt_Money" }, { "serviceName" : "SR_S5_Mt_Upcharge_25" }],
+          "vehiclePartTotalPrice" : "$2,117.50"
         }},
       "workOrderPrice" : "$2,127.50"
     }
   ],
+
+  "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095": [
+    {
+      "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095.01",
+      "description": "Test Case 30672:WO: Verify that money value of some percentage service is rounds up after 0.095",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "services" : [{"serviceName" : "SR_S1_Money", "servicePrice" : "40", "vehiclePart" : {"vehiclePartName" : "Grill" }},
+        { "serviceName" : "SR_S1_Money_FlatFee", "servicePrice" : "8.25" },
+        { "serviceName" : "Discount 5-10%", "servicePrice" : "6", "servicePrice2" : "$2.90"}]
+    }
+  ],
+
+  "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003": [
+    {
+      "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003.01",
+      "description": "Test Case 30675:WO: Verify that money value of some percentage service is rounds down after 0.003",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "services" : [{"serviceName" : "SR_S1_Money", "servicePrice" : "40", "vehiclePart" : {"vehiclePartName" : "Grill" }},
+        { "serviceName" : "SR_S1_Money_FlatFee", "servicePrice" : "1.38" },
+        { "serviceName" : "Discount 5-10%", "servicePrice" : "6", "servicePrice2" : "$2.48"}]
+    }
+  ],
+
+  "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005": [
+    {
+      "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005.01",
+      "description": "Test Case 30676:WO: Verify that money value of some percentage service is rounds up after 0.005",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "services" : [{"serviceName" : "SR_S1_Money", "servicePrice" : "20", "vehiclePart" : {"vehiclePartName" : "Grill" }},
+        { "serviceName" : "SR_S1_Money_FlatFee", "servicePrice" : "8.09" },
+        { "serviceName" : "Discount 5-10%", "servicePrice" : "6", "servicePrice2" : "$1.69"}]
+    }
+  ],
+
+  "testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1": [
+    {
+      "rowID": "testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1.01",
+      "description": "Test Case 31498:WO: Verify that amount is calculated and rounded correctly",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "services" : [{"serviceName" : "3/4\" - Penny Size", "servicePrice" : "160"},
+        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "105"},
+        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "400"},
+        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "195"},
+        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "2400"},
+        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "180"},
+        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "160"},
+        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "105"},
+        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "300"},
+        {"serviceName" : "SR_Disc_20_Percent", "servicePrice" : "-25"},
+        {"serviceName" : "Tax discount"}
+      ],
+      "workOrderPrice" : "$3,153.94"
+    }
+  ],
+
+  "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1": [
+    {
+      "rowID": "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1.01",
+      "description": "Test Case 32226:Inspections: Verify that inspection is saved as declined when all services are skipped or declined",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize" :  "DIME", "vehiclePartSeverity" :  "VERY LIGHT"},
+        {"vehiclePartName": "ROOF", "vehiclePartSize" :  "DIME", "vehiclePartSeverity" :  "VERY LIGHT"}],
+      "declineReason" : "Decline 1"
+    }
+  ],
+
+  "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1": [
+    {
+      "rowID": "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1.01",
+      "description": "Test Case 32286:Inspections: Verify that amount of approved services are shown on BO > inspectiontypes list > column Approved Amount",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "services" : [{"serviceName" : "SR_S1_Money_Panel", "vehiclePart" : {"vehiclePartName" : "Left Rear Door" } , "serviceStatus" : "Approved" },
+        {"serviceName" : "SR_S1_Money_Vehicle", "vehiclePart" : {"vehiclePartName" : "Front Bumper" }, "serviceStatus" : "Declined" },
+        {"serviceName" : "SR_S1_Money", "vehiclePart" : {"vehiclePartName" : "Grill" }, "serviceStatus" : "Skipped" }
+      ]
+    }
+  ],
+
+  "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1": [
+    {
+      "rowID": "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1.01",
+      "description": "Test Case 32287:Inspections: Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column Approved Amount",
+      "vihicleInfo": {
+        "vinNumber": "1D7HW48NX6S507810"
+      },
+      "services" : [{"serviceName" : "SR_S1_Money_Panel", "vehiclePart" : {"vehiclePartName" : "Hood" } , "serviceStatus" : "Skipped" },
+        {"serviceName" : "SR_S1_Money_Vehicle", "vehiclePart" : {"vehiclePartName" : "Grill" }, "serviceStatus" : "Skipped" },
+        {"serviceName" : "SR_S1_Money", "vehiclePart" : {"vehiclePartName" : "Grill" }, "serviceStatus" : "Skipped" }
+      ],
+      "declineReason" : "Decline 1"
+    }
+  ],
+
+  "testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal": [
+    {
+      "rowID": "testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal.01",
+      "description": "Test Case 33664:Inspections: Verify that services are marked as strikethrough when exclude from total",
+      "vihicleInfo": {
+        "vinNumber": "1D7HW48NX6S507810"
+      },
+      "services" : [{"serviceName" : "SR_S1_Money_Vehicle", "vehicleParts" : [{"vehiclePartName" : "Grill" }, {"vehiclePartName" : "Hood" }]},
+        {"serviceName" : "SR_S1_Money_Panel", "vehicleParts" : [{"vehiclePartName" : "Right Door Mirror" }]},
+        {"serviceName" : "SR_S1_Money_Panel", "vehicleParts" : [{"vehiclePartName" : "Right Door Mirror" }] }
+      ],
+      "inspPrice" : "$2,050.00"
+    }
+  ]
 
 }

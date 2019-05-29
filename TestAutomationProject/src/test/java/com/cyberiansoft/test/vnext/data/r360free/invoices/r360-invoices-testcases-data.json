@@ -13,8 +13,8 @@
         "percentageService": {"serviceName": "Aluminum Upcharge"
         },
         "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
-          "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }]
-          }]},
+          "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
+          }},
         "workOrderPrice": "$267.81"
       },
       "invoiceData" : {"poNumber" : "123po"
@@ -69,8 +69,8 @@
         "percentageService": {"serviceName": "Aluminum Upcharge"
         },
         "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
-          "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }]
-          }]},
+          "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
+          }},
         "workOrderPrice": "$267.81"
       },
       "invoiceData" : {"poNumber" : "Edyfycydydyftwfxfxhxgdy2555*&*-\"4*-\"&\"-\"55$6'+'&*6"
@@ -87,9 +87,9 @@
           "vehicleYear" : "1992"
         },
         "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
-          "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15"
+          "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15"
           },
-            {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Dime", "hailMatrixSeverity": "Light 6 to 15"
+            {"vehiclePartName": "Roof", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15"
             }]},
         "workOrderPrice": "$660.00"
       },

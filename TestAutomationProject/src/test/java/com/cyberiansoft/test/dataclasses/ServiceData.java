@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class ServiceData {
@@ -19,6 +21,8 @@ public class ServiceData {
     private String serviceStatus;
     @JsonProperty("vehiclePart")
     private VehiclePartData vehiclePart;
+    @JsonProperty("vehicleParts")
+    private List<VehiclePartData> vehicleParts;
 
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);

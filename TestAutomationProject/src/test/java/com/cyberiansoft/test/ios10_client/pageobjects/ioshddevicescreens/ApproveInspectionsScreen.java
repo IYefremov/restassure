@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -9,6 +11,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -165,26 +168,47 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		selectUIAPickerValue(statusreson);
 		clickDoneStatusReasonButton();
 	}
-	
-	public void selectInspectionServiceToApprove(String inspservice) {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='approve little off']")).click();
-	}
-	
-	public void selectInspectionServiceToApproveByIndex(String inspservice, int inspnumber) {
-		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='approve little off']")).get(inspnumber)).click();
+
+	public void selectInspectionServiceStatus(ServiceData serviceData) {
+		String serviceName = serviceData.getServiceName();
+		if (serviceData.getVehiclePart() != null) {
+			serviceName = serviceName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
+		}
+		switch (serviceData.getServiceStatus()){
+			case APPROVED:
+				selectInspectionServiceToApprove(serviceName);
+				break;
+			case DECLINED:
+				selectInspectionServiceToDecline(serviceName);
+				break;
+			case SKIPPED:
+				selectInspectionServiceToSkip(serviceName);
+				break;
+		}
 	}
 
-	public void selectInspectionServiceToDecline(String inspservice) {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='decline little off']")).click();
+	private WebElement getServiceCell(String serviceName) {
+		return appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(serviceName));
 	}
 	
-	public void selectInspectionServiceToSkip(String inspservice) {
-		
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).click();
+	public void selectInspectionServiceToApprove(String serviceName) {
+		getServiceCell(serviceName).findElement(MobileBy.AccessibilityId("approve little off")).click();
 	}
 	
-	public void selectInspectionServiceToSkipByIndex(String inspservice, int inspnumber) {
-		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).click();
+	public void selectInspectionServiceToApproveByIndex(String serviceName, int inspnumber) {
+		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + serviceName + "']/XCUIElementTypeButton[@name='approve little off']")).get(inspnumber)).click();
+	}
+
+	public void selectInspectionServiceToDecline(String serviceName) {
+		getServiceCell(serviceName).findElement(MobileBy.AccessibilityId("decline little off")).click();
+	}
+	
+	public void selectInspectionServiceToSkip(String serviceName) {
+		getServiceCell(serviceName).findElement(MobileBy.AccessibilityId("skip little off")).click();
+	}
+	
+	public void selectInspectionServiceToSkipByIndex(String serviceName, int inspnumber) {
+		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + serviceName + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).click();
 	}
 	
 	public int getNumberOfActiveApproveButtons() {

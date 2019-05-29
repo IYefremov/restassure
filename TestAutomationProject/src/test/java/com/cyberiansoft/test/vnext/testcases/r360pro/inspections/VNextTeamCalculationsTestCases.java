@@ -2,9 +2,10 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
-import com.cyberiansoft.test.dataclasses.HailMatrixService;
+
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -23,7 +24,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import io.appium.java_client.MobileElement;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -305,13 +305,13 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
 
         VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
         VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
-        List<HailMatrixService>  hailMatrixServices = inspectionData.getMatrixServiceData().getHailMatrixServices();
-        for (HailMatrixService  hailMatrixService : hailMatrixServices) {
-            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-            vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-            vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
-            if (hailMatrixService.getMatrixAdditionalServices() != null) {
-                List<ServiceData> additionalServices = hailMatrixService.getMatrixAdditionalServices();
+        List<VehiclePartData>  vehiclePartsData = inspectionData.getMatrixServiceData().getVehiclePartsData();
+        for (VehiclePartData  vehiclePartData : vehiclePartsData) {
+            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+            vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
+            if (vehiclePartData.getVehiclePartAdditionalServices() != null) {
+                List<ServiceData> additionalServices = vehiclePartData.getVehiclePartAdditionalServices();
                 for (ServiceData additionalService : additionalServices)
                     vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
@@ -348,13 +348,13 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
 
         VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
         VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
-        List<HailMatrixService>  hailMatrixServices = inspectionData.getMatrixServiceData().getHailMatrixServices();
-        for (HailMatrixService  hailMatrixService : hailMatrixServices) {
-            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-            vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-            vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
-            if (hailMatrixService.getMatrixAdditionalServices() != null) {
-                List<ServiceData> additionalServices = hailMatrixService.getMatrixAdditionalServices();
+        List<VehiclePartData>  vehiclePartsData = inspectionData.getMatrixServiceData().getVehiclePartsData();
+        for (VehiclePartData  vehiclePartData : vehiclePartsData) {
+            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+            vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
+            if (vehiclePartData.getVehiclePartAdditionalServices() != null) {
+                List<ServiceData> additionalServices = vehiclePartData.getVehiclePartAdditionalServices();
                 for (ServiceData additionalService : additionalServices)
                     vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
@@ -391,13 +391,13 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
 
         VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
         VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
-        List<HailMatrixService>  hailMatrixServices = inspectionData.getMatrixServiceData().getHailMatrixServices();
-        for (HailMatrixService  hailMatrixService : hailMatrixServices) {
-            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-            vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-            vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
-            if (hailMatrixService.getMatrixAdditionalServices() != null) {
-                List<ServiceData> additionalServices = hailMatrixService.getMatrixAdditionalServices();
+        List<VehiclePartData>  vehiclePartsData = inspectionData.getMatrixServiceData().getVehiclePartsData();
+        for (VehiclePartData  vehiclePartData : vehiclePartsData) {
+            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+            vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
+            if (vehiclePartData.getVehiclePartAdditionalServices() != null) {
+                List<ServiceData> additionalServices = vehiclePartData.getVehiclePartAdditionalServices();
                 for (ServiceData additionalService : additionalServices)
                     vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }

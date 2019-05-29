@@ -12,17 +12,12 @@ public class MatrixServiceData {
     @JsonProperty("hailMatrixName")
     String hailMatrixName;
 
-    @JsonProperty("hailMatrixServices")
-    List<HailMatrixService> hailMatrixServices;
+    @JsonProperty("vehiclePartsData")
+    List<VehiclePartData> vehiclePartsData;
 
-    @JsonProperty("hailMatrixService")
-    HailMatrixService hailMatrixService;
+    @JsonProperty("vehiclePartData")
+    VehiclePartData vehiclePartData;
 
-    @JsonProperty("matrixPart")
-    MatrixPartData matrixPart;
-
-    @JsonProperty("matrixParts")
-    List<MatrixPartData> matrixParts;
 
     public String getMatrixServiceName() {
         return matrixServiceName;
@@ -32,19 +27,12 @@ public class MatrixServiceData {
         return hailMatrixName;
     }
 
-    public List<HailMatrixService> getHailMatrixServices() {
-        return hailMatrixServices;
+    public List<VehiclePartData> getVehiclePartsData() {
+        return vehiclePartsData;
     }
 
-    public HailMatrixService getHailMatrixService() {
-        return hailMatrixService;
+    public VehiclePartData getVehiclePartData() {
+        return vehiclePartData;
     }
 
-    public MatrixPartData getMatrixPartData() {
-        return matrixPart;
-    }
-
-    public List<MatrixPartData> getMatrixPartsData() {
-        return matrixParts;
-    }
 }

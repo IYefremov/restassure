@@ -3,9 +3,9 @@ package com.cyberiansoft.test.vnext.testcases.r360free.inspections;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.dataclasses.HailMatrixService;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -621,10 +621,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextPriceMatrixesScreen pricematrixesscreen = availableServicesScreen.openMatrixServiceDetails(inspectionData.getMatrixServiceData().getMatrixServiceName());
 		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
-		for (HailMatrixService hailMatrixService : inspectionData.getMatrixServiceData().getHailMatrixServices()) {
-			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-			vehiclepartinfoscreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-			vehiclepartinfoscreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
+		for (VehiclePartData vehiclePartData : inspectionData.getMatrixServiceData().getVehiclePartsData()) {
+			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+			vehiclepartinfoscreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+			vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 			VNextNotesScreen notesScreen = vehiclepartinfoscreen.clickMatrixServiceNotesOption();
 			//notesScreen.selectNotesPicturesTab();
 			notesScreen.addFakeImageNote();
@@ -655,9 +655,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
 		Assert.assertTrue(inspectionsWebPage.isMatrixServiceExists(inspectionData.getMatrixServiceData().getMatrixServiceName()));
 		List<WebElement> matrixSepviseRows = inspectionsWebPage.getAllMatrixServicesRows(inspectionData.getMatrixServiceData().getMatrixServiceName());
-		Assert.assertEquals(matrixSepviseRows.size(), inspectionData.getMatrixServiceData().getHailMatrixServices().size());
-		for (WebElement matrixSepviseRow : matrixSepviseRows) {
-			Assert.assertTrue(inspectionsWebPage.isImageExistsForMatrixServiceNotes(matrixSepviseRow));
+		Assert.assertEquals(matrixSepviseRows.size(), inspectionData.getMatrixServiceData().getVehiclePartsData().size());
+		for (WebElement matrixServiceeRow : matrixSepviseRows) {
+			Assert.assertTrue(inspectionsWebPage.isImageExistsForMatrixServiceNotes(matrixServiceeRow));
 		}
 		webdriver.quit();
 	}

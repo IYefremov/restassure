@@ -68,11 +68,11 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
         VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
         VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
-        final HailMatrixService hailMatrixService = matrixServiceData.getHailMatrixServices().get(0);
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-        vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-        vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
-        vehiclePartInfoScreen.selectVehiclePartAdditionalService(hailMatrixService.getMatrixAdditionalServices().get(0).getServiceName());
+        final VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+        vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+        vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
+        vehiclePartInfoScreen.selectVehiclePartAdditionalService(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
         vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
@@ -242,11 +242,11 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
         VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
         VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
-        final HailMatrixService hailMatrixService = matrixServiceData.getHailMatrixServices().get(0);
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-        vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-        vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
-        vehiclePartInfoScreen.selectVehiclePartAdditionalService(hailMatrixService.getMatrixAdditionalServices().get(0).getServiceName());
+        final VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+        vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+        vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
+        vehiclePartInfoScreen.selectVehiclePartAdditionalService(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
         vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
@@ -291,10 +291,10 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
         VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
         VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
-        for (HailMatrixService hailMatrixService : matrixServiceData.getHailMatrixServices()) {
-            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(hailMatrixService.getHailMatrixServiceName());
-            vehiclePartInfoScreen.selectVehiclePartSize(hailMatrixService.getHailMatrixSize());
-            vehiclePartInfoScreen.selectVehiclePartSeverity(hailMatrixService.getHailMatrixSeverity());
+        for (VehiclePartData vehiclePartData : matrixServiceData.getVehiclePartsData()) {
+            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
+            vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
             vehiclePartInfoScreen.selectAllAvailableAdditionalServices();
             vehiclePartInfoScreen.clickSaveVehiclePartInfo();
             vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());

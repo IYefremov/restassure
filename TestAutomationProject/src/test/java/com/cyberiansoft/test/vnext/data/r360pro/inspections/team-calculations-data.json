@@ -119,10 +119,10 @@
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
       "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "State Farm-Tech",
-        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "DIME", "hailMatrixSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
-        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "Very Light 1 to 5"
-        }, {"hailMatrixServiceName": "Deck Lid", "hailMatrixSize": "Quarter", "hailMatrixSeverity": "Limit 151 to 200"
-        }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Half", "hailMatrixSeverity": "Ceiling 201 to 250"
+        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "DIME", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
+        }, {"vehiclePartName": "Roof", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "Very Light 1 to 5"
+        }, {"vehiclePartName": "Deck Lid", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Limit 151 to 200"
+        }, {"vehiclePartName": "Cowl, Other", "vehiclePartSize": "Half", "vehiclePartSeverity": "Ceiling 201 to 250"
         }]},
       "inspPrice": "$281.25"
     }
@@ -136,9 +136,9 @@
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
       "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "Nationwide Insurance-Tech",
-        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "QTR", "hailMatrixSeverity": "1-5", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
-        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "NKL", "hailMatrixSeverity": "Roof (251 - 300)"
-        }, {"hailMatrixServiceName": "Left Other", "hailMatrixSize": "HLF", "hailMatrixSeverity": "6-15"
+        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "QTR", "vehiclePartSeverity": "1-5", "vehiclePartAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
+        }, {"vehiclePartName": "Roof", "vehiclePartSize": "NKL", "vehiclePartSeverity": "Roof (251 - 300)"
+        }, {"vehiclePartName": "Left Other", "vehiclePartSize": "HLF", "vehiclePartSeverity": "6-15"
         }]},
       "inspPrice": "$1,531.25"
     }
@@ -152,9 +152,9 @@
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
       "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "Progressive-Tech",
-        "hailMatrixServices" : [{"hailMatrixServiceName": "Hood", "hailMatrixSize": "Half", "hailMatrixSeverity": "Moderate 31 to 50", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
-        }, {"hailMatrixServiceName": "Roof", "hailMatrixSize": "Quarter", "hailMatrixSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)"
-        }, {"hailMatrixServiceName": "Cowl, Other", "hailMatrixSize": "Nickel", "hailMatrixSeverity": "Light 6 to 15"
+        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "Half", "vehiclePartSeverity": "Moderate 31 to 50", "vehiclePartAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
+        }, {"vehiclePartName": "Roof", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)"
+        }, {"vehiclePartName": "Cowl, Other", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "Light 6 to 15"
         }]},
       "inspPrice": "$2,287.50"
     }

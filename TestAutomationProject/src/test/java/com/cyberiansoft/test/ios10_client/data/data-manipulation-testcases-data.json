@@ -11,8 +11,8 @@
 
       },
       "matrixService": {"matrixServiceName" : "Hail Damage Repair",
-        "matrixParts" : [{"matrixPartName": "Hood", "partSize": "Nickel", "partSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Corrosion Protection" }]
-        }, {"matrixPartName": "Roof", "partSize": "Quarter", "partSeverity": "Medium 31 to 50", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }, { "serviceName" : "Dent on Body Line" }]
+        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalServices" : [{ "serviceName" : "Corrosion Protection" }]
+        }, {"vehiclePartName": "Roof", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Medium 31 to 50", "vehiclePartAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }, { "serviceName" : "Dent on Body Line" }]
         }]}
     }
   ],
@@ -28,8 +28,8 @@
 
       },
       "matrixService": {"matrixServiceName" : "Hail Damage Repair",
-        "matrixParts" : [{"matrixPartName": "Hood", "partSize": "Nickel", "partSeverity": "Light 6 to 15", "matrixAdditionalServices" : [{ "serviceName" : "Corrosion Protection" }]
-        }, {"matrixPartName": "Roof", "partSize": "Quarter", "partSeverity": "Medium 31 to 50", "matrixAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }, { "serviceName" : "Dent on Body Line" }]
+        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalServices" : [{ "serviceName" : "Corrosion Protection" }]
+        }, {"vehiclePartName": "Roof", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Medium 31 to 50", "vehiclePartAdditionalServices" : [{ "serviceName" : "Aluminum Upcharge" }, { "serviceName" : "Dent on Body Line" }]
         }]}
     }
   ],
