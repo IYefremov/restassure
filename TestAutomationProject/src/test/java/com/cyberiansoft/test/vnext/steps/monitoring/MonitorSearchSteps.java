@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.steps;
+package com.cyberiansoft.test.vnext.steps.monitoring;
 
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -14,6 +14,7 @@ public class MonitorSearchSteps {
 
     public static void selectStatus(String status) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement());
         commonFilterScreen.getStatus().selectOption(status);
     }
 

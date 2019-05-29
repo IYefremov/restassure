@@ -4,9 +4,14 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
+import com.cyberiansoft.test.vnext.enums.MenuItems;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.monitoring.MonitorMenuSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -29,6 +34,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
     public void userCanCompleteBasicROFlow(String rowID,
                                            String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        RepairOrderDto repairOrderDto =  workOrderData.getMonitoring().getRepairOrderData();
 
         HomeScreenSteps.openInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
@@ -49,6 +55,19 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         MonitorSearchSteps.search();
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
         MonitorSteps.verifyRepairOrderValues(workOrderId,
-                workOrderData.getMonitoring().getRepairOrderData());
+                repairOrderDto);
+        MonitorSteps.openMenu(workOrderId);
+        MonitorMenuSteps.selectMenuItem(MenuItems.START);
+        MonitorMenuSteps.selectServices(workOrderData.getServicesList());
+        MonitorSteps.openMenu(workOrderId);
+        MonitorMenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        MonitorMenuSteps.selectServices(workOrderData.getServicesList());
+        MonitorSteps.openSearchFilters();
+        MonitorSearchSteps.selectStatus("Completed - All");
+        MonitorSearchSteps.search();
+        repairOrderDto.setCompletePercentage("100%");
+        repairOrderDto.setPhaseName("Completed");
+        MonitorSteps.verifyRepairOrderValues(workOrderId,
+                repairOrderDto);
     }
 }

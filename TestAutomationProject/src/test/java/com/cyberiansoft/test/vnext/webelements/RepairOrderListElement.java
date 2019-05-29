@@ -3,9 +3,11 @@ package com.cyberiansoft.test.vnext.webelements;
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+@Getter
 public class RepairOrderListElement implements IWebElement {
     private WebElement rootElement;
     private String expandButtonLocator = ".//div[@class=\"status-item-content-toggle\"]";
@@ -50,5 +52,10 @@ public class RepairOrderListElement implements IWebElement {
     public RepairOrderDto getRepairOrderDto() {
         WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderIdLocator)), true);
         return new RepairOrderDto(getPhase(), getVin(), getStatusValue());
+    }
+
+    public void openMenu(){
+        WaitUtils.elementShouldBeVisible( rootElement.findElement(By.xpath(vinTextLocator)), true);
+        rootElement.findElement(By.xpath(vinTextLocator)).click();
     }
 }
