@@ -68,7 +68,7 @@ public class VNextTeamVehicleInfoTestCases extends BaseTestCaseTeamEditionRegist
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.setVIN(inspectionData.getNewVinNumber());
+        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         Assert.assertTrue(vehicleInfoScreen.isVINValidationMessageExists());
         Assert.assertEquals(vehicleInfoScreen.getVINValidationMessageBackgroundColor(), greyRGBColor);
         Assert.assertEquals(vehicleInfoScreen.getVINFieldValue(),inspectionData.getVinNumber().substring(0, inspectionData.getVinNumber().length()-1));
