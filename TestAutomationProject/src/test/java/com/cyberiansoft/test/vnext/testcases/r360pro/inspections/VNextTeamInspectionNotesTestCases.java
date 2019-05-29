@@ -31,6 +31,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRegistration {
 
@@ -239,7 +240,11 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		final int numberOfQuickNotesToAdd = 4;
+		List<String> quickNotes = new ArrayList<>();
+		quickNotes.add("Warranty expired");
+		quickNotes.add("Test Quick Note 1");
+		quickNotes.add("test_r2");
+		quickNotes.add("test_r3");
 		
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionScreen = homeScreen.clickInspectionsMenuItem();		
@@ -258,14 +263,16 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
 
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		VNextNotesScreen notesScreen = inspectionsMenuScreen.clickNotesInspectionMenuItem();
-		ArrayList<String> addednotes = notesScreen.addNumberOfQuickNotes(numberOfQuickNotesToAdd);
+		notesScreen.addQuickNotes(quickNotes);
 		AppiumUtils.clickHardwareBackButton();
 		inspectionScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionScreen.searchInpectionByFreeText(inspectionNumber);
 		inspectionsMenuScreen = inspectionScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		notesScreen = inspectionsMenuScreen.clickNotesInspectionMenuItem();
-		for (String quicknote: addednotes) {
-			Assert.assertTrue(notesScreen.getSelectedNotes().contains(quicknote));
+		for (String quickNote: quickNotes) {
+			System.out.println("++++" + quickNote);
+			System.out.println("====" + notesScreen.getSelectedNotes());
+			Assert.assertTrue(notesScreen.getSelectedNotes().contains(quickNote));
 		}
 		notesScreen.clickNotesBackButton();
 		inspectionScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());

@@ -191,24 +191,20 @@ public class VNextNotesScreen extends VNextBaseScreen {
 		informationdialog.clickInformationDialogRemoveButton();
 	}
 	
-	public ArrayList<String> addNumberOfQuickNotes(int quickNotesNumber) {
-		ArrayList<String> addednotes = new ArrayList<String>();
-		for (int i = 0; i < quickNotesNumber; i++) {
+	public void addQuickNotes(List<String> quickNotes) {
+		for (String quickNote: quickNotes) {
 			if (!quicknotescontent.getAttribute("class").contains("accordion-item-expanded"))
 				tap(quicknotescontent);
 			appiumdriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 			if (servicenotessscreen.findElements(By.xpath("//*[@action='show-more']")).size() > 0)
 				tap(servicenotessscreen.findElement(By.xpath("//*[@action='show-more']")));
 			appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			List<WebElement> quicknotes = servicenotessscreen.findElements(By.xpath("//*[@action='quick-note']"));
-			if (i < quicknotes.size()) {
-				JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-				je.executeScript("arguments[0].scrollIntoView(true);",quicknotes.get(i));
-				tap(quicknotes.get(i));
-				addednotes.add(quicknotes.get(i).getText().trim());
-			}
+			WebElement quickNoteCell = servicenotessscreen.findElement(By.xpath("//*[@action='quick-note' and contains(text(), '" +
+							quickNote + "')]"));
+			JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
+			je.executeScript("arguments[0].scrollIntoView(true);",quickNoteCell);
+			tap(quickNoteCell);
 		}
-		return addednotes;
 	}
 	
 }
