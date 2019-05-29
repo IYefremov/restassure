@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
-import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ActiveFiltersLabel;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
@@ -27,6 +26,12 @@ public class RepairOrderScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@data-autotests-id=\"repair-orders-list\"]/div")
     private List<RepairOrderListElement> repairOrderListElements;
 
+    @FindBy(xpath = "//span[@data-automation-id=\"search-icon\"]")
+    private WebElement searchButton;
+
+    @FindBy(xpath = "//div[@class=\"searchlist-common-filters-toggle\"]")
+    private WebElement commonFiltersToggle;
+
     public RepairOrderScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }
@@ -45,5 +50,13 @@ public class RepairOrderScreen extends MonitorScreen {
     public void openChangeLocationPage() {
         WaitUtils.elementShouldBeVisible(locationSelectionNavigationBar, true);
         locationSelectionNavigationBar.click();
+    }
+
+    public void openSearchMenu() {
+        searchButton.click();
+    }
+
+    public void openCommonFilters() {
+        WaitUtils.click(commonFiltersToggle);
     }
 }

@@ -36,4 +36,11 @@ public class MonitorSteps {
         Assert.assertEquals(repairOrderScreen.getRepairOrderElement(repairOrderId).getRepairOrderDto(),
                 expectedRoValues);
     }
+
+    public static void openSearchFilters() {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        repairOrderScreen.openSearchMenu();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getCommonFiltersToggle(), true);
+        repairOrderScreen.openCommonFilters();
+    }
 }

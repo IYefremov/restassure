@@ -14,7 +14,7 @@
       "monitoring": {
         "location": "automationMonitoring",
         "repairOrderData": {
-          "phaseName": "Not Started",
+          "phaseName": "QC",
           "vin": "777777",
           "completePercentage": "0%"
         }

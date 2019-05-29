@@ -43,7 +43,10 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
 
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation(workOrderData.getMonitoring().getLocation());
-        MonitorSteps.clearAllFilters();
+        MonitorSteps.openSearchFilters();
+        MonitorSearchSteps.searchByText(workOrderId);
+        MonitorSearchSteps.selectStatus("All");
+        MonitorSearchSteps.search();
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
         MonitorSteps.verifyRepairOrderValues(workOrderId,
                 workOrderData.getMonitoring().getRepairOrderData());
