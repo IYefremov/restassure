@@ -113,11 +113,10 @@ public class VNextBaseScreen {
     }
 
     public void clickScreenBackButton() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='back']")));
-        wait = new WebDriverWait(appiumdriver, 5);
-        WebElement backBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@action='back']")));
-        tap(backBtn);
+        String backButtonLocator = "//*[@action=\"back\"]";
+        WaitUtils.getGeneralWebdriverWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath(backButtonLocator)));
+        WaitUtils.waitUntilElementIsClickable(By.xpath(backButtonLocator));
+        DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath(backButtonLocator)).click();
     }
 
     public void clickScreenForwardButton() {

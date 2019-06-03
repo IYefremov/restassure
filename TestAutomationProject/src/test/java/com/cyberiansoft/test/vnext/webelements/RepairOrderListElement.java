@@ -1,11 +1,15 @@
 package com.cyberiansoft.test.vnext.webelements;
 
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
+import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Getter
 public class RepairOrderListElement implements IWebElement {
@@ -15,6 +19,7 @@ public class RepairOrderListElement implements IWebElement {
     private String statusValue = ".//div[@class=\"status-item\"]//div[@class=\"status-item-chart\"]";
     private String phaseTextLocator = "//div[@class=\"status-item-content\"]//div[@class=\"status-item-content-row\"][2]";
     private String vinTextLocator = "//div[@class=\"status-item-content\"]//div[@class=\"status-item-content-row\"][3]";
+    private String statusesListLocator = "//div[@action=\"change-flag\"]";
 
     public RepairOrderListElement(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -54,8 +59,26 @@ public class RepairOrderListElement implements IWebElement {
         return new RepairOrderDto(getPhase(), getVin(), getStatusValue());
     }
 
-    public void openMenu(){
-        WaitUtils.elementShouldBeVisible( rootElement.findElement(By.xpath(vinTextLocator)), true);
+    public void openMenu() {
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(vinTextLocator)), true);
         rootElement.findElement(By.xpath(vinTextLocator)).click();
+    }
+
+    public void selectStatus(RepairOrderFlag flag) {
+        this.expand();
+        rootElement.findElements(By.xpath(statusesListLocator))
+                .stream()
+                .filter((element) -> element.getAttribute("class").contains(flag.getFlagData()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Repair order flag not found " + flag.getFlagData()))
+                .click();
+    }
+
+    public RepairOrderFlag getRepairOrderFlag() {
+        Pattern pattern = Pattern.compile("\\w+-flag-selected");
+        Matcher matcher = pattern.matcher(rootElement.getAttribute("class"));
+        matcher.find();
+        String flagString = matcher.group();
+        return RepairOrderFlag.getFlagFromString(flagString.substring(0,flagString.lastIndexOf("-")));
     }
 }

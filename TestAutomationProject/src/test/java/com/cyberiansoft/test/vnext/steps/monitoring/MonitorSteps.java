@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
+import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.SelectLocationScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -48,8 +49,23 @@ public class MonitorSteps {
 
     public static void openMenu(String workOrderId) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> repairOrderScreen.getRepairOrderListElements().size() > 0);
         RepairOrderListElement repairOrder = repairOrderScreen.getRepairOrderElement(workOrderId);
         WaitUtils.elementShouldBeVisible(repairOrder.getRootElement(), true);
         repairOrder.openMenu();
+    }
+
+    public static void setRepairOrderFlag(String workOrderId, RepairOrderFlag flag) {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> repairOrderScreen.getRepairOrderListElements().size() > 0);
+        repairOrderScreen.getRepairOrderElement(workOrderId).selectStatus(flag);
+    }
+
+    public static void verifyOrderFlag(String workOrderId, RepairOrderFlag repairOrderFlag) {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        Assert.assertEquals(
+                repairOrderScreen.getRepairOrderElement(workOrderId).getRepairOrderFlag(),
+                repairOrderFlag);
     }
 }

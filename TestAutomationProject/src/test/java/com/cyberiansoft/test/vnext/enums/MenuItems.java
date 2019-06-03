@@ -8,7 +8,7 @@ public enum MenuItems {
     START("start"),
     COMPLETE("complete"),
     CHANGE_STATUS(""),
-    NOTES(""),
+    NOTES("comments"),
     CHANGE_DEPARTMENT("");
 
     @Getter

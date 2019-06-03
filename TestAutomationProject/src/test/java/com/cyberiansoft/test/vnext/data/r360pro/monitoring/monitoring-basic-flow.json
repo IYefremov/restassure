@@ -20,5 +20,46 @@
         }
       }
     }
+  ],
+  "userCanChangeFlagsOfWorkOrder": [
+    {
+      "rowID": "userCanChangeFlagsOfWorkOrder.01",
+      "description": "TC 00001, TC00002"
+    }
+  ],
+  "userCanAddNotesToRepairOrder": [
+    {
+      "rowID": "userCanAddNotesToRepairOrder.01",
+      "description": "TC 00001, TC00002"
+    }
+  ],
+  "userCanCompleteOrderViaEdit": [
+    {
+      "rowID": "userCanCompleteOrderViaEdit.01",
+      "description": "TC 00001, TC00002",
+      "monitoring": {
+        "location": "automationMonitoring",
+        "repairOrderData": {
+          "phaseName": "QC",
+          "vin": "777777",
+          "completePercentage": "0%"
+        },
+        "orderPhaseDto": {
+          "status": "ACTIVE",
+          "phaseName": "Phase: QC"
+        }
+      }
+    }
+  ],
+  "userCanViewOrderInfoViaEdit": [
+    {
+      "rowID": "userCanViewOrderInfoViaEdit.01",
+      "description": "TC 00001, TC00002",
+      "monitoring": {
+        "orderInfoDto":{
+          "vin":"7777777777777"
+        }
+      }
+    }
   ]
 }
