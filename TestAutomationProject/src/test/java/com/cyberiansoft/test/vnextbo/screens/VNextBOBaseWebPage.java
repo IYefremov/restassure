@@ -192,17 +192,24 @@ public abstract class VNextBOBaseWebPage {
         try {
             waitShort.until(ExpectedConditions.visibilityOfAllElements(listBox));
         } catch (Exception ignored) {}
-        for (WebElement option : listBox) {
-            if (option.getText().equals(selection)) {
-                actions.moveToElement(option).click().build().perform();
-                try {
+        listBox
+                .stream()
+                .filter((option) -> {
                     wait.ignoring(StaleElementReferenceException.class)
-                            .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
-                } catch (Exception ignored) {
-                    waitABit(1000);
-                }
-                break;
-            }
+                            .until(ExpectedConditions.not(ExpectedConditions.stalenessOf(option)));
+                    return option.getText().equals(selection);
+                })
+                .findFirst()
+                .ifPresent((option) -> actions
+                        .moveToElement(option)
+                        .click()
+                        .build()
+                        .perform());
+        try {
+            wait.ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
+        } catch (Exception ignored) {
+            waitABit(1000);
         }
     }
 
@@ -266,5 +273,14 @@ public abstract class VNextBOBaseWebPage {
 
     private LocalDate getDate(String date) {
         return LocalDate.parse(date, formatter);
+    }
+
+    public String getInputFieldValue(WebElement inputField) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(inputField)).getAttribute("value");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

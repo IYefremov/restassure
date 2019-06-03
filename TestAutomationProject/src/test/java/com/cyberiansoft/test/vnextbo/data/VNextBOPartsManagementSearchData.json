@@ -59,7 +59,7 @@
       "rowID": "verifyUserCanSearchROByWOTypeUsingAdvancedSearch.01",
       "description": "Test Case 83759:User can search RO by \"WO Type\" using Advanced Search",
       "location": "Best Location",
-      "stockType": "Best"
+      "woType": "Best"
     }
   ],
 
@@ -93,7 +93,7 @@
       "rowID": "verifyUserCanSearchROByVINNumUsingAdvancedSearch.01",
       "description": "Test Case 83788:User can search RO by \"VIN\" using Advanced Search",
       "location": "Best Location",
-      "VINNum": "11111"
+      "vinNum": "11111"
     }
   ],
 
@@ -102,7 +102,7 @@
       "rowID": "verifyUserCanSearchROByOEMNumUsingAdvancedSearch.01",
       "description": "Test Case 83789:User can search RO by \"OEM#\" using Advanced Search",
       "location": "Best Location",
-      "OEMNum": "My OEM"
+      "oemNum": "My OEM"
     }
   ],
 
@@ -121,6 +121,185 @@
       "description": "Test Case 83796:User can search RO by \"Ordered From\" using Advanced Search",
       "location": "Best Location",
       "orderedFrom": "Test Team"
+    }
+  ],
+
+  "verifyUserCanSearchROByFromOptionUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByFromOptionUsingAdvancedSearch.01",
+      "description": "Test Case 83792:User can search RO by \"From\" using Advanced Search",
+      "location": "Best Location"
+    }
+  ],
+
+  "verifyUserCanSearchROByToOptionUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByToOptionUsingAdvancedSearch.01",
+      "description": "Test Case 83793:User can search RO by \"To\" using Advanced Search",
+      "location": "Best Location"
+    }
+  ],
+
+  "verifyUserCanFillAllFieldsOfAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanFillAllFieldsOfAdvancedSearch.01",
+      "description": "Test Case 83803:User can fill all fields of Advanced Search",
+      "location": "Best Location",
+      "type": "mik",
+      "customer": "Mike's Techs",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "vinNum": "32434234234234",
+      "oemNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "TestWO"
+    }
+  ],
+
+  "verifyAdvancedSearchDataIsNotClearedAfterClosingByClickingXIconAndOutsideSearchWindow": [
+    {
+      "rowID": "verifyAdvancedSearchDataIsNotClearedAfterClosingByClickingXIconAndOutsideSearchWindow.01",
+      "description": "Test Case 83808:User can close Advanced Search by the clicking on \"X-icon\". Test Case 83811:User can close Advanced Search by the clicking outside of the Search window",
+      "location": "Best Location",
+      "type": "mik",
+      "customer": "Mike's Techs",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "vinNum": "32434234234234",
+      "oemNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "TestWO"
+    }
+  ],
+
+  "verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog": [
+    {
+      "rowID": "verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog.01",
+      "description": "Test Case 83812:User can clear all entered values",
+      "location": "Best Location",
+      "type": "mik",
+      "customer": "Mike's Techs",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "vinNum": "32434234234234",
+      "oemNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "TestWO",
+      "defaultValue": ""
+    }
+  ],
+
+  "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog": [
+    {
+      "rowID": "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog.01",
+      "description": "Test Case 83815:User can Save options of \"Advanced Search\". Test Case 83816:User can search RO using options of the \"Advanced Search\"",
+      "location": "Best Location",
+      "type": "mik",
+      "customer": "Mike's Techs",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "vinNum": "32434234234234",
+      "oemNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "TestWO",
+      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+    }
+  ],
+
+  "verifyUserCanSearchROUsingOptionsOfAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROUsingOptionsOfAdvancedSearch.01",
+      "description": "Test Case 83816:User can search RO using options of the \"Advanced Search\"",
+      "location": "Best Location",
+      "type": "mik",
+      "customer": "Mike's Techs",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "vinNum": "32434234234234",
+      "oemNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "TestWO",
+      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+    }
+  ],
+
+  "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch.01",
+      "description": "Test Case 83817:User can search RO using saved options of the \"Advanced Search\"",
+      "location": "Best Location",
+      "type": "",
+      "customer": "",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "stockNum": "",
+      "vinNum": "",
+      "oemNum": "",
+      "notes": "",
+      "orderedFrom": "",
+      "searchName": "TestWO",
+      "defaultValue": "",
+      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+    }
+  ],
+
+  "verifyUserCanChangeValuesOfTheSavedAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanChangeValuesOfTheSavedAdvancedSearch.01",
+      "description": "Test Case 83823:User can change values of the saved \"Advanced Search\"",
+      "location": "Best Location",
+      "type": "mik",
+      "customer": "Mike's Techs",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "vinNum": "32434234234234",
+      "oemNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "TestWO",
+      "typeChanged": "mike",
+      "phaseChanged": "First",
+      "woTypeChanged": "_no_sharing",
+      "searchNameChanged": "222",
+      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+    }
+  ],
+
+  "verifyUserCanClickSavedAdvancedSearchModalDialogDeleteButtons": [
+    {
+      "rowID": "verifyUserCanClickSavedAdvancedSearchModalDialogDeleteButtons.01",
+      "description": "Test Case 83825:User can click Delete but not deleted saved \"Advances Search\" clicking the \"X-icon\". Test Case 83826:User can click Delete but not deleted saved \"Advances Search\" clicking \"No\". Test Case 83827:User can Delete saved \"Advances Search\"",
+      "location": "Best Location",
+      "type": "mik",
+      "customer": "Mike's Techs",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "vinNum": "32434234234234",
+      "oemNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "TestWO",
+      "emptyPartsListMessage": "Click here to learn how to create your first work order"
     }
   ]
 }

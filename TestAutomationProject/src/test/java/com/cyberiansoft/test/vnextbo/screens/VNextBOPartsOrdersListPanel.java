@@ -8,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -27,7 +30,10 @@ public class VNextBOPartsOrdersListPanel extends VNextBOBaseWebPage {
     private List<WebElement> phasesListOptions;
 
     @FindBy(xpath = "//ul[@data-automation-id='partsOrdersList']//div/b")
-    private List<WebElement> WONumsListOptions;
+    private List<WebElement> woNumsListOptions;
+
+    @FindBy(xpath = "//ul[@data-automation-id='partsOrdersList']//div[contains(@class, 'item__description')]/div[1]")
+    private List<WebElement> woDataListOptions;
 
     @FindBy(xpath = "//ul[@data-automation-id='partsOrdersList']//span[text()='Stock#:']/..")
     private List<WebElement> stockNumsListOptions;
@@ -38,14 +44,14 @@ public class VNextBOPartsOrdersListPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[@class='k-input service-oem-number-combobox']")
     private List<WebElement> oemNumsListOptions;
 
-    @FindBy(xpath = "//ul[@data-automation-id='partsOrdersList']/li//div[contains(@class, 'item__description')]/div")
-    private List<WebElement> descriptionListOptions;
-
     @FindBy(xpath = "//ul[@data-automation-id='partsOrdersList']/li//span[text()='Stock#:']/parent::div")
     private List<WebElement> stockNumOptions;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'estimatedTimeArrival')]")
     private List<WebElement> etaData;
+
+    @FindBy(xpath = "//a[@class='link--underlined' and contains(text(), 'first work order')]")
+    private WebElement emptyPartsListMessage;
 
     public VNextBOPartsOrdersListPanel(WebDriver driver) {
         super(driver);
@@ -106,12 +112,28 @@ public class VNextBOPartsOrdersListPanel extends VNextBOBaseWebPage {
         return getPartsManagementOptions(phasesListOptions);
     }
 
-    public List<String> getPartsOrdersListOptionsDescriptions() {
-        return getPartsManagementOptions(descriptionListOptions);
+    public List<String> getPartsOrdersListDataOptionsDescriptions() {
+        return getPartsManagementOptions(woDataListOptions);
     }
 
-    public List<String> getWONumsListOptions() {
-        return getPartsManagementOptions(WONumsListOptions);
+    public String getDateFromString(String string) {
+        final String updated = string.replaceAll("[(),]", "");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        return Arrays
+                .stream(updated.split(" "))
+                .filter((value) -> {
+                    try {
+                        LocalDate.parse(value, formatter);
+                        return true;
+                    } catch (Exception ignored) {}
+                    return false;
+                })
+                .collect(Collectors.toList())
+                .get(0);
+    }
+
+    public List<String> getWoNumsListOptions() {
+        return getPartsManagementOptions(woNumsListOptions);
     }
 
     public List<String> getStockNumsListOptions() {
@@ -144,5 +166,13 @@ public class VNextBOPartsOrdersListPanel extends VNextBOBaseWebPage {
                 .stream()
                 .map(e -> e.getAttribute("value"))
                 .collect(Collectors.toList());
+    }
+
+    public String getEmptyPartsListMessage() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(emptyPartsListMessage)).getText();
+        } catch (Exception ignored) {
+            return "";
+        }
     }
 }
