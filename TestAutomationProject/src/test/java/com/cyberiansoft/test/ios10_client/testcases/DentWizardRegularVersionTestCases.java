@@ -25,7 +25,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class DentWizardRegularVersionTestCases extends BaseTestCase {
+public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTestCase {
 
 	public RegularHomeScreen homescreen;
 		

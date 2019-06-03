@@ -102,5 +102,6 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         InspectionSteps.saveInspection();
         InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
+        InspectionSteps.navigateHomeScreen();
     }
 }
