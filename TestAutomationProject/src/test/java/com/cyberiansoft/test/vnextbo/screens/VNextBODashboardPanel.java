@@ -47,8 +47,7 @@ public class VNextBODashboardPanel extends VNextBOBaseWebPage {
     }
 
     public String getQuantityValue() {
-        wait.until(ExpectedConditions.visibilityOf(quantityField));
-        return quantityField.getAttribute("value");
+        return wait.until(ExpectedConditions.visibilityOf(quantityField)).getAttribute("value");
     }
 
     public VNextBODashboardPanel clickPastDuePartsLink() {

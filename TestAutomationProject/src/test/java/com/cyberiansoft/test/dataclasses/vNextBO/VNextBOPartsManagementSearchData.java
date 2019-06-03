@@ -22,11 +22,11 @@ public class VNextBOPartsManagementSearchData extends VNextBOBaseData{
     @JsonProperty("stockNum")
     private String stockNum;
 
-    @JsonProperty("OEMNum")
-    private String OEMNum;
+    @JsonProperty("oemNum")
+    private String oemNum;
 
-    @JsonProperty("VINNum")
-    private String VINNum;
+    @JsonProperty("vinNum")
+    private String vinNum;
 
     @JsonProperty("woType")
     private String woType;
@@ -36,6 +36,27 @@ public class VNextBOPartsManagementSearchData extends VNextBOBaseData{
 
     @JsonProperty("orderedFrom")
     private String orderedFrom;
+
+    @JsonProperty("searchName")
+    private String searchName;
+
+    @JsonProperty("defaultValue")
+    private String defaultValue;
+
+    @JsonProperty("emptyPartsListMessage")
+    private String emptyPartsListMessage;
+
+    @JsonProperty("typeChanged")
+    private String typeChanged;
+
+    @JsonProperty("phaseChanged")
+    private String phaseChanged;
+
+    @JsonProperty("woTypeChanged")
+    private String woTypeChanged;
+
+    @JsonProperty("searchNameChanged")
+    private String searchNameChanged;
 
     public String getLocation() {
         return location;
@@ -61,12 +82,12 @@ public class VNextBOPartsManagementSearchData extends VNextBOBaseData{
         return stockNum;
     }
 
-    public String getOEMNum() {
-        return OEMNum;
+    public String getOemNum() {
+        return oemNum;
     }
 
-    public String getVINNum() {
-        return VINNum;
+    public String getVinNum() {
+        return vinNum;
     }
 
     public String getNotes() {
@@ -79,5 +100,33 @@ public class VNextBOPartsManagementSearchData extends VNextBOBaseData{
 
     public String getOrderedFrom() {
         return orderedFrom;
+    }
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public String getEmptyPartsListMessage() {
+        return emptyPartsListMessage;
+    }
+
+    public String getTypeChanged() {
+        return typeChanged;
+    }
+
+    public String getPhaseChanged() {
+        return phaseChanged;
+    }
+
+    public String getWoTypeChanged() {
+        return woTypeChanged;
+    }
+
+    public String getSearchNameChanged() {
+        return searchNameChanged;
     }
 }

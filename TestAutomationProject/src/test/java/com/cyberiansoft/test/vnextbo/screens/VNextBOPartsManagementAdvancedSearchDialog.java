@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -92,17 +94,44 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     @FindBy(xpath = "//span[@aria-controls='partsOrdersSearchEtaToInput_dateview']")
     private WebElement etaToDateCalendarButton;
 
+    @FindBy(xpath = "//span[@aria-controls='advSearchPartsOrdering-fromDate_dateview']")
+    private WebElement fromDateCalendarButton;
+
+    @FindBy(xpath = "//span[@aria-controls='advSearchPartsOrdering-toDate_dateview']")
+    private WebElement toDateCalendarButton;
+
     @FindBy(id = "partsOrdersSearchEtaFromInput_dateview")
-    private WebElement fromDateCalendarWidget;
+    private WebElement etaFromDateCalendarWidget;
 
     @FindBy(id = "partsOrdersSearchEtaToInput_dateview")
+    private WebElement etaToDateCalendarWidget;
+
+    @FindBy(id = "advSearchPartsOrdering-fromDate_dateview")
+    private WebElement fromDateCalendarWidget;
+
+    @FindBy(id = "advSearchPartsOrdering-toDate_dateview")
     private WebElement toDateCalendarWidget;
 
     @FindBy(xpath = "//div[@id='partsOrdersSearchEtaFromInput_dateview']//td[contains(@id, 'cell_selected')]")
-    private WebElement focusedDateInFromDateCalendarWidget;
+    private WebElement focusedDateInETAFromDateCalendarWidget;
 
     @FindBy(xpath = "//div[@id='partsOrdersSearchEtaToInput_dateview']//td[contains(@id, 'cell_selected')]")
+    private WebElement focusedDateInETAToDateCalendarWidget;
+
+    @FindBy(xpath = "//div[@id='advSearchPartsOrdering-fromDate_dateview']//td[contains(@id, 'cell_selected')]")
+    private WebElement focusedDateInFromDateCalendarWidget;
+
+    @FindBy(xpath = "//div[@id='advSearchPartsOrdering-toDate_dateview']//td[contains(@id, 'cell_selected')]")
     private WebElement focusedDateInToDateCalendarWidget;
+
+    @FindBy(xpath = "//div[@id='advSearchPartsOrdering-fromDate_dateview']//a[@aria-label='Previous']")
+    private WebElement previousMonthButtonInFromDateCalendarWidget;
+
+    @FindBy(xpath = "//div[@id='advSearchPartsOrdering-toDate_dateview']//a[@aria-label='Previous']")
+    private WebElement previousMonthButtonInToDateCalendarWidget;
+
+    @FindBy(xpath = "//div[@id='advSearchPartsOrdering-toDate_dateview']//td[contains(@id, 'cell_selected')]")
+    private WebElement nextMonthInToDateCalendarWidget;
 
     @FindBy(xpath = "//form[@id='advSearchPartsOrdering-form']//button[contains(text(), 'Search')]")
     private WebElement searchButton;
@@ -118,6 +147,27 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
 
     @FindBy(xpath = "//form[@id='advSearchPartsOrdering-form']//span[text()='Delete']")
     private WebElement deleteButton;
+
+    @FindBy(xpath = "//span[@aria-owns='partsOrdersSearchPhaseInput_listbox']//span[@class='k-input']")
+    private WebElement selectedPhaseOption;
+
+    @FindBy(xpath = "//span[@aria-owns='partsOrdersSearchWOTypesInput_listbox']//span[@class='k-input']")
+    private WebElement selectedWoTypeOption;
+
+    @FindBy(xpath = "//span[@aria-owns='advSearchPartsOrdering-orderedFrom_listbox']//span[@class='k-input']")
+    private WebElement selectedOrderedFromOption;
+
+    public String getPhaseOption() {
+        return wait.until(ExpectedConditions.visibilityOf(selectedPhaseOption)).getText();
+    }
+
+    public String getWoTypeOption() {
+        return wait.until(ExpectedConditions.visibilityOf(selectedWoTypeOption)).getText();
+    }
+
+    public String getOrderedFromOption() {
+        return wait.until(ExpectedConditions.visibilityOf(selectedOrderedFromOption)).getText();
+    }
 
     public VNextBOPartsManagementAdvancedSearchDialog(WebDriver driver) {
         super(driver);
@@ -209,9 +259,73 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
         return isElementDisplayed(deleteButton);
     }
 
+    public String getCustomerInputFieldValue() {
+        return getInputFieldValue(customerInputField);
+    }
+
+    public String getWoInputFieldValue() {
+        return getInputFieldValue(woNumInputField);
+    }
+
+    public String getStockInputFieldValue() {
+        return getInputFieldValue(stockNumInputField);
+    }
+
+    public String getVinInputFieldValue() {
+        return getInputFieldValue(vinInputField);
+    }
+
+    public String getOemInputFieldValue() {
+        return getInputFieldValue(oemNumInputField);
+    }
+
+    public String getNotesInputFieldValue() {
+        return getInputFieldValue(notesInputField);
+    }
+
+    public String getSearchNameInputFieldValue() {
+        return getInputFieldValue(searchNameInputField);
+    }
+
+    public String getETAFromInputField() {
+        return getInputFieldValue(etaFromInputField);
+    }
+
+    public String getETAToInputField() {
+        return getInputFieldValue(etaToInputField);
+    }
+
+    public String getFromInputField() {
+        return getInputFieldValue(fromDateInputField);
+    }
+
+    public String getToInputField() {
+        return getInputFieldValue(toDateInputField);
+    }
+
     public void clickSearchButton() {
         wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
         waitForLoading();
+    }
+
+    public void clickXButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(xButton)).click();
+    }
+
+    public void clickClearButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(clearButton)).click();
+        wait.until(ExpectedConditions.invisibilityOf(clearButton));
+    }
+
+    public void clickSaveButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(saveButton)).click();
+        waitForLoading();
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog clickDeleteSavedSearchButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
+        waitForLoading();
+        return this;
     }
 
     private VNextBOPartsManagementAdvancedSearchDialog typeData(WebElement inputField, WebElement autoCompleteList, String data) {
@@ -248,7 +362,13 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     }
 
     private VNextBOPartsManagementAdvancedSearchDialog clickPhaseBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(phaseListBox)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(phaseListBox)).click();
+        } catch (ElementClickInterceptedException e) {
+            waitABit(1500);
+            clickWithJS(phaseListBox);
+        }
+        waitABit(1000);
         return this;
     }
 
@@ -278,7 +398,12 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     }
 
     VNextBOPartsManagementAdvancedSearchDialog setData(WebElement inputField, String data) {
-        wait.until(ExpectedConditions.elementToBeClickable(inputField)).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(inputField)).click();
+        } catch (ElementClickInterceptedException e) {
+            waitABit(1500);
+            clickWithJS(inputField);
+        }
         inputField.clear();
         inputField.sendKeys(data);
         return this;
@@ -288,8 +413,9 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
         return selectDataFromBoxList(customerListBoxOptions, customerAutoCompleteList, customer);
     }
 
-    public void typeCustomerName(String customer) {
+    public VNextBOPartsManagementAdvancedSearchDialog typeCustomerName(String customer) {
         typeData(customerInputField, customerAutoCompleteList, customer);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setCustomer(String customer) {
@@ -352,21 +478,8 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
         return setData(toDateInputField, toDate);
     }
 
-    public String getETAFromInputField() {
-        return getETAValue(etaFromInputField);
-    }
-
-    public String getETAToInputField() {
-        return getETAValue(etaToInputField);
-    }
-
-    private String getETAValue(WebElement etaToInputField) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(etaToInputField)).getAttribute("value");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
+    public VNextBOPartsManagementAdvancedSearchDialog setSearchName(String searchName) {
+        return setData(searchNameInputField, searchName);
     }
 
     public boolean isCustomerDisplayed(String customer) {
@@ -393,15 +506,45 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog openETAFromCalendarWidget() {
-        return openCalendarWidget(etaFromDateCalendarButton, fromDateCalendarWidget);
+        return openCalendarWidget(etaFromDateCalendarButton, etaFromDateCalendarWidget);
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog openETAToCalendarWidget() {
-        return openCalendarWidget(etaToDateCalendarButton, toDateCalendarWidget);
+        return openCalendarWidget(etaToDateCalendarButton, etaToDateCalendarWidget);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog openFromCalendarWidget() {
+        return openCalendarWidget(fromDateCalendarButton, fromDateCalendarWidget);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog openToCalendarWidget() {
+        return openCalendarWidget(toDateCalendarButton, toDateCalendarWidget);
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog clickFocusedDateInETAFromDateCalendarWidget() {
+        clickFocusedDate(etaFromDateCalendarWidget, focusedDateInETAFromDateCalendarWidget);
+        return this;
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog clickFocusedDateInETAToDateCalendarWidget() {
+        clickFocusedDate(etaToDateCalendarWidget, focusedDateInETAToDateCalendarWidget);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog clickFocusedDateInFromDateCalendarWidget() {
         clickFocusedDate(fromDateCalendarWidget, focusedDateInFromDateCalendarWidget);
+        return this;
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog navigateLeftMinusMonthInFromDateCalendarWidget() {
+        wait.until(ExpectedConditions.elementToBeClickable(previousMonthButtonInFromDateCalendarWidget)).click();
+        waitABit(500);
+        return this;
+    }
+
+    public VNextBOPartsManagementAdvancedSearchDialog navigateLeftMinusMonthInToDateCalendarWidget() {
+        wait.until(ExpectedConditions.elementToBeClickable(previousMonthButtonInToDateCalendarWidget)).click();
+        waitABit(500);
         return this;
     }
 
@@ -413,11 +556,49 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     private VNextBOPartsManagementAdvancedSearchDialog openCalendarWidget(WebElement calendarButton, WebElement widget) {
         wait.until(ExpectedConditions.elementToBeClickable(calendarButton)).click();
         wait.until(ExpectedConditions.visibilityOf(widget));
+        waitABit(1000);
         return this;
     }
 
     private void clickFocusedDate(WebElement calendarWidget, WebElement focusedDateInCalendarWidget) {
         wait.until(ExpectedConditions.elementToBeClickable(focusedDateInCalendarWidget)).click();
         wait.until(ExpectedConditions.invisibilityOf(calendarWidget));
+    }
+
+    public void verifyAdvancedSearchFieldsValues(String customer, String phase, String woType, String woNum, String stockNum, String currentDate,
+                       String vinNum, String oemNum, String notes, String orderedFrom, String searchName) {
+        Assert.assertEquals(customer, getCustomerInputFieldValue(),
+                "The customer name hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(phase, getPhaseOption(),
+                "The Phase option hasn't been displayed properly after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(woType, getWoTypeOption(),
+                "The WO type option hasn't been displayed properly after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(woNum, getWoInputFieldValue(),
+                "The wo# hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(stockNum, getStockInputFieldValue(),
+                "The stock# hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(currentDate, getETAFromInputField(),
+                "The ETA From hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(currentDate, getETAToInputField(),
+                "The ETA To hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(vinNum, getVinInputFieldValue(),
+                "The VIN# hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(oemNum, getOemInputFieldValue(),
+                "The OEM# hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(notes, getNotesInputFieldValue(),
+                "The Notes value hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(currentDate, getFromInputField(),
+                "The From date hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(currentDate, getToInputField(),
+                "The To date hasn't been displayed after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(orderedFrom, getOrderedFromOption(),
+                "The Ordered From option hasn't been displayed properly after closing and opening the Advanced Search dialog");
+        Assert.assertEquals(searchName, getSearchNameInputFieldValue(),
+                "The search name hasn't been displayed after closing and opening the Advanced Search dialog");
+    }
+
+    public void verifyAdvancedSearchFieldsValues(String defaultValue, String phase, String woType) {
+        verifyAdvancedSearchFieldsValues(defaultValue, phase, woType, defaultValue, defaultValue, defaultValue,
+                defaultValue, defaultValue, defaultValue, defaultValue, defaultValue);
     }
 }
