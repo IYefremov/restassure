@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class DentWizartestCases extends BaseTestCase {
+public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 
 	private final String customer = "Abc Rental Center";
