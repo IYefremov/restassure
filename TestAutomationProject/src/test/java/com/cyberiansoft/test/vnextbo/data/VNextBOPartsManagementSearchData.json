@@ -301,25 +301,5 @@
       "searchName": "TestWO",
       "emptyPartsListMessage": "Click here to learn how to create your first work order"
     }
-  ],
-
-  "verifyUserCanDeleteSavedAdvancedSearch": [
-    {
-      "rowID": "verifyUserCanDeleteSavedAdvancedSearch.01",
-      "description": "Test Case 83827:User can Delete saved \"Advances Search\"",
-      "location": "Best Location",
-      "type": "mik",
-      "customer": "Mike's Techs",
-      "phase": "All",
-      "woType": "All",
-      "woNum": "O-000-152292",
-      "stockNum": "eeqwe",
-      "vinNum": "32434234234234",
-      "oemNum": "sdsfdsfsd",
-      "notes": "aaaaaaaaa",
-      "orderedFrom": "01_TimeRep_team",
-      "searchName": "TestWO",
-      "emptyPartsListMessage": "Click here to learn how to create your first work order"
-    }
   ]
 }
