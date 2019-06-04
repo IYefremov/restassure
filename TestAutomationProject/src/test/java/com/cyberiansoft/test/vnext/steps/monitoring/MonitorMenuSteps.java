@@ -19,6 +19,7 @@ public class MonitorMenuSteps {
     //TODO: Probably move to another class?
     public static void selectServices(List<ServiceData> serviceDataList) {
         RepairOrderSelectServiceScreen repairOrderSelectServiceScreen = new RepairOrderSelectServiceScreen();
+        WaitUtils.getGeneralFluentWait().until(driver -> repairOrderSelectServiceScreen.getServiceList().size() > 0);
         repairOrderSelectServiceScreen.selectServices(serviceDataList.stream().map(ServiceData::getServiceName).collect(Collectors.toList()));
         repairOrderSelectServiceScreen.completeScreen();
     }

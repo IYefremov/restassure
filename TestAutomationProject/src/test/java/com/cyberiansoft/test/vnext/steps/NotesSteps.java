@@ -17,7 +17,6 @@ public class NotesSteps {
         notesScreen.expandNote();
         notesScreen.enterNoteText(noteText);
         GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
     }
 
     public static void verifyNoteIsPresent(String noteText) {

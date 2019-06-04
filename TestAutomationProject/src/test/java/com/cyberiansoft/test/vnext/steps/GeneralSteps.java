@@ -2,13 +2,15 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextHelpingScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ConfirmationDialog;
 
 public class GeneralSteps {
     public static void pressBackButton() {
-        AppiumUtils.clickHardwareBackButton();
+        VNextBaseScreen vNextBaseScreen = new VNextBaseScreen();
+        vNextBaseScreen.clickScreenBackButton();
     }
 
     public static void dismissHelpingScreenIfPresent() {
@@ -23,6 +25,7 @@ public class GeneralSteps {
 
     public static void confirmDialog() {
         ConfirmationDialog confirmationDialog = new ConfirmationDialog();
+        WaitUtils.elementShouldBeVisible(confirmationDialog.getConfirmDialogButton(), true);
         confirmationDialog.getConfirmDialogButton().click();
     }
 }

@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
@@ -44,7 +44,6 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.approveInspection();
-        GeneralSteps.pressBackButton();
         GeneralSteps.pressBackButton();
     }
 
@@ -100,7 +99,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void  userCanAddNotesToRepairOrder(String rowID,
+    public void userCanAddNotesToRepairOrder(String rowID,
                                              String description, JSONObject testData) {
         String noteText = UUID.randomUUID().toString();
         HomeScreenSteps.openMonitor();
@@ -128,10 +127,13 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         EditOrderSteps.verifyPhaseSelected(phaseDto);
         EditOrderSteps.completePhase(phaseDto);
         phaseDto.setStatus(PhaseName.COMPLETED);
+        BaseUtils.waitABit(2000);
+        phaseDto.setStatus(PhaseName.COMPLETED);
         EditOrderSteps.verifyPhaseSelected(phaseDto);
         GeneralSteps.pressBackButton();
-        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.COMPLETED_ALL);
         repairOrderDto.setPhaseName(PhaseName.COMPLETED);
+        repairOrderDto.setCompletePercentage("100%");
+        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.COMPLETED_ALL);
         MonitorSteps.verifyRepairOrderValues(workOrderId,
                 repairOrderDto);
         GeneralSteps.pressBackButton();
@@ -148,7 +150,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         MonitorSteps.openMenu(workOrderId);
         MonitorMenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();
-        expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMMM d, yyyy")));
+        expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         EditOrderSteps.verifyOrderInfo(expectedOrderInfo);
         GeneralSteps.pressBackButton();
         GeneralSteps.pressBackButton();

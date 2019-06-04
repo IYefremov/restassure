@@ -1,11 +1,13 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+@Getter
 public class RepairOrderSelectServiceScreen extends MonitorScreen {
     @FindBy(xpath = "//span[@action=\"save\"]")
     private WebElement completeScreenCheckbox;
@@ -18,12 +20,10 @@ public class RepairOrderSelectServiceScreen extends MonitorScreen {
     }
 
     public void selectServices(List<String> serviceListToSelect) {
-        serviceListToSelect.stream().forEach((serviceName) -> {
-            serviceList.stream()
-                    .filter((serviceElement) -> serviceElement.getText().contains(serviceName))
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException(""))
-                    .click();
-        });
+        serviceListToSelect.stream().forEach((serviceName) -> serviceList.stream()
+                .filter((serviceElement) -> serviceElement.getText().contains(serviceName))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Unable to find service " + serviceName))
+                .click());
     }
 }

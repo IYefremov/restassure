@@ -35,6 +35,7 @@ public class MonitorSteps {
 
     public static void verifyRepairOrderValues(String repairOrderId, RepairOrderDto expectedRoValues) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
         Assert.assertEquals(repairOrderScreen.getRepairOrderElement(repairOrderId).getRepairOrderDto(),
                 expectedRoValues);
     }

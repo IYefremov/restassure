@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnext.enums;
 import lombok.Getter;
 
 public enum PhaseName {
-    COMPLETED("Completed");
+    COMPLETED("COMPLETED");
 
     @Getter
     private String value;

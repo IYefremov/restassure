@@ -46,7 +46,7 @@ public class RepairOrderListElement implements IWebElement {
 
     public String getPhase() {
         WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderIdLocator)), true);
-        return rootElement.findElement(By.xpath(phaseTextLocator)).getText();
+        return rootElement.findElement(By.xpath(phaseTextLocator)).getText().toUpperCase();
     }
 
     public String getVin() {

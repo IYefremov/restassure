@@ -116,7 +116,7 @@ public class VNextBaseScreen {
         String backButtonLocator = "//*[@action=\"back\"]";
         WaitUtils.getGeneralWebdriverWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath(backButtonLocator)));
         WaitUtils.waitUntilElementIsClickable(By.xpath(backButtonLocator));
-        DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath(backButtonLocator)).click();
+        WaitUtils.click(By.xpath(backButtonLocator));
     }
 
     public void clickScreenForwardButton() {
@@ -143,7 +143,7 @@ public class VNextBaseScreen {
         clickScreenTitleCaption();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
-        tap(changescrenpopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
+        WaitUtils.click(changescrenpopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
     }
 
     public boolean isScreenPresentInChangeScreenPopoverList(String screenName) {
@@ -151,13 +151,7 @@ public class VNextBaseScreen {
     }
 
     public void clickScreenTitleCaption() {
-        tap(appiumdriver.findElement(By.xpath("//span[@class='page-title']")));
-        BaseUtils.waitABit(1000);
-        try {
-            appiumdriver.findElement(By.xpath("//span[@class='page-title']")).click();
-        } catch (WebDriverException e) {
-
-        }
+        WaitUtils.click(By.xpath("//span[@class='page-title']"));
     }
 
     public boolean elementExists(String xpath) {

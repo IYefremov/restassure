@@ -57,7 +57,7 @@
       "description": "TC 00001, TC00002",
       "monitoring": {
         "orderInfoDto":{
-          "vin":"7777777777777"
+          "vin":"777777"
         }
       }
     }

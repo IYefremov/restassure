@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.steps;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextHelpingScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class HomeScreenSteps {
     public static void openCreateNewInspection() {
@@ -14,6 +15,7 @@ public class HomeScreenSteps {
 
     public static void openInspections() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
+        WaitUtils.elementShouldBeVisible(homeScreen.getRootElement(),true);
         homeScreen.clickInspectionsMenuItem();
     }
 

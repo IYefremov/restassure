@@ -25,9 +25,8 @@ public class WaitUtils {
     }
 
     public static WebElement waitUntilElementIsClickable(final By locator) {
-        WebElement element = DriverBuilder.getInstance().getAppiumDriver().findElement(locator);
-        WaitUtils.waitUntilElementIsClickable(element);
-        return element;
+        WaitUtils.getGeneralWebdriverWait().until(ExpectedConditions.elementToBeClickable(locator));
+        return DriverBuilder.getInstance().getAppiumDriver().findElement(locator);
     }
 
     public static void waitUntilElementIsClickable(final By locator, AppiumDriver<MobileElement> appiumdriver) {
@@ -39,8 +38,13 @@ public class WaitUtils {
         return webElement;
     }
 
+    //click(Webelement) cannot be called in this case, because element will not be searched again after fail, because its not proxy
+    //TODO: convert locator to PROXY web element and call click(Webelement)
     public static void click(final By locator) {
-        WaitUtils.click(DriverBuilder.getInstance().getAppiumDriver().findElement(locator));
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> {
+            DriverBuilder.getInstance().getAppiumDriver().findElement(locator).click();
+            return true;
+        });
     }
 
     public static void click(final WebElement webElement) {
@@ -58,7 +62,7 @@ public class WaitUtils {
     public static FluentWait<WebDriver> getGeneralFluentWait() {
         return
                 new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
-                        .withTimeout(Duration.ofSeconds(60))
+                        .withTimeout(Duration.ofSeconds(120))
                         .pollingEvery(Duration.ofMillis(300))
                         .ignoring(WebDriverException.class);
     }
