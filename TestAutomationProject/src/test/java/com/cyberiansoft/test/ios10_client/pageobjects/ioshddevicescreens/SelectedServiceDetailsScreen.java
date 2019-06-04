@@ -229,8 +229,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public void saveSelectedServiceDetails() {
-
-		MobileElement saveButton = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND visible == 1 AND name == 'Save'"));
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		MobileElement saveButton = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND visible == 1 AND name == 'Save'")));
 		saveButton.click();
 	}
 

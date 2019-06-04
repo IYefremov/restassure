@@ -53,6 +53,14 @@ public class WorkOrderData {
     @JsonProperty("monitoring")
     Monitoring monitoring;
 
+    @Getter
+    @JsonProperty("bundleService")
+    BundleServiceData bundleService;
+
+    @Getter
+    @JsonProperty("workOrderTotalSale")
+    String workOrderTotalSale;
+
     public String getWorkOrderType() {
         return workOrderType;
     }
@@ -71,6 +79,10 @@ public class WorkOrderData {
 
     public String getServicePrice() {
         return service.getServicePrice();
+    }
+
+    public ServiceData getServiceData() {
+        return service;
     }
 
     public List<ServiceData> getServicesList() {

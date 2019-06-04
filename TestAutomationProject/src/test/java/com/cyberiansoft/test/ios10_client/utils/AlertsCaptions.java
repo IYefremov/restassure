@@ -44,4 +44,17 @@ public class AlertsCaptions {
 			"You can not start repair order because you are not assigned to order services.";
 	public static final String YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES = "Order Monitor\n" +
 			"You must start the repair order before you can change the status of the service.";
+	public static final String ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE = "Warning!\n"+
+			"Total amount of work order is huge.\n"+
+			"\n"+
+			"Maximum allowed total amount is %1$s";
+
+	public static final String ALERT_TOTAL_AMAUNT_OF_INSPECTION_IS_HUGE = "Warning!\n"+
+			"Total amount of inspection is huge.\n"+
+			"\n"+
+			"Maximum allowed total amount is %1$s";
+	public static final String ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE = "Warning!\n"+
+			"Total amount of invoice is huge.\n"+
+			"\n"+
+			"Maximum allowed total amount is %1$s";
 }

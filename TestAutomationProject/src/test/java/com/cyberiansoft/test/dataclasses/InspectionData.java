@@ -52,6 +52,9 @@ public class InspectionData {
     @JsonProperty("inspPrice")
     String inspPrice;
 
+    @JsonProperty("inspectionTotalPrice")
+    String inspectionTotalPrice;
+
     @JsonProperty("inspApprovedPrice")
     String inspApprovedPrice;
 
@@ -73,12 +76,22 @@ public class InspectionData {
     @JsonProperty("damagesData")
     List<DamageData> damagesData;
 
+    @JsonProperty("priceMatrixScreenData")
+    PriceMatrixScreenData priceMatrixScreenData;
+
+    @JsonProperty("priceMatrixScreensData")
+    List<PriceMatrixScreenData> priceMatrixScreensData;
+
     public String getInspectionType() {
         return inspType;
     }
 
     public String getInspectionPrice() {
         return inspPrice;
+    }
+
+    public String getInspectionTotalPrice() {
+        return inspectionTotalPrice;
     }
 
     public String getInspectionApprovedPrice() {
@@ -113,6 +126,10 @@ public class InspectionData {
         return service.getServicePrice();
     }
 
+    public ServiceData getServiceData() {
+        return service;
+    }
+
     public String getMoneyServiceName() {
         return moneyService.getServiceName();
     }
@@ -137,12 +154,20 @@ public class InspectionData {
         return services;
     }
 
+    public ServiceData getMoneyServiceData() {
+        return moneyService;
+    }
+
     public List<ServiceData> getMoneyServicesList() {
         return moneyServices;
     }
 
     public List<ServiceData> getPercentageServicesList() {
         return percentageServices;
+    }
+
+    public ServiceData getPercentageServiceData() {
+        return percentageService;
     }
 
     public MatrixServiceData getMatrixServiceData() {
@@ -200,5 +225,13 @@ public class InspectionData {
 
     public List<DamageData> getDamagesData() {
         return damagesData;
+    }
+
+    public PriceMatrixScreenData getPriceMatrixScreenData() {
+        return priceMatrixScreenData;
+    }
+
+    public List<PriceMatrixScreenData> getPriceMatrixScreensData() {
+        return priceMatrixScreensData;
     }
 }

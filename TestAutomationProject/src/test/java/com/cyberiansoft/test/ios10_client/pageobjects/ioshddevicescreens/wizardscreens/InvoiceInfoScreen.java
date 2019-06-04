@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.BaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
@@ -11,10 +12,13 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 
@@ -107,11 +111,11 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	
 	public InvoiceInfoScreen addWorkOrder(String wonumber) {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByAccessibilityId("Insert").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InvoiceOrdersView")));
-		IOSElement invoicesOrdersTable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'InvoiceOrdersView' and type = 'XCUIElementTypeTable'"));
-		invoicesOrdersTable.findElementByAccessibilityId(wonumber).findElementByAccessibilityId("unselected").click();
 
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'TeamInvoiceOrdersView' and type = 'XCUIElementTypeTable'")));
+		IOSElement invoicesOrdersTable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'TeamInvoiceOrdersView' and type = 'XCUIElementTypeTable'"));
+		invoicesOrdersTable.findElementByAccessibilityId(wonumber).findElementByAccessibilityId("unselected").click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 
 		wait = new WebDriverWait(appiumdriver, 10);

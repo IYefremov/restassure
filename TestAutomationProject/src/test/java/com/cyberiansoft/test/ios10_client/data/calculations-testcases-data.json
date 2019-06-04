@@ -1,25 +1,28 @@
 {
-
   "testCreateInspectionOnTheDeviceWithApprovalRequired": [
     {
       "rowID": "testCreateInspectionOnTheDeviceWithApprovalRequired.01",
       "description": "Test Case 8553:Create inspection on the device with approval required",
       "vihicleInfo": {
-        "vinNumber": "TESTVINNO", "vehicleMake" : "Acura", "vehicleModel" : "1.6 EL", "vehicleColor" : "Black"
+        "vinNumber": "TESTVINNO",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
       }
     }
   ],
-
   "testCreateRetailInspection": [
     {
       "rowID": "testCreateRetailInspection.01",
       "description": "Test Case 8435:Create Retail Inspection (HD Single page)",
       "vihicleInfo": {
-        "vinNumber": "ZWERTYASDFEWSDRZG", "vehicleMake" : "Acura", "vehicleModel" : "1.6 EL", "vehicleColor" : "Black"
+        "vinNumber": "ZWERTYASDFEWSDRZG",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
       }
     }
   ],
-
   "testAddServicesToVisualInspection": [
     {
       "rowID": "testAddServicesToVisualInspection.01",
@@ -27,10 +30,9 @@
       "vihicleInfo": {
         "vinNumber": "ZWERTYASDFEWSDRZG"
       },
-      "inspPrice" : "275"
+      "inspPrice": "275"
     }
   ],
-
   "testChangeQuantityOfServicesInVisualInspection": [
     {
       "rowID": "testChangeQuantityOfServicesInVisualInspection.01",
@@ -38,87 +40,212 @@
       "vihicleInfo": {
         "vinNumber": "ZWERTYASDFEWSDRZG"
       },
-      "damagesData" : [{"damageGroupName": "Miscellaneous", "moneyService" : {"serviceName" : "Dye", "serviceQuantity" : "3.00"}},
-        {"damageGroupName": "WHEEL REPAIR", "moneyService" : {"serviceName" : "Wheel", "serviceQuantity" : "2.00"}}],
-      "inspPrice" : "275"
+      "damagesData": [
+        {
+          "damageGroupName": "Miscellaneous",
+          "moneyService": {
+            "serviceName": "Dye",
+            "serviceQuantity": "3.00"
+          }
+        },
+        {
+          "damageGroupName": "WHEEL REPAIR",
+          "moneyService": {
+            "serviceName": "Wheel",
+            "serviceQuantity": "2.00"
+          }
+        }
+      ],
+      "inspPrice": "275"
     }
   ],
-
   "testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart": [
     {
       "rowID": "testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart.01",
       "description": "Test Case 28580:WO: If fee bundle item price policy = 'Panel' then it will be added once for many associated service instances with same vehicle part.",
       "vihicleInfo": {
-        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+        "vinNumber": "JA4LS31H8YP047397",
+        "vehicleMake": "Mitsubishi",
+        "vehicleModel": "Montero Sport",
+        "vehicleYear": "2000"
       },
-      "services" : [{"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "12.00", "servicePrice2" : "$33.00", "vehiclePart" : {"vehiclePartName" : "Grill" }},
-        {"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "13", "servicePrice2" : "$34.00", "vehiclePart" : {"vehiclePartName" : "Grill" }},
-        {"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "12", "servicePrice2" : "$67.00", "vehiclePart" : {"vehiclePartName" : "Driver Seat" }}]
+      "services": [
+        {
+          "serviceName": "Oksi_Service_PP_Panel",
+          "servicePrice": "12.00",
+          "servicePrice2": "$33.00",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        },
+        {
+          "serviceName": "Oksi_Service_PP_Panel",
+          "servicePrice": "13",
+          "servicePrice2": "$34.00",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        },
+        {
+          "serviceName": "Oksi_Service_PP_Panel",
+          "servicePrice": "12",
+          "servicePrice2": "$67.00",
+          "vehiclePart": {
+            "vehiclePartName": "Driver Seat"
+          }
+        }
+      ]
     }
   ],
-
   "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1": [
     {
       "rowID": "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1.01",
       "description": "Test Case 28583:WO: If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity",
       "vihicleInfo": {
-        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+        "vinNumber": "JA4LS31H8YP047397",
+        "vehicleMake": "Mitsubishi",
+        "vehicleModel": "Montero Sport",
+        "vehicleYear": "2000"
       },
-      "service" : {"serviceName" : "Service_in_2_fee_packs", "servicePrice" : "$36.00", "vehiclePart" : {"vehiclePartName" : "Grill" }}
+      "service": {
+        "serviceName": "Service_in_2_fee_packs",
+        "servicePrice": "$36.00",
+        "vehiclePart": {
+          "vehiclePartName": "Grill"
+        }
+      }
     }
   ],
-
   "testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices": [
     {
       "rowID": "testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices.01",
       "description": "Test Case 28585:WO: Verify that package price of fee bundle item is override the price of wholesale and retail prices",
       "vihicleInfo": {
-        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+        "vinNumber": "JA4LS31H8YP047397",
+        "vehicleMake": "Mitsubishi",
+        "vehicleModel": "Montero Sport",
+        "vehicleYear": "2000"
       },
-      "service" : {"serviceName" : "Service_for_override"},
-      "workOrderPrice" : "$27.00"
+      "service": {
+        "serviceName": "Service_for_override"
+      },
+      "workOrderPrice": "$27.00"
     }
   ],
-
   "testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances": [
     {
       "rowID": "testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances.01",
       "description": "Test Case 28600:WO: If fee bundle item price policy = 'Vehicle' then it will be added once for many associated service instances",
       "vihicleInfo": {
-        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+        "vinNumber": "JA4LS31H8YP047397",
+        "vehicleMake": "Mitsubishi",
+        "vehicleModel": "Montero Sport",
+        "vehicleYear": "2000"
       },
-      "services" : [{"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "13.00", "servicePrice2" : "$34.00", "vehiclePart" : {"vehiclePartName" : "Back Glass" }},
-        {"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "14", "servicePrice2" : "$35.00", "vehiclePart" : {"vehiclePartName" : "Back Glass" }},
-        {"serviceName" : "Oksi_Service_PP_Vehicle", "servicePrice" : "14", "servicePrice2" : "$35.00", "vehiclePart" : {"vehiclePartName" : "Left Headlight" }}]
+      "services": [
+        {
+          "serviceName": "Oksi_Service_PP_Vehicle",
+          "servicePrice": "13.00",
+          "servicePrice2": "$34.00",
+          "vehiclePart": {
+            "vehiclePartName": "Back Glass"
+          }
+        },
+        {
+          "serviceName": "Oksi_Service_PP_Vehicle",
+          "servicePrice": "14",
+          "servicePrice2": "$35.00",
+          "vehiclePart": {
+            "vehiclePartName": "Back Glass"
+          }
+        },
+        {
+          "serviceName": "Oksi_Service_PP_Vehicle",
+          "servicePrice": "14",
+          "servicePrice2": "$35.00",
+          "vehiclePart": {
+            "vehiclePartName": "Left Headlight"
+          }
+        }
+      ]
     }
   ],
-
   "testVerifyIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO": [
     {
       "rowID": "testVerifyIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO.01",
       "description": "Test Case 28601:WO: If fee bundle item price policy = 'Service' or 'Flat Fee' then it will be added to WO every time when associated service instance will add to WO.",
       "vihicleInfo": {
-        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+        "vinNumber": "JA4LS31H8YP047397",
+        "vehicleMake": "Mitsubishi",
+        "vehicleModel": "Montero Sport",
+        "vehicleYear": "2000"
       },
-      "services" : [{"serviceName" : "Oksi_Service_PP_Service", "servicePrice" : "10.00", "servicePrice2" : "$22.00", "vehiclePart" : {"vehiclePartName" : "Hood" }},
-        {"serviceName" : "Oksi_Service_PP_Service", "servicePrice" : "12", "servicePrice2" : "$46.00", "vehiclePart" : {"vehiclePartName" : "Hood" }},
-        {"serviceName" : "Oksi_Service_PP_Service", "servicePrice" : "10", "servicePrice2" : "$68.00", "vehiclePart" : {"vehiclePartName" : "Cowl, Other" }}]
+      "services": [
+        {
+          "serviceName": "Oksi_Service_PP_Service",
+          "servicePrice": "10.00",
+          "servicePrice2": "$22.00",
+          "vehiclePart": {
+            "vehiclePartName": "Hood"
+          }
+        },
+        {
+          "serviceName": "Oksi_Service_PP_Service",
+          "servicePrice": "12",
+          "servicePrice2": "$46.00",
+          "vehiclePart": {
+            "vehiclePartName": "Hood"
+          }
+        },
+        {
+          "serviceName": "Oksi_Service_PP_Service",
+          "servicePrice": "10",
+          "servicePrice2": "$68.00",
+          "vehiclePart": {
+            "vehiclePartName": "Cowl, Other"
+          }
+        }
+      ]
     }
   ],
-
   "testVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem": [
     {
       "rowID": "testVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem.01",
       "description": "Test Case 28602:WO: Verify that for Wholesale and Retail customers fee is added depends on the price accordingly to price of the fee bundle item",
       "vihicleInfo": {
-        "vinNumber": "JA4LS31H8YP047397", "vehicleMake" : "Mitsubishi", "vehicleModel" : "Montero Sport", "vehicleYear" : "2000"
+        "vinNumber": "JA4LS31H8YP047397",
+        "vehicleMake": "Mitsubishi",
+        "vehicleModel": "Montero Sport",
+        "vehicleYear": "2000"
       },
-      "services" : [{"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "12.00", "servicePrice2" : "$33.00", "vehiclePart" : {"vehiclePartName" : "Grill" }},
-        {"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "13", "servicePrice2" : "$34.00", "vehiclePart" : {"vehiclePartName" : "Grill" }},
-        {"serviceName" : "Oksi_Service_PP_Panel", "servicePrice" : "12", "servicePrice2" : "$67.00", "vehiclePart" : {"vehiclePartName" : "Driver Seat" }}]
+      "services": [
+        {
+          "serviceName": "Oksi_Service_PP_Panel",
+          "servicePrice": "12.00",
+          "servicePrice2": "$33.00",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        },
+        {
+          "serviceName": "Oksi_Service_PP_Panel",
+          "servicePrice": "13",
+          "servicePrice2": "$34.00",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        },
+        {
+          "serviceName": "Oksi_Service_PP_Panel",
+          "servicePrice": "12",
+          "servicePrice2": "$67.00",
+          "vehiclePart": {
+            "vehiclePartName": "Driver Seat"
+          }
+        }
+      ]
     }
   ],
-
   "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1": [
     {
       "rowID": "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1.01",
@@ -126,15 +253,28 @@
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
-      "matrixService": {"matrixServiceName" : "SR_S5_Matrix_DE_TE",
-        "vehiclePartData" : {"vehiclePartName": "Roof", "vehiclePartPrice" : "54", "vehiclePartAdditionalServices" : [{ "serviceName" : "SR_S1_Money" },
-          { "serviceName" : "SR_S5_Mt_Money" }, { "serviceName" : "SR_S5_Mt_Upcharge_25" }],
-          "vehiclePartTotalPrice" : "$2,117.50"
-        }},
-      "workOrderPrice" : "$2,127.50"
+      "matrixService": {
+        "matrixServiceName": "SR_S5_Matrix_DE_TE",
+        "vehiclePartData": {
+          "vehiclePartName": "Roof",
+          "vehiclePartPrice": "54",
+          "vehiclePartAdditionalServices": [
+            {
+              "serviceName": "SR_S1_Money"
+            },
+            {
+              "serviceName": "SR_S5_Mt_Money"
+            },
+            {
+              "serviceName": "SR_S5_Mt_Upcharge_25"
+            }
+          ],
+          "vehiclePartTotalPrice": "$2,117.50"
+        }
+      },
+      "workOrderPrice": "$2,127.50"
     }
   ],
-
   "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095": [
     {
       "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095.01",
@@ -142,12 +282,26 @@
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
-      "services" : [{"serviceName" : "SR_S1_Money", "servicePrice" : "40", "vehiclePart" : {"vehiclePartName" : "Grill" }},
-        { "serviceName" : "SR_S1_Money_FlatFee", "servicePrice" : "8.25" },
-        { "serviceName" : "Discount 5-10%", "servicePrice" : "6", "servicePrice2" : "$2.90"}]
+      "services": [
+        {
+          "serviceName": "SR_S1_Money",
+          "servicePrice": "40",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        },
+        {
+          "serviceName": "SR_S1_Money_FlatFee",
+          "servicePrice": "8.25"
+        },
+        {
+          "serviceName": "Discount 5-10%",
+          "servicePrice": "6",
+          "servicePrice2": "$2.90"
+        }
+      ]
     }
   ],
-
   "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003": [
     {
       "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003.01",
@@ -155,12 +309,26 @@
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
-      "services" : [{"serviceName" : "SR_S1_Money", "servicePrice" : "40", "vehiclePart" : {"vehiclePartName" : "Grill" }},
-        { "serviceName" : "SR_S1_Money_FlatFee", "servicePrice" : "1.38" },
-        { "serviceName" : "Discount 5-10%", "servicePrice" : "6", "servicePrice2" : "$2.48"}]
+      "services": [
+        {
+          "serviceName": "SR_S1_Money",
+          "servicePrice": "40",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        },
+        {
+          "serviceName": "SR_S1_Money_FlatFee",
+          "servicePrice": "1.38"
+        },
+        {
+          "serviceName": "Discount 5-10%",
+          "servicePrice": "6",
+          "servicePrice2": "$2.48"
+        }
+      ]
     }
   ],
-
   "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005": [
     {
       "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005.01",
@@ -168,12 +336,26 @@
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
-      "services" : [{"serviceName" : "SR_S1_Money", "servicePrice" : "20", "vehiclePart" : {"vehiclePartName" : "Grill" }},
-        { "serviceName" : "SR_S1_Money_FlatFee", "servicePrice" : "8.09" },
-        { "serviceName" : "Discount 5-10%", "servicePrice" : "6", "servicePrice2" : "$1.69"}]
+      "services": [
+        {
+          "serviceName": "SR_S1_Money",
+          "servicePrice": "20",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        },
+        {
+          "serviceName": "SR_S1_Money_FlatFee",
+          "servicePrice": "8.09"
+        },
+        {
+          "serviceName": "Discount 5-10%",
+          "servicePrice": "6",
+          "servicePrice2": "$1.69"
+        }
+      ]
     }
   ],
-
   "testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1": [
     {
       "rowID": "testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1.01",
@@ -181,22 +363,54 @@
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
-      "services" : [{"serviceName" : "3/4\" - Penny Size", "servicePrice" : "160"},
-        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "105"},
-        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "400"},
-        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "195"},
-        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "2400"},
-        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "180"},
-        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "160"},
-        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "105"},
-        {"serviceName" : "3/4\" - Penny Size", "servicePrice" : "300"},
-        {"serviceName" : "SR_Disc_20_Percent", "servicePrice" : "-25"},
-        {"serviceName" : "Tax discount"}
+      "services": [
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "160"
+        },
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "105"
+        },
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "400"
+        },
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "195"
+        },
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "2400"
+        },
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "180"
+        },
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "160"
+        },
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "105"
+        },
+        {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "300"
+        },
+        {
+          "serviceName": "SR_Disc_20_Percent",
+          "servicePrice": "-25"
+        },
+        {
+          "serviceName": "Tax discount"
+        }
       ],
-      "workOrderPrice" : "$3,153.94"
+      "workOrderPrice": "$3,153.94"
     }
   ],
-
   "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1": [
     {
       "rowID": "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1.01",
@@ -204,12 +418,21 @@
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
-      "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize" :  "DIME", "vehiclePartSeverity" :  "VERY LIGHT"},
-        {"vehiclePartName": "ROOF", "vehiclePartSize" :  "DIME", "vehiclePartSeverity" :  "VERY LIGHT"}],
-      "declineReason" : "Decline 1"
+      "vehiclePartsData": [
+        {
+          "vehiclePartName": "Hood",
+          "vehiclePartSize": "DIME",
+          "vehiclePartSeverity": "VERY LIGHT"
+        },
+        {
+          "vehiclePartName": "ROOF",
+          "vehiclePartSize": "DIME",
+          "vehiclePartSeverity": "VERY LIGHT"
+        }
+      ],
+      "declineReason": "Decline 1"
     }
   ],
-
   "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1": [
     {
       "rowID": "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1.01",
@@ -217,13 +440,31 @@
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
-      "services" : [{"serviceName" : "SR_S1_Money_Panel", "vehiclePart" : {"vehiclePartName" : "Left Rear Door" } , "serviceStatus" : "Approved" },
-        {"serviceName" : "SR_S1_Money_Vehicle", "vehiclePart" : {"vehiclePartName" : "Front Bumper" }, "serviceStatus" : "Declined" },
-        {"serviceName" : "SR_S1_Money", "vehiclePart" : {"vehiclePartName" : "Grill" }, "serviceStatus" : "Skipped" }
+      "services": [
+        {
+          "serviceName": "SR_S1_Money_Panel",
+          "vehiclePart": {
+            "vehiclePartName": "Left Rear Door"
+          },
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "SR_S1_Money_Vehicle",
+          "vehiclePart": {
+            "vehiclePartName": "Front Bumper"
+          },
+          "serviceStatus": "Declined"
+        },
+        {
+          "serviceName": "SR_S1_Money",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          },
+          "serviceStatus": "Skipped"
+        }
       ]
     }
   ],
-
   "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1": [
     {
       "rowID": "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1.01",
@@ -231,14 +472,32 @@
       "vihicleInfo": {
         "vinNumber": "1D7HW48NX6S507810"
       },
-      "services" : [{"serviceName" : "SR_S1_Money_Panel", "vehiclePart" : {"vehiclePartName" : "Hood" } , "serviceStatus" : "Skipped" },
-        {"serviceName" : "SR_S1_Money_Vehicle", "vehiclePart" : {"vehiclePartName" : "Grill" }, "serviceStatus" : "Skipped" },
-        {"serviceName" : "SR_S1_Money", "vehiclePart" : {"vehiclePartName" : "Grill" }, "serviceStatus" : "Skipped" }
+      "services": [
+        {
+          "serviceName": "SR_S1_Money_Panel",
+          "vehiclePart": {
+            "vehiclePartName": "Hood"
+          },
+          "serviceStatus": "Skipped"
+        },
+        {
+          "serviceName": "SR_S1_Money_Vehicle",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          },
+          "serviceStatus": "Skipped"
+        },
+        {
+          "serviceName": "SR_S1_Money",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          },
+          "serviceStatus": "Skipped"
+        }
       ],
-      "declineReason" : "Decline 1"
+      "declineReason": "Decline 1"
     }
   ],
-
   "testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal": [
     {
       "rowID": "testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal.01",
@@ -246,11 +505,308 @@
       "vihicleInfo": {
         "vinNumber": "1D7HW48NX6S507810"
       },
-      "services" : [{"serviceName" : "SR_S1_Money_Vehicle", "vehicleParts" : [{"vehiclePartName" : "Grill" }, {"vehiclePartName" : "Hood" }]},
-        {"serviceName" : "SR_S1_Money_Panel", "vehicleParts" : [{"vehiclePartName" : "Right Door Mirror" }]},
-        {"serviceName" : "SR_S1_Money_Panel", "vehicleParts" : [{"vehiclePartName" : "Right Door Mirror" }] }
+      "services": [
+        {
+          "serviceName": "SR_S1_Money_Vehicle",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Grill"
+            },
+            {
+              "vehiclePartName": "Hood"
+            }
+          ]
+        },
+        {
+          "serviceName": "SR_S1_Money_Panel",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Right Door Mirror"
+            }
+          ]
+        },
+        {
+          "serviceName": "SR_S1_Money_Panel",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Right Door Mirror"
+            }
+          ]
+        }
       ],
-      "inspPrice" : "$2,050.00"
+      "inspPrice": "$2,050.00"
+    }
+  ],
+  "testVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode": [
+    {
+      "rowID": "testVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode.01",
+      "description": "Test Case 38748:Inspections: Verify that value selected on price matrix step is saved and shown during edit mode",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "priceMatrixScreensData": [
+        {
+          "screenName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartAdditionalService": {
+              "serviceName": "Test service zayats"
+            }
+          },
+          "screenPrice": "$55.00",
+          "screenTotalPrice": "$55.00"
+        },
+        {
+          "screenName": "Hail Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "ROOF",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartPrice": "123.00"
+          },
+          "screenPrice": "$123.00",
+          "screenTotalPrice": "$178.00"
+        },
+        {
+          "screenName": "Hail Damage",
+          "vehiclePartData": {
+            "vehiclePartName": "Grill",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "LIGHT"
+          },
+          "screenPrice": "$10.00",
+          "screenTotalPrice": "$188.00"
+        }
+      ],
+      "service": {
+        "serviceName": "Test service zayats",
+        "servicePrice": "5"
+      },
+      "inspPrice": "$193.00"
+    }
+  ],
+  "testWOVerifyThatMessageIsShownTotalIsOverLimitation": [
+    {
+      "rowID": "testWOVerifyThatMessageIsShownTotalIsOverLimitation.01",
+      "description": "Test Case 42184:WO: Verify that message is shown total is over limitation 999999999.999",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "service": {
+        "serviceName": "SR_S1_Money",
+        "servicePrice": "999999.00",
+        "serviceQuantity": "98765",
+        "serviceQuantity2": "987",
+        "vehiclePart": {
+          "vehiclePartName": "Grill"
+        }
+      },
+      "workOrderPrice": "$999,999,999.99"
+    }
+  ],
+  "testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation": [
+    {
+      "rowID": "testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation.01",
+      "description": "Test Case 42183:Invoices: Verify that message is shown total is over limitation 999,999,999.999",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "service": {
+          "serviceName": "SR_S1_Money",
+          "servicePrice": "999999.00",
+          "serviceQuantity": "987",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po",
+        "invoiceTotal": "$999,999,999.99"
+      }
+    }
+  ],
+  "testInspectionVerifyThatMessageIsShownTotalIsOverLimitation": [
+    {
+      "rowID": "testInspectionVerifyThatMessageIsShownTotalIsOverLimitation.01",
+      "description": "Test Case 42182:Inspection: Verify that message is shown total is over limitation 999999999.999",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "service": {
+        "serviceName": "SR_S1_Money",
+        "servicePrice": "999999.00",
+        "serviceQuantity": "98765",
+        "serviceQuantity2": "987",
+        "vehiclePart": {
+          "vehiclePartName": "Grill"
+        }
+      },
+      "inspPrice": "$999,999,999.99"
+    }
+  ],
+  "testVerifyApprovedAmountForInspectionCreatedFromSR": [
+    {
+      "rowID": "testVerifyApprovedAmountForInspectionCreatedFromSR.01",
+      "description": "Test Case 42372:Inspections: Verify approved amount for Inspection created from SR",
+      "vihicleInfo": {
+        "vinNumber": "1D7HW48NX6S507810",
+        "vehicleMake": "Dodge",
+        "vehicleModel": "Dakota",
+        "vehicleYear": "2006"
+      },
+      "moneyService": {
+        "serviceName": "Dye"
+      },
+      "inspectionData": {
+        "moneyService": {
+          "serviceName": "SR_S1_Money",
+          "vehiclePart": {
+            "vehiclePartName": "Hood"
+          },
+          "serviceStatus": "Approved"
+        },
+        "percentageService": {
+          "serviceName": "Disc_Ex_Service1",
+          "serviceStatus": "Declined"
+        },
+        "inspPrice": "$2,000.00",
+        "inspectionTotalPrice": "$2,050.00"
+      }
+    }
+  ],
+  "testWOVerifyCalculationWithPriceMatrixLaborType_1": [
+    {
+      "rowID": "testWOVerifyCalculationWithPriceMatrixLaborType_1.01",
+      "description": "Test Case 45224:WO: HD - Verify calculation with price matrix Labor type",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "100"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "SR_Disc_20_Percent",
+            "servicePrice": "25"
+          },
+          {
+            "serviceName": "Tax discount",
+            "servicePrice": "10"
+          }
+        ],
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye"
+            },
+            {
+              "serviceName": "Wheel",
+              "servicePrice": "90"
+            }
+          ],
+          "bundleServiceAmount": "100"
+        },
+        "matrixService": {
+          "matrixServiceName": "Matrix Service",
+          "hailMatrixName": "Test Matrix Labor",
+          "vehiclePartData": {
+            "vehiclePartName": "123",
+            "vehiclePartTime": "100",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "SR_Disc_20_Percent",
+                "servicePrice": "25"
+              },
+              {
+                "serviceName": "Test service zayats",
+                "servicePrice": "100"
+              }
+            ]
+          }
+        },
+        "workOrderTotalSale" : "3",
+        "workOrderPrice" : "$542.68"
+      },
+      "invoiceData": {
+        "poNumber": "12345"
+      }
+    }
+  ],
+  "testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly": [
+    {
+      "rowID": "testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly.01",
+      "description": "Test Case 47249:Inspections: Verify that on Price matrix step sub total value is shown correctly, Test Case 47257:WO: Verify that on Price Matrix step sub total is shown correctly",
+      "vihicleInfo": {
+        "vinNumber": "JA4LS31H8YP047397"
+      },
+      "priceMatrixScreensData": [
+        {
+          "screenName": "Default",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartOption" : "PDR",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "SR_S5_Mt_Upcharge_20",
+                "servicePrice": "$120.00",
+                "servicePrice2": "$170.00"
+              },
+              {
+                "serviceName": "SR_S5_Mt_Upcharge_25",
+                "servicePrice": "$145.00",
+                "servicePrice2": "$195.00"
+              },
+              {
+                "serviceName": "SR_S5_Mt_Discount_10",
+                "servicePrice": "$130.50",
+                "servicePrice2": "$180.50"
+              }
+            ],
+            "vehiclePartPrice" : "100"
+          }
+        },
+        {
+          "screenName": "Matrix Labor",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "SR_S5_Mt_Discount_10",
+                "servicePrice": "$90.00",
+                "servicePrice2": "$270.50"
+              },
+              {
+                "serviceName": "SR_S5_Mt_Upcharge_25",
+                "servicePrice": "$112.50",
+                "servicePrice2": "$293.00"
+              }
+            ],
+            "vehiclePartTime" : "20"
+          }
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Dent Removal",
+          "servicePrice": "$112.50"
+        },
+        {
+          "serviceName": "Dent Removal",
+          "servicePrice": "$130.50"
+        }],
+      "inspPrice": "$293.00"
     }
   ]
 
