@@ -39,6 +39,18 @@
       "damageData" : {"damageGroupName" : "Wheel Repair", "moneyService" : {"serviceName" : "Wheel repair",
       "servicePrice" : "$99.99"}}
     }
+  ],
+
+  "testEditServiceOnVisualScreenWhenAddingService": [
+    {
+      "rowID": "testEditServiceOnVisualScreenWhenAddingService.01",
+      "description": "Test Case 47442:vNext - Edit service on Visual screen when adding service, Test Case 47443:vNext - Remove all services from Visual screen",
+      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "damageData" : {"damageGroupName" : "Wheel Repair", "moneyService" : {"serviceName" : "Wheel repair",
+        "servicePrice" : "$99.99"}},
+      "inspPrice" : "$0.00"
+    }
   ]
 
 }
