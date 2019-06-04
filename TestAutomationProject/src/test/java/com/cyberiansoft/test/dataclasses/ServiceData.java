@@ -17,6 +17,8 @@ public class ServiceData {
     private String servicePrice2;
     @JsonProperty("serviceQuantity")
     private String serviceQuantity;
+    @JsonProperty("serviceQuantity2")
+    private String serviceQuantity2;
     @JsonProperty("serviceStatus")
     private String serviceStatus;
     @JsonProperty("vehiclePart")

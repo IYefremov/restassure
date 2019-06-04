@@ -27,8 +27,17 @@ public class VehiclePartData {
     @JsonProperty("vehiclePartPrice")
     String vehiclePartPrice;
 
+    @JsonProperty("vehiclePartTime")
+    String vehiclePartTime;
+
     @JsonProperty("vehiclePartTotalPrice")
     String vehiclePartTotalPrice;
+
+    @JsonProperty("vehiclePartSubTotalPrice")
+    String vehiclePartSubTotalPrice;
+
+    @JsonProperty("vehiclePartOption")
+    String vehiclePartOption;
 
     public String getVehiclePartName() {
         return vehiclePartName;
@@ -50,6 +59,14 @@ public class VehiclePartData {
         return vehiclePartTotalPrice;
     }
 
+    public String getVehiclePartSubTotalPrice() {
+        return vehiclePartSubTotalPrice;
+    }
+
+    public String getVehiclePartTime() {
+        return vehiclePartTime;
+    }
+
     public List<ServiceData> getVehiclePartAdditionalServices() {
         return vehiclePartAdditionalServices;
     }
@@ -60,6 +77,10 @@ public class VehiclePartData {
 
     public LaborServiceData getMatrixAdditionalLaborService() {
         return laborService;
+    }
+
+    public String getVehiclePartOption() {
+        return vehiclePartOption;
     }
 
 }
