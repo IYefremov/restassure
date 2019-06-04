@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.DamageData;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
@@ -44,5 +45,12 @@ public class VisualScreenSteps {
     public static void verifyInspectionTotalPrice(String expectedPrice) {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         Assert.assertEquals(baseWizardScreen.getInspectionTotalPriceValue(), expectedPrice);
+    }
+
+    public static void removeAllBreakages() {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
+        visualScreen.clickRemoveAllBreakagesButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog();
+        informationDialog.clickInformationDialogRemoveButton();
     }
 }

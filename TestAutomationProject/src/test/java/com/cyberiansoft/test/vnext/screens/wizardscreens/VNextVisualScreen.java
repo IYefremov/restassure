@@ -43,6 +43,9 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 	
 	@FindBy(xpath="//*[@data-tab='custom']")
 	private WebElement customtab;
+
+	@FindBy(xpath="//*[@action='remove-all-breakages']")
+	private WebElement removebreakagesbtn;
 	
 	public VNextVisualScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
@@ -136,5 +139,9 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 		tap(defaulttab);
 		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
 		return new VNextVisualScreen(appiumdriver);
+	}
+
+	public void clickRemoveAllBreakagesButton() {
+		tap(removebreakagesbtn);
 	}
 }
