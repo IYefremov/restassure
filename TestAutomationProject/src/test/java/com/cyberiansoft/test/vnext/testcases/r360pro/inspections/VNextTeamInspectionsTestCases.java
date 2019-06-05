@@ -666,39 +666,39 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         for (int i = 0; i < amountToSelect; i++)
-            availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceName()), amountToSelect);
+            availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceData().getServiceName()), amountToSelect);
         for (int i = 0; i < amountToSelect; i++)
-            availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceName()), amountToSelect);
+            availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceData().getServiceName()), amountToSelect);
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceName()), amountToSelect);
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceName()), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceData().getServiceName()), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceData().getServiceName()), amountToSelect);
 
         selectedServicesScreen.saveInspectionViaMenu();
         inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceName()), amountToSelect);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceName()), amountToSelect);
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceData().getServiceName()), amountToSelect);
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceData().getServiceName()), amountToSelect);
         selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceName()), amountToSelect);
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceName()), amountToSelect);
-        selectedServicesScreen.uselectService(inspectionData.getPercentageServiceName());
-        selectedServicesScreen.uselectService(inspectionData.getPercentageServiceName());
-        selectedServicesScreen.uselectService(inspectionData.getMoneyServiceName());
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceName()), defaultCountForMoneyService);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceData().getServiceName()), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceData().getServiceName()), amountToSelect);
+        selectedServicesScreen.uselectService(inspectionData.getPercentageServiceData().getServiceName());
+        selectedServicesScreen.uselectService(inspectionData.getPercentageServiceData().getServiceName());
+        selectedServicesScreen.uselectService(inspectionData.getMoneyServiceData().getServiceName());
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceData().getServiceName()), defaultCountForMoneyService);
         selectedServicesScreen.switchToAvalableServicesView();
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceName()), 2);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceName()), defaultCountForMoneyService);
-        availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
-        availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
-        availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceData().getServiceName()), 2);
+        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceData().getServiceName()), defaultCountForMoneyService);
+        availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
+        availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
+        availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
 
         availableServicesScreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceName()), amountToSelect);
-        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceName()), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getMoneyServiceData().getServiceName()), amountToSelect);
+        Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(inspectionData.getPercentageServiceData().getServiceName()), amountToSelect);
         availableServicesScreen.saveInspectionViaMenu();
         inspectionsScreen.switchToMyInspectionsView();
         inspectionsScreen.clickBackButton();
@@ -740,13 +740,13 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
         visualScreen.changeScreen(ScreenType.SERVICES);;
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.changeScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimInfoScreen.clickScreenForwardButton();
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.isServiceSelected(inspectionData.getServiceName());
+        selectedServicesScreen.isServiceSelected(inspectionData.getServiceData().getServiceName());
         selectedServicesScreen.clickScreenBackButton();
         claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimInfoScreen.clickScreenBackButton();
@@ -799,7 +799,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);;
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.saveInspectionViaMenu();
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);

@@ -1133,7 +1133,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+		servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
 		final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
 		workOrdersScreen = servicesScreen.saveWorkOrderViaMenu();
 		homeScreen = workOrdersScreen.clickBackButton();

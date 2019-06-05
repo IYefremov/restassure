@@ -57,4 +57,6 @@ public class AlertsCaptions {
 			"Total amount of invoice is huge.\n"+
 			"\n"+
 			"Maximum allowed total amount is %1$s";
+	public static final String ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE = "Warning!\n"+
+			"You can add only one service '%1$s'";
 }

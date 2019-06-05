@@ -16,6 +16,9 @@ public class BundleServiceData {
     @JsonProperty("service")
     ServiceData service;
 
+    @JsonProperty("laborService")
+    LaborServiceData laborService;
+
     @JsonProperty("services")
     List<ServiceData> services;
 

@@ -25,6 +25,12 @@ public class ServiceData {
     private VehiclePartData vehiclePart;
     @JsonProperty("vehicleParts")
     private List<VehiclePartData> vehicleParts;
+    @JsonProperty("servicePartData")
+    private ServicePartData servicePartData;
+    @JsonProperty("question")
+    private QuestionsData question;
+    @JsonProperty("isNotMultiple")
+    private boolean isNotMultiple;
 
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);

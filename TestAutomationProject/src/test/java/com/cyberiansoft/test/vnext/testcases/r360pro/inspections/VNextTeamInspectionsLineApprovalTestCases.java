@@ -179,7 +179,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceName());
+		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		
 		inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);

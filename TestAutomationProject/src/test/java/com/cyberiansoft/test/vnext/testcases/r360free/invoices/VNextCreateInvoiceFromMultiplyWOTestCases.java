@@ -290,9 +290,9 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 			servicesscreen.switchToAvalableServicesView();
-			servicesscreen.selectService(workOrderData.getMoneyServiceName());
+			servicesscreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
-			selectservicesscreen.setServiceAmountValue(workOrderData.getMoneyServiceName(), workOrderData.getMoneyServicePrice());
+			selectservicesscreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		}
@@ -343,9 +343,9 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleVINHistoryScreen.clickBackButton();
 			vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-			servicesscreen.selectService(workOrderData.getMoneyServiceName());
+			servicesscreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
-			selectservicesscreen.setServiceAmountValue(workOrderData.getMoneyServiceName(), workOrderData.getMoneyServicePrice());
+			selectservicesscreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
 			workOrders.add(vehicleinfoscreen.getNewInspectionNumber());
 			workordersscreen = vehicleinfoscreen.saveWorkOrderViaMenu();
 		}

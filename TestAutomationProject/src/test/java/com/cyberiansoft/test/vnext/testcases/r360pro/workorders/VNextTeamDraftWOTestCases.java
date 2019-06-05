@@ -141,7 +141,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         invoiceInfoScreen.clickOnWorkOrder(woNumber);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        availableServicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         availableServicesScreen.clickSaveWorkOrderMenuButton();
         invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         invoiceInfoScreen.saveInvoiceAsFinal();
@@ -174,7 +174,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(workOrderData.getServiceName());
+        availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
         availableServicesScreen.saveWorkOrderViaMenu();
 
         Assert.assertEquals(workOrdersScreen.getWorkOrderStatusValue(woNumber),
@@ -230,7 +230,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(workOrderData.getServiceName());
+        availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
         availableServicesScreen.saveWorkOrderViaMenu();
 
         Assert.assertEquals(workOrdersScreen.getWorkOrderStatusValue(woNumber),

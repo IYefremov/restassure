@@ -61,7 +61,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.selectService(inspectionData.getPercentageServicesList().get(0).getServiceName());
 
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -70,7 +70,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         List<ServiceData> percentageServices = inspectionData.getPercentageServicesList();
         for (ServiceData percentageService : percentageServices) {
             selectedServicesScreen.setServiceAmountValue(percentageService.getServiceName(), percentageService.getServicePrice());
-            float moneyServicePrice = BackOfficeUtils.getServicePriceValue(inspectionData.getServicePrice());
+            float moneyServicePrice = BackOfficeUtils.getServicePriceValue(inspectionData.getServiceData().getServicePrice());
             String newPrice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(percentageService.getServicePrice())/100);
             Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), newPrice);
         }
@@ -97,7 +97,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.selectService(inspectionData.getMoneyServicesList().get(0).getServiceName());
 
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -106,7 +106,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         for (ServiceData moneyService : moneyServices) {
             selectedServicesScreen.setServiceAmountValue(moneyService.getServiceName(), moneyService.getServicePrice());
             float moneyServicePrice = BackOfficeUtils.getServicePriceValue(moneyService.getServicePrice());
-            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspectionData.getServicePrice())/100);
+            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspectionData.getServiceData().getServicePrice())/100);
             Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), newprice);
         }
 
@@ -132,11 +132,11 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
-        availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
+        availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+        availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
 
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServicePrice());
+        selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
         selectedServicesScreen.clickSaveInspectionMenuButton();
@@ -164,12 +164,12 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
-        availableServicesScreen.selectService(inspectionData.getPercentageServiceName());
+        availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+        availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
 
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServiceQuantity());
+        selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
+        selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
         selectedServicesScreen.clickSaveInspectionMenuButton();
@@ -197,7 +197,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.selectService(inspectionData.getMoneyServicesList().get(0).getServiceName());
 
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -207,7 +207,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
             selectedServicesScreen.setServiceQuantityValue(moneyService.getServiceName(), moneyService.getServiceQuantity());
             float moneyServicePrice = BackOfficeUtils.getServicePriceValue(moneyService.getServicePrice())*
                     BackOfficeUtils.getServiceQuantityValue(moneyService.getServiceQuantity());
-            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspectionData.getServicePrice())/100);
+            String newprice =  BackOfficeUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspectionData.getServiceData().getServicePrice())/100);
             Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), newprice);
         }
 
@@ -234,7 +234,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         List<ServiceData> percentageServices = inspectionData.getPercentageServicesList();
         for (ServiceData percentageService : percentageServices)
             availableServicesScreen.selectService(percentageService.getServiceName());
@@ -478,19 +478,19 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
 
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
         visualScreen.clickAddServiceButton();
-        visualScreen.clickDefaultDamageType(inspectionData.getMoneyServiceName());
+        visualScreen.clickDefaultDamageType(inspectionData.getMoneyServiceData().getServiceName());
         visualScreen.clickCarImage();
         BaseUtils.waitABit(1000);
         VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker();
-        serviceDetailsScreen.setServiceAmountValue(inspectionData.getMoneyServicePrice());
-        serviceDetailsScreen.setServiceQuantityValue(inspectionData.getMoneyServiceQuantity());
+        serviceDetailsScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServicePrice());
+        serviceDetailsScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceQuantity());
         serviceDetailsScreen.clickServiceDetailsDoneButton();
         visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         VNextSelectDamagesScreen selectdamagesscreen = visualScreen.clickAddServiceButton();
         selectdamagesscreen.selectAllDamagesTab();
         VNextVisualServicesScreen visualServicesScreen = selectdamagesscreen.clickCustomDamageType(panelName);
-        visualScreen = visualServicesScreen.selectCustomService(inspectionData.getPercentageServiceName());
+        visualScreen = visualServicesScreen.selectCustomService(inspectionData.getPercentageServiceData().getServiceName());
         BaseUtils.waitABit(1000);
         visualScreen.clickCarImageSecondTime();
 
@@ -518,17 +518,17 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
         visualScreen.clickAddServiceButton();
-        visualScreen.clickDefaultDamageType(inspectionData.getMoneyServiceName());
+        visualScreen.clickDefaultDamageType(inspectionData.getMoneyServiceData().getServiceName());
         visualScreen.clickCarImage();
         BaseUtils.waitABit(1000);
         VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker();
-        serviceDetailsScreen.setServiceAmountValue(inspectionData.getMoneyServicePrice());
+        serviceDetailsScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServicePrice());
         serviceDetailsScreen.clickServiceDetailsDoneButton();
         visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         serviceDetailsScreen = visualScreen.clickCarImageMarker();
         serviceDetailsScreen.clickServiceAmountField();
-        Assert.assertEquals(serviceDetailsScreen.getServiceAmountValue(), inspectionData.getMoneyServicePrice());
+        Assert.assertEquals(serviceDetailsScreen.getServiceAmountValue(), inspectionData.getMoneyServiceData().getServicePrice());
         serviceDetailsScreen.clickServiceDetailsDoneButton();
         visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
 

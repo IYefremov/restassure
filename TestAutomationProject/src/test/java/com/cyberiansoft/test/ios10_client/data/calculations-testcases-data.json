@@ -681,7 +681,7 @@
   "testWOVerifyCalculationWithPriceMatrixLaborType_1": [
     {
       "rowID": "testWOVerifyCalculationWithPriceMatrixLaborType_1.01",
-      "description": "Test Case 45224:WO: HD - Verify calculation with price matrix Labor type",
+      "description": "Test Case 45224:WO: Verify calculation with price matrix Labor type",
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -734,8 +734,8 @@
             ]
           }
         },
-        "workOrderTotalSale" : "3",
-        "workOrderPrice" : "$542.68"
+        "workOrderTotalSale": "3",
+        "workOrderPrice": "$542.68"
       },
       "invoiceData": {
         "poNumber": "12345"
@@ -754,7 +754,7 @@
           "screenName": "Default",
           "vehiclePartData": {
             "vehiclePartName": "Hood",
-            "vehiclePartOption" : "PDR",
+            "vehiclePartOption": "PDR",
             "vehiclePartAdditionalServices": [
               {
                 "serviceName": "SR_S5_Mt_Upcharge_20",
@@ -772,7 +772,7 @@
                 "servicePrice2": "$180.50"
               }
             ],
-            "vehiclePartPrice" : "100"
+            "vehiclePartPrice": "100"
           }
         },
         {
@@ -793,7 +793,7 @@
                 "servicePrice2": "$293.00"
               }
             ],
-            "vehiclePartTime" : "20"
+            "vehiclePartTime": "20"
           }
         }
       ],
@@ -805,9 +805,667 @@
         {
           "serviceName": "Dent Removal",
           "servicePrice": "$130.50"
-        }],
+        }
+      ],
       "inspPrice": "$293.00"
     }
+  ],
+  "testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection": [
+    {
+      "rowID": "testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection.01",
+      "description": "Test Case 48543:Inspections: Verify that part services with different configurations are correctly shown for inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Oksi_Part_Category",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Engine",
+                "isPredefined": true
+              },
+              "serviceSubCategory": {
+                "partName": "Filters",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Engine Oil Filter",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Oil Cooler",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "2.35"
+          },
+          {
+            "serviceName": "Oksi_Part_None",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Body",
+                "isPredefined": false
+              },
+              "serviceSubCategory": {
+                "partName": "Bumper",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Bumper",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Rear Upper",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "5.09",
+            "question": {
+              "questionName": "QuestionTypeLogical_Q1"
+            }
+          },
+          {
+            "serviceName": "Oksi_Part_several",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Air and Fuel Delivery",
+                "isPredefined": false
+              },
+              "serviceSubCategory": {
+                "partName": "Filters",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Air Filter",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Inner",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "7"
+          },
+          {
+            "serviceName": "Oksi_Part_SubCategory",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Body",
+                "isPredefined": true
+              },
+              "serviceSubCategory": {
+                "partName": "Bumper",
+                "isPredefined": true
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Bumper Air Shield",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Front Lower",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "4.31"
+          }
+        ],
+        "moneyService": {
+          "serviceName": "Oksi_Part_Name",
+          "servicePartData": {
+            "servicePartValue": "Engine Coolant Outlet Housing Bolt (N/A)"
+          },
+          "servicePrice": "2.5"
+        },
+        "damageData": {
+          "damageGroupName": "Detail",
+          "moneyService": {
+            "serviceName": "Oksi_Part_SubCategory",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Body",
+                "isPredefined": true
+              },
+              "serviceSubCategory": {
+                "partName": "Bumper",
+                "isPredefined": true
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Bumper Assembly",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Front",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "6.43"
+          }
+        },
+        "priceMatrixScreenData": {
+          "screenName": "PM_New",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartOption": "PDR",
+            "vehiclePartPrice": "10",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Oksi_Part_Category",
+                "servicePartData": {
+                  "serviceSubCategory": {
+                    "partName": "Electrical Connectors",
+                    "isPredefined": false
+                  },
+                  "serviceSubCategoryPart": {
+                    "partName": "Engine Brake Relay Connector",
+                    "isPredefined": false
+                  },
+                  "servicePartValue": "Engine Brake Relay Connector (N/A)"
+                },
+                "servicePrice": "12.44"
+              },
+              {
+                "serviceName": "Oksi_Part_Name",
+                "servicePartData": {
+                  "serviceCategory": {
+                    "partName": "Belts and Cooling",
+                    "isPredefined": false
+                  },
+                  "serviceSubCategory": {
+                    "partName": "Hardware",
+                    "isPredefined": false
+                  },
+                  "servicePartValue": "Engine Coolant Outlet Housing Bolt (N/A)"
+                },
+                "servicePrice": "2.13"
+              }
+            ],
+            "vehiclePartAdditionalService": {
+              "serviceName": "Oksi_Part_Category",
+              "serviceQuantity": "3"
+            },
+            "vehiclePartTotalPrice": "$82.13",
+            "vehiclePartSubTotalPrice": "$49.45"
+          }
+        }
+      },
+      "workOrderData": {
+        "workOrderPrice": "$77.13",
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO": [
+    {
+      "rowID": "testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO.01",
+      "description": "Test Case 48563:WO: Verify that part services with different configurations are correctly shown for WO",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Oksi_Part_Category",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Engine",
+                "isPredefined": true
+              },
+              "serviceSubCategory": {
+                "partName": "Filters",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Engine Oil Filter",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Oil Cooler",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "2.35"
+          },
+          {
+            "serviceName": "Oksi_Part_None",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Body",
+                "isPredefined": false
+              },
+              "serviceSubCategory": {
+                "partName": "Bumper",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Bumper",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Rear Upper",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "5.09",
+            "question": {
+              "questionName": "QuestionTypeLogical_Q1"
+            }
+          },
+          {
+            "serviceName": "Oksi_Part_several",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Air and Fuel Delivery",
+                "isPredefined": false
+              },
+              "serviceSubCategory": {
+                "partName": "Filters",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Air Filter",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Inner",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "7"
+          },
+          {
+            "serviceName": "Oksi_Part_SubCategory",
+            "servicePartData": {
+              "serviceCategory": {
+                "partName": "Body",
+                "isPredefined": true
+              },
+              "serviceSubCategory": {
+                "partName": "Bumper",
+                "isPredefined": true
+              },
+              "serviceSubCategoryPart": {
+                "partName": "Bumper Air Shield",
+                "isPredefined": false
+              },
+              "serviceSubCategoryPosition": {
+                "partName": "Front Lower",
+                "isPredefined": false
+              }
+            },
+            "servicePrice": "4.31"
+          }
+        ],
+        "moneyService": {
+          "serviceName": "Oksi_Part_Name",
+          "servicePartData": {
+            "servicePartValue": "Engine Coolant Outlet Housing Bolt (N/A)"
+          },
+          "servicePrice": "2.5"
+        },
+        "matrixService": {
+          "matrixServiceName": "PM_New",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartOption": "PDR",
+            "vehiclePartPrice": "10",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Oksi_Part_Category",
+                "servicePartData": {
+                  "serviceSubCategory": {
+                    "partName": "Electrical Connectors",
+                    "isPredefined": false
+                  },
+                  "serviceSubCategoryPart": {
+                    "partName": "Engine Brake Relay Connector",
+                    "isPredefined": false
+                  },
+                  "servicePartValue": "Engine Brake Relay Connector (N/A)"
+                },
+                "servicePrice": "12.44"
+              },
+              {
+                "serviceName": "Oksi_Part_Name",
+                "servicePartData": {
+                  "serviceCategory": {
+                    "partName": "Belts and Cooling",
+                    "isPredefined": false
+                  },
+                  "serviceSubCategory": {
+                    "partName": "Hardware",
+                    "isPredefined": false
+                  },
+                  "servicePartValue": "Engine Coolant Outlet Housing Bolt (N/A)"
+                },
+                "servicePrice": "2.13"
+              }
+            ],
+            "vehiclePartAdditionalService": {
+              "serviceName": "Oksi_Part_Category",
+              "serviceQuantity": "3"
+            },
+            "vehiclePartSubTotalPrice": "$24.57",
+            "vehiclePartTotalPrice": "$49.45"
+          }
+        },
+        "workOrderPrice": "$70.70",
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testWOVerifyRoundingInCalculationScriptWithPriceMatrix": [
+    {
+      "rowID": "testWOVerifyRoundingInCalculationScriptWithPriceMatrix.01",
+      "description": "Test Case 45100:WO: Verify rounding in calculation script with price matrix",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "service": {
+          "serviceName": "Discount 5-10%",
+          "servicePrice": "-30"
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "Grill",
+            "vehiclePartOption": "PDR",
+            "vehiclePartPrice": "975",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "SR_Disc_20_Percent",
+                "servicePrice": "25"
+              },
+              {
+                "serviceName": "SR_S1_Money_Panel",
+                "servicePrice": "192"
+              }
+            ]
+          }
+        },
+        "workOrderTotalSale": "3",
+        "workOrderPrice": "$987.52"
+      },
+      "invoiceData": {
+        "poNumber": "12345",
+        "invoiceTotal": "$987.52"
+      }
+    }
+  ],
+  "testInvoicesVerifyRoundingMoneyAmountValues_1": [
+    {
+      "rowID": "testInvoicesVerifyRoundingMoneyAmountValues_1.01",
+      "description": "Test Case 42803:Invoices: Verify rounding money amount values",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle",
+            "servicePrice": "10",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            },
+            "question": {
+              "questionName": "QuestionTypeSelect_Question 2",
+              "questionAnswer": "A3"
+            }
+          },
+          {
+            "serviceName": "Sales Tax",
+            "servicePrice": "3.8"
+          }
+        ],
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "Grill",
+            "vehiclePartOption": "PDR",
+            "vehiclePartPrice": "100",
+            "vehiclePartAdditionalService": {
+              "serviceName": "Oksi_Service_PP_Flat_Fee",
+              "servicePrice": "23"
+            }
+          }
+        },
+        "bundleService": {
+          "bundleServiceName": "Oksi_Bundle_PP",
+          "services": [
+            {
+              "serviceName": "Oksi_Service_PP_Service",
+              "servicePrice": "25",
+              "vehiclePart": {
+                "vehiclePartName": "Hood"
+              }
+            },
+            {
+              "serviceName": "Oksi_Service_PP_Panel",
+              "servicePrice": "5",
+              "vehiclePart": {
+                "vehiclePartName": "Grill"
+              }
+            }
+          ],
+          "bundleServiceAmount": "30"
+        },
+        "workOrderTotalSale": "3",
+        "workOrderPrice": "$169.19"
+      },
+      "invoiceData": {
+        "poNumber": "12345"
+      }
+    }
+  ],
+  "testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection": [
+    {
+      "rowID": "testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection.01",
+      "description": "Test Case 40463:Inspections: Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "25",
+            "serviceStatus": "Skipped"
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "servicePrice": "2000",
+            "vehiclePart": {
+              "vehiclePartName": "Roof"
+            },
+            "serviceStatus": "Approved"
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle",
+            "servicePrice": "13",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            },
+            "question": {
+              "questionName": "QuestionTypeSelect_Question 2",
+              "questionAnswer": "A3"
+            }
+          }
+        ],
+        "bundleService": {
+          "bundleServiceName": "SR_S4_Bundle",
+          "services":[
+            {
+              "serviceName": "SR_S4_Bl_I1_M"
+            },
+            {
+              "serviceName": "SR_S4_Bl_I2_M",
+              "servicePrice": "200"
+            }]
+        },
+        "servicesToApprove" : [{
+          "serviceName": "3/4\" - Penny Size",
+          "serviceStatus": "Skipped"
+        },{
+          "serviceName": "Oksi_Service_PP_Vehicle",
+          "serviceStatus": "Skipped",
+          "vehiclePart": {
+            "vehiclePartName": "Back Glass"
+          }
+        },{
+          "serviceName": "Disc_Ex_Service1",
+          "serviceStatus": "Approved"
+        },{
+          "serviceName": "SR_S1_Money",
+          "serviceStatus": "Approved",
+          "vehiclePart": {
+            "vehiclePartName": "Roof"
+          }
+        },{
+          "serviceName": "SR_S4_Bundle",
+          "serviceStatus": "Approved"
+        }],
+        "inspApprovedPrice": "$2,650.00",
+        "inspPrice": "$2,688.00"
+      }
+    }
+  ],
+  "testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection": [
+    {
+      "rowID": "testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection.01",
+      "description": "Test Case 40466:Inspections: Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when decline inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "25",
+            "serviceStatus": "Skipped"
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            },
+            "serviceStatus": "Approved"
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            },
+            "question": {
+              "questionName": "QuestionTypeSelect_Question 2",
+              "questionAnswer": "A3"
+            }
+          }
+        ],
+        "bundleService": {
+          "bundleServiceName": "SR_S4_Bundle",
+          "services":[
+            {
+              "serviceName": "SR_S4_Bl_I1_M"
+            },
+            {
+              "serviceName": "SR_S4_Bl_I2_M",
+              "servicePrice": "200"
+            }]
+        },
+        "declineReason" : "Decline 1",
+        "inspApprovedPrice": "$0.00",
+        "inspPrice": "$2,638.00"
+      }
+    }
+  ],
+  "testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels": [
+    {
+      "rowID": "testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels.01",
+      "description": "Test Case 38970:Inspections: Verify that updated value for required service with 0 Price is saved when package grouped by panels",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "service":
+          {
+            "serviceName": "Service_req_0_price",
+            "servicePrice": "$0.00",
+            "servicePrice2": "21"
+          }
+      }
+    }
+  ],
+  "testWOVerifyThatForBundleItemsPricePolicyIsApplied": [
+    {
+      "rowID": "testWOVerifyThatForBundleItemsPricePolicyIsApplied.01",
+      "description": "Test Case 35030:WO: Verify that for bundle items price policy is applied",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "bundleService": {
+          "bundleServiceName": "Oksi_Bundle_PP",
+          "services": [
+            {
+              "serviceName": "Oksi_Service_PP_Vehicle",
+              "vehicleParts": [{
+                "vehiclePartName": "Back Glass"
+              },{
+                "vehiclePartName": "Deck Lid"
+              }],
+              "servicePrice2": "$13.00"
+            },
+            {
+              "serviceName": "Oksi_Service_PP_Service",
+              "servicePrice": "10",
+              "serviceQuantity": "3",
+              "vehicleParts": [{
+                "vehiclePartName": "Hood"
+              },{
+                "vehiclePartName": "Deck Lid"
+              }],
+              "servicePrice2": "$73.00"
+            },
+            {
+              "serviceName": "Oksi_Service_PP_Panel",
+              "vehicleParts": [{
+                "vehiclePartName": "Grill"
+              },{
+                "vehiclePartName": "Driver Seat"
+              }],
+              "servicePrice2": "$97.00"
+            },
+            {
+              "serviceName": "SR_S5_Mt_Discount_10",
+              "servicePrice2": "$87.30"
+            },
+            {
+              "serviceName": "Service_PP_Vehicle_not_multiple",
+              "servicePrice": "10",
+              "vehicleParts": [{
+                "vehiclePartName": "Back Glass"
+              },{
+                "vehiclePartName": "Deck Lid"
+              }],
+              "isNotMultiple" : true,
+              "servicePrice2": "$96.30"
+            }
+          ],
+          "laborService":
+          {
+            "serviceName": "Oksi_Service_PP_Labor",
+            "laborServiceRate": "25",
+            "laborServiceTime": "3"
+          },
+          "bundleServiceAmount": "$163.80"
+        },
+        "workOrderTotalSale": "3",
+        "workOrderPrice": "$163.80"
+      }
+    }
   ]
-
 }

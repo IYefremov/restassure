@@ -169,7 +169,7 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		clickDoneStatusReasonButton();
 	}
 
-	public void selectInspectionServiceStatus(ServiceData serviceData) {
+	public void selectApproveInspectionServiceStatus(ServiceData serviceData) {
 		String serviceName = serviceData.getServiceName();
 		if (serviceData.getVehiclePart() != null) {
 			serviceName = serviceName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";

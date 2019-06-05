@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class InspectionData {
 
     @JsonProperty("percentageServices")
     List<ServiceData> percentageServices;
+
+    @JsonProperty("servicesToApprove")
+    List<ServiceData> servicesToApprove;
 
     @JsonProperty("matrixService")
     MatrixServiceData matrixService;
@@ -82,6 +86,10 @@ public class InspectionData {
     @JsonProperty("priceMatrixScreensData")
     List<PriceMatrixScreenData> priceMatrixScreensData;
 
+    @Getter
+    @JsonProperty("bundleService")
+    BundleServiceData bundleService;
+
     public String getInspectionType() {
         return inspType;
     }
@@ -114,40 +122,8 @@ public class InspectionData {
         return newVinNumber;
     }
 
-    public ServiceStatus getServiceStatus() {
-        return service.getServiceStatus();
-    }
-
-    public String getServiceName() {
-        return service.getServiceName();
-    }
-
-    public String getServicePrice() {
-        return service.getServicePrice();
-    }
-
     public ServiceData getServiceData() {
         return service;
-    }
-
-    public String getMoneyServiceName() {
-        return moneyService.getServiceName();
-    }
-
-    public String getMoneyServicePrice() {
-        return moneyService.getServicePrice();
-    }
-
-    public String getMoneyServiceQuantity() {
-        return moneyService.getServiceQuantity();
-    }
-
-    public String getPercentageServiceName() {
-        return percentageService.getServiceName();
-    }
-
-    public String getPercentageServicePrice() {
-        return percentageService.getServicePrice();
     }
 
     public List<ServiceData> getServicesList() {
@@ -164,6 +140,10 @@ public class InspectionData {
 
     public List<ServiceData> getPercentageServicesList() {
         return percentageServices;
+    }
+
+    public List<ServiceData> getServicesToApprovesList() {
+        return servicesToApprove;
     }
 
     public ServiceData getPercentageServiceData() {

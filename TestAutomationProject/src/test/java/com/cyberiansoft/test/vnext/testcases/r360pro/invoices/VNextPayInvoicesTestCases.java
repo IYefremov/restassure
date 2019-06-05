@@ -56,7 +56,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -97,7 +97,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -142,7 +142,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -187,7 +187,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -237,7 +237,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -281,7 +281,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -316,7 +316,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -365,7 +365,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -406,7 +406,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -443,7 +443,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -484,7 +484,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -521,7 +521,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -566,7 +566,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -643,7 +643,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -679,7 +679,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -719,7 +719,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -760,7 +760,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -797,7 +797,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -838,7 +838,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -879,7 +879,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -923,7 +923,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -976,7 +976,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1034,7 +1034,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1083,7 +1083,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1127,7 +1127,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1168,7 +1168,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1213,7 +1213,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1258,7 +1258,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1308,7 +1308,7 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
         vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        servicesScreen.selectService(invoice.getWorkOrderData().getServiceName());
+        servicesScreen.selectService(invoice.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
