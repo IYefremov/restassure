@@ -13,6 +13,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.ServicePartSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
@@ -282,9 +283,9 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
                 workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
 		wonumber28583 = vehiclescreen.getInspectionNumber();
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ALL_SERVICES);
-		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(workOrderData.getServiceName());
+		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		servicedetailsscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), workOrderData.getServicePrice());
+		Assert.assertEquals(servicesscreen.getTotalAmaunt(), workOrderData.getServiceData().getServicePrice());
 		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale(totalSale);
 		ordersummaryscreen.saveWizard();
@@ -341,7 +342,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		vehiclescreen.verifyMakeModelyearValues(workOrderData.getVehicleInfoData().getVehicleMake(),
 				workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ALL_SERVICES);
-		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(workOrderData.getServiceName());
+		SelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		servicedetailsscreen.saveSelectedServiceDetails();
 		Assert.assertEquals(servicesscreen.getTotalAmaunt(), workOrderData.getWorkOrderPrice());
 		
@@ -809,7 +810,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen();
 		approveinspscreen.selectInspectionForApprove(inspectionnumber32286);
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
-			approveinspscreen.selectInspectionServiceStatus(serviceData);
+			approveinspscreen.selectApproveInspectionServiceStatus(serviceData);
 		}
 
 		approveinspscreen.clickSaveButton();
@@ -998,7 +999,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 
 		ServicesScreen servicesscreen =vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
-		servicesscreen.selectService(inspectionData.getServiceName());
+		servicesscreen.selectService(inspectionData.getServiceData().getServiceName());
 		InspectionToolBar toolaber = new InspectionToolBar();
 		Assert.assertEquals(toolaber.getInspectionTotalPrice(), inspectionData.getInspectionPrice());
 
@@ -1036,8 +1037,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		vehiclescreen.setVIN(workOrderData.getVinNumber());
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(workOrderData.getServiceName());
-		selectedservicedetailscreen.setServicePriceValue(workOrderData.getServicePrice());
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+		selectedservicedetailscreen.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
 		selectedservicedetailscreen.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity());
 		
 		selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -1082,8 +1083,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			workOrders.add(vehiclescreen.getInspectionNumber());
 
 			ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-			SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(invoiceData.getWorkOrderData().getServiceName());
-			selectedservicedetailscreen.setServicePriceValue(invoiceData.getWorkOrderData().getServicePrice());
+			SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(invoiceData.getWorkOrderData().getServiceData().getServiceName());
+			selectedservicedetailscreen.setServicePriceValue(invoiceData.getWorkOrderData().getServiceData().getServicePrice());
 			selectedservicedetailscreen.setServiceQuantityValue(invoiceData.getWorkOrderData().getServiceData().getServiceQuantity());
 
 			selectedservicedetailscreen.saveSelectedServiceDetails();
@@ -1142,8 +1143,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		vehiclescreen.setVIN(inspectionData.getVinNumber());
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(inspectionData.getServiceName());
-		selectedservicedetailscreen.setServicePriceValue(inspectionData.getServicePrice());
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
+		selectedservicedetailscreen.setServicePriceValue(inspectionData.getServiceData().getServicePrice());
 		selectedservicedetailscreen.setServiceQuantityValue(inspectionData.getServiceData().getServiceQuantity());
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		selectedservicedetailscreen.selectVehiclePart(inspectionData.getServiceData().getVehiclePart().getVehiclePartName());
@@ -1214,8 +1215,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen();
 		approveinspscreen.selectInspectionForApprove(inspectionnumber);
-		approveinspscreen.selectInspectionServiceStatus(serviceRequestData.getInspectionData().getMoneyServiceData());
-		approveinspscreen.selectInspectionServiceStatus(serviceRequestData.getInspectionData().getPercentageServiceData());
+		approveinspscreen.selectApproveInspectionServiceStatus(serviceRequestData.getInspectionData().getMoneyServiceData());
+		approveinspscreen.selectApproveInspectionServiceStatus(serviceRequestData.getInspectionData().getPercentageServiceData());
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneStatusReasonButton();
@@ -1276,41 +1277,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 				Assert.assertEquals(toolaber.getInspectionTotalPrice(), serviceData.getServicePrice2());
 			}
 		}
-
-		/*PriceMatrixScreen pricematrix = questionsscreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.DEFAULT);
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice(defprice);
-		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_20");
-		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.saveSelectedServiceDetails();
-		InspectionToolBar toolaber = new InspectionToolBar();		
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$120.00");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$170.00");
-		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_25");
-		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$145.00");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$195.00");
-		pricematrix.clickDiscaunt("SR_S5_Mt_Discount_10");
-		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$130.50");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$180.50");
-
-		pricematrix = pricematrix.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.MATRIX_LABOR);
-		pricematrix.selectPriceMatrix(_pricematrix1);
-		pricematrix.setSizeAndSeverity("DIME", "VERY LIGHT");
-		pricematrix.setTime(timevalue);
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$100.00");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$280.50");
-		pricematrix.clickDiscaunt("SR_S5_Mt_Discount_10");
-		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$90.00");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$270.50");
-		
-		pricematrix.clickDiscaunt("SR_S5_Mt_Upcharge_25");
-		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$112.50");
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$293.00");*/
 		vehiclescreen.saveWizard();
 		
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
@@ -1332,14 +1298,13 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		servicesscreen.cancelWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	private String inspnumber48543 = "";
-	
-	@Test(testName = "Test Case 48543:Inspections: HD - Verify that part services with different configurations are correctly shown for inspection", 
-			description = "Inspections: HD - Verify that part services with different configurations are correctly shown for inspection")
-	public void testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection() {
-		
-		final String VIN  = "1D7HW48NX6S507810";
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection(String rowID,
+																			 String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		InspectionData inspectionData = testCaseData.getInspectionData();
 
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -1349,156 +1314,104 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		VehicleScreen vehiclescreen = myinspectionsscreen.addInspection(InspectionsTypes.INSP_WITH_PART_SERVICES);
 		vehiclescreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
-		vehiclescreen.setVIN(VIN);
-		inspnumber48543 = vehiclescreen.getInspectionNumber();
+		vehiclescreen.setVIN(inspectionData.getVinNumber());
+		final String inspectionNumber = vehiclescreen.getInspectionNumber();
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.clickSaveAsDraft();
 		
-		myinspectionsscreen.selectInspectionForEdit(inspnumber48543);
+		myinspectionsscreen.selectInspectionForEdit(inspectionNumber);
 		vehiclescreen = new VehicleScreen();
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
-		ServicePartPopup servicepartpopup = selectedservicescreen.clickServicePartCell();
-		//Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Engine");
-		servicepartpopup.selectServicePartSubcategory("Filters");
-		servicepartpopup.selectServicePartSubcategoryPart("Engine Oil Filter");
-		servicepartpopup.selectServicePartSubcategoryPosition("Oil Cooler");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("2.35");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
-		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
-		selectedservicescreen.setServicePriceValue("2.5");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		servicepartpopup.selectServicePartCategory("Body");
-		servicepartpopup.selectServicePartSubcategory("Bumper");
-		servicepartpopup.selectServicePartSubcategoryPart("Bumper");
-		servicepartpopup.selectServicePartSubcategoryPosition("Rear Upper");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("5.09");
-		selectedservicescreen.answerQuestionCheckButton();		
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_several");
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		servicepartpopup.selectCategory("Air and Fuel Delivery");
-		servicepartpopup.selectServicePartSubcategory("Filters");
-		servicepartpopup.selectServicePartSubcategoryPart("Air Filter");
-		servicepartpopup.selectServicePartSubcategoryPosition("Inner");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("7");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_SubCategory");
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		//Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Body");
-		//Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Bumper");
-		servicepartpopup.selectServicePartSubcategoryPart("Bumper Air Shield");
-		servicepartpopup.selectServicePartSubcategoryPosition("Front Lower");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("4.31");
+
+		for (ServiceData serviceData : inspectionData.getServicesList()) {
+			SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(serviceData.getServiceName());
+			selectedservicescreen.clickServicePartCell();
+			ServicePartSteps.selectServicePartData(serviceData.getServicePartData());
+			selectedservicescreen.setServicePriceValue(serviceData.getServicePrice());
+			if (serviceData.getQuestion() != null) {
+				selectedservicescreen.answerQuestion(serviceData.getQuestion());
+			}
+			selectedservicescreen.saveSelectedServiceDetails();
+		}
+
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
+		Assert.assertEquals(selectedservicescreen.getServicePartValue(), inspectionData.getMoneyServiceData().getServicePartData().getServicePartValue());
+		selectedservicescreen.setServicePriceValue(inspectionData.getMoneyServiceData().getServicePrice());
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		VisualInteriorScreen visualinteriorscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualinteriorscreen.switchToCustomTab();
-		visualinteriorscreen.selectService("Detail");
-		visualinteriorscreen.selectSubService("Oksi_Part_SubCategory");
+		visualinteriorscreen.selectService(inspectionData.getDamageData().getDamageGroupName());
+		visualinteriorscreen.selectSubService(inspectionData.getDamageData().getMoneyServiceData().getServiceName());
 		visualinteriorscreen.tapCarImage();
 		visualinteriorscreen.tapCarImage();
 		selectedservicescreen = new SelectedServiceDetailsScreen();
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		//Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Body");
-		//Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Bumper");
-		servicepartpopup.selectServicePartSubcategoryPart("Bumper Assembly");
-		servicepartpopup.selectServicePartSubcategoryPosition("Front");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("6.43");
+		ServicePartPopup servicepartpopup = selectedservicescreen.clickServicePartCell();
+		ServicePartSteps.selectServicePartData(inspectionData.getDamageData().getMoneyServiceData().getServicePartData());
+		selectedservicescreen.setServicePriceValue(inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
 		selectedservicescreen.saveSelectedServiceDetails();
+		final PriceMatrixScreenData priceMatrixScreenData = inspectionData.getPriceMatrixScreenData();
+		PriceMatrixScreen pricematrix = vehiclescreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+		final VehiclePartData vehiclePartData = priceMatrixScreenData.getVehiclePartData();
+		pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+		pricematrix.switchOffOption(vehiclePartData.getVehiclePartOption());
+		pricematrix.setPrice(vehiclePartData.getVehiclePartPrice());
+		for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
+			pricematrix.clickDiscaunt(serviceData.getServiceName());
+			selectedservicescreen = new SelectedServiceDetailsScreen();
+			selectedservicescreen.clickServicePartCell();
+			ServicePartSteps.selectServicePartData(serviceData.getServicePartData());
+			Assert.assertEquals(selectedservicescreen.getServicePartValue(), serviceData.getServicePartData().getServicePartValue());
+			selectedservicescreen.setServicePriceValue(serviceData.getServicePrice());
+			selectedservicescreen.saveSelectedServiceDetails();
+		}
 
-		PriceMatrixScreen pricematrix = vehiclescreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, "PM_New");
-		pricematrix.selectPriceMatrix("VP1 zayats");
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice("10");
-		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		pricematrix.clickDiscaunt(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
 		selectedservicescreen = new SelectedServiceDetailsScreen();
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		//Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Engine");
-		servicepartpopup.selectServicePartSubcategory("Electrical Connectors");
-		servicepartpopup.selectServicePartSubcategoryPart("Engine Brake Relay Connector");
-		servicepartpopup.saveSelectedServicePart();	
-		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Brake Relay Connector (N/A)");
-		selectedservicescreen.setServicePriceValue("12.44");
+		selectedservicescreen.setServiceQuantityValue(vehiclePartData.getVehiclePartAdditionalService().getServiceQuantity());
 		selectedservicescreen.saveSelectedServiceDetails();
-		
-		pricematrix.clickDiscaunt("Oksi_Part_Name");
-		selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Belts and Cooling");
-		Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Hardware");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("2.13");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		InspectionToolBar toolaber = new InspectionToolBar();		
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$24.57");
-		
-		pricematrix.clickDiscaunt("Oksi_Part_Category");
-		selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.setServiceQuantityValue("3");
-		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$82.13");
-		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$49.45");
+		InspectionToolBar toolaber = new InspectionToolBar();
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), vehiclePartData.getVehiclePartTotalPrice());
+		Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), vehiclePartData.getVehiclePartSubTotalPrice());
 		
 		servicesscreen.clickSaveAsFinal();
-		myinspectionsscreen.clickHomeButton();
-	}	
-	
-	@Test(testName = "Test Case 48562:WO: HD - Verify that part services are copied from insp to order", 
-			description = "WO: HD - Verify that part services are copied from insp to order")
-	public void testWOVerifyThatPartServicesAreCopiedFromInspToOrder() {
-		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-		myinspectionsscreen.selectInspectionForAction(inspnumber48543);
+
+		myinspectionsscreen.selectInspectionForAction(inspectionNumber);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen();
-		approveinspscreen.selectInspectionForApprove(inspnumber48543);
-		approveinspscreen.selectInspectionForApprove(inspnumber48543);
+		approveinspscreen.selectInspectionForApprove(inspectionNumber);
+		//approveinspscreen.selectInspectionForApprove(inspnumber48543);
 		approveinspscreen.clickApproveAllServicesButton();
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneStatusReasonButton();
 
-        VehicleScreen vehiclescreen = myinspectionsscreen.createWOFromInspection(inspnumber48543,
-                WorkOrdersTypes.WO_WITH_PART_SERVICE);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+		vehiclescreen = myinspectionsscreen.createWOFromInspection(inspectionNumber,
+				WorkOrdersTypes.WO_WITH_PART_SERVICE);
 		String wonumber = vehiclescreen.getInspectionNumber();
-		InspectionToolBar toolaber = new InspectionToolBar();
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$77.13");
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 		OrderSummaryScreen ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("3");
-		
+		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
+
 		ordersummaryscreen.saveWizard();
 		homescreen = myinspectionsscreen.clickHomeButton();
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$77.13");
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), workOrderData.getWorkOrderPrice());
 		myworkordersscreen.clickHomeButton();
+
 	}
-	
-	@Test(testName = "Test Case 48563:WO: HD - Verify that part services with different configurations are correctly shown for WO", 
-			description = "WO: HD - Verify that part services with different configurations are correctly shown for WO")
-	public void testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO()  {
-		
-		final String VIN  = "1D7HW48NX6S507810";
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO(String rowID,
+																											  String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -1508,112 +1421,75 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_WITH_PART_SERVICE);
 		vehiclescreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
-		vehiclescreen.setVIN(VIN);
+		vehiclescreen.setVIN(workOrderData.getVinNumber());
 		String wonumber = vehiclescreen.getInspectionNumber();
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		ordersummaryscreen.saveWizard();
 		
 		myworkordersscreen.selectWorkOrderForEidt(wonumber);
 		vehiclescreen = new VehicleScreen();
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Category");
-		ServicePartPopup servicepartpopup = selectedservicescreen.clickServicePartCell();
-		//Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Engine");
-		servicepartpopup.selectServicePartSubcategory("Filters");
-		servicepartpopup.selectServicePartSubcategoryPart("Engine Oil Filter");
-		servicepartpopup.selectServicePartSubcategoryPosition("Oil Cooler");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("2.35");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_Name");
-		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
-		selectedservicescreen.setServicePriceValue("2.5");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_None");
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		servicepartpopup.selectServicePartCategory("Body");
-		servicepartpopup.selectServicePartSubcategory("Bumper");
-		servicepartpopup.selectServicePartSubcategoryPart("Bumper");
-		servicepartpopup.selectServicePartSubcategoryPosition("Rear Upper");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("5.09");
-		selectedservicescreen.answerQuestionCheckButton();		
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_several");
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		servicepartpopup.selectCategory("Air and Fuel Delivery");
-		servicepartpopup.selectServicePartSubcategory("Filters");
-		servicepartpopup.selectServicePartSubcategoryPart("Air Filter");
-		servicepartpopup.selectServicePartSubcategoryPosition("Inner");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("7");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Oksi_Part_SubCategory");
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		//Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Body");
-		//Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Bumper");
-		servicepartpopup.selectServicePartSubcategoryPart("Bumper Air Shield");
-		servicepartpopup.selectServicePartSubcategoryPosition("Front Lower");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("4.31");
+		for (ServiceData serviceData : workOrderData.getServicesList()) {
+			SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(serviceData.getServiceName());
+			ServicePartPopup servicepartpopup = selectedservicescreen.clickServicePartCell();
+			ServicePartSteps.selectServicePartData(serviceData.getServicePartData());
+			selectedservicescreen.setServicePriceValue(serviceData.getServicePrice());
+			if (serviceData.getQuestion() != null) {
+				selectedservicescreen.answerQuestion(serviceData.getQuestion());
+			}
+			selectedservicescreen.saveSelectedServiceDetails();
+		}
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
+		Assert.assertEquals(selectedservicescreen.getServicePartValue(), workOrderData.getMoneyServiceData().getServicePartData().getServicePartValue());
+		selectedservicescreen.setServicePriceValue(workOrderData.getMoneyServiceData().getServicePrice());
 		selectedservicescreen.saveSelectedServiceDetails();
 		
 		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectPriceMatrix("PM_New");	
+		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
+		servicesscreen.selectPriceMatrix(matrixServiceData.getMatrixServiceName());
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen();
-		pricematrix.selectPriceMatrix("VP1 zayats");			
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice("10");
-		pricematrix.clickDiscaunt("Oksi_Part_Category");
+		VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+		pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+		pricematrix.switchOffOption(vehiclePartData.getVehiclePartOption());
+		pricematrix.setPrice(vehiclePartData.getVehiclePartPrice());
+		for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
+			pricematrix.clickDiscaunt(serviceData.getServiceName());
+			selectedservicescreen = new SelectedServiceDetailsScreen();
+			selectedservicescreen.clickServicePartCell();
+			ServicePartSteps.selectServicePartData(serviceData.getServicePartData());
+			Assert.assertEquals(selectedservicescreen.getServicePartValue(), serviceData.getServicePartData().getServicePartValue());
+			selectedservicescreen.setServicePriceValue(serviceData.getServicePrice());
+			selectedservicescreen.saveSelectedServiceDetails();
+		}
+
+		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartTotalPrice(), vehiclePartData.getVehiclePartSubTotalPrice());
+		pricematrix.clickDiscaunt(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
 		selectedservicescreen = new SelectedServiceDetailsScreen();
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		//Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Engine");
-		servicepartpopup.selectServicePartSubcategory("Electrical Connectors");
-		servicepartpopup.selectServicePartSubcategoryPart("Engine Brake Relay Connector");
-		servicepartpopup.saveSelectedServicePart();	
-		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Brake Relay Connector (N/A)");
-		selectedservicescreen.setServicePriceValue("12.44");
+		selectedservicescreen.setServiceQuantityValue(vehiclePartData.getVehiclePartAdditionalService().getServiceQuantity());
 		selectedservicescreen.saveSelectedServiceDetails();
-		
-		pricematrix.clickDiscaunt("Oksi_Part_Name");
-		selectedservicescreen = new SelectedServiceDetailsScreen();
-		Assert.assertEquals(selectedservicescreen.getServicePartValue(), "Engine Coolant Outlet Housing Bolt (N/A)");
-		servicepartpopup = selectedservicescreen.clickServicePartCell();
-		Assert.assertEquals(servicepartpopup.getServicePartCategoryValue(), "Belts and Cooling");
-		Assert.assertEquals(servicepartpopup.getServicePartSubCategoryValue(), "Hardware");
-		servicepartpopup.saveSelectedServicePart();	
-		selectedservicescreen.setServicePriceValue("2.13");
-		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartTotalPrice(), "$24.57");
-		//InspectionToolBar toolaber = new InspectionToolBar();		
-		//Assert.assertEquals(toolaber.getInspectionSubTotalPrice(), "$24.57");
-		
-		pricematrix.clickDiscaunt("Oksi_Part_Category");
-		selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.setServiceQuantityValue("3");
-		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartTotalPrice(), "$49.45");
+		InspectionToolBar toolaber = new InspectionToolBar();
+		Assert.assertEquals(pricematrix.getPriceMatrixVehiclePartTotalPrice(), vehiclePartData.getVehiclePartTotalPrice());
+
 		pricematrix.clickSaveButton();
-		InspectionToolBar toolaber = new InspectionToolBar();	
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$70.70");
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 		servicesscreen.saveWizard();
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), workOrderData.getWorkOrderPrice());
 		myworkordersscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 45100:WO: HD - Verify rounding in calculation script with price matrix", 
-			description = "WO: HD - Verify rounding in calculation script with price matrix")
-	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix() {
-		
-		final String VIN  = "1D7HW48NX6S507810";
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix(String rowID,
+																							  String description, JSONObject testData) {
+
+		final String filterBillingValue = "All";
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+		InvoiceData invoiceData = testCaseData.getInvoiceData();
 
 		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
 		settingsScreen.setInsvoicesCustomLayoutOff();
@@ -1626,35 +1502,35 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehiclescreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
-		vehiclescreen.setVIN(VIN);
+		vehiclescreen.setVIN(workOrderData.getVinNumber());
 		String wonumber = vehiclescreen.getInspectionNumber();
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		servicesscreen.selectServicePriceMatrices("Price Matrix Zayats");
+		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
+		servicesscreen.selectService(matrixServiceData.getMatrixServiceName());
+		servicesscreen.selectServicePriceMatrices(matrixServiceData.getHailMatrixName());
 		PriceMatrixScreen pricematrix = new PriceMatrixScreen();
-		pricematrix.selectPriceMatrix("Grill");				
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice("975");
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_DISC_20_PERCENT);
-		SelectedServiceDetailsScreen selectedservicedetailscreen = new SelectedServiceDetailsScreen();
-		selectedservicedetailscreen.setServicePriceValue("25");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
-		selectedservicedetailscreen.setServicePriceValue("192");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
+		VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+		pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+		pricematrix.switchOffOption(vehiclePartData.getVehiclePartOption());
+		pricematrix.setPrice(vehiclePartData.getVehiclePartPrice());
+		for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
+			pricematrix.clickDiscaunt(serviceData.getServiceName());
+			SelectedServiceDetailsScreen selectedservicedetailscreen = new SelectedServiceDetailsScreen();
+			selectedservicedetailscreen.setServicePriceValue(serviceData.getServicePrice());
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+		}
 		pricematrix.clickSaveButton();
-		
-		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-		selectedservicedetailscreen.setServicePriceValue("-30");
+
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+		selectedservicedetailscreen.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 		InspectionToolBar toolaber = new InspectionToolBar();		
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$987.52");
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
@@ -1662,20 +1538,20 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		
 		ordersummaryscreen.clickSave();
         InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
-		invoiceinfoscreen.setPO("12345");
+		invoiceinfoscreen.setPO(invoiceData.getInvoicePONumber());
 		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
 		invoiceinfoscreen.clickSave();
 		Helpers.acceptAlert();
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen.clickFilterButton();
-		myworkordersscreen.setFilterBilling("All");
+		myworkordersscreen.setFilterBilling(filterBillingValue);
 		myworkordersscreen.clickSaveFilter();
 		
-		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), "$987.52");
+		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber), workOrderData.getWorkOrderPrice());
 		homescreen = myworkordersscreen.clickHomeButton();
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		Assert.assertEquals(myinvoicesscreen.getPriceForInvoice(invoicenumber), "$987.52");
+		Assert.assertEquals(myinvoicesscreen.getPriceForInvoice(invoicenumber), invoiceData.getInvoiceTotal());
 		myinvoicesscreen.clickHomeButton();
 	}
 
@@ -1803,12 +1679,15 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 	}
 	
 	private String invoicenumber42803 = null;
-	
-	@Test(testName = "Test Case 42803:Invoices: HD - Verify rounding money amount values", 
-			description = "Invoices: HD - Verify rounding money amount values")
-	public void testInvoicesVerifyRoundingMoneyAmountValues_1() {
-		
-		final String VIN  = "1D7HW48NX6S507810";
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testInvoicesVerifyRoundingMoneyAmountValues_1(String rowID,
+																  String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+		InvoiceData invoiceData = testCaseData.getInvoiceData();
+
 		
 		homescreen = new HomeScreen();			
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -1817,62 +1696,63 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
-		vehiclescreen.setVIN(VIN);
+		vehiclescreen.setVIN(workOrderData.getVinNumber());
 		String wonumber = vehiclescreen.getInspectionNumber();
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		ServicesScreen servicesscreen =  questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
-		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Price Matrix Zayats");
-		pricematrix.selectPriceMatrix("Grill");
+		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
+		servicesscreen.selectService(matrixServiceData.getMatrixServiceName());
+		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices(matrixServiceData.getHailMatrixName());
+		VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+		pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
 
-		pricematrix.switchOffOption("PDR");
-		pricematrix.setPrice("100");
-		pricematrix.clickDiscaunt(iOSInternalProjectConstants.OKSI_SERVICE_PP_FLAT_FEE);
+		pricematrix.switchOffOption(vehiclePartData.getVehiclePartOption());
+		pricematrix.setPrice(vehiclePartData.getVehiclePartPrice());
+		pricematrix.clickDiscaunt(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.setServicePriceValue("23");
+		selectedservicescreen.setServicePriceValue(vehiclePartData.getVehiclePartAdditionalService().getServicePrice());
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix.clickSaveButton();
-		
-		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		selectedservicescreen = new SelectedServiceDetailsScreen();
-		selectedservicescreen.setServicePriceValue("10");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Back Glass");
-		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.answerQuestion2("A3");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_BUNDLE_PP);
-		servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_BUNDLE_PP);
+
+		for (ServiceData serviceData : workOrderData.getServicesList()) {
+			servicesscreen.openCustomServiceDetails(serviceData.getServiceName());
+			selectedservicescreen = new SelectedServiceDetailsScreen();
+			selectedservicescreen.setServicePriceValue(serviceData.getServicePrice());
+			if (serviceData.getVehiclePart() != null) {
+				selectedservicescreen.clickVehiclePartsCell();
+				selectedservicescreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
+				selectedservicescreen.saveSelectedServiceDetails();
+			}
+			if (serviceData.getQuestion() != null) {
+				selectedservicescreen.answerQuestion(serviceData.getQuestion());
+			}
+			selectedservicescreen.saveSelectedServiceDetails();
+		}
+
+
+		BundleServiceData bundleServiceData = workOrderData.getBundleService();
+		servicesscreen.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
 		SelectedServiceBundleScreen selectedservicebundlescreen = new SelectedServiceBundleScreen();
-		selectedservicebundlescreen.selectBundle(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE);
-		selectedservicebundlescreen.setServicePriceValue("25");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Hood");
-		selectedservicescreen.saveSelectedServiceDetails();
+		for (ServiceData serviceData : bundleServiceData.getServices()) {
+			selectedservicebundlescreen.selectBundle(serviceData.getServiceName());
+			selectedservicebundlescreen.setServicePriceValue(serviceData.getServicePrice());
+			selectedservicescreen.clickVehiclePartsCell();
+			selectedservicescreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
+			selectedservicescreen.saveSelectedServiceDetails();
+			selectedservicescreen.saveSelectedServiceDetails();
+		}
+
+		selectedservicescreen.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		selectedservicebundlescreen.selectBundle(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
-		selectedservicebundlescreen.setServicePriceValue("5");
-		selectedservicescreen.clickVehiclePartsCell();
-		selectedservicescreen.selectVehiclePart("Grill");
-		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.changeAmountOfBundleService("30");
-		selectedservicescreen.saveSelectedServiceDetails();
-		
-		servicesscreen.searchAvailableService("Sales Tax");
-		servicesscreen.openCustomServiceDetails("Sales Tax");
-		selectedservicescreen.setServicePriceValue("3.8");
-		selectedservicescreen.saveSelectedServiceDetails();
+
 		InspectionToolBar toolaber = new InspectionToolBar();		
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$169.19");
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 
 		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.clickWorkOrderForApproveButton(wonumber);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
@@ -1884,7 +1764,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		myworkordersscreen.clickInvoiceIcon();
         InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
 		invoicenumber42803 = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.setPO("12345");
+		invoiceinfoscreen.setPO(invoiceData.getInvoicePONumber());
 		invoiceinfoscreen.clickSaveAsFinal();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -1916,13 +1796,13 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		invoicespage.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}
-	
-	@Test(testName = "Test Case 40463:Inspections: HD - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection", 
-			description = "Inspections: HD - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection")
-	public void testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection() {
-		
-		final String VIN  = "1D7HW48NX6S507810";
 
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection(String rowID,
+															  String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		InspectionData inspectionData = testCaseData.getInspectionData();
 		
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -1933,68 +1813,67 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		VisualInteriorScreen visualInteriorScreen = myinspectionsscreen.addInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehiclescreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
-		vehiclescreen.setVIN(VIN);
+		vehiclescreen.setVIN(inspectionData.getVinNumber());
 		final String inspnumber = vehiclescreen.getInspectionNumber();
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
-		selectedservicedetailscreen.setServicePriceValue("25");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
-		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
-		selectedservicedetailscreen.setServicePriceValue("2000");
-		selectedservicedetailscreen.clickVehiclePartsCell();
-		selectedservicedetailscreen.selectVehiclePart("Roof");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+		for (ServiceData serviceData : inspectionData.getServicesList()) {
+			SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(serviceData.getServiceName());
+			selectedservicedetailscreen = new SelectedServiceDetailsScreen();
+			selectedservicedetailscreen.setServicePriceValue(serviceData.getServicePrice());
+			if (serviceData.getVehiclePart() != null) {
+				selectedservicedetailscreen.clickVehiclePartsCell();
+				selectedservicedetailscreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
+				selectedservicedetailscreen.saveSelectedServiceDetails();
+			}
+			if (serviceData.getQuestion() != null) {
+				selectedservicedetailscreen.answerQuestion(serviceData.getQuestion());
+			}
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+		}
+
+		BundleServiceData bundleServiceData = inspectionData.getBundleService();
+		servicesscreen.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
 		SelectedServiceBundleScreen selectedServiceBundleScreen = new SelectedServiceBundleScreen();
-		selectedServiceBundleScreen.selectBundle("SR_S4_Bl_I1_M");
-		SelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo ("SR_S4_Bl_I2_M");
-		selectedServiceDetailsScreen.setServicePriceValue("200");
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		
-		servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		selectedservicedetailscreen.setServicePriceValue("13");
-		selectedservicedetailscreen.clickVehiclePartsCell();
-		selectedservicedetailscreen.selectVehiclePart("Back Glass");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.answerQuestion2("A3");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.cancelSearchAvailableService();
+		for (ServiceData serviceData : bundleServiceData.getServices()) {
+			if (serviceData.getServicePrice()!=null) {
+				SelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo (serviceData.getServiceName());
+				selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
+				selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			} else
+				selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
+		}
+
+		selectedServiceBundleScreen.saveSelectedServiceDetails();
 		
 		InspectionToolBar toolaber = new InspectionToolBar();		
-		Assert.assertEquals(toolaber.getInspectionTotalPrice(), "$2,688.00");
+		Assert.assertEquals(toolaber.getInspectionTotalPrice(), inspectionData.getInspectionPrice());
 		servicesscreen.saveWizard();
 		myinspectionsscreen.selectInspectionForApprove(inspnumber);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen();
 		approveinspscreen.selectInspectionForApprove(inspnumber);
-		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.DISC_EX_SERVICE1);
-		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S1_MONEY + " (Roof)");
-		approveinspscreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S4_BUNDLE);
-		approveinspscreen.selectInspectionServiceToSkip("3/4\" - Penny Size");
-		approveinspscreen.selectInspectionServiceToSkip(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE + " (Back Glass)");
+		for (ServiceData serviceData : inspectionData.getServicesToApprovesList())
+			approveinspscreen.selectApproveInspectionServiceStatus(serviceData);
 		approveinspscreen.clickSaveButton();
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		
-		Assert.assertEquals(myinspectionsscreen.getInspectionTotalPriceValue(inspnumber), "$2,688.00");
-		Assert.assertEquals(myinspectionsscreen.getInspectionApprovedPriceValue(inspnumber), "$2,650.00");
+		Assert.assertEquals(myinspectionsscreen.getInspectionTotalPriceValue(inspnumber), inspectionData.getInspectionPrice());
+		Assert.assertEquals(myinspectionsscreen.getInspectionApprovedPriceValue(inspnumber), inspectionData.getInspectionApprovedPrice());
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 40466:Inspections: HD - Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when decline inspection", 
-			description = "Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when decline inspection")
-	public void testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection() {
 
-		final String VIN  = "1D7HW48NX6S507810";		
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection(String rowID,
+																															   String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		InspectionData inspectionData = testCaseData.getInspectionData();
+
 		homescreen = new HomeScreen();
 		SettingsScreen settingscreen = homescreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
@@ -2006,34 +1885,39 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		VehicleScreen vehiclescreen = myinspectionsscreen.addInspection(InspectionsTypes.INSP_DRAFT_MODE);
-		vehiclescreen.setVIN(VIN);
+		vehiclescreen.setVIN(inspectionData.getVinNumber());
 		String inspectionnumber = vehiclescreen.getInspectionNumber();
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
-		selectedservicedetailscreen.setServicePriceValue("25");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S1_MONEY);
-		selectedservicedetailscreen = new SelectedServiceDetailsScreen();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Hood");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.selectService(iOSInternalProjectConstants.SR_S4_BUNDLE);
+
+		for (ServiceData serviceData : inspectionData.getServicesList()) {
+			SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(serviceData.getServiceName());
+			selectedservicedetailscreen = new SelectedServiceDetailsScreen();
+			if(serviceData.getServicePrice() != null)
+				selectedservicedetailscreen.setServicePriceValue(serviceData.getServicePrice());
+			if (serviceData.getVehiclePart() != null) {
+				selectedservicedetailscreen.clickVehiclePartsCell();
+				selectedservicedetailscreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
+				selectedservicedetailscreen.saveSelectedServiceDetails();
+			}
+			if (serviceData.getQuestion() != null) {
+				selectedservicedetailscreen.answerQuestion(serviceData.getQuestion());
+			}
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+		}
+
+		BundleServiceData bundleServiceData = inspectionData.getBundleService();
+		servicesscreen.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
 		SelectedServiceBundleScreen selectedServiceBundleScreen = new SelectedServiceBundleScreen();
-		selectedServiceBundleScreen.selectBundle("SR_S4_Bl_I1_M");
-		SelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo ("SR_S4_Bl_I2_M");
-		selectedServiceDetailsScreen.setServicePriceValue("200");
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		
-		//servicesscreen.searchAvailableService(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		selectedservicedetailscreen = servicesscreen.openCustomServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		selectedservicedetailscreen.clickVehiclePartsCell();
-		selectedservicedetailscreen.selectVehiclePart("Back Glass");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.answerQuestion2("A3");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		servicesscreen.cancelSearchAvailableService();
+		for (ServiceData serviceData : bundleServiceData.getServices()) {
+			if (serviceData.getServicePrice()!=null) {
+				SelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo (serviceData.getServiceName());
+				selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
+				selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			} else
+				selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
+		}
+
+		selectedServiceBundleScreen.saveSelectedServiceDetails();
 		servicesscreen.clickSaveAsFinal();
 			
 		myinspectionsscreen.selectInspectionForApprove(inspectionnumber);
@@ -2043,7 +1927,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		approveinspscreen.selectInspectionForApprove(inspectionnumber);
 		approveinspscreen.clickDeclineAllServicesButton();
 		approveinspscreen.clickSaveButton();
-		approveinspscreen.selectStatusReason("Decline 1");
+		approveinspscreen.selectStatusReason(inspectionData.getDeclineReason());
 		approveinspscreen.drawSignatureAfterSelection();
 		approveinspscreen.clickDoneButton();
 		
@@ -2051,21 +1935,21 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		//approveinspscreen.clickApproveButton();
 		myinspectionsscreen.clickFilterButton();
 		myinspectionsscreen.clickStatusFilter();
-		myinspectionsscreen.clickFilterStatus("Declined");
+		myinspectionsscreen.clickFilterStatus(InspectionStatuses.DECLINED.getInspectionStatusValue());
 		//myinspectionsscreen.clickBackButton();
 		myinspectionsscreen.clickCloseFilterDialogButton();
 		myinspectionsscreen.clickSaveFilterDialogButton();
-		Assert.assertEquals(myinspectionsscreen.getInspectionApprovedPriceValue(inspectionnumber), "$0.00");
-		Assert.assertEquals(myinspectionsscreen.getInspectionTotalPriceValue(inspectionnumber), "$2,638.00");		
+		Assert.assertEquals(myinspectionsscreen.getInspectionApprovedPriceValue(inspectionnumber), inspectionData.getInspectionApprovedPrice());
+		Assert.assertEquals(myinspectionsscreen.getInspectionTotalPriceValue(inspectionnumber), inspectionData.getInspectionPrice());
 		myinspectionsscreen.clickHomeButton();	
 	}
-	
-	@Test(testName = "Test Case 38970:Inspections: Reqular - Verify that updated value for required service with 0 Price is saved when package grouped by panels", 
-			description = "Inspections: Reqular - Verify that updated value for required service with 0 Price is saved when package grouped by panels")
-	public void testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels() {
-		
-		final String VIN  = "1D7HW48NX6S507810";
-		final String serviceprice = "21";
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels(String rowID,
+																													 String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		InspectionData inspectionData = testCaseData.getInspectionData();
 
 		homescreen = new HomeScreen();
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -2074,20 +1958,20 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		
 		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
 		VehicleScreen vehiclescreen = myinspectionsscreen.addInspection(InspectionsTypes.INSP_WITH_0_PRICE);
-		vehiclescreen.setVIN(VIN);
+		vehiclescreen.setVIN(inspectionData.getVinNumber());
 		final String inspnumber = vehiclescreen.getInspectionNumber();
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		Assert.assertTrue(servicesscreen.checkServiceIsSelected(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE));
+		Assert.assertTrue(servicesscreen.checkServiceIsSelected(inspectionData.getServiceData().getServiceName()));
 		servicesscreen.saveWizard();
 		myinspectionsscreen.selectInspectionForAction(inspnumber);
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveinspscreen = new ApproveInspectionsScreen();	
 		approveinspscreen.selectInspectionForApprove(inspnumber);
-		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE), "$0.00");
+		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(inspectionData.getServiceData().getServiceName()), inspectionData.getServiceData().getServicePrice());
 		
 		approveinspscreen.clickCancelButton();
 		approveinspscreen.clickCancelButton();
@@ -2095,8 +1979,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		myinspectionsscreen.selectInspectionForEdit(inspnumber);
 		vehiclescreen = new VehicleScreen();
 		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openServiceDetails(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE);
-		selectedservicescreen.setServicePriceValue(serviceprice);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openServiceDetails(inspectionData.getServiceData().getServiceName());
+		selectedservicescreen.setServicePriceValue(inspectionData.getServiceData().getServicePrice2());
 		selectedservicescreen.saveSelectedServiceDetails();
 		servicesscreen.saveWizard();
 		
@@ -2105,17 +1989,18 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectemployeepopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		approveinspscreen = new ApproveInspectionsScreen();	
 		approveinspscreen.selectInspectionForApprove(inspnumber);
-		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(iOSInternalProjectConstants.SERVICE_REQ_0_PRICE), PricesCalculations.getPriceRepresentation(serviceprice));
+		Assert.assertEquals(approveinspscreen.getInspectionServicePrice(inspectionData.getServiceData().getServiceName()), PricesCalculations.getPriceRepresentation(inspectionData.getServiceData().getServicePrice2()));
 		approveinspscreen.clickCancelButton();
 		approveinspscreen.clickCancelButton();
 		myinspectionsscreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 35030:WO: HD - Verify that for bundle items price policy is applied", 
-			description = "WO: HD - Verify that for bundle items price policy is applied")
-	public void testWOVerifyThatForBundleItemsPricePolicyIsApplied() {
-		
-		final String VIN  = "1D7HW48NX6S507810";
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testWOVerifyThatForBundleItemsPricePolicyIsApplied(String rowID,
+															  String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		
 		homescreen = new HomeScreen();			
 		CustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -2124,70 +2009,46 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
-		vehiclescreen.setVIN(VIN);
+		vehiclescreen.setVIN(workOrderData.getVinNumber());
 
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
 		questionsscreen.selectAnswerForQuestion("Question 2", "A3");
 
 		ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.searchAvailableService("Oksi_Bundle_PP");
-		servicesscreen.openCustomServiceDetails("Oksi_Bundle_PP");
-		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomBundleServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE);
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Back Glass");
-		selectedservicedetailscreen.selectVehiclePart("Deck Lid");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$13.00");
-		
-		selectedservicedetailscreen = servicesscreen.openCustomBundleServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_SERVICE);
-		selectedservicedetailscreen.setServiceQuantityValue("3");
-		selectedservicedetailscreen.setServicePriceValue("10");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Hood");
-		selectedservicedetailscreen.selectVehiclePart("Deck Lid");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertTrue(selectedservicedetailscreen.getVehiclePartValue().contains("Hood"));
-		Assert.assertTrue(selectedservicedetailscreen.getVehiclePartValue().contains("Deck Lid"));	
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$73.00");
+		BundleServiceData bundleServiceData = workOrderData.getBundleService();
+		servicesscreen.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
+		for (ServiceData serviceData : bundleServiceData.getServices()) {
+			SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomBundleServiceDetails(serviceData.getServiceName());
+			if (serviceData.getServicePrice() != null)
+				selectedservicedetailscreen.setServicePriceValue(serviceData.getServicePrice());
+			if (serviceData.getServiceQuantity() != null)
+				selectedservicedetailscreen.setServiceQuantityValue(serviceData.getServiceQuantity());
+			if (serviceData.getVehicleParts() != null) {
+				selectedservicedetailscreen.clickVehiclePartsCell();
+				selectedservicedetailscreen.selectVehicleParts(serviceData.getVehicleParts());
+				selectedservicedetailscreen.saveSelectedServiceDetails();
+			}
 
-		selectedservicedetailscreen = servicesscreen.openCustomBundleServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_PANEL);
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Grill");
-		selectedservicedetailscreen.selectVehiclePart("Driver Seat");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$97.00");
-		
-		selectedservicedetailscreen = servicesscreen.selectBundleServiceDetails(iOSInternalProjectConstants.SR_S5_MT_DISCOUNT_10);
-		//selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$87.30");		
-		
-		selectedservicedetailscreen = servicesscreen.openCustomBundleServiceDetails(iOSInternalProjectConstants.SERVICE_PP_VEHICLE_NOT_MULTIPLE);
-		selectedservicedetailscreen.setServicePriceValue("10");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.selectVehiclePart("Back Glass");
-		selectedservicedetailscreen.selectVehiclePart("Deck Lid");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		String alerttxt = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttxt.contains("You can add only one service 'Service_PP_Vehicle_not_multiple'"));
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$96.30");
-		
-		selectedservicedetailscreen = servicesscreen.openCustomBundleServiceDetails(iOSInternalProjectConstants.OKSI_SERVICE_PP_LABOR);
-		selectedservicedetailscreen.setServiceTimeValue("3");
-		selectedservicedetailscreen.setServiceRateValue("25");
-		selectedservicedetailscreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), "$163.80");
 
-		
-		
-		selectedservicedetailscreen.changeAmountOfBundleService("163.80");
+			selectedservicedetailscreen.saveSelectedServiceDetails();
+			if (serviceData.isNotMultiple()) {
+				String alerttxt = Helpers.getAlertTextAndAccept();
+				Assert.assertEquals(alerttxt, String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
+			}
+			Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
+		}
+
+		SelectedServiceDetailsScreen selectedservicedetailscreen = servicesscreen.openCustomBundleServiceDetails(bundleServiceData.getLaborService().getServiceName());
+		selectedservicedetailscreen.setServiceTimeValue(bundleServiceData.getLaborService().getLaborServiceTime());
+		selectedservicedetailscreen.setServiceRateValue(bundleServiceData.getLaborService().getLaborServiceRate());
+		selectedservicedetailscreen.saveSelectedServiceDetails();
+		Assert.assertEquals(selectedservicedetailscreen.getServiceDetailsPriceValue(), bundleServiceData.getBundleServiceAmount());
+
+		selectedservicedetailscreen.changeAmountOfBundleService(workOrderData.getWorkOrderPrice());
 		selectedservicedetailscreen.saveSelectedServiceDetails();
 
 		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("3");
+		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		ordersummaryscreen.saveWizard();
 		myworkordersscreen.clickHomeButton();
 	}

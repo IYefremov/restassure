@@ -70,7 +70,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		//selectservicesscreen.selectService(percservices);
-		availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
+		availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
 		final MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
 		VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
@@ -85,8 +85,8 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixServiceData.getMatrixServiceName()), matrixServiceData.getHailMatrixName());
 
-		selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServicePrice());
-		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServiceQuantity());
+		selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
+		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
 		inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspNumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
@@ -152,7 +152,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		//selectservicesscreen.selectService(percservices);
-		availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
+		availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
 		final MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
 		VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
@@ -167,8 +167,8 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixServiceData.getMatrixServiceName()), matrixServiceData.getHailMatrixName());
 
-		selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServicePrice());
-		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceName(), inspectionData.getMoneyServiceQuantity());
+		selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
+		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
 		inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspNumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));

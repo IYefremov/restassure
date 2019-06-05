@@ -53,7 +53,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
         vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 
 
         inspectionsScreen = availableServicesScreen.saveInspectionAsDraft();
@@ -108,7 +108,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         inspectionsMenuScreen.clickEditInspectionMenuItem();
         vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.saveInspectionAsDraft();
 
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
@@ -168,7 +168,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         inspectionsMenuScreen.clickEditInspectionMenuItem();
         vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceName());
+        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
                 InspectionStatuses.NEW.getInspectionStatusValue());

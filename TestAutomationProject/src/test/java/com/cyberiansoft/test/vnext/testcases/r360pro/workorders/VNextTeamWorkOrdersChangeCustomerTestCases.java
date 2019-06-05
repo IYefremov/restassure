@@ -129,7 +129,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(workOrderData.getServiceName());
+        availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
         workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(woNumber), workOrderData.getWorkOrderPrice());

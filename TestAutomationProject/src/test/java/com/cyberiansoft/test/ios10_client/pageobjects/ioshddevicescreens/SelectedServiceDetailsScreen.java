@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -181,12 +182,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		return questionvalue;
 	}
 
-	public void answerQuestionCheckButton() {
-
+	public void answerQuestion(QuestionsData questionsData) {
 		appiumdriver.findElementByAccessibilityId("Questions").click();
-		appiumdriver.findElement(MobileBy.AccessibilityId("QuestionTypeLogical_Q1")).click();
-		//appiumdriver.findElement(MobileBy.IosUIAutomation(".popovers()[0].tableViews()[0].cells()[1]")).click();	
-		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
+		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).click();
+		if (questionsData.getQuestionAnswer() != null) {
+			appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionAnswer())).click();
+		}
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
 	}
 	
 	public void setServiceQuantityValue(String _quantity) {

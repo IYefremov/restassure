@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.dataclasses.ServicePartData;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -49,10 +50,6 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 
 		appiumdriver.findElementByAccessibilityId(subcategoryname).click();
 	}
-
-	public void clickSubcategoryCell() {
-		subcategorycell.click();
-	}
 	
 	public String getServicePartSubCategoryValue() {
 		WebElement par = getTableParentCell("Subcategory");
@@ -77,6 +74,5 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	public WebElement getTableParentCell(String cellname) {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
-	
 
 }

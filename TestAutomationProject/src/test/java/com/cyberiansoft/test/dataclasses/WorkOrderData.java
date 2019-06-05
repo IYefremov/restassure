@@ -73,14 +73,6 @@ public class WorkOrderData {
         return vihicleInfo.getVINNumber();
     }
 
-    public String getServiceName() {
-        return service.getServiceName();
-    }
-
-    public String getServicePrice() {
-        return service.getServicePrice();
-    }
-
     public ServiceData getServiceData() {
         return service;
     }
@@ -93,23 +85,9 @@ public class WorkOrderData {
         return workOrderPrice;
     }
 
-    public String getMoneyServiceName() {
-        return moneyService.getServiceName();
-    }
+    public ServiceData getMoneyServiceData() { return moneyService; }
 
-    public String getMoneyServicePrice() {
-        return moneyService.getServicePrice();
-    }
-
-    public String getMoneyServiceQuantity() { return moneyService.getServiceQuantity(); }
-
-    public String getPercentageServiceName() {
-        return percentageService.getServiceName();
-    }
-
-    public String getPercentageServicePrice() {
-        return percentageService.getServicePrice();
-    }
+    public ServiceData getPercentageServiceData() { return percentageService; }
 
     public MatrixServiceData getMatrixServiceData() { return matrixService; }
 

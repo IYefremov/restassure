@@ -142,7 +142,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectService(inspectionData.getMoneyServiceName());
+		availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
 		availableServicesScreen.changeScreen(ScreenType.VEHICLE_INFO);
 		vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		AppiumUtils.clickHardwareBackButton();

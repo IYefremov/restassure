@@ -56,9 +56,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextVehicleInfoScreen vehicleInfoScreen =  inspectionsMenuScreen.clickEditInspectionMenuItem();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceName());
+		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		List<WebElement> quickNotesList = notesScreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<>();
 		for (WebElement note : quickNotesList)
@@ -70,7 +70,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 
-		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		final String selectedNotes = notesScreen.getSelectedNotes();
 		for (String note : notes)
 			Assert.assertTrue(selectedNotes.contains(note));
@@ -94,9 +94,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextVehicleInfoScreen vehicleInfoScreen =  inspectionsMenuScreen.clickEditInspectionMenuItem();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceName());
+		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		List<WebElement> quickNotesList = notesScreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<>();
 		for (WebElement note : quickNotesList)
@@ -107,7 +107,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		AppiumUtils.clickHardwareBackButton();
 		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		final String selectedNotes = notesScreen.getSelectedNotes();
 		String notestocompare = "";
 		for (int i =0; i< notesToAdd; i++) {
@@ -244,11 +244,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextVehicleInfoScreen vehicleInfoScreen =  inspectionsMenuScreen.clickEditInspectionMenuItem();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceName());
+		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		selectedServicesScreen.addNotesToSelectedService(inspectionData.getServiceName(), noteTextValid);
+		selectedServicesScreen.addNotesToSelectedService(inspectionData.getServiceData().getServiceName(), noteTextValid);
 		
-		Assert.assertEquals(selectedServicesScreen.getSelectedServiceNotesValue(inspectionData.getServiceName()), noteTextValid);
+		Assert.assertEquals(selectedServicesScreen.getSelectedServiceNotesValue(inspectionData.getServiceData().getServiceName()), noteTextValid);
 
 		inspectionsScreen = availableServicesScreen.cancelInspection();
 		inspectionsScreen.clickBackButton();
@@ -267,9 +267,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextVehicleInfoScreen vehicleInfoScreen =  inspectionsMenuScreen.clickEditInspectionMenuItem();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceName());
+		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		List<WebElement> quickNotesList = notesScreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<>();
 		for (WebElement note : quickNotesList)
@@ -278,7 +278,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		notesScreen.clickNotesBackButton();
 		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		final String selectedNotes = notesScreen.getSelectedNotes();
 		Assert.assertTrue(selectedNotes.contains(notes.get(0)));
 		notesScreen.clickNotesBackButton();
@@ -301,10 +301,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextVehicleInfoScreen vehicleInfoScreen =  inspectionsMenuScreen.clickEditInspectionMenuItem();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceName());
+		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		//VNextServiceDetailsScreen servicedetailsscreen = availableServicesScreen.openServiceDetailsScreen(testservice);
-		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		List<WebElement> quickNotesList = notesScreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<>();
 		for (WebElement note : quickNotesList) {
@@ -315,9 +315,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		notesScreen.clickNotesBackButton();
 		new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (int i = 0; i < notesToAdd; i++)
-			Assert.assertTrue(selectedServicesScreen.getSelectedServiceNotesValue(inspectionData.getServiceName()).trim().contains(notes.get(i).trim()));
+			Assert.assertTrue(selectedServicesScreen.getSelectedServiceNotesValue(inspectionData.getServiceData().getServiceName()).trim().contains(notes.get(i).trim()));
 
-		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		final String selectedNotes = notesScreen.getSelectedNotes();
 		for (int i = 0; i < notesToAdd; i++)
 			Assert.assertTrue(selectedNotes.contains(notes.get(i)));
@@ -498,10 +498,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		VNextVehicleInfoScreen vehicleInfoScreen =  inspectionsMenuScreen.clickEditInspectionMenuItem();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceName());
+		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		//VNextServiceDetailsScreen servicedetailsscreen = availableServicesScreen.openServiceDetailsScreen(testservice);
-		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		List<WebElement> quickNotesList = notesScreen.getListOfQuickNotes();
 		List<String> notes = new ArrayList<>();
 		for (WebElement note : quickNotesList)
@@ -517,12 +517,12 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		notesScreen.clickClearNotesButton();
 		Assert.assertEquals(notesScreen.getSelectedNotes(), emptyNotes);
 		AppiumUtils.clickHardwareBackButton();
 		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceName());
+		notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
 		Assert.assertEquals(notesScreen.getSelectedNotes(), emptyNotes);
 		notesScreen.clickNotesBackButton();
 		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
