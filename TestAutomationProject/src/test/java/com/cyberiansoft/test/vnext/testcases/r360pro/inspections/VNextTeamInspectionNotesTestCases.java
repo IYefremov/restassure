@@ -425,6 +425,6 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
 		Assert.assertTrue(inspectionMediaWebPage.isImageNoteExistsForInspection());
 
 
-		DriverBuilder.getInstance().getAppiumDriver().quit();
+		DriverBuilder.getInstance().getDriver().quit();
 	}
 }
