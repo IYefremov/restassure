@@ -90,6 +90,10 @@ public class InspectionData {
     @JsonProperty("bundleService")
     BundleServiceData bundleService;
 
+    @Getter
+    @JsonProperty("questionScreenData")
+    QuestionScreenData questionScreenData;
+
     public String getInspectionType() {
         return inspType;
     }

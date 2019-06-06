@@ -31,6 +31,12 @@ public class WorkOrderData {
     @JsonProperty("matrixService")
     MatrixServiceData matrixService;
 
+    @JsonProperty("taxService")
+    TaxServiceData taxService;
+
+    @JsonProperty("taxServices")
+    List<TaxServiceData> taxServices;
+
     @JsonProperty("laborService")
     LaborServiceData laborService;
 
@@ -61,6 +67,18 @@ public class WorkOrderData {
     @JsonProperty("workOrderTotalSale")
     String workOrderTotalSale;
 
+    @Getter
+    @JsonProperty("questionScreenData")
+    QuestionScreenData questionScreenData;
+
+    @Getter
+    @JsonProperty("wholesailCustomer")
+    WholesailCustomer wholesailCustomer;
+
+    @Getter
+    @JsonProperty("workOrderJob")
+    String workOrderJob;
+
     public String getWorkOrderType() {
         return workOrderType;
     }
@@ -90,6 +108,10 @@ public class WorkOrderData {
     public ServiceData getPercentageServiceData() { return percentageService; }
 
     public MatrixServiceData getMatrixServiceData() { return matrixService; }
+
+    public TaxServiceData getTaxServiceData() { return taxService; }
+
+    public List<TaxServiceData> getTaxServicesData() { return taxServices; }
 
     public LaborServiceData getLaborServiceData() { return laborService; }
 

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.dataclasses.QuestionsData;
+import com.cyberiansoft.test.dataclasses.ServiceRateData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -375,8 +376,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		return toolbar.findElementsByClassName("XCUIElementTypeStaticText").get(1).getAttribute("value");
 	}
 	
-	public String getServiceDetailsFieldValue(String fieldname) {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").getAttribute("value");
+	public String getServiceRatedValue(ServiceRateData serviceRateData) {
+		return appiumdriver.findElementByAccessibilityId(serviceRateData.getServiceRateName()).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public void setServiceTimeValue(String _timevalue) {
@@ -396,15 +397,15 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
         par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_ratevalue + "\n");
 	}
 	
-	public boolean isServiceDetailsFieldEditable(String fieldname) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").click();
+	public boolean isServiceRateFieldEditable(ServiceRateData serviceRateData) {
+		appiumdriver.findElementByAccessibilityId(serviceRateData.getServiceRateName()).findElement(MobileBy.className("XCUIElementTypeTextField")).click();
 		return appiumdriver.findElementsByAccessibilityId("Clear text").size() > 0;
 	}
 	
-	public void setServiceDetailsFieldValue(String fieldname, String _value) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").click();
+	public void setServiceRateFieldValue(ServiceRateData serviceRateData) {
+		appiumdriver.findElementByAccessibilityId(serviceRateData.getServiceRateName()).findElement(MobileBy.className("XCUIElementTypeTextField")).click();
 		appiumdriver.findElementByAccessibilityId("Clear text").click();
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").sendKeys(_value + "\n");
+		appiumdriver.findElementByAccessibilityId(serviceRateData.getServiceRateName()).findElement(MobileBy.className("XCUIElementTypeTextField")).sendKeys(serviceRateData.getServiceRateValue() + "\n");
 	}
 	
 	public WebElement getTableParentCell(String cellname) {

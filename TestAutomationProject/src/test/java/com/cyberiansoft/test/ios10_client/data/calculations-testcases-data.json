@@ -862,7 +862,7 @@
               }
             },
             "servicePrice": "5.09",
-            "question": {
+            "questionData": {
               "questionName": "QuestionTypeLogical_Q1"
             }
           },
@@ -1048,7 +1048,7 @@
               }
             },
             "servicePrice": "5.09",
-            "question": {
+            "questionData": {
               "questionName": "QuestionTypeLogical_Q1"
             }
           },
@@ -1210,7 +1210,7 @@
             "vehiclePart": {
               "vehiclePartName": "Back Glass"
             },
-            "question": {
+            "questionData": {
               "questionName": "QuestionTypeSelect_Question 2",
               "questionAnswer": "A3"
             }
@@ -1289,7 +1289,7 @@
             "vehiclePart": {
               "vehiclePartName": "Back Glass"
             },
-            "question": {
+            "questionData": {
               "questionName": "QuestionTypeSelect_Question 2",
               "questionAnswer": "A3"
             }
@@ -1297,37 +1297,44 @@
         ],
         "bundleService": {
           "bundleServiceName": "SR_S4_Bundle",
-          "services":[
+          "services": [
             {
               "serviceName": "SR_S4_Bl_I1_M"
             },
             {
               "serviceName": "SR_S4_Bl_I2_M",
               "servicePrice": "200"
-            }]
+            }
+          ]
         },
-        "servicesToApprove" : [{
-          "serviceName": "3/4\" - Penny Size",
-          "serviceStatus": "Skipped"
-        },{
-          "serviceName": "Oksi_Service_PP_Vehicle",
-          "serviceStatus": "Skipped",
-          "vehiclePart": {
-            "vehiclePartName": "Back Glass"
+        "servicesToApprove": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "serviceStatus": "Skipped"
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle",
+            "serviceStatus": "Skipped",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            }
+          },
+          {
+            "serviceName": "Disc_Ex_Service1",
+            "serviceStatus": "Approved"
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "serviceStatus": "Approved",
+            "vehiclePart": {
+              "vehiclePartName": "Roof"
+            }
+          },
+          {
+            "serviceName": "SR_S4_Bundle",
+            "serviceStatus": "Approved"
           }
-        },{
-          "serviceName": "Disc_Ex_Service1",
-          "serviceStatus": "Approved"
-        },{
-          "serviceName": "SR_S1_Money",
-          "serviceStatus": "Approved",
-          "vehiclePart": {
-            "vehiclePartName": "Roof"
-          }
-        },{
-          "serviceName": "SR_S4_Bundle",
-          "serviceStatus": "Approved"
-        }],
+        ],
         "inspApprovedPrice": "$2,650.00",
         "inspPrice": "$2,688.00"
       }
@@ -1359,7 +1366,7 @@
             "vehiclePart": {
               "vehiclePartName": "Back Glass"
             },
-            "question": {
+            "questionData": {
               "questionName": "QuestionTypeSelect_Question 2",
               "questionAnswer": "A3"
             }
@@ -1367,16 +1374,17 @@
         ],
         "bundleService": {
           "bundleServiceName": "SR_S4_Bundle",
-          "services":[
+          "services": [
             {
               "serviceName": "SR_S4_Bl_I1_M"
             },
             {
               "serviceName": "SR_S4_Bl_I2_M",
               "servicePrice": "200"
-            }]
+            }
+          ]
         },
-        "declineReason" : "Decline 1",
+        "declineReason": "Decline 1",
         "inspApprovedPrice": "$0.00",
         "inspPrice": "$2,638.00"
       }
@@ -1390,12 +1398,11 @@
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
         },
-        "service":
-          {
-            "serviceName": "Service_req_0_price",
-            "servicePrice": "$0.00",
-            "servicePrice2": "21"
-          }
+        "service": {
+          "serviceName": "Service_req_0_price",
+          "servicePrice": "$0.00",
+          "servicePrice2": "21"
+        }
       }
     }
   ],
@@ -1412,31 +1419,40 @@
           "services": [
             {
               "serviceName": "Oksi_Service_PP_Vehicle",
-              "vehicleParts": [{
-                "vehiclePartName": "Back Glass"
-              },{
-                "vehiclePartName": "Deck Lid"
-              }],
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Back Glass"
+                },
+                {
+                  "vehiclePartName": "Deck Lid"
+                }
+              ],
               "servicePrice2": "$13.00"
             },
             {
               "serviceName": "Oksi_Service_PP_Service",
               "servicePrice": "10",
               "serviceQuantity": "3",
-              "vehicleParts": [{
-                "vehiclePartName": "Hood"
-              },{
-                "vehiclePartName": "Deck Lid"
-              }],
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                },
+                {
+                  "vehiclePartName": "Deck Lid"
+                }
+              ],
               "servicePrice2": "$73.00"
             },
             {
               "serviceName": "Oksi_Service_PP_Panel",
-              "vehicleParts": [{
-                "vehiclePartName": "Grill"
-              },{
-                "vehiclePartName": "Driver Seat"
-              }],
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Grill"
+                },
+                {
+                  "vehiclePartName": "Driver Seat"
+                }
+              ],
               "servicePrice2": "$97.00"
             },
             {
@@ -1446,17 +1462,19 @@
             {
               "serviceName": "Service_PP_Vehicle_not_multiple",
               "servicePrice": "10",
-              "vehicleParts": [{
-                "vehiclePartName": "Back Glass"
-              },{
-                "vehiclePartName": "Deck Lid"
-              }],
-              "isNotMultiple" : true,
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Back Glass"
+                },
+                {
+                  "vehiclePartName": "Deck Lid"
+                }
+              ],
+              "isNotMultiple": true,
               "servicePrice2": "$96.30"
             }
           ],
-          "laborService":
-          {
+          "laborService": {
             "serviceName": "Oksi_Service_PP_Labor",
             "laborServiceRate": "25",
             "laborServiceTime": "3"
@@ -1465,6 +1483,365 @@
         },
         "workOrderTotalSale": "3",
         "workOrderPrice": "$163.80"
+      }
+    }
+  ],
+  "testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData": [
+    {
+      "rowID": "testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData.01",
+      "description": "Test Case 40541:WO: Verify that for Sales Tax Service data is set from DB when create WO for customer with appropriate data",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "taxServices": [
+          {
+            "taxServiceName": "Sales Tax",
+            "serviceRatesData": [
+              {
+                "serviceRateName": "State Rate",
+                "serviceRateValue": "%6.250",
+                "isServiceRateEditable": false
+              },
+              {
+                "serviceRateName": "County Rate",
+                "serviceRateValue": "%0.250",
+                "isServiceRateEditable": false
+              },
+              {
+                "serviceRateName": "City Rate",
+                "serviceRateValue": "%0.500",
+                "isServiceRateEditable": false
+              },
+              {
+                "serviceRateName": "Special Rate",
+                "serviceRateValue": "%2.500",
+                "isServiceRateEditable": false
+              }
+            ]
+          },
+          {
+            "taxServiceName": "Sales Tax Override",
+            "serviceRatesData": [
+              {
+                "serviceRateName": "State Rate",
+                "serviceRateValue": "%6.250",
+                "isServiceRateEditable": true
+              },
+              {
+                "serviceRateName": "County Rate",
+                "serviceRateValue": "%0.250",
+                "isServiceRateEditable": true
+              },
+              {
+                "serviceRateName": "City Rate",
+                "serviceRateValue": "%0.500",
+                "isServiceRateEditable": true
+              },
+              {
+                "serviceRateName": "Special Rate",
+                "serviceRateValue": "%2.500",
+                "isServiceRateEditable": true
+              }
+            ]
+          }
+        ],
+        "taxService": {
+          "taxServiceName": "Sales Tax Override",
+          "serviceRateData": {
+            "serviceRateName": "State Rate",
+            "serviceRateValue": "6.000",
+            "isServiceRateEditable": true
+          },
+          "taxServiceTotal": "%9.250"
+        },
+        "service": {
+          "serviceName": "Test_service_with_QF_PP_Panel",
+          "vehiclePart": {
+            "vehiclePartName": "Dashboard"
+          },
+          "questionData": {
+            "questionName": "QuestionTypeSelect_Question 2",
+            "questionAnswer": "A3"
+          }
+        },
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testInvoicesVerifyThatTaxRoundingIsCorrectlyCalculated": [
+    {
+      "rowID": "testInvoicesVerifyThatTaxRoundingIsCorrectlyCalculated.01",
+      "description": "Test Case 49680:Invoices: Verify that tax rounding is correctly calculated",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Front Bumper"
+            },
+            "servicePrice": "79",
+            "serviceQuantity": "4.1"
+          },
+          {
+            "serviceName": "SR_S1_Money_FlatFee",
+            "servicePrice": "20"
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            },
+            "servicePrice": "15"
+          },
+          {
+            "serviceName": "Service_with_default_Tech",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            },
+            "servicePrice": "3205"
+          }
+        ],
+        "percentageService": {
+          "serviceName": "Tax discount",
+          "servicePrice": "$178.20"
+        },
+        "workOrderTotalSale": "3",
+        "workOrderPrice": "$3,742.10"
+      }
+    }
+  ],
+  "testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo": [
+    {
+      "rowID": "testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo.01",
+      "description": "Test Case 49915:Inspections: Verify that tax is calc correctly from services with tax exempt YES/No",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "Money_Tax_Exempt",
+            "vehiclePart": {
+              "vehiclePartName": "Driver Seat"
+            },
+            "servicePrice": "100",
+            "servicePrice2": "$100.00"
+          },
+          {
+            "serviceName": "Sales Tax",
+            "servicePrice2": "$100.00"
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Front Bumper"
+            },
+            "servicePrice": "100",
+            "servicePrice2": "$205.00"
+          },
+          {
+            "serviceName": "Money_Discount_Exempt",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            },
+            "servicePrice": "100",
+            "servicePrice2": "$310.00"
+          },
+          {
+            "serviceName": "Discount 5-10%",
+            "servicePrice2": "$289.50"
+          },
+          {
+            "serviceName": "Money_TE_DE",
+            "vehiclePart": {
+              "vehiclePartName": "Deck Lid"
+            },
+            "servicePrice": "100",
+            "servicePrice2": "$389.50"
+          }
+        ],
+        "inspPrice": "$389.50"
+      }
+    }
+  ],
+  "testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale": [
+    {
+      "rowID": "testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale.01",
+      "description": "Test Case 49945: Verify that package price overrides client (retail or wholesale)",
+      "workOrdersData": [
+        {
+          "wholesailCustomer": {
+            "companyName": "003 - Test Company"
+          },
+          "workOrderType": "WO_TYPE_FOR_CALC",
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "service": {
+            "serviceName": "Money_Pack_Price"
+          },
+          "workOrderTotalSale": "3",
+          "workOrderPrice": "$4.07",
+          "questionScreenData": {
+            "screenName": "Zayats Section1",
+            "questionData": {
+              "questionName": "Question 2",
+              "questionAnswer": "A3"
+            }
+          }
+        },
+        {
+          "wholesailCustomer": {
+            "companyName": "004 - Test Company"
+          },
+          "workOrderType": "WO_MONITOR_DEVICE",
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "service": {
+            "serviceName": "Money_Pack_Price"
+          },
+          "workOrderTotalSale": "3",
+          "workOrderPrice": "$12.00"
+        }
+      ]
+    }
+  ],
+  "testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO": [
+    {
+      "rowID": "testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO.01",
+      "description": "Test Case 50013:WO: Verify that client and job overrides are working fine for WO",
+      "workOrderData": {
+        "workOrderJob": "Job for test",
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "Money_client_override",
+            "servicePrice": "$4.79"
+          },
+          {
+            "serviceName": "Money_client_override",
+            "servicePrice": "$13.84"
+          }
+        ],
+        "workOrderPrice": "$13.84",
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        }
+      }
+    }
+  ],
+  "testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval": [
+    {
+      "rowID": "testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval.01",
+      "description": "Test Case 32190:Inspections: Verify that for Declined/Skipped services appropriate icon is shown after approval, Test Case 32191:Inspections: Verify that declined/skipped services are marked with text (Declined) or (Skipped) accordingly on Inspection Summary screen",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "service" : {
+          "serviceName": "WHEEL REPAIR"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          }
+        ],
+        "percentageServices": [
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "Tax discount"
+          }
+        ],
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2"
+            }
+          ]
+        },
+        "priceMatrixScreensData": [
+          {
+            "screenName": "Default",
+            "vehiclePartData": {
+              "vehiclePartName": "Hood",
+              "vehiclePartSize": "DIME",
+              "vehiclePartSeverity": "HEAVY",
+              "vehiclePartPrice": "123.00"
+            }
+          },
+          {
+            "screenName": "Matrix Labor",
+            "vehiclePartData": {
+              "vehiclePartName": "Back Glass",
+              "vehiclePartOption": "PDR",
+              "vehiclePartTime": "34"
+            }
+          }
+        ],
+        "servicesToApprove": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "serviceStatus": "Skipped"
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle",
+            "serviceStatus": "Skipped",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            }
+          },
+          {
+            "serviceName": "Disc_Ex_Service1",
+            "serviceStatus": "Approved"
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "serviceStatus": "Approved",
+            "vehiclePart": {
+              "vehiclePartName": "Roof"
+            }
+          },
+          {
+            "serviceName": "SR_S4_Bundle",
+            "serviceStatus": "Approved"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        },
+        "inspApprovedPrice": "$2,650.00",
+        "inspPrice": "$2,688.00"
       }
     }
   ]
