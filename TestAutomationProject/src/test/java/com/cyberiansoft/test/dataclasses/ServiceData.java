@@ -27,8 +27,8 @@ public class ServiceData {
     private List<VehiclePartData> vehicleParts;
     @JsonProperty("servicePartData")
     private ServicePartData servicePartData;
-    @JsonProperty("question")
-    private QuestionsData question;
+    @JsonProperty("questionData")
+    private QuestionsData questionData;
     @JsonProperty("isNotMultiple")
     private boolean isNotMultiple;
 
