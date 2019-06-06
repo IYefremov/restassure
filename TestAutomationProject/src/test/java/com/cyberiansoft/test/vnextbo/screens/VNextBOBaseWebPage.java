@@ -243,8 +243,7 @@ public abstract class VNextBOBaseWebPage {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
             return false;
         }
     }
@@ -281,6 +280,61 @@ public abstract class VNextBOBaseWebPage {
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    VNextBOBaseWebPage setData(WebElement inputField, String data) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(inputField)).click();
+        } catch (ElementClickInterceptedException e) {
+            waitABit(1500);
+            clickWithJS(inputField);
+        }
+        inputField.clear();
+        inputField.sendKeys(data);
+        return this;
+    }
+
+    VNextBOBaseWebPage selectDataFromBoxList(List<WebElement> listBox, WebElement list, String data) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        } catch (Exception ignored) {}
+        for (WebElement selected : listBox) {
+            if (selected.getText().equals(data)) {
+                actions.moveToElement(selected)
+                        .click()
+                        .build()
+                        .perform();
+                break;
+            }
+        }
+        waitForListDisappearance(list);
+        return this;
+    }
+
+    private void waitForListDisappearance(WebElement list) {
+        try {
+            wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
+        } catch (Exception e) {
+            try {
+                actions.moveToElement(list).sendKeys(Keys.ENTER).build().perform();
+                wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
+            } catch (Exception ignored) {
+                waitABit(1000);
+            }
+        }
+    }
+
+    boolean isDataDisplayed(List<WebElement> listBox, String data) {
+        try {
+            return wait
+                    .until(ExpectedConditions.visibilityOfAllElements(listBox))
+                    .stream()
+                    .map(WebElement::getText)
+                    .anyMatch(option -> option.equals(data));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

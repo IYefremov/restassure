@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -257,46 +255,6 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         return this;
     }
 
-    private boolean isDataDisplayed(List<WebElement> listBox, String data) {
-        try {
-            return wait
-                    .until(ExpectedConditions.visibilityOfAllElements(listBox))
-                    .stream()
-                    .map(WebElement::getText)
-                    .anyMatch(e -> e.equals(data));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private VNextBORepairOrdersAdvancedSearchDialog selectDataFromBoxList(List<WebElement> listBox, WebElement list, String data) {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
-        } catch (Exception ignored) {}
-        for (WebElement selected : listBox) {
-            if (selected.getText().equals(data)) {
-                new Actions(driver)
-                        .moveToElement(selected)
-                        .click()
-                        .build()
-                        .perform();
-                break;
-            }
-        }
-        try {
-            wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
-        } catch (Exception e) {
-            try {
-                actions.moveToElement(list).sendKeys(Keys.ENTER).build().perform();
-                wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
-            } catch (Exception ignored) {
-                waitABit(1000);
-            }
-        }
-        return this;
-    }
-
     public boolean isCustomerDisplayed(String customer) {
         return isDataDisplayed(customerListBoxOptions, customer);
     }
@@ -306,11 +264,13 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog selectCustomerNameFromBoxList(String customer) {
-        return selectDataFromBoxList(customerListBoxOptions, customerAutoCompleteList, customer);
+        return (VNextBORepairOrdersAdvancedSearchDialog) selectDataFromBoxList(
+                customerListBoxOptions, customerAutoCompleteList, customer);
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog selectEmployeeNameFromBoxList(String employee) {
-        return selectDataFromBoxList(employeeListBoxOptions, employeeAutoCompleteList, employee);
+        return (VNextBORepairOrdersAdvancedSearchDialog) selectDataFromBoxList(
+                employeeListBoxOptions, employeeAutoCompleteList, employee);
     }
 
     public void typeEmployeeName(String employee) {

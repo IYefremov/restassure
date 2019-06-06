@@ -76,6 +76,7 @@ public class VNextBOPartsManagementSearchPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOPartsManagementSearchPanel clickSearchLoupeIcon() {
+        waitForLoading();
         wait.until(ExpectedConditions.elementToBeClickable(searchLoupeIcon)).click();
         waitForLoading();
         return this;

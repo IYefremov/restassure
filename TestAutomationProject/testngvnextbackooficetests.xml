@@ -27,6 +27,7 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorSimpleSearchTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOHomePage"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementSearchTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementOrderDetailsTestCases"/>
         <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">-->
             <!--<methods>-->
                 <!--<include name="testCheckValidationErrorsOnTheCreateNewUserDialog"/>-->
