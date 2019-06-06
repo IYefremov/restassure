@@ -1,9 +1,13 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
+import com.cyberiansoft.test.vnext.enums.MenuItems;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
+import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.SelectLocationScreen;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
+import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
 import org.testng.Assert;
@@ -68,5 +72,12 @@ public class MonitorSteps {
         Assert.assertEquals(
                 repairOrderScreen.getRepairOrderElement(workOrderId).getRepairOrderFlag(),
                 repairOrderFlag);
+    }
+
+    public static void editOrder(String workOrderId){
+        HomeScreenSteps.openMonitor();
+        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openMenu(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
     }
 }

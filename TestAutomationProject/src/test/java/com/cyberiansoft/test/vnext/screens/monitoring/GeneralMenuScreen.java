@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 @Getter
-public class RepairOrderMenuScreen extends MonitorScreen {
+public class GeneralMenuScreen extends MonitorScreen {
     @FindBy(xpath = "//a[contains(@class,\"action-item\")]")
     private List<WebElement> menuItems;
 

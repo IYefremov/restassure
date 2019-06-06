@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
-import com.cyberiansoft.test.vnext.webelements.PhaseListElement;
+import com.cyberiansoft.test.vnext.webelements.EditListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 public class PhasesScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@data-autotests-id=\"phases-list\"]/div")
-    private List<PhaseListElement> phaseListElements;
+    private List<EditListElement> phaseListElements;
 
     @FindBy(xpath = "//span[@action=\"info\"]")
     private WebElement infoScreenButton;
@@ -25,9 +25,9 @@ public class PhasesScreen extends MonitorScreen {
         infoScreenButton.click();
     }
 
-    public PhaseListElement getPhaseElement(String phaseName) {
+    public EditListElement getPhaseElement(String phaseName) {
         return phaseListElements.stream()
-                .filter((phaseElement) -> phaseElement.getPhaseName().equals(phaseName))
+                .filter((phaseElement) -> phaseElement.getName().equals(phaseName))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Phase elemnt not found " + phaseName));
     }

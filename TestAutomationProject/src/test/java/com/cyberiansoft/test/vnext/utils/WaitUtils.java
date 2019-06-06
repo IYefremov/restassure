@@ -12,8 +12,13 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class WaitUtils {
+    public static void collectionSizeIsGreaterThan(List<?> list, Integer expectedSize) {
+        WaitUtils.getGeneralFluentWait().until(driver -> list.size() > expectedSize);
+    }
+
     public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible) {
         WaitUtils.getGeneralFluentWait().
                 until((webDriver) -> {
@@ -64,7 +69,8 @@ public class WaitUtils {
                 new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
                         .withTimeout(Duration.ofSeconds(120))
                         .pollingEvery(Duration.ofMillis(300))
-                        .ignoring(WebDriverException.class);
+                        .ignoring(WebDriverException.class)
+                        .ignoring(RuntimeException.class);
     }
 
     public static WebDriverWait getGeneralWebdriverWait() {

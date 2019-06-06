@@ -9,7 +9,9 @@ public enum MenuItems {
     COMPLETE("complete"),
     CHANGE_STATUS(""),
     NOTES("comments"),
-    CHANGE_DEPARTMENT("");
+    CHANGE_DEPARTMENT(""),
+    REPORT_PROBLEM("reportProblem"),
+    RESOLVE_PROBLEM("resolveProblem");
 
     @Getter
     private String menuItemDataName;

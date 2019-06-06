@@ -24,7 +24,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@class='order-info-details']/div")
 	private WebElement orderDetails;
 
-	@FindBy(xpath = "//div[@class='order-info-details']/div//strong[@id='phaseName']")
+	@FindBy(xpath = "//div[@class='order-info-details']/div//strong[@id='serviceName']")
 	private WebElement orderDetailsPhaseName;
 
 	@FindBy(id = "orderServices")
@@ -233,7 +233,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     }
 	
 	public String getRepairOrderActivePhaseStatus() {
-		return wait.until(ExpectedConditions.visibilityOf(orderDetails.findElement(By.id("phaseName")))).getText().trim();
+		return wait.until(ExpectedConditions.visibilityOf(orderDetails.findElement(By.id("serviceName")))).getText().trim();
 	}
 	
 	public String getRepairOrderCompletedValue() {

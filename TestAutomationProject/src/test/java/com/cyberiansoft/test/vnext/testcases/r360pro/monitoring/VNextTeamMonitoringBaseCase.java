@@ -70,11 +70,11 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
         MonitorSteps.verifyRepairOrderValues(workOrderId,
                 repairOrderDto);
-        MonitorSteps.openMenu(workOrderId);
-        MonitorMenuSteps.selectMenuItem(MenuItems.START);
+        MonitorSteps.openMenu(workOrderId);        
+        MenuSteps.selectMenuItem(MenuItems.START);
         MonitorMenuSteps.selectServices(workOrderData.getServicesList());
         MonitorSteps.openMenu(workOrderId);
-        MonitorMenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         MonitorMenuSteps.selectServices(workOrderData.getServicesList());
         MonitorSteps.openSearchFilters();
         MonitorSearchSteps.selectStatus(RepairOrderStatus.COMPLETED_ALL);
@@ -105,7 +105,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         HomeScreenSteps.openMonitor();
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
-        MonitorMenuSteps.selectMenuItem(MenuItems.NOTES);
+        MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.addNewNote(noteText);
         NotesSteps.verifyNoteIsPresent(noteText);
         GeneralSteps.pressBackButton();
@@ -122,7 +122,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         HomeScreenSteps.openMonitor();
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
-        MonitorMenuSteps.selectMenuItem(MenuItems.EDIT);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
 
         EditOrderSteps.verifyPhaseSelected(phaseDto);
         EditOrderSteps.completePhase(phaseDto);
@@ -148,7 +148,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         HomeScreenSteps.openMonitor();
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
-        MonitorMenuSteps.selectMenuItem(MenuItems.EDIT);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();
         expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         EditOrderSteps.verifyOrderInfo(expectedOrderInfo);

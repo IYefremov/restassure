@@ -3,7 +3,9 @@ package com.cyberiansoft.test.vnext.enums;
 import lombok.Getter;
 
 public enum PhaseName {
-    COMPLETED("COMPLETED");
+    COMPLETED("COMPLETED"),
+    PROBLEM("PROBLEM"),
+    ACTIVE("ACTIVE");
 
     @Getter
     private String value;

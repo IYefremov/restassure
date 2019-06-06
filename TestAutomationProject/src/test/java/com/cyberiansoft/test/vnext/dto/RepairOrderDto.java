@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class RepairOrderDto {
-    @JsonProperty("phaseName")
+    @JsonProperty("serviceName")
     private String phaseName;
     @JsonProperty("vin")
     private String vin;

@@ -56,9 +56,43 @@
       "rowID": "userCanViewOrderInfoViaEdit.01",
       "description": "TC 00001, TC00002",
       "monitoring": {
-        "orderInfoDto":{
-          "vin":"777777"
+        "orderInfoDto": {
+          "vin": "777777"
         }
+      }
+    }
+  ],
+  "userCanReportProblemOnServiceLevel": [
+    {
+      "rowID": "userCanReportProblemOnServiceLevel.01",
+      "description": "TC 00001, TC00002",
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: QC"
+        },
+        "orderServiceDto": {
+          "serviceName": "Expenses_money (AM)"
+        }
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      }
+    }
+  ],
+  "userCanResolveProblemOnServiceLevel": [
+    {
+      "rowID": "userCanReportProblemOnServiceLevel.01",
+      "description": "TC 00001, TC00002",
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: QC"
+        },
+        "orderServiceDto": {
+          "serviceName": "Expenses_money (AM)"
+        }
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
       }
     }
   ]

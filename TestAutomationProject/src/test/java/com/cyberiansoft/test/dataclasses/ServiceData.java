@@ -35,4 +35,7 @@ public class ServiceData {
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);
     }
+    public String getStatus(){
+        return serviceStatus;
+    }
 }
