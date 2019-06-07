@@ -77,8 +77,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		quantityfld.click();
 		quantityfld.findElement(MobileBy.className("XCUIElementTypeTextField")).setValue("");
 		//quantityfldvalue.setValue("");
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(_quantity);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		quantityfld.findElement(MobileBy.className("XCUIElementTypeTextField")).setValue(_quantity+"\n");
 	}
 
 	public VisualInteriorScreen saveCarServiceDetails() {
@@ -95,16 +94,10 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 
 	public void tapInterior() {
 		
-		TouchAction action = new TouchAction(appiumdriver);
+
 		MobileElement imagecar = (MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
-		
-		int  xx = imagecar.getLocation().getX();
-		int yy = imagecar.getLocation().getY();	
-		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2, xx + imagecar.getSize().getWidth()/2).waitAction(1000).
-		action.press(PointOption.point(imagecar.getSize().getWidth()/2,  imagecar .getSize().getHeight()/2)).
-				waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1))).
-		
-		release().perform();
+		TouchAction action = new TouchAction(appiumdriver);
+		action.tap(element(imagecar, imagecar.getSize().getWidth()/2, imagecar.getSize().getHeight()/2)).perform();
 	}
 	
 	public void tapInteriorWithCoords(int times) {
