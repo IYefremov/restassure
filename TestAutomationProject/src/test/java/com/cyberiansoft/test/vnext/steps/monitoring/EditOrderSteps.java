@@ -65,4 +65,10 @@ public class EditOrderSteps {
         PhasesScreen phasesScreen = new PhasesScreen();
         Assert.assertEquals(phasesScreen.getPhaseElement(phaseDto.getPhaseName()).getStatus(), phaseDto.getStatus());
     }
+
+    public static void openPhaseMenu(OrderPhaseDto phaseDto) {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getPhaseListElements(), 0);
+        phasesScreen.getPhaseElement(phaseDto.getPhaseName()).openMenu();
+    }
 }

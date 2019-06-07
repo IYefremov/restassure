@@ -68,14 +68,14 @@
       "description": "TC 00001, TC00002",
       "monitoring": {
         "orderPhaseDto": {
-          "phaseName": "Phase: QC"
+          "phaseName": "Phase: AutomationServiceLevel"
         },
         "orderServiceDto": {
-          "serviceName": "Expenses_money (AM)"
+          "serviceName": "Labor AM"
         }
       },
       "service": {
-        "serviceName": "Expenses_money (AM)"
+        "serviceName": "Labor AM"
       }
     }
   ],
@@ -85,14 +85,42 @@
       "description": "TC 00001, TC00002",
       "monitoring": {
         "orderPhaseDto": {
-          "phaseName": "Phase: QC"
+          "phaseName": "Phase: AutomationServiceLevel"
         },
         "orderServiceDto": {
-          "serviceName": "Expenses_money (AM)"
+          "serviceName": "Labor AM"
         }
       },
       "service": {
+        "serviceName": "Labor AM"
+      }
+    }
+  ],
+  "userCanReportProblemOnPhaseLevel": [
+    {
+      "rowID": "userCanReportProblemOnPhaseLevel.01",
+      "description": "TC 00001, TC00002",
+      "service": {
         "serviceName": "Expenses_money (AM)"
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationPhaseLevel"
+        }
+      }
+    }
+  ],
+  "userCanResolveProblemOnPhaseLevel": [
+    {
+      "rowID": "userCanReportProblemOnPhaseLevel.01",
+      "description": "TC 00001, TC00002",
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationPhaseLevel"
+        }
       }
     }
   ]

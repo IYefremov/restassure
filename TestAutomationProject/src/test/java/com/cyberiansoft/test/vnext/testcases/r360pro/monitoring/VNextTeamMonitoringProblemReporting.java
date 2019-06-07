@@ -43,7 +43,36 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         GeneralSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    public void userCanReportProblemOnPhaseLevel(String rowID,
+                                                 String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
+
+        MonitorSteps.editOrder(workOrderId);
+        EditOrderSteps.openPhaseMenu(phaseDto);
+        MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
+        ProblemReportingSteps.setProblemReason("PROBLEM_REASON");
+        phaseDto.setStatus(PhaseName.PROBLEM);
+        EditOrderSteps.verifyPhaseStatus(phaseDto);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "userCanReportProblemOnPhaseLevel", priority = 20)
+    public void userCanResolveProblemOnPhaseLevel(String rowID,
+                                                  String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
+
+        EditOrderSteps.openPhaseMenu(phaseDto);
+        MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
+        ProblemReportingSteps.resolveProblem();
+        phaseDto.setStatus(PhaseName.ACTIVE);
+        EditOrderSteps.verifyPhaseStatus(phaseDto);
+        GeneralSteps.pressBackButton();
+        GeneralSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 30)
     public void userCanReportProblemOnServiceLevel(String rowID,
                                                    String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -63,7 +92,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "userCanReportProblemOnServiceLevel")
+            , dependsOnMethods = "userCanReportProblemOnServiceLevel", priority = 40)
     public void userCanResolveProblemOnServiceLevel(String rowID,
                                                     String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -79,6 +108,8 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         GeneralSteps.pressBackButton();
         phaseDto.setStatus(PhaseName.ACTIVE);
         EditOrderSteps.verifyPhaseStatus(phaseDto);
+        GeneralSteps.pressBackButton();
+        GeneralSteps.pressBackButton();
     }
 
     //TODO: Temp solution to provide test data to @BeforeMethod method
@@ -86,6 +117,9 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         List<ServiceData> serviceData = new ArrayList<>();
         ServiceData service = new ServiceData();
         service.setServiceName("Expenses_money (AM)");
+        serviceData.add(service);
+        service = new ServiceData();
+        service.setServiceName("Labor AM");
         serviceData.add(service);
         return serviceData;
     }
