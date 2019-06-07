@@ -2,7 +2,7 @@ package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class VNextBOPartsManagementSearchData extends VNextBOBaseData{
+public class VNextBOPartsManagementSearchData extends VNextBOBaseData {
 
     @JsonProperty("location")
     private String location;
