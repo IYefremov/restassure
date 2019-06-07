@@ -189,7 +189,7 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 
 	private WebElement getServiceCell(String serviceName) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		return wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)));
+		return wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeCell' AND name = '" +serviceName + "'")));
 	}
 	
 	public void selectInspectionServiceToApprove(String serviceName) {

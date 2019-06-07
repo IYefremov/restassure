@@ -113,7 +113,8 @@
         "vehiclePart": {
           "vehiclePartName": "Grill"
         }
-      }
+      },
+      "workOrderTotalSale": "3"
     }
   ],
   "testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices": [
@@ -149,6 +150,10 @@
           "servicePrice2": "$34.00",
           "vehiclePart": {
             "vehiclePartName": "Back Glass"
+          },
+          "questionData": {
+            "questionName": "QuestionTypeSelect_Question 2",
+            "questionAnswer": "A3"
           }
         },
         {
@@ -157,6 +162,10 @@
           "servicePrice2": "$35.00",
           "vehiclePart": {
             "vehiclePartName": "Back Glass"
+          },
+          "questionData": {
+            "questionName": "QuestionTypeSelect_Question 2",
+            "questionAnswer": "A3"
           }
         },
         {
@@ -165,6 +174,10 @@
           "servicePrice2": "$35.00",
           "vehiclePart": {
             "vehiclePartName": "Left Headlight"
+          },
+          "questionData": {
+            "questionName": "QuestionTypeSelect_Question 2",
+            "questionAnswer": "A3"
           }
         }
       ]
@@ -258,6 +271,7 @@
         "vehiclePartData": {
           "vehiclePartName": "Roof",
           "vehiclePartPrice": "54",
+          "vehiclePartOption": "PDR",
           "vehiclePartAdditionalServices": [
             {
               "serviceName": "SR_S1_Money"
@@ -408,6 +422,14 @@
           "serviceName": "Tax discount"
         }
       ],
+      "questionScreenData": {
+        "screenName": "Zayats Section1",
+        "questionData": {
+          "questionName": "Question 2",
+          "questionAnswer": "A1"
+        }
+      },
+      "workOrderTotalSale": "3",
       "workOrderPrice": "$3,153.94"
     }
   ],
@@ -446,23 +468,30 @@
           "vehiclePart": {
             "vehiclePartName": "Left Rear Door"
           },
-          "serviceStatus": "Approved"
+          "serviceStatus": "Declined"
         },
         {
           "serviceName": "SR_S1_Money_Vehicle",
           "vehiclePart": {
             "vehiclePartName": "Front Bumper"
           },
-          "serviceStatus": "Declined"
+          "serviceStatus": "Skipped"
         },
         {
           "serviceName": "SR_S1_Money",
           "vehiclePart": {
             "vehiclePartName": "Grill"
           },
-          "serviceStatus": "Skipped"
+          "serviceStatus": "Approved"
         }
-      ]
+      ],
+      "questionScreenData": {
+        "screenName": "Zayats Section1",
+        "questionData": {
+          "questionName": "Question 2",
+          "questionAnswer": "A2"
+        }
+      }
     }
   ],
   "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1": [
@@ -495,6 +524,13 @@
           "serviceStatus": "Skipped"
         }
       ],
+      "questionScreenData": {
+        "screenName": "Zayats Section1",
+        "questionData": {
+          "questionName": "Question 2",
+          "questionAnswer": "A1"
+        }
+      },
       "declineReason": "Decline 1"
     }
   ],
@@ -534,6 +570,13 @@
           ]
         }
       ],
+      "questionScreenData": {
+        "screenName": "Zayats Section1",
+        "questionData": {
+          "questionName": "Question 2",
+          "questionAnswer": "A3"
+        }
+      },
       "inspPrice": "$2,050.00"
     }
   ],
@@ -580,6 +623,13 @@
           "screenTotalPrice": "$188.00"
         }
       ],
+      "questionScreenData": {
+        "screenName": "Zayats Section1",
+        "questionData": {
+          "questionName": "Question 2",
+          "questionAnswer": "A3"
+        }
+      },
       "service": {
         "serviceName": "Test service zayats",
         "servicePrice": "5"
@@ -603,6 +653,7 @@
           "vehiclePartName": "Grill"
         }
       },
+      "workOrderTotalSale": "3",
       "workOrderPrice": "$999,999,999.99"
     }
   ],
@@ -621,7 +672,8 @@
           "vehiclePart": {
             "vehiclePartName": "Grill"
           }
-        }
+        },
+        "workOrderTotalSale": "3"
       },
       "invoiceData": {
         "poNumber": "123po",
@@ -673,6 +725,13 @@
           "serviceName": "Disc_Ex_Service1",
           "serviceStatus": "Declined"
         },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2"
+          }
+        },
         "inspPrice": "$2,000.00",
         "inspectionTotalPrice": "$2,050.00"
       }
@@ -685,6 +744,13 @@
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
         },
         "services": [
           {
@@ -721,6 +787,7 @@
           "hailMatrixName": "Test Matrix Labor",
           "vehiclePartData": {
             "vehiclePartName": "123",
+            "vehiclePartOption": "PDR",
             "vehiclePartTime": "100",
             "vehiclePartAdditionalServices": [
               {
@@ -738,7 +805,13 @@
         "workOrderPrice": "$542.68"
       },
       "invoiceData": {
-        "poNumber": "12345"
+        "poNumber": "12345",
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        }
       }
     }
   ],
@@ -807,6 +880,13 @@
           "servicePrice": "$130.50"
         }
       ],
+      "questionScreenData": {
+        "screenName": "Zayats Section1",
+        "questionData": {
+          "questionName": "Question 2",
+          "questionAnswer": "A3"
+        }
+      },
       "inspPrice": "$293.00"
     }
   ],
@@ -817,6 +897,13 @@
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
         },
         "services": [
           {
@@ -1004,6 +1091,13 @@
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
         },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        },
         "services": [
           {
             "serviceName": "Oksi_Part_Category",
@@ -1167,6 +1261,13 @@
           "serviceName": "Discount 5-10%",
           "servicePrice": "-30"
         },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        },
         "matrixService": {
           "matrixServiceName": "Test service price matrix",
           "hailMatrixName": "Price Matrix Zayats",
@@ -1190,6 +1291,12 @@
         "workOrderPrice": "$987.52"
       },
       "invoiceData": {
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        },
         "poNumber": "12345",
         "invoiceTotal": "$987.52"
       }
@@ -1202,6 +1309,13 @@
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
         },
         "services": [
           {
@@ -1307,6 +1421,13 @@
             }
           ]
         },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        },
         "servicesToApprove": [
           {
             "serviceName": "3/4\" - Penny Size",
@@ -1402,6 +1523,13 @@
           "serviceName": "Service_req_0_price",
           "servicePrice": "$0.00",
           "servicePrice2": "21"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
         }
       }
     }
@@ -1413,6 +1541,13 @@
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
         },
         "bundleService": {
           "bundleServiceName": "Oksi_Bundle_PP",
@@ -1493,6 +1628,13 @@
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
         },
         "taxServices": [
           {
@@ -1577,6 +1719,13 @@
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
         },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        },
         "services": [
           {
             "serviceName": "SR_S1_Money",
@@ -1621,6 +1770,13 @@
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
         },
         "services": [
           {
@@ -1726,7 +1882,7 @@
             "servicePrice": "$4.79"
           },
           {
-            "serviceName": "Money_client_override",
+            "serviceName": "Money_job_override",
             "servicePrice": "$13.84"
           }
         ],

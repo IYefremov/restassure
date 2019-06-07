@@ -19,4 +19,7 @@ public class ServiceRequestData {
 
     @JsonProperty("percentageService")
     ServiceData percentageService;
+
+    @JsonProperty("questionScreenData")
+    QuestionScreenData questionScreenData;
 }
