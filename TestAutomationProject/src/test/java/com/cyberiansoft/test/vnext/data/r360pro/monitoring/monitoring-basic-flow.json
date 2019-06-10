@@ -1,60 +1,20 @@
 {
-  "userCanCompleteBasicROFlow": [
-    {
-      "rowID": "userCanCompleteBasicROFlow.01",
-      "description": "TC 00001, TC00002",
-      "vihicleInfo": {
-        "vinNumber": "7777777777777"
-      },
-      "services": [
-        {
-          "serviceName": "Expenses_money (AM)"
-        }
-      ],
-      "monitoring": {
-        "location": "automationMonitoring",
-        "repairOrderData": {
-          "phaseName": "QC",
-          "vin": "777777",
-          "completePercentage": "0%"
-        }
-      }
-    }
-  ],
   "userCanChangeFlagsOfWorkOrder": [
     {
       "rowID": "userCanChangeFlagsOfWorkOrder.01",
-      "description": "TC 00001, TC00002"
+      "description": "TFSID: 86154,86155"
     }
   ],
   "userCanAddNotesToRepairOrder": [
     {
       "rowID": "userCanAddNotesToRepairOrder.01",
-      "description": "TC 00001, TC00002"
-    }
-  ],
-  "userCanCompleteOrderViaEdit": [
-    {
-      "rowID": "userCanCompleteOrderViaEdit.01",
-      "description": "TC 00001, TC00002",
-      "monitoring": {
-        "location": "automationMonitoring",
-        "repairOrderData": {
-          "phaseName": "QC",
-          "vin": "777777",
-          "completePercentage": "0%"
-        },
-        "orderPhaseDto": {
-          "status": "ACTIVE",
-          "phaseName": "Phase: QC"
-        }
-      }
+      "description": "TFSID: 87880"
     }
   ],
   "userCanViewOrderInfoViaEdit": [
     {
       "rowID": "userCanViewOrderInfoViaEdit.01",
-      "description": "TC 00001, TC00002",
+      "description": "TFSID: 87826",
       "monitoring": {
         "orderInfoDto": {
           "vin": "777777"
@@ -65,7 +25,7 @@
   "userCanReportProblemOnServiceLevel": [
     {
       "rowID": "userCanReportProblemOnServiceLevel.01",
-      "description": "TC 00001, TC00002",
+      "description": "TFSID: 89573",
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "Phase: AutomationServiceLevel"
@@ -82,7 +42,7 @@
   "userCanResolveProblemOnServiceLevel": [
     {
       "rowID": "userCanReportProblemOnServiceLevel.01",
-      "description": "TC 00001, TC00002",
+      "description": "TFSID: 89573",
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "Phase: AutomationServiceLevel"
@@ -99,7 +59,7 @@
   "userCanReportProblemOnPhaseLevel": [
     {
       "rowID": "userCanReportProblemOnPhaseLevel.01",
-      "description": "TC 00001, TC00002",
+      "description": "TFSID: 89595",
       "service": {
         "serviceName": "Expenses_money (AM)"
       },
@@ -113,7 +73,7 @@
   "userCanResolveProblemOnPhaseLevel": [
     {
       "rowID": "userCanReportProblemOnPhaseLevel.01",
-      "description": "TC 00001, TC00002",
+      "description": "TFSID: 89595",
       "service": {
         "serviceName": "Expenses_money (AM)"
       },
