@@ -35,7 +35,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 150);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class, 'page invoices-list')]")));
-		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[contains(@class, //*[contains(@class='page invoices-list')]'page invoices-list')]"));
+		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[contains(@class, 'page invoices-list')]"));
 		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
 		clearSearchField();
 	}

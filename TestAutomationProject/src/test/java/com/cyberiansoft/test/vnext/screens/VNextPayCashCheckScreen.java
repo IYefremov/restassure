@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -35,6 +36,7 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     }
 
     public void setPaymentCheckNumber(String checkNumber) {
+        WaitUtils.waitUntilElementIsClickable(paymentCheckNumberfld);
         paymentCheckNumberfld.clear();
         paymentCheckNumberfld.sendKeys(checkNumber);
     }

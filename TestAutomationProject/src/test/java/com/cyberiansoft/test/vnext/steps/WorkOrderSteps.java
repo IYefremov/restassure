@@ -32,7 +32,6 @@ public class WorkOrderSteps {
 
     public static void createWorkOrder(WorkOrderTypes workOrderType) {
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList();
-        WaitUtils.elementShouldBeVisible(workOrderTypesList.getTypeslist(), true);
         workOrderTypesList.selectWorkOrderType(workOrderType);
         WaitUtils.elementShouldBeVisible(new VNextVehicleInfoScreen().getRootElement(), true);
     }

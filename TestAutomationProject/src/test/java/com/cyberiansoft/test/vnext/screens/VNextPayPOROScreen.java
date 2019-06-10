@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -13,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextPayPOROScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//div[@data-page='details']")
+    @FindBy(xpath="//div[@data-page='payment']")
     private WebElement paycachcheckscreeen;
 
     @FindBy(id="paymentPORONumber")
@@ -31,6 +32,7 @@ public class VNextPayPOROScreen extends VNextBaseScreen {
     }
 
     public void setPaymentPOROValue(String pOROValue) {
+        WaitUtils.waitUntilElementIsClickable(poroNumberfld);
         poroNumberfld.clear();
         poroNumberfld.sendKeys(pOROValue);
     }
@@ -48,8 +50,9 @@ public class VNextPayPOROScreen extends VNextBaseScreen {
     }
 
     public void clickPayButton() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='details']")));
+        WaitUtils.waitUntilElementIsClickable(paycachcheckscreeen);
+        //WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='details']")));
         tap(paybtn);
     }
 
