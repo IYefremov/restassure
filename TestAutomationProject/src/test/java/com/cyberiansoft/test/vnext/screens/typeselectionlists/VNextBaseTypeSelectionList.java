@@ -18,9 +18,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Getter
 public class VNextBaseTypeSelectionList extends VNextBaseScreen {
 
-    @FindBy(xpath="//div[@data-page='entity-types']")
-    private WebElement typeslist;
-
     @FindBy(xpath="//*[@data-automation-id='search-icon']")
     private WebElement searchbtn;
 
@@ -30,8 +27,6 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
     public VNextBaseTypeSelectionList(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
-        wait.until(ExpectedConditions.visibilityOf(typeslist));
     }
 
     public VNextBaseTypeSelectionList() {

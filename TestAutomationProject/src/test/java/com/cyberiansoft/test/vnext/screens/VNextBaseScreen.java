@@ -21,8 +21,11 @@ public class VNextBaseScreen {
 
     protected AppiumDriver<MobileElement> appiumdriver;
 
+    @FindBy(xpath = "//*[@action='show_topbar_popover']/span")
+    private WebElement showTopBarPopover;
+
     @FindBy(xpath = "//*[@data-autotests-id='change-screen-popover']")
-    private WebElement changescrenpopover;
+    private WebElement changeScrenPopover;
 
     public VNextBaseScreen(AppiumDriver<MobileElement> driver) {
         this.appiumdriver = driver;
@@ -142,16 +145,16 @@ public class VNextBaseScreen {
     public void changeScreen(ScreenType screen) {
         clickScreenTitleCaption();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.visibilityOf(changescrenpopover));
-        WaitUtils.click(changescrenpopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
+        wait.until(ExpectedConditions.visibilityOf(changeScrenPopover));
+        WaitUtils.click(changeScrenPopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
     }
 
     public boolean isScreenPresentInChangeScreenPopoverList(String screenName) {
-        return changescrenpopover.findElements(By.xpath(".//span[text()='" + screenName + "']")).size() > 0;
+        return changeScrenPopover.findElements(By.xpath(".//span[text()='" + screenName + "']")).size() > 0;
     }
 
     public void clickScreenTitleCaption() {
-        WaitUtils.click(By.xpath("//span[@class='page-title']"));
+        tap(showTopBarPopover);
     }
 
     public boolean elementExists(String xpath) {

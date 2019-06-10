@@ -108,7 +108,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
         wait.until(ExpectedConditions.elementToBeClickable(By.name("Vehicle.VIN")));
         wait.until((driver) -> vinfld.isEnabled());
         vinfld.clear();
-        vinfld.sendKeys(vinnumber);
+        vinfld.sendKeys(vinnumber+"\n");
         BaseUtils.waitABit(1500);
     }
 
