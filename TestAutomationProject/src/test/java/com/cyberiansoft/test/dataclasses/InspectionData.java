@@ -94,6 +94,18 @@ public class InspectionData {
     @JsonProperty("questionScreenData")
     QuestionScreenData questionScreenData;
 
+    @Getter
+    @JsonProperty("visualScreenData")
+    VisualScreenData visualScreenData;
+
+    @Getter
+    @JsonProperty("visualScreensData")
+    List<VisualScreenData> visualScreensData;
+
+    @Getter
+    @JsonProperty("archiveReason")
+    String archiveReason;
+
     public String getInspectionType() {
         return inspType;
     }

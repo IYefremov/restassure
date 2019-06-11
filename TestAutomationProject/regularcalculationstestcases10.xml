@@ -9,29 +9,28 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularCalculationsTestCases">
         <methods>
 
-        <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
+        <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
-        <include name="testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1" /> 
-        <include name="testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1" /> 
+        <include name="testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1" />
+        <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1" />
         <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1" />
         <include name="testWOVerifyCalculationWithPriceMatrixLaborType_1" />
         <include name="testInvoicesVerifyRoundingMoneyAmountValues_1" />
 
         
   			<include name="testCreateInspectionOnTheDeviceWithApprovalRequired" />    
-            <include name="testAddServicesToVisualInspection" /> 
-            <include name="testChangeQuantityOfServicesInVisualInspection" />
-            <include name="testRegularIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
-            <include name="testRegularVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
-            <include name="testRegularIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
-            <include name="testRegularIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
-            <include name="testRegularVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem" />
-            <include name="testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095" />
-            <include name="testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003" />
-            <include name="testRegularVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005" /> 
+            <include name="testAddServicesToVisualInspection" />
+            <include name="testIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
+            <include name="testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
+            <include name="testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
+            <include name="testVerifyIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
+            <include name="testVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem" />
+            <include name="testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095" />
+            <include name="testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003" />
+            <include name="testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005" />
             <include name="testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal" />
-            <include name="testRegularVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode" />
+            <include name="testVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode" />
             <include name="testWOVerifyThatMessageIsShownTotalIsOverLimitation" />
             <include name="testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation" />
             <include name="testInspectionVerifyThatMessageIsShownTotalIsOverLimitation" /> 
@@ -51,9 +50,6 @@
         	<include name="testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo" />
         	<include name="testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale" />
         	<include name="testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO" />
-        	<!--<include name="testSRVerifyALMFlowWhenApproveBothInspections" />
-        	<include name="testSRVerifyALMFlowWhenApproveOneInspectionAndOneDecline" />
-        	<include name="testSRVerifyALMFlowWhenDeclineBothInspections" />-->
         	<include name="testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval" />
         	
         	

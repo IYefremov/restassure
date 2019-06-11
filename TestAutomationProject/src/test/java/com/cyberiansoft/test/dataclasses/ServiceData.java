@@ -21,6 +21,8 @@ public class ServiceData {
     private String serviceQuantity2;
     @JsonProperty("serviceStatus")
     private String serviceStatus;
+    @JsonProperty("serviceAdjustment")
+    private ServiceAdjustmentData serviceAdjustment;
     @JsonProperty("vehiclePart")
     private VehiclePartData vehiclePart;
     @JsonProperty("vehicleParts")
@@ -31,6 +33,8 @@ public class ServiceData {
     private QuestionsData questionData;
     @JsonProperty("isNotMultiple")
     private boolean isNotMultiple;
+    @JsonProperty("isSelected")
+    private boolean isSelected;
 
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);

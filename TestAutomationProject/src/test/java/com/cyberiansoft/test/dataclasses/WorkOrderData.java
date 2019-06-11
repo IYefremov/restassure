@@ -19,6 +19,10 @@ public class WorkOrderData {
     @JsonProperty("services")
     List<ServiceData> services;
 
+    @Getter
+    @JsonProperty("selectedServices")
+    List<ServiceData> selectedServices;
+
     @JsonProperty("workOrderPrice")
     String workOrderPrice;
 
@@ -27,6 +31,10 @@ public class WorkOrderData {
 
     @JsonProperty("percentageService")
     ServiceData percentageService;
+
+    @Getter
+    @JsonProperty("percentageServices")
+    List<ServiceData> percentageServices;
 
     @JsonProperty("matrixService")
     MatrixServiceData matrixService;

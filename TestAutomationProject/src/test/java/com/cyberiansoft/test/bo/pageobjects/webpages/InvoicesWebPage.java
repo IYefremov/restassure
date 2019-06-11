@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.*;
@@ -535,6 +536,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
     public String getPrintPreviewTestMartrixLaborServiceListValue(String servicename) {
         WebElement parentrow = driver.findElement(
                 By.xpath("//table/tbody/tr/td/div/table/tbody/tr/td[text()='" + servicename + "']/../../../../../.."));
+        BaseUtils.waitABit(500);
         return parentrow.findElement(By.xpath("./td[2]/div/table/tbody/tr/td")).getText();
     }
 

@@ -113,17 +113,6 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 
 	public boolean isInteriorServicePresent(String serviceName) {
 		return appiumdriver.findElement(MobileBy.AccessibilityId(serviceName)).isDisplayed();
-		//Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Miscellaneous")).isDisplayed());
-		//Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("Price Adjustment")).isDisplayed());
-		//Assert.assertTrue(appiumdriver.findElement(MobileBy.AccessibilityId("WHEEL REPAIR")).isDisplayed());
-	}
-
-	public static String getVisualInteriorCaption() {
-		return visualinteriorcapt;
-	}
-
-	public static String getVisualExteriorCaption() {
-		return visualexteriorcapt;
 	}
 
 	public RegularNotesScreen clickNotesButton() {

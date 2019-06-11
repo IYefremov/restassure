@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
@@ -77,11 +78,8 @@ public abstract class iOSBaseScreen {
 		TouchAction swipe = new TouchAction(appiumdriver).press(element(table, table.getSize().width/2, table.getSize().height-10))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(element(table, table.getSize().width/2, 10)).release();
         swipe.perform();
-		
-        /*swipe = new TouchAction(appiumdriver).press(startx, endy)
-                .waitAction(Duration.ofSeconds(2)).moveTo(startx, starty).release();
-        swipe.perform();*/
-		//appiumdriver.swipe(startx, starty, startx, endy, 500);
+
+		BaseUtils.waitABit(1000);
 	}
 	
 	public void scrollScreenUp() {

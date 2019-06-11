@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -457,8 +458,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		waitABit(3000);
 	}
 
-	public void approveInspectionLinebylineApprovalByNumberWithAllServicesApproval(String inspnumber)
-			throws InterruptedException {
+	public void approveInspectionLinebylineApprovalByNumber(String inspnumber, List<ServiceData> servicesData) {
 		searchInspectionByNumber(inspnumber);
 		clickInspectionApproveMarker(inspnumber);
 		waitForNewTab();
@@ -470,89 +470,24 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			String parent = it.next();
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
-			Thread.sleep(5000);
-			List<WebElement> serviceslist = driver.findElements(By.id("divStatusAccept"));
-			for (WebElement service : serviceslist) {
-				service.click();
+			for (ServiceData serviceData : servicesData) {
+				switch (serviceData.getServiceStatus()){
+					case APPROVED:
+						serviceApprove(serviceData.getServiceName());
+						break;
+					case DECLINED:
+						serviceDecline(serviceData.getServiceName());
+						break;
+				}
 			}
 			servicegeneralapprovebtn.click();
-			Thread.sleep(5000);
-			// perform actions on new window
-			driver.close();
-			driver.switchTo().window(parent);
-		}
-
-		Thread.sleep(3000);
-	}
-
-	public void approveInspectionByNumbeApproveAll(String inspnumber) throws InterruptedException {
-		searchInspectionByNumber(inspnumber);
-		clickInspectionApproveMarker(inspnumber);
-		waitForNewTab();
-		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
-		Set<String> handles = driver.getWindowHandles();
-		Iterator<String> it = handles.iterator();
-		// iterate through your windows
-		while (it.hasNext()) {
-			String parent = it.next();
-			String newwin = it.next();
-			driver.switchTo().window(newwin);
-			Thread.sleep(15000);
-			approveallbtn.click();
-			Thread.sleep(5000);
-			// perform actions on new window
-			driver.close();
-			driver.switchTo().window(parent);
-		}
-
-		Thread.sleep(3000);
-	}
-
-	public void approveInspectionByNumberApproveAndSubmit(String inspnumber) throws InterruptedException {
-		searchInspectionByNumber(inspnumber);
-		clickInspectionApproveMarker(inspnumber);
-		waitForNewTab();
-		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
-		Set<String> handles = driver.getWindowHandles();
-		Iterator<String> it = handles.iterator();
-		// iterate through your windows
-		while (it.hasNext()) {
-			String parent = it.next();
-			String newwin = it.next();
-			driver.switchTo().window(newwin);
-			Thread.sleep(5000);
-			List<WebElement> serviceslist = driver.findElements(By.id("divStatusAccept"));
-			for (WebElement service : serviceslist) {
-				service.click();
-			}
-			approveandsubmitbtn.click();
-			Thread.sleep(5000);
-			// perform actions on new window
-			driver.close();
-			driver.switchTo().window(parent);
-		}
-
-		Thread.sleep(3000);
-	}
-
-	public void verifyServicesPresentForInspection(String inspnumber, String[] servicesnames) {
-		clickInspectionLink(inspnumber);
-		waitForNewTab();
-		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
-		Set<String> handles = driver.getWindowHandles();
-		Iterator<String> it = handles.iterator();
-		// iterate through your windows
-		while (it.hasNext()) {
-			String parent = it.next();
-			String newwin = it.next();
-			driver.switchTo().window(newwin);
 			waitABit(5000);
-			for (String servicesname : servicesnames)
-				Assert.assertTrue(isServicePresentInInspectioncontentTable(servicesname));
+			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
 
+		waitABit(3000);
 	}
 
 	public String getInspectionApprovedTotal(String inspnumber) {

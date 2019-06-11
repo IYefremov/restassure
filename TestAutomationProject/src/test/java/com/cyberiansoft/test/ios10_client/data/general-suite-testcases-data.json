@@ -1,0 +1,271 @@
+{
+  "testUpdateDatabase": [
+    {
+      "rowID": "testUpdateDatabase.01",
+      "description": "Test Case 8438:Update database on the device"
+    }
+  ],
+  "testUpdateVIN": [
+    {
+      "rowID": "testUpdateVIN.01",
+      "description": "Test Case 8437:Updating VIN decoder"
+    }
+  ],
+  "testEditRetailInspectionNotes": [
+    {
+      "rowID": "testEditRetailInspectionNotes.01",
+      "description": "Test Case 8432:Edit the retail Inspection Notes",
+      "vihicleInfo": {
+        "vinNumber": "TESTVINNO",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
+      }
+    }
+  ],
+  "testApproveInspectionOnDevice": [
+    {
+      "rowID": "testApproveInspectionOnDevice.01",
+      "description": "Test Case 8431:Approve inspection on device (Not Line Approval)",
+      "vihicleInfo": {
+        "vinNumber": "TESTVINNO",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
+      }
+    }
+  ],
+  "testArchiveAndUnArchiveTheInspection": [
+    {
+      "rowID": "testArchiveAndUnArchiveTheInspection.01",
+      "description": "Test Case 8586:Archive and Un-Archive the Inspection",
+      "vihicleInfo": {
+        "vinNumber": "TESTVINNO",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
+      },
+      "archiveReason": "Reason 2"
+    }
+  ],
+  "testCreateWorkOrderWithTeamSharingOption": [
+    {
+      "rowID": "testCreateWorkOrderWithTeamSharingOption.01",
+      "description": "Test Case 8429:Creating complex calculation WO, Test Case 8428:Copy services of WO (regular version)",
+      "workOrdersData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "moneyService": {
+            "serviceName": "Dye",
+            "servicePrice": "$10.00",
+            "serviceQuantity": "3.00",
+            "serviceAdjustment": {
+              "adjustmentTotalAmaunt": "$0.50"
+            }
+          },
+          "percentageService": {
+            "serviceName": "Disc_Ex_Service1",
+            "servicePrice": "$100.00",
+            "serviceAdjustment": {
+              "adjustmentTotalAmaunt": "-$5.00",
+              "adjustmentData": {
+                "adjustmentName": "For_SP_Cl",
+                "adjustmentQuantity": "%-5.000"
+              }
+            }
+          },
+          "bundleService": {
+            "bundleServiceName": "Bundle1_Disc_Ex",
+            "services": [
+              {
+                "serviceName": "Dye",
+                "isSelected": "false"
+              },
+              {
+                "serviceName": "Wheel",
+                "serviceQuantity": "2.00",
+                "isSelected": "true"
+              }
+            ]
+          },
+          "percentageServices": [
+            {
+              "serviceName": "Test Tax"
+            },
+            {
+              "serviceName": "Discount 5-10%"
+            }
+          ],
+          "matrixService": {
+            "matrixServiceName": "Dent Removal",
+            "hailMatrixName": "Hail Matrix",
+            "vehiclePartData": {
+              "vehiclePartName": "HOOD",
+              "vehiclePartSize": "NKL",
+              "vehiclePartSeverity": "VERY LIGHT",
+              "vehiclePartPrice": "$100.00",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Dye"
+                },
+                {
+                  "serviceName": "Discount 5-10%"
+                },
+                {
+                  "serviceName": "Discount 10-20$"
+                }
+              ]
+            }
+          },
+          "selectedServices": [
+            {
+              "serviceName": "Dye",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Dent Removal",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Disc_Ex_Service1",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Bundle1_Disc_Ex",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Test Tax",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Discount 5-10%",
+              "isSelected": true
+            }
+          ],
+          "workOrderPrice": "$346.23"
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "selectedServices": [
+            {
+              "serviceName": "Dye",
+              "isSelected": false
+            },
+            {
+              "serviceName": "Dent Removal",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Disc_Ex_Service1",
+              "isSelected": false
+            },
+            {
+              "serviceName": "Bundle1_Disc_Ex",
+              "isSelected": false
+            },
+            {
+              "serviceName": "Test Tax",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Discount 5-10%",
+              "isSelected": false
+            }
+          ],
+          "workOrderPrice": "$91.80"
+        }
+      ]
+    }
+  ],
+  "testApproveInspectionsOnDeviceViaAction": [
+    {
+      "rowID": "testApproveInspectionsOnDeviceViaAction.01",
+      "description": "Approve Inspections On Device via Action",
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "TESTVINNO",
+            "vehicleMake": "Acura",
+            "vehicleModel": "1.6 EL",
+            "vehicleColor": "Black"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "TESTVINNO",
+            "vehicleMake": "Acura",
+            "vehicleModel": "1.6 EL",
+            "vehicleColor": "Black"
+          }
+        }
+      ]
+    }
+  ],
+  "testArchiveInspectionsOnDeviceViaAction": [
+    {
+      "rowID": "testArchiveInspectionsOnDeviceViaAction.01",
+      "description": "Archive Inspections On Device via Action",
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "TESTVINNO",
+            "vehicleMake": "Acura",
+            "vehicleModel": "1.6 EL",
+            "vehicleColor": "Black"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "TESTVINNO",
+            "vehicleMake": "Acura",
+            "vehicleModel": "1.6 EL",
+            "vehicleColor": "Black"
+          }
+        }
+      ],
+      "archiveReason": "Reason 2"
+    }
+  ],
+  "testApproveInspectionOnBackOfficeFullInspectionApproval": [
+    {
+      "rowID": "testApproveInspectionOnBackOfficeFullInspectionApproval.01",
+      "description": "Test Case 8467:Approve inspection on back office (full inspection approval)",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "TESTVINNO",
+          "vehicleMake": "Acura",
+          "vehicleModel": "1.6 EL",
+          "vehicleColor": "Black"
+        }
+      }
+    }
+  ],
+  "testApproveInspectionOnBackOfficeLinebylineApproval": [
+    {
+      "rowID": "testApproveInspectionOnBackOfficeLinebylineApproval.01",
+      "description": "Test Case 8463:Approve inspection on back office (line-by-line approval)",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "TESTVINNO",
+          "vehicleMake": "Acura",
+          "vehicleModel": "1.6 EL",
+          "vehicleColor": "Black"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1", "serviceStatus": "Approved"
+          },
+          {
+            "serviceName": "Dye", "serviceStatus": "Declined"
+          }
+        ]
+      }
+    }
+  ],
+
+}

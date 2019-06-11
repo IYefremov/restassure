@@ -115,7 +115,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-	public void testCreateRetailInspection(String rowID,
+	public void testAddServicesToVisualInspection(String rowID,
 																	String description, JSONObject testData) {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
@@ -132,6 +132,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER,
 				InspectionsTypes.DEFAULT_INSPECTION_TYPE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
+		final String inspNumber = vehicleScreen.getInspectionNumber();
 		vehicleScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_VIN_REQUIRED);
@@ -143,92 +144,45 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
 		vehicleScreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-		VisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
-		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
-		visualInteriorScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
-		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		vehicleScreen.saveWizard();
-		myInspectionsScreen.clickHomeButton();
-	}
-
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-	public void testAddServicesToVisualInspection(String rowID,
-										   String description, JSONObject testData) {
-
-		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-
-		homescreen = new HomeScreen();
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
-		settingsScreen.setInspectionToNonSinglePageInspection();
-		settingsScreen.clickHomeButton();
-		
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
-		myInspectionsScreen.selectFirstInspection();
-		myInspectionsScreen.clickEditInspectionButton();
-		VehicleScreen vehicleScreen = new VehicleScreen();
-		final String inspNumber = vehicleScreen.getInspectionNumber();
-		VisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
-		Assert.assertTrue(visualInteriorScreen.isInteriorServicePresent(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE));
-		Assert.assertTrue(visualInteriorScreen.isInteriorServicePresent(iOSInternalProjectConstants.PRICE_ADJUSTMENT));
-		Assert.assertTrue(visualInteriorScreen.isInteriorServicePresent(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE));
-		visualInteriorScreen.switchToCustomTab();
-		visualInteriorScreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
-		visualInteriorScreen.selectSubService(iOSInternalProjectConstants.DYE_SERVICE);
-		visualInteriorScreen.tapInteriorWithCoords(1);
-		visualInteriorScreen.tapInteriorWithCoords(2);
-		visualInteriorScreen.switchToCustomTab();
-		visualInteriorScreen.switchToCustomTab();
-		visualInteriorScreen.selectService(iOSInternalProjectConstants.WHEEL_REPAIR_SERVICE);
-		visualInteriorScreen.selectSubService(iOSInternalProjectConstants.WHEEL_SERVICE);
-		visualInteriorScreen.tapInteriorWithCoords(3);
-		visualInteriorScreen.tapInteriorWithCoords(4);
-		visualInteriorScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
-		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
-		visualInteriorScreen.switchToCustomTab();
-		visualInteriorScreen.selectService(iOSInternalProjectConstants.MISCELLANEOUS_SERVICE);
-		visualInteriorScreen.selectSubService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
-		visualInteriorScreen.tapExterior();
-		InspectionToolBar inspectionToolBar = new InspectionToolBar();
-		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
-		visualInteriorScreen.saveWizard();
-		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspNumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
-		myInspectionsScreen.clickHomeButton();
-	}
-
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-	public void testChangeQuantityOfServicesInVisualInspection(String rowID,
-												  String description, JSONObject testData) {
-
-		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-
-		homescreen = new HomeScreen();
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
-		settingsScreen.setInspectionToNonSinglePageInspection();
-		settingsScreen.clickHomeButton();
-		
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
-		myInspectionsScreen.selectFirstInspection();
-		myInspectionsScreen.clickEditInspectionButton();
-		VehicleScreen vehicleScreen = new VehicleScreen();
-		VisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
-		visualInteriorScreen.switchToCustomTab();
-		visualInteriorScreen.selectService(inspectionData.getDamagesData().get(0).getDamageGroupName());
-		visualInteriorScreen.selectSubService(inspectionData.getDamagesData().get(0).getMoneyServiceData().getServiceName());
-		visualInteriorScreen.tapInterior();
-		visualInteriorScreen.tapInterior();
-		visualInteriorScreen.setCarServiceQuantityValue(inspectionData.getDamagesData().get(0).getMoneyServiceData().getServiceQuantity());
-		visualInteriorScreen.saveCarServiceDetails();
-		Assert.assertEquals(visualInteriorScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
-		visualInteriorScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
-		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
-		visualInteriorScreen.switchToCustomTab();
-		visualInteriorScreen.selectService(inspectionData.getDamagesData().get(1).getDamageGroupName());
-		visualInteriorScreen.selectSubService(inspectionData.getDamagesData().get(1).getMoneyServiceData().getServiceName());
-		visualInteriorScreen.tapExterior();
-		visualInteriorScreen.setCarServiceQuantityValue(inspectionData.getDamagesData().get(1).getMoneyServiceData().getServiceQuantity());
-		visualInteriorScreen.saveCarServiceDetails();
-
-		visualInteriorScreen.saveWizard();
+		myInspectionsScreen.selectInspectionForEdit(inspNumber);
+		vehicleScreen = new VehicleScreen();
+		int screenTapCount = 1;
+		for (VisualScreenData visualScreenData : inspectionData.getVisualScreensData()) {
+			VisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, visualScreenData.getScreenName());
+			visualInteriorScreen.waitVisualScreenLoaded(visualScreenData.getScreenName());
+			for (DamageData damageData : visualScreenData.getDamagesData()) {
+				visualInteriorScreen.switchToCustomTab();
+				visualInteriorScreen.selectService(damageData.getDamageGroupName());
+				visualInteriorScreen.selectSubService(damageData.getMoneyServiceData().getServiceName());
+				visualInteriorScreen.tapInteriorWithCoords(screenTapCount);
+				screenTapCount++;
+				visualInteriorScreen.tapInteriorWithCoords(screenTapCount);
+				screenTapCount++;
+			}
+			InspectionToolBar inspectionToolBar = new InspectionToolBar();
+			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), visualScreenData.getScreenTotalPrice());
+			Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), visualScreenData.getScreenPrice());
+		}
+		vehicleScreen.saveWizard();
+		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspNumber), inspectionData.getInspectionPrice());
+		myInspectionsScreen.selectInspectionForEdit(inspNumber);
+		vehicleScreen = new VehicleScreen();
+		screenTapCount = 1;
+		for (VisualScreenData visualScreenData : inspectionData.getVisualScreensData()) {
+			VisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, visualScreenData.getScreenName());
+			visualInteriorScreen.waitVisualScreenLoaded(visualScreenData.getScreenName());
+			for (DamageData damageData : visualScreenData.getDamagesData()) {
+				visualInteriorScreen.tapInteriorWithCoords(screenTapCount);
+				screenTapCount = screenTapCount + 2;
+				visualInteriorScreen.setCarServiceQuantityValue(damageData.getMoneyServiceData().getServiceQuantity());
+				visualInteriorScreen.saveCarServiceDetails();
+			}
+			InspectionToolBar inspectionToolBar = new InspectionToolBar();
+			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), visualScreenData.getScreenTotalPrice2());
+			Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), visualScreenData.getScreenPrice2());
+		}
+		vehicleScreen.saveWizard();
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -690,7 +644,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	private String inspectionnumber32226 = null;
+	private String inspectionNumber32226 = null;
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1(String rowID,
@@ -708,22 +662,22 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		
 		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
 		QuestionsScreen questionsScreen = myInspectionsScreen.addInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_SIMPLE);
-		questionsScreen.selectAnswerForQuestion("Question 2", "A2");
+		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
 		VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(inspectionData.getVinNumber());
-		inspectionnumber32226 = vehicleScreen.getInspectionNumber();
+		inspectionNumber32226 = vehicleScreen.getInspectionNumber();
 		PriceMatrixScreen priceMatrixScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.DEFAULT);
 		for(VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
 			priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
 			priceMatrixScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
 		}
 		priceMatrixScreen.saveWizard();
-		myInspectionsScreen.selectInspectionForAction(inspectionnumber32226);
+		myInspectionsScreen.selectInspectionForAction(inspectionNumber32226);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
-		approveInspectionsScreen.selectInspectionForApprove(inspectionnumber32226);
+		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber32226);
 		approveInspectionsScreen.clickSkipAllServicesButton();
 		approveInspectionsScreen.clickSaveButton();
 		approveInspectionsScreen.clickCancelStatusReasonButton();
@@ -756,14 +710,14 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
         inspectionsWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
         inspectionsWebPage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 		inspectionsWebPage.selectSearchStatus("Declined");
-		inspectionsWebPage.searchInspectionByNumber(inspectionnumber32226);
-		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionnumber32226), "$0.00");
-		Assert.assertEquals(inspectionsWebPage.getInspectionReason(inspectionnumber32226), "Decline 1");
-		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspectionnumber32226), "Declined");
+		inspectionsWebPage.searchInspectionByNumber(inspectionNumber32226);
+		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionNumber32226), "$0.00");
+		Assert.assertEquals(inspectionsWebPage.getInspectionReason(inspectionNumber32226), "Decline 1");
+		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspectionNumber32226), "Declined");
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	private String inspectionnumber32286 = null;
+	private String inspectionNumber32286 = null;
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1(String rowID,
@@ -783,7 +737,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = myInspectionsScreen.addInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
 		vehicleScreen.setVIN(inspectionData.getVinNumber());
 
-		inspectionnumber32286 = vehicleScreen.getInspectionNumber();
+		inspectionNumber32286 = vehicleScreen.getInspectionNumber();
 		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
@@ -801,11 +755,11 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
         servicesScreen.cancelSearchAvailableService();
         servicesScreen.saveWizard();
 		
-		myInspectionsScreen.selectInspectionForAction(inspectionnumber32286);
+		myInspectionsScreen.selectInspectionForAction(inspectionNumber32286);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
-		approveInspectionsScreen.selectInspectionForApprove(inspectionnumber32286);
+		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber32286);
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			approveInspectionsScreen.selectApproveInspectionServiceStatus(serviceData);
 		}
@@ -834,13 +788,13 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
         inspectionsWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
         inspectionsWebPage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 		inspectionsWebPage.selectSearchStatus("All active");
-		inspectionsWebPage.searchInspectionByNumber(inspectionnumber32286);		
-		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionnumber32286), "$2,000.00");
-		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspectionnumber32286), "Approved");
+		inspectionsWebPage.searchInspectionByNumber(inspectionNumber32286);		
+		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionNumber32286), "$2,000.00");
+		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspectionNumber32286), "Approved");
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
-	private String inspectionnumber32287 = null;
+	private String inspectionNumber32287 = null;
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1(String rowID,
@@ -856,7 +810,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
 		VehicleScreen vehicleScreen = myInspectionsScreen.addInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
 		vehicleScreen.setVIN(inspectionData.getVinNumber());
-		inspectionnumber32287 = vehicleScreen.getInspectionNumber();
+		inspectionNumber32287 = vehicleScreen.getInspectionNumber();
 		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
@@ -872,11 +826,11 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
         servicesScreen.cancelSearchAvailableService();
 		servicesScreen.saveWizard();
 		
-		myInspectionsScreen.selectInspectionForApprove(inspectionnumber32287);
+		myInspectionsScreen.selectInspectionForApprove(inspectionNumber32287);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
-		approveInspectionsScreen.selectInspectionForApprove(inspectionnumber32287);
+		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber32287);
 		approveInspectionsScreen.clickSkipAllServicesButton();		
 		approveInspectionsScreen.clickSaveButton();
 		approveInspectionsScreen.selectStatusReason(inspectionData.getDeclineReason());
@@ -905,9 +859,9 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
         inspectionsWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
         inspectionsWebPage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
 		inspectionsWebPage.selectSearchStatus(InspectionStatuses.DECLINED.getInspectionStatusValue());
-		inspectionsWebPage.searchInspectionByNumber(inspectionnumber32287);		
-		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionnumber32287), "$0.00");
-		Assert.assertEquals(inspectionsWebPage.getInspectionApprovedTotal(inspectionnumber32287), "$0.00");
+		inspectionsWebPage.searchInspectionByNumber(inspectionNumber32287);		
+		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionNumber32287), "$0.00");
+		Assert.assertEquals(inspectionsWebPage.getInspectionApprovedTotal(inspectionNumber32287), "$0.00");
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
@@ -926,7 +880,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		VisualInteriorScreen visualInteriorScreen = myInspectionsScreen.addInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(inspectionData.getVinNumber());
-		String inspectionnumber = vehicleScreen.getInspectionNumber();
+		String inspectionNumber = vehicleScreen.getInspectionNumber();
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
@@ -944,16 +898,16 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 		questionsScreen.saveWizard();
 		
-		myInspectionsScreen.selectInspectionForAction(inspectionnumber);
+		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
-		approveInspectionsScreen.selectInspectionForApprove(inspectionnumber);
+		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		approveInspectionsScreen.clickApproveAllServicesButton();
 		approveInspectionsScreen.clickSaveButton();
 		approveInspectionsScreen.drawSignatureAfterSelection();
 		approveInspectionsScreen.clickDoneStatusReasonButton();
-		Assert.assertEquals(myInspectionsScreen.getInspectionApprovedPriceValue(inspectionnumber), inspectionData.getInspectionPrice());
+		Assert.assertEquals(myInspectionsScreen.getInspectionApprovedPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -977,7 +931,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 				InspectionsTypes.INSP_TYPE_FOR_PRICE_MATRIX);
 		vehicleScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(inspectionData.getVinNumber());
-		String inspectionnumber = vehicleScreen.getInspectionNumber();
+		String inspectionNumber = vehicleScreen.getInspectionNumber();
 
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
 			PriceMatrixScreen priceMatrixScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
@@ -993,8 +947,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), priceMatrixScreenData.getMatrixScreenTotalPrice());
 		}
 
-
-
 		ServicesScreen servicesScreen =vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
 		servicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		InspectionToolBar inspectionToolBar = new InspectionToolBar();
@@ -1006,7 +958,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 		
 		vehicleScreen.saveWizard();
-		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
+		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), inspectionData.getInspectionPrice());
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
 			vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
@@ -1103,7 +1055,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
 
-			myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myWorkOrdersScreen.clickHomeButton();
 
 		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
@@ -1149,7 +1101,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		String alertText = Helpers.getAlertTextAndAccept();
 
 		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INSPECTION_IS_HUGE, inspectionData.getInspectionPrice()));
-		selectedServiceDetailsScreen = servicesScreen.openServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedServiceDetailsScreen = servicesScreen.openServiceDetails(inspectionData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServiceQuantityValue(inspectionData.getServiceData().getServiceQuantity2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		servicesScreen.clickSaveAsDraft();
@@ -1190,7 +1142,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		String srnumber = serviceRequestsScreen.getFirstServiceRequestNumber();
 		VisualInteriorScreen visualInteriorScreen = serviceRequestsScreen.createInspectionFromServiceReques(srnumber, InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
-		String inspectionnumber = vehicleScreen.getInspectionNumber();
+		String inspectionNumber = vehicleScreen.getInspectionNumber();
 
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesScreen.selectService(serviceRequestData.getInspectionData().getMoneyServiceData().getServiceName());
@@ -1204,19 +1156,19 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.selectServiceRequest(srnumber);
 		ServiceRequestdetailsScreen serviceRequestdetailsScreen = serviceRequestsScreen.selectDetailsRequestAction();
 		TeamInspectionsScreen teamInspectionsScreen = serviceRequestdetailsScreen.clickServiceRequestSummaryInspectionsButton();
-		Assert.assertTrue(teamInspectionsScreen.isInspectionExists(inspectionnumber));
-		teamInspectionsScreen.selectInspectionForApprove(inspectionnumber);
+		Assert.assertTrue(teamInspectionsScreen.isInspectionExists(inspectionNumber));
+		teamInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
-		approveInspectionsScreen.selectInspectionForApprove(inspectionnumber);
+		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		approveInspectionsScreen.selectApproveInspectionServiceStatus(serviceRequestData.getInspectionData().getMoneyServiceData());
 		approveInspectionsScreen.selectApproveInspectionServiceStatus(serviceRequestData.getInspectionData().getPercentageServiceData());
 		approveInspectionsScreen.clickSaveButton();
 		approveInspectionsScreen.drawSignatureAfterSelection();
 		approveInspectionsScreen.clickDoneStatusReasonButton();
 		teamInspectionsScreen = new TeamInspectionsScreen();
-		Assert.assertTrue(teamInspectionsScreen.isInspectionApproved(inspectionnumber));
+		Assert.assertTrue(teamInspectionsScreen.isInspectionApproved(inspectionNumber));
 		Assert.assertEquals(teamInspectionsScreen.getFirstInspectionPriceValue(), serviceRequestData.getInspectionData().getInspectionPrice());
 		Assert.assertEquals(teamInspectionsScreen.getFirstInspectionTotalPriceValue(), serviceRequestData.getInspectionData().getInspectionTotalPrice());
 		teamInspectionsScreen.clickBackServiceRequest();
@@ -1344,7 +1296,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		visualInteriorScreen.tapCarImage();
 		visualInteriorScreen.tapCarImage();
 		selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
-		ServicePartPopup servicepartpopup = selectedServiceDetailsScreen.clickServicePartCell();
+		selectedServiceDetailsScreen.clickServicePartCell();
 		ServicePartSteps.selectServicePartData(inspectionData.getDamageData().getMoneyServiceData().getServicePartData());
 		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -1478,7 +1430,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testWOVerifyRoundingInCalculationScriptWithPriceMatrix(String rowID,
-																							  String description, JSONObject testData) {
+																	   String description, JSONObject testData) {
 
 		final String filterBillingValue = "All";
 
@@ -1683,7 +1635,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		InvoiceData invoiceData = testCaseData.getInvoiceData();
 
-		
 		homescreen = new HomeScreen();			
 		CustomersScreen customersScreen = homescreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -1816,7 +1767,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-			selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
 			selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
 			if (serviceData.getVehiclePart() != null) {
 				selectedServiceDetailsScreen.clickVehiclePartsCell();
@@ -1881,12 +1831,11 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
 		VehicleScreen vehicleScreen = myInspectionsScreen.addInspection(InspectionsTypes.INSP_DRAFT_MODE);
 		vehicleScreen.setVIN(inspectionData.getVinNumber());
-		String inspectionnumber = vehicleScreen.getInspectionNumber();
+		String inspectionNumber = vehicleScreen.getInspectionNumber();
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-			selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
 			if(serviceData.getServicePrice() != null)
 				selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
 			if (serviceData.getVehiclePart() != null) {
@@ -1915,11 +1864,11 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceBundleScreen.saveSelectedServiceDetails();
 		servicesScreen.clickSaveAsFinal();
 			
-		myInspectionsScreen.selectInspectionForApprove(inspectionnumber);
+		myInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();	
-		approveInspectionsScreen.selectInspectionForApprove(inspectionnumber);
+		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		approveInspectionsScreen.clickDeclineAllServicesButton();
 		approveInspectionsScreen.clickSaveButton();
 		approveInspectionsScreen.selectStatusReason(inspectionData.getDeclineReason());
@@ -1934,8 +1883,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		//myInspectionsScreen.clickBackButton();
 		myInspectionsScreen.clickCloseFilterDialogButton();
 		myInspectionsScreen.clickSaveFilterDialogButton();
-		Assert.assertEquals(myInspectionsScreen.getInspectionApprovedPriceValue(inspectionnumber), inspectionData.getInspectionApprovedPrice());
-		Assert.assertEquals(myInspectionsScreen.getInspectionTotalPriceValue(inspectionnumber), inspectionData.getInspectionPrice());
+		Assert.assertEquals(myInspectionsScreen.getInspectionApprovedPriceValue(inspectionNumber), inspectionData.getInspectionApprovedPrice());
+		Assert.assertEquals(myInspectionsScreen.getInspectionTotalPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
 		myInspectionsScreen.clickHomeButton();	
 	}
 
@@ -2023,8 +1972,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 				selectedServiceDetailsScreen.selectVehicleParts(serviceData.getVehicleParts());
 				selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			}
-
-
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			if (serviceData.isNotMultiple()) {
 				String alertText = Helpers.getAlertTextAndAccept();
@@ -2072,7 +2019,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		for (TaxServiceData taxServiceData : workOrderData.getTaxServicesData()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(taxServiceData.getTaxServiceName());
 			for (ServiceRateData serviceRateData : taxServiceData.getServiceRatesData()) {
-				Assert.assertEquals(selectedServiceDetailsScreen.getServiceRatedValue(serviceRateData), serviceRateData.getServiceRateValue());
+				Assert.assertEquals(selectedServiceDetailsScreen.getServiceRateValue(serviceRateData), serviceRateData.getServiceRateValue());
 			}
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		}
@@ -2096,7 +2043,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		
 		selectedServiceDetailsScreen = servicesScreen.openServiceDetails(workOrderData.getTaxServiceData().getTaxServiceName());
 		selectedServiceDetailsScreen.setServiceRateFieldValue(workOrderData.getTaxServiceData().getServiceRateData());
-		Assert.assertEquals(selectedServiceDetailsScreen.getServiceRatedValue(workOrderData.getTaxServiceData().getServiceRateData()), "%" + workOrderData.getTaxServiceData().getServiceRateData().getServiceRateValue());
+		Assert.assertEquals(selectedServiceDetailsScreen.getServiceRateValue(workOrderData.getTaxServiceData().getServiceRateData()), "%" + workOrderData.getTaxServiceData().getServiceRateData().getServiceRateValue());
 		Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsTotalValue(), workOrderData.getTaxServiceData().getTaxServiceTotal());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		servicesScreen.saveWizard();
@@ -2170,7 +2117,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = myInspectionsScreen.addInspection(InspectionsTypes.INSP_FOR_CALC);
 		vehicleScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(inspectionData.getVinNumber());
-		String inspectionnumber = vehicleScreen.getInspectionNumber();
+		String inspectionNumber = vehicleScreen.getInspectionNumber();
 
 		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
@@ -2178,7 +2125,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesScreen.saveWizard();
 		
-		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
+		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen = new VehicleScreen();
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
@@ -2197,7 +2144,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), serviceData.getServicePrice2());
 		}
 		servicesScreen.saveWizard();
-		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionnumber), inspectionData.getInspectionPrice());
+		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -2367,13 +2314,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspectionForApprove(inspNumber);
-		approveInspectionsScreen.clickDeclineAllServicesButton();	
-		approveInspectionsScreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.WHEEL_SERVICE);
-		approveInspectionsScreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S1_MONEY_PANEL+ " (Grill)");
+		approveInspectionsScreen.clickDeclineAllServicesButton();
+		for (ServiceData serviceData : inspectionData.getServicesToApprovesList())
+			approveInspectionsScreen.selectApproveInspectionServiceStatus(serviceData);
 
-		approveInspectionsScreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S1_MONEY + " (Grill)");
-		approveInspectionsScreen.selectInspectionServiceToSkip(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
-	
 		approveInspectionsScreen.clickSaveButton();
 		//approveInspectionsScreen.selectStatusReason("Decline 1");
 		approveInspectionsScreen.drawSignatureAfterSelection();
