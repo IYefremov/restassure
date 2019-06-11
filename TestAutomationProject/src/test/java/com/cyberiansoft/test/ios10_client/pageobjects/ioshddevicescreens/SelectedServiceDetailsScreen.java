@@ -376,7 +376,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		return toolbar.findElementsByClassName("XCUIElementTypeStaticText").get(1).getAttribute("value");
 	}
 	
-	public String getServiceRatedValue(ServiceRateData serviceRateData) {
+	public String getServiceRateValue(ServiceRateData serviceRateData) {
 		return appiumdriver.findElementByAccessibilityId(serviceRateData.getServiceRateName()).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	

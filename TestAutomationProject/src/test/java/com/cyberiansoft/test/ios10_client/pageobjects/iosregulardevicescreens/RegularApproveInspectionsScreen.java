@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -88,7 +89,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickSignButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Sign"))).click();
 		//appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
 	}
@@ -219,6 +220,24 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	
 	public WebElement getTableCell(String cellname) {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
+	}
+
+	public void selectApproveInspectionServiceStatus(ServiceData serviceData) {
+		String serviceName = serviceData.getServiceName();
+		if (serviceData.getVehiclePart() != null) {
+			serviceName = serviceName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
+		}
+		switch (serviceData.getServiceStatus()){
+			case APPROVED:
+				selectInspectionServiceToApprove(serviceName);
+				break;
+			case DECLINED:
+				selectInspectionServiceToDecline(serviceName);
+				break;
+			case SKIPPED:
+				selectInspectionServiceToSkip(serviceName);
+				break;
+		}
 	}
 
 }

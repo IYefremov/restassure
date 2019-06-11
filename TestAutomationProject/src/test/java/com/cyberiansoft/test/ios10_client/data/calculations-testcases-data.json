@@ -11,52 +11,59 @@
       }
     }
   ],
-  "testCreateRetailInspection": [
-    {
-      "rowID": "testCreateRetailInspection.01",
-      "description": "Test Case 8435:Create Retail Inspection (HD Single page)",
-      "vihicleInfo": {
-        "vinNumber": "ZWERTYASDFEWSDRZG",
-        "vehicleMake": "Acura",
-        "vehicleModel": "1.6 EL",
-        "vehicleColor": "Black"
-      }
-    }
-  ],
   "testAddServicesToVisualInspection": [
     {
       "rowID": "testAddServicesToVisualInspection.01",
-      "description": "Test Case 8434:Add Services to visual inspection",
+      "description": "Test Case 8435:Create Retail Inspection (HD Single page), Test Case 8434:Add Services to visual inspection, Test Case 8433:Change Quantity of services in Visual Inspection",
       "vihicleInfo": {
-        "vinNumber": "ZWERTYASDFEWSDRZG"
+        "vinNumber": "WDZPE7CD9E5889222",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
       },
-      "inspPrice": "275"
-    }
-  ],
-  "testChangeQuantityOfServicesInVisualInspection": [
-    {
-      "rowID": "testChangeQuantityOfServicesInVisualInspection.01",
-      "description": "Test Case 8433:Change Quantity of services in Visual Inspection",
-      "vihicleInfo": {
-        "vinNumber": "ZWERTYASDFEWSDRZG"
-      },
-      "damagesData": [
+      "visualScreensData" : [
         {
-          "damageGroupName": "Miscellaneous",
-          "moneyService": {
-            "serviceName": "Dye",
-            "serviceQuantity": "3.00"
-          }
+          "screenName": "Interior",
+          "damagesData": [
+            {
+              "damageGroupName": "Miscellaneous",
+              "moneyService": {
+                "serviceName": "Dye",
+                "serviceQuantity": "3.00"
+              }
+            },
+            {
+              "damageGroupName": "WHEEL REPAIR",
+              "moneyService": {
+                "serviceName": "Wheel",
+                "serviceQuantity": "2.00"
+              }
+            }
+          ],
+          "screenPrice" : "$175.00",
+          "screenTotalPrice" : "$225.00",
+          "screenPrice2" : "$255.00",
+          "screenTotalPrice2" : "$405.00"
         },
         {
-          "damageGroupName": "WHEEL REPAIR",
-          "moneyService": {
-            "serviceName": "Wheel",
-            "serviceQuantity": "2.00"
-          }
+          "screenName": "Exterior",
+          "damagesData": [
+            {
+              "damageGroupName": "Miscellaneous",
+              "moneyService": {
+                "serviceName": "Disc_Ex_Service1",
+                "serviceQuantity": "3.00"
+              }
+            }
+          ],
+          "screenPrice" : "$150.00",
+          "screenTotalPrice" : "$325.00",
+          "screenPrice2" : "$250.00",
+          "screenTotalPrice2" : "$505.00"
         }
       ],
-      "inspPrice": "275"
+
+      "inspPrice": "$325.00"
     }
   ],
   "testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart": [
@@ -452,6 +459,12 @@
           "vehiclePartSeverity": "VERY LIGHT"
         }
       ],
+      "questionScreenData": {
+        "questionData": {
+          "questionName": "Question 2",
+          "questionAnswer": "A3"
+        }
+      },
       "declineReason": "Decline 1"
     }
   ],
@@ -710,6 +723,13 @@
         "vehicleModel": "Dakota",
         "vehicleYear": "2006"
       },
+      "questionScreenData": {
+        "screenName": "Zayats Section1",
+        "questionData": {
+          "questionName": "Question 2",
+          "questionAnswer": "A2"
+        }
+      },
       "moneyService": {
         "serviceName": "Dye"
       },
@@ -724,13 +744,6 @@
         "percentageService": {
           "serviceName": "Disc_Ex_Service1",
           "serviceStatus": "Declined"
-        },
-        "questionScreenData": {
-          "screenName": "Zayats Section1",
-          "questionData": {
-            "questionName": "Question 2",
-            "questionAnswer": "A2"
-          }
         },
         "inspPrice": "$2,000.00",
         "inspectionTotalPrice": "$2,050.00"
@@ -1996,6 +2009,30 @@
             "questionAnswer": "A3"
           }
         },
+        "servicesToApprove": [
+          {
+            "serviceName": "Wheel",
+            "serviceStatus": "Approved"
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "serviceStatus": "Approved",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "Discount 5-10%",
+            "serviceStatus": "Skipped"
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "serviceStatus": "Approved",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          }
+        ],
         "inspApprovedPrice": "$2,650.00",
         "inspPrice": "$2,688.00"
       }

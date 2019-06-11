@@ -13,6 +13,9 @@ public class TestCaseData {
     @JsonProperty("inspectionData")
     InspectionData inspectionData;
 
+    @JsonProperty("inspectionData")
+    List<InspectionData> inspectionsData;
+
     @JsonProperty("workOrderData")
     WorkOrderData workOrderData;
 
@@ -21,5 +24,11 @@ public class TestCaseData {
 
     @JsonProperty("invoiceData")
     InvoiceData invoiceData;
+
+    @JsonProperty("serviceRequestData")
+    ServiceRequestData serviceRequestData;
+
+    @JsonProperty("archiveReason")
+    String archiveReason;
 
 }

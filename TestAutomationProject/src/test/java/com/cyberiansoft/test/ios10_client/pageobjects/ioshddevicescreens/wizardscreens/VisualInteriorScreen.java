@@ -75,8 +75,7 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 	public void setCarServiceQuantityValue(String _quantity)  {
 		IOSElement quantityfld = (IOSElement) appiumdriver.findElementByAccessibilityId("Quantity");
 		quantityfld.click();
-		quantityfld.findElement(MobileBy.className("XCUIElementTypeTextField")).setValue("");
-		//quantityfldvalue.setValue("");
+		quantityfld.findElement(MobileBy.className("XCUIElementTypeTextField")).clear();
 		quantityfld.findElement(MobileBy.className("XCUIElementTypeTextField")).setValue(_quantity+"\n");
 	}
 
