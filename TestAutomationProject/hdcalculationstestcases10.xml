@@ -19,10 +19,8 @@
         <include name="testInvoicesVerifyRoundingMoneyAmountValues_1" />
         
           
-            <include name="testCreateInspectionOnTheDeviceWithApprovalRequired" /> 
-        	<include name="testCreateRetailInspection" />   
-            <include name="testAddServicesToVisualInspection" /> 
-            <include name="testChangeQuantityOfServicesInVisualInspection" />
+            <include name="testCreateInspectionOnTheDeviceWithApprovalRequired" />
+            <include name="testAddServicesToVisualInspection" />
             <include name="testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
             <include name="testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
             <include name="testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
