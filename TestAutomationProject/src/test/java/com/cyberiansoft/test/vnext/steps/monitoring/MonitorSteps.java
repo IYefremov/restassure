@@ -74,10 +74,16 @@ public class MonitorSteps {
                 repairOrderFlag);
     }
 
-    public static void editOrder(String workOrderId){
+    public static void editOrder(String workOrderId) {
         HomeScreenSteps.openMonitor();
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
+    }
+
+    public static void verifyRepairOrderListIsEmpty() {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getNothingFoundLable(), true);
+        WaitUtils.getGeneralFluentWait().until(driver -> repairOrderScreen.getRepairOrderListElements().isEmpty());
     }
 }

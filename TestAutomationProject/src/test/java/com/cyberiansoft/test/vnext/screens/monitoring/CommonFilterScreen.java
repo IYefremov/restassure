@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ListPicker;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -36,12 +37,15 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(id = "filter_priority")
     private ListPicker priority;
 
+    @FindBy(xpath = "//div[@class=\"searchlist-nothing-found\"]")
+    private WebElement nothingFoundLable;
+
     public CommonFilterScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }
 
     public void setSearchInputField(String searchString) {
-        searchInputField.click();
+        WaitUtils.click(searchInputField);
         searchInputField.sendKeys(searchString);
     }
 

@@ -22,7 +22,7 @@ public class ListPicker implements IWebElement {
         WaitUtils.getGeneralFluentWait().until((webdriver) -> webdriver.findElements(By.xpath(elementsLocator)).size() > 0);
         DriverBuilder.getInstance().getAppiumDriver().findElements(By.xpath(elementsLocator))
                 .stream()
-                .filter(element -> element.getText().contains(elementName))
+                .filter(element -> element.getText().toLowerCase().contains(elementName.toLowerCase()))
                 .findFirst()
                 .orElseThrow(() ->
                         new RuntimeException("element not found in list " + elementName))

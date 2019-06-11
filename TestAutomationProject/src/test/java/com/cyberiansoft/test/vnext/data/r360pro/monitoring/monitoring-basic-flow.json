@@ -2,7 +2,7 @@
   "userCanChangeFlagsOfWorkOrder": [
     {
       "rowID": "userCanChangeFlagsOfWorkOrder.01",
-      "description": "TFSID: 86154,86155"
+      "description": "TFSID: 86154,86155,85757,85758,85759,85760"
     }
   ],
   "userCanAddNotesToRepairOrder": [
@@ -80,6 +80,47 @@
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "Phase: AutomationPhaseLevel"
+        }
+      }
+    }
+  ],
+  "verifyUserSeesWarningMessageIfChosenLocationIsEmpty": [
+    {
+      "rowID": "verifyUserSeesWarningMessageIfChosenLocationIsEmpty.01",
+      "description": "TFSID: 85512"
+    }
+  ],
+  "verifyUserCanUseSearchFilter": [
+    {
+      "rowID": "verifyUserCanUseSearchFilter.01",
+      "description": "TFSID: 85523 85526"
+    }
+  ],
+  "userCanUsePriorityFilter": [
+    {
+      "rowID": "userCanUsePriorityFilter.01",
+      "description": "TFSID: 85761,85763"
+    }
+  ],
+  "userCanSearchByDepartment": [
+    {
+      "rowID": "userCanSearchByDepartment.01",
+      "description": "TFSID: 85689, 85692"
+    }
+  ],
+  "userCanUseOrderFlagFilter": [
+    {
+      "rowID": "userCanUseOrderFlagFilter.01",
+      "description": "TFSID: 85757, 85758"
+    }
+  ],
+  "userCanSearchByPhase": [
+    {
+      "rowID": "userCanSearchByPhase.01",
+      "description": "TFSID: 85378, 85738, 85752",
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel"
         }
       }
     }

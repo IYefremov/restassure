@@ -32,6 +32,9 @@ public class RepairOrderScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@class=\"searchlist-common-filters-toggle\"]")
     private WebElement commonFiltersToggle;
 
+    @FindBy(xpath = "//div[@class=\"searchlist-nothing-found\"]")
+    private WebElement nothingFoundLable;
+
     public RepairOrderScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }

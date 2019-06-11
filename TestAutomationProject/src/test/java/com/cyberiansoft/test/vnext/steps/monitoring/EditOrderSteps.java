@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.enums.MenuItems;
+import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.screens.monitoring.InfoScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhaseServicesScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
@@ -70,5 +71,10 @@ public class EditOrderSteps {
         PhasesScreen phasesScreen = new PhasesScreen();
         WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getPhaseListElements(), 0);
         phasesScreen.getPhaseElement(phaseDto.getPhaseName()).openMenu();
+    }
+
+    public static void setOrderPriority(OrderPriority orderPriority) {
+        InfoScreen infoScreen = new InfoScreen();
+        infoScreen.setOrderPriority(orderPriority);
     }
 }
