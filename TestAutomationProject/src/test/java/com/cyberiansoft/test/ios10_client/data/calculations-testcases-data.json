@@ -16,7 +16,7 @@
       "rowID": "testAddServicesToVisualInspection.01",
       "description": "Test Case 8435:Create Retail Inspection (HD Single page), Test Case 8434:Add Services to visual inspection, Test Case 8433:Change Quantity of services in Visual Inspection",
       "vihicleInfo": {
-        "vinNumber": "WDZPE7CD9E5889222",
+        "vinNumber": "TESTVINN",
         "vehicleMake": "Acura",
         "vehicleModel": "1.6 EL",
         "vehicleColor": "Black"
