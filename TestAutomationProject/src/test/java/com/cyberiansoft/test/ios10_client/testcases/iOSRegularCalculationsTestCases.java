@@ -1068,16 +1068,19 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 
 		myWorkOrdersScreen.approveWorkOrder(workOrders.get(0), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myWorkOrdersScreen.switchToTeamWorkOrders();
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrders.get(0));
 		myWorkOrdersScreen.clickInvoiceIcon();
-		
-		myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
+
+		teamWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		RegularInvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceInfoScreen.setPO(invoiceData.getInvoiceData().getInvoicePONumber());
 		String invoicenum = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
-		
+		teamWorkOrdersScreen.clickHomeButton();
+		homeScreen.clickMyWorkOrdersButton();
 		myWorkOrdersScreen.approveWorkOrder(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myWorkOrdersScreen.clickHomeButton();
 		

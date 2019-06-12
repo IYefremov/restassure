@@ -216,5 +216,13 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
 	}
 
-
+	public <T extends IBaseWizardScreen> T selectInvoiceType(IInvoicesTypes invoiceType) {
+		if (!appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).isDisplayed()) {
+			swipeToElement(appiumdriver.
+					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoiceType.getInvoiceTypeName() + "']/..")));
+		}
+		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
+		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
+		return invoiceType.getFirstVizardScreen();
+	}
 }
