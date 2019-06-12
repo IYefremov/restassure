@@ -51,8 +51,6 @@ public class VNextPayPOROScreen extends VNextBaseScreen {
 
     public void clickPayButton() {
         WaitUtils.waitUntilElementIsClickable(paycachcheckscreeen);
-        //WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='details']")));
         tap(paybtn);
     }
 

@@ -28,13 +28,11 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 		BaseUtils.waitABit(2000);
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		//wait.until(ExpectedConditions.visibilityOf(pricematrixesscreen));
 	}
 
 	
 	public boolean isPriceMatrixExistsInTheList(String pricematrix) {
-		return matrixpartslist.findElements(By.xpath(".//*[@class='checkbox-item-title' and contains(text(), '" + pricematrix + "')]")).size() > 0;
+		return matriceslist.findElements(By.xpath(".//*[@action='select-matrix' and contains(text(), '" + pricematrix + "')]")).size() > 0;
 	}
 	
 	public VNextVehiclePartInfoPage selectPriceMatrix(String pricematrix) {

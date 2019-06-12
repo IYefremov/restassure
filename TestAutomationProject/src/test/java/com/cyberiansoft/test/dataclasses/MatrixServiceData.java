@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -11,6 +12,10 @@ public class MatrixServiceData {
 
     @JsonProperty("hailMatrixName")
     String hailMatrixName;
+
+    @Getter
+    @JsonProperty("hailMatrixes")
+    List<String> hailMatrixes;
 
     @JsonProperty("vehiclePartsData")
     List<VehiclePartData> vehiclePartsData;
