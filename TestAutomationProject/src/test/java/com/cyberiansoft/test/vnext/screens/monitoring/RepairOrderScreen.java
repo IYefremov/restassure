@@ -52,7 +52,7 @@ public class RepairOrderScreen extends MonitorScreen {
 
     public void openChangeLocationPage() {
         WaitUtils.elementShouldBeVisible(locationSelectionNavigationBar, true);
-        locationSelectionNavigationBar.click();
+        WaitUtils.click(locationSelectionNavigationBar);
     }
 
     public void openSearchMenu() {

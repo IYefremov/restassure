@@ -43,8 +43,8 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='show-invoices']")
     private WebElement invoiceslist;
 
-    @FindBy(xpath = "//*[@action='show-monitor']")
-    private WebElement monitor;
+    @FindBy(xpath = "//*[@action='work-queue']")
+    private WebElement workQueue;
 
     @FindBy(xpath = "//a[@class='tile-link tile-item more-tile']")
     private WebElement morelist;
@@ -189,7 +189,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
     }
 
     public void clickMonitor() {
-        WaitUtils.elementShouldBeVisible(monitor,true);
-        monitor.click();
+        WaitUtils.elementShouldBeVisible(workQueue,true);
+        workQueue.click();
     }
 }

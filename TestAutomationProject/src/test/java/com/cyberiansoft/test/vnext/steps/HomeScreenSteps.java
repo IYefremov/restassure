@@ -19,11 +19,9 @@ public class HomeScreenSteps {
         homeScreen.clickInspectionsMenuItem();
     }
 
-    public static void openMonitor() {
+    public static void openWorkQueue() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextHelpingScreen vNextHelpingScreen = new VNextHelpingScreen();
-        if(vNextHelpingScreen.getOkDismissButton().isDisplayed())
-            vNextHelpingScreen.getOkDismissButton().click();
         homeScreen.clickMonitor();
     }
 }

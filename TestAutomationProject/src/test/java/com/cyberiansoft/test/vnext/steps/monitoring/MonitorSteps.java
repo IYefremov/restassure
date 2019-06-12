@@ -75,7 +75,7 @@ public class MonitorSteps {
     }
 
     public static void editOrder(String workOrderId) {
-        HomeScreenSteps.openMonitor();
+        HomeScreenSteps.openWorkQueue();
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);

@@ -50,7 +50,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
     public void userCanAddNotesToRepairOrder(String rowID,
                                              String description, JSONObject testData) {
         String noteText = UUID.randomUUID().toString();
-        HomeScreenSteps.openMonitor();
+        HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
@@ -68,7 +68,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderInfoDto expectedOrderInfo = workOrderData.getMonitoring().getOrderInfoDto();
 
-        HomeScreenSteps.openMonitor();
+        HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);

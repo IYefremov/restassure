@@ -49,7 +49,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
 
     @BeforeMethod
     public void beforeMethod(){
-        HomeScreenSteps.openMonitor();
+        HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
         MonitorSteps.clearAllFilters();
     }
