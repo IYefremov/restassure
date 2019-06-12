@@ -16,7 +16,7 @@
       "matrixService": {
         "matrixServiceName": "Hail Repair",
         "hailMatrixName": "State Farm",
-        "vehiclePartsData": {
+        "vehiclePartData": {
           "vehiclePartName": "Hood",
           "vehiclePartSize": "Dime",
           "vehiclePartSeverity": "Light 6 to 15",
@@ -46,7 +46,7 @@
       "matrixService": {
         "matrixServiceName": "Hail Repair",
         "hailMatrixName": "State Farm",
-        "vehiclePartsData": {
+        "vehiclePartData": {
           "vehiclePartName": "Hood",
           "vehiclePartSize": "Dime",
           "vehiclePartSeverity": "Light 6 to 15",

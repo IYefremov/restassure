@@ -74,7 +74,7 @@
     {
       "rowID": "testVerifyNotAllowedCharactersAreTrimmedWhileManualEntry.01",
       "description": "Test Case 37086:vNext - Verify not allowed characters are trimmed while manual entry",
-      "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      "vihicleInfo": {"vinNumber": "*90%$2~!$!`\":;\'<>?,./+=_-)(*&^#@\\|"
       }
     }
   ],
@@ -177,6 +177,15 @@
       "rowID": "testVerifyPriceMatrixAddedToServicePackageIsAvailableToChooseWhenAddEditInspection.01",
       "description": "Test Case 37843:vNext - Verify Price Matrix added to service package is available to choose when add/edit inspection",
       "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "matrixService": {
+        "matrixServiceName": "Hail Repair",
+        "hailMatrixName": "State Farm",
+        "vehiclePartData": {
+          "vehiclePartName": "Hood",
+          "vehiclePartSize": "Dime",
+          "vehiclePartSeverity": "Light 6 to 15"
+        }
       }
     }
   ],
@@ -186,6 +195,15 @@
       "rowID": "testVerifyListOfAvailablePriceMatricesIsLoadedWhenChoosingMatrixService.01",
       "description": "Test Case 37844:vNext - Verify list of available Price Matrices is loaded when choosing Matrix Service",
       "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "matrixService": {
+        "matrixServiceName": "Hail Repair",
+        "hailMatrixes": ["Nationwide Insurance", "Progressive", "State Farm"],
+        "vehiclePartData": {
+          "vehiclePartName": "Hood",
+          "vehiclePartSize": "Dime",
+          "vehiclePartSeverity": "Light 6 to 15"
+        }
       }
     }
   ],
@@ -195,6 +213,15 @@
       "rowID": "testVerifyPriceMatrixNameIsShownOnSelectServicesScreenAfterSelection.01",
       "description": "Test Case 37845:vNext - Verify Price Matrix name is shown on 'Select Services' screen after selection, Test Case 43617:vNext - Show Matrix Service name on 'Price Matrices' screen",
       "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "matrixService": {
+        "matrixServiceName": "Hail Repair",
+        "hailMatrixName": "State Farm",
+        "vehiclePartData": {
+          "vehiclePartName": "Hood",
+          "vehiclePartSize": "Dime",
+          "vehiclePartSeverity": "Light 6 to 15"
+        }
       }
     }
   ],
@@ -204,6 +231,8 @@
       "rowID": "testVerifyCorrectPriceIsShownInServicesListAfterEditingServicePricePercentage.01",
       "description": "Test Case 45902:vNext - Verify correct price is shown in Services list after editing service price (Percentage)",
       "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "percentageService": {"serviceName": "Facility Fee", "servicePrice": "(30.000%)", "servicePrice2": "30.018"
       }
     }
   ],
@@ -240,6 +269,10 @@
       "rowID": "testEditServicePricePercentage.01",
       "description": "Test Case 41562:vNext - Edit service price (Percentage)",
       "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "moneyService": {"serviceName": "Dent Repair"
+      },
+      "percentageService": {"serviceName": "Facility Fee", "servicePrice" : "8", "servicePrice2" : "8.000%"
       }
     }
   ],
@@ -249,6 +282,8 @@
       "rowID": "testEditServicePriceMoney.01",
       "description": "Test Case 41563:vNext - Edit service price (Money)",
       "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "moneyService": {"serviceName": "Dent Repair", "servicePrice" : "3.20", "servicePrice2" : "$3.20 x 1.00"
       }
     }
   ],
@@ -297,6 +332,16 @@
       "rowID": "testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService.01",
       "description": "Test Case :vNext - Total is not set to 0 if user adds Matrix Additional service with negative percentage service",
       "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
+      },
+      "matrixService": {
+        "matrixServiceName": "Hail Repair",
+        "hailMatrixName": "State Farm",
+        "vehiclePartData": {
+          "vehiclePartName": "Hood",
+          "vehiclePartSize": "Dime",
+          "vehiclePartSeverity": "Light 6 to 15",
+          "vehiclePartAdditionalService" : {"serviceName" : "Aluminum Upcharge", "servicePrice" : "-25"}
+        }
       },
       "inspPrice": "$93.75"
     }

@@ -14,14 +14,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextVehicleVINHistoryScreen extends VNextBaseWizardScreen {
 
-    @FindBy(xpath="//*[@data-page='long-text']")
+    @FindBy(xpath="//*[@data-page='plain-text']")
     private WebElement vinhistoryscreen;
 
     public VNextVehicleVINHistoryScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-page='long-text']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-page='plain-text']")));
     }
 
     public VNextVehicleInfoScreen clickBackButton() {
