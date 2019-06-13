@@ -139,8 +139,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			myworkordersscreen.clickAddOrderButton();
 			RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(DentWizardWorkOrdersTypes.routeusworkordertype);
-			String searchresult = vehiclescreen.setVINAndAndSearch(ExcelUtils.getVIN(testcaserow));
-			Assert.assertEquals(searchresult, "No vehicle invoice history found");
+			vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -2766,6 +2765,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesscreen.clickBackServicesButton();
 			
 			servicesscreen.clickSave();
+			invoiceinfoscreen = new RegularInvoiceInfoScreen();
 			invoiceinfoscreen.clickSaveAsFinal();
 			homescreen = myinvoicesscreen.clickHomeButton();
 		}

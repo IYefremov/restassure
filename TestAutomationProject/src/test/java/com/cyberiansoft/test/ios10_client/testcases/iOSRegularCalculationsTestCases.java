@@ -1082,6 +1082,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickHomeButton();
 		homeScreen.clickMyWorkOrdersButton();
 		myWorkOrdersScreen.approveWorkOrder(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		myWorkOrdersScreen.clickHomeButton();
 		
 		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoices();
