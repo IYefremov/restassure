@@ -46,8 +46,10 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Info")));
+		wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Info")));
 	}
 	
 	public void clickSaveEmptyPO() {
