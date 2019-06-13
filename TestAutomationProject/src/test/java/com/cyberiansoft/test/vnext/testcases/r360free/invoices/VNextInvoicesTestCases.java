@@ -128,7 +128,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         invoiceInfoScreen.setInvoicePONumber(invoiceData.getInvoiceData().getInvoicePONumber());
         invoiceInfoScreen.addTextNoteToInvoice(noteText);
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoice();
+        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
         Assert.assertEquals(invoicesScreen.getInvoicePriceValue(invoiceNumber), invoiceData.getWorkOrderData().getWorkOrderPrice());
         invoicesScreen.clickBackButton();
         BaseUtils.waitABit(60 * 1000);
@@ -144,6 +144,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VNextBOInvoicesWebPage invoicesWebPage = leftMenu.selectInvoicesMenu();
         invoicesWebPage.selectInvoiceInTheList(invoiceNumber);
         Assert.assertEquals(invoicesWebPage.getSelectedInvoiceNote(), noteText);
+        webdriver.quit();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -180,8 +181,8 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         Assert.assertEquals(invoicesScreen.getInvoicePriceValue(invoiceNumber), workOrderData.getWorkOrderPrice());
         VNextEmailScreen emailScreen = invoicesScreen.clickOnInvoiceToEmail(invoiceNumber);
         NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId("test.cyberiansoft@getnada.com");
-        emailScreen.sentToEmailAddress("test.cyberiansoft@getnada.com");
+        nada.setEmailId(nada.getEmailId());
+        emailScreen.sentToEmailAddress(nada.getEmailId());
 
         emailScreen.sendEmail();
 
@@ -193,10 +194,8 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         File pdfdoc = new File(inspectionReportFilenName);
         String pdftext = PDFReader.getPDFText(pdfdoc);
-        Assert.assertTrue(pdftext.contains("Dent Repair \n$0.98"));
-        Assert.assertTrue(pdftext.contains("Bumper Repair $0.98 \n$1.96"));
-
-
+        Assert.assertTrue(pdftext.contains(workOrderData.getMoneyServiceData().getServiceName() +
+                " " + workOrderData.getWorkOrderPrice()));
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
@@ -207,7 +206,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
                 VNexBOLeftMenuPanel.class);
         VNextBOInvoicesWebPage invoicesWebPage = leftMenu.selectInvoicesMenu();
         invoicesWebPage.selectInvoiceInTheList(invoiceNumber);
-        Assert.assertEquals(invoicesWebPage.getSelectedInvoiceCustomerName(), testcustomer);
+        Assert.assertEquals(invoicesWebPage.getSelectedInvoiceCustomerName(), testcustomer.getFullName());
 
     }
 
@@ -260,13 +259,13 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         invoiceInfoScreen.setInvoicePONumber(invoiceData.getInvoiceData().getInvoicePONumber());
         invoiceInfoScreen.addTextNoteToInvoice(invoiceNote);
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoice();
+        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
         Assert.assertEquals(invoicesScreen.getInvoicePriceValue(invoiceNumber), woPrice);
         invoicesScreen.clickBackButton();
 
     }
 
-    //@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testCreateAndEmailInvoiceWithTwoMatrixPanel(String rowID,
                                            String description, JSONObject testData) {
 

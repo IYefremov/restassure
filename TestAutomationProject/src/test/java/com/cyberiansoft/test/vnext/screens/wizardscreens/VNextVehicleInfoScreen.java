@@ -206,7 +206,6 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
     public void setLicPlate(String licplate) {
         licplatefld.clear();
         licplatefld.sendKeys(licplate);
-        //appiumdriver.hideKeyboard();
     }
 
     public String getLicPlate() {
@@ -235,7 +234,6 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
     public void setRoNo(String rono) {
         rofld.clear();
         rofld.sendKeys(rono);
-        //appiumdriver.hideKeyboard();
     }
 
     public String getPoNo() {
@@ -245,7 +243,6 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
     public void setPoNo(String pono) {
         pofld.clear();
         pofld.sendKeys(pono);
-        //appiumdriver.hideKeyboard();
     }
 
     public String getRoNo() {
@@ -253,25 +250,15 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
     }
 
     public List<String> getDisplayedVehicleFieldsListItems() {
-        List<String> fields = new ArrayList<String>();
+        List<String> fields = new ArrayList<>();
         List<WebElement> elementfields = vehiclefieldslist.findElements(By.xpath("./ul/li/label/div/div[@class='item-title label']"));
         for (WebElement element : elementfields)
             fields.add(element.getText());
         return fields;
     }
 
-    public VNextInspectionsScreen saveInspectionfromFirstScreen() {
-        setVIN("1FMCU0DG4BK830800");
-        return saveInspectionViaMenu();
-    }
-
     public String getCustomercontextValue() {
         return vehiclepage.findElement(By.xpath(".//span[@class='client-mode']")).getText();
-    }
-
-    public void populateVehicleInfoDataOnCreateWOWizard(String VIN, String color) {
-        setVIN(VIN);
-        selectModelColor(color);
     }
 
     public VNextCustomersScreen clickSelectOwnerCell() {

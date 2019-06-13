@@ -223,7 +223,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
 		claimInfoScreen.changeScreen(ScreenType.VEHICLE_INFO);
 		vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		inspectionsScreen = vehicleInfoScreen.saveInspectionfromFirstScreen();
+		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsScreen.getFirstInspectionNumber(), inspnum);
 		Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspnum), inspCustomer.getFullName());
 		homeScreen = inspectionsScreen.clickBackButton();

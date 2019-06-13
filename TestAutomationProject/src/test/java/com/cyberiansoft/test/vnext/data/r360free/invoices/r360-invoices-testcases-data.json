@@ -12,10 +12,10 @@
         },
         "percentageService": {"serviceName": "Facility Fee"
         },
-        "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
+        "matrixService": {"matrixServiceName" : "Hail Repair", "hailMatrixName" : "State Farm",
           "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
           }},
-        "workOrderPrice": "$267.81"
+        "workOrderPrice": "$149.97"
       },
       "invoiceData" : {"poNumber" : "123po"
       }
@@ -45,11 +45,11 @@
         "vihicleInfo": {"vinNumber": "19UUA66278A050105", "vehicleMake" : "Acura", "vehicleModel" : "TL",
           "vehicleColor" : "Red", "vehicleYear" : "2008"
         },
-        "moneyService": {"serviceName": "Bumper Repair", "servicePrice": "1.96", "serviceQuantity": "1.96"
+        "moneyService": {"serviceName": "Bumper Repair", "servicePrice": "0.99", "serviceQuantity": "0.99"
         },
         "service": {"serviceName": "Dent", "servicePrice": "0.99"
         },
-        "workOrderPrice": "$3.84"
+        "workOrderPrice": "$0.98"
       },
       "invoiceData" : {"poNumber" : "123po"
       }
