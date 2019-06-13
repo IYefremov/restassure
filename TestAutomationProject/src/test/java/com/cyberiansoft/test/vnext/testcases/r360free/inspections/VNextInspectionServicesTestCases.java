@@ -95,12 +95,16 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
             Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
-        availableServicesScreen.swipeScreenLeft();
         availableServicesScreen.swipeScreenRight();
+        BaseUtils.waitABit(2000);
+        availableServicesScreen.swipeScreenLeft();
+        availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
             Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
-        availableServicesScreen.swipeScreenLeft();
         availableServicesScreen.swipeScreenRight();
+        BaseUtils.waitABit(2000);
+        availableServicesScreen.swipeScreenLeft();
+        availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
             Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
         inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();
@@ -335,11 +339,10 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
         Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), vehicleInfoData.getVehicleMake());
         Assert.assertEquals(vehicleInfoScreen.getModelInfo(), vehicleInfoData.getVehicleModel());
         Assert.assertEquals(vehicleInfoScreen.getYear(), vehicleInfoData.getVehicleYear());
-        Assert.assertEquals(vehicleInfoScreen.getType(), vehicleInfoData.getVehicleType());
         Assert.assertEquals(vehicleInfoScreen.getMilage(), vehicleInfoData.getMileage());
-        Assert.assertEquals(vehicleInfoScreen.getLicPlate(), vehicleInfoData.getVehicleLicensePlate());
-        Assert.assertEquals(vehicleInfoScreen.getStockNo(), vehicleInfoData.getStockNumber());
-        Assert.assertEquals(vehicleInfoScreen.getRoNo(), vehicleInfoData.getRoNumber());
+        Assert.assertEquals(vehicleInfoScreen.getLicPlate(), vehicleInfoData.getVehicleLicensePlate().toUpperCase());
+        Assert.assertEquals(vehicleInfoScreen.getStockNo(), vehicleInfoData.getStockNumber().toUpperCase());
+        Assert.assertEquals(vehicleInfoScreen.getRoNo(), vehicleInfoData.getRoNumber().toUpperCase());
 
         vehicleInfoScreen.cancelInspection();
         inspectionsScreen.clickBackButton();
@@ -628,7 +631,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixServiceData.getMatrixServiceName()));
-        Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixServiceData.getMatrixServiceName()), matrixServiceData.getHailMatrixes());
+        Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixServiceData.getMatrixServiceName()), matrixServiceData.getHailMatrixName());
         inspectionsScreen = selectedServicesScreen.cancelInspection();
         inspectionsScreen.clickBackButton();
     }
@@ -760,8 +763,8 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
             selectedServicesScreen.setServiceAmountValue(serviceData.getServiceName(), serviceData.getServicePrice());
         Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), inspectionData.getInspectionPrice());
 
-        for (ServiceData serviceData : inspectionData.getMoneyServicesList())
-            selectedServicesScreen.uselectService(serviceData.getServiceName());
+        selectedServicesScreen.uselectService(inspectionData.getMoneyServicesList().get(1).getServiceName());
+        BaseUtils.waitABit(300);
         Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), editedPrice);
         selectedServicesScreen.cancelInspection();
         inspectionsScreen.clickBackButton();

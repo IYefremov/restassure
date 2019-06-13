@@ -23,23 +23,6 @@
         </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionServicesTestCases">
-      	<methods>
-            <include name="testVerifyListOfAvailablePriceMatricesIsLoadedWhenChoosingMatrixService" />
-            <include name="testVerifyNotAllowedCharactersAreTrimmedWhileManualEntry" />
-      	  <include name="testShowSelectedServicesAfterInspectionIsSaved" />
-      	  <include name="testAddOneServiceToAlreadySelectedServicesWhenInspectionIsEdited" />
-      	  <include name="testAddTheSameServiceMultipleTimes" />
-          <include name="testEditServicePriceMoney" />
-          <include name="testEditServicePricePercentage" />
-      	  <include name="testEditInspectionServices" />
-          <include name="testExitCancelInspectionStateCalledFromHumburgerMenu_FirstStep" />
-          <include name="testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen" />
-          <include name="testDeleteServiceFromServicesScreen" />
-          <include name="testInspectionTotalPriceShouldChangeWhenUselectSomeOfTheSelectedServiceOnServicesScreen" />
-          <include name="testServicesArentBecameSelectedIfUserUnselectThemBeforeClickingBackButtonOnServicesScreen" />
-          <include name="testTotalIsNotSetTo0IfUserAddsMatrixAdditionalServiceWithNegativePercentageService" />
-          <include name="testOpenAndSetServiceDetailsOnSelectServicesScreen" />
-      	 </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionsNotesTestCases">
       	<methods>  
@@ -77,7 +60,8 @@
         </methods>
      </class>
      <class name="com.cyberiansoft.test.vnext.testcases.r360free.invoices.VNextInvoicesTestCases">
-     <methods>                   
+     <methods>
+         <include name="testCreateAndEmailInvoiceWithTwoMatrixPanel" />
           <include name="testVerifyInvoiceCanBeCreatedFromWOWizard" />
           <include name="testVerifyInvoiceCanBeCreatedFromWOMenu" />
       </methods>
