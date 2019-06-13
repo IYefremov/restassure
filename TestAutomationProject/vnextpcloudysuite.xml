@@ -60,14 +60,9 @@
         </methods>
      </class>
      <class name="com.cyberiansoft.test.vnext.testcases.r360free.invoices.VNextInvoicesTestCases">
-     <methods>
-         <include name="testCreateAndEmailInvoiceWithTwoMatrixPanel" />
-          <include name="testVerifyInvoiceCanBeCreatedFromWOWizard" />
-          <include name="testVerifyInvoiceCanBeCreatedFromWOMenu" />
-      </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.r360free.registrationandnavigation.VNextNavigationTestCases">
-     <methods>                   
+     <methods>
           <include name="testVerifyUserCanNavigateByActionScreenInInspectionsForAndroid" />
           <include name="testNavigatingByActionScreenForAndroid" />
           <include name="testVerifyActionScreenWorksCorrectly" />
