@@ -2,11 +2,14 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VNextVehiclePartInfoPage extends VNextBaseScreen {
@@ -56,16 +60,22 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	public void selectVehiclePartSeverity(String vehiclepartseverity) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@action='severity']")));
-		//wait = new WebDriverWait(appiumdriver, 15);
-		//wait.until(ExpectedConditions.elementToBeClickable(vehiclepartseverityselect));
 		tap(vehiclepartseverityselect);
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartseverity + "')]")));
 	}
 	
 	public void selectVehiclePartAdditionalService(String additionalservicename) {
 		WebElement addservs = getVehiclePartAdditionalServiceCell(additionalservicename);
-		if (addservs != null)
-			tap(addservs.findElement(By.xpath(".//input[@action='select-item']")));
+		String servicePrice = "";
+		if (addservs != null) {
+			servicePrice = addservs.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
+			tap(WaitUtils.waitUntilElementIsClickable(addservs.findElement(By.xpath(".//input[@action='select-item']"))));
+			WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
+			if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
+				VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(appiumdriver);
+				serviceDetailsScreen.clickServiceDetailsDoneButton();
+			}
+		}
 		else
 			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
 	}
@@ -99,12 +109,13 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		}
 	}
 
-	public void selectAllAvailableAdditionalServices() {
-		List<WebElement> addservs = additionalavailableserviceslist.findElements(By.xpath(".//div[@action='open-details']"));
-		for (WebElement additinalservice : addservs) {
-			additinalservice.findElement(By.xpath(".//input[@action='select-item']")).click();
-			BaseUtils.waitABit(500);
+	public List<String> getListOfAdditionalServices() {
+		List<String> additionalServices = new ArrayList<>();
+		List<WebElement> addservs1 = getAvailableServicesList();
+		for (WebElement additinalservice : addservs1) {
+			additionalServices.add(additinalservice.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText());
 		}
+		return additionalServices;
 	}
 
 	private List<WebElement> getAvailableServicesList() {
@@ -113,17 +124,6 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 
 	private String getServiceListItemName(WebElement srvlistitem) {
 		return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
-	}
-
-	private WebElement getSelectedServiceCell(String serviceName) {
-		WebElement serviceListItem = null;
-		List<WebElement> selectedservices = getAvailableServicesList();
-		for (WebElement service : selectedservices)
-			if (getServiceListItemName(service).equals(serviceName)) {
-				serviceListItem =  service;
-				break;
-			}
-		return serviceListItem;
 	}
 
 	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {

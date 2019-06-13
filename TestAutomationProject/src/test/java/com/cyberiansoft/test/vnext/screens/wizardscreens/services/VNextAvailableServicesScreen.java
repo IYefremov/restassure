@@ -5,6 +5,7 @@ import com.cyberiansoft.test.vnext.screens.VNextLaborServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
+import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -17,7 +18,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 import java.util.List;
 
 public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
@@ -78,8 +78,9 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
                 WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
                 WaitUtils.click(servicerow.findElement(By.xpath(".//input[@action='select-item']")));
             }
+
             WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
-            if (servicePrice.contains("$0.00")) {
+            if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
                 VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(appiumdriver);
                 serviceDetailsScreen.clickServiceDetailsDoneButton();
             }

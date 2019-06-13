@@ -10,7 +10,7 @@
         },
         "moneyService": {"serviceName": "Dent Repair", "servicePrice": "58", "serviceQuantity": "1"
         },
-        "percentageService": {"serviceName": "Aluminum Upcharge"
+        "percentageService": {"serviceName": "Facility Fee"
         },
         "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
           "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
@@ -49,7 +49,7 @@
         },
         "service": {"serviceName": "Dent", "servicePrice": "0.99"
         },
-        "workOrderPrice": "$0.00"
+        "workOrderPrice": "$3.84"
       },
       "invoiceData" : {"poNumber" : "123po"
       }
@@ -66,12 +66,12 @@
         },
         "moneyService": {"serviceName": "Dent Repair", "servicePrice": "58", "serviceQuantity": "1"
         },
-        "percentageService": {"serviceName": "Aluminum Upcharge"
+        "percentageService": {"serviceName": "Facility Fee"
         },
-        "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
+        "matrixService": {"matrixServiceName" : "Hail Repair", "hailMatrixName" : "State Farm",
           "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
           }},
-        "workOrderPrice": "$267.81"
+        "workOrderPrice": "$149.97"
       },
       "invoiceData" : {"poNumber" : "Edyfycydydyftwfxfxhxgdy2555*&*-\"4*-\"&\"-\"55$6'+'&*6"
       }
@@ -86,12 +86,12 @@
         "vihicleInfo": {"vinNumber": "JT3AC11R4N1023558", "vehicleMake" : "Toyota", "vehicleModel" : "Previa",
           "vehicleYear" : "1992"
         },
-        "matrixService": {"matrixServiceName" : "Hail Dent Repair", "hailMatrixName" : "State Farm",
+        "matrixService": {"matrixServiceName" : "Hail Repair", "hailMatrixName" : "State Farm",
           "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15"
           },
             {"vehiclePartName": "Roof", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15"
             }]},
-        "workOrderPrice": "$660.00"
+        "workOrderPrice": "$860.00"
       },
       "invoiceData" : {"poNumber" : "123po"
       }

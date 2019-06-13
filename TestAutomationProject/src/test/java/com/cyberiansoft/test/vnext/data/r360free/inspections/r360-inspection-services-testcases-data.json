@@ -135,11 +135,11 @@
       "description": "Test Case 38577:vNext -Verify default price for service is shown correctly",
       "vihicleInfo": {"vinNumber": "1FMCU0DG4BK830800"
       },
-      "moneyServices": [{"serviceName": "Bumper Repair", "servicePrice": "20.00"
-      }, {"serviceName": "Dent Repair", "servicePrice": "0.00"
+      "moneyServices": [{"serviceName": "Bumper Repair", "servicePrice": "$0.00 x 1.00"
+      }, {"serviceName": "Other", "servicePrice": "$5.00 x 1.00"
       }],
-      "percentageServices": [{"serviceName": "Facility Fee", "servicePrice": "20.000"
-      }, {"serviceName": "Tax", "servicePrice": "25.000"
+      "percentageServices": [{"serviceName": "Facility Fee", "servicePrice": "(30.000%)"
+      }, {"serviceName": "Tax", "servicePrice": "0.000%"
       }]
     }
   ],

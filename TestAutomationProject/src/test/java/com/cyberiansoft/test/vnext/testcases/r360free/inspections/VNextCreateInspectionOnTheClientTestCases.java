@@ -31,6 +31,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.List;
 
 public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
     final String VIN = "19UUA66278A050105";
@@ -250,7 +251,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
             VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartName);
             vehiclePartInfoScreen.selectVehiclePartSize(vehiclepartsize);
             vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclepartseverity);
-            vehiclePartInfoScreen.selectAllAvailableAdditionalServices();
+            List<String> additionalServices = vehiclePartInfoScreen.getListOfAdditionalServices();
+            for (String serviceName : additionalServices)
+                vehiclePartInfoScreen.selectVehiclePartAdditionalService(serviceName);
             vehiclePartInfoScreen.clickSaveVehiclePartInfo();
             vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 
