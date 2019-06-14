@@ -3,6 +3,7 @@ package com.cyberiansoft.test.dataclasses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+@Getter
 public class InvoiceData {
 
     @JsonProperty("invoiceType")
@@ -14,19 +15,12 @@ public class InvoiceData {
     @JsonProperty("invoiceTotal")
     String invoiceTotal;
 
-    @Getter
     @JsonProperty("questionScreenData")
     QuestionScreenData questionScreenData;
 
-    public String getInvoiceType() {
-        return invoiceType;
-    }
+    @JsonProperty("creditCardData")
+    CreditCardData creditCardData;
 
-    public String getInvoicePONumber() {
-        return poNumber;
-    }
-
-    public String getInvoiceTotal() {
-        return invoiceTotal;
-    }
+    @JsonProperty("newPoNumber")
+    String newPoNumber;
 }

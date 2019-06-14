@@ -9,10 +9,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.dataclasses.DamageData;
-import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.Invoice;
-import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -78,10 +75,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
     public void testVerifyUserCanCreateInvoiceFromInspections(String rowID,
                                                               String description, JSONObject testData) {
 
-        Invoice invoiceData = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
         HomeScreenSteps.openCreateNewInspection();
-        InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, invoiceData.getInspectionData());
+        InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, testCaseData.getInspectionData());
         final String inspectionNumber = InspectionSteps.saveInspection();
 
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -107,7 +104,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR2);
 
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceInfoScreen.setInvoicePONumber(invoiceData.getInvoiceData().getInvoicePONumber());
+        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
         VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoice();
         invoicesScreen.switchToMyInvoicesView();

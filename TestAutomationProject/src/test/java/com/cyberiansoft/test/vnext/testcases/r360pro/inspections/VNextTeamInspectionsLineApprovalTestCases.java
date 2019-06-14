@@ -419,8 +419,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	public void testVerifyUserCanApproveSeveralInspectionsWithOneCustomersWithLineApproveAndWithoutLineApprove(String rowID,
 																 String description, JSONObject testData) {
 
-		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionsData();
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -462,8 +462,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	public void testVerifyUserCanSelectServiceForApproveOnMultiLineApproveScreenIfLineApprovalEqualsONForThisInspection(String rowID,
 																											   String description, JSONObject testData) {
 
-		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionsData();
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -512,8 +512,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	public void testVerifyUserCanDeleteInspectionFromLineApproveList(String rowID,
 																	 String description, JSONObject testData) {
 
-		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionsData();
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -559,8 +559,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	public void testVerifyTotalApprovalAmountIncludeOnlySUMOfApprovedService(String rowID,
 																														String description, JSONObject testData) {
 
-		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionsData();
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -617,8 +617,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	public void testVerifyUserNeedToSelectReasonForAllDeclinedInspection(String rowID,
 																			 String description, JSONObject testData) {
 
-		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionsData();
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -673,8 +673,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	public void testVerifyInspectionStatusUpdatedAfterApproveDecline(String rowID,
 																			 String description, JSONObject testData) {
 
-		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionsData();
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -737,8 +737,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 	public void testVerifyUserCantApproveInspectionsWithDifferentCustomers(String rowID,
 																	 String description, JSONObject testData) {
 
-		Inspection inspection = JSonDataParser.getTestDataFromJson(testData, Inspection.class);
-		List<InspectionData> inspectionsData = inspection.getInspectionsData();
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();

@@ -40,9 +40,9 @@
         }, {"serviceName": "Labor"
         }]
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -67,9 +67,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -81,9 +81,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -95,9 +95,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -109,9 +109,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -123,9 +123,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -137,9 +137,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -151,9 +151,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -167,9 +167,9 @@
         }, {"serviceName": "Labor"
         }]
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -190,9 +190,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       }],
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -213,9 +213,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       }],
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ],
 
@@ -236,9 +236,9 @@
         "vihicleInfo": {"vinNumber": "7777777777777"
         }
       }],
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "newPoNumber" : "TEST!23"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "newPoNumber" : "TEST!23"
+      }
     }
   ]
 
