@@ -42,11 +42,6 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 			settingsbofficeurl = VNextFreeRegistrationInfo.getInstance().getR360BackOfficeSettingsIntegrationURL();
 		JSONDataProvider.dataFile = VNextFreeTestCasesDataPaths.getInstance().getCustomersTestCasesDataPath();
 	}
-	
-	/*@AfterSuite
-	public void deleteClients() throws IOException {
-		VNextWebServicesUtils.deleteClientsByMail("cnolan@gmail.com");
-	}*/
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testCreateNewCustomerWithEmptyFirstNameAndLastName(String rowID,

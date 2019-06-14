@@ -36,28 +36,10 @@
       	</methods>
       </class>
      <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionsTestCases">
-        <methods>
-          <include name="testVerifyVINIsDecodedCorrectlyForInspection" />
-          <include name="testSaveInspectionUsingOptionFromHamburgerMenu_GeneralCase" /> 
-          <include name="testEditInspectionVehicleInfo" /> 
-          <include name="testCreateCustomerAlongWithInspection" />              
-          <include name="testNavigateBySwipeThroughWizardStepsForInspeciton" />
-          <include name="testNavigateThroughWizardStepsForInspectionByHardwareBackButton" />
-          <include name="testVerifyUserCanArchiveCreatedInspection" />
-            <include name="testVerifyUserCanArchiveSeveralInspections" />
-        </methods>
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.r360free.customers.VNextCustomersTestCases">
-     	<methods>        
-     	  <include name="testVerifyNewCustomerIsAvailableAfterDBUpdate" />           
-          <include name="testCreateNewCustomerWithEmptyFirstNameAndLastName" />
-          <include name="testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate" />
-        </methods>
       </class>
      <class name="com.cyberiansoft.test.vnext.testcases.r360free.workorders.VNextWorkOrdersTestCases">
-     <methods>                   
-          <include name="testShowSelectedServicesAfterWOIsSaved" />
-        </methods>
      </class>
      <class name="com.cyberiansoft.test.vnext.testcases.r360free.invoices.VNextInvoicesTestCases">
       </class>

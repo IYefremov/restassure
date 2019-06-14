@@ -86,7 +86,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleInfoScreen.clickCancelMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
-		Assert.assertTrue(msg.contains(VNextAlertMessages.CANCEL_INSPECTION_ALERT));
+		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
 		vehicleInfoScreen.swipeScreenLeft();
 		informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
