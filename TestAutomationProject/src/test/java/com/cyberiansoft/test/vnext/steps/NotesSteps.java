@@ -20,9 +20,7 @@ public class NotesSteps {
         WaitUtils.elementShouldBeVisible(noteScreen.getRootElement(), true);
         WaitUtils.elementShouldBeVisible(noteScreen.getNoteEditField(), true);
         WaitUtils.getGeneralFluentWait().until(webDriver -> {
-            Assert.assertEquals(noteScreen.getNoteEditField().getAttribute("value"),
-                    noteText
-            );
+            Assert.assertTrue(noteScreen.getNoteEditField().getAttribute("value").contains(noteText));
             return true;
         });
 

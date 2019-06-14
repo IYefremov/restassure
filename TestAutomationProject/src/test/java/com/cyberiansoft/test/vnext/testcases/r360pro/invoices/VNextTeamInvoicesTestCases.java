@@ -33,6 +33,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.steps.NotesSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
@@ -337,223 +338,202 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	//TODO: REWRITE TEST
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanRefreshDeletedPicturesFromMyInvoiceList(String rowID,
+																					   String description, JSONObject testData) {
 
-//	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-//	public void testVerifyUserCanRefreshDeletedPicturesFromMyInvoiceList(String rowID,
-//																					   String description, JSONObject testData) {
-//
-//		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
-//
-//		final int numberOfImageNotes = 4;
-//		final int numberOfImageToDelete = 2;
-//
-//		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
-//
-//		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-//		invoicesScreen.switchToMyInvoicesView();
-//		VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
-//		workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
-//		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-//
-//		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-//		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-//		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-//		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
-//		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		invoiceMenuScreen.refreshInvoicePictures();
-//
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//
-//		for (int i = 0; i < numberOfImageNotes; i++)
-//			notesScreen.addFakeImageNote();
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		for (int i = 0; i < numberOfImageToDelete; i++)
-//			notesScreen.deletePictureFromNotes();
-//		Assert.assertEquals(notesScreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		invoiceMenuScreen.refreshInvoicePictures();
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		Assert.assertEquals(notesScreen.getNumberOfAddedNotesPictures(), numberOfImageNotes);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoicesScreen.clickBackButton();
-//	}
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
 
-    //TODO: REWRITE TEST
-//	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-//	public void testVerifyDeletedPicturesDoesntDisplaysAfterUpdatingApplicationDB_MyInvoiceList(String rowID,
-//																		 String description, JSONObject testData) {
-//
-//		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
-//
-//		final int numberOfImageNotes = 4;
-//		final int numberOfImageToDelete = 2;
-//
-//		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
-//
-//		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-//		VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
-//		workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
-//		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-//
-//		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-//		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-//		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-//		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
-//		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//
-//		for (int i = 0; i < numberOfImageNotes; i++)
-//			notesScreen.addFakeImageNote();
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		for (int i = 0; i < numberOfImageToDelete; i++)
-//			notesScreen.deletePictureFromNotes();
-//		Assert.assertEquals(notesScreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		homeScreen = invoicesScreen.clickBackButton();
-//
-//		VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
-//		statusScreen.updateMainDB();
-//		//homeScreen = statusScreen.clickBackButton();
-//
-//		invoicesScreen = homeScreen.clickInvoicesMenuItem();
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		Assert.assertEquals(notesScreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoicesScreen.clickBackButton();
-//	}
+		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+		invoicesScreen.switchToMyInvoicesView();
+		VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+		workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+
+		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
+		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
+		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		invoiceMenuScreen.refreshInvoicePictures();
+
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+
+		NotesSteps.addPhotoFromCamera();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		NotesSteps.deleteAllPictures();
+		NotesSteps.verifyNoPicturesPresent();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		invoiceMenuScreen.refreshInvoicePictures();
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		NotesSteps.verifyNoPicturesPresent();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoicesScreen.clickBackButton();
+	}
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyDeletedPicturesDoesntDisplaysAfterUpdatingApplicationDB_MyInvoiceList(String rowID,
+																		 String description, JSONObject testData) {
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
 
 
-    //TODO: REWRITE TEST
-//	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-//	public void testVerifyUserCanRefreshDeletedPicturesAfterApprovingInvoice(String rowID,
-//																								String description, JSONObject testData) {
-//
-//		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
-//
-//		final int numberOfImageNotes = 4;
-//		final int numberOfImageToDelete = 2;
-//
-//		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
-//
-//		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-//		VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
-//		workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
-//		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-//
-//		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-//		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-//		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-//		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
-//		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//
-//		for (int i = 0; i < numberOfImageNotes; i++)
-//			notesScreen.addFakeImageNote();
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		for (int i = 0; i < numberOfImageToDelete; i++)
-//			notesScreen.deletePictureFromNotes();
-//		Assert.assertEquals(notesScreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		VNextApproveScreen approveScreen = invoiceMenuScreen.clickApproveInvoiceMenuItem();
-//		approveScreen.drawSignature();
-//		approveScreen.saveApprovedInspection();
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		Assert.assertEquals(notesScreen.getNumberOfAddedNotesPictures(), numberOfImageNotes-numberOfImageToDelete);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		invoiceMenuScreen.refreshInvoicePictures();
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		Assert.assertEquals(notesScreen.getNumberOfAddedNotesPictures(), numberOfImageNotes);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoicesScreen.clickBackButton();
-//	}
-//TODO: REWRITE TEST
-//	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-//	public void testVerifyUserCanAddNotesForTeamInvoice(String rowID,
-//																			 String description, JSONObject testData) {
-//
-//		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
-//
-//		final String notetext = "Test";
-//		final String quicknote = "Warranty expired";
-//
-//		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
-//
-//		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-//		VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
-//		workOrdersScreen.switchToMyWorkordersView();
-//		workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
-//		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-//
-//		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
-//		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-//		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-//		invoicesScreen.switchToTeamInvoicesView();
-//		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		notesScreen.setNoteText(notetext);
-//		notesScreen.addQuickNote(quicknote);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-//		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-//		Assert.assertEquals(notesScreen.getSelectedNotes(), notetext + "\n" + quicknote);
-//		notesScreen.clickScreenBackButton();
-//
-//		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-//		invoicesScreen.switchToMyInvoicesView();
-//		invoicesScreen.clickBackButton();
-//	}
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
+
+		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+		VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+		workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+
+		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
+		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
+		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+
+		NotesSteps.addPhotoFromCamera();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		NotesSteps.verifyNoPicturesPresent();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		homeScreen = invoicesScreen.clickBackButton();
+
+		VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
+		statusScreen.updateMainDB();
+		//homeScreen = statusScreen.clickBackButton();
+
+		invoicesScreen = homeScreen.clickInvoicesMenuItem();
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		NotesSteps.verifyNoPicturesPresent();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoicesScreen.clickBackButton();
+	}
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanRefreshDeletedPicturesAfterApprovingInvoice(String rowID,
+																								String description, JSONObject testData) {
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
+
+		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+		VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+		workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+
+		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
+		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
+		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+
+	NotesSteps.addPhotoFromCamera();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		NotesSteps.deleteAllPictures();
+		NotesSteps.verifyNoPicturesPresent();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		VNextApproveScreen approveScreen = invoiceMenuScreen.clickApproveInvoiceMenuItem();
+		approveScreen.drawSignature();
+		approveScreen.saveApprovedInspection();
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		NotesSteps.verifyNoPicturesPresent();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		invoiceMenuScreen.refreshInvoicePictures();
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		NotesSteps.verifyNoPicturesPresent();
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoicesScreen.clickBackButton();
+	}
+
+	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	public void testVerifyUserCanAddNotesForTeamInvoice(String rowID,
+																			 String description, JSONObject testData) {
+
+		Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+
+		final String notetext = "Test";
+		final String quicknote = "Warranty expired";
+
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, invoice);
+
+		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+		VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
+		workOrdersScreen.switchToMyWorkordersView();
+		workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
+		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+
+		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceInfoScreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
+		invoicesScreen.switchToTeamInvoicesView();
+		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		notesScreen.setNoteText(notetext);
+		NotesSteps.addQuickNote(quicknote);
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
+		NotesSteps.verifyNoteIsPresent(notetext + "\n" + quicknote);
+		notesScreen.clickScreenBackButton();
+
+		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoicesScreen.switchToMyInvoicesView();
+		invoicesScreen.clickBackButton();
+	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testVerifyUserDoesntSeeInvoiceWithTeamSharingEqualsNO(String rowID,
