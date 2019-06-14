@@ -24,10 +24,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4000000000000002", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4000000000000002", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -42,10 +42,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4000000000000127", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4000000000000127", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -60,10 +60,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"incorrectCardNumber": "4000000000000127", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123", "cardNumber": "4242424242424242"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"incorrectCardNumber": "4000000000000127", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123", "cardNumber": "4242424242424242"
+        }
       }
     }
   ],
@@ -78,10 +78,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -111,10 +111,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -129,10 +129,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -355,10 +355,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -373,10 +373,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -421,10 +421,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4000000000000002", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4000000000000002", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -439,10 +439,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4000000000000127", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4000000000000127", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ],
@@ -457,10 +457,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"incorrectCardNumber": "4000000000000127", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123", "cardNumber": "4242424242424242"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"incorrectCardNumber": "4000000000000127", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123", "cardNumber": "4242424242424242"
+        }
       }
     }
   ],
@@ -475,10 +475,10 @@
         "service": {"serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
-      },
-      "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
-        "expirationYear" : "2022",  "cvc" : "123"
+      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
+        "creditCardData" : {"cardNumber": "4242424242424242", "expirationMonth" : "04",
+          "expirationYear" : "2022",  "cvc" : "123"
+        }
       }
     }
   ]

@@ -1014,7 +1014,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 	public void testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation(String rowID,
 																	String description, JSONObject testData) {
 
-		Invoice invoiceData = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		final int workOrdersToCreate = 2;
 		List<String> workOrders = new ArrayList<>();
 		
@@ -1026,21 +1026,21 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
 		for (int i = 0; i < workOrdersToCreate; i++) {
 			VehicleScreen vehicleScreen = myWorkOrdersScreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
-			vehicleScreen.setVIN(invoiceData.getWorkOrderData().getVinNumber());
+			vehicleScreen.setVIN(testCaseData.getWorkOrderData().getVinNumber());
 			workOrders.add(vehicleScreen.getInspectionNumber());
 
 			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-			SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(invoiceData.getWorkOrderData().getServiceData().getServiceName());
-			selectedServiceDetailsScreen.setServicePriceValue(invoiceData.getWorkOrderData().getServiceData().getServicePrice());
-			selectedServiceDetailsScreen.setServiceQuantityValue(invoiceData.getWorkOrderData().getServiceData().getServiceQuantity());
+			SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(testCaseData.getWorkOrderData().getServiceData().getServiceName());
+			selectedServiceDetailsScreen.setServicePriceValue(testCaseData.getWorkOrderData().getServiceData().getServicePrice());
+			selectedServiceDetailsScreen.setServiceQuantityValue(testCaseData.getWorkOrderData().getServiceData().getServiceQuantity());
 
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
-			selectedServiceDetailsScreen.selectVehiclePart(invoiceData.getWorkOrderData().getServiceData().getVehiclePart().getVehiclePartName());
+			selectedServiceDetailsScreen.selectVehiclePart(testCaseData.getWorkOrderData().getServiceData().getVehiclePart().getVehiclePartName());
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
 			OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-			orderSummaryScreen.setTotalSale(invoiceData.getWorkOrderData().getWorkOrderTotalSale());
+			orderSummaryScreen.setTotalSale(testCaseData.getWorkOrderData().getWorkOrderTotalSale());
 			orderSummaryScreen.saveWizard();
 		}
 
@@ -1051,7 +1051,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
         QuestionsScreen questionsScreen = teamWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
 		questionsScreen.waitQuestionsScreenLoaded();
 		InvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
-		invoiceInfoScreen.setPO(invoiceData.getInvoiceData().getInvoicePONumber());
+		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
 
@@ -1068,7 +1068,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.addWorkOrder(workOrders.get(1));
 		invoiceInfoScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, invoiceData.getInvoiceData().getInvoiceTotal()));
+		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, testCaseData.getInvoiceData().getInvoiceTotal()));
 		invoiceInfoScreen.swipeScreenLeft();
 		invoiceInfoScreen.cancelInvoice();
 		myinvoicesscreen.clickHomeButton();
@@ -1485,7 +1485,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		
 		orderSummaryScreen.clickSave();
         InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
-		invoiceInfoScreen.setPO(invoiceData.getInvoicePONumber());
+		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSave();
 		Helpers.acceptAlert();
@@ -1582,7 +1582,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_AUTOWORKLISTNET);
 		questionsScreen.selectAnswerForQuestion(invoiceData.getQuestionScreenData().getQuestionData());
 		InvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
-		invoiceInfoScreen.setPO(invoiceData.getInvoicePONumber());
+		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceNumber45224 = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
 		
@@ -1710,7 +1710,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickInvoiceIcon();
         InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
 		invoiceNumber42803 = invoiceInfoScreen.getInvoiceNumber();
-		invoiceInfoScreen.setPO(invoiceData.getInvoicePONumber());
+		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceInfoScreen.clickSaveAsFinal();
 		myWorkOrdersScreen.clickHomeButton();
 	}
