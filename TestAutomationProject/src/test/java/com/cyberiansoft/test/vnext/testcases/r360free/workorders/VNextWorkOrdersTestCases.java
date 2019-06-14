@@ -33,31 +33,29 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 																	   String description, JSONObject testData) {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
-		VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
-		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleinfoscreen.setVIN(workOrderData.getVinNumber());
-		//AppiumUtils.clickHardwareBackButton();
-		vehicleinfoscreen.clickScreenForwardButton();
+
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+		VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
+		customersScreen.selectCustomer(testcustomer);
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
 		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleVINHistoryScreen.clickBackButton();
-		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		servicesscreen.selectServices(workOrderData.getServicesList());
-		workordersscreen = servicesscreen.saveWorkOrderViaMenu();
-		final String wonumber = workordersscreen.getFirstWorkOrderNumber();
-		VNextWorkOrdersMenuScreen menuscreen = workordersscreen.clickOnWorkOrderByNumber(wonumber);
-		vehicleinfoscreen = menuscreen.clickEditWorkOrderMenuItem();
-		vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
-		servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
+		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		availableServicesScreen.selectServices(workOrderData.getServicesList());
+		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
+		final String workOrderNumber = workOrdersScreen.getFirstWorkOrderNumber();
+		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
+		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName()));
-		workordersscreen = servicesscreen.saveWorkOrderViaMenu();
-		workordersscreen.clickBackButton();
+		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
+		workOrdersScreen.clickBackButton();
 	}
 
 }
