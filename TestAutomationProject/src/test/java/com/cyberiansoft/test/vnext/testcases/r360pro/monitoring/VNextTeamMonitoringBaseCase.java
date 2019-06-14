@@ -46,7 +46,6 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         GeneralSteps.pressBackButton();
     }
 
-    //TODO:REWRITE
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanAddNotesToRepairOrder(String rowID,
                                              String description, JSONObject testData) {
