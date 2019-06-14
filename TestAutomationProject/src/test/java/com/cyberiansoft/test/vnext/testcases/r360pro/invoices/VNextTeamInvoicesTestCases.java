@@ -44,7 +44,6 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistration {
 

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.invoices;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.dataclasses.Invoice;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
