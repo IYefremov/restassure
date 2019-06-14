@@ -184,7 +184,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         emailScreen.sentToEmailAddress(nada.getEmailId());
 
         emailScreen.sendEmail();
-        invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver())
+        invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         invoicesScreen.clickBackButton();
 
         final String inspectionReportFilenName = invoiceNumber + ".pdf";
