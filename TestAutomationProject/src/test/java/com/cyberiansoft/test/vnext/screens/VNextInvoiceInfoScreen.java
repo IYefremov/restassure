@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -76,18 +77,11 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		return invoicedate.getAttribute("value");
 	}
 	
-	public void addQuickNoteToInvoice(String quicknote) {
-		clickMenuButton();
-		VNextNotesScreen notesscreen = clickNotesMenuItem();
-		notesscreen.addQuickNote(quicknote);
-		notesscreen.clickNotesBackButton();
-	}
-	
 	public VNextInvoiceInfoScreen addTextNoteToInvoice(String notetext) {
 		clickMenuButton();
 		VNextNotesScreen notesscreen = clickNotesMenuItem();
 		notesscreen.setNoteText(notetext);
-		notesscreen.clickNotesBackButton();
+		GeneralSteps.pressBackButton();
 		return this;
 	}
 

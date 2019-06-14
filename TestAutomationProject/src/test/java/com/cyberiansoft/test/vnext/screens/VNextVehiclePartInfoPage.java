@@ -185,7 +185,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(notesbutton));
 		tap(notesbutton);
-		return new VNextNotesScreen(appiumdriver);
+		return new VNextNotesScreen();
 	}
 
 

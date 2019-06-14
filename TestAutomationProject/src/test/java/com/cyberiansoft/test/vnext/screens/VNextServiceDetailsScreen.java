@@ -39,7 +39,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	public VNextNotesScreen clickServiceNotesOption() {
 		tap(notesbutton);
-		return new VNextNotesScreen(appiumdriver);
+		return new VNextNotesScreen();
 	}
 	
 	public void clickServiceDetailsBackButton() {

@@ -174,7 +174,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
             tap(servicecell.findElement(By.xpath(".//div[@action='notes']")));
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
-        return new VNextNotesScreen(appiumdriver);
+        return new VNextNotesScreen();
     }
 
     public void uselectService(String serviceName) {

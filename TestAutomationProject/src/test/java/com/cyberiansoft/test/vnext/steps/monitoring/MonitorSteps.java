@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
-import com.cyberiansoft.test.vnext.enums.MenuItems;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;

@@ -82,7 +82,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	
 	public VNextNotesScreen clickInvoiceNotesMenuItem() {
 		clickMenuItem(invoicenotesbtn);
-		return new VNextNotesScreen(appiumdriver);
+		return new VNextNotesScreen();
 	}
 	
 	public void clickInvoiceRefreshPicturesMenuItem() {

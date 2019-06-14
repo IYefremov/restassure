@@ -1,8 +1,8 @@
 {
 
-  "testVerifyUserAddNotesForTeamInspection": [
+  "userCanAddNoteToTeamInspections": [
     {
-      "rowID": "testVerifyUserAddNotesForTeamInspection.01",
+      "rowID": "userCanAddNoteToTeamInspections.01",
       "description": "Test Case 67743:Verify user can add Notes for Team Inspection, Test Case 67744:Verify User can edit Notes from Team Inspection list, Test Case 67746:Verify Notes changes is saved after DB update",
       "vihicleInfo": {
         "vinNumber": "WDBFA67E1SFA946591"
@@ -10,9 +10,9 @@
     }
   ],
 
-  "testVerifyNotesDisplaysOnTeamInspectionListAfterAddingOnMyInspectionList": [
+  "userCanSeeNotesFromMyInspectionsInTeamInspections": [
     {
-      "rowID": "testVerifyNotesDisplaysOnTeamInspectionListAfterAddingOnMyInspectionList.01",
+      "rowID": "userCanSeeNotesFromMyInspectionsInTeamInspections.01",
       "description": "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, Test Case 67748:Verify Notes icon displays if user add Notes for Inspection My/Team",
       "vihicleInfo": {
         "vinNumber": "WDBFA67E1SFA946591"
@@ -20,7 +20,7 @@
     }
   ],
 
-  "testVerifyNotesDisplaysOnMyInspectionListAfterAddingOnTeamInspectionList": [
+  "userCanSeeNotesFromTeamInspectionsInMyInspections": [
     {
       "rowID": "testVerifyNotesDisplaysOnMyInspectionListAfterAddingOnTeamInspectionList.01",
       "description": "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, Test Case 67748:Verify Notes icon displays if user add Notes for Inspection My/Team, Test Case 67750:Verify saving text note on tapping 'Back' button",
@@ -60,9 +60,9 @@
     }
   ],
 
-  "testVerifyUserCanRemovePicturesFromNotes": [
+  "userCanAddAndRemovePictures": [
     {
-      "rowID": "testVerifyUserCanRemovePicturesFromNotes.01",
+      "rowID": "userCanAddAndRemovePictures.01",
       "description": "Test Case 67752:Verify user can remove pictures from Notes",
       "vihicleInfo": {
         "vinNumber": "WDBFA67E1SFA946591"

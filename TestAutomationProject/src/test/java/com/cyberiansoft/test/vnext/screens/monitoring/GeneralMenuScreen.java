@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
-import com.cyberiansoft.test.vnext.enums.MenuItems;
+import com.cyberiansoft.test.enums.MenuItems;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

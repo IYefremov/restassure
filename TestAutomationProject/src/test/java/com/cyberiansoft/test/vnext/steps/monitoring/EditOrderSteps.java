@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
-import com.cyberiansoft.test.vnext.enums.MenuItems;
+
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.screens.monitoring.InfoScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhaseServicesScreen;

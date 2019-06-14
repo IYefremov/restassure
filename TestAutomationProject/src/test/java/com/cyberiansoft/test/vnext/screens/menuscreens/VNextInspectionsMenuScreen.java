@@ -77,7 +77,7 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 
     public VNextNotesScreen clickNotesInspectionMenuItem() {
         clickMenuItem(notesinspectionbtn);
-        return new VNextNotesScreen(appiumdriver);
+        return new VNextNotesScreen();
     }
 
     public void clickCreateWorkOrderInspectionMenuItem() {

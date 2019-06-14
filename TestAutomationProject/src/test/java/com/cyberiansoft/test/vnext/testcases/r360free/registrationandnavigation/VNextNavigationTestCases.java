@@ -133,16 +133,16 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 
-		VNextNotesScreen notesscreen = selectedServicesScreen.clickInspectionNotesOption();
-		notesscreen.setNoteText(notesText);
-		notesscreen.clickScreenBackButton();
-
-		selectedServicesScreen = new VNextSelectedServicesScreen (DriverBuilder.getInstance().getAppiumDriver());
-		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
-
-		notesscreen = inspectionsscreen.openInspectionNotes(inspNumber);
-		Assert.assertEquals(notesscreen.getSelectedNotes(), notesText);
-		notesscreen.clickScreenBackButton();
+//		VNextNotesScreen notesscreen = selectedServicesScreen.clickInspectionNotesOption();
+//		notesscreen.setNoteText(notesText);
+//		notesscreen.clickScreenBackButton();
+//
+//		selectedServicesScreen = new VNextSelectedServicesScreen (DriverBuilder.getInstance().getAppiumDriver());
+//		inspectionsscreen = selectedServicesScreen.saveInspectionViaMenu();
+//
+//		notesscreen = inspectionsscreen.openInspectionNotes(inspNumber);
+//		Assert.assertEquals(notesscreen.getSelectedNotes(), notesText);
+//		notesscreen.clickScreenBackButton();
 		inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 		VNextEmailScreen emailscreen = inspectionsscreen.clickOnInspectionToEmail(inspNumber);
@@ -158,4 +158,4 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		inspectionsscreen.clickBackButton();
 	}
 
-} 
+}

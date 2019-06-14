@@ -4,9 +4,9 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
-import com.cyberiansoft.test.vnext.enums.MenuItems;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -46,6 +46,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         GeneralSteps.pressBackButton();
     }
 
+    //TODO:REWRITE
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanAddNotesToRepairOrder(String rowID,
                                              String description, JSONObject testData) {
@@ -55,7 +56,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.addNewNote(noteText);
+        NotesSteps.setNoteText(noteText);
         NotesSteps.verifyNoteIsPresent(noteText);
         GeneralSteps.pressBackButton();
         GeneralSteps.pressBackButton();

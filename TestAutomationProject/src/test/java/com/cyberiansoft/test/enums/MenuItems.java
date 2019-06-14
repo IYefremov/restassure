@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.enums;
+package com.cyberiansoft.test.enums;
 
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ public enum MenuItems {
     START("start"),
     COMPLETE("complete"),
     CHANGE_STATUS(""),
-    NOTES("comments"),
+    NOTES("notes"),
     CHANGE_DEPARTMENT(""),
     REPORT_PROBLEM("reportProblem"),
     RESOLVE_PROBLEM("resolveProblem");

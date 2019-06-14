@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.steps;
 
-import com.cyberiansoft.test.vnext.enums.MenuItems;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.screens.monitoring.GeneralMenuScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 

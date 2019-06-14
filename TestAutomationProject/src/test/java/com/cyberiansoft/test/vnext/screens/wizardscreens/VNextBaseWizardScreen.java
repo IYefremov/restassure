@@ -27,28 +27,28 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 	public static VNextTypeScreenContext typeScreenContext;
 	public static InspectionTypes inspectionType;
 	public static WorkOrderTypes workOrderType;
-	
+
 	@FindBy(xpath="//div[@class='estimation-number']")
 	private WebElement inspectionnumber;
 
 	@FindBy(xpath="//*[@action='more_actions']")
 	private WebElement menubtn;
-	
+
 	@FindBy(xpath="//a[@handler='_cancel']")
 	private WebElement cancelinspectionmenu;
-	
+
 	@FindBy(xpath="//a[@handler='_save']")
 	private WebElement saveinspectionmenu;
-	
+
 	@FindBy(xpath="//a[@handler='_save']/span[2]/span")
 	private WebElement saveworkordermenu;
-	
+
 	@FindBy(xpath="//a[@handler='_notes']")
 	private WebElement inspectionnotesmenu;
-	
+
 	@FindBy(xpath="//span[@action='save']")
 	private WebElement savebtn;
-	
+
 	public VNextBaseWizardScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
@@ -87,7 +87,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		informationDialog.clickDraftButton();
 		return new VNextInspectionsScreen(appiumdriver);
 	}
-	
+
 	public VNextInspectionsScreen saveInspectionViaMenu() {
 		clickSaveInspectionMenuButton();
 		if (inspectionType != null)
@@ -97,7 +97,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		inspectionsScreen.waitForInspectionsListIsVisibile();
 		return inspectionsScreen;
 	}
-	
+
 	public VNextWorkOrdersScreen saveWorkOrderViaMenu() {
 		clickSaveWorkOrderMenuButton();
 		if (workOrderType != null)
@@ -129,7 +129,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		clickMenuButton();
 		tap(saveinspectionmenu);
 	}
-	
+
 	public void clickSaveWorkOrderMenuButton() {
 		clickMenuButton();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
@@ -137,17 +137,17 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		BaseUtils.waitABit(1500);
 		tap(saveworkordermenu);
 	}
-	
+
 	public String getNewInspectionNumber() {
 		return inspectionnumber.getText().trim();
 	}
-	
+
 	public VNextNotesScreen clickInspectionNotesOption() {
 		clickMenuButton();
 		tap(inspectionnotesmenu);
-		return new VNextNotesScreen(appiumdriver);
+		return new VNextNotesScreen();
 	}
-	
+
 	public String getInspectionTotalPriceValue() {
 		return appiumdriver.findElement(By.xpath("//*[@id='total']")).getText().trim();
 	}

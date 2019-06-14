@@ -4,10 +4,10 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.MenuItems;
+import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
-import com.cyberiansoft.test.vnext.enums.MenuItems;
-import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -48,7 +48,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
     }
 
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
         MonitorSteps.clearAllFilters();

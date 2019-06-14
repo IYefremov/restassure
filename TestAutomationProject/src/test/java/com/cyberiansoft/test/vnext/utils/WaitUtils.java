@@ -70,6 +70,7 @@ public class WaitUtils {
                         .withTimeout(Duration.ofSeconds(120))
                         .pollingEvery(Duration.ofMillis(300))
                         .ignoring(WebDriverException.class)
+                        .ignoring(AssertionError.class)
                         .ignoring(RuntimeException.class);
     }
 
