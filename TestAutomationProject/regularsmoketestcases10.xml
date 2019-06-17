@@ -9,15 +9,14 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularSmokeTestCases">
         <methods>
 
+          <include name="testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown" />
 
-          <!--<include name="testGetDeviceRegistrationCode" />
-            <include name="testRegisterationiOSDdevice" />-->
+
           <include name="testUpdateDatabase" />
           <include name="testUpdateVIN" />
           <!--<include name="testCreateRetailCustomer" />
           <include name="testEditRetailCustomer" />
           <include name="testDeleteRetailCustomer" /> -->
-          <include name="testCreateRetailInspection" />
           <include name="testEditRetailInspectionNotes" />
           <include name="testApproveInspectionOnDevice" />
           <include name="testArchiveAndUnArchiveTheInspection" />
@@ -57,36 +56,29 @@
           <include name="testSRVerifySummaryActionForAppointmentOnSRsCalendar" />
           <include name="testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices" />
           <include name="testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices" />
-          <include name="testWOMonitorCreateWOForMonitor" />
           <include name="testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService" />
           <include name="testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase" />
           <include name="testWOMonitorVerifyThatStartDateIsSetWhenStartService" />
           <include name="testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase" />
-          <include name="testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature" />
-          <include name="testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature" />
-          <include name="testRegularVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists" />
-          <include name="testRegularIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
-          <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageAuantity" />
-          <include name="testRegularVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
-          <include name="testRegularIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
-          <include name="testRegularIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
-          <include name="testRegularVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem" />
-          <include name="testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech" />
-          <include name="testSRRegularVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech" />
-          <include name="testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech" />
-          <include name="testSRRegularVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech" />
-          <include name="testWORegularNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting" />
+          <include name="testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature" />
+          <include name="testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature" />
+          <include name="testVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists" />
+          <include name="testVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech" />
+          <include name="testVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech" />
+          <include name="testVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech" />
+          <include name="testVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech" />
+          <include name="testNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting" />
           <include name="testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection" />
-          <include name="testSRRegularVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold" />
-          <include name="testSRRegularVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold" />
-          <include name="testSRRegularVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose" />
-          <include name="testSRRegularVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown" />
-          <include name="testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO" />
-          <include name="testSRRegularVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO" />
-          <include name="testSRRegularVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices" />
-          <include name="testSRRegularVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices" />
+          <include name="testVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold" />
+          <include name="testVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold" />
+          <include name="testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose" />
+          <include name="testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown" />
+          <include name="testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO" />
+          <include name="testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO" />
+          <include name="testVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices" />
+          <include name="testVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices" />
           <include name="testRegularVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode" />
-          <include name="testRegularVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown" />
+          <include name="testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown" />
           <include name="testRegularVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen" />
           <include name="testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined" />
           <include name="testRegularVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired" />
@@ -161,7 +153,6 @@
 
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
-          <!--<include name="testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices" />-->
         </methods>
       </class>
     </classes>

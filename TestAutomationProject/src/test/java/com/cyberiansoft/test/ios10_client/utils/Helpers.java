@@ -255,7 +255,7 @@ public abstract class Helpers {
 		/*WebElement element = driver
 				.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAImage[1]");*/
 		MobileElement element = (MobileElement) DriverBuilder.getInstance().getAppiumDriver()
-				.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage");
+				.findElementByXPath("//XCUIElementTypeImage");
 		action.tap(element(element, x, y)).perform();
 		//action = new TouchAction(driver);
 		//action.press(element, x, y).waitAction(1000).release().perform();

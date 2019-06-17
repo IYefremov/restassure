@@ -39,8 +39,8 @@ public class DeviceRegistrator {
 
     public void installAndRegisterDevice(BrowserType browsertype, MobilePlatform platformType, String backofficeurl,
                                          String userName, String userPassword, String licensename, IOSReconproEnvironmentType environmentType) {
-        String regCode = getDeviceRegistrationCode(browsertype, backofficeurl, userName, userPassword, licensename);
-        registerationiOSDdevice(platformType, environmentType, regCode);
+        registerationiOSDdevice(browsertype, platformType, backofficeurl,
+                userName, userPassword, licensename, environmentType);
 
     }
 
@@ -65,7 +65,8 @@ public class DeviceRegistrator {
         return regCode;
     }
 
-    public void registerationiOSDdevice(MobilePlatform platformType, IOSReconproEnvironmentType environmentType, String regCode) {
+    public void registerationiOSDdevice(BrowserType browsertype, MobilePlatform platformType, String backofficeurl,
+                                        String userName, String userPassword, String licensename, IOSReconproEnvironmentType environmentType) {
 
         String deviceBundleId = null;
         if (platformType.equals(MobilePlatform.IOS_REGULAR))
@@ -88,11 +89,12 @@ public class DeviceRegistrator {
             if (platformType.equals(MobilePlatform.IOS_REGULAR)) {
                 RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
                 LoginScreen loginscreen = selectenvscreen.selectEnvironment(environmentType.getEnvironmentTypeName());
+                String regCode = getDeviceRegistrationCode(browsertype, backofficeurl, userName, userPassword, licensename);
                 loginscreen.registeriOSDevice(regCode);
             } else {
                 SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
                 LoginScreen loginscreen = selectenvscreen.selectEnvironment(environmentType.getEnvironmentTypeName());
-
+                String regCode = getDeviceRegistrationCode(browsertype, backofficeurl, userName, userPassword, licensename);
                 loginscreen.registeriOSDevice(regCode);
             }
         }

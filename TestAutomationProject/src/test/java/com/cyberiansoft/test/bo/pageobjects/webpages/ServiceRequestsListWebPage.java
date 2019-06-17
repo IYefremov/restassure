@@ -6,6 +6,7 @@ import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
@@ -867,11 +868,25 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public ServiceRequestsListWebPage addServicesToServiceRequest(String...services) {
 		WebElement servicespopup = clickAddServicesIcon();
 		for (String srv : services) {
-			System.out.println("+++" + srv);
 			//driver.findElement(By.id("Card_comboService_Input")).click();
 			driver.findElement(By.id("Card_comboService_Input")).clear();
 			waitABit(1000);
 			driver.findElement(By.id("Card_comboService_Input")).sendKeys(srv);
+			driver.findElement(By.id("Card_comboService_DropDown")).findElement(By.name("serviceCheckbox")).click();
+			driver.findElement(By.id("Card_btnAddServiceToList")).click();
+			waitABit(500);
+		}
+		servicespopup.findElement(By.xpath(".//div[@class='infoBlock-list-doneBtn rp-btn-blue']")).click();
+		return this;
+	}
+
+	public ServiceRequestsListWebPage addServicesToServiceRequest(List<ServiceData> servicesData) {
+		WebElement servicespopup = clickAddServicesIcon();
+		for (ServiceData serviceData : servicesData) {
+			//driver.findElement(By.id("Card_comboService_Input")).click();
+			driver.findElement(By.id("Card_comboService_Input")).clear();
+			waitABit(1000);
+			driver.findElement(By.id("Card_comboService_Input")).sendKeys(serviceData.getServiceName());
 			driver.findElement(By.id("Card_comboService_DropDown")).findElement(By.name("serviceCheckbox")).click();
 			driver.findElement(By.id("Card_btnAddServiceToList")).click();
 			waitABit(500);

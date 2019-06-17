@@ -62,6 +62,7 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	public void selectService(String serviceName) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)));
+		swipeScrollViewElement(appiumdriver.findElementByAccessibilityId( serviceName));
 		appiumdriver.findElementByAccessibilityId (serviceName ).click();
 	}
 
