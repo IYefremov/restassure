@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -24,8 +25,9 @@ public class VNextVehicleVINHistoryScreen extends VNextBaseWizardScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-page='plain-text']")));
     }
 
-    public VNextVehicleInfoScreen clickBackButton() {
+    public void clickBackButton() {
         clickScreenBackButton();
-        return new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
     }
 }

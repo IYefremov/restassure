@@ -78,14 +78,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='null']")));
-        if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
-            tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
-        if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0) {
-        if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
-            tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-            //waitABit(10000);
-            }
-        }
     }
 
     public VNextHomeScreen() {
