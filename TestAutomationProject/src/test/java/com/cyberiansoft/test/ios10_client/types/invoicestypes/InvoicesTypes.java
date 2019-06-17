@@ -34,7 +34,7 @@ public enum InvoicesTypes implements IInvoicesTypes {
             }
         }
 
-        throw new IllegalArgumentException(ivoiceType + " is not a valid DentWizardInvoiceTypes");
+        throw new IllegalArgumentException(ivoiceType + " is not a valid Invoice Type");
     }
 
     public <T extends IBaseWizardScreen>T getFirstVizardScreen() {

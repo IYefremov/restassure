@@ -240,7 +240,7 @@
       },
       "services": [
         {
-          "serviceName": "Oksi_Service_PP_Panel",
+          "serviceName": "Dye",
           "servicePrice": "12.00",
           "servicePrice2": "$33.00",
           "vehiclePart": {

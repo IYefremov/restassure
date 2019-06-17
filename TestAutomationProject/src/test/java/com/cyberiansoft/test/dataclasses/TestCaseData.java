@@ -28,6 +28,9 @@ public class TestCaseData {
     @JsonProperty("serviceRequestData")
     ServiceRequestData serviceRequestData;
 
+    @JsonProperty("serviceRequestsData")
+    List<ServiceRequestData> serviceRequestsData;
+
     @JsonProperty("archiveReason")
     String archiveReason;
 

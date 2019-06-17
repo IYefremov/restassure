@@ -87,6 +87,22 @@ public class WorkOrderData {
     @JsonProperty("workOrderJob")
     String workOrderJob;
 
+    @Getter
+    @JsonProperty("priceMatrixScreenData")
+    PriceMatrixScreenData priceMatrixScreenData;
+
+    @Getter
+    @JsonProperty("priceMatrixScreensData")
+    List<PriceMatrixScreenData> priceMatrixScreensData;
+
+    @Getter
+    @JsonProperty("orderMonitorData")
+    OrderMonitorData orderMonitorData;
+
+    @Getter
+    @JsonProperty("invoiceData")
+    InvoiceData invoiceData;
+
     public String getWorkOrderType() {
         return workOrderType;
     }
