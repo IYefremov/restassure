@@ -69,4 +69,12 @@ public class VNextTeamRegistrationInfo {
                 throw new RuntimeException("Cannot resolve url for env type:" + environmentType.getEnvironmentTypeName());
         }
     }
+
+    public boolean isHelpPopupShown() {
+        boolean installNewBuild = false;
+        String newBuild= props.getProperty("popuphelp.show");
+        if (newBuild.equalsIgnoreCase("true"))
+            installNewBuild = true;
+        return installNewBuild;
+    }
 }
