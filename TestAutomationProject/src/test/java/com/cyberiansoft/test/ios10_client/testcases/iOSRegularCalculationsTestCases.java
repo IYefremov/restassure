@@ -1034,7 +1034,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 	public void testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation(String rowID,
 																		  String description, JSONObject testData) {
 
-		Invoice invoiceData = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		final int workOrdersToCreate = 2;
 		List<String> workOrders = new ArrayList<>();
 		
@@ -1047,22 +1047,22 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		for (int i = 0; i < workOrdersToCreate; i++) {
 			myWorkOrdersScreen.clickAddOrderButton();
 			RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
-			vehicleScreen.setVIN(invoiceData.getWorkOrderData().getVinNumber());
+			vehicleScreen.setVIN(testCaseData.getWorkOrderData().getVinNumber());
 			workOrders.add(vehicleScreen.getWorkOrderNumber());
 
 
 			RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
-			selectedServiceDetailsScreen.setServicePriceValue(invoiceData.getWorkOrderData().getServiceData().getServicePrice());
-			selectedServiceDetailsScreen.setServiceQuantityValue(invoiceData.getWorkOrderData().getServiceData().getServiceQuantity());
+			selectedServiceDetailsScreen.setServicePriceValue(testCaseData.getWorkOrderData().getServiceData().getServicePrice());
+			selectedServiceDetailsScreen.setServiceQuantityValue(testCaseData.getWorkOrderData().getServiceData().getServiceQuantity());
 
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
-			selectedServiceDetailsScreen.selectVehiclePart(invoiceData.getWorkOrderData().getServiceData().getVehiclePart().getVehiclePartName());
+			selectedServiceDetailsScreen.selectVehiclePart(testCaseData.getWorkOrderData().getServiceData().getVehiclePart().getVehiclePartName());
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
 			RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-			orderSummaryScreen.setTotalSale(invoiceData.getWorkOrderData().getWorkOrderTotalSale());
+			orderSummaryScreen.setTotalSale(testCaseData.getWorkOrderData().getWorkOrderTotalSale());
 			orderSummaryScreen.saveWizard();
 		}
 
@@ -1076,7 +1076,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		RegularInvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
-		invoiceInfoScreen.setPO(invoiceData.getInvoiceData().getInvoicePONumber());
+		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		String invoicenum = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
 		teamWorkOrdersScreen.clickHomeButton();
@@ -1094,7 +1094,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.addWorkOrder(workOrders.get(1));
 		invoiceInfoScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, invoiceData.getInvoiceData().getInvoiceTotal()));
+		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, testCaseData.getInvoiceData().getInvoiceTotal()));
 		invoiceInfoScreen.swipeScreenLeft();
 		invoiceInfoScreen.cancelWizard();
 		myinvoicesscreen.clickHomeButton();
@@ -1514,7 +1514,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.clickSave();
 		
 		RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
-		invoiceInfoScreen.setPO(invoiceData.getInvoicePONumber());
+		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSave();
 		Helpers.acceptAlert();
@@ -1613,7 +1613,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(invoiceData.getQuestionScreenData().getQuestionData());
 		RegularInvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
-		invoiceInfoScreen.setPO(invoiceData.getInvoicePONumber());
+		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceNumber45224 = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
 		myWorkOrdersScreen.clickFilterButton();
@@ -1742,7 +1742,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber);
 		myWorkOrdersScreen.clickInvoiceIcon();
         RegularInvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
-		invoiceInfoScreen.setPO(invoiceData.getInvoicePONumber());
+		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceNumber42803 = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
 		myWorkOrdersScreen.clickHomeButton();

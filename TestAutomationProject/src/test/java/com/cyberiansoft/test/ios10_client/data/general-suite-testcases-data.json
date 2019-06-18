@@ -258,14 +258,1765 @@
         },
         "services": [
           {
-            "serviceName": "Disc_Ex_Service1", "serviceStatus": "Approved"
+            "serviceName": "Disc_Ex_Service1",
+            "serviceStatus": "Approved"
           },
           {
-            "serviceName": "Dye", "serviceStatus": "Declined"
+            "serviceName": "Dye",
+            "serviceStatus": "Declined"
           }
         ]
       }
     }
   ],
-
+  "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice": [
+    {
+      "rowID": "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice.01",
+      "description": "Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "WERTYU123",
+          "vehicleMake": "BMW",
+          "vehicleModel": "323i U",
+          "vehicleColor": "Red",
+          "vehicleYear": "2012",
+          "mileage": "77777",
+          "vehicleFuelTankLevel": "25",
+          "vehicleType": "Used",
+          "vehicleStock": "Stock1",
+          "roNumber": "123"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Bundle1_Disc_Ex"
+          },
+          {
+            "serviceName": "Quest_Req_Serv"
+          },
+          {
+            "serviceName": "Wheel",
+            "serviceQuantity": "3"
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        },
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Tax_Point_1",
+            "questionAnswer": "Test Answer 1"
+          }
+        }
+      }
+    }
+  ],
+  "testCreateInspectionFromServiceRequest": [
+    {
+      "rowID": "testCreateInspectionFromServiceRequest.01",
+      "description": "Test Case 21582:Create Inspection from Service request",
+      "inspectionData": {
+        "moneyServices": [
+          {
+            "serviceName": "Quest_Req_Serv",
+            "servicePrice2": "$10.00 x 1.00",
+            "questionData": {
+              "questionName": "QuestionTypeSelect_Tax_Point_1",
+              "questionAnswer": "Test Answer 1"
+            }
+          },
+          {
+            "serviceName": "Wheel",
+            "servicePrice2": "$70.00 x 3.00"
+          }
+        ],
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2"
+            }
+          ],
+          "bundleServiceAmount": "$70.00"
+        },
+        "inspPrice": "$438.60"
+      }
+    }
+  ],
+  "testCreateWOFromServiceRequest": [
+    {
+      "rowID": "testCreateWOFromServiceRequest.01",
+      "description": "Test Case 21585:Create WO from Service Request",
+      "workOrderData": {
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "bundleServiceAmount": "70"
+        }
+      }
+    }
+  ],
+  "testCreateInspectionFromInvoiceWithTwoWOs": [
+    {
+      "rowID": "testCreateInspectionFromInvoiceWithTwoWOs.01",
+      "description": "Test Case 16640:Create Inspection from Invoice with two WOs",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        },
+        "moneyService": {
+          "serviceName": "Dye",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Cowl, Other"
+            },
+            {
+              "vehiclePartName": "Hood"
+            }
+          ]
+        },
+        "workOrderPrice": "$13.50"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testCreateInvoiceFromWOInMyWOsList": [
+    {
+      "rowID": "testCreateInvoiceFromWOInMyWOsList.01",
+      "description": "Test Case 16664:Create Invoice from WO in 'My WOs' list",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "Dye",
+          "serviceQuantity": "3"
+        },
+        "percentageServices": [
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          }
+        ],
+        "percentageService": {
+          "serviceName": "Disc_Ex_Service1",
+          "servicePrice": "$108.50",
+          "serviceAdjustment": {
+            "adjustmentData": {
+              "adjustmentName": "For_SP_Cl"
+            }
+          }
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2"
+            }
+          ]
+        },
+        "matrixService": {
+          "matrixServiceName": "Dent Removal",
+          "hailMatrixName": "Hail Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "HOOD",
+            "vehiclePartSize": "NKL",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartPrice": "$100.00",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Discount 5-10%"
+              },
+              {
+                "serviceName": "Discount 10-20$"
+              }
+            ]
+          }
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode": [
+    {
+      "rowID": "testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode.01",
+      "description": "Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode",
+      "workOrdersData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "services": [
+            {
+              "serviceName": "Wheel"
+            },
+            {
+              "serviceName": "Test Tax"
+            },
+            {
+              "serviceName": "VPS1"
+            }
+          ]
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "services": [
+            {
+              "serviceName": "Wheel"
+            },
+            {
+              "serviceName": "Test Tax"
+            },
+            {
+              "serviceName": "VPS1"
+            }
+          ]
+        }
+      ],
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testDontAlowToChangeBilledOrders": [
+    {
+      "rowID": "testDontAlowToChangeBilledOrders.01",
+      "description": "Test Case 18436:Don't allow to change billed orders",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ]
+      },
+      "invoiceData": {
+        "poNumber": "first123"
+      }
+    }
+  ],
+  "testChangeCustomerForInvoice": [
+    {
+      "rowID": "testChangeCustomerForInvoice.01",
+      "description": "Test Case 18439:Change customer for invoice",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ]
+      },
+      "invoiceData": {
+        "poNumber": "first123"
+      }
+    }
+  ],
+  "testBugWithCrashOnCopyVehicle": [
+    {
+      "rowID": "testBugWithCrashOnCopyVehicle.01",
+      "description": "Test Case 10498:Regression test: test bug with crash on 'Copy Vehicle",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "TESTVINNO",
+          "vehicleMake": "BMW",
+          "vehicleModel": "323i U",
+          "vehicleColor": "Black"
+        }
+      }
+    }
+  ],
+  "testCopyInspections": [
+    {
+      "rowID": "testCopyInspections.01",
+      "description": "Test Case 16239:Copy Inspections",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        },
+        "visualScreensData": [
+          {
+            "screenName": "Interior",
+            "damageData": {
+              "damageGroupName": "Miscellaneous"
+            }
+          },
+          {
+            "screenName": "Future Audi Car",
+            "damageData": {
+              "damageGroupName": "WHEEL REPAIR",
+              "screenTotalPrice": "$180.50"
+            }
+          },
+          {
+            "screenName": "Exterior",
+            "damageData": {
+              "damageGroupName": "WHEEL REPAIR",
+              "screenTotalPrice": "$250.50"
+            }
+          },
+          {
+            "screenName": "Futire Jet Car",
+            "damageData": {
+              "damageGroupName": "Price Adjustment",
+              "screenTotalPrice": "$240.50"
+            }
+          }
+        ],
+        "questionScreensData": [
+          {
+            "screenName": "Test Section",
+            "questionsData": [
+              {
+                "questionSetionName": "Engine Condition",
+                "questionAnswer": "Really Bad",
+                "screenIndex": 0
+              },
+              {
+                "questionSetionName": "Just One Possible Answer",
+                "questionAnswer": "One",
+                "screenIndex": 2
+              }
+            ]
+          },
+          {
+            "screenName": "Follow up Requested",
+            "questionsData": [
+              {
+                "signatureQuestion": true,
+                "screenIndex": 1
+              },
+              {
+                "questionSetionName": "Sample Question",
+                "questionAnswer": "Answers 1",
+                "screenIndex": 2
+              }
+            ]
+          },
+          {
+            "screenName": "BATTERY PERFORMANCE",
+            "questionsData": [
+              {
+                "questionSetionName": "Battery Terminals / Cables / Mountings",
+                "questionAnswer": "Immediate Attention Required",
+                "screenIndex": 0
+              },
+              {
+                "questionSetionName": "Check Condition of Battery (Storage Capacity Test)",
+                "questionAnswer": "Immediate Attention Required",
+                "screenIndex": 1
+              },
+              {
+                "questionName": "Tax_Point_1",
+                "questionAnswer": "Test Answer 1",
+                "screenIndex": 1
+              }
+            ]
+          }
+        ],
+        "moneyService": {
+          "serviceName": "Dye",
+          "servicePrice": "$10.00",
+          "serviceAdjustment": {
+            "adjustmentTotalAmaunt": "$0.50"
+          }
+        },
+        "percentageService": {
+          "serviceName": "Disc_Ex_Service1",
+          "servicePrice": "$100.00",
+          "serviceAdjustment": {
+            "adjustmentTotalAmaunt": "-$5.00",
+            "adjustmentData": {
+              "adjustmentName": "For_SP_Cl",
+              "adjustmentQuantity": "%-5.000"
+            }
+          }
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye",
+              "isSelected": "false"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2.00",
+              "isSelected": "true"
+            }
+          ]
+        },
+        "percentageServices": [
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          }
+        ],
+        "matrixService": {
+          "matrixServiceName": "Dent Removal",
+          "hailMatrixName": "Hail Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "HOOD",
+            "vehiclePartSize": "NKL",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartPrice": "$100.00",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Discount 5-10%"
+              },
+              {
+                "serviceName": "Discount 10-20$"
+              }
+            ]
+          }
+        },
+        "selectedServices": [
+          {
+            "serviceName": "Dye",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Dent Removal",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Disc_Ex_Service1",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Bundle1_Disc_Ex",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Test Tax",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Discount 5-10%",
+            "isSelected": true
+          }
+        ],
+        "inspPrice": "$837.99"
+      }
+    }
+  ],
+  "testCreateInspectionFromWO": [
+    {
+      "rowID": "testCreateInspectionFromWO.01",
+      "description": "Test Case 16507:Create inspection from WO",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "workOrderPrice": "$0.00"
+      }
+    }
+  ],
+  "testCreateInvoiceWithTwoWOsAndCopyVehicle": [
+    {
+      "rowID": "testCreateInvoiceWithTwoWOsAndCopyVehicle.01",
+      "description": "Test Case 26266:Create Invoice with two WOs and copy vehicle",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        },
+        "moneyService": {
+          "serviceName": "Dye",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Cowl, Other"
+            },
+            {
+              "vehiclePartName": "Hood"
+            }
+          ]
+        },
+        "workOrderPrice": "$13.50"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testChangeCustomerOptionForInspection": [
+    {
+      "rowID": "testChangeCustomerOptionForInspection.01",
+      "description": "Test Case 23401:Test 'Change customer' option for inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa": [
+    {
+      "rowID": "testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa.01",
+      "description": "Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies": [
+    {
+      "rowID": "testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies.01",
+      "description": "Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        }
+      }
+    }
+  ],
+  "testChangeCustomerOptionForWorkOrder": [
+    {
+      "rowID": "testChangeCustomerOptionForWorkOrder.01",
+      "description": "Test Case 23422:Test 'Change customer' option for Work Order",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "3/4\" - Penny Size"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies": [
+    {
+      "rowID": "testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies.01",
+      "description": "Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "3/4\" - Penny Size"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa": [
+    {
+      "rowID": "testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa.01",
+      "description": "Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "3/4\" - Penny Size"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN": [
+    {
+      "rowID": "testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN.01",
+      "description": "Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService": [
+    {
+      "rowID": "testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService.01",
+      "description": "Test Case 23459:'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size"
+          },
+          {
+            "serviceName": "AMoneyService_AdjustHeadlight"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testEditOptionOfDuplicateServicesMessageForWO": [
+    {
+      "rowID": "testEditOptionOfDuplicateServicesMessageForWO.01",
+      "description": "Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "3/4\" - Penny Size"
+        },
+        "service": {
+          "serviceName": "AMoneyService_AdjustHeadlight"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testOverrideOptionOfDuplicateServicesMessageForWO": [
+    {
+      "rowID": "testOverrideOptionOfDuplicateServicesMessageForWO.01",
+      "description": "Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size"
+          },
+          {
+            "serviceName": "AMoneyService_AdjustHeadlight"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testCancelOptionOfDuplicateServicesMessageForWO": [
+    {
+      "rowID": "testCancelOptionOfDuplicateServicesMessageForWO.01",
+      "description": "Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size"
+          },
+          {
+            "serviceName": "AMoneyService_AdjustHeadlight"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testSavingInspectionsWithThreeMatrix": [
+    {
+      "rowID": "testSavingInspectionsWithThreeMatrix.01",
+      "description": "Test Case 23966:Inspections: Test saving inspectiontypes with three matrix, Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleColor": "Black",
+          "vehicleType": "New",
+          "poNumber": "12345"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY"
+        },
+        "visualScreensData": [
+          {
+            "screenName": "Interior",
+            "damagesData": [
+              {
+                "damageGroupName": "WHEEL REPAIR"
+              },
+              {
+                "damageGroupName": "WHEEL REPAIR"
+              }
+            ],
+            "screenPrice": "$140.00",
+            "screenTotalPrice": "$520.00"
+          },
+          {
+            "screenName": "Exterior",
+            "damageData": {
+              "damageGroupName": "Miscellaneous"
+            },
+            "screenPrice": "$100.00",
+            "screenTotalPrice": "$570.00"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "priceMatrixScreensData": [
+          {
+            "screenName": "Default",
+            "vehiclePartsData": [
+              {
+                "vehiclePartName": "Hood",
+                "vehiclePartOption": "PDR",
+                "vehiclePartTotalPrice": "$6,100.00",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "SR_S5_Mt_Money"
+                  },
+                  {
+                    "serviceName": "SR_S5_Mt_Money_DE_TE"
+                  },
+                  {
+                    "serviceName": "SR_S1_Money",
+                    "serviceQuantity": "3"
+                  }
+                ]
+              },
+              {
+                "vehiclePartName": "Left Roof Rail",
+                "vehiclePartSize": "NKL",
+                "vehiclePartSeverity": "VERY LIGHT",
+                "vehiclePartTotalPrice": "$75.00"
+              }
+            ]
+          },
+          {
+            "screenName": "Matrix Labor",
+            "vehiclePartsData": [
+              {
+                "vehiclePartName": "Back Glass",
+                "vehiclePartSize": "DIME",
+                "vehiclePartSeverity": "LIGHT",
+                "vehiclePartTotalPrice": "$25.00"
+              },
+              {
+                "vehiclePartName": "Front Bumper",
+                "vehiclePartOption": "PDR",
+                "vehiclePartTime": "1",
+                "vehiclePartTotalPrice": "$1,105.50",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "Little Service"
+                  },
+                  {
+                    "serviceName": "Disc_Ex_Service1"
+                  },
+                  {
+                    "serviceName": "SR_S1_Money_Vehicle"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "screenName": "Test matrix33",
+            "vehiclePartsData": [
+              {
+                "vehiclePartName": "Roof",
+                "vehiclePartOption": "PDR",
+                "vehiclePartTotalPrice": "$2,000.00",
+                "vehiclePartAdditionalService": {
+                  "serviceName": "SR_S1_Money"
+                }
+              }
+            ]
+          }
+        ],
+        "service": {
+          "serviceName": "SR_S2_MoneyDisc_TE"
+        },
+        "services": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Roof"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Front Bumper"
+            }
+          }
+        ],
+        "visualScreenData": {
+          "screenName": "New_Test_Image",
+          "damageData": {
+            "damageGroupName": "WHEEL REPAIR"
+          },
+          "screenPrice": "$80.00",
+          "screenTotalPrice": "$13,145.50"
+        }
+      }
+    }
+  ],
+  "testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR": [
+    {
+      "rowID": "testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR.01",
+      "description": "Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Dodge",
+          "vehicleModel": "Dakota",
+          "vehicleYear": "2006"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Dye",
+            "serviceQuantity": "14",
+            "servicePrice2": "$10.00 x 14.00"
+          },
+          {
+            "serviceName": "VPS1",
+            "servicePrice2": "%20.000"
+          },
+          {
+            "serviceName": "Wheel",
+            "servicePrice2": "$70.00 x 1.00"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testThatAutoSavedWOIsCreatedCorrectly": [
+    {
+      "rowID": "testThatAutoSavedWOIsCreatedCorrectly.01",
+      "description": "Test Case 24657:WO: Test that auto-saved WO is created correctly, Test Case 23435:WO: Test 'Continue' option of 'Auto-saved' WO, Test Case 23436:WO: Test 'Discard' option of 'Auto-saved' WO",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FMFU18L53LC13897",
+          "vehicleMake": "Ford",
+          "vehicleModel": "Expedition",
+          "vehicleYear": "2003"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testSRAddAppointmentToServiceRequest": [
+    {
+      "rowID": "testSRAddAppointmentToServiceRequest.01",
+      "description": "Test Case 21578:SR: Add appointment to Service Request",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Tax_Point_1",
+            "questionAnswer": "Test Answer 1",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testSRVerifySummaryActionForAppointmentOnSRsCalendar": [
+    {
+      "rowID": "testSRVerifySummaryActionForAppointmentOnSRsCalendar.01",
+      "description": "Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Tax_Point_1",
+            "questionAnswer": "Test Answer 1",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices": [
+    {
+      "rowID": "testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices.01",
+      "description": "Test Case 25403:WO: Verify that only assigned services on Matrix Panel is available as additional services",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "WDZPE7CD9E5889222",
+          "vehicleMake": "Mercedes-Benz",
+          "vehicleModel": "Sprinter Passenger",
+          "vehicleYear": "2014"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "VP1 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Test service zayats"
+                },
+                {
+                  "serviceName": "Wheel"
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "VP2 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalService": {
+                "serviceName": "Dye"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices": [
+    {
+      "rowID": "testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices.01",
+      "description": "Test Case 25011:Inspections: verify that only assigned services on Matrix Panel is available as additional services",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "WDZPE7CD9E5889222",
+          "vehicleMake": "Mercedes-Benz",
+          "vehicleModel": "Sprinter Passenger",
+          "vehicleYear": "2014"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "priceMatrixScreenData": {
+          "screenName": "Price Matrix Zayats",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "VP1 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Test service zayats"
+                },
+                {
+                  "serviceName": "Wheel"
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "VP2 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalService": {
+                "serviceName": "Dye"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService": [
+    {
+      "rowID": "testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService.01",
+      "description": "Test Case 26054:WO Monitor: Regular - Create WO for monitor, Test Case 26091:WO Monitor: Regular - Verify that it is not possible to change Service Status before Start Service",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "vehicleMake": "Dodge",
+          "vehicleModel": "Ram Pickup 1500",
+          "vehicleYear": "2009",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "workOrderTotalSale": "3",
+        "orderMonitorData": {
+          "monitorServiceData": {
+            "serviceName": "Wheel",
+            "serviceStatus": "Completed",
+            "startService": true,
+            "completeService": "true"
+          }
+        }
+      }
+    }
+  ],
+  "testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase": [
+    {
+      "rowID": "testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase.01",
+      "description": "Test Case 26092:WO Monitor: Regular - Verify that it is not possible to change Phase Status before Start phase",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "workOrderTotalSale": "3",
+        "orderMonitorData": {
+          "monitorServicesData": [
+            {
+              "serviceName": "Dye",
+              "serviceStatus": "Completed"
+            },
+            {
+              "serviceName": "Disc_Ex_Service1",
+              "serviceStatus": "Completed"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testWOMonitorVerifyThatStartDateIsSetWhenStartService": [
+    {
+      "rowID": "testWOMonitorVerifyThatStartDateIsSetWhenStartService.01",
+      "description": "Test Case 26094:WO Monitor: Regular - Verify that Start date is set when Start Service",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "workOrderTotalSale": "3",
+        "orderMonitorData": {
+          "monitorServiceData": {
+            "serviceName": "Wheel",
+            "serviceStatus": "Completed",
+            "startService": true,
+            "completeService": "true"
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature": [
+    {
+      "rowID": "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature.01",
+      "description": "Test Case 28473:Invoices: HD - Verify that red 'A' icon is present for invoice with customer approval ON and no signature",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "4"
+      },
+      "invoiceData": {
+        "poNumber": "12345"
+      }
+    }
+  ],
+  "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature": [
+    {
+      "rowID": "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature.01",
+      "description": "Test Case 28476:Invoices: HD&Regular - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "4"
+      },
+      "invoiceData": {
+        "poNumber": "12345"
+      }
+    }
+  ],
+  "testVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists": [
+    {
+      "rowID": "testVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists.01",
+      "description": "Test Case 28478:Invoices: Regular - Verify that 'A' icon is not present for invoice when signature exists",
+      "workOrdersData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "services": [
+            {
+              "serviceName": "Wheel"
+            },
+            {
+              "serviceName": "Test service zayats"
+            }
+          ],
+          "workOrderTotalSale": "4",
+          "invoiceData": {
+            "invoiceType": "CUSTOMER_APPROVALON_INVOICETYPE",
+            "poNumber": "12345"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "services": [
+            {
+              "serviceName": "Wheel"
+            },
+            {
+              "serviceName": "Test service zayats"
+            }
+          ],
+          "workOrderTotalSale": "4",
+          "invoiceData": {
+            "invoiceType": "CUSTOMER_APPROVALOFF_INVOICETYPE",
+            "poNumber": "12345"
+          }
+        }
+      ]
+    }
+  ],
+  "testVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech": [
+    {
+      "rowID": "testVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech.01",
+      "description": "Test Case 29022:SR: Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "moneyService": {
+          "serviceName": "Dye"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech": [
+    {
+      "rowID": "testVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech.01",
+      "description": "Test Case 29029:SR: Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "moneyService": {
+          "serviceName": "Dye"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech": [
+    {
+      "rowID": "testVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech.01",
+      "description": "Test Case 29082:SR: Verify that Reject action is not displayed for SR in Status OnHold (Insp or WO) and not assign for Tech",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country"
+        }
+      }
+    }
+  ],
+  "testVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech": [
+    {
+      "rowID": "testVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech.01",
+      "description": "Test Case 29083:SR: Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Oksi_Service_PP_Panel"
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle"
+          }
+        ],
+        "percentageServices": [
+          {
+            "serviceName": "VPS1"
+          },
+          {
+            "serviceName": "Dye"
+          }
+        ]
+      }
+    }
+  ],
+  "testNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting": [
+    {
+      "rowID": "testNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting.01",
+      "description": "Test Case 33165:WO: Not multiple Service with required Panels is added one time to WO after selecting",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Service_PP_Vehicle_not_multiple",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Back Glass"
+              },
+              {
+                "vehiclePartName": "Deck Lid"
+              }
+            ]
+          },
+          {
+            "serviceName": "Service_PP_Vehicle_not_multiple",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Back Glass"
+              },
+              {
+                "vehiclePartName": "Deck Lid"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection": [
+    {
+      "rowID": "testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection.01",
+      "description": "Test Case 34562:WO: Verify that Bundle Items are shown when create WO from inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "bundleServiceAmount": "70",
+          "services": [
+            {
+              "serviceName": "Dye",
+              "isSelected": false
+            },
+            {
+              "serviceName": "Wheel",
+              "isSelected": true
+            }
+          ]
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold": [
+    {
+      "rowID": "testVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold.01",
+      "description": "Test Case 31743:SR: Verify that when option 'Allow to close SR' is set to ON action 'Close' is shown for selected SR on status 'Scheduled' or 'On-Hold'",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Bundle1_Disc_Ex"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold": [
+    {
+      "rowID": "testVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold.01",
+      "description": "Test Case 31748:SR: Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Bundle1_Disc_Ex"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose": [
+    {
+      "rowID": "testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose.01",
+      "description": "Test Case 31749:SR: Verify that alert message is shown when select 'Close' action for SR - press No alert message is close",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Bundle1_Disc_Ex"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown": [
+    {
+      "rowID": "testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown.01",
+      "description": "Test Case 31750:SR: Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Bundle1_Disc_Ex"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO": [
+    {
+      "rowID": "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO.01",
+      "description": "Test Case 31752:SR: Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Bundle1_Disc_Ex"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO": [
+    {
+      "rowID": "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO.01",
+      "description": "Test Case 31753:SR: Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Bundle1_Disc_Ex"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices": [
+    {
+      "rowID": "testVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices.01",
+      "description": "Test Case 30083:SR: Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country",
+          "vehicleYear": "2010"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "moneyServices": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices": [
+    {
+      "rowID": "testVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices.01",
+      "description": "Test Case 30084:SR: Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country",
+          "vehicleYear": "2010"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "moneyServices": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown": [
+    {
+      "rowID": "testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown.01",
+      "description": "Test Case 38749:Inspections: Verify that on inspection approval screen selected price matrix value is shown",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "WDZPE7CD9E5889222",
+          "vehicleMake": "Mercedes-Benz",
+          "vehicleModel": "Sprinter Passenger",
+          "vehicleYear": "2014"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "priceMatrixScreensData": [
+          {
+            "screenName": "Price Matrix Zayats",
+            "vehiclePartData": {
+              "vehiclePartName": "VP2 zayats",
+              "vehiclePartSize": "CENT",
+              "vehiclePartSeverity": "LIGHT",
+              "vehiclePartTotalPrice": "$100.00",
+              "vehiclePartSubTotalPrice": "$100.00"
+            }
+          },
+          {
+            "screenName": "Hail Matrix",
+            "vehiclePartData": {
+              "vehiclePartName": "L QUARTER",
+              "vehiclePartSize": "DIME",
+              "vehiclePartSeverity": "VERY LIGHT",
+              "vehiclePartTotalPrice": "$165.00",
+              "vehiclePartSubTotalPrice": "$65.00"
+            }
+          }
+        ],
+        "servicesToApprove": [
+          {
+            "serviceName": "Dent Removal",
+            "servicePrice": "$65.00"
+          },
+          {
+            "serviceName": "Test service price matrix",
+            "servicePrice": "$100.00"
+          }
+          ]
+      }
+    }
+  ]
 }

@@ -10,6 +10,9 @@ import java.util.List;
 @Setter
 public class ServiceRequestData {
 
+    @JsonProperty("serviceRequestType")
+    String serviceRequestType;
+
     @JsonProperty("wholesailCustomer")
     WholesailCustomer wholesailCustomer;
 
@@ -28,9 +31,15 @@ public class ServiceRequestData {
     @JsonProperty("percentageService")
     ServiceData percentageService;
 
+    @JsonProperty("percentageServices")
+    List<ServiceData> percentageServices;
+
     @JsonProperty("questionScreenData")
     QuestionScreenData questionScreenData;
 
     @JsonProperty("serviceRequestPrice")
     String serviceRequestPrice;
+
+    @JsonProperty("insuranceCompany")
+    InsuranceCompanyData insuranceCompany;
 }

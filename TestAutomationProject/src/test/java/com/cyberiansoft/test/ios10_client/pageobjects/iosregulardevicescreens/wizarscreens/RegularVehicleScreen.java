@@ -110,7 +110,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
 	public void setVIN(String vin)  {
 		setVINValue(vin);
-		Helpers.waitABit(1000);
+		/*Helpers.waitABit(1000);
 		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (IOSElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
@@ -148,7 +148,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 					
 					break;
 				}
-			}
+			}*/
 	}
 	
 	public void clearVINCode() {

@@ -27,7 +27,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Vehicle Part")));
-        viewMode = "PdrView";
+        //viewMode = "PdrView";
     }
 
     public void setSizeAndSeverity(String size, String severity) {
@@ -37,6 +37,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + size + "']")).click();
         appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + severity + "']")).click();
         appiumdriver.findElementByAccessibilityId("Save").click();
+        viewMode = "PdrView";
     }
 
     public boolean isNotesExists() {
@@ -131,8 +132,6 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         cell.click();
         cell.clear();
         cell.sendKeys(price + "\n");
-        //((IOSDriver) appiumdriver).getKeyboard().pressKey(price);
-        //((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
     }
 
     public void setTime(String timevalue) {

@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.workorders;
 
-import com.cyberiansoft.test.dataclasses.Invoice;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.dataclasses.WholesailCustomer;
-import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -212,7 +209,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
     public void testVerifyInvoiceCreatedWithChangedCustomer(String rowID,
                                                            String description, JSONObject testData) throws IOException {
 
-        Invoice invoice = JSonDataParser.getTestDataFromJson(testData, Invoice.class);
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
@@ -221,7 +218,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.setVIN(invoice.getWorkOrderData().getVinNumber());
+        vehicleInfoScreen.setVIN(testCaseData.getWorkOrderData().getVinNumber());
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersScreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
@@ -230,7 +227,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         VNextInvoiceTypesList invoiceTypesScreen = workOrdersMenuScreen.clickCreateInvoiceMenuItem();
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
         VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        invoiceinfoscreen.setInvoicePONumber(invoice.getInvoiceData().getInvoicePONumber());
+        invoiceinfoscreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
         VNextInvoicesScreen invoicesscreen = invoiceinfoscreen.saveInvoiceAsFinal();
         Assert.assertEquals(invoicesscreen.getInvoiceCustomerValue(invoiceNumber), testcustomer2.getFullName());

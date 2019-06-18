@@ -124,7 +124,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 		vehicleinfoscreen.clickCancelMenuItem();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
-		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
+		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_EDITING_INSPECTION_ALERT);
 		vehicleinfoscreen.clickScreenForwardButton();
 		VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		claiminfoscreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());

@@ -9,6 +9,12 @@ import lombok.Setter;
 public class QuestionsData {
     @JsonProperty("questionName")
     private String questionName;
+    @JsonProperty("questionSetionName")
+    private String questionSetionName;
     @JsonProperty("questionAnswer")
     private String questionAnswer;
+    @JsonProperty("screenIndex")
+    private int screenIndex;
+    @JsonProperty("signatureQuestion")
+    private boolean signatureQuestion;
 }

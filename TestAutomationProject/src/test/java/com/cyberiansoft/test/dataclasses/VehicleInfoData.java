@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 public class VehicleInfoData {
 	
@@ -36,7 +37,18 @@ public class VehicleInfoData {
 
 	@JsonProperty("licPlate")
 	String licPlate;
-	
+
+	@JsonProperty("vehicleFuelTankLevel")
+	String vehicleFuelTankLevel;
+
+	@Getter
+	@JsonProperty("vehicleStock")
+	String vehicleStock;
+
+	@Getter
+	@JsonProperty("location")
+	String location;
+
 	public String getVINNumber() {
 		 return vinNumber;
 	}
@@ -80,4 +92,6 @@ public class VehicleInfoData {
 	public String getVehicleLicensePlate() {
 		return licPlate;
 	}
+
+	public String getFuelTankLevel() {return vehicleFuelTankLevel;}
 }
