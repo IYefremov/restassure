@@ -84,12 +84,13 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleInfoScreen.clickCancelMenuItem();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+		String msg = informationDialog.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
-		vehicleInfoScreen.swipeScreenLeft();
-		informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-		msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
+		vehicleInfoScreen.clickSaveInspectionMenuButton();
+
+		informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+		msg = informationDialog.clickInformationDialogOKButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.VIN_REQUIRED_MSG);
 		vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		vehicleInfoScreen.cancelInspection();
@@ -147,8 +148,8 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 		vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		AppiumUtils.clickHardwareBackButton();
 		BaseUtils.waitABit(3000);
-		VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-		String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
+		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+		String msg = informationDialog.clickInformationDialogNoButtonAndGetMessage();
 		Assert.assertEquals(msg, VNextAlertMessages.ARE_YOU_SURE_STOP_CREATING_INSPECTION);
 		vehicleInfoScreen.clickSaveInspectionMenuButton();
 

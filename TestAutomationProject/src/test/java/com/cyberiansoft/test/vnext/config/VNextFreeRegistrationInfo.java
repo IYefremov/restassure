@@ -86,4 +86,11 @@ public class VNextFreeRegistrationInfo {
 	      return props.getProperty("uservnextdev.password");
 	}
 
+	public boolean isHelpPopupShown() {
+		boolean installNewBuild = false;
+		String newBuild= props.getProperty("popuphelp.show");
+		if (newBuild.equalsIgnoreCase("true"))
+			installNewBuild = true;
+		return installNewBuild;
+	}
 }
