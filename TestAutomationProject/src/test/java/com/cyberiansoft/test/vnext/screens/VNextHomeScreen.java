@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -78,6 +79,13 @@ public class VNextHomeScreen extends VNextBaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='null']")));
+        if (VNextBaseTestCase.isHelpPopupShown()) {
+            if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0) {
+                if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
+                    tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+                }
+            }
+        }
     }
 
     public VNextHomeScreen() {
