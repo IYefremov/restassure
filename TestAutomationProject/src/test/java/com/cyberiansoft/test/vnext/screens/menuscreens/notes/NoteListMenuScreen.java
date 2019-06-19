@@ -25,4 +25,10 @@ public class NoteListMenuScreen extends MonitorScreen {
     public NoteListMenuScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }
+
+    public NoteListElement getNoteByText(String noteText) {
+        return noteListElements.stream()
+                .filter(listElement -> listElement.getNoteText().equals(noteText))
+                .findFirst().orElseThrow(() -> new RuntimeException("note not found " + noteText));
+    }
 }

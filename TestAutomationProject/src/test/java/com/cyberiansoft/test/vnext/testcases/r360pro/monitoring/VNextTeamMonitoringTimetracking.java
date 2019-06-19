@@ -9,20 +9,17 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
-import com.cyberiansoft.test.vnext.enums.PhaseName;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.ProblemReportingSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegistration {
     private String inspectionId = "";
     private String workOrderId = "";
 
@@ -43,74 +40,36 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         GeneralSteps.pressBackButton();
     }
 
-    @Ignore("Due to bug 83028")
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
-    public void userCanReportProblemOnPhaseLevel(String rowID,
-                                                 String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
-
-        MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openPhaseMenu(phaseDto);
-        MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
-        ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
-        phaseDto.setStatus(PhaseName.PROBLEM);
-        EditOrderSteps.verifyPhaseStatus(phaseDto);
-    }
-
-    @Ignore("Due to bug 83028")
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "userCanReportProblemOnPhaseLevel", priority = 20)
-    public void userCanResolveProblemOnPhaseLevel(String rowID,
+    public void userCanStartTimeTrackingOnService(String rowID,
                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
-
-        EditOrderSteps.openPhaseMenu(phaseDto);
-        MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
-        ProblemReportingSteps.resolveProblem();
-        phaseDto.setStatus(PhaseName.ACTIVE);
-        EditOrderSteps.verifyPhaseStatus(phaseDto);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 30)
-    public void userCanReportProblemOnServiceLevel(String rowID,
-                                                   String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
         EditOrderSteps.expandPhase(phaseDto);
         EditOrderSteps.openServiceMenu(serviceDto);
-        MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
-        ProblemReportingSteps.setProblemReason(serviceDto.getProblemReason());
-        serviceDto.setServiceStatus(ServiceStatus.PROBLEM);
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        serviceDto.setServiceStatus(ServiceStatus.STARTED);
         EditOrderSteps.verifyServiceStatus(serviceDto);
-        GeneralSteps.pressBackButton();
-        phaseDto.setStatus(PhaseName.PROBLEM);
-        EditOrderSteps.verifyPhaseStatus(phaseDto);
+        EditOrderSteps.verifyTimeTrackingShouldBeStarted(serviceDto, true);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "userCanReportProblemOnServiceLevel", priority = 40)
-    public void userCanResolveProblemOnServiceLevel(String rowID,
-                                                    String description, JSONObject testData) {
+            , dependsOnMethods = "userCanStartTimeTrackingOnService", priority = 40)
+    public void userCanStopTimeTrackingOnService(String rowID,
+                                                 String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
         ServiceData serviceDto = workOrderData.getServiceData();
 
-        EditOrderSteps.expandPhase(phaseDto);
         EditOrderSteps.openServiceMenu(serviceDto);
-        MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
-        ProblemReportingSteps.resolveProblem();
-        serviceDto.setServiceStatus(ServiceStatus.ACTIVE);
+        MenuSteps.selectMenuItem(MenuItems.STOP);
+        GeneralSteps.confirmDialog();
+        serviceDto.setServiceStatus(ServiceStatus.STARTED);
         EditOrderSteps.verifyServiceStatus(serviceDto);
-        GeneralSteps.pressBackButton();
-        phaseDto.setStatus(PhaseName.ACTIVE);
-        EditOrderSteps.verifyPhaseStatus(phaseDto);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        EditOrderSteps.verifyTimeTrackingShouldBeStarted(serviceDto, false);
     }
 }

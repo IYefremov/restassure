@@ -35,7 +35,8 @@
         }
       },
       "service": {
-        "serviceName": "Labor AM"
+        "serviceName": "Labor AM",
+        "problemReason": "SOME_PROBLEM"
       }
     }
   ],
@@ -61,7 +62,8 @@
       "rowID": "userCanReportProblemOnPhaseLevel.01",
       "description": "TFSID: 89595",
       "service": {
-        "serviceName": "Expenses_money (AM)"
+        "serviceName": "Expenses_money (AM)",
+        "problemReason": "SOME_PROBLEM"
       },
       "monitoring": {
         "orderPhaseDto": {
@@ -80,6 +82,34 @@
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "Phase: AutomationPhaseLevel"
+        }
+      }
+    }
+  ],
+  "userCanStartTimeTrackingOnService": [
+    {
+      "rowID": "userCanStartTimeTrackingOnService.01",
+      "description": "TFSID: 89595",
+      "service": {
+        "serviceName": "Labor AM"
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationServiceLevel"
+        }
+      }
+    }
+  ],
+  "userCanStopTimeTrackingOnService": [
+    {
+      "rowID": "userCanStopTimeTrackingOnService.01",
+      "description": "TFSID: 89595",
+      "service": {
+        "serviceName": "Labor AM"
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationServiceLevel"
         }
       }
     }

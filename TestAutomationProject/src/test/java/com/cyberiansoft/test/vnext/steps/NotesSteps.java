@@ -2,6 +2,8 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
+import com.cyberiansoft.test.vnext.screens.menuscreens.notes.NoteListMenuScreen;
+import com.cyberiansoft.test.vnext.screens.monitoring.VNextRepairOrderNoteScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -61,5 +63,23 @@ public class NotesSteps {
     public static void verifyNoPicturesPresent() {
         VNextNotesScreen notesScreen = new VNextNotesScreen();
         Assert.assertEquals(notesScreen.getPictureElementList().size(), 0);
+    }
+
+    public static void addRepairOrderNote() {
+        NoteListMenuScreen noteListMenuScreen = new NoteListMenuScreen();
+        WaitUtils.waitUntilElementIsClickable(noteListMenuScreen.getAddNewNoteButton());
+        noteListMenuScreen.getAddNewNoteButton().click();
+    }
+
+    public static void verifyNotePresentInList(String noteText) {
+        NoteListMenuScreen noteListMenuScreen = new NoteListMenuScreen();
+        WaitUtils.collectionSizeIsGreaterThan(noteListMenuScreen.getNoteListElements(), 0);
+        Assert.assertNotNull(noteListMenuScreen.getNoteByText(noteText));
+    }
+
+    public static void setRepairOrderNoteText(String noteText) {
+        VNextRepairOrderNoteScreen noteScreen = new VNextRepairOrderNoteScreen();
+        WaitUtils.elementShouldBeVisible(noteScreen.getRootElement(), true);
+        noteScreen.getCommentTest().sendKeys(noteText);
     }
 }

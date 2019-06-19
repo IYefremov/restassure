@@ -3,17 +3,20 @@ package com.cyberiansoft.test.dataclasses;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonFormat(shape=JsonFormat.Shape.OBJECT)
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ServiceStatus {
 
     APPROVED("Approved"),
     NEW("New"),
     DECLINED("Declined"),
-    SKIPPED("Skipped");;
+    SKIPPED("Skipped"),
+    PROBLEM("PROBLEM"),
+    ACTIVE("ACTIVE"),
+    STARTED("STARTED");
 
     private final String status;
 
-    private ServiceStatus(final String statusValue) {
+    ServiceStatus(final String statusValue) {
         this.status = statusValue;
     }
 

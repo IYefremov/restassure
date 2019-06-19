@@ -16,7 +16,7 @@ public class GeneralMenuScreen extends MonitorScreen {
         menuItems.stream()
                 .filter(WebElement::isDisplayed)
                 .filter((element) ->
-                        element.getAttribute("data-name").equals(menuItem.getMenuItemDataName()))
+                        element.getText().equals(menuItem.getMenuItemDataName()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Menu element not found " + menuItem.getMenuItemDataName()))
                 .click();
