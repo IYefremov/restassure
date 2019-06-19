@@ -139,10 +139,10 @@ public class VNextBaseTestCase {
                 licenseName);
 
         ActiveDevicesWebPage activeDevicesWebPage = new ActiveDevicesWebPage(DriverBuilder.getInstance().getDriver());
-        deviceID = activeDevicesWebPage.getDeviceID();
-        licenseID = activeDevicesWebPage.getLicenseID();
-        appID = activeDevicesWebPage.getApplicationID();
-        appLicenseEntity = activeDevicesWebPage.getLicenseEntityName();
+        //deviceID = activeDevicesWebPage.getDeviceID();
+        //licenseID = activeDevicesWebPage.getLicenseID();
+        //appID = activeDevicesWebPage.getApplicationID();
+        //appLicenseEntity = activeDevicesWebPage.getLicenseEntityName();
         DriverBuilder.getInstance().getDriver().quit();
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
