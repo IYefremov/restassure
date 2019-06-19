@@ -10,6 +10,8 @@ public class OrderPhaseDto {
     private String status;
     @JsonProperty("phaseName")
     private String phaseName;
+    @JsonProperty("problemReason")
+    private String problemReason;
 
     public void setStatus(PhaseName phase) {
         this.status = phase.getValue();

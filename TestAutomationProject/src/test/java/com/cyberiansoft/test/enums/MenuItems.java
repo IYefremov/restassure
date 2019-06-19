@@ -3,15 +3,16 @@ package com.cyberiansoft.test.enums;
 import lombok.Getter;
 
 public enum MenuItems {
-    EDIT("edit"),
+    EDIT("Edit"),
     ASSIGN_TECH(""),
-    START("start"),
-    COMPLETE("complete"),
+    START("Start"),
+    STOP("Stop"),
+    COMPLETE("Complete"),
     CHANGE_STATUS(""),
-    NOTES("notes"),
+    NOTES("Notes"),
     CHANGE_DEPARTMENT(""),
-    REPORT_PROBLEM("reportProblem"),
-    RESOLVE_PROBLEM("resolveProblem");
+    REPORT_PROBLEM("Report Problem"),
+    RESOLVE_PROBLEM("Resolve Problem");
 
     @Getter
     private String menuItemDataName;

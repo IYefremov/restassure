@@ -35,9 +35,14 @@ public class ServiceData {
     private boolean isNotMultiple;
     @JsonProperty("isSelected")
     private boolean isSelected;
+    @JsonProperty("problemReason")
+    private String problemReason;
 
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);
+    }
+    public void setServiceStatus(ServiceStatus serviceStatus){
+        this.serviceStatus = serviceStatus.getStatus();
     }
     public String getStatus(){
         return serviceStatus;

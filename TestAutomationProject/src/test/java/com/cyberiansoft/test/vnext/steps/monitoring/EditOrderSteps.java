@@ -1,11 +1,11 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.enums.MenuItems;
+import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
-
-import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.screens.monitoring.InfoScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhaseServicesScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
@@ -60,6 +60,7 @@ public class EditOrderSteps {
     public static void verifyServiceStatus(ServiceData serviceDto) {
         PhaseServicesScreen phaseServicesScreen = new PhaseServicesScreen();
         WaitUtils.elementShouldBeVisible(phaseServicesScreen.getRootElement(), true);
+        BaseUtils.waitABit(2000);
         Assert.assertEquals(phaseServicesScreen.getServiceElement(serviceDto.getServiceName()).getStatus(), serviceDto.getStatus());
     }
 
@@ -77,5 +78,12 @@ public class EditOrderSteps {
     public static void setOrderPriority(OrderPriority orderPriority) {
         InfoScreen infoScreen = new InfoScreen();
         infoScreen.setOrderPriority(orderPriority);
+    }
+
+    public static void verifyTimeTrackingShouldBeStarted(ServiceData serviceDto, Boolean shouldBeStarted) {
+        PhaseServicesScreen phaseServicesScreen = new PhaseServicesScreen();
+        BaseUtils.waitABit(2000);
+        WaitUtils.elementShouldBeVisible(phaseServicesScreen.getRootElement(), true);
+        Assert.assertEquals(phaseServicesScreen.getServiceElement(serviceDto.getServiceName()).isClockIconPresent(), shouldBeStarted);
     }
 }

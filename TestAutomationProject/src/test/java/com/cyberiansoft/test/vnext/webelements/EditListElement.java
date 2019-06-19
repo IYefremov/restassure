@@ -10,18 +10,20 @@ public class EditListElement implements IWebElement {
     private String statusLocator = ".//div[@class=\"icon-item-status-title\"]";
     private String nameLocator = ".//div[contains(@class,\"icon-item-content-title\")]";
     private String expandElementLocator = ".//div[@action=\"open-phase-services\"]";
+    private String clockIconLocator = ".//div[contains(@class,\"icon-item-content-title\")][3]//span[@class='icon-item-arrow']";
+
 
     public EditListElement(WebElement rootElement) {
         this.rootElement = rootElement;
     }
 
     public String getName() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(nameLocator)),true);
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(nameLocator)), true);
         return rootElement.findElement(By.xpath(nameLocator)).getText();
     }
 
     public String getStatus() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(statusLocator)),true);
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(statusLocator)), true);
         return rootElement.findElement(By.xpath(statusLocator)).getText();
     }
 
@@ -29,8 +31,12 @@ public class EditListElement implements IWebElement {
         rootElement.click();
     }
 
-    public void expandElement(){
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(expandElementLocator)),true);
+    public void expandElement() {
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(expandElementLocator)), true);
         rootElement.findElement(By.xpath(expandElementLocator)).click();
+    }
+
+    public Boolean isClockIconPresent() {
+        return rootElement.findElements(By.xpath(clockIconLocator)).size() > 0;
     }
 }

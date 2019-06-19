@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
-import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -15,14 +15,13 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.webelements.NoteListElement;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistration {
@@ -41,7 +40,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
         WorkOrderSteps.openServiceScreen();
-        AvailableServicesScreenSteps.selectServices(this.getTestSerivceData());
+        AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
         GeneralSteps.pressBackButton();
     }
@@ -55,8 +54,10 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.setNoteText(noteText);
-        NotesSteps.verifyNoteIsPresent(noteText);
+        NotesSteps.addRepairOrderNote();
+        NotesSteps.setRepairOrderNoteText(noteText);
+        GeneralSteps.pressBackButton();
+        NotesSteps.verifyNotePresentInList(noteText);
         GeneralSteps.pressBackButton();
         GeneralSteps.pressBackButton();
     }
@@ -78,14 +79,5 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         EditOrderSteps.verifyOrderInfo(expectedOrderInfo);
         GeneralSteps.pressBackButton();
         GeneralSteps.pressBackButton();
-    }
-
-    //TODO: Temp solution to provide test data to @BeforeMethod method
-    private List<ServiceData> getTestSerivceData() {
-        List<ServiceData> serviceData = new ArrayList<>();
-        ServiceData service = new ServiceData();
-        service.setServiceName("Expenses_money (AM)");
-        serviceData.add(service);
-        return serviceData;
     }
 }
