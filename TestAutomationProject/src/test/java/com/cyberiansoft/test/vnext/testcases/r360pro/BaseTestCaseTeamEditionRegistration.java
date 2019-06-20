@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
+import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import org.testng.ITestContext;
@@ -23,11 +24,9 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
     @Parameters("device.lecense")
     public void beforeTest(ITestContext context, @Optional("OKramar_android3") String deviceLicense) throws Exception {
         employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/team-device-employee.json"), Employee.class);
-
         if (VNextEnvironmentInfo.getInstance().installNewBuild())
             registerTeamEdition(deviceLicense);
-
-
+        
         VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
         loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 

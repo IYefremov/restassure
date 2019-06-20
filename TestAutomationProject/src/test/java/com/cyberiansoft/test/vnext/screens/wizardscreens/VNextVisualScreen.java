@@ -53,10 +53,9 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@data-page, 'visual')]")));
 		BaseUtils.waitABit(1000);
-		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-		
-		
+		if (checkHelpPopupPresence())
+			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
+				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
 	}
 
 	public VNextVisualScreen() {
