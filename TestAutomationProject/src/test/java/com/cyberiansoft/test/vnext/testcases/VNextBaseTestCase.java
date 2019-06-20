@@ -42,8 +42,6 @@ public class VNextBaseTestCase {
     protected static MobilePlatform mobilePlatform;
     @Getter
     protected static Employee employee;
-    @Getter
-    protected static boolean helpPopupShown;
     protected static EnvironmentType envType;
 
     protected static String deviceID;
@@ -91,7 +89,6 @@ public class VNextBaseTestCase {
     }
 
     public void registerDevice() throws Exception {
-        helpPopupShown = VNextFreeRegistrationInfo.getInstance().isHelpPopupShown();
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
         VNextEditionsScreen editionsScreen = new VNextEditionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
@@ -126,7 +123,6 @@ public class VNextBaseTestCase {
     }
 
     public void registerTeamEdition(String licenseName) {
-        helpPopupShown = VNextTeamRegistrationInfo.getInstance().isHelpPopupShown();
         VNextEditionsScreen editionsScreen = new VNextEditionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextEnvironmentSelectionScreen environmentSelectionScreen = new VNextEnvironmentSelectionScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextTeamEditionVerificationScreen verificationScreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());

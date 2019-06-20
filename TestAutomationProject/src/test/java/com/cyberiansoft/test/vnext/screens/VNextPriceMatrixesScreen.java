@@ -24,10 +24,10 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		BaseUtils.waitABit(1000);
-		if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
+		if (checkHelpPopupPresence())
 			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
 				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-		BaseUtils.waitABit(2000);
+		BaseUtils.waitABit(1000);
 	}
 
 	
