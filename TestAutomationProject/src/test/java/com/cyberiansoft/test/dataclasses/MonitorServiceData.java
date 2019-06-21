@@ -8,11 +8,11 @@ import java.util.List;
 @Getter
 public class MonitorServiceData {
 
-    @JsonProperty("serviceName")
-    String serviceName;
+    @JsonProperty("monitorService")
+    ServiceData monitorService;
 
-    @JsonProperty("serviceStatus")
-    String serviceStatus;
+    @JsonProperty("monitorServiceStatus")
+    private String monitorServiceStatus;
 
     @JsonProperty("startService")
     boolean startService;

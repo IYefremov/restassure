@@ -499,7 +499,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (DamageData damageData : workOrderData.getDamagesData()) {
 			VNextAvailableGroupServicesList availableGroupServicesList = groupServicesScreen.openServiceGroup(damageData.getDamageGroupName());
-			for (ServiceData serviceData : damageData.getMoneyServicesData()) {
+			for (ServiceData serviceData : damageData.getMoneyServices()) {
 				availableGroupServicesList.selectService(serviceData.getServiceName());
 			}
 			availableGroupServicesList.clickBackButton();
@@ -513,7 +513,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		groupServicesScreen = new VNextGroupServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedGroupServicesScreen selectedGroupServicesScreen = groupServicesScreen.switchToSelectedGroupServicesView();
-		selectedGroupServicesScreen.uselectService(workOrderData.getDamagesData().get(0).getMoneyServicesData().get(0).getServiceName());
+		selectedGroupServicesScreen.uselectService(workOrderData.getDamagesData().get(0).getMoneyServices().get(0).getServiceName());
 		selectedGroupServicesScreen.switchToGroupServicesScreen();
 		Assert.assertEquals(groupServicesScreen.getInspectionTotalPriceValue(), amountTotalEdited);
 		groupServicesScreen.switchToSelectedGroupServicesView();

@@ -1,7 +1,10 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -84,6 +87,24 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
                 if ((srvc.
                         findElements(MobileBy.className("XCUIElementTypeStaticText")).get(2).getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
                         pricevalue.replaceAll(" ", "")))) {
+                    selected = true;
+                    break;
+                }
+        return selected;
+    }
+
+    public boolean isServiceIsSelectedWithServiceValues(ServiceData serviceData) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceData.getServiceName())));
+        boolean selected = false;
+        List<MobileElement> services = selectedservicestable.findElements(MobileBy.className("XCUIElementTypeCell"));
+        String priceValue = PricesCalculations.getPriceRepresentation(serviceData.getServicePrice()) + " x " + serviceData.getServiceQuantity();
+
+        for (MobileElement srvc : services)
+            if (srvc.getAttribute("name").contains(serviceData.getServiceName()))
+                if ((srvc.
+                        findElements(MobileBy.className("XCUIElementTypeStaticText")).get(2).getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
+                        priceValue.replaceAll(" ", "")))) {
                     selected = true;
                     break;
                 }

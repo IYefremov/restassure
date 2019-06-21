@@ -114,6 +114,18 @@ public class InspectionData {
     @JsonProperty("selectedServices")
     List<ServiceData> selectedServices;
 
+    @Getter
+    @JsonProperty("servicesScreen")
+    ServicesScreenData servicesScreen;
+
+    @Getter
+    @JsonProperty("servicesScreens")
+    List<ServicesScreenData> servicesScreens;
+
+    @Getter
+    @JsonProperty("isDraft")
+    boolean isDraft;
+
     public String getInspectionType() {
         return inspType;
     }

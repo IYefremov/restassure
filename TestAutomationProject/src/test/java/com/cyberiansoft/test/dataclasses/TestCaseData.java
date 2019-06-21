@@ -13,7 +13,7 @@ public class TestCaseData {
     @JsonProperty("inspectionData")
     InspectionData inspectionData;
 
-    @JsonProperty("inspectionData")
+    @JsonProperty("inspectionsData")
     List<InspectionData> inspectionsData;
 
     @JsonProperty("workOrderData")

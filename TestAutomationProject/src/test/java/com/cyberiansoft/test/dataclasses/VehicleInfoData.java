@@ -3,6 +3,8 @@ package com.cyberiansoft.test.dataclasses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import java.util.List;
+
 public class VehicleInfoData {
 	
 	@JsonProperty("vinNumber")
@@ -48,6 +50,18 @@ public class VehicleInfoData {
 	@Getter
 	@JsonProperty("location")
 	String location;
+
+	@Getter
+	@JsonProperty("defaultTechnician")
+	ServiceTechnician defaultTechnician;
+
+	@Getter
+	@JsonProperty("newTechnician")
+	ServiceTechnician newTechnician;
+
+	@Getter
+	@JsonProperty("newTechnicians")
+	List<ServiceTechnician> newTechnicians;
 
 	public String getVINNumber() {
 		 return vinNumber;
