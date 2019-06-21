@@ -97,7 +97,6 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
         if (checkHelpPopupPresence())
             if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
                 tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-        BaseUtils.waitABit(1000);
     }
 
     public VNextVehicleInfoScreen() {

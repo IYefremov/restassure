@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     @FindBy(xpath = "//div[contains(@class, 'page work-orders-list')]")
-    private WebElement workordersscreen;
+    private WebElement rootElement;
 
     @FindBy(xpath = "//*[@data-autotests-id='work orders-list']")
     private WebElement workorderslist;
@@ -40,14 +40,11 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
-        BaseUtils.waitABit(2000);
-        if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
-            tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
-        wait = new WebDriverWait(appiumdriver, 60);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class, 'page work-orders-list')]")));
+        WaitUtils.elementShouldBeVisible(getRootElement(),true);
+        if (checkHelpPopupPresence())
+            if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
+                tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+            }
         clearSearchField();
     }
 
@@ -101,7 +98,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public int getNumberOfSelectedWorkOrders() {
-        return Integer.parseInt(workordersscreen.findElement(By.xpath(".//span[@class='selected-items-counter']")).getText());
+        return Integer.parseInt(rootElement.findElement(By.xpath(".//span[@class='selected-items-counter']")).getText());
     }
 
     public VNextHomeScreen clickBackButton() {

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class WaitUtils {
     public static void collectionSizeIsGreaterThan(List<?> list, Integer expectedSize) {
@@ -60,7 +61,9 @@ public class WaitUtils {
     }
 
     public static void waitUntilElementInvisible(final By locator) {
+        DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WaitUtils.getGeneralWebdriverWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     //TODO: timeout and polling should be readed from some .prop file

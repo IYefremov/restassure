@@ -77,8 +77,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
     public VNextHomeScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='null']")));
+        WaitUtils.elementShouldBeVisible(getRootElement(),true);
         if (checkHelpPopupPresence())
             if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
                 tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
@@ -95,8 +94,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
 
     public VNextWorkOrdersScreen clickWorkOrdersMenuItem() {
         //waitABit(2000);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-        wait.until(ExpectedConditions.elementToBeClickable(workorderslist));
+        WaitUtils.elementShouldBeVisible(workorderslist,true);
         tap(workorderslist);
         return new VNextWorkOrdersScreen(appiumdriver);
     }

@@ -46,12 +46,11 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     public VNextInspectionsScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='inspections-list']")));
-        wait = new WebDriverWait(appiumdriver, 60);
-        wait.until(ExpectedConditions.elementToBeClickable(inspectionsscreen));
-        if (elementExists("//div[@class='intercom-chat-dismiss-button-mobile']"))
-            tap(appiumdriver.findElementByXPath("//div[@class='intercom-chat-dismiss-button-mobile']"));
+        WaitUtils.elementShouldBeVisible(inspectionsscreen,true);
+        if (checkHelpPopupPresence())
+            if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
+                tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
+            }
         clearSearchField();
     }
 
