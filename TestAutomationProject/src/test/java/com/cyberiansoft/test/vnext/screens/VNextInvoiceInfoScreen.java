@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,10 +21,11 @@ import org.testng.Assert;
 import java.time.LocalDate;
 import java.util.List;
 
+@Getter
 public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-page='info']")
-	private WebElement invoiceinfoscreen;
+	private WebElement rootElement;
 	
 	@FindBy(xpath="//input[@name='Invoices.PONo']")
 	private WebElement invoicepo;
@@ -55,17 +57,13 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	public VNextInvoiceInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 150);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='info']")));
-		wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.visibilityOf(invoiceinfoscreen));
+		WaitUtils.elementShouldBeVisible(getRootElement(),true);
 	}
 	
 	public void setInvoicePONumber(String ponumber) {
 		WaitUtils.click(invoicepo);
 		invoicepo.clear();
 		invoicepo.sendKeys(ponumber);
-		//appiumdriver.hideKeyboard();
 		BaseUtils.waitABit(500);
 	}
 
