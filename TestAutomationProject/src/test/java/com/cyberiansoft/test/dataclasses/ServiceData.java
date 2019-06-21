@@ -35,10 +35,6 @@ public class ServiceData {
     private boolean isNotMultiple;
     @JsonProperty("isSelected")
     private boolean isSelected;
-    @JsonProperty("serviceDefaultTechnician")
-    ServiceTechnician serviceDefaultTechnician;
-    @JsonProperty("serviceNewTechnician")
-    ServiceTechnician serviceNewTechnician;
 
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);
