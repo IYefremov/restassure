@@ -65,11 +65,8 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     }
 
     protected void clickAddButton() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.visibilityOf(addbtn));
-        wait = new WebDriverWait(appiumdriver, 10);
-        WebElement addorderBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@action='add']")));
-        tap(addorderBtn);
+        WaitUtils.waitUntilElementIsClickable(addbtn);
+        tap(addbtn);
     }
 
     protected void switchToTeamView() {
