@@ -12,7 +12,10 @@ public enum ServiceStatus {
     SKIPPED("Skipped"),
     PROBLEM("PROBLEM"),
     ACTIVE("ACTIVE"),
-    STARTED("STARTED");
+    STARTED("STARTED"),
+    ORDERED("Ordered"),
+    RECEIVED("Received");
+
 
     private final String status;
 
