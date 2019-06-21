@@ -86,11 +86,11 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
         InspectionSteps.openInspectionToEdit(inspectionNumber);
         WizardScreenSteps.navigateToVisualScreen();
         VisualScreenSteps.editVisualDamage(
-                String.valueOf(BackOfficeUtils.getServicePriceValue(inspectionData.getDamageData().getMoneyServiceData().getServicePrice())));
-        VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
+                String.valueOf(BackOfficeUtils.getServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice())));
+        VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyService().getServicePrice());
 
         InspectionSteps.saveInspection();
-        InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
+        InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
         InspectionSteps.navigateHomeScreen();
     }
 
@@ -106,10 +106,10 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         VisualScreenSteps.addDamage(inspectionData.getDamageData());
         VisualScreenSteps.editVisualDamage(
-                String.valueOf(BackOfficeUtils.getServicePriceValue(inspectionData.getDamageData().getMoneyServiceData().getServicePrice())));
-        VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
+                String.valueOf(BackOfficeUtils.getServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice())));
+        VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyService().getServicePrice());
         final String inspectionNumber = InspectionSteps.saveInspection();
-        InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
+        InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
         WizardScreenSteps.navigateToVisualScreen();

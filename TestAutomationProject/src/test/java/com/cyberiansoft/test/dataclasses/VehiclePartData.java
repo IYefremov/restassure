@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -38,6 +39,14 @@ public class VehiclePartData {
 
     @JsonProperty("vehiclePartOption")
     String vehiclePartOption;
+
+    @Getter
+    @JsonProperty("serviceDefaultTechnician")
+    ServiceTechnician serviceDefaultTechnician;
+
+    @Getter
+    @JsonProperty("serviceNewTechnician")
+    ServiceTechnician serviceNewTechnician;
 
     public String getVehiclePartName() {
         return vehiclePartName;

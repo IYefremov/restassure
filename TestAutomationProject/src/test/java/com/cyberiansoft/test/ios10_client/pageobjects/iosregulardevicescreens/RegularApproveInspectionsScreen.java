@@ -135,6 +135,13 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	public boolean isInspectionServiceExistsForApprove(String inspservice) {
 		return appiumdriver.findElements(MobileBy.AccessibilityId(inspservice)).size() > 0;
 	}
+
+	public boolean isInspectionServiceExistsForApprove(ServiceData serviceData) {
+		String inspservice = serviceData.getServiceName();
+		if (serviceData.getVehiclePart() != null)
+			inspservice = inspservice + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
+		return appiumdriver.findElements(MobileBy.AccessibilityId(inspservice)).size() > 0;
+	}
 	
 	public String getInspectionServicePrice(String inspservice) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);

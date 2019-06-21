@@ -313,7 +313,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
 		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
 		appiumdriver.findElementByAccessibilityId("Trim").click();
-		appiumdriver.findElementByAccessibilityId("Trim").click();;
 		selectUIAPickerValue(trimvalue);
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}

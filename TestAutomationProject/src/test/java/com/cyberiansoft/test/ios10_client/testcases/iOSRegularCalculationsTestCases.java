@@ -144,7 +144,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 				visualInteriorScreen.clickServicesToolbarButton();
 				visualInteriorScreen.switchToCustomTab();
 				visualInteriorScreen.selectService(damageData.getDamageGroupName());
-				visualInteriorScreen.selectSubService(damageData.getMoneyServiceData().getServiceName());
+				visualInteriorScreen.selectSubService(damageData.getMoneyService().getServiceName());
 				RegularVisualInteriorScreen.tapInteriorWithCoords(tapXCoordInicial, tapYCoordInicial);
 				RegularVisualInteriorScreen.tapInteriorWithCoords(tapXCoordInicial, tapYCoordInicial+50);
 				tapYCoordInicial = tapYCoordInicial + 100;
@@ -167,7 +167,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			visualInteriorScreen.waitVisualScreenLoaded(visualScreenData.getScreenName());
 			for (DamageData damageData : visualScreenData.getDamagesData()) {
 				RegularVisualInteriorScreen.tapInteriorWithCoords(tapXCoordInicial, tapYCoordInicial);
-				visualInteriorScreen.setCarServiceQuantityValue(damageData.getMoneyServiceData().getServiceQuantity());
+				visualInteriorScreen.setCarServiceQuantityValue(damageData.getMoneyService().getServiceQuantity());
 				visualInteriorScreen.saveCarServiceDetails();
 				tapYCoordInicial = tapYCoordInicial + 100;
 			}
@@ -1318,13 +1318,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		visualInteriorScreen.clickServicesToolbarButton();
 		visualInteriorScreen.switchToCustomTab();
 		visualInteriorScreen.selectService(inspectionData.getDamageData().getDamageGroupName());
-		visualInteriorScreen.selectSubService(inspectionData.getDamageData().getMoneyServiceData().getServiceName());
+		visualInteriorScreen.selectSubService(inspectionData.getDamageData().getMoneyService().getServiceName());
 		Helpers.tapRegularCarImage();
 		Helpers.tapRegularCarImage();
 		selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.clickServicePartCell();
-		RegularServicePartSteps.selectServicePartData(inspectionData.getDamageData().getMoneyServiceData().getServicePartData());
-		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
+		RegularServicePartSteps.selectServicePartData(inspectionData.getDamageData().getMoneyService().getServicePartData());
+		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
 		final PriceMatrixScreenData priceMatrixScreenData = inspectionData.getPriceMatrixScreenData();

@@ -16,13 +16,13 @@ public class VisualScreenSteps {
     public static void addDamage(DamageData damageData) {
         VNextVisualScreen visualScreen = new VNextVisualScreen();
         VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
-        if (damageData.getMoneyServiceData() == null) {
+        if (damageData.getMoneyService() == null) {
             selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
         }
         else {
             selectDamagesScreen.selectAllDamagesTab();
             VNextVisualServicesScreen visualServicesScreen = selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
-            visualServicesScreen.selectCustomService(damageData.getMoneyServiceData().getServiceName());
+            visualServicesScreen.selectCustomService(damageData.getMoneyService().getServiceName());
         }
         visualScreen.clickCarImage();
     }

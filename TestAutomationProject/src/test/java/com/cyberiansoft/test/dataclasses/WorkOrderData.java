@@ -29,6 +29,10 @@ public class WorkOrderData {
     @JsonProperty("moneyService")
     ServiceData moneyService;
 
+    @Getter
+    @JsonProperty("moneyServices")
+    List<ServiceData> moneyServices;
+
     @JsonProperty("percentageService")
     ServiceData percentageService;
 

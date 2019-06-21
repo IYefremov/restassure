@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class MatrixServiceData {
 
     @JsonProperty("matrixServiceName")
@@ -13,7 +14,6 @@ public class MatrixServiceData {
     @JsonProperty("hailMatrixName")
     String hailMatrixName;
 
-    @Getter
     @JsonProperty("hailMatrixes")
     List<String> hailMatrixes;
 
@@ -22,22 +22,5 @@ public class MatrixServiceData {
 
     @JsonProperty("vehiclePartData")
     VehiclePartData vehiclePartData;
-
-
-    public String getMatrixServiceName() {
-        return matrixServiceName;
-    }
-
-    public String getHailMatrixName() {
-        return hailMatrixName;
-    }
-
-    public List<VehiclePartData> getVehiclePartsData() {
-        return vehiclePartsData;
-    }
-
-    public VehiclePartData getVehiclePartData() {
-        return vehiclePartData;
-    }
 
 }
