@@ -1,11 +1,13 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -59,7 +61,9 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		WebElement picker = wait.until(ExpectedConditions.presenceOfElementLocated( MobileBy.className("XCUIElementTypePicker")));
 
-		while (!(appiumdriver.findElementByClassName("XCUIElementTypePickerWheel").getAttribute("value").contains(value))) {
+BaseUtils.waitABit(5000);
+		((IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel")).setValue(value);
+		/*while (!(appiumdriver.findElementByClassName("XCUIElementTypePickerWheel").getAttribute("value").contains(value))) {
 			TouchAction action = new TouchAction(appiumdriver);
 			action.tap(PointOption.point(picker.getSize().getWidth()/2, picker
 					.getLocation().getY() + picker.getSize().getHeight()/2+40)).perform();
@@ -67,7 +71,7 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 			clicks = clicks+1;
 			if (clicks > defaultwheelnumer)
 				break;
-		}
+		}*/
 	}
 	
 	public void swipeToElement(WebElement elementtoswipe) {

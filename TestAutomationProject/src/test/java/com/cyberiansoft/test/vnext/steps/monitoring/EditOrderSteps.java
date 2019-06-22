@@ -71,8 +71,15 @@ public class EditOrderSteps {
 
     public static void openPhaseMenu(OrderPhaseDto phaseDto) {
         PhasesScreen phasesScreen = new PhasesScreen();
+        BaseUtils.waitABit(1000);
         WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getPhaseListElements(), 0);
         phasesScreen.getPhaseElement(phaseDto.getPhaseName()).openMenu();
+    }
+
+    public static void openPhaseMenu(String phaseName) {
+        OrderPhaseDto orderPhaseDto = new OrderPhaseDto();
+        orderPhaseDto.setPhaseName(phaseName);
+        openPhaseMenu(orderPhaseDto);
     }
 
     public static void setOrderPriority(OrderPriority orderPriority) {
@@ -85,5 +92,11 @@ public class EditOrderSteps {
         BaseUtils.waitABit(2000);
         WaitUtils.elementShouldBeVisible(phaseServicesScreen.getRootElement(), true);
         Assert.assertEquals(phaseServicesScreen.getServiceElement(serviceDto.getServiceName()).isClockIconPresent(), shouldBeStarted);
+    }
+
+    public static void switchToParts() {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.elementShouldBeVisible(phasesScreen.getPartsScreenButton(), true);
+        phasesScreen.getPartsScreenButton().click();
     }
 }

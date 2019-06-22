@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.webelements;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
 import org.openqa.selenium.By;
@@ -18,6 +19,7 @@ public class EditListElement implements IWebElement {
     }
 
     public String getName() {
+        BaseUtils.waitABit(1000);
         WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(nameLocator)), true);
         return rootElement.findElement(By.xpath(nameLocator)).getText();
     }
@@ -28,7 +30,7 @@ public class EditListElement implements IWebElement {
     }
 
     public void openMenu() {
-        rootElement.click();
+        WaitUtils.click(rootElement);
     }
 
     public void expandElement() {

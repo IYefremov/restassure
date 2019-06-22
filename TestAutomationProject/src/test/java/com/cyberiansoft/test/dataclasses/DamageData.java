@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class DamageData {
 
     @JsonProperty("damageGroupName")
@@ -12,25 +14,21 @@ public class DamageData {
     @JsonProperty("moneyService")
     ServiceData moneyService;
 
-    @JsonProperty("moneyService")
+    @JsonProperty("moneyServices")
     List<ServiceData> moneyServices;
 
     @JsonProperty("percentageService")
     ServiceData percentageService;
 
-    public String getDamageGroupName() {
-        return damageGroupName;
-    }
+    @JsonProperty("bundleService")
+    BundleServiceData bundleService;
 
-    public ServiceData getMoneyServiceData() {
-        return moneyService;
-    }
+    @JsonProperty("matrixService")
+    MatrixServiceData matrixService;
 
-    public ServiceData getPercentageServiceData() {
-        return percentageService;
-    }
+    @JsonProperty("serviceDefaultTechnician")
+    ServiceTechnician serviceDefaultTechnician;
 
-    public List<ServiceData> getMoneyServicesData() {
-        return moneyServices;
-    }
+    @JsonProperty("serviceNewTechnician")
+    ServiceTechnician serviceNewTechnician;
 }

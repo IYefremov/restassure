@@ -18,6 +18,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import java.util.List;
 
 public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
@@ -88,6 +89,10 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
+    }
+
+    public void selectPartService(String serviceName) {
+        getServiceListItem(serviceName).click();
     }
 
     public int getServiceAmountSelectedValue(String serviceName) {

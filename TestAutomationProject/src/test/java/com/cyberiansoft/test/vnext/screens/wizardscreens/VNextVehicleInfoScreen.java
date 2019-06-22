@@ -94,10 +94,9 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@data-autotests-id, '-vehicle-info')]")));
         BaseUtils.waitABit(1000);
-        if (appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0)
+        if (checkHelpPopupPresence())
             if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
                 tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-        BaseUtils.waitABit(2000);
     }
 
     public VNextVehicleInfoScreen() {

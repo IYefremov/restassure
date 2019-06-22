@@ -2,11 +2,14 @@ package com.cyberiansoft.test.ios10_client.utils;
 
 public class AlertsCaptions {
 
-	public static final String ALERT_CHANGE_DEFAULT_EMPLOYEES = "Changing default employees for a work order will change split data for all services.";
+	public static final String ALERT_CHANGE_DEFAULT_EMPLOYEES = "Technicians assigning\n" +
+			"Changing default employees for a work order will change split data for all services.";
+	public static final String CHANGING_DEFAULT_EMPLOYEES = "Changing default employees for a work order will change split data for all services.";
 	public static final String ALERT_VIN_REQUIRED = "Warning!\nVIN# is required";
 	public static final String ALERT_MAKE_REQUIRED = "Warning!\nMake is required";
+	public static final String ALERT_TRIM_REQUIRED = "Warning!\nTrim is required";
 	public static final String ALERT_COLOR_REQUIRED = "Warning!\nColor is required";
-	public static final String THE_VIN_IS_INCORRECT = "Warning!\nThe VIN# is incorrect.";
+	public static final String THE_VIN_IS_INCORRECT = "The VIN# is incorrect.";
 	public static final String THE_VIN_IS_INVALID = "Warning!\nThe VIN is invalid.";
 	public static final String THE_VIN_IS_INVALID_AND_SAVE_WORKORDER = "Warning!\n" +
 			"The VIN is invalid.\n" +
@@ -71,4 +74,11 @@ public class AlertsCaptions {
 			"Maximum allowed total amount is %1$s";
 	public static final String ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE = "Warning!\n"+
 			"You can add only one service '%1$s'";
+	public static final String INVOICE_PO_SHOULDNT_BE_EMPTY = "Invoice Payment\n" +
+			"Invoice PO# shouldn't be empty.";
+	public static final String STOP_WORKORDER_CREATION = "Stop Work Order Creation\nAny unsaved changes will be lost. Are you sure you want to stop creating this Work Order?";
+	public static final String STOP_WORKORDER_EDIT = "Stop Work Order Edit\nAny unsaved changes will be lost. Are you sure you want to stop editing this Work Order?";
+	public static final String NO_SELECTED_SERVICES = "Services\n" +
+			"No selected services.";
+	public static final String WOULD_YOU_LIKE_TO_START_REPAIR_ORDER = "Would you like to start repair order";
 }

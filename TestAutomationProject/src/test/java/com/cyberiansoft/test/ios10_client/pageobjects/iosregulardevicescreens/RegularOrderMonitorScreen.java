@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
 import io.appium.java_client.MobileBy;
@@ -72,12 +73,25 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("MonitorOrderServicesList")));
 	}
 
-	public void selectPanel(String panelname) {
+	public void selectPanel(String panelName) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelname + "']")));
-		swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelname + "']")));
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelname + "']").click();
+		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
+		swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']").click();
+	}
+
+	public void selectPanel(ServiceData serviceData) {
+
+		String panelName = serviceData.getServiceName();
+		if (serviceData.getVehiclePart() != null) {
+			panelName = panelName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
+		}
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
+		swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']").click();
 	}
 
 	public void selectPanelToChangeStatus(String panelname) {
@@ -98,6 +112,18 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 
 		WebElement wotable = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
 		return monitorserviceslist.findElementByAccessibilityId(panelname).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
+	}
+
+	public String getPanelStatus(ServiceData serviceData) {
+
+		String panelName = serviceData.getServiceName();
+		if (serviceData.getVehiclePart() != null) {
+			panelName = panelName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
+		}
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		WebElement wotable = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		return monitorserviceslist.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}
 
 	public String getPanelStatusInPopup(String panelname) {

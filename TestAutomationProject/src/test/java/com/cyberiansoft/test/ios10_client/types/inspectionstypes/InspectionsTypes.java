@@ -10,6 +10,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wi
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVisualInteriorScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
+import lombok.Getter;
 
 public enum InspectionsTypes implements IInspectionsTypes {
 
@@ -41,6 +42,7 @@ public enum InspectionsTypes implements IInspectionsTypes {
     INSP_FOR_AUTO_WO_LINE_APPR_SIMPLE("Insp_for_auto_WO_line_appr_simple"),
     INSP_SMOKE_TEST("Insp_smoke_test");
 
+    @Getter
     private final String inspType;
 
     InspectionsTypes(final String srType) {

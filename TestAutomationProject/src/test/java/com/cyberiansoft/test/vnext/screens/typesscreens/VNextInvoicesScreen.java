@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
@@ -22,7 +23,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Getter
 public class VNextInvoicesScreen extends VNextBaseTypeScreen {
+
+	@FindBy(xpath = "//div[contains(@class, 'page invoices-list')]")
+	private WebElement rootElement;
 	
 	@FindBy(xpath="//div[@data-autotests-id='invoices-list']")
 	private WebElement invoiceslist;
@@ -33,10 +38,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	public VNextInvoicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 150);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class, 'page invoices-list')]")));
-		WaitUtils.waitUntilElementIsClickable(By.xpath("//*[contains(@class, 'page invoices-list')]"));
-		WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading invoices']"));
+		WaitUtils.elementShouldBeVisible(getRootElement(),true);
 		clearSearchField();
 	}
 	

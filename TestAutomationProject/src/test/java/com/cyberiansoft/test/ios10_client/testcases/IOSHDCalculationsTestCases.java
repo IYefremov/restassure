@@ -154,7 +154,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			for (DamageData damageData : visualScreenData.getDamagesData()) {
 				visualInteriorScreen.switchToCustomTab();
 				visualInteriorScreen.selectService(damageData.getDamageGroupName());
-				visualInteriorScreen.selectSubService(damageData.getMoneyServiceData().getServiceName());
+				visualInteriorScreen.selectSubService(damageData.getMoneyService().getServiceName());
 				visualInteriorScreen.tapInteriorWithCoords(screenTapCount);
 				screenTapCount++;
 				visualInteriorScreen.tapInteriorWithCoords(screenTapCount);
@@ -175,7 +175,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			for (DamageData damageData : visualScreenData.getDamagesData()) {
 				visualInteriorScreen.tapInteriorWithCoords(screenTapCount);
 				screenTapCount = screenTapCount + 2;
-				visualInteriorScreen.setCarServiceQuantityValue(damageData.getMoneyServiceData().getServiceQuantity());
+				visualInteriorScreen.setCarServiceQuantityValue(damageData.getMoneyService().getServiceQuantity());
 				visualInteriorScreen.saveCarServiceDetails();
 			}
 			InspectionToolBar inspectionToolBar = new InspectionToolBar();
@@ -1292,13 +1292,13 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		VisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualInteriorScreen.switchToCustomTab();
 		visualInteriorScreen.selectService(inspectionData.getDamageData().getDamageGroupName());
-		visualInteriorScreen.selectSubService(inspectionData.getDamageData().getMoneyServiceData().getServiceName());
+		visualInteriorScreen.selectSubService(inspectionData.getDamageData().getMoneyService().getServiceName());
 		visualInteriorScreen.tapCarImage();
 		visualInteriorScreen.tapCarImage();
 		selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.clickServicePartCell();
-		ServicePartSteps.selectServicePartData(inspectionData.getDamageData().getMoneyServiceData().getServicePartData());
-		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getDamageData().getMoneyServiceData().getServicePrice());
+		ServicePartSteps.selectServicePartData(inspectionData.getDamageData().getMoneyService().getServicePartData());
+		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		final PriceMatrixScreenData priceMatrixScreenData = inspectionData.getPriceMatrixScreenData();
 		PriceMatrixScreen priceMatrixScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());

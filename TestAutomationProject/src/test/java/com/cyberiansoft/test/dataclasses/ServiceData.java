@@ -37,6 +37,10 @@ public class ServiceData {
     private boolean isSelected;
     @JsonProperty("problemReason")
     private String problemReason;
+    @JsonProperty("serviceDefaultTechnician")
+    ServiceTechnician serviceDefaultTechnician;
+    @JsonProperty("serviceNewTechnician")
+    ServiceTechnician serviceNewTechnician;
 
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);

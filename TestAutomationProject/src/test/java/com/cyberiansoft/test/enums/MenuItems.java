@@ -8,7 +8,7 @@ public enum MenuItems {
     START("Start"),
     STOP("Stop"),
     COMPLETE("Complete"),
-    CHANGE_STATUS(""),
+    CHANGE_STATUS("Change Status"),
     NOTES("Notes"),
     CHANGE_DEPARTMENT(""),
     REPORT_PROBLEM("Report Problem"),
