@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextPayPOROScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//div[@data-page='payment']")
+    @FindBy(xpath="//div[@data-page='details']")
     private WebElement paycachcheckscreeen;
 
     @FindBy(id="paymentPORONumber")

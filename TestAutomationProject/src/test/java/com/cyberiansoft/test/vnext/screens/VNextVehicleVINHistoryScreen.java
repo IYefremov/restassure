@@ -22,7 +22,7 @@ public class VNextVehicleVINHistoryScreen extends VNextBaseWizardScreen {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-page='plain-text']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-page='long-text']")));
     }
 
     public void clickBackButton() {
