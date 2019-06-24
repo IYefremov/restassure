@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
+import com.cyberiansoft.test.dataclasses.ServiceAdjustmentData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class RegularServiceDetailsScreenSteps {
 
-    public static void serServiceDetailsData(ServiceData serviceData) {
+    public static void setServiceDetailsData(ServiceData serviceData) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         if (serviceData.getServicePrice() != null)
             setServicePriceValue(serviceData.getServicePrice());
@@ -60,12 +61,28 @@ public class RegularServiceDetailsScreenSteps {
         selectedServiceDetailsScreen.clickTechniciansIcon();
     }
 
+    public static void selectServiceTechnician(ServiceTechnician serviceTechnician) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.selecTechnician(serviceTechnician.getTechnicianFullName());
+    }
+
+    public static void unselectServiceTechnician(ServiceTechnician serviceTechnician) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.unselecTechnician(serviceTechnician.getTechnicianFullName());
+    }
+
     public static void verifyServiceTechnicianIsSelected(ServiceTechnician serviceTechnician) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         if (serviceTechnician.isSelected())
-            Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
+            Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceTechnician.getTechnicianFullName()));
         else
-            Assert.assertFalse(selectedServiceDetailsScreen.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
+            Assert.assertFalse(selectedServiceDetailsScreen.isTechnicianSelected(serviceTechnician.getTechnicianFullName()));
+    }
+
+    public static void selectServiceAdjustment(ServiceAdjustmentData serviceAdjustmentData) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickAdjustments();
+        selectedServiceDetailsScreen.selectAdjustment(serviceAdjustmentData.getAdjustmentData().getAdjustmentName());
     }
 
 }

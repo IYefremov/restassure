@@ -41,6 +41,8 @@ public class ServiceData {
     ServiceTechnician serviceDefaultTechnician;
     @JsonProperty("serviceNewTechnician")
     ServiceTechnician serviceNewTechnician;
+    @JsonProperty("serviceNewTechnicians")
+    List<ServiceTechnician> serviceNewTechnicians;
 
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);

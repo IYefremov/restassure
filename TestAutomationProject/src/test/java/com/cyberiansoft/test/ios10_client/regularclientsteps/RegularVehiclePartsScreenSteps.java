@@ -57,7 +57,7 @@ public class RegularVehiclePartsScreenSteps {
         RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         if ((serviceData.getServiceQuantity() != null) || (serviceData.getServicePrice() != null)) {
             vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
-            RegularServiceDetailsScreenSteps.serServiceDetailsData(serviceData);
+            RegularServiceDetailsScreenSteps.setServiceDetailsData(serviceData);
         } else
             vehiclePartScreen.selectDiscaunt(serviceData.getServiceName());
     }
@@ -77,7 +77,7 @@ public class RegularVehiclePartsScreenSteps {
         Assert.assertEquals(vehiclePartScreen.getTechniciansValue(), serviceTechnician.getTechnicianFullName());
     }
 
-    public static void verifyVehiclePartTechnicianValue(List<ServiceTechnician> serviceTechnicians) {
+    public static void verifyVehiclePartTechniciansValue(List<ServiceTechnician> serviceTechnicians) {
         RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         for (ServiceTechnician serviceTechnician : serviceTechnicians)
             Assert.assertTrue(vehiclePartScreen.getTechniciansValue().contains(serviceTechnician.getTechnicianFullName()));
