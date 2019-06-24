@@ -244,7 +244,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			}
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.clickTechniciansIcon();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			selectedservicescreen.selecTechnician(UtilConstants.technicianC);
 			Assert.assertEquals(
@@ -775,7 +775,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehiclescreen.setStock(ExcelUtils.getStock(testcaserow));
 			vehiclescreen.clickTech();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			selectedservicescreen.selectTechniciansEvenlyView();
 			String alerttext = selectedservicescreen
@@ -809,10 +809,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					vehicleparts[1]);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 			selectedservicescreen.clickTechniciansIcon();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianB));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianB));
 			selectedservicescreen.unselecTechnician(UtilConstants.technicianB);
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsNotSelected(UtilConstants.technicianB));
+			Assert.assertTrue(selectedservicescreen.isTechnicianNotSelected(UtilConstants.technicianB));
 			Assert.assertEquals(
 					selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA),
 					PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -832,10 +832,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					vehicleparts[2]);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 			selectedservicescreen.clickTechniciansIcon();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianB));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianB));
 			selectedservicescreen.unselecTechnician(UtilConstants.technicianB);
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsNotSelected(UtilConstants.technicianB));
+			Assert.assertTrue(selectedservicescreen.isTechnicianNotSelected(UtilConstants.technicianB));
 			Assert.assertEquals(
 					selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
 			selectedservicescreen.selecTechnician(UtilConstants.technicianD);
@@ -844,7 +844,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertEquals(
 					selectedservicescreen.getTechnicianPrice(UtilConstants.technicianD), "$30.00");
 			selectedservicescreen.unselecTechnician(UtilConstants.technicianA);
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsNotSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianNotSelected(UtilConstants.technicianA));
 			Assert.assertEquals(
 					selectedservicescreen.getTechnicianPrice(UtilConstants.technicianD), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
@@ -901,7 +901,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			}
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.clickTechniciansIcon();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			Assert.assertEquals(
 					selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA), "$47.50");
@@ -913,7 +913,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_TOTAL_SERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 			selectedservicescreen.clickTechniciansIcon();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			Assert.assertEquals(
 					selectedservicescreen.getTechnicianPrice(UtilConstants.technicianA),
@@ -951,7 +951,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehiclescreen.setStock(ExcelUtils.getStock(testcaserow));
 			vehiclescreen.clickTech();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selectTechniciansCustomView();
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			Assert.assertEquals(
@@ -1265,7 +1265,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreen.clickTech();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			selectedservicescreen.selecTechnician(UtilConstants.technicianC);
 			selectedservicescreen.selectTechniciansEvenlyView();
@@ -1534,7 +1534,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreen.clickTech();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selectTechniciansCustomView();
 			Assert.assertEquals(
 					selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA),
@@ -1657,7 +1657,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertTrue(vehiclePartScreen.isTechniciansExists());
             vehiclePartScreen.clickOnTechnicians();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selectTechniciansCustomView();
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			Assert.assertEquals(
@@ -1694,7 +1694,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
             vehiclePartScreen.clickOnTechnicians();
 			selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selectTechniciansCustomView();
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			selectedservicescreen.setTechnicianCustomPriceValue(UtilConstants.technicianA, "125");
@@ -2314,7 +2314,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehiclescreen.clickTech();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
 			selectedservicescreen.selectTechniciansCustomView();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianA, "70");
 			selectedservicescreen.setTechnicianCustomPercentageValue(UtilConstants.technicianB, "30");
@@ -2403,7 +2403,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehiclescreen.clickTech();
 			RegularSelectedServiceDetailsScreen selectedservicescreen = new RegularSelectedServiceDetailsScreen();
-			Assert.assertTrue(selectedservicescreen.isTechnicianIsSelected(UtilConstants.technicianA));
+			Assert.assertTrue(selectedservicescreen.isTechnicianSelected(UtilConstants.technicianA));
 			selectedservicescreen.selecTechnician(UtilConstants.technicianB);
 			Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianA), "%50.00");
 			Assert.assertEquals(selectedservicescreen.getTechnicianPercentage(UtilConstants.technicianB), "%50.00");

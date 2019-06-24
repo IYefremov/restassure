@@ -10,7 +10,7 @@ public class RegularServicesScreenSteps {
 
     public static void selectServiceWithServiceData(ServiceData serviceData) {
         openCustomServiceDetails(serviceData.getServiceName());
-        RegularServiceDetailsScreenSteps.serServiceDetailsData(serviceData);
+        RegularServiceDetailsScreenSteps.setServiceDetailsData(serviceData);
     }
 
     public static void selectService(String serviceName) {
