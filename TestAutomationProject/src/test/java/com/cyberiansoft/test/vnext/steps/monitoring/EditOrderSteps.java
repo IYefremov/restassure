@@ -48,6 +48,7 @@ public class EditOrderSteps {
 
     public static void expandPhase(OrderPhaseDto phaseDto) {
         PhasesScreen phasesScreen = new PhasesScreen();
+        BaseUtils.waitABit(2000);
         phasesScreen.getPhaseElement(phaseDto.getPhaseName()).expandElement();
     }
 
