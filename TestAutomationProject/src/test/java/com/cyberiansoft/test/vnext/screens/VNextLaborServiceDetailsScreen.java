@@ -40,13 +40,6 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseScreen {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-page='details']")));
     }
 
-    public VNextLaborServiceDetailsScreen selectPanelAndPart(String panelName, String partName) {
-        VNextLaborServicePanelsList laborServicePanelsList = clickSelectPanelCell();
-        VNextLaborServicePartsList laborServicePartsList = laborServicePanelsList.selectServiceLaborPanel(panelName);
-        laborServicePartsList.selectServiceLaborPart(partName);
-        return laborServicePartsList.saveLaborServiceParts();
-    }
-
     public  VNextLaborServicePanelsList clickSelectPanelCell() {
         tap(selectpanelsandpartspanel);
         return new VNextLaborServicePanelsList(appiumdriver);
