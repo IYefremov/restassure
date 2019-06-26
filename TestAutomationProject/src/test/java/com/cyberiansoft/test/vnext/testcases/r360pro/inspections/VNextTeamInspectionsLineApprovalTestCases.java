@@ -388,7 +388,16 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 			if (vehiclePartData.getVehiclePartAdditionalServices() != null) {
 				List<ServiceData> additionalServices = vehiclePartData.getVehiclePartAdditionalServices();
-				vehiclePartInfoScreen.selectVehiclePartAdditionalServices(additionalServices);
+				for (ServiceData additionalService : additionalServices) {
+					if (additionalService.getServicePrice() != null) {
+						VNextServiceDetailsScreen serviceDetailsScreen = vehiclePartInfoScreen.openServiceDetailsScreen(additionalService.getServiceName());
+						serviceDetailsScreen.setServiceAmountValue(additionalService.getServicePrice());
+						serviceDetailsScreen.setServiceQuantityValue(additionalService.getServiceQuantity());
+						serviceDetailsScreen.clickServiceDetailsDoneButton();
+					} else
+						vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
+				}
+
 			}
 			vehiclePartInfoScreen.clickSaveVehiclePartInfo(); }
 		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
