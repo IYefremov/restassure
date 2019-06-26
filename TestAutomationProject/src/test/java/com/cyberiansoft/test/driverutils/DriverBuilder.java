@@ -8,6 +8,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.SneakyThrows;
 import org.awaitility.Duration;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,12 +18,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static org.awaitility.Awaitility.await;
@@ -49,6 +54,7 @@ public class DriverBuilder {
         return instance;
     }
 
+    @SneakyThrows
     public final void setDriver(BrowserType browserType) {
 
         DesiredCapabilities webcap = null;
@@ -92,6 +98,30 @@ public class DriverBuilder {
                 } catch (SessionNotCreatedException ignored) {
                     new ThreadLocal<WebDriver>().set(new ChromeDriver(options));
                 }
+                break;
+            case SELENOID_CHROME:
+                ChromeOptions selenoidChromeOptions = new ChromeOptions();
+                Map<String, Object> prefs = new HashMap<>();
+                //1-Allow, 2-Block, 0-default
+                prefs.put("profile.default_content_setting_values.notifications", 1);
+                selenoidChromeOptions.setExperimentalOption("prefs", prefs);
+                selenoidChromeOptions.addArguments("--window-size=1800,1000");
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setBrowserName("chrome");
+                capabilities.setVersion("75.0");
+                capabilities.setCapability("enableVNC", true);
+                capabilities.setCapability("enableVideo", false);
+                capabilities.setCapability("sessionTimeout", "2m");
+                capabilities.setCapability("name", "SessionName");
+
+                capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
+                webcap = capabilities;
+                RemoteWebDriver driver = new RemoteWebDriver(
+                        URI.create("http://localhost:4444/wd/hub").toURL(),
+                        capabilities
+                );
+                driver.setFileDetector(new LocalFileDetector());
+                webDriver.set(driver);
                 break;
             case SAFARI:
                 SafariOptions safariOpts = new SafariOptions();

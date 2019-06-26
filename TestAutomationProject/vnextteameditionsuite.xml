@@ -10,7 +10,7 @@
         <!--  <listener class-name="com.cyberiansoft.test.vnext.utils.VNextTeamEditionTestListener"/>-->
         <listener class-name="com.cyberiansoft.test.vnext.listeners.ExtentTestNGIReporterListener"/>
     </listeners>
-    <test name="Tests for VNext client" preserve-order="true">
+    <test name="Tests for VNext client" preserve-order="true" group-by-instances="true">
         <classes>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamCustomersTestCases"/>

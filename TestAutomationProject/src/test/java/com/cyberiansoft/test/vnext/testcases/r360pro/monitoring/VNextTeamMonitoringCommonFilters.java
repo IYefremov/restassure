@@ -56,6 +56,8 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
                                                                     String description, JSONObject testData) {
         MonitorSteps.changeLocation("Another Location");
         MonitorSteps.verifyRepairOrderListIsEmpty();
+        MonitorSteps.changeLocation("automationMonitoring");
+        GeneralSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
