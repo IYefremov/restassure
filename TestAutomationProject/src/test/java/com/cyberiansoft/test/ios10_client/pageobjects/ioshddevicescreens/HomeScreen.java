@@ -173,9 +173,7 @@ public class HomeScreen extends iOSHDBaseScreen {
                 break;
             }
         toolbar.findElementByClassName("XCUIElementTypeButton").click();
-		Helpers.setTimeOut(180);
 		Helpers.acceptAlert();
-		Helpers.setDefaultTimeOut();
 	}
 	
 	public void updateVIN() {
@@ -187,9 +185,7 @@ public class HomeScreen extends iOSHDBaseScreen {
                 break;
             }
         toolbar.findElementsByClassName("XCUIElementTypeButton").get(1).click();
-	    Helpers.setTimeOut(60);
 		Helpers.acceptAlert();
-		Helpers.setDefaultTimeOut();
 	}
 
 	public MainScreen clickLogoutButton() {

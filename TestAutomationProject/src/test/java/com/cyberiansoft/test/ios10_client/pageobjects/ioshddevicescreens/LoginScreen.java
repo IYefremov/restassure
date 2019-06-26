@@ -46,8 +46,7 @@ public class LoginScreen extends iOSHDBaseScreen {
 		//thirdcode.click();
 		registerbtn.click();
 		//registerbtn.click();
-		
-		appiumdriver.manage().timeouts().implicitlyWait(60*9, TimeUnit.SECONDS);
+
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 600);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("UpdateMainDatabaseButton")));
 		appiumdriver.findElementByAccessibilityId("UpdateMainDatabaseButton");

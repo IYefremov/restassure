@@ -15,7 +15,6 @@ public class RegularTeamInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	public RegularTeamInvoicesScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void selectInvoice(String invoice) {

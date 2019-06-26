@@ -90,7 +90,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public RegularVehicleScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable"))); 
 	}
@@ -370,6 +369,13 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
 	public String getWorkOrderTypeValue() {
 		return regularwotypelabel.getAttribute("value");
+	}
+
+	public void clickSaveAsFinal() {
+		clickSave();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Final")));
+		appiumdriver.findElement(MobileBy.AccessibilityId("Final")).click();
 	}
 
 }

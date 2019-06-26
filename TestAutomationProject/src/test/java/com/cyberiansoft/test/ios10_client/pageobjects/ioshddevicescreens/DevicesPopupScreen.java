@@ -21,7 +21,6 @@ public class DevicesPopupScreen extends iOSHDBaseScreen {
 	public DevicesPopupScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickCancelButton() {

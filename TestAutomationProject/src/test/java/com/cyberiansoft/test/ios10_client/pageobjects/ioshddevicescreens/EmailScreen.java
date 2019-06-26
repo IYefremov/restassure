@@ -24,7 +24,6 @@ public class EmailScreen extends iOSRegularBaseScreen {
 	public EmailScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void sendInvoiceOnEmailAddress(String emailaddr) {

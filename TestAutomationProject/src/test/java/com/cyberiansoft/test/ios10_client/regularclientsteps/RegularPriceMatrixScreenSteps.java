@@ -17,6 +17,7 @@ public class RegularPriceMatrixScreenSteps {
     public static void goTopriceMatrixScreenAndSelectPriceMatrixData(PriceMatrixScreenData priceMatrixScreenData) {
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
         baseWizardScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+
         if (priceMatrixScreenData.getMatrixService() != null) {
             RegularServicesScreenSteps.selectMatrixServiceData(priceMatrixScreenData.getMatrixService());
         } else if (priceMatrixScreenData.getVehiclePartsData() != null) {

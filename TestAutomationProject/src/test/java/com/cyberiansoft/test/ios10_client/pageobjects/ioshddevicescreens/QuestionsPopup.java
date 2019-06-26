@@ -11,7 +11,6 @@ public class QuestionsPopup extends iOSHDBaseScreen {
 	public QuestionsPopup() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void answerQuestion2(String answer) {
