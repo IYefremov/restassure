@@ -14,7 +14,6 @@ public class SummaryScreen extends iOSHDBaseScreen {
     public SummaryScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Summary")));
     }

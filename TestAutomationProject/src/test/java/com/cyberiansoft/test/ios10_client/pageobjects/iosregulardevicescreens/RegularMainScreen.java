@@ -41,17 +41,14 @@ public class RegularMainScreen extends iOSBaseScreen {
 	}
 	
 	public void updateDatabase() {
-		Helpers.setTimeOut(340);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("UpdateMainDatabaseButton")));
 		mainbtn.click();
 		Helpers.acceptAlert();
-		Helpers.setDefaultTimeOut();
 	}
 
 	public void updateVIN() {
-		Helpers.setTimeOut(60);
 		Helpers.waitUntilCheckLicenseDialogDisappears();
 		/*
 		 * MobileElement element = new MobileElement( (RemoteWebElement)
@@ -59,7 +56,6 @@ public class RegularMainScreen extends iOSBaseScreen {
 		 */
 		updatevin.click();
 		Helpers.acceptAlert();
-		Helpers.setDefaultTimeOut();
 	}
 
 	public RegularHomeScreen userLogin(String user, String password)  {

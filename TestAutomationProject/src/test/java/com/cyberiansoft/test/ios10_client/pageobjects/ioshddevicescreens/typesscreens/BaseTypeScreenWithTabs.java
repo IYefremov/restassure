@@ -10,8 +10,6 @@ public abstract class BaseTypeScreenWithTabs extends BaseTypeScreen {
 
     public BaseTypeScreenWithTabs() {
         super();
-        //PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        //appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public void switchToMyView() {

@@ -38,7 +38,6 @@ public class CarHistoryScreen extends BaseAppScreen {
 	public CarHistoryScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, Duration.ofSeconds(10)), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Cars")));
 	}

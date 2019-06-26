@@ -30,22 +30,16 @@ public abstract class iOSBaseScreen {
 	
 	public iOSBaseScreen() {
 		appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
-		//PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		//appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	protected boolean elementExists(By locator) {
-		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		boolean exists = appiumdriver.findElements(locator).size() != 0;
-		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		return exists;
 	}
 	
 	public void waitForAlert() {
-		appiumdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeAlert")));
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void acceptAlert() {
@@ -55,9 +49,7 @@ public abstract class iOSBaseScreen {
 	}
 
 	public boolean elementExists(String xpath) {
-		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		boolean exists = appiumdriver.findElements(By.xpath(xpath)).size() != 0;
-		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		return exists;
 	}
 	

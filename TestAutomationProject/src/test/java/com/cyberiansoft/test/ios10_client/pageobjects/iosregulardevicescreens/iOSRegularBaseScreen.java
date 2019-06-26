@@ -34,9 +34,7 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 		
 	public boolean elementExists(String elementName) {
 		boolean exists = false;
-		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		exists =  appiumdriver.findElementsByAccessibilityId(elementName).size() > 0;
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return exists;
 	}
 	

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -53,10 +54,10 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	public RegularServicesScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
-		appiumdriver.findElementByAccessibilityId("Available").click();
+		wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Services")));
 	}
 
 	public void clickCancelButton() {
@@ -123,7 +124,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 			if (appiumdriver.findElementsByClassName("XCUIElementTypeSearchField").size() > 0)
 				searchServiceByName(servicename);
 		}
-		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		if (appiumdriver.findElementByAccessibilityId("AvailableServiceList").
 				findElement(MobileBy.AccessibilityId(servicename)).findElements(MobileBy.AccessibilityId("unselected")).size() > 0) {
 			appiumdriver.findElementByAccessibilityId("AvailableServiceList").

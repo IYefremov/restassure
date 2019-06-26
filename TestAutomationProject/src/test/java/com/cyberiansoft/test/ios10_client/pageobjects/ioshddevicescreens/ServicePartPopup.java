@@ -28,7 +28,6 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	public ServicePartPopup() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectServicePartCategory(String categoryname) {

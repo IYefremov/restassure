@@ -19,7 +19,6 @@ public class TechniciansPopup extends iOSHDBaseScreen {
     public TechniciansPopup() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        //appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public String saveTechnociansViewWithAlert() {

@@ -32,34 +32,20 @@ public class MainScreen extends iOSHDBaseScreen {
 	}
 	
 	public void updateDatabase() {
-		Helpers.setTimeOut(340);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(mainbtn));
 		mainbtn.click();
 		Helpers.acceptAlert();
-		Helpers.setDefaultTimeOut();
 	}
 
 	public void updateVIN() {
-		Helpers.setTimeOut(60);
 		Helpers.waitUntilCheckLicenseDialogDisappears();
-		/*
-		 * MobileElement element = new MobileElement( (RemoteWebElement)
-		 * driver.findElementByXPath(updatevinxpath), driver);
-		 */
 		updatevin.click();
 		Helpers.acceptAlert();
-		Helpers.setDefaultTimeOut();
 	}
 
 	public HomeScreen userLogin(String user, String password) {
 		Helpers.waitABit(1000);
-		Helpers.setTimeOut(5);
-		//Helpers.waitUntilCheckLicenseDialogDisappears();
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(user)));
-		//TouchAction action = new TouchAction(appiumdriver);
-		//action.press(appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']")).waitAction(Duration.ofSeconds(1)).release().perform();
 		if (!appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").isDisplayed()) {
 			swipeTableUp(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + user + "']/.."),
 					appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + user + "']/../.."));
@@ -70,9 +56,7 @@ public class MainScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeSecureTextField")));
 		((IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeSecureTextField")).setValue(password);
-		//securefld.setValue(password);
 		loginbtn.click();
-		//loginbtn.click();
 		return new HomeScreen();
 	}
 	

@@ -24,7 +24,6 @@ public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 	public TeamInvoicesScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void printInvoice(String invoicenum, String printserver) {

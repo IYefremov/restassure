@@ -904,8 +904,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(vehiclescreen.getModel(), workOrderData.getVehicleInfoData().getVehicleModel());
 		Assert.assertEquals(vehiclescreen.getYear(), workOrderData.getVehicleInfoData().getVehicleYear());
 		ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-
+		ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 		ordersummaryscreen.checkApproveAndCreateInvoice();
+		ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSave();
 		ordersummaryscreen.selectDefaultInvoiceType();
@@ -1358,6 +1359,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(vehiclescreen.getModel(), workOrderData.getVehicleInfoData().getVehicleModel());
 
 		ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		ordersummaryscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.clickSave();
@@ -1669,6 +1671,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			servicesscreen.selectSubService(serviceData.getServiceName());
 		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		ordersummaryscreen.clickSave();
 		ordersummaryscreen.closeDublicaterServicesWarningByClickingCancel();
@@ -1890,7 +1893,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			}
 		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 
-		servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
 		servicesscreen.clickSave();
 		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		servicerequestsscreen = new RegularServiceRequestsScreen();
@@ -3324,6 +3327,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		}
 		approveinspscreen.clickCancelButton();
 		approveinspscreen.clickCancelButton();
+		myinspectionsscreen = new RegularMyInspectionsScreen();
 		myinspectionsscreen.selectInspectionForEdit(inspectionnumber);
 		vehiclescreen = new RegularVehicleScreen();
 		PriceMatrixScreenData priceMatrixScreenData = inspectionData.getPriceMatrixScreensData().get(0);
@@ -3747,8 +3751,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		final String inspnumber = vehiclescreen.getInspectionNumber();
 		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 
-		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickSaveAsFinal();
+		vehiclescreen.clickSaveAsFinal();
 		myinspectionsscreen = new RegularMyInspectionsScreen();
 		myinspectionsscreen.selectInspectionToAssign(inspnumber);
 		Assert.assertTrue(myinspectionsscreen.isAssignButtonExists());

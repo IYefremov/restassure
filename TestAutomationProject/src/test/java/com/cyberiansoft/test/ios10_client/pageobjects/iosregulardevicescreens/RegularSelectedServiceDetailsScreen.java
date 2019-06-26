@@ -51,7 +51,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public RegularSelectedServiceDetailsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public String getServicePriceValue() {
@@ -166,9 +165,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isQuestionFormCellExists() {
-		appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		boolean exists =  appiumdriver.findElements(MobileBy.AccessibilityId("Questions")).size() > 0;
-		appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.MILLISECONDS);
 		return exists;
 	}
 

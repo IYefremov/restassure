@@ -14,7 +14,6 @@ public class LicensesScreen extends iOSHDBaseScreen {
 	public LicensesScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	@iOSXCUITFindBy(accessibility = "Add")

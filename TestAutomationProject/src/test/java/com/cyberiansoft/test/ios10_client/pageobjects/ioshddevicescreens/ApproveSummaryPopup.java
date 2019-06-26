@@ -16,7 +16,6 @@ public class ApproveSummaryPopup extends iOSHDBaseScreen {
 	public ApproveSummaryPopup() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickApproveButton() {

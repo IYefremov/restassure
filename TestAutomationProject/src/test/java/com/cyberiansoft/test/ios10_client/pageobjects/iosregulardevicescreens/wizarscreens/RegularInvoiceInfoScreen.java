@@ -45,7 +45,6 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	public RegularInvoiceInfoScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Info")));
 		wait = new WebDriverWait(appiumdriver, 30);
@@ -75,8 +74,6 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 		setPOWithoutHidingkeyboard(_po);
         WebElement par = getTableParentCell("PO#");
         par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys("\n");
-		//((IOSDriver) appiumdriver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Return");
-		//hidekeyboardbtn.click();
 	}
 	
 	public void setPOWithoutHidingkeyboard(String _po)  {

@@ -23,7 +23,6 @@ public class RegularCarHistoryWOsAndInvoicesScreen extends iOSRegularBaseScreen 
     public RegularCarHistoryWOsAndInvoicesScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(MobileBy.xpath("//XCUIElementTypeButton[@name='viewTitle' and @label='History']")));
     }

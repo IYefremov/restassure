@@ -11,7 +11,6 @@ public class TechRevenueScreen extends iOSHDBaseScreen {
 	public TechRevenueScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean isTechIsPresentInReport(String techname) {
