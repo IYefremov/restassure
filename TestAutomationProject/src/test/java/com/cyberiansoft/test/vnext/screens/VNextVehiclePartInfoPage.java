@@ -89,13 +89,9 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 
-	public VNextLaborServiceDetailsScreen openVehiclePartLaborServiceDetails(String additionalservicename) {
-		WebElement addservs = getVehiclePartAdditionalServiceCell(additionalservicename);
-		if (addservs != null)
-			tap(addservs.findElement(By.xpath(".//div[@class='checkbox-item-title']")));
-		else
-			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
-		return new VNextLaborServiceDetailsScreen(appiumdriver);
+	public void openVehiclePartLaborServiceDetails(String additionalservicename) {
+		WebElement webElement = WaitUtils.waitUntilElementIsClickable(By.xpath("//div[@class='checkbox-item-title' and text()='" + additionalservicename + "']"));
+		tap(webElement);
 	}
 
 	public void selectVehiclePartAdditionalServices(List<ServiceData> additionalServices) {
@@ -104,6 +100,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 			if (addservs != null) {
 				tap(addservs.findElement(By.xpath(".//input[@action='select-item']")));
 				WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
+				BaseUtils.waitABit(500);
 			} else
 				Assert.fail("Can't find additional servicve: " + additionalService.getServiceName());
 		}
@@ -119,7 +116,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	}
 
 	private List<WebElement> getAvailableServicesList() {
-		return additionalavailableserviceslist.findElements(By.xpath(".//*[@action='open-details']"));
+		return additionalavailableserviceslist.findElements(By.xpath(".//*[@class='r360-accordion-item checked-accordion-item   ']"));
 	}
 
 	private String getServiceListItemName(WebElement srvlistitem) {

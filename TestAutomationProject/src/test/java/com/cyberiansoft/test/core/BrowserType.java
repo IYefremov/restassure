@@ -6,7 +6,8 @@ public enum BrowserType {
 	FIREFOX("firefox"),
 	IE("ie"),
 	EDGE("edge"),
-	SAFARI("safari");
+	SAFARI("safari"),
+	SELENOID_CHROME("selenoid_chrome");
 
 	private final String browserType; 
 	

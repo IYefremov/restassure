@@ -54,9 +54,8 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         return new VNextServiceDetailsScreen(appiumdriver);
     }
 
-    public VNextLaborServiceDetailsScreen openLaborServiceDetailsScreen(String servicename) {
+    public void openLaborServiceDetails(String servicename) {
         tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
-        return new VNextLaborServiceDetailsScreen(appiumdriver);
     }
 
     public void clickSaveButton() {
@@ -106,14 +105,12 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         return amaount;
     }
 
-    public VNextLaborServiceDetailsScreen selectLaborService(String laborServiceName) {
+    public void selectLaborService(String laborServiceName) {
         WebElement servicerow = getServiceListItem(laborServiceName);
         if (servicerow != null) {
             tap(servicerow);
-            return new VNextLaborServiceDetailsScreen(appiumdriver);
         } else
             Assert.assertTrue(false, "Can't find service: " + laborServiceName);
-        return null;
     }
 
     public void selectServices(String[] serviceslist) {

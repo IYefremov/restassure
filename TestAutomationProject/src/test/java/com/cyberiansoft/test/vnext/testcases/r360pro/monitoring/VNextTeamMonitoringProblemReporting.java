@@ -19,7 +19,6 @@ import com.cyberiansoft.test.vnext.steps.monitoring.ProblemReportingSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEditionRegistration {
@@ -43,7 +42,6 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         GeneralSteps.pressBackButton();
     }
 
-    @Ignore("Due to bug 83028")
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void userCanReportProblemOnPhaseLevel(String rowID,
                                                  String description, JSONObject testData) {
@@ -52,13 +50,15 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
 
         MonitorSteps.editOrder(workOrderId);
         EditOrderSteps.openPhaseMenu(phaseDto);
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
         phaseDto.setStatus(PhaseName.PROBLEM);
         EditOrderSteps.verifyPhaseStatus(phaseDto);
     }
 
-    @Ignore("Due to bug 83028")
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "userCanReportProblemOnPhaseLevel", priority = 20)
     public void userCanResolveProblemOnPhaseLevel(String rowID,
                                                   String description, JSONObject testData) {
@@ -105,7 +105,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
         ProblemReportingSteps.resolveProblem();
-        serviceDto.setServiceStatus(ServiceStatus.ACTIVE);
+        serviceDto.setServiceStatus(ServiceStatus.STARTED);
         EditOrderSteps.verifyServiceStatus(serviceDto);
         GeneralSteps.pressBackButton();
         phaseDto.setStatus(PhaseName.ACTIVE);

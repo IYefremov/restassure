@@ -212,6 +212,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//ul[@data-template='repairOrders-filterInfoList-item']/li")
     private List<WebElement> searchOptions;
 
+
     public VNextBORepairOrdersWebPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

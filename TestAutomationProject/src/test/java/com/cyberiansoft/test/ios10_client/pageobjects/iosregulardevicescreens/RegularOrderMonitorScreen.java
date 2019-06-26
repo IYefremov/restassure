@@ -307,6 +307,16 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label").replaceAll("\n", " ");
 	}
 
+	public String getMonitorServiceAmauntValue(ServiceData serviceData) {
+		String serviceName = serviceData.getServiceName();
+		if (serviceData.getVehiclePart() != null) {
+			serviceName = serviceName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
+		}
+		return appiumdriver.findElementByAccessibilityId("MonitorOrderServicesList")
+				.findElement(MobileBy.AccessibilityId(serviceName))
+				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label").replaceAll("\n", " ");
+	}
+
 	public String getServiceDetailsPriceValue() {
 		return appiumdriver.findElementByAccessibilityId("MonitorDetailsCell_Amount")
 				.findElement(MobileBy.AccessibilityId("AmountTextControl")).getAttribute("value");

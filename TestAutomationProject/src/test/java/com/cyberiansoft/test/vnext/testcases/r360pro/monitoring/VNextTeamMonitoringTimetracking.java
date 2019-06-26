@@ -62,7 +62,6 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
     public void userCanStopTimeTrackingOnService(String rowID,
                                                  String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
         ServiceData serviceDto = workOrderData.getServiceData();
 
         EditOrderSteps.openServiceMenu(serviceDto);

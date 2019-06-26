@@ -53,11 +53,12 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
 
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = availableServicesScreen.
-                openLaborServiceDetailsScreen(inspectionData.getLaborServiceData().getServiceName());
-        laborServiceDetailsScreen.selectPanelAndPart(inspectionData.getLaborServiceData().getLaborServicePanel(),
-                inspectionData.getLaborServiceData().getLaborServicePart());
-        laborServiceDetailsScreen.saveLaborServiceDetails();
+        availableServicesScreen.
+                openLaborServiceDetails(inspectionData.getLaborServiceData().getServiceName());
+        VNextLaborServicePanelsList laborServicePanelsList = new VNextLaborServicePanelsList(DriverBuilder.getInstance().getAppiumDriver());
+        VNextLaborServicePartsList laborServicePartsList = laborServicePanelsList.selectServiceLaborPanel(inspectionData.getLaborServiceData().getLaborServicePanel());
+        laborServicePartsList.selectServiceLaborPart(inspectionData.getLaborServiceData().getLaborServicePart());
+        laborServicePartsList.saveLaborServiceParts();
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(inspectionData.getLaborServiceData().getServiceName()),
@@ -85,20 +86,18 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = availableServicesScreen.
+        availableServicesScreen.
                 selectLaborService(inspectionData.getLaborServiceData().getServiceName());
-        VNextLaborServicePanelsList laborServicePanelsList = laborServiceDetailsScreen.clickSelectPanelCell();
+        VNextLaborServicePanelsList laborServicePanelsList = new VNextLaborServicePanelsList(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertFalse(laborServicePanelsList.isPartsTabEnabled());
         laborServicePanelsList.clickBackButton();
-        laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
-                laborServiceDetailsScreen.clickScreenBackButton();
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         inspectionScreen = availableServicesScreen.saveInspectionViaMenu();
         inspectionScreen.clickBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+   @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserDoesntNeedToSelectPanelWhenAddLaborServiceInMatrix(String rowID,
                                                                                  String description, JSONObject testData) {
 
@@ -127,11 +126,11 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
         vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = vehiclePartInfoScreen.openVehiclePartLaborServiceDetails(vehiclePartData.getMatrixAdditionalLaborService().getServiceName());
-        VNextLaborServicePartsList laborServicePartsList = laborServiceDetailsScreen.clickSelectPanelsAndPartsForLaborService(vehiclePartData.getMatrixAdditionalLaborService());
+        vehiclePartInfoScreen.openVehiclePartLaborServiceDetails(vehiclePartData.getMatrixAdditionalLaborService().getServiceName());
+       VNextLaborServicePartsList laborServicePartsList = new VNextLaborServicePartsList(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertTrue(laborServicePartsList.isPartsTabEnabled());
         laborServicePartsList.clickBackButton();
-        laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
+       VNextLaborServiceDetailsScreen laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
 
         laborServiceDetailsScreen.saveLaborServiceDetails();
         vehiclePartInfoScreen = new VNextVehiclePartInfoPage(DriverBuilder.getInstance().getAppiumDriver());
@@ -164,20 +163,20 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
         availableServicesScreen.switchToAvalableServicesView();
 
         VNextVehiclePartsScreen priceMatrixesScreen = availableServicesScreen.openSelectedMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
-        //VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
 
         VehiclePartData vehiclePartData = inspectionData.getMatrixServiceData().getVehiclePartData();
         VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
         vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
         vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = vehiclePartInfoScreen.openVehiclePartLaborServiceDetails(vehiclePartData.getMatrixAdditionalLaborService().getServiceName());
-        VNextLaborServicePartsList laborServicePartsList = laborServiceDetailsScreen.clickSelectPanelsAndPartsForLaborService(vehiclePartData.getMatrixAdditionalLaborService());
+        vehiclePartInfoScreen.openVehiclePartLaborServiceDetails(vehiclePartData.getMatrixAdditionalLaborService().getServiceName());
+        VNextLaborServicePartsList laborServicePartsList = new VNextLaborServicePartsList(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertTrue(laborServicePartsList.isPartsTabEnabled());
         laborServicePartsList.selectServiceLaborPart(vehiclePartData.getMatrixAdditionalLaborService().getLaborServicePart());
-        laborServiceDetailsScreen = laborServicePartsList.saveLaborServiceParts();
-                Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceRate(vehiclePartData.getMatrixAdditionalLaborService()),
-                        vehiclePartData.getMatrixAdditionalLaborService().getLaborServiceRate());
+        laborServicePartsList.saveLaborServiceParts();
+        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceRate(vehiclePartData.getMatrixAdditionalLaborService()),
+                vehiclePartData.getMatrixAdditionalLaborService().getLaborServiceRate());
         Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceTime(vehiclePartData.getMatrixAdditionalLaborService()),
                 vehiclePartData.getMatrixAdditionalLaborService().getLaborServiceTime());
         Assert.assertEquals(laborServiceDetailsScreen.getLaborServiceNotes(vehiclePartData.getMatrixAdditionalLaborService()),
@@ -213,15 +212,14 @@ public class VNextLaborServiceTestCases extends BaseTestCaseTeamEditionRegistrat
  
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextLaborServiceDetailsScreen laborServiceDetailsScreen = availableServicesScreen.
+        availableServicesScreen.
                 selectLaborService(inspectionData.getLaborServiceData().getServiceName());
-        VNextLaborServicePanelsList laborServicePanelsList = laborServiceDetailsScreen.clickSelectPanelCell();
+        VNextLaborServicePanelsList laborServicePanelsList = new VNextLaborServicePanelsList(DriverBuilder.getInstance().getAppiumDriver());
         VNextLaborServicePartsList laborServicePartsList = laborServicePanelsList.selectServiceLaborPanel(inspectionData.getLaborServiceData().getLaborServicePanel());
         laborServicePartsList.clickBackButton();
         laborServicePanelsList = new VNextLaborServicePanelsList(DriverBuilder.getInstance().getAppiumDriver());
         laborServicePanelsList.clickBackButton();
-        laborServiceDetailsScreen = new VNextLaborServiceDetailsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen = laborServiceDetailsScreen.clickBackButton();
+        availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionScreen = availableServicesScreen.cancelInspection();
         inspectionScreen.clickBackButton();
     }

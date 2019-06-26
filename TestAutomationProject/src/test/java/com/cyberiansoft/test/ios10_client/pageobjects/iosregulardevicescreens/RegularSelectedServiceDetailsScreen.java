@@ -419,15 +419,16 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		amountfld.clear();
 		amountfld.sendKeys(newamount);
 		appiumdriver.findElementByAccessibilityId("Override").click();
+
 	}
 
-	public boolean isTechnicianIsSelected(String technician) {
+	public boolean isTechnicianSelected(String technician) {
 		return appiumdriver.
 				findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
 						+ technician + "\")]/XCUIElementTypeButton[@name=\"selected\"]").size() > 0;
 	}
 
-	public boolean isTechnicianIsNotSelected(String technician) {
+	public boolean isTechnicianNotSelected(String technician) {
 		return appiumdriver.
 				findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
 						+ technician + "\")]/XCUIElementTypeButton[@name=\"unselected\"]").size() > 0;

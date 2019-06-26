@@ -36,7 +36,7 @@
       },
       "service": {
         "serviceName": "Labor AM",
-        "problemReason": "SOME_PROBLEM"
+        "problemReason": "PROBLEM REASON"
       }
     }
   ],
@@ -67,7 +67,8 @@
       },
       "monitoring": {
         "orderPhaseDto": {
-          "phaseName": "Phase: AutomationPhaseLevel"
+          "phaseName": "Phase: AutomationPhaseLevel",
+          "problemReason": "PROBLEM REASON"
         }
       }
     }
