@@ -189,7 +189,6 @@ public class ServicesScreen extends BaseWizardScreen {
 
 	public SelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
 		IOSElement grouplist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/.."));
-        appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
 		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).sendKeys(servicename);
 		appiumdriver.hideKeyboard();

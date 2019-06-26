@@ -91,7 +91,6 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	public void clickSignButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Sign"))).click();
-		//appiumdriver.findElement(MobileBy.AccessibilityId("Sign")).click();
 	}
 	
 	public void clickSingnAndDrawApprovalSignature() {
@@ -133,10 +132,14 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isInspectionServiceExistsForApprove(String inspservice) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("approve little off")));
 		return appiumdriver.findElements(MobileBy.AccessibilityId(inspservice)).size() > 0;
 	}
 
 	public boolean isInspectionServiceExistsForApprove(ServiceData serviceData) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("approve little off")));
 		String inspservice = serviceData.getServiceName();
 		if (serviceData.getVehiclePart() != null)
 			inspservice = inspservice + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
@@ -144,8 +147,8 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getInspectionServicePrice(String inspservice) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(inspservice)));
+		WebDriverWait wait = new WebDriverWait(appiumdriver,30);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspservice)));
 		WebElement par = getTableCell(inspservice);
 		return par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}

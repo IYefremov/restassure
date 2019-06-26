@@ -7,7 +7,5 @@ public abstract class BaseTypeScreen extends BaseAppScreen implements ITypeScree
 
     public BaseTypeScreen() {
         super();
-        //PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        //appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 }

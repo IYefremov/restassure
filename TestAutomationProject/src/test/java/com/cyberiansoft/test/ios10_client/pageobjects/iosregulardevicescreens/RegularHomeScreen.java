@@ -149,19 +149,15 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	}	
 	
 	public void updateDatabase() {
-		Helpers.setTimeOut(180);
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		toolbar.findElementsByClassName("XCUIElementTypeButton").get(0).click();
 		Helpers.acceptAlert();
-		Helpers.setDefaultTimeOut();
 	}
 	
 	public void updateVIN() {
-		Helpers.setTimeOut(60);
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		toolbar.findElementsByClassName("XCUIElementTypeButton").get(1).click();
 		Helpers.acceptAlert();
-		Helpers.setDefaultTimeOut();
 	}
 
 	public RegularMainScreen clickLogoutButton() {

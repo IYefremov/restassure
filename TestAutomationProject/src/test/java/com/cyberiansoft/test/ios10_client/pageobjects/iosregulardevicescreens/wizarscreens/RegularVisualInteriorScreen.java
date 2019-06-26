@@ -40,7 +40,6 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	public RegularVisualInteriorScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		//appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void waitVisualScreenLoaded(String screenName) {

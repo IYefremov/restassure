@@ -18,7 +18,6 @@ public class RegularInspectionToolBar extends iOSRegularBaseScreen {
 	public RegularInspectionToolBar() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public String getInspectionSubTotalPrice() {

@@ -24,7 +24,6 @@ public class SinglePageInspectionScreen extends BaseWizardScreen {
 	public SinglePageInspectionScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public String getInspectionNumber() {

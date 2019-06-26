@@ -17,7 +17,6 @@ public class RegularSettingsScreen extends RegularBaseAppScreen {
 	public RegularSettingsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public void setCheckDuplicatesOn() {

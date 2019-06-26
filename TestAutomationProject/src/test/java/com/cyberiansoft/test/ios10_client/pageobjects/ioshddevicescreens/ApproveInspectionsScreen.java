@@ -46,7 +46,6 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	public ApproveInspectionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void clickApproveButton() {

@@ -15,7 +15,6 @@ public class RegularTechRevenueScreen extends iOSRegularBaseScreen {
 	public RegularTechRevenueScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public boolean isTechIsPresentInReport(String techname) {

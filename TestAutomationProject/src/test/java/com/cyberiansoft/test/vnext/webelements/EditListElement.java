@@ -3,9 +3,11 @@ package com.cyberiansoft.test.vnext.webelements;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+@Getter
 public class EditListElement implements IWebElement {
     private WebElement rootElement;
     private String statusLocator = ".//div[@class=\"icon-item-status-title\"]";

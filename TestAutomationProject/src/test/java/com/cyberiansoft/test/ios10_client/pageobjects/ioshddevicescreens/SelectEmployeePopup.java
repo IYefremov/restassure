@@ -18,7 +18,6 @@ public class SelectEmployeePopup extends iOSHDBaseScreen {
 	public SelectEmployeePopup() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void selectEmployeeAndTypePassword(String employee, String password) {

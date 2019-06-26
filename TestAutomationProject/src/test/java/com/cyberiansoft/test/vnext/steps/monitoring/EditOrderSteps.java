@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.EditListElement;
 import org.testng.Assert;
 
 public class EditOrderSteps {
@@ -88,11 +89,19 @@ public class EditOrderSteps {
         infoScreen.setOrderPriority(orderPriority);
     }
 
-    public static void verifyTimeTrackingShouldBeStarted(ServiceData serviceDto, Boolean shouldBeStarted) {
+    public static void verifyTimeTrackingShouldBeStartedAtService(ServiceData serviceDto, Boolean shouldBeStarted) {
         PhaseServicesScreen phaseServicesScreen = new PhaseServicesScreen();
         BaseUtils.waitABit(2000);
         WaitUtils.elementShouldBeVisible(phaseServicesScreen.getRootElement(), true);
         Assert.assertEquals(phaseServicesScreen.getServiceElement(serviceDto.getServiceName()).isClockIconPresent(), shouldBeStarted);
+    }
+
+    public static void verifyTimeTrackingShouldBeStartedAtPhase(OrderPhaseDto phaseDto, Boolean shouldBeStarted) {
+        PhasesScreen phaseScreen = new PhasesScreen();
+        BaseUtils.waitABit(2000);
+        EditListElement phaseElement = phaseScreen.getPhaseElement(phaseDto.getPhaseName());
+        WaitUtils.elementShouldBeVisible(phaseElement.getRootElement(), true);
+        Assert.assertEquals(phaseElement.isClockIconPresent(), shouldBeStarted);
     }
 
     public static void switchToParts() {

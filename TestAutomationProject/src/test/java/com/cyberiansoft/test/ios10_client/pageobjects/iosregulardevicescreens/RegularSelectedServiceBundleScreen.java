@@ -25,7 +25,6 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	public RegularSelectedServiceBundleScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	public boolean checkBundleIsSelected(String bundle) {

@@ -29,7 +29,6 @@ public class EnterpriseBeforeDamageScreen extends BaseWizardScreen {
 	public EnterpriseBeforeDamageScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public static String getEnterpriseBeforeDamageScreenCaption() {

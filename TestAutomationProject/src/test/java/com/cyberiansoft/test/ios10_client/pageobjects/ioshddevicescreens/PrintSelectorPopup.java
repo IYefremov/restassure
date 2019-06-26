@@ -21,7 +21,6 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 	public PrintSelectorPopup() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public void checkRemotePrintServerAndSelectPrintServer(String printserver) {
