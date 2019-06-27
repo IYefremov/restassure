@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.webelements.EditListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Getter
 public class PhasesScreen extends MonitorScreen {
-    @FindBy(xpath = "//div[@data-autotests-id='phases-list']/div")
+    @FindBy(xpath = "//div[@data-autotests-id='phases-list']/div/div")
     private List<EditListElement> phaseListElements;
 
     @FindBy(xpath = "//span[@action='info']")
@@ -25,6 +26,7 @@ public class PhasesScreen extends MonitorScreen {
     }
 
     public EditListElement getPhaseElement(String phaseName) {
+        BaseUtils.waitABit(2000);
         return phaseListElements.stream()
                 .filter((phaseElement) -> phaseElement.getName().equals(phaseName))
                 .findFirst()

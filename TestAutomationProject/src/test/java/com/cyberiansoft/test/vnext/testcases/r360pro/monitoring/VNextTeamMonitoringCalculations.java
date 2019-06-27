@@ -59,10 +59,10 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToParts();
-        EditOrderSteps.openPhaseMenu(serviceData.getServiceName());
+        EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.ORDERED);
-        EditOrderSteps.openPhaseMenu(serviceData.getServiceName());
+        EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.RECEIVED);
         GeneralSteps.pressBackButton();
@@ -74,18 +74,16 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
     public void skippedServicesShouldNotAffectCalculation(String rowID,
                                                           String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
         RepairOrderDto repairOrderDto = workOrderData.getMonitoring().getRepairOrderData();
         ServiceData serviceData = workOrderData.getServiceData();
 
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-        EditOrderSteps.expandPhase(phaseDto);
-        EditOrderSteps.openServiceMenu(serviceData);
+        EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.SKIPPED);
         GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
+        GeneralSteps.pressBackButton();
     }
 }

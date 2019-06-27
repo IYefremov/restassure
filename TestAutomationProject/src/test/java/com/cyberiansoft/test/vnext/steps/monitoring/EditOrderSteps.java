@@ -7,12 +7,10 @@ import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.screens.monitoring.InfoScreen;
-import com.cyberiansoft.test.vnext.screens.monitoring.PhaseServicesScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import com.cyberiansoft.test.vnext.webelements.EditListElement;
 import org.testng.Assert;
 
 public class EditOrderSteps {
@@ -53,35 +51,29 @@ public class EditOrderSteps {
         phasesScreen.getPhaseElement(phaseDto.getPhaseName()).expandElement();
     }
 
-    public static void openServiceMenu(ServiceData serviceData) {
-        PhaseServicesScreen phaseServicesScreen = new PhaseServicesScreen();
-        WaitUtils.collectionSizeIsGreaterThan(phaseServicesScreen.getServicesList(), 0);
-        phaseServicesScreen.getServiceElement(serviceData.getServiceName()).openMenu();
-    }
-
-    public static void verifyServiceStatus(ServiceData serviceDto) {
-        PhaseServicesScreen phaseServicesScreen = new PhaseServicesScreen();
-        WaitUtils.elementShouldBeVisible(phaseServicesScreen.getRootElement(), true);
-        BaseUtils.waitABit(2000);
-        Assert.assertEquals(phaseServicesScreen.getServiceElement(serviceDto.getServiceName()).getStatus(), serviceDto.getStatus());
-    }
-
-    public static void verifyPhaseStatus(OrderPhaseDto phaseDto) {
+    public static void verifyElementStatus(OrderPhaseDto phaseDto) {
         PhasesScreen phasesScreen = new PhasesScreen();
+        BaseUtils.waitABit(2000);
         Assert.assertEquals(phasesScreen.getPhaseElement(phaseDto.getPhaseName()).getStatus(), phaseDto.getStatus());
     }
 
-    public static void openPhaseMenu(OrderPhaseDto phaseDto) {
+    public static void verifyElementStatus(ServiceData serviceData) {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        BaseUtils.waitABit(2000);
+        Assert.assertEquals(phasesScreen.getPhaseElement(serviceData.getServiceName()).getStatus(), serviceData.getStatus());
+    }
+
+    public static void openElementMenu(OrderPhaseDto phaseDto) {
         PhasesScreen phasesScreen = new PhasesScreen();
         BaseUtils.waitABit(1000);
         WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getPhaseListElements(), 0);
         phasesScreen.getPhaseElement(phaseDto.getPhaseName()).openMenu();
     }
 
-    public static void openPhaseMenu(String phaseName) {
+    public static void openElementMenu(String phaseName) {
         OrderPhaseDto orderPhaseDto = new OrderPhaseDto();
         orderPhaseDto.setPhaseName(phaseName);
-        openPhaseMenu(orderPhaseDto);
+        openElementMenu(orderPhaseDto);
     }
 
     public static void setOrderPriority(OrderPriority orderPriority) {
@@ -89,19 +81,10 @@ public class EditOrderSteps {
         infoScreen.setOrderPriority(orderPriority);
     }
 
-    public static void verifyTimeTrackingShouldBeStartedAtService(ServiceData serviceDto, Boolean shouldBeStarted) {
-        PhaseServicesScreen phaseServicesScreen = new PhaseServicesScreen();
-        BaseUtils.waitABit(2000);
-        WaitUtils.elementShouldBeVisible(phaseServicesScreen.getRootElement(), true);
-        Assert.assertEquals(phaseServicesScreen.getServiceElement(serviceDto.getServiceName()).isClockIconPresent(), shouldBeStarted);
-    }
-
-    public static void verifyTimeTrackingShouldBeStartedAtPhase(OrderPhaseDto phaseDto, Boolean shouldBeStarted) {
+    public static void verifyTimeTrackingShouldBeStarted(String objectName, Boolean shouldBeStarted) {
         PhasesScreen phaseScreen = new PhasesScreen();
         BaseUtils.waitABit(2000);
-        EditListElement phaseElement = phaseScreen.getPhaseElement(phaseDto.getPhaseName());
-        WaitUtils.elementShouldBeVisible(phaseElement.getRootElement(), true);
-        Assert.assertEquals(phaseElement.isClockIconPresent(), shouldBeStarted);
+        Assert.assertEquals(phaseScreen.getPhaseElement(objectName).isClockIconPresent(), shouldBeStarted);
     }
 
     public static void switchToParts() {

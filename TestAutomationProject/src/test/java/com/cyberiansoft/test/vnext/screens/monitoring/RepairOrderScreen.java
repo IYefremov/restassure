@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ActiveFiltersLabel;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
@@ -40,6 +41,7 @@ public class RepairOrderScreen extends MonitorScreen {
     }
 
     public RepairOrderListElement getRepairOrderElement(String orderId) {
+        BaseUtils.waitABit(2000);
         return repairOrderListElements
                 .stream()
                 .filter((repairOrder) -> {
