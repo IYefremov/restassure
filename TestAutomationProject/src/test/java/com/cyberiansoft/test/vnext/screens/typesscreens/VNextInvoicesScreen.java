@@ -38,8 +38,6 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	public VNextInvoicesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		//WaitUtils.elementShouldBeVisible(getRootElement(),true);
-		//clearSearchField();
 	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
