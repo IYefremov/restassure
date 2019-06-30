@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextTypeScreenContext;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -94,7 +95,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 			if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
 				clcikSaveViaMenuAsFinal();
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(appiumdriver);
-		inspectionsScreen.waitForInspectionsListIsVisibile();
+		WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
 		return inspectionsScreen;
 	}
 
@@ -103,7 +104,10 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 		if (workOrderType != null)
 			if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
 				clcikSaveViaMenuAsFinal();
-		return new VNextWorkOrdersScreen(appiumdriver);
+		VNextWorkOrdersScreen workOrdersScreen =  new VNextWorkOrdersScreen(appiumdriver);
+		WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(),true);
+		workOrdersScreen.clearSearchField();
+		return workOrdersScreen;
 	}
 
 	public VNextWorkOrdersScreen saveWorkOrderAsDraft() {

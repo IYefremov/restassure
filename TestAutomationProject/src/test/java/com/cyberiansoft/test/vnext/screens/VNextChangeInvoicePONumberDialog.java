@@ -24,10 +24,6 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 	public VNextChangeInvoicePONumberDialog(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("InvoicesChangePO")));
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(changeponumberfld));
 	}
 	
 	public VNextInvoicesScreen changeInvoicePONumber(String poNumber) {
@@ -45,10 +41,13 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 
 	
 	public void setInvoicePONumber(String poNumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("InvoicesChangePO")));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(changeponumberfld));
 		changeponumberfld.clear();
 		changeponumberfld.sendKeys(poNumber);
 		BaseUtils.waitABit(1000);
-		//appiumdriver.hideKeyboard();
 	}
 
 	public String getInvoicePreviousPONumber() {

@@ -171,7 +171,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
 
             vehicleinfoscreen.saveInspectionViaMenu();
         }
-
+        inspectionscreen.clearSearchField();
         for (String inspNumber : inspNumbers) {
             inspectionscreen.selectInspection(inspNumber);
         }
