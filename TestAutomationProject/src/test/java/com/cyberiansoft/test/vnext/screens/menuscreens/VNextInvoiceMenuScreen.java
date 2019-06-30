@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens.menuscreens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -82,6 +83,8 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	
 	public VNextNotesScreen clickInvoiceNotesMenuItem() {
 		clickMenuItem(invoicenotesbtn);
+		VNextNotesScreen notesScreen = new VNextNotesScreen();
+		WaitUtils.elementShouldBeVisible(notesScreen.getRootElement(), true);
 		return new VNextNotesScreen();
 	}
 	

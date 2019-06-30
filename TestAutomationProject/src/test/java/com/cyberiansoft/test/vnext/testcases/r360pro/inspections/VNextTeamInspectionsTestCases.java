@@ -324,7 +324,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
         statusScreen.updateMainDB();
-        //homeScreen = statusScreen.clickBackButton();
 
         inspectionsScreen = homeScreen.clickInspectionsMenuItem();
         inspectionsScreen.switchToTeamInspectionsView();
@@ -517,7 +516,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         webdriver.quit();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //TODO: removed until we need it
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifySendingMoreThen100MessagesAfterReconnectInternet(String rowID,
                                                                            String description, JSONObject testData) {
 
@@ -713,9 +713,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
+        inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         AppiumUtils.clickHardwareBackButton();
-        ;
         new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsScreen.clickBackButton();
     }
@@ -741,7 +740,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
         visualScreen.changeScreen(ScreenType.SERVICES);
-        ;
+
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.changeScreen(ScreenType.CLAIM);

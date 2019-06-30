@@ -40,12 +40,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WaitUtils.elementShouldBeVisible(getRootElement(),true);
-        if (checkHelpPopupPresence())
-            if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
-                tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-            }
-        clearSearchField();
     }
 
     public VNextWorkOrdersScreen() {
@@ -69,6 +63,9 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         if (isTeamViewActive()) {
             if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']"))
                 searchWorkOrderByFreeText(wonumber);
+        } else {
+            if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']"));
+                clearSearchField();
         }
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='work orders-list']")));
@@ -94,6 +91,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public boolean isWorkOrderExists(String woNumber) {
+        clearSearchField();
         return workorderslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + woNumber + "']")).size() > 0;
     }
 
@@ -127,6 +125,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public void clickCreateInvoiceFromWorkOrder(String wonumber) {
+        WaitUtils.elementShouldBeVisible(workorderslist,true);
         WebElement workordercell = getWorkOrderCell(wonumber);
         tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
         clickCreateInvoiceMenuItem();

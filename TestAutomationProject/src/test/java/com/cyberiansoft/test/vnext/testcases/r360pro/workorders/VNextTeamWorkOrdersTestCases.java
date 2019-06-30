@@ -53,15 +53,12 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		informationDialog.clickInformationDialogDontDeleteButton();
 		workOrdersScreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderNumber));
-		workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-
-		workOrdersScreen = workOrdersMenuScreen.deleteWorkOrder();
+		WorkOrderSteps.deleteWorkOrder(workOrderNumber);
 		Assert.assertFalse(workOrdersScreen.isWorkOrderExists(workOrderNumber));
 		VNextHomeScreen homeScreen = workOrdersScreen.clickBackButton();
 
 		VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
 		statusScreen.updateMainDB();
-		//homeScreen = statusScreen.clickBackButton();
 		workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
 		Assert.assertFalse(workOrdersScreen.isWorkOrderExists(workOrderNumber));
 		workOrdersScreen.clickBackButton();
@@ -151,7 +148,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		
 		inspectionsScreen.switchToTeamInspectionsView();
 		inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
-		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);;
+		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
 
 		VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
@@ -225,7 +222,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		availableServicesScreen.selectServices(workOrderData.getServicesList());
 		availableServicesScreen.saveInspectionViaMenu();
 		inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
-		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);;
+		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
 
 		VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		inspectionMenuScreen.clickApproveInspectionMenuItem();
@@ -270,7 +267,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
 		vehicleInfoScreen.saveInspectionViaMenu();
 		inspectionsScreen.searchInpectionByFreeText(inspNumber);
-		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);;
+		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspNumber), "Can't find inspection: " + inspNumber);
 
 		VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
 		inspectionMenuScreen.clickApproveInspectionMenuItem();
@@ -290,11 +287,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		
 		Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderNumber));
 		workOrdersScreen.switchToMyWorkordersView();
-		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		workOrdersMenuScreen.clickDeleteWorkOrderMenuButton();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-		informationDialog.clickInformationDialogDeleteButton();
-		workOrdersScreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+		WorkOrderSteps.deleteWorkOrder(workOrderNumber);
 		Assert.assertFalse(workOrdersScreen.isWorkOrderExists(workOrderNumber));
 		
 		workOrdersScreen.switchToTeamWorkordersView();
