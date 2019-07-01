@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -34,7 +35,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
 
         HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
-        WizardScreenSteps.navigateToServicesScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(workOrderData.getInspectionData().getServicesList());
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
@@ -42,7 +43,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         InspectionSteps.openInspectionMenu(inspectionNumber);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR);
-        WorkOrderSteps.openServiceScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SelectedServicesScreenSteps.verifySelectedServices(workOrderData.getInspectionData().getServicesList());
         AvailableServicesScreenSteps.selectServices(workOrderData.getServicesList());
         SelectedServicesScreenSteps.verifySelectedServices(summaryServiceList);

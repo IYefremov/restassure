@@ -10,6 +10,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.enums.PhaseName;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -36,7 +37,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
-        WorkOrderSteps.openServiceScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
         GeneralSteps.pressBackButton();
@@ -74,11 +75,10 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         GeneralSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,dependsOnMethods = "userCanResolveProblemOnPhaseLevel")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "userCanResolveProblemOnPhaseLevel")
     public void userCanReportProblemOnServiceLevel(String rowID,
                                                    String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
@@ -94,7 +94,6 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
     public void userCanResolveProblemOnServiceLevel(String rowID,
                                                     String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
         ServiceData serviceDto = workOrderData.getServiceData();
 
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());

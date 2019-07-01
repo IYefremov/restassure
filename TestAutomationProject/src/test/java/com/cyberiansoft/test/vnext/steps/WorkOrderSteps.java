@@ -40,11 +40,6 @@ public class WorkOrderSteps {
         WaitUtils.elementShouldBeVisible(new VNextVehicleInfoScreen().getRootElement(), true);
     }
 
-    public static void openServiceScreen() {
-        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        baseWizardScreen.changeScreen(ScreenType.SERVICES);
-    }
-
     public static String saveWorkOrder() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String workOrderNumber = baseWizardScreen.getNewInspectionNumber();
@@ -66,5 +61,4 @@ public class WorkOrderSteps {
         informationDialog.clickInformationDialogDeleteButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + workOrderId + "']"));
     }
-
 }

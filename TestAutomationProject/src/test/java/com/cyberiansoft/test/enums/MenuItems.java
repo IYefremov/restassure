@@ -12,7 +12,8 @@ public enum MenuItems {
     NOTES("Notes"),
     CHANGE_DEPARTMENT(""),
     REPORT_PROBLEM("Report Problem"),
-    RESOLVE_PROBLEM("Resolve Problem");
+    RESOLVE_PROBLEM("Resolve Problem"),
+    FOCUS_MODE("Focus mode");
 
     @Getter
     private String menuItemDataName;

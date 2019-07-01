@@ -20,6 +20,16 @@ public class WaitUtils {
         WaitUtils.getGeneralFluentWait().until(driver -> list.size() > expectedSize);
     }
 
+    public static Boolean isElementPresent(By locator) {
+        try {
+            return getGeneralWebdriverWait()
+                    .withTimeout(Duration.ofSeconds(2))
+                    .until((appiumDriver) ->appiumDriver.findElement(locator).isDisplayed());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible) {
         WaitUtils.getGeneralFluentWait().
                 until((webDriver) -> {
