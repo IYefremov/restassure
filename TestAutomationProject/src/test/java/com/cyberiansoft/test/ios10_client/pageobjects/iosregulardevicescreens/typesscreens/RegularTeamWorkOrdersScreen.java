@@ -1,11 +1,13 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -174,6 +176,20 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	public void setFilterLocation(String _location)  {
 		appiumdriver.findElementByAccessibilityId("Location").click();
 		appiumdriver.findElementByAccessibilityId(_location).click();
+	}
+
+	public void setBilling(String billingValue)  {
+		appiumdriver.findElementByAccessibilityId("Billing").click();
+		BaseUtils.waitABit(500);
+		appiumdriver.findElementByAccessibilityId(billingValue).click();
+	}
+
+	public void setFilterCustomer(String companyName)  {
+		appiumdriver.findElementByAccessibilityId("Customer").click();
+		BaseUtils.waitABit(500);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(companyName)));
+		appiumdriver.findElementByAccessibilityId(companyName).click();
 	}
 	
 	public void clickSaveFilter() {

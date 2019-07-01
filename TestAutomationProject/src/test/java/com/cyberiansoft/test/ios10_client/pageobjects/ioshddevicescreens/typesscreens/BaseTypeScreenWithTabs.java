@@ -13,6 +13,8 @@ public abstract class BaseTypeScreenWithTabs extends BaseTypeScreen {
     }
 
     public void switchToMyView() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("My")));
         appiumdriver.findElementByAccessibilityId("My").click();
     }
 

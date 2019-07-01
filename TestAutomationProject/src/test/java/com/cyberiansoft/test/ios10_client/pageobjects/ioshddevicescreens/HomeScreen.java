@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
@@ -155,9 +156,6 @@ public class HomeScreen extends iOSHDBaseScreen {
 	}
 
 	public SettingsScreen clickSettingsButton() {
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		//wait.until(ExpectedConditions.elementToBeClickable(servicerequestsbtn));
-		//swipeScreenUp();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Settings")));
 		appiumdriver.findElementByAccessibilityId("Settings").click();
@@ -172,6 +170,7 @@ public class HomeScreen extends iOSHDBaseScreen {
                 toolbar = tlb;
                 break;
             }
+		BaseUtils.waitABit(1000);
         toolbar.findElementByClassName("XCUIElementTypeButton").click();
 		Helpers.acceptAlert();
 	}
