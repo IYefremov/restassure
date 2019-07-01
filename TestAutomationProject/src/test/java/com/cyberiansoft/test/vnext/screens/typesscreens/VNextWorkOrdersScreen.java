@@ -213,7 +213,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickSeparateInvoicesButton();
-        waitForWorkOrderScreenInfoMessage("Invoice has been created");
+        waitForWorkOrderScreenInfoMessage("Invoice creation");
     }
 
     public void createSeparateInvoices(ArrayList<String> workOrders) {
@@ -223,8 +223,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickSeparateInvoicesButton();
-        final String invoicesCreatedTxt = workOrders.size() + " Invoices have been created";
-        waitForWorkOrderScreenInfoMessage(invoicesCreatedTxt);
+        waitForWorkOrderScreenInfoMessage("Invoices creation");
     }
 
     public void cancelCreatingSeparateInvoice() {
