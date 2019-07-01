@@ -60,9 +60,27 @@ public class NotesSteps {
         });
     }
 
+    public static void deletePictures(int numberToDelete) {
+        VNextNotesScreen notesScreen = new VNextNotesScreen();
+        By removePictureButton = By.xpath("//span[contains(@class,'button-delete')]");
+        WaitUtils.click(notesScreen.getPictureElement());
+        for (int i = 0; i < numberToDelete; i++) {
+            WaitUtils.waitUntilElementIsClickable(removePictureButton);
+            WaitUtils.click(removePictureButton);
+            GeneralSteps.confirmDialog();
+        }
+        WaitUtils.elementShouldBeVisible(notesScreen.getRootElement(), true);
+        notesScreen.clickScreenBackButton();
+    }
+
     public static void verifyNoPicturesPresent() {
         VNextNotesScreen notesScreen = new VNextNotesScreen();
         Assert.assertEquals(notesScreen.getPictureElementList().size(), 0);
+    }
+
+    public static void verifyNumberOfPicturesPresent(int expectedNumber) {
+        VNextNotesScreen notesScreen = new VNextNotesScreen();
+        Assert.assertEquals(notesScreen.getPictureElementList().size(), expectedNumber);
     }
 
     public static void addRepairOrderNote() {
