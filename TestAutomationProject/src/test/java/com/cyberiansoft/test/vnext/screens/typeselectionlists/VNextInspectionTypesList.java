@@ -13,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VNextInspectionTypesList extends VNextBaseTypeSelectionList {
 
-	@FindBy(xpath="//div[@data-page='entity-types']")
+	@FindBy(xpath="//div[@data-page='inspections-types']")
 	private WebElement rootElement;
 
 	public VNextInspectionTypesList(AppiumDriver<MobileElement> appiumdriver) {

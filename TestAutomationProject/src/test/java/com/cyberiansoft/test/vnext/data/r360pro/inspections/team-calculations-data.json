@@ -44,7 +44,7 @@
       },
       "percentageService": {"serviceName": "Aluminum Panel", "servicePrice": "25"
       },
-      "inspPrice": "-$11.25"
+      "inspPrice": "$(11.25)"
     }
   ],
 

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VNextInvoiceTypesList extends VNextBaseTypeSelectionList {
 
-    @FindBy(xpath="//div[@data-page='entity-types']")
+    @FindBy(xpath="//div[@data-page='invoices-types']")
     private WebElement rootElement;
 
     public VNextInvoiceTypesList(AppiumDriver<MobileElement> appiumdriver) {
