@@ -186,14 +186,14 @@
   ],
   "partServiceShouldNotAffectROCompleteness": [
     {
-      "rowID": "userCanSearchByPhase.01",
+      "rowID": "partServiceShouldNotAffectROCompleteness.01",
       "description": "TFSID: 85378, 85738, 85752",
       "service": {
         "serviceName": "Engine Engine Oil Filter"
       },
       "monitoring": {
         "repairOrderData": {
-          "phaseName": "AUTOMATIONPHASELEVEL",
+          "phaseName": "AUTOMATIONSERVICELEVEL",
           "vin": "777777",
           "completePercentage": "0%"
         }
@@ -202,7 +202,7 @@
   ],
   "skippedServicesShouldNotAffectCalculation": [
     {
-      "rowID": "userCanSearchByPhase.01",
+      "rowID": "skippedServicesShouldNotAffectCalculation.01",
       "description": "TFSID: 85378, 85738, 85752",
       "service": {
         "serviceName": "Labor AM"

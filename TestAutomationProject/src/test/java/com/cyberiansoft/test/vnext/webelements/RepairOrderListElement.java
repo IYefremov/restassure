@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.webelements;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -26,6 +27,7 @@ public class RepairOrderListElement implements IWebElement {
     }
 
     public Boolean isExpanded() {
+        BaseUtils.waitABit(1000);
         return rootElement.getAttribute("class").contains("expanded");
     }
 

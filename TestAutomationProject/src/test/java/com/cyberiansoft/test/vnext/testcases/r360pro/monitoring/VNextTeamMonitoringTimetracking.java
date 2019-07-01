@@ -40,61 +40,60 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         GeneralSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanStartTimeTrackingOnService(String rowID,
                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.expandPhase(phaseDto);
-        EditOrderSteps.openServiceMenu(serviceDto);
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
-        EditOrderSteps.verifyServiceStatus(serviceDto);
-        EditOrderSteps.verifyTimeTrackingShouldBeStartedAtService(serviceDto, true);
+        EditOrderSteps.verifyElementStatus(serviceDto);
+        EditOrderSteps.verifyTimeTrackingShouldBeStarted(serviceDto.getServiceName(), true);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "userCanStartTimeTrackingOnService", priority = 20)
+            , dependsOnMethods = "userCanStartTimeTrackingOnService")
     public void userCanStopTimeTrackingOnService(String rowID,
                                                  String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceDto = workOrderData.getServiceData();
 
-        EditOrderSteps.openServiceMenu(serviceDto);
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
-        EditOrderSteps.verifyServiceStatus(serviceDto);
-        EditOrderSteps.verifyTimeTrackingShouldBeStartedAtService(serviceDto, false);
-        GeneralSteps.pressBackButton();
+        EditOrderSteps.verifyElementStatus(serviceDto);
+        EditOrderSteps.verifyTimeTrackingShouldBeStarted(serviceDto.getServiceName(), false);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 30)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,dependsOnMethods = "userCanStopTimeTrackingOnService")
     public void userCanStartTimeTrackingOnPhase(String rowID,
                                                 String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        EditOrderSteps.openPhaseMenu(phaseDto);
+        EditOrderSteps.openElementMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.verifyTimeTrackingShouldBeStartedAtPhase(phaseDto, true);
+        EditOrderSteps.verifyTimeTrackingShouldBeStarted(phaseDto.getPhaseName(), true);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "userCanStartTimeTrackingOnPhase", priority = 40)
+            , dependsOnMethods = "userCanStartTimeTrackingOnPhase")
     public void userCanStopTimeTrackingOnPhase(String rowID,
                                                String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        EditOrderSteps.openPhaseMenu(phaseDto);
+        EditOrderSteps.openElementMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.verifyTimeTrackingShouldBeStartedAtPhase(phaseDto, false);
+        EditOrderSteps.verifyTimeTrackingShouldBeStarted(phaseDto.getPhaseName(), false);
+        GeneralSteps.pressBackButton();
+        GeneralSteps.pressBackButton();
     }
 }
