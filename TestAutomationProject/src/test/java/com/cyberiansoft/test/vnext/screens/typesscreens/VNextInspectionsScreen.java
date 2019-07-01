@@ -41,6 +41,9 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[@action='multiselect-actions-archive']")
     private WebElement multiselectinsparchivebtn;
 
+    @FindBy(xpath = "//*[@class='searchlist-empty-center']")
+    private WebElement nothingFounfPanel;
+
     final public static int MAX_NUMBER_OF_INPECTIONS = 50;
 
     public VNextInspectionsScreen(AppiumDriver<MobileElement> appiumdriver) {
@@ -207,7 +210,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public boolean isInspectionExists(String inspectionNumber) {
         WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
-        if (!inspectionslist.isDisplayed())
+        if (nothingFounfPanel.isDisplayed())
             return false;
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(inspectionslist));
