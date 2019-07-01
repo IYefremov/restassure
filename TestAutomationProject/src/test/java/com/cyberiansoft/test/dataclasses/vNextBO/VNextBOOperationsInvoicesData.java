@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class VNextBOOperationsInvoicesData {
 
     @JsonProperty("status")
@@ -15,20 +17,4 @@ public class VNextBOOperationsInvoicesData {
 
     @JsonProperty("fromDate")
     private String fromDate;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getStatus2() {
-        return status2;
-    }
-
-    public String getTimeFrame() {
-        return timeFrame;
-    }
-
-    public String getFromDate() {
-        return fromDate;
-    }
 }

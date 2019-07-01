@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -186,25 +187,66 @@ public abstract class VNextBOBaseWebPage {
     }
 
     void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
-        try {
-            wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
-        } catch (Exception ignored) {}
-        try {
-            waitShort.until(ExpectedConditions.visibilityOfAllElements(listBox));
-        } catch (Exception ignored) {}
-        listBox
+        waitForDropDownToBeOpened(dropDown);
+        waitForVisibilityOfAllOptions(listBox);
+        getMatchingOptionInListBox(listBox, selection)
+                .ifPresent((option) -> actions
+                        .moveToElement(option)
+                        .click()
+                        .build()
+                        .perform());
+        waitForDropDownToBeClosed(dropDown);
+    }
+
+    void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
+        if (draggable) {
+            waitForDropDownToBeOpened(dropDown);
+            waitForVisibilityOfAllOptions(listBox);
+            getMatchingOptionInListBox(listBox, selection)
+                    .ifPresent((option) -> {
+                        scrollListBoxDownWhileElementIsNotDisplayed(dropDown, listBox, option);
+                        waitShort.until(ExpectedConditions.elementToBeClickable(option)).click();
+                    });
+            waitForDropDownToBeClosed(dropDown);
+        } else {
+            selectOptionInDropDown(dropDown, listBox, selection);
+        }
+    }
+
+    private Optional<WebElement> getMatchingOptionInListBox(List<WebElement> listBox, String selection) {
+        return listBox
                 .stream()
                 .filter((option) -> {
                     wait.ignoring(StaleElementReferenceException.class)
                             .until(ExpectedConditions.not(ExpectedConditions.stalenessOf(option)));
                     return option.getText().equals(selection);
                 })
-                .findFirst()
-                .ifPresent((option) -> actions
-                        .moveToElement(option)
-                        .click()
-                        .build()
-                        .perform());
+                .findFirst();
+    }
+
+    private void scrollListBoxDownWhileElementIsNotDisplayed(WebElement dropDown, List<WebElement> listBox, WebElement option) {
+        for (int i = 0; i < listBox.size(); i++) {
+            if (!waitShort.until(ExpectedConditions.visibilityOf(option)).isDisplayed()) {
+                dropDown.sendKeys(Keys.ARROW_DOWN);
+            } else {
+                break;
+            }
+        }
+    }
+
+    private void waitForVisibilityOfAllOptions(List<WebElement> listBox) {
+        try {
+            waitShort.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        } catch (Exception ignored) {}
+    }
+
+    private void waitForDropDownToBeOpened(WebElement dropDown) {
+        try {
+            wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
+        } catch (Exception ignored) {}
+    }
+
+    private void waitForDropDownToBeClosed(WebElement dropDown) {
         try {
             wait.ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
@@ -224,18 +266,13 @@ public abstract class VNextBOBaseWebPage {
     }
 
     String selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox) {
-        try {
-            wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
-        } catch (Exception ignored) {}
-        wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        waitForDropDownToBeOpened(dropDown);
+        waitForVisibilityOfAllOptions(listBox);
         final int random = RandomUtils.nextInt(0, listBox.size());
         System.out.println(random);
         final WebElement selectedValue = listBox.get(random);
         actions.moveToElement(selectedValue).click().build().perform();
-        try {
-            wait.ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
-        } catch (Exception ignored) {}
+        waitForDropDownToBeClosed(dropDown);
         return selectedValue.getText();
     }
 
@@ -296,9 +333,7 @@ public abstract class VNextBOBaseWebPage {
     }
 
     VNextBOBaseWebPage selectDataFromBoxList(List<WebElement> listBox, WebElement list, String data) {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
-        } catch (Exception ignored) {}
+        waitForVisibilityOfAllOptions(listBox);
         for (WebElement selected : listBox) {
             if (selected.getText().equals(data)) {
                 actions.moveToElement(selected)
@@ -308,11 +343,11 @@ public abstract class VNextBOBaseWebPage {
                 break;
             }
         }
-        waitForListDisappearance(list);
+        waitForListToDisappear(list);
         return this;
     }
 
-    private void waitForListDisappearance(WebElement list) {
+    private void waitForListToDisappear(WebElement list) {
         try {
             wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
         } catch (Exception e) {

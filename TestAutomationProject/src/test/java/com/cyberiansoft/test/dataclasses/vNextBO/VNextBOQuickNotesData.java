@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class VNextBOQuickNotesData {
 
     @JsonProperty("quickNotesDescription")
@@ -12,16 +14,4 @@ public class VNextBOQuickNotesData {
 
     @JsonProperty("quickNotesDescriptionList")
     private String quickNotesDescriptionList[];
-
-    public String getQuickNotesDescription() {
-        return quickNotesDescription;
-    }
-
-    public String getQuickNotesDescriptionEdited() {
-        return quickNotesDescriptionEdited;
-    }
-
-    public String[] getQuickNotesDescriptionList() {
-        return quickNotesDescriptionList;
-    }
 }

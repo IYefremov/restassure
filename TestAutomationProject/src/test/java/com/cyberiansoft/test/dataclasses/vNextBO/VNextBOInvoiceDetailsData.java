@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class VNextBOInvoiceDetailsData {
 
     @JsonProperty("companyName")
@@ -51,68 +53,4 @@ public class VNextBOInvoiceDetailsData {
 
     @JsonProperty("techUserPhone")
     private String techUserPhone;
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getCompanyMail() {
-        return companyMail;
-    }
-
-    public String getCompanyPhone() {
-        return companyPhone;
-    }
-
-    public String getShipToAddress() {
-        return shipToAddress;
-    }
-
-    public String getShipToAddress2() {
-        return shipToAddress2;
-    }
-
-    public String getShipToCity() {
-        return shipToCity;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getShipToZip() {
-        return shipToZip;
-    }
-
-    public String getTechFirstName() {
-        return techFirstName;
-    }
-
-    public String getTechLastName() {
-        return techLastName;
-    }
-
-    public String getUserMailPrefix() {
-        return userMailPrefix;
-    }
-
-    public String getUserMailPostbox() {
-        return userMailPostbox;
-    }
-
-    public String getTechUserPhone() {
-        return techUserPhone;
-    }
 }

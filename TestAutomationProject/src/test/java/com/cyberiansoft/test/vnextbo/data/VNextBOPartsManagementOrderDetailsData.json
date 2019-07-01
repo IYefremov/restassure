@@ -57,5 +57,43 @@
       "woNum": "O-000-152414",
       "oemNum": "24234"
     }
+  ],
+
+  "verifyUserCanChangePartsInputFields": [
+    {
+      "rowID": "verifyUserCanChangePartsInputFields.01",
+      "description": "Test Case 83957:User can change \"Vendor Price\", Test Case 83959: User can change \"Price\", Test Case 83960: User can change \"Quantity\"",
+      "location": "Best Location",
+      "woNum": "O-000-152414"
+    }
+  ],
+
+  "verifyUserCanChangeETA": [
+    {
+      "rowID": "verifyUserCanChangeETA.01",
+      "description": "Test Case 83961:User can change \"ETA\"",
+      "location": "Best Location",
+      "woNum": "O-000-152414"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfThePart": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.01",
+      "description": "Test Case 83965-83973, 89749:User can change Status of the Part",
+      "location": "Best Location",
+      "woNum": "O-000-152414",
+      "statuses": [
+        "On Hold",
+        "Return to Vendor (RTV)",
+        "Quote Received",
+        "Ordered",
+        "Re-Ordered",
+        "Received (final)",
+        "RTV Complete (final)",
+        "Refused",
+        "Audited"
+      ]
+    }
   ]
 }

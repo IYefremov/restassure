@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class VNextBOServicesData {
 
     @JsonProperty("userName")
@@ -57,76 +59,4 @@ public class VNextBOServicesData {
 
     @JsonProperty("newMatrixServiceName")
     private String newMatrixServiceName;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public String getUserMail() {
-        return userMail;
-    }
-
-    public String getPriceServiceName() {
-        return priceServiceName;
-    }
-
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public String getServiceDescription() {
-        return serviceDescription;
-    }
-
-    public String getServicePriceType() {
-        return servicePriceType;
-    }
-
-    public String getServicePrice() {
-        return servicePrice;
-    }
-
-    public String getServiceTypeEdited() {
-        return serviceTypeEdited;
-    }
-
-    public String getServicePriceEdited() {
-        return servicePriceEdited;
-    }
-
-    public String getServiceEdited() {
-        return serviceEdited;
-    }
-
-    public String getPercentageServiceName() {
-        return percentageServiceName;
-    }
-
-    public String getPercentageServiceDescription() {
-        return percentageServiceDescription;
-    }
-
-    public String getServicePercentageType() {
-        return servicePercentageType;
-    }
-
-    public String getEmptyServiceName() {
-        return emptyServiceName;
-    }
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public String getMatrixServiceType() {
-        return matrixServiceType;
-    }
-
-    public String getNewMatrixServiceName() {
-        return newMatrixServiceName;
-    }
 }

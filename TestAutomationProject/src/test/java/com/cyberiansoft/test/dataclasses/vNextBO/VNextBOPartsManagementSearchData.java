@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class VNextBOPartsManagementSearchData extends VNextBOBaseData {
 
     @JsonProperty("location")
@@ -57,76 +59,4 @@ public class VNextBOPartsManagementSearchData extends VNextBOBaseData {
 
     @JsonProperty("searchNameChanged")
     private String searchNameChanged;
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getCustomer() {
-        return customer;
-    }
-
-    public String getPhase() {
-        return phase;
-    }
-
-    public String getWoNum() {
-        return woNum;
-    }
-
-    public String getStockNum() {
-        return stockNum;
-    }
-
-    public String getOemNum() {
-        return oemNum;
-    }
-
-    public String getVinNum() {
-        return vinNum;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public String getWoType() {
-        return woType;
-    }
-
-    public String getOrderedFrom() {
-        return orderedFrom;
-    }
-
-    public String getSearchName() {
-        return searchName;
-    }
-
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public String getEmptyPartsListMessage() {
-        return emptyPartsListMessage;
-    }
-
-    public String getTypeChanged() {
-        return typeChanged;
-    }
-
-    public String getPhaseChanged() {
-        return phaseChanged;
-    }
-
-    public String getWoTypeChanged() {
-        return woTypeChanged;
-    }
-
-    public String getSearchNameChanged() {
-        return searchNameChanged;
-    }
 }
