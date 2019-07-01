@@ -13,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VNextWorkOrderTypesList extends VNextBaseTypeSelectionList {
 
-	@FindBy(xpath="//div[@data-page='entity-types']")
+	@FindBy(xpath="//div[@data-page='orders-types']")
 	private WebElement rootElement;
 
 
