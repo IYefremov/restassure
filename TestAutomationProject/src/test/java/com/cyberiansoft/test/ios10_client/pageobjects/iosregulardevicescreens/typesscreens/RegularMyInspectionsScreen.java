@@ -89,6 +89,11 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("InspectionsTable")));
 	}
 
+	public void waitMyInspectionsScreenLoaded() {
+		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("InspectionsTable")));
+	}
+
 	public void clickAddInspectionButton() {
 		appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(By.name("Add")).click();
 		if (elementExists("Discard")) {

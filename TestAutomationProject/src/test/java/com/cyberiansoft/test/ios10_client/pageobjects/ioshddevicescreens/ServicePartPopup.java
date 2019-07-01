@@ -8,6 +8,8 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -46,7 +48,8 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	}
 	
 	public void selectServicePartSubcategory(String subcategoryname) {
-
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategoryname)));
 		appiumdriver.findElementByAccessibilityId(subcategoryname).click();
 	}
 	
@@ -56,13 +59,15 @@ public class ServicePartPopup extends iOSHDBaseScreen {
 	}
 	
 	public void selectServicePartSubcategoryPart(String subcategorypartname) {
-		//partcell.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategorypartname)));
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {
-		//positioncell.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategorypositionname)));
 		appiumdriver.findElementByAccessibilityId(subcategorypositionname).click();
 	}
 	

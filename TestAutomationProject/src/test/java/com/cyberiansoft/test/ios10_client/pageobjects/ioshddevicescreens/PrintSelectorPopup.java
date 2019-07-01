@@ -24,8 +24,10 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 	}
 	
 	public void checkRemotePrintServerAndSelectPrintServer(String printserver) {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Remote")).click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Remote")));
+		appiumdriver.findElement(MobileBy.AccessibilityId("Remote")).click();
+		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(printserver)));
 		appiumdriver.findElement(MobileBy.AccessibilityId(printserver)).click();
 		IOSElement par = (IOSElement) appiumdriver.findElement(MobileBy.
@@ -36,7 +38,6 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 	}
 	
 	public void clickPrintSelectorPrintButton() {
-		//appiumdriver.findElement(MobileBy.AccessibilityId("Print Selector")).findElement(MobileBy.AccessibilityId("Print")).click();
 		printserverprintbtn.click();
 	}
 	
