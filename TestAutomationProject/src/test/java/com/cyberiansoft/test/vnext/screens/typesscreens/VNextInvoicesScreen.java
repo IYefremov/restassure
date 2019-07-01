@@ -39,6 +39,10 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
+
+	public void waitInvoicesScreenLoad(){
+		WaitUtils.elementShouldBeVisible(rootElement, true);
+	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
 		WebElement invoicecell = getInvoiceCell(invoicenumber);

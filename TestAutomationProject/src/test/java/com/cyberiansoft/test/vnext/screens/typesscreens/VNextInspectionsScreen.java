@@ -156,7 +156,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspectionNumber) {
-        WaitUtils.elementShouldBeVisible(rootElement,true);
+        WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
         if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']"))
             clearSearchField();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
@@ -206,7 +206,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public boolean isInspectionExists(String inspectionNumber) {
-        WaitUtils.elementShouldBeVisible(rootElement,true);
+        WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
         if (!inspectionslist.isDisplayed())
             return false;
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);

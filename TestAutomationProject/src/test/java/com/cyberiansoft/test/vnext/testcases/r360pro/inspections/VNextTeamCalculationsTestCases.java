@@ -315,10 +315,8 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
                 for (ServiceData additionalService : additionalServices)
                     vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
-            vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-            vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+            vehiclePartInfoScreen.clickScreenBackButton();
         }
-        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
         Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
         inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();
@@ -358,9 +356,8 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
                 for (ServiceData additionalService : additionalServices)
                     vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
-            vehiclePartInfoScreen.clickSaveVehiclePartInfo();
+            vehiclePartInfoScreen.clickScreenBackButton();
         }
-        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
 
         Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
@@ -401,10 +398,8 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
                 for (ServiceData additionalService : additionalServices)
                     vehiclePartInfoScreen.selectVehiclePartAdditionalService(additionalService.getServiceName());
             }
-            vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-            vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+            vehiclePartInfoScreen.clickScreenBackButton();
         }
-        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
         Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
         inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();

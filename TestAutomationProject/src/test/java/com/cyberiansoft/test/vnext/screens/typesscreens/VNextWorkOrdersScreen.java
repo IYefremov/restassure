@@ -237,7 +237,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         //BaseUtils.waitABit(1000);
         tap(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']")));
 
-        System.out.println("--------------------------------------");
         wait.until(ExpectedConditions.visibilityOf(
                 appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
         wait = new WebDriverWait(appiumdriver, 120);

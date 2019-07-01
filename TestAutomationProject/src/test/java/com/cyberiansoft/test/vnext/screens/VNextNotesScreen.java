@@ -28,6 +28,9 @@ public class VNextNotesScreen extends VNextBaseScreen {
     private List<WebElement> quickNotesList;
 
     @FindBy(xpath = "//div[@class='image-item']")
+    private WebElement pictureElement;
+
+    @FindBy(xpath = "//div[@class='image-item']")
     private List<WebElement> pictureElementList;
 
     public void selectQuickNote(String quickNoteText) {

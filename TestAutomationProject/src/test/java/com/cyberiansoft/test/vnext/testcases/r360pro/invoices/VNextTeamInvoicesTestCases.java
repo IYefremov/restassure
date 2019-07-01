@@ -389,7 +389,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 																		 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-
+		final int picturesToAdd = 4;
+		final int picturesToDelete = 2;
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, testCaseData);
@@ -408,26 +409,28 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 		VNextNotesScreen notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
 
-		NotesSteps.addPhotoFromCamera();
+		for (int i = 0; i < picturesToAdd; i++)
+			NotesSteps.addPhotoFromCamera();
 		notesScreen.clickScreenBackButton();
 
 		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-		NotesSteps.verifyNoPicturesPresent();
+
+		NotesSteps.deletePictures(picturesToDelete);
+		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd-picturesToDelete);
 		notesScreen.clickScreenBackButton();
 
-		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		invoicesScreen.waitInvoicesScreenLoad();
 		homeScreen = invoicesScreen.clickBackButton();
 
 		VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
 		statusScreen.updateMainDB();
-		//homeScreen = statusScreen.clickBackButton();
 
 		invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-		NotesSteps.verifyNoPicturesPresent();
+		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd-picturesToDelete);
 		notesScreen.clickScreenBackButton();
 
 		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
