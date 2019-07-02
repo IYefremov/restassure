@@ -1,18 +1,14 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleModelsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleTypeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclemakesScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -105,9 +101,12 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
     public void setVIN(String vinnumber) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.name("Vehicle.VIN")));
-        wait.until((driver) -> vinfld.isEnabled());
-        vinfld.clear();
-        vinfld.sendKeys(vinnumber+"\n");
+        WaitUtils.getGeneralWebdriverWait().until((driver) -> vinfld.isEnabled());
+        WaitUtils.getGeneralWebdriverWait().until((driver) -> {
+            vinfld.clear();
+            return true;
+        });
+        vinfld.sendKeys(vinnumber + "\n");
         BaseUtils.waitABit(1500);
     }
 

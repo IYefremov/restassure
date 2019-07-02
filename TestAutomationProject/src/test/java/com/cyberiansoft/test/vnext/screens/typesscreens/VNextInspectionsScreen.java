@@ -41,7 +41,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[@action='multiselect-actions-archive']")
     private WebElement multiselectinsparchivebtn;
 
-    @FindBy(xpath = "//*[@class='searchlist-empty-center']")
+    @FindBy(xpath = "//*[contains(@class,'searchlist-nothing-found')]")
     private WebElement nothingFounfPanel;
 
     final public static int MAX_NUMBER_OF_INPECTIONS = 50;
@@ -214,8 +214,6 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
             return false;
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(inspectionslist));
-        wait = new WebDriverWait(appiumdriver, 30);
-        //return !wait.until(ExpectedConditions.invisibilityOf(inspectionslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']"))));
         return inspectionslist.findElements(By.xpath(".//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']")).size() > 0;
     }
 

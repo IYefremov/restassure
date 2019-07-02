@@ -23,9 +23,11 @@ public class GeneralSteps {
 
     public static void dismissHelpingScreenIfPresent() {
         VNextHelpingScreen helpingScreen = new VNextHelpingScreen();
+        BaseUtils.waitABit(3000);
         if (WaitUtils.isElementPresent(helpingScreen.getOkButtonLocator())) {
             helpingScreen.getOkDismissButton().click();
             WaitUtils.elementShouldBeVisible(helpingScreen.getOkDismissButton(), false);
+            BaseUtils.waitABit(1000);
         }
     }
 
