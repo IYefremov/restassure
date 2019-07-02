@@ -8,6 +8,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -39,7 +40,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
-        WorkOrderSteps.openServiceScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
         GeneralSteps.pressBackButton();

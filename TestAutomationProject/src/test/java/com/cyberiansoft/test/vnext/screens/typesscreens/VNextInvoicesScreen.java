@@ -39,6 +39,10 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
+
+	public void waitInvoicesScreenLoad(){
+		WaitUtils.elementShouldBeVisible(rootElement, true);
+	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
@@ -199,6 +203,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		return invoicecell.findElements(By.xpath(".//div[@data-autotests-id='invoice_paid']")).size() > 0;
 	}
 	public String getFirstInvoiceNumber() {
+		WaitUtils.elementShouldBeVisible(invoiceslist,true);
 		return invoiceslist.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
 	}
 

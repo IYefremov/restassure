@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechniciansPopup;
@@ -152,20 +153,12 @@ public class VehicleScreen extends BaseWizardScreen {
 		clickVINField();
 
 		appiumdriver.findElementByAccessibilityId("VIN#").sendKeys(vin);
-		//appiumdriver.findElementByAccessibilityId("VIN#").click();
-		/*((IOSDriver) appiumdriver) .getKeyboard().pressKey(vin);
-		//Helpers.waitABit(500);
-		try {
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
-		} catch (WebDriverException e) {
-			
-		}*/
-		//appiumdriver .pressKey(new KeyEvent(AndroidKey.ENTER));
 		((IOSDriver) appiumdriver).hideKeyboard();
 	}
 	
 	public void clearVINCode() {
 		clickVINField();
+		BaseUtils.waitABit(1000);
 		for (int i = 0; i < 17; i++)
 			((IOSDriver) appiumdriver).getKeyboard().sendKeys(Keys.DELETE);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
@@ -216,16 +209,17 @@ public class VehicleScreen extends BaseWizardScreen {
 	public void setMakeAndModel(String make, String model) {
 		IOSElement makefld = (IOSElement) appiumdriver.findElementByAccessibilityId("Make");
 		makefld.findElementByAccessibilityId("custom detail button").click();
-		//makecustombtn.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(make)));
 		appiumdriver.findElementByName(make).click();
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(model)));
 		appiumdriver.findElementByName(model).click();
 	}
 
 	public void seletAdvisor(String advisor) {
 		appiumdriver.findElementByAccessibilityId("Advisor").click();
 		appiumdriver.findElementByAccessibilityId(advisor).click();
-		//appiumdriver.findElementByXPath("//UIATableView/UIATableCell[@name=\""
-		//				+ advisor + "\"]").click();
 	}
 	
 	

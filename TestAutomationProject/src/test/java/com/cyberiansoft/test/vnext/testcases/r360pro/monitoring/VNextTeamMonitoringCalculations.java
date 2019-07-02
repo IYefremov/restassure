@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -38,7 +39,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
-        WorkOrderSteps.openServiceScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectPartService("Engine part", "Filters", "Engine Oil Filter", "Main");
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
@@ -82,6 +83,24 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.SKIPPED);
+        GeneralSteps.pressBackButton();
+        MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
+            , dependsOnMethods = "skippedServicesShouldNotAffectCalculation")
+    public void refusedServicesShouldNotAffectCalculation(String rowID,
+                                                          String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        RepairOrderDto repairOrderDto = workOrderData.getMonitoring().getRepairOrderData();
+        ServiceData serviceData = workOrderData.getServiceData();
+
+        MonitorSteps.openMenu(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        MonitorSteps.toggleFocusMode();
+        EditOrderSteps.openElementMenu(serviceData.getServiceName());
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
+        MenuSteps.selectStatus(ServiceStatus.REFUSED);
         GeneralSteps.pressBackButton();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
         GeneralSteps.pressBackButton();

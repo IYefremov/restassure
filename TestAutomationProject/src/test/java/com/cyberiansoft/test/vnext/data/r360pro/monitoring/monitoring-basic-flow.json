@@ -218,5 +218,24 @@
         }
       }
     }
+  ],
+  "refusedServicesShouldNotAffectCalculation": [
+    {
+      "rowID": "skippedServicesShouldNotAffectCalculation.01",
+      "description": "TFSID: 85378, 85738, 85752",
+      "service": {
+        "serviceName": "Labor AM"
+      },
+      "monitoring": {
+        "repairOrderData": {
+          "phaseName": "AUTOMATIONPHASELEVEL",
+          "vin": "777777",
+          "completePercentage": "0%"
+        },
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationServiceLevel"
+        }
+      }
+    }
   ]
 }

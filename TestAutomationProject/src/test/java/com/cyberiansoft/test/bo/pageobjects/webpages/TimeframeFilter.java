@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.cyberiansoft.test.baseutils.DataUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +36,7 @@ class TimeframeFilter {
 	}
 	
 	public void verifyTableDateRangeForCurrentTablePage(Date startrange, Date endrange, List<WebElement> datecells) {
-		DateFormat dateFormat = new SimpleDateFormat(BackOfficeUtils.getFullDateFormat());	
+		DateFormat dateFormat = new SimpleDateFormat(DataUtils.FULL_DATE_FORMAT.getData());
 		for (WebElement datecell : datecells) {
 			try {
 				Date datevalue = dateFormat.parse(datecell.getText());

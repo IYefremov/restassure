@@ -495,13 +495,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectServicePartSubcategory(String subcategoryname) {
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Subcategory")));
-		//appiumdriver.findElementByAccessibilityId("Subcategory").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategoryname)));
 		appiumdriver.findElementByAccessibilityId(subcategoryname).click();
-		//appiumdriver.tap(1, appiumdriver.findElementByAccessibilityId(subcategoryname), 1000);
-		//appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + subcategoryname + "']")).click();
-		//appiumdriver.findElementByAccessibilityId(subcategoryname).click();
 	}
 	
 	public String getServicePartSubCategoryValue() {
@@ -510,15 +506,15 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectServicePartSubcategoryPart(String subcategorypartname) {
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Part")));
-		//appiumdriver.findElementByAccessibilityId("Part").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategorypartname)));
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {
-		//appiumdriver.findElementByAccessibilityId("Position").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategorypositionname)));
 		appiumdriver.findElementByAccessibilityId(subcategorypositionname).click();
 	}
 	

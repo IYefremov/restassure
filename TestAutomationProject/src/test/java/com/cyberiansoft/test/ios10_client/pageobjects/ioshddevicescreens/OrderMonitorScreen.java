@@ -177,12 +177,16 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public void changeStatusForWorkOrder(String newWOSTatus, String reason) {
 		MobileElement toolbar = (MobileElement) appiumdriver.findElementByAccessibilityId("Toolbar");
 		toolbar.findElementsByClassName("XCUIElementTypeButton").get(2).click();
-		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		IOSElement pickerwhl = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypePickerWheel")));
+		//IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
 		pickerwhl.setValue(newWOSTatus);
 
 		IOSElement donebtn = (IOSElement) appiumdriver.findElementByAccessibilityId("StringPicker_Done");
 
 		new TouchAction(appiumdriver).tap(tapOptions().withElement(element(donebtn))).perform();
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(reason)));
 		appiumdriver.findElementByAccessibilityId(reason).click();
 	}
 

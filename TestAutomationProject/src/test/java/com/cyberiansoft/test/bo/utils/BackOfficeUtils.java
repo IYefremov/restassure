@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.utils;
 
+import com.cyberiansoft.test.baseutils.DataUtils;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -11,56 +13,61 @@ import java.util.Date;
 import java.util.Locale;
 
 public class BackOfficeUtils {
-
-	public static String MONEY_SYMBOL =  "$";
-
-	public static String getFullDateFormat() {
-		return "MM/dd/yyyy";
-	}
-	
-	public static String getTheShortestDateFormat() {
-		return "M/d/yyyy";
-	}
 	
 	public static String getTomorrowDateFormatted() {
-		LocalDate date = LocalDate.now();
-		date = date.plusDays(1);
-		return date.format(DateTimeFormatter.ofPattern("MM/d/uuuu"));
+		return LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern(DataUtils.SHORT_DATE_FORMAT.getData()));
 	}
 
 	public static String getPreviousDateFormatted() {
-		LocalDate date = LocalDate.now();
-		date = date.minusDays(1);
-		return date.format(DateTimeFormatter.ofPattern("MM/d/uuuu"));
+		return LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern(DataUtils.SHORT_DATE_FORMAT.getData()));
 	}
 	
 	public static String getDayAfterTomorrowDateFormatted() {
-		LocalDate date = LocalDate.now();
-		date = date.plusDays(2);
-		return date.format(DateTimeFormatter.ofPattern("MM/d/uuuu"));
+		return LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern(DataUtils.SHORT_DATE_FORMAT.getData()));
 	}
 
 	public static String getShortTomorrowDateFormatted() {
-		LocalDate date = LocalDate.now();
-		date = date.plusDays(1);
-		return date.format(DateTimeFormatter.ofPattern("M/d/uuuu"));
+		return LocalDate.now().plusDays(1).format(DateTimeFormatter
+                .ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData()));
 	}
 	
 	public static String getCurrentDateFormatted() {
-		LocalDate date = LocalDate.now();
-		return date.format(DateTimeFormatter.ofPattern("MM/d/uuuu"));
+        return getFormattedDate(DataUtils.SHORT_DATE_FORMAT);
 	}
+
+    public static String getCurrentDate(boolean... isLocalized) {
+        if (isLocalized[0]) {
+            return getFormattedDate(DataUtils.FULL_DATE_FORMAT);
+        } else {
+            return LocalDate.now().format(DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData()));
+        }
+    }
 	
-	public static String getShortCurrentDateFormatted() {
-		LocalDate date = LocalDate.now();
-		return date.format(DateTimeFormatter.ofPattern("M/d/uuuu"));
+	public static String getTheShortestCurrentDateFormatted() {
+        return getFormattedDate(DataUtils.THE_SHORTEST_DATE_FORMAT);
 	}
-	
-	public static String getShortCurrentTimeWithTimeZone() {
-		LocalDateTime localDateAndTime = LocalDateTime.now(ZoneId.of("US/Pacific"));
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("M/d/uuuu");
-	    
-	    
+
+	public static String getDetailedCurrentDateFormatted() {
+        return getFormattedDate(DataUtils.DETAILED_FULL_DATE_FORMAT);
+	}
+
+    public static String getDetailedTomorrowDateFormatted() {
+	    return LocalDate.now().plusDays(1).format(DateTimeFormatter
+                .ofPattern(DataUtils.DETAILED_FULL_DATE_FORMAT.getData(), Locale.US));
+    }
+
+    public static String getTomorrowFullDateFormatted() {
+	    return LocalDate.now().plusDays(1).format(DateTimeFormatter
+                .ofPattern(DataUtils.FULL_DATE_FORMAT.getData(), Locale.US));
+    }
+
+    private static String getFormattedDate(DataUtils format) {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern(format.getData(), Locale.US));
+    }
+
+    public static String getShortCurrentTimeWithTimeZone() {
+		LocalDateTime localDateAndTime = LocalDateTime.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
+		DateTimeFormatter format = DateTimeFormatter.ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData());
 	    return localDateAndTime.format(format);
 	}
 	
@@ -72,30 +79,20 @@ public class BackOfficeUtils {
 	}
 	
 	public static LocalDate getWeekStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 		return localDate.with(fieldUS, 1);
 	}
 	
 	public static LocalDate getLastWeekStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 
-//		localDate = localDate.minusWeeks(1);
 		localDate = localDate.minusWeeks(2);
 		return localDate.with(fieldUS, 1);
 	}
-	
-//	public static LocalDate getLastWeekEndDate() {
-//		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
-//		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
-//
-//		localDate = localDate.minusWeeks(1);
-//		return localDate.with(fieldUS, 7);
-//	}
 
     public static LocalDate getLastWeekEndDate(LocalDate lastweekstart) {
-//		LocalDate localDate = LocalDate.now(ZoneOffset.of("-08:00"));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 
 		lastweekstart = lastweekstart.plusWeeks(1);
@@ -103,7 +100,7 @@ public class BackOfficeUtils {
 	}
 
     public static LocalDate getLastWeekEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
 
 		localDate = localDate.plusWeeks(1);
@@ -111,36 +108,35 @@ public class BackOfficeUtils {
 	}
 	
 	public static LocalDate getMonthStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		return localDate.withDayOfMonth(1);
-		
 	}
 	
 	public static LocalDate getLastMonthStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		localDate = localDate.minusMonths(1);
 		return localDate.withDayOfMonth(1);
 	}
 	
 	public static LocalDate getLastMonthEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		localDate = localDate.minusMonths(1);
 		return localDate.withDayOfMonth(localDate.lengthOfMonth());
 	}
 	
 	public static LocalDate getYearStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		return localDate.withDayOfYear(1);
 	}
 	
 	public static LocalDate getLastYearStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		localDate = localDate.minusYears(1);
 		return localDate.withDayOfYear(1);
 	}
 	
 	public static LocalDate getLastYearEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of("US/Pacific"));
+		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
 		localDate = localDate.minusYears(1);
 		return localDate.withDayOfYear(localDate.lengthOfYear());
 	}
@@ -178,8 +174,8 @@ public class BackOfficeUtils {
 	}
 
 	public static float getServicePriceValue(String servicePriceString) {
-		if (servicePriceString.contains(MONEY_SYMBOL))
-			servicePriceString = servicePriceString.replace (MONEY_SYMBOL, "").trim();
+		if (servicePriceString.contains(DataUtils.MONEY_SYMBOL.getData()))
+			servicePriceString = servicePriceString.replace (DataUtils.MONEY_SYMBOL.getData(), "").trim();
 		else
 			servicePriceString = servicePriceString.trim();
 		return Float.valueOf(servicePriceString).floatValue();
@@ -193,9 +189,6 @@ public class BackOfficeUtils {
 	}
 
 	public static String getFormattedServicePriceValue(float servicePrice) {
-
-		String servicePriceFormatted= MONEY_SYMBOL + String.format("%,.2f", servicePrice);
-		return servicePriceFormatted;
+		return DataUtils.MONEY_SYMBOL.getData() + String.format("%,.2f", servicePrice);
 	}
-
 }

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class VNextBOServicesPartsAndLaborBundleData {
 
     @JsonProperty("serviceName")
@@ -42,46 +44,6 @@ public class VNextBOServicesPartsAndLaborBundleData {
 
     @JsonProperty("servicePartName")
     private String servicePartName;
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public String getServiceDescription() {
-        return serviceDescription;
-    }
-
-    public String getServicePriceType() {
-        return servicePriceType;
-    }
-
-    public String getServicePrice() {
-        return servicePrice;
-    }
-
-    public String getServiceLaborRate() {
-        return serviceLaborRate;
-    }
-
-    public String getServiceDefaultLaborTime() {
-        return serviceDefaultLaborTime;
-    }
-
-    public String getServicePartCategory() {
-        return servicePartCategory;
-    }
-
-    public String getServicePartSubcategory() {
-        return servicePartSubcategory;
-    }
-
-    public String getServicePartName() {
-        return servicePartName;
-    }
 
     public List<String> getPartOptionsList() {
         return Arrays.asList(servicePartCategory, servicePartSubcategory, servicePartName);

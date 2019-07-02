@@ -14,7 +14,8 @@ public enum ServiceStatus {
     ACTIVE("ACTIVE"),
     STARTED("STARTED"),
     ORDERED("Ordered"),
-    RECEIVED("Received");
+    RECEIVED("Received"),
+    REFUSED("Refused");
 
 
     private final String status;

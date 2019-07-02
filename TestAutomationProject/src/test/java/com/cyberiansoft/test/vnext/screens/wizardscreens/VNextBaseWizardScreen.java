@@ -15,6 +15,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -23,11 +24,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Getter
 public class VNextBaseWizardScreen extends VNextBaseScreen {
 
 	public static VNextTypeScreenContext typeScreenContext;
 	public static InspectionTypes inspectionType;
 	public static WorkOrderTypes workOrderType;
+
+	@FindBy(xpath = "//div[@data-page]")
+	private WebElement rootElement;
 
 	@FindBy(xpath="//div[@class='estimation-number']")
 	private WebElement inspectionnumber;

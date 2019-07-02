@@ -4,6 +4,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
+import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.SelectLocationScreen;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
@@ -85,5 +86,11 @@ public class MonitorSteps {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getNothingFoundLable(), true);
         WaitUtils.getGeneralFluentWait().until(driver -> repairOrderScreen.getRepairOrderListElements().isEmpty());
+    }
+
+    public static void toggleFocusMode() {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        phasesScreen.getPhasesMenuButton().click();
+        MenuSteps.selectMenuItem(MenuItems.FOCUS_MODE);
     }
 }

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Getter
 public class VNextBOMonitorData  {
 
     @JsonProperty("location")
@@ -258,166 +260,6 @@ public class VNextBOMonitorData  {
     @JsonProperty("servicePhaseHeaders")
     private String[] servicePhaseHeaders;
 
-    public String getLocation() {
-        return location;
-    }
-
-    public String getLocationChanged() {
-        return locationChanged;
-    }
-
-    public String getSearchLocation() {
-        return searchLocation;
-    }
-
-    public String getOrderNumber() {
-        return orderNumber;
-    }
-
-    public String getRoNumber() {
-        return roNumber;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCopyright() {
-        return copyright;
-    }
-
-    public String getAMT() {
-        return AMT;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getCustomer() {
-        return customer;
-    }
-
-    public String getEmployee() {
-        return employee;
-    }
-
-    public String getPhase() {
-        return phase;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public String getWoType() {
-        return woType;
-    }
-
-    public String getWoNum() {
-        return woNum;
-    }
-
-    public String getRoNum() {
-        return roNum;
-    }
-
-    public String getStockNum() {
-        return stockNum;
-    }
-
-    public String getVinNum() {
-        return vinNum;
-    }
-
-    public String getDaysInPhase() {
-        return daysInPhase;
-    }
-
-    public String getDaysNum() {
-        return daysNum;
-    }
-
-    public String getDaysNumStart() {
-        return daysNumStart;
-    }
-
-    public String getDaysInProcess() {
-        return daysInProcess;
-    }
-
-    public String getTimeFrame() {
-        return timeFrame;
-    }
-
-    public String getFromDate() {
-        return fromDate;
-    }
-
-    public String getToDate() {
-        return toDate;
-    }
-
-    public String getRepairStatus() {
-        return repairStatus;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public String getServiceCategory() {
-        return serviceCategory;
-    }
-
-    public String getServiceSubcategory() {
-        return serviceSubcategory;
-    }
-
-    public String getVendor() {
-        return vendor;
-    }
-
-    public String getTechnician() {
-        return technician;
-    }
-
-    public String getVendor1() {
-        return vendor1;
-    }
-
-    public String getTechnician1() {
-        return technician1;
-    }
-
-    public String getServiceNotesMessage() {
-        return serviceNotesMessage;
-    }
-
-    public String getServicePhase() {
-        return servicePhase;
-    }
-
-    public String[] getServicesTableFields() {
-        return servicesTableFields;
-    }
-
-    public String[] getServiceParts() {
-        return serviceParts;
-    }
-
     public List<String> getTitles() {
         return Arrays.asList(titles);
     }
@@ -443,108 +285,8 @@ public class VNextBOMonitorData  {
                 repairStatusText, daysInProcessText, daysInPhaseText, flagText);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getFlag() {
-        return flag;
-    }
-
-    public String getSearchName() {
-        return searchName;
-    }
-
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public String getPriceType() {
-        return priceType;
-    }
-
-    public String getService() {
-        return service;
-    }
-
-    public String getServiceDescription() {
-        return serviceDescription;
-    }
-
-    public String getServiceDetails() {
-        return serviceDetails;
-    }
-
-    public String getServicePrice() {
-        return servicePrice;
-    }
-
-    public String getServiceQuantity() {
-        return serviceQuantity;
-    }
-
-    public String getServiceLaborRate() {
-        return serviceLaborRate;
-    }
-
-    public String getServiceLaborTime() {
-        return serviceLaborTime;
-    }
-
-    public String getServiceStartedDate() {
-        return serviceStartedDate;
-    }
-
     public String getServiceCompletedDate() {
         LocalDate date = LocalDate.now(ZoneId.of("US/Pacific"));
         return date.format(DateTimeFormatter.ofPattern("MM/dd/uuuu"));
-    }
-
-    public List<String> getDepartments() {
-        return departments;
-    }
-
-    public List<String> getPhases() {
-        return phases;
-    }
-
-    public String[] getDaysNumList() {
-        return daysNumList;
-    }
-
-    public String[] getFlags() {
-        return flags;
-    }
-
-    public String[] getLocations() {
-        return locations;
-    }
-
-    public String[] getStockNumbers() {
-        return stockNumbers;
-    }
-
-    public String[] getRoNumbers() {
-        return roNumbers;
-    }
-
-    public String[] getServiceVendorPrices() {
-        return serviceVendorPrices;
-    }
-
-    public String[] getServiceStatuses() {
-        return serviceStatuses;
-    }
-
-    public String[] getAuditLogTabs() {
-        return auditLogTabs;
-    }
-
-    public String[] getInformationFields() {
-        return informationFields;
-    }
-
-    public String[] getServicePhaseHeaders() {
-        return servicePhaseHeaders;
     }
 }

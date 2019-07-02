@@ -1,12 +1,15 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementOrderDetailsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -302,5 +305,82 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         partsDetailsPanel.setOEM(data.getOemNum());
         Assert.assertEquals(partsDetailsPanel.getPartOEMValue(), data.getOemNum(),
                 "The OEM value hasn't been set");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangePartsInputFields(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementOrderDetailsData data = JSonDataParser
+                .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch
+                .setPartsSearchText(data.getWoNum())
+                .clickSearchLoupeIcon();
+
+        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
+                "The WO order hasn't been displayed after search");
+        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
+                "Tha Parts details panel hasn't been displayed");
+
+        final String randomVendorPriceValue = String.valueOf(RandomUtils.nextInt(10, 99));
+        partsDetailsPanel.setVendorPrice(0, randomVendorPriceValue);
+        Assert.assertEquals(partsDetailsPanel.getVendorPriceValue(0), randomVendorPriceValue + ".00",
+                "The vendor price value hasn't been set");
+
+        final String randomPriceValue = String.valueOf(RandomUtils.nextInt(10, 99));
+        partsDetailsPanel.setPrice(0, randomPriceValue);
+        Assert.assertEquals(partsDetailsPanel.getPriceValue(0), randomPriceValue + ".00",
+                "The price value hasn't been set");
+
+        final String randomQuantityValue = String.valueOf(RandomUtils.nextInt(10, 99));
+        partsDetailsPanel.setQuantity(0, randomQuantityValue);
+        Assert.assertEquals(partsDetailsPanel.getQuantityValue(0), randomQuantityValue + ".000",
+                "The quantity value hasn't been set");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeETA(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementOrderDetailsData data = JSonDataParser
+                .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch
+                .setPartsSearchText(data.getWoNum())
+                .clickSearchLoupeIcon();
+
+        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
+                "The WO order hasn't been displayed after search");
+        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
+                "Tha Parts details panel hasn't been displayed");
+        final String tomorrowDetailedDateFormatted = BackOfficeUtils.getDetailedTomorrowDateFormatted();
+        final String tomorrowFullDateFormatted = BackOfficeUtils.getTomorrowFullDateFormatted();
+        partsDetailsPanel.setETADate(tomorrowDetailedDateFormatted, 0);
+
+        Assert.assertEquals(partsDetailsPanel.getPartETAValue(), tomorrowFullDateFormatted,
+                "The ETA value hasn't been set");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStatusOfThePart(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementOrderDetailsData data = JSonDataParser
+                .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
+
+        leftMenu.selectPartsManagementMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+
+        partsManagementSearch
+                .setPartsSearchText(data.getWoNum())
+                .clickSearchLoupeIcon();
+
+        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
+                "The WO order hasn't been displayed after search");
+        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
+                "Tha Parts details panel hasn't been displayed");
+
+        data.getStatuses().forEach(status -> partsDetailsPanel.verifyStatusIsChanged(status));
     }
 }

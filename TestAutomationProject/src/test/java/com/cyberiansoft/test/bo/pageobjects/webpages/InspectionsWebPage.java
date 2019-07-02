@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.DataUtils;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.webelements.*;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -678,8 +679,8 @@ public class InspectionsWebPage extends WebPageWithFilter {
     }
 
     public String getChangedInspectionDate(int day) {
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(BackOfficeUtils.getFullDateFormat());
-        LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of("US/Pacific")));
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData());
+        LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of(DataUtils.ZONE_ID.getData())));
         localDate = localDate.minusMonths(1);
         return localDate.withDayOfMonth(day).format(dateFormat);
     }

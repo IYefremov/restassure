@@ -92,9 +92,9 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public void selectInvoice(String invoiceNumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(invoiceNumber)));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InvoicesPageTableLeft")));
 		wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + invoiceNumber + "']"))).click();
+		wait.until(ExpectedConditions.visibilityOf(invoicestable.findElementByAccessibilityId(invoiceNumber ))).click();
 	}
 
 	public String getPriceForInvoice(String invoiceNumber) {

@@ -7,18 +7,12 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class WizardScreenSteps {
-
-    public static void navigateToServicesScreen() {
+    public static void navigateToWizardScreen(ScreenType screenType){
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        baseWizardScreen.changeScreen(ScreenType.SERVICES);
-    }
-
-    public static void navigateToVisualScreen() {
-        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        baseWizardScreen.changeScreen(ScreenType.VISUAL);
-        VNextVisualScreen visualScreen = new VNextVisualScreen();
-        WaitUtils.elementShouldBeVisible(visualScreen.getRootElement(), true);
-        WaitUtils.waitUntilElementIsClickable(visualScreen.getRootElement());
+        baseWizardScreen.changeScreen(screenType);
+        WaitUtils.getGeneralWebdriverWait().until(webDriver -> baseWizardScreen.getShowTopBarPopover().getText().contains(screenType.getScreenIdentificator()));
+        WaitUtils.elementShouldBeVisible(baseWizardScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(baseWizardScreen.getRootElement());
         GeneralSteps.dismissHelpingScreenIfPresent();
     }
 }

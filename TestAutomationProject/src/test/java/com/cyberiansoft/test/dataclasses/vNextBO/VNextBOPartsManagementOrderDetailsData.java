@@ -1,7 +1,11 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+import java.util.List;
+
+@Getter
 public class VNextBOPartsManagementOrderDetailsData extends VNextBOBaseData {
 
     @JsonProperty("location")
@@ -19,23 +23,6 @@ public class VNextBOPartsManagementOrderDetailsData extends VNextBOBaseData {
     @JsonProperty("oemNum")
     private String oemNum;
 
-    public String getLocation() {
-        return location;
-    }
-
-    public String getWoNum() {
-        return woNum;
-    }
-
-    public String getLabor() {
-        return labor;
-    }
-
-    public String getLaborStart() {
-        return laborStart;
-    }
-
-    public String getOemNum() {
-        return oemNum;
-    }
+    @JsonProperty("statuses")
+    private List<String> statuses;
 }

@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 import org.apache.commons.lang3.RandomStringUtils;
 
+@Getter
 public class VNextBOSmokeData {
 
     @JsonProperty("firstName")
@@ -31,33 +33,5 @@ public class VNextBOSmokeData {
 
     public String getFirstName() {
         return firstName + RandomStringUtils.randomAlphanumeric(5);
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getUserMailPrefix() {
-        return userMailPrefix;
-    }
-
-    public String getUserMailPostbox() {
-        return userMailPostbox;
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public String getUserEdited() {
-        return userEdited;
-    }
-
-    public String getUserNewPhone() {
-        return userNewPhone;
-    }
-
-    public String getShortPassword() {
-        return shortPassword;
     }
 }

@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -51,6 +52,7 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 	}
 
 	public String getInvoicePreviousPONumber() {
+		WaitUtils.elementShouldBeVisible(changeponumberfld, true);
 		return changeponumberfld.getAttribute("value");
 	}
 	

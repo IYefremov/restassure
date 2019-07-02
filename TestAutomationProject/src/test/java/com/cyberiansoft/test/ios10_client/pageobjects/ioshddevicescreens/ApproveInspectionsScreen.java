@@ -49,6 +49,8 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public void clickApproveButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Approve")));
 		approvebtn.click();
 	}
 	
@@ -143,6 +145,8 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isInspectionServiceExistsForApprove(String inspservice) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("approve little off")));
 		return appiumdriver.findElements(MobileBy.AccessibilityId(inspservice)).size() > 0;
 	}
 	

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -160,7 +161,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
                 "The Estimated Time Arrival Value cannot be null");
 
         System.out.println("Displayed date: " + estimatedTimeArrivalValue);
-        System.out.println("Current date: " + data.getCurrentDate());
+        System.out.println("Current date: " + BackOfficeUtils.getCurrentDate());
 
         if (estimatedTimeArrivalValue.equals("")) {
             System.out.println("The Estimated Time Arrival Value is empty");
@@ -168,7 +169,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
         } else {
             System.out.println("The Estimated Time Arrival Value is before the current date");
             Assert.assertTrue(partsDetailsPanel.isDateBefore(
-                    estimatedTimeArrivalValue, data.getCurrentDate()),
+                    estimatedTimeArrivalValue, BackOfficeUtils.getCurrentDate()),
                     "The Estimated Time Arrival Value isn't before the current date");
         }
     }
@@ -213,11 +214,11 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
                 "The Estimated Time Arrival Value cannot be null");
 
         System.out.println("Displayed date: " + estimatedTimeArrivalValue);
-        System.out.println("Current date: " + data.getCurrentDate());
+        System.out.println("Current date: " + BackOfficeUtils.getCurrentDate());
 
-        final boolean dateAfter = partsDetailsPanel.isDateAfter(estimatedTimeArrivalValue, data.getCurrentDate());
-        final boolean dateBefore = partsDetailsPanel.isDateBefore(estimatedTimeArrivalValue, data.getCurrentDate());
-        final boolean dateEqual = partsDetailsPanel.isDateEqual(estimatedTimeArrivalValue, data.getCurrentDate());
+        final boolean dateAfter = partsDetailsPanel.isDateAfter(estimatedTimeArrivalValue, BackOfficeUtils.getCurrentDate());
+        final boolean dateBefore = partsDetailsPanel.isDateBefore(estimatedTimeArrivalValue, BackOfficeUtils.getCurrentDate());
+        final boolean dateEqual = partsDetailsPanel.isDateEqual(estimatedTimeArrivalValue, BackOfficeUtils.getCurrentDate());
 
         if (estimatedTimeArrivalValue.equals("")) {
             System.out.println("The Estimated Time Arrival Value is empty");

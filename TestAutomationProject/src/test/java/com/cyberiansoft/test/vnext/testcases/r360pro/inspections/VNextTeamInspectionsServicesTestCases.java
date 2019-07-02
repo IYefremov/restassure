@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
@@ -29,10 +30,9 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-
         HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
-        WizardScreenSteps.navigateToVisualScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
         for (DamageData damageData : inspectionData.getDamagesData()) {
             VisualScreenSteps.addDamage(damageData);
@@ -41,7 +41,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
         final String inspectionNumber = InspectionSteps.saveInspection();
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
-        WizardScreenSteps.navigateToVisualScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
         VisualScreenSteps.verifyNumberOfAddedDamages(inspectionData.getDamagesData().size());
         InspectionSteps.cancelInspection();
         InspectionSteps.navigateHomeScreen();
@@ -55,7 +55,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
-        WizardScreenSteps.navigateToVisualScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
         for (DamageData damageData : inspectionData.getDamagesData()) {
             VisualScreenSteps.addDamage(damageData);
@@ -64,7 +64,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
         final String inspectionNumber = InspectionSteps.saveInspection();
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
-        WizardScreenSteps.navigateToVisualScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
         VisualScreenSteps.verifyNumberOfAddedDamages(inspectionData.getDamagesData().size());
         InspectionSteps.cancelInspection();
         InspectionSteps.navigateHomeScreen();
@@ -78,13 +78,13 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
-        WizardScreenSteps.navigateToVisualScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
         VisualScreenSteps.addDamage(inspectionData.getDamageData());
         final String inspectionNumber = InspectionSteps.saveInspection();
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
-        WizardScreenSteps.navigateToVisualScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
         VisualScreenSteps.editVisualDamage(
                 String.valueOf(BackOfficeUtils.getServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice())));
         VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyService().getServicePrice());
@@ -102,7 +102,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         HomeScreenSteps.openCreateNewInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
-        WizardScreenSteps.navigateToVisualScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
         VisualScreenSteps.addDamage(inspectionData.getDamageData());
         VisualScreenSteps.editVisualDamage(
@@ -112,7 +112,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
         InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
-        WizardScreenSteps.navigateToVisualScreen();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
         VisualScreenSteps.removeAllBreakages();
 
         VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getInspectionPrice());

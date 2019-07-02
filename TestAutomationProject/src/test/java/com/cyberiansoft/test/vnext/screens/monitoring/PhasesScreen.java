@@ -21,6 +21,9 @@ public class PhasesScreen extends MonitorScreen {
     @FindBy(xpath = "//span[@action='parts']")
     private WebElement partsScreenButton;
 
+    @FindBy(xpath = "//span[@action='quick-actions']")
+    private WebElement phasesMenuButton;
+
     public PhasesScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }
@@ -30,6 +33,6 @@ public class PhasesScreen extends MonitorScreen {
         return phaseListElements.stream()
                 .filter((phaseElement) -> phaseElement.getName().equals(phaseName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Phase elemnt not found " + phaseName));
+                .orElseThrow(() -> new RuntimeException("Phase element not found " + phaseName));
     }
 }

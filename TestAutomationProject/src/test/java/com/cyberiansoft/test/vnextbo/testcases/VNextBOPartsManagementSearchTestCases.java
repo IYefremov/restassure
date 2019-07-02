@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -372,7 +373,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
                 "Not all saved search names are displayed in dropdown");
 
-        final String currentDate = data.getCurrentDate(false);
+        final String currentDate = BackOfficeUtils.getCurrentDate(false);
         final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
                 .clickAdvancedSearchOption()
                 .openETAFromCalendarWidget()
@@ -416,7 +417,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
                 "Not all saved search names are displayed in dropdown");
 
-        final String currentDate = data.getCurrentDate(false);
+        final String currentDate = BackOfficeUtils.getCurrentDate(false);
         final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
                 .clickAdvancedSearchOption()
                 .openETAToCalendarWidget()
@@ -788,7 +789,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertTrue(partsManagementSearch.areSavedSearchNamesDisplayed(),
                 "Not all saved search names are displayed in dropdown");
 
-        final String currentDate = data.getCurrentDate(false);
+        final String currentDate = BackOfficeUtils.getCurrentDate(false);
         final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
                 .clickAdvancedSearchOption()
                 .typeCustomerName(data.getType())
@@ -892,7 +893,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         partsManagementSearch.clickSearchCaret();
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchName());
 
-        final String currentDate = data.getCurrentDate(false);
+        final String currentDate = BackOfficeUtils.getCurrentDate(false);
         final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
                 .clickAdvancedSearchOption()
                 .typeCustomerName(data.getType())
@@ -1021,7 +1022,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchName());
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchNameChanged());
 
-        final String currentDate = data.getCurrentDate(false);
+        final String currentDate = BackOfficeUtils.getCurrentDate(false);
         final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
                 .clickAdvancedSearchOption()
                 .typeCustomerName(data.getType())
@@ -1111,7 +1112,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         partsManagementSearch.clickSearchCaret();
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchName());
 
-        final String currentDate = data.getCurrentDate(false);
+        final String currentDate = BackOfficeUtils.getCurrentDate(false);
         final VNextBOPartsManagementAdvancedSearchDialog advancedSearchDialog = partsManagementSearch
                 .clickAdvancedSearchOption()
                 .typeCustomerName(data.getType())

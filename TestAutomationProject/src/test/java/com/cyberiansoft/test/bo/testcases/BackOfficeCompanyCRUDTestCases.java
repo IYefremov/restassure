@@ -188,7 +188,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		Assert.assertEquals(data.getJobDesc(), jobsPage.getTableJobDescription(data.getJobEdited()));
 		Assert.assertEquals(data.getCustomer(), jobsPage.getTableJobClient(data.getJobEdited()));
-		Assert.assertEquals(BackOfficeUtils.getShortCurrentDateFormatted(), jobsPage.getTableJobStartDate(data.getJobEdited()));
+		Assert.assertEquals(BackOfficeUtils.getTheShortestCurrentDateFormatted(), jobsPage.getTableJobStartDate(data.getJobEdited()));
 		Assert.assertEquals(BackOfficeUtils.getShortTomorrowDateFormatted(), jobsPage.getTableJobEndDate(data.getJobEdited()));
 		Assert.assertEquals(data.getJobAccId(), jobsPage.getTableJobAccountingID(data.getJobEdited()));
 		Assert.assertEquals(data.getJobAcc2Id(), jobsPage.getTableJobAccountingID2(data.getJobEdited()));

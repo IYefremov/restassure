@@ -3,14 +3,14 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import lombok.NonNull;
 import org.apache.commons.lang3.RandomUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
@@ -59,6 +59,57 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='partsTable']/div[1]//input[contains(@class, 'service-oem-number-combobox') and not(@data-bind)]")
     private WebElement firstPartOEMInputField;
+
+    @FindBy(xpath = "//span[contains(@class, 'service-status-dropdown')]//span[contains(@class, 'k-input')]")
+    private WebElement firstPartStatusInputField;
+
+    @FindBy(xpath = "//span[contains(@class, 'service-status-dropdown')]")
+    private WebElement serviceStatusListBox;
+
+    @FindBy(xpath = "//div[@class='k-animation-container']/div[contains(@class, 'k-list-container')]") //todo add identifier if added by developers
+    private WebElement statusDropDown;
+
+    @FindBy(xpath = "//div[@class='k-animation-container']/div[contains(@class, 'k-list-container')]//li")
+    private List<WebElement> statusListBoxOptions;
+
+    @FindBy(xpath = "//div[@id='partsTable']/div[1]//input[contains(@data-bind, 'estimatedTimeArrival')]")
+    private WebElement firstPartETAInputField;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'estimatedTimeArrival')]/following-sibling::span[@role='button']")
+    private List<WebElement> etaCalendarButtons;
+
+    @FindBy(xpath = "//div[contains(@class, 'k-animation-container')]")
+    private WebElement etaCalendarWidget;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'estimatedTimeArrival')]")
+    private WebElement etaInputField;
+
+    @FindBy(xpath = "//td[contains(@class, 'k-today')]/a")
+    private WebElement todayETADate;
+
+    @FindBy(xpath = "//div[@data-role='calendar']//a[@aria-label='Next']")
+    private WebElement calendarWidgetNextButton;
+
+    @FindBy(xpath = "//div[@data-role='calendar']//a[@aria-label='Previous']")
+    private WebElement calendarWidgetPreviousButton;
+
+    @FindBy(xpath = "//td[@role='gridcell']/a")
+    private List<WebElement> calendarCells;
+
+    @FindBy(xpath = "//td[@role='gridcell' and not(contains(@class, 'disabled'))]")
+    private List<WebElement> calendarEnabledCells;
+
+    @FindBy(xpath = "//div[@id='partsTable']//input[contains(@data-bind, 'vendorPriceFormatted')]")
+    private List<WebElement> vendorPriceInputFields;
+
+    @FindBy(xpath = "//div[contains(@data-bind, 'serviceName')]")
+    private List<WebElement> serviceName;
+
+    @FindBy(xpath = "//div[@id='partsTable']//input[contains(@data-bind, 'amountFormatted')]")
+    private List<WebElement> priceInputFields;
+
+    @FindBy(xpath = "//div[@id='partsTable']//input[contains(@data-bind, 'quantityFormatted')]")
+    private List<WebElement> quantityInputFields;
 
     public VNextBOPartsDetailsPanel(WebDriver driver) {
         super(driver);
@@ -217,8 +268,131 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
         setData(firstPartOEMInputField, oem);
     }
 
+    public VNextBOPartsDetailsPanel setStatus(String status) {
+        clickStatusBox();
+        selectStatus(status);
+        return this;
+    }
+
+    public VNextBOPartsDetailsPanel verifyStatusIsChanged(String status) {
+        setStatus(status);
+        Assert.assertEquals(status, getPartStatusValue(), "The ETA value hasn't been set");
+        return this;
+    }
+
+    private VNextBOPartsDetailsPanel clickStatusBox() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(serviceStatusListBox)).click();
+        } catch (ElementClickInterceptedException e) {
+            waitABit(1500);
+            clickWithJS(serviceStatusListBox);
+        }
+        waitABit(1000);
+        return this;
+    }
+
+    private VNextBOPartsDetailsPanel selectStatus(String status) {
+        selectOptionInDropDown(statusDropDown, statusListBoxOptions, status, true);
+        waitForLoading();
+        return this;
+    }
+
+    public void setETADate(String etaDate, int index) {
+        openETACalendarWidget(index);
+
+        while (!areEnabledCalendarCellsDisplayed()) {
+            wait.until(ExpectedConditions.elementToBeClickable(calendarWidgetNextButton)).click();
+        }
+        try {
+            Objects.requireNonNull(getDateCellWebElement(etaDate)).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(etaCalendarWidget));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean areEnabledCalendarCellsDisplayed() {
+        try {
+            waitShort.until(ExpectedConditions.visibilityOfAllElements(calendarEnabledCells));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    private WebElement getDateCellWebElement(String date) {
+        try {
+            waitABit(1000);
+            waitShort
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOfAllElements(calendarCells));
+            return calendarCells
+                    .stream()
+                    .filter(cell -> cell.getAttribute("title").contains(date))
+                    .findFirst()
+                    .orElse(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void openETACalendarWidget(int index) {
+        wait.until(ExpectedConditions.elementToBeClickable(etaCalendarButtons.get(index))).click();
+//        wait.until(ExpectedConditions.visibilityOf(etaCalendarWidget));
+        waitABit(1000);
+    }
+
     public String getPartOEMValue() {
-        wait.until(ExpectedConditions.visibilityOf(firstPartOEMInputField));
-        return firstPartOEMInputField.getAttribute("value");
+        return wait.until(ExpectedConditions.visibilityOf(firstPartOEMInputField)).getAttribute("value");
+    }
+
+    public String getPartETAValue() {
+        return wait.until(ExpectedConditions.visibilityOf(firstPartETAInputField)).getAttribute("value");
+    }
+
+    public String getPartStatusValue() {
+        return wait.until(ExpectedConditions.visibilityOf(firstPartStatusInputField)).getText();
+    }
+
+    public void setVendorPrice(int order, String vendorPrice) {
+        setPartValue(order, vendorPrice, vendorPriceInputFields);
+    }
+
+    public String getVendorPriceValue(int order) {
+        return getPartValue(order, vendorPriceInputFields);
+    }
+
+    public void setPrice(int order, String price) {
+        setPartValue(order, price, priceInputFields);
+    }
+
+    public void setQuantity(int order, String price) {
+        setPartValue(order, price, quantityInputFields);
+    }
+
+    public String getPriceValue(int order) {
+        return getPartValue(order, priceInputFields);
+    }
+
+    public String getQuantityValue(int order) {
+        return getPartValue(order, quantityInputFields);
+    }
+
+    private void setPartValue(int order, String price, List<WebElement> inputFields) {
+        wait.until(ExpectedConditions.elementToBeClickable(inputFields.get(order))).click();
+        inputFields.get(order).sendKeys(price);
+        wait.until(ExpectedConditions.elementToBeClickable(serviceName.get(order))).click();
+        waitABit(500);
+    }
+
+    private String getPartValue(int order, List<WebElement> inputFields) {
+        return wait.until(ExpectedConditions.visibilityOf(inputFields.get(order)))
+                .getAttribute("value")
+                .replace("$", "");
     }
 }

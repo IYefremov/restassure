@@ -117,6 +117,10 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		clickAddOrderButton();
 		if (customerValue.equals("Wholesale Mode") | customerValue.equals("Retail Mode"))
 			selectCustomerAndWorkOrderType(customerName, workOrderType);
+		else {
+			WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
+			workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
+		}
 		return workOrderType.getFirstVizardScreen();
 	}
 

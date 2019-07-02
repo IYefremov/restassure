@@ -188,6 +188,9 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void selectInspectionServiceToSkip(String inspservice) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspservice)));
+
 		if (!appiumdriver.findElementByAccessibilityId(inspservice).isDisplayed()) {
 			swipeToElement(appiumdriver.
 					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspservice + "']/..")));
