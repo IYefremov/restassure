@@ -85,6 +85,7 @@ public class WaitUtils {
                         .ignoring(WebDriverException.class)
                         .ignoring(AssertionError.class)
                         .ignoring(RuntimeException.class);
+
     }
 
     public static WebDriverWait getGeneralWebdriverWait() {
