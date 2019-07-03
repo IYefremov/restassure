@@ -116,6 +116,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public String getWorkOrderCustomerValue(String wonumber) {
+        WaitUtils.elementShouldBeVisible(workorderslist,true);
         WebElement workordercell = getWorkOrderCell(wonumber);
         return workordercell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText();
     }
@@ -160,6 +161,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public VNextWorkOrdersScreen changeCustomerForWorkOrder(String workOrderNumber, AppCustomer newCustomer) {
+        WaitUtils.elementShouldBeVisible(workorderslist, true);
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
         VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
         changeCustomerScreen.selectCustomer(newCustomer);

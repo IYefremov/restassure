@@ -227,7 +227,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
 		inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-		vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+		inspectionsMenuScreen.clickEditInspectionMenuItem();
+		vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatuses.NEW.getInspectionStatusValue());
 		inspectionsScreen.clickBackButton();

@@ -120,7 +120,8 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber));
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-		vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+		inspectionsMenuScreen.clickEditInspectionMenuItem();
+		vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		availableServicesScree = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScree.switchToSelectedServicesView();
