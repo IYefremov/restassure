@@ -240,11 +240,11 @@
       },
       "services": [
         {
-          "serviceName": "Dye",
+          "serviceName": "Oksi_Service_PP_Panel",
           "servicePrice": "12.00",
           "servicePrice2": "$33.00",
           "vehiclePart": {
-            "vehiclePartName": "Hood"
+            "vehiclePartName": "Grill"
           }
         },
         {

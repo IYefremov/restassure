@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
@@ -183,6 +184,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			myworkordersscreen.clickAddOrderButton();
 			RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(DentWizardWorkOrdersTypes.routeusworkordertype);
 			vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
+
 			String wo1 = vehiclescreen.getWorkOrderNumber();
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
@@ -782,7 +784,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					.saveSelectedServiceDetailsWithAlert();
 			Assert.assertEquals(
 					alerttext,
-					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+					AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
@@ -970,7 +972,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			alerttext = selectedservicescreen.saveSelectedServiceDetailsWithAlert();
 			Assert.assertEquals(
 					alerttext,
-					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+					AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
@@ -1282,7 +1284,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					.saveSelectedServiceDetailsWithAlert();
 			Assert.assertEquals(
 					alerttext,
-					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+					AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
 			questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
 			questionsscreen.selectOtherQuestions();
@@ -1551,7 +1553,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			alerttext = selectedservicescreen.saveSelectedServiceDetailsWithAlert();
 			Assert.assertEquals(
 					alerttext,
-					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+					AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 			vehiclescreen = new RegularVehicleScreen();
 			questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
 			questionsscreen.selectProperQuestions();
@@ -2139,6 +2141,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
@@ -2322,7 +2325,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					.saveSelectedServiceDetailsWithAlert();
 			Assert.assertEquals(
 					alerttext,
-					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+					AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesscreen.selectServicePanel(UtilConstants.INTERIOR_SERVICE);
@@ -2380,6 +2383,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.clickSave();
             RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
@@ -2412,7 +2416,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					.saveSelectedServiceDetailsWithAlert();
 			Assert.assertEquals(
 					alerttext,
-					AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+					AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesscreen.selectServicePanel(UtilConstants.DETAIL_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FRONTLINEREADY_SUBSERVICE);
@@ -2451,6 +2455,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.clickSave();
             RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
@@ -2514,6 +2519,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
@@ -2553,6 +2559,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.setTotalSale("1");
 			ordersummaryscreen.clickSave();
@@ -2716,6 +2723,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
@@ -3303,6 +3311,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesscreen.clickBackServicesButton();
             Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			ordersummaryscreen.waitWorkOrderSummaryScreenLoad();
 			ordersummaryscreen.checkApproveAndCreateInvoice();
 			ordersummaryscreen.clickSave();
 			RegularInvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);

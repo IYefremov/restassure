@@ -103,51 +103,10 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		clickVINField();
 		getVINField().sendKeys(vin);
 		getVINField().sendKeys("\n");
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public void setVIN(String vin)  {
 		setVINValue(vin);
-		/*Helpers.waitABit(1000);
-		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-		for (IOSElement closebtn : closebtns)
-			if (closebtn.isDisplayed()) {
-				closebtn.click();
-				break;
-			}
-        try {
-			Helpers.waitABit(1000);
-            if (elementExists(MobileBy.AccessibilityId("Searching on Back Office"))) {
-                WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-                wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByAccessibilityId("Searching on Back Office")));
-            }
-        } catch (WebDriverException e) {
-
-        }
-
-		Helpers.waitABit(1000);
-		if (elementExists("Close"))	 {
-		closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-		for (IOSElement closebtn : closebtns)
-//			closebtn.click();
-			if (closebtn.isDisplayed()) {
-				closebtn.click();
-				
-				break;
-			}
-		}
-
-		Helpers.waitABit(1000);
-		if (elementExists("Close"))	 {
-			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-			for (IOSElement closebtn : closebtns)
-				if (closebtn.isDisplayed()) {
-					closebtn.click();
-					
-					break;
-				}
-			}*/
 	}
 	
 	public void clearVINCode() {
@@ -158,8 +117,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public WebElement getVINField() {
-		//WebElement par = getVehicleInfoTableParentNode("VIN#");
-		//return par.findElement(By.xpath("./XCUIElementTypeTextField[1]"));
 		return appiumdriver.findElementByAccessibilityId("VIN#");
 	}
 	
@@ -172,9 +129,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		getVINField().click();
 		getVINField().sendKeys(vin + "\n");
 		String alertText = appiumdriver.findElementByClassName("XCUIElementTypeTextView").getText();
-		//WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("No vehicle invoice history found")));
-		//Assert.assertTrue(appiumdriver.findElementByAccessibilityId("No vehicle invoice history found").isDisplayed());
 		appiumdriver.findElementByAccessibilityId("Close").click();
 		return alertText;
 	}
