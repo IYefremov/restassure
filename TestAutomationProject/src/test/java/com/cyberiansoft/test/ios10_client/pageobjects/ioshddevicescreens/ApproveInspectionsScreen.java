@@ -96,11 +96,10 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(xx + 200, yy + 230)).release().perform();
 	}
 	
-	public void selectInspectionForApprove(String inspnum) {
-		if (appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnum + "']")).size() > 1)
-			((IOSElement) appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnum + "']")).get(1)).click();
-		else
-			appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnum + "']")).click();
+	public void selectInspectionForApprove(String inspectionNumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebElement approveInspectionsView = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("type=='XCUIElementTypeTable' and name =='ApproveInspectionsView'")));
+		approveInspectionsView.findElement(MobileBy.AccessibilityId(inspectionNumber)).click();
 	}
 	
 	public void clickSignButton() {

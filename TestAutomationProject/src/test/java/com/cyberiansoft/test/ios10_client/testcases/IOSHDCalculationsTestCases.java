@@ -1045,6 +1045,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrders.get(0), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
 		TeamWorkOrdersScreen teamWorkOrdersScreen = myWorkOrdersScreen.switchToTeamWorkOrdersView();
 		teamWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrders.get(0));
 		teamWorkOrdersScreen.clickInvoiceIcon();
@@ -1268,7 +1269,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesScreen.clickSaveAsDraft();
-		
+		myInspectionsScreen.waitInspectionsScreenLoaded();
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen = new VehicleScreen();
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);

@@ -758,7 +758,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
-				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
 		questionsscreen.waitQuestionsScreenLoaded();
         ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -970,7 +970,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		alerttext = techniciansPopup.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
-				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
 		QuestionsScreen questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
 		questionsscreen.waitQuestionsScreenLoaded();
@@ -1281,7 +1281,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
-				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
         questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
 		questionsscreen.selectOtherQuestions();
@@ -1550,7 +1550,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		alerttext = techniciansPopup.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
-				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
         questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
 		questionsscreen.selectProperQuestions();
@@ -1706,7 +1706,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
 		techniciansPopup.selectTechniciansCustomView();
 		techniciansPopup.unselecTechnician(UtilConstants.technicianA);
-		techniciansPopup.selecTechnician(UtilConstants.technicianB);
+		//techniciansPopup.selecTechnician(UtilConstants.technicianB);
 		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "100");
 		techniciansPopup.selecTechnician(UtilConstants.technicianC);
 		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianC, "45");
@@ -2341,7 +2341,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
-				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
         ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
@@ -2432,7 +2432,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				.saveTechnociansViewWithAlert();
 		Assert.assertEquals(
 				alerttext,
-				AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
+				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
         ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesscreen.selectGroupServiceItem(UtilConstants.DETAIL_SERVICE);
