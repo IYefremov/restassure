@@ -64,11 +64,6 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
         clickMenuItem(editinspectionbtn);
     }
 
-    public VNextInformationDialog clickEditInspectionMenuItemWithAlert() {
-        clickMenuItem(editinspectionbtn);
-        return new VNextInformationDialog(appiumdriver);
-    }
-
     public VNextEmailScreen clickEmailInspectionMenuItem() {
         clickMenuItem(emailinspectionbtn);
         return new VNextEmailScreen(appiumdriver);
