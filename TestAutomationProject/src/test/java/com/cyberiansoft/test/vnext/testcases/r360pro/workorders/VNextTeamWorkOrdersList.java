@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.workorders;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -109,18 +110,22 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
         workOrdersScreen.switchToTeamWorkordersView();
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
         vehicleInfoScreen.selectMakeAndModel(workOrderData.getVehicleInfoData().getVehicleMake(),
                 workOrderData.getVehicleInfoData().getVehicleModel());
         vehicleInfoScreen.saveWorkOrderViaMenu();
+        BaseUtils.waitABit(30000);
         workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
         Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
         Assert.assertEquals(vehicleInfoScreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
         vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersScreen.switchToMyWorkordersView();
         workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
         Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
         Assert.assertEquals(vehicleInfoScreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
         vehicleInfoScreen.saveWorkOrderViaMenu();
@@ -158,12 +163,14 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
         AppiumUtils.setNetworkOff();
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
         vehicleInfoScreen.selectMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(),
                 inspectionData.getVehicleInfo().getVehicleModel());
         vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
         Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
         Assert.assertEquals(vehicleInfoScreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
         vehicleInfoScreen.cancelWorkOrder();
@@ -204,12 +211,14 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
 
         AppiumUtils.setNetworkOff();
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
         vehicleInfoScreen.selectMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(),
                 inspectionData.getVehicleInfo().getVehicleModel());
         vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
         Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
         Assert.assertEquals(vehicleInfoScreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
         vehicleInfoScreen.cancelWorkOrder();
@@ -223,7 +232,8 @@ public class VNextTeamWorkOrdersList extends BaseTestCaseTeamEditionRegistration
         //statusScreen.clickBackButton();
         homeScreen.clickWorkOrdersMenuItem();
         workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
         Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), inspectionData.getVehicleInfo().getVehicleMake());
         Assert.assertEquals(vehicleInfoScreen.getModelInfo(), inspectionData.getVehicleInfo().getVehicleModel());
         vehicleInfoScreen.cancelWorkOrder();
