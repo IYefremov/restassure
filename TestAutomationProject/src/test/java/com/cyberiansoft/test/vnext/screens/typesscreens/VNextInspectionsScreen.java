@@ -176,8 +176,9 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public VNextVehicleInfoScreen clickOpenInspectionToEdit(String inspectionNumber) {
-        VNextInspectionsMenuScreen InspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
-        return InspectionsMenuScreen.clickEditInspectionMenuItem();
+        VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        return new VNextVehicleInfoScreen();
     }
 
     public VNextEmailScreen clickOnInspectionToEmail(String inspectionNumber) {

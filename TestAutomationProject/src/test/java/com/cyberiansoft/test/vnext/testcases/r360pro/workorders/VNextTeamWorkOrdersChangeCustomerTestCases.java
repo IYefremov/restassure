@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.workorders;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -178,6 +179,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersScreen.changeCustomerToWholesailForWorkOrder(woNumber, testWholesaleCustomer);
         Assert.assertFalse(workOrdersScreen.isWorkOrderExists(woNumber), "Can't find work order: " + woNumber);
+        BaseUtils.waitABit(20000);
         workOrdersScreen.switchToTeamWorkordersView();
         workOrdersScreen.searchWorkOrderByFreeText(woNumber);
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(woNumber), testWholesaleCustomer.getFullName());
@@ -253,6 +255,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestCaseTeam
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersScreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
+        workOrdersScreen.clickBackButton();
+        BaseUtils.waitABit(30000);
+        homeScreen.clickWorkOrdersMenuItem();
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         workOrdersScreen.switchToMyWorkordersView();
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());

@@ -60,9 +60,8 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
     public VNextInspectionsMenuScreen() {
     }
 
-    public VNextVehicleInfoScreen clickEditInspectionMenuItem() {
+    public void clickEditInspectionMenuItem() {
         clickMenuItem(editinspectionbtn);
-        return new VNextVehicleInfoScreen(appiumdriver);
     }
 
     public VNextInformationDialog clickEditInspectionMenuItemWithAlert() {

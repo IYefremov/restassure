@@ -28,6 +28,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.*;
 import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -355,6 +356,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
         vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.setVIN(newvinnumber);
 		workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+		BaseUtils.waitABit(30000);
 		workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
 		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleInfoScreen.waitVehicleInfoScreenLoaded();
@@ -405,6 +407,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
 
 		selectedServicesScreen.saveWorkOrderViaMenu();
+		BaseUtils.waitABit(30000);
 		workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
 		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleInfoScreen.waitVehicleInfoScreenLoaded();
@@ -471,6 +474,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), workOrderData.getWorkOrderPrice());
 		availableServicesScreen.saveWorkOrderViaMenu();
+		workOrdersScreen.clickBackButton();
+		BaseUtils.waitABit(30000);
+		homeScreen.clickWorkOrdersMenuItem();
 		Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(workOrderNumber), workOrderData.getWorkOrderPrice(),
 				"Price is not valid for work order: " + workOrderNumber);
 		workOrdersScreen.clickBackButton();

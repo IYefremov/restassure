@@ -93,7 +93,8 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestCaseTea
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        VNextVehicleInfoScreen vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        vehicleinfoscreen.waitVehicleInfoScreenLoaded();
         vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableservicesscreen.selectService(inspectionData.getServiceData().getServiceName());
