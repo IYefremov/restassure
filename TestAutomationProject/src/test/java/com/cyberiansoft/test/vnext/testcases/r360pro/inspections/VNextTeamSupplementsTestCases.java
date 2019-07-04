@@ -201,7 +201,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextAvailableServicesScreen availableServicesScree = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		availableServicesScree.selectService(inspectionData.getServiceData().getServiceName());
 		inspectionsScreen = availableServicesScree.saveInspectionViaMenu();
-		
+		inspectionsScreen.clickSearchButtonAndClear();
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber));
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		vehicleInfoScreen = inspectionsMenuScreen.clickAddSupplementInspectionMenuItem();
