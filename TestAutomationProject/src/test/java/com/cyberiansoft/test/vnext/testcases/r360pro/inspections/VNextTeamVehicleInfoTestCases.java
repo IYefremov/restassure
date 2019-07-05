@@ -16,6 +16,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
+import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.json.simple.JSONObject;
@@ -46,7 +47,7 @@ public class VNextTeamVehicleInfoTestCases extends BaseTestCaseTeamEditionRegist
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 
         VehicleInfoScreenValidations.vinValidationMessageShouldExist(true);
         VehicleInfoScreenValidations.vinValidationColorShouldBeEqual(redRGBColor);
@@ -76,10 +77,10 @@ public class VNextTeamVehicleInfoTestCases extends BaseTestCaseTeamEditionRegist
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         VehicleInfoScreenValidations.vinValidationMessageShouldExist(true);
         VehicleInfoScreenValidations.vinValidationColorShouldBeEqual(greyRGBColor);
-        VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.VIN, inspectionData.getVinNumber().substring(0, inspectionData.getVinNumber().length() - 1));
+        VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.VIN, inspectionData.getVehicleInfo().getVINNumber().substring(0, inspectionData.getVehicleInfo().getVINNumber().length() - 1));
         vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
         claimInfoScreen.cancelInspection();

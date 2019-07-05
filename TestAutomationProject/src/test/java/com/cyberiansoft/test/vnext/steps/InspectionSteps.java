@@ -30,7 +30,7 @@ public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes, InspectionData inspectionData) {
         CustomersSreenSteps.selectCustomer(customer);
         InspectionSteps.selectInspectionType(inspectionTypes);
-        VehicleInfoScreenSteps.setVIN(inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
     }
 
     public static String createR360Inspection(AppCustomer customer, InspectionData inspectionData) {
@@ -40,7 +40,7 @@ public class InspectionSteps {
         vNextCustomersScreen.selectCustomer(customer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-       VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
         if (inspectionData.getInsuranceCompanyData() != null) {
             vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
