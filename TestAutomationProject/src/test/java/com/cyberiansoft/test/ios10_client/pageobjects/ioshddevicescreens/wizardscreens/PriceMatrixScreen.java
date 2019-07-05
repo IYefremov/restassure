@@ -9,6 +9,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -58,6 +59,9 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;*/
 
+	@iOSXCUITFindBy(accessibility = "PriceMatrixVehiclePartList")
+	private IOSElement priceMatrixVehiclePartList;
+
 	@iOSXCUITFindBy(accessibility = "Technicians")
 	private IOSElement technicianscell;
 
@@ -69,7 +73,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	public PriceMatrixScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		viewMode = "PdrView";
+		//viewMode = "PdrView";
 	}
 
 	public void selectPriceMatrix(String pricematrix) {
@@ -77,15 +81,15 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(pricematrix)));
 		if (!appiumdriver.findElementByAccessibilityId(pricematrix).isDisplayed()) {
 			swipeTableUp(appiumdriver.findElementByAccessibilityId(pricematrix),
-					appiumdriver.findElementByAccessibilityId("PriceMatrixVehiclePartList"));
-			//appiumdriver.findElementByAccessibilityId(wotype).click();
+					priceMatrixVehiclePartList);
 		}
 		appiumdriver.findElementByAccessibilityId(pricematrix).click();
+	}
 
-		//TouchAction action = new TouchAction(appiumdriver);
-		//action.press(appiumdriver.findElementByAccessibilityId(pricematrix)).waitAction(Duration.ofSeconds(1)).release().perform();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + pricematrix + "']").click();
-
+	public String getPriceMatrixVehiclePartPriceValue(String pricematrix) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(pricematrix)));
+		return priceMatrixVehiclePartList.findElementByAccessibilityId(pricematrix).findElements(By.className("XCUIElementTypeStaticText")).get(1).getAttribute("value");
 	}
 
 	public void setSizeAndSeverity(String size, String severity) {
@@ -96,7 +100,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId("Size & Severity").findElement(By.name("Save")).click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.numberOfElementsToBeLessThan (MobileBy.AccessibilityId("Size & Severity"), 1));
-		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Size & Severity']/XCUIElementTypeButton[@name='Save']").click();
+		viewMode = "PdrView";
 	}
 
 	public void setPrice(String price) {
@@ -131,8 +135,6 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		MobileElement table = getMaqtrixPanel();
 		if (!table.findElementByAccessibilityId(discaunt).isDisplayed()) {
 		    scrollToElement(table.findElementByAccessibilityId(discaunt));
-			//swipeTableUp(table.findElementByAccessibilityId(discaunt),
-			//		table);
 		}
 		if (!table.findElementByAccessibilityId(discaunt).isDisplayed())
 			swipeTableUp(table.findElementByAccessibilityId(discaunt), table);
@@ -141,9 +143,6 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public void switchOffOption(String optionname) {
-		//IOSElement switcher = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = '" + optionname + "' and type = 'XCUIElementTypeSwitch'"));
-		//if (switcher.getAttribute("value").equals("1"))
-		//	switcher.click();
 		appiumdriver.findElementByAccessibilityId("Other").click();
 		viewMode = "OtherView";
 	}
@@ -162,8 +161,6 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		IOSElement pricematrixesVPList = (IOSElement) new WebDriverWait(appiumdriver, 10).
 					until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("PriceMatrixVehiclePartList")));
 		IOSElement vehiclePart = (IOSElement) pricematrixesVPList.findElementByAccessibilityId(pricematrix);
-		//IOSElement vehiclePart = (IOSElement) new WebDriverWait(appiumdriver, 10).
-		//	until(ExpectedConditions.elementToBeClickable(pricematrixesVPList.findElementByAccessibilityId(pricematrix)));
 
 		return vehiclePart.findElementsByAccessibilityId("selected").size() > 0;
 	}

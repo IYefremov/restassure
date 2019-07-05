@@ -28,6 +28,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
@@ -233,7 +234,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
         wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId(inpectionNumber), 1)  );
 	}
 
-	public void archiveInspections(ArrayList<String> inspections, String reason)  {
+	public void archiveInspections(List<String> inspections, String reason)  {
 		clickActionButton();
 		for (String inspNumber : inspections) {
 			selectInspectionForAction(inspNumber);
@@ -265,6 +266,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	public void selectInspectionInTable(String inspectionnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspectionnumber)));
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(inspectionsTable));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspectionnumber))).click();
 	}

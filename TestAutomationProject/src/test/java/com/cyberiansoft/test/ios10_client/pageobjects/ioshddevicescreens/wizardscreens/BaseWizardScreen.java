@@ -11,7 +11,7 @@ import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScreen {
+public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScreen {
 
     public static TypeScreenContext typeContext;
 
