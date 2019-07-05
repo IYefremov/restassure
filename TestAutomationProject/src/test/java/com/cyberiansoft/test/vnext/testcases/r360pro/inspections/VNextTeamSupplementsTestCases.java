@@ -33,6 +33,11 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
     @BeforeClass(description = "Team Supplements Test Cases")
 	public void settingUp() {
 		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getSupplementsTestCasesDataPath();
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		inspectionsScreen.waitForInspectionsListIsVisibile();
+		inspectionsScreen.clickSearchButtonAndClear();
+		inspectionsScreen.clickBackButton();
 	}
 	
 	@AfterClass()
@@ -201,7 +206,6 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 		VNextAvailableServicesScreen availableServicesScree = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		availableServicesScree.selectService(inspectionData.getServiceData().getServiceName());
 		inspectionsScreen = availableServicesScree.saveInspectionViaMenu();
-		inspectionsScreen.clickSearchButtonAndClear();
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber));
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		vehicleInfoScreen = inspectionsMenuScreen.clickAddSupplementInspectionMenuItem();
