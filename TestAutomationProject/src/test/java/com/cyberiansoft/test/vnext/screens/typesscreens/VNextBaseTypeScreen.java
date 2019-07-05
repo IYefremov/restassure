@@ -127,11 +127,19 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         if (searchbtn.findElement(By.xpath(".//span[contains(@class, 'icon-has-query')]")).isDisplayed()) {
             tap(searchbtn);
             if (searchfld.getAttribute("value").length() > 1) {
-                //searchfld.clear();
                 tap(clearsearchicon);
                 WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspectiontypes']"));
             }
             clickCancelSearchButton();
         }
+    }
+
+    public void clickSearchButtonAndClear() {
+        tap(searchbtn);
+        if (searchfld.getAttribute("value").length() > 1) {
+            tap(clearsearchicon);
+            WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspectiontypes']"));
+        }
+        clickCancelSearchButton();
     }
 }

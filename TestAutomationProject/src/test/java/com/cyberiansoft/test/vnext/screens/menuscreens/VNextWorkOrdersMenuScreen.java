@@ -67,16 +67,10 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
         return new VNextWorkOrdersScreen(appiumdriver);
     }
 
-    public VNextVehicleInfoScreen clickEditWorkOrderMenuItem() {
+    public void clickEditWorkOrderMenuItem() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.visibilityOf(editinspectionbtn));
         clickMenuItem(editinspectionbtn);
-        return new VNextVehicleInfoScreen(appiumdriver);
-    }
-
-    public VNextInformationDialog clickEditWorkOrderMenuItemWithAlert() {
-        clickMenuItem(editinspectionbtn);
-        return new VNextInformationDialog(appiumdriver);
     }
 
     public VNextInvoiceTypesList clickCreateInvoiceMenuItem(){

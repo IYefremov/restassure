@@ -28,6 +28,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.*;
 import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -168,7 +169,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderNumber));
 		workOrdersScreen.switchToMyWorkordersView();
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -318,8 +320,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		BaseUtils.waitABit(10*1000);
 		AppiumUtils.setNetworkOff();
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		VNextInformationDialog informationDialog = workOrdersMenuScreen.clickEditWorkOrderMenuItemWithAlert();
-		Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		VNextErrorDialog errorDialog = new VNextErrorDialog(DriverBuilder.getInstance().getAppiumDriver());
+		Assert.assertEquals(errorDialog.clickOKButtonAndGetMessage(),
 				VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
 		AppiumUtils.setAndroidNetworkOn();
 		workOrdersScreen.switchToMyWorkordersView();
@@ -349,11 +352,14 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workOrdersScreen.switchToTeamWorkordersView();
 
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.setVIN(newvinnumber);
 		workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+		BaseUtils.waitABit(30000);
 		workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		Assert.assertEquals(vehicleInfoScreen.getVINFieldValue(), newvinnumber);
 		vehicleInfoScreen.cancelWorkOrder();
 		workOrdersScreen.switchToMyWorkordersView();
@@ -386,7 +392,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workOrdersScreen.switchToTeamWorkordersView();
 
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (int i = 0; i < amountToSelect; i++)
@@ -400,8 +407,10 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
 
 		selectedServicesScreen.saveWorkOrderViaMenu();
+		BaseUtils.waitABit(30000);
 		workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(workOrderData.getMoneyServiceData().getServiceName()), amountToSelect);
@@ -450,7 +459,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workOrdersScreen.switchToTeamWorkordersView();
 
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextServiceDetailsScreen serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(workOrderData.getMoneyServiceData().getServiceName());
@@ -464,6 +474,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), workOrderData.getWorkOrderPrice());
 		availableServicesScreen.saveWorkOrderViaMenu();
+		workOrdersScreen.clickBackButton();
+		BaseUtils.waitABit(30000);
+		homeScreen.clickWorkOrdersMenuItem();
 		Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(workOrderNumber), workOrderData.getWorkOrderPrice(),
 				"Price is not valid for work order: " + workOrderNumber);
 		workOrdersScreen.clickBackButton();
@@ -502,7 +515,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 		workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		groupServicesScreen = new VNextGroupServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedGroupServicesScreen selectedGroupServicesScreen = groupServicesScreen.switchToSelectedGroupServicesView();

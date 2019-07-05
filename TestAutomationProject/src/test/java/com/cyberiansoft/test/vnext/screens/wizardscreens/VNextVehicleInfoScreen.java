@@ -98,6 +98,11 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
     public VNextVehicleInfoScreen() {
     }
 
+    public void waitVehicleInfoScreenLoaded() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@data-autotests-id, '-vehicle-info')]")));
+    }
+
     public void setVIN(String vinnumber) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.name("Vehicle.VIN")));

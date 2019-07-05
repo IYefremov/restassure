@@ -262,6 +262,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		changeInvoicePONumberDialog.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
 
 		AppiumUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		invoicesScreen.clickBackButton();
 	}
@@ -1350,7 +1351,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO(String rowID,
 															   String description, JSONObject testData) {
 
-		final String NO_AVAILABLE_WO_MESSAGE = "No available Work Order for Invoice creation";
+		final String NO_AVAILABLE_WO_MESSAGE = "No available work orders";
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -1369,8 +1370,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
 		informationDialog.clickSeparateInvoicesButton();
-		workOrdersScreen.waitForWorkOrderScreenInfoMessage(NO_AVAILABLE_WO_MESSAGE);
-
+		Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), NO_AVAILABLE_WO_MESSAGE);
+		workOrdersScreen.unselectWorkOrder(workOrderNumber);
 		workOrdersScreen.clickBackButton();
 		homeScreen.clickInvoicesMenuItem();
 		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();

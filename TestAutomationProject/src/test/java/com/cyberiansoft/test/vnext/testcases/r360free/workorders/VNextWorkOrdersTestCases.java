@@ -48,7 +48,8 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
 		final String workOrderNumber = workOrdersScreen.getFirstWorkOrderNumber();
 		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		vehicleInfoScreen.waitVehicleInfoScreenLoaded();
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();

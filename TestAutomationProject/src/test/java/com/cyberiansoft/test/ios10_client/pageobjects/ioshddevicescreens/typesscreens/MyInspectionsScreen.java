@@ -103,6 +103,10 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	public MyInspectionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		waitInspectionsScreenLoaded();
+	}
+
+	public void waitInspectionsScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("InspectionsPageTableLeft")));
