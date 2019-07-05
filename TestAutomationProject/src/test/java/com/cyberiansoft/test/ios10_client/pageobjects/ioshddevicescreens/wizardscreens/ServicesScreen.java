@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -104,6 +106,22 @@ public class ServicesScreen extends BaseWizardScreen {
 		for (MobileElement serviceCell : serviceCells) {
 			if (serviceCell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
 			servicepriceandquantity.replaceAll(" ", ""))) {
+				selected = true;
+				break;
+			}
+		}
+		return selected;
+	}
+
+	public boolean checkServiceIsSelectedWithServiceValues(ServiceData serviceData) {
+		boolean selected = false;
+		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
+		List<MobileElement> serviceCells = selectedservices.findElementByClassName("XCUIElementTypeTable").
+				findElementsByXPath("//XCUIElementTypeStaticText[@name='" + serviceData.getServiceName() + "']/..");
+		String priceValue = PricesCalculations.getPriceRepresentation(serviceData.getServicePrice()) + " x " + serviceData.getServiceQuantity();
+		for (MobileElement serviceCell : serviceCells) {
+			if (serviceCell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
+					priceValue.replaceAll(" ", ""))) {
 				selected = true;
 				break;
 			}
@@ -286,7 +304,6 @@ public class ServicesScreen extends BaseWizardScreen {
 		IOSElement selectedServices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
 		IOSElement serviceCell = (IOSElement) selectedServices.findElementByAccessibilityId(serviceName);
 		serviceCell.findElementByIosNsPredicate("name CONTAINS 'Delete'").click();
-		//appiumdriver.findElementByName("Delete " + service).click();
 		appiumdriver.findElementByAccessibilityId("Delete").click();
 	}
 	

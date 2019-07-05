@@ -264,9 +264,14 @@ public class QuestionsScreen extends BaseWizardScreen {
 	}
 
 	public void selectAnswerForQuestion(QuestionsData questionsData) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(questionsData.getQuestionName())));
-		appiumdriver.findElementByName(questionsData.getQuestionAnswer()).click();
+		if (questionsData.getQuestionName() != null) {
+			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(questionsData.getQuestionName())));
+		}
+		if (questionsData.getQuestionAnswerIndex() > 0) {
+			((WebElement) appiumdriver.findElementsByName(questionsData.getQuestionAnswer()).get(questionsData.getQuestionAnswerIndex()-1)).click();
+		} else
+			appiumdriver.findElementByName(questionsData.getQuestionAnswer()).click();
 
 	}
 

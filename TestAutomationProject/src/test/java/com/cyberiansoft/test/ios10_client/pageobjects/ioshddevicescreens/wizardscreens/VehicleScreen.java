@@ -101,14 +101,13 @@ public class VehicleScreen extends BaseWizardScreen {
 
 	public String clickSaveWithAlert() {
 		clickSave();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
 		return Helpers.getAlertTextAndAccept();
 	}
 
 	public void setVIN(String vin) {
 	
 		setVINFieldValue(vin);
-		Helpers.waitABit(1000);
+		/*Helpers.waitABit(1000);
 		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
 		for (IOSElement closebtn : closebtns)
 			if (closebtn.isDisplayed()) {
@@ -145,7 +144,7 @@ public class VehicleScreen extends BaseWizardScreen {
 
 					break;
 				}
-		}
+		}*/
 	}
 	
 	public void setVINFieldValue(String vin) {

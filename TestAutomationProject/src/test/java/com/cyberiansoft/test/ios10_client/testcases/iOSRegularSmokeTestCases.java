@@ -96,8 +96,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testUpdateVIN(String rowID,
 								   String description, JSONObject testData) {
-		//resrtartApplication();
-		//RegularMainScreen mainscr = new RegularMainScreen();
+
 		RegularMainScreen mainscr = homescreen.clickLogoutButton();
 		mainscr.updateVIN();
 		RegularHomeScreen homescreen = mainscr.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -290,7 +289,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	//Test Case 8430:Create work order with type is assigned to a specific client
+
 	@Test(testName = "Test Case 8430:Create work order with type is assigned to a specific client", description = "Create work order with type is assigned to a specific client ")
 	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient() {
 		final String VIN = "ZWERTYASDFDDXZBVB";
@@ -469,7 +468,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	//todo
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testApproveInspectionsOnDeviceViaAction(String rowID,
 														 String description, JSONObject testData) {
@@ -518,7 +516,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		myinspectionsscreen.clickHomeButton();
 	}
 
-	//todo
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testArchiveInspectionsOnDeviceViaAction(String rowID,
 														String description, JSONObject testData) {
@@ -845,6 +842,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		String wonumber = vehiclescreen.getWorkOrderNumber();
 		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
+		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice2()));
+		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getBundleService().getBundleServiceName(), workOrderData.getBundleService().getBundleServiceAmount()));
+
 		RegularSelectedServiceDetailsScreen selectedservicedetailsscreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getBundleService().getBundleServiceName());
 		selectedservicedetailsscreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
 		selectedservicedetailsscreen.saveSelectedServiceDetails();
@@ -862,12 +862,10 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-		public void
-	testCreateInspectionFromInvoiceWithTwoWOs(String rowID,
-				String description, JSONObject testData) {
+	public void testCreateInspectionFromInvoiceWithTwoWOs(String rowID, String description, JSONObject testData) {
 
-			TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-			WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -1083,7 +1081,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		myworkordersscreen.selectWorkOrder(wonumber1);
 		for (String menuItem : menuItemsToVerify) {
-			myworkordersscreen.isMenuItemForSelectedWOExists(menuItem);
+			Assert.assertFalse(myworkordersscreen.isMenuItemForSelectedWOExists(menuItem));
 		}
 		myworkordersscreen.clickDetailspopupMenu();
 		vehiclescreen = new RegularVehicleScreen();
@@ -1298,8 +1296,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
 
-		//Create WO1
-		Instant star = Instant.now();
 		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
@@ -1317,6 +1313,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(myworkordersscreen.getPriceValueForWO(wonumber1), testCaseData.getWorkOrderData().getWorkOrderPrice());
 		myworkordersscreen.selectWorkOrderNewInspection(wonumber1);
 		vehiclescreen = new RegularVehicleScreen();
+		vehiclescreen.verifyMakeModelyearValues(testCaseData.getWorkOrderData().getVehicleInfoData().getVehicleMake(),
+				testCaseData.getWorkOrderData().getVehicleInfoData().getVehicleModel(), testCaseData.getWorkOrderData().getVehicleInfoData().getVehicleYear());
 		vehiclescreen.cancelOrder();
 		myworkordersscreen.clickHomeButton();
 	}
@@ -1571,7 +1569,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		ordersummaryscreen.saveWizard();
 
 		Helpers.waitABit(45*1000);
-		//testlogger.log(LogStatus.INFO, wonumber);
 		myworkordersscreen.changeCustomerForWorkOrder(wonumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		myworkordersscreen.openWorkOrderDetails(wonumber);
 		vehiclescreen = new RegularVehicleScreen();
@@ -1848,7 +1845,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		vehiclescreen = new RegularVehicleScreen();
 
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
-			RegularPriceMatrixScreen pricematrix = vehiclescreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+			vehiclescreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
 			for (VehiclePartData vehiclePartData : priceMatrixScreenData.getVehiclePartsData()) {
 				RegularVehiclePartsScreenSteps.verifyIfVehiclePartContainsPriceValue(vehiclePartData);
 			}
@@ -2068,8 +2065,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		servicerequestsscreen.clickAddButton();
 		servicerequestsscreen.selectTodayFromAppointmet();
 		servicerequestsscreen.selectTodayToAppointmet();
-		final String fromapp = servicerequestsscreen.getFromAppointmetValue();
-		final String toapp = servicerequestsscreen.getToAppointmetValue();
 
 		servicerequestsscreen.setSubjectAppointmet(appointmentSubject);
 		servicerequestsscreen.setAddressAppointmet(appointmentAddress);
@@ -2542,7 +2537,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-	public void testRegularVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature(String rowID,
+	public void testVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature(String rowID,
 																									 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -3197,7 +3192,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		ordersummaryscreen.setTotalSale(totalSale);
 		ordersummaryscreen.clickSave();
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < serviceRequestData.getMoneyServices().size(); i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.lastIndexOf("'"));
 			selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
@@ -3261,7 +3256,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(serviceData.getServiceName()));
 		selectedServicesScreen.clickSave();
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < serviceRequestData.getMoneyServices().size(); i++) {
 			alerttext = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerttext.substring(alerttext.indexOf("'")+1, alerttext.lastIndexOf("'"));
 			selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
@@ -3536,7 +3531,10 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen();
 		approveinspscreen.selectInspection(inspnumber);
 		for (ServiceData serviceData : inspectionData.getServicesToApprovesList())
-			approveinspscreen.isInspectionServiceExistsForApprove(serviceData.getServiceName());
+			if (serviceData.isSelected())
+				Assert.assertTrue(approveinspscreen.isInspectionServiceExistsForApprove(serviceData), "Can't find service:" + serviceData.getServiceName());
+			else
+				Assert.assertFalse(approveinspscreen.isInspectionServiceExistsForApprove(serviceData));
 
 		approveinspscreen.clickApproveAllServicesButton();
 		approveinspscreen.clickSaveButton();
@@ -3727,7 +3725,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			if (serviceData.isSelected())
 				Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceData));
 			else
-			Assert.assertEquals(selectedServicesScreen.getNumberOfServiceSelectedItems(serviceData.getServiceName()), serviceData.getVehicleParts().size());
+				Assert.assertEquals(selectedServicesScreen.getNumberOfServiceSelectedItems(serviceData.getServiceName()), serviceData.getVehicleParts().size());
 		selectedServicesScreen.cancelWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -3989,6 +3987,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String cashcheckamount = "100";
+		final String expectedPrice = "$0.00";
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -4058,7 +4057,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(invoicepayments.getPaymentsTypeAmountValue("Cash/Check"), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		Assert.assertEquals(invoicepayments.getPaymentsTypeCreatedByValue("Cash/Check"), "Employee Simple 20%");
 
-		Assert.assertEquals(invoicepayments.getPaymentsTypeAmountValue("PO/RO"), PricesCalculations.getPriceRepresentation("0"));
+		Assert.assertEquals(invoicepayments.getPaymentsTypeAmountValue("PO/RO"), expectedPrice);
 		Assert.assertEquals(invoicepayments.getPaymentsTypeCreatedByValue("PO/RO"), "Back Office");
 		invoicepayments.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
@@ -4071,6 +4070,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String cashcheckamount = "100";
+		final String expectedPrice = "$0.00";
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -4141,7 +4141,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		String mainWindowHandle = webdriver.getWindowHandle();
 		InvoicePaymentsTabWebPage invoicepayments = invoiceswebpage.clickInvoicePayments(invoicenumber);
 
-		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + invoiceData.getNewPoNumber()), PricesCalculations.getPriceRepresentation("0"));
+		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + invoiceData.getNewPoNumber()), expectedPrice);
 		invoicepayments.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}
@@ -4152,6 +4152,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+		final String expectedPrice = "$0.00";
 
 		homescreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
@@ -4211,7 +4212,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		String mainWindowHandle = webdriver.getWindowHandle();
 		InvoicePaymentsTabWebPage invoicepayments = invoiceswebpage.clickInvoicePayments(invoicenumber);
 
-		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + invoiceData.getNewPoNumber()), PricesCalculations.getPriceRepresentation("0"));
+		Assert.assertEquals(invoicepayments.getPaymentDescriptionTypeAmountValue("PO #: " + invoiceData.getNewPoNumber()), expectedPrice);
 		invoicepayments.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}

@@ -351,6 +351,10 @@
       "rowID": "testCreateWOFromServiceRequest.01",
       "description": "Test Case 21585:Create WO from Service Request",
       "workOrderData": {
+        "moneyService" : {
+          "serviceName": "Wheel",
+          "servicePrice2": "$70.00 x 3.00"
+        },
         "bundleService": {
           "bundleServiceName": "Bundle1_Disc_Ex",
           "bundleServiceAmount": "70"
@@ -583,23 +587,24 @@
           {
             "screenName": "Future Audi Car",
             "damageData": {
-              "damageGroupName": "WHEEL REPAIR",
-              "screenTotalPrice": "$180.50"
-            }
+              "damageGroupName": "WHEEL REPAIR"
+
+            },
+            "screenTotalPrice": "$180.50"
           },
           {
             "screenName": "Exterior",
             "damageData": {
-              "damageGroupName": "WHEEL REPAIR",
-              "screenTotalPrice": "$250.50"
-            }
+              "damageGroupName": "WHEEL REPAIR"
+            },
+            "screenTotalPrice": "$250.50"
           },
           {
             "screenName": "Futire Jet Car",
             "damageData": {
-              "damageGroupName": "Price Adjustment",
-              "screenTotalPrice": "$240.50"
-            }
+              "damageGroupName": "Price Adjustment"
+            },
+            "screenTotalPrice": "$240.50"
           }
         ],
         "questionScreensData": [
@@ -609,12 +614,14 @@
               {
                 "questionSetionName": "Engine Condition",
                 "questionAnswer": "Really Bad",
-                "screenIndex": 0
+                "screenIndex": 0,
+                "screenHDIndex": 0
               },
               {
                 "questionSetionName": "Just One Possible Answer",
                 "questionAnswer": "One",
-                "screenIndex": 2
+                "screenIndex": 2,
+                "screenHDIndex": 1
               }
             ]
           },
@@ -623,12 +630,14 @@
             "questionsData": [
               {
                 "signatureQuestion": true,
-                "screenIndex": 1
+                "screenIndex": 1,
+                "screenHDIndex": 0
               },
               {
                 "questionSetionName": "Sample Question",
                 "questionAnswer": "Answers 1",
-                "screenIndex": 2
+                "screenIndex": 2,
+                "screenHDIndex": 1
               }
             ]
           },
@@ -638,17 +647,22 @@
               {
                 "questionSetionName": "Battery Terminals / Cables / Mountings",
                 "questionAnswer": "Immediate Attention Required",
-                "screenIndex": 0
+                "screenIndex": 0,
+                "screenHDIndex": 0,
+                "questionAnswerIndex" : 1
               },
               {
                 "questionSetionName": "Check Condition of Battery (Storage Capacity Test)",
                 "questionAnswer": "Immediate Attention Required",
-                "screenIndex": 1
+                "screenIndex": 0,
+                "screenHDIndex": 0,
+                "questionAnswerIndex" : 2
               },
               {
                 "questionName": "Tax_Point_1",
                 "questionAnswer": "Test Answer 1",
-                "screenIndex": 1
+                "screenIndex": 1,
+                "screenHDIndex": 1
               }
             ]
           }
@@ -750,7 +764,10 @@
       "description": "Test Case 16507:Create inspection from WO",
       "workOrderData": {
         "vihicleInfo": {
-          "vinNumber": "JA4LS31H8YP047397"
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
         },
         "workOrderPrice": "$0.00"
       }
@@ -1516,7 +1533,7 @@
   "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature": [
     {
       "rowID": "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature.01",
-      "description": "Test Case 28473:Invoices: HD - Verify that red 'A' icon is present for invoice with customer approval ON and no signature",
+      "description": "Test Case 28473:Invoices: Verify that red 'A' icon is present for invoice with customer approval ON and no signature",
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1536,10 +1553,10 @@
       }
     }
   ],
-  "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature": [
+  "testVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature": [
     {
-      "rowID": "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature.01",
-      "description": "Test Case 28476:Invoices: HD&Regular - Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature",
+      "rowID": "testVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature.01",
+      "description": "Test Case 28476:Invoices: Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature",
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -2191,10 +2208,16 @@
           },
           {
             "serviceName": "Oksi_Service_PP_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            },
             "isSelected": true
           },
           {
             "serviceName": "Oksi_Service_PP_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            },
             "isSelected": true
           }
         ]

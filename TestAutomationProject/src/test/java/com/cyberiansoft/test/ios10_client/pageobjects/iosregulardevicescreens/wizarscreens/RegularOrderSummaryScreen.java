@@ -134,8 +134,6 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	public void closeDublicaterServicesWarningByClickingCancel() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Duplicate services")));
-		//wait = new WebDriverWait(appiumdriver,10);
-        //wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Duplicate services")));
         appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 	
