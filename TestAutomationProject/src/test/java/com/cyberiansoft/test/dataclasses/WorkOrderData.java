@@ -115,10 +115,6 @@ public class WorkOrderData {
         return vihicleInfo;
     }
 
-    public String getVinNumber() {
-        return vihicleInfo.getVINNumber();
-    }
-
     public ServiceData getServiceData() {
         return service;
     }

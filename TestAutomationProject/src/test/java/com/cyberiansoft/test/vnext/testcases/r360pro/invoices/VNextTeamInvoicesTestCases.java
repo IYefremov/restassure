@@ -35,6 +35,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummarySc
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.NotesSteps;
+import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
@@ -680,8 +681,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 			wotypeslist.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
-			VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,testCaseData.getWorkOrderData().getVinNumber());
+			GeneralSteps.dismissHelpingScreenIfPresent();
+			VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 			vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
 			VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
 			workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -880,8 +881,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 			workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
-			VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,testCaseData.getWorkOrderData().getVinNumber());
+			GeneralSteps.dismissHelpingScreenIfPresent();
+			VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 			vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
 			VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
 			workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1068,8 +1069,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 			wotypeslist.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
-			VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,testCaseData.getWorkOrderData().getVinNumber());
+			GeneralSteps.dismissHelpingScreenIfPresent();
+			VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 			vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
 			VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
 			workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -1124,7 +1125,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		wotypeslist.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,testCaseData.getWorkOrderData().getVinNumber());
+		VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
@@ -1355,7 +1356,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workOrderTypesList.selectWorkOrderType(wotype);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,testCaseData.getWorkOrderData().getVinNumber());
+		VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 		final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
 		workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 		workOrdersScreen.clickBackButton();
