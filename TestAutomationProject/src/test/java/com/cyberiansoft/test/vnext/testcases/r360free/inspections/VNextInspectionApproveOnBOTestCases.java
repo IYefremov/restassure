@@ -57,7 +57,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
+		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final VehicleInfoData vehicleInfoData = inspectionData.getVehicleInfo();
 
 		VehicleInfoScreenValidations.validateVehicleInfo(vehicleInfoData);
@@ -134,7 +134,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
+		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final VehicleInfoData vehicleInfoData = inspectionData.getVehicleInfo();
 		VehicleInfoScreenValidations.validateVehicleInfo(vehicleInfoData);
 		VehicleInfoScreenSteps.setVehicleInfo(vehicleInfoData);

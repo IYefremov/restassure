@@ -24,6 +24,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScre
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
+import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.json.simple.JSONObject;
@@ -61,7 +62,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -98,7 +99,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -134,7 +135,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
@@ -167,8 +168,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
@@ -202,7 +202,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -239,7 +239,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -275,7 +275,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -309,7 +309,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -351,7 +351,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -394,7 +394,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -438,7 +438,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
 
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -483,7 +483,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR_NO_SHARING);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
 
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -525,7 +525,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestCaseTeamEditionRegis
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
         VNextVisualScreen visualScreen = new VNextVisualScreen(DriverBuilder.getInstance().getAppiumDriver());
         visualScreen.clickAddServiceButton();
