@@ -262,6 +262,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		changeInvoicePONumberDialog.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
 
 		AppiumUtils.clickHardwareBackButton();
+		AppiumUtils.clickHardwareBackButton();
 		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		invoicesScreen.clickBackButton();
 	}

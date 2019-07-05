@@ -401,7 +401,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         AppiumUtils.setNetworkOff();
         vehicleInfoScreen.setVIN(newVinNumber);
         vehicleInfoScreen.clickSaveInspectionMenuButton();
-        BaseUtils.waitABit(10000);
+        BaseUtils.waitABit(15000);
         VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         informationDialog.clickInformationDialogOKButton();
         inspectionsScreen.switchToMyInspectionsView();
