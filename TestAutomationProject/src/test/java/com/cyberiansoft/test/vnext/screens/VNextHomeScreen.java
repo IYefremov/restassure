@@ -7,7 +7,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -152,7 +152,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
         VNextWorkOrdersScreen workordersscreen = clickWorkOrdersMenuItem();
         VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
         customersscreen.selectCustomer(testcustomer);
-        return new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        GeneralSteps.dismissHelpingScreenIfPresent();
+        return vehicleInfoScreen;
     }
 
     public void clickUpgrateToProBanner() {

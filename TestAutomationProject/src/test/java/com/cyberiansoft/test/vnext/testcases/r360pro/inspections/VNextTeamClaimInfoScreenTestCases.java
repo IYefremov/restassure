@@ -1,25 +1,27 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
+import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
+import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 
 public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRegistration {
 
@@ -41,8 +43,9 @@ public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRe
 		customersScreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
 		vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
 		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertTrue(claimInfoScreen.isInsuranceCompanyFieldVisible());
@@ -67,8 +70,9 @@ public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRe
 		customersScreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
 		vehicleInfoScreen.clickScreenTitleCaption();
 		Assert.assertFalse(vehicleInfoScreen.isScreenPresentInChangeScreenPopoverList(ScreenType.CLAIM.name()));
 		AppiumUtils.clickHardwareBackButton();
@@ -90,8 +94,9 @@ public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRe
 		customersScreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
 		vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
 		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertTrue(claimInfoScreen.isInsuranceCompanyFieldVisible());
@@ -116,8 +121,9 @@ public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRe
 		customersScreen.selectCustomer(testwholesailcustomer);
 		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
 		vehicleInfoScreen.clickScreenTitleCaption();
 		Assert.assertFalse(vehicleInfoScreen.isScreenPresentInChangeScreenPopoverList("Claim"));
 		AppiumUtils.clickHardwareBackButton();

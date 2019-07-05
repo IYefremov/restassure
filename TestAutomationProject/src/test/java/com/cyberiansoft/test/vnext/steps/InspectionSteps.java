@@ -4,7 +4,9 @@ import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
+import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
@@ -36,8 +38,9 @@ public class InspectionSteps {
         inspectionsScreen.clickAddInspectionButton();
         VNextCustomersScreen vNextCustomersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         vNextCustomersScreen.selectCustomer(customer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.setVIN(inspectionData.getVinNumber());
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+       VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
         if (inspectionData.getInsuranceCompanyData() != null) {
             vehicleInfoScreen.changeScreen(ScreenType.CLAIM);

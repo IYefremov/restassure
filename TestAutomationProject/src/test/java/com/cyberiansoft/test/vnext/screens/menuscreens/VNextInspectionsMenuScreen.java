@@ -8,6 +8,7 @@ import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -60,8 +61,16 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
     public VNextInspectionsMenuScreen() {
     }
 
-    public void clickEditInspectionMenuItem() {
+    public VNextVehicleInfoScreen clickEditInspectionMenuItem() {
         clickMenuItem(editinspectionbtn);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        GeneralSteps.dismissHelpingScreenIfPresent();
+        return vehicleInfoScreen;
+    }
+
+    public VNextInformationDialog clickEditInspectionMenuItemWithAlert() {
+        clickMenuItem(editinspectionbtn);
+        return new VNextInformationDialog(appiumdriver);
     }
 
     public VNextEmailScreen clickEmailInspectionMenuItem() {
@@ -124,7 +133,9 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 
     public VNextVehicleInfoScreen clickAddSupplementInspectionMenuItem() {
         clickMenuItem(addsupplementbtn);
-        return new VNextVehicleInfoScreen(appiumdriver);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        GeneralSteps.dismissHelpingScreenIfPresent();
+        return vehicleInfoScreen;
     }
 
     public boolean isAddSupplementInspectionMenuItemPresent() {

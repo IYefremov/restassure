@@ -5,6 +5,7 @@ import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -67,10 +68,18 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
         return new VNextWorkOrdersScreen(appiumdriver);
     }
 
-    public void clickEditWorkOrderMenuItem() {
+    public VNextVehicleInfoScreen clickEditWorkOrderMenuItem() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.visibilityOf(editinspectionbtn));
         clickMenuItem(editinspectionbtn);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        GeneralSteps.dismissHelpingScreenIfPresent();
+        return vehicleInfoScreen;
+    }
+
+    public VNextInformationDialog clickEditWorkOrderMenuItemWithAlert() {
+        clickMenuItem(editinspectionbtn);
+        return new VNextInformationDialog(appiumdriver);
     }
 
     public VNextInvoiceTypesList clickCreateInvoiceMenuItem(){

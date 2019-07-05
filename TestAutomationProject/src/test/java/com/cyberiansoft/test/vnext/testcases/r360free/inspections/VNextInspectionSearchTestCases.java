@@ -6,6 +6,8 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
+import com.cyberiansoft.test.vnext.enums.VehicleDataField;
+import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
@@ -16,8 +18,10 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
+import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOAdvancedSearchInspectionDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
@@ -71,16 +75,19 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.setVIN(VIN);
-        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), _make);
-        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), _model);
-        Assert.assertEquals(vehicleInfoScreen.getYear(), year);
-        vehicleInfoScreen.setMilage(mileage);
-        vehicleInfoScreen.setStockNo(stock);
-        vehicleInfoScreen.setRoNo(ro);
-        vehicleInfoScreen.setPoNo(po);
-        vehicleInfoScreen.setLicPlate(licPlate);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, VIN);
+
+        VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.MAKE, _make);
+        VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.MODEL, _model);
+        VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.YEAR, year);
+
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.MILAGE,mileage);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.STOCK_NO,stock);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.RO_NO,ro);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.PO_NO,po);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.LIC_PLATE,licPlate);
 
         inspnumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
@@ -138,16 +145,19 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.setVIN(VIN);
-        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), _make);
-        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), _model);
-        Assert.assertEquals(vehicleInfoScreen.getYear(), year);
-        vehicleInfoScreen.setMilage(mileage);
-        vehicleInfoScreen.setStockNo(stock);
-        vehicleInfoScreen.setRoNo(ro);
-        vehicleInfoScreen.setPoNo(po);
-        vehicleInfoScreen.setLicPlate(licPlate);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, VIN);
+
+        VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.MAKE, _make);
+        VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.MODEL, _model);
+        VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.YEAR, year);
+
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.MILAGE,mileage);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.STOCK_NO,stock);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.RO_NO,ro);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.PO_NO,po);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.LIC_PLATE,licPlate);
 
         archivedinspnumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.CLAIM);

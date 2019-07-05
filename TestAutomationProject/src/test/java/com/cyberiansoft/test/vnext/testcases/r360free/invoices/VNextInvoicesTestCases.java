@@ -7,28 +7,24 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.email.EmailUtils;
-import com.cyberiansoft.test.email.emaildata.EmailFolder;
-import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
-import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
+import com.cyberiansoft.test.vnext.enums.VehicleDataField;
+import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
+import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -58,13 +54,13 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         final WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
-        vehicleInfoScreen.selectModelColor(workOrderData.getVehicleInfoData().getVehicleColor());
-        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
-        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
-        Assert.assertEquals(vehicleInfoScreen.getYear(), workOrderData.getVehicleInfoData().getVehicleYear());
+        VehicleInfoScreenInteractions.selectColor(workOrderData.getVehicleInfoData().getVehicleColor());
+
+        VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
+
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextServiceDetailsScreen serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(workOrderData.getMoneyServiceData().getServiceName());
@@ -102,7 +98,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         invoicesScreen.clickBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInvoiceWithTextNote(String rowID,
                                               String description, JSONObject testData) {
 
@@ -112,13 +108,14 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        vehicleInfoScreen.setVIN(testCaseData.getWorkOrderData().getVinNumber());
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, testCaseData.getWorkOrderData().getVinNumber());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
         VNextNotesScreen notesScreen = vehicleInfoScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(woNote);
         GeneralSteps.pressBackButton();
-        vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        vehicleInfoScreen = new VNextVehicleInfoScreen();
+        GeneralSteps.dismissHelpingScreenIfPresent();
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
         VNextWorkOrdersScreen workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
         Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(workOrderNumber), testCaseData.getWorkOrderData().getWorkOrderPrice());
@@ -146,7 +143,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         webdriver.quit();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity(String rowID,
                                                                                String description, JSONObject testData) throws Exception {
 
@@ -157,8 +154,9 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
         VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
         customersScreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
 
@@ -211,7 +209,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInvoiceWithSetPO(String rowID,
                                            String description, JSONObject testData) throws Exception {
 
@@ -221,12 +219,10 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
-        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
-        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
-        Assert.assertEquals(vehicleInfoScreen.getYear(), workOrderData.getVehicleInfoData().getVehicleYear());
+        VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextServiceDetailsScreen serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(workOrderData.getMoneyServiceData().getServiceName());
@@ -266,7 +262,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateAndEmailInvoiceWithTwoMatrixPanel(String rowID,
                                                             String description, JSONObject testData) {
 
@@ -275,13 +271,12 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
 
-        Assert.assertEquals(vehicleInfoScreen.getMakeInfo(), workOrderData.getVehicleInfoData().getVehicleMake());
-        Assert.assertEquals(vehicleInfoScreen.getModelInfo(), workOrderData.getVehicleInfoData().getVehicleModel());
-        Assert.assertEquals(vehicleInfoScreen.getYear(), workOrderData.getVehicleInfoData().getVehicleYear());
+        VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
+
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
@@ -318,7 +313,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         invoicesScreen.clickBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyInvoiceCanBeCreatedFromWOWizard(String rowID,
                                                           String description, JSONObject testData) {
 
@@ -327,7 +322,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
@@ -347,7 +342,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         invoicesScreen.clickBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyInvoiceCanBeCreatedFromWOMenu(String rowID,
                                                         String description, JSONObject testData) {
 
@@ -356,7 +351,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        vehicleInfoScreen.setVIN(workOrderData.getVinNumber());
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();

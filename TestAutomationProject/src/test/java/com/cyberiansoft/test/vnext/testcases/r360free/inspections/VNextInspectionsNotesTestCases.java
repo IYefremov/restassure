@@ -23,6 +23,7 @@ import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.steps.NotesSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -33,7 +34,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import retrofit2.http.GET;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +58,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -98,8 +98,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -134,8 +134,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(0));
@@ -177,8 +177,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(0));
@@ -219,8 +219,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 
@@ -247,8 +247,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -276,8 +276,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -311,8 +311,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -341,8 +341,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
@@ -370,8 +370,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
@@ -383,7 +383,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         notesScreen = availableServicesScreen.clickInspectionNotesOption();
@@ -406,8 +406,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
@@ -435,8 +435,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
@@ -466,8 +466,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
@@ -480,7 +480,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         notesScreen = availableServicesScreen.clickInspectionNotesOption();
@@ -506,8 +506,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -523,7 +523,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();
         inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -552,8 +553,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         for (ServiceData serviceAdd : inspectionData.getServicesList())
@@ -600,8 +601,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        vehicleInfoScreen.waitVehicleInfoScreenLoaded();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
+
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextPriceMatrixesScreen pricematrixesscreen = availableServicesScreen.openMatrixServiceDetails(inspectionData.getMatrixServiceData().getMatrixServiceName());

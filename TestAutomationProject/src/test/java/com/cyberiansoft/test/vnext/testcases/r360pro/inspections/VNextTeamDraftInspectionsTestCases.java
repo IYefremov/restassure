@@ -7,15 +7,18 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
+import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.json.simple.JSONObject;
@@ -49,9 +52,10 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 
@@ -76,10 +80,11 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
-        vehicleinfoscreen.saveInspectionViaMenu();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+       VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
+        vehicleInfoScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
                 InspectionStatuses.NEW.getInspectionStatusValue());
         inspectionsScreen.clickBackButton();
@@ -97,16 +102,17 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
-        inspectionsScreen = vehicleinfoscreen.saveInspectionAsDraft();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+       VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
+        inspectionsScreen = vehicleInfoScreen.saveInspectionAsDraft();
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
                 InspectionStatuses.DRAFT.getInspectionStatusValue());
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.saveInspectionAsDraft();
@@ -128,10 +134,11 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
-        inspectionsScreen = vehicleinfoscreen.saveInspectionViaMenu();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+       VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
+        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
                 InspectionStatuses.NEW.getInspectionStatusValue());
 
@@ -157,16 +164,17 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
-        vehicleinfoscreen.saveInspectionViaMenu();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+       VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
+        vehicleInfoScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
                 InspectionStatuses.NEW.getInspectionStatusValue());
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleinfoscreen.changeScreen(ScreenType.SERVICES);
+        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         availableServicesScreen.saveInspectionViaMenu();
@@ -188,16 +196,17 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         customersscreen.selectCustomer(testcustomer);
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
-        VNextVehicleInfoScreen vehicleinfoscreen = new VNextVehicleInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        final String inspNumber = vehicleinfoscreen.getNewInspectionNumber();
-        vehicleinfoscreen.clickSaveWorkOrderMenuButton();
-        vehicleinfoscreen.clcikSaveViaMenuAsFinal();
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
+        vehicleInfoScreen.clickSaveWorkOrderMenuButton();
+        vehicleInfoScreen.clcikSaveViaMenuAsFinal();
         VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.VIN_REQUIRED_MSG);
-        vehicleinfoscreen.setVIN(inspectionData.getVinNumber());
+       VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,inspectionData.getVinNumber());
 
-        vehicleinfoscreen.saveInspectionViaMenu();
+        vehicleInfoScreen.saveInspectionViaMenu();
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),
                 InspectionStatuses.NEW.getInspectionStatusValue());
 
