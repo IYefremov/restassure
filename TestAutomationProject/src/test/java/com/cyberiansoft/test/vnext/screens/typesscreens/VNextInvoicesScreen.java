@@ -72,6 +72,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	}
 	
 	public String getInvoicePONumberValue(String invoicenumber) {
+		WaitUtils.elementShouldBeVisible(invoiceslist, true);
 		String poNumber = "";
 		WebElement invoicecell = getInvoiceCell(invoicenumber);
 		expandInvoiceDetails(invoicenumber);

@@ -1308,49 +1308,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workOrdersScreen.clickCreateInvoiceIcon();
 
 		AppiumUtils.clickHardwareBackButton();
-		new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-
-	}
-
-	//@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-	public void testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices(String rowID,
-																			  String description, JSONObject testData) {
-
-		final int invoiceStringLenght = 6;
-		final int numberInvoicesToCreate = 3;
-		ArrayList<String> workOrders = new ArrayList<>();
-
-		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i= 0; i < numberInvoicesToCreate; i++)
-			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData));
-
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-		final int lastInvoiceNumber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
-
-		invoicesScreen.clickBackButton();
-
-		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-		workOrdersScreen.switchToMyWorkordersView();
-		for (String workOrderNumber : workOrders)
-			workOrdersScreen.selectWorkOrder(workOrderNumber);
-		workOrdersScreen.clickCreateInvoiceIcon();
-
-		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-		informationDialog.clickSeparateInvoicesButton();
-
-        workOrdersScreen.cancelCreatingSeparateInvoice();
-
+		workOrdersScreen.unselectWorkOrder(workOrderNumber);
 		workOrdersScreen.clickBackButton();
-		invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-
-		Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
-		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
-		Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNumber+1);
-		invoicesScreen.clickBackButton();
+		new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
 	}
 
