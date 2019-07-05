@@ -26,6 +26,7 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequ
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import io.appium.java_client.MobileBy;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
@@ -1026,7 +1027,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
 		for (int i = 0; i < workOrdersToCreate; i++) {
 			VehicleScreen vehicleScreen = myWorkOrdersScreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
-			vehicleScreen.setVIN(testCaseData.getWorkOrderData().getVinNumber());
+			VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 			workOrders.add(vehicleScreen.getInspectionNumber());
 
 			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);

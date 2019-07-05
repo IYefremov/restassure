@@ -165,7 +165,7 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-       VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,workOrderData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.saveWorkOrderViaMenu();
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(workOrderNumber), retailCustomer1.getFullName());

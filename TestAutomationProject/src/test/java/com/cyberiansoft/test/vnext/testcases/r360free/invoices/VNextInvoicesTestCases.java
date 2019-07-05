@@ -23,6 +23,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummarySc
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
+import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
@@ -54,7 +55,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         final WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
         VehicleInfoScreenInteractions.selectColor(workOrderData.getVehicleInfoData().getVehicleColor());
@@ -108,7 +109,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, testCaseData.getWorkOrderData().getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
         VNextNotesScreen notesScreen = vehicleInfoScreen.clickInspectionNotesOption();
@@ -156,7 +157,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         customersScreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
 
@@ -219,7 +220,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
         VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
@@ -271,7 +272,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
 
@@ -322,7 +323,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
@@ -351,7 +352,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, workOrderData.getVinNumber());
+        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
         vehicleVINHistoryScreen.clickBackButton();
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
