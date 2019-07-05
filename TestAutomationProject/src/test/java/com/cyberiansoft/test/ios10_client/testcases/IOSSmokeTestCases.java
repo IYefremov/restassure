@@ -488,7 +488,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (InspectionData inspectionData : testCaseData.getInspectionsData()) {
 			VehicleScreen vehiclescreen = myinspectionsscreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER,
 					InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
-			vehiclescreen.setVIN(inspectionData.getVinNumber());
+			vehiclescreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 			vehiclescreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 			vehiclescreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
 			vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
@@ -536,7 +536,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (InspectionData inspectionData : testCaseData.getInspectionsData()) {
 			VehicleScreen vehiclescreen = myinspectionsscreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER,
 					InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
-			vehiclescreen.setVIN(inspectionData.getVinNumber());
+			vehiclescreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 			vehiclescreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 			vehiclescreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
 			vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
@@ -573,7 +573,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehiclescreen = myinspectionsscreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER,
 				InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
 		String inpectionnumber = vehiclescreen.getInspectionNumber();
-		vehiclescreen.setVIN(inspectionData.getVinNumber());
+		vehiclescreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		vehiclescreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 		vehiclescreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
 		vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
@@ -628,7 +628,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehiclescreen = myinspectionsscreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER,
 				InspectionsTypes.INSP_LA_DA_INSPTYPE);
 		String inpectionnumber = vehiclescreen.getInspectionNumber();
-		vehiclescreen.setVIN(inspectionData.getVinNumber());
+		vehiclescreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		vehiclescreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 		vehiclescreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
 		vehiclescreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
@@ -922,7 +922,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		VehicleScreen vehiclescreen = myworkordersscreen.addOrderWithSelectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER,
 				WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
-		vehiclescreen.setVIN(workOrderData.getVinNumber());
+		vehiclescreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
@@ -966,7 +966,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		VehicleScreen vehiclescreen = myworkordersscreen.addOrderWithSelectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER,
 				WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
-		vehiclescreen.setVIN(workOrderData.getVinNumber());
+		vehiclescreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
 		ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
@@ -1041,7 +1041,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			VehicleScreen vehiclescreen = myworkordersscreen.addWorkOrder(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
-			vehiclescreen.setVIN(workOrderData.getVinNumber());
+			vehiclescreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 			workOrderIDs.add(vehiclescreen.getInspectionNumber());
 			ServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			for (ServiceData serviceData : workOrderData.getServicesList())
@@ -1417,7 +1417,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VisualInteriorScreen visualscreen = myinspectionsscreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER,
 				InspectionsTypes.INSP_CHANGE_INSPTYPE);
 		VehicleScreen vehiclescreen = visualscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
-		vehiclescreen.setVIN(inspectionData.getVinNumber());
+		vehiclescreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionnumber = vehiclescreen.getInspectionNumber();
 
 		ClaimScreen claimscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.CLAIM);
@@ -1670,7 +1670,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		ordersummaryscreen.clickSave();
 		ordersummaryscreen.waitForCustomWarningMessage(String.format(AlertsCaptions.ALERT_YOU_CANT_CREATE_WORK_ORDER_BECAUSE_VIN_EXISTS,
-				WorkOrdersTypes.WOTYPE_BLOCK_VIN_ON.getWorkOrderTypeName(), workOrderData.getVinNumber()), "Cancel");
+				WorkOrdersTypes.WOTYPE_BLOCK_VIN_ON.getWorkOrderTypeName(), workOrderData.getVehicleInfoData().getVINNumber()), "Cancel");
 
 		myworkordersscreen = new MyWorkOrdersScreen();
 		myworkordersscreen.clickHomeButton();
