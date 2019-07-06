@@ -22,6 +22,7 @@ public class VehicleInfoScreenInteractions {
     public static void setDataFiled(VehicleDataField dataField, String value) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
+        //todo: temporary fix for hide keyboard
         WaitUtils.getGeneralWebdriverWait().until(driver -> {
             ControlUtils.setValue(vehicleInfoScreen
                             .getDataFieldList()
@@ -29,7 +30,7 @@ public class VehicleInfoScreenInteractions {
                             .filter(element -> element.getAttribute("name").contains(dataField.getValue()))
                             .findFirst()
                             .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue())),
-                    value);
+                    value + "\n");
             return true;
         });
     }

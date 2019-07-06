@@ -24,6 +24,7 @@ import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -39,7 +40,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getSupplementsTestCasesDataPath();
         VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        inspectionsScreen.waitForInspectionsListIsVisibile();
+        WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
         inspectionsScreen.clickSearchButtonAndClear();
         inspectionsScreen.clickBackButton();
     }
