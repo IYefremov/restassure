@@ -37,6 +37,11 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
     @BeforeClass(description = "Team Supplements Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getSupplementsTestCasesDataPath();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        inspectionsScreen.waitForInspectionsListIsVisibile();
+        inspectionsScreen.clickSearchButtonAndClear();
+        inspectionsScreen.clickBackButton();
     }
 
     @AfterClass()
