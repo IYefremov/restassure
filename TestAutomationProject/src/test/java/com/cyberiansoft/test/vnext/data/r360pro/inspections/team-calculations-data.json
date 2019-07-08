@@ -104,7 +104,7 @@
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
       "moneyServices": [{"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "1"
-      }, {"serviceName": "Damage Service", "servicePrice": "-1", "serviceQuantity": "1"
+      }, {"serviceName": "Damage Service", "servicePrice": "-1"
       }, {"serviceName": "Labor", "servicePrice": "13.99", "serviceQuantity": "1"
       }],
       "inspPrice": "$21.99"
