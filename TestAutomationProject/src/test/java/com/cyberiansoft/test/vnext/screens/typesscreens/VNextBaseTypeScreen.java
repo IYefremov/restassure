@@ -9,6 +9,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
+@Getter
 public class VNextBaseTypeScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//*[@data-automation-id='search-icon']")

@@ -150,10 +150,6 @@ public class InspectionData {
         return vihicleInfo;
     }
 
-    public String getVinNumber() {
-        return vihicleInfo.getVINNumber();
-    }
-
     public String getNewVinNumber() {
         return newVinNumber;
     }

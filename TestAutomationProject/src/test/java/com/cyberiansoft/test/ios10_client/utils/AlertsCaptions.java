@@ -18,6 +18,7 @@ public class AlertsCaptions {
 	public static final String THE_VIN_IS_INCORRECT_HD = "The VIN# is incorrect.";
 	public static final String ALERT_ADVISOR_REQUIRED = "Warning!\nAdvisor is required";
 	public static final String ALERT_PO_IS_REQUIRED = "Warning!\nPO# is required";
+	public static final String ALERT_PO_IS_REQUIRED_REGULAR = "PO# is required";
 	public static final String ALERT_TOTAL_AMAUNT_NOT_EQUAL100 = "Warning!\nTotal amount is not equal 100%";
 	public static final String ALERT_TOTAL_AMAUNT_NOT_EQUAL = "Warning!\nTotal amount is not equal.";
 	public static final String ALERT_SPLIT_TOTAL_AMAUNT_NOT_EQUAL = "Warning!\nSplit amount should be equal to total amount.";

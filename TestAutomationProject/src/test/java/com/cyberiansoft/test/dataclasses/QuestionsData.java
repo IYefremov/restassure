@@ -13,8 +13,12 @@ public class QuestionsData {
     private String questionSetionName;
     @JsonProperty("questionAnswer")
     private String questionAnswer;
+    @JsonProperty("questionAnswerIndex")
+    private int questionAnswerIndex;
     @JsonProperty("screenIndex")
     private int screenIndex;
+    @JsonProperty("screenHDIndex")
+    private int screenHDIndex;
     @JsonProperty("signatureQuestion")
     private boolean signatureQuestion;
 }

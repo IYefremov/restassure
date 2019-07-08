@@ -148,6 +148,15 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("approve little off")));
 		return appiumdriver.findElements(MobileBy.AccessibilityId(inspservice)).size() > 0;
 	}
+
+	public boolean isInspectionServiceExistsForApprove(ServiceData serviceData) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("approve little off")));
+		String inspservice = serviceData.getServiceName();
+		if (serviceData.getVehiclePart() != null)
+			inspservice = inspservice + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
+		return appiumdriver.findElements(MobileBy.AccessibilityId(inspservice)).size() > 0;
+	}
 	
 	public String getInspectionServicePrice(String inspservice) {
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeStaticText[2]")).getAttribute("value");

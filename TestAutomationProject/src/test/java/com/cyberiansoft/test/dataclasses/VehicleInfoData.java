@@ -2,11 +2,14 @@ package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
 public class VehicleInfoData {
-	
+
 	@JsonProperty("vinNumber")
 	String vinNumber;
 
@@ -27,7 +30,7 @@ public class VehicleInfoData {
 
 	@JsonProperty("vehicleType")
 	String vehicleType;
-	 
+
 	@JsonProperty("roNumber")
 	String roNumber;
 
@@ -43,11 +46,9 @@ public class VehicleInfoData {
 	@JsonProperty("vehicleFuelTankLevel")
 	String vehicleFuelTankLevel;
 
-	@Getter
 	@JsonProperty("vehicleStock")
 	String vehicleStock;
 
-	@Getter
 	@JsonProperty("location")
 	String location;
 
@@ -64,7 +65,7 @@ public class VehicleInfoData {
 	List<ServiceTechnician> newTechnicians;
 
 	public String getVINNumber() {
-		 return vinNumber;
+		return vinNumber;
 	}
 
 	public String getVehicleMake() {
@@ -82,13 +83,13 @@ public class VehicleInfoData {
 	public String getVehicleColor() {
 		return vehicleColor;
 	}
-	 
+
 	public String getStockNumber() {
-		 return stockNumber;
+		return stockNumber;
 	}
-	 
+
 	public String getRoNumber() {
-		 return roNumber;
+		return roNumber;
 	}
 
 	public String getPoNumber() {

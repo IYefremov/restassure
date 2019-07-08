@@ -22,7 +22,7 @@ public abstract class BaseTypeScreenWithTabs extends BaseTypeScreen {
         appiumdriver.findElementByAccessibilityId("Team").click();
         FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
         if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
-            wait = new WebDriverWait(appiumdriver, 10);
+            wait = new WebDriverWait(appiumdriver, 20);
             wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));
         }
     }

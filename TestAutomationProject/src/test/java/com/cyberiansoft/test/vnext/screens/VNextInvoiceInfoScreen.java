@@ -209,6 +209,8 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	public VNextVehicleInfoScreen clickOnWorkOrder(String workOrderNumber) {
 		tap(appiumdriver.
 				findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + workOrderNumber + "']")));
-		return new VNextVehicleInfoScreen(appiumdriver);
+		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        GeneralSteps.dismissHelpingScreenIfPresent();
+        return vehicleInfoScreen;
 	}
 }

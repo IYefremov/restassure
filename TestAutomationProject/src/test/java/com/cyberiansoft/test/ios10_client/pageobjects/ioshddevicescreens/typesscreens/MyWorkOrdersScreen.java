@@ -369,13 +369,13 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("New Inspection").click();
 	}
 	
-	public void selectContinueWorkOrder(String wo) {
-		selectWorkOrder(wo);
+	public void selectContinueWorkOrder() {
+		selectWorkOrder("Auto Save");
 		appiumdriver.findElementByAccessibilityId("Continue").click();
 	}
 	
-	public void selectDiscardWorkOrder(String wo) {
-		selectWorkOrder(wo);
+	public void selectDiscardWorkOrder() {
+		selectWorkOrder("Auto Save");
 		appiumdriver.findElementByAccessibilityId("Discard").click();
 	}
 

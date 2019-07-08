@@ -1,15 +1,40 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.dataclasses.VehicleInfoData;
+import com.cyberiansoft.test.vnext.enums.VehicleDataField;
+import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class VehicleInfoScreenSteps {
+    public static void setVehicleInfo(VehicleInfoData vehicleInfoDto) {
+        if (vehicleInfoDto.getVINNumber() != null)
+            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vehicleInfoDto.getVINNumber());
+        if (vehicleInfoDto.getVehicleMake() != null)
+            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.MAKE, vehicleInfoDto.getVehicleMake());
+        if (vehicleInfoDto.getVehicleModel() != null)
+            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.MODEL, vehicleInfoDto.getVehicleModel());
+        if (vehicleInfoDto.getVehicleYear() != null)
+            VehicleInfoScreenInteractions.setYear(vehicleInfoDto.getVehicleYear());
+        if (vehicleInfoDto.getMileage() != null)
+            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.MILAGE, vehicleInfoDto.getMileage());
+        if (vehicleInfoDto.getStockNumber() != null)
+            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.STOCK_NO, vehicleInfoDto.getStockNumber());
+        if (vehicleInfoDto.getRoNumber() != null)
+            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.RO_NO, vehicleInfoDto.getRoNumber());
+        if (vehicleInfoDto.getPoNumber() != null)
+            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.PO_NO, vehicleInfoDto.getPoNumber());
+        if (vehicleInfoDto.getVehicleLicensePlate() != null)
+            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.LIC_PLATE, vehicleInfoDto.getVehicleLicensePlate());
+        if (vehicleInfoDto.getVehicleColor() != null)
+            VehicleInfoScreenInteractions.selectColor(vehicleInfoDto.getVehicleColor());
+    }
 
     public static void setVIN(String vin) {
         GeneralSteps.dismissHelpingScreenIfPresent();
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(vehicleInfoScreen.getRootElement());
-        vehicleInfoScreen.setVIN(vin);
+        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vin);
     }
 }
