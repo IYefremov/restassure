@@ -90,7 +90,7 @@ public class MonitorSteps {
 
     public static void toggleFocusMode() {
         PhasesScreen phasesScreen = new PhasesScreen();
-        phasesScreen.getPhasesMenuButton().click();
+        WaitUtils.click(phasesScreen.getPhasesMenuButton());
         MenuSteps.selectMenuItem(MenuItems.FOCUS_MODE);
     }
 }
