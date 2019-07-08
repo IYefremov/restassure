@@ -67,7 +67,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     }
 
     protected void clickAddButton() {
-        WaitUtils.waitUntilElementIsClickable(addbtn);
+        WaitUtils.elementShouldBeVisible(addbtn, true);
         tap(addbtn);
     }
 
