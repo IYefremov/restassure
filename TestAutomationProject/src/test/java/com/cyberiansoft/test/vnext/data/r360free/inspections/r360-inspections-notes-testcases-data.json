@@ -1,8 +1,8 @@
 {
 
-  "testValidateMakeFieldOnVehicleScreenReflectsVisibleONOFF": [
+  "testAddSeveralQuickNotesForServiceInTheList": [
     {
-      "rowID": "testValidateMakeFieldOnVehicleScreenReflectsVisibleONOFF.01",
+      "rowID": "testAddSeveralQuickNotesForServiceInTheList.01",
       "description": "Test Case 40322:vNext - Add several quick notes for Service in the list",
       "vihicleInfo": {"vinNumber": "1D7HW48NX6S507810"
       },

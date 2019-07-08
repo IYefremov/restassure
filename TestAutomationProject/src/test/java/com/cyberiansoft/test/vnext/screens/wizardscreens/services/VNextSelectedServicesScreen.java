@@ -131,13 +131,9 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     public VNextNotesScreen clickServiceNotesOption(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
-            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
-                tap(servicecell);
-            BaseUtils.waitABit(1000);
-            servicecell = getSelectedServiceCell(serviceName);
-            if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
-                tap(servicecell);
-            tap(servicecell.findElement(By.xpath(".//div[@action='notes']")));
+            tap(servicecell);
+            VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+            serviceDetailsScreen.clickServiceNotesOption();
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
         return new VNextNotesScreen();
@@ -252,6 +248,8 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     }
 
     public String getTotalPriceValue() {
+        WaitUtils.elementShouldBeVisible(servicesscreen, true);
+        WaitUtils.waitUntilElementIsClickable(servicesscreen.findElement(By.xpath(".//span[@id='total']")));
         return servicesscreen.findElement(By.xpath(".//span[@id='total']")).getText().trim();
     }
 }
