@@ -58,6 +58,14 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
 
+    public void clickOnSelectedService(String serviceName) {
+        WebElement servicecell = getSelectedServiceCell(serviceName);
+        if (servicecell != null) {
+            tap(servicecell);
+        } else
+            Assert.assertTrue(false, "Can't find service: " + serviceName);
+    }
+
     public void addNotesToSelectedService(String serviceName, String notes) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {

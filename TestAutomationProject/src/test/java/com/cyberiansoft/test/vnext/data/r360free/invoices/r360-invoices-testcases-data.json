@@ -42,8 +42,7 @@
       "rowID": "testCreateInvoiceWhichContainsPriceServicesWithDecimalQuantity.01",
       "description": "Test Case 48094:vNext mobile: Create Invoice which contains price services with decimal quantity, Test Case 38638:vNext: Verify Customer Info on Invoice detail",
       "workOrderData" : {
-        "vihicleInfo": {"vinNumber": "19UUA66278A050105", "vehicleMake" : "Acura", "vehicleModel" : "TL",
-          "vehicleColor" : "Red", "vehicleYear" : "2008"
+        "vihicleInfo": {"vinNumber": "19UUA66278A050105"
         },
         "moneyService": {"serviceName": "Bumper Repair", "servicePrice": "0.99", "serviceQuantity": "0.99"
         },
