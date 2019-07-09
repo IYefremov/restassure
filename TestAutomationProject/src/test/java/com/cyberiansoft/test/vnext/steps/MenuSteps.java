@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.screens.StatusSelectScreen;
-import com.cyberiansoft.test.vnext.screens.monitoring.GeneralMenuScreen;
+import com.cyberiansoft.test.vnext.screens.menuscreens.GeneralMenuScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class MenuSteps {
@@ -22,5 +22,10 @@ public class MenuSteps {
         StatusSelectScreen statusSelectScreen = new StatusSelectScreen();
         BaseUtils.waitABit(2000);
         WaitUtils.click(statusSelectScreen.getStatusItemByText(serviceStatus.getStatus()));
+    }
+
+    public static void closeMenu() {
+        GeneralMenuScreen repairOrderMenuScreen = new GeneralMenuScreen();
+        WaitUtils.click(repairOrderMenuScreen.getCloseButton());
     }
 }

@@ -116,7 +116,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	}
 
 	private List<WebElement> getAvailableServicesList() {
-		return additionalavailableserviceslist.findElements(By.xpath(".//*[@class='r360-accordion-item checked-accordion-item   ']"));
+		return additionalavailableserviceslist.findElements(By.xpath(".//*[@action='open-details']"));
 	}
 
 	private String getServiceListItemName(WebElement srvlistitem) {

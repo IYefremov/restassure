@@ -1,6 +1,7 @@
-package com.cyberiansoft.test.vnext.screens.monitoring;
+package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.enums.MenuItems;
+import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,9 +9,12 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 @Getter
-public class GeneralMenuScreen extends MonitorScreen {
+public class GeneralMenuScreen extends VNextBaseScreen {
     @FindBy(xpath = "//a[contains(@class,'action-item')]")
     private List<WebElement> menuItems;
+
+    @FindBy(xpath = "//div[contains(@class,'close-actions')]")
+    private WebElement closeButton;
 
     public void selectMenuItem(MenuItems menuItem) {
         menuItems.stream()

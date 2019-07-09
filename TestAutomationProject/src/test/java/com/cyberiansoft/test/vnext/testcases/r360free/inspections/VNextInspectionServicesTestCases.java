@@ -524,7 +524,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
         for (ServiceData serviceData : inspectionData.getServicesList()) {
             selectedServicesScreen.setServiceAmountValue(serviceData.getServiceName(), serviceData.getServicePrice());
         }
-        Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), inspPrice);
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspPrice);
         inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
 
         vehicleInfoScreen = inspectionsScreen.clickOpenInspectionToEdit(inspNumberber);
@@ -548,7 +548,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
         selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServicesList().get(1).getServiceName(),
                 secondMoneyServiceQty);
 
-        Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(),
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(),
                 BackOfficeUtils.getFormattedServicePriceValue(BackOfficeUtils.getServicePriceValue("$1000.63")));
         inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
         inspectionsScreen.clickBackButton();
@@ -779,11 +779,11 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData serviceData : inspectionData.getMoneyServicesList())
             selectedServicesScreen.setServiceAmountValue(serviceData.getServiceName(), serviceData.getServicePrice());
-        Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), inspectionData.getInspectionPrice());
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
         selectedServicesScreen.uselectService(inspectionData.getMoneyServicesList().get(1).getServiceName());
         BaseUtils.waitABit(300);
-        Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), editedPrice);
+        Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), editedPrice);
         selectedServicesScreen.cancelInspection();
         inspectionsScreen.clickBackButton();
     }
@@ -842,6 +842,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
         serviceDetailsScreen.clickServiceDetailsDoneButton();
         vehiclePartInfoScreen = new VNextVehiclePartInfoPage(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(vehiclePartInfoScreen.getMatrixServiceTotalPriceValue(), inspectionData.getInspectionPrice());
+        vehiclePartInfoScreen.clickScreenBackButton();
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
         vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();

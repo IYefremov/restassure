@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -81,6 +82,8 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickServiceAmountField() {
+		WaitUtils.elementShouldBeVisible(rootElement, true);
+		WaitUtils.elementShouldBeVisible(rootElement.findElement(By.id("serviceDetailsPrice")), true);
 		tap(rootElement.findElement(By.id("serviceDetailsPrice")));
 	}
 	

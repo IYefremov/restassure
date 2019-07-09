@@ -47,43 +47,6 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testValidateMakeFieldOnVehicleScreenReflectsVisibleONOFF(String rowID,
-                                                                         String description, JSONObject testData) {
-
-        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-        final int notesToAdd = 3;
-
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.clickEditInspectionMenuItem();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
-        List<WebElement> quickNotesList = notesScreen.getQuickNotesList();
-        List<String> notes = new ArrayList<>();
-        for (WebElement note : quickNotesList)
-            notes.add(note.getText());
-        for (int i = 0; i < notesToAdd; i++) {
-            NotesSteps.addQuickNote(notes.get(i));
-        }
-        AppiumUtils.clickHardwareBackButton();
-        selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
-        for (String note : notes)
-            NotesSteps.verifyNoteIsPresent(note);
-        GeneralSteps.pressBackButton();
-        selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionsScreen = selectedServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyQuickNotesAreAddedAsNewLinesOfText(String rowID,
                                                              String description, JSONObject testData) {
 
