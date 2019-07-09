@@ -38,8 +38,8 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesEditWOInInvoiceTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringBaseCase"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCommonFilters"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringProblemReporting"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringTimetracking"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimetracking"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimetrackingVisibility"/>
         </classes>
     </test>
 </suite>
