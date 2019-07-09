@@ -13,7 +13,8 @@ public enum MenuItems {
     CHANGE_DEPARTMENT(""),
     REPORT_PROBLEM("Report Problem"),
     RESOLVE_PROBLEM("Resolve Problem"),
-    FOCUS_MODE("Focus mode");
+    FOCUS_MODE_ON("OFF\nFocus mode"),
+    FOCUS_MODE_OFF("ON\nFocus mode");
 
     @Getter
     private String menuItemDataName;

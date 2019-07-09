@@ -12,7 +12,6 @@ import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -23,6 +22,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummarySc
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
@@ -114,7 +114,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         vehicleVINHistoryScreen.clickBackButton();
         VNextNotesScreen notesScreen = vehicleInfoScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(woNote);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         vehicleInfoScreen = new VNextVehicleInfoScreen();
         GeneralSteps.dismissHelpingScreenIfPresent();
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();

@@ -42,7 +42,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @BeforeMethod
@@ -58,7 +58,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         MonitorSteps.changeLocation("Another Location");
         MonitorSteps.verifyRepairOrderListIsEmpty();
         MonitorSteps.changeLocation("automationMonitoring");
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -68,7 +68,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         MonitorSearchSteps.searchByText("NON_EXISTING_REPAIR_ORDER");
         MonitorSearchSteps.search();
         MonitorSearchSteps.verifySearchResultsAreEmpty();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -81,7 +81,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         MonitorSteps.setRepairOrderFlag(workOrderId, RepairOrderFlag.YELLOW);
         MonitorSearchSteps.searchByFlag(RepairOrderFlag.YELLOW);
         MonitorSteps.verifyOrderFlag(workOrderId, RepairOrderFlag.YELLOW);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -92,11 +92,11 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();
         EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         MonitorSteps.clearAllFilters();
         MonitorSearchSteps.searchByPriority(OrderPriority.HIGH);
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -105,7 +105,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSearchSteps.searchByDepartment("Default");
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -117,6 +117,6 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSearchSteps.searchByPhase(expectedOrderInfo.getPhaseName());
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

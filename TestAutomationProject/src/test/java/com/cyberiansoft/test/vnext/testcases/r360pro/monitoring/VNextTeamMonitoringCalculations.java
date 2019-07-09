@@ -8,7 +8,6 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
-import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
@@ -43,7 +42,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         AvailableServicesScreenSteps.selectPartService("Engine part", "Filters", "Engine Oil Filter", "Main");
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -66,7 +65,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.RECEIVED);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
     }
 
@@ -83,7 +82,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.SKIPPED);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
     }
 
@@ -97,12 +96,12 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
 
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-        MonitorSteps.toggleFocusMode();
+        MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.REFUSED);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

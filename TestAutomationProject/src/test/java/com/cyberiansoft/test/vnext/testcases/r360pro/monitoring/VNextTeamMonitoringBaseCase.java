@@ -16,7 +16,6 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
-import com.cyberiansoft.test.vnext.webelements.NoteListElement;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -43,7 +42,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -57,10 +56,10 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.addRepairOrderNote();
         NotesSteps.setRepairOrderNoteText(noteText);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         NotesSteps.verifyNotePresentInList(noteText);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -78,7 +77,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         EditOrderSteps.switchToInfo();
         expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         EditOrderSteps.verifyOrderInfo(expectedOrderInfo);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

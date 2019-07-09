@@ -255,5 +255,23 @@
         }
       }
     }
+  ],
+  "anotherUserCanSeeStartOnStartedService": [
+    {
+      "rowID": "anotherUserCanSeeStartOnStartedService.01",
+      "description": "TFSID: 85378, 85738, 85752",
+      "service": {
+        "serviceName": "Labor AM"
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationServiceLevel"
+        },
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationPhaseLevel",
+          "problemReason": "PROBLEM REASON"
+        }
+      }
+    }
   ]
 }

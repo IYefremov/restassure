@@ -2,8 +2,9 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
+import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextHelpingScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -12,14 +13,6 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
 public class GeneralSteps {
-    public static void pressBackButton() {
-        VNextBaseScreen vNextBaseScreen = new VNextBaseScreen();
-        vNextBaseScreen.clickScreenBackButton();
-    }
-
-    public static void pressHardwareBackButton() {
-        AppiumUtils.clickHardwareBackButton();
-    }
 
     public static void dismissHelpingScreenIfPresent() {
         VNextHelpingScreen helpingScreen = new VNextHelpingScreen();
@@ -58,5 +51,10 @@ public class GeneralSteps {
         WaitUtils.waitUntilElementIsClickable(doneButtonSelector);
         webDriver.findElement(doneButtonSelector).click();
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+    }
+
+    public static void logIn(Employee employee) {
+        VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+        loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
     }
 }

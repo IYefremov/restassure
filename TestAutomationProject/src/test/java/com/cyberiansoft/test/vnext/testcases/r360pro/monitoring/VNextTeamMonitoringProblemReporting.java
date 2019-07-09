@@ -40,7 +40,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -71,8 +71,8 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         ProblemReportingSteps.resolveProblem();
         phaseDto.setStatus(PhaseName.ACTIVE);
         EditOrderSteps.verifyElementStatus(phaseDto);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "userCanResolveProblemOnPhaseLevel")
@@ -101,7 +101,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         ProblemReportingSteps.resolveProblem();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
         EditOrderSteps.verifyElementStatus(serviceDto);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }
