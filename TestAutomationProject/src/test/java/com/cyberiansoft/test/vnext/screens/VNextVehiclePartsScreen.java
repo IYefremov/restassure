@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -54,10 +55,10 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		return vpcell;
 	}
 	
-	/*public VNextSelectedServicesScreen clickVehiclePartsBackButton() {
-		clickScreenBackButton();
-		return new VNextSelectedServicesScreen(appiumdriver);
-	}*/
+	public String getVehiclePartsScrenPriceValue() {
+		WaitUtils.elementShouldBeVisible(vehiclepartsscreen, true);
+		return vehiclepartsscreen.findElement(By.xpath(".//*[@class='money-wrapper']")).getText().trim();
+	}
 
 	public VNextAvailableServicesScreen clickVehiclePartsSaveButton() {
 		tap(vehiclepartsscreen.findElement(By.xpath(".//*[@action='save']")));
