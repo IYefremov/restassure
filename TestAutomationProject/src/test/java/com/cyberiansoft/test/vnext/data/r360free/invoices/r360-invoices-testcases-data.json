@@ -13,7 +13,7 @@
         "percentageService": {"serviceName": "Facility Fee"
         },
         "matrixService": {"matrixServiceName" : "Hail Repair", "hailMatrixName" : "State Farm",
-          "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
+          "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartPrice" : "$156.25", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
           }},
         "workOrderPrice": "$149.97"
       },
@@ -68,7 +68,7 @@
         "percentageService": {"serviceName": "Facility Fee"
         },
         "matrixService": {"matrixServiceName" : "Hail Repair", "hailMatrixName" : "State Farm",
-          "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
+          "vehiclePartData" : {"vehiclePartName": "Hood", "vehiclePartSize": "Dime", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartPrice" : "$156.25", "vehiclePartAdditionalService" : { "serviceName" : "Aluminum Upcharge" }
           }},
         "workOrderPrice": "$149.97"
       },
