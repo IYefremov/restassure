@@ -128,6 +128,13 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByName(_location).click();
 	}
 
+	public void selectSearchStatus(String orderStatus) {
+		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Status']").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(orderStatus)));
+		appiumdriver.findElementByName(orderStatus).click();
+	}
+
 	public void setSearchWorkOrderNumber(String woNumber) {
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(woNumber);
 	}

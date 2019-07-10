@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.OrderMonitorServiceDetailsPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
@@ -81,6 +82,12 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		return new OrderMonitorServiceDetailsPopup();
 	}
 
+	public OrderMonitorServiceDetailsPopup selectPanel(ServiceData serviceData) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(serviceData.getServiceName()))).click();
+		return new OrderMonitorServiceDetailsPopup();
+	}
+
 	public List<String> getPanelsStatuses(String panelname) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = '" +
@@ -94,6 +101,10 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 
 	public String getPanelStatus(String panelname) {
 		return monitorservicestable.findElementByAccessibilityId (panelname).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
+	}
+
+	public String getPanelStatus(ServiceData serviceData) {
+		return monitorservicestable.findElementByAccessibilityId (serviceData.getServiceName()).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}
 
 	public String getPanelStatusInPopup() {
@@ -193,6 +204,12 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public String getMonitorServiceAmauntValue(String serviceName) {
 		return appiumdriver.findElementByAccessibilityId("MonitorOrderServicesList")
 				.findElement(MobileBy.AccessibilityId(serviceName))
+				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label");
+	}
+
+	public String getMonitorServiceAmauntValue(ServiceData serviceData) {
+		return appiumdriver.findElementByAccessibilityId("MonitorOrderServicesList")
+				.findElement(MobileBy.AccessibilityId(serviceData.getServiceName()))
 				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label");
 	}
 

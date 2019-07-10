@@ -4679,7 +4679,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		servicesscreen.clickTechnicianToolbarIcon();
 		servicesscreen.changeTechnician("Dent", workOrderData.getServiceData().getServiceNewTechnician().getTechnicianFullName());
 		RegularSelectedServicesScreen regularSelectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
-		selectedservicescreen = regularSelectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
+		selectedservicescreen = regularSelectedServicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		selectedservicescreen.clickTechniciansIcon();
 		Assert.assertTrue(selectedservicescreen.isTechnicianSelected(workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianFullName()));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -5827,7 +5827,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		orderMonitorScreen.changeStatusForWorkOrder(workOrderMonitorStatus, statusReason);
 		orderMonitorScreen = new RegularOrderMonitorScreen();
-		orderMonitorScreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService().getServiceName());
+		orderMonitorScreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService());
 		orderMonitorScreen.clickTech();
 
 		orderMonitorScreen.clickServiceDetailsDoneButton();
@@ -6802,13 +6802,11 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		RegularServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
 
-
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		ordersummaryscreen.checkApproveAndSaveWorkOrder();
 		myworkordersscreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ordersummaryscreen.saveWizard();
-
 
 		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myworkordersscreen.switchToTeamWorkOrders();
 		teamWorkOrdersScreen.clickSearchButton();
@@ -6816,7 +6814,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchSaveButton();
 		teamWorkOrdersScreen.clickOnWO(wonum);
 		RegularOrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-		ordermonitorscreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService().getServiceName());
+		ordermonitorscreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService());
 		Assert.assertTrue(ordermonitorscreen.isStartServiceButtonPresent());
 		ordermonitorscreen.clickServiceDetailsDoneButton();
 

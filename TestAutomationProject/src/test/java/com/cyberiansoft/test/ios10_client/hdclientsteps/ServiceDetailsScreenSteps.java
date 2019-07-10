@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.hdclientsteps;
 
+import com.cyberiansoft.test.dataclasses.ServiceAdjustmentData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
@@ -51,5 +52,27 @@ public class ServiceDetailsScreenSteps {
     public static void saveServiceDetails() {
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.saveSelectedServiceDetails();
+    }
+
+    public static void cancelServiceDetails() {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickCancelSelectedServiceDetails();
+    }
+
+    public static void clickServiceTechniciansIcon() {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickTechniciansIcon();
+    }
+
+    public static void clickServiceTechniciansCell() {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickTechniciansCell();
+    }
+
+    public static void selectServiceAdjustment(ServiceAdjustmentData serviceAdjustmentData) {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickAdjustments();
+        selectedServiceDetailsScreen.selectAdjustment(serviceAdjustmentData.getAdjustmentData().getAdjustmentName());
+        saveServiceDetails();
     }
 }
