@@ -82,4 +82,12 @@ public class VehicleInfoScreenValidations {
             return true;
         });
     }
+
+    public static void ownerShouldBe(String expectedOwner) {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+            Assert.assertEquals(VehicleInfoScreenInteractions.getOwnerValue(), expectedOwner);
+            return true;
+        });
+    }
 }

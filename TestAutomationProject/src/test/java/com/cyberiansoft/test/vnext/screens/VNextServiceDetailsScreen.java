@@ -80,6 +80,10 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	public String getServiceQuantityValue() {
 		return rootElement.findElement(By.id("serviceDetailsQuantityFloat")).getAttribute("value");
 	}
+
+	public String getServiceNotesValue() {
+		return rootElement.findElement(By.id("serviceDetailsNotes")).getAttribute("value");
+	}
 	
 	public void clickServiceAmountField() {
 		WaitUtils.elementShouldBeVisible(rootElement, true);
@@ -101,6 +105,10 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 		appiumdriver.findElement(By.xpath("//*[@action='select-question-section']/input[@value='" +
 				questionSectionName + "']")).click();
 		return new VNextQuestionsScreen(appiumdriver);
+	}
+
+	public void clickSelectPanelsAndParts() {
+		tap(rootElement.findElement(By.xpath(".//*[@action='select-panel']")));
 	}
 
 }
