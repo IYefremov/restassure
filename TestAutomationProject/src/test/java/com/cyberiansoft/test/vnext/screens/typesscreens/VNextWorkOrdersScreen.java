@@ -106,6 +106,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public String getWorkOrderPriceValue(String wonumber) {
+        WaitUtils.elementShouldBeVisible(workorderslist, true);
         WebElement workordercell = getWorkOrderCell(wonumber);
         return workordercell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
     }
