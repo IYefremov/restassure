@@ -9,8 +9,8 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.DentWizardRegularVersionTestCases">
         <methods>
 
-          <include name="testValidVINCheck" />
-          <include name="testVehiclePartRequirement" />
+          <!--<include name="testValidVINCheck" />
+          <include name="testVehiclePartRequirement" />-->
           <include name="testTurningMultipleWorkOrdersIntoASingleInvoice" />
           <include name="testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice" />
           <include name="testApprovalNeededBeforeInspectionsCanBeConvertedToWorkOrderForWizardProTracker" />

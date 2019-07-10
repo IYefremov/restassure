@@ -8,7 +8,7 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
         <methods>
-            
+
             <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
