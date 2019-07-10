@@ -2891,7 +2891,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("5");
+		ordersummaryscreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		Assert.assertEquals(ordersummaryscreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation("5"));
 		ordersummaryscreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectemployeepopup = new SelectEmployeePopup();

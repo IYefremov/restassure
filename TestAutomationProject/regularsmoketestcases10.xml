@@ -8,10 +8,6 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularSmokeTestCases">
         <methods>
-
-          <include name="testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown" />
-
-
           <include name="testUpdateDatabase" />
           <include name="testUpdateVIN" />
           <!--<include name="testCreateRetailCustomer" />
@@ -61,7 +57,7 @@
           <include name="testWOMonitorVerifyThatStartDateIsSetWhenStartService" />
           <include name="testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase" />
           <include name="testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature" />
-          <include name="testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature" />
+          <include name="testVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature" />
           <include name="testVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists" />
           <include name="testVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech" />
           <include name="testVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech" />
