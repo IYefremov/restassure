@@ -80,4 +80,8 @@ public class VNextProTestCasesDataPaths {
     public String getWorkOrdersTestCasesDataPath() { return props.getProperty("workorders.td"); }
 
     public String getMonitoringBaseCaseDataPath() { return props.getProperty("monitoring.basic.flow"); }
+
+    public String getTechSplitDataPath() {
+        return props.getProperty("techsplit.basic.flow");
+    }
 }

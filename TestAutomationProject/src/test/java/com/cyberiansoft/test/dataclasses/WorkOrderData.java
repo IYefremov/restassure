@@ -107,6 +107,10 @@ public class WorkOrderData {
     @JsonProperty("invoiceData")
     InvoiceData invoiceData;
 
+    @Getter
+    @JsonProperty("technicianList")
+    List<Employee> technicianList;
+
     public String getWorkOrderType() {
         return workOrderType;
     }

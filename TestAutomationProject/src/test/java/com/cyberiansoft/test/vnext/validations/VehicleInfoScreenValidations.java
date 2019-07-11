@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.validations;
 
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
@@ -8,6 +9,8 @@ import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class VehicleInfoScreenValidations {
     public static void validateVehicleInfo(VehicleInfoData vehicleInfoDto) {
@@ -89,5 +92,16 @@ public class VehicleInfoScreenValidations {
             Assert.assertEquals(VehicleInfoScreenInteractions.getOwnerValue(), expectedOwner);
             return true;
         });
+    }
+
+    public static void validateTechnicianSelected(Employee employee) {
+        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+            Assert.assertTrue(VehicleInfoScreenInteractions.getDataFieldValue(VehicleDataField.VEHICLE_TECH).contains(employee.getEmployeeName()));
+            return true;
+        });
+    }
+
+    public static void validateTechniciansSelected(List<Employee> employeeList) {
+        employeeList.forEach(VehicleInfoScreenValidations::validateTechnicianSelected);
     }
 }

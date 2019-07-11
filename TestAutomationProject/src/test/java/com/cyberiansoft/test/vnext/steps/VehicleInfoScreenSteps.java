@@ -1,10 +1,14 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
+import com.cyberiansoft.test.vnext.interactions.TechnicianScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+
+import java.util.List;
 
 public class VehicleInfoScreenSteps {
     public static void setVehicleInfo(VehicleInfoData vehicleInfoDto) {
@@ -36,5 +40,11 @@ public class VehicleInfoScreenSteps {
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(vehicleInfoScreen.getRootElement());
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vin);
+    }
+
+    public static void setTechnicians(List<Employee> employeeList) {
+        VehicleInfoScreenInteractions.openTechnicianList();
+        employeeList.forEach(employee -> TechnicianScreenInteractions.selectTechnician(employee.getEmployeeName()));
+        TechnicianScreenInteractions.acceptScreen();
     }
 }
