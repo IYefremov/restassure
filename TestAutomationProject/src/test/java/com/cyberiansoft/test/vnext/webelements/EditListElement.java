@@ -22,7 +22,6 @@ public class EditListElement implements IWebElement {
 
     public String getName() {
         BaseUtils.waitABit(1000);
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(nameLocator)), true);
         return rootElement.findElement(By.xpath(nameLocator)).getText();
     }
 

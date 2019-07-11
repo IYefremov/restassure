@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -39,17 +40,47 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void anotherUserCanSeeStartOnStartedService(String rowID,
+                                                       String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        ServiceData serviceDto = workOrderData.getServiceData();
+        Employee secondEmployee = new Employee();
+        secondEmployee.setEmployeeFirstName("Test");
+        secondEmployee.setEmployeeLastName("Test");
+
+        MonitorSteps.editOrder(workOrderId);
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        HomeScreenSteps.logOut();
+        GeneralSteps.logIn(secondEmployee);
+        MonitorSteps.editOrder(workOrderId);
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        MenuValidations.menuItemShouldBeEnabled(MenuItems.START, true);
+        MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        HomeScreenSteps.logOut();
+        GeneralSteps.logIn(employee);
+        MonitorSteps.editOrder(workOrderId);
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        MenuSteps.selectMenuItem(MenuItems.STOP);
+        GeneralSteps.confirmDialog();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "anotherUserCanSeeStartOnStartedService")
     public void verifyStartStopVisibleOnlyInActiveState(String rowID,
                                                         String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceDto = workOrderData.getServiceData();
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        MonitorSteps.editOrder(workOrderId);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
@@ -58,12 +89,12 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
-        MonitorSteps.toggleFocusMode();
+        MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.closeMenu();
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

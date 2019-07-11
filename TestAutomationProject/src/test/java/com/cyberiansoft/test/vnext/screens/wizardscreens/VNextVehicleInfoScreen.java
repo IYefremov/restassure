@@ -32,4 +32,7 @@ public class VNextVehicleInfoScreen extends VNextBaseWizardScreen {
 
     @FindBy(xpath = "//span[@class='client-mode']")
     private WebElement customerContextField;
+
+    @FindBy(id = "vehicleInfoOwner")
+    private WebElement ownderField;
 }

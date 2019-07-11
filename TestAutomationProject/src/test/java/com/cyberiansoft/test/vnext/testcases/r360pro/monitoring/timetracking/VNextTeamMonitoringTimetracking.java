@@ -38,7 +38,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -94,7 +94,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
         EditOrderSteps.verifyTimeTrackingShouldBeStarted(phaseDto.getPhaseName(), false);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

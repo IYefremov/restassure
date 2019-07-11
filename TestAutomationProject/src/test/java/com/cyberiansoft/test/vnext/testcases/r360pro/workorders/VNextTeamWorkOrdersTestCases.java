@@ -367,6 +367,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
         vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,newvinnumber);
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+        workOrdersScreen.clickBackButton();
+        BaseUtils.waitABit(10*1000);
+        homeScreen.clickWorkOrdersMenuItem();
         workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
         vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.VIN,newvinnumber);
@@ -416,6 +419,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
 
         selectedServicesScreen.saveWorkOrderViaMenu();
+        workOrdersScreen.clickBackButton();
+        BaseUtils.waitABit(10*1000);
+        homeScreen.clickWorkOrdersMenuItem();
         workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
         vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
@@ -481,6 +487,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), workOrderData.getWorkOrderPrice());
         availableServicesScreen.saveWorkOrderViaMenu();
+        BaseUtils.waitABit(10*1000);
+        workOrdersScreen.clickBackButton();
+        homeScreen.clickWorkOrdersMenuItem();
         Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(workOrderNumber), workOrderData.getWorkOrderPrice(),
                 "Price is not valid for work order: " + workOrderNumber);
         workOrdersScreen.clickBackButton();
@@ -518,7 +527,6 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 
         Assert.assertEquals(groupServicesScreen.getInspectionTotalPriceValue(), workOrderData.getWorkOrderPrice());
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
-
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
         vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
@@ -533,7 +541,5 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
         workOrdersScreen = groupServicesScreen.saveWorkOrderViaMenu();
         Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(workOrderNumber), amountTotalEdited);
         workOrdersScreen.clickBackButton();
-
-
     }
 }

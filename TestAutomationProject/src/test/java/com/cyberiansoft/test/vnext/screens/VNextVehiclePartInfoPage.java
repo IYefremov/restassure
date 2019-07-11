@@ -94,18 +94,6 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		tap(webElement);
 	}
 
-	public void selectVehiclePartAdditionalServices(List<ServiceData> additionalServices) {
-		for (ServiceData additionalService : additionalServices) {
-			WebElement addservs = getVehiclePartAdditionalServiceCell(additionalService.getServiceName());
-			if (addservs != null) {
-				tap(addservs.findElement(By.xpath(".//input[@action='select-item']")));
-				WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
-				BaseUtils.waitABit(500);
-			} else
-				Assert.fail("Can't find additional servicve: " + additionalService.getServiceName());
-		}
-	}
-
 	public List<String> getListOfAdditionalServices() {
 		List<String> additionalServices = new ArrayList<>();
 		List<WebElement> addservs1 = getAvailableServicesList();
@@ -140,31 +128,6 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		return addsrvc;
 	}
 
-	public void setAdditionalServicePriceValue(String additionalservicename, String pricevalue) {
-		WebElement servicecell = getVehiclePartAdditionalServiceCell(additionalservicename);
-		if (servicecell != null) {
-			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
-				tap(servicecell);
-			tap(servicecell.findElement(By.xpath(".//input[@data-name='Price']")));
-			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
-			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Price']")).getAttribute("value"), pricevalue);
-		} else
-			Assert.assertTrue(false, "Can't find service: " + additionalservicename);
-	}
-
-
-	public void setAdditionalServiceAmauntValue(String additionalservicename, String pricevalue) {
-		WebElement servicecell = getVehiclePartAdditionalServiceCell(additionalservicename);
-		if (servicecell != null) {
-			if (!servicecell.getAttribute("class").contains("accordion-item-expanded"))
-				tap(servicecell);
-			tap(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")));
-			VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
-			keyboard.setFieldValue(servicecell.findElement(By.xpath(".//input[@data-name='Amount']")).getAttribute("value"), pricevalue);
-		} else
-			Assert.assertTrue(false, "Can't find service: " + additionalservicename);
-	}
-
 	public String getMatrixServiceTotalPriceValue() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(vehiclepartinfoscreen.findElement(By.xpath(".//span[@class='money-wrapper']"))));
@@ -172,7 +135,6 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	}
 
 	public void clickSaveVehiclePartInfo() {
-		//clickScreenBackButton();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(savebtn));
 		tap(savebtn);
@@ -192,16 +154,16 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		wait = new WebDriverWait(appiumdriver, 5);
 	}
 
-	public WebElement getSelectedServicesList() {
+	private WebElement getSelectedServicesList() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		return wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath(".//div[@data-autotests-id='all-services']"))));
 	}
 
-	public List<WebElement> getServicesListItems() {
-		return getSelectedServicesList().findElements(By.xpath(".//div[contains(@class, 'r360-accordion-item checked-accordion-item')]"));
+	private List<WebElement> getServicesListItems() {
+		return getSelectedServicesList().findElements(By.xpath(".//*[@action='edit-item']"));
 	}
 
-	public WebElement getSelectedServiceCell(String servicename) {
+	private WebElement getSelectedServiceCell(String servicename) {
 		WebElement serviceListItem = null;
 		List<WebElement> services = getServicesListItems();
 		for (WebElement srv : services)
@@ -212,19 +174,9 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		return serviceListItem;
 	}
 
-	public WebElement expandSelectedServiceDetails(String serviceName) {
+	public void expandSelectedServiceDetails(String serviceName) {
 		WebElement servicecell = getSelectedServiceCell(serviceName);
-		if (servicecell != null) {
-			if (!servicecell.getAttribute("class").contains("accordion-item-expanded")) {
-				tap(servicecell);
-				BaseUtils.waitABit(1000);
-			}
-			if (!servicecell.getAttribute("class").contains("accordion-item-expanded")) {
-				tap(servicecell);
-				BaseUtils.waitABit(1000);
-			}
-		}
-		return servicecell;
+		tap(servicecell);
 	}
 
 	public String getSelectedServicePriceValue(String servicename) {

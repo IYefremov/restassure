@@ -45,7 +45,7 @@ public class VNextSelectedGroupServicesScreen extends VNextBaseGroupServicesScre
     }
 
     public List<WebElement> getServicesListItems() {
-        return getSelectedServicesList().findElements(By.xpath(".//div[contains(@class, 'r360-accordion-item checked-accordion-item')]"));
+        return getSelectedServicesList().findElements(By.xpath(".//*[@action='edit-item']"));
     }
     public WebElement getSelectedServicesList() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);

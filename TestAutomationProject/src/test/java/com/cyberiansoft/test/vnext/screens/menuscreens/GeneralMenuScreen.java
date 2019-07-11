@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,12 +18,12 @@ public class GeneralMenuScreen extends VNextBaseScreen {
     private WebElement closeButton;
 
     public void selectMenuItem(MenuItems menuItem) {
-        menuItems.stream()
+        WaitUtils.click(menuItems.stream()
                 .filter(WebElement::isDisplayed)
                 .filter((element) ->
-                        element.getText().contains(menuItem.getMenuItemDataName()))
+                        element.getText().trim().equals(menuItem.getMenuItemDataName()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Menu element not found " + menuItem.getMenuItemDataName()))
-                .click();
+        );
     }
 }

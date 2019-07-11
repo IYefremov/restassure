@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
@@ -88,9 +89,10 @@ public class MonitorSteps {
         WaitUtils.getGeneralFluentWait().until(driver -> repairOrderScreen.getRepairOrderListElements().isEmpty());
     }
 
-    public static void toggleFocusMode() {
+    public static void toggleFocusMode(MenuItems focusMode) {
         PhasesScreen phasesScreen = new PhasesScreen();
+        BaseUtils.waitABit(2000);
         WaitUtils.click(phasesScreen.getPhasesMenuButton());
-        MenuSteps.selectMenuItem(MenuItems.FOCUS_MODE);
+        MenuSteps.selectMenuItem(focusMode);
     }
 }

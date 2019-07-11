@@ -9,8 +9,6 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.DentWizartestCases">
         <methods>
 
-          <include name="testEditingAnInvoiceInDraft" />
-          <include name="testAddingPOToAnInvoiceContainingMultipleWorkOrders" />
           <!--<include name="testGetDeviceRegistrationCode" />
           <include name="testRegisterationiOSDdevice" />   -->      
           <include name="testValidVINCheck" /> 

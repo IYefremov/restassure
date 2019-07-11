@@ -1,15 +1,19 @@
 package com.cyberiansoft.test.dataclasses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Employee {
-	
+
 	@JsonProperty("employeeFirstName")
 	private String employeeFirstName;
 
 	@JsonProperty("employeeLastName")
 	private String employeeLastName;
-	
+
 	@JsonProperty("employeePassword")
 	private String employeePassword;
 
@@ -48,7 +52,7 @@ public class Employee {
 	public String getEmployeePhoneNumber() {
 		return phoneNumber;
 	}
-	
+
 	public String getEmployeePassword() {
 		return employeePassword;
 	}

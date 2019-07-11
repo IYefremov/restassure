@@ -5,6 +5,7 @@ import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -14,8 +15,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.LocalDate;
@@ -79,7 +78,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		clickMenuButton();
 		VNextNotesScreen notesscreen = clickNotesMenuItem();
 		notesscreen.setNoteText(notetext);
-		GeneralSteps.pressBackButton();
+		ScreenNavigationSteps.pressBackButton();
 		return this;
 	}
 

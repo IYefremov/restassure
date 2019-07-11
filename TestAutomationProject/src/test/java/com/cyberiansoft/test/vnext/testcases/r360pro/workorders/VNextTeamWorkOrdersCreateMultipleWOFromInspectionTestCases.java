@@ -51,7 +51,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         SelectedServicesScreenSteps.verifySelectedServices(workOrderData.getServicesList());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
         WorkOrderSteps.workOrderShouldBePresent(workOrderId);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -69,6 +69,6 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR);
         String workOrderId = WorkOrderSteps.saveWorkOrder();
         WorkOrderSteps.workOrderShouldBePresent(workOrderId);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

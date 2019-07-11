@@ -65,6 +65,10 @@ public class VehicleInfoScreenInteractions {
         return new VNextVehicleInfoScreen().getCustomerContextField().getAttribute("value");
     }
 
+    public static String getOwnerValue() {
+        return new VNextVehicleInfoScreen().getOwnderField().getAttribute("value");
+    }
+
     //TODO: Refactor and decorations for year spinner required
     public static void setYear(String yearValue) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();

@@ -44,12 +44,12 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         NotesSteps.addQuickNote(quickNoteText1);
         NotesSteps.addQuickNote(quickNoteText2);
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
-        GeneralSteps.pressHardwareBackButton();
+        ScreenNavigationSteps.pressHardwareBackButton();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -62,21 +62,21 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(myInspectionNote);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
 
         InspectionSteps.switchToTeamInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.verifyNoteIsPresent(myInspectionNote);
         NotesSteps.setNoteText(teamInspectionNote);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
 
         InspectionSteps.switchToMyInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.verifyNoteIsPresent(teamInspectionNote);
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
 
@@ -90,14 +90,14 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         NotesSteps.setNoteText(noteText);
         NotesSteps.addPhotoFromCamera();
         NotesSteps.verifyPicturesPresent();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.verifyNoteIsPresent(noteText);
         NotesSteps.verifyPicturesPresent();
         NotesSteps.deleteAllPictures();
         NotesSteps.verifyNoPicturesPresent();
-        GeneralSteps.pressBackButton();
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

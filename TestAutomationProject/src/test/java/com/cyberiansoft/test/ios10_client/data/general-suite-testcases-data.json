@@ -4474,5 +4474,113 @@
         "workOrderTotalSale": "3"
       }
     }
+  ],
+  "testSRVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo": [
+    {
+      "rowID": "testSRVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo.01",
+      "description": "Test Case 26214:SR: Verify that SR is created correctly when select owner on Vehicle info",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService" : {"serviceName" :  "Disc_Ex_Service1"}
+      }
+    }
+  ],
+  "testSRVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON": [
+    {
+      "rowID": "testSRVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON.01",
+      "description": "Test Case 26215:SR: Verify that Check In action is present for SR when appropriate SR type has option Check in ON",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService" : {"serviceName" :  "Disc_Ex_Service1"}
+      }
+    }
+  ],
+  "testSRVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa": [
+    {
+      "rowID": "testSRVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa.01",
+      "description": "Test Case 26216:SR: Verify that Check In action is changed to Undo Check In after pressing on it and vice versa",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService" : {"serviceName" :  "Disc_Ex_Service1"}
+      }
+    }
+  ],
+  "testSRVerifyThatFilterNotCheckedInIsWorkingCorrectly": [
+    {
+      "rowID": "testSRVerifyThatFilterNotCheckedInIsWorkingCorrectly.01",
+      "description": "Test Case 26217:SR: Verify that filter 'Not Checked In' is working correctly",
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService" : {"serviceName" :  "Disc_Ex_Service1"}
+      }
+    }
+  ],
+  "testVerifyThatWhenCustomerApprovalRequiredIsSetToONAutoEmailIsNotSentWhenApprovalDoesNotExist": [
+    {
+      "rowID": "testVerifyThatWhenCustomerApprovalRequiredIsSetToONAutoEmailIsNotSentWhenApprovalDoesNotExist.01",
+      "description": "Test Case 26662:Invoices: Verify that when ‘Customer approval required’ is set to ON - auto email is not sent when approval does not exist",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "3"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testVerifyThatWhenCustomerApprovalRequiredIsSetToOffAutoEmailIsSentWhenInvoiceAsAutoApproved": [
+    {
+      "rowID": "testVerifyThatWhenCustomerApprovalRequiredIsSetToOffAutoEmailIsSentWhenInvoiceAsAutoApproved.01",
+      "description": "Test Case 26663:Invoices: verify that when ‘Customer approval required’ is set to OFF - auto email is sent when invoice is auto approved",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "3"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices": [
+    {
+      "rowID": "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices.01",
+      "description": "Test Case 26690:Invoices: Verify that print icon is shown next to invoice when it was printed (My Invoices)"
+    }
+  ],
+  "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices": [
+    {
+      "rowID": "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices.01",
+      "description": "Test Case 26691:Invoices: Verify that print icon is shown next to invoice when it was printed (Team Invoices)"
+    }
   ]
 }

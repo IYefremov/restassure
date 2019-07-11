@@ -869,13 +869,13 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         AppiumUtils.clickHardwareBackButton();
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(inspectionNote);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.saveInspectionViaMenu();
         inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickNotesInspectionMenuItem();
         NotesSteps.verifyNoteIsPresent(inspectionNote);
-        GeneralSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
 
         inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);

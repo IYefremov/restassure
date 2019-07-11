@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.ios10_client.hdclientsteps;
 
-import com.cyberiansoft.test.dataclasses.BundleServiceData;
-import com.cyberiansoft.test.dataclasses.MatrixServiceData;
-import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.VehiclePartData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ServicesScreen;
 import org.testng.Assert;
@@ -73,5 +70,21 @@ public class ServicesScreenSteps {
         if (matrixServiceData.getHailMatrixName() != null) {
             servicesScreen.selectServicePriceMatrices(matrixServiceData.getHailMatrixName());
         }
+    }
+
+    public static void selectPanelServiceData(DamageData damageData) {
+        ServicesScreen servicesScreen = new ServicesScreen();
+        servicesScreen.selectGroupServiceItem(damageData.getDamageGroupName());
+        if (damageData.getMoneyServices() != null) {
+            for (ServiceData serviceData : damageData.getMoneyServices())
+                selectServiceWithServiceData(serviceData);
+        }
+        if (damageData.getBundleService() != null) {
+            selectBundleService(damageData.getBundleService());
+        }
+        if (damageData.getMatrixService() != null) {
+            selectMatrixServiceData(damageData.getMatrixService());
+        }
+
     }
 }

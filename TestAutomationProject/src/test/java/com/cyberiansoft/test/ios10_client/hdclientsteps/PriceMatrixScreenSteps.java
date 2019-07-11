@@ -2,12 +2,16 @@ package com.cyberiansoft.test.ios10_client.hdclientsteps;
 
 import com.cyberiansoft.test.dataclasses.PriceMatrixScreenData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.InspectionToolBar;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechniciansPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class PriceMatrixScreenSteps {
     public static void goTopriceMatrixScreenAndSelectPriceMatrixData(PriceMatrixScreenData priceMatrixScreenData) {
@@ -85,6 +89,25 @@ public class PriceMatrixScreenSteps {
     public static void savePriceMatrixData() {
         PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
         priceMatrixScreen.clickSaveButton();
+    }
+
+    public static void verifyVehiclePartTechnicianValue(ServiceTechnician serviceTechnician) {
+        PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
+        Assert.assertEquals(priceMatrixScreen.getTechniciansValue(), serviceTechnician.getTechnicianFullName());
+    }
+
+    public static void verifyVehiclePartTechniciansValue(List<ServiceTechnician> serviceTechnicians) {
+        PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
+        for (ServiceTechnician serviceTechnician : serviceTechnicians)
+            Assert.assertTrue(priceMatrixScreen.getTechniciansValue().contains(serviceTechnician.getTechnicianFullName()));
+    }
+
+    public static void selectVehiclePartTechnician(ServiceTechnician serviceTechnician) {
+        PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
+        priceMatrixScreen.clickOnTechnicians();
+        TechniciansPopup techniciansPopup = new TechniciansPopup();
+        techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
+        techniciansPopup.saveTechViewDetails();
     }
 
 
