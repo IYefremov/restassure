@@ -77,11 +77,6 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
         return vehicleInfoScreen;
     }
 
-    public VNextInformationDialog clickEditWorkOrderMenuItemWithAlert() {
-        clickMenuItem(editinspectionbtn);
-        return new VNextInformationDialog(appiumdriver);
-    }
-
     public VNextInvoiceTypesList clickCreateInvoiceMenuItem(){
         clickMenuItem(createinvoicemenuitem);
         return new VNextInvoiceTypesList(appiumdriver);
