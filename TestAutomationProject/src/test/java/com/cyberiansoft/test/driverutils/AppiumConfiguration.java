@@ -32,8 +32,7 @@ public class AppiumConfiguration {
 		Instant date = Instant.now();
 		ZoneId californiaTimeZone = ZoneId.of("America/Los_Angeles");
 		ZonedDateTime californiaTime = ZonedDateTime.ofInstant(date, californiaTimeZone);
-		californiaTime = californiaTime.minusDays(1);
-		System.out.println("++++" + californiaTime.format(dateFormat));
+		//californiaTime = californiaTime.minusDays(1);
 		ZoneId kyivTimeZone = ZoneId.of("Europe/Budapest");
 		ZonedDateTime kyivTime = ZonedDateTime.ofInstant(date, kyivTimeZone);
 		switch (mplatform) {
