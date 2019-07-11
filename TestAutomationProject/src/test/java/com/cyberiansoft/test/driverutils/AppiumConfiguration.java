@@ -15,7 +15,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 
@@ -26,22 +28,22 @@ public class AppiumConfiguration {
 		DesiredCapabilities appiumcap = new DesiredCapabilities();
 		DateTimeFormatter dateFormat =
                 DateTimeFormatter.ofPattern("MMdd");
-		//LocalDate date = LocalDate.now(ZoneOffset.of("-08:00"));
-		LocalDate date = LocalDate.now();
-		//date = date.minusDays(2);
-		//LocalDate date = LocalDate.now();
+
+		Instant date = Instant.now();
+		ZoneId californiaTimeZone = ZoneId.of("America/Los_Angeles");
+		ZonedDateTime californiaTime = ZonedDateTime.ofInstant(date, californiaTimeZone);
+		//californiaTime = californiaTime.minusDays(1);
+		ZoneId kyivTimeZone = ZoneId.of("Europe/Budapest");
+		ZonedDateTime kyivTime = ZonedDateTime.ofInstant(date, kyivTimeZone);
 		switch (mplatform) {
 			case ANDROID:
-
-				date = date.minusDays(1);
 				File appDir = new File("data/");
 				try {
-					BaseUtils.unpackArchive(new URL("http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_" + date.format(dateFormat) + ".app.zip"), appDir);
+					BaseUtils.unpackArchive(new URL("http://amtqc.cyberiansoft.net/Uploads/Repair360AndroidTeam_" + californiaTime.format(dateFormat) + ".app.zip"), appDir);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				File app = new File(appDir, "Repair360AndroidTeam.apk");
-				//File app = new File(appDir, "Repair360Android.apk");
 				appiumcap = new DesiredCapabilities();
 				appiumcap.setCapability(MobileCapabilityType.DEVICE_NAME, "myphone");
 				//appiumcap.setCapability("avd", "myphone");
@@ -52,7 +54,6 @@ public class AppiumConfiguration {
 	    		appiumcap.setCapability(MobileCapabilityType.NO_RESET, true);
 	    		appiumcap.setCapability("session-override",true);
 	    		appiumcap.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
-	    		//appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.APPIUM);
 	    		appiumcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
 				LoggingPreferences logPrefs = new LoggingPreferences();
 				logPrefs.enable(LogType.BROWSER, Level.ALL);
@@ -62,7 +63,6 @@ public class AppiumConfiguration {
 	     
 				return appiumcap;
 			case IOS_HD:
-			
 				appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
 				appiumcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, IOSHDDeviceInfo.getInstance().getPlatformVersion());
 				appiumcap.setCapability(MobileCapabilityType.FULL_RESET, false);
@@ -80,7 +80,7 @@ public class AppiumConfiguration {
 	    		appiumcap.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, 8500);
 				//appiumcap.setCapability("showXcodeLog", true);
 	    		appiumcap.setCapability(MobileCapabilityType.APP,
-	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_" + date.format(dateFormat) + ".app.zip");
+	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_HD_" + kyivTime.format(dateFormat) + ".app.zip");
 				return appiumcap;
 			case IOS_REGULAR:
 				appiumcap.setCapability(MobileCapabilityType.BROWSER_NAME, "");
@@ -101,7 +101,7 @@ public class AppiumConfiguration {
 	    		appiumcap.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
 	    		//appiumcap.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, 8200);
 	    		appiumcap.setCapability(MobileCapabilityType.APP,
-	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_" + date.format(dateFormat) + ".app.zip");
+	    				"http://amtqc.cyberiansoft.net/Uploads/ReconPro_" + kyivTime.format(dateFormat) + ".app.zip");
 	     
 				return appiumcap;
 		}
