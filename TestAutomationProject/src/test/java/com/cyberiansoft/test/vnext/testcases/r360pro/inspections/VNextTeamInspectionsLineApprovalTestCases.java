@@ -414,9 +414,9 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 				}
 
 			}
-			vehiclePartInfoScreen.clickSaveVehiclePartInfo(); }
+			vehiclePartInfoScreen.clickScreenBackButton();
+		}
 		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-
 		availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
 
 		Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());

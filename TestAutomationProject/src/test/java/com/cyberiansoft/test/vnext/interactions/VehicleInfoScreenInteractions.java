@@ -115,6 +115,21 @@ public class VehicleInfoScreenInteractions {
         milageField.click();
         VNextCustomKeyboard keyboard = new VNextCustomKeyboard(DriverBuilder.getInstance().getAppiumDriver());
         keyboard.setFieldValue(milageField.getAttribute("value"), milage);
+    }
+
+    public static void openTechnicianList() {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
+        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+                    vehicleInfoScreen
+                            .getDataFieldList()
+                            .stream()
+                            .filter(element -> element.getAttribute("name").contains(VehicleDataField.VEHICLE_TECH.getValue()))
+                            .findFirst()
+                            .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.VEHICLE_TECH.getValue())).click();
+                    return true;
+                }
+        );
 
     }
 }

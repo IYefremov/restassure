@@ -12,7 +12,8 @@ public enum VehicleDataField {
     RO_NO("Estimations.RON"),
     PO_NO("Estimations.PONo"),
     LIC_PLATE("Vehicle.PlateNo"),
-    COLOR("Vehicle.Color");
+    COLOR("Vehicle.Color"),
+    VEHICLE_TECH("Orders.EmployeeId");
 
     @Getter
     private String value;

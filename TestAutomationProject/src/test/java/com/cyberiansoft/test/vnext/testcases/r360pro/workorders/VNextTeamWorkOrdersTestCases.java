@@ -332,8 +332,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
         BaseUtils.waitABit(10 * 1000);
         AppiumUtils.setNetworkOff();
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-        VNextInformationDialog informationDialog = workOrdersMenuScreen.clickEditWorkOrderMenuItemWithAlert();
-        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        VNextErrorDialog errorDialog = new VNextErrorDialog(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(errorDialog.clickOKButtonAndGetMessage(),
                 VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
         AppiumUtils.setAndroidNetworkOn();
         workOrdersScreen.switchToMyWorkordersView();
