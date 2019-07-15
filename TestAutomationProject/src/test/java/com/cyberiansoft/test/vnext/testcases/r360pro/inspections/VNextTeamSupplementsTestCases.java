@@ -22,6 +22,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -134,8 +135,8 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber));
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScree = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScree.switchToSelectedServicesView();
         selectedServicesScreen.setServiceAmountValue(inspectionData.getServiceNameByIndex(0), inspectionData.getServicePriceByIndex(0));
