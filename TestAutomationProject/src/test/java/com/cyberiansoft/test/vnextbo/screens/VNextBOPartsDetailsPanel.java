@@ -49,13 +49,13 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private WebElement firstPartBlock;
 
     @FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalConfirmButton']")
-    private WebElement confirmDeletingButton;
+    private WebElement confirmButton;
 
     @FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCancelButton']")
-    private WebElement cancelDeletingButton;
+    private WebElement cancelButton;
 
-    @FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCancelButton']")
-    private WebElement xIconForDeletingLabor;
+    @FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCloseButton']")
+    private WebElement xIconButton;
 
     @FindBy(xpath = "//div[@id='partsTable']/div[1]//input[contains(@class, 'service-oem-number-combobox') and not(@data-bind)]")
     private WebElement firstPartOEMInputField;
@@ -93,6 +93,12 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@data-role='calendar']//a[@aria-label='Previous']")
     private WebElement calendarWidgetPreviousButton;
 
+    @FindBy(xpath = "//div[@id='part-entity-details']//div[contains(@data-bind, 'addPart')]")
+    private WebElement addPartButton;
+
+    @FindBy(id = "service-instance-form")
+    private WebElement addPartDialog;
+
     @FindBy(xpath = "//td[@role='gridcell']/a")
     private List<WebElement> calendarCells;
 
@@ -103,13 +109,25 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private List<WebElement> vendorPriceInputFields;
 
     @FindBy(xpath = "//div[contains(@data-bind, 'serviceName')]")
-    private List<WebElement> serviceName;
+    private List<WebElement> partsNamesList;
 
     @FindBy(xpath = "//div[@id='partsTable']//input[contains(@data-bind, 'amountFormatted')]")
     private List<WebElement> priceInputFields;
 
     @FindBy(xpath = "//div[@id='partsTable']//input[contains(@data-bind, 'quantityFormatted')]")
     private List<WebElement> quantityInputFields;
+
+    @FindBy(xpath = "//div[contains(@data-bind, 'isActionsButtonVisible')]")
+    private List<WebElement> actionsButtons;
+
+    @FindBy(xpath = "//div[contains(@data-bind, 'partsMenuVisible')]")
+    private List<WebElement> actionsPartsMenuBlocks;
+
+    @FindBy(xpath = "//div[contains(@data-bind, 'partsMenuVisible')]//label[text()='Duplicate']")
+    private List<WebElement> duplicateActionsButtons;
+
+    @FindBy(xpath = "//div[contains(@data-bind, 'partsMenuVisible')]//label[text()='Delete']")
+    private List<WebElement> deleteActionsButtons;
 
     public VNextBOPartsDetailsPanel(WebDriver driver) {
         super(driver);
@@ -241,18 +259,18 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     public void clickConfirmDeletingButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(confirmDeletingButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(confirmButton)).click();
         waitForLoading();
     }
 
     public void clickCancelDeletingButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(cancelDeletingButton)).click();
-        wait.until(ExpectedConditions.invisibilityOf(cancelDeletingButton));
+        wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
+        wait.until(ExpectedConditions.invisibilityOf(cancelButton));
     }
 
     public void clickXIconForDeletingLabor() {
-        wait.until(ExpectedConditions.elementToBeClickable(xIconForDeletingLabor)).click();
-        wait.until(ExpectedConditions.invisibilityOf(xIconForDeletingLabor));
+        wait.until(ExpectedConditions.elementToBeClickable(xIconButton)).click();
+        wait.until(ExpectedConditions.invisibilityOf(xIconButton));
     }
 
     public boolean isFirstPartLaborBlockExpanded() {
@@ -386,7 +404,7 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private void setPartValue(int order, String price, List<WebElement> inputFields) {
         wait.until(ExpectedConditions.elementToBeClickable(inputFields.get(order))).click();
         inputFields.get(order).sendKeys(price);
-        wait.until(ExpectedConditions.elementToBeClickable(serviceName.get(order))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(partsNamesList.get(order))).click();
         waitABit(500);
     }
 
@@ -394,5 +412,68 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
         return wait.until(ExpectedConditions.visibilityOf(inputFields.get(order)))
                 .getAttribute("value")
                 .replace("$", "");
+    }
+
+    public VNextBOAddNewPartDialog clickAddNewPartButton() {
+        clickElement(addPartButton);
+        waitABit(1000);
+        return PageFactory.initElements(driver, VNextBOAddNewPartDialog.class);
+    }
+
+    public boolean isAddNewPartDialogDisplayed() {
+        return isElementDisplayed(addPartDialog);
+    }
+
+    public boolean isAddNewPartDialogNotDisplayed() {
+        return isElementNotDisplayed(addPartDialog);
+    }
+
+    public VNextBOPartsDetailsPanel clickActionsButton(int partOrder) {
+        clickElement(actionsButtons.get(partOrder));
+        return this;
+    }
+
+    public VNextBOPartsDetailsPanel clickDuplicateActionsButton(int partOrder) {
+        clickElement(duplicateActionsButtons.get(partOrder));
+        return this;
+    }
+
+    public VNextBOPartsDetailsPanel clickDeleteActionsButton(int partOrder) {
+        clickElement(deleteActionsButtons.get(partOrder));
+        return this;
+    }
+
+    public boolean isActionsPartsMenuDisplayed(int partOrder) {
+        return isElementDisplayed(actionsPartsMenuBlocks.get(partOrder));
+    }
+
+    public boolean isConfirmationPartDialogDisplayed() {
+        return isElementDisplayed(modalDialog);
+    }
+
+    public VNextBOPartsDetailsPanel clickConfirmationPartButton() {
+        clickElement(confirmButton);
+        waitForLoading();
+        refreshPage();
+        return this;
+    }
+
+    public int getNumberOfParts() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(partsNamesList));
+            return partsNamesList.size();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int getPartOrderByName(String partsName) {
+        for (int i = 0; i < partsNamesList.size(); i++) {
+            if (partsNamesList.get(i).getText().contains(partsName)) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

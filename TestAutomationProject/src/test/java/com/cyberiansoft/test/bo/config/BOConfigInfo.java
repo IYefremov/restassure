@@ -35,6 +35,10 @@ public class BOConfigInfo {
 	      return props.getProperty("backoffice.url");
 	}
 
+	public String getBackOfficeURLMain() {
+	      return props.getProperty("backoffice.url.main");
+	}
+
 	public String getBackOfficeDemoURL() {
 	      return props.getProperty("backofficedemo.url");
 	}

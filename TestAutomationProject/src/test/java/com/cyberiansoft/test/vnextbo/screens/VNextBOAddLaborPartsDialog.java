@@ -100,14 +100,8 @@ public class VNextBOAddLaborPartsDialog extends VNextBOBaseWebPage {
         return PageFactory.initElements(driver, VNextBOPartsDetailsPanel.class);
     }
 
-    private VNextBOAddLaborPartsDialog typeData(WebElement inputField, WebElement autoCompleteList, String data) {
-        setData(inputField, data);
-        wait.until(ExpectedConditions.attributeToBe(autoCompleteList, "aria-hidden", "false"));
-        return this;
-    }
-
     public VNextBOAddLaborPartsDialog typeLaborName(String labor) {
-        typeData(laborInputField, laborDropDown, labor);
+        setData(laborInputField, labor);
         return this;
     }
 

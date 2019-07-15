@@ -196,7 +196,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         breadCrumbPanel.setLocation(data.getLocation());
         Assert.assertTrue(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
         repairOrdersPage.clickNextButton();
-        Assert.assertFalse(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
+        Assert.assertFalse(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not enabled");
         repairOrdersPage.clickPrevButton();
         Assert.assertTrue(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
     }
@@ -1877,7 +1877,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
         System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
         Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
-                "The service total price hasn't been recalculated after setting the negative number for the service quantity");
+                    "The service total price hasn't been recalculated after setting the negative number for the service quantity");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

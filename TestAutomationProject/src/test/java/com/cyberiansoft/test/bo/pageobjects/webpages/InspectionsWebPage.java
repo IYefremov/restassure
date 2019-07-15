@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.DataUtils;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.webelements.*;
@@ -406,7 +407,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	public void approveInspectionByNumber(String inspnumber) {
 		makeSearchPanelVisible();
 		selectSearchTimeframe("Custom");
-		setTimeFrame(BackOfficeUtils.getCurrentDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
+		setTimeFrame(CustomDateProvider.getCurrentDateFormatted(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
 		waitForLoading();

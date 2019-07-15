@@ -1,0 +1,126 @@
+{
+  "verifyUserCanMaximizeMinimizeMenu": [
+    {
+      "rowID": "verifyUserCanMaximizeMinimizeMenu.01",
+      "description": "Test Case 84374:User can maximize/minimize the menu"
+    }
+  ],
+
+  "verifyUserCanApproveInspection": [
+    {
+      "rowID": "verifyUserCanApproveInspection.01",
+      "description": "Test Case 84584:Verify user can open \"Operations → Inspections\" with full set of elements, Test Case 84999:User can see \"Approve's\" details, Test Case 85018:User can approve Inspection (Approve and complete)",
+      "statuses": [
+        "New",
+        "Approved"
+      ],
+      "note": "12345"
+    }
+  ],
+
+  "verifyUserCanAddNewParts": [
+    {
+      "rowID": "verifyUserCanAddNewParts.01",
+      "description": "Test Case 83857:User can Add new parts",
+      "location": "Best Location",
+      "woNum": "O-000-152414",
+      "service": "_ multiple presets (required, no prefix)",
+      "serviceDescription": "Test123",
+      "serviceCategory": "Accessories and Fluids",
+      "serviceSubcategory": "Books",
+      "partItems": [
+        "Catalog",
+        "Enthusiast Book"
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfThePartToOrdered": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePartToOrdered.01",
+      "description": "Test Case 83968:User can change Status of the Part to \"Ordered\"",
+      "location": "Best Location",
+      "woNum": "O-000-152414",
+      "status": "Ordered"
+    }
+  ],
+
+  "verifyUserCanDuplicateThePart": [
+    {
+      "rowID": "verifyUserCanDuplicateThePart.01",
+      "description": "Test Case 84003:User can Duplicate the Part",
+      "location": "Best Location",
+      "woNum": "O-000-152414"
+    }
+  ],
+
+  "verifyUserCanDeleteThePart": [
+    {
+      "rowID": "verifyUserCanDeleteThePart.01",
+      "description": "Test Case 84007:User can Delete the Part",
+      "location": "Best Location",
+      "woNum": "O-000-152414",
+      "partItems": [
+        "Catalog",
+        "Enthusiast Book"
+      ]
+    }
+  ],
+
+  "verifyUserCanAddAndDeleteLabor": [
+    {
+      "rowID": "verifyUserCanAddAndDeleteLabor.01",
+      "description": "Test Case 83937:User can Add labour. Test Case 83938:User can delete labour.",
+      "location": "Best Location",
+      "woNum": "O-000-152414",
+      "labor": "Labor AM"
+    }
+  ],
+
+  "verifyUserCanChangeCompanyInfoAndSaveIt": [
+    {
+      "rowID": "verifyUserCanChangeCompanyInfoAndSaveIt.01",
+      "description": "Test Case 84561:User can change \"Company Info\" and save it",
+      "company": [
+        "SpainCo",
+        "AMT"
+      ],
+      "addressLine1": [
+        "address",
+        "5001 Birch St."
+      ],
+      "addressLine2": [
+        "address222",
+        "Newport Beach"
+      ],
+      "city": [
+        "Barcelona",
+        "Los Angeles"
+      ],
+      "country": [
+        "Canada",
+        "United States of America"
+      ],
+      "stateProvince": [
+        "Quebec",
+        "Arizona"
+      ],
+      "zip": [
+        "3456",
+        "92660"
+      ],
+      "email": [
+        "barca@gmail.com",
+        "amt@cyberiansoft.com"
+      ],
+      "phoneCode": [
+        "+1",
+        "+359"
+      ],
+      "phone": [
+        "298374",
+        "6145678903"
+      ]
+    }
+  ]
+}

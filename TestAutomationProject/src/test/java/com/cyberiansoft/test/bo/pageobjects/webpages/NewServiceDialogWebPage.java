@@ -121,6 +121,15 @@ public class NewServiceDialogWebPage extends BaseWebPage {
 	public boolean isNewServiceMultipleSelected() {
 		return isCheckboxChecked(multipleCheckBox);
 	}
+
+    public NewServiceDialogWebPage clickMultipleCheckbox() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(multipleCheckBox)).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
 	
 	public NewServiceDialogWebPage clickOKButton() {
 		clickAndWait(OKbtn);

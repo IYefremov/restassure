@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.bo.BOCompanyCRUDData;
@@ -161,8 +162,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		jobsPage.setNewJobDescription(data.getJobDesc());
 		jobsPage.selectJobClient(data.getCustomer());
 		jobsPage.selectJobParentClient(data.getParentCustomer());
-		jobsPage.setNewJobStartDate(BackOfficeUtils.getCurrentDateFormatted());
-		jobsPage.setNewJobEndDate(BackOfficeUtils.getTomorrowDateFormatted());
+		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateFormatted());
+		jobsPage.setNewJobEndDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		jobsPage.setNewJobAccountingID(data.getJobAccId());
 		jobsPage.setNewJobAccountingID(data.getJobAcc2Id());
 
@@ -180,16 +181,16 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		jobsPage.setNewJobDescription(data.getJobDesc());
 		jobsPage.selectJobClient(data.getCustomer());
 		jobsPage.selectJobParentClient(data.getParentCustomer());
-		jobsPage.setNewJobStartDate(BackOfficeUtils.getCurrentDateFormatted());
-		jobsPage.setNewJobEndDate(BackOfficeUtils.getTomorrowDateFormatted());
+		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateFormatted());
+		jobsPage.setNewJobEndDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		jobsPage.setNewJobAccountingID(data.getJobAccId());
 		jobsPage.setNewJobAccountingID2(data.getJobAcc2Id());
 		jobsPage.clickAddJobOKButton();
 
 		Assert.assertEquals(data.getJobDesc(), jobsPage.getTableJobDescription(data.getJobEdited()));
 		Assert.assertEquals(data.getCustomer(), jobsPage.getTableJobClient(data.getJobEdited()));
-		Assert.assertEquals(BackOfficeUtils.getTheShortestCurrentDateFormatted(), jobsPage.getTableJobStartDate(data.getJobEdited()));
-		Assert.assertEquals(BackOfficeUtils.getShortTomorrowDateFormatted(), jobsPage.getTableJobEndDate(data.getJobEdited()));
+		Assert.assertEquals(CustomDateProvider.getLocalizedCurrentDateFormattedTheShortest(), jobsPage.getTableJobStartDate(data.getJobEdited()));
+		Assert.assertEquals(CustomDateProvider.getTomorrowLocalizedDateFormattedTheShortest(), jobsPage.getTableJobEndDate(data.getJobEdited()));
 		Assert.assertEquals(data.getJobAccId(), jobsPage.getTableJobAccountingID(data.getJobEdited()));
 		Assert.assertEquals(data.getJobAcc2Id(), jobsPage.getTableJobAccountingID2(data.getJobEdited()));
 

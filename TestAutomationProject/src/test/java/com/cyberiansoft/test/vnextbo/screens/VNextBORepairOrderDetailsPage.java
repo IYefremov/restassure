@@ -1,5 +1,10 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ServicesWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
@@ -11,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -147,6 +153,9 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[contains(@data-bind, 'partActionsVisible')]")
     private List<WebElement> partsActions;
+
+    @FindBy(xpath = "//div[@id='reconmonitordetails-parts']//b")
+    private List<WebElement> partsNames;
 
     @FindBy(xpath = "//div[@id='reconmonitordetails-parts']//td[@class='grid__centered'][4]/div")
     private List<WebElement> partsOrderedFromTableValues;
@@ -456,7 +465,33 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     }
 
     public VNextBORepairOrderDetailsPage setServiceQuantity(String serviceId, String serviceDescription, String newValue) {
-        setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
+        try {
+            setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
+        } catch (TimeoutException e) {
+            ((JavascriptExecutor) driver).executeScript("window.open('about:blank','_blank');");
+
+            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(tabs.get(1));
+
+            WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURLMain());
+            BackOfficeLoginWebPage loginPage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
+            BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(driver, BackOfficeHeaderPanel.class);
+            loginPage.userLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
+
+            ServicesWebPage servicesPage = backOfficeHeader
+                    .clickCompanyLink()
+                    .clickServicesLink();
+
+		    servicesPage.setServiceSearchCriteria(serviceDescription)
+                    .clickFindButton()
+                    .clickEditService(serviceDescription)
+                    .clickMultipleCheckbox()
+                    .clickOKButton()
+                    .closeNewTab(tabs.get(0));
+		    refreshPage();
+            expandServicesTable().setTextValue(
+                    serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
+        }
         return this;
     }
 
@@ -492,14 +527,8 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
                 .sendKeys(newValue)
                 .build()
                 .perform();
-//        final WebElement element1 = element.findElement(By.xpath(".//preceding-sibling::span"));
-//        setAttributeWithJS(element1, "style", "display: block");
-//        sendKeysWithJS(element1, newValue);
-//        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-//        todo delete if works fine -->
-//        actions.sendKeys(element, Keys.DELETE);
-//        element.sendKeys(newValue);
         clickServiceDescriptionName(serviceDescription);
+        waitABit(500);
     }
 
     private void clickServiceDescriptionName(String serviceDescription) {
@@ -794,21 +823,24 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
     public boolean updateTotalServicePrice(String totalPrice) {
         try {
-            wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
-            actions.moveToElement(totalServicePrice).build().perform();
-            wait.until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
+            waitForTotalPriceToBeUpdated(totalPrice);
             return true;
         } catch (Exception ignored) {
             refreshPage();
             try {
-                wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
-                actions.moveToElement(totalServicePrice).build().perform();
-                wait.until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
+                waitForTotalPriceToBeUpdated(totalPrice);
             } catch (Exception e) {
+                e.printStackTrace();
                 return false;
             }
             return true;
         }
+    }
+
+    private void waitForTotalPriceToBeUpdated(String totalPrice) {
+        wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
+        actions.moveToElement(totalServicePrice).build().perform();
+        new WebDriverWait(driver, 60).until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
     }
 
     public String getFirstPartIdFromPartsList() {
@@ -816,12 +848,32 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         return partsList.get(0).getAttribute("data-order-service-id");
     }
 
-    public WebElement clickFirstPartActionsIcon() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(partsActions));
-        final WebElement firstPartAction = partsActions.get(0);
-        wait.until(ExpectedConditions.elementToBeClickable(firstPartAction)).click();
-        wait.until(ExpectedConditions.visibilityOf(firstPartAction.findElement(By.xpath("./div[@class='drop checkout']"))));
-        return firstPartAction;
+    private WebElement getPartActionElement(int index) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(partsActions));
+            final WebElement partAction = partsActions.get(index);
+            wait.until(ExpectedConditions.elementToBeClickable(partAction)).click();
+            wait.until(ExpectedConditions.visibilityOf(partAction.findElement(By.xpath("./div[@class='drop checkout']"))));
+            return partAction;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public WebElement clickPartActionsIconForPart(String part) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(partsNames));
+        } catch (Exception e) {
+            Assert.fail("The Parts section is empty", e);
+        }
+        try {
+            final List<String> collect = partsNames.stream().map(WebElement::getText).collect(Collectors.toList());
+            return getPartActionElement(collect.indexOf(part));
+        } catch (Exception e) {
+            Assert.fail("The Part hasn't been displayed");
+        }
+        return null;
     }
 
     public VNextBOOrderServiceNotesDialog openNotesDialogForPart(WebElement partsAction) {

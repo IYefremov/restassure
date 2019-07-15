@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementOrderDetailsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -8,7 +9,6 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -202,7 +202,6 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         laborPartsDialog.typeLaborName(data.getLaborStart());
         Assert.assertTrue(laborPartsDialog.isLaborDisplayed(data.getLabor()));
         final int laborOptionsQuantityBefore = laborPartsDialog.getLaborOptionsQuantity();
-        laborPartsDialog.selectLaborNameFromBoxList(data.getLaborStart());
 
         Assert.assertTrue(laborPartsDialog.isLaborClearIconDisplayed(), "The Labor Clear icon hasn't been displayed");
         laborPartsDialog.clickClearLaborIcon();
@@ -356,8 +355,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
                 "The WO order hasn't been displayed after search");
         Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
                 "Tha Parts details panel hasn't been displayed");
-        final String tomorrowDetailedDateFormatted = BackOfficeUtils.getDetailedTomorrowDateFormatted();
-        final String tomorrowFullDateFormatted = BackOfficeUtils.getTomorrowFullDateFormatted();
+        final String tomorrowDetailedDateFormatted = CustomDateProvider.getTomorrowLocalizedDateFormattedDetailed();
+        final String tomorrowFullDateFormatted = CustomDateProvider.getTomorrowDateFormattedFull();
         partsDetailsPanel.setETADate(tomorrowDetailedDateFormatted, 0);
 
         Assert.assertEquals(partsDetailsPanel.getPartETAValue(), tomorrowFullDateFormatted,

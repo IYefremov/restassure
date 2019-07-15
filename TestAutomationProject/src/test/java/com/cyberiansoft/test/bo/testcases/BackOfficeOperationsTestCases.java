@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
@@ -33,7 +34,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         TechnicianCommissionsWebPage techCommissionPage = operationsPage.clickTechnicianCommissionsLink();
         techCommissionPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
         techCommissionPage.setSearchFromDate(data.getFromTime());
-        techCommissionPage.setSearchToDate(BackOfficeUtils.getCurrentDateFormatted());
+        techCommissionPage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
 
         techCommissionPage.clickFindButton();
         techCommissionPage.verifyInvoicesTableColumnsAreVisible();
@@ -88,7 +89,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         wopage.makeSearchPanelVisible();
         wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
         wopage.setSearchFromDate(data.getFromTime());
-        wopage.setSearchToDate(BackOfficeUtils.getCurrentDateFormatted());
+        wopage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
         wopage.clickFindButton();
         wopage.verifyWorkOrdersTableColumnsAreVisible();
 

@@ -111,7 +111,8 @@
       "rowID": "verifyUserCanSearchROByNotesUsingAdvancedSearch.01",
       "description": "Test Case 83790:User can search RO by \"Notes\" using Advanced Search",
       "location": "Best Location",
-      "notes": "Autotest258"
+      "notes": "Autotest258",
+      "part": "New part service"
     }
   ],
 

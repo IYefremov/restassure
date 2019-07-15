@@ -152,11 +152,14 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     @FindBy(xpath = "//button[@class='btn-black pull-right']")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//div[@class='advSearch']//button[text()='Save']")
+    @FindBy(xpath = "//div[@class='advSearch']//button[contains(text(), 'Save')]")
     private WebElement saveButton;
 
-    @FindBy(xpath = "//div[@class='advSearch']//button[text()='Clear']")
+    @FindBy(xpath = "//div[@class='advSearch']//button[contains(text(), 'Clear')]")
     private WebElement clearButton;
+
+    @FindBy(xpath = "//div[@class='advSearch']//button[contains(text(), 'Delete')]")
+    private WebElement deleteButton;
 
     @FindBy(xpath = "//div[@class='advSearch']//i[@class='icon-close pull-right']")
     private WebElement advancedSearchCloseButton;
@@ -229,29 +232,27 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setWoNum(String woNum) {
-        return setData(woInputField, woNum);
+        setData(woInputField, woNum);
+        return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setRoNum(String roNum) {
-        return setData(roInputField, roNum);
+        setData(roInputField, roNum);
+        return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setStockNum(String stockNum) {
-        return setData(stockInputField, stockNum);
+        setData(stockInputField, stockNum);
+        return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setVinNum(String vinNum) {
-        return setData(vinInputField, vinNum);
+        setData(vinInputField, vinNum);
+        return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setSearchName(String searchName) {
-        return setData(searchNameInputField, searchName);
-    }
-
-    VNextBORepairOrdersAdvancedSearchDialog setData(WebElement inputField, String data) {
-        wait.until(ExpectedConditions.elementToBeClickable(inputField)).click();
-        inputField.clear();
-        inputField.sendKeys(data);
+        setData(searchNameInputField, searchName);
         return this;
     }
 
@@ -264,13 +265,13 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog selectCustomerNameFromBoxList(String customer) {
-        return (VNextBORepairOrdersAdvancedSearchDialog) selectDataFromBoxList(
-                customerListBoxOptions, customerAutoCompleteList, customer);
+        selectDataFromBoxList(customerListBoxOptions, customerAutoCompleteList, customer);
+        return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog selectEmployeeNameFromBoxList(String employee) {
-        return (VNextBORepairOrdersAdvancedSearchDialog) selectDataFromBoxList(
-                employeeListBoxOptions, employeeAutoCompleteList, employee);
+        selectDataFromBoxList(employeeListBoxOptions, employeeAutoCompleteList, employee);
+        return this;
     }
 
     public void typeEmployeeName(String employee) {
