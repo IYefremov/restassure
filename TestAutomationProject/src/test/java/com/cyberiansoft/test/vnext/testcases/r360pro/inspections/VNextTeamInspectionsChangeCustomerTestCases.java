@@ -21,6 +21,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -100,8 +101,8 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestCaseTea
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableservicesscreen.selectService(inspectionData.getServiceData().getServiceName());
         availableservicesscreen.saveInspectionViaMenu();

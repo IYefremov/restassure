@@ -61,11 +61,9 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
     public VNextInspectionsMenuScreen() {
     }
 
-    public VNextVehicleInfoScreen clickEditInspectionMenuItem() {
+    public void clickEditInspectionMenuItem() {
         clickMenuItem(editinspectionbtn);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         GeneralSteps.dismissHelpingScreenIfPresent();
-        return vehicleInfoScreen;
     }
 
     public VNextInformationDialog clickEditInspectionMenuItemWithAlert() {

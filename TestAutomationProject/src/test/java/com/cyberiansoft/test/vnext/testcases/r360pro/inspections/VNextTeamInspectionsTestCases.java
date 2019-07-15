@@ -404,7 +404,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
         AppiumUtils.setNetworkOff();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,newVinNumber);
         vehicleInfoScreen.clickSaveInspectionMenuButton();
@@ -444,7 +444,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         AppiumUtils.setNetworkOff();
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,newVinNumber);
         inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
         homeScreen = inspectionsScreen.clickBackButton();
@@ -644,8 +644,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
         AppiumUtils.setNetworkOff();
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        VNextInformationDialog informationDialog = inspectionsMenuScreen.clickEditInspectionMenuItemWithAlert();
-        Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        VNextErrorDialog errorDialog = new VNextErrorDialog(DriverBuilder.getInstance().getAppiumDriver());
+        Assert.assertEquals(errorDialog.clickOKButtonAndGetMessage(),
                 VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
         AppiumUtils.setAndroidNetworkOn();
         inspectionsScreen.switchToMyInspectionsView();
@@ -670,8 +671,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         inspectionsScreen.switchToTeamInspectionsView();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        VNextVehicleInfoScreen vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         for (int i = 0; i < amountToSelect; i++)
             availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
@@ -685,8 +686,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         selectedServicesScreen.saveInspectionViaMenu();
         inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        vehicleInfoScreen = inspectionsMenuScreen.clickEditInspectionMenuItem();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getMoneyServiceData().getServiceName()), amountToSelect);
         Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(inspectionData.getPercentageServiceData().getServiceName()), amountToSelect);
