@@ -8,7 +8,9 @@ import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VehicleInfoScreenSteps {
     public static void setVehicleInfo(VehicleInfoData vehicleInfoDto) {
@@ -42,9 +44,27 @@ public class VehicleInfoScreenSteps {
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vin);
     }
 
-    public static void setTechnicians(List<Employee> employeeList) {
+    public static void selectTechnicians(List<Employee> employeeList) {
         VehicleInfoScreenInteractions.openTechnicianList();
+        TechnicianScreenInteractions.selectEvenlyOption();
         employeeList.forEach(employee -> TechnicianScreenInteractions.selectTechnician(employee.getEmployeeName()));
         TechnicianScreenInteractions.acceptScreen();
+    }
+
+    public static void deselectTechnicians(List<Employee> employeeList) {
+        VehicleInfoScreenInteractions.openTechnicianList();
+        TechnicianScreenInteractions.selectEvenlyOption();
+        employeeList.forEach(employee -> TechnicianScreenInteractions.deselectTechnician(employee.getEmployeeName()));
+        TechnicianScreenInteractions.acceptScreen();
+    }
+
+    public static List<Employee> getSelectedTechnicians() {
+        return WaitUtils.getGeneralWebdriverWait().until((driver) ->
+                Arrays.stream(VehicleInfoScreenInteractions.getDataFieldValue(VehicleDataField.VEHICLE_TECH).split(",")).map(string -> {
+                    Employee employee = new Employee();
+                    employee.setEmployeeFirstName(string.trim().split(" ")[0].trim());
+                    employee.setEmployeeLastName(string.trim().split(" ")[1].trim());
+                    return employee;
+                }).collect(Collectors.toList()));
     }
 }

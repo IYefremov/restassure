@@ -2,17 +2,21 @@ package com.cyberiansoft.test.vnext.interactions;
 
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextTechnicianScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.vnext.webelements.TechnicialListElement;
 
-//TODO: DECORATE TECHNICIAN WEBELEMENT!!!
 public class TechnicianScreenInteractions {
-    public static WebElement getTechnicianElement(String technicianName) {
+    public static void selectEvenlyOption() {
+        VNextTechnicianScreen technicianScreen = new VNextTechnicianScreen();
+        WaitUtils.elementShouldBeVisible(technicianScreen.getRootElement(), true);
+        technicianScreen.getEvenlyButton().click();
+    }
+
+    public static TechnicialListElement getTechnicianElement(String technicianName) {
         VNextTechnicianScreen technicianScreen = new VNextTechnicianScreen();
         WaitUtils.elementShouldBeVisible(technicianScreen.getRootElement(), true);
         return technicianScreen.getTechList().stream()
                 .filter(technicianElement ->
-                        technicianElement.getText().replace('\n', ' ').contains(technicianName)
+                        technicianElement.getTechnicianName().contains(technicianName)
                 )
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Technician with name not found " + technicianName));
@@ -20,8 +24,15 @@ public class TechnicianScreenInteractions {
 
     public static void selectTechnician(String technicianName) {
         WaitUtils.getGeneralWebdriverWait().until(driver -> {
-            getTechnicianElement(technicianName).findElement(By.xpath(".//input[@action='check-item']")).click();
-            return getTechnicianElement(technicianName).findElement(By.xpath(".//input[@action='check-item']")).getAttribute("checked") != null;
+            getTechnicianElement(technicianName).checkElement();
+            return getTechnicianElement(technicianName).isElementChecked();
+        });
+    }
+
+    public static void deselectTechnician(String technicianName) {
+        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+            getTechnicianElement(technicianName).checkElement();
+            return !getTechnicianElement(technicianName).isElementChecked();
         });
     }
 

@@ -38,7 +38,7 @@ public class VehicleInfoScreenInteractions {
     public static String getDataFieldValue(VehicleDataField dataField) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
-        return WaitUtils.getGeneralWebdriverWait().until(driver -> ControlUtils.getElementValue(vehicleInfoScreen
+        return WaitUtils.getGeneralFluentWait().until(driver -> ControlUtils.getElementValue(vehicleInfoScreen
                 .getDataFieldList()
                 .stream()
                 .filter(element -> element.getAttribute("name").contains(dataField.getValue()))

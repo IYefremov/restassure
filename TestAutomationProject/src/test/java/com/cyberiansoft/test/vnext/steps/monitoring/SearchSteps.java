@@ -5,10 +5,11 @@ import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
+import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
-public class MonitorSearchSteps {
-    public static void searchByText(String searchString) {
+public class SearchSteps {
+    public static void fillTextSearch(String searchString) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getClearSearchInputButton());
         commonFilterScreen.getClearSearchInputButton().click();
@@ -30,10 +31,16 @@ public class MonitorSearchSteps {
     }
 
     public static void searchByTextAndStatus(String text, RepairOrderStatus status) {
-        MonitorSteps.openSearchFilters();
-        searchByText(text);
+        openSearchFilters();
+        fillTextSearch(text);
         selectStatus(status);
-        MonitorSearchSteps.search();
+        SearchSteps.search();
+    }
+
+    public static void searchByText(String text) {
+        openSearchFilters();
+        fillTextSearch(text);
+        SearchSteps.search();
     }
 
     public static void verifySearchResultsAreEmpty() {
@@ -44,32 +51,46 @@ public class MonitorSearchSteps {
     public static void searchByFlag(RepairOrderFlag repairOrderFlag) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
 
-        MonitorSteps.openSearchFilters();
+        openSearchFilters();
         commonFilterScreen.getFlag().selectOption(repairOrderFlag.name());
-        MonitorSearchSteps.search();
+        SearchSteps.search();
     }
 
     public static void searchByPriority(OrderPriority high) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
 
-        MonitorSteps.openSearchFilters();
+        openSearchFilters();
         commonFilterScreen.getPriority().selectOption(high.getValue());
-        MonitorSearchSteps.search();
+        SearchSteps.search();
     }
 
     public static void searchByDepartment(String departmentName) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
 
-        MonitorSteps.openSearchFilters();
+        openSearchFilters();
         commonFilterScreen.getDepartment().selectOption(departmentName);
-        MonitorSearchSteps.search();
+        SearchSteps.search();
     }
 
     public static void searchByPhase(String phaseName) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
 
-        MonitorSteps.openSearchFilters();
+        openSearchFilters();
         commonFilterScreen.getPhase().selectOption(phaseName);
-        MonitorSearchSteps.search();
+        SearchSteps.search();
+    }
+
+    public static void clearAllFilters() {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        repairOrderScreen.getActiveFilterslabel().clearAllFilters();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
+
+    public static void openSearchFilters() {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.waitUntilElementIsClickable(repairOrderScreen.getSearchButton());
+        repairOrderScreen.openSearchMenu();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getCommonFiltersToggle(), true);
+        repairOrderScreen.openCommonFilters();
     }
 }
