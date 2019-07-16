@@ -20,7 +20,7 @@ public class IOSReconProTestCasesDataPaths {
             props.load(fileInput);
             fileInput.close();
         } catch (IOException e) {
-            System.out.println("Can't load Calculations test cases data properties");
+            System.out.println("Can't load ReconPro Test Cases test cases data properties");
             e.printStackTrace();
         }
     }
