@@ -56,6 +56,8 @@ public class VNextLoginScreen extends VNextBaseScreen {
     public VNextLoginScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='employees']")));
         WaitUtils.elementShouldBeVisible(appiumdriver.findElement(By.xpath("//div[@data-page='employees']")), true);
     }
 
