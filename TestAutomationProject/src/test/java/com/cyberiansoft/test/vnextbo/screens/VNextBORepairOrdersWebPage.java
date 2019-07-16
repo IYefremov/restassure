@@ -179,13 +179,13 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@id='tableBody']")
     private WebElement tableBody;
 
-    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']//span[@aria-label='select']")
+    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']//i[@class='caret']")
     private WebElement savedSearchArrow;
 
-    @FindBy(xpath = "//div[@id='reconmonitor-saved-search-select-list' and @aria-hidden='false']//ul/li/span")
+    @FindBy(xpath = "//div[@data-template='reconmonitor-saved-search-select-item-template']//span[@class='savedSearch']")
     private List<WebElement> savedSearchDropDownOptions;
 
-    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']/span[@title]")
+    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']//div[@class='dropdown__list']")
     private WebElement savedSearchDropDown;
 
     @FindBy(xpath = "//div[@id='reconmonitor-saved-search']/span[@class='icon-pencil']")
@@ -258,23 +258,26 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public void clickSavedSearchArrow() {
+        clickWithJS(savedSearchArrow);
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(savedSearchArrow)).click();
+            wait.until(ExpectedConditions.visibilityOf(savedSearchDropDown));
         } catch (Exception e) {
-            waitForLoading();
-            wait.until(ExpectedConditions.elementToBeClickable(savedSearchArrow)).click();
+            e.printStackTrace();
         }
-        wait.until(ExpectedConditions.attributeToBe(savedSearchDropDown, "aria-expanded", "true"));
     }
 
     public void selectSavedSearchDropDownOption(String option) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(savedSearchDropDownOptions));
-        final WebElement webElement = savedSearchDropDownOptions
-                .stream()
-                .filter(o -> o.getText().equals(option))
-                .findFirst()
-                .get();
-        actions.moveToElement(webElement).click().build().perform();
+        try {
+            wait.until(ExpectedConditions.visibilityOfAllElements(savedSearchDropDownOptions));
+            final WebElement webElement = savedSearchDropDownOptions
+                    .stream()
+                    .filter(o -> o.getText().equals(option))
+                    .findFirst()
+                    .get();
+            actions.moveToElement(webElement).click().build().perform();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         waitForLoading();
     }
 

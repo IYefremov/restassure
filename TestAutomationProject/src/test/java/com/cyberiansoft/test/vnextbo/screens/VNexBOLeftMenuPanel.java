@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,10 +40,10 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//*[@data-automation-id='services']")
     private WebElement servicesMenu;
 
-    @FindBy(xpath = "//*[@data-automation-id='quick-notes']")
+    @FindBy(xpath = "//li[@data-automation-id='quick-notes']")
     private WebElement quickNotesMenu;
 
-    @FindBy(xpath = "//*[@data-automation-id='company-info']")
+    @FindBy(xpath = "//li[@data-automation-id='company-info']")
     private WebElement companyInfoMenu;
 
     @FindBy(xpath = "//*[@data-automation-id='users']")
@@ -57,10 +58,6 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[text()='SKIP']")
     private WebElement tutorialSkipButton;
 
-    private static String MONITOR_MAINMENU_ITEM = "Monitor";
-    private static String OPERATIONS_MAINMENU_ITEM = "Operations";
-    private static String SETTINGS_MAINMENU_ITEM = "Settings";
-
     public VNexBOLeftMenuPanel(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -68,49 +65,43 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOInspectionsWebPage selectInspectionsMenu() {
-        selectMenuItem(inspectionsMenu, OPERATIONS_MAINMENU_ITEM);
-        return PageFactory.initElements(
-                driver, VNextBOInspectionsWebPage.class);
+        selectMenuItem(inspectionsMenu, MainMenuItems.OPERATIONS.getMenu());
+        return PageFactory.initElements(driver, VNextBOInspectionsWebPage.class);
     }
 
     public VNextBOInvoicesWebPage selectInvoicesMenu() {
-        selectMenuItem(invoicesMenu, OPERATIONS_MAINMENU_ITEM);
-        waitABit(4000);
-        return PageFactory.initElements(
-                driver, VNextBOInvoicesWebPage.class);
+        selectMenuItem(invoicesMenu, MainMenuItems.OPERATIONS.getMenu());
+        return PageFactory.initElements(driver, VNextBOInvoicesWebPage.class);
     }
 
     public VNextBOPartsManagementWebPage selectPartsManagementMenu() {
-        selectMenuItem(partsManagementMenu, OPERATIONS_MAINMENU_ITEM);
-        waitABit(4000);
-        return PageFactory.initElements(
-                driver, VNextBOPartsManagementWebPage.class);
+        selectMenuItem(partsManagementMenu, MainMenuItems.OPERATIONS.getMenu());
+        return PageFactory.initElements(driver, VNextBOPartsManagementWebPage.class);
     }
 
     public VNexBOUsersWebPage selectUsersMenu() {
-        selectMenuItem(usersMenu, SETTINGS_MAINMENU_ITEM);
-        return PageFactory.initElements(
-                driver, VNexBOUsersWebPage.class);
+        selectMenuItem(usersMenu, MainMenuItems.SETTINGS.getMenu());
+        return PageFactory.initElements(driver, VNexBOUsersWebPage.class);
     }
 
     public VNextBORepairOrdersWebPage selectRepairOrdersMenu() {
-        selectMenuItem(repairOrdersMenu, MONITOR_MAINMENU_ITEM);
-        return PageFactory.initElements(
-                driver, VNextBORepairOrdersWebPage.class);
+        selectMenuItem(repairOrdersMenu, MainMenuItems.MONITOR.getMenu());
+        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
     }
 
     public VNextBOServicesWebPage selectServicesMenu() {
-        selectMenuItem(servicesMenu, SETTINGS_MAINMENU_ITEM);
-        waitForLoading();
-        return PageFactory.initElements(
-                driver, VNextBOServicesWebPage.class);
+        selectMenuItem(servicesMenu, MainMenuItems.SETTINGS.getMenu());
+        return PageFactory.initElements(driver, VNextBOServicesWebPage.class);
     }
 
     public VNextBOQuickNotesWebPage selectQuickNotesMenu() {
-        selectMenuItem(quickNotesMenu, SETTINGS_MAINMENU_ITEM);
-        waitForLoading();
-        return PageFactory.initElements(
-                driver, VNextBOQuickNotesWebPage.class);
+        selectMenuItem(quickNotesMenu, MainMenuItems.SETTINGS.getMenu());
+        return PageFactory.initElements(driver, VNextBOQuickNotesWebPage.class);
+    }
+
+    public VNextBOCompanyInfoWebPage selectCompanyInfoMenu() {
+        selectMenuItem(companyInfoMenu, MainMenuItems.SETTINGS.getMenu());
+        return PageFactory.initElements(driver, VNextBOCompanyInfoWebPage.class);
     }
 
     public boolean isUsersMenuItemExists() {
@@ -173,6 +164,7 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
             scrollToElement(menuitem);
             clickWithJS(menuitem);
         }
+        waitForLoading();
     }
 
     public boolean isMenuButtonDisplayed() {

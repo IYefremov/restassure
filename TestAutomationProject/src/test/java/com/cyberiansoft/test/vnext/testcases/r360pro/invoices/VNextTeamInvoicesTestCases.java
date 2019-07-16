@@ -1,12 +1,12 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.invoices;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InvoicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
@@ -121,8 +121,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		InvoicesWebPage invoicesWebPage = operationsPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		invoicesWebPage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
+		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesWebPage.clickFindButton();
 		Assert.assertEquals(invoicesWebPage.getInvoiceStatus(invoiceNumber), VNextInspectionStatuses.NEW);
@@ -185,8 +185,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		InvoicesWebPage invoicesWebPage = operationsPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		invoicesWebPage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
+		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_VOID);
 		invoicesWebPage.clickFindButton();

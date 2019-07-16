@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.testcases;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -67,7 +68,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         servicerequestslistpage.acceptFirstServiceRequestFromList();
         SRAppointmentInfoPopup appointmentpopup = servicerequestslistpage
                 .clickAddAppointmentToFirstServiceRequestFromList();
-        appointmentpopup.setFromDateValue(BackOfficeUtils.getTomorrowDateFormatted());
+        appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         appointmentpopup.setStartTimeValue(data.getStartTime());
         appointmentpopup.setEndTimeValue(data.getEndTime());
         Assert.assertEquals(appointmentpopup.getSubjectValue(), data.getClientName());
@@ -119,7 +120,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		SRAppointmentInfoPopup appointmentpopup = servicerequestslistpage
 				.clickAddAppointmentToFirstServiceRequestFromList();
-		appointmentpopup.setFromDateValue(BackOfficeUtils.getTomorrowDateFormatted());
+		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
 		Assert.assertEquals(appointmentpopup.getSubjectValue(), data.getNewServiceRequest());
@@ -176,8 +177,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		SRAppointmentInfoPopup appointmentpopup = servicerequestslistpage
 				.clickAddAppointmentToFirstServiceRequestFromList();
 
-		appointmentpopup.setFromDateValue(BackOfficeUtils.getDayAfterTomorrowDateFormatted());
-		appointmentpopup.setToDateValue(BackOfficeUtils.getDayAfterTomorrowDateFormatted());
+		appointmentpopup.setFromDateValue(CustomDateProvider.getDayAfterTomorrowLocalizedDateFormattedShort());
+		appointmentpopup.setToDateValue(CustomDateProvider.getDayAfterTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
 		Assert.assertEquals(appointmentpopup.getTechnicianValue(), data.getAssignedTo());
@@ -248,8 +249,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		SRAppointmentInfoPopup appointmentpopup = servicerequestslistpage
 				.clickAddAppointmentToFirstServiceRequestFromList();
-		appointmentpopup.setFromDateValue(BackOfficeUtils.getTomorrowDateFormatted());
-		appointmentpopup.setToDateValue(BackOfficeUtils.getTomorrowDateFormatted());
+		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
+		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
 		Assert.assertEquals(appointmentpopup.getTechnicianValue(), data.getAssignedTo());
@@ -312,8 +313,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		SRAppointmentInfoPopup appointmentpopup = servicerequestslistpage
 				.clickAddAppointmentToFirstServiceRequestFromList();
-		appointmentpopup.setFromDateValue(BackOfficeUtils.getTomorrowDateFormatted());
-		appointmentpopup.setToDateValue(BackOfficeUtils.getTomorrowDateFormatted());
+		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
+		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
 		Assert.assertEquals(appointmentpopup.getTechnicianValue(), data.getAssignedTo());
@@ -371,8 +372,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		SRAppointmentInfoPopup appointmentpopup = servicerequestslistpage
 				.clickAddAppointmentToFirstServiceRequestFromList();
-		appointmentpopup.setFromDateValue(BackOfficeUtils.getTomorrowDateFormatted());
-		appointmentpopup.setToDateValue(BackOfficeUtils.getTomorrowDateFormatted());
+		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
+		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
 		Assert.assertEquals(appointmentpopup.getTechnicianValue(), data.getAssignedTo());

@@ -68,7 +68,7 @@
     {
       "rowID": "verifyUserCanUsePaging.01",
       "description": "Test Case 81902:Verify user can use paging",
-      "location": "Best Location"
+      "location": "1111"
     }
   ],
 
@@ -622,7 +622,7 @@
       "location": "1111",
       "status": "Approved",
       "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
+      "service": "zayatsLaborService_Motor_est_work_time (lab time)",
       "vendor": "ALM Vendor",
       "technician": "Jhon Jnonson",
       "serviceStatuses": [

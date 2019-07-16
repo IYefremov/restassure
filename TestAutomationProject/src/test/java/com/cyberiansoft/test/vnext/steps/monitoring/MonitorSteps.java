@@ -33,25 +33,11 @@ public class MonitorSteps {
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
-    public static void clearAllFilters() {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        repairOrderScreen.getActiveFilterslabel().clearAllFilters();
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
-    }
-
     public static void verifyRepairOrderValues(String repairOrderId, RepairOrderDto expectedRoValues) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
         Assert.assertEquals(repairOrderScreen.getRepairOrderElement(repairOrderId).getRepairOrderDto(),
                 expectedRoValues);
-    }
-
-    public static void openSearchFilters() {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        WaitUtils.waitUntilElementIsClickable(repairOrderScreen.getSearchButton());
-        repairOrderScreen.openSearchMenu();
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getCommonFiltersToggle(), true);
-        repairOrderScreen.openCommonFilters();
     }
 
     public static void openMenu(String workOrderId) {
@@ -78,7 +64,7 @@ public class MonitorSteps {
 
     public static void editOrder(String workOrderId) {
         HomeScreenSteps.openWorkQueue();
-        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
     }

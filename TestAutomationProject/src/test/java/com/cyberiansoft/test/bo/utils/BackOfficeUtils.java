@@ -13,131 +13,136 @@ import java.util.Date;
 import java.util.Locale;
 
 public class BackOfficeUtils {
+
+    private static LocalDate getCurrentDate() {
+        return LocalDate.now();
+    }
+
+    private static LocalDate getCurrentDateLocalized() {
+        return LocalDate.now(getZoneId());
+    }
+
+    private static ZoneId getZoneId() {
+        return ZoneId.of(DataUtils.ZONE_ID.getData());
+    }
+
+    private static LocalDate getCurrentDatePlusDays(int days) {
+        return getCurrentDate().plusDays(days);
+    }
+
+    private static LocalDate getCurrentDateMinusDays(int days) {
+        return getCurrentDate().minusDays(days);
+    }
+
+    private static String getFormattedLocalizedDate(DataUtils format) {
+        return getFormattedLocalizedDate(getCurrentDate(), format);
+    }
+
+    private static String getFormattedLocalizedDate(LocalDate date, DataUtils format) {
+        return date.format(DateTimeFormatter.ofPattern(format.getData(), Locale.US));
+    }
+
+    private static String getFormattedLocalizedDateTime(LocalDateTime dateTime, DataUtils format) {
+        return dateTime.format(DateTimeFormatter.ofPattern(format.getData(), Locale.US));
+    }
+
+    private static TemporalField getUSField() {
+        return WeekFields.of(Locale.US).dayOfWeek();
+    }
 	
-	public static String getTomorrowDateFormatted() {
-		return LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern(DataUtils.SHORT_DATE_FORMAT.getData()));
+	public static String getTomorrowLocalizedDateFormattedShort() {
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DataUtils.SHORT_DATE_FORMAT);
 	}
 
-	public static String getPreviousDateFormatted() {
-		return LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern(DataUtils.SHORT_DATE_FORMAT.getData()));
-	}
-	
-	public static String getDayAfterTomorrowDateFormatted() {
-		return LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern(DataUtils.SHORT_DATE_FORMAT.getData()));
+	public static String getPreviousLocalizedDateFormattedShort() {
+        return getFormattedLocalizedDate(getCurrentDateMinusDays(1), DataUtils.SHORT_DATE_FORMAT);
 	}
 
-	public static String getShortTomorrowDateFormatted() {
-		return LocalDate.now().plusDays(1).format(DateTimeFormatter
-                .ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData()));
+	public static String getDayAfterTomorrowLocalizedDateFormattedShort() {
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(2), DataUtils.SHORT_DATE_FORMAT);
 	}
-	
+
+	public static String getTomorrowLocalizedDateFormattedTheShortest() {
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DataUtils.THE_SHORTEST_DATE_FORMAT);
+	}
+
 	public static String getCurrentDateFormatted() {
-        return getFormattedDate(DataUtils.SHORT_DATE_FORMAT);
+        return getFormattedLocalizedDate(DataUtils.SHORT_DATE_FORMAT);
 	}
 
     public static String getCurrentDate(boolean... isLocalized) {
         if (isLocalized[0]) {
-            return getFormattedDate(DataUtils.FULL_DATE_FORMAT);
+            return getFormattedLocalizedDate(DataUtils.FULL_DATE_FORMAT);
         } else {
-            return LocalDate.now().format(DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData()));
+            return getCurrentDate().format(DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData()));
         }
     }
-	
-	public static String getTheShortestCurrentDateFormatted() {
-        return getFormattedDate(DataUtils.THE_SHORTEST_DATE_FORMAT);
+
+	public static String getLocalizedCurrentDateFormattedTheShortest() {
+        return getFormattedLocalizedDate(DataUtils.THE_SHORTEST_DATE_FORMAT);
 	}
 
-	public static String getDetailedCurrentDateFormatted() {
-        return getFormattedDate(DataUtils.DETAILED_FULL_DATE_FORMAT);
+	public static String getLocalizedCurrentDateFormattedDetailed() {
+        return getFormattedLocalizedDate(DataUtils.DETAILED_FULL_DATE_FORMAT);
 	}
 
-    public static String getDetailedTomorrowDateFormatted() {
-	    return LocalDate.now().plusDays(1).format(DateTimeFormatter
-                .ofPattern(DataUtils.DETAILED_FULL_DATE_FORMAT.getData(), Locale.US));
+    public static String getTomorrowLocalizedDateFormattedDetailed() {
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DataUtils.DETAILED_FULL_DATE_FORMAT);
     }
 
-    public static String getTomorrowFullDateFormatted() {
-	    return LocalDate.now().plusDays(1).format(DateTimeFormatter
-                .ofPattern(DataUtils.FULL_DATE_FORMAT.getData(), Locale.US));
+    public static String getTomorrowDateFormattedFull() {
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DataUtils.FULL_DATE_FORMAT);
     }
 
-    private static String getFormattedDate(DataUtils format) {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern(format.getData(), Locale.US));
-    }
-
-    public static String getShortCurrentTimeWithTimeZone() {
-		LocalDateTime localDateAndTime = LocalDateTime.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		DateTimeFormatter format = DateTimeFormatter.ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData());
-	    return localDateAndTime.format(format);
+    public static String getCurrentTimeWithTimeZoneTheShortest() {
+	    return getFormattedLocalizedDateTime(LocalDateTime.now(getZoneId()), DataUtils.THE_SHORTEST_DATE_FORMAT);
 	}
-	
+
 	private static Calendar getCalendarForNow() {
-		Date today = new Date();                   
 		Calendar calendar = Calendar.getInstance();
-	    calendar.setTime(today);
+	    calendar.setTime(new Date());
 	    return calendar;
 	}
-	
+
 	public static LocalDate getWeekStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
-		return localDate.with(fieldUS, 1);
+		return getCurrentDateLocalized().with(getUSField(), 1);
 	}
-	
+
 	public static LocalDate getLastWeekStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
-
-		localDate = localDate.minusWeeks(2);
-		return localDate.with(fieldUS, 1);
+		return getCurrentDateLocalized().minusWeeks(2).with(getUSField(), 1);
 	}
 
-    public static LocalDate getLastWeekEndDate(LocalDate lastweekstart) {
-		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
-
-		lastweekstart = lastweekstart.plusWeeks(1);
-		return lastweekstart.with(fieldUS, 7);
+    public static LocalDate getLastWeekEndDate(LocalDate lastWeekStart) {
+		return lastWeekStart.plusWeeks(1).with(getUSField(), 7);
 	}
 
     public static LocalDate getLastWeekEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		TemporalField fieldUS = WeekFields.of(Locale.US).dayOfWeek();
+		return getCurrentDateLocalized().plusWeeks(1).with(getUSField(), 7);
+	}
 
-		localDate = localDate.plusWeeks(1);
-		return localDate.with(fieldUS, 7);
+    public static LocalDate getMonthStartDate() {
+		return getCurrentDateLocalized().withDayOfMonth(1);
 	}
-	
-	public static LocalDate getMonthStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		return localDate.withDayOfMonth(1);
-	}
-	
+
 	public static LocalDate getLastMonthStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		localDate = localDate.minusMonths(1);
-		return localDate.withDayOfMonth(1);
+		return getCurrentDateLocalized().minusMonths(1).withDayOfMonth(1);
 	}
-	
+
 	public static LocalDate getLastMonthEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		localDate = localDate.minusMonths(1);
+		LocalDate localDate = getCurrentDateLocalized().minusMonths(1);
 		return localDate.withDayOfMonth(localDate.lengthOfMonth());
 	}
-	
+
 	public static LocalDate getYearStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		return localDate.withDayOfYear(1);
+		return getCurrentDateLocalized().withDayOfYear(1);
 	}
-	
+
 	public static LocalDate getLastYearStartDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		localDate = localDate.minusYears(1);
-		return localDate.withDayOfYear(1);
+		return getCurrentDateLocalized().minusYears(1).withDayOfYear(1);
 	}
-	
+
 	public static LocalDate getLastYearEndDate() {
-		LocalDate localDate = LocalDate.now(ZoneId.of(DataUtils.ZONE_ID.getData()));
-		localDate = localDate.minusYears(1);
+		LocalDate localDate = getCurrentDateLocalized().minusYears(1);
 		return localDate.withDayOfYear(localDate.lengthOfYear());
 	}
 	

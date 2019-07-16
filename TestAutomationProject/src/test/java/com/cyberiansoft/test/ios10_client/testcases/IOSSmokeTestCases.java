@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -754,8 +755,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicerequestslistpage.selectSearchTeam(teamName);
 		servicerequestslistpage.selectSearchTechnician("Employee Simple 20%");
 		servicerequestslistpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		servicerequestslistpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
-		servicerequestslistpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		servicerequestslistpage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		servicerequestslistpage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		servicerequestslistpage.setSearchFreeText(newsrnumber);
 		servicerequestslistpage.clickFindButton();
 		servicerequestslistpage.verifySearchResultsByServiceName(serviceName);
@@ -1389,8 +1390,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
 		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
-		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoiceswebpage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceDisplayed(invoicenum));
@@ -4366,7 +4367,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		inspectionspage.makeSearchPanelVisible();
 		inspectionspage.selectSearchStatus("All active");
 		inspectionspage.selectSearchTimeframe("Custom");
-		inspectionspage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
+		inspectionspage.setTimeFrame(CustomDateProvider.getPreviousLocalizedDateFormattedShort(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 
 		inspectionspage.searchInspectionByNumber(inspnumber);
 		Assert.assertEquals(inspectionspage.getInspectionAmountApproved(inspnumber), "$2,000.00");
@@ -4476,8 +4477,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
-		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoiceswebpage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 		Assert.assertEquals(invoiceswebpage.getInvoicePONumber(invoicenumber), invoiceData.getPoNumber());
@@ -4559,8 +4560,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
-		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoiceswebpage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 
@@ -4629,8 +4630,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoiceswebpage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
+		invoiceswebpage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 
@@ -4736,8 +4737,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation("Default Location");
 		repairorderspage.selectSearchTimeframe("Custom");
-		repairorderspage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
-		repairorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		repairorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		repairorderspage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		repairorderspage.setSearchWoNumber(wonum);
 		repairorderspage.clickFindButton();
 
@@ -5125,8 +5126,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
 		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
-		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoiceswebpage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenum);
 		invoiceswebpage.clickFindButton();
 		Assert.assertTrue(invoiceswebpage.isInvoiceDisplayed(invoicenum));
@@ -5383,8 +5384,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
 		InvoicesWebPage invoiceswebpage = operationspage.clickInvoicesLink();
 		invoiceswebpage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoiceswebpage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
-		invoiceswebpage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoiceswebpage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoiceswebpage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoiceswebpage.setSearchInvoiceNumber(invoicenumber);
 		invoiceswebpage.clickFindButton();
 		invoiceswebpage.archiveInvoiceByNumber(invoicenumber);
@@ -5443,8 +5444,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		workorderspage.makeSearchPanelVisible();
 		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		workorderspage.setSearchFromDate(BackOfficeUtils.getCurrentDateFormatted());
-		workorderspage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		workorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		workorderspage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		workorderspage.setSearchOrderNumber(wonumber3);
 
 		workorderspage.clickFindButton();

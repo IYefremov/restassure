@@ -71,7 +71,7 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 		customerslist.findElement(By.xpath("./li[text()='" + customername + "']")).click();
 	}
 	
-	public void selectAdvancedSearchByStatus(String statussearch) {
+	public VNextBOAdvancedSearchInspectionDialog selectAdvancedSearchByStatus(String statussearch) {
 		WebElement statusDropDown = advancedsearchform
                 .findElement(By.xpath("//*[@aria-owns='advSearchEstimation-status_listbox']/span/span"));
 		if (!statusDropDown.getText().trim().equals(statussearch)) {		
@@ -84,6 +84,7 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 			statuseslist.findElement(By.xpath("//ul[@id='advSearchEstimation-status_listbox']/li[text()='" + statussearch + "']")).click();
 			waitABit(500);
 		}
+		return this;
 	}
 	
 	public void setAdvancedSearchInspectionByStatusAndInspectionNumber(String inspNumber, String statussearch) {
@@ -117,9 +118,10 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 		advancedsearchform.findElement(By.xpath("//span[text()='Save']")).click();
 	}
 	
-	public void clickSearchButton() {
+	public VNextBOInspectionsWebPage clickSearchButton() {
 		wait.until(ExpectedConditions.elementToBeClickable(advancedsearchform.findElement(By.xpath(".//*[@data-bind='click: search']")))).click();
 		wait.until(ExpectedConditions.invisibilityOf(advancedsearchform));
+		return PageFactory.initElements(driver, VNextBOInspectionsWebPage.class);
 	}
 	
 	public void clickClearButton() {

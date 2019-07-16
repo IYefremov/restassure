@@ -30,6 +30,7 @@ public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes, InspectionData inspectionData) {
         CustomersSreenSteps.selectCustomer(customer);
         InspectionSteps.selectInspectionType(inspectionTypes);
+        GeneralSteps.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
     }
 

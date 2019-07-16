@@ -16,6 +16,9 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
     private WebElement locationExpanded;
 
+    @FindBy(xpath = "//ul[@class='scroll-pane-locations']")
+    private WebElement locationsList;
+
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']/ul[@class='scroll-pane-locations']//label")
     private List<WebElement> locationLabels;
 
@@ -23,7 +26,7 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
     private WebElement locationSearchInput;
 
     @FindBy(xpath = "//span[contains(@class, 'location-name')]")
-    private WebElement locationElement;
+    private WebElement locationName;
 
     @FindBy(className = "breadcrumbs")
     private WebElement mainBreadCrumbsLink;
@@ -77,11 +80,12 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
             selectLocation(location);
         } else {
             try {
-                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+                wait.until(ExpectedConditions.elementToBeClickable(locationName)).click();
             } catch (Exception ignored) {
                 waitABit(2000);
-                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+                clickWithJS(locationName);
             }
+            waitForLoading();
             selectLocation(location);
         }
         return this;
@@ -101,7 +105,7 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
 
     public boolean isLocationSet(String location) {
         try {
-            wait.until(ExpectedConditions.textToBePresentInElement(locationElement, location));
+            wait.until(ExpectedConditions.textToBePresentInElement(locationName, location));
             return true;
         } catch (Exception ignored) {
             return false;
@@ -110,7 +114,7 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
 
     private void selectLocation(String location) {
         wait.until(ExpectedConditions
-                .elementToBeClickable(locationExpanded.findElement(By.xpath(".//label[text()='" + location + "']"))))
+                .elementToBeClickable(locationsList.findElement(By.xpath(".//label[text()='" + location + "']"))))
                 .click();
         waitForLoading();
         Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
@@ -121,7 +125,7 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
         try {
             wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
         } catch (Exception e) {
-            locationElement.click();
+            locationName.click();
             wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
         }
     }
@@ -158,7 +162,7 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
         try {
             wait.until(ExpectedConditions.visibilityOf(locationExpanded));
         } catch (Exception e) {
-            wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(locationName)).click();
         }
         final int locationsNum = clearAndTypeLocation(searchLocation);
         try {

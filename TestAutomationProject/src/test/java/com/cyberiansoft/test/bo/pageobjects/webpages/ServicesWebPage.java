@@ -79,10 +79,11 @@ public class ServicesWebPage extends WebPageWithPagination {
 		return searchtab.getAttribute("class").contains("open");
 	}
 	
-	public void makeSearchPanelVisible() {
+	public ServicesWebPage makeSearchPanelVisible() {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
+		return PageFactory.initElements(driver, ServicesWebPage.class);
 	}
 	
 	public void verifyServicesTableColumnsAreVisible() {

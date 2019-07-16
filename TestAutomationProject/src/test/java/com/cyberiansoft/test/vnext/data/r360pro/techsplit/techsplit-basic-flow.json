@@ -7,6 +7,26 @@
         {
           "employeeFirstName": "Test",
           "employeeLastName": "Test"
+        },
+        {
+          "employeeFirstName": "1111",
+          "employeeLastName": "2222"
+        }
+      ]
+    }
+  ],
+  "userCanChangeTechAmountViaEdit": [
+    {
+      "rowID": "userCanAssignMultipleTechniciansToOrder.01",
+      "description": "TFSID:87874 87875",
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
+        },
+        {
+          "employeeFirstName": "1111",
+          "employeeLastName": "2222"
         }
       ]
     }

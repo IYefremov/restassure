@@ -24,7 +24,6 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
     public VNextBOQuickNotesWebPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-//        wait.until(ExpectedConditions.visibilityOf(addQuickNotesButton));
     }
 
     public VNextBOQuickNotesWebPage moveQuickNotes(String quickNoteSource, String quickNoteTarget) {

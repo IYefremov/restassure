@@ -59,4 +59,7 @@ public class VNextBOPartsManagementSearchData extends VNextBOBaseData {
 
     @JsonProperty("searchNameChanged")
     private String searchNameChanged;
+
+    @JsonProperty("part")
+    private String part;
 }

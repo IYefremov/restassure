@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -262,8 +263,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrdersWebPage workOrdersWebPage = operationsWebPageWebPage.clickWorkOrdersLink();
 		workOrdersWebPage.makeSearchPanelVisible();
 		workOrdersWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		workOrdersWebPage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		workOrdersWebPage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		workOrdersWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
+		workOrdersWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		workOrdersWebPage.setSearchOrderNumber(workOrderNumber28583);
 		workOrdersWebPage.unselectInvoiceFromDeviceCheckbox();
 		workOrdersWebPage.clickFindButton();
@@ -465,8 +466,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrdersWebPage workOrdersWebPage = operationsWebPageWebPage.clickWorkOrdersLink();
 		workOrdersWebPage.makeSearchPanelVisible();
 		workOrdersWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		workOrdersWebPage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		workOrdersWebPage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		workOrdersWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
+		workOrdersWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		workOrdersWebPage.setSearchOrderNumber(workOrderNumber29398);
 		workOrdersWebPage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
@@ -660,8 +661,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrdersWebPage workOrdersWebPage = operationsWebPageWebPage.clickWorkOrdersLink();
 		workOrdersWebPage.makeSearchPanelVisible();
 		workOrdersWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		workOrdersWebPage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		workOrdersWebPage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		workOrdersWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
+		workOrdersWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		workOrdersWebPage.setSearchOrderNumber(workOrderNumber31498);
 		workOrdersWebPage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
@@ -735,7 +736,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		InspectionsWebPage inspectionsWebPage = operationsWebPageWebPage.clickInspectionsLink();
 		inspectionsWebPage.makeSearchPanelVisible();
 		inspectionsWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		inspectionsWebPage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
+		inspectionsWebPage.setTimeFrame(CustomDateProvider.getPreviousLocalizedDateFormattedShort(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		inspectionsWebPage.selectSearchStatus("Declined");
 		inspectionsWebPage.searchInspectionByNumber(inspectionNumber32226);
 		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionNumber32226), "$0.00");
@@ -808,7 +809,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		InspectionsWebPage inspectionsWebPage = operationsWebPageWebPage.clickInspectionsLink();
 		inspectionsWebPage.makeSearchPanelVisible();
 		inspectionsWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		inspectionsWebPage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
+		inspectionsWebPage.setTimeFrame(CustomDateProvider.getPreviousLocalizedDateFormattedShort(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		inspectionsWebPage.selectSearchStatus("All active");
 		inspectionsWebPage.searchInspectionByNumber(inspectionNumber32286);		
 		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionNumber32286), "$2,000.00");
@@ -879,7 +880,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		InspectionsWebPage inspectionsWebPage = operationsWebPageWebPage.clickInspectionsLink();
 		inspectionsWebPage.makeSearchPanelVisible();
 		inspectionsWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		inspectionsWebPage.setTimeFrame(BackOfficeUtils.getPreviousDateFormatted(), BackOfficeUtils.getTomorrowDateFormatted());
+		inspectionsWebPage.setTimeFrame(CustomDateProvider.getPreviousLocalizedDateFormattedShort(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		inspectionsWebPage.selectSearchStatus("Declined");
 		inspectionsWebPage.searchInspectionByNumber(inspnumber32287);		
 		Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspnumber32287), "$0.00");
@@ -1652,8 +1653,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		invoicesWebPage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		invoicesWebPage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
+		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.clickInvoicePrintPreview(invoiceNumber45224);
 		invoicesWebPage.waitABit(4000);
 		Assert.assertEquals(invoicesWebPage.getPrintPreviewTestMartrixLaborServiceListValue("Matrix Service"), "$100.00");
@@ -1772,8 +1773,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		OperationsWebPage operationsWebPageWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPageWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(BackOfficeUtils.getPreviousDateFormatted());
-		invoicesWebPage.setSearchToDate(BackOfficeUtils.getTomorrowDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
+		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchInvoiceNumber(invoiceNumber42803);
 		invoicesWebPage.clickFindButton();
 		String mainWindowHandle = webdriver.getWindowHandle();

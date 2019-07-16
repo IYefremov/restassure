@@ -90,7 +90,7 @@ public class AdvancedSearchInvoiceForm extends VNextBOBaseWebPage {
     }
 
     private AdvancedSearchInvoiceForm selectTimeFrame(String timeFrame) {
-        selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame);
+        selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame, true);
         return this;
     }
 

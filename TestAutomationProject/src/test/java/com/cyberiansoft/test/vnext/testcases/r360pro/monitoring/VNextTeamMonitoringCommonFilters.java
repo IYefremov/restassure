@@ -15,8 +15,8 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.SearchSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -49,7 +49,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
     public void beforeMethod() {
         HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
-        MonitorSteps.clearAllFilters();
+        SearchSteps.clearAllFilters();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -64,22 +64,22 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanUseSearchFilter(String rowID,
                                              String description, JSONObject testData) {
-        MonitorSteps.openSearchFilters();
-        MonitorSearchSteps.searchByText("NON_EXISTING_REPAIR_ORDER");
-        MonitorSearchSteps.search();
-        MonitorSearchSteps.verifySearchResultsAreEmpty();
+        SearchSteps.openSearchFilters();
+        SearchSteps.fillTextSearch("NON_EXISTING_REPAIR_ORDER");
+        SearchSteps.search();
+        SearchSteps.verifySearchResultsAreEmpty();
         ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanUseOrderFlagFilter(String rowID,
                                           String description, JSONObject testData) {
-        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.setRepairOrderFlag(workOrderId, RepairOrderFlag.GREEN);
-        MonitorSearchSteps.searchByFlag(RepairOrderFlag.GREEN);
+        SearchSteps.searchByFlag(RepairOrderFlag.GREEN);
         MonitorSteps.verifyOrderFlag(workOrderId, RepairOrderFlag.GREEN);
         MonitorSteps.setRepairOrderFlag(workOrderId, RepairOrderFlag.YELLOW);
-        MonitorSearchSteps.searchByFlag(RepairOrderFlag.YELLOW);
+        SearchSteps.searchByFlag(RepairOrderFlag.YELLOW);
         MonitorSteps.verifyOrderFlag(workOrderId, RepairOrderFlag.YELLOW);
         ScreenNavigationSteps.pressBackButton();
     }
@@ -87,14 +87,14 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanUsePriorityFilter(String rowID,
                                          String description, JSONObject testData) {
-        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();
         EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
         ScreenNavigationSteps.pressBackButton();
-        MonitorSteps.clearAllFilters();
-        MonitorSearchSteps.searchByPriority(OrderPriority.HIGH);
+        SearchSteps.clearAllFilters();
+        SearchSteps.searchByPriority(OrderPriority.HIGH);
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
     }
@@ -102,8 +102,8 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSearchByDepartment(String rowID,
                                           String description, JSONObject testData) {
-        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSearchSteps.searchByDepartment("Default");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        SearchSteps.searchByDepartment("Default");
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
     }
@@ -114,8 +114,8 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto expectedOrderInfo = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSearchSteps.searchByPhase(expectedOrderInfo.getPhaseName());
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        SearchSteps.searchByPhase(expectedOrderInfo.getPhaseName());
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
     }

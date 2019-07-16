@@ -54,7 +54,7 @@ public class VNextBOPartsManagementSearchPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCancelButton']")
     private WebElement cancelDeletingSearchNameDeleteButton;
 
-    @FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCancelButton']")
+    @FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCloseButton']")
     private WebElement xIconForDeletingSearchName;
 
     public VNextBOPartsManagementSearchPanel(WebDriver driver) {

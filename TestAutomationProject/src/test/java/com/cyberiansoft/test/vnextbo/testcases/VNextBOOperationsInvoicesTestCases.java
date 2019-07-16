@@ -210,6 +210,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         advancedSearchInvoiceForm
                 .setTimeFrame(data.getTimeFrame())
                 .setFromDate(data.getFromDate())
+                .setToDate(data.getToDate())
                 .setStatus(data.getStatus())
                 .clickSearchButton();
 

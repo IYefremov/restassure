@@ -198,6 +198,14 @@ public abstract class VNextBOBaseWebPage {
         waitForDropDownToBeClosed(dropDown);
     }
 
+    void clickElement(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        } catch (Exception e) {
+            clickWithJS(element);
+        }
+    }
+
     void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
         if (draggable) {
             waitForDropDownToBeOpened(dropDown);
@@ -279,6 +287,15 @@ public abstract class VNextBOBaseWebPage {
     boolean isElementDisplayed(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    boolean isElementNotDisplayed(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(element));
             return true;
         } catch (Exception ignored) {
             return false;

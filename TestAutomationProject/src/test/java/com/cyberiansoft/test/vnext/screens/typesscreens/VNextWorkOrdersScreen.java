@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
@@ -9,6 +10,8 @@ import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -21,6 +24,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
@@ -37,12 +41,24 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[@action='multiselect-actions-create-invoice']")
     private WebElement createinvoiceicon;
 
+    @FindBy(xpath = "//div[@data-autotests-id='work orders-list']/div")
+    private List<WorkOrderListElement> workOrdersList;
+
     public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
     public VNextWorkOrdersScreen() {
+        PageFactory.initElements(new FiledDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);
+    }
+
+    public WorkOrderListElement getWorkOrderElement(String workOrderId) {
+        return workOrdersList.stream().filter(listElement -> listElement.getId().equals(workOrderId)).findFirst().orElseThrow(() -> new RuntimeException("work order not found " + workOrderId));
+    }
+
+    public List<WorkOrderListElement> getWorkOrdersList() {
+        return workOrdersList;
     }
 
     public VNextCustomersScreen clickAddWorkOrderButton() {
@@ -64,8 +80,8 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
             if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']"))
                 searchWorkOrderByFreeText(wonumber);
         } else {
-            if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']"));
-                clearSearchField();
+            if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")) ;
+            clearSearchField();
         }
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='work orders-list']")));
@@ -117,7 +133,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public String getWorkOrderCustomerValue(String wonumber) {
-        WaitUtils.elementShouldBeVisible(workorderslist,true);
+        WaitUtils.elementShouldBeVisible(workorderslist, true);
         WebElement workordercell = getWorkOrderCell(wonumber);
         return workordercell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText();
     }
@@ -127,7 +143,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public void clickCreateInvoiceFromWorkOrder(String wonumber) {
-        WaitUtils.elementShouldBeVisible(workorderslist,true);
+        WaitUtils.elementShouldBeVisible(workorderslist, true);
         WebElement workordercell = getWorkOrderCell(wonumber);
         tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
         clickCreateInvoiceMenuItem();

@@ -17,4 +17,7 @@ public class VNextBOOperationsInvoicesData {
 
     @JsonProperty("fromDate")
     private String fromDate;
+
+    @JsonProperty("toDate")
+    private String toDate;
 }

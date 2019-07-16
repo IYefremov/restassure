@@ -15,7 +15,7 @@ public class HomeScreenSteps {
 
     public static void openInspections() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
-        WaitUtils.elementShouldBeVisible(homeScreen.getRootElement(), true);
+        WaitUtils.elementShouldBeVisible(homeScreen.getStatuslist(), true);
         homeScreen.clickInspectionsMenuItem();
     }
 

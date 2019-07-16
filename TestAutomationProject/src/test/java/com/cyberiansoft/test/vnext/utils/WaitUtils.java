@@ -3,10 +3,7 @@ package com.cyberiansoft.test.vnext.utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -84,6 +81,7 @@ public class WaitUtils {
                         .pollingEvery(Duration.ofMillis(300))
                         .ignoring(WebDriverException.class)
                         .ignoring(AssertionError.class)
+                        .ignoring(StaleElementReferenceException.class)
                         .ignoring(RuntimeException.class);
 
     }
