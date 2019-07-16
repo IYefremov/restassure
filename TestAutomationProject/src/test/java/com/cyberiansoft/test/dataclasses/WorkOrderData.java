@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.Map;
 
 public class WorkOrderData {
 
@@ -110,6 +111,11 @@ public class WorkOrderData {
     @Getter
     @JsonProperty("technicianList")
     List<Employee> technicianList;
+
+    @Getter
+    @JsonProperty("technicianSplitData")
+    Map<String, String> technicianSplitData;
+
 
     public String getWorkOrderType() {
         return workOrderType;

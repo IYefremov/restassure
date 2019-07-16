@@ -26,6 +26,9 @@ public class VNextTechnicianScreen extends VNextBaseScreen {
     @FindBy(xpath = "//a[@action='evenly']")
     private WebElement evenlyButton;
 
+    @FindBy(xpath = "//a[@action='custom']")
+    private WebElement customButton;
+
 
     public VNextTechnicianScreen() {
         PageFactory.initElements(new FiledDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);

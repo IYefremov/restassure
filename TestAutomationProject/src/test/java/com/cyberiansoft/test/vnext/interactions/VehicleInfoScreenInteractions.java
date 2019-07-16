@@ -120,7 +120,7 @@ public class VehicleInfoScreenInteractions {
     public static void openTechnicianList() {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
                     vehicleInfoScreen
                             .getDataFieldList()
                             .stream()
@@ -130,6 +130,5 @@ public class VehicleInfoScreenInteractions {
                     return true;
                 }
         );
-
     }
 }
