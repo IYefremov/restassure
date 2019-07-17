@@ -26,10 +26,10 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(xpath = "//div[@data-page='matrix-info']")
 	private WebElement vehiclepartinfoscreen;
 
-	@FindBy(xpath = "//div[@action='size']")
+	@FindBy(xpath = "//*[@action='size']")
 	private WebElement vehiclepartsizeselect;
 
-	@FindBy(xpath = "//div[@action='severity']")
+	@FindBy(xpath = "//*[@action='severity']")
 	private WebElement vehiclepartseverityselect;
 
 	@FindBy(xpath = "//div[@input='price']")
@@ -38,7 +38,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(xpath = "//*[@data-autotests-id='all-services']")
 	private WebElement additionalavailableserviceslist;
 
-	@FindBy(xpath = "//div[@action='notes']")
+	@FindBy(xpath = "//*[@action='notes']")
 	private WebElement notesbutton;
 
 	@FindBy(xpath = "//*[@action='save']")
@@ -53,14 +53,14 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 
 	public void selectVehiclePartSize(String vehiclepartsize) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@action='size']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='size']")));
 		tap(vehiclepartsizeselect);
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartsize + "')]")));
 	}
 
 	public void selectVehiclePartSeverity(String vehiclepartseverity) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@action='severity']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='severity']")));
 		tap(vehiclepartseverityselect);
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartseverity + "')]")));
 	}
@@ -70,7 +70,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		String servicePrice = "";
 		if (addservs != null) {
 			servicePrice = addservs.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
-			tap(WaitUtils.waitUntilElementIsClickable(addservs.findElement(By.xpath(".//input[@action='select-item']"))));
+			tap(WaitUtils.waitUntilElementIsClickable(addservs.findElement(By.xpath(".//*[@action='select-item']"))));
 			WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
 			if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
 				VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(appiumdriver);
@@ -78,15 +78,6 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 			}
 		} else
 			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
-	}
-
-	public VNextServiceDetailsScreen openVehiclePartAdditionalServiceDetails(String additionalservicename) {
-		WebElement addservs = getVehiclePartAdditionalServiceCell(additionalservicename);
-		if (addservs != null)
-			tap(addservs.findElement(By.xpath(".//div[@class='checkbox-item-title']")));
-		else
-			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
-		return new VNextServiceDetailsScreen(appiumdriver);
 	}
 
 	public void openVehiclePartLaborServiceDetails(String additionalservicename) {
@@ -156,7 +147,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 
 	private WebElement getSelectedServicesList() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		return wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath(".//div[@data-autotests-id='all-services']"))));
+		return wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath(".//*[@data-autotests-id='all-services']"))));
 	}
 
 	private List<WebElement> getServicesListItems() {
@@ -177,35 +168,5 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	public void expandSelectedServiceDetails(String serviceName) {
 		WebElement servicecell = getSelectedServiceCell(serviceName);
 		tap(servicecell);
-	}
-
-	public String getSelectedServicePriceValue(String servicename) {
-		String serviceprice = "";
-		WebElement servicerow = getSelectedServiceCell(servicename);
-		if (servicerow != null) {
-			serviceprice = servicerow.findElement(By.xpath(".//*[@data-name='Amount']")).getAttribute("value").trim();
-		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);
-		return serviceprice;
-	}
-
-	public String getSelectedServiceQuantityValue(String servicename) {
-		String serviceprice = "";
-		WebElement servicerow = getSelectedServiceCell(servicename);
-		if (servicerow != null) {
-			serviceprice = servicerow.findElement(By.xpath(".//*[@data-name='QuantityFloat']")).getAttribute("value").trim();
-		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);
-		return serviceprice;
-	}
-
-	public String getSelectedServiceNotesValue(String servicename) {
-		String serviceprice = "";
-		WebElement servicerow = getSelectedServiceCell(servicename);
-		if (servicerow != null) {
-			serviceprice = servicerow.findElement(By.xpath(".//*[@data-name='Notes.desc']")).getAttribute("value").trim();
-		} else
-			Assert.assertTrue(false, "Can't find service: " + servicename);
-		return serviceprice;
 	}
 }

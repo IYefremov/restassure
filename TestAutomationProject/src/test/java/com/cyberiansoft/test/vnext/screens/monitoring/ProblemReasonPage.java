@@ -15,7 +15,7 @@ public class ProblemReasonPage extends MonitorScreen {
     @FindBy(xpath = "//textarea[@name=\"entityProblem\"]")
     private WebElement problemEditBox;
 
-    @FindBy(xpath = "//span[@action=\"save\"]")
+    @FindBy(xpath = "//*[@action=\"save\"]")
     private WebElement completeButton;
 
 }

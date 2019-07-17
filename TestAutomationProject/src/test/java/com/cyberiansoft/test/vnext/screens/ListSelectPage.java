@@ -15,7 +15,7 @@ public class ListSelectPage extends MonitorScreen {
     @FindBy(xpath = "//div[contains(@data-autotests-id,'list')]/div")
     private List<WebElement> itemList;
 
-    @FindBy(xpath = "//span[@action='save']")
+    @FindBy(xpath = "//*[@action='save']")
     private WebElement saveButton;
 
     public WebElement getItemElementByText(String text) {

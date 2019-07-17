@@ -18,7 +18,7 @@ public class VNextQuestionsScreen extends VNextBaseWizardScreen {
     @FindBy(xpath="//div[@data-page='questions-list']")
     private WebElement questionsscreen;
 
-    @FindBy(xpath="//div[@data-autotests-id='all-questions']")
+    @FindBy(xpath="//*[@data-autotests-id='all-questions']")
     private WebElement questionslist;
 
     public VNextQuestionsScreen(AppiumDriver<MobileElement> appiumdriver) {

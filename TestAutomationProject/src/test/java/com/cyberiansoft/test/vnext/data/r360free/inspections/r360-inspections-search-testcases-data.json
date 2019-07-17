@@ -1,0 +1,93 @@
+{
+
+  "testCreateInspectionWithPopulatedVehicleInfoForCurrentDay": [
+    {
+      "rowID": "testCreateInspectionWithPopulatedVehicleInfoForCurrentDay.01",
+      "description": "Test Case 64860:vNext mobile: Create Inspection with populated vehicle info for current day, Test Case 64862:vNext: verify searching inspection by Customer on BO",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "3N1AB7AP3HY327077",
+          "mileage" : "95400",
+          "vehicleStock" : "123",
+          "roNumber" : "321",
+          "poNumber" : "987",
+          "licPlate" : "qwerty"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "Test Insurance Company",
+          "claimNumber" : "qwerty",
+          "policyNumber" : "123",
+          "deductible" : "122"
+        },
+        "percentageService": {
+          "serviceName": "Aluminum Upcharge"
+        },
+        "moneyService": {
+          "serviceName": "Dent Repair",
+          "servicePrice": "58",
+          "serviceQuantity": "1"
+        },
+        "matrixService": {
+          "matrixServiceName": "Hail Dent Repair",
+          "hailMatrixName": "State Farm",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "Dime",
+            "vehiclePartSeverity": "Light 6 to 15",
+            "vehiclePartAdditionalService":
+            {
+              "serviceName": "Aluminum Upcharge"
+            }
+          }
+        },
+        "inspPrice": "267.81"
+      }
+    }
+  ],
+
+  "testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay": [
+    {
+      "rowID": "testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay.01",
+      "description": "Test Case 64863:vNext mobile: Create Archived Inspection with full populated vehicle info for current day",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "3N1AB7AP3HY327077",
+          "mileage" : "95400",
+          "vehicleStock" : "123",
+          "roNumber" : "321",
+          "poNumber" : "987",
+          "licPlate" : "qwerty"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "Test Insurance Company",
+          "claimNumber" : "qwerty",
+          "policyNumber" : "123",
+          "deductible" : "122"
+        },
+        "percentageService": {
+          "serviceName": "Aluminum Upcharge"
+        },
+        "moneyService": {
+          "serviceName": "Dent Repair",
+          "servicePrice": "58",
+          "serviceQuantity": "1"
+        },
+        "matrixService": {
+          "matrixServiceName": "Hail Dent Repair",
+          "hailMatrixName": "State Farm",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "Dime",
+            "vehiclePartSeverity": "Light 6 to 15",
+            "vehiclePartAdditionalService":
+            {
+              "serviceName": "Aluminum Upcharge"
+            }
+          }
+        },
+        "inspPrice": "267.81"
+      }
+    }
+  ]
+
+}

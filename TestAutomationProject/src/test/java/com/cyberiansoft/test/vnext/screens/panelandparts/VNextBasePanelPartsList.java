@@ -11,7 +11,7 @@ public abstract class VNextBasePanelPartsList extends VNextBaseScreen {
     @FindBy(xpath="//a[contains(@class, 'tab-part')]")
     WebElement partstab;
 
-    @FindBy(xpath="//span[@action='save']")
+    @FindBy(xpath="//*[@action='save']")
     private WebElement savebtn;
 
     public VNextBasePanelPartsList(AppiumDriver<MobileElement> appiumdriver) {

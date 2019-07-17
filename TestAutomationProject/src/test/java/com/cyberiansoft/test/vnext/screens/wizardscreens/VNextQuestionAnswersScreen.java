@@ -15,7 +15,7 @@ public class VNextQuestionAnswersScreen extends VNextBaseWizardScreen {
     @FindBy(xpath="//div[@data-page='answers']")
     private WebElement answersscreen;
 
-    @FindBy(xpath="//div[@data-autotests-id='answers-list']")
+    @FindBy(xpath="//*[@data-autotests-id='answers-list']")
     private WebElement answerslist;
 
     public VNextQuestionAnswersScreen(AppiumDriver<MobileElement> appiumdriver) {
@@ -26,12 +26,12 @@ public class VNextQuestionAnswersScreen extends VNextBaseWizardScreen {
     }
 
     public VNextQuestionsScreen selectAnswerByIndex(int answerIndex) {
-        tap(answerslist.findElements(By.xpath(".//div[@action='select-item']")).get(answerIndex));
+        tap(answerslist.findElements(By.xpath(".//*[@action='select-item']")).get(answerIndex));
         clickDoneButton();
         return new VNextQuestionsScreen(appiumdriver);
     }
 
     public void clickDoneButton() {
-        tap(answersscreen.findElement(By.xpath(".//span[@action='save']")));
+        tap(answersscreen.findElement(By.xpath(".//*[@action='save']")));
     }
 }

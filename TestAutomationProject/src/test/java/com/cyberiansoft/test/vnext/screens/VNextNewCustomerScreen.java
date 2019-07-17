@@ -52,7 +52,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	@FindBy(id="customerDetailsCountry")
 	private WebElement countrycell;
 	
-	@FindBy(xpath="//div[@action='state']")
+	@FindBy(xpath="//*[@action='state']")
 	private WebElement statecell;
 	
 	@FindBy(id="customerDetailsZip")

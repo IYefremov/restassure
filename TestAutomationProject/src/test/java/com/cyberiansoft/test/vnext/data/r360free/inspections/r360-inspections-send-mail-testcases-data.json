@@ -1,0 +1,59 @@
+{
+  "testVerifyCorrectCustomerInfoIsShownOnPrinting": [
+    {
+      "rowID": "testVerifyCorrectCustomerInfoIsShownOnPrinting.01",
+      "description": "Test Case 66998:Verify correct Customer Info is shown on Printing",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "19UUA66278A050105"
+        }
+      }
+    }
+  ],
+  "testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting": [
+    {
+      "rowID": "testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting.01",
+      "description": "Test Case 66999:Verify 'Back' button doesn't save info for Vehicle Part - Printing",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "19UUA66278A050105"
+        },
+        "matrixService": {
+          "matrixServiceName": "Hail Dent Repair",
+          "hailMatrixName": "Progressive",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "Left Fender"
+            },
+            {
+              "vehiclePartName": "Trunk Lid"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyHardwareBackButtonDoesntSaveInfoForVehiclePartPrinting": [
+    {
+      "rowID": "testVerifyHardwareBackButtonDoesntSaveInfoForVehiclePartPrinting.01",
+      "description": "Test Case 67000:Verify hardware 'Back' button doesn't save info for Vehicle Part - Printing",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "19UUA66278A050105"
+        },
+        "matrixService": {
+          "matrixServiceName": "Hail Dent Repair",
+          "hailMatrixName": "Progressive",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "Left Fender"
+            },
+            {
+              "vehiclePartName": "Trunk Lid"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

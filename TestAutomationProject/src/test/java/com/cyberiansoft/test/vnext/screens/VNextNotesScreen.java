@@ -15,16 +15,16 @@ public class VNextNotesScreen extends VNextBaseScreen {
     @FindBy(xpath = "//textarea[@name='notes']")
     private WebElement noteEditField;
 
-    @FindBy(xpath = "//span[@action='clear']")
+    @FindBy(xpath = "//*[@action='clear']")
     private WebElement clearNoteButton;
 
-    @FindBy(xpath = "//div[@action='goto-quick-notes']")
+    @FindBy(xpath = "//*[@action='goto-quick-notes']")
     private WebElement switchToQuickNotes;
 
-    @FindBy(xpath = "//div[@action='take-camera']")
+    @FindBy(xpath = "//*[@action='take-camera']")
     private WebElement takePictureButton;
 
-    @FindBy(xpath = "//div[@action='select-quick-note']")
+    @FindBy(xpath = "//*[@action='select-quick-note']")
     private List<WebElement> quickNotesList;
 
     @FindBy(xpath = "//div[@class='image-item']")

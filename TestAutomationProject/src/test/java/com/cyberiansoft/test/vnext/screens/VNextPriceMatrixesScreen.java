@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -14,23 +15,20 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='info']")
 	private WebElement pricematrixesscreen;
 
-	@FindBy(xpath="//div[@data-autotests-id='matrix-parts-list']")
+	@FindBy(xpath="//*[@data-autotests-id='matrix-parts-list']")
 	private WebElement matrixpartslist;
 
-	@FindBy(xpath="//div[@data-autotests-id='matrices-list']")
+	@FindBy(xpath="//*[@data-autotests-id='matrices-list']")
 	private WebElement matriceslist;
 	
 	public VNextPriceMatrixesScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		BaseUtils.waitABit(1000);
-		if (checkHelpPopupPresence())
-			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-		BaseUtils.waitABit(1000);
 	}
 
-	
+	public VNextPriceMatrixesScreen() {
+	}
+
 	public boolean isPriceMatrixExistsInTheList(String pricematrix) {
 		return matriceslist.findElements(By.xpath(".//*[@action='select-matrix' and contains(text(), '" + pricematrix + "')]")).size() > 0;
 	}
@@ -40,9 +38,8 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 		return new VNextVehiclePartInfoPage(appiumdriver);
 	}
 
-	public VNextVehiclePartsScreen selectHailMatrix(String pricematrix) {
+	public void selectHailMatrix(String pricematrix) {
 		tap(matriceslist.findElement(By.xpath(".//*[@action='select-matrix' and contains(text(), '" + pricematrix + "')]")));
-		return new VNextVehiclePartsScreen(appiumdriver);
 	}
 
 }

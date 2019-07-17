@@ -63,7 +63,7 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 
 	public VNextSelectDamagesScreen clickAddServiceButton() {
 		tap(adddamagesbtn);
-		tap(appiumdriver.findElement(By.xpath("//a[@action='add-other']")));
+		tap(appiumdriver.findElement(By.xpath("//*[@action='add-other']")));
 		return new VNextSelectDamagesScreen(appiumdriver);
 	}
 	

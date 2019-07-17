@@ -19,10 +19,10 @@ import org.testng.Assert;
 @Getter
 public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//span[@action='save']")
+	@FindBy(xpath="//*[@action='save']")
 	private WebElement servicedtailsapplybtn;
 	
-	@FindBy(xpath="//div[@action='notes']/span")
+	@FindBy(xpath="//*[@action='notes']/span")
 	private WebElement notesbutton;
 	
 	@FindBy(xpath="//div[@data-page='details']")

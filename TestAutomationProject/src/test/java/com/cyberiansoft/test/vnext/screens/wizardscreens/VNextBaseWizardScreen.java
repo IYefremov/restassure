@@ -52,7 +52,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 	@FindBy(xpath="//a[@handler='_notes']")
 	private WebElement inspectionnotesmenu;
 
-	@FindBy(xpath="//span[@action='save']")
+	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
 
 	public VNextBaseWizardScreen(AppiumDriver<MobileElement> appiumdriver) {

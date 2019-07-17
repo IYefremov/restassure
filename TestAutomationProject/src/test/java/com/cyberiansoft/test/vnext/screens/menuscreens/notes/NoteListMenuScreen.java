@@ -16,10 +16,10 @@ public class NoteListMenuScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@data-page=\"comments-list\"]")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//div[@action=\"add-new-comment\"]")
+    @FindBy(xpath = "//*[@action=\"add-new-comment\"]")
     private WebElement addNewNoteButton;
 
-    @FindBy(xpath = "//div[@data-autotests-id=\"simple-comments-list\"]/div")
+    @FindBy(xpath = "//*[@data-autotests-id=\"simple-comments-list\"]/div")
     private List<NoteListElement> noteListElements;
 
     public NoteListMenuScreen() {

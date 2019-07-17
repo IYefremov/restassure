@@ -18,6 +18,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.steps.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.steps.NotesSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
@@ -568,10 +569,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextPriceMatrixesScreen pricematrixesscreen = availableServicesScreen.openMatrixServiceDetails(inspectionData.getMatrixServiceData().getMatrixServiceName());
-        VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(inspectionData.getMatrixServiceData().getHailMatrixName());
+        AvailableServicesScreenSteps.selectMatrixService(inspectionData.getMatrixServiceData());
+        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         for (VehiclePartData vehiclePartData : inspectionData.getMatrixServiceData().getVehiclePartsData()) {
-            VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
             vehiclepartinfoscreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
             vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
             VNextNotesScreen notesScreen = vehiclepartinfoscreen.clickMatrixServiceNotesOption();
@@ -579,9 +580,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
             NotesSteps.verifyPicturesPresent();
             vehiclepartinfoscreen = new VNextVehiclePartInfoPage(DriverBuilder.getInstance().getAppiumDriver());
             vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-            vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+            vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
         }
-        availableServicesScreen = vehiclepartsscreen.clickVehiclePartsSaveButton();
+        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
 
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getMatrixServiceData().getMatrixServiceName()));

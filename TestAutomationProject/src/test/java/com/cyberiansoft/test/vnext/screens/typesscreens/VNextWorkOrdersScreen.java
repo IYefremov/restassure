@@ -41,7 +41,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[@action='multiselect-actions-create-invoice']")
     private WebElement createinvoiceicon;
 
-    @FindBy(xpath = "//div[@data-autotests-id='work orders-list']/div")
+    @FindBy(xpath = "//*[@data-autotests-id='work orders-list']/div")
     private List<WorkOrderListElement> workOrdersList;
 
     public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
@@ -72,7 +72,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public String getFirstWorkOrderNumber() {
-        return workorderslist.findElement(By.xpath(".//div[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
+        return workorderslist.findElement(By.xpath(".//*[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
     }
 
     public VNextWorkOrdersMenuScreen clickOnWorkOrderByNumber(String wonumber) {
