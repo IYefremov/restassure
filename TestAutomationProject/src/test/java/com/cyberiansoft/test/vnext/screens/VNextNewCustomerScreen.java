@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -230,6 +231,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSaveCustomerButton() {
+		WaitUtils.elementShouldBeVisible(savebtn, true);
 		tap(savebtn);
 	}
 	

@@ -128,6 +128,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public String getWorkOrderStatusValue(String wonumber) {
+        WaitUtils.elementShouldBeVisible(workorderslist, true);
         WebElement workordercell = getWorkOrderCell(wonumber);
         return workordercell.findElement(By.xpath(".//span[contains(@class, 'entity-item-status-')]")).getText();
     }
