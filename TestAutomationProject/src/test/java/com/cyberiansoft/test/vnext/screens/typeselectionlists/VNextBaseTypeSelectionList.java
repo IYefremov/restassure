@@ -47,7 +47,7 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
                 WebElement elem = appiumdriver.findElement(typeXpath);
                 JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
                 je.executeScript("arguments[0].scrollIntoView(true);", elem);
-                BaseUtils.waitABit(500);
+                BaseUtils.waitABit(1000);
             }
         }
         try {

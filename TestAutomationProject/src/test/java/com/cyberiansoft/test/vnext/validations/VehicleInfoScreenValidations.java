@@ -81,7 +81,6 @@ public class VehicleInfoScreenValidations {
     }
 
     public static void cutomerContextShouldBe(String expectedCustomerContext) {
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.getGeneralWebdriverWait().until(driver -> {
             Assert.assertEquals(VehicleInfoScreenInteractions.getCustomerContextValue(), expectedCustomerContext);
             return true;
@@ -89,7 +88,7 @@ public class VehicleInfoScreenValidations {
     }
 
     public static void ownerShouldBe(String expectedOwner) {
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(VehicleInfoScreenInteractions.getOwnerValue(), expectedOwner);
             return true;
         });
