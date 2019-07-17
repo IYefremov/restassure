@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 public class ListPicker implements IWebElement {
     private WebElement rootElement;
     private String elementsPageSelector = "//div[@data-page=\"filters-values-list\"]";
-    private String elementsLocator = "//div[@action=\"select-item\"]";
+    private String elementsLocator = "//*[@action=\"select-item\"]";
 
     public ListPicker(WebElement rootElement) {
         this.rootElement = rootElement;

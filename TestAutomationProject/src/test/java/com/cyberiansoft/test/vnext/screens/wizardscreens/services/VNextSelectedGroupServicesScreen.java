@@ -24,7 +24,7 @@ public class VNextSelectedGroupServicesScreen extends VNextBaseGroupServicesScre
     public void uselectService(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
-            tap(servicecell.findElement(By.xpath(".//input[@action='unselect-item']")));
+            tap(servicecell.findElement(By.xpath(".//*[@action='unselect-item']")));
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
@@ -49,7 +49,7 @@ public class VNextSelectedGroupServicesScreen extends VNextBaseGroupServicesScre
     }
     public WebElement getSelectedServicesList() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        return wait.until(ExpectedConditions.visibilityOf(groupservicesscreen.findElement(By.xpath(".//div[@data-autotests-id='labor-list']"))));
+        return wait.until(ExpectedConditions.visibilityOf(groupservicesscreen.findElement(By.xpath(".//*[@data-autotests-id='labor-list']"))));
     }
 
     public VNextGroupServicesScreen switchToGroupServicesScreen() {

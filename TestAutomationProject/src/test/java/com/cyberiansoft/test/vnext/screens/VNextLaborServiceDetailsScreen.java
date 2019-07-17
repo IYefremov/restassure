@@ -25,10 +25,10 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseScreen {
     @FindBy(xpath="//input[@data-name='QuantityFloat']")
     private WebElement labortime;
 
-    @FindBy(xpath="//div[@action='select-panel']")
+    @FindBy(xpath="//*[@action='select-panel']")
     private WebElement selectpanelsandpartspanel;
 
-    @FindBy(xpath="//span[@action='save']")
+    @FindBy(xpath="//*[@action='save']")
     private WebElement savebtn;
 
     public VNextLaborServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
@@ -56,7 +56,7 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseScreen {
 
     public VNextLaborServicePartsList clickSelectPanelsAndPartsForLaborService(LaborServiceData laborService) {
 
-        tap(appiumdriver.findElement(By.xpath("//div[@action='select-panel']")));
+        tap(appiumdriver.findElement(By.xpath("//*[@action='select-panel']")));
         return new VNextLaborServicePartsList(appiumdriver);
     }
 

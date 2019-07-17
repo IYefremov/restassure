@@ -29,7 +29,7 @@ public class VNextBaseScreen {
     @FindBy(xpath = "//*[@data-autotests-id='change-screen-popover']")
     private WebElement changeScrenPopover;
 
-    @FindBy(xpath = "//span[@action='logout']")
+    @FindBy(xpath = "//*[@action='logout']")
     private WebElement logoutButton;
 
     public VNextBaseScreen(AppiumDriver<MobileElement> driver) {

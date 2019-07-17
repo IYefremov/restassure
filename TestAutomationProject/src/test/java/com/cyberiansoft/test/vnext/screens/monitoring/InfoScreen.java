@@ -16,10 +16,10 @@ public class InfoScreen extends MonitorScreen {
     @FindBy(xpath = "//input[@data-name=\"startDate\"]")
     private WebElement startedDate;
 
-    @FindBy(xpath = "//span[@action=\"info\"]")
+    @FindBy(xpath = "//*[@action=\"info\"]")
     private WebElement serviceInfo;
 
-    @FindBy(xpath = "//div[@action=\"change-priority\"]")
+    @FindBy(xpath = "//*[@action=\"change-priority\"]")
     private List<WebElement> priorityItemsList;
 
     public void selectServiceInfo() {

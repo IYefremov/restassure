@@ -10,6 +10,6 @@ public class PartInfoScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@data-page='part-info']")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//span[@action='save']")
+    @FindBy(xpath = "//*[@action='save']")
     private WebElement saveButton;
 }

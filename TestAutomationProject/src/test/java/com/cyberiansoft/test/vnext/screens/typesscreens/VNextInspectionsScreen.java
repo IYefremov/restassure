@@ -115,7 +115,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")));
         WebElement inspCell = getInspectionCell(inspectionNumber);
-        return inspCell.findElement(By.xpath(".//div[@action='select']/div/*[contains(@class, 'entity-item-status-')]")).getText();
+        return inspCell.findElement(By.xpath(".//*[@action='select']/div/*[contains(@class, 'entity-item-status-')]")).getText();
     }
 
     public VNextInspectionsMenuScreen clickOnFirstInspectionWithStatus(String inspStatus) {

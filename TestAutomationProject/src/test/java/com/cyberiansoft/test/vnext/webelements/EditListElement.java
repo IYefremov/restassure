@@ -12,7 +12,7 @@ public class EditListElement implements IWebElement {
     private WebElement rootElement;
     private String statusLocator = ".//div[@class=\"icon-item-status-title\"]";
     private String nameLocator = ".//div[contains(@class,\"icon-item-content-title\")]";
-    private String expandElementLocator = ".//div[@action=\"open-phase-services\"]";
+    private String expandElementLocator = ".//*[@action=\"open-phase-services\"]";
     private String clockIconLocator = ".//div[contains(@class,\"icon-item-content-title\")][3]//span[@class='icon-item-arrow']";
 
 

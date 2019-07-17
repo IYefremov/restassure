@@ -26,13 +26,13 @@ public class VNextLoginScreen extends VNextBaseScreen {
     @FindBy(xpath = "//div[@data-page='employees']")
     private WebElement loginscreen;
 
-    @FindBy(xpath = "//div[@data-autotests-id='employees-list']")
+    @FindBy(xpath = "//*[@data-autotests-id='employees-list']")
     private WebElement employeeslist;
 
-    @FindBy(xpath = "//a[@action='main-db']/i")
+    @FindBy(xpath = "//*[@action='main-db']/i")
     private WebElement updatemaindbbtn;
 
-    @FindBy(xpath = "//a[@action='vin-db']/i")
+    @FindBy(xpath = "//*[@action='vin-db']/i")
     private WebElement updatevindbbtn;
 
     @FindBy(xpath = "//input[@type='password']")

@@ -12,16 +12,16 @@ import java.util.List;
 
 @Getter
 public class PhasesScreen extends MonitorScreen {
-    @FindBy(xpath = "//div[@data-autotests-id='phases-list']/div/div")
+    @FindBy(xpath = "//*[@data-autotests-id='phases-list']/div/div")
     private List<EditListElement> phaseListElements;
 
-    @FindBy(xpath = "//span[@action='info']")
+    @FindBy(xpath = "//*[@action='info']")
     private WebElement infoScreenButton;
 
-    @FindBy(xpath = "//span[@action='parts']")
+    @FindBy(xpath = "//*[@action='parts']")
     private WebElement partsScreenButton;
 
-    @FindBy(xpath = "//span[@action='quick-actions']")
+    @FindBy(xpath = "//*[@action='quick-actions']")
     private WebElement phasesMenuButton;
 
     public PhasesScreen() {

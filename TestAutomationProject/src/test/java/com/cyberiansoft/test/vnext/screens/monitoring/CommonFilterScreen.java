@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public class CommonFilterScreen extends MonitorScreen {
-    @FindBy(xpath = "//input[@data-autotests-id=\"search-input\"]")
+    @FindBy(xpath = "//*[@data-autotests-id=\"search-input\"]")
     private WebElement searchInputField;
 
     @FindBy(xpath = "//div[contains(@class,\"searchlist-filters-apply\")]")

@@ -40,7 +40,7 @@
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "YV4982CZ9A1538968"
       },
-      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
+      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix",
         "vehiclePartData" : {"vehiclePartName": "Anastasia Part", "vehiclePartSize": "DIME", "vehiclePartSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence" }
         }
       }
@@ -54,7 +54,7 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "YV4982CZ9A1538968"
       },
-      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
+      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix",
         "vehiclePartData" : {"vehiclePartName": "Anastasia Part", "vehiclePartSize": "DIME", "vehiclePartSeverity": "1-5", "laborService" : { "serviceName" : "Labor_expence",
           "laborServicePart": "Refinish Left Roof Rail",
           "laborServiceRate": "99.12",

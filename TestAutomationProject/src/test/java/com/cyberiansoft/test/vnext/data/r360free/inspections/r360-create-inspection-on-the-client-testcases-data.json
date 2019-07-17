@@ -1,0 +1,135 @@
+{
+  "testCheckApprovedAmountIsCalculatedCorrectlyForApprovedInspection": [
+    {
+      "rowID": "testCheckApprovedAmountIsCalculatedCorrectlyForApprovedInspection.01",
+      "description": "Test Case 46975:vNext: Check Approved ammount is calculated correctly for Approved inspection",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "19UUA66278A050105"
+        },
+        "percentageService": {
+          "serviceName": "Aluminum Upcharge"
+        },
+        "moneyService": {
+          "serviceName": "Dent Repair",
+          "servicePrice": "58",
+          "serviceQuantity": "1"
+        },
+        "matrixService": {
+          "matrixServiceName": "Hail Dent Repair",
+          "hailMatrixName": "State Farm",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "Dime",
+            "vehiclePartSeverity": "Light 6 to 15",
+            "vehiclePartAdditionalService":
+              {
+                "serviceName": "Aluminum Upcharge"
+              }
+          }
+        },
+        "inspPrice": "267.81"
+      }
+    }
+  ],
+  "testCreateInspectionWhichContainsBreakageServiceWithBigQuantity": [
+    {
+      "rowID": "testCreateInspectionWhichContainsBreakageServiceWithBigQuantity.01",
+      "description": "Test Case 47229:vNext mobile: Create Inspection which contains breakage service with big quantity",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "19UUA66278A050105"
+        },
+        "moneyService": {
+          "serviceName": "Dent Repair",
+          "servicePrice": "1577.20",
+          "serviceQuantity": "1"
+        },
+        "matrixService": {
+          "matrixServiceName": "Hail Dent Repair",
+          "hailMatrixName": "State Farm",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "Dime",
+            "vehiclePartSeverity": "Light 6 to 15",
+            "vehiclePartAdditionalService":
+              {
+                "serviceName": "Aluminum Upcharge"
+              }
+          }
+        },
+        "inspPrice": "$1733.45"
+      }
+    }
+  ],
+  "testCreateInspectionWhithFullPopulatedCustomerInfo": [
+    {
+      "rowID": "testCreateInspectionWhithFullPopulatedCustomerInfo.01",
+      "description": "Test Case 47231:vNext mobile: Create Inspection with full populated customer info",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "19UUA66278A050105"
+        },
+        "retailCustomer": {
+          "firstName": "Retail",
+          "lastName": "Automation",
+          "mailAddress": "test.autom+408222@gmail.com",
+          "customerPhone": "978385064"
+        },
+        "inspPrice": "$0.00"
+      }
+    }
+  ]
+
+  "testCreateInspectionWhithCustomerWithFirstNameOnly": [
+    {
+      "rowID": "testCreateInspectionWhithCustomerWithFirstNameOnly.01",
+      "description": "Test Case 47233:vNext mobile: Create Inspection with customer with First name only",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "19UUA66278A050105"
+        },
+        "retailCustomer": {
+          "firstName": "Retail",
+          "lastName": "",
+          "mailAddress": "test.autom+408222@gmail.com",
+          "customerPhone": "978385064"
+        },
+        "inspPrice": "$0.00"
+      }
+    }
+  ],
+  "testCreateAndEmailInspectionWithTtwoMatrixPanel": [
+    {
+      "rowID": "testCreateAndEmailInspectionWithTtwoMatrixPanel.01",
+      "description": "Test Case 52818:vNext mobile: create and email Inspection with two matrix panel",
+      "inspectionsData": {
+        "vihicleInfo": {
+          "vinNumber": "JT3AC11R4N1023558"
+        },
+        "moneyService": {
+          "serviceName": "Dent Repair",
+          "servicePrice": "1577.20",
+          "serviceQuantity": "1"
+        },
+        "matrixService": {
+          "matrixServiceName": "Hail Dent Repair",
+          "hailMatrixName": "State Farm",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "Hood",
+              "vehiclePartSize": "Dime",
+              "vehiclePartSeverity": "Light 6 to 15"
+            },
+            {
+              "vehiclePartName": "Roof",
+              "vehiclePartSize": "Dime",
+              "vehiclePartSeverity": "Light 6 to 15"
+            }
+          ]
+        },
+        "inspPrice": "$660.00"
+      }
+    }
+  ]
+}

@@ -62,16 +62,16 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='messager-send']")
     private WebElement queuemessageicon;
 
-    @FindBy(xpath = "//a[@action='logout']/i")
+    @FindBy(xpath = "//*[@action='logout']/i")
     private WebElement logoutbtn;
 
     @FindBy(xpath = "//div[@class='speed-dial']/a[@class='floating-button color-red']")
     private WebElement addbtn;
 
-    @FindBy(xpath = "//a[@action='new_order']")
+    @FindBy(xpath = "//*[@action='new_order']")
     private WebElement newworkorderbtn;
 
-    @FindBy(xpath = "//a[@action='new_inspection']")
+    @FindBy(xpath = "//*[@action='new_inspection']")
     private WebElement newinspectionbtn;
 
     public VNextHomeScreen(AppiumDriver<MobileElement> appiumdriver) {

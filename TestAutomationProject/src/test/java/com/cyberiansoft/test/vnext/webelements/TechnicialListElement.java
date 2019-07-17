@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 public class TechnicialListElement implements IWebElement {
     private WebElement rootElement;
-    private String selectionCheckboxLocator = ".//input[@action='check-item']";
+    private String selectionCheckboxLocator = ".//*[@action='check-item']";
     private String titleLocator = ".//div[@class='checkbox-item-title']";
     private String amountLocator = ".//input[@data-name='Amount']";
 

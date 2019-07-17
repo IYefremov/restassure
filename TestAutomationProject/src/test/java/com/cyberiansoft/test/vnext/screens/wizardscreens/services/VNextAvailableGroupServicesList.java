@@ -26,11 +26,11 @@ public class VNextAvailableGroupServicesList extends  VNextBaseGroupServicesScre
         WebElement servicerow = getServiceListItem(serviceName);
         if (servicerow != null) {
             try {
-                tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//input[@action='select-item']"))));
+                tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//*[@action='select-item']"))));
                 WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
             } catch (WebDriverException e) {
                 WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
-                WaitUtils.click(servicerow.findElement(By.xpath(".//input[@action='select-item']")));
+                WaitUtils.click(servicerow.findElement(By.xpath(".//*[@action='select-item']")));
             }
             WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
         }
@@ -55,7 +55,7 @@ public class VNextAvailableGroupServicesList extends  VNextBaseGroupServicesScre
 
     public WebElement getServicesList() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        return wait.until(ExpectedConditions.visibilityOf(groupservicesscreen.findElement(By.xpath(".//div[@data-autotests-id='labor-list']"))));
+        return wait.until(ExpectedConditions.visibilityOf(groupservicesscreen.findElement(By.xpath(".//*[@data-autotests-id='labor-list']"))));
     }
 
     public String getServiceListItemName(WebElement srvlistitem) {

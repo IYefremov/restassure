@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.screens.ListSelectPage;
 import com.cyberiansoft.test.vnext.screens.PartInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
@@ -34,5 +36,14 @@ public class AvailableServicesScreenSteps {
         WaitUtils.click(listPage.getItemElementByText(partPosition));
         WaitUtils.elementShouldBeVisible(partInfoScreen.getRootElement(), true);
         partInfoScreen.getSaveButton().click();
+    }
+
+    public static void selectMatrixService(MatrixServiceData matrixServiceData) {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
+        if (matrixServiceData.getHailMatrixName() != null) {
+            VNextPriceMatrixesScreen priceMatrixesScreen = new VNextPriceMatrixesScreen() ;
+            priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
+        }
     }
 }

@@ -22,6 +22,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.steps.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
@@ -75,9 +76,9 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
 		final MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
-		VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
-		VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
+		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		final VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
 		vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
 		vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
@@ -149,12 +150,12 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		claimInfoScreen.setDeductibleValue(insuranceCompanyData.getDeductible());
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		//selectservicesscreen.selectService(percservices);
+
 		availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
 		final MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
-		VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
-		VNextVehiclePartsScreen vehiclePartsScreen = priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
+		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		final VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
 		vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
 		vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
