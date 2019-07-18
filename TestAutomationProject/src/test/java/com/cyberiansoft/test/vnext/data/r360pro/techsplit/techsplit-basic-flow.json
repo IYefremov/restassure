@@ -56,5 +56,33 @@
         "Employee Employee": "60"
       }
     }
+  ],
+  "userCanSeparateAmountOfWOForTechniciansManuallyEditingWOAndCancelIt": [
+    {
+      "rowID": "userCanSeparateAmountOfWOForTechniciansManuallyEditingWOAndCancelIt.01",
+      "description": "87992 87993",
+      "technicianSplitData": {
+        "Test Test": "40",
+        "Employee Employee": "60"
+      }
+    }
+  ],
+  "userCantSpecifyValueNotEqualTo100PercentOnSplit": [
+    {
+      "rowID": "userCantSpecifyValueNotEqualTo100PercentOnSplit.01",
+      "description": "87995",
+      "technicianSplitData": {
+        "Test Test": "40",
+        "Employee Employee": "40"
+      }
+    },
+    {
+      "rowID": "userCantSpecifyValueNotEqualTo100PercentOnSplit.02",
+      "description": "87995",
+      "technicianSplitData": {
+        "Test Test": "60",
+        "Employee Employee": "60"
+      }
+    }
   ]
 }

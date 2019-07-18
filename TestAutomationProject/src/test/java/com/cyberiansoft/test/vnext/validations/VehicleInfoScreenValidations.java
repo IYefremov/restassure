@@ -1,18 +1,13 @@
 package com.cyberiansoft.test.vnext.validations;
 
-import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
-import com.cyberiansoft.test.vnext.interactions.TechnicianScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-
-import java.util.List;
-import java.util.Map;
 
 public class VehicleInfoScreenValidations {
     public static void validateVehicleInfo(VehicleInfoData vehicleInfoDto) {
@@ -81,6 +76,7 @@ public class VehicleInfoScreenValidations {
     }
 
     public static void cutomerContextShouldBe(String expectedCustomerContext) {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.getGeneralWebdriverWait().until(driver -> {
             Assert.assertEquals(VehicleInfoScreenInteractions.getCustomerContextValue(), expectedCustomerContext);
             return true;
@@ -88,28 +84,10 @@ public class VehicleInfoScreenValidations {
     }
 
     public static void ownerShouldBe(String expectedOwner) {
-        WaitUtils.getGeneralFluentWait().until(driver -> {
+        WaitUtils.getGeneralWebdriverWait().until(driver -> {
             Assert.assertEquals(VehicleInfoScreenInteractions.getOwnerValue(), expectedOwner);
             return true;
         });
     }
 
-    public static void validateTechnicianSelected(Employee employee) {
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
-            Assert.assertTrue(VehicleInfoScreenInteractions.getDataFieldValue(VehicleDataField.VEHICLE_TECH).contains(employee.getEmployeeName()));
-            return true;
-        });
-    }
-
-    public static void validateTechniciansSelected(List<Employee> employeeList) {
-        employeeList.forEach(VehicleInfoScreenValidations::validateTechnicianSelected);
-    }
-
-    public static void validateTechnicianPercentage(String techName, String techPercentage) {
-        Assert.assertEquals(TechnicianScreenInteractions.getTechnicianElement(techName).getPercentageAmount(), techPercentage);
-    }
-
-    public static void validateTechniciansPercentage(Map<String, String> techPercentageList) {
-        techPercentageList.forEach(VehicleInfoScreenValidations::validateTechnicianPercentage);
-    }
 }

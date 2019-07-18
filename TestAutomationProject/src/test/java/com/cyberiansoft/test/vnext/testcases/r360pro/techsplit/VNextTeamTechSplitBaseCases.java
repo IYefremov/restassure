@@ -13,7 +13,7 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.SearchSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
-import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
+import com.cyberiansoft.test.vnext.validations.TechScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -27,7 +27,7 @@ public class VNextTeamTechSplitBaseCases extends BaseTestCaseTeamEditionRegistra
     @BeforeClass(description = "Tech split base test cases")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getTechSplitDataPath();
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
@@ -43,10 +43,10 @@ public class VNextTeamTechSplitBaseCases extends BaseTestCaseTeamEditionRegistra
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
-        VehicleInfoScreenValidations.validateTechnicianSelected(employee);
+        TechScreenValidations.validateTechnicianSelected(employee);
         VehicleInfoScreenSteps.selectTechnicians(employeeList);
-        VehicleInfoScreenValidations.validateTechnicianSelected(employee);
-        VehicleInfoScreenValidations.validateTechniciansSelected(employeeList);
+        TechScreenValidations.validateTechnicianSelected(employee);
+        TechScreenValidations.validateTechniciansSelected(employeeList);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
@@ -62,13 +62,13 @@ public class VNextTeamTechSplitBaseCases extends BaseTestCaseTeamEditionRegistra
         WorkOrderSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         List<Employee> baseEmployeeList = VehicleInfoScreenSteps.getSelectedTechnicians();
-        VehicleInfoScreenValidations.validateTechnicianSelected(employee);
+        TechScreenValidations.validateTechnicianSelected(employee);
         VehicleInfoScreenSteps.deselectTechnicians(employeeList);
         GeneralSteps.confirmDialog();
-        VehicleInfoScreenValidations.validateTechnicianSelected(employee);
+        TechScreenValidations.validateTechnicianSelected(employee);
         VehicleInfoScreenSteps.selectTechnicians(employeeList);
         GeneralSteps.confirmDialog();
-        VehicleInfoScreenValidations.validateTechniciansSelected(baseEmployeeList);
+        TechScreenValidations.validateTechniciansSelected(baseEmployeeList);
         ScreenNavigationSteps.pressBackButton();
     }
 }

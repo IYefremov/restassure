@@ -77,7 +77,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, testCaseData.getInspectionData());
         final String inspectionNumber = InspectionSteps.saveInspection();
 
@@ -121,7 +121,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
 
@@ -607,7 +607,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
 
         final String customereMail = "test.cyberiansoft@gmail.com";
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
 
@@ -663,7 +663,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         final int defaultCountForMoneyService = 1;
 
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
 
@@ -716,7 +716,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanCloseMyInspectionActionScreenInAndroid(String rowID,
                                                                         String description, JSONObject testData) {
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());

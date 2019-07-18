@@ -58,7 +58,7 @@ public class RepairOrderScreen extends MonitorScreen {
     }
 
     public void openSearchMenu() {
-        searchButton.click();
+        WaitUtils.click(searchButton);
     }
 
     public void openCommonFilters() {

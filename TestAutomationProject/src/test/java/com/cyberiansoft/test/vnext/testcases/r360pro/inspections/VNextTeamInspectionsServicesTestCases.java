@@ -30,7 +30,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
@@ -53,7 +53,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
@@ -76,7 +76,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
@@ -100,7 +100,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 

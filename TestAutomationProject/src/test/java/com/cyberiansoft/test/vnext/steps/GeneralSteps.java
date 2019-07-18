@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.interactions.ErrorDialogInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextHelpingScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -28,6 +29,16 @@ public class GeneralSteps {
         ConfirmationDialog confirmationDialog = new ConfirmationDialog();
         WaitUtils.elementShouldBeVisible(confirmationDialog.getConfirmDialogButton(), true);
         confirmationDialog.getConfirmDialogButton().click();
+    }
+
+    public static void declineDialog() {
+        ConfirmationDialog confirmationDialog = new ConfirmationDialog();
+        WaitUtils.elementShouldBeVisible(confirmationDialog.getCancelDialogButton(), true);
+        confirmationDialog.getCancelDialogButton().click();
+    }
+
+    public static void closeErrorDialog() {
+        ErrorDialogInteractions.clickOkButton();
     }
 
     public static void takeCameraPicture() {

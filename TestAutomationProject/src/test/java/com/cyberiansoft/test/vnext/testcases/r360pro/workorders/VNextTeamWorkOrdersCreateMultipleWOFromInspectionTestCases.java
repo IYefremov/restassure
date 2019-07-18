@@ -33,7 +33,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         summaryServiceList.addAll(workOrderData.getInspectionData().getServicesList());
         summaryServiceList.addAll(workOrderData.getServicesList());
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(workOrderData.getInspectionData().getServicesList());
@@ -57,7 +57,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void userCanCreateWoFromApprovedInspection(String rowID,
                                                          String description, JSONObject testData) {
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
