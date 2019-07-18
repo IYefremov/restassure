@@ -174,10 +174,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     }
 
-    public boolean isMyWorkordersViewActive() {
-        return isMyViewActive();
-    }
-
     public VNextWorkOrdersScreen changeCustomerForWorkOrder(String workOrderNumber, AppCustomer newCustomer) {
         WaitUtils.elementShouldBeVisible(workorderslist, true);
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);

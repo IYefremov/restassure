@@ -1,6 +1,9 @@
 package com.cyberiansoft.test.email.getnada;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.email.getnada.dto.EmailMessage;
+import com.cyberiansoft.test.email.getnada.dto.InboxEmail;
+import com.cyberiansoft.test.email.getnada.dto.MailAttachment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
