@@ -4,9 +4,8 @@ import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
@@ -30,7 +29,7 @@ public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes, InspectionData inspectionData) {
         CustomersSreenSteps.selectCustomer(customer);
         InspectionSteps.selectInspectionType(inspectionTypes);
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
     }
 
@@ -40,7 +39,7 @@ public class InspectionSteps {
         VNextCustomersScreen vNextCustomersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
         vNextCustomersScreen.selectCustomer(customer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
         if (inspectionData.getInsuranceCompanyData() != null) {

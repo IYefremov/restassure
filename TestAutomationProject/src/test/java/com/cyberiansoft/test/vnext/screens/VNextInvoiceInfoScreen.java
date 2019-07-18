@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
@@ -209,7 +209,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		tap(appiumdriver.
 				findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + workOrderNumber + "']")));
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         return vehicleInfoScreen;
 	}
 }

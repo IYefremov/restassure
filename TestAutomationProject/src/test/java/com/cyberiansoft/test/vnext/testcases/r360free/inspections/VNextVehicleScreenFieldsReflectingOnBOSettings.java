@@ -5,12 +5,12 @@ import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.openqa.selenium.WebDriver;
@@ -53,7 +53,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.VIN,false);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -73,7 +73,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.VIN,true);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -110,7 +110,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MAKE,false);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -131,7 +131,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
          vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MAKE,true);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -168,7 +168,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MODEL,false);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
@@ -190,7 +190,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
          vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MODEL,true);
 
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
@@ -228,7 +228,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.COLOR,false);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
@@ -249,7 +249,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
          vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.COLOR,true);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -286,7 +286,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.YEAR,false);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -306,7 +306,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
          vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.YEAR,true);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -343,7 +343,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.STOCK_NO,false);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -363,7 +363,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
          vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.STOCK_NO,true);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -400,7 +400,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.RO_NO,false);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -420,7 +420,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
          vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.RO_NO,true);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -457,7 +457,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MILAGE,false);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();
@@ -477,7 +477,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
         customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
          vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MILAGE,true);
         inspectionsscreen = vehicleInfoScreen.cancelInspection();
         inspectionsscreen.clickBackButton();

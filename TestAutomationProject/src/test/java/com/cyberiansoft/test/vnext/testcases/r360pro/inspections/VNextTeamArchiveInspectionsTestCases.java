@@ -5,10 +5,9 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
-import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
-import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
@@ -17,7 +16,6 @@ import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScree
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
@@ -56,7 +54,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspnumber = GeneralWizardInteractions.getObjectNumber();
 
@@ -83,7 +81,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 
@@ -113,7 +111,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspnumber = GeneralWizardInteractions.getObjectNumber();
 
@@ -143,7 +141,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspnumber = GeneralWizardInteractions.getObjectNumber();
         GeneralWizardInteractions.saveViaMenu();
@@ -176,7 +174,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
             VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
             insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
             VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-            GeneralSteps.dismissHelpingScreenIfPresent();
+            HelpingScreenInteractions.dismissHelpingScreenIfPresent();
             VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
             inspNumbers.add(GeneralWizardInteractions.getObjectNumber());
             GeneralWizardInteractions.saveViaMenu();
@@ -213,7 +211,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspnumber = GeneralWizardInteractions.getObjectNumber();
 
@@ -247,7 +245,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
         VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspnumber = GeneralWizardInteractions.getObjectNumber();
 

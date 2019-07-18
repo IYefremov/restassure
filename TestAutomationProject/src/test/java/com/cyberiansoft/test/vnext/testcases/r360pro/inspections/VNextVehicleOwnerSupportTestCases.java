@@ -6,6 +6,7 @@ import com.cyberiansoft.test.globalutils.GlobalUtils;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -16,7 +17,6 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTyp
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +56,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
         customersScreen = new VNextCustomersScreen();
@@ -87,14 +87,14 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
         customersScreen = new VNextCustomersScreen();
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer2);
         vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
         vehicleInfoScreen.saveInspectionViaMenu();
         inspectionsScreen.clickBackButton();
@@ -115,7 +115,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
         customersScreen = new VNextCustomersScreen();
@@ -146,7 +146,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
         customersScreen = new VNextCustomersScreen();
@@ -158,7 +158,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer2);
         vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
         vehicleInfoScreen.saveInspectionViaMenu();
         inspectionsScreen.clickBackButton();
@@ -179,7 +179,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
@@ -222,7 +222,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
@@ -230,7 +230,7 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRe
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer2);
         vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
         vehicleInfoScreen.saveInspectionViaMenu();
 

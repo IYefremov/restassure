@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.steps;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.TechnicianScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 
 public class VehicleInfoScreenSteps {
     public static void setVehicleInfo(VehicleInfoData vehicleInfoDto) {
+        VehicleInfoScreenInteractions.waitPageLoaded();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         if (vehicleInfoDto.getVINNumber() != null)
             VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vehicleInfoDto.getVINNumber());
         if (vehicleInfoDto.getVehicleMake() != null)
@@ -38,7 +41,7 @@ public class VehicleInfoScreenSteps {
     }
 
     public static void setVIN(String vin) {
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(vehicleInfoScreen.getRootElement());
@@ -60,7 +63,7 @@ public class VehicleInfoScreenSteps {
     }
 
     public static List<Employee> getSelectedTechnicians() {
-        return WaitUtils.getGeneralWebdriverWait().until((driver) ->
+        return WaitUtils.getGeneralFluentWait().until((driver) ->
                 Arrays.stream(VehicleInfoScreenInteractions.getDataFieldValue(VehicleDataField.VEHICLE_TECH).split(",")).map(string -> {
                     Employee employee = new Employee();
                     employee.setEmployeeFirstName(string.trim().split(" ")[0].trim());

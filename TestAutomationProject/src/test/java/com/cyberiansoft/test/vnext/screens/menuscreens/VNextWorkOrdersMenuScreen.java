@@ -1,11 +1,11 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -73,7 +73,7 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
         wait.until(ExpectedConditions.visibilityOf(editinspectionbtn));
         clickMenuItem(editinspectionbtn);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         return vehicleInfoScreen;
     }
 

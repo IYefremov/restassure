@@ -14,6 +14,7 @@ import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -21,7 +22,10 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -63,7 +67,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 			newCustomerScreen.createNewCustomer(testcustomer);
 		} else
 			customersScreen.selectCustomer(testcustomer);
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 
@@ -109,7 +113,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		} else
 			customersScreen.selectCustomer(testcustomer);
 
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -172,7 +176,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		} else
 			customersScreen.selectCustomer(testcustomer);
 
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -241,7 +245,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		} else
 			customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);

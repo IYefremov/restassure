@@ -6,7 +6,6 @@ import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.interactions.ErrorDialogInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextHelpingScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ConfirmationDialog;
@@ -14,16 +13,6 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
 public class GeneralSteps {
-
-    public static void dismissHelpingScreenIfPresent() {
-        VNextHelpingScreen helpingScreen = new VNextHelpingScreen();
-        BaseUtils.waitABit(3000);
-        if (WaitUtils.isElementPresent(helpingScreen.getOkButtonLocator())) {
-            helpingScreen.getOkDismissButton().click();
-            WaitUtils.elementShouldBeVisible(helpingScreen.getOkDismissButton(), false);
-            BaseUtils.waitABit(1000);
-        }
-    }
 
     public static void confirmDialog() {
         ConfirmationDialog confirmationDialog = new ConfirmationDialog();

@@ -48,7 +48,7 @@ public class VehicleInfoScreenValidations {
     public static void dataFieldShouldHaveValue(VehicleDataField dataField, String expectedValue) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
                     Assert.assertEquals(
                             ControlUtils.getElementValue(vehicleInfoScreen
                                     .getDataFieldList()
@@ -69,7 +69,7 @@ public class VehicleInfoScreenValidations {
 
     public static void vinValidationColorShouldBeEqual(String expectedColorString) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(vehicleInfoScreen.getVehicleFieldsList().findElement(By.xpath(".//div[@class='input-with-validation-message']")).getCssValue("background-color"), expectedColorString);
             return true;
         });
@@ -77,14 +77,14 @@ public class VehicleInfoScreenValidations {
 
     public static void cutomerContextShouldBe(String expectedCustomerContext) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(VehicleInfoScreenInteractions.getCustomerContextValue(), expectedCustomerContext);
             return true;
         });
     }
 
     public static void ownerShouldBe(String expectedOwner) {
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(VehicleInfoScreenInteractions.getOwnerValue(), expectedOwner);
             return true;
         });

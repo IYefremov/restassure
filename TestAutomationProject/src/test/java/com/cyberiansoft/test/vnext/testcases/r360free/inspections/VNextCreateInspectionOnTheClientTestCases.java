@@ -2,22 +2,20 @@ package com.cyberiansoft.test.vnext.testcases.r360free.inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.dataclasses.*;
+import com.cyberiansoft.test.dataclasses.InspectionData;
+import com.cyberiansoft.test.dataclasses.MatrixServiceData;
+import com.cyberiansoft.test.dataclasses.TestCaseData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
-import com.cyberiansoft.test.email.EmailUtils;
-import com.cyberiansoft.test.email.emaildata.EmailFolder;
-import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
-import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.enums.VehicleDataField;
-import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
@@ -26,10 +24,8 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.AvailableServicesScreenSteps;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
-import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
@@ -38,7 +34,6 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -58,7 +53,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
         customersScreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
@@ -137,7 +132,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
         customersScreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         
         final  String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
@@ -203,7 +198,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         newCustomerScreen.createNewCustomer(inspectionData.getInspectionRetailCustomer());
 
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
 
@@ -225,7 +220,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         newCustomerScreen.createNewCustomer(inspectionData.getInspectionRetailCustomer());
 
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
 
@@ -257,7 +252,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
         customersScreen.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         String inspnumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);

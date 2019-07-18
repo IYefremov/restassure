@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -29,7 +29,7 @@ public class VNextVehicleModelsScreen extends VNextBaseScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-model='" + vehicleModel + "']")));
         tap(modelslist.findElement(By.xpath(".//*[@data-model='" + vehicleModel + "']")));
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         return vehicleInfoScreen;
     }
 }

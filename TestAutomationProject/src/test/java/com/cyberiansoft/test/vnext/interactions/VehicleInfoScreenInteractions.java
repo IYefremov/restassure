@@ -23,7 +23,7 @@ public class VehicleInfoScreenInteractions {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
         //todo: temporary fix for hide keyboard
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             ControlUtils.setValue(vehicleInfoScreen
                             .getDataFieldList()
                             .stream()
@@ -74,7 +74,7 @@ public class VehicleInfoScreenInteractions {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.waitUntilElementIsClickable(By.name("Vehicle.Year"));
         WaitUtils.click(vehicleInfoScreen.getYearField());
-        WaitUtils.getGeneralWebdriverWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-picker-value='" + yearValue + "']")));
+        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-picker-value='" + yearValue + "']")));
         WebElement elem = DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//div[@data-picker-value='" + yearValue + "']"));
         JavascriptExecutor je = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
         je.executeScript("arguments[0].scrollIntoView(true);", elem);
@@ -130,5 +130,11 @@ public class VehicleInfoScreenInteractions {
                     return true;
                 }
         );
+    }
+
+    public static void waitPageLoaded() {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
+        WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
     }
 }
