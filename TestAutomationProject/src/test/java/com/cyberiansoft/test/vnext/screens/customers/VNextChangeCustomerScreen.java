@@ -23,6 +23,6 @@ public class VNextChangeCustomerScreen extends VNextBaseCustomersScreen {
     }
 
     public boolean isAddCustomerButtonDisplayed() {
-        return changecustomersscreen.findElements(By.xpath(".//a[@action='add']")).size() > 0;
+        return changecustomersscreen.findElements(By.xpath(".//*[@action='add']")).size() > 0;
     }
 }

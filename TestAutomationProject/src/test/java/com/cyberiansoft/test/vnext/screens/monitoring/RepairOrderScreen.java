@@ -18,13 +18,13 @@ public class RepairOrderScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@data-page=\"list\"]")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//div[@action=\"show-locations\"]")
+    @FindBy(xpath = "//*[@action=\"show-locations\"]")
     private WebElement locationSelectionNavigationBar;
 
     @FindBy(xpath = "//div[@class=\"searchlist-filters\"]")
     private ActiveFiltersLabel activeFilterslabel;
 
-    @FindBy(xpath = "//div[@data-autotests-id=\"repair-orders-list\"]/div")
+    @FindBy(xpath = "//*[@data-autotests-id=\"repair-orders-list\"]/div")
     private List<RepairOrderListElement> repairOrderListElements;
 
     @FindBy(xpath = "//span[@data-automation-id=\"search-icon\"]")

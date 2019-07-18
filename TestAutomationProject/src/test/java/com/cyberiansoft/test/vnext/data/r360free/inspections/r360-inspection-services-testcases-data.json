@@ -198,7 +198,7 @@
       },
       "matrixService": {
         "matrixServiceName": "Hail Repair",
-        "hailMatrixes": ["Nationwide Insurance", "Progressive", "State Farm"],
+        "hailMatrixName": "State Farm",
         "vehiclePartData": {
           "vehiclePartName": "Hood",
           "vehiclePartSize": "Dime",

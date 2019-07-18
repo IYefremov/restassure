@@ -1,11 +1,14 @@
 package com.cyberiansoft.test.vnext.testcases.r360free.inspections;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.dataclasses.*;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.email.EmailUtils;
 import com.cyberiansoft.test.email.emaildata.EmailFolder;
 import com.cyberiansoft.test.email.emaildata.EmailHost;
+import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
@@ -18,14 +21,15 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
+import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.time.LocalDateTime;
 
 public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
@@ -44,46 +48,43 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		testcustomer.setCustomerState("Colima");
 		testcustomer.setCustomerZip("79031");		
 	}
-	
-	@Test(testName= "Test Case 66998:Verify correct Customer Info is shown on Printing", 
-			description = "Verify correct Customer Info is shown on Printing")
-	public void testVerifyCorrectCustomerInfoIsShownOnPrinting() throws Exception {
 
-		final String vinnumber = "TEST";
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testVerifyCorrectCustomerInfoIsShownOnPrinting(String rowID,
+																				  String description, JSONObject testData) throws Exception {
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		InspectionData inspectionData = testCaseData.getInspectionData();
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		if (!customersscreen.isCustomerExists(testcustomer)) {
-			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-			newcustomerscreen.createNewCustomer(testcustomer);
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+		if (!customersScreen.isCustomerExists(testcustomer)) {
+			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+			newCustomerScreen.createNewCustomer(testcustomer);
 		} else
-			customersscreen.selectCustomer(testcustomer);
-		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-		//insptypeslist.selectInspectionType(inspType);
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+			customersScreen.selectCustomer(testcustomer);
 		GeneralSteps.dismissHelpingScreenIfPresent();
-		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
-		
-		final String inspnumber = GeneralWizardInteractions.getObjectNumber();
+		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
+		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 
 		GeneralWizardInteractions.saveViaMenu();
-		inspectionscreen = new VNextInspectionsScreen();
+		inspectionsScreen = new VNextInspectionsScreen();
 		
-		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
-		emailscreen.sendEmail();
-		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-		inspectionscreen.clickBackButton();
+		VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
+		NadaEMailService nadaEMailService = new NadaEMailService();
+		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
+		emailScreen.sendEmail();
+		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionsScreen.clickBackButton();
 
-		final String inspectionreportfilenname = inspnumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
-				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
-
-		File pdfdoc = new File(inspectionreportfilenname);
+		final String inspectionReportFileName = inspectionNumber + ".pdf";
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspectionNumber, inspectionReportFileName);
+		Assert.assertTrue(nadaEMailService.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + inspectionNumber +
+				" in mail box " + nadaEMailService.getEmailId() + ". At time " +
+				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		nadaEMailService.deleteMessageWithSubject(inspectionNumber);
+		File pdfdoc = new File(inspectionReportFileName);
 		String pdftext = PDFReader.getPDFText(pdfdoc);
 		Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
 		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
@@ -92,65 +93,58 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
 		Assert.assertTrue(pdftext.contains(", " + customerstateShort));
 	}
-	
-	@Test(testName= "Test Case 66999:Verify 'Back' button doesn't save info for Vehicle Part - Printing", 
-			description = "Verify 'Back' button doesn't save info for Vehicle Part - Printing")
-	public void testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting() throws Exception {
 
-		final String vinnumber = "TEST";
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting(String rowID,
+															   String description, JSONObject testData) throws Exception {
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		InspectionData inspectionData = testCaseData.getInspectionData();
 		
-		final String matrixservice = "Hail Dent Repair";
-		final String pricematrix = "Progressive";
-		final String vehiclepartname = "Left Fender";
-		final String vehiclepartname2 = "Trunk Lid";
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		if (!customersscreen.isCustomerExists(testcustomer)) {
-			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-			newcustomerscreen.createNewCustomer(testcustomer);
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+		if (!customersScreen.isCustomerExists(testcustomer)) {
+			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+			newCustomerScreen.createNewCustomer(testcustomer);
 		} else
-			customersscreen.selectCustomer(testcustomer);
-		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-		//insptypeslist.selectInspectionType(inspType);
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
-		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
-		final String inspnumber = GeneralWizardInteractions.getObjectNumber();
-		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
-		pricematrixesscreen.clickScreenBackButton();
-		servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
-		vehiclepartsscreen = selectedServicesScreen.openSelectedMatrixServiceDetails(matrixservice);
-		
-		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
-		vehiclepartinfoscreen.clickScreenBackButton();
-		vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+			customersScreen.selectCustomer(testcustomer);
 
-		vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname2);
-		vehiclepartinfoscreen.clickScreenBackButton();
-		vehiclepartinfoscreen.clickScreenBackButton();
+		GeneralSteps.dismissHelpingScreenIfPresent();
+		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
+		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
+		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
+		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
+		ScreenNavigationSteps.pressBackButton();
+		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		selectedServicesScreen.openSelectedMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
+		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
+			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+			vehiclepartinfoscreen.clickScreenBackButton();
+			vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		}
+		ScreenNavigationSteps.pressBackButton();
 		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
+		inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
 		
-		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360OutlookMail());
-		emailscreen.sendEmail();
-		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-		inspectionscreen.clickBackButton();
+		VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
+		NadaEMailService nadaEMailService = new NadaEMailService();
+		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
+		emailScreen.sendEmail();
+		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionsScreen.clickBackButton();
 
-		final String inspectionreportfilenname = inspnumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
-				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
-
-		File pdfdoc = new File(inspectionreportfilenname);
+		final String inspectionReportFileName = inspectionNumber + ".pdf";
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspectionNumber, inspectionReportFileName);
+		Assert.assertTrue(nadaEMailService.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + inspectionNumber +
+				" in mail box " + nadaEMailService.getEmailId() + ". At time " +
+				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		nadaEMailService.deleteMessageWithSubject(inspectionNumber);
+		File pdfdoc = new File(inspectionReportFileName);
 		String pdftext = PDFReader.getPDFText(pdfdoc);
 		Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
 		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
@@ -158,70 +152,62 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
 		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
 		Assert.assertTrue(pdftext.contains(", " + customerstateShort));
-		Assert.assertTrue(pdftext.contains(matrixservice));
-		Assert.assertFalse(pdftext.contains(vehiclepartname));
-		Assert.assertFalse(pdftext.contains(vehiclepartname2));
-
+		Assert.assertTrue(pdftext.contains(matrixServiceData.getMatrixServiceName()));
+		for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData())
+			Assert.assertFalse(pdftext.contains(vehiclePartData.getVehiclePartName()));
 	}
-	
-	@Test(testName= "Test Case 67000:Verify hardware 'Back' button doesn't save info for Vehicle Part - Printing", 
-			description = "Verify hardware 'Back' button doesn't save info for Vehicle Part - Printing")
-	public void testVerifyHardwareBackButtonDoesntSaveInfoForVehiclePartPrinting() throws Exception {
 
-		final String vinnumber = "TEST";
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testVerifyHardwareBackButtonDoesntSaveInfoForVehiclePartPrinting(String rowID,
+																		 String description, JSONObject testData) throws Exception {
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		InspectionData inspectionData = testCaseData.getInspectionData();
 		
-		final String matrixservice = "Hail Dent Repair";
-		final String pricematrix = "Progressive";
-		final String vehiclepartname = "Left Fender";
-		final String vehiclepartname2 = "Trunk Lid";
-		
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		if (!customersscreen.isCustomerExists(testcustomer)) {
-			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-			newcustomerscreen.createNewCustomer(testcustomer);
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+		if (!customersScreen.isCustomerExists(testcustomer)) {
+			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+			newCustomerScreen.createNewCustomer(testcustomer);
 		} else
-			customersscreen.selectCustomer(testcustomer);
-		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-		//insptypeslist.selectInspectionType(inspType);
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+			customersScreen.selectCustomer(testcustomer);
+
 		GeneralSteps.dismissHelpingScreenIfPresent();
-		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
-		final String inspnumber = GeneralWizardInteractions.getObjectNumber();
+		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
+		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextPriceMatrixesScreen pricematrixesscreen = servicesscreen.openMatrixServiceDetails(matrixservice);
-		VNextVehiclePartsScreen vehiclepartsscreen = pricematrixesscreen.selectHailMatrix(pricematrix);
-		pricematrixesscreen.clickScreenBackButton();
-		servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextSelectedServicesScreen selectservicesscreen = servicesscreen.switchToSelectedServicesView();
-		vehiclepartsscreen = selectservicesscreen.openSelectedMatrixServiceDetails(matrixservice);
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
+		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
+		ScreenNavigationSteps.pressBackButton();
+		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextSelectedServicesScreen selectavailableServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		selectavailableServicesScreen.openSelectedMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
+		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
+			vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+			AppiumUtils.clickHardwareBackButton();
+
+		}
+		AppiumUtils.clickHardwareBackButton();
+		selectavailableServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionsScreen = selectavailableServicesScreen.saveInspectionViaMenu();
 		
-		VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname);
-		AppiumUtils.clickHardwareBackButton();
-		vehiclepartsscreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
+		NadaEMailService nadaEMailService = new NadaEMailService();
+		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
+		emailScreen.sendEmail();
+		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionsScreen.clickBackButton();
 
-		vehiclepartinfoscreen = vehiclepartsscreen.selectVehiclePart(vehiclepartname2);
-		AppiumUtils.clickHardwareBackButton();
-		AppiumUtils.clickHardwareBackButton();
-		selectservicesscreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		inspectionscreen = selectservicesscreen.saveInspectionViaMenu();
-		
-		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
-		emailscreen.sendEmail();
-		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-		inspectionscreen.clickBackButton();
-
-		final String inspectionreportfilenname = inspnumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
-				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
-
-		File pdfdoc = new File(inspectionreportfilenname);
+		final String inspectionReportFileName = inspectionNumber + ".pdf";
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspectionNumber, inspectionReportFileName);
+		Assert.assertTrue(nadaEMailService.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + inspectionNumber +
+				" in mail box " + nadaEMailService.getEmailId() + ". At time " +
+				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		nadaEMailService.deleteMessageWithSubject(inspectionNumber);
+		File pdfdoc = new File(inspectionReportFileName);
 		String pdftext = PDFReader.getPDFText(pdfdoc);
 		Assert.assertTrue(pdftext.contains(testcustomer.getFullName()));
 		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerAddress1()));
@@ -229,9 +215,9 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerCity()));
 		Assert.assertTrue(pdftext.contains(testcustomer.getCustomerZip()));
 		Assert.assertTrue(pdftext.contains(", " + customerstateShort));
-		Assert.assertTrue(pdftext.contains(matrixservice));
-		Assert.assertFalse(pdftext.contains(vehiclepartname));
-		Assert.assertFalse(pdftext.contains(vehiclepartname2));
+		Assert.assertTrue(pdftext.contains(matrixServiceData.getMatrixServiceName()));
+		for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData())
+			Assert.assertFalse(pdftext.contains(vehiclePartData.getVehiclePartName()));
 	}
 
 	@Test(testName= "Test Case 67001:PRINT - Validate 'Quantity' column is shown on device printout form for money services", 
@@ -246,43 +232,41 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		final String[] moneyservicesamounts = { "$0.10", "$0.98" };
 		final String total = "$1.08";
 		
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		if (!customersscreen.isCustomerExists(testcustomer)) {
-			VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-			newcustomerscreen.createNewCustomer(testcustomer);
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+		if (!customersScreen.isCustomerExists(testcustomer)) {
+			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+			newCustomerScreen.createNewCustomer(testcustomer);
 		} else
-			customersscreen.selectCustomer(testcustomer);
-		//VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-		//insptypeslist.selectInspectionType(inspType);
+			customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
-		final String inspnumber = GeneralWizardInteractions.getObjectNumber();
+		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		servicesscreen.selectServices(moneyservices);
-		VNextSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesView();
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+		availableServicesScreen.selectServices(moneyservices);
+		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (int i = 0; i < moneyservices.length; i++) {
 			selectedServicesScreen.setServiceAmountValue(moneyservices[i], moneyservicesprices[i]);
 			selectedServicesScreen.setServiceQuantityValue(moneyservices[i], moneyservicesquantities[i]);
 		}
 		
-		inspectionscreen = selectedServicesScreen.saveInspectionViaMenu();
-		//inspectionscreen.switchToTeamInspectionsView();
-		VNextEmailScreen emailscreen = inspectionscreen.clickOnInspectionToEmail(inspnumber);
-		emailscreen.sentToEmailAddress(testcustomer.getMailAddress());
-		emailscreen.sendEmail();
-		inspectionscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-		inspectionscreen.clickBackButton();
+		inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+		//inspectionsScreen.switchToTeamInspectionsView();
+		VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
+		emailScreen.sentToEmailAddress(testcustomer.getMailAddress());
+		emailScreen.sendEmail();
+		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		inspectionsScreen.clickBackButton();
 
-		final String inspectionreportfilenname = inspnumber + ".pdf";
+		final String inspectionreportfilenname = inspectionNumber + ".pdf";
 		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
 				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
 		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName(inspnumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspnumber);
+				.withSubjectAndAttachmentFileName(inspectionNumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
+		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspectionNumber);
 
 		File pdfdoc = new File(inspectionreportfilenname);
 		String pdftext = PDFReader.getPDFText(pdfdoc);

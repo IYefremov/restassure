@@ -11,7 +11,7 @@ public class SelectLocationScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@data-page=\"locations\"]")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//div[@data-autotests-id=\"locations-list\"]/div")
+    @FindBy(xpath = "//*[@data-autotests-id=\"locations-list\"]/div")
     private List<WebElement> locationList;
 
     public void selectLocationByText(String locationPartialName) {

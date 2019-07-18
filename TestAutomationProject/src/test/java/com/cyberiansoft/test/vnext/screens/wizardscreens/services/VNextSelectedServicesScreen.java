@@ -150,7 +150,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     public void uselectService(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
-            tap(servicecell.findElement(By.xpath(".//input[@action='unselect-item']")));
+            tap(servicecell.findElement(By.xpath(".//*[@action='unselect-item']")));
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
@@ -186,7 +186,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     public boolean isServiceSelected(String servicename) {
         boolean exists = false;
         appiumdriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        if (servicesscreen.findElement(By.xpath(".//div[@data-autotests-id='all-services']")).isDisplayed())
+        if (servicesscreen.findElement(By.xpath(".//*[@data-autotests-id='all-services']")).isDisplayed())
             exists = getSelectedServicesList().findElements(By.xpath((".//div[@class='checkbox-item-title' and text()='" + servicename + "']"))).size() > 0;
         appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return exists;
@@ -214,7 +214,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
 
     public WebElement getSelectedServicesList() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        return wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//div[@data-autotests-id='all-services']"))));
+        return wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//*[@data-autotests-id='all-services']"))));
     }
 
     public boolean isPriceMatrixValuePresentForSelectedServicesByName(String serviceName, String matrixservicename) {

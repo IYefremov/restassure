@@ -9,10 +9,10 @@ import java.util.List;
 
 @Getter
 public class RepairOrderSelectServiceScreen extends MonitorScreen {
-    @FindBy(xpath = "//span[@action=\"save\"]")
+    @FindBy(xpath = "//*[@action=\"save\"]")
     private WebElement completeScreenCheckbox;
 
-    @FindBy(xpath = "//div[@data-autotests-id=\"simple-services-list\"]/div")
+    @FindBy(xpath = "//*[@data-autotests-id=\"simple-services-list\"]/div")
     private List<WebElement> serviceList;
 
     public void completeScreen() {

@@ -20,7 +20,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='parts']")
 	private WebElement vehiclepartsscreen;
 
-	@FindBy(xpath="//div[@data-autotests-id='matrix-parts-list']")
+	@FindBy(xpath="//*[@data-autotests-id='matrix-parts-list']")
 	private WebElement matrixpartslist;
 	
 	public VNextVehiclePartsScreen(AppiumDriver<MobileElement> appiumdriver) {
@@ -45,7 +45,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	
 	public WebElement getVehiclePartCell(String vehiclepartname) {
 		WebElement vpcell = null;
-		List<WebElement> vehicleparts = matrixpartslist.findElements(By.xpath("./div[@action='select-item']"));
+		List<WebElement> vehicleparts = matrixpartslist.findElements(By.xpath("./*[@action='select-item']"));
 		for (WebElement vehiclepartcell : vehicleparts) {
 			if (vehiclepartcell.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().equals(vehiclepartname)) {
 				vpcell = vehiclepartcell;

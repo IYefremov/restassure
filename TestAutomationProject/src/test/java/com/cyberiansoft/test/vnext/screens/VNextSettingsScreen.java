@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextSettingsScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//input[@action='manual-update']")
+	@FindBy(xpath="//*[@action='manual-update']")
 	private WebElement manualsendradio;
 	
 	@FindBy(xpath="//*[@action='back']")

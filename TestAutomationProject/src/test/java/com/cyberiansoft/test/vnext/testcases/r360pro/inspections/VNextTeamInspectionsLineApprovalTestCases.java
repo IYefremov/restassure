@@ -18,6 +18,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.steps.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
@@ -391,14 +392,12 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		availableServicesScreen.switchToAvalableServicesView();
 
-		VNextPriceMatrixesScreen priceMatrixesScreen = availableServicesScreen.openMatrixServiceDetails(  inspectionData.getMatrixServiceData().getMatrixServiceName());
-		//VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectPriceMatrix1(inspectionData.getMatrixServiceData().getHailMatrixName());
 		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
+		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		List<VehiclePartData> vehiclePartsData = matrixServiceData.getVehiclePartsData();
-
+		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		for (VehiclePartData  vehiclePartData : vehiclePartsData) {
-			VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
-			//VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(matrixPartData.getMatrixPartName());
+			VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
 			vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
 			vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 			if (vehiclePartData.getVehiclePartAdditionalServices() != null) {
@@ -416,7 +415,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			}
 			vehiclePartInfoScreen.clickScreenBackButton();
 		}
-		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+		vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
 
 		Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());

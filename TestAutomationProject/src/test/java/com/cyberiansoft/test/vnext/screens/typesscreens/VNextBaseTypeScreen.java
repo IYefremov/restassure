@@ -54,11 +54,11 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
 
     protected WebElement getListCell(WebElement typesList, String cellValue) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@action='check-item']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='check-item']")));
         List<WebElement> listCells = typesList.findElements(By.xpath(".//*[contains(@class, 'entity-item accordion-item')]"));
 
         WebElement tableCell = listCells.stream().
-                filter(elemnt -> elemnt.findElement(By.xpath(".//div[@action='select']/div[@class='checkbox-item-title']"))
+                filter(elemnt -> elemnt.findElement(By.xpath(".//*[@action='select']/div[@class='checkbox-item-title']"))
                         .getText().trim().equals(cellValue))
                 .findFirst().orElse(null);
         if (tableCell == null)

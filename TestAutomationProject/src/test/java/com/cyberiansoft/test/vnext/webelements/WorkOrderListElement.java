@@ -16,7 +16,7 @@ public class WorkOrderListElement implements IWebElement {
     }
 
     public String getId() {
-        return WaitUtils.getGeneralWebdriverWait().until(driver -> rootElement.findElement(By.xpath(idFieldLocator)).getText());
+        return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElement(By.xpath(idFieldLocator)).getText());
     }
 
     public void openMenu() {

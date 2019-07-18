@@ -17,8 +17,8 @@
   ],
   "userCanChangeTechAmountViaEdit": [
     {
-      "rowID": "userCanAssignMultipleTechniciansToOrder.01",
-      "description": "TFSID:87874 87875",
+      "rowID": "userCanChangeTechAmountViaEdit.01",
+      "description": "TFSID:87886 87929",
       "technicianList": [
         {
           "employeeFirstName": "Test",
@@ -29,6 +29,32 @@
           "employeeLastName": "2222"
         }
       ]
+    }
+  ],
+  "userCanSeparateAmountOfWOForTechniciansManually": [
+    {
+      "rowID": "userCanSeparateAmountOfWOForTechniciansManually.01",
+      "description": "87990",
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
+        }
+      ],
+      "technicianSplitData": {
+        "Test Test": "30",
+        "Employee Employee": "70"
+      }
+    }
+  ],
+  "userCanSeparateAmountOfWOForTechniciansManuallyEditingWO": [
+    {
+      "rowID": "userCanSeparateAmountOfWOForTechniciansManuallyEditingWO.01",
+      "description": "87991",
+      "technicianSplitData": {
+        "Test Test": "40",
+        "Employee Employee": "60"
+      }
     }
   ]
 }

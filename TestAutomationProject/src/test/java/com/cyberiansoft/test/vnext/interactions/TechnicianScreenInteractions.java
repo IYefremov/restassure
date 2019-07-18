@@ -11,6 +11,12 @@ public class TechnicianScreenInteractions {
         technicianScreen.getEvenlyButton().click();
     }
 
+    public static void selectCustomOption() {
+        VNextTechnicianScreen technicianScreen = new VNextTechnicianScreen();
+        WaitUtils.elementShouldBeVisible(technicianScreen.getRootElement(), true);
+        technicianScreen.getCustomButton().click();
+    }
+
     public static TechnicialListElement getTechnicianElement(String technicianName) {
         VNextTechnicianScreen technicianScreen = new VNextTechnicianScreen();
         WaitUtils.elementShouldBeVisible(technicianScreen.getRootElement(), true);
@@ -29,6 +35,13 @@ public class TechnicianScreenInteractions {
         });
     }
 
+    public static void setTechnicianPercentage(String technicianName, String percentage) {
+        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+            getTechnicianElement(technicianName).setPercentageAmount(percentage);
+            return true;
+        });
+    }
+
     public static void deselectTechnician(String technicianName) {
         WaitUtils.getGeneralWebdriverWait().until(driver -> {
             getTechnicianElement(technicianName).checkElement();
@@ -39,4 +52,6 @@ public class TechnicianScreenInteractions {
     public static void acceptScreen() {
         WaitUtils.click(new VNextTechnicianScreen().getAcceptButton());
     }
+
+
 }

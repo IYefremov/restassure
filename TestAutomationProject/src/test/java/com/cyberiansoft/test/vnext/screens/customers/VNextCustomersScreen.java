@@ -40,13 +40,13 @@ public class VNextCustomersScreen extends VNextBaseCustomersScreen {
 
 	public VNextNewCustomerScreen clickAddCustomerButton() {
 		tap(customersscreen.findElement(By.xpath(".//a[@class='floating-button color-red']")));
-		tap(customersscreen.findElement(By.xpath(".//a[@action='add_customer' and @class='customers-button']")));
-		//tap(customersscreen.findElement(By.xpath(".//a[@action='add' and @class='customers-button']")));
+		tap(customersscreen.findElement(By.xpath(".//*[@action='add_customer' and @class='customers-button']")));
+		//tap(customersscreen.findElement(By.xpath(".//*[@action='add' and @class='customers-button']")));
 		return new VNextNewCustomerScreen(appiumdriver);
 	}
 
 	public boolean isAddCustomerButtonDisplayed() {
-		return customersscreen.findElements(By.xpath(".//a[@action='add']")).size() > 0;
+		return customersscreen.findElements(By.xpath(".//*[@action='add']")).size() > 0;
 	}
 
 	public boolean isNothingFoundCaptionDisplayed() {

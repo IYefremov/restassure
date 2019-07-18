@@ -25,10 +25,10 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@data-autotests-id='customers-list']")
     private WebElement customerslist;
 
-    @FindBy(xpath = "//a[@action='select-customer']")
+    @FindBy(xpath = "//*[@action='select-customer']")
     private WebElement firstcustomer;
 
-    @FindBy(xpath = "//a[@action='add']")
+    @FindBy(xpath = "//*[@action='add']")
     private WebElement addcustomerbtn;
 
     @FindBy(xpath = "//*[@action='search']")
@@ -95,7 +95,7 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
 
 
     public boolean isAddCustomerButtonExists() {
-        return elementExists("//a[@action='add']");
+        return elementExists("//*[@action='add']");
     }
 
     public boolean isCustomerExists(AppCustomer customer) {

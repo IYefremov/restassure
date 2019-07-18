@@ -10,6 +10,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class VehicleInfoScreenSteps {
@@ -66,5 +67,20 @@ public class VehicleInfoScreenSteps {
                     employee.setEmployeeLastName(string.trim().split(" ")[1].trim());
                     return employee;
                 }).collect(Collectors.toList()));
+    }
+
+    public static void selectTechniciansPercentage(Map<String, String> techniciansPercentageList) {
+        VehicleInfoScreenInteractions.openTechnicianList();
+        TechnicianScreenInteractions.selectCustomOption();
+        techniciansPercentageList.forEach(TechnicianScreenInteractions::setTechnicianPercentage);
+        TechnicianScreenInteractions.acceptScreen();
+    }
+
+    public static void openTechnicianMenu() {
+        VehicleInfoScreenInteractions.openTechnicianList();
+    }
+
+    public static void closeTechnicianMenu() {
+        TechnicianScreenInteractions.acceptScreen();
     }
 }

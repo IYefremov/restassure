@@ -32,7 +32,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//input[@name='Invoices.InvoiceDate']")
 	private WebElement invoicedate;
 	
-	@FindBy(xpath="//span[@action='more_actions']")
+	@FindBy(xpath="//*[@action='more_actions']")
 	private WebElement menubtn;
 	
 	@FindBy(xpath="//*[@action='save']")
@@ -41,7 +41,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='add-order']")
 	private WebElement addorderbtn;
 
-	@FindBy(xpath="//a[@action='create-invoice']/i")
+	@FindBy(xpath="//*[@action='create-invoice']/i")
 	private WebElement createinvoicemenu;
 	
 	@FindBy(xpath="//div[@class='estimation-number']")

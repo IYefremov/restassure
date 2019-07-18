@@ -16,7 +16,7 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseWizardScreen {
 	@FindBy(xpath="//div[@data-page='summary']")
 	private WebElement wosummaryscreen;
 	
-	@FindBy(xpath="//input[@action='auto-invoice']")
+	@FindBy(xpath="//*[@action='auto-invoice']")
 	private WebElement autoinvoicecreateoption;
 	
 	@FindBy(xpath="//*[@action='save']")
