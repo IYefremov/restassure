@@ -41,6 +41,7 @@ public class SearchSteps {
         openSearchFilters();
         fillTextSearch(text);
         SearchSteps.search();
+        BaseUtils.waitABit(3000);
     }
 
     public static void verifySearchResultsAreEmpty() {

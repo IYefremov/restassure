@@ -31,7 +31,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
 
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);

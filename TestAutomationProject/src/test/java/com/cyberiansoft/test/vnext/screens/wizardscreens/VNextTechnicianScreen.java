@@ -17,16 +17,16 @@ public class VNextTechnicianScreen extends VNextBaseScreen {
     @FindBy(xpath = "//div[@data-page='tech-split']")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//*[@data-autotests-id='tech-split-list']//div[@class='entity-item']")
+    @FindBy(xpath = "//div[@data-autotests-id='tech-split-list']//div[@class='entity-item']")
     private List<TechnicialListElement> techList;
 
-    @FindBy(xpath = "//*[@action='save']")
+    @FindBy(xpath = "//span[@action='save']")
     private WebElement acceptButton;
 
-    @FindBy(xpath = "//*[@action='evenly']")
+    @FindBy(xpath = "//a[@action='evenly']")
     private WebElement evenlyButton;
 
-    @FindBy(xpath = "//*[@action='custom']")
+    @FindBy(xpath = "//a[@action='custom']")
     private WebElement customButton;
 
 

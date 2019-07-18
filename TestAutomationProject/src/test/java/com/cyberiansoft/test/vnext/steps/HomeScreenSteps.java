@@ -6,10 +6,17 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class HomeScreenSteps {
-    public static void openCreateNewInspection() {
+    public static void openCreateMyInspection() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         HomeScreenSteps.openInspections();
         inspectionsScreen.switchToMyInspectionsView();
+        inspectionsScreen.clickAddInspectionButton();
+    }
+
+    public static void openCreateTeamInspection() {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        HomeScreenSteps.openInspections();
+        inspectionsScreen.switchToTeamInspectionsView();
         inspectionsScreen.clickAddInspectionButton();
     }
 
@@ -17,6 +24,12 @@ public class HomeScreenSteps {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
         WaitUtils.elementShouldBeVisible(homeScreen.getStatuslist(), true);
         homeScreen.clickInspectionsMenuItem();
+    }
+
+    public static void openWorkOrders() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        WaitUtils.elementShouldBeVisible(homeScreen.getStatuslist(), true);
+        homeScreen.clickWorkOrdersMenuItem();
     }
 
     public static void openWorkQueue() {

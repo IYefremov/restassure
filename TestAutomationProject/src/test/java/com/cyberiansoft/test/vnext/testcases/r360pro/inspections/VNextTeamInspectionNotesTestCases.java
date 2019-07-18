@@ -24,7 +24,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
 
     @BeforeMethod
     public void beforeMethod() {
-        HomeScreenSteps.openCreateNewInspection();
+        HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR);
         inspectionId = InspectionSteps.saveInspection();
     }
