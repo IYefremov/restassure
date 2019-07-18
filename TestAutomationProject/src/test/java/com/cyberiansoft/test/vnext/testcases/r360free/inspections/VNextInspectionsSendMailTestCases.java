@@ -5,9 +5,6 @@ import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.email.EmailUtils;
-import com.cyberiansoft.test.email.emaildata.EmailFolder;
-import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
@@ -260,19 +257,20 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
 		//inspectionsScreen.switchToTeamInspectionsView();
 		VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
-		emailScreen.sentToEmailAddress(testcustomer.getMailAddress());
+		NadaEMailService nadaEMailService = new NadaEMailService();
+		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 		emailScreen.sendEmail();
 		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionsScreen.clickBackButton();
 
-		final String inspectionreportfilenname = inspectionNumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
-				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName(inspectionNumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspectionNumber);
-
-		File pdfdoc = new File(inspectionreportfilenname);
+		final String inspectionReportFileName = inspectionNumber + ".pdf";
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspectionNumber, inspectionReportFileName);
+		Assert.assertTrue(nadaEMailService.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + inspectionNumber +
+				" in mail box " + nadaEMailService.getEmailId() + ". At time " +
+				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		nadaEMailService.deleteMessageWithSubject(inspectionNumber);
+		File pdfdoc = new File(inspectionReportFileName);
 		String pdftext = PDFReader.getPDFText(pdfdoc);
 		for (int i = 0; i < moneyservices.length; i++) {
 			Assert.assertTrue(pdftext.contains(moneyservices[i]));
