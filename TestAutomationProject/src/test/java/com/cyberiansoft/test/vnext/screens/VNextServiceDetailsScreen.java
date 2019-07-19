@@ -27,6 +27,15 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-page='details']")
 	private WebElement rootElement;
+
+	@FindBy(xpath = "//input[@name='technicians']")
+	private WebElement technicianField;
+
+	@FindBy(xpath = "//span[@action='quantity-plus']")
+	private WebElement increaseQuantityButton;
+
+	@FindBy(xpath = "//span[@action='quantity-minus']")
+	private WebElement decreaseQuantityButton;
 	
 	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);

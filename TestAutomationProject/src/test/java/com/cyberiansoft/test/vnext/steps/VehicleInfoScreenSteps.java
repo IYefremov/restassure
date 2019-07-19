@@ -83,7 +83,4 @@ public class VehicleInfoScreenSteps {
         VehicleInfoScreenInteractions.openTechnicianList();
     }
 
-    public static void closeTechnicianMenu() {
-        TechnicianScreenInteractions.acceptScreen();
-    }
 }

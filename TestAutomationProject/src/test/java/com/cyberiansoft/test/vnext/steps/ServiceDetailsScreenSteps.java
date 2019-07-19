@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.vnext.interactions.ServiceDetailsInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
@@ -13,4 +14,20 @@ public class ServiceDetailsScreenSteps {
         serviceDetailsScreen.clickServiceDetailsDoneButton();
     }
 
+
+    public static void openTechniciansScreen() {
+        ServiceDetailsInteractions.waitPageReady();
+        ServiceDetailsInteractions.openTechnicianMenu();
+    }
+
+    public static void increaseServiceQuantity() {
+        ServiceDetailsInteractions.waitPageReady();
+        ServiceDetailsInteractions.clickIncreaseQuantity();
+
+    }
+
+    public static void decreaseServiceQuantity() {
+        ServiceDetailsInteractions.waitPageReady();
+        ServiceDetailsInteractions.clickDecreaseQuantity();
+    }
 }
