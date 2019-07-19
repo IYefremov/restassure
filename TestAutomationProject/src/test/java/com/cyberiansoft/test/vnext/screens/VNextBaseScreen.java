@@ -122,7 +122,7 @@ public class VNextBaseScreen {
 
     public void clickScreenBackButton() {
         String backButtonLocator = "//*[@action=\"back\"]";
-        WaitUtils.getGeneralWebdriverWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath(backButtonLocator)));
+        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath(backButtonLocator)));
         WaitUtils.waitUntilElementIsClickable(By.xpath(backButtonLocator));
         WaitUtils.click(By.xpath(backButtonLocator));
     }

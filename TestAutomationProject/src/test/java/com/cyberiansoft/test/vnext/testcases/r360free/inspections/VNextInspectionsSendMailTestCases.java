@@ -5,15 +5,13 @@ import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.email.EmailUtils;
-import com.cyberiansoft.test.email.emaildata.EmailFolder;
-import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -21,7 +19,10 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -63,7 +64,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 			newCustomerScreen.createNewCustomer(testcustomer);
 		} else
 			customersScreen.selectCustomer(testcustomer);
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 
@@ -109,7 +110,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		} else
 			customersScreen.selectCustomer(testcustomer);
 
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -172,7 +173,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		} else
 			customersScreen.selectCustomer(testcustomer);
 
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -241,7 +242,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		} else
 			customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -256,19 +257,20 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
 		//inspectionsScreen.switchToTeamInspectionsView();
 		VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
-		emailScreen.sentToEmailAddress(testcustomer.getMailAddress());
+		NadaEMailService nadaEMailService = new NadaEMailService();
+		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 		emailScreen.sendEmail();
 		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		inspectionsScreen.clickBackButton();
 
-		final String inspectionreportfilenname = inspectionNumber + ".pdf";
-		EmailUtils emailUtils = new EmailUtils(EmailHost.OUTLOOK, VNextFreeRegistrationInfo.getInstance().getR360OutlookMail(),
-				VNextFreeRegistrationInfo.getInstance().getR360UserPassword(), EmailFolder.JUNK);
-		EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName(inspectionNumber, inspectionreportfilenname).unreadOnlyMessages(true).maxMessagesToSearch(5);
-		Assert.assertTrue(emailUtils.waitForMessageWithSubjectAndDownloadAttachment(mailSearchParameters), "Can't find inspection: " + inspectionNumber);
-
-		File pdfdoc = new File(inspectionreportfilenname);
+		final String inspectionReportFileName = inspectionNumber + ".pdf";
+		NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+				.withSubjectAndAttachmentFileName(inspectionNumber, inspectionReportFileName);
+		Assert.assertTrue(nadaEMailService.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + inspectionNumber +
+				" in mail box " + nadaEMailService.getEmailId() + ". At time " +
+				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+		nadaEMailService.deleteMessageWithSubject(inspectionNumber);
+		File pdfdoc = new File(inspectionReportFileName);
 		String pdftext = PDFReader.getPDFText(pdfdoc);
 		for (int i = 0; i < moneyservices.length; i++) {
 			Assert.assertTrue(pdftext.contains(moneyservices[i]));

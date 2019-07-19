@@ -14,7 +14,7 @@ import java.util.Map;
 public class TechScreenValidations {
 
     public static void validateTechnicianSelected(Employee employee) {
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertTrue(VehicleInfoScreenInteractions.getDataFieldValue(VehicleDataField.VEHICLE_TECH).contains(employee.getEmployeeName()));
             return true;
         });

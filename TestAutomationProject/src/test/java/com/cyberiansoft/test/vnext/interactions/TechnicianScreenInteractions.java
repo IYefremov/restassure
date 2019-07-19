@@ -29,21 +29,21 @@ public class TechnicianScreenInteractions {
     }
 
     public static void selectTechnician(String technicianName) {
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             getTechnicianElement(technicianName).checkElement();
             return getTechnicianElement(technicianName).isElementChecked();
         });
     }
 
     public static void setTechnicianPercentage(String technicianName, String percentage) {
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             getTechnicianElement(technicianName).setPercentageAmount(percentage);
             return true;
         });
     }
 
     public static void deselectTechnician(String technicianName) {
-        WaitUtils.getGeneralWebdriverWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
             getTechnicianElement(technicianName).checkElement();
             return !getTechnicianElement(technicianName).isElementChecked();
         });

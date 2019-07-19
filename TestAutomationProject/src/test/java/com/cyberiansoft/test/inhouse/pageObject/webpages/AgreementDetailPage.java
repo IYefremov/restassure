@@ -1,8 +1,4 @@
 package com.cyberiansoft.test.inhouse.pageObject.webpages;
-
-import com.cyberiansoft.test.email.EmailUtils;
-import com.cyberiansoft.test.email.emaildata.EmailFolder;
-import com.cyberiansoft.test.email.emaildata.EmailHost;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.utils.MailChecker;
 import io.qameta.allure.Step;
@@ -278,37 +274,6 @@ public class AgreementDetailPage extends BasePage {
             links.add(pageMatcher.group());
         }
         return links;
-    }
-
-    public String getAgreementApproveLink() throws Exception {
-//        String mailContent = null;
-//        try {
-//            mailContent = MailChecker.getUserMailContentFromSpam();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Document doc = Jsoup.parse(mailContent);
-//        String text = doc.body().text();
-//        System.out.println(text);
-//        String[] allTexts = text.split(" ");
-//        String result = "";
-//        for (String str : allTexts) {
-//            if (str.contains("https://goo.gl")) {
-//                result = str;
-//            }
-//        }
-//        return result;
-
-        EmailUtils emailUtils = new EmailUtils(EmailHost.GMAIL, userName,
-                userPassword, EmailFolder.INBOX);
-        EmailUtils.MailSearchParametersBuilder mailSearchParameters = new EmailUtils.MailSearchParametersBuilder()
-                .withSubject("Agreement")
-                .unreadOnlyMessages(true).maxMessagesToSearch(5);
-        return emailUtils.waitForMessageWithSubjectInFolderAndGetMailMessage(mailSearchParameters);
-    }
-
-    public String getMailContentFromSpam() {
-        return MailChecker.getUserMailContentFromSpam();
     }
 
     @Step

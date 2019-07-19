@@ -7,9 +7,8 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -18,7 +17,6 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTyp
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -54,7 +52,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -82,7 +80,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.saveInspectionViaMenu();
@@ -104,7 +102,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         inspectionsScreen = vehicleInfoScreen.saveInspectionAsDraft();
@@ -136,7 +134,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
@@ -166,7 +164,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.saveInspectionViaMenu();
@@ -198,7 +196,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
         VNextInspectionTypesList insptypes = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
         insptypes.selectInspectionType(InspectionTypes.O_KRAMAR3);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-		GeneralSteps.dismissHelpingScreenIfPresent();
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
         vehicleInfoScreen.clickSaveWorkOrderMenuButton();
         vehicleInfoScreen.clcikSaveViaMenuAsFinal();
