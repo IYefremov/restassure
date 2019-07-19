@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 public class WaitUtils {
 
-    private static final int durationInSeconds = 10;
-    private static final int pullingIntervalInMils = 10;
+    private static final int durationInSeconds = 60;
+    private static final int pullingIntervalInMils = 300;
 
     public static void collectionSizeIsGreaterThan(List<?> list, Integer expectedSize) {
         WaitUtils.getGeneralFluentWait().until(driver -> list.size() > expectedSize);
