@@ -84,4 +84,8 @@ public class VNextProTestCasesDataPaths {
     public String getTechSplitDataPath() {
         return props.getProperty("techsplit.basic.flow");
     }
+
+    public String getTechSplitServiceDataPath() {
+        return props.getProperty("techsplit.service.flow");
+    }
 }

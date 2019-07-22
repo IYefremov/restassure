@@ -70,7 +70,7 @@
   "userCantSpecifyValueNotEqualTo100PercentOnSplit": [
     {
       "rowID": "userCantSpecifyValueNotEqualTo100PercentOnSplit.01",
-      "description": "87995",
+      "description": "87994",
       "technicianSplitData": {
         "Test Test": "40",
         "Employee Employee": "40"
@@ -82,6 +82,29 @@
       "technicianSplitData": {
         "Test Test": "60",
         "Employee Employee": "60"
+      }
+    }
+  ],
+  "userCanSelectEvenlyAfterCustomPercentageSplit": [
+    {
+      "rowID": "userCanSelectEvenlyAfterCustomPercentageSplit.01",
+      "description": "88087",
+      "technicianSplitData": {
+        "Test Test": "50",
+        "Employee Employee": "50"
+      }
+    }
+  ],
+  "serviceLevelTechSplitValidation": [
+    {
+      "rowID": "serviceLevelTechSplitValidation.01",
+      "description": "",
+      "technicianSplitData": {
+        "Test Test": "50",
+        "Employee Employee": "50"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
       }
     }
   ]

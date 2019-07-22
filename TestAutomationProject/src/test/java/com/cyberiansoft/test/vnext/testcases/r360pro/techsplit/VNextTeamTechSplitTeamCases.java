@@ -56,7 +56,7 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenSteps.openTechnicianMenu();
         TechScreenValidations.validateTechniciansPercentage(technicianSplitData);
-        VehicleInfoScreenSteps.closeTechnicianMenu();
+        TechnicianScreenSteps.closeTechnicianMenu();
         GeneralSteps.confirmDialog();
     }
 
@@ -74,7 +74,7 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenSteps.openTechnicianMenu();
         TechScreenValidations.validateTechniciansPercentage(technicianSplitData);
-        VehicleInfoScreenSteps.closeTechnicianMenu();
+        TechnicianScreenSteps.closeTechnicianMenu();
 
     }
 
@@ -103,7 +103,7 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         VehicleInfoScreenSteps.selectTechniciansPercentage(changedTechnicianSplitData);
         GeneralSteps.declineDialog();
         TechScreenValidations.validateTechniciansPercentage(changedTechnicianSplitData);
-        VehicleInfoScreenSteps.closeTechnicianMenu();
+        TechnicianScreenSteps.closeTechnicianMenu();
         GeneralSteps.confirmDialog();
         ScreenNavigationSteps.pressBackButton();
         GeneralSteps.confirmDialog();
@@ -111,6 +111,19 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenSteps.openTechnicianMenu();
         TechScreenValidations.validateTechniciansPercentage(initialTechnicianSplitData);
+
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
+            , dependsOnMethods = "userCanSeparateAmountOfWOForTechniciansManuallyEditingWOAndCancelIt")
+    public void userCanSelectEvenlyAfterCustomPercentageSplit(String rowID,
+                                                              String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        Map<String, String> technicianSplitData = workOrderData.getTechnicianSplitData();
+
+        TechnicianScreenSteps.selectEvenlyPercentageSpilt();
+        TechScreenValidations.validateTechniciansPercentage(technicianSplitData);
+        TechnicianScreenSteps.closeTechnicianMenu();
         GeneralSteps.confirmDialog();
         WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();

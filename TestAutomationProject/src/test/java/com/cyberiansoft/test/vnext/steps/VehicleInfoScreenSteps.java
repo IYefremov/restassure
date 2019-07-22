@@ -27,7 +27,7 @@ public class VehicleInfoScreenSteps {
         if (vehicleInfoDto.getVehicleYear() != null)
             VehicleInfoScreenInteractions.setYear(vehicleInfoDto.getVehicleYear());
         if (vehicleInfoDto.getMileage() != null)
-            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.MILAGE, vehicleInfoDto.getMileage());
+            VehicleInfoScreenInteractions.setMileage(vehicleInfoDto.getMileage());
         if (vehicleInfoDto.getStockNumber() != null)
             VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.STOCK_NO, vehicleInfoDto.getStockNumber());
         if (vehicleInfoDto.getRoNumber() != null)
@@ -83,7 +83,4 @@ public class VehicleInfoScreenSteps {
         VehicleInfoScreenInteractions.openTechnicianList();
     }
 
-    public static void closeTechnicianMenu() {
-        TechnicianScreenInteractions.acceptScreen();
-    }
 }

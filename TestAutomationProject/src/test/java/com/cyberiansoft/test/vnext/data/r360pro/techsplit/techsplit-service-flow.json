@@ -1,0 +1,21 @@
+{
+  "serviceLevelTechSplitValidation": [
+    {
+      "rowID": "serviceLevelTechSplitValidation.01",
+      "description": "",
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
+        }
+      ],
+      "technicianSplitData": {
+        "Test Test": "50",
+        "Employee Employee": "50"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      }
+    }
+  ]
+}
