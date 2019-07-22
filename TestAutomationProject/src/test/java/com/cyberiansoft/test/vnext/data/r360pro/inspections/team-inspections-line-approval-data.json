@@ -123,7 +123,8 @@
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "19UUA66278A050105"
       },
-      "matrixService": {"matrixServiceName" : "Anastasia Labor matrix", "hailMatrixName" : "Anastasia LAbor matrix 1",
+      "matrixService": {
+        "matrixServiceName": "Anastasia Labor matrix",
         "vehiclePartsData" : [{"vehiclePartName": "Anastasia Part", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "VERY LIGHT", "vehiclePartAdditionalServices" : [{ "serviceName" : "Anastasia Labor Avarage Data" }, { "serviceName" : "Battery Installation", "servicePrice" : "30", "serviceQuantity" : "2.50" }, { "serviceName" : "Anastasia % Vehicle Part" }]
         }, {"vehiclePartName": "Hood", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)", "vehiclePartAdditionalServices" : [{ "serviceName" : "A new demo service" }, { "serviceName" : "PREFIX Hood" }, { "serviceName" : "Aluminum Panel" }]
         }]},
