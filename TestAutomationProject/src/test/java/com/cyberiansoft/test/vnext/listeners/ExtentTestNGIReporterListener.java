@@ -146,6 +146,8 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 		}
 		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
