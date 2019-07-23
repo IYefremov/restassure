@@ -202,8 +202,8 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
     public void testVerifyPresetCustomerCanceledIfUserGoFromRetailToWholesaleCustomerScreen(String rowID,
                                                       String description, JSONObject testData) {
 
-        WholesailCustomer defaultWholesailCustomer = new WholesailCustomer("Wholesale");
-
+        WholesailCustomer defaultWholesailCustomer = new WholesailCustomer();
+        defaultWholesailCustomer.setCompanyName("Wholesale");
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();

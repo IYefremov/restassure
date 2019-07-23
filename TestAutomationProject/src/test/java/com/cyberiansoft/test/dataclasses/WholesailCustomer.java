@@ -16,8 +16,8 @@ public class WholesailCustomer implements AppCustomer {
 	@JsonProperty("mailAddress")
 	private String mailAddress;
 
-	public WholesailCustomer(String companyName) {
-		this.companyName = companyName;
+	public WholesailCustomer() {
+
 	}
 
 	@Override

@@ -410,8 +410,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,newVinNumber);
         vehicleInfoScreen.clickSaveInspectionMenuButton();
         BaseUtils.waitABit(10000);
-        VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-        informationDialog.clickInformationDialogOKButton();
+        VNextErrorDialog errorDialog = new VNextErrorDialog(DriverBuilder.getInstance().getAppiumDriver());
+        errorDialog.clickOKButtonAndGetMessage();
         inspectionsScreen.switchToMyInspectionsView();
         homeScreen = inspectionsScreen.clickBackButton();
         Assert.assertEquals(homeScreen.getQueueMessageValue(), queueMessage);
