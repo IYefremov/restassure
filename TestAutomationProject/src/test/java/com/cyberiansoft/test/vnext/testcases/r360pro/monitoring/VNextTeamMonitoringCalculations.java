@@ -80,6 +80,9 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openElementMenu(serviceData.getServiceName());
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.SKIPPED);
         ScreenNavigationSteps.pressBackButton();

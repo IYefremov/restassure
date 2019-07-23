@@ -209,7 +209,7 @@
       },
       "monitoring": {
         "repairOrderData": {
-          "phaseName": "AUTOMATIONPHASELEVEL",
+          "phaseName": "AUTOMATIONSERVICELEVEL",
           "vin": "777777",
           "completePercentage": "0%"
         },
@@ -228,7 +228,7 @@
       },
       "monitoring": {
         "repairOrderData": {
-          "phaseName": "AUTOMATIONPHASELEVEL",
+          "phaseName": "AUTOMATIONSERVICELEVEL",
           "vin": "777777",
           "completePercentage": "0%"
         },

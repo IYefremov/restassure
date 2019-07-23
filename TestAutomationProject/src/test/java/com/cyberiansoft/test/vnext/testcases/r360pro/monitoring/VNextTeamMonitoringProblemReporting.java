@@ -83,6 +83,9 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
 
         MonitorSteps.editOrder(workOrderId);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(serviceDto.getProblemReason());
         serviceDto.setServiceStatus(ServiceStatus.PROBLEM);
