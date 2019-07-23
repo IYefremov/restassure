@@ -19,6 +19,12 @@ public class AvailableServicesScreenSteps {
         servicesScreen.selectServices(serviceDataList);
     }
 
+    public static void openServiceDetails(String serviceName) {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.switchToAvalableServicesView();
+        servicesScreen.openServiceDetailsScreen(serviceName);
+    }
+
     public static void selectPartService(String serviceName, String subCategory, String partName, String partPosition) {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         ListSelectPage listPage = new ListSelectPage();

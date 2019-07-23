@@ -5,7 +5,6 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.ServicesScreenSteps;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -26,7 +25,7 @@ public class VNextTeamTechSplitServiceCases extends BaseTestCaseTeamEditionRegis
 
     @BeforeClass(description = "Tech split service test cases")
     public void beforeClass() {
-        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getTechSplitDataPath();
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getTechSplitServiceDataPath();
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         inspectionId = InspectionSteps.saveInspection();
@@ -47,10 +46,68 @@ public class VNextTeamTechSplitServiceCases extends BaseTestCaseTeamEditionRegis
         List<Employee> employeeList = workOrderData.getTechnicianList();
         Map<String, String> expectedTechSplit = workOrderData.getTechnicianSplitData();
 
-        ServicesScreenSteps.openCustomServiceDetails(service.getServiceName());
+        AvailableServicesScreenSteps.openServiceDetails(service.getServiceName());
         ServiceDetailsScreenSteps.changeServicePrice("100");
         ServiceDetailsScreenSteps.openTechniciansScreen();
         TechnicianScreenSteps.selectTechnicians(employeeList);
-        TechScreenValidations.validateTechniciansPercentage(expectedTechSplit);
+        TechScreenValidations.validateTechniciansValues(expectedTechSplit);
+        TechnicianScreenSteps.closeTechnicianMenu();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
+            , dependsOnMethods = "serviceLevelTechSplitValidation")
+    public void amountOfServiceRecalculatedBetweenTechniciansWhenUserChangeServicePrice(String rowID,
+                                                                                        String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        Map<String, String> expectedTechSplit = workOrderData.getTechnicianSplitData();
+
+        ServiceDetailsScreenSteps.changeServicePrice("200");
+        ServiceDetailsScreenSteps.openTechniciansScreen();
+        TechScreenValidations.validateTechniciansValues(expectedTechSplit);
+        TechnicianScreenSteps.closeTechnicianMenu();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
+            , dependsOnMethods = "amountOfServiceRecalculatedBetweenTechniciansWhenUserChangeServicePrice")
+    public void amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased(String rowID,
+                                                                            String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        Map<String, String> expectedTechSplit = workOrderData.getTechnicianSplitData();
+
+        ServiceDetailsScreenSteps.increaseServiceQuantity();
+        ServiceDetailsScreenSteps.openTechniciansScreen();
+        TechScreenValidations.validateTechniciansValues(expectedTechSplit);
+        TechnicianScreenSteps.closeTechnicianMenu();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
+            , dependsOnMethods = "amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased")
+    public void amountOfServiceIsRecalculatedWhenQuantityOfServiceDecreased(String rowID,
+                                                                            String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        Map<String, String> expectedTechSplit = workOrderData.getTechnicianSplitData();
+
+        ServiceDetailsScreenSteps.decreaseServiceQuantity();
+        ServiceDetailsScreenSteps.openTechniciansScreen();
+        TechScreenValidations.validateTechniciansValues(expectedTechSplit);
+        TechnicianScreenSteps.closeTechnicianMenu();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
+            , dependsOnMethods = "amountOfServiceIsRecalculatedWhenQuantityOfServiceDecreased")
+    public void userCanResetSplitToDefault(String rowID,
+                                           String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<Employee> employeeList = workOrderData.getTechnicianList();
+        Map<String, String> expectedTechSplit = workOrderData.getTechnicianSplitData();
+
+        ServiceDetailsScreenSteps.openTechniciansScreen();
+        TechnicianScreenSteps.selectTechnicians(employeeList);
+        TechnicianScreenSteps.selectDefault();
+        TechScreenValidations.validateTechniciansValues(expectedTechSplit);
+        TechnicianScreenSteps.closeTechnicianMenu();
+        ServiceDetailsScreenSteps.closeServiceDetailsScreen();
+        WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

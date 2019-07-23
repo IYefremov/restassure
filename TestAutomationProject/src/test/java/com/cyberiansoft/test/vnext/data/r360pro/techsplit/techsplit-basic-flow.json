@@ -94,18 +94,5 @@
         "Employee Employee": "50"
       }
     }
-  ],
-  "serviceLevelTechSplitValidation": [
-    {
-      "rowID": "serviceLevelTechSplitValidation.01",
-      "description": "",
-      "technicianSplitData": {
-        "Test Test": "50",
-        "Employee Employee": "50"
-      },
-      "service": {
-        "serviceName": "Expenses_money (AM)"
-      }
-    }
   ]
 }

@@ -1,14 +1,11 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.DamageData;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.testng.Assert;
 
 public class VisualScreenSteps {
@@ -40,6 +37,7 @@ public class VisualScreenSteps {
     public static void editVisualDamage(String newPrice) {
         openEditDamage();
         ServiceDetailsScreenSteps.changeServicePrice(newPrice);
+        ServiceDetailsScreenSteps.closeServiceDetailsScreen();
     }
 
     public static void verifyInspectionTotalPrice(String expectedPrice) {

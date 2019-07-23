@@ -128,5 +128,6 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
     }
+
 }
 
