@@ -32,6 +32,14 @@ public class TechScreenValidations {
         techPercentageList.forEach(TechScreenValidations::validateTechnicianPercentage);
     }
 
+    public static void validateTechnicianValue(String techName, String techPercentage) {
+        Assert.assertEquals(TechnicianScreenInteractions.getTechnicianElement(techName).getValueAmount(), techPercentage);
+    }
+
+    public static void validateTechniciansValues(Map<String, String> techPercentageList) {
+        techPercentageList.forEach(TechScreenValidations::validateTechnicianValue);
+    }
+
     public static void validatePercentageErrorMessageIsDisplayed() {
         WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(ErrorDialogInteractions.getErrorDialogText(),

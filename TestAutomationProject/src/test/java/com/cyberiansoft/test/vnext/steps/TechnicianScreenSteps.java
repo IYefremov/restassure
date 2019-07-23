@@ -20,10 +20,13 @@ public class TechnicianScreenSteps {
     public static void selectTechnicians(List<Employee> employeeList) {
         TechnicianScreenInteractions.selectEvenlyOption();
         employeeList.forEach((employee) -> TechnicianScreenInteractions.selectTechnician(employee.getEmployeeName()));
-        TechnicianScreenInteractions.acceptScreen();
     }
 
     public static void closeTechnicianMenu() {
         TechnicianScreenInteractions.acceptScreen();
+    }
+
+    public static void selectDefault() {
+        TechnicianScreenInteractions.selectDefault();
     }
 }

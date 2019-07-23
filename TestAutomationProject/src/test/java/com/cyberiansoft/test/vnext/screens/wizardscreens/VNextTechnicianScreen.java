@@ -14,21 +14,23 @@ import java.util.List;
 @Getter
 public class VNextTechnicianScreen extends VNextBaseScreen {
 
-    @FindBy(xpath = "//div[@data-page='tech-split']")
+    @FindBy(xpath = "//*[@data-page='tech-split']")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//div[@data-autotests-id='tech-split-list']//div[@class='entity-item']")
+    @FindBy(xpath = "//*[@data-autotests-id='tech-split-list']//div[@class='entity-item']")
     private List<TechnicialListElement> techList;
 
-    @FindBy(xpath = "//span[@action='save']")
+    @FindBy(xpath = "//*[@action='save']")
     private WebElement acceptButton;
 
-    @FindBy(xpath = "//a[@action='evenly']")
+    @FindBy(xpath = "//*[@action='evenly']")
     private WebElement evenlyButton;
 
-    @FindBy(xpath = "//a[@action='custom']")
+    @FindBy(xpath = "//*[@action='custom']")
     private WebElement customButton;
 
+    @FindBy(xpath = "//*[@action='default']")
+    private WebElement defaultButton;
 
     public VNextTechnicianScreen() {
         PageFactory.initElements(new FiledDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);

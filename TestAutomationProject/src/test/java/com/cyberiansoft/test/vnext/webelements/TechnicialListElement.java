@@ -34,6 +34,11 @@ public class TechnicialListElement implements IWebElement {
         return rootElement.findElement(By.xpath(amountLocator)).getAttribute("value").split(" ")[0];
     }
 
+    public String getValueAmount() {
+        return rootElement.findElement(By.xpath(amountLocator)).getAttribute("value").split(" ")[1];
+    }
+
+
     public void setPercentageAmount(String percentageAmount) {
         rootElement.findElement(By.xpath(amountLocator)).click();
         VNextCustomKeyboard keyboard = new VNextCustomKeyboard(DriverBuilder.getInstance().getAppiumDriver());

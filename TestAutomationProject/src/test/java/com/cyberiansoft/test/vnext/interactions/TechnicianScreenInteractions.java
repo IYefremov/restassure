@@ -54,4 +54,7 @@ public class TechnicianScreenInteractions {
     }
 
 
+    public static void selectDefault() {
+        WaitUtils.click(new VNextTechnicianScreen().getDefaultButton());
+    }
 }

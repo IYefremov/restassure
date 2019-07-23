@@ -11,6 +11,10 @@ public class ServiceDetailsScreenSteps {
         WaitUtils.elementShouldBeVisible(serviceDetailsScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(serviceDetailsScreen.getRootElement());
         serviceDetailsScreen.setServiceAmountValue(newServicePrice);
+    }
+
+    public static void closeServiceDetailsScreen() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
     }
 

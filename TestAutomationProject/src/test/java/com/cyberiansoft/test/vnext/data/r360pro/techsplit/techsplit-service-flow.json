@@ -2,7 +2,7 @@
   "serviceLevelTechSplitValidation": [
     {
       "rowID": "serviceLevelTechSplitValidation.01",
-      "description": "",
+      "description": "88079 88080",
       "technicianList": [
         {
           "employeeFirstName": "Test",
@@ -12,6 +12,67 @@
       "technicianSplitData": {
         "Test Test": "50",
         "Employee Employee": "50"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      }
+    }
+  ],
+  "amountOfServiceRecalculatedBetweenTechniciansWhenUserChangeServicePrice": [
+    {
+      "rowID": "amountOfServiceRecalculatedBetweenTechniciansWhenUserChangeServicePrice.01",
+      "description": "88086",
+      "technicianSplitData": {
+        "Test Test": "100",
+        "Employee Employee": "100"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      }
+    }
+  ],
+  "amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased": [
+    {
+      "rowID": "amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased.01",
+      "description": "88522",
+      "technicianSplitData": {
+        "Test Test": "200",
+        "Employee Employee": "200"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      }
+    }
+  ],
+  "amountOfServiceIsRecalculatedWhenQuantityOfServiceDecreased": [
+    {
+      "rowID": "amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased.01",
+      "description": "88522",
+      "technicianSplitData": {
+        "Test Test": "100",
+        "Employee Employee": "100"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      }
+    }
+  ],
+  "userCanResetSplitToDefault": [
+    {
+      "rowID": "userCanResetSplitToDefault.01",
+      "description": "88524",
+      "technicianList": [
+        {
+          "employeeFirstName": "1111",
+          "employeeLastName": "2222"
+        },
+        {
+          "employeeFirstName": "Sasha",
+          "employeeLastName": "AP"
+        }
+      ],
+      "technicianSplitData": {
+        "Employee Employee": "200"
       },
       "service": {
         "serviceName": "Expenses_money (AM)"
