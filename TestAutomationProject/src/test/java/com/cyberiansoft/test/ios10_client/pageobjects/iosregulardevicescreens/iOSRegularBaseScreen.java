@@ -59,17 +59,8 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		WebElement picker = wait.until(ExpectedConditions.presenceOfElementLocated( MobileBy.className("XCUIElementTypePicker")));
 
-BaseUtils.waitABit(5000);
+		BaseUtils.waitABit(5000);
 		((IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel")).setValue(value);
-		/*while (!(appiumdriver.findElementByClassName("XCUIElementTypePickerWheel").getAttribute("value").contains(value))) {
-			TouchAction action = new TouchAction(appiumdriver);
-			action.tap(PointOption.point(picker.getSize().getWidth()/2, picker
-					.getLocation().getY() + picker.getSize().getHeight()/2+40)).perform();
-			Helpers.waitABit(1000);
-			clicks = clicks+1;
-			if (clicks > defaultwheelnumer)
-				break;
-		}*/
 	}
 	
 	public void swipeToElement(WebElement elementtoswipe) {
@@ -78,7 +69,6 @@ BaseUtils.waitABit(5000);
 
 		while (swipe) {
 			if (elementtoswipe.isDisplayed()) {
-				swipe = false;
 				break;
 			} else if ((elementtoswipe.getLocation().getY() > screenheight)) {
 

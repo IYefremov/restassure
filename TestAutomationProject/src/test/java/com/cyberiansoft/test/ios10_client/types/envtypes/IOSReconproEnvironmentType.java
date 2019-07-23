@@ -3,7 +3,8 @@ package com.cyberiansoft.test.ios10_client.types.envtypes;
 public enum IOSReconproEnvironmentType {
 
     INTEGRATION("QC Environment"),
-    DEVELOPMENT("Dev Environment");
+    DEVELOPMENT("Dev Environment"),
+    UAT("UAT Environment");
 
 
     private final String environmentType;

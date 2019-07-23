@@ -106,6 +106,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
         RegularMainScreen mainscr = new RegularMainScreen();
         TestUser testuser = ((BaseTestCase) result.getInstance()).getTestUser();
         RegularHomeScreen homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
+        homescreen.waitHomeScreenLoaded();
 
     }
 

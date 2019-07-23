@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
@@ -8,42 +9,42 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
-	
-	private AppiumDriver appiumdriver;
 
-	final static String scrollviewxpath = "//XCUIElementTypeTable";
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[1]/XCUIElementTypeTextField[1]")
-    private IOSElement firstnamefld;
-	
-	//@iOSXCUITFindByuiAutomator = scrollviewxpath + ".cells()['Last Name'].textFields()[0]")
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[2]/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(accessibility = "First Name")
+	private IOSElement firstnamefld;
+
+	@iOSXCUITFindBy(accessibility = "Last Name")
     private IOSElement lastnamefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[3]/XCUIElementTypeTextField[1]")
+
+	@iOSXCUITFindBy(accessibility = "Company")
     private IOSElement companyfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[6]/XCUIElementTypeTextView[1]")
-    private IOSElement streetfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[8]/XCUIElementTypeTextField[1]")
+
+	@iOSXCUITFindBy(accessibility = "Address 1")
+    private IOSElement address1fld;
+
+	@iOSXCUITFindBy(accessibility = "Address 2")
+	private IOSElement address2fld;
+
+	@iOSXCUITFindBy(accessibility = "City")
     private IOSElement cityfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[10]/XCUIElementTypeTextField[1]")
-    private IOSElement statefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[9]/XCUIElementTypeTextField[1]")
+
+	@iOSXCUITFindBy(accessibility = "State\nProvince")
+	private IOSElement statefld;
+
+	@iOSXCUITFindBy(accessibility = "Country")
     private IOSElement countryfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[11]/XCUIElementTypeTextField[1]")
+
+	@iOSXCUITFindBy(accessibility = "ZIP\nPostal")
     private IOSElement zipfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[5]/XCUIElementTypeTextField[1]")
+
+	@iOSXCUITFindBy(accessibility = "Phone")
     private IOSElement phonefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeCell[4]/XCUIElementTypeTextField[1]")
+
+	@iOSXCUITFindBy(accessibility = "Email")
     private IOSElement mailfld;
 	
 	@iOSXCUITFindBy(accessibility = "Save")
@@ -58,7 +59,7 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 	}
 
 	public void addCustomer(String firstname, String lastname,
-			String companyname, String street, String city, String state,
+			String companyname, String address1, String city, String state,
 			String zip, String country, String phone, String mail) {
 		setFirstName(firstname);
 		setLastName(lastname);
@@ -66,7 +67,7 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(2000);
 		setMail(mail);
 		setPhone(phone);
-		setStreet(street);
+		setAddress1(address1);
 		setCity(city);
 		selectCountry(country);
 		Helpers.waitABit(2000);
@@ -78,7 +79,7 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 	}
 
 	public void editCustomer(String firstname, String lastname,
-			String companyname, String street, String city, String state,
+			String companyname, String address1, String city, String state,
 			String zip, String country, String phone, String mail) {
 		Helpers.waitABit(1000);
 		setFirstName(firstname);
@@ -87,7 +88,7 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 		Helpers.waitABit(2000);
 		setMail(mail);
 		setPhone(phone);
-		setStreet(street);
+		setAddress1(address1);
 		setCity(city);
 		setZip(zip);
 	}
@@ -95,55 +96,48 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 	public void setFirstName(String firstname) {
 		firstnamefld.clear();
 		firstnamefld.sendKeys(firstname+"\n");
-		//appiumdriver.hideKeyboard();
 	}
 
 	public void setLastName(String lastname) {
 		lastnamefld.click();
 		lastnamefld.clear();
 		lastnamefld.sendKeys(lastname + "\n");
-		//appiumdriver.hideKeyboard();
 	}
 
 	public void setCompanyName(String companyname) {
 		companyfld.clear();
 		companyfld.sendKeys(companyname + "\n");
-		//appiumdriver.hideKeyboard();
 	}
 
-	public void setStreet(String street) {
-		streetfld.clear();
-		streetfld.setValue(street + "\n");
-		//appiumdriver.hideKeyboard();
+	public void setAddress1(String address1) {
+		address1fld.clear();
+		address1fld.setValue(address1 + "\n");
+	}
+
+	public void setAddress2(String address2) {
+		address2fld.clear();
+		address2fld.setValue(address2 + "\n");
 	}
 
 	public void setCity(String city) {
 		cityfld.clear();
 		cityfld.sendKeys(city + "\n");
-		//appiumdriver.hideKeyboard();
-	}
-
-	public void setState(String state) {
-		statefld.setValue(state);
-		appiumdriver.hideKeyboard();
 	}
 
 	public void setZip(String zip) {
 		zipfld.clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(zip + "\n");
+		zipfld.sendKeys(zip + "\n");
 	}
 
 	public void setPhone(String phone) {
 		phonefld.clear();
 		phonefld.click();
 		phonefld.sendKeys(phone + "\n");
-		//appiumdriver.hideKeyboard();
 	}
 
 	public void setMail(String mail) {
 		mailfld.clear();
 		mailfld.sendKeys(mail + "\n");
-		//appiumdriver.hideKeyboard();
 	}
 
 	public void selectState(String state) {
@@ -153,6 +147,10 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 
 	public void selectCountry(String country) {
 		countryfld.click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(country)));
+		if (!appiumdriver.findElementByAccessibilityId(country).isDisplayed())
+			SwipeUtils.swipeToElement(appiumdriver.findElementByAccessibilityId(country));
 		appiumdriver.findElement(MobileBy.AccessibilityId(country)).click();
 	}
 
@@ -160,8 +158,5 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 		savebtn.click();
 	}
 
-	public void clickClientsBtn() {
-		clientsbtn.click();
-	}
 
 }

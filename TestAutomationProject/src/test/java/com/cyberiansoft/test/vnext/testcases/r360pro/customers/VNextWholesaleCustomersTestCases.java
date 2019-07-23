@@ -36,8 +36,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestCaseTeamEditionReg
     //		description = "Verify created on BO Wholesale customer displays in the list")
     public void testVerifyCreatedOnBOWholesaleCustomerDisplaysInTheList() {
 
-        final WholesailCustomer wholesalecustomer = new WholesailCustomer();
-        wholesalecustomer.setCompanyName("Test_Wholesale_BO");
+        final WholesailCustomer wholesalecustomer = new WholesailCustomer("Test_Wholesale_BO");
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
