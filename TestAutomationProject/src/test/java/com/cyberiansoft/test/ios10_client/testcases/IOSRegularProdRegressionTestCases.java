@@ -62,7 +62,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularCustomersScreenSteps.switchToWholesaleMode();
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
-        RegularMyInspectionsSteps.startCreatingInspection(new WholesailCustomer("Amazimg Nissan"), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        //RegularMyInspectionsSteps.startCreatingInspection(new WholesailCustomer("Amazimg Nissan"), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
         RegularNavigationSteps.navigateToClaimScreen();
         RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
