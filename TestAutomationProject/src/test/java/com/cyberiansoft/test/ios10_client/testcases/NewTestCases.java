@@ -82,7 +82,7 @@ public class NewTestCases extends BaseTestCase {
 			
 		homescreen = new RegularHomeScreen();
 			
-		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 		myinvoicesscreen.clickActionButton();
 		myinvoicesscreen.selectInvoices(numberInvoicesToSelect);
 		myinvoicesscreen.clickActionButton();

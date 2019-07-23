@@ -217,15 +217,11 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public void setFuelTankLevel(String fueltanklevel) {
 		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").click();
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Fuel Tank Level' and type = 'XCUIElementTypeCell'")).sendKeys(fueltanklevel);
-		//appiumdriver.getKeyboard().sendKeys(fueltanklevel);
-		//element(
-			//	MobileBy.name("Fuel Tank Level")).setValue(fueltanklevel);
 	}
 	
 	public void setLicensePlate(String licplate) {
-		appiumdriver.findElementByAccessibilityId("License Plate").click();
-		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'License Plate' and type = 'XCUIElementTypeCell'")).sendKeys(licplate);
-		//appiumdriver.getKeyboard().sendKeys(licplate);
+		appiumdriver.findElementByAccessibilityId("License\nPlate").click();
+		appiumdriver.findElementByAccessibilityId("License\nPlate").sendKeys(licplate);
 	}
 
 	public void setTech(String _tech) {
@@ -293,15 +289,11 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public void setRO(String ro) {
 		appiumdriver.findElementByAccessibilityId("RO#").click();
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'RO#' and type = 'XCUIElementTypeCell'")).sendKeys(ro + "\n");
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey(ro);
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public void setPO(String po) {
 		appiumdriver.findElementByAccessibilityId("PO#").click();
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'")).sendKeys(po + "\n");
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey(po);
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public String getWorkOrderCustomer() {

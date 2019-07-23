@@ -28,6 +28,7 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequ
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -52,6 +53,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		RegularMainScreen mainScreen = new RegularMainScreen();
 		homeScreen = mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		homeScreen.waitHomeScreenLoaded();
 		RegularSettingsScreen settingsScreen =  homeScreen.clickSettingsButton();
 		settingsScreen.setShowAvailableSelectedServicesOn();
 		homeScreen = settingsScreen.clickHomeButton();
@@ -1094,7 +1096,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		myWorkOrdersScreen.clickHomeButton();
 		
-		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoices();
+		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
 		myinvoicesscreen.selectInvoice(invoicenum);
 		myinvoicesscreen.clickEditPopup();
 		questionsScreen = new RegularQuestionsScreen();
@@ -1536,7 +1538,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
-		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoices();
+		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
 		Assert.assertEquals(myinvoicesscreen.getPriceForInvoice(invoiceNumber), invoiceData.getInvoiceTotal());
 		myinvoicesscreen.clickHomeButton();		
 	}

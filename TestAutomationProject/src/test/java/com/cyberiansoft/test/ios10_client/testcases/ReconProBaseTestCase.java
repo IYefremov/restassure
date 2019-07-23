@@ -13,6 +13,8 @@ public class ReconProBaseTestCase extends BaseTestCase {
             deviceofficeurl = ReconProIOSStageInfo.getInstance().getBackOfficeDevelopmentURL();
         else if (envType.equals(IOSReconproEnvironmentType.INTEGRATION))
             deviceofficeurl = ReconProIOSStageInfo.getInstance().getBackOfficeStagingURL();
+        else if (envType.equals(IOSReconproEnvironmentType.UAT))
+            deviceofficeurl = ReconProIOSStageInfo.getInstance().getBackOfficeUATURL();
 
     }
 }

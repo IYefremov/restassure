@@ -34,4 +34,6 @@ public class IOSReconProTestCasesDataPaths {
     public String getCalculationsTestCasesDataPath() { return props.getProperty("calculations.td"); }
 
     public String getGeneralSuiteTestCasesDataPath() { return props.getProperty("general.suite.td"); }
+
+    public String getProdRegressionSuiteTestCasesDataPath() { return props.getProperty("prod.regression.suite.td"); }
 }

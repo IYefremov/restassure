@@ -3,6 +3,8 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -33,6 +35,9 @@ public class RegularMainScreen extends iOSBaseScreen {
 	@iOSXCUITFindBy(accessibility = "Licenses")
     private IOSElement licenses;
 
+	@iOSXCUITFindBy(accessibility = "LoginView")
+	private IOSElement loginView;
+
 	public RegularMainScreen() {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
@@ -50,30 +55,30 @@ public class RegularMainScreen extends iOSBaseScreen {
 
 	public void updateVIN() {
 		Helpers.waitUntilCheckLicenseDialogDisappears();
-		/*
-		 * MobileElement element = new MobileElement( (RemoteWebElement)
-		 * driver.findElementByXPath(updatevinxpath), driver);
-		 */
 		updatevin.click();
 		Helpers.acceptAlert();
 	}
 
-	public RegularHomeScreen userLogin(String user, String password)  {
-		//Helpers.waitUntilCheckLicenseDialogDisappears();
-		//Thread.sleep(3000);
-		//Helpers.scroolToByXpath("//UIATableView[1]/UIATableCell/UIAStaticText[@name='" + user + "']");
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(user)));
-		appiumdriver.findElementByAccessibilityId(user).click();
-		wait = new WebDriverWait(appiumdriver, 15);
-
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Enter password here")));
-		securefld.setValue(password);
-		loginbtn.click();
+	public RegularHomeScreen userLogin(String employeeName, String password)  {
+		selectEmployee(employeeName);
+		enterEmployeePassword(password);
 		return new RegularHomeScreen();
 	}
-	
+
+	public void selectEmployee(String employeeName) {
+		WaitUtils.waitUntilElementIsClickable(loginView);
+		if (!loginView.findElementByAccessibilityId(employeeName).isDisplayed()) {
+			SwipeUtils.swipeToElement(loginView.findElementByAccessibilityId(employeeName));
+		}
+		loginView.findElementByAccessibilityId(employeeName).click();
+	}
+
+	public void enterEmployeePassword(String employeePassword) {
+		WaitUtils.waitUntilElementIsClickable(securefld);
+		securefld.setValue(employeePassword);
+		loginbtn.click();
+	}
+
 	public LicensesScreen clickLicenses() {
 		licenses.click();
 		return new LicensesScreen();

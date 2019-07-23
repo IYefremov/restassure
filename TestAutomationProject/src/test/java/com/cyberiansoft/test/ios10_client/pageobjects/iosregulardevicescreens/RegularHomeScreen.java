@@ -5,6 +5,7 @@
   import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
   import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
   import com.cyberiansoft.test.ios10_client.utils.Helpers;
+  import com.cyberiansoft.test.vnext.utils.WaitUtils;
   import io.appium.java_client.MobileBy;
   import io.appium.java_client.ios.IOSElement;
   import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -15,10 +16,10 @@
 
 public class RegularHomeScreen extends iOSRegularBaseScreen {
 	
-	/*@iOSXCUITFindBy(accessibility = "Customers")
+	@iOSXCUITFindBy(accessibility = "Customers")
     private IOSElement customersbtn;
 	
-	@iOSXCUITFindBy(accessibility = "My Inspections")
+	/*@iOSXCUITFindBy(accessibility = "My Inspections")
     private IOSElement myinspectionsbtn;
 	
 	@iOSXCUITFindBy(accessibility  = "Team Inspections")
@@ -57,14 +58,18 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	public RegularHomeScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		//WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		//wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("Home")));
+	}
+
+	public void waitHomeScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("Home")));
 	}
 
 	public RegularCustomersScreen clickCustomersButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Customers")));
-		appiumdriver.findElementByAccessibilityId("Customers").click();
+		WaitUtils.waitUntilElementIsClickable(customersbtn);
+		customersbtn.click();
 		return new RegularCustomersScreen();
 	}
 
@@ -101,13 +106,11 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		return new RegularCarHistoryScreen();
 	}
 
-	public RegularMyInvoicesScreen clickMyInvoices() {
+	public RegularMyInvoicesScreen clickMyInvoicesButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
-		RegularMyInvoicesScreen invoicesscreen = new RegularMyInvoicesScreen();
-		invoicesscreen.switchToMyView();
-		return invoicesscreen;
+		return new RegularMyInvoicesScreen();
 	}
 	
 	public RegularTeamInvoicesScreen clickTeamInvoices() {
@@ -127,8 +130,6 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickStatusButton() {
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		//wait.until(ExpectedConditions.elementToBeClickable(statustsbtn));
 		appiumdriver.findElementByAccessibilityId("Status").click();
 	}
 	
