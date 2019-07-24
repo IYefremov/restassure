@@ -301,7 +301,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertFalse(myworkordersscreen.woExists(wo1));
 			Assert.assertFalse(myworkordersscreen.woExists(wo2));
 			myworkordersscreen.clickHomeButton();
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			final String wosvalue = wo1 + ", " +  wo2;
 			Assert.assertEquals(wosvalue, myinvoicesscreen.getWOsForInvoice(invoicenum));
 			myinvoicesscreen.clickHomeButton();
@@ -2528,7 +2528,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			invoiceinfoscreen.clickSaveAsFinal();
 
 			myworkordersscreen.clickHomeButton();
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			Assert.assertTrue(myinvoicesscreen.myInvoiceExists(invoicenum));
 			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickNotesPopup();
@@ -2569,7 +2569,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			invoiceinfoscreen.clickSaveAsFinal();
 
 			myworkordersscreen.clickHomeButton();
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			Assert.assertTrue(myinvoicesscreen.myInvoiceExists(invoicenum));
 			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickChangePOPopup();
@@ -2733,7 +2733,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			myworkordersscreen.clickHomeButton();
 			
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickEditPopup();
 			invoiceinfoscreen = new RegularInvoiceInfoScreen();
@@ -2831,12 +2831,12 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			questionsscreen.chooseAVISCode("Rental-921");						
 			invoiceinfoscreen.clickSaveAsFinal();
 			teamworkordersscreen.clickHomeButton();
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickChangePOPopup();
 			myinvoicesscreen.changePO("170116");
             myinvoicesscreen.clickBackButton();
-            homescreen.clickMyInvoices();
+            homescreen.clickMyInvoicesButton();
             Assert.assertEquals(myinvoicesscreen.getInvoicePrice(invoicenum), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
             Assert.assertTrue(myinvoicesscreen.isInvoiceHasInvoiceSharedIcon(invoicenum));
 			Assert.assertTrue(myinvoicesscreen.isInvoiceHasInvoiceNumberIcon(invoicenum));
@@ -2944,7 +2944,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			invoiceinfoscreen.clickSaveAsFinal();
 			teamworkordersscreen.clickHomeButton();
 			
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickChangePOPopup();
 			myinvoicesscreen.changePO("957884");
@@ -3248,7 +3248,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 		@Test(testName = "Test Case 10263:Send Multiple Emails", description = "Send Multiple Emails")
 		public void testSendMultipleEmails() {
 
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			myinvoicesscreen.clickActionButton();
 			myinvoicesscreen.selectInvoices(3);
 
@@ -3467,7 +3467,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			questionsscreen.chooseAVISCode("Other-920");			
 			invoiceinfoscreen.clickSaveAsFinal();
 			myworkordersscreen.clickHomeButton();
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			myinvoicesscreen.selectInvoice(invoicenum);
 			notesscreen =  myinvoicesscreen.clickNotesPopup();
 			notesscreen.addNotesCapture();
@@ -3604,7 +3604,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final  String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 			invoiceinfoscreen.clickSaveAsFinal();
 			myworkordersscreen.clickHomeButton();
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			myinvoicesscreen.clickActionButton();
 			myinvoicesscreen.selectInvoice(invoicenum);
 			myinvoicesscreen.clickActionButton();
@@ -3658,7 +3658,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			invoiceinfoscreen.clickSaveAsFinal();
 
 			myworkordersscreen.clickHomeButton();
-			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+			RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
 			myinvoicesscreen.selectInvoice(invoicenum);
 			RegularNotesScreen notesscreen = myinvoicesscreen.clickNotesPopup();
 			notesscreen.setNotes("Refused paint");

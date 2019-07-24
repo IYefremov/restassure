@@ -1,0 +1,39 @@
+{
+
+  "testCreateInspectionVerifyOnBO": [
+    {
+      "rowID": "testCreateInspectionVerifyOnBO.01",
+      "description": "Test Case 27847: 1 - Create inspection - verify on BO",
+      "inspectionData": {
+        "retailCustomer" : {"firstName" :  "Amazimg", "lastName" :  "Nissan"},
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber" : "pl-123",
+          "deductible" : "34"
+        }
+      }
+    }
+  ],
+
+  "testCreateRetailCustomer": [
+    {
+      "rowID": "testCreateRetailCustomer.01",
+      "description": "Test Case 27854: 1 - 8 - Create retail customer",
+      "inspectionData": {
+        "retailCustomer" : {"firstName" :  "TestRetailFirst", "lastName" :  "TestRetailSecond",
+        "mailAddress" :  "test@cyberiansoft.com", "customerPhone" :  "+123456789",
+        "customerAddress1" :  "First Street 1/32", "customerAddress2" :  "Block 92-3", "customerCity" :  "L'viv",
+        "customerCountry" :  "United States", "customerState" :  "California", "customerZipCode" :  "79031"}
+      }
+    }
+  ]
+
+}

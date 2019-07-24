@@ -11,6 +11,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,10 +26,10 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	private final TypeScreenContext INSPECTIONCONTEXT = TypeScreenContext.INSPECTION;
 
-	/*@iOSXCUITFindBy(accessibility = "Add")
+	@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addinspbtn;
 	
-	@iOSXCUITFindBy(accessibility = "MyInspectionsTable")
+	/*@iOSXCUITFindBy(accessibility = "MyInspectionsTable")
 	private IOSElement inspectiontable;
 	
 	@iOSXCUITFindBy(accessibility = "Edit")
@@ -85,8 +86,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	public RegularMyInspectionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("InspectionsTable")));
 	}
 
 	public void waitMyInspectionsScreenLoaded() {
@@ -155,11 +154,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 	
-	public EmailScreen clickSendEmail() {
-		appiumdriver.findElementByAccessibilityId("Send\nEmail").click();
-		return new EmailScreen();
-	}
-	
 	public void clickCopyInspection() {
 		appiumdriver.findElementByAccessibilityId("Copy").click();
 		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
@@ -188,13 +182,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 			appiumdriver.findElement(MobileBy.name("Done")).click();
 	}
 
-	/*public RegularVehicleScreen selectDefaultInspectionType() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Default")));
-		appiumdriver.findElement(MobileBy.AccessibilityId("Default")).click();
-		return new RegularVehicleScreen();
-	}*/
-
 	public <T extends IBaseWizardScreen> T selectInspectionType(IInspectionsTypes inspectionType) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InspectionTypeSelector")));
@@ -204,14 +191,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		}
 		appiumdriver.findElement(MobileBy.AccessibilityId(inspectionType.getInspectionTypeName())).click();
 		return inspectionType.getFirstVizardScreen();
-	}
-
-	public void selectFirstInspection() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='InspectionsTable']/XCUIElementTypeCell[1]"))).click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='MyInspectionsTable']/XCUIElementTypeCell[1]").click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='MyInspectionsTable']/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionNumber']").click();
-		//firstinspection.click();
 	}
 
 	public String getFirstInspectionNumberValue() {
@@ -224,7 +203,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
 				AccessibilityId(inspectionnumber)).findElement(MobileBy.
 						AccessibilityId("labelInspectionAmount")).getAttribute("label");
-		//return firstinspectionprice.getAttribute("label");
 	}
 	
 	public String getInspectionApprovedPriceValue(String inspectionnumber) {

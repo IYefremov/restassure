@@ -4,15 +4,30 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import lombok.Getter;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
+@Getter
 public class RegularCustomersScreen extends RegularBaseAppScreen {
+
+	@iOSXCUITFindBy(accessibility = "Customers")
+	private IOSElement rootElement;
+
+	@iOSXCUITFindBy(accessibility = "Add")
+	private IOSElement addcustomerbtn;
+
+	@iOSXCUITFindBy(accessibility = "CustomersTable")
+	private IOSElement customersTable;
 	
 	/*@iOSXCUITFindBy(accessibility = "btnWholesale")
     private IOSElement btnwholesale;
@@ -20,8 +35,7 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	@iOSXCUITFindBy(accessibility = "btnRetail")
     private IOSElement btnretail;
 	
-	@iOSXCUITFindBy(accessibility = "Add")
-    private IOSElement addcustomerbtn;
+
 	
 	@iOSXCUITFindBy(accessibility = "Search")
     private IOSElement searchbtn;
@@ -62,20 +76,19 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 		return Helpers.elementExists(customer);
 	}
 	
-	public RegularAddCustomerScreen clickAddCustomersButton() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Add")).click();
-		return new RegularAddCustomerScreen();
+	public void clickAddCustomersButton() {
+		addcustomerbtn.click();
 	}
 	
-	public void selectCustomer(String customer) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
-			searchbtn.click();
+	public void selectCustomer(String customerName) {
+		WaitUtils.waitUntilElementIsClickable(rootElement);
+		searchbtn.click();
 		BaseUtils.waitABit(1500);
-		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer);
-		appiumdriver.findElementByAccessibilityId(customer).click();
-		wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customerName);
+		appiumdriver.findElementByAccessibilityId(customerName).click();
+		WaitUtils.waitUntilElementInvisible(MobileBy.AccessibilityId("Customer changing..."));
+		//wait = new WebDriverWait(appiumdriver, 60);
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
 	}
 	
 	public void selectOnlineCustomer(String customer) {
@@ -95,7 +108,9 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	public RegularHomeScreen selectCustomerWithoutEditing(String customer) {
 		selectCustomer(customer);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Select")).click();
-		return new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
+		homeScreen.waitHomeScreenLoaded();
+		return homeScreen;
 	}
 	
 	public RegularAddCustomerScreen selectCustomerToEdit(String customer) {
@@ -111,5 +126,6 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	public boolean checkTopCustomersExists() {
 		return elementExists("Top Customers");
 	}
+
 
 }

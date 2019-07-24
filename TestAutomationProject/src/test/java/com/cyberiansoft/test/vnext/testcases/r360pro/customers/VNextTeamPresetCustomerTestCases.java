@@ -204,7 +204,6 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestCaseTeamEditionReg
 
         WholesailCustomer defaultWholesailCustomer = new WholesailCustomer();
         defaultWholesailCustomer.setCompanyName("Wholesale");
-
         VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
