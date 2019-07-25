@@ -40,16 +40,6 @@ public class RegularBaseServicesScreen extends RegularBaseWizardScreen {
         appiumdriver.findElement(MobileBy.AccessibilityId("Final")).click();
     }
 
-    public <T extends RegularBaseTypeScreen> T saveAsFinal() {
-        clickSaveAsFinal();
-        return getTypeScreenFromContext();
-    }
-
-    public <T extends RegularBaseTypeScreen> T saveAsDraft() {
-        clickSaveAsDraft();
-        return getTypeScreenFromContext();
-    }
-
     public void clickSaveAsDraft() {
         clickSave();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

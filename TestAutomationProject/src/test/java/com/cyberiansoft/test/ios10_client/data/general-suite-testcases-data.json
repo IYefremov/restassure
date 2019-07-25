@@ -654,7 +654,7 @@
               {
                 "questionSetionName": "Check Condition of Battery (Storage Capacity Test)",
                 "questionAnswer": "Immediate Attention Required",
-                "screenIndex": 0,
+                "screenIndex": 1,
                 "screenHDIndex": 0,
                 "questionAnswerIndex" : 2
               },

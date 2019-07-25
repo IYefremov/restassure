@@ -98,8 +98,11 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	public RegularServiceRequestsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+	}
+
+	public void waitForServiceRequestScreenLoad() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable"))); 
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable")));
 	}
 
 	public void clickRefreshButton()  {
@@ -110,7 +113,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	public void clickAddButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Add")));
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Add")));
 		appiumdriver.findElementByAccessibilityId("Add").click();
 		RegularBaseWizardScreen.typeContext = SRCONTEXT;
 	}
