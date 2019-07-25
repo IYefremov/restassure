@@ -47,21 +47,21 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
             appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
     }
 
-    public <T extends ITypeScreen> T saveWizard() {
+    /*public <T extends ITypeScreen> T saveWizard() {
         clickSave();
         return getTypeScreenFromContext();
-    }
+    }*/
 
     public void clickCancelWizard() {
         clickChangeScreen();
         appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
     }
 
-    public <T extends ITypeScreen> T cancelWizard() {
+    /*public <T extends ITypeScreen> T cancelWizard() {
         clickCancelWizard();
         acceptAlert();
         return getTypeScreenFromContext();
-    }
+    }*/
 
     public <T extends ITypeScreen> T getTypeScreenFromContext()  {
         return (T) RegularTypesScreenFactory.getTypeScreen(typeContext);

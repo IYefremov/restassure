@@ -19,6 +19,8 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularServiceRequestSteps;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularWorkOrdersSteps;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
@@ -140,7 +142,7 @@ public class NewTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
+		RegularWorkOrdersSteps.saveWorkOrder();
 		myworkordersscreen.selectWorkOrderForApprove(wonumber1);
 		myworkordersscreen.clickApproveButton();
 		
@@ -317,7 +319,7 @@ public class NewTestCases extends BaseTestCase {
 		for (String serviceName : services)
 			Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
 					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));
-		servicesscreen.saveWizard();
+		RegularServiceRequestSteps.saveServiceRequest();
 		servicerequestsscreen.clickHomeButton();
 	}
 	

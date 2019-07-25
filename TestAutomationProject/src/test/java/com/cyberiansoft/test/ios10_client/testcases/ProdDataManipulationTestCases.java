@@ -22,6 +22,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularInspectionsSteps;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.ProdInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import org.json.simple.JSONObject;
@@ -125,7 +126,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             vehiclePartScreen.clickSave();
             pricematrix = new RegularPriceMatrixScreen();
         }
-        pricematrix.saveWizard();
+        RegularInspectionsSteps.saveInspecion();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -201,7 +202,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.saveWizard();
+        RegularInspectionsSteps.saveInspecion();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -232,7 +233,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.saveWizard();
+        RegularInspectionsSteps.saveInspecion();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -263,7 +264,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.saveWizard();
+        RegularInspectionsSteps.saveInspecion();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -294,7 +295,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.saveWizard();
+        RegularInspectionsSteps.saveInspecion();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -325,7 +326,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        servicesScreen.saveWizard();
+        RegularInspectionsSteps.saveInspecion();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }

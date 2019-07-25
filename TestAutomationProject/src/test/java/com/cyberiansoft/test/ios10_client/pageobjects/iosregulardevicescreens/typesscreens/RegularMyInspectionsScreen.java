@@ -8,6 +8,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWiz
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -105,8 +106,9 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
-	
+
 	public void clickOnInspection(String inspnumber) {
+		waitMyInspectionsScreenLoaded();
 		appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.AccessibilityId(inspnumber)).click();
 	}
 	
@@ -300,8 +302,8 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
 	
-	public RegularMyInspectionsScreen changeCustomerForInspection(String inspection, String customer) {
-		appiumdriver.findElement(MobileBy.AccessibilityId(inspection)).click();
+	public RegularMyInspectionsScreen changeCustomerForInspection(String inspectionNumber, String customer) {
+		clickOnInspection(inspectionNumber);
 		clickChangeCustomerpopupMenu();
 		selectCustomer(customer);
 		return this;
@@ -348,17 +350,9 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void selectInspectionForAction(String inspnumber) {
+		waitMyInspectionsScreenLoaded();
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))).findElement(MobileBy.className("XCUIElementTypeOther")).click();
-		//appiumdriver.findElementByAccessibilityId("MyInspectionsTable").findElement(MobileBy.
-		//		AccessibilityId(inspnumber)).findElement(MobileBy.className("XCUIElementTypeOther")).click();
-	}
-	
-	public void selectInspection(String inspnumber) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		IOSElement inptable = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))); 
-		appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
-				AccessibilityId(inspnumber)).click();
 	}
 
 	public boolean isInspectionIsApproved(String inspnumber) {
@@ -372,8 +366,9 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspnumber) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		return wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))).findElements(MobileBy.AccessibilityId("ESTIMATION_NOTES")).size() > 0; 
+		waitMyInspectionsScreenLoaded();
+		WaitUtils.waitUntilElementIsClickable(appiumdriver.findElementByAccessibilityId(inspnumber));
+		return appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("ESTIMATION_NOTES")).size() > 0;
 	}
 	
 	public boolean isDraftIconPresentForInspection(String inspnumber) {

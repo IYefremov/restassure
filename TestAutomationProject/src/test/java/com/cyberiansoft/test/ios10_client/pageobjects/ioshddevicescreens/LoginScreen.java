@@ -34,24 +34,16 @@ public class LoginScreen extends iOSHDBaseScreen {
 	}
 
 	public void registeriOSDevice(String regCode) {
-		//firstcode.setValue(regCode.substring(0, 4));
 		firstcode.click();
-
 		firstcode.sendKeys(regCode.substring(0, 4));
 		secondcode.sendKeys(regCode.substring(5, 9));
 		thirdcode.sendKeys(regCode.substring(10, 14));
-		/*firstcode.setValue(regCode.substring(0, 4));
-		secondcode.setValue(regCode.substring(5, 9));
-		thirdcode.setValue(regCode.substring(10, 14));*/
-		//thirdcode.click();
 		registerbtn.click();
-		//registerbtn.click();
 
 		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 600);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("UpdateMainDatabaseButton")));
 		appiumdriver.findElementByAccessibilityId("UpdateMainDatabaseButton");
-		//Helpers.element(MobileBy.name("UpdateMainDatabaseButton"));
-		
+
 	}
 
 }

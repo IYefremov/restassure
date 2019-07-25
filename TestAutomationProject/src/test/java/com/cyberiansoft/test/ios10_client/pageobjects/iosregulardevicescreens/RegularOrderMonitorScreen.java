@@ -241,7 +241,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clicksRepairPhaseLine() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("Repair phase"))).click();
 	}
 
@@ -252,7 +252,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public boolean isStartPhaseButtonExists() {
-		return monitorserviceslist.
+		return appiumdriver.
 				findElementsByAccessibilityId("btnStartReset").size() > 0;
 	}
 
