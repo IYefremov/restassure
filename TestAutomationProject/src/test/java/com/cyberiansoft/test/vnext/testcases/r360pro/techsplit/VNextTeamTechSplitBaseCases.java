@@ -69,6 +69,7 @@ public class VNextTeamTechSplitBaseCases extends BaseTestCaseTeamEditionRegistra
         VehicleInfoScreenSteps.selectTechnicians(employeeList);
         GeneralSteps.confirmDialog();
         TechScreenValidations.validateTechniciansSelected(baseEmployeeList);
+        WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
     }
 }

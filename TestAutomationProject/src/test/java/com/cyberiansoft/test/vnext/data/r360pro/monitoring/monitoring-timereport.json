@@ -1,0 +1,42 @@
+{
+  "userCanSeeTimeReportOnServiceLevel": [
+    {
+      "rowID": "userCanSeeTimeReportOnServiceLevel.01",
+      "description": "91017",
+      "service": {
+        "serviceName": "Labor AM"
+      }
+    }
+  ],
+  "userCanSeeTimeReportOnPhaseLevel": [
+    {
+      "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
+      "description": "91020",
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationPhaseLevel"
+        }
+      }
+    }
+  ],
+  "userCanResetStartDateOnServiceLevel": [
+    {
+      "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
+      "description": "91006",
+      "service": {
+        "serviceName": "Labor AM"
+      }
+    }
+  ],
+  "userCanResetStartDateOnPhaseLevel": [
+    {
+      "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
+      "description": "91007",
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationPhaseLevel"
+        }
+      }
+    }
+  ]
+}

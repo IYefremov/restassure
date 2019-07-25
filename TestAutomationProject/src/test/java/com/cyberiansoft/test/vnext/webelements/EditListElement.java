@@ -14,6 +14,7 @@ public class EditListElement implements IWebElement {
     private String nameLocator = ".//div[contains(@class,\"icon-item-content-title\")]";
     private String expandElementLocator = ".//*[@action=\"open-phase-services\"]";
     private String clockIconLocator = ".//div[contains(@class,\"icon-item-content-title\")][3]//span[@class='icon-item-arrow']";
+    private String startDateLocator = ".//div[contains(@class,\"icon-item-content-title\")][3]";
 
 
     public EditListElement(WebElement rootElement) {
@@ -41,5 +42,9 @@ public class EditListElement implements IWebElement {
 
     public Boolean isClockIconPresent() {
         return rootElement.findElements(By.xpath(clockIconLocator)).size() > 0;
+    }
+
+    public Boolean isStartDatePresent() {
+        return !rootElement.findElement(By.xpath(startDateLocator)).getText().equals("");
     }
 }
