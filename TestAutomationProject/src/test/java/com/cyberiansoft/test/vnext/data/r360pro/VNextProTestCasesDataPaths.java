@@ -81,6 +81,10 @@ public class VNextProTestCasesDataPaths {
 
     public String getMonitoringBaseCaseDataPath() { return props.getProperty("monitoring.basic.flow"); }
 
+    public String getMonitoringTimeReportDataPath() {
+        return props.getProperty("monitoring.timereport");
+    }
+
     public String getTechSplitDataPath() {
         return props.getProperty("techsplit.basic.flow");
     }

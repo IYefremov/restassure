@@ -343,7 +343,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 
 		SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
-		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Dev Environment");
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment(envType.getEnvironmentTypeName());
 		loginscreen.registeriOSDevice(regCode);
 		mainscreen.userLogin(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN, iOSInternalProjectConstants.USER_PASSWORD);
 

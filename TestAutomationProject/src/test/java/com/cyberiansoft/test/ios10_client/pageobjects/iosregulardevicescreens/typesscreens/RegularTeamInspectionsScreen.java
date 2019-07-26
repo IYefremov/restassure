@@ -6,6 +6,7 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -19,34 +20,37 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 
 	private final TypeScreenContext TEAMINSPECTIONCONTEXT = TypeScreenContext.TEAMINSPECTION;
 	
-	/*@iOSXCUITFindBy(accessibility = "InspectionsTable")
+	@iOSXCUITFindBy(accessibility = "InspectionsTable")
 	private IOSElement inspectiontable;
+
+	@iOSXCUITFindBy(accessibility = "Approve")
+	private IOSElement approvepopupmenu;
 	
 	@iOSXCUITFindBy(accessibility = "Edit")
     private IOSElement editpopupmenu;
 	
-	@iOSXCUITFindBy(accessibility = "Approve")
-    private IOSElement approvepopupmenu;
-	
-	@iOSXCUITFindBy(accessibility = "Done")
+	/*@iOSXCUITFindBy(accessibility = "Done")
     private IOSElement toolbardonebtn;*/
 	
 	public RegularTeamInspectionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+	}
+
+	public void waitTeamInspectionsScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("InspectionsTable")));
 	}
 	
 	public void selectInspectionForAction(String inspnumber) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		IOSElement inptable = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))); 
-		appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
+		IOSElement inptable = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber)));
+		inspectiontable.findElement(MobileBy.
 				AccessibilityId(inspnumber)).click();
 	}
 	
 	public void clickOnInspection(String inspnumber) {
-		appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.AccessibilityId(inspnumber)).click();
+		inspectiontable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
 	}
 	
 	public void selectInspectionForEdit(String inspnumber) {
@@ -55,22 +59,22 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	}
 	
 	public void clickEditInspectionButton() {
-		appiumdriver.findElementByAccessibilityId("Edit").click();
+		editpopupmenu.click();
 		RegularBaseWizardScreen.typeContext = TEAMINSPECTIONCONTEXT;
 	}
 	
 	public boolean isInspectionIsApproveButtonExists(String inspnumber) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_76")).size() > 0;
+		return inspectiontable.findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_76")).size() > 0;
 	}
 	
 	public boolean isDraftIconPresentForInspection(String inspnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber)));
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeImage[@name='ESTIMATION_DRAFT']")).size() > 0;
+		return inspectiontable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeImage[@name='ESTIMATION_DRAFT']")).size() > 0;
 	}
 	
 	public boolean isInspectionExists(String inspection) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElements(MobileBy.AccessibilityId(inspection)).size() > 0;
+		return inspectiontable.findElements(MobileBy.AccessibilityId(inspection)).size() > 0;
 	}
 	
 	public void clickActionButton() {
@@ -80,7 +84,7 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	
 	public void clickApproveInspections() {
 		clickActionButton();
-		appiumdriver.findElementByAccessibilityId("Approve").click();
+		approvepopupmenu.click();
 	}
 	
 	public void selectEmployeeAndTypePassword(String employee, String password) {
@@ -113,19 +117,19 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	}
 	
 	protected void clickApproveInspectionButton() {
-		appiumdriver.findElementByAccessibilityId("Approve").click();
+		approvepopupmenu.click();
 	}
 	
 	public boolean checkInspectionIsApproved(String inspnumber) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
+		return inspectiontable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}
 	
 	public String getFirstInspectionAprovedPriceValue() {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionApprovedAmount']")).getAttribute("label");
+		return inspectiontable.findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionApprovedAmount']")).getAttribute("label");
 	}
 	
 	public String getFirstInspectionPriceValue() {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionAmount']")).getAttribute("label");
+		return inspectiontable.findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionAmount']")).getAttribute("label");
 		//return firstinspectionprice.getAttribute("label");
 	}
 

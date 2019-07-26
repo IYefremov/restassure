@@ -14,7 +14,9 @@ public enum MenuItems {
     REPORT_PROBLEM("Report Problem"),
     RESOLVE_PROBLEM("Resolve Problem"),
     FOCUS_MODE_ON("OFF\nFocus mode"),
-    FOCUS_MODE_OFF("ON\nFocus mode");
+    FOCUS_MODE_OFF("ON\nFocus mode"),
+    TIME_REPORT("Time Report"),
+    RESET_START_DATE("Reset Start Date");
 
     @Getter
     private String menuItemDataName;

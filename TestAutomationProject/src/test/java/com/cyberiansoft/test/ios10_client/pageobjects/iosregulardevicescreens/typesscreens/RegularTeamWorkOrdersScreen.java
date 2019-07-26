@@ -53,10 +53,13 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	public RegularTeamWorkOrdersScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+	}
+
+	public void waitTeamWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersTable")));
 	}
-	
+
 	public void clickCreateInvoiceForWO(String wonumber) {
 		WebElement table = appiumdriver.findElementByAccessibilityId("TeamOrdersTable");
 		table.findElement(By.xpath("//XCUIElementTypeCell[@name='"
