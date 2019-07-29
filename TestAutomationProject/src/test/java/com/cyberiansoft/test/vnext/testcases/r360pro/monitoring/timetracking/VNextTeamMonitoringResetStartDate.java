@@ -60,6 +60,8 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestCaseTeamEditionRe
         GeneralSteps.confirmDialog();
         EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), false);
         EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.ACTIVE);
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -67,6 +69,7 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestCaseTeamEditionRe
                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
+        ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
         EditOrderScreenValidations.elementShouldHaveStartDate(phaseDto.getPhaseName(), false);
@@ -74,11 +77,13 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestCaseTeamEditionRe
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         EditOrderScreenValidations.elementShouldHaveStartDate(phaseDto.getPhaseName(), true);
-        EditOrderScreenValidations.validateElementState(phaseDto.getPhaseName(), ServiceStatus.STARTED);
+        EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.STARTED);
         EditOrderSteps.openElementMenu(phaseDto.getPhaseName());
         MenuSteps.selectMenuItem(MenuItems.RESET_START_DATE);
         GeneralSteps.confirmDialog();
         EditOrderScreenValidations.elementShouldHaveStartDate(phaseDto.getPhaseName(), false);
-        EditOrderScreenValidations.validateElementState(phaseDto.getPhaseName(), ServiceStatus.ACTIVE);
+        EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.ACTIVE);
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

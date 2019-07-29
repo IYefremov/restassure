@@ -39,7 +39,7 @@ public class VNextTeamMonitoringTimeReport extends BaseTestCaseTeamEditionRegist
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        ScreenNavigationSteps.pressBackButton();//O-452-00348
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -65,6 +65,9 @@ public class VNextTeamMonitoringTimeReport extends BaseTestCaseTeamEditionRegist
         MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(true);
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -90,5 +93,8 @@ public class VNextTeamMonitoringTimeReport extends BaseTestCaseTeamEditionRegist
         MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(true);
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

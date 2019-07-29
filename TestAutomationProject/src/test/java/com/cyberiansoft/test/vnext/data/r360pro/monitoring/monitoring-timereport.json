@@ -32,6 +32,9 @@
     {
       "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
       "description": "91007",
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      },
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "Phase: AutomationPhaseLevel"
