@@ -36,6 +36,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 
 	@FindBy(xpath = "//span[@action='quantity-minus']")
 	private WebElement decreaseQuantityButton;
+
+	@FindBy(xpath = "//*[@action='part-info']")
+	private WebElement partServiceDetailButton;
 	
 	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);

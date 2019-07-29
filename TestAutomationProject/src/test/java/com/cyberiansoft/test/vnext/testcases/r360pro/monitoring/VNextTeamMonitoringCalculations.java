@@ -39,7 +39,8 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        AvailableServicesScreenSteps.selectPartService("Engine part", "Filters", "Engine Oil Filter", "Main");
+        PartServiceSteps.selectPartService("Engine part", null, "Filters", "Engine Oil Filter", "Main");
+        PartServiceSteps.confirmPartInfo();
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();

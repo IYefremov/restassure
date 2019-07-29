@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import org.testng.Assert;
 
@@ -20,5 +21,9 @@ public class SelectedServicesScreenSteps {
         expectedServiceList.forEach(serviceData -> Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName())));
     }
 
-
+    public static void openServiceDetails(String serviceName) {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.switchToSelectedServicesView();
+        servicesScreen.openServiceDetails(serviceName);
+    }
 }

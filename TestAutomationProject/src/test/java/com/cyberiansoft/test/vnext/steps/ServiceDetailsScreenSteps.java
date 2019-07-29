@@ -34,4 +34,9 @@ public class ServiceDetailsScreenSteps {
         ServiceDetailsInteractions.waitPageReady();
         ServiceDetailsInteractions.clickDecreaseQuantity();
     }
+
+    public static void openPartServiceDetails() {
+        ServiceDetailsInteractions.waitPageReady();
+        ServiceDetailsInteractions.openPartServiceDetails();
+    }
 }
