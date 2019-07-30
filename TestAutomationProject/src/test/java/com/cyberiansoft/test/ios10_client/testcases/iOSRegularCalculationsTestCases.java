@@ -96,7 +96,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
 		vehicleScreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 		String inspnumber = vehicleScreen.getInspectionNumber();
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 
 		myInspectionsScreen.selectInspectionForApprove(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -137,7 +137,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
 		vehicleScreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
         vehicleScreen = new RegularVehicleScreen();
 
@@ -161,7 +161,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), visualScreenData.getScreenPrice());
 		}
 
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen = new RegularVehicleScreen();
@@ -182,7 +182,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), visualScreenData.getScreenPrice2());
 		}
 
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -707,7 +707,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
 			vehiclePartScreen.saveVehiclePart();
 		}
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber32226);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -781,7 +781,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		}
 		servicesScreen = new RegularServicesScreen();
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber32286);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -854,7 +854,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		servicesScreen = new RegularServicesScreen();
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		
 		myInspectionsScreen.selectInspectionForApprove(inspnumber32287);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -923,7 +923,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -979,7 +979,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen = new RegularVehicleScreen();
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
@@ -989,7 +989,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 			Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(),priceMatrixScreenData.getMatrixScreenPrice());
 		}
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -1261,7 +1261,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			}
 			vehiclePartScreen.saveVehiclePart();
 		}
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
 		myInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1813,7 +1813,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
         RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1832,7 +1832,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getServiceData().getServicePrice2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServicesScreen = new RegularSelectedServicesScreen();
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1897,7 +1897,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();		
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), inspectionData.getInspectionPrice());
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -2170,7 +2170,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
         RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen = new RegularVehicleScreen();
@@ -2191,7 +2191,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), serviceData.getServicePrice2());
 		}
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
 		myInspectionsScreen.clickHomeButton();
 	}
@@ -2364,7 +2364,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			}
 			vehiclePartScreen.saveVehiclePart();
 		}
-		RegularInspectionsSteps.saveInspecion();
+		RegularInspectionsSteps.saveInspection();
 		
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);

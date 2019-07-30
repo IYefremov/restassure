@@ -126,7 +126,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             vehiclePartScreen.clickSave();
             pricematrix = new RegularPriceMatrixScreen();
         }
-        RegularInspectionsSteps.saveInspecion();
+        RegularInspectionsSteps.saveInspection();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -202,7 +202,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        RegularInspectionsSteps.saveInspecion();
+        RegularInspectionsSteps.saveInspection();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -233,7 +233,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        RegularInspectionsSteps.saveInspecion();
+        RegularInspectionsSteps.saveInspection();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -264,7 +264,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        RegularInspectionsSteps.saveInspecion();
+        RegularInspectionsSteps.saveInspection();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -295,7 +295,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        RegularInspectionsSteps.saveInspecion();
+        RegularInspectionsSteps.saveInspection();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }
@@ -326,7 +326,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                 selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
-        RegularInspectionsSteps.saveInspecion();
+        RegularInspectionsSteps.saveInspection();
         Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
         myinspectionsscreen.clickHomeButton();
     }

@@ -121,6 +121,9 @@ public class WorkOrderData {
     @JsonProperty("partServiceList")
     List<PartServiceData> partServiceList;
 
+    @Getter
+    @JsonProperty("servicesScreen")
+    ServicesScreenData servicesScreen;
 
     public String getWorkOrderType() {
         return workOrderType;

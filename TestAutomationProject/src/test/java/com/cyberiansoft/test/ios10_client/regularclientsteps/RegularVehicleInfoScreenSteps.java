@@ -11,6 +11,11 @@ public class RegularVehicleInfoScreenSteps {
         vehicleScreen.setVIN(VIN);
     }
 
+    public static void setMakeAndModel(String make, String model) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.setMakeAndModel(make, model);
+    }
+
     public static void setMileage(String mileage) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setMileage(mileage);
@@ -18,17 +23,27 @@ public class RegularVehicleInfoScreenSteps {
 
     public static void setStockNumber(String stockNumber) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setStock(stockNumber);
+        vehicleScreen.setStock(stockNumber + "\n");
     }
 
     public static void setRoNumber(String roNumber) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setRO(roNumber);
+        vehicleScreen.setRO(roNumber + "\n");
     }
 
     public static void setLicPlate(String licPlate) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setLicensePlate(licPlate);
+        vehicleScreen.setLicensePlate(licPlate + "\n");
+    }
+
+    public static void setYear(String year) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.setYear(year);
+    }
+
+    public static void setTrim(String trimValue) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.setTrim(trimValue);
     }
 
     public static void verifyMakeModelyearValues(VehicleInfoData vehicleInfoData) {
@@ -42,6 +57,12 @@ public class RegularVehicleInfoScreenSteps {
         if (vehicleInfoData.getVINNumber() != null) {
             setVIN(vehicleInfoData.getVINNumber());
         }
+        if (vehicleInfoData.getVehicleMake() != null) {
+            setMakeAndModel(vehicleInfoData.getVehicleMake(), vehicleInfoData.getVehicleModel());
+        }
+        if (vehicleInfoData.getVehicleYear() != null) {
+            setYear(vehicleInfoData.getVehicleYear());
+        }
         if (vehicleInfoData.getMileage() != null) {
             setMileage(vehicleInfoData.getMileage());
         }
@@ -54,5 +75,18 @@ public class RegularVehicleInfoScreenSteps {
         if (vehicleInfoData.getLicPlate() != null) {
             setLicPlate(vehicleInfoData.getLicPlate());
         }
+        if (vehicleInfoData.getTrim() != null) {
+            setTrim(vehicleInfoData.getTrim());
+        }
+    }
+
+    public static String getInspectionNumber() {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        return vehicleScreen.getInspectionNumber();
+    }
+
+    public static String getWorkOrderNumber() {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        return vehicleScreen.getWorkOrderNumber();
     }
 }

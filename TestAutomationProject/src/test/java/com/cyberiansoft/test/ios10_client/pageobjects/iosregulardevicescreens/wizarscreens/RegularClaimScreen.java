@@ -40,10 +40,8 @@ public class RegularClaimScreen extends RegularBaseWizardScreen {
 
 	public void setPolicy(String policyNumber) {
 		appiumdriver.findElementByAccessibilityId("Policy#").click();
-		WebElement par = getTableParentCell("Claim#");
+		WebElement par = getTableParentCell("Policy#");
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(policyNumber + "\n");
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey(policyNumber);
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 
 	}
 	

@@ -49,10 +49,6 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 	
-	public void selectInspectionToApprove() {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").click();
-	}
-	
 	public void clickDoneButton() {
 		donestatusreasonbtn.click();
 	}
@@ -66,7 +62,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickApproveAllServicesButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveAll")));
 		approveallbtn.click();
 	}

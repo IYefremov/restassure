@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
-import com.cyberiansoft.test.dataclasses.ServiceAdjustmentData;
-import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.ServiceTechnician;
-import com.cyberiansoft.test.dataclasses.VehiclePartData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import org.testng.Assert;
 
@@ -23,6 +20,8 @@ public class RegularServiceDetailsScreenSteps {
             slectServiceVehicleParts(serviceData.getVehicleParts());
         if (serviceData.getQuestionData() != null)
             selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
+        if (serviceData.getQuestionsData() != null)
+            selectedServiceDetailsScreen.answerQuestions(serviceData.getQuestionsData());
         saveServiceDetails();
     }
 
@@ -83,6 +82,20 @@ public class RegularServiceDetailsScreenSteps {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.clickAdjustments();
         selectedServiceDetailsScreen.selectAdjustment(serviceAdjustmentData.getAdjustmentData().getAdjustmentName());
+    }
+
+    public static void setLaborServiceData(LaborServiceData laborServiceData) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        if (laborServiceData.getLaborServiceRate() != null) {
+            selectedServiceDetailsScreen.setServiceRateValue(laborServiceData.getLaborServiceRate());
+        }
+        if (laborServiceData.getLaborServicePanel() != null) {
+            selectedServiceDetailsScreen.clickOperationCell();
+            selectedServiceDetailsScreen.selectLaborServicePanel(laborServiceData.getLaborServicePanel());
+            selectedServiceDetailsScreen.selectLaborServicePart(laborServiceData.getLaborServicePart());
+            selectedServiceDetailsScreen.clickSelectedServiceDetailsDoneButton();
+        }
+        System.out.println("++++" + selectedServiceDetailsScreen.getServiceDetailsPriceValue());
     }
 
 }

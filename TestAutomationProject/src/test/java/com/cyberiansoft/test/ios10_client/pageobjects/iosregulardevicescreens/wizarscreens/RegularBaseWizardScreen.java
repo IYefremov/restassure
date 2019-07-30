@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iOSRegularBaseScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
@@ -8,6 +9,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScr
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,6 +19,11 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
 
     public RegularBaseWizardScreen() {
         super();
+    }
+
+    public  void clickFinalButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Final"))).click();
     }
 
     public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType) {
@@ -47,21 +54,10 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
             appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
     }
 
-    /*public <T extends ITypeScreen> T saveWizard() {
-        clickSave();
-        return getTypeScreenFromContext();
-    }*/
-
     public void clickCancelWizard() {
         clickChangeScreen();
         appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
     }
-
-    /*public <T extends ITypeScreen> T cancelWizard() {
-        clickCancelWizard();
-        acceptAlert();
-        return getTypeScreenFromContext();
-    }*/
 
     public <T extends ITypeScreen> T getTypeScreenFromContext()  {
         return (T) RegularTypesScreenFactory.getTypeScreen(typeContext);

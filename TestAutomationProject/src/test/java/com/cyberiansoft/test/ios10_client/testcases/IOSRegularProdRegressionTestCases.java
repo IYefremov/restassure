@@ -6,10 +6,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.dataclasses.TestCaseData;
-import com.cyberiansoft.test.dataclasses.WholesailCustomer;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -21,12 +18,15 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
-import com.cyberiansoft.test.ios10_client.regularvalidations.RegularCustomersScreenValidations;
+import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.UATInspectionTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
@@ -58,14 +58,70 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("Amazimg Nissan");
+
+
         RegularHomeScreenSteps.navigateToCustomersScreen();
         RegularCustomersScreenSteps.switchToWholesaleMode();
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
-        //RegularMyInspectionsSteps.startCreatingInspection(new WholesailCustomer("Amazimg Nissan"), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, UATInspectionTypes.INSP_APPROVE_MULTISELECT);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionID = RegularVehicleInfoScreenSteps.getInspectionNumber();
         RegularNavigationSteps.navigateToClaimScreen();
         RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.selectBundleService(inspectionData.getServicesScreen().getBundleService());
+        RegularServicesScreenSteps.selectLaborServiceAndSetData(inspectionData.getServicesScreen().getLaborService());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+
+        RegularNavigationSteps.swipeScreenLeft();
+        RegularPriceMatrixScreenSteps.selectPriceMatrixData(inspectionData.getPriceMatrixScreenData());
+        RegularVehiclePartsScreenValidations.verifyVehiclePartScreenSubTotalValue(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartTotalPrice());
+        RegularVehiclePartsScreenSteps.saveVehiclePart();
+        RegularWizardScreenValidations.verifyScreenSubTotalPrice(inspectionData.getPriceMatrixScreenData().getMatrixScreenPrice());
+        RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getPriceMatrixScreenData().getMatrixScreenTotalPrice());
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularWizardScreenValidations.verifyScreenSubTotalPrice(inspectionData.getServicesScreen().getScreenPrice());
+        RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getServicesScreen().getScreenTotalPrice());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
+
+        RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionID);
+        RegularApproveInspectionScreenActions.clickApproveAllServicessButton();
+        RegularApproveInspectionScreenActions.saveApprovedServices();
+        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+
+        RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
+        RegularMyInspectionsScreenValidations.verifyInspectionApprovedPrice(inspectionID, inspectionData.getInspectionTotalPrice());
+
+        RegularMyInspectionsSteps.createWorkOrderFromInspection(inspectionID, UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.switchToSelectedServices();
+
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularSelectedServicesScreenValidations.verifyServiceIsSelected(serviceData.getServiceName(), true);
+        }
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getBundleService().getBundleServiceName(), true);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getLaborService().getServiceName(), true);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartAdditionalService().getServiceName(), false);
+
+        RegularWizardScreenValidations.verifyScreenSubTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenPrice());
+        RegularWizardScreenValidations.verifyScreenTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenTotalPrice());
+
+        RegularWizardScreensSteps.clickSaveButton();
+        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderTotalPrice(workOrderNumber, testCaseData.getWorkOrderData().getWorkOrderPrice());
+
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

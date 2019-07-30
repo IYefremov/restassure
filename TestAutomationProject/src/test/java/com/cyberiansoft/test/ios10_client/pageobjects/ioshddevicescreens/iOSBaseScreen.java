@@ -85,13 +85,10 @@ public abstract class iOSBaseScreen {
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.20);
 		int endx = (int) (size.width * 0.80);
-		int starty = (int) size.height / 2;	
-		//TouchAction act = new TouchAction(appiumdriver);
-		//act.press(endx, starty).waitAction(1000) .moveTo(startx, starty).release().perform();
+		int starty = (int) size.height / 2;
 		TouchAction swipe = new TouchAction(appiumdriver).press(PointOption.point(endx, starty))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(startx, starty)).release();
         swipe.perform();
-		//appiumdriver.swipe(endx, starty, startx, starty, 2000);
 	}
 	
 	public void swipeScreenLeft() {
@@ -99,14 +96,11 @@ public abstract class iOSBaseScreen {
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.20);
 		int endx = (int) (size.width * 0.80);
-		int starty = size.height / 3;	
-		//TouchAction act = new TouchAction(appiumdriver);
-		//act.press(startx, starty).waitAction(1000) .moveTo(endx, starty).release().perform();
+		int starty = size.height / 3;
 		
 		TouchAction swipe = new TouchAction(appiumdriver).press(PointOption.point(startx, starty))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(endx, starty)).release();
         swipe.perform();
-		//appiumdriver.swipe(startx, starty, endx, starty, 2000);
 	}
 
 	public void hideKeyboard() {
