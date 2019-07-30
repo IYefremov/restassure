@@ -13,8 +13,8 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.SearchSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -51,7 +51,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         String noteText = UUID.randomUUID().toString();
         HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.addRepairOrderNote();
@@ -71,7 +71,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
 
         HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();

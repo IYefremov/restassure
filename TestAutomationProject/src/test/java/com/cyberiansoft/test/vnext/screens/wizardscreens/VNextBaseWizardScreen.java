@@ -27,150 +27,156 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Getter
 public class VNextBaseWizardScreen extends VNextBaseScreen {
 
-	public static VNextTypeScreenContext typeScreenContext;
-	public static InspectionTypes inspectionType;
-	public static WorkOrderTypes workOrderType;
+    public static VNextTypeScreenContext typeScreenContext;
+    public static InspectionTypes inspectionType;
+    public static WorkOrderTypes workOrderType;
 
-	@FindBy(xpath = "//div[@data-page]")
-	private WebElement rootElement;
+    @FindBy(xpath = "//div[@data-page]")
+    private WebElement rootElement;
 
-	@FindBy(xpath="//div[@class='estimation-number']")
-	private WebElement inspectionnumber;
+    @FindBy(xpath = "//div[@class='estimation-number']")
+    private WebElement inspectionnumber;
 
-	@FindBy(xpath="//*[@action='more_actions']")
-	private WebElement menubtn;
+    @FindBy(xpath = "//*[@action='more_actions']")
+    private WebElement menubtn;
 
-	@FindBy(xpath="//a[@handler='_cancel']")
-	private WebElement cancelinspectionmenu;
+    @FindBy(xpath = "//a[@handler='_cancel']")
+    private WebElement cancelinspectionmenu;
 
-	@FindBy(xpath="//a[@handler='_save']")
-	private WebElement saveinspectionmenu;
+    @FindBy(xpath = "//a[@handler='_save']")
+    private WebElement saveinspectionmenu;
 
-	@FindBy(xpath="//a[@handler='_save']/span[2]/span")
-	private WebElement saveworkordermenu;
+    @FindBy(xpath = "//a[@handler='_save']/span[2]/span")
+    private WebElement saveworkordermenu;
 
-	@FindBy(xpath="//a[@handler='_notes']")
-	private WebElement inspectionnotesmenu;
+    @FindBy(xpath = "//a[@handler='_notes']")
+    private WebElement inspectionnotesmenu;
 
-	@FindBy(xpath="//*[@action='save']")
-	private WebElement savebtn;
+    @FindBy(xpath = "//*[@action='save']")
+    private WebElement savebtn;
 
-	public VNextBaseWizardScreen(AppiumDriver<MobileElement> appiumdriver) {
-		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-	}
+    @FindBy(xpath = "//*[@data-automation-id='search-icon']")
+    private WebElement searchIcon;
 
-	public VNextBaseWizardScreen() {
-	}
+    @FindBy(xpath = "//input[@data-autotests-id='search-input']")
+    private WebElement searchInput;
 
-	public VNextInspectionsScreen cancelInspection() {
-		clickCancelMenuItem();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-		return new VNextInspectionsScreen(appiumdriver);
-	}
+    public VNextBaseWizardScreen(AppiumDriver<MobileElement> appiumdriver) {
+        super(appiumdriver);
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+    }
 
-	public VNextWorkOrdersScreen cancelWorkOrder() {
-		clickCancelMenuItem();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-		return new VNextWorkOrdersScreen(appiumdriver);
-	}
+    public VNextBaseWizardScreen() {
+    }
 
-	public void clickCancelMenuItem() {
-		clickMenuButton();
-		tap(cancelinspectionmenu);
-	}
+    public VNextInspectionsScreen cancelInspection() {
+        clickCancelMenuItem();
+        VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+        String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
+        return new VNextInspectionsScreen(appiumdriver);
+    }
 
-	public void clcikSaveViaMenuAsFinal() {
-		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-		informationDialog.clickFinalButton();
-	}
+    public VNextWorkOrdersScreen cancelWorkOrder() {
+        clickCancelMenuItem();
+        VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+        String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
+        return new VNextWorkOrdersScreen(appiumdriver);
+    }
 
-	public VNextInspectionsScreen saveInspectionAsDraft() {
-		clickSaveInspectionMenuButton();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-		informationDialog.clickDraftButton();
-		return new VNextInspectionsScreen(appiumdriver);
-	}
+    public void clickCancelMenuItem() {
+        clickMenuButton();
+        tap(cancelinspectionmenu);
+    }
 
-	public VNextInspectionsScreen saveInspectionViaMenu() {
-		clickSaveInspectionMenuButton();
-		if (inspectionType != null)
-			if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
-				clcikSaveViaMenuAsFinal();
-		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(appiumdriver);
-		WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
-		return inspectionsScreen;
-	}
+    public void clcikSaveViaMenuAsFinal() {
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickFinalButton();
+    }
 
-	public VNextWorkOrdersScreen saveWorkOrderViaMenu() {
-		clickSaveWorkOrderMenuButton();
-		if (workOrderType != null)
-			if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
-				clcikSaveViaMenuAsFinal();
-		VNextWorkOrdersScreen workOrdersScreen =  new VNextWorkOrdersScreen(appiumdriver);
-		WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(),true);
-		workOrdersScreen.clearSearchField();
-		return workOrdersScreen;
-	}
+    public VNextInspectionsScreen saveInspectionAsDraft() {
+        clickSaveInspectionMenuButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickDraftButton();
+        return new VNextInspectionsScreen(appiumdriver);
+    }
 
-	public VNextWorkOrdersScreen saveWorkOrderAsDraft() {
-		clickSaveWorkOrderMenuButton();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-		informationDialog.clickDraftButton();
-		return new VNextWorkOrdersScreen(appiumdriver);
-	}
+    public VNextInspectionsScreen saveInspectionViaMenu() {
+        clickSaveInspectionMenuButton();
+        if (inspectionType != null)
+            if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
+                clcikSaveViaMenuAsFinal();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(appiumdriver);
+        WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
+        return inspectionsScreen;
+    }
 
-	public void clickMenuButton() {
-		tap(menubtn);
+    public VNextWorkOrdersScreen saveWorkOrderViaMenu() {
+        clickSaveWorkOrderMenuButton();
+        if (workOrderType != null)
+            if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
+                clcikSaveViaMenuAsFinal();
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen(appiumdriver);
+        WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
+        workOrdersScreen.clearSearchField();
+        return workOrdersScreen;
+    }
+
+    public VNextWorkOrdersScreen saveWorkOrderAsDraft() {
+        clickSaveWorkOrderMenuButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickDraftButton();
+        return new VNextWorkOrdersScreen(appiumdriver);
+    }
+
+    public void clickMenuButton() {
+        tap(menubtn);
 
         BaseUtils.waitABit(1000);
         if (elementExists("//*[@action='more_actions']"))
-        	try {
-				menubtn.click();
-			} catch (WebDriverException e) {
+            try {
+                menubtn.click();
+            } catch (WebDriverException e) {
 
-			}
-}
+            }
+    }
 
-	public void clickSaveInspectionMenuButton() {
-		clickMenuButton();
-		tap(saveinspectionmenu);
-	}
+    public void clickSaveInspectionMenuButton() {
+        clickMenuButton();
+        tap(saveinspectionmenu);
+    }
 
-	public void clickSaveWorkOrderMenuButton() {
-		clickMenuButton();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(saveworkordermenu));
-		BaseUtils.waitABit(1500);
-		tap(saveworkordermenu);
-	}
+    public void clickSaveWorkOrderMenuButton() {
+        clickMenuButton();
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+        wait.until(ExpectedConditions.visibilityOf(saveworkordermenu));
+        BaseUtils.waitABit(1500);
+        tap(saveworkordermenu);
+    }
 
-	public String getNewInspectionNumber() {
-		return inspectionnumber.getText().trim();
-	}
+    public String getNewInspectionNumber() {
+        return inspectionnumber.getText().trim();
+    }
 
-	public VNextNotesScreen clickInspectionNotesOption() {
-		clickMenuButton();
-		tap(inspectionnotesmenu);
-		return new VNextNotesScreen();
-	}
+    public VNextNotesScreen clickInspectionNotesOption() {
+        clickMenuButton();
+        tap(inspectionnotesmenu);
+        return new VNextNotesScreen();
+    }
 
-	public String getInspectionTotalPriceValue() {
-		return appiumdriver.findElement(By.xpath("//*[@id='total']")).getText().trim();
-	}
+    public String getInspectionTotalPriceValue() {
+        return appiumdriver.findElement(By.xpath("//*[@id='total']")).getText().trim();
+    }
 
-	public boolean isSaveButtonVisible() {
-		return saveinspectionmenu.isDisplayed();
-	}
+    public boolean isSaveButtonVisible() {
+        return saveinspectionmenu.isDisplayed();
+    }
 
-	public boolean isCancelButtonVisible() {
-		return cancelinspectionmenu.isDisplayed();
-	}
+    public boolean isCancelButtonVisible() {
+        return cancelinspectionmenu.isDisplayed();
+    }
 
-	public boolean isNotesButtonVisible() {
-		return inspectionnotesmenu.isDisplayed();
-	}
+    public boolean isNotesButtonVisible() {
+        return inspectionnotesmenu.isDisplayed();
+    }
 
 }

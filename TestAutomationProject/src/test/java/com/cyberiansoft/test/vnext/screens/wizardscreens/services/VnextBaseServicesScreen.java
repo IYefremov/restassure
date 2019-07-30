@@ -19,6 +19,7 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     @FindBy(xpath = "//div[@data-page='services-list']")
     private WebElement servicesscreen;
 
+
     public VnextBaseServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);

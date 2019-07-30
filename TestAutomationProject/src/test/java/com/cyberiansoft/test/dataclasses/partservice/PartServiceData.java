@@ -14,7 +14,7 @@ public class PartServiceData {
     @JsonProperty("subCategory")
     private String subCategory;
     @JsonProperty("partName")
-    private String partName;
+    private PartName partName;
     @JsonProperty("partPosition")
     private String partPosition;
     @JsonProperty("servicePrice")

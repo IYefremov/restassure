@@ -8,13 +8,23 @@
           "serviceName": "Anastasia Labor parts (required + prefix)",
           "category": "Brake",
           "subCategory": "Control Cables",
-          "partName": "Parking Brake Cable Lever"
+          "partName": {
+            "partNameList": [
+              "Parking Brake Cable Lever"
+            ],
+            "isMultiSelect": false
+          }
         },
         {
           "serviceName": "Anastasia Labor parts (required + prefix)",
           "category": "Engine",
           "subCategory": "Filters",
-          "partName": "Engine Oil Filter",
+          "partName": {
+            "partNameList": [
+              "Engine Oil Filter"
+            ],
+            "isMultiSelect": false
+          },
           "partPosition": "Main",
           "servicePrice": "100"
         }
@@ -30,7 +40,12 @@
           "serviceName": "Anastasia Labor parts (required + prefix)",
           "category": "Engine",
           "subCategory": "Filters",
-          "partName": "Engine Oil Filter",
+          "partName": {
+            "partNameList": [
+              "Engine Oil Filter"
+            ],
+            "isMultiSelect": false
+          },
           "partPosition": "Main",
           "servicePrice": "100"
         },
@@ -38,7 +53,32 @@
           "serviceName": "Anastasia Labor parts (required + prefix)",
           "category": "Brake",
           "subCategory": "Control Cables",
-          "partName": "Parking Brake Cable Lever"
+          "partName": {
+            "partNameList": [
+              "Parking Brake Cable Lever"
+            ],
+            "isMultiSelect": false
+          }
+        }
+      ]
+    }
+  ],
+  "userCantAddPartServiceWithoutSelectedPartName": [
+    {
+      "rowID": "userCantAddPartServiceWithoutSelectedPartName.01",
+      "description": "89647",
+      "partServiceList": [
+        {
+          "serviceName": "rozstalnoy_enable_parts",
+          "category": "Engine",
+          "subCategory": "Filters",
+          "partName": {
+            "partNameList": [
+              "Engine Oil Filter"
+            ],
+            "isMultiSelect": true
+          },
+          "partPosition": "Main"
         }
       ]
     }

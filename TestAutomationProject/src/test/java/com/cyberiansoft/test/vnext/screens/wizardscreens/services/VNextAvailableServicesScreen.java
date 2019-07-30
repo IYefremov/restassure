@@ -38,6 +38,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     @FindBy(xpath = "//*[@data-autotests-id='all-services']")
     private WebElement allserviceslist;
 
+
     public VNextAvailableServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);

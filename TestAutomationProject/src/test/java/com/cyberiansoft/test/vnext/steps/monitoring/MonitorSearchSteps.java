@@ -8,7 +8,7 @@ import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
-public class SearchSteps {
+public class MonitorSearchSteps {
     public static void fillTextSearch(String searchString) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getClearSearchInputButton());
@@ -34,13 +34,13 @@ public class SearchSteps {
         openSearchFilters();
         fillTextSearch(text);
         selectStatus(status);
-        SearchSteps.search();
+        MonitorSearchSteps.search();
     }
 
     public static void searchByText(String text) {
         openSearchFilters();
         fillTextSearch(text);
-        SearchSteps.search();
+        MonitorSearchSteps.search();
         BaseUtils.waitABit(3000);
     }
 
@@ -54,7 +54,7 @@ public class SearchSteps {
 
         openSearchFilters();
         commonFilterScreen.getFlag().selectOption(repairOrderFlag.name());
-        SearchSteps.search();
+        MonitorSearchSteps.search();
     }
 
     public static void searchByPriority(OrderPriority high) {
@@ -62,7 +62,7 @@ public class SearchSteps {
 
         openSearchFilters();
         commonFilterScreen.getPriority().selectOption(high.getValue());
-        SearchSteps.search();
+        MonitorSearchSteps.search();
     }
 
     public static void searchByDepartment(String departmentName) {
@@ -70,7 +70,7 @@ public class SearchSteps {
 
         openSearchFilters();
         commonFilterScreen.getDepartment().selectOption(departmentName);
-        SearchSteps.search();
+        MonitorSearchSteps.search();
     }
 
     public static void searchByPhase(String phaseName) {
@@ -78,7 +78,7 @@ public class SearchSteps {
 
         openSearchFilters();
         commonFilterScreen.getPhase().selectOption(phaseName);
-        SearchSteps.search();
+        MonitorSearchSteps.search();
     }
 
     public static void clearAllFilters() {
