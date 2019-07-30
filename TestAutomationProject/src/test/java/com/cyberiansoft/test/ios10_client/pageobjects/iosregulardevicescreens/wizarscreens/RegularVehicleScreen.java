@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -152,7 +153,11 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		makecustombtn.click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(make)));
+		if (!appiumdriver.findElementByAccessibilityId(make).isDisplayed())
+			SwipeUtils.swipeToElement(appiumdriver.findElementByAccessibilityId(make));
 		appiumdriver.findElementByAccessibilityId(make).click();
+		if (!appiumdriver.findElementByAccessibilityId(model).isDisplayed())
+			SwipeUtils.swipeToElement(appiumdriver.findElementByAccessibilityId(model));
 		appiumdriver.findElementByAccessibilityId(model).click();
 		clickSave();
 	}
@@ -178,6 +183,22 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public String getYear() {
 		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Year")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
+
+	public String getMileage() {
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Mileage")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
+
+	public String getStock() {
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Stock#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
+
+	public String getRO() {
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("RO#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
+
+	public String getPO() {
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("PO#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
 	
 	public String getTrim() {
 		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Trim")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
@@ -185,6 +206,10 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public String getEst() {
 		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Est#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
+
+	public String getLicensePlate() {
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("License\nPlate")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public String getTechnician() {

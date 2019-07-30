@@ -31,6 +31,8 @@ public class ServiceData {
     private ServicePartData servicePartData;
     @JsonProperty("questionData")
     private QuestionsData questionData;
+    @JsonProperty("questionsData")
+    private List<QuestionsData> questionsData;
     @JsonProperty("isNotMultiple")
     private boolean isNotMultiple;
     @JsonProperty("isSelected")

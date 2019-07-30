@@ -26,7 +26,6 @@ public class RegularVehiclePartsScreenSteps {
             setVehiclePartPrice(vehiclePartData.getVehiclePartPrice());
         if (vehiclePartData.getVehiclePartTime() != null)
             setVehiclePartTime(vehiclePartData.getVehiclePartTime());
-        saveVehiclePart();
     }
 
     public static void saveVehiclePart() {

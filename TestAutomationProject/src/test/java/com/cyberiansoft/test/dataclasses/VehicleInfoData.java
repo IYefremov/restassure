@@ -53,6 +53,10 @@ public class VehicleInfoData {
 	String location;
 
 	@Getter
+	@JsonProperty("trim")
+	String trim;
+
+	@Getter
 	@JsonProperty("defaultTechnician")
 	ServiceTechnician defaultTechnician;
 

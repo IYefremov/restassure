@@ -423,7 +423,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.selectInspectionForApprove(inspNumber);
 			RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen();
 
@@ -490,7 +490,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesscreen.clickBackServicesButton();
             Assert.assertEquals(servicesscreen.getSubTotalAmaunt(), "$930.00");
 
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.selectInspectionForApprove(inpnumber);
 			RegularApproveInspectionsScreen approveinspscreen =  new RegularApproveInspectionsScreen();
 			approveinspscreen.clickApproveButton();
@@ -652,7 +652,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertTrue(alerttext.contains("Advisor is required"));
 			vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.clickHomeButton();
 		}
 		
@@ -679,7 +679,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.selectInspectionForCreatingWO(inspNumber);
 			vehiclescreen = new RegularVehicleScreen();
 			String wonumber = vehiclescreen.getWorkOrderNumber();
@@ -735,7 +735,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.clickOnInspection(inspNumber);
 			myinspectionsscreen.clickArchiveInspectionButton();
 			myinspectionsscreen.clickFilterButton();
@@ -2223,7 +2223,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.changeCustomerForInspection(inspNumber, "Abc Rental Center");
 			myinspectionsscreen.clickHomeButton();
 			
@@ -2604,7 +2604,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.selectInspectionForEdit(inspNumber);
 			vehiclescreen = new RegularVehicleScreen();
 			servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -2614,7 +2614,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.clickHomeButton();
 		}
 		
@@ -3051,7 +3051,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();	
 			servicesscreen.clickBackServicesButton();
 			Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			myinspectionsscreen.clickOnInspection(inspnum);
 			myinspectionsscreen.clickCreateWOButton();
 			vehiclescreen = new RegularVehicleScreen();
@@ -3211,7 +3211,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnum), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			myinspectionsscreen.selectInspectionForCreatingWO(inspnum);
 			vehiclescreen = new RegularVehicleScreen();
@@ -3226,7 +3226,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			//servicesscreen.selectService(UtilConstants.PAINT_SERVICE);
 			//servicesscreen.switchToSelectedServicesTab();
             Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(UtilConstants.PAINTPANEL_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)) + " x 1.00"));
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 			Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspnum), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			myinspectionsscreen.showWorkOrdersForInspection(inspnum);
 			vehiclescreen = new RegularVehicleScreen();
@@ -3533,7 +3533,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			notesscreen.addNotesCapture();
 			Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 2);
 			notesscreen.clickSaveButton();
-			RegularInspectionsSteps.saveInspecion();
+			RegularInspectionsSteps.saveInspection();
 
 			myinspectionsscreen.clickOnInspection(inspNumber);
 			RegularMyInvoicesScreen myinvoicesscreen = new RegularMyInvoicesScreen();

@@ -132,10 +132,10 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 
 	public void selectServiceRequest(String srnumber) {
+		waitForServiceRequestScreenLoad();
 		if (!appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + srnumber + "']").isDisplayed()) {
 			swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + srnumber + "']")));
-			//appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + srnumber + "']").click();
 		}
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + srnumber + "']").click();
 	}
@@ -265,6 +265,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 	
 	public String getServiceRequestStatus(String srnumber) {
+		waitForServiceRequestScreenLoad();
 		MobileElement srTable = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypeTable");
 		return srTable.findElementByAccessibilityId(srnumber).findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
 		//return
@@ -272,6 +273,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 	
 	public String getFirstServiceRequestNumber() {
+		waitForServiceRequestScreenLoad();
 		List<WebElement> ws = appiumdriver.findElementByClassName("XCUIElementTypeTable").findElements (MobileBy.AccessibilityId("labelServiceRequestNumber"));
 		List<String> nmbr = new ArrayList();
  		for (WebElement el : ws ) {

@@ -11,10 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class RegularWorkOrdersSteps {
 
     public static void saveWorkOrder() {
-        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
-        baseWizardScreen.clickSave();
-        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-        myWorkOrdersScreen.waitMyWorkOrdersScreenLoaded();
+        RegularWizardScreensSteps.clickSaveButton();
+        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
 
     public static void cancelCreatingWorkOrder() {
@@ -22,7 +20,6 @@ public class RegularWorkOrdersSteps {
         baseWizardScreen.clickCancelWizard();
         Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
         alert.accept();
-        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-        myWorkOrdersScreen.waitMyWorkOrdersScreenLoaded();
+        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
 }

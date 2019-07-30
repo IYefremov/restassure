@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularPriceMatricesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceBundleScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSubServicesScreen;
 
@@ -53,17 +54,24 @@ public class RegularServicesScreenSteps {
     public static void selectBundleService(BundleServiceData bundleServiceData) {
         openCustomServiceDetails(bundleServiceData.getBundleServiceName());
         RegularSelectedServiceBundleScreen selectedservicebundlescreen = new RegularSelectedServiceBundleScreen();
-        for (ServiceData serviceData : bundleServiceData.getServices()) {
-            if ((serviceData.getServiceQuantity() != null) || (serviceData.getServicePrice() != null)) {
-                selectedservicebundlescreen.openBundleInfo(serviceData.getServiceName());
-                if (serviceData.getServiceQuantity() != null)
-                    RegularServiceDetailsScreenSteps.setServiceQuantityValue(serviceData.getServiceQuantity());
-                if (serviceData.getServicePrice() != null)
-                    RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
-                RegularServiceDetailsScreenSteps.saveServiceDetails();
-            } else
-                selectedservicebundlescreen.selectBundle(serviceData.getServiceName());
+        if (bundleServiceData.getServices() != null) {
+            for (ServiceData serviceData : bundleServiceData.getServices()) {
+                if ((serviceData.getServiceQuantity() != null) || (serviceData.getServicePrice() != null) || (serviceData.getVehiclePart() != null)) {
+                    selectedservicebundlescreen.openBundleInfo(serviceData.getServiceName());
+                    if (serviceData.getServiceQuantity() != null)
+                        RegularServiceDetailsScreenSteps.setServiceQuantityValue(serviceData.getServiceQuantity());
+                    if (serviceData.getServicePrice() != null)
+                        RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
+                    if (serviceData.getVehiclePart() != null) {
+                        RegularServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
+                    }
+                    RegularServiceDetailsScreenSteps.saveServiceDetails();
+                } else
+                    selectedservicebundlescreen.selectBundle(serviceData.getServiceName());
+            }
         }
+        if (bundleServiceData.getBundleServiceAmount() != null)
+            selectedservicebundlescreen.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
     }
 
@@ -89,6 +97,17 @@ public class RegularServicesScreenSteps {
             selectMatrixServiceData(damageData.getMatrixService());
         }
 
+    }
+
+    public static void selectLaborServiceAndSetData(LaborServiceData laborServiceData) {
+        openCustomServiceDetails(laborServiceData.getServiceName());
+        RegularServiceDetailsScreenSteps.setLaborServiceData(laborServiceData);
+    }
+
+    public static void switchToSelectedServices() {
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.switchToSelectedServicesTab();
+        RegularSelectedServicesSteps.waitSelectedServicesScreenLoaded();
     }
 
 }
