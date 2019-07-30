@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.dataclasses;
 
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -116,6 +117,10 @@ public class WorkOrderData {
     @JsonProperty("technicianSplitData")
     Map<String, String> technicianSplitData;
 
+    @Getter
+    @JsonProperty("partServiceList")
+    List<PartServiceData> partServiceList;
+
 
     public String getWorkOrderType() {
         return workOrderType;
@@ -137,17 +142,29 @@ public class WorkOrderData {
         return workOrderPrice;
     }
 
-    public ServiceData getMoneyServiceData() { return moneyService; }
+    public ServiceData getMoneyServiceData() {
+        return moneyService;
+    }
 
-    public ServiceData getPercentageServiceData() { return percentageService; }
+    public ServiceData getPercentageServiceData() {
+        return percentageService;
+    }
 
-    public MatrixServiceData getMatrixServiceData() { return matrixService; }
+    public MatrixServiceData getMatrixServiceData() {
+        return matrixService;
+    }
 
-    public TaxServiceData getTaxServiceData() { return taxService; }
+    public TaxServiceData getTaxServiceData() {
+        return taxService;
+    }
 
-    public List<TaxServiceData> getTaxServicesData() { return taxServices; }
+    public List<TaxServiceData> getTaxServicesData() {
+        return taxServices;
+    }
 
-    public LaborServiceData getLaborServiceData() { return laborService; }
+    public LaborServiceData getLaborServiceData() {
+        return laborService;
+    }
 
     public InsuranceCompanyData getInsuranceCompanyData() {
         return insuranceCompany;

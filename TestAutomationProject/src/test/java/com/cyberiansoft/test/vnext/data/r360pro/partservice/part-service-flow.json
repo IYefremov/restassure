@@ -1,0 +1,46 @@
+{
+  "userCanChangePartServiceValuesAndSaveThem": [
+    {
+      "rowID": "userCanChangePartServiceValuesAndSaveThem.01",
+      "description": "89596",
+      "partServiceList": [
+        {
+          "serviceName": "Anastasia Labor parts (required + prefix)",
+          "category": "Brake",
+          "subCategory": "Control Cables",
+          "partName": "Parking Brake Cable Lever"
+        },
+        {
+          "serviceName": "Anastasia Labor parts (required + prefix)",
+          "category": "Engine",
+          "subCategory": "Filters",
+          "partName": "Engine Oil Filter",
+          "partPosition": "Main",
+          "servicePrice": "100"
+        }
+      ]
+    }
+  ],
+  "userCanEditPartService": [
+    {
+      "rowID": "userCanEditPartService.01",
+      "description": "89601",
+      "partServiceList": [
+        {
+          "serviceName": "Anastasia Labor parts (required + prefix)",
+          "category": "Engine",
+          "subCategory": "Filters",
+          "partName": "Engine Oil Filter",
+          "partPosition": "Main",
+          "servicePrice": "100"
+        },
+        {
+          "serviceName": "Anastasia Labor parts (required + prefix)",
+          "category": "Brake",
+          "subCategory": "Control Cables",
+          "partName": "Parking Brake Cable Lever"
+        }
+      ]
+    }
+  ]
+}

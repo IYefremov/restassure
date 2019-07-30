@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.vnext.screens.VNextLaborServiceDetailsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
@@ -52,6 +49,10 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
         tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
         return new VNextServiceDetailsScreen(appiumdriver);
+    }
+
+    public void openServiceDetails(String servicename) {
+        tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
     }
 
     public void openLaborServiceDetails(String servicename) {

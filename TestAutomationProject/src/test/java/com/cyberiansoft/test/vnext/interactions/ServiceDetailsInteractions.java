@@ -23,4 +23,9 @@ public class ServiceDetailsInteractions {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         WaitUtils.click(serviceDetailsScreen.getDecreaseQuantityButton());
     }
+
+    public static void openPartServiceDetails() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        WaitUtils.click(serviceDetailsScreen.getPartServiceDetailButton());
+    }
 }

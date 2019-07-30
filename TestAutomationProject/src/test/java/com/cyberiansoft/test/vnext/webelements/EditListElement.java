@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.webelements;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
 import lombok.Getter;
@@ -22,8 +21,8 @@ public class EditListElement implements IWebElement {
     }
 
     public String getName() {
-        BaseUtils.waitABit(1000);
-        return rootElement.findElement(By.xpath(nameLocator)).getText();
+        return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElement(By.xpath(nameLocator)).getText());
+
     }
 
     public String getStatus() {

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -83,6 +84,15 @@ public class WaitUtils {
         DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
         DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public static void assertEquals(Object expected, Object actual) {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Assert.assertEquals(expected,
+                    actual
+            );
+            return true;
+        });
     }
 
     //TODO: timeout and polling should be readed from some .prop file
