@@ -11,7 +11,6 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
-import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.validations.TechScreenValidations;
 import org.json.simple.JSONObject;
@@ -51,7 +50,7 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        MonitorSearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByText(workOrderId);
         WorkOrderSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenSteps.openTechnicianMenu();
@@ -69,7 +68,7 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         VehicleInfoScreenSteps.selectTechniciansPercentage(technicianSplitData);
         GeneralSteps.confirmDialog();
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        MonitorSearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByText(workOrderId);
         WorkOrderSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenSteps.openTechnicianMenu();

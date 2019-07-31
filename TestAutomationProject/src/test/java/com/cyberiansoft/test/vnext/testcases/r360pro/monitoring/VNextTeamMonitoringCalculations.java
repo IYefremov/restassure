@@ -17,7 +17,6 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
@@ -46,13 +45,16 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         PartServiceData partServiceData = new PartServiceData();
         partServiceData.setServiceName("Engine part");
-        partServiceData.setCategory("Filters");
+        partServiceData.setSubCategory("Filters");
         PartName partName = new PartName();
         List<String> list = new ArrayList<>();
         list.add("Engine Oil Filter");
         partName.setPartNameList(list);
+        partName.setIsMultiSelect(true);
         partServiceData.setPartName(partName);
         partServiceData.setPartPosition("Main");
+        SearchSteps.textSearch(partServiceData.getServiceName());
+        PartServiceSteps.selectPartService(partServiceData);
         PartServiceSteps.confirmPartInfo();
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
@@ -68,7 +70,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
 
         HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
-        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);

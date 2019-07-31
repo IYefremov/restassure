@@ -10,6 +10,7 @@ import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.SelectLocationScreen;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
 import org.testng.Assert;
@@ -64,7 +65,7 @@ public class MonitorSteps {
 
     public static void editOrder(String workOrderId) {
         HomeScreenSteps.openWorkQueue();
-        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
     }

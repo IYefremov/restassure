@@ -215,4 +215,15 @@ public class ExtentTestNGIReporterListener extends TestListenerAdapter implement
 			}
 		}
 	}
+
+	@Override
+	public void onConfigurationFailure(ITestResult itr) {
+		AppiumUtils.setAndroidNetworkOn();
+		VNextAppUtils.restartApp();
+
+		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+		Employee employee = VNextBaseTestCase.getEmployee();
+		loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+		new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+	}
 }
