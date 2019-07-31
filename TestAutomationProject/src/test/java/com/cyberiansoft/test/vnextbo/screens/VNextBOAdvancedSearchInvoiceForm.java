@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class AdvancedSearchInvoiceForm extends VNextBOBaseWebPage {
+public class VNextBOAdvancedSearchInvoiceForm extends VNextBOBaseWebPage {
 
     @FindBy(id = "advSearchInvoice-form")
     private WebElement advancedSearchForm;
@@ -42,30 +44,34 @@ public class AdvancedSearchInvoiceForm extends VNextBOBaseWebPage {
     @FindBy(xpath = "//ul[@id='advSearchInvoice-timeframe_listbox']/li")
     private List<WebElement> timeFrameListBoxOptions;
 
-    public AdvancedSearchInvoiceForm(WebDriver driver) {
+    public VNextBOAdvancedSearchInvoiceForm(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         wait.until(ExpectedConditions.visibilityOf(advancedSearchForm));
     }
 
-    public AdvancedSearchInvoiceForm setInvoiceNumber(String invoice) {
-        wait.until(ExpectedConditions.elementToBeClickable(invoiceInputField)).clear();
-        invoiceInputField.sendKeys(invoice);
+    public VNextBOAdvancedSearchInvoiceForm setInvoiceNumber(String invoice) {
+        Utils.clearAndType(invoiceInputField, invoice);
         return this;
     }
 
-    public AdvancedSearchInvoiceForm setStatus(String status) {
-        wait.until(ExpectedConditions.elementToBeClickable(statusCombobox)).click();
-        wait.until(ExpectedConditions.attributeContains(statusCombobox, "aria-expanded", "true"));
-        wait.until(ExpectedConditions.elementToBeClickable(statusDropDown
-                .findElement(By.xpath("//li[text()='" + status + "']")))).click();
-        waitABit(1500);
+    public VNextBOAdvancedSearchInvoiceForm setStatus(String status) {
+        Utils.clickElement(statusCombobox);
+        try {
+            wait.until(ExpectedConditions.attributeContains(statusCombobox, "aria-expanded", "true"));
+            WaitUtilsWebDriver.waitABit(500);
+        } catch (Exception ignored) {}
+        Utils.clickElement(statusDropDown.findElement(By.xpath("//li[text()='" + status + "']")));
+        try {
+            wait.until(ExpectedConditions.attributeContains(statusCombobox, "aria-expanded", "false"));
+        } catch (Exception ignored) {}
+        WaitUtilsWebDriver.waitABit(1000);
         return this;
     }
 
     public VNextBOInvoicesWebPage clickSearchButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
-        waitForLoading();
+        Utils.clickElement(submitButton);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         return PageFactory.initElements(driver, VNextBOInvoicesWebPage .class);
     }
 
@@ -78,31 +84,31 @@ public class AdvancedSearchInvoiceForm extends VNextBOBaseWebPage {
         }
     }
 
-    public AdvancedSearchInvoiceForm setTimeFrame(String timeFrame) {
+    public VNextBOAdvancedSearchInvoiceForm setTimeFrame(String timeFrame) {
         clickTimeFrameBox();
         selectTimeFrame(timeFrame);
         return this;
     }
 
-    private AdvancedSearchInvoiceForm clickTimeFrameBox() {
+    private VNextBOAdvancedSearchInvoiceForm clickTimeFrameBox() {
         wait.until(ExpectedConditions.elementToBeClickable(timeFrameListBox)).click();
         return this;
     }
 
-    private AdvancedSearchInvoiceForm selectTimeFrame(String timeFrame) {
+    private VNextBOAdvancedSearchInvoiceForm selectTimeFrame(String timeFrame) {
         selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame, true);
         return this;
     }
 
-    public AdvancedSearchInvoiceForm setFromDate(String date) {
+    public VNextBOAdvancedSearchInvoiceForm setFromDate(String date) {
         return setDate(fromDateField, date);
     }
 
-    public AdvancedSearchInvoiceForm setToDate(String date) {
+    public VNextBOAdvancedSearchInvoiceForm setToDate(String date) {
         return setDate(toDateField, date);
     }
 
-    public AdvancedSearchInvoiceForm setDate(WebElement toDateField, String date) {
+    public VNextBOAdvancedSearchInvoiceForm setDate(WebElement toDateField, String date) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(toDateField)).click();
         } catch (Exception e) {

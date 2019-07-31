@@ -27,7 +27,7 @@ import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextConfirmationDialog;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -107,7 +107,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextBOInspectionsWebPage inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspNumber);
 		inspectionsWebPage.clickInspectionApproveButton();
-		VNextConfirmationDialog confirmationDialog = new VNextConfirmationDialog(webdriver);
+		VNextBOConfirmationDialog confirmationDialog = new VNextBOConfirmationDialog();
 
 		confirmationDialog.clickNoButton();
 		BaseUtils.waitABit(500);
@@ -183,7 +183,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextBOInspectionsWebPage inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspNumber);
 		inspectionsWebPage.clickInspectionApproveButton();
-		VNextConfirmationDialog confirmationDialog = new VNextConfirmationDialog(webdriver);
+		VNextBOConfirmationDialog confirmationDialog = new VNextBOConfirmationDialog();
 		confirmationDialog.clickNoButton();
 		BaseUtils.waitABit(1000);
 		inspectionsWebPage.declineInspection(approveNotes);

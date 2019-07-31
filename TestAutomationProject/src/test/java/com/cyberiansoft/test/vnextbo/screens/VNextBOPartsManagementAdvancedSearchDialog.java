@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -174,7 +175,7 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     }
 
     public boolean isAdvancedSearchDialogDisplayed() {
-        return isElementDisplayed(advancedSearchDialog);
+        return Utils.isElementDisplayed(advancedSearchDialog);
     }
 
     public boolean isAdvancedSearchDialogNotDisplayed() {
@@ -182,123 +183,123 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     }
 
     public boolean isCustomerFieldDisplayed() {
-        return isElementDisplayed(customerInputField);
+        return Utils.isElementDisplayed(customerInputField);
     }
 
     public boolean isWoNumInputFieldDisplayed() {
-        return isElementDisplayed(woNumInputField);
+        return Utils.isElementDisplayed(woNumInputField);
     }
 
     public boolean isStockNumInputFieldDisplayed() {
-        return isElementDisplayed(stockNumInputField);
+        return Utils.isElementDisplayed(stockNumInputField);
     }
 
     public boolean isEtaFromInputFieldDisplayed() {
-        return isElementDisplayed(etaFromInputField);
+        return Utils.isElementDisplayed(etaFromInputField);
     }
 
     public boolean isEtaToInputFieldDisplayed() {
-        return isElementDisplayed(etaToInputField);
+        return Utils.isElementDisplayed(etaToInputField);
     }
 
     public boolean isVinInputFieldDisplayed() {
-        return isElementDisplayed(vinInputField);
+        return Utils.isElementDisplayed(vinInputField);
     }
 
     public boolean isOemNumInputFieldDisplayed() {
-        return isElementDisplayed(oemNumInputField);
+        return Utils.isElementDisplayed(oemNumInputField);
     }
 
     public boolean isNotesInputFieldDisplayed() {
-        return isElementDisplayed(notesInputField);
+        return Utils.isElementDisplayed(notesInputField);
     }
 
     public boolean isFromDateInputFieldDisplayed() {
-        return isElementDisplayed(fromDateInputField);
+        return Utils.isElementDisplayed(fromDateInputField);
     }
 
     public boolean isToDateInputFieldDisplayed() {
-        return isElementDisplayed(toDateInputField);
+        return Utils.isElementDisplayed(toDateInputField);
     }
 
     public boolean isSearchNameInputFieldDisplayed() {
-        return isElementDisplayed(searchNameInputField);
+        return Utils.isElementDisplayed(searchNameInputField);
     }
 
     public boolean isPhaseListBoxDisplayed() {
-        return isElementDisplayed(phaseListBox);
+        return Utils.isElementDisplayed(phaseListBox);
     }
 
     public boolean isWoTypeListBoxDisplayed() {
-        return isElementDisplayed(woTypeListBox);
+        return Utils.isElementDisplayed(woTypeListBox);
     }
 
     public boolean isOrderedFromListBoxDisplayed() {
-        return isElementDisplayed(orderedFromListBox);
+        return Utils.isElementDisplayed(orderedFromListBox);
     }
 
     public boolean isSearchButtonDisplayed() {
-        return isElementDisplayed(searchButton);
+        return Utils.isElementDisplayed(searchButton);
     }
 
     public boolean isXButtonDisplayed() {
-        return isElementDisplayed(xButton);
+        return Utils.isElementDisplayed(xButton);
     }
 
     public boolean isClearButtonDisplayed() {
-        return isElementDisplayed(clearButton);
+        return Utils.isElementDisplayed(clearButton);
     }
 
     public boolean isSaveButtonDisplayed() {
-        return isElementDisplayed(saveButton);
+        return Utils.isElementDisplayed(saveButton);
     }
 
     public boolean isDeleteButtonDisplayed() {
-        return isElementDisplayed(deleteButton);
+        return Utils.isElementDisplayed(deleteButton);
     }
 
     public String getCustomerInputFieldValue() {
-        return getInputFieldValue(customerInputField);
+        return Utils.getInputFieldValue(customerInputField);
     }
 
     public String getWoInputFieldValue() {
-        return getInputFieldValue(woNumInputField);
+        return Utils.getInputFieldValue(woNumInputField);
     }
 
     public String getStockInputFieldValue() {
-        return getInputFieldValue(stockNumInputField);
+        return Utils.getInputFieldValue(stockNumInputField);
     }
 
     public String getVinInputFieldValue() {
-        return getInputFieldValue(vinInputField);
+        return Utils.getInputFieldValue(vinInputField);
     }
 
     public String getOemInputFieldValue() {
-        return getInputFieldValue(oemNumInputField);
+        return Utils.getInputFieldValue(oemNumInputField);
     }
 
     public String getNotesInputFieldValue() {
-        return getInputFieldValue(notesInputField);
+        return Utils.getInputFieldValue(notesInputField);
     }
 
     public String getSearchNameInputFieldValue() {
-        return getInputFieldValue(searchNameInputField);
+        return Utils.getInputFieldValue(searchNameInputField);
     }
 
     public String getETAFromInputField() {
-        return getInputFieldValue(etaFromInputField);
+        return Utils.getInputFieldValue(etaFromInputField);
     }
 
     public String getETAToInputField() {
-        return getInputFieldValue(etaToInputField);
+        return Utils.getInputFieldValue(etaToInputField);
     }
 
     public String getFromInputField() {
-        return getInputFieldValue(fromDateInputField);
+        return Utils.getInputFieldValue(fromDateInputField);
     }
 
     public String getToInputField() {
-        return getInputFieldValue(toDateInputField);
+        return Utils.getInputFieldValue(toDateInputField);
     }
 
     public void clickSearchButton() {

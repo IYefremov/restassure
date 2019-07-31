@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -57,10 +59,13 @@ public class VNextBOAddLaborPartsDialog extends VNextBOBaseWebPage {
     }
 
     public VNextBOAddLaborPartsDialog clickClearLaborIcon() {
-        wait.until(ExpectedConditions.elementToBeClickable(clearIcon)).click();
+        final int size = laborListBoxOptions.size();
+        Utils.clickElement(clearIcon);
         try {
-            waitShort.until(ExpectedConditions.not(ExpectedConditions
-                    .attributeContains(laborArrowLoader, "class", "loading")));
+            Utils.waitShort.until(e -> !laborArrowLoader.getAttribute("class").contains("loading"));
+        } catch (Exception ignored) {}
+        try {
+            Utils.waitShort.until(e -> size != laborListBoxOptions.size());
         } catch (Exception ignored) {}
         return this;
     }
@@ -102,6 +107,7 @@ public class VNextBOAddLaborPartsDialog extends VNextBOBaseWebPage {
 
     public VNextBOAddLaborPartsDialog typeLaborName(String labor) {
         setData(laborInputField, labor);
+        WaitUtilsWebDriver.waitABit(2000);
         return this;
     }
 

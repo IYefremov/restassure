@@ -3,7 +3,7 @@
     {
       "rowID": "verifyUserCanOpenOperationsPartsManagementWithFullSetOfElements.01",
       "description": "Test Case 83749:Verify user can open \"Operations → Parts Management\" with full set of elements",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "dashboardItemsNames": [
         "Past Due Parts",
         "In Progress",
@@ -16,7 +16,7 @@
     {
       "rowID": "verifyUserCanSeePartsDetailsOfDifferentROs.01",
       "description": "Test Case 83856:User can see Part's details of different RO's",
-      "location": "Best Location"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -24,7 +24,7 @@
     {
       "rowID": "verifyUserCanSelectOrdersWithPastDuePartsOption.01",
       "description": "Test Case 87783:User can select orders with \"Past Due Parts\" Parts",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "statusesList": [
         "Open",
         "On Hold",
@@ -40,7 +40,7 @@
     {
       "rowID": "verifyUserCanSelectOrdersWithInProgressOption.01",
       "description": "Test Case 87785:User can select orders with \"In Progress\" Parts",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "statusesList": [
         "Return to Vendor (RTV)",
         "Ordered",
@@ -53,7 +53,7 @@
     {
       "rowID": "verifyUserCanSelectOrdersWithCompletedOption.01",
       "description": "Test Case 87786:User can select orders with \"Completed\" Parts",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "statusesList": [
         "Received (final)",
         "RTV Complete (final)"

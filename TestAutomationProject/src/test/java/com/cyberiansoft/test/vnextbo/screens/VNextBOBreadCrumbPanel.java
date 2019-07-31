@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -16,8 +18,11 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
     private WebElement locationExpanded;
 
-    @FindBy(xpath = "//ul[@class='scroll-pane-locations']")
-    private WebElement locationsList;
+    @FindBy(xpath = "//ul[@class='scroll-pane-locations']//label")
+    private List<WebElement> locationsList;
+
+    @FindBy(xpath = "//div[@class='drop department-drop']")
+    private WebElement locationsDropDown;
 
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']/ul[@class='scroll-pane-locations']//label")
     private List<WebElement> locationLabels;
@@ -76,18 +81,10 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOBaseWebPage setLocation(String location) {
-        if (isLocationExpanded()) {
-            selectLocation(location);
-        } else {
-            try {
-                wait.until(ExpectedConditions.elementToBeClickable(locationName)).click();
-            } catch (Exception ignored) {
-                waitABit(2000);
-                clickWithJS(locationName);
-            }
-            waitForLoading();
-            selectLocation(location);
+        if (!isLocationExpanded()) {
+            Utils.clickElement(locationName);
         }
+        selectLocation(location);
         return this;
     }
 
@@ -113,21 +110,17 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
     }
 
     private void selectLocation(String location) {
-        wait.until(ExpectedConditions
-                .elementToBeClickable(locationsList.findElement(By.xpath(".//label[text()='" + location + "']"))))
-                .click();
-        waitForLoading();
+        Utils.selectOptionInDropDown(locationsDropDown, locationsList, location, true);
         Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
-        closeLocationDropDown();
     }
 
     public void closeLocationDropDown() {
-        try {
-            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
-        } catch (Exception e) {
-            locationName.click();
-            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
+        if (isLocationExpanded()) {
+            Utils.clickElement(locationName);
         }
+        try {
+            WaitUtilsWebDriver.waitForInvisibility(locationExpanded);
+        } catch (Exception ignored) {}
     }
 
     public boolean isLocationSelected(String location) {

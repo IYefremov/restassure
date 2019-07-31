@@ -3,7 +3,7 @@
     {
       "rowID": "verifyUserCanSearchByVIN.01",
       "description": "Test Case 81905:User can search by VIN",
-      "location": "1111",
+      "location": "1111 Automation",
       "vinNum": "32434234234234"
     }
   ],
@@ -12,7 +12,7 @@
     {
       "rowID": "verifyUserCanSearchByOrderNum.01",
       "description": "Test Case 81906:User can search by OrderNum",
-      "location": "1111",
+      "location": "1111 Automation",
       "orderNumber": "O-000-152292"
     }
   ],
@@ -21,7 +21,7 @@
     {
       "rowID": "verifyUserCanSearchByRoNum.01",
       "description": "Test Case 81908:User can search by RONo",
-      "location": "1111",
+      "location": "1111 Automation",
       "roNumber": "O-000-152292"
     }
   ],
@@ -30,7 +30,7 @@
     {
       "rowID": "verifyUserCanSearchByFirstName.01",
       "description": "Test Case 81909:User can search by FirstName",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "firstName": "Alex1"
     }
   ],
@@ -39,7 +39,7 @@
     {
       "rowID": "verifyUserCanSearchByLastName.01",
       "description": "Test Case 81910:User can search by LastName",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "lastName": "Zakaulov1"
     }
   ],
@@ -48,7 +48,7 @@
     {
       "rowID": "verifyUserCanSearchByEmail.01",
       "description": "Test Case 82104:User can search by Email",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "email": "cyberiansoft.test@nada.ltd",
       "firstName": "Alex1",
       "lastName": "Zakaulov1"
@@ -59,7 +59,7 @@
     {
       "rowID": "verifyUserCanSearchByCompanyName.01",
       "description": "Test Case 82105:User can search by CompanyName",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "company": "TestAutomationCompany",
       "firstName": "Alex1",
       "lastName": "Zakaulov1"

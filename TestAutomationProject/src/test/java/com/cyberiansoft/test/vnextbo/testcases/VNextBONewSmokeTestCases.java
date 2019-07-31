@@ -1,12 +1,21 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBONewSmokeData;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOQuickNotesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOAccountInfoBlockInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOClientsListViewInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOEmailOptionsBlockInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
+import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsListViewSteps;
+import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsSearchSteps;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -31,6 +40,9 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBOCompanyInfoWebPage companyInfoWebPage;
     private VNextBOHomeWebPage homePage;
     private VNextBOInspectionsWebPage inspectionsWebPage;
+    private VNextBOInspectionsApprovalPageSteps inspectionsApprovalSteps;
+    private VNextBOClientsListViewInteractions listViewInteractions;
+    private VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions;
 
     @BeforeClass
     public void settingUp() {
@@ -62,6 +74,9 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         companyInfoWebPage = PageFactory.initElements(webdriver, VNextBOCompanyInfoWebPage.class);
         homePage = PageFactory.initElements(webdriver, VNextBOHomeWebPage.class);
         inspectionsWebPage = PageFactory.initElements(webdriver, VNextBOInspectionsWebPage.class);
+        inspectionsApprovalSteps = PageFactory.initElements(webdriver, VNextBOInspectionsApprovalPageSteps.class);
+        listViewInteractions = PageFactory.initElements(webdriver, VNextBOClientsListViewInteractions.class);
+        emailOptionsBlockInteractions = PageFactory.initElements(webdriver, VNextBOEmailOptionsBlockInteractions .class);
     }
 
     @AfterMethod
@@ -117,11 +132,15 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
                 .selectAdvancedSearchByStatus(data.getStatuses()[0])
                 .clickSearchButton();
         final String inspectionNumber = breadCrumbPanel.getLastBreadCrumbText();
-        inspectionsWebPage.approveInspection(data.getNote());
+        inspectionsApprovalSteps.approveInspection(data.getNote());
 
-        inspectionsWebPage.searchInspectionByText(inspectionNumber);
+        inspectionsWebPage
+                .openAdvancedSearchPanel()
+                .setAdvancedSearchByInspectionNumber(inspectionNumber)
+                .selectAdvancedSearchByStatus(data.getStatuses()[1])
+                .clickSearchButton();
         Assert.assertEquals(inspectionsWebPage.getFirstInspectionStatus(), data.getStatuses()[1],
-                "The status of inspection hasn't been changed");
+                "The status of inspection hasn't been changed from 'New' to 'Approved'");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -374,5 +393,62 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         Assert.assertEquals(companyInfoWebPage.getPhoneCodeValue(), data.getPhoneCode()[1]);
         Assert.assertEquals(companyInfoWebPage.getPhoneValue(), data.getPhone()[1]);
         Assert.assertEquals(companyInfoWebPage.getEmailValue(), data.getEmail()[1]);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanAddDeleteAndEditQuickNotes(String rowID, String description, JSONObject testData) {
+        VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
+
+        VNextBOQuickNotesWebPage quickNotesPage = leftMenu.selectQuickNotesMenu();
+        final int numberOfQuickNotes = quickNotesPage.getNumberOfQuickNotesDisplayed(data.getQuickNotesDescription());
+        quickNotesPage
+                .clickAddNotesButton()
+                .typeDescription(data.getQuickNotesDescription())
+                .clickQuickNotesDialogAddButton();
+        Assert.assertEquals(numberOfQuickNotes + 1,
+                quickNotesPage.getNumberOfQuickNotesDisplayed(data.getQuickNotesDescription()));
+
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
+        quickNotesPage
+                .deleteQuickNote(data.getQuickNotesDescription())
+                .deleteQuickNotesIfPresent(data.getQuickNotesDescriptionEdited())
+                .clickAddNotesButton()
+                .typeDescription(data.getQuickNotesDescription())
+                .clickQuickNotesDialogAddButton();
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
+
+        quickNotesPage
+                .clickEditQuickNote(data.getQuickNotesDescription())
+                .typeDescription(data.getQuickNotesDescriptionEdited())
+                .clickQuickNotesDialogUpdateButton();
+        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescriptionEdited()));
+        quickNotesPage.deleteQuickNote(data.getQuickNotesDescriptionEdited());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanEditAddressFields(String rowID, String description, JSONObject testData) {
+        VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
+
+        leftMenu.selectClientsMenu();
+        new VNextBOClientsSearchSteps().searchWithSimpleSearch(data.getSearch());
+        Assert.assertTrue(listViewInteractions.isClientsTableDisplayed(), "The clients table hasn't been displayed");
+
+        new VNextBOClientsListViewSteps().openClientsDetailsPage(data.getTypes()[0]);
+        final VNextBOClientDetailsViewAccordionSteps accordionSteps = new VNextBOClientDetailsViewAccordionSteps();
+        accordionSteps.setClientInfoData(data.getClientInfoData());
+
+        accordionSteps.setAccountInfoData(data.getAccountInfoData());
+        Assert.assertFalse(new VNextBOAccountInfoBlockInteractions().isPoNumberUpfrontRequiredCheckboxClickable());
+        accordionSteps.setAddressData(data.getAddressData());
+        accordionSteps.setEmailOptionsData(data.getEmailOptionsData());
+
+        Assert.assertFalse(emailOptionsBlockInteractions.isInvoicesCheckboxClickable(),
+                "The invoices checkbox is clickable");
+        Assert.assertFalse(emailOptionsBlockInteractions.isInspectionsCheckboxClickable(),
+                "The inspections checkbox is clickable");
+        Assert.assertFalse(emailOptionsBlockInteractions.isIncludeInspectionCheckboxClickable(),
+                "The include inspections checkbox is clickable");
+        accordionSteps.setPreferencesData(data.getDefaultArea());
+        accordionSteps.setMiscellaneousData(data.getNotes());
     }
 }

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class VNextConfirmationDialog extends VNextBOBaseWebPage {
+public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//div[@class='modal fade in' and @id='dialogModal']")
 	private WebElement confirmDialog;
@@ -34,10 +35,9 @@ public class VNextConfirmationDialog extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCloseButton']")
 	private WebElement rejectButton;
 	
-	public VNextConfirmationDialog(WebDriver driver) {
-		super(driver);
+	public VNextBOConfirmationDialog() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(confirmDialog));
 	}
 	
 	public void clickNoButton() {

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import lombok.Getter;
 import org.apache.commons.lang3.RandomUtils;
 import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.*;
@@ -20,10 +21,14 @@ import java.util.concurrent.TimeUnit;
 
 import static org.awaitility.Awaitility.await;
 
-public abstract class VNextBOBaseWebPage {
+@Getter
+public class VNextBOBaseWebPage {
 
-    @FindBy(xpath = "//div[@class='k-loading-mask']")
-    private WebElement loadingProcess;
+    @FindBy(xpath = "//div[contains(@class, 'k-loading-mask')]")
+    public static WebElement spinner;
+
+    @FindBy(id = "app-progress-spinner")
+    public static WebElement loadingProcess;
 
     public WebDriver driver;
     public static WebDriverWait wait;
@@ -344,8 +349,8 @@ public abstract class VNextBOBaseWebPage {
             waitABit(1500);
             clickWithJS(inputField);
         }
-        inputField.clear();
-        inputField.sendKeys(data);
+        wait.until(ExpectedConditions.elementToBeClickable(inputField)).clear();
+        wait.until(ExpectedConditions.elementToBeClickable(inputField)).sendKeys(data);
         return this;
     }
 

@@ -83,7 +83,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
         VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
 
-        final AdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -113,7 +113,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
         VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
 
-        final AdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -143,7 +143,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
         VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
 
-        final AdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -202,7 +202,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
         VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
 
-        final AdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
@@ -211,7 +211,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 .setTimeFrame(data.getTimeFrame())
                 .setFromDate(data.getFromDate())
                 .setToDate(data.getToDate())
-                .setStatus(data.getStatus())
+                .setStatus(data.getStatus2())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
@@ -226,22 +226,21 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         Arrays.stream(invoices)
                 .forEach((inv) -> invoicesPage
                         .clickFirstInvoice()
-                        .clickUnvoidButton()
+                        .clickVoidButton()
                         .clickInvoiceYesButton());
+
+        Arrays.stream(invoices)
+                .forEach((inv) -> Assert.assertFalse(invoicesPage
+                                .isInvoiceDisplayed(inv),
+                        "The invoice " + inv + " is displayed after being voided"));
 
         invoicesPage
                 .clickAdvancedSearchCaret()
                 .setStatus(data.getStatus())
-                .clickSearchButton()
-                .scrollInvoices();
+                .clickSearchButton();
 
-        Arrays.stream(invoices)
-                .forEach((inv) -> Assert.assertTrue(invoicesPage
-                                .isInvoiceDisplayed(inv),
-                        "The invoice " + inv + " is not displayed after being voided"));
-
-        invoicesPage.clickCheckbox(invoices);
         invoicesPage
+                .clickCheckbox(invoices)
                 .clickHeaderIconUnvoidButton()
                 .clickInvoiceYesButton();
 

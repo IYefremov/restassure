@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -85,14 +86,14 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
                 headerIconArchiveButton.isDisplayed();
     }
 
-    public VNextConfirmationDialog clickHeaderIconVoidButton() {
+    public VNextBOConfirmationDialog clickHeaderIconVoidButton() {
 	    wait.until(ExpectedConditions.elementToBeClickable(headerIconVoidButton)).click();
-	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
     }
 
-    public VNextConfirmationDialog clickHeaderIconUnvoidButton() {
-	    wait.until(ExpectedConditions.elementToBeClickable(headerIconUnvoidButton)).click();
-	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+    public VNextBOConfirmationDialog clickHeaderIconUnvoidButton() {
+	    Utils.clickElement(headerIconUnvoidButton);
+	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
     }
 
 	public void selectInvoiceInTheList(String invoice) {
@@ -143,16 +144,16 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	    return this;
     }
 
-    public VNextConfirmationDialog clickVoidButton() {
+    public VNextBOConfirmationDialog clickVoidButton() {
 	    wait.until(ExpectedConditions.elementToBeClickable(voidButton)).click();
         waitForLoading();
-	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
     }
 
-    public VNextConfirmationDialog clickUnvoidButton() {
-	    wait.until(ExpectedConditions.elementToBeClickable(unvoidButton)).click();
+    public VNextBOConfirmationDialog clickUnvoidButton() {
+        Utils.clickElement(unvoidButton);
 	    waitForLoading();
-	    return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
     }
 
     public void scrollInvoices() {
@@ -183,9 +184,9 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	    return wait.until(ExpectedConditions.visibilityOf(checkedItemsNote)).getText();
 	}
 
-	public AdvancedSearchInvoiceForm clickAdvancedSearchCaret() {
+	public VNextBOAdvancedSearchInvoiceForm clickAdvancedSearchCaret() {
 	    wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCaret)).click();
-        return PageFactory.initElements(driver, AdvancedSearchInvoiceForm.class);
+        return PageFactory.initElements(driver, VNextBOAdvancedSearchInvoiceForm.class);
     }
 
     public VNextBOInvoicesWebPage setLocation(String location) {

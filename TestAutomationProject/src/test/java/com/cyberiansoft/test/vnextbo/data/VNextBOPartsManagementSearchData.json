@@ -3,7 +3,7 @@
     {
       "rowID": "verifyUserCanSearchROUsingSearch.01",
       "description": "Test Case 83750:User can search RO using \"Search\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "123"
     }
   ],
@@ -12,7 +12,7 @@
     {
       "rowID": "verifyUserCanDeleteSearchOptions.01",
       "description": "Test Case 83751:User can delete search options",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "123"
     }
   ],
@@ -21,7 +21,7 @@
     {
       "rowID": "verifyUserCanUseAdvancedSearchForROSearch.01",
       "description": "Test Case 83752:User can use Advanced Search to the search of RO",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "123"
     }
   ],
@@ -30,7 +30,7 @@
     {
       "rowID": "verifyUserCanSearchROByCustomerUsingAdvancedSearch.01",
       "description": "Test Case 83754:User can search RO by \"Customer\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "mik",
       "customer": "Mike's Techs"
     }
@@ -40,7 +40,7 @@
     {
       "rowID": "verifyUserCanSearchROByPhaseUsingAdvancedSearch.01",
       "description": "Test Case 83755:User can search RO by \"Phase\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "phase": "Third"
     }
   ],
@@ -49,7 +49,7 @@
     {
       "rowID": "verifyUserCanSearchROByWONumUsingAdvancedSearch.01",
       "description": "Test Case 83758:User can search RO by \"WO#\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-062-00068"
     }
   ],
@@ -58,7 +58,7 @@
     {
       "rowID": "verifyUserCanSearchROByWOTypeUsingAdvancedSearch.01",
       "description": "Test Case 83759:User can search RO by \"WO Type\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woType": "Best"
     }
   ],
@@ -67,7 +67,7 @@
     {
       "rowID": "verifyUserCanSearchROByStockNumUsingAdvancedSearch.01",
       "description": "Test Case 83781:User can search RO by \"Stock#\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "stockNum": "Autotests"
     }
   ],
@@ -76,7 +76,7 @@
     {
       "rowID": "verifyUserCanSearchROByETAFromUsingAdvancedSearch.01",
       "description": "Test Case 83786:User can search RO by \"ETA From\" using Advanced Search",
-      "location": "Best Location"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -84,7 +84,7 @@
     {
       "rowID": "verifyUserCanSearchROByETAToUsingAdvancedSearch.01",
       "description": "Test Case 83787:User can search RO by \"ETA To\" using Advanced Search",
-      "location": "Best Location"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -92,7 +92,7 @@
     {
       "rowID": "verifyUserCanSearchROByVINNumUsingAdvancedSearch.01",
       "description": "Test Case 83788:User can search RO by \"VIN\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "vinNum": "11111"
     }
   ],
@@ -101,7 +101,7 @@
     {
       "rowID": "verifyUserCanSearchROByOEMNumUsingAdvancedSearch.01",
       "description": "Test Case 83789:User can search RO by \"OEM#\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "oemNum": "My OEM"
     }
   ],
@@ -110,7 +110,7 @@
     {
       "rowID": "verifyUserCanSearchROByNotesUsingAdvancedSearch.01",
       "description": "Test Case 83790:User can search RO by \"Notes\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "notes": "Autotest258",
       "part": "New part service"
     }
@@ -120,7 +120,7 @@
     {
       "rowID": "verifyUserCanSearchROByOrderedFromUsingAdvancedSearch.01",
       "description": "Test Case 83796:User can search RO by \"Ordered From\" using Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "orderedFrom": "Test Team"
     }
   ],
@@ -129,7 +129,7 @@
     {
       "rowID": "verifyUserCanSearchROByFromOptionUsingAdvancedSearch.01",
       "description": "Test Case 83792:User can search RO by \"From\" using Advanced Search",
-      "location": "Best Location"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -137,7 +137,7 @@
     {
       "rowID": "verifyUserCanSearchROByToOptionUsingAdvancedSearch.01",
       "description": "Test Case 83793:User can search RO by \"To\" using Advanced Search",
-      "location": "Best Location"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -145,7 +145,7 @@
     {
       "rowID": "verifyUserCanFillAllFieldsOfAdvancedSearch.01",
       "description": "Test Case 83803:User can fill all fields of Advanced Search",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "mik",
       "customer": "Mike's Techs",
       "phase": "All",
@@ -164,7 +164,7 @@
     {
       "rowID": "verifyAdvancedSearchDataIsNotClearedAfterClosingByClickingXIconAndOutsideSearchWindow.01",
       "description": "Test Case 83808:User can close Advanced Search by the clicking on \"X-icon\". Test Case 83811:User can close Advanced Search by the clicking outside of the Search window",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "mik",
       "customer": "Mike's Techs",
       "phase": "All",
@@ -183,7 +183,7 @@
     {
       "rowID": "verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog.01",
       "description": "Test Case 83812:User can clear all entered values",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "mik",
       "customer": "Mike's Techs",
       "phase": "All",
@@ -203,7 +203,7 @@
     {
       "rowID": "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog.01",
       "description": "Test Case 83815:User can Save options of \"Advanced Search\". Test Case 83816:User can search RO using options of the \"Advanced Search\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "mik",
       "customer": "Mike's Techs",
       "phase": "All",
@@ -223,7 +223,7 @@
     {
       "rowID": "verifyUserCanSearchROUsingOptionsOfAdvancedSearch.01",
       "description": "Test Case 83816:User can search RO using options of the \"Advanced Search\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "mik",
       "customer": "Mike's Techs",
       "phase": "All",
@@ -243,7 +243,7 @@
     {
       "rowID": "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch.01",
       "description": "Test Case 83817:User can search RO using saved options of the \"Advanced Search\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "",
       "customer": "",
       "phase": "All",
@@ -264,7 +264,7 @@
     {
       "rowID": "verifyUserCanChangeValuesOfTheSavedAdvancedSearch.01",
       "description": "Test Case 83823:User can change values of the saved \"Advanced Search\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "mik",
       "customer": "Mike's Techs",
       "phase": "All",
@@ -288,7 +288,7 @@
     {
       "rowID": "verifyUserCanClickSavedAdvancedSearchModalDialogDeleteButtons.01",
       "description": "Test Case 83825:User can click Delete but not deleted saved \"Advances Search\" clicking the \"X-icon\". Test Case 83826:User can click Delete but not deleted saved \"Advances Search\" clicking \"No\". Test Case 83827:User can Delete saved \"Advances Search\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "type": "mik",
       "customer": "Mike's Techs",
       "phase": "All",
