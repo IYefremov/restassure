@@ -1,11 +1,14 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.dataclasses.ServiceRateData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularQuestionsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -136,6 +139,20 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Questions").click();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
 		questionsscreen.answerQuestion(questionsData);
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
+	}
+
+	public void answerQuestions(List<QuestionsData> questionsData) {
+
+		appiumdriver.findElementByAccessibilityId("Questions").click();
+		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
+		for (QuestionsData questionData : questionsData)
+			if (questionData.isLogicalQuestion())
+				questionsscreen.answerLogicalQuestion(questionData);
+			else if (questionData.isTextQuestion())
+				questionsscreen.answerTextQuestion(questionData);
+			else
+				questionsscreen.answerQuestion(questionData);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
 	}
 	
@@ -319,12 +336,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId(serviceRateData.getServiceRateName()).findElement(MobileBy.className("XCUIElementTypeTextField")).click();
 		appiumdriver.findElementByAccessibilityId("Clear text").click();
 		appiumdriver.findElementByAccessibilityId(serviceRateData.getServiceRateName()).findElement(MobileBy.className("XCUIElementTypeTextField")).sendKeys(serviceRateData.getServiceRateValue() + "\n");
-	}
-
-	public void setServiceDetailsFieldValue(String fieldname, String _value) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").click();
-		appiumdriver.findElementByAccessibilityId("Clear text").click();
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").sendKeys(_value + "\n");
 	}
 	
 	public String getServiceDetailsTotalValue() {
@@ -531,4 +542,21 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		return new RegularPriceMatrixScreen();
 	}
 
+	public void clickOperationCell() {
+		appiumdriver.findElementByAccessibilityId("Operation").click();
+	}
+
+	public void selectLaborServicePanel(String panelName) {
+		if (!appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + panelName + "']")).isDisplayed()) {
+			swipeToElement(appiumdriver.
+					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + panelName + "']/..")));
+		}
+		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(panelName)).click();
+	}
+
+	public void selectLaborServicePart(String partName) {
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(partName+"\n");
+		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(partName)).click();
+	}
 }

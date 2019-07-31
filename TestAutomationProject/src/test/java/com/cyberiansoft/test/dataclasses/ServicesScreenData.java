@@ -29,6 +29,12 @@ public class ServicesScreenData {
     @JsonProperty("percentageServices")
     List<ServiceData> percentageServices;
 
+    @JsonProperty("bundleService")
+    BundleServiceData bundleService;
+
+    @JsonProperty("laborService")
+    LaborServiceData laborService;
+
     @JsonProperty("screenPrice")
     String screenPrice;
 

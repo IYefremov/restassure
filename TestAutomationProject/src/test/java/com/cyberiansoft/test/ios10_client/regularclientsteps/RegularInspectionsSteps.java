@@ -7,11 +7,9 @@ import org.openqa.selenium.Alert;
 
 public class RegularInspectionsSteps {
 
-    public static void saveInspecion() {
-        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
-        baseWizardScreen.clickSave();
-        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
-        myInspectionsScreen.waitMyInspectionsScreenLoaded();
+    public static void saveInspection() {
+        RegularWizardScreensSteps.clickSaveButton();
+        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
     }
 
     public static void cancelCreatingInspection() {
@@ -19,7 +17,13 @@ public class RegularInspectionsSteps {
         baseWizardScreen.clickCancelWizard();
         Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
         alert.accept();
-        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
-        myInspectionsScreen.waitMyInspectionsScreenLoaded();
+        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+    }
+
+
+    public static void saveInspectionAsFinal() {
+        RegularWizardScreensSteps.clickSaveButton();
+        RegularWizardScreensSteps.clickFinalButton();
+        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
     }
 }

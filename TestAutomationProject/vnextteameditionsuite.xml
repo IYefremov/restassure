@@ -47,6 +47,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitBaseCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitTeamCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitServiceCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceBaseCase"/>
         </classes>
     </test>
 </suite>

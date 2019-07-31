@@ -111,18 +111,10 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
        // appiumdriver.findElementByAccessibilityId("Technicians").click();
     }
 
-    public boolean isDiscauntPresent(String discaunt) {
-        return appiumdriver.findElementsByAccessibilityId(discaunt).size() > 0;
-    }
 
     public void switchOffOption(String optionname) {
         appiumdriver.findElementByAccessibilityId("Other").click();
         viewMode = "OtherView";
-    }
-
-    public String getDiscauntPriceAndValue(String discaunt) {
-        WebElement par = getTableParentCell(discaunt);
-        return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value").replaceAll("[^a-zA-Z0-9$.,% ]", " ").trim();
     }
 
     public void setPrice(String price) {

@@ -14,10 +14,7 @@ import org.testng.Assert;
 
 public class RegularPriceMatrixScreenSteps {
 
-    public static void goTopriceMatrixScreenAndSelectPriceMatrixData(PriceMatrixScreenData priceMatrixScreenData) {
-        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
-        baseWizardScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
-
+    public static void selectPriceMatrixData(PriceMatrixScreenData priceMatrixScreenData) {
         if (priceMatrixScreenData.getMatrixService() != null) {
             RegularServicesScreenSteps.selectMatrixServiceData(priceMatrixScreenData.getMatrixService());
         } else if (priceMatrixScreenData.getVehiclePartsData() != null) {
@@ -26,16 +23,6 @@ public class RegularPriceMatrixScreenSteps {
             }
         } else if (priceMatrixScreenData.getVehiclePartData() != null)
             RegularVehiclePartsScreenSteps.selectVehiclePartAndSetData(priceMatrixScreenData.getVehiclePartData());
-        if (priceMatrixScreenData.getMatrixScreenPrice() != null) {
-            RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
-            Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), priceMatrixScreenData.getMatrixScreenPrice());
-        }
-
-        if (priceMatrixScreenData.getMatrixScreenTotalPrice() != null) {
-            RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
-            Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), priceMatrixScreenData.getMatrixScreenTotalPrice());
-        }
-
     }
 
 

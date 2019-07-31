@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.utils;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.junit.Assert;
@@ -27,6 +28,14 @@ public class WaitUtils {
                     .withTimeout(Duration.ofSeconds(2))
                     .until((appiumDriver) -> appiumDriver.findElement(locator).isDisplayed());
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static Boolean isElementPresent(WebElement webElement) {
+        try {
+            return webElement.isDisplayed();
+        } catch (ElementNotFoundException | StaleElementReferenceException ex) {
             return false;
         }
     }

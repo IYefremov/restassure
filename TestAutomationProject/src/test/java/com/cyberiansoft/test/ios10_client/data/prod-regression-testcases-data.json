@@ -1,39 +1,126 @@
 {
-
   "testCreateInspectionVerifyOnBO": [
     {
       "rowID": "testCreateInspectionVerifyOnBO.01",
       "description": "Test Case 27847: 1 - Create inspection - verify on BO",
       "inspectionData": {
-        "retailCustomer" : {"firstName" :  "Amazimg", "lastName" :  "Nissan"},
+        "retailCustomer": {
+          "firstName": "Amazimg",
+          "lastName": "Nissan"
+        },
         "vihicleInfo": {
-          "vinNumber": "JA4LS31H8YP047397",
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleYear": "2011",
           "mileage": "77777",
           "licPlate": "12345",
           "stockNumber": "Stock1",
-          "roNumber": "123"
+          "roNumber": "123",
+          "trim" : "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel",
+              "servicePrice": "20",
+              "questionsData": [
+                {
+                  "questionName": "QuestionTypeLogical_Review Car",
+                  "logicalQuestion": true,
+                  "logicalQuestionValue": false
+                },
+                {
+                  "questionName": "QuestionTypeText_Question2",
+                  "questionAnswer": "12345",
+                  "textQuestion": true
+                }
+              ]
+            },
+            {
+              "serviceName": "Special Discount",
+              "servicePrice": "-10"
+            }
+          ],
+          "laborService": {
+            "serviceName": "Labor_Vehilce_data_R&R",
+            "laborServiceRate": "2",
+            "laborServicePriceVerify": "$5.14",
+            "laborServicePanel": "Front Bumper",
+            "laborServicePart": "Remove/Replace Front Bumper Cover"
+          },
+          "bundleService": {
+            "bundleServiceName": "Bundle for PP",
+            "bundleServiceAmount": "1021",
+            "services": [
+              {
+                "serviceName": "Service_PP_Vehicle",
+                "vehiclePart": {
+                  "vehiclePartName": "Front Bumper"
+                }
+              },
+              {
+                "serviceName": "SR_S1_Money",
+                "vehiclePart": {
+                  "vehiclePartName": "Decklid"
+                }
+              }
+            ]
+          },
+          "screenTotalPrice": "$1,013.53",
+          "screenPrice": "$1,046.14"
+        },
+        "priceMatrixScreenData": {
+          "screenName": "Simple Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "1 \"",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartAdditionalService":
+              {
+                "serviceName": "SR_S5_Mt_Money",
+                "servicePrice": "50"
+              },
+            "vehiclePartTotalPrice": "$72.00"
+          },
+          "screenTotalPrice": "$1,013.53",
+          "screenPrice": "$72.00"
         },
         "insuranceCompany": {
           "insuranceCompanyName": "USG",
           "claimNumber": "QWERTY",
-          "policyNumber" : "pl-123",
-          "deductible" : "34"
-        }
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        },
+        "inspectionTotalPrice" : "$1,013.53"
+      },
+      "workOrderData" : {
+        "servicesScreen": {
+          "screenTotalPrice": "$962.53",
+          "screenPrice": "$1,046.14"
+        },
+        "workOrderPrice": "$962.53"
       }
     }
   ],
-
   "testCreateRetailCustomer": [
     {
       "rowID": "testCreateRetailCustomer.01",
       "description": "Test Case 27854: 1 - 8 - Create retail customer",
       "inspectionData": {
-        "retailCustomer" : {"firstName" :  "TestRetailFirst", "lastName" :  "TestRetailSecond",
-        "mailAddress" :  "test@cyberiansoft.com", "customerPhone" :  "+123456789",
-        "customerAddress1" :  "First Street 1/32", "customerAddress2" :  "Block 92-3", "customerCity" :  "L'viv",
-        "customerCountry" :  "United States", "customerState" :  "California", "customerZipCode" :  "79031"}
+        "retailCustomer": {
+          "firstName": "TestRetailFirst",
+          "lastName": "TestRetailSecond",
+          "mailAddress": "test@cyberiansoft.com",
+          "customerPhone": "+123456789",
+          "customerAddress1": "First Street 1/32",
+          "customerAddress2": "Block 92-3",
+          "customerCity": "L'viv",
+          "customerCountry": "United States",
+          "customerState": "California",
+          "customerZipCode": "79031"
+        }
       }
     }
   ]
-
 }

@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -31,6 +32,12 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("SelectedServicesView")));
         wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("SelectedServicesView")));
+    }
+
+    public void waitSelectedServicesScreenLoaded() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("SelectedServicesView")));
+        WaitUtils.elementShouldBeVisible(selectedservicestable, true);
     }
 
     public boolean checkServiceIsSelected(String servicename) {

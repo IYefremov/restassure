@@ -29,6 +29,9 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addinspbtn;
+
+	@iOSXCUITFindBy(accessibility = "Create\nWO")
+	private IOSElement createwopopupmenu;
 	
 	/*@iOSXCUITFindBy(accessibility = "MyInspectionsTable")
 	private IOSElement inspectiontable;
@@ -57,8 +60,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	@iOSXCUITFindBy(accessibility = "Show\nWOs")
     private IOSElement showwospopupmenu;
 	
-	@iOSXCUITFindBy(accessibility = "Create\nWO")
-    private IOSElement createwopopupmenu;
+
 	
 	@iOSXCUITFindBy(accessibility = "Status Reason")
     private IOSElement statusreasonbtn;
@@ -152,7 +154,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void clickCreateWOButton() {
-		appiumdriver.findElementByAccessibilityId("Create\nWO").click();
+		createwopopupmenu.click();
 		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 	

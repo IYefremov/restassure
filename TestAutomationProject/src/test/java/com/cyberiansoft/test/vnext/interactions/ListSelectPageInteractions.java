@@ -23,4 +23,8 @@ public class ListSelectPageInteractions {
     public static void selectItem(String itemName) {
         WaitUtils.click(ListSelectPageInteractions.getItemElementByText(itemName));
     }
+
+    public static void saveListPage() {
+        WaitUtils.click(new ListSelectPage().getSaveButton());
+    }
 }

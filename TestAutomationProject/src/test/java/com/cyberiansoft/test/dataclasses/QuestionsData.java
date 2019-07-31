@@ -21,4 +21,10 @@ public class QuestionsData {
     private int screenHDIndex;
     @JsonProperty("signatureQuestion")
     private boolean signatureQuestion;
+    @JsonProperty("logicalQuestion")
+    private boolean logicalQuestion;
+    @JsonProperty("logicalQuestionValue")
+    private boolean logicalQuestionValue;
+    @JsonProperty("logicalQuestionValue")
+    private boolean textQuestion;
 }

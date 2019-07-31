@@ -4,6 +4,8 @@ import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.dataclasses.partservice.PartName;
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
@@ -15,12 +17,15 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.SearchSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegistration {
     private String inspectionId = "";
@@ -39,7 +44,15 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        PartServiceSteps.selectPartService("Engine part", null, "Filters", "Engine Oil Filter", "Main");
+        PartServiceData partServiceData = new PartServiceData();
+        partServiceData.setServiceName("Engine part");
+        partServiceData.setCategory("Filters");
+        PartName partName = new PartName();
+        List<String> list = new ArrayList<>();
+        list.add("Engine Oil Filter");
+        partName.setPartNameList(list);
+        partServiceData.setPartName(partName);
+        partServiceData.setPartPosition("Main");
         PartServiceSteps.confirmPartInfo();
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
@@ -55,7 +68,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
 
         HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
         MonitorSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
