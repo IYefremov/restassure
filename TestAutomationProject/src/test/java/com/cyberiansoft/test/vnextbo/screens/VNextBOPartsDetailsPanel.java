@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import lombok.NonNull;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
@@ -215,11 +217,7 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOAddLaborPartsDialog clickAddLaborButton(int index) {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(addLaborButtons.get(index))).click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Utils.clickElement(addLaborButtons.get(index));
         return PageFactory.initElements(driver, VNextBOAddLaborPartsDialog.class);
     }
 
@@ -259,8 +257,8 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     public void clickConfirmDeletingButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(confirmButton)).click();
-        waitForLoading();
+        Utils.clickElement(confirmButton);
+        WaitUtilsWebDriver.waitForLoading();
     }
 
     public void clickCancelDeletingButton() {
@@ -310,8 +308,8 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     private VNextBOPartsDetailsPanel selectStatus(String status) {
-        selectOptionInDropDown(statusDropDown, statusListBoxOptions, status, true);
-        waitForLoading();
+        Utils.selectOptionInDropDown(statusDropDown, statusListBoxOptions, status, true);
+        WaitUtilsWebDriver.waitForLoading();
         return this;
     }
 

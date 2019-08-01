@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,9 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 	
 	@FindBy(id = "advSearchEstimation-form")
 	private WebElement advancedsearchform;
+
+	@FindBy(id = "advSearchEstimation-Inspection")
+	private WebElement inspectionInputField;
 	
 		
 	public VNextBOAdvancedSearchInspectionDialog(WebDriver driver) {
@@ -31,9 +35,9 @@ public class VNextBOAdvancedSearchInspectionDialog extends VNextBOBaseWebPage {
 		wait.until(ExpectedConditions.invisibilityOf(advancedsearchform));
 	}
 	
-	public void setAdvancedSearchByInspectionNumber(String inspNumber) {
-		advancedsearchform.findElement(By.id("advSearchEstimation-Inspection")).clear();
-		advancedsearchform.findElement(By.id("advSearchEstimation-Inspection")).sendKeys(inspNumber);
+	public VNextBOAdvancedSearchInspectionDialog setAdvancedSearchByInspectionNumber(String inspNumber) {
+        Utils.clearAndType(inspectionInputField, inspNumber);
+		return this;
 	}
 	
 	public String getAdvancedSearchInspectionNumberValue() {

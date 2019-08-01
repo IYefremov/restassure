@@ -3,7 +3,7 @@
     {
       "rowID": "verifyUserCanSelectCustomer.01",
       "description": "Test Case 82212:User can select \"Customer\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1"
     }
   ],
@@ -12,7 +12,7 @@
     {
       "rowID": "verifyUserCanSearchByEmployee.01",
       "description": "Test Case 82213:User can search by \"Employee\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai"
     }
@@ -22,7 +22,7 @@
     {
       "rowID": "verifyUserCanSearchByPhase.01",
       "description": "Test Case 82214:User can search by \"Phase\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "PDR Station"
@@ -33,7 +33,7 @@
     {
       "rowID": "verifyUserCanSearchByDepartment.01",
       "description": "Test Case 82215:User can search by \"Department\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",
@@ -45,7 +45,7 @@
     {
       "rowID": "verifyUserCanSearchByWoType.01",
       "description": "Test Case 82216:User can search by \"WO Type\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",
@@ -58,7 +58,7 @@
     {
       "rowID": "verifyUserCanSearchByWoNumber.01",
       "description": "Test Case 82217:User can search by \"WO#\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",
@@ -72,7 +72,7 @@
     {
       "rowID": "verifyUserCanSearchByRoNumber.01",
       "description": "Test Case 82218:User can search by \"RO#\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",
@@ -87,7 +87,7 @@
     {
       "rowID": "verifyUserCanSearchByStockNumber.01",
       "description": "Test Case 82219:User can search by \"Stock#\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",
@@ -103,7 +103,7 @@
     {
       "rowID": "verifyUserCanSearchByVinNumber.01",
       "description": "Test Case 82220:User can search by \"VIN\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",
@@ -120,7 +120,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseLess.01",
       "description": "Test Case 82224:User can search by 'Days in Phase' ('<')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInPhase": "<",
       "daysNum": "25"
     }
@@ -130,7 +130,7 @@
     {
       "rowID": "verifyUserCanSearchByWhiteFlag.01",
       "description": "Test Case 82225:User can search by \"Flag\" (white)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "White"
     }
   ],
@@ -139,7 +139,7 @@
     {
       "rowID": "verifyUserCanSearchByCustomer.01",
       "description": "Test Case 82279:Verify user can search by \"Customer\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "flag": "Red",
       "searchName": "MySavedSearch"
@@ -150,7 +150,7 @@
     {
       "rowID": "verifyUserCanSearchByRedFlag.01",
       "description": "Test Case 83948:User can search by \"Flag\" (red)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "Red"
     }
   ],
@@ -159,7 +159,7 @@
     {
       "rowID": "verifyUserCanSearchByOrangeFlag.01",
       "description": "Test Case 83952:User can search by \"Flag\" (orange)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "Orange"
     }
   ],
@@ -168,7 +168,7 @@
     {
       "rowID": "verifyUserCanSearchByYellowFlag.01",
       "description": "Test Case 83953:User can search by \"Flag\" (yellow)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "Yellow"
     }
   ],
@@ -177,7 +177,7 @@
     {
       "rowID": "verifyUserCanSearchByGreenFlag.01",
       "description": "Test Case 83955:User can search by \"Flag\" (green)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "Green"
     }
   ],
@@ -186,7 +186,7 @@
     {
       "rowID": "verifyUserCanSearchByBlueFlag.01",
       "description": "Test Case 83956:User can search by \"Flag\" (blue)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "Blue"
     }
   ],
@@ -195,7 +195,7 @@
     {
       "rowID": "verifyUserCanSearchByPurpleFlag.01",
       "description": "Test Case 83958:User can search by \"Flag\" (purple)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "Purple"
     }
   ],
@@ -204,7 +204,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseLessOrEqual.01",
       "description": "Test Case 82766:User can search by 'Days in Phase' ('<=')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInPhase": "<=",
       "daysNum": "25"
     }
@@ -214,7 +214,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseEqual.01",
       "description": "Test Case 82767:User can search by 'Days in Phase' ('=')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInPhase": "=",
       "daysNum": "25"
     }
@@ -224,7 +224,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseMoreOrEqual.01",
       "description": "Test Case 82768:User can search by 'Days in Phase' ('>=')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInPhase": ">=",
       "daysNum": "25"
     }
@@ -234,7 +234,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseMore.01",
       "description": "Test Case 82769:User can search by 'Days in Phase' ('>')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInPhase": ">",
       "daysNum": "25"
     }
@@ -244,7 +244,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseBetween.01",
       "description": "Test Case 82770:User can search by 'Days in Phase' ('Between')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInPhase": "Between",
       "daysNumStart": "10",
       "daysNum": "25"
@@ -255,7 +255,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessLess.01",
       "description": "Test Case 82747:User can search by 'Days in Process' ('<')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInProcess": "<",
       "daysNum": "25"
     }
@@ -265,7 +265,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessLessOrEqual.01",
       "description": "Test Case 82749:User can search by 'Days in Process' ('<=')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInProcess": "<=",
       "daysNum": "25"
     }
@@ -275,7 +275,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessEqual.01",
       "description": "Test Case 82754:User can search by 'Days in Process' ('=')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInProcess": "=",
       "daysNum": "25"
     }
@@ -285,7 +285,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessMoreOrEqual.01",
       "description": "Test Case 82755:User can search by \"Days in Process\" ('>=')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInProcess": ">=",
       "daysNum": "25"
     }
@@ -295,7 +295,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessMore.01",
       "description": "Test Case 82756:User can search by \"Days in Process\" ('>')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInProcess": ">",
       "daysNum": "25"
     }
@@ -305,7 +305,7 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessBetween.01",
       "description": "Test Case 82760:User can search by \"Days in Process\" ('Between')",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "daysInProcess": "Between",
       "daysNumStart": "10",
       "daysNum": "25"
@@ -316,7 +316,7 @@
     {
       "rowID": "verifyUserCanSearchByCustomTimeFrame.01",
       "description": "Test Case 82660:User can search by \"Timeframe\" (Custom)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "timeFrame": "Custom"
     }
   ],
@@ -325,7 +325,7 @@
     {
       "rowID": "verifyUserCanSearchByLast3WeeksTimeFrame.01",
       "description": "Test Case 82221:User can search by \"Timeframe\" (Last 3 weeks)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "timeFrame": "Last 3 weeks"
     }
   ],
@@ -334,7 +334,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressRework.01",
       "description": "Test Case 82666:User can search by \"Repair Status\"(In Progress - Rework)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "In Progress - Rework",
       "orderNumber": "O-000-152419"
     }
@@ -344,7 +344,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressActive.01",
       "description": "Test Case 82664:User can search by \"Repair Status\"(In Progress - Active)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "In Progress - Active"
     }
   ],
@@ -353,7 +353,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressQueued.01",
       "description": "Test Case 82665:User can search by \"Repair Status\"(In Progress - Queued)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "In Progress - Queued"
     }
   ],
@@ -362,7 +362,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressOnHold.01",
       "description": "Test Case 82667:User can search by \"Repair Status\"(In Progress - On Hold)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "In Progress - On Hold"
     }
   ],
@@ -371,7 +371,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressNotOnHold.01",
       "description": "Test Case 82668:User can search by \"Repair Status\"(In Progress - Not On Hold)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "In Progress - Not On Hold"
     }
   ],
@@ -380,7 +380,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressQAReady.01",
       "description": "Test Case 82669:User can search by \"Repair Status\"(In Progress - QA Ready)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "In Progress - QA Ready"
     }
   ],
@@ -389,7 +389,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusCompletedQAReady.01",
       "description": "Test Case 82670:User can search by \"Repair Status\"(Completed - QA Ready)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "Completed - QA Ready"
     }
   ],
@@ -398,7 +398,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusCompletedNotBilled.01",
       "description": "Test Case 82671:User can search by \"Repair Status\"(Completed - Not Billed)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "Completed - Not Billed"
     }
   ],
@@ -407,7 +407,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusCompletedOnSite.01",
       "description": "Test Case 82672:User can search by \"Repair Status\"(Completed - On Site)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "Completed - On Site"
     }
   ],
@@ -416,7 +416,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusCompletedAll.01",
       "description": "Test Case 82673:User can search by \"Repair Status\"(Completed - All)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "Completed - All"
     }
   ],
@@ -425,7 +425,7 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressAll.01",
       "description": "Test Case 82222:User can search by \"Repair Status\"(In Progress - All)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "repairStatus": "In Progress - All"
     }
   ],
@@ -434,7 +434,7 @@
     {
       "rowID": "verifyUserCanUseStoredAdvancedSearch.01",
       "description": "Test Case 82227:Verify user can use stored \"Advanced Search\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "White",
       "searchName": "MySavedSearch"
     }
@@ -444,7 +444,7 @@
     {
       "rowID": "verifyUserCanFillInAdvancedSearchWindow.01",
       "description": "Test Case 82228:Verify user can fill in all fields in the \"Advanced Search\" window",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",
@@ -467,7 +467,7 @@
     {
       "rowID": "verifyUserCanSaveAdvancedSearch.01",
       "description": "Test Case 82229:Verify user can save \"Advanced search\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "flag": "White",
       "searchName": "MySavedSearch"
     }
@@ -478,8 +478,8 @@
       "rowID": "verifyUserCanEditSavedAdvancedSearch.01",
       "description": "Test Case 82230:Verify user can edit saved \"Advanced\" search",
       "locations": [
-        "Best Location",
-        "1111"
+        "Best Location Automation",
+        "1111 Automation"
       ],
       "flags": [
         "White",
@@ -493,7 +493,7 @@
     {
       "rowID": "verifyUserCanCloseAdvancedSearchWindow.01",
       "description": "Test Case 82232:Verify user can close \"Advanced\" search window",
-      "location": "Best Location"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -501,7 +501,7 @@
     {
       "rowID": "verifyUserCanClearAllFieldsInAdvancedSearchWindow.01",
       "description": "Test Case 84876:Verify user can clear all fields in the \"Advanced Search\" window",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",
@@ -532,7 +532,7 @@
     {
       "rowID": "verifyUserSeesSearchMaskWithAllEnteredInfo.01",
       "description": "Test Case 84878:Verify user sees \"Search\" mask with all entered info",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
       "phase": "First",

@@ -3,7 +3,7 @@
     {
       "rowID": "verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox.01",
       "description": "Test Case 83855:User can see Parts details of RO. Test Case 83951:User can select the Part by activating the check-box",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414"
     }
   ],
@@ -12,7 +12,7 @@
     {
       "rowID": "verifyUserCanAddAndDeleteLabor.01",
       "description": "Test Case 83937:User can Add labour. Test Case 83938:User can delete labour. Test Case 83939:User can cancel deleting (X-icon). Test Case 83940:User can cancel deleting (No)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "labor": "Labor AM"
     }
@@ -22,7 +22,7 @@
     {
       "rowID": "verifyUserCanTypeLaborServiceNameAddingLabor.01",
       "description": "Test Case 83943:User can type labour service name Adding labour. Test Case 83944:User can clear typed name of Labour service clicking on \"X-icon\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "laborStart": "not",
       "labor": "Not Multi Labor (optional clarification)"
@@ -33,7 +33,7 @@
     {
       "rowID": "verifyUserCanCancelAddingLabor.01",
       "description": "Test Case 83945:User can cancel Adding labour (X-icon). Test Case 83947:User can cancel Adding labour (Cancel)",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "labor": "Labor AM"
     }
@@ -43,7 +43,7 @@
     {
       "rowID": "verifyUserCanMaximizeMinimizeThePartTab.01",
       "description": "Test Case 83949:User can minimize/maximize the @Part tab",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "labor": "Labor AM"
     }
@@ -53,7 +53,7 @@
     {
       "rowID": "verifyUserCanChangeOEM.01",
       "description": "Test Case 83954:User can change \"OEM#\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "oemNum": "24234"
     }
@@ -63,7 +63,7 @@
     {
       "rowID": "verifyUserCanChangePartsInputFields.01",
       "description": "Test Case 83957:User can change \"Vendor Price\", Test Case 83959: User can change \"Price\", Test Case 83960: User can change \"Quantity\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414"
     }
   ],
@@ -72,7 +72,7 @@
     {
       "rowID": "verifyUserCanChangeETA.01",
       "description": "Test Case 83961:User can change \"ETA\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414"
     }
   ],
@@ -81,7 +81,7 @@
     {
       "rowID": "verifyUserCanChangeStatusOfThePart.01",
       "description": "Test Case 83965-83973, 89749:User can change Status of the Part",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "statuses": [
         "On Hold",

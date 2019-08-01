@@ -9,7 +9,7 @@
   "verifyUserCanApproveInspection": [
     {
       "rowID": "verifyUserCanApproveInspection.01",
-      "description": "Test Case 84584:Verify user can open \"Operations → Inspections\" with full set of elements, Test Case 84999:User can see \"Approve's\" details, Test Case 85018:User can approve Inspection (Approve and complete)",
+      "description": "Test Case 84584:Verify user can open \"Operations → Inspections\" with full set of elements, Test Case 84999:User can see \"Approve's\" details. Test Case 85018:User can approve Inspection (Approve and complete).",
       "statuses": [
         "New",
         "Approved"
@@ -121,6 +121,63 @@
         "298374",
         "6145678903"
       ]
+    }
+  ],
+
+  "verifyUserCanAddDeleteAndEditQuickNotes": [
+    {
+      "rowID": "verifyUserCanAddDeleteAndEditQuickNotes.01",
+      "description": "Test Case 79070:Verify user can add new \"Quick Notes\". Test Case 79073:Verify user can delete \"Quick Notes\". Test Case 79074:Verify user can edit \"Quick Notes\"",
+      "quickNotesDescription": "Test Description",
+      "quickNotesDescriptionEdited": "Description test for update"
+    }
+  ],
+
+  "verifyUserCanEditAddressFields": [
+    {
+      "rowID": "verifyUserCanEditAddressFields.01",
+      "description": "Test Case 84405: Verify user can open \"Settings → Clients\" with full set of elements. Test Case 84504:User can edit \"Address\" fields. Test Case 84535: User can edit detailes of \"Retail\" client. Test Case 84498: User can edit \"Client info\" of client. Test Case 84499: User can edit \"Account info\" fields. Test Case 84505: User can edit \"Email Options\" fields. Test Case 84506: User can edit \"Preferences\" fields",
+      "search": "bentley",
+      "clientInfoData": {
+        "clientType": "Retail",
+        "companyName": "000 Bentley service",
+        "firstName": "Slaverto",
+        "lastName": "Big-Man",
+        "email": "bent@wkcj",
+        "phone": "3566567"
+      },
+      "types": [
+        "Bentley service",
+        "dfbdfbdb"
+      ],
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "DONALD Q",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New-york",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Anastasia_Area",
+      "notes": "Lorem trulala"
     }
   ]
 }

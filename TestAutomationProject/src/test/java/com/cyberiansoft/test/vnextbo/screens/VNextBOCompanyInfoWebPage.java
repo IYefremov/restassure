@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -159,42 +160,42 @@ public class VNextBOCompanyInfoWebPage extends VNextBOBaseWebPage {
     }
 
     public String getCompanyValue() {
-        return getInputFieldValue(companyNameInputField);
+        return Utils.getInputFieldValue(companyNameInputField);
     }
 
     public String getAddressLine1Value() {
-        return getInputFieldValue(address1InputField);
+        return Utils.getInputFieldValue(address1InputField);
     }
 
     public String getAddressLine2Value() {
-        return getInputFieldValue(address2InputField);
+        return Utils.getInputFieldValue(address2InputField);
     }
 
     public String getCityValue() {
-        return getInputFieldValue(cityInputField);
+        return Utils.getInputFieldValue(cityInputField);
     }
 
     public String getCountryValue() {
-        return getInputFieldValue(countryInputField);
+        return Utils.getInputFieldValue(countryInputField);
     }
 
     public String getStateProvinceValue() {
-        return getInputFieldValue(stateProvinceInputField);
+        return Utils.getInputFieldValue(stateProvinceInputField);
     }
 
     public String getZipValue() {
-        return getInputFieldValue(zipInputField);
+        return Utils.getInputFieldValue(zipInputField);
     }
 
     public String getPhoneCodeValue() {
-        return getInputFieldValue(phoneCodeInputField);
+        return Utils.getInputFieldValue(phoneCodeInputField);
     }
 
     public String getPhoneValue() {
-        return getInputFieldValue(phoneInputField);
+        return Utils.getInputFieldValue(phoneInputField);
     }
 
     public String getEmailValue() {
-        return getInputFieldValue(emailInputField);
+        return Utils.getInputFieldValue(emailInputField);
     }
 }

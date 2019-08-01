@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -21,10 +22,6 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(id = "menuBtn")
     private WebElement menuButton;
 
-//    @FindBy(xpath = "//body[contains(@class, 'body-mobile--scroll-hidden')]")
-//    private WebElement body;
-
-//    @FindBy(xpath = "//body[contains(@class, 'body')]")
     @FindBy(xpath = "//div[@id='page-wrapper']/parent::body")
     private WebElement body;
 
@@ -45,6 +42,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//li[@data-automation-id='company-info']")
     private WebElement companyInfoMenu;
+
+    @FindBy(xpath = "//li[@data-automation-id='clients']")
+    private WebElement clientsMenu;
 
     @FindBy(xpath = "//*[@data-automation-id='users']")
     private WebElement usersMenu;
@@ -102,6 +102,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     public VNextBOCompanyInfoWebPage selectCompanyInfoMenu() {
         selectMenuItem(companyInfoMenu, MainMenuItems.SETTINGS.getMenu());
         return PageFactory.initElements(driver, VNextBOCompanyInfoWebPage.class);
+    }
+
+    public VNextBOClientsWebPage selectClientsMenu() {
+        selectMenuItem(clientsMenu, MainMenuItems.SETTINGS.getMenu());
+        return PageFactory.initElements(driver, VNextBOClientsWebPage.class);
     }
 
     public boolean isUsersMenuItemExists() {

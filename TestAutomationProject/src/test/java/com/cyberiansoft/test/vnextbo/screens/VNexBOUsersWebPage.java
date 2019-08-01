@@ -132,24 +132,24 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
                 driver, VNexBOAddNewUserDialog.class);
     }
 
-    public VNextConfirmationDialog clickResendButtonForUser(String usermail) {
+    public VNextBOConfirmationDialog clickResendButtonForUser(String usermail) {
         WebElement row = getTableRowWithUserMail(usermail);
         if (row != null) {
             row.findElement(By.xpath(".//button[@data-bind='click: resendConfirmation']")).click();
         } else
             Assert.assertFalse(false, "Can't find user with the following email: " + usermail);
         return PageFactory.initElements(
-                driver, VNextConfirmationDialog.class);
+                driver, VNextBOConfirmationDialog.class);
     }
 
     public void clickUserResendButtonAndAgree(String usermail) {
-        VNextConfirmationDialog confirmsg = clickResendButtonForUser(usermail);
+        VNextBOConfirmationDialog confirmsg = clickResendButtonForUser(usermail);
         final String msg = confirmsg.clickYesAndGetConfirmationDialogMessage();
         Assert.assertEquals(msg, VNextBOAlertMessages.USER_DIDNT_CONFIRM_REGISTRATION);
     }
 
     public void clickUserResendButtonAndDisagree(String usermail) {
-        VNextConfirmationDialog confirmsg = clickResendButtonForUser(usermail);
+        VNextBOConfirmationDialog confirmsg = clickResendButtonForUser(usermail);
         final String msg = confirmsg.clickNoAndGetConfirmationDialogMessage();
         Assert.assertEquals(msg, VNextBOAlertMessages.USER_DIDNT_CONFIRM_REGISTRATION);
     }

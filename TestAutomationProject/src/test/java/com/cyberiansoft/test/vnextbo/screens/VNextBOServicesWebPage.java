@@ -306,13 +306,13 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
     public VNextBOServicesWebPage deleteServiceByServiceName(String servicename) {
         WebElement tablerow = getTableRowWithServiceByServiceName(servicename);
         clickDeleteServiceButton(tablerow);
-        VNextConfirmationDialog confirmdialog = PageFactory.initElements(driver, VNextConfirmationDialog.class);
+        VNextBOConfirmationDialog confirmdialog = PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
         Assert.assertEquals(confirmdialog.clickYesAndGetConfirmationDialogMessage(),
                 "Are you sure you want to delete \"" + servicename + "\" service?");
         return this;
     }
 
-    private VNextConfirmationDialog clickDeleteServiceButton(WebElement tablerow) {
+    private VNextBOConfirmationDialog clickDeleteServiceButton(WebElement tablerow) {
         Actions act = new Actions(driver);
         try {
             act.moveToElement(wait
@@ -321,18 +321,18 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
                     .click(tablerow.findElement(By.xpath(".//span[@title='Delete']")))
                     .build()
                     .perform();
-            return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+            return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
         } catch (Exception ignored) {
             System.err.println("********* Clicked with JS *********");
             clickWithJS(tablerow.findElement(By.xpath(".//span[@title='Delete']")));
-            return PageFactory.initElements(driver, VNextConfirmationDialog.class);
+            return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
         }
     }
 
     public void clickDeleteServiceButtonAndAcceptAlert(WebElement tablerow) {
         clickDeleteServiceButton(tablerow);
-        VNextConfirmationDialog confirmdialog = PageFactory.initElements(
-                driver, VNextConfirmationDialog.class);
+        VNextBOConfirmationDialog confirmdialog = PageFactory.initElements(
+                driver, VNextBOConfirmationDialog.class);
         confirmdialog.clickYesButton();
         waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
         wait.until(ExpectedConditions.elementToBeClickable(addservicebtn));
@@ -340,14 +340,14 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
 
 
     public void unarchiveServiceByServiceName(String servicename) {
-        VNextConfirmationDialog confirmdialog = clickUnarchiveButtonForService(servicename);
+        VNextBOConfirmationDialog confirmdialog = clickUnarchiveButtonForService(servicename);
         Assert.assertEquals(confirmdialog.clickYesAndGetConfirmationDialogMessage(),
                 "Are you sure you want to restore \"" + servicename + "\" service?");
         waitForLoading();
         waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
     }
 
-    public VNextConfirmationDialog clickUnarchiveButtonForService(String servicename) {
+    public VNextBOConfirmationDialog clickUnarchiveButtonForService(String servicename) {
         WebElement servicerow = getTableRowWithServiceByServiceName(servicename);
         Actions act = new Actions(driver);
         act.moveToElement(servicerow.findElement(By.xpath("./td[@class='grid__actions']")))
@@ -355,7 +355,7 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
                 .build()
                 .perform();
         return PageFactory.initElements(
-                driver, VNextConfirmationDialog.class);
+                driver, VNextBOConfirmationDialog.class);
     }
 
     public VNextBOServicesWebPage deleteServiceIfPresent(String percentageservicename) {

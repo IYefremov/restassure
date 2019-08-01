@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -148,12 +150,13 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
 
     public VNextBONewNotesDialog clickAddNotesButton() {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(addQuickNotesButton)).click();
+            WaitUtilsWebDriver.waitABit(1500);
+            Utils.clickElement(addQuickNotesButton);
+            WaitUtilsWebDriver.waitABit(2000);
         } catch (Exception e) {
-            waitABit(1000);
-            wait.until(ExpectedConditions.elementToBeClickable(addQuickNotesButton)).click();
+            e.printStackTrace();
+            Assert.fail("The Add Notes button hasn't been clicked");
         }
-        waitForLoading();
         return PageFactory.initElements(driver, VNextBONewNotesDialog.class);
     }
 
@@ -187,14 +190,12 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
         final WebElement webElement = getQuickNotesList()
                 .stream()
                 .filter(e -> e.getText().equals(quickNoteName))
-                .findFirst().get().findElement(By.xpath(locator));
+                .findFirst()
+                .get()
+                .findElement(By.xpath(locator));
         scrollToElement(webElement);
         clickWithJS(webElement);
-//                .ifPresent(el -> new Actions(driver)
-//                        .moveToElement(el.findElement(By.xpath(locator)))
-//                        .click()
-//                        .build()
-//                        .perform());
+        WaitUtilsWebDriver.waitABit(2000);
     }
 
     public VNextBOQuickNotesWebPage deleteQuickNote(String quickNoteName) {

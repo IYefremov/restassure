@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,17 +70,14 @@ public class VNextBOPartsManagementSearchPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOPartsManagementSearchPanel setPartsSearchText(String value) {
-        wait.until(ExpectedConditions.elementToBeClickable(searchInputField)).click();
-        searchInputField.clear();
-        searchInputField.sendKeys(value);
-        waitABit(500);
+        Utils.clearAndType(searchInputField, value);
+        WaitUtilsWebDriver.waitABit(500);
         return this;
     }
 
     public VNextBOPartsManagementSearchPanel clickSearchLoupeIcon() {
-        waitForLoading();
-        wait.until(ExpectedConditions.elementToBeClickable(searchLoupeIcon)).click();
-        waitForLoading();
+        Utils.clickElement(searchLoupeIcon);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         return this;
     }
 

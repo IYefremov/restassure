@@ -1,8 +1,9 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,7 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@Getter
 public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//ul[@data-automation-id='inspectionsList']")
@@ -32,7 +34,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	private WebElement printinspectionicon;
 	
 	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsApproveButton']")
-	private WebElement approveinspectionicon;
+	private WebElement approveInspectionIcon;
 	
 	@FindBy(id = "inspectiontypes-search")
 	private WebElement searchinspectionspanel;
@@ -55,9 +57,9 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[contains(@class, 'status__label')]")
 	private List<WebElement> inspectionStatusLabels;
 	
-	public VNextBOInspectionsWebPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+	public VNextBOInspectionsWebPage() {
+		super(DriverBuilder.getInstance().getDriver());
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
@@ -137,21 +139,23 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public VNextBOInspectionsWebPage clickInspectionApproveButton() {
-		wait.until(ExpectedConditions.visibilityOf(approveinspectionicon));
-		wait.until(ExpectedConditions.elementToBeClickable(approveinspectionicon));
-		approveinspectionicon.click();
-		waitForLoading();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(approveInspectionIcon)).click();
+            waitForLoading();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 		return this;
 	}
 	
 	public boolean isInspectionApproveButtonVisible() {
-		return approveinspectionicon.isDisplayed();
+		return approveInspectionIcon.isDisplayed();
 	}
 	
 	public void approveInspection(String approveNotes) {
 		String parent = driver.getWindowHandle();
 		clickInspectionApproveButton();
-		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(driver);
+		VNextBOConfirmationDialog confirmdialog = new VNextBOConfirmationDialog();
 		confirmdialog.clickYesButton();
 		waitForNewTab();
 		String newwin = "";
@@ -174,7 +178,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void approveInspection() {
 		String parent = driver.getWindowHandle();
 		clickInspectionApproveButton();
-		new VNextConfirmationDialog(driver).clickYesButton();
+		new VNextBOConfirmationDialog().clickYesButton();
 		waitForNewTab();
 		String newWindow = "";
 		for(String window: driver.getWindowHandles()){
@@ -192,7 +196,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void declineInspection(String declineNotes) {
 		String parent = driver.getWindowHandle();
 		clickInspectionApproveButton();
-		VNextConfirmationDialog confirmdialog = new VNextConfirmationDialog(driver);
+		VNextBOConfirmationDialog confirmdialog = new VNextBOConfirmationDialog();
 		confirmdialog.clickYesButton();
 		waitForNewTab();
 		String newwin = "";

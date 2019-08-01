@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.By;
+import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -126,7 +126,7 @@ public class VNextBOAddNewPartDialog extends VNextBOBaseWebPage {
     }
 
     public String getServiceFieldValue() {
-        return getInputFieldValue(serviceInputField);
+        return Utils.getInputFieldValue(serviceInputField);
     }
 
     public String getPartsCounterValue() {
