@@ -110,6 +110,7 @@ public class WaitUtils {
                 new FluentWait<WebDriver>(DriverBuilder.getInstance().getAppiumDriver())
                         .withTimeout(Duration.ofSeconds(durationInSeconds))
                         .pollingEvery(Duration.ofMillis(pullingIntervalInMils))
+                        .ignoring(ElementClickInterceptedException.class)
                         .ignoring(WebDriverException.class)
                         .ignoring(AssertionError.class)
                         .ignoring(StaleElementReferenceException.class)

@@ -15,10 +15,15 @@ public class PartInfoScreenValidations {
             WaitUtils.assertEquals(expectedPartServiceData.getSubCategory(),
                     PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.SUB_CATEGORY).findElement(By.xpath(".//input")).getAttribute("value"));
         if (expectedPartServiceData.getPartName() != null)
-            WaitUtils.assertEquals(expectedPartServiceData.getPartName(),
+            WaitUtils.assertEquals(expectedPartServiceData.getPartName().getPartNameList().get(0),
                     PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.PART_NAME).findElement(By.xpath(".//input")).getAttribute("value"));
         if (expectedPartServiceData.getPartPosition() != null)
             WaitUtils.assertEquals(expectedPartServiceData.getPartPosition(),
                     PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.PART_POSITION).findElement(By.xpath(".//input")).getAttribute("value"));
+    }
+
+    public static void fieldShouldBeReadonly(boolean shouldBeReadonly, PartInfoScreenField partInfoField) {
+        WaitUtils.assertEquals(PartInfoScreenInteractions.getPartInfoScreenField(partInfoField).getAttribute("action") == null,
+                shouldBeReadonly);
     }
 }

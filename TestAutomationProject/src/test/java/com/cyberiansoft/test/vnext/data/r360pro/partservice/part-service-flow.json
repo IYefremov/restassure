@@ -12,7 +12,7 @@
             "partNameList": [
               "Parking Brake Cable Lever"
             ],
-            "isMultiSelect": false
+            "isMultiSelect": true
           }
         },
         {
@@ -44,7 +44,7 @@
             "partNameList": [
               "Engine Oil Filter"
             ],
-            "isMultiSelect": false
+            "isMultiSelect": true
           },
           "partPosition": "Main",
           "servicePrice": "100"
@@ -79,6 +79,26 @@
             "isMultiSelect": true
           },
           "partPosition": "Main"
+        }
+      ]
+    }
+  ],
+  "userCantEditPreselectedValues": [
+    {
+      "rowID": "userCantEditPreselectedValues.01",
+      "description": "89655 89660 89662",
+      "partServiceList": [
+        {
+          "serviceName": "roz_part_with_categories",
+          "category": "Engine",
+          "subCategory": "Bearings",
+          "partName": {
+            "partNameList": [
+              "Engine Camshaft Bearing"
+            ],
+            "isMultiSelect": true
+          },
+          "partPosition": "Front"
         }
       ]
     }

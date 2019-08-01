@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -37,19 +38,18 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         PartServiceData editedPartService = partServiceData.get(1);
 
         HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartService.getServiceName());
         PartServiceSteps.selectPartService(basicPartService);
         PartServiceSteps.confirmPartInfo();
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName());
+        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName().getPartNameList().get(0));
         ServiceDetailsScreenSteps.changeServicePrice(editedPartService.getServicePrice());
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartServiceSteps.changeCategory(editedPartService);
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.closeServiceDetailsScreen();
         inspectionId = InspectionSteps.saveInspection();
-        SearchSteps.textSearch(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -72,7 +72,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         PartServiceData editedPartService = partServiceData.get(1);
 
         HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartService.getServiceName());
         PartServiceSteps.selectPartService(basicPartService);
@@ -82,7 +82,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         MonitorSteps.openMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName());
+        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName().getPartNameList().get(0));
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartServiceSteps.changeCategory(editedPartService);
         PartServiceSteps.confirmPartInfo();
@@ -91,7 +91,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + editedPartService.getPartName());
+        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName().getPartNameList().get(0));
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartInfoScreenValidations.validatePartInfo(editedPartService);
         PartServiceSteps.confirmPartInfo();
@@ -108,7 +108,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         PartServiceData basicPartService = partServiceData.get(0);
 
         HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartService.getServiceName());
         AvailableServicesScreenSteps.openServiceDetails(basicPartService.getServiceName());
@@ -119,6 +119,28 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         GeneralSteps.closeErrorDialog();
         PartServiceSteps.selectPartName(basicPartService.getPartName());
         PartServiceSteps.selectPartPosition(basicPartService.getPartPosition());
+        PartServiceSteps.confirmPartInfo();
+        InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCantEditPreselectedValues(String rowID,
+                                              String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<PartServiceData> partServiceData = workOrderData.getPartServiceList();
+        PartServiceData basicPartService = partServiceData.get(0);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        SearchSteps.textSearch(basicPartService.getServiceName());
+        AvailableServicesScreenSteps.openServiceDetails(basicPartService.getServiceName());
+        PartServiceSteps.selectPartPosition(basicPartService.getPartPosition());
+        PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.CATEGORY);
+        PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.SUB_CATEGORY);
+        PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.PART_NAME);
+        PartInfoScreenValidations.fieldShouldBeReadonly(false, PartInfoScreenField.PART_POSITION);
         PartServiceSteps.confirmPartInfo();
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();

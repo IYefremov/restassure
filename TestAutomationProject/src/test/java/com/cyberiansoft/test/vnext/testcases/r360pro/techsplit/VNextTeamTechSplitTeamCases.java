@@ -74,6 +74,7 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         VehicleInfoScreenSteps.openTechnicianMenu();
         TechScreenValidations.validateTechniciansPercentage(technicianSplitData);
         TechnicianScreenSteps.closeTechnicianMenu();
+        GeneralSteps.confirmDialog();
 
     }
 
@@ -87,6 +88,7 @@ public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistra
         VehicleInfoScreenSteps.selectTechniciansPercentage(technicianSplitData);
         TechScreenValidations.validatePercentageErrorMessageIsDisplayed();
         GeneralSteps.closeErrorDialog();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
