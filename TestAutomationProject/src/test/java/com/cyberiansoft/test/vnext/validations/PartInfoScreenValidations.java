@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnext.validations;
 
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
-import com.cyberiansoft.test.vnext.enums.PartInfoScreenField;
+import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.interactions.PartInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
