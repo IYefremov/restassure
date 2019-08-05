@@ -154,10 +154,10 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(make)));
 		if (!appiumdriver.findElementByAccessibilityId(make).isDisplayed())
-			SwipeUtils.swipeToElement(appiumdriver.findElementByAccessibilityId(make));
+			SwipeUtils.swipeToElement(make);
 		appiumdriver.findElementByAccessibilityId(make).click();
 		if (!appiumdriver.findElementByAccessibilityId(model).isDisplayed())
-			SwipeUtils.swipeToElement(appiumdriver.findElementByAccessibilityId(model));
+			SwipeUtils.swipeToElement(model);
 		appiumdriver.findElementByAccessibilityId(model).click();
 		clickSave();
 	}
@@ -173,47 +173,51 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public String getMake() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		IOSElement table = (IOSElement)wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("VehicleInfoTable")));
-		return table.findElementByAccessibilityId("Make").findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
+		return table.findElementByAccessibilityId("Make").findElementByClassName("XCUIElementTypeTextField").getText();
 	}
 
 	public String getModel() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Model")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Model")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
+	}
+
+	public String getColor() {
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Color")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
 	public String getYear() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Year")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Year")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
 	public String getMileage() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Mileage")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Mileage")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
 	public String getStock() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Stock#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Stock#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
 	public String getRO() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("RO#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("RO#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
 	public String getPO() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("PO#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("PO#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 	
 	public String getTrim() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Trim")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Trim")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 	
 	public String getEst() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Est#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Est#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
 	public String getLicensePlate() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("License\nPlate")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("License\nPlate")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 	
 	public String getTechnician() {
-		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Tech")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Tech")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {

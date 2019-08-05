@@ -16,6 +16,11 @@ public class RegularVehicleInfoScreenSteps {
         vehicleScreen.setMakeAndModel(make, model);
     }
 
+    public static void selectColor(String vehicleColor) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.setColor(vehicleColor);
+    }
+
     public static void setMileage(String mileage) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setMileage(mileage);
@@ -59,6 +64,9 @@ public class RegularVehicleInfoScreenSteps {
         }
         if (vehicleInfoData.getVehicleMake() != null) {
             setMakeAndModel(vehicleInfoData.getVehicleMake(), vehicleInfoData.getVehicleModel());
+        }
+        if (vehicleInfoData.getVehicleColor() != null) {
+            selectColor(vehicleInfoData.getVehicleColor());
         }
         if (vehicleInfoData.getVehicleYear() != null) {
             setYear(vehicleInfoData.getVehicleYear());

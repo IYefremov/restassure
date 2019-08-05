@@ -40,7 +40,6 @@ public class RegularMyInspectionsSteps {
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         myInspectionsScreen.clickOnInspection(inspectionID);
         myInspectionsScreen.clickCreateWOButton();
-        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-        myInspectionsScreen.selectWorkOrderType(workordertype);
+        RegularWorkOrderTypesSteps.selectWorkOrderType(workordertype);
     }
 }

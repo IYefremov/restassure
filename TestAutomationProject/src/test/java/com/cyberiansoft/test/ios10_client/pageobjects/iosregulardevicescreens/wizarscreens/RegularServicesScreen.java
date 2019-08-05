@@ -54,10 +54,15 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	public RegularServicesScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		/*WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
 		wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Services")));
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Services")));*/
+	}
+
+	public void waitServicesScreenLoaded() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
 	}
 
 	public void clickCancelButton() {

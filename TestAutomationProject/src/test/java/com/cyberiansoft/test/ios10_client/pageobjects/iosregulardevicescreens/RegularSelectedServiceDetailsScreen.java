@@ -81,7 +81,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void clickVehiclePartsCell() {
 		new WebDriverWait(appiumdriver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Vehicle Part"))).click();
+		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Select Vehicle Part"))).click();
 	}
 
 	public void clickTechniciansCell() {
