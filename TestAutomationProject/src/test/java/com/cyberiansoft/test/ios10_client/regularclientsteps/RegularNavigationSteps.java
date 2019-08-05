@@ -20,6 +20,7 @@ public class RegularNavigationSteps {
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
         baseWizardScreen.selectNextScreen(WizardScreenTypes.SERVICES);
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.waitServicesScreenLoaded();
     }
 
     public static void navigateToClaimScreen() {

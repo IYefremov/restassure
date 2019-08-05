@@ -74,6 +74,10 @@ public class InspectionData {
     @JsonProperty("retailCustomer")
     RetailCustomer retailCustomer;
 
+    @Getter
+    @JsonProperty("wholesailCustomer")
+    WholesailCustomer wholesailCustomer;
+
     @JsonProperty("damageData")
     DamageData damageData;
 

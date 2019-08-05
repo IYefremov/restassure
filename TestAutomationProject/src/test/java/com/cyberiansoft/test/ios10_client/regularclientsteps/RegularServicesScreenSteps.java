@@ -110,4 +110,9 @@ public class RegularServicesScreenSteps {
         RegularSelectedServicesSteps.waitSelectedServicesScreenLoaded();
     }
 
+    public static void waitServicesScreenLoad() {
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.waitServicesScreenLoaded();
+    }
+
 }

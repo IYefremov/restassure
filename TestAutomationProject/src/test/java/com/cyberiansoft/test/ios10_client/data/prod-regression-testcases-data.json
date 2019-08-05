@@ -2,16 +2,16 @@
   "testCreateInspectionVerifyOnBO": [
     {
       "rowID": "testCreateInspectionVerifyOnBO.01",
-      "description": "Test Case 27847: 1 - Create inspection - verify on BO",
+      "description": "Test Case 27847: 1 - Create inspection - verify on BO, Test Case 27848 2 - Create WO from inspection - verify WO with all data on BO ",
       "inspectionData": {
-        "retailCustomer": {
-          "firstName": "Amazimg",
-          "lastName": "Nissan"
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
         },
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
           "vehicleMake": "Honda",
           "vehicleModel": "Accord",
+          "vehicleColor" : "Black",
           "vehicleYear": "2011",
           "mileage": "77777",
           "licPlate": "12345",
@@ -95,6 +95,256 @@
         "inspectionTotalPrice" : "$1,013.53"
       },
       "workOrderData" : {
+        "vihicleInfo": {
+          "vinNumber": "",
+          "vehicleMake": "",
+          "vehicleModel": "",
+          "vehicleColor" : "",
+          "vehicleYear": "",
+          "mileage": "",
+          "licPlate": "",
+          "stockNumber": "",
+          "roNumber": "",
+          "trim" : "No trims available"
+        },
+        "servicesScreen": {
+          "screenTotalPrice": "$962.53",
+          "screenPrice": "$1,046.14"
+        },
+        "workOrderPrice": "$962.53"
+      }
+    }
+  ],
+  "testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO": [
+    {
+      "rowID": "testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO.01",
+      "description": "Test Case 27850: 4 - Create new WO using 'Copy services' action - verify new WO on BO",
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor" : "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123",
+          "trim" : "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel",
+              "servicePrice": "20",
+              "questionsData": [
+                {
+                  "questionName": "QuestionTypeLogical_Review Car",
+                  "logicalQuestion": true,
+                  "logicalQuestionValue": false
+                },
+                {
+                  "questionName": "QuestionTypeText_Question2",
+                  "questionAnswer": "12345",
+                  "textQuestion": true
+                }
+              ]
+            },
+            {
+              "serviceName": "Special Discount",
+              "servicePrice": "-10"
+            }
+          ],
+          "laborService": {
+            "serviceName": "Labor_Vehilce_data_R&R",
+            "laborServiceRate": "2",
+            "laborServicePriceVerify": "$5.14",
+            "laborServicePanel": "Front Bumper",
+            "laborServicePart": "Remove/Replace Front Bumper Cover"
+          },
+          "bundleService": {
+            "bundleServiceName": "Bundle for PP",
+            "bundleServiceAmount": "1021",
+            "services": [
+              {
+                "serviceName": "Service_PP_Vehicle",
+                "vehiclePart": {
+                  "vehiclePartName": "Front Bumper"
+                }
+              },
+              {
+                "serviceName": "SR_S1_Money",
+                "vehiclePart": {
+                  "vehiclePartName": "Decklid"
+                }
+              }
+            ]
+          },
+          "screenTotalPrice": "$1,013.53",
+          "screenPrice": "$1,046.14"
+        },
+        "priceMatrixScreenData": {
+          "screenName": "Simple Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "1 \"",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartAdditionalService":
+            {
+              "serviceName": "SR_S5_Mt_Money",
+              "servicePrice": "50"
+            },
+            "vehiclePartTotalPrice": "$72.00"
+          },
+          "screenTotalPrice": "$1,013.53",
+          "screenPrice": "$72.00"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        },
+        "inspectionTotalPrice" : "$1,013.53"
+      },
+      "workOrderData" : {
+        "wholesailCustomer": {
+          "companyName": "BoBo"
+        },
+        "vihicleInfo": {
+          "vinNumber": "",
+          "vehicleMake": "",
+          "vehicleModel": "",
+          "vehicleColor" : "",
+          "vehicleYear": "",
+          "mileage": "",
+          "licPlate": "",
+          "stockNumber": "",
+          "roNumber": "",
+          "trim" : "No trims available"
+        },
+        "servicesScreen": {
+          "screenTotalPrice": "$962.53",
+          "screenPrice": "$1,046.14"
+        },
+        "workOrderPrice": "$962.53"
+      }
+    }
+  ],
+  "testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO": [
+    {
+      "rowID": "testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO.01",
+      "description": "Test Case 27849: 3 - Create new WO using 'Copy vehicle info' action - verify new WO on BO",
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor" : "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123",
+          "trim" : "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel",
+              "servicePrice": "20",
+              "questionsData": [
+                {
+                  "questionName": "QuestionTypeLogical_Review Car",
+                  "logicalQuestion": true,
+                  "logicalQuestionValue": false
+                },
+                {
+                  "questionName": "QuestionTypeText_Question2",
+                  "questionAnswer": "12345",
+                  "textQuestion": true
+                }
+              ]
+            },
+            {
+              "serviceName": "Special Discount",
+              "servicePrice": "-10"
+            }
+          ],
+          "laborService": {
+            "serviceName": "Labor_Vehilce_data_R&R",
+            "laborServiceRate": "2",
+            "laborServicePriceVerify": "$5.14",
+            "laborServicePanel": "Front Bumper",
+            "laborServicePart": "Remove/Replace Front Bumper Cover"
+          },
+          "bundleService": {
+            "bundleServiceName": "Bundle for PP",
+            "bundleServiceAmount": "1021",
+            "services": [
+              {
+                "serviceName": "Service_PP_Vehicle",
+                "vehiclePart": {
+                  "vehiclePartName": "Front Bumper"
+                }
+              },
+              {
+                "serviceName": "SR_S1_Money",
+                "vehiclePart": {
+                  "vehiclePartName": "Decklid"
+                }
+              }
+            ]
+          },
+          "screenTotalPrice": "$1,013.53",
+          "screenPrice": "$1,046.14"
+        },
+        "priceMatrixScreenData": {
+          "screenName": "Simple Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "1 \"",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartAdditionalService":
+            {
+              "serviceName": "SR_S5_Mt_Money",
+              "servicePrice": "50"
+            },
+            "vehiclePartTotalPrice": "$72.00"
+          },
+          "screenTotalPrice": "$1,013.53",
+          "screenPrice": "$72.00"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        },
+        "inspectionTotalPrice" : "$1,013.53"
+      },
+      "workOrderData" : {
+        "wholesailCustomer": {
+          "companyName": "BoBo"
+        },
+        "vihicleInfo": {
+          "vinNumber": "",
+          "vehicleMake": "",
+          "vehicleModel": "",
+          "vehicleColor" : "",
+          "vehicleYear": "",
+          "mileage": "",
+          "licPlate": "",
+          "stockNumber": "",
+          "roNumber": "",
+          "trim" : "No trims available"
+        },
         "servicesScreen": {
           "screenTotalPrice": "$962.53",
           "screenPrice": "$1,046.14"

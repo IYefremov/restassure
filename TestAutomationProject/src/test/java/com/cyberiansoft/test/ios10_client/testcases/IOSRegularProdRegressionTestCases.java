@@ -33,7 +33,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
+
+    List<String> workOrdersForInvoice = new ArrayList<>();
 
     @BeforeClass
     public void setUpSuite() {
@@ -44,29 +49,20 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
                 ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "oksi opr",
                 envType);
 
-        RegularMainScreen mainscr = new RegularMainScreen();
         RegularMainScreenSteps.userLogin("Oksana Manager", iOSInternalProjectConstants.USER_PASSWORD);
         RegularHomeScreenSteps.navigateToSettingsScreen();
         RegularSettingsScreenSteps.setShowAvailableSelectedServicesOn();
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testCreateInspectionVerifyOnBO(String rowID,
-                                              String description, JSONObject testData) {
-
-        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-        InspectionData inspectionData = testCaseData.getInspectionData();
-
-        WholesailCustomer wholesailCustomer = new WholesailCustomer();
-        wholesailCustomer.setCompanyName("Amazimg Nissan");
-
+    public String createInspectionForWorkOrders(InspectionData inspectionData) {
 
         RegularHomeScreenSteps.navigateToCustomersScreen();
         RegularCustomersScreenSteps.switchToWholesaleMode();
         RegularNavigationSteps.navigateBackScreen();
+
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
-        RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
         final String inspectionID = RegularVehicleInfoScreenSteps.getInspectionNumber();
         RegularNavigationSteps.navigateToClaimScreen();
@@ -99,10 +95,21 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
         RegularMyInspectionsScreenValidations.verifyInspectionApprovedPrice(inspectionID, inspectionData.getInspectionTotalPrice());
+        return inspectionID;
+    }
 
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testCreateInspectionVerifyOnBO(String rowID,
+                                              String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        String inspectionID = createInspectionForWorkOrders(inspectionData);
         RegularMyInspectionsSteps.createWorkOrderFromInspection(inspectionID, UATWorkOrderTypes.WO_FINAL_INVOICE);
         RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
         final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        workOrdersForInvoice.add(workOrderNumber);
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
 
@@ -122,6 +129,66 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersScreenValidations.verifyWorkOrderTotalPrice(workOrderNumber, testCaseData.getWorkOrderData().getWorkOrderPrice());
 
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO(String rowID,
+                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+
+        RegularMyWorkOrdersSteps.clickCopyVehicleMenu(workOrdersForInvoice.get(0));
+        RegularCustomersScreenSteps.selectCustomer(testCaseData.getWorkOrderData().getWholesailCustomer());
+        RegularWorkOrderTypesSteps.selectWorkOrderType(UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
+        workOrdersForInvoice.add(RegularVehicleInfoScreenSteps.getWorkOrderNumber());
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.switchToSelectedServices();
+
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularSelectedServicesScreenValidations.verifyServiceIsSelected(serviceData.getServiceName(), false);
+        }
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getBundleService().getBundleServiceName(), false);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getLaborService().getServiceName(), false);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartAdditionalService().getServiceName(), false);
+        RegularWorkOrdersSteps.saveWorkOrder();
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO(String rowID,
+                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+
+        RegularMyWorkOrdersSteps.clickCopyServicesMenu(workOrdersForInvoice.get(0));
+        RegularCustomersScreenSteps.selectCustomer(testCaseData.getWorkOrderData().getWholesailCustomer());
+        RegularWorkOrderTypesSteps.selectWorkOrderType(UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoValidations.validateVehicleInfoData(testCaseData.getWorkOrderData().getVehicleInfoData());
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        workOrdersForInvoice.add(RegularVehicleInfoScreenSteps.getWorkOrderNumber());
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.switchToSelectedServices();
+
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularSelectedServicesScreenValidations.verifyServiceIsSelected(serviceData.getServiceName(), true);
+        }
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getBundleService().getBundleServiceName(), true);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getLaborService().getServiceName(), true);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartAdditionalService().getServiceName(), false);
+
+        RegularWizardScreenValidations.verifyScreenSubTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenPrice());
+        RegularWizardScreenValidations.verifyScreenTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenTotalPrice());
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

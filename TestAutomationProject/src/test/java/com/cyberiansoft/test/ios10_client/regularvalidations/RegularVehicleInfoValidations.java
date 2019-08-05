@@ -14,6 +14,9 @@ public class RegularVehicleInfoValidations {
         if (vehicleInfoData.getVehicleModel() != null) {
             Assert.assertEquals(vehicleScreen.getModel(), vehicleInfoData.getVehicleModel());
         }
+        if (vehicleInfoData.getVehicleColor() != null) {
+            Assert.assertEquals(vehicleScreen.getColor(), vehicleInfoData.getVehicleColor());
+        }
         if (vehicleInfoData.getVehicleYear() != null) {
             Assert.assertEquals(vehicleScreen.getYear(), vehicleInfoData.getVehicleYear());
         }

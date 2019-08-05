@@ -13,4 +13,16 @@ public class RegularMyWorkOrdersSteps {
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
         myWorkOrdersScreen.waitMyWorkOrdersScreenLoaded();
     }
+
+    public static void clickCopyVehicleMenu(String workOrderId) {
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.selectWorkOrder(workOrderId);
+        myWorkOrdersScreen.clickrCopyVehicleMenu();
+    }
+
+    public static void clickCopyServicesMenu(String workOrderId) {
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.selectWorkOrder(workOrderId);
+        myWorkOrdersScreen.clickCopyServices();
+    }
 }

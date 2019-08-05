@@ -15,6 +15,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularInspectionsSteps;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyWorkOrdersSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularWorkOrdersSteps;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspectionsTypes;
@@ -2959,7 +2960,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(DentWizardWorkOrdersTypes.routeusworkordertype);
 			vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-			String wo = vehiclescreen.getWorkOrderNumber();
+			String workOrderNumber = vehiclescreen.getWorkOrderNumber();
 			RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesscreen.selectServicePanel(UtilConstants.OTHER_SERVICE);
 			RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
@@ -2968,8 +2969,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedservicescreen.saveSelectedServiceDetails();
 			servicesscreen.clickBackServicesButton();
 			RegularWorkOrdersSteps.saveWorkOrder();
-            myworkordersscreen = new RegularMyWorkOrdersScreen();
-			myworkordersscreen.selectWorkOrderForCopyVehicle(wo);
+			RegularMyWorkOrdersSteps.clickCopyVehicleMenu(workOrderNumber);
 			myworkordersscreen.selectWorkOrderType(DentWizardWorkOrdersTypes.carmaxworkordertype);
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			RegularWorkOrdersSteps.saveWorkOrder();
