@@ -2,8 +2,9 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.partservice.PartName;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
-import com.cyberiansoft.test.vnext.enums.PartInfoScreenField;
-import com.cyberiansoft.test.vnext.enums.PartServiceWizardScreen;
+import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
+import com.cyberiansoft.test.vnext.enums.partservice.PartServiceWizardScreen;
+import com.cyberiansoft.test.vnext.interactions.AvailableServiceScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.PartInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.PartInfoScreen;
@@ -15,10 +16,16 @@ public class PartServiceSteps {
         PartServiceSteps.selectpartServiceDetails(partServiceData);
     }
 
+    public static void selectMatrixPartService(PartServiceData partServiceData) {
+        AvailableServiceScreenInteractions.openServiceDetails(partServiceData.getServiceName());
+        PartServiceSteps.selectpartServiceDetails(partServiceData);
+    }
+
     public static void changeCategory(PartServiceData partServiceData) {
         WaitUtils.click(PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.CATEGORY));
         PartServiceSteps.selectpartServiceDetails(partServiceData);
     }
+
 
     public static void selectpartServiceDetails(PartServiceData partServiceData) {
         if (partServiceData.getCategory() != null)

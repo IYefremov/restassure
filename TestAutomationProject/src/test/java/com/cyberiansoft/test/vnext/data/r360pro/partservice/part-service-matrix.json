@@ -1,0 +1,33 @@
+{
+  "userCanCreateInspectionWithPartsMatrixService": [
+    {
+      "rowID": "userCanCreateInspectionWithPartsMatrixService.01",
+      "description": "86706",
+      "partServiceMatrixDataList": [
+        {
+          "serviceName": "rozstalnoy_enable_matrix",
+          "vehicle": "Rozstalnoy_vehicle",
+          "size": "DIME",
+          "severity": "LIGHT",
+          "partServiceDataList": [
+            {
+              "serviceName": "roz_part_full_cat",
+              "partPosition": "Main"
+            },
+            {
+              "serviceName": "rozstalnoy_enable_parts",
+              "category": "Brake",
+              "subCategory": "Control Cables",
+              "partName": {
+                "partNameList": [
+                  "Parking Brake Cable Lever"
+                ],
+                "isMultiSelect": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

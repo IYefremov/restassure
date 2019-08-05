@@ -21,9 +21,20 @@ public class SelectedServicesScreenSteps {
         expectedServiceList.forEach(serviceData -> Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName())));
     }
 
+    public static void verifyServiceSelected(String serviceName) {
+        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
+        selectedServicesScreen.switchToSelectedServicesView();
+        Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceName));
+    }
+
     public static void openServiceDetails(String serviceName) {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         servicesScreen.switchToSelectedServicesView();
         servicesScreen.openServiceDetails(serviceName);
+    }
+
+    public static void switchToSelectedService() {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.switchToSelectedServicesView();
     }
 }

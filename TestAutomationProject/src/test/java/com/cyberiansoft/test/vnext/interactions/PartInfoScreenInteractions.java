@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.interactions;
 
-import com.cyberiansoft.test.vnext.enums.PartInfoScreenField;
+import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.screens.PartInfoScreen;
 import org.openqa.selenium.WebElement;
 
