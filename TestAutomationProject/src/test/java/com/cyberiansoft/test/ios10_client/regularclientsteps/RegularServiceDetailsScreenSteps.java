@@ -95,7 +95,6 @@ public class RegularServiceDetailsScreenSteps {
             selectedServiceDetailsScreen.selectLaborServicePart(laborServiceData.getLaborServicePart());
             selectedServiceDetailsScreen.clickSelectedServiceDetailsDoneButton();
         }
-        System.out.println("++++" + selectedServiceDetailsScreen.getServiceDetailsPriceValue());
     }
 
 }
