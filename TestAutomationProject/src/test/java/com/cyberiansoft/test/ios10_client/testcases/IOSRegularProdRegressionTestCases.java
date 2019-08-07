@@ -25,6 +25,7 @@ import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.UATInspectionTypes;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.UATInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
@@ -188,6 +189,26 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularWizardScreenValidations.verifyScreenTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenTotalPrice());
         RegularWorkOrdersSteps.saveWorkOrder();
 
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO(String rowID,
+                                                                                String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InvoiceData invoiceData = testCaseData.getInvoiceData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        for (String workOrderId : workOrdersForInvoice)
+            RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderId);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+
+        for (String workOrderId : workOrdersForInvoice)
+            RegularInvoiceInfoScreenValidations.verifyWorkOrderIsPresentForInvoice(workOrderId, true);
+        RegularInvoiceInfoScreenValidations.verifyInvoiceTotalValue(invoiceData.getInvoiceTotal());
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(invoiceData.getPoNumber());
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
     }
 

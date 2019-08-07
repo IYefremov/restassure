@@ -212,7 +212,7 @@
       },
       "workOrderData" : {
         "wholesailCustomer": {
-          "companyName": "BoBo"
+          "companyName": "Amazimg Nissan"
         },
         "vihicleInfo": {
           "vinNumber": "",
@@ -331,7 +331,7 @@
       },
       "workOrderData" : {
         "wholesailCustomer": {
-          "companyName": "BoBo"
+          "companyName": "Amazimg Nissan"
         },
         "vihicleInfo": {
           "vinNumber": "",
@@ -350,6 +350,16 @@
           "screenPrice": "$1,046.14"
         },
         "workOrderPrice": "$962.53"
+      }
+    }
+  ],
+  "testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO": [
+    {
+      "rowID": "testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO.01",
+      "description": "Test Case 27850: 5 - Create invoice based on 3 created WOs - verify presence of Invoice on BO",
+      "invoiceData": {
+        "poNumber": "123po",
+        "invoiceTotal": "$1,925.06"
       }
     }
   ],
