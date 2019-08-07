@@ -1479,17 +1479,28 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
         final VNextBOOrderServiceNotesDialog notesDialog = detailsPage.openNotesDialog(serviceId);
-        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
-        final int notesNumber = notesDialog.getNotesListNumber();
+        Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes block hasn't been displayed");
+        final int notesNumber = notesDialog.getRepairNotesListNumber();
 
         notesDialog
-                .typeNotesMessage(data.getServiceNotesMessage())
-                .clickNotesXbutton();
-        Assert.assertFalse(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been closed");
+                .openRepairNoteTextArea()
+                .typeRepairNotesMessage(data.getServiceNotesMessage())
+                .clickRepairNotesXbutton();
+        Assert.assertEquals(notesDialog.getRepairNoteTextAreaValue(), "");
+        notesDialog.closeRepairNoteDialog();
 
         detailsPage.openNotesDialog(serviceId);
-        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
-        Assert.assertEquals(notesNumber, notesDialog.getNotesListNumber(),
+        Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+        Assert.assertEquals(notesNumber, notesDialog.getRepairNotesListNumber(),
+                "The services notes list number has been updated, although the 'X' button was clicked");
+
+        notesDialog.openRepairNoteTextArea().typeRepairNotesMessage(data.getServiceNotesMessage());
+//        Assert.assertEquals(notesDialog.getRepairNoteTextAreaValue(), data.getServiceNotesMessage());
+        notesDialog.closeRepairNoteDialog();
+
+        detailsPage.openNotesDialog(serviceId);
+        Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+        Assert.assertEquals(notesNumber, notesDialog.getRepairNotesListNumber(),
                 "The services notes list number has been updated, although the 'X' button was clicked");
     }
 

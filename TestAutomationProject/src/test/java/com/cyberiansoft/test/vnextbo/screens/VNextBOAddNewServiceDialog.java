@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.*;
@@ -169,9 +170,7 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     }
 
     public VNextBOAddNewServiceDialog setServiceName(String servicename) {
-        wait.until(ExpectedConditions.elementToBeClickable(serviceNameField)).clear();
-        serviceNameField.sendKeys(servicename);
-        waitABit(1000);
+        Utils.clearAndType(serviceNameField, servicename);
         return this;
     }
 

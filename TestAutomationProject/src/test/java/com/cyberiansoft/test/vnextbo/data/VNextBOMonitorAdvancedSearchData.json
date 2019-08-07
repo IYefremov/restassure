@@ -23,8 +23,8 @@
       "rowID": "verifyUserCanSearchByPhase.01",
       "description": "Test Case 82214:User can search by \"Phase\"",
       "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
+      "customer": "Mike's Techs",
+      "timeFrame": "Year To Date",
       "phase": "PDR Station"
     }
   ],
@@ -33,10 +33,9 @@
     {
       "rowID": "verifyUserCanSearchByDepartment.01",
       "description": "Test Case 82215:User can search by \"Department\"",
-      "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
+      "location": "1111 Automation",
+      "customer": "Mike's Techs",
+      "timeFrame": "Year To Date",
       "department": "Default"
     }
   ],
@@ -46,11 +45,9 @@
       "rowID": "verifyUserCanSearchByWoType.01",
       "description": "Test Case 82216:User can search by \"WO Type\"",
       "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp"
+      "customer": "Mike's Techs",
+      "woType": "Best",
+      "timeFrame": "Year To Date"
     }
   ],
 
@@ -59,12 +56,9 @@
       "rowID": "verifyUserCanSearchByWoNumber.01",
       "description": "Test Case 82217:User can search by \"WO#\"",
       "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp",
-      "woNum": "O-000-149566"
+      "customer": "Mike's Techs",
+      "woNum": "O-361-00004",
+      "timeFrame": "Year To Date"
     }
   ],
 
@@ -73,12 +67,9 @@
       "rowID": "verifyUserCanSearchByRoNumber.01",
       "description": "Test Case 82218:User can search by \"RO#\"",
       "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp",
-      "woNum": "O-000-149566",
+      "customer": "Mike's Techs",
+      "woNum": "O-361-00004",
+      "timeFrame": "Year To Date",
       "roNum": "RO#ForAuto"
     }
   ],
@@ -88,14 +79,9 @@
       "rowID": "verifyUserCanSearchByStockNumber.01",
       "description": "Test Case 82219:User can search by \"Stock#\"",
       "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp",
-      "woNum": "O-000-149566",
-      "roNum": "RO#ForAuto",
-      "stockNum": "StockForAuto"
+      "customer": "Mike's Techs",
+      "stockNum": "S00054",
+      "timeFrame": "Year To Date"
     }
   ],
 
@@ -104,15 +90,9 @@
       "rowID": "verifyUserCanSearchByVinNumber.01",
       "description": "Test Case 82220:User can search by \"VIN\"",
       "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai",
-      "phase": "First",
-      "department": "Default",
-      "woType": "01ZalexWO_tp",
-      "woNum": "O-000-149566",
-      "roNum": "RO#ForAuto",
-      "stockNum": "StockForAuto",
-      "vinNum": "asdfasd"
+      "customer": "Mike's Techs",
+      "vinNum": "1ESFCVGDE34ES2589",
+      "timeFrame": "Year To Date"
     }
   ],
 
@@ -336,7 +316,7 @@
       "description": "Test Case 82666:User can search by \"Repair Status\"(In Progress - Rework)",
       "location": "Best Location Automation",
       "repairStatus": "In Progress - Rework",
-      "orderNumber": "O-000-152419"
+      "orderNumber": "O-000-152073"
     }
   ],
 
@@ -542,11 +522,11 @@
       "roNum": "RO#ForAuto",
       "stockNum": "StockForAuto",
       "vinNum": "asdfasd",
-      "timeFrame": "Last 3 weeks",
+      "timeFrame": "Last 90 days",
       "repairStatus": "In Progress - On Hold",
       "daysInProcess": "<",
       "daysInPhase": "<=",
-      "flag": "Red",
+      "flag": "Important",
       "searchName": "MySavedSearch",
       "daysNumList": [
         "10",
@@ -561,11 +541,11 @@
       "woNumText": " WO#: O-000-149566",
       "employeeText": " Employee: Criss Lai",
       "woTypeText": " WO Type: 01ZalexWO_tp",
-      "timeFrameText": " Timeframe: Last 3 weeks",
+      "timeFrameText": " Timeframe: Last 90 days",
       "repairStatusText": " Repair Status: In Progress - On Hold",
       "daysInProcessText": " Days in process: < 10",
       "daysInPhaseText": " Days in phase: <= 20",
-      "flagText": " Flag: Red"
+      "flagText": " Flag: Important"
     }
   ]
 }

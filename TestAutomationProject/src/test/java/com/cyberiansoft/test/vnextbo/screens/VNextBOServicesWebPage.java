@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
@@ -66,8 +67,7 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBOAddNewServiceDialog clickAddNewServiceButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(addservicebtn)).click();
-        waitABit(2500);
+        Utils.clickElement(addservicebtn);
         return PageFactory.initElements(
                 driver, VNextBOAddNewServiceDialog.class);
     }

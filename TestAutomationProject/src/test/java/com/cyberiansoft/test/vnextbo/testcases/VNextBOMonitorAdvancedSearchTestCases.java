@@ -124,6 +124,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         advancedSearchDialog
                 .setCustomer(data.getCustomer())
                 .setPhase(data.getPhase())
+                .setTimeFrame(data.getTimeFrame())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
@@ -132,7 +133,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class) //todo fails, needs clarifications from V.Dubinenko
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByDepartment(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -146,6 +147,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         advancedSearchDialog
                 .setCustomer(data.getCustomer())
                 .setDepartment(data.getDepartment())
+                .setTimeFrame(data.getTimeFrame())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
@@ -168,6 +170,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         advancedSearchDialog
                 .setCustomer(data.getCustomer())
                 .setWoType(data.getWoType())
+                .setTimeFrame(data.getTimeFrame())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
@@ -190,6 +193,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         advancedSearchDialog
                 .setCustomer(data.getCustomer())
                 .setWoNum(data.getWoNum())
+                .setTimeFrame(data.getTimeFrame())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
@@ -212,6 +216,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         advancedSearchDialog
                 .setCustomer(data.getCustomer())
                 .setRoNum(data.getRoNum())
+                .setTimeFrame(data.getTimeFrame())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
@@ -234,6 +239,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         advancedSearchDialog
                 .setCustomer(data.getCustomer())
                 .setStockNum(data.getStockNum())
+                .setTimeFrame(data.getTimeFrame())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
@@ -256,6 +262,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         advancedSearchDialog
                 .setCustomer(data.getCustomer())
                 .setVinNum(data.getVinNum())
+                .setTimeFrame(data.getTimeFrame())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
@@ -782,15 +789,12 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
 
-        advancedSearchDialog
-                .setRepairStatus(data.getRepairStatus())
-                .clickSearchButton();
+        advancedSearchDialog.setRepairStatus(data.getRepairStatus());
+        Assert.assertEquals(advancedSearchDialog.getRepairStatusOption(), data.getRepairStatus());
+        advancedSearchDialog.clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
-
-        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
-                "The work order is not displayed after search by Repair order with status " + data.getRepairStatus());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

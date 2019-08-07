@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.HomeWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
@@ -142,38 +143,38 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
     }
 
     public String openAccessClientPortalWindow(String mainWindow) {
-        clickButton(accessClientPortalLink);
+        Utils.clickElement(accessClientPortalLink);
         waitForNewTab();
         return getNewTab(mainWindow);
     }
 
     public String openSupportForBOWindow(String mainWindow) {
-        clickButton(supportForBOButton);
+        Utils.clickElement(supportForBOButton);
         waitForNewTab();
         return getNewTab(mainWindow);
     }
 
     public String openSupportForMobileAppWindow(String mainWindow) {
-        clickButton(supportForMobileAppButton);
+        Utils.clickElement(supportForMobileAppButton);
         waitForNewTab();
         return getNewTab(mainWindow);
     }
 
     public String openAccessReconProBOWindow(String mainWindow) {
-        clickButton(accessReconProBOLink);
+        Utils.clickElement(accessReconProBOLink);
         final HomeWebPage BOHomeWebPage = PageFactory.initElements(driver, HomeWebPage.class);
         BOHomeWebPage.waitForLoading();
         return getNewTab(mainWindow);
     }
 
     public VNextBOTermsAndConditionsDialog clickTermsAndConditionsLink() {
-        clickButton(termsAndConditionsLink);
+        Utils.clickElement(termsAndConditionsLink);
         waitForLoading();
         return PageFactory.initElements(driver, VNextBOTermsAndConditionsDialog.class);
     }
 
     public VNextBOPrivacyPolicyDialog clickPrivacyPolicyLink() {
-        clickButton(termsAndConditionsLink);
+        Utils.clickElement(termsAndConditionsLink);
         waitForLoading();
         return PageFactory.initElements(driver, VNextBOPrivacyPolicyDialog.class);
     }

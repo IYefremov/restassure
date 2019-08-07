@@ -116,24 +116,32 @@ public class WaitUtilsWebDriver {
         } catch (ConditionTimeoutException ignored) {}
     }
 
-    public static void waitForVisibilityOfAllOptions(List<WebElement> listBox) {
+    public static List<WebElement> waitForVisibilityOfAllOptions(List<WebElement> listBox) {
         waitShort.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        return listBox;
     }
 
-    public static void waitForVisibilityOfAllOptions(List<WebElement> listBox, int timeoutSeconds) {
+    public static List<WebElement> waitForVisibilityOfAllOptions(List<WebElement> listBox, int timeoutSeconds) {
         new WebDriverWait(driver, timeoutSeconds).until(ExpectedConditions.visibilityOfAllElements(listBox));
+        return listBox;
     }
 
-    public static void waitForVisibilityOfAllOptionsIgnoringException(List<WebElement> listBox) {
+    public static List<WebElement> waitForVisibilityOfAllOptionsIgnoringException(List<WebElement> listBox) {
         try {
             waitForVisibilityOfAllOptions(listBox);
-        } catch (Exception ignored) {}
+            return listBox;
+        } catch (Exception ignored) {
+            return null;
+        }
     }
 
-    public static void waitForVisibilityOfAllOptionsIgnoringException(List<WebElement> listBox, int timeoutSeconds) {
+    public static List<WebElement> waitForVisibilityOfAllOptionsIgnoringException(List<WebElement> listBox, int timeoutSeconds) {
         try {
             waitForVisibilityOfAllOptions(listBox, timeoutSeconds);
-        } catch (Exception ignored) {}
+            return listBox;
+        } catch (Exception ignored) {
+            return null;
+        }
     }
 
     public static void waitForVisibilityIgnoringException(WebElement element) {
