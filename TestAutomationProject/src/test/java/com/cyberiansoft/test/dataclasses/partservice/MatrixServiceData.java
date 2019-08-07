@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class PartServiceMatrixData {
+public class MatrixServiceData {
     @JsonProperty("serviceName")
     private String serviceName;
     @JsonProperty("vehicle")

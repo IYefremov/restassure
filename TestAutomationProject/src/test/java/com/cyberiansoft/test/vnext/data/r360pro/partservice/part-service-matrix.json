@@ -3,7 +3,7 @@
     {
       "rowID": "userCanCreateInspectionWithPartsMatrixService.01",
       "description": "86706",
-      "partServiceMatrixDataList": [
+      "matrixServiceDataList": [
         {
           "serviceName": "rozstalnoy_enable_matrix",
           "vehicle": "Rozstalnoy_vehicle",

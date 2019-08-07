@@ -103,7 +103,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         GeneralSteps.confirmDialog();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "anotherUserCanSeeStartOnStartedService")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "anotherLocationManagerCanSeeStartOnStartedService")
     public void verifyStartStopVisibleOnlyInActiveStateServiceLevel(String rowID,
                                                                     String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -128,7 +128,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         MenuSteps.closeMenu();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "anotherUserCanSeeStartOnStartedService")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "anotherLocationManagerCanSeeStartOnStartedService")
     public void verifyStartStopVisibleOnlyInActiveStatePhaseLevel(String rowID,
                                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);

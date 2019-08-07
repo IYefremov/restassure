@@ -176,7 +176,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//p[contains(@data-bind, 'orders.result') and contains(text(), 'No records')]")
     private WebElement noRecordsFound;
 
-    @FindBy(xpath = "//tbody[@id='tableBody']")
+    @FindBy(xpath = "//tbody[@id='tableBody' and contains(@data-bind, 'orders.result')]")
     private WebElement tableBody;
 
     @FindBy(xpath = "//div[@id='reconmonitor-saved-search']//i[@class='caret']")
@@ -714,7 +714,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
             return wait
                     .ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions.visibilityOf(tableBody
-                            .findElement(By.xpath(".//strong[text()='" + text + "']"))))
+                            .findElement(By.xpath(".//strong[text()=\"" + text + "\"]"))))
                     .isDisplayed();
         } catch (Exception e) {
             return false;

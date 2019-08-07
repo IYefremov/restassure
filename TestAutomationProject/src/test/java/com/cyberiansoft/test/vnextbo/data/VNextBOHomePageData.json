@@ -77,7 +77,7 @@
     {
       "rowID": "verifyUserCanOpenSupportForBOPage.01",
       "description": "Test Case 84384:User can open \"Support for Back Office\"",
-      "url": "https://intercom.help/amt/repair360-back-office"
+      "url": "repair360-reconmonitor-back-office"
     }
   ],
 
@@ -85,7 +85,7 @@
     {
       "rowID": "verifyUserCanOpenSupportForMobileAppPage.01",
       "description": "Test Case 84385:User can open \"Support for Mobile App\"",
-      "url": "https://intercom.help/amt/repair360-mobile-app"
+      "url": "repair360-mobile-app"
     }
   ],
 

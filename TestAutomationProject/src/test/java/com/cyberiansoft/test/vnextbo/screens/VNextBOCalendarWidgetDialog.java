@@ -14,17 +14,11 @@ import java.util.concurrent.TimeUnit;
 
 public class VNextBOCalendarWidgetDialog extends VNextBOBaseWebPage {
 
-    @FindBy(xpath = "//div[@id='advSearch_fromDate_dateview']")
+    @FindBy(id = "advSearch_fromDate_dateview")
     private WebElement fromDateCalendarWidget;
 
     @FindBy(xpath = "//div[@id='advSearch_toDate_dateview']")
     private WebElement toDateCalendarWidget;
-
-    @FindBy(id = "advSearch_fromDate_dateview")
-    private WebElement fromDateCalendarButton;
-
-    @FindBy(xpath = "advSearch_toDate_dateview")
-    private WebElement toDateCalendarButton;
 
     public VNextBOCalendarWidgetDialog(WebDriver driver) {
         super(driver);

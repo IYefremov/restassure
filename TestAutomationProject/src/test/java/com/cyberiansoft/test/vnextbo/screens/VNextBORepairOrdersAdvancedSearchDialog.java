@@ -1,6 +1,9 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -85,6 +88,9 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
 
     @FindBy(id = "orderStatusDropdownlist_listbox")
     private WebElement repairStatusDropDown;
+
+    @FindBy(xpath = "//span[@aria-owns='orderStatusDropdownlist_listbox']//span[@class='k-input']")
+    private WebElement repairStatusValue;
 
     @FindBy(xpath = "//span[@aria-owns='orderDaysInProcessDropdown_listbox']")
     private WebElement daysInProcessListBox;
@@ -400,18 +406,18 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     public VNextBORepairOrdersWebPage clickClearButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(clearButton)).click();
+        Utils.clickElement(clearButton);
         waitForLoading();
         return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickPhaseBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(phaseListBox)).click();
+        Utils.clickElement(phaseListBox);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickDepartmentBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(departmentListBox)).click();
+        Utils.clickElement(departmentListBox);
         return this;
     }
 
@@ -421,27 +427,27 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickDaysInPhaseBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(daysInPhaseListBox)).click();
+        Utils.clickElement(daysInPhaseListBox);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickFlagBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(flagsListBox)).click();
+        Utils.clickElement(flagsListBox);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickDaysInProcessBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(daysInProcessListBox)).click();
+        Utils.clickElement(daysInProcessListBox);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickTimeFrameBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(timeFrameListBox)).click();
+        Utils.clickElement(timeFrameListBox);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickRepairStatusBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(repairStatusListBox)).click();
+        Utils.clickElement(repairStatusListBox);
         return this;
     }
 
@@ -469,12 +475,12 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
 //        wait.until(ExpectedConditions.visibilityOf(flagDropDown));
 //        final Select select = new Select(flagDropDown);
 //        select.selectByVisibleText(flag);
-        selectOptionInDropDown(flagDropDown, flagsListBoxOptions, flag);
+        selectOptionInDropDown(flagDropDown, flagsListBoxOptions, flag, true);
         return this;
     }
 
     public VNextBORepairOrdersWebPage clickAdvancedSearchCloseButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCloseButton)).click();
+        Utils.clickElement(advancedSearchCloseButton);
         return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
     }
 
@@ -484,13 +490,17 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectTimeFrame(String timeFrame) {
-        selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame);
+        selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame, true);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectRepairStatus(String repairStatus) {
         selectOptionInDropDown(repairStatusDropDown, repairStatusListBoxOptions, repairStatus);
         return this;
+    }
+
+    public String getRepairStatusOption() {
+        return WaitUtilsWebDriver.waitForVisibility(repairStatusValue).getText();
     }
 //
 //    private VNextBORepairOrdersAdvancedSearchDialog selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox,

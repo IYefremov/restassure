@@ -266,7 +266,7 @@ public class VNextBOHomePage extends BaseTestCase {
         final String currentUrl = homePage.getUrl();
         System.out.println(mainWindow);
 
-        System.out.println("actual Access Client Portal Url: " + currentUrl);
+        System.out.println("actual homepage Url: " + currentUrl);
         System.out.println("expected Access Client Portal Url: " + data.getUrl());
 
         Assert.assertTrue(currentUrl.contains(data.getUrl()), "The \"Access Client Portal\" page hasn't been opened");
@@ -284,10 +284,10 @@ public class VNextBOHomePage extends BaseTestCase {
         System.out.println(mainWindow);
         System.out.println(AccessClientPortalWindow);
 
-        System.out.println("actual Support For BO Url: " + currentUrl);
+        System.out.println("actual homepage Url: " + currentUrl);
         System.out.println("expected Support For BO Url: " + data.getUrl());
 
-        Assert.assertEquals(currentUrl, data.getUrl(), "The \"Support For BO\" page hasn't been opened");
+        Assert.assertTrue(currentUrl.contains(data.getUrl()), "The \"Support For BO\" page hasn't been opened");
 
         homePage.closeWindows();
     }
@@ -305,7 +305,7 @@ public class VNextBOHomePage extends BaseTestCase {
         System.out.println("actual Support For BO Url: " + currentUrl);
         System.out.println("expected Support For BO Url: " + data.getUrl());
 
-        Assert.assertEquals(currentUrl, data.getUrl(), "The \"Support For Mobile App\" page hasn't been opened");
+        Assert.assertTrue(currentUrl.contains(data.getUrl()), "The \"Support For Mobile App\" page hasn't been opened");
 
         homePage.closeWindows();
     }

@@ -1,13 +1,13 @@
 package com.cyberiansoft.test.vnext.validations;
 
-import com.cyberiansoft.test.dataclasses.partservice.PartServiceMatrixData;
+import com.cyberiansoft.test.dataclasses.partservice.MatrixServiceData;
 import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.interactions.PartInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 
 public class PartMatrixScreenValidations {
-    public static void validatePartInfo(PartServiceMatrixData expectedPartServiceData) {
+    public static void validatePartInfo(MatrixServiceData expectedPartServiceData) {
         if (expectedPartServiceData.getSize() != null)
             WaitUtils.assertEquals(expectedPartServiceData.getSize(),
                     PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.SIZE).findElement(By.xpath(".//input")).getAttribute("value"));
