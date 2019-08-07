@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 
 public class RegularMyWorkOrdersSteps {
 
@@ -24,5 +25,16 @@ public class RegularMyWorkOrdersSteps {
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
         myWorkOrdersScreen.selectWorkOrder(workOrderId);
         myWorkOrdersScreen.clickCopyServices();
+    }
+
+    public static void clickCreateInvoiceIconForWO(String workOrderId) {
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderId);
+    }
+
+    public static void clickCreateInvoiceIconAndSelectInvoiceType(IInvoicesTypes invoiceType) {
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.clickInvoiceIcon();
+        myWorkOrdersScreen.selectInvoiceType(invoiceType);
     }
 }

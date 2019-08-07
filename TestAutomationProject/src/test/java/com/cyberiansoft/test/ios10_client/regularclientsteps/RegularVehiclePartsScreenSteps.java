@@ -61,9 +61,9 @@ public class RegularVehiclePartsScreenSteps {
             vehiclePartScreen.selectDiscaunt(serviceData.getServiceName());
     }
 
-    public static void verifyIfVehiclePartContainsPriceValue(VehiclePartData vehiclePartData) {
+    public static void verifyIfVehiclePartPriceValue(VehiclePartData vehiclePartData) {
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-        Assert.assertTrue(priceMatrixScreen.isPriceMatrixContainsPriceValue(vehiclePartData.getVehiclePartName(), vehiclePartData.getVehiclePartTotalPrice()));
+        Assert.assertEquals(priceMatrixScreen.getVehiclePartPriceValue(vehiclePartData.getVehiclePartName()), vehiclePartData.getVehiclePartTotalPrice());
     }
 
     public static void savePriceMatrixData() {

@@ -123,7 +123,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public <T extends IBaseWizardScreen> T addOrderWithSelectCustomer(String customerName, IWorkOrdersTypes workOrderType) {
 		final String customerValue = appiumdriver.findElementByAccessibilityId("Toolbar").
 				findElements(MobileBy.className("XCUIElementTypeButton")).get(2).getAttribute("label");
-		System.out.println("+++++=====" + customerValue);
 		clickAddOrderButton();
 		if (customerValue.equals("Wholesale Mode") | customerValue.equals("Retail Mode"))
 			selectCustomerAndWorkOrderType(customerName, workOrderType);
@@ -219,14 +218,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		clickChangeCustomerPopupMenu();
 		selectCustomer(customer);
 		return this;
-	}
-	
-	public void customersPopupSwitchToWholesailMode() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
-		if (elementExists(btnretail)) {
-			appiumdriver.findElement(btnretail).click();
-		}
 	}
 	
 	public void customersPopupSwitchToRetailMode() {
@@ -379,10 +370,10 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("Discard").click();
 	}
 
-	public void clickCreateInvoiceIconForWO(String wonumber) {
+	public void clickCreateInvoiceIconForWO(String workOrderId) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
-		appiumdriver.findElementByAccessibilityId(wonumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(workOrderId)));
+		appiumdriver.findElementByAccessibilityId(workOrderId).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
 	}
 	
 	public String getPriceValueForWO(String wonumber) {
