@@ -238,9 +238,27 @@
       }
     }
   ],
-  "anotherUserCanSeeStartOnStartedService": [
+  "nonLocationManagerCannotStartWO": [
     {
-      "rowID": "anotherUserCanSeeStartOnStartedService.01",
+      "rowID": "nonLocationManagerCannotStartWO.01",
+      "description": "TFSID: 91027",
+      "service": {
+        "serviceName": "Labor AM"
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationServiceLevel"
+        },
+        "orderPhaseDto": {
+          "phaseName": "Phase: AutomationPhaseLevel",
+          "problemReason": "PROBLEM REASON"
+        }
+      }
+    }
+  ],
+  "anotherLocationManagerCanSeeStartOnStartedService": [
+    {
+      "rowID": "anotherLocationManagerCanSeeStartOnStartedService.01",
       "description": "TFSID: 85378, 85738, 85752",
       "service": {
         "serviceName": "Labor AM"

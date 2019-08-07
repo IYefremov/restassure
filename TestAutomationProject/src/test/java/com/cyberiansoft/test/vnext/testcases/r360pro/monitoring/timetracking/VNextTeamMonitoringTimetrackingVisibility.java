@@ -44,14 +44,33 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void anotherUserCanSeeStartOnStartedService(String rowID,
-                                                       String description, JSONObject testData) {
+    public void nonLocationManagerCannotStartWO(String rowID,
+                                                String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        ServiceData serviceDto = workOrderData.getServiceData();
+        Employee nonLocationManagerEmployee = new Employee();
+        nonLocationManagerEmployee.setEmployeeFirstName("Old");
+        nonLocationManagerEmployee.setEmployeeLastName("Fashion");
+
+        HomeScreenSteps.logOut();
+        GeneralSteps.logIn(nonLocationManagerEmployee);
+        MonitorSteps.editOrder(workOrderId);
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
+        MenuSteps.closeMenu();
+        HomeScreenSteps.logOut();
+        GeneralSteps.logIn(employee);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void anotherLocationManagerCanSeeStartOnStartedService(String rowID,
+                                                                  String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceDto = workOrderData.getServiceData();
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
-        Employee secondEmployee = new Employee();
-        secondEmployee.setEmployeeFirstName("Test");
-        secondEmployee.setEmployeeLastName("Test");
+        Employee locationManagerEmployee = new Employee();
+        locationManagerEmployee.setEmployeeFirstName("Test");
+        locationManagerEmployee.setEmployeeLastName("Test");
 
         MonitorSteps.editOrder(workOrderId);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
@@ -63,7 +82,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
         HomeScreenSteps.logOut();
-        GeneralSteps.logIn(secondEmployee);
+        GeneralSteps.logIn(locationManagerEmployee);
         MonitorSteps.editOrder(workOrderId);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, true);

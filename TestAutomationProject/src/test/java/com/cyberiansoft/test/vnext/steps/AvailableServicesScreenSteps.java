@@ -7,13 +7,21 @@ import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AvailableServicesScreenSteps {
 
     public static void selectServices(List<ServiceData> serviceDataList) {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         servicesScreen.switchToAvalableServicesView();
-        servicesScreen.selectServices(serviceDataList);
+        serviceDataList.stream().map(ServiceData::getServiceName).collect(Collectors.toList()).forEach(AvailableServicesScreenSteps::selectService);
+    }
+
+    public static void selectService(String serviceName) {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.switchToAvalableServicesView();
+        SearchSteps.textSearch(serviceName);
+        servicesScreen.selectService(serviceName);
     }
 
     public static void openServiceDetails(String serviceName) {
