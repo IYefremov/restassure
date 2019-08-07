@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 @Getter
+//TODO: Merge with new MatrixScrenDetailsClass
 public class MatrixServicePdrScreen extends VNextBaseWizardScreen {
     @FindBy(xpath = "//div[@action='size']")
     private WebElement sizeField;
