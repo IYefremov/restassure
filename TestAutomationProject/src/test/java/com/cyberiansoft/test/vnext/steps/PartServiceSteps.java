@@ -20,7 +20,6 @@ public class PartServiceSteps {
         PartServiceSteps.selectpartServiceDetails(partServiceData);
     }
 
-
     public static void selectpartServiceDetails(PartServiceData partServiceData) {
         if (partServiceData.getCategory() != null)
             PartServiceSteps.selectCategory(partServiceData.getCategory());

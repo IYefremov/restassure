@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 
 public class ServiceListItem implements IWebElement {
     private WebElement rootElement;
-    private String addButtonLocator = ".//input[@action='select-item']";
     private String priceLocator = ".//div[contains(@class,'checkbox-item-subtitle checkbox-item-price')]";
     private String serviceNameLocator = ".//div[@class='checkbox-item-title']";
 
@@ -16,7 +15,7 @@ public class ServiceListItem implements IWebElement {
     }
 
     public void addService() {
-        WaitUtils.click(rootElement.findElement(By.xpath(addButtonLocator)));
+        WaitUtils.click(rootElement);
     }
 
     public String getServiceName() {

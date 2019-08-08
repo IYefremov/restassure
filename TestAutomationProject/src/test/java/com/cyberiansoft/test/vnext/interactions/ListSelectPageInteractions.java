@@ -9,7 +9,7 @@ public class ListSelectPageInteractions {
         ListSelectPage listPage = new ListSelectPage();
         return listPage.getItemList().stream()
                 .filter(elem ->
-                        elem.getText().equals(text)
+                        elem.getText().contains(text)
                 )
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("List element not found " + text));
