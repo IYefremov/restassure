@@ -47,6 +47,10 @@ public class MatrixServiceSteps {
         PartServiceSteps.acceptDetailsScreen();
     }
 
+    public static void openPartServiceDetails(PartServiceData partService) {
+        MatrixServiceDetailsScreenInteractions.selectService(partService.getServiceName());
+    }
+
     public static void switchToSelectedServices() {
         MatrixServiceDetailsScreenInteractions.switchToSelectedServices();
     }

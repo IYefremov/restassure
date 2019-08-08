@@ -11,6 +11,7 @@
           <include name="testCreateInspectionVerifyOnBO" />
           <include name="testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO" />
           <include name="testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO" />
+          <include name="testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO" />
         </methods>
       </class>
     </classes>

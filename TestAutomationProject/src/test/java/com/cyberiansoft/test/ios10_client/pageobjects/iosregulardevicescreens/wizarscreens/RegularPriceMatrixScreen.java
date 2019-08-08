@@ -85,25 +85,14 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 		return new RegularVehiclePartScreen();
 	}
 	
-	public boolean isPriceMatrixContainsPriceValue(String pricematrix, String pricevalue) {
-		WebElement par = getTableParentCell(pricematrix);
-		return par.findElements(By.xpath("//XCUIElementTypeStaticText[@name=\""+ pricevalue + "\"]")).size() > 0;
+	public String getVehiclePartPriceValue(String pricematrix) {
+		return appiumdriver.findElementByAccessibilityId("PriceMatrixVehiclePartList").
+				findElement(MobileBy.AccessibilityId(pricematrix)).findElements(MobileBy.className("XCUIElementTypeStaticText")).
+				get(1).getText();
 	}
 
 	public void clickCancelButton() {
         appiumdriver.findElementByAccessibilityId("Cancel").click();
-	}
-	
-	public void clickServicesButton() {
-		List<WebElement> serviesbtns = appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElements(By.name("Services"));
-		
-		for(WebElement srvcbtn : serviesbtns){
-			if (srvcbtn.isDisplayed())
-				srvcbtn.click();
-		}
-		
-		//appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(By.name("Services")).click();
-		//servicesbtn.click();
 	}
 
 	public void clickNotesButton() {

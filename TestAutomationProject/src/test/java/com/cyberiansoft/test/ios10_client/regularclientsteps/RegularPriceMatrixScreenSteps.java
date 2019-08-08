@@ -20,6 +20,7 @@ public class RegularPriceMatrixScreenSteps {
         } else if (priceMatrixScreenData.getVehiclePartsData() != null) {
             for (VehiclePartData vehiclePartData : priceMatrixScreenData.getVehiclePartsData()) {
                 RegularVehiclePartsScreenSteps.selectVehiclePartAndSetData(vehiclePartData);
+                RegularVehiclePartsScreenSteps.saveVehiclePart();
             }
         } else if (priceMatrixScreenData.getVehiclePartData() != null)
             RegularVehiclePartsScreenSteps.selectVehiclePartAndSetData(priceMatrixScreenData.getVehiclePartData());

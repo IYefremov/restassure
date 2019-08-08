@@ -45,6 +45,10 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	public RegularInvoiceInfoScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+
+	}
+
+	public void waitInvoiceInfoScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Info")));
 		wait = new WebDriverWait(appiumdriver, 30);
@@ -90,9 +94,9 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
 	}
 
-	public boolean isWOSelected(String wo) {
+	public boolean isWOSelected(String workOrderId) {
 		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='"
-						+ wo + "']").size() > 0;
+						+ workOrderId + "']").size() > 0;
 	}
 	
 	public void clickWO(String wonumber) {

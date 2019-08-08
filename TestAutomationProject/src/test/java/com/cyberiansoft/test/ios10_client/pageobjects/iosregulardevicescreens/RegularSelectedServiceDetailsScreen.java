@@ -81,7 +81,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 	public void clickVehiclePartsCell() {
 		new WebDriverWait(appiumdriver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Select Vehicle Part"))).click();
+		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("ClarificationBox"))).
+				findElement(MobileBy.AccessibilityId("custom detail button")).click();
 	}
 
 	public void clickTechniciansCell() {
@@ -442,8 +443,10 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 						+ technician + "\")]/XCUIElementTypeButton[@name=\"unselected\"]").size() > 0;
 	}
 
-	public void selectVehiclePart(String vehiclepart) {		
-		MobileElement table  = (MobileElement) appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
+	public void selectVehiclePart(String vehiclepart) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		MobileElement table  = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("VehiclePartSelectorView")));
+		 //(MobileElement) appiumdriver.findElementByAccessibilityId("VehiclePartSelectorView");
 		if (!table.findElementByAccessibilityId(vehiclepart).isDisplayed()) {
 			swipeToElement(table.findElement(MobileBy.AccessibilityId(vehiclepart)));
 		}

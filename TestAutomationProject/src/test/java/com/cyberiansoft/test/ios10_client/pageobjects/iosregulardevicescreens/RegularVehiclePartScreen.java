@@ -24,9 +24,13 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     public RegularVehiclePartScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+
+        //viewMode = "PdrView";
+    }
+
+    public void waitVehiclePartScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Vehicle Part")));
-        //viewMode = "PdrView";
     }
 
     public void setSizeAndSeverity(String size, String severity) {
@@ -96,6 +100,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     }
 
     public RegularPriceMatrixScreen saveVehiclePart() {
+        waitVehiclePartScreenLoaded();
         clickSave();
         return new RegularPriceMatrixScreen();
     }
