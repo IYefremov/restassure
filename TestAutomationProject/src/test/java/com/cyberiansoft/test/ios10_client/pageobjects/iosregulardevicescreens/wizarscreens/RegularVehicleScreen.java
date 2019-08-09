@@ -91,8 +91,13 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public RegularVehicleScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		//FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
+		//wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable")));
+	}
+
+	public void waitVehicleScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable"))); 
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable")));
 	}
 
 	public String clickSaveWithAlert() {
@@ -331,6 +336,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getInspectionCustomer() {
+		waitVehicleScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		return wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("viewPrompt"))).getAttribute("value");
 	}

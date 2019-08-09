@@ -18,6 +18,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RegularServicesScreen extends RegularBaseServicesScreen {
@@ -62,7 +63,7 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 
 	public void waitServicesScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Services")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("label = 'Services' and type = 'XCUIElementTypeButton'")));
 	}
 
 	public void clickCancelButton() {
@@ -255,6 +256,8 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	}
 	
 	public void clickTechnicianToolbarIcon() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("technician")));
 		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("technician")).click();
 	}
 	
