@@ -26,6 +26,11 @@ public class RegularPriceMatrixScreenSteps {
             RegularVehiclePartsScreenSteps.selectVehiclePartAndSetData(priceMatrixScreenData.getVehiclePartData());
     }
 
+    public static void savePriceMatrix() {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.clickSave();
+    }
+
 
 
 }

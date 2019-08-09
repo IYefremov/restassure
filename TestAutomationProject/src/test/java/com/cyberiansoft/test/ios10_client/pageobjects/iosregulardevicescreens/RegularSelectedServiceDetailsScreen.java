@@ -80,8 +80,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickVehiclePartsCell() {
-		new WebDriverWait(appiumdriver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("ClarificationBox"))).
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ClarificationBox_VehiclePartSelector")));
+		appiumdriver.findElementByAccessibilityId("ClarificationBox_VehiclePartSelector").
 				findElement(MobileBy.AccessibilityId("custom detail button")).click();
 	}
 
@@ -96,9 +97,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public String getVehiclePartValue() {
-		WebElement par = getTableParentCell("Vehicle Part");	
-		return par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
-		//return vehiclepartsfld.getAttribute("name");
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement vehiclePartRow = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ClarificationBox_VehiclePartSelector")));
+		return vehiclePartRow.getAttribute("label");
 	}
 
 	public String getTechniciansValue() {
@@ -546,7 +547,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickOperationCell() {
-		appiumdriver.findElementByAccessibilityId("Operation").click();
+		appiumdriver.findElementByAccessibilityId("ClarificationBox_PanelPartSelector").click();
 	}
 
 	public void selectLaborServicePanel(String panelName) {
