@@ -5,27 +5,29 @@
       "description": "86706",
       "matrixServiceDataList": [
         {
-          "serviceName": "rozstalnoy_enable_matrix",
-          "vehicle": "Rozstalnoy_vehicle",
-          "size": "DIME",
-          "severity": "LIGHT",
-          "partServiceDataList": [
-            {
-              "serviceName": "roz_part_full_cat",
-              "partPosition": "Main"
-            },
-            {
-              "serviceName": "rozstalnoy_enable_parts",
-              "category": "Brake",
-              "subCategory": "Control Cables",
-              "partName": {
-                "partNameList": [
-                  "Parking Brake Cable Lever"
-                ],
-                "isMultiSelect": true
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "LIGHT",
+            "partServicesList": [
+              {
+                "serviceName": "roz_part_full_cat",
+                "partPosition": "Main"
+              },
+              {
+                "serviceName": "rozstalnoy_enable_parts",
+                "category": "Brake",
+                "subCategory": "Control Cables",
+                "partName": {
+                  "partNameList": [
+                    "Parking Brake Cable Lever"
+                  ],
+                  "isMultiSelect": true
+                }
               }
-            }
-          ]
+            ]
+          }
         }
       ]
     }
@@ -36,38 +38,40 @@
       "description": "89701 89703 89704 89708",
       "matrixServiceDataList": [
         {
-          "serviceName": "rozstalnoy_enable_matrix",
-          "vehicle": "Rozstalnoy_vehicle",
-          "size": "QTR",
-          "severity": "HEAVY",
-          "partServiceDataList": [
-            {
-              "serviceName": "roz_part_full_cat",
-              "partPosition": "Main"
-            },
-            {
-              "serviceName": "rozstalnoy_enable_parts",
-              "category": "Brake",
-              "subCategory": "Control Cables",
-              "partName": {
-                "partNameList": [
-                  "Parking Brake Cable Lever"
-                ],
-                "isMultiSelect": true
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "QTR",
+            "vehiclePartSeverity": "HEAVY",
+            "partServicesList": [
+              {
+                "serviceName": "roz_part_full_cat",
+                "partPosition": "Main"
+              },
+              {
+                "serviceName": "rozstalnoy_enable_parts",
+                "category": "Brake",
+                "subCategory": "Control Cables",
+                "partName": {
+                  "partNameList": [
+                    "Parking Brake Cable Lever"
+                  ],
+                  "isMultiSelect": true
+                }
+              },
+              {
+                "serviceName": "rozstalnoy_enable_parts",
+                "category": "Engine",
+                "subCategory": "Filters",
+                "partName": {
+                  "partNameList": [
+                    "Engine Oil Filter Bracket"
+                  ],
+                  "isMultiSelect": false
+                }
               }
-            },
-            {
-              "serviceName": "rozstalnoy_enable_parts",
-              "category": "Engine",
-              "subCategory": "Filters",
-              "partName": {
-                "partNameList": [
-                  "Engine Oil Filter Bracket"
-                ],
-                "isMultiSelect": false
-              }
-            }
-          ]
+            ]
+          }
         }
       ]
     }

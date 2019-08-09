@@ -33,7 +33,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
     public void userCanChangePartServiceValuesAndSaveThem(String rowID,
                                                           String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<PartServiceData> partServiceData = workOrderData.getPartServiceList();
+        List<PartServiceData> partServiceData = workOrderData.getPartServiceDataList();
         PartServiceData basicPartService = partServiceData.get(0);
         PartServiceData editedPartService = partServiceData.get(1);
 
@@ -50,6 +50,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.closeServiceDetailsScreen();
         inspectionId = InspectionSteps.saveInspection();
+        SearchSteps.textSearch(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -67,7 +68,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
     public void userCanEditPartService(String rowID,
                                        String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<PartServiceData> partServiceData = workOrderData.getPartServiceList();
+        List<PartServiceData> partServiceData = workOrderData.getPartServiceDataList();
         PartServiceData basicPartService = partServiceData.get(0);
         PartServiceData editedPartService = partServiceData.get(1);
 
@@ -76,7 +77,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartService.getServiceName());
         PartServiceSteps.selectPartService(basicPartService);
-        PartServiceSteps.confirmPartInfo();
+        PartServiceSteps.acceptDetailsScreen();
         inspectionId = InspectionSteps.saveInspection();
         SearchSteps.searchByText(inspectionId);
         MonitorSteps.openMenu(inspectionId);
@@ -104,7 +105,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
     public void userCantAddPartServiceWithoutSelectedPartName(String rowID,
                                                               String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<PartServiceData> partServiceData = workOrderData.getPartServiceList();
+        List<PartServiceData> partServiceData = workOrderData.getPartServiceDataList();
         PartServiceData basicPartService = partServiceData.get(0);
 
         HomeScreenSteps.openCreateMyInspection();
@@ -128,7 +129,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
     public void userCantEditPreselectedValues(String rowID,
                                               String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<PartServiceData> partServiceData = workOrderData.getPartServiceList();
+        List<PartServiceData> partServiceData = workOrderData.getPartServiceDataList();
         PartServiceData basicPartService = partServiceData.get(0);
 
         HomeScreenSteps.openCreateMyInspection();

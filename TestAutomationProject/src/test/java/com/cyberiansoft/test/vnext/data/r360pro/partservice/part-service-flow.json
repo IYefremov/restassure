@@ -3,7 +3,7 @@
     {
       "rowID": "userCanChangePartServiceValuesAndSaveThem.01",
       "description": "89596",
-      "partServiceList": [
+      "partServiceDataList": [
         {
           "serviceName": "Anastasia Labor parts (required + prefix)",
           "category": "Brake",
@@ -21,11 +21,10 @@
           "subCategory": "Filters",
           "partName": {
             "partNameList": [
-              "Engine Oil Filter"
+              "Engine Oil Filter Kit"
             ],
             "isMultiSelect": false
           },
-          "partPosition": "Main",
           "servicePrice": "100"
         }
       ]
@@ -35,18 +34,17 @@
     {
       "rowID": "userCanEditPartService.01",
       "description": "89601",
-      "partServiceList": [
+      "partServiceDataList": [
         {
           "serviceName": "Anastasia Labor parts (required + prefix)",
           "category": "Engine",
           "subCategory": "Filters",
           "partName": {
             "partNameList": [
-              "Engine Oil Filter"
+              "Engine Oil Filter Kit"
             ],
-            "isMultiSelect": true
+            "isMultiSelect": false
           },
-          "partPosition": "Main",
           "servicePrice": "100"
         },
         {
@@ -67,18 +65,17 @@
     {
       "rowID": "userCantAddPartServiceWithoutSelectedPartName.01",
       "description": "89647",
-      "partServiceList": [
+      "partServiceDataList": [
         {
           "serviceName": "rozstalnoy_enable_parts",
           "category": "Engine",
           "subCategory": "Filters",
           "partName": {
             "partNameList": [
-              "Engine Oil Filter"
+              "Engine Oil Filter Kit"
             ],
-            "isMultiSelect": true
-          },
-          "partPosition": "Main"
+            "isMultiSelect": false
+          }
         }
       ]
     }
@@ -87,7 +84,7 @@
     {
       "rowID": "userCantEditPreselectedValues.01",
       "description": "89655 89660 89662",
-      "partServiceList": [
+      "partServiceDataList": [
         {
           "serviceName": "roz_part_with_categories",
           "category": "Engine",

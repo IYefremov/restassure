@@ -98,6 +98,6 @@ public class VNextProTestCasesDataPaths {
     }
 
     public String getPartServiceMatrixCasesDataPath() {
-        return props.getProperty("part.service.flow");
+        return props.getProperty("part.service.matrix");
     }
 }
