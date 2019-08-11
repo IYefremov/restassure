@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
-import com.cyberiansoft.test.dataclasses.partservice.MatrixServiceData;
+import com.cyberiansoft.test.dataclasses.MatrixServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.vnext.enums.partservice.PartServiceWizardScreen;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
@@ -9,41 +10,45 @@ import com.cyberiansoft.test.vnext.interactions.MatrixServicePdrScreenInteractio
 
 public class MatrixServiceSteps {
     public static void selectMatrixService(MatrixServiceData matrixServiceData) {
-        AvailableServicesScreenSteps.openServiceDetails(matrixServiceData.getServiceName());
+        AvailableServicesScreenSteps.openServiceDetails(matrixServiceData.getMatrixServiceName());
         MatrixServiceSteps.selectServiceDetails(matrixServiceData);
     }
 
     public static void selectServiceDetails(MatrixServiceData matrixServiceData) {
-        if (matrixServiceData.getVehicle() != null)
+        VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        if (vehiclePartData.getVehiclePartName() != null)
             MatrixServiceSteps.selectVehicle(matrixServiceData);
-        if (matrixServiceData.getSize() != null)
+        if (vehiclePartData.getVehiclePartSize() != null)
             MatrixServiceSteps.selectSize(matrixServiceData);
-        if (matrixServiceData.getSeverity() != null)
+        if (vehiclePartData.getVehiclePartSeverity() != null)
             MatrixServiceSteps.selectSeverity(matrixServiceData);
     }
 
     public static void selectVehicle(MatrixServiceData matrixServiceData) {
-        ListSelectPageInteractions.waitListPageReady(matrixServiceData.getServiceName());
-        ListSelectPageInteractions.selectItem(matrixServiceData.getVehicle());
+        VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        ListSelectPageInteractions.waitListPageReady(matrixServiceData.getMatrixServiceName());
+        ListSelectPageInteractions.selectItem(vehiclePartData.getVehiclePartName());
     }
 
     public static void selectSize(MatrixServiceData matrixServiceData) {
-        ListSelectPageInteractions.waitListPageReady(matrixServiceData.getVehicle());
+        VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        ListSelectPageInteractions.waitListPageReady(vehiclePartData.getVehiclePartName());
         MatrixServicePdrScreenInteractions.openSize();
         ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.SIZE.getValue());
-        MatrixServicePdrScreenInteractions.selectSize(matrixServiceData.getSize());
+        MatrixServicePdrScreenInteractions.selectSize(vehiclePartData.getVehiclePartSize());
     }
 
     public static void selectSeverity(MatrixServiceData matrixServiceData) {
-        ListSelectPageInteractions.waitListPageReady(matrixServiceData.getVehicle());
+        VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        ListSelectPageInteractions.waitListPageReady(vehiclePartData.getVehiclePartName());
         MatrixServicePdrScreenInteractions.openSeverity();
         ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.SEVERITY.getValue());
-        MatrixServicePdrScreenInteractions.selectSeverity(matrixServiceData.getSeverity());
+        MatrixServicePdrScreenInteractions.selectSeverity(vehiclePartData.getVehiclePartSeverity());
     }
 
-    public static void selectPartServiceInsideMatrixService(PartServiceData partService) {
-        MatrixServiceDetailsScreenInteractions.selectService(partService.getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partService);
+    public static void selectPartServiceInsideMatrixService(PartServiceData vehiclePartData) {
+        MatrixServiceDetailsScreenInteractions.selectService(vehiclePartData.getServiceName());
+        PartServiceSteps.selectpartServiceDetails(vehiclePartData);
         PartServiceSteps.acceptDetailsScreen();
     }
 

@@ -46,6 +46,7 @@ public class ServiceData {
     @JsonProperty("serviceNewTechnicians")
     List<ServiceTechnician> serviceNewTechnicians;
 
+
     public ServiceStatus getServiceStatus() {
         return ServiceStatus.getStatus(serviceStatus);
     }

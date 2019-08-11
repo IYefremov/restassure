@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.partservice;
 
+import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
-import com.cyberiansoft.test.dataclasses.partservice.MatrixServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
@@ -31,17 +31,18 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestCaseTeamEditionRegi
     public void userCanCreateInspectionWithPartsMatrixService(String rowID,
                                                               String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
         List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
         MatrixServiceData basicPartsServiceMatrixService = matrixServiceData.get(0);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SearchSteps.textSearch(basicPartsServiceMatrixService.getServiceName());
+        SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
-        basicPartsServiceMatrixService.getPartServiceDataList().forEach(MatrixServiceSteps::selectPartServiceInsideMatrixService);
+        basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(MatrixServiceSteps::selectPartServiceInsideMatrixService);
         MatrixServiceSteps.switchToSelectedServices();
-        basicPartsServiceMatrixService.getPartServiceDataList().forEach(serviceData -> MatrixServiceDetailsValidations.validateServiceSelected(serviceData.getServiceName()));
+        basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(serviceData -> MatrixServiceDetailsValidations.validateServiceSelected(serviceData.getServiceName()));
         MatrixServiceDetailsValidations.validateMatrixServiceDetails(basicPartsServiceMatrixService);
         ScreenNavigationSteps.pressBackButton();
         MatrixServiceSteps.acceptDetailsScreen();
@@ -61,12 +62,12 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestCaseTeamEditionRegi
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails(basicPartsServiceMatrixService.getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectVehicle(basicPartsServiceMatrixService);
         MatrixServiceSteps.selectSize(basicPartsServiceMatrixService);
         MatrixServiceSteps.selectSeverity(basicPartsServiceMatrixService);
         MatrixServiceSteps.switchToSelectedServices();
-        MatrixServiceSteps.openPartServiceDetails(basicPartsServiceMatrixService.getPartServiceDataList().get(0));
+        MatrixServiceSteps.openPartServiceDetails(basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().get(0));
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.CATEGORY);
         PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.SUB_CATEGORY);
@@ -74,9 +75,9 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestCaseTeamEditionRegi
         PartInfoScreenValidations.fieldShouldBeReadonly(false, PartInfoScreenField.PART_POSITION);
         PartServiceSteps.acceptDetailsScreen();
         PartServiceSteps.confirmPartInfo();
-        MatrixServiceSteps.openPartServiceDetails(basicPartsServiceMatrixService.getPartServiceDataList().get(1));
+        MatrixServiceSteps.openPartServiceDetails(basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().get(1));
         ServiceDetailsScreenSteps.openPartServiceDetails();
-        PartServiceSteps.changeCategory(basicPartsServiceMatrixService.getPartServiceDataList().get(2));
+        PartServiceSteps.changeCategory(basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().get(2));
         PartServiceSteps.acceptDetailsScreen();
         PartServiceSteps.confirmPartInfo();
         ScreenNavigationSteps.pressBackButton();
@@ -86,13 +87,13 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestCaseTeamEditionRegi
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails(basicPartsServiceMatrixService.getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectVehicle(basicPartsServiceMatrixService);
         MatrixServiceDetailsValidations.validateMatrixServiceDetails(basicPartsServiceMatrixService);
         MatrixServiceSteps.switchToSelectedServices();
-        MatrixServiceSteps.openPartServiceDetails(basicPartsServiceMatrixService.getPartServiceDataList().get(2));
+        MatrixServiceSteps.openPartServiceDetails(basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().get(2));
         ServiceDetailsScreenSteps.openPartServiceDetails();
-        PartInfoScreenValidations.validatePartInfo(basicPartsServiceMatrixService.getPartServiceDataList().get(2));
+        PartInfoScreenValidations.validatePartInfo(basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().get(2));
         PartServiceSteps.acceptDetailsScreen();
         PartServiceSteps.confirmPartInfo();
         ScreenNavigationSteps.pressBackButton();

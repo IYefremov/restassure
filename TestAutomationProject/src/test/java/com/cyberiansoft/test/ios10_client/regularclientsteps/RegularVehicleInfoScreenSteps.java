@@ -90,6 +90,7 @@ public class RegularVehicleInfoScreenSteps {
 
     public static String getInspectionNumber() {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.waitVehicleScreenLoaded();
         return vehicleScreen.getInspectionNumber();
     }
 

@@ -45,6 +45,10 @@ public class WorkOrderData {
     @JsonProperty("matrixService")
     com.cyberiansoft.test.dataclasses.MatrixServiceData matrixService;
 
+    @Getter
+    @JsonProperty("matrixServiceDataList")
+    List<com.cyberiansoft.test.dataclasses.MatrixServiceData> matrixServiceDataList;
+
     @JsonProperty("taxService")
     TaxServiceData taxService;
 
@@ -118,16 +122,12 @@ public class WorkOrderData {
     Map<String, String> technicianSplitData;
 
     @Getter
-    @JsonProperty("partServiceList")
-    List<PartServiceData> partServiceList;
-
-    @Getter
-    @JsonProperty("matrixServiceDataList")
-    List<com.cyberiansoft.test.dataclasses.partservice.MatrixServiceData> matrixServiceDataList;
-
-    @Getter
     @JsonProperty("servicesScreen")
     ServicesScreenData servicesScreen;
+
+    @Getter
+    @JsonProperty("partServiceDataList")
+    private List<PartServiceData> partServiceDataList;
 
     public String getWorkOrderType() {
         return workOrderType;

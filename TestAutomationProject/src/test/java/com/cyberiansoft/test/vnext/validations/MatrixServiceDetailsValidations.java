@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnext.validations;
 
-import com.cyberiansoft.test.dataclasses.partservice.MatrixServiceData;
+
+import com.cyberiansoft.test.dataclasses.MatrixServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.vnext.screens.MatrixServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.springframework.util.Assert;
@@ -14,11 +16,12 @@ public class MatrixServiceDetailsValidations {
 
     public static void validateMatrixServiceDetails(MatrixServiceData matrixServiceData) {
         MatrixServiceDetailsScreen matrixServiceDetailsScreen = new MatrixServiceDetailsScreen();
-        if (matrixServiceData.getSize() != null)
-            WaitUtils.assertEquals(matrixServiceData.getSize(), matrixServiceDetailsScreen.getSizeField().getAttribute("value"));
-        if (matrixServiceData.getSeverity() != null)
-            WaitUtils.assertEquals(matrixServiceData.getSeverity(), matrixServiceDetailsScreen.getSeverityField().getAttribute("value"));
-        if (matrixServiceData.getPrice() != null)
-            WaitUtils.assertEquals(matrixServiceData.getPrice(), matrixServiceDetailsScreen.getPriceField().getAttribute("value"));
+        VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        if (vehiclePartData.getVehiclePartSize() != null)
+            WaitUtils.assertEquals(vehiclePartData.getVehiclePartSize(), matrixServiceDetailsScreen.getSizeField().getAttribute("value"));
+        if (vehiclePartData.getVehiclePartSeverity() != null)
+            WaitUtils.assertEquals(vehiclePartData.getVehiclePartSeverity(), matrixServiceDetailsScreen.getSeverityField().getAttribute("value"));
+        if (vehiclePartData.getVehiclePartPrice() != null)
+            WaitUtils.assertEquals(vehiclePartData.getVehiclePartPrice(), matrixServiceDetailsScreen.getPriceField().getAttribute("value"));
     }
 }

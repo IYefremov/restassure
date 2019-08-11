@@ -22,5 +22,4 @@ public class MatrixServiceData {
 
     @JsonProperty("vehiclePartData")
     VehiclePartData vehiclePartData;
-
 }
