@@ -20,4 +20,9 @@ public class RegularWorkOrdersSteps {
         RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
 
+    public static void cancelWorkOrder() {
+        RegularWizardScreensSteps.cancelWizard();
+        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
+    }
+
 }

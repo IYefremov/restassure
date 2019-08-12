@@ -27,6 +27,8 @@ public class RegularPriceMatrixScreenSteps {
     }
 
     public static void savePriceMatrix() {
+        RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
+        priceMatrixScreen.waitPriceMatrixScreenLoad();
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
         baseWizardScreen.clickSave();
     }

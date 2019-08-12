@@ -16,6 +16,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularInspectionsSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyWorkOrdersSteps;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularWizardScreensSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularWorkOrdersSteps;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspectionsTypes;
@@ -509,8 +510,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertEquals(inpnumber.substring(0, 1), "E");
 			Assert.assertEquals(wonumber.substring(0, 1), "O");
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-			RegularWorkOrdersSteps.saveWorkOrder();
-
+			RegularWizardScreensSteps.clickSaveButton();
+			myinspectionsscreen.waitMyInspectionsScreenLoaded();
 			myinspectionsscreen.clickHomeButton();
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 			myworkordersscreen.woExists(wonumber);
@@ -688,7 +689,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 			Assert.assertEquals(wonumber.substring(0, 1), "O");
             Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-			RegularWorkOrdersSteps.saveWorkOrder();
+			RegularWizardScreensSteps.clickSaveButton();
 			myinspectionsscreen.showWorkOrdersForInspection(inspNumber);
 			vehiclescreen = new RegularVehicleScreen();
 			Assert.assertEquals(vehiclescreen.getWorkOrderNumber(), wonumber);
@@ -1998,7 +1999,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			
 			ordermonitorscreen.clickServicesButton();
-			servicesscreen = new RegularServicesScreen();
+			servicesscreen.waitServicesScreenLoaded();
 			servicesscreen.selectServicePanel(UtilConstants.PDR_SERVICE);
 			selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 			selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice4(testcaserow));
@@ -2971,6 +2972,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularWorkOrdersSteps.saveWorkOrder();
 			RegularMyWorkOrdersSteps.clickCopyVehicleMenu(workOrderNumber);
 			myworkordersscreen.selectWorkOrderType(DentWizardWorkOrdersTypes.carmaxworkordertype);
+			vehiclescreen.waitVehicleScreenLoaded();
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			RegularWorkOrdersSteps.saveWorkOrder();
 			myworkordersscreen.clickHomeButton();

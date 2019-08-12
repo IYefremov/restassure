@@ -278,6 +278,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void showWorkOrdersForInspection(String inspection) {
+		waitMyInspectionsScreenLoaded();
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.AccessibilityId(inspection)))).click();
 		clickShowWorkOrdersButton();
