@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -20,11 +21,11 @@ public class RegularSelectEnvironmentScreen extends iOSRegularBaseScreen {
 	public RegularSelectEnvironmentScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
-		wait.until(ExpectedConditions.visibilityOf(environmentspopup));
 	}
 	
 	public LoginScreen selectEnvironment(String environmentName) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Select Environment")));
 		appiumdriver.findElementByAccessibilityId(environmentName).click();
 		return new LoginScreen();
 	}

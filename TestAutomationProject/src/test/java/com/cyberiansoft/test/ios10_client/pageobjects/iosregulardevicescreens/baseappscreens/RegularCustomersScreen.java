@@ -88,8 +88,6 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customerName);
 		appiumdriver.findElementByAccessibilityId(customerName).click();
 		WaitUtils.waitUntilElementInvisible(MobileBy.AccessibilityId("Customer changing..."));
-		//wait = new WebDriverWait(appiumdriver, 60);
-		//wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Customer changing...")));
 	}
 	
 	public void selectOnlineCustomer(String customer) {

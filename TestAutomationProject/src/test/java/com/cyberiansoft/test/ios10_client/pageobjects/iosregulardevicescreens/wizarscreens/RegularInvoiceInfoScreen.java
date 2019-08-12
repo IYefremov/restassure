@@ -115,6 +115,7 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	}
 
 	public String getOrderSumm() {
+		waitInvoiceInfoScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	
@@ -130,6 +131,7 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	}
 	
 	public String getInvoiceNumber() {
+		waitInvoiceInfoScreenLoaded();
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByIosNsPredicate("name CONTAINS 'I-'").getAttribute("value");
 	}

@@ -86,6 +86,7 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getVehiclePartPriceValue(String pricematrix) {
+		waitPriceMatrixScreenLoad();
 		return appiumdriver.findElementByAccessibilityId("PriceMatrixVehiclePartList").
 				findElement(MobileBy.AccessibilityId(pricematrix)).findElements(MobileBy.className("XCUIElementTypeStaticText")).
 				get(1).getText();
@@ -119,10 +120,6 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("SubtotalAmount")));
 		return appiumdriver.findElement(MobileBy.AccessibilityId("SubtotalAmount")).getAttribute("value");
-	}
-	
-	public WebElement getTableParentCell(String cellname) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 
 }

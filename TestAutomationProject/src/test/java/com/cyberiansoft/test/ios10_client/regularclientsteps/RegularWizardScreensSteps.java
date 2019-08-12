@@ -16,6 +16,11 @@ public class RegularWizardScreensSteps {
         baseWizardScreen.clickFinalButton();
     }
 
+    public static void clickDraftButton() {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.clickDraftButton();
+    }
+
     public static void cancelWizard() {
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
         baseWizardScreen.clickCancelWizard();
