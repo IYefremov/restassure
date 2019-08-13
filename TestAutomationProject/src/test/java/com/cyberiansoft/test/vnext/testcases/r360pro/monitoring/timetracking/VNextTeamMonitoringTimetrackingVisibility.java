@@ -43,7 +43,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void nonLocationManagerCannotStartWO(String rowID,
                                                 String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -62,7 +62,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         GeneralSteps.logIn(employee);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void anotherLocationManagerCanSeeStartOnStartedService(String rowID,
                                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
