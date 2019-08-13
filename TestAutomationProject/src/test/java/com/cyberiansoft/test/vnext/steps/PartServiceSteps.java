@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.partservice.PartName;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.enums.partservice.PartServiceWizardScreen;
+import com.cyberiansoft.test.vnext.interactions.LaborServiceScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.PartInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.PartInfoScreen;
@@ -62,5 +63,9 @@ public class PartServiceSteps {
         PartInfoScreen partInfoScreen = new PartInfoScreen();
         WaitUtils.click(partInfoScreen.getSaveButton());
         WaitUtils.elementShouldBeVisible(partInfoScreen.getRootElement(), false);
+    }
+
+    public static void addLaborService() {
+        LaborServiceScreenInteractions.clickAddlaborService();
     }
 }

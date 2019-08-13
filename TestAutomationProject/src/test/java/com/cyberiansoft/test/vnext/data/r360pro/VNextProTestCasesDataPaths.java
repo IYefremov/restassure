@@ -100,4 +100,8 @@ public class VNextProTestCasesDataPaths {
     public String getPartServiceMatrixCasesDataPath() {
         return props.getProperty("part.service.matrix");
     }
+
+    public String getPartServiceLaborCasesDataPath() {
+        return props.getProperty("part.service.labor");
+    }
 }
