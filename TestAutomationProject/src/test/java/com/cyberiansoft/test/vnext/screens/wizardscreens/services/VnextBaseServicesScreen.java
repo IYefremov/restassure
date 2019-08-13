@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Getter
 public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
 
-    @FindBy(xpath = "//div[@data-page='services-list']")
+    @FindBy(xpath = "//div[contains(@data-page,'list')]")
     private WebElement servicesscreen;
 
 
@@ -24,7 +24,7 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='services-list']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@data-page,'list')]")));
         BaseUtils.waitABit(2000);
         if (checkHelpPopupPresence())
             if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
@@ -39,7 +39,7 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
         wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='all-services' and @data-view-mode='available']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class,'services-list') and @data-view-mode='available']")));
         return new VNextAvailableServicesScreen(appiumdriver);
     }
 

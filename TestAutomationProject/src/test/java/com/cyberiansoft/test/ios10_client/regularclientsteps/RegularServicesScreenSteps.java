@@ -95,6 +95,7 @@ public class RegularServicesScreenSteps {
         }
         if (damageData.getMatrixService() != null) {
             selectMatrixServiceData(damageData.getMatrixService());
+            RegularPriceMatrixScreenSteps.savePriceMatrix();
         }
 
     }

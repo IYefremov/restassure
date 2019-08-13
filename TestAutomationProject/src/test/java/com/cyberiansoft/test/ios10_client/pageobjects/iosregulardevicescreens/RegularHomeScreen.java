@@ -143,7 +143,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 
 	public RegularSettingsScreen clickSettingsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Service Requests")));
 		swipeScreenUp();
 		appiumdriver.findElementByAccessibilityId("Settings").click();
 		return new RegularSettingsScreen();

@@ -1,0 +1,22 @@
+{
+  "userCanAddPartServiceAndAssignThatToLaborService": [
+    {
+      "rowID": "userCanAddPartServiceAndAssignThatToLaborService.01",
+      "description": "TFS_ID: 89723",
+      "partServiceDataList": [
+        {
+          "serviceName": "roz_part_full_cat",
+          "partPosition": "Main",
+          "laborServiceDataList": [
+            {
+              "serviceName": "rozstalnoy_enable_labor"
+            },
+            {
+              "serviceName": "rozstalnoy_disable_labor"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

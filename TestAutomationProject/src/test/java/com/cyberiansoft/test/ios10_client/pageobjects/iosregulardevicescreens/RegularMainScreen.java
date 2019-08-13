@@ -29,9 +29,6 @@ public class RegularMainScreen extends iOSBaseScreen {
 	@iOSXCUITFindBy(accessibility = "OK")
     private IOSElement loginbtn;
 
-	@iOSXCUITFindBy(xpath = "//UIANavigationBar[1]/UIAButton[@name='Search']")
-    private IOSElement searchbtn;
-
 	@iOSXCUITFindBy(accessibility = "Licenses")
     private IOSElement licenses;
 
@@ -39,10 +36,8 @@ public class RegularMainScreen extends iOSBaseScreen {
 	private IOSElement loginView;
 
 	public RegularMainScreen() {
+		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Login")));
 	}
 	
 	public void updateDatabase() {
@@ -66,6 +61,8 @@ public class RegularMainScreen extends iOSBaseScreen {
 	}
 
 	public void selectEmployee(String employeeName) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("LoginView")));
 		WaitUtils.waitUntilElementIsClickable(loginView);
 		if (!loginView.findElementByAccessibilityId(employeeName).isDisplayed()) {
 			SwipeUtils.swipeToElement(loginView.findElementByAccessibilityId(employeeName));

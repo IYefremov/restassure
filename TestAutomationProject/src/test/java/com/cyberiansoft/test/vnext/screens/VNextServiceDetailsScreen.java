@@ -39,6 +39,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 
 	@FindBy(xpath = "//*[@action='part-info']")
 	private WebElement partServiceDetailButton;
+
+	@FindBy(xpath = "//*[@action='labor-services']")
+    private WebElement laborServicesButton;
 	
 	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);

@@ -50,6 +50,7 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	}
 	
 	public boolean checkApproveAndCreateInvoiceExists() {
+		waitWorkOrderSummaryScreenLoad();
 		return elementExists(approveandcreateinvoicechekbox);
 	}
 	
@@ -100,6 +101,7 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void setTotalSale(String totalsale) {
+		waitWorkOrderSummaryScreenLoad();
 		setTotalSaleWithoutHidingkeyboard(totalsale+"\n");
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Total Sale")));

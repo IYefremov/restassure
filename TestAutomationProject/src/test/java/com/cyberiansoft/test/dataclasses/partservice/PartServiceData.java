@@ -1,8 +1,11 @@
 package com.cyberiansoft.test.dataclasses.partservice;
 
+import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,4 +22,7 @@ public class PartServiceData {
     private String partPosition;
     @JsonProperty("servicePrice")
     private String servicePrice;
+    @JsonProperty("laborServiceDataList")
+    private List<LaborServiceData> laborServiceDataList;
+
 }

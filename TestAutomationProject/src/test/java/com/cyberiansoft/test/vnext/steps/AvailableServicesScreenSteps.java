@@ -27,7 +27,6 @@ public class AvailableServicesScreenSteps {
     public static void openServiceDetails(String serviceName) {
         AvailableServiceScreenInteractions.switchToAvailableServicesView();
         AvailableServiceScreenInteractions.openServiceDetails(serviceName);
-
     }
 
     public static void selectMatrixService(MatrixServiceData matrixServiceData) {

@@ -478,13 +478,12 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	//Service Parts /////////
 	
 	public String getServicePartValue() {
-		WebElement par = getTableParentCell("Part");
-		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")) .getAttribute("value");
+		return appiumdriver.findElementByAccessibilityId("ClarificationBox_PartSelector").findElement(By.xpath("//XCUIElementTypeStaticText[1]")) .getAttribute("value");
 	}
 	
 	public void clickServicePartCell() {
 		new WebDriverWait(appiumdriver, 10)
-		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByName("Part"))).click();
+		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByName("ClarificationBox_PartSelector"))).click();
 	}
 	
 	public void selectServicePartCategory(String categoryname) {

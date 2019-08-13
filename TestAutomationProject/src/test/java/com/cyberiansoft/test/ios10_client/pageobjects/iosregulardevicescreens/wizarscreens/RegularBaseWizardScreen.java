@@ -26,6 +26,11 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Final"))).click();
     }
 
+    public  void clickDraftButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Draft"))).click();
+    }
+
     public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType) {
         clickChangeScreen();
         appiumdriver.findElementByAccessibilityId(wizardScreenType.getDefaultScreenTypeName()).click();

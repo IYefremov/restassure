@@ -20,7 +20,7 @@ import java.util.List;
 
 public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
-    @FindBy(xpath = "//div[@data-page='services-list']")
+    @FindBy(xpath = "//div[contains(@class,'services-list')]")
     private WebElement servicesscreen;
 
     @FindBy(xpath = "//*[@action='add']")
@@ -145,7 +145,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
     public WebElement getServicesList() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-        return wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//*[@data-autotests-id='all-services']"))));
+        return wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//*[contains(@data-autotests-id,'list')]"))));
     }
 
     public List<WebElement> getServicesListItems() {

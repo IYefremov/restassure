@@ -1771,6 +1771,7 @@
           "serviceName": "Tax discount",
           "servicePrice": "$178.20"
         },
+        "workOrderTotalSale": "3",
         "workOrderPrice": "$3,742.10"
       }
     }
