@@ -52,7 +52,6 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         partName.setPartNameList(list);
         partName.setIsMultiSelect(true);
         partServiceData.setPartName(partName);
-        partServiceData.setPartPosition("Main");
         SearchSteps.textSearch(partServiceData.getServiceName());
         PartServiceSteps.selectPartService(partServiceData);
         PartServiceSteps.confirmPartInfo();
