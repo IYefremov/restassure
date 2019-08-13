@@ -55,6 +55,8 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='size']")));
 		tap(vehiclepartsizeselect);
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartsize + "')]")));
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartsize + "')]")));
 	}
 
@@ -62,6 +64,8 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='severity']")));
 		tap(vehiclepartseverityselect);
+		wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartseverity + "')]")));
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartseverity + "')]")));
 	}
 

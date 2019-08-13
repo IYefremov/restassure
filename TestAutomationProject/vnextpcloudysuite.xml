@@ -25,15 +25,6 @@
       <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionServicesTestCases">
       </class>
       <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionsNotesTestCases">
-      	<methods>  
-      	  <include name="testAddTextNotesForServiceInTheList" />
-      	  <include name="testSaveTextNoteOnTappingBackButtonEstimationLevel" />
-      	  <include name="testAddSeveralQuickNotesForServiceInTheList" />
-      	  <include name="testClearTextNotesForServiceInTheList" /> 
-      	  <include name="testSavePictureNoteFromGalleryOnTappingBackButtonEstimationLevel" />
-      	  <include name="testCreateInspectionWithMoneyServiceImageNotes" />
-          <include name="testCreateInspectionWithMatrixServicesImageNotes" />  
-      	</methods>
       </class>
      <class name="com.cyberiansoft.test.vnext.testcases.r360free.inspections.VNextInspectionsTestCases">
       </class>
