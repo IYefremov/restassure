@@ -15,6 +15,7 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.ServicePartSteps;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VisualInteriorScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
@@ -792,7 +793,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
-		myInspectionsScreen = new RegularMyInspectionsScreen();
+		myInspectionsScreen.waitMyInspectionsScreenLoaded();
 		myInspectionsScreen.clickHomeButton();
 	}
 	
@@ -1031,7 +1032,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServicesScreen = new RegularSelectedServicesScreen();
+		selectedServicesScreen.waitSelectedServicesScreenLoaded();
 		RegularWorkOrdersSteps.saveWorkOrder();
 		myWorkOrdersScreen.clickHomeButton();
 	}
@@ -1094,21 +1095,25 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickHomeButton();
 		homeScreen.clickMyWorkOrdersButton();
 		myWorkOrdersScreen.approveWorkOrder(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+		myWorkOrdersScreen.selectWorkOrderForEidt(workOrders.get(1));
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+		vehicleScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
+		RegularWorkOrdersSteps.saveWorkOrder();
 		myWorkOrdersScreen.clickHomeButton();
 		
 		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
 		myinvoicesscreen.selectInvoice(invoicenum);
 		myinvoicesscreen.clickEditPopup();
 		questionsScreen = new RegularQuestionsScreen();
-		questionsScreen.waitQuestionsScreenLoaded("Test Section");
+		questionsScreen.waitQuestionsScreenLoaded();
 		invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceInfoScreen.addWorkOrder(workOrders.get(1));
 		invoiceInfoScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, testCaseData.getInvoiceData().getInvoiceTotal()));
 		invoiceInfoScreen.swipeScreenLeft();
-		invoiceInfoScreen.clickCancelWizard();
+		questionsScreen.waitQuestionsScreenLoaded();
+		RegularWizardScreensSteps.cancelWizard();
 		myinvoicesscreen.clickHomeButton();
 	}
 
@@ -1181,6 +1186,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.selectServiceRequest(srnumber);
 		serviceRequestsScreen.selectCreateInspectionRequestAction();
         RegularVisualInteriorScreen visualInteriorScreen =  serviceRequestsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+        visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
 		visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.waitVehicleScreenLoaded();
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
@@ -2088,7 +2094,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(selectedServiceDetailsScreen.getServiceRateValue(workOrderData.getTaxServiceData().getServiceRateData()), "%" + workOrderData.getTaxServiceData().getServiceRateData().getServiceRateValue());
 		Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsTotalValue(), workOrderData.getTaxServiceData().getTaxServiceTotal());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServicesScreen = new RegularSelectedServicesScreen();
+		selectedServicesScreen.waitSelectedServicesScreenLoaded();
 		RegularWorkOrdersSteps.saveWorkOrder();
 		myWorkOrdersScreen.clickHomeButton();
 	}

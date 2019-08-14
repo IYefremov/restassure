@@ -14,6 +14,10 @@ public class RegularServiceTypesScreen extends iOSRegularBaseScreen {
 
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+
+    }
+
+    public void waitServiceTypesScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Service Types")));
     }

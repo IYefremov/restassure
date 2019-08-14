@@ -19,12 +19,12 @@ public class RegularSelectWorkOrderTypeScreen extends iOSRegularBaseScreen {
 	public RegularSelectWorkOrderTypeScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'")));
+
 	}
 	
 	public <T extends IBaseWizardScreen> T selectWorkOrderType(WorkOrdersTypes workordertype) {
-		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+		IOSElement wostable = (IOSElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'")));
 
 		if (!wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
 			swipeToElement(wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
