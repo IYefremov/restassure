@@ -287,15 +287,15 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
-			vehicleVINHistoryScreen.clickBackButton();
+			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+			//vehicleVINHistoryScreen.clickBackButton();
+			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 			servicesscreen.switchToAvalableServicesView();
 			servicesscreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
 			selectservicesscreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
-			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			workordersscreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
@@ -341,14 +341,14 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
-			vehicleVINHistoryScreen.clickBackButton();
+			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+			//vehicleVINHistoryScreen.clickBackButton();
+			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 			servicesscreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
 			selectservicesscreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
-			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			workordersscreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
