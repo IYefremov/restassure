@@ -143,19 +143,13 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         return servicesscreen.findElement(By.xpath(".//span[@id='total']")).getText().trim();
     }
 
-    public WebElement getServicesList() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-        return wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//*[contains(@data-autotests-id,'list')]"))));
-    }
-
     public List<WebElement> getServicesListItems() {
-        return getServicesList().findElements(By.xpath(".//div[@class='checkbox-item']"));
+        return allserviceslist.findElements(By.xpath(".//div[@class='checkbox-item']"));
     }
 
     public String getServiceListItemName(WebElement srvlistitem) {
         return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
     }
-
 
     public WebElement getServiceListItem(String servicename) {
         WebElement serviceListItem = null;
