@@ -1156,7 +1156,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehiclescreen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehiclescreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			questionsscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-			questionsscreen.waitQuestionsScreenLoaded(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+			questionsscreen.waitQuestionsScreenLoaded();
 			questionsscreen.clickSave();
 			String alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertTrue(

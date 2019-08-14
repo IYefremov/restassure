@@ -15,6 +15,10 @@ public class RegularPriceMatricesScreen extends iOSRegularBaseScreen {
     public RegularPriceMatricesScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+
+    }
+
+    public void waitPriceMatricesScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(appiumdriver,10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Price Matrices")));
     }
