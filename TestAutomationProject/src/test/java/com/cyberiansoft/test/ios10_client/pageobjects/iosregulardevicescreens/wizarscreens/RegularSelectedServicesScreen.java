@@ -28,10 +28,6 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     public RegularSelectedServicesScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("SelectedServicesView")));
-        wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("SelectedServicesView")));
     }
 
     public void waitSelectedServicesScreenLoaded() {

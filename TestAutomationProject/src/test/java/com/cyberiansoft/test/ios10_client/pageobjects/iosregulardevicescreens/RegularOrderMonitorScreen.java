@@ -68,6 +68,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	public RegularOrderMonitorScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+	}
+
+	public void waitOrderMonitorScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("MonitorOrderServicesList")));
 	}
