@@ -51,8 +51,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
-			vehicleVINHistoryScreen.clickBackButton();
+			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 
 			vehicleInfoScreen.saveWorkOrderViaMenu();
@@ -105,8 +105,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
-			vehicleVINHistoryScreen.clickBackButton();
+			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
@@ -162,8 +162,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 				VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
                 HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 				VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-				VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
-				vehicleVINHistoryScreen.clickBackButton();
+				//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+				//vehicleVINHistoryScreen.clickBackButton();
 				workOrdersMap.computeIfAbsent(workOrderData.getWorlOrderRetailCustomer().getFullName(), k -> new ArrayList<>()).add(vehicleInfoScreen.getNewInspectionNumber());
 				vehicleInfoScreen.saveWorkOrderViaMenu();
 			}
@@ -229,8 +229,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
-			vehicleVINHistoryScreen.clickBackButton();
+			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}

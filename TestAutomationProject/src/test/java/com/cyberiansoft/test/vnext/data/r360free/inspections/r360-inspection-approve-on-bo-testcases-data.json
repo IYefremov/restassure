@@ -6,7 +6,7 @@
       "description": "Test Case 64860:vNext mobile: Create Inspection with populated vehicle info for current day, Test Case 68994:R360: verify posibility to Approve New Inspection on BO",
       "vihicleInfo": {"vinNumber": "3N1AB7AP3HY327077", "vehicleMake" : "Nissan", "vehicleModel" : "Sentra", "vehicleYear" : "2017",
         "vehicleColor" : "Red", "mileage" : "123", "stockNumber" : "1234567", "roNumber" : "4567", "poNumber" : "987",
-        "licPlate" : "qwerty"
+        "licPlate" : "QWERTY"
       },
       "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company", "claimNumber" : "qwerty",
         "policyNumber" : "asd-2345", "deductible" : "123"
@@ -36,7 +36,7 @@
       "description": "Test Case 68995:R360: verify posibility to Decline New Inspection on BO",
       "vihicleInfo": {"vinNumber": "3N1AB7AP3HY327077", "vehicleMake" : "Nissan", "vehicleModel" : "Sentra", "vehicleYear" : "2017",
         "vehicleColor" : "Red", "mileage" : "123", "stockNumber" : "1234567", "roNumber" : "4567", "poNumber" : "987",
-        "licPlate" : "qwerty"
+        "licPlate" : "QWERTY"
       },
       "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company", "claimNumber" : "qwerty",
         "policyNumber" : "asd-2345", "deductible" : "123"

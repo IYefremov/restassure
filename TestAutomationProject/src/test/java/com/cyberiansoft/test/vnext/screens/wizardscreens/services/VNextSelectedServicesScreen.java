@@ -166,16 +166,6 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
                         getText().trim().equals(serviceName)).collect(Collectors.toCollection(ArrayList::new)).size();
     }
 
-    public String getSelectedPriceMatrixValueForPriceMatrixService(String matrixservicename) {
-        String pricematrixname = "";
-        WebElement servicerow = getSelectedServiceCell(matrixservicename);
-        if (servicerow != null)
-            pricematrixname = servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
-        else
-            Assert.assertTrue(false, "Can't find service: " + matrixservicename);
-        return pricematrixname;
-    }
-
     public VNextVehiclePartsScreen openSelectedMatrixServiceDetails(String matrixservicename) {
         WebElement servicerow = getSelectedServiceCell(matrixservicename);
         if (servicerow != null)
