@@ -138,24 +138,24 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
 
     public boolean isLocationExpanded() {
         try {
-            return waitShort.until(ExpectedConditions.visibilityOf(locationExpanded)).isDisplayed();
+            return WaitUtilsWebDriver.waitForVisibility(locationExpanded, 5).isDisplayed();
         } catch (Exception ignored) {
             return false;
         }
     }
 
     public int clearAndTypeLocation(String searchLocation) {
-        wait.until(ExpectedConditions.elementToBeClickable(locationSearchInput)).click();
-        final int locationsNum = wait.until(ExpectedConditions.visibilityOfAllElements(locationLabels)).size();
+        Utils.clickElement(locationSearchInput);
+        final int locationsNum = WaitUtilsWebDriver.waitForVisibilityOfAllOptions(locationLabels).size();
         clearAndType(locationSearchInput, searchLocation);
         return locationsNum;
     }
 
     public boolean isLocationSearched(String searchLocation) {
         try {
-            wait.until(ExpectedConditions.visibilityOf(locationExpanded));
+            WaitUtilsWebDriver.waitForVisibility(locationExpanded);
         } catch (Exception e) {
-            wait.until(ExpectedConditions.elementToBeClickable(locationName)).click();
+            Utils.clickElement(locationName);
         }
         final int locationsNum = clearAndTypeLocation(searchLocation);
         try {

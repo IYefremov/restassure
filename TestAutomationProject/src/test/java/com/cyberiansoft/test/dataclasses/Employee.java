@@ -29,6 +29,12 @@ public class Employee {
     @JsonProperty("employeeId")
     private String employeeId;
 
+    @JsonProperty("clientType")
+    private String clientType;
+
+    @JsonProperty("companyName")
+    private String companyName;
+
     public static Employee getEmployeeFromString(String stringEmployee) {
         Employee employee = new Employee();
         employee.setEmployeeFirstName(stringEmployee.split(" ")[0]);

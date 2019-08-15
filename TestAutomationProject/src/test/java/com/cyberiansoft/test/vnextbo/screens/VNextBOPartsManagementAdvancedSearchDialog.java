@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -329,53 +330,48 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
 
     private VNextBOPartsManagementAdvancedSearchDialog typeData(WebElement inputField, WebElement autoCompleteList, String data) {
         setData(inputField, data);
-        wait.until(ExpectedConditions.attributeToBe(autoCompleteList, "aria-hidden", "false"));
+        WaitUtilsWebDriver.waitForAttributeToBe(autoCompleteList, "aria-hidden", "false");
         return this;
     }
 
     private VNextBOPartsManagementAdvancedSearchDialog clickPhaseBox() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(phaseListBox)).click();
-        } catch (ElementClickInterceptedException e) {
-            waitABit(1500);
-            clickWithJS(phaseListBox);
-        }
+        Utils.clickElement(phaseListBox);
         waitABit(1000);
         return this;
     }
 
     private VNextBOPartsManagementAdvancedSearchDialog clickOrderedFromBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(orderedFromListBox)).click();
+        Utils.clickElement(orderedFromListBox);
         return this;
     }
 
     private VNextBOPartsManagementAdvancedSearchDialog clickWoTypeBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(woTypeListBox)).click();
+        Utils.clickElement(woTypeListBox);
         return this;
     }
 
     private VNextBOPartsManagementAdvancedSearchDialog selectPhase(String phase) {
-        selectOptionInDropDown(phaseDropDown, phaseListBoxOptions, phase);
+        Utils.selectOptionInDropDown(phaseDropDown, phaseListBoxOptions, phase, true);
         return this;
     }
 
     private VNextBOPartsManagementAdvancedSearchDialog selectOrderedFrom(String orderedFrom) {
-        selectOptionInDropDown(orderedFromDropDown, orderedFromListBoxOptions, orderedFrom);
+        Utils.selectOptionInDropDown(orderedFromDropDown, orderedFromListBoxOptions, orderedFrom, true);
         return this;
     }
 
     private VNextBOPartsManagementAdvancedSearchDialog selectWoType(String woType) {
-        selectOptionInDropDown(woTypeDropDown, woTypeListBoxOptions, woType);
+        Utils.selectOptionInDropDown(woTypeDropDown, woTypeListBoxOptions, woType, true);
         return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog selectCustomerNameFromBoxList(String customer) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) selectDataFromBoxList(
-                customerListBoxOptions, customerAutoCompleteList, customer);
+        Utils.selectOptionInDropDown(customerAutoCompleteList, customerListBoxOptions, customer, true);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog typeCustomerName(String customer) {
-        typeData(customerInputField, customerAutoCompleteList, customer);
+        Utils.clearAndType(customerInputField, customer);
         return this;
     }
 
@@ -404,43 +400,53 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setWoNum(String woNum) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(woNumInputField, woNum);
+       Utils.clearAndType(woNumInputField, woNum);
+       return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setStockNum(String stockNum) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(stockNumInputField, stockNum);
+        Utils.clearAndType(stockNumInputField, stockNum);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setETAFrom(String etaFrom) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(etaFromInputField, etaFrom);
+        Utils.clearAndType(etaFromInputField, etaFrom);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setETATo(String etaTo) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(etaToInputField, etaTo);
+        Utils.clearAndType(etaToInputField, etaTo);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setVin(String vinNum) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(vinInputField, vinNum);
+        Utils.clearAndType(vinInputField, vinNum);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setOEMNum(String oemNum) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(oemNumInputField, oemNum);
+        Utils.clearAndType(oemNumInputField, oemNum);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setNotes(String notes) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(notesInputField, notes);
+        Utils.clearAndType(notesInputField, notes);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setFromDate(String fromDate) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(fromDateInputField, fromDate);
+        Utils.clearAndType(fromDateInputField, fromDate);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setToDate(String toDate) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(toDateInputField, toDate);
+        Utils.clearAndType(toDateInputField, toDate);
+        return this;
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog setSearchName(String searchName) {
-        return (VNextBOPartsManagementAdvancedSearchDialog) setData(searchNameInputField, searchName);
+        Utils.clearAndType(searchNameInputField, searchName);
+        return this;
     }
 
     public boolean isCustomerDisplayed(String customer) {
@@ -448,7 +454,7 @@ public class VNextBOPartsManagementAdvancedSearchDialog extends VNextBOBaseWebPa
     }
 
     public VNextBOPartsManagementAdvancedSearchDialog clickAdvancedSearchHeader() {
-        wait.until(ExpectedConditions.elementToBeClickable(advancedSearchPartsOrderingHeader)).click();
+        Utils.clickElement(advancedSearchPartsOrderingHeader);
         waitABit(1000);
         return this;
     }

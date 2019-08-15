@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
-import com.cyberiansoft.test.dataclasses.vNextBO.clientData.ClientInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -22,8 +22,8 @@ public class VNextBOClientsData {
     @JsonProperty("notes")
     private String notes;
 
-    @JsonProperty("clientInfoData")
-    private ClientInfoData clientInfoData;
+    @JsonProperty("employee")
+    private Employee employee;
 
     @JsonProperty("accountInfoData")
     private AccountInfoData accountInfoData;

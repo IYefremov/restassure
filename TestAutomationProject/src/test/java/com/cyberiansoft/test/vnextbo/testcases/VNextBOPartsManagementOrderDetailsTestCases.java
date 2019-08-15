@@ -380,6 +380,9 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
                 "Tha Parts details panel hasn't been displayed");
 
-        data.getStatuses().forEach(status -> partsDetailsPanel.verifyStatusIsChanged(status));
+        data.getStatuses().forEach(status -> {
+            System.out.println(status);
+            partsDetailsPanel.verifyStatusIsChanged(status);
+        });
     }
 }

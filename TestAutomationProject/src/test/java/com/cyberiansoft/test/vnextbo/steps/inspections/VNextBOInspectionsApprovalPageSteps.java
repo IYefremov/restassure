@@ -15,9 +15,10 @@ public class VNextBOInspectionsApprovalPageSteps {
 
     private VNextBOInspectionsApprovalWebPage inspectionsApprovalWebPage;
     private VNextBOConfirmationDialog confirmationDialog;
+    private WebDriver driver;
 
     public VNextBOInspectionsApprovalPageSteps() {
-        WebDriver driver = DriverBuilder.getInstance().getDriver();
+        driver = DriverBuilder.getInstance().getDriver();
         inspectionsApprovalWebPage = PageFactory.initElements(driver, VNextBOInspectionsApprovalWebPage.class);
         confirmationDialog = PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
     }
@@ -35,12 +36,12 @@ public class VNextBOInspectionsApprovalPageSteps {
             WaitUtilsWebDriver.waitForLoading();
         }
 
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
+        return PageFactory.initElements(driver, VNextBOInspectionsApprovalWebPage.class);
     }
 
     private VNextBOInspectionsApprovalWebPage setPrintPageNotes(String notes) {
         Utils.clearAndType(inspectionsApprovalWebPage.getNotesTextArea(), notes);
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
+        return PageFactory.initElements(driver, VNextBOInspectionsApprovalWebPage.class);
     }
 
     public VNextBOInspectionsApprovalWebPage clickConfirmApprovePrintPageButtonIfDisplayed() {
@@ -49,7 +50,7 @@ public class VNextBOInspectionsApprovalPageSteps {
             WaitUtilsWebDriver.waitForLoading();
         }
         WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getInspectionStatus());
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
+        return PageFactory.initElements(driver, VNextBOInspectionsApprovalWebPage.class);
     }
 
     public String getPrintPageInspectionStatus() {

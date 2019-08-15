@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
@@ -604,8 +606,8 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
     private VNextBORepairOrderDetailsPage clickServiceStatusBox(String serviceId) {
         waitForLoading();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-order-service-id='" + serviceId
-                + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"))).click();
+        Utils.clickElement(By.xpath("//div[@data-order-service-id='" + serviceId
+                + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
         return this;
     }
 
@@ -850,11 +852,11 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
     private WebElement getPartActionElement(int index) {
         try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(partsActions));
             final WebElement partAction = partsActions.get(index);
-            wait.until(ExpectedConditions.elementToBeClickable(partAction)).click();
-            wait.until(ExpectedConditions.visibilityOf(partAction.findElement(By.xpath("./div[@class='drop checkout']"))));
-            return partAction;
+            System.out.println("element");
+            System.out.println(partsActions.get(index));
+            Utils.clickElement(partAction);
+            return WaitUtilsWebDriver.waitForVisibility(partAction.findElement(By.xpath("./div[@class='drop checkout']")));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -863,13 +865,16 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
     public WebElement clickPartActionsIconForPart(String part) {
         try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(partsNames));
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(partsNames, 10);
         } catch (Exception e) {
             Assert.fail("The Parts section is empty", e);
         }
         try {
-            final List<String> collect = partsNames.stream().map(WebElement::getText).collect(Collectors.toList());
-            return getPartActionElement(collect.indexOf(part));
+            final List<String> partsList = partsNames
+                    .stream()
+                    .map(WebElement::getText)
+                    .collect(Collectors.toList());
+            return getPartActionElement(partsList.indexOf(part));
         } catch (Exception e) {
             Assert.fail("The Part hasn't been displayed");
         }
@@ -877,9 +882,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     }
 
     public VNextBOOrderServiceNotesDialog openNotesDialogForPart(WebElement partsAction) {
-        wait.until(ExpectedConditions.elementToBeClickable(partsAction
-                .findElement(By.xpath(".//label[text()='Notes']"))))
-                .click();
+        Utils.clickElement(partsAction.findElement(By.xpath(".//label[text()='Notes']")));
         waitForLoading();
         return PageFactory.initElements(driver, VNextBOOrderServiceNotesDialog.class);
     }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.google.common.base.CharMatcher;
 import org.openqa.selenium.*;
@@ -321,12 +322,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public boolean isSavedSearchContainerDisplayed() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(savedSearchContainer)).isDisplayed();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        return Utils.isElementDisplayed(savedSearchContainer);
     }
 
     public boolean isDepartmentDropdownDisplayed() {

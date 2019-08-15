@@ -1161,7 +1161,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
                 "The audit logs tabs are not displayed");
 
-        auditLogDialog.clickAuditLogsTab(data.getAuditLogTabs()[2]);
+        auditLogDialog.clickAuditLogsServicesTab();
         final String servicesActivityTimeFirstRecord = auditLogDialog.getServicesActivityTimeFirstRecord();
         final String actualLocalDateTime = auditLogDialog.getActualLocalDateTime();
         final String actualLocalDateTimeMinusMinute = auditLogDialog.getActualLocalDateTimeMinusMinute();
@@ -1220,7 +1220,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
                 "The audit logs tabs are not displayed");
 
-        auditLogDialog.clickAuditLogsTab(data.getAuditLogTabs()[1]);
+        auditLogDialog.clickAuditLogsPhasesAndDepartmentsTab();
         final String departmentsLastRecord = auditLogDialog.getDepartmentsLastRecord();
         final String actualLocalDateTime = auditLogDialog.getActualLocalDateTime();
         final String actualLocalDateTimePlusMinute = auditLogDialog.getActualLocalDateTimePlusMinute();
@@ -1810,7 +1810,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
                 "The audit logs tabs are not displayed");
 
-        auditLogDialog.clickAuditLogsTab(data.getAuditLogTabs()[0]);
+        auditLogDialog.clickAuditLogsPhasesAndDepartmentsTab();
         final String phasesLastRecord = auditLogDialog.getPhasesLastRecord();
         Assert.assertTrue(!phasesLastRecord.isEmpty(), "The last phase record hasn't been displayed");
     }

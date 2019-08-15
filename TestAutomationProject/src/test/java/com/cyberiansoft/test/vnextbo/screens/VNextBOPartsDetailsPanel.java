@@ -267,8 +267,8 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     public void clickXIconForDeletingLabor() {
-        wait.until(ExpectedConditions.elementToBeClickable(xIconButton)).click();
-        wait.until(ExpectedConditions.invisibilityOf(xIconButton));
+        Utils.clickElement(xIconButton);
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(xIconButton);
     }
 
     public boolean isFirstPartLaborBlockExpanded() {
@@ -297,12 +297,7 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     private VNextBOPartsDetailsPanel clickStatusBox() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(serviceStatusListBox)).click();
-        } catch (ElementClickInterceptedException e) {
-            waitABit(1500);
-            clickWithJS(serviceStatusListBox);
-        }
+        Utils.clickElement(serviceStatusListBox);
         waitABit(1000);
         return this;
     }

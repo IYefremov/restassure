@@ -55,6 +55,9 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//ul[@data-template='order-service-note-template']/li")
     private List<WebElement> notesTextList;
 
+    @FindBy(xpath = "//div[@data-template='notesItem']//div[contains(@class, 'content__notes__note__text')]")
+    private List<WebElement> repairNotesTextList;
+
     public VNextBOOrderServiceNotesDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -161,6 +164,15 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
         try {
             wait.until(ExpectedConditions.visibilityOfAllElements(notesTextList)).size();
             return notesTextList.stream().map(WebElement::getText).collect(Collectors.toList());
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    public List<String> getRepairNotesListValues() {
+        try {
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(repairNotesList).size();
+            return repairNotesList.stream().map(WebElement::getText).collect(Collectors.toList());
         } catch (Exception ignored) {
             return null;
         }

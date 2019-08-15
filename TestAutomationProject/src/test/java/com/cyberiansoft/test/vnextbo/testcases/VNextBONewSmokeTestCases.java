@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBODeviceManagementData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBONewSmokeData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOQuickNotesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -11,10 +12,13 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOAccountInfoBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOClientsListViewInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOEmailOptionsBlockInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsListViewSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsSearchSteps;
+import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOAddNewDeviceSteps;
+import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -435,7 +439,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         new VNextBOClientsListViewSteps().openClientsDetailsPage(data.getTypes()[0]);
         final VNextBOClientDetailsViewAccordionSteps accordionSteps = new VNextBOClientDetailsViewAccordionSteps();
-        accordionSteps.setClientInfoData(data.getClientInfoData());
+        accordionSteps.setClientInfoData(data.getEmployee());
 
         accordionSteps.setAccountInfoData(data.getAccountInfoData());
         Assert.assertFalse(new VNextBOAccountInfoBlockInteractions().isPoNumberUpfrontRequiredCheckboxClickable());
@@ -450,5 +454,22 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
                 "The include inspections checkbox is clickable");
         accordionSteps.setPreferencesData(data.getDefaultArea());
         accordionSteps.setMiscellaneousData(data.getNotes());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanDeleteLicenceOfDevice(String rowID, String description, JSONObject testData) {
+        VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
+
+        leftMenu.selectDeviceManagementMenu();
+        final VNextBODeviceManagementInteractions deviceManagementInteractions = new VNextBODeviceManagementInteractions();
+        deviceManagementInteractions.clickAddNewDeviceButton();
+        final String randomUser = data.getNickname();
+        new VNextBOAddNewDeviceSteps().setNewDeviceValuesAndSubmit(data, randomUser);
+
+        Assert.assertTrue(deviceManagementInteractions.isUserDisplayedInPendingRegistrationTable(randomUser),
+                "The user hasn't been displayed in the pending registration table");
+        new VNextBODeviceManagementSteps().deletePendingRegistrationDeviceByUser(randomUser);
+        Assert.assertTrue(deviceManagementInteractions.isUserNotDisplayedInPendingRegistrationTable(randomUser),
+                "The user hasn't disappeared from the pending registration table");
     }
 }

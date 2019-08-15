@@ -452,7 +452,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 
         VNextBOServicesWebPage servicesPage = leftMenu
                 .selectServicesMenu()
-                .advancedSearchServiceByServiceType(data.getMatrixServiceType());
+                .searchServiceByServiceType(data.getMatrixServiceType());
         String firstServiceNameInTableRow = servicesPage.getFirstServiceNameInTableRow();
         servicesPage
                 .clickEditServiceByServiceName(firstServiceNameInTableRow)

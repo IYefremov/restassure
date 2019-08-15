@@ -223,42 +223,31 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     public boolean isAdvancedSearchDialogNotDisplayed() {
-        try {
-            return wait.until(ExpectedConditions.invisibilityOf(advancedSearchDialog));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private VNextBORepairOrdersAdvancedSearchDialog typeData(WebElement inputField, WebElement autoCompleteList, String data) {
-        setData(inputField, data);
-        wait.until(ExpectedConditions.attributeToBe(autoCompleteList, "aria-hidden", "false"));
-        return this;
+        return Utils.isElementNotDisplayed(advancedSearchDialog);
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setWoNum(String woNum) {
-        setData(woInputField, woNum);
+        Utils.clearAndType(woInputField, woNum);
         return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setRoNum(String roNum) {
-        setData(roInputField, roNum);
+        Utils.clearAndType(roInputField, roNum);
         return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setStockNum(String stockNum) {
-        setData(stockInputField, stockNum);
+        Utils.clearAndType(stockInputField, stockNum);
         return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setVinNum(String vinNum) {
-        setData(vinInputField, vinNum);
+        Utils.clearAndType(vinInputField, vinNum);
         return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setSearchName(String searchName) {
-        setData(searchNameInputField, searchName);
+        Utils.clearAndType(searchNameInputField, searchName);
         return this;
     }
 
@@ -271,21 +260,21 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog selectCustomerNameFromBoxList(String customer) {
-        selectDataFromBoxList(customerListBoxOptions, customerAutoCompleteList, customer);
+        Utils.selectDataFromBoxList(customerListBoxOptions, customerAutoCompleteList, customer);
         return this;
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog selectEmployeeNameFromBoxList(String employee) {
-        selectDataFromBoxList(employeeListBoxOptions, employeeAutoCompleteList, employee);
+        Utils.selectDataFromBoxList(employeeListBoxOptions, employeeAutoCompleteList, employee);
         return this;
     }
 
     public void typeEmployeeName(String employee) {
-        typeData(employeeInputField, employeeAutoCompleteList, employee);
+        Utils.clearAndType(employeeInputField, employee);
     }
 
     public void typeCustomerName(String customer) {
-        typeData(customerInputField, customerAutoCompleteList, customer);
+        Utils.clearAndType(customerInputField, customer);
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog setCustomer(String customer) {
@@ -388,19 +377,19 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     private VNextBOCalendarWidgetDialog openCalendarWidget(WebElement button) {
-        wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+        Utils.clickElement(button);
         waitABit(500);
         return PageFactory.initElements(driver, VNextBOCalendarWidgetDialog.class);
     }
 
     public VNextBORepairOrdersWebPage clickSearchButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
+        Utils.clickElement(searchButton);
         waitForLoading();
         return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
     }
 
     public VNextBORepairOrdersWebPage clickSaveButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(saveButton)).click();
+        Utils.clickElement(saveButton);
         waitForLoading();
         return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
     }
@@ -422,7 +411,7 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickWoTypeBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(woTypeListBox)).click();
+        Utils.clickElement(woTypeListBox);
         return this;
     }
 
@@ -452,22 +441,22 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectPhase(String phase) {
-        selectOptionInDropDown(phaseDropDown, phaseListBoxOptions, phase);
+        Utils.selectOptionInDropDown(phaseDropDown, phaseListBoxOptions, phase);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectDepartment(String phase) {
-        selectOptionInDropDown(departmentDropDown, departmentListBoxOptions, phase);
+        Utils.selectOptionInDropDown(departmentDropDown, departmentListBoxOptions, phase);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectWoType(String woType) {
-        selectOptionInDropDown(woTypeDropDown, woTypeListBoxOptions, woType);
+        Utils.selectOptionInDropDown(woTypeDropDown, woTypeListBoxOptions, woType);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectDaysInPhase(String daysInPhase) {
-        selectOptionInDropDown(daysInPhaseDropDown, daysInPhaseListBoxOptions, daysInPhase);
+        Utils.selectOptionInDropDown(daysInPhaseDropDown, daysInPhaseListBoxOptions, daysInPhase);
         return this;
     }
 
@@ -475,7 +464,7 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
 //        wait.until(ExpectedConditions.visibilityOf(flagDropDown));
 //        final Select select = new Select(flagDropDown);
 //        select.selectByVisibleText(flag);
-        selectOptionInDropDown(flagDropDown, flagsListBoxOptions, flag, true);
+        Utils.selectOptionInDropDown(flagDropDown, flagsListBoxOptions, flag, true);
         return this;
     }
 
@@ -485,35 +474,21 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectDaysInProcess(String daysInProcess) {
-        selectOptionInDropDown(daysInProcessDropDown, daysInProcessListBoxOptions, daysInProcess);
+        Utils.selectOptionInDropDown(daysInProcessDropDown, daysInProcessListBoxOptions, daysInProcess);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectTimeFrame(String timeFrame) {
-        selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame, true);
+        Utils.selectOptionInDropDown(timeFrameDropDown, timeFrameListBoxOptions, timeFrame, true);
         return this;
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog selectRepairStatus(String repairStatus) {
-        selectOptionInDropDown(repairStatusDropDown, repairStatusListBoxOptions, repairStatus);
+        Utils.selectOptionInDropDown(repairStatusDropDown, repairStatusListBoxOptions, repairStatus);
         return this;
     }
 
     public String getRepairStatusOption() {
         return WaitUtilsWebDriver.waitForVisibility(repairStatusValue).getText();
     }
-//
-//    private VNextBORepairOrdersAdvancedSearchDialog selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox,
-//                                                                          String selection) {
-//        wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
-//        wait.until(ExpectedConditions.visibilityOfAllElements(listBox));
-//        for (WebElement option : listBox) {
-//            if (option.getText().equals(selection)) {
-//                new Actions(driver).moveToElement(option).click().build().perform();
-//                wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
-//                break;
-//            }
-//        }
-//        return this;
-//    }
 }

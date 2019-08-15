@@ -13,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 @Getter
-public class VNextBOClientsListView extends VNextBOBaseWebPage {
+public class VNextBOClientsListView extends VNextBOClientsWebPage {
 
     @FindBy(id = "clients-list-view")
     private WebElement clientsTable;
@@ -30,8 +30,8 @@ public class VNextBOClientsListView extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class, 'menu-drop')]/div[contains(@data-bind, 'onArchiveClicked')]")
     private WebElement archiveDropMenuButton;
 
-    public VNextBOClientsListView(WebDriver driver) {
-        super(driver);
+    public VNextBOClientsListView() {
+        super();
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 

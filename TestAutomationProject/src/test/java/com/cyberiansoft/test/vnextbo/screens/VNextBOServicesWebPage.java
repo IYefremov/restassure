@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
@@ -56,6 +57,9 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//span[@data-bind='click: unArchiveService']")
     private WebElement restoreButton;
+
+    @FindBy(xpath = "//div[@id='services-list-view']/div/p")
+    private WebElement servicesListView;
 
     By editButton = By.xpath("//td[@class='grid__actions']/span[@class='icon-pencil2']");
 
@@ -119,7 +123,8 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
         return this;
     }
 
-    public VNextBOServicesWebPage advancedSearchServiceByServiceType(String servicetype) {
+    public VNextBOServicesWebPage searchServiceByServiceType(String servicetype) {
+        WaitUtilsWebDriver.waitForLoading();
         openAdvancedSearchPanel();
         wait.until(ExpectedConditions.elementToBeClickable(searchServicesArchiveCheckbox));
         selectAdvancedServiceType(servicetype);
@@ -147,21 +152,18 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
     }
 
     public void openAdvancedSearchPanel() {
-        wait.until(ExpectedConditions.elementToBeClickable(advancedSearchServicesPanel)).click();
+        Utils.clickElement(advancedSearchServicesPanel);
         try {
-            wait.until(ExpectedConditions.visibilityOf(advancedsearchform));
+            WaitUtilsWebDriver.waitForVisibility(advancedsearchform, 5);
         } catch (Exception e) {
-            clickWithJS(advancedSearchServicesPanel);
-            System.err.println("********** Clicked with JS **********");
+            Utils.clickWithJS(advancedSearchServicesPanel);
             waitABit(1000);
         }
     }
 
     public boolean isServicePresentOnCurrentPageByServiceName(String servicename) {
         try {
-            if (driver.findElement(By.xpath("//div[@id='services-list-view']/div/p"))
-                    .getText()
-                    .equals("No services to show")) {
+            if (isNoServiceDisplayed()) {
                 return false;
             } else {
                 WebElement row = getTableRowWithServiceByServiceName(servicename);
@@ -170,13 +172,14 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
                 }
             }
         } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
         return false;
     }
 
     public int getNumOfServicesOnCurrentPageByServiceName(String servicename) {
         try {
-            if (!driver.findElement(By.xpath("//div[@id='services-list-view']/div/p")).getText().equals("No services to show")) {
+            if (!isNoServiceDisplayed()) {
                 List<WebElement> rows = getServicesTableRows();
                 if (rows.size() > 0) {
                     try {
@@ -188,14 +191,21 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
                                         .equals(servicename))
                                 .collect(Collectors.toList())
                                 .size();
-                    } catch (NoSuchElementException ignored) {
-                    }
+                    } catch (NoSuchElementException ignored) {}
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    private boolean isNoServiceDisplayed() {
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(servicesListView, 7);
+        try {
+            return servicesListView.getText().equals("No services to show");
+        } catch (Exception ignored) {}
+        return false;
     }
 
     public String getServiceTypeValue(String servicename) {

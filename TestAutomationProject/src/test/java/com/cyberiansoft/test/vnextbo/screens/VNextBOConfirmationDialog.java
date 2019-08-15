@@ -1,17 +1,21 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.Objects;
 
+@Getter
 public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//div[@class='modal fade in' and @id='dialogModal']")
@@ -21,10 +25,10 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	private WebElement confirmdialogmessage;
 	
 	@FindBy(xpath = "//button[@data-automation-id='modalCancelButton']")
-	private WebElement nobtn;
+	private WebElement noButton;
 	
 	@FindBy(xpath = "//button[@data-automation-id='modalConfirmButton']")
-	private WebElement yesbtn;
+	private WebElement yesButton;
 
 	@FindBy(xpath = "//button[text()='No']")
 	private WebElement invoiceNoButton;
@@ -34,6 +38,9 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCloseButton']")
 	private WebElement rejectButton;
+
+	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div")
+	private List<WebElement> dialogMessagesList;
 	
 	public VNextBOConfirmationDialog() {
 		super(DriverBuilder.getInstance().getDriver());
@@ -67,11 +74,7 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	}
 
     private void clickModalDialogButton(WebElement button) {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(button)).click();
-        } catch (Exception e) {
-            clickWithJS(button);
-        }
+        Utils.clickElement(button);
         try {
             wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
         } catch (TimeoutException e) {
@@ -79,23 +82,23 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
         }
     }
 
-	public String getConfirmationDialogMessage() {
-		String confirmMessage  = null;
-		List<WebElement> msgs = driver.findElements(By.xpath("//div[@class='modal-body']/div[@class='modal-body__content']/div"));
-		for (WebElement msg : msgs)
-			if (!msg.getText().equals(""))
-				confirmMessage = msg.getText();
-		return confirmMessage;
+	private String getConfirmationDialogMessage() {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(dialogMessagesList, 7);
+		for (WebElement message : dialogMessagesList)
+			if (!message.getText().equals("")) {
+                return message.getText();
+            }
+		return null;
 	}
 	
 	public String clickYesAndGetConfirmationDialogMessage() {
-		final String msg = getConfirmationDialogMessage();
+		final String msg = Objects.requireNonNull(getConfirmationDialogMessage());
 		clickYesButton();
 		return msg;
 	}
 	
 	public String clickNoAndGetConfirmationDialogMessage() {
-		final String msg = getConfirmationDialogMessage();
+		final String msg = Objects.requireNonNull(getConfirmationDialogMessage());
 		clickNoButton();
 		return msg;
 	}

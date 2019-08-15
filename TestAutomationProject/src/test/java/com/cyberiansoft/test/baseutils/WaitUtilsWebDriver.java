@@ -75,6 +75,10 @@ public class WaitUtilsWebDriver {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
+    public static void waitForInvisibility(WebElement element, int timeout) {
+        new WebDriverWait(driver, timeout).until(ExpectedConditions.invisibilityOf(element));
+    }
+
     public static void waitForInvisibilityIgnoringException(WebElement element) {
         try {
             wait.until(ExpectedConditions.invisibilityOf(element));
@@ -184,7 +188,14 @@ public class WaitUtilsWebDriver {
         }
     }
 
-    private static Boolean waitForAttributeToBe(WebElement list, String attribute, String value) {
-        return wait.until(ExpectedConditions.attributeToBe(list, attribute, value));
+    public static Boolean waitForAttributeToBe(WebElement element, String attribute, String value) {
+        return wait.until(ExpectedConditions.attributeToBe(element, attribute, value));
+    }
+
+    public static void waitForInputFieldValueIgnoringException(WebElement element, String value) {
+        try {
+            new WebDriverWait(driver, 10)
+                    .until(ExpectedConditions.attributeToBe(element, "value", value));
+        } catch (Exception e) {}
     }
 }

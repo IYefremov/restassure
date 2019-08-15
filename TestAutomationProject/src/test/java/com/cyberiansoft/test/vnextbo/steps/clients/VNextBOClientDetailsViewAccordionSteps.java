@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnextbo.steps.clients;
 
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
-import com.cyberiansoft.test.dataclasses.vNextBO.clientData.ClientInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.cyberiansoft.test.vnextbo.interactions.*;
 
@@ -24,19 +24,19 @@ public class VNextBOClientDetailsViewAccordionSteps {
         miscellaneousBlockInteractions = new VNextBOMiscellaneousBlockInteractions();
     }
 
-    public void setClientInfoData(ClientInfoData clientInfoData) {
+    public void setClientInfoData(Employee employee) {
         clientInfoBlockInteractions.verifyClientInfoBlockIsExpanded();
 
-        if (clientInfoData.getClientType().toLowerCase().equals("retail")) {
+        if (employee.getClientType().toLowerCase().equals("retail")) {
             clientInfoBlockInteractions.setRetailCompanyType();
-        } else if (clientInfoData.getClientType().toLowerCase().equals("wholesale")) {
+        } else if (employee.getClientType().toLowerCase().equals("wholesale")) {
             clientInfoBlockInteractions.setRetailCompanyType();
         }
-        clientInfoBlockInteractions.setCompanyName(clientInfoData.getCompanyName());
-        clientInfoBlockInteractions.setFirstName(clientInfoData.getFirstName());
-        clientInfoBlockInteractions.setLastName(clientInfoData.getLastName());
-        clientInfoBlockInteractions.setEmail(clientInfoData.getEmail());
-        clientInfoBlockInteractions.setPhone(clientInfoData.getPhone());
+        clientInfoBlockInteractions.setCompanyName(employee.getCompanyName());
+        clientInfoBlockInteractions.setFirstName(employee.getEmployeeFirstName());
+        clientInfoBlockInteractions.setLastName(employee.getEmployeeLastName());
+        clientInfoBlockInteractions.setEmail(employee.getEmployeeEmail());
+        clientInfoBlockInteractions.setPhone(employee.getPhoneNumber());
     }
 
     public void setAccountInfoData(AccountInfoData accountInfoData) {
