@@ -17,7 +17,11 @@ public class ServiceRequestdetailsScreen extends iOSHDBaseScreen {
     public ServiceRequestdetailsScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+
+    }
+
+    public void waitServiceRequestdetailsScreenLoad() {
+        FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Service Request")));
     }
 

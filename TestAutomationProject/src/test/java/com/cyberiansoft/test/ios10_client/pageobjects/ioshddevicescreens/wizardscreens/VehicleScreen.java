@@ -28,8 +28,8 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class VehicleScreen extends BaseWizardScreen {
 		
-	final static String vehiclescreencapt = "Vehicle";	
-	
+	final static String vehiclescreencapt = "Vehicle";
+
 	//@iOSXCUITFindBy(accessibility  = "Advisor")
     //private IOSElement advisorfld;
 	
@@ -94,8 +94,11 @@ public class VehicleScreen extends BaseWizardScreen {
 	public VehicleScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
+	}
+
+	public void waitVehicleScreenLoaded() {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleTable")));
 	}
 
@@ -105,50 +108,12 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 
 	public void setVIN(String vin) {
-	
+		waitVehicleScreenLoaded();
 		setVINFieldValue(vin);
-		/*Helpers.waitABit(1000);
-		List<IOSElement> closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-		for (IOSElement closebtn : closebtns)
-			if (closebtn.isDisplayed()) {
-				closebtn.click();
-				break;
-			}
-		try {
-			if (appiumdriver.findElementsByAccessibilityId("Searching on Back Office").size() > 0) {
-				WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-				wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByAccessibilityId("Searching on Back Office")));
-			}
-		} catch (WebDriverException e) {
-
-		}
-
-		Helpers.waitABit(1000);
-		if (elementExists("Close"))	 {
-			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-			for (IOSElement closebtn : closebtns)
-//			closebtn.click();
-				if (closebtn.isDisplayed()) {
-					closebtn.click();
-
-					break;
-				}
-		}
-
-		Helpers.waitABit(1000);
-		if (elementExists("Close"))	 {
-			closebtns = appiumdriver.findElementsByAccessibilityId("Close");
-			for (IOSElement closebtn : closebtns)
-				if (closebtn.isDisplayed()) {
-					closebtn.click();
-
-					break;
-				}
-		}*/
 	}
 	
 	public void setVINFieldValue(String vin) {
-		
+		waitVehicleScreenLoaded();
 		clickVINField();
 
 		appiumdriver.findElementByAccessibilityId("VIN#").sendKeys(vin);
@@ -165,7 +130,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 	
 	public IOSElement getVINField() {
-		//IOSElement vehicletable = (IOSElement)  appiumdriver.findElementByAccessibilityId("VehicleTable");
+		waitVehicleScreenLoaded();
 		return (IOSElement) appiumdriver.findElementByAccessibilityId("VIN#");
 		//return vinfld;
 	}
@@ -202,6 +167,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 
 	public String getInspectionNumber() {
+		waitVehicleScreenLoaded();
 		return appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[3]")).getText();
 	}
 
@@ -223,6 +189,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	
 	
 	public String getMake() {
+		waitVehicleScreenLoaded();
 		IOSElement makefld = (IOSElement) appiumdriver.findElementByAccessibilityId("Make");
 		return makefld.findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
 	}
@@ -317,27 +284,12 @@ public class VehicleScreen extends BaseWizardScreen {
 	public void setYear(String year) {
 		
 		appiumdriver.findElementByAccessibilityId("Year").click();
-
-		IOSElement picker = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePicker");
 		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
-		//picker.setValue(year);
 		pickerwhl.setValue(year);
 		
 		IOSElement donebtn = (IOSElement) appiumdriver.findElementByAccessibilityId("StringPicker_Done");
 		
 		new TouchAction(appiumdriver).tap(tapOptions().withElement(element(donebtn))).perform();
-		/*if (appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@label='Done']").size() > 1)
-			donebtn = ((IOSElement) appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@label='Done']").get(1));
-		else
-			donebtn = (IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeButton[@label='Done']");*/
-		
-		//IOSTouchAction iosTouchAction = new IOSTouchAction(appiumdriver);
-		//iosTouchAction.tap(xx,yy).perform();
-		
-		/*if (appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@label='Done']").size() > 1)
-			((IOSElement) appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@label='Done']").get(1)).click();
-		else
-			appiumdriver.findElementByXPath("//XCUIElementTypeButton[@label='Done']").click();*/
 			
 	}
 	
@@ -375,32 +327,26 @@ public class VehicleScreen extends BaseWizardScreen {
 	public void setPO(String po)  {
 		appiumdriver.findElementByAccessibilityId("PO#").click();
 		appiumdriver.findElementByAccessibilityId("PO#").sendKeys(po + "\n");
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 	
 	public String getWorkOrderCustomer() {
+		waitVehicleScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId("viewPrompt").getAttribute("value");
-		//return navbarworkordercustomercaption.getAttribute("name");
 	}
 	
 	public String getInspectionCustomer() {
+		waitVehicleScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId("viewPrompt").getAttribute("value");
-		//return navbarinspectioncustomercaption.getAttribute("name");
 	}
 
 	public NotesScreen clickNotesButton() {
+		waitVehicleScreenLoaded();
 		appiumdriver.findElementByAccessibilityId("Compose").click();
-		//composebtn.click();
 		return new NotesScreen();
-	}
-	
-	public String getWorkOrderTypeValue() {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[4]").getAttribute("value");
 	}
 	
 	public void saveWorkOrder() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name='Save']").click();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));

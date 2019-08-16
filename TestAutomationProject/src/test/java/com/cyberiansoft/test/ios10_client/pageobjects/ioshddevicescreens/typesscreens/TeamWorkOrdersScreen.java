@@ -49,6 +49,10 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public TeamWorkOrdersScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+
+	}
+
+	public void waitTeamWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 35);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersPageTableLeft")));
 	}
@@ -105,6 +109,7 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void selectWorkOrderForEidt(String wonumber) {
+		waitTeamWorkOrdersScreenLoaded();
 		selectWorkOrder(wonumber);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
@@ -189,12 +194,14 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
 
 	public boolean woExists(String wonumber) {
+		waitTeamWorkOrdersScreenLoaded();
 		return elementExists(wonumber);
 	}
 
-	public ServiceRequestdetailsScreen clickServiceRequestButton() {
+	public void clickServiceRequestButton() {
 		appiumdriver.findElementByAccessibilityId("Service Request").click();
-		return new ServiceRequestdetailsScreen();
+		ServiceRequestdetailsScreen serviceRequestdetailsScreen = new ServiceRequestdetailsScreen();
+		serviceRequestdetailsScreen.waitServiceRequestdetailsScreenLoad();
 	}
 
 	public void clickInvoiceIcon() {

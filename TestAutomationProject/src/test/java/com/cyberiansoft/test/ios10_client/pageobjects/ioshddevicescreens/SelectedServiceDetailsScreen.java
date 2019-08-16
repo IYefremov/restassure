@@ -38,11 +38,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
 	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[@name='Service Part']/XCUIElementTypeStaticText[2]")
     private IOSElement servicepartfld;*/
-	
-	/*@iOSXCUITFindBy(accessibility = "Vehicle Part")
-    private IOSElement vehiclepartscell;
-	
-	@iOSXCUITFindBy(accessibility = "Service Part")
+
+	/*@iOSXCUITFindBy(accessibility = "Service Part")
     private IOSElement servicepartscell;
 	
 	@iOSXCUITFindBy(accessibility = "Questions")
@@ -56,9 +53,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
 	@iOSXCUITFindBy(accessibility  = "Notes")
     private IOSElement notesfld;
-	
-	@iOSXCUITFindBy(accessibility = "Vehicle Parts")
-    private IOSElement vehiclepartsfldname;
 	
 	@iOSXCUITFindBy(accessibility = "Custom")
     private IOSElement technitianscustomview;
@@ -75,7 +69,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	@iOSXCUITFindBy(accessibility = "BundleItemsView")
     private IOSElement bundleitemstable;*/
 
-	@iOSXCUITFindBy(accessibility = "Vehicle Part")
+	@iOSXCUITFindBy(accessibility = "ClarificationBox_VehiclePartSelector")
 	private IOSElement vehiclepartscell;
 
 	@iOSXCUITFindBy(accessibility = "Part")
@@ -134,8 +128,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public String getVehiclePartValue() {
-		WebElement par = getTableParentCell("Vehicle Part");
-		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return vehiclepartscell.getAttribute("label").replace("\n", " ");
 	}
 
 
@@ -343,7 +336,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getListOfSelectedVehicleParts() {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Vehicle Part']/XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return vehiclepartscell.getAttribute("label");
 	}
 	
 	public boolean isQuestionFormCellExists() {

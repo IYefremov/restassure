@@ -52,10 +52,13 @@ public class ServicesScreen extends BaseWizardScreen {
 	public ServicesScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+	}
+
+	public void waitServicesScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Available Services")));
-        wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Available Services")));
+		wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Available Services")));
 	}
 	
 	public void clickSaveAsDraft() {
@@ -81,6 +84,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public boolean checkServiceIsSelected(String service) {
+		waitServicesScreenLoaded();
 		IOSElement selectedservices = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
 		return selectedservices.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(service).size() > 0;
 	}
@@ -154,6 +158,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public void selectService(String servicename) {
+		waitServicesScreenLoaded();
 		MobileElement searchFld =  null;
 		IOSElement tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
 		if (tablelist.getAttribute("type").equals("XCUIElementTypeOther"))
