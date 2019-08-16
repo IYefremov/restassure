@@ -4,40 +4,43 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
-import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOPendingRegistrationWebPage;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class VNextBODeviceManagementInteractions {
 
     private VNextBODeviceManagementWebPage deviceManagementPage;
-    private VNextBOPendingRegistrationWebPage pendingRegistrationWebPage;
 
     public VNextBODeviceManagementInteractions() {
-        final WebDriver driver = DriverBuilder.getInstance().getDriver();
-        deviceManagementPage = PageFactory.initElements(
-                driver, VNextBODeviceManagementWebPage.class);
-        pendingRegistrationWebPage = PageFactory.initElements(
-                driver, VNextBOPendingRegistrationWebPage.class);
+        deviceManagementPage = PageFactory
+                .initElements(DriverBuilder.getInstance().getDriver(), VNextBODeviceManagementWebPage.class);
     }
 
     public void clickAddNewDeviceButton() {
         Utils.clickElement(deviceManagementPage.getAddNewDeviceButton());
     }
 
-    public void clickDeleteDeviceButtonForUser(String user) {
-        Utils.clickElement(pendingRegistrationWebPage.getDeleteDeviceButton(user));
+    public void clickActiveDevicesTab() {
+        Utils.clickElement(deviceManagementPage.getActiveDevicesTab());
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
-    public boolean isUserDisplayedInPendingRegistrationTable(String user) {
-        return Utils.isElementDisplayed(pendingRegistrationWebPage.getDeleteDeviceButton(user), 10);
+    public void clickPendingRegistrationsTab() {
+        Utils.clickElement(deviceManagementPage.getPendingRegistrationsTab());
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
-    public boolean isUserNotDisplayedInPendingRegistrationTable(String user) {
+    public boolean isActiveDevicesTabOpened() {
         try {
-            WaitUtilsWebDriver.waitForInvisibility(pendingRegistrationWebPage.getDeleteDeviceButton(user), 10);
+            WaitUtilsWebDriver.waitForAttributeToBe(deviceManagementPage.getActiveDevicesTab(), "aria-expanded", "true", 7);
             return true;
-        } catch (NullPointerException ignored) {
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isPendingRegistrationTabOpened() {
+        try {
+            WaitUtilsWebDriver.waitForAttributeToBe(deviceManagementPage.getPendingRegistrationsTab(), "aria-expanded", "true", 7);
             return true;
         } catch (Exception ignored) {
             return false;

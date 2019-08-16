@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnextbo.interactions.VNextBOAccountInfoBlockInterac
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOClientsListViewInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOEmailOptionsBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsListViewSteps;
@@ -47,6 +48,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBOInspectionsApprovalPageSteps inspectionsApprovalSteps;
     private VNextBOClientsListViewInteractions listViewInteractions;
     private VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions;
+    private VNextBODeviceManagementSteps deviceManagementSteps;
 
     @BeforeClass
     public void settingUp() {
@@ -78,9 +80,10 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         companyInfoWebPage = PageFactory.initElements(webdriver, VNextBOCompanyInfoWebPage.class);
         homePage = PageFactory.initElements(webdriver, VNextBOHomeWebPage.class);
         inspectionsWebPage = PageFactory.initElements(webdriver, VNextBOInspectionsWebPage.class);
-        inspectionsApprovalSteps = PageFactory.initElements(webdriver, VNextBOInspectionsApprovalPageSteps.class);
-        listViewInteractions = PageFactory.initElements(webdriver, VNextBOClientsListViewInteractions.class);
-        emailOptionsBlockInteractions = PageFactory.initElements(webdriver, VNextBOEmailOptionsBlockInteractions .class);
+        inspectionsApprovalSteps = new VNextBOInspectionsApprovalPageSteps();
+        listViewInteractions = new VNextBOClientsListViewInteractions();
+        emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
+        deviceManagementSteps = new VNextBODeviceManagementSteps();
     }
 
     @AfterMethod
@@ -275,6 +278,8 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
                 "The number of parts hasn't been decreased by 1 after deleting");
     }
 
+    // Company Info
+
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddAndDeleteLabor(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
@@ -337,8 +342,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         Assert.assertEquals(partsDetailsPanel.getNumberOfLaborBlocks(), numberOfLaborBlocksBefore,
                 "The labor hasn't been deleted");
     }
-
-    // Company Info
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeCompanyInfoAndSaveIt(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
@@ -461,15 +464,25 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
 
         leftMenu.selectDeviceManagementMenu();
-        final VNextBODeviceManagementInteractions deviceManagementInteractions = new VNextBODeviceManagementInteractions();
-        deviceManagementInteractions.clickAddNewDeviceButton();
+        new VNextBODeviceManagementInteractions().clickAddNewDeviceButton();
         final String randomUser = data.getNickname();
         new VNextBOAddNewDeviceSteps().setNewDeviceValuesAndSubmit(data, randomUser);
+        final VNextBOPendingRegistrationsInteractions pendingRegistrationsInteractions =
+                new VNextBOPendingRegistrationsInteractions();
 
-        Assert.assertTrue(deviceManagementInteractions.isUserDisplayedInPendingRegistrationTable(randomUser),
+        Assert.assertTrue(pendingRegistrationsInteractions.isUserDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't been displayed in the pending registration table");
-        new VNextBODeviceManagementSteps().deletePendingRegistrationDeviceByUser(randomUser);
-        Assert.assertTrue(deviceManagementInteractions.isUserNotDisplayedInPendingRegistrationTable(randomUser),
+        deviceManagementSteps.deletePendingRegistrationDeviceByUser(randomUser);
+        Assert.assertTrue(pendingRegistrationsInteractions.isUserNotDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't disappeared from the pending registration table");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanUncoverHideNewRegistrationCode(String rowID, String description, JSONObject testData) {
+        VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
+
+        leftMenu.selectDeviceManagementMenu();
+        deviceManagementSteps.verifyUserCanUncoverRegistrationCode(data.getDeviceName());
+        deviceManagementSteps.verifyUserCanHideRegistrationCode(data.getDeviceName());
     }
 }

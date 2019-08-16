@@ -14,6 +14,12 @@ public class VNextBODeviceManagementWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[contains(@class, 'btn-add-new-device')]")
     private WebElement addNewDeviceButton;
 
+    @FindBy(xpath = "//a[text()='Active Devices']")
+    private WebElement activeDevicesTab;
+
+    @FindBy(xpath = "//a[text()='Pending Registrations']")
+    private WebElement pendingRegistrationsTab;
+
     public VNextBODeviceManagementWebPage() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
