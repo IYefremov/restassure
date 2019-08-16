@@ -13,10 +13,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextBasicMenuScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//body/div[@data-menu='popup']")
+    @FindBy(xpath = "//div[contains(@class,'actions-menu-layout')]")
     private WebElement menuscreen;
 
-    @FindBy(xpath="//div[@class='close-popup close-actions']")
+    @FindBy(xpath = "//div[contains(@class,'actions-menu-close')]")
     private WebElement closebtn;
 
     public VNextBasicMenuScreen(AppiumDriver<MobileElement> appiumdriver) {

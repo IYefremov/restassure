@@ -40,20 +40,17 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='more_actions']")
     private WebElement menubtn;
 
-    @FindBy(xpath = "//a[@handler='_cancel']")
+    @FindBy(xpath = "//div[@data-name='cancel']")
     private WebElement cancelinspectionmenu;
 
-    @FindBy(xpath = "//a[@handler='_save']")
+    @FindBy(xpath = "//div[@data-name='save']")
     private WebElement saveinspectionmenu;
 
-    @FindBy(xpath = "//a[@handler='_save']/span[2]/span")
+    @FindBy(xpath = "//*[@data-name='save']")
     private WebElement saveworkordermenu;
 
-    @FindBy(xpath = "//a[@handler='_notes']")
+    @FindBy(xpath = "//div[@data-name='notes']")
     private WebElement inspectionnotesmenu;
-
-    @FindBy(xpath = "//*[@action='save']")
-    private WebElement savebtn;
 
     @FindBy(xpath = "//*[@data-automation-id='search-icon']")
     private WebElement searchIcon;
