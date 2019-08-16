@@ -4,7 +4,9 @@ import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestdetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,17 +16,19 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	private final TypeScreenContext TEAMINSPECTIONCONTEXT = TypeScreenContext.TEAMINSPECTION;
 
+	@iOSXCUITFindBy(accessibility = "TeamInspectionsPageTableLeft")
+	private IOSElement inspectionsTable;
+
 	final String firstinspxpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]";
 	
 	public TeamInspectionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("TeamInspectionsPageTableLeft")));
 	}
 
-	public String getFirstInspectionNumberValue() {
-		return appiumdriver.findElementByXPath(firstinspxpath + "/XCUIElementTypeStaticText[1]").getAttribute("label");
+	public void waitTeamInspectionsScreenLoaded() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("TeamInspectionsPageTableLeft")));
 	}
 
 	public String getInspectionTypeValue(String inspectionnumber) {
@@ -47,6 +51,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public boolean isInspectionExists(String inspection) {
+		waitTeamInspectionsScreenLoaded();
 		return appiumdriver.findElementsByAccessibilityId(inspection).size() > 0;
 	}
 
@@ -97,7 +102,8 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void selectInspectionForAction(String inspnumber) {
-		appiumdriver.findElementByAccessibilityId(inspnumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+		waitTeamInspectionsScreenLoaded();
+		inspectionsTable.findElementByAccessibilityId(inspnumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 
 	public void selectInspectionForEdit(String inspnumber)  {

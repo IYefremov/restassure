@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -47,11 +48,12 @@ public class VNextTeamPartServiceLaborCases extends BaseTestCaseTeamEditionRegis
         WizardScreenSteps.saveAction();
         PartServiceSteps.confirmPartInfo();
         SelectedServicesScreenSteps.switchToSelectedService();
-        SelectedServicesScreenSteps.verifyServiceSelected(basicPartService.getServiceName());
+        ListServicesValidations.verifyServiceSelected(basicPartService.getServiceName());
         laborServiceData.stream()
                 .map(LaborServiceData::getServiceName)
                 .collect(Collectors.toList())
-                .forEach(SelectedServicesScreenSteps::verifyServiceSelected);
+                .forEach(ListServicesValidations::verifyServiceSelected);
+
         inspectionId = InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -78,11 +80,94 @@ public class VNextTeamPartServiceLaborCases extends BaseTestCaseTeamEditionRegis
         WizardScreenSteps.saveAction();
         PartServiceSteps.confirmPartInfo();
         SelectedServicesScreenSteps.switchToSelectedService();
-        SelectedServicesScreenSteps.verifyServiceSelected(laborServiceData.getServiceName());
+        ListServicesValidations.verifyServiceSelected(laborServiceData.getServiceName());
         partServiceData.stream()
                 .map(PartServiceData::getServiceName)
                 .collect(Collectors.toList())
-                .forEach(SelectedServicesScreenSteps::verifyServiceSelected);
+                .forEach(ListServicesValidations::verifyServiceSelected);
+
+        inspectionId = InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanRemoveOrLeftPartServiceRemovingLaborService(String rowID,
+                                                                   String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<LaborServiceData> laborServiceDataList = workOrderData.getLaborServicesList();
+
+        LaborServiceData laborServiceToRemoveWithPartService = laborServiceDataList.get(0);
+        PartServiceData expectedRemovedPartService = laborServiceToRemoveWithPartService.getPartServiceDataList().get(0);
+        LaborServiceData laborServiceToRemoveWithoutPartService = laborServiceDataList.get(1);
+        PartServiceData expectedPresentPartService = laborServiceToRemoveWithoutPartService.getPartServiceDataList().get(0);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        laborServiceDataList.forEach(laborServiceData -> {
+            SearchSteps.textSearch(laborServiceData.getServiceName());
+            AvailableServicesScreenSteps.openServiceDetails(laborServiceData.getServiceName());
+            LaborServiceSteps.addPartService();
+            laborServiceData.getPartServiceDataList()
+                    .forEach(service -> {
+                        SearchSteps.textSearch(service.getServiceName());
+                        PartServiceSteps.selectPartService(service);
+                        PartServiceSteps.acceptDetailsScreen();
+                    });
+            WizardScreenSteps.saveAction();
+            PartServiceSteps.confirmPartInfo();
+        });
+
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.unselectService(laborServiceToRemoveWithPartService.getServiceName());
+        GeneralSteps.confirmDialog();
+        SelectedServicesScreenSteps.unselectService(laborServiceToRemoveWithoutPartService.getServiceName());
+        GeneralSteps.declineDialog();
+
+        ListServicesValidations.verifyServiceSelected(expectedPresentPartService.getServiceName());
+        ListServicesValidations.verifyServiceNotSelected(laborServiceToRemoveWithPartService.getServiceName());
+        ListServicesValidations.verifyServiceNotSelected(expectedRemovedPartService.getServiceName());
+        ListServicesValidations.verifyServiceNotSelected(laborServiceToRemoveWithoutPartService.getServiceName());
+
+        inspectionId = InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanRemoveOrLeftLaborServiceRemovingPartService(String rowID,
+                                                                   String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<PartServiceData> partServiceDataList = workOrderData.getPartServiceDataList();
+        PartServiceData partServiceToRemoveWithLaborService = partServiceDataList.get(0);
+        LaborServiceData expectedRemovedLaborService = partServiceToRemoveWithLaborService.getLaborServiceDataList().get(0);
+        PartServiceData partServiceToRemoveWithoutLaborService = partServiceDataList.get(1);
+        LaborServiceData expectedPresentLaborService = partServiceToRemoveWithoutLaborService.getLaborServiceDataList().get(0);
+
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        partServiceDataList.forEach(partServiceData -> {
+            SearchSteps.textSearch(partServiceData.getServiceName());
+            PartServiceSteps.selectPartService(partServiceData);
+            PartServiceSteps.addLaborService();
+            partServiceData.getLaborServiceDataList()
+                    .forEach(service -> LaborServiceSteps.selectService(service.getServiceName()));
+            WizardScreenSteps.saveAction();
+            PartServiceSteps.confirmPartInfo();
+        });
+
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.unselectService(partServiceToRemoveWithLaborService.getServiceName());
+        GeneralSteps.confirmDialog();
+        SelectedServicesScreenSteps.unselectService(partServiceToRemoveWithoutLaborService.getServiceName());
+        GeneralSteps.declineDialog();
+
+        ListServicesValidations.verifyServiceSelected(expectedPresentLaborService.getServiceName());
+        ListServicesValidations.verifyServiceNotSelected(partServiceToRemoveWithLaborService.getServiceName());
+        ListServicesValidations.verifyServiceNotSelected(expectedRemovedLaborService.getServiceName());
+        ListServicesValidations.verifyServiceNotSelected(partServiceToRemoveWithoutLaborService.getServiceName());
+
         inspectionId = InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }

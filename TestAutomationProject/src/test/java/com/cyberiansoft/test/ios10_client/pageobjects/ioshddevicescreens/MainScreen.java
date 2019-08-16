@@ -20,8 +20,8 @@ public class MainScreen extends iOSHDBaseScreen {
 	@iOSXCUITFindBy(accessibility = "Enter Password")
     private IOSElement securefld;
 	
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeButton[@name='Login']")
-    private IOSElement loginbtn;
+	@iOSXCUITFindBy(accessibility = "Password_LoginButton")
+	private IOSElement loginbtn;
 	
 	@iOSXCUITFindBy(accessibility  = "Licenses")
     private IOSElement licenses;

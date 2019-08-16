@@ -58,6 +58,10 @@ public class WorkOrderData {
     @JsonProperty("laborService")
     LaborServiceData laborService;
 
+    @Getter
+    @JsonProperty("laborServicesList")
+    List<LaborServiceData> laborServicesList;
+
     @JsonProperty("insuranceCompany")
     InsuranceCompanyData insuranceCompany;
 
