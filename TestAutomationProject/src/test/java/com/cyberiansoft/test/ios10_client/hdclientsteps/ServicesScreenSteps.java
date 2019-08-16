@@ -11,6 +11,7 @@ public class ServicesScreenSteps {
 
     public static void verifyServicesAreSelected(List<ServiceData> servicesData) {
         ServicesScreen servicesScreen = new ServicesScreen();
+        servicesScreen.waitServicesScreenLoaded();
         for (ServiceData serviceData : servicesData) {
             if (serviceData.isSelected())
                 Assert.assertTrue(servicesScreen.checkServiceIsSelected(serviceData.getServiceName()));

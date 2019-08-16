@@ -15,6 +15,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWiz
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -22,6 +23,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -40,9 +42,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	
 	/*@iOSXCUITFindBy(accessibility = "Add")
     private IOSElement addinspbtn;
-	
-	@iOSXCUITFindBy(accessibility  = "Edit")
-    private IOSElement editpopupmenu;
 	
 	@iOSXCUITFindBy(accessibility  = "Approve")
     private IOSElement approvepopupmenu;
@@ -98,6 +97,9 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	@iOSXCUITFindBy(accessibility  = "Done")
     private IOSElement toolbardonebtn;*/
 
+	@iOSXCUITFindBy(accessibility  = "Edit")
+	private IOSElement editpopupmenu;
+
 	@iOSXCUITFindBy(accessibility = "InspectionsPageTableLeft")
 	private IOSElement inspectionsTable;
 	
@@ -142,7 +144,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickEditInspectionButton() {
-		appiumdriver.findElementByAccessibilityId("Edit").click();
+		editpopupmenu.click();
 		BaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 	
@@ -295,10 +297,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")));
 		wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeToolbar")));
-		wait = new WebDriverWait(appiumdriver, 10);
-		BaseUtils.waitABit(500);
-		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")));
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")).click();
 	}
 
 	public boolean isInspectionExists(String inspection) {
@@ -403,7 +403,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public boolean isApproveInspectionMenuActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Approve").size() > 0;
+		return WaitUtils.isElementPresent((WebElement) appiumdriver.findElementByAccessibilityId("Approve"));
+		//return appiumdriver.findElementsByAccessibilityId("Approve").size() > 0;
 	}
 	
 	public boolean isCreateWOInspectionMenuActionExists() {
@@ -427,14 +428,14 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		clickArchiveInspectionButton();
 	}
 
-	public void selectInspectionForAction(String inspnumber) {
-		inspectionsTable.findElementByAccessibilityId(inspnumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+	public void selectInspectionForAction(String inspectionNumber) {
+		waitInspectionsScreenLoaded();
+		inspectionsTable.findElementByAccessibilityId(inspectionNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 
 	public boolean isInspectionApproved(String inspnumber) {
+		waitInspectionsScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspnumber)));
-		wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber)));
 		return appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0;
 	}
@@ -473,10 +474,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + inspectionnumber + "']/XCUIElementTypeStaticText[@name='labelInspectionAmount']")).getAttribute("label");
-	}
-	
-	public String getInspectionTypeValue(String inspectionnumber) {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + inspectionnumber + "']/XCUIElementTypeStaticText[@name='labelInfo2']")).getAttribute("label");
 	}
 
     public void clickBackButton() {

@@ -67,6 +67,10 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	public OrderMonitorScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+
+	}
+
+	public void waitOrderMonitorScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 45);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Order Monitor")));
 	}
@@ -77,6 +81,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public OrderMonitorServiceDetailsPopup selectPanel(String panelname) {
+		waitOrderMonitorScreenLoaded();
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(panelname))).click();
 		return new OrderMonitorServiceDetailsPopup();
@@ -150,15 +155,15 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public void clicksRepairPhaseLine() {
+		waitOrderMonitorScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Repair phase"))).click();
 	}
 
 
 	public TeamWorkOrdersScreen clickBackButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
-		wait = new WebDriverWait(appiumdriver, 15);
+		waitOrderMonitorScreenLoaded();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Back")));
 		backbtn.click();
 		return new TeamWorkOrdersScreen();
@@ -169,6 +174,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public void checkMyWorkCheckbox() {
+		waitOrderMonitorScreenLoaded();
 		if (appiumdriver.findElementsByAccessibilityId("checkbox unchecked").size() > 0)
 			appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();
 	}

@@ -73,11 +73,15 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	public MyInvoicesScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+
+	}
+
+	public void waitMyInvoicesScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Invoices")));
-		wait = new WebDriverWait(appiumdriver, 10);
+		wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InvoicesPageTableLeft")));
-		wait = new WebDriverWait(appiumdriver, 10);
+		wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("InvoicesPageTableLeft")));
 	}
 
@@ -91,10 +95,8 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void selectInvoice(String invoiceNumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InvoicesPageTableLeft")));
-		wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.visibilityOf(invoicestable.findElementByAccessibilityId(invoiceNumber ))).click();
+		waitMyInvoicesScreenLoaded();
+		invoicestable.findElementByAccessibilityId(invoiceNumber ).click();
 	}
 
 	public String getPriceForInvoice(String invoiceNumber) {
