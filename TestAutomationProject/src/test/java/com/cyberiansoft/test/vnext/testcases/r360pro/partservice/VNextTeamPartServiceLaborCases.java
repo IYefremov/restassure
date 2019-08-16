@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -42,13 +43,44 @@ public class VNextTeamPartServiceLaborCases extends BaseTestCaseTeamEditionRegis
         laborServiceData.stream()
                 .map(LaborServiceData::getServiceName)
                 .collect(Collectors.toList())
-                .forEach(AvailableServicesScreenSteps::selectService);
+                .forEach(LaborServiceSteps::selectService);
         WizardScreenSteps.saveAction();
         PartServiceSteps.confirmPartInfo();
         SelectedServicesScreenSteps.switchToSelectedService();
         SelectedServicesScreenSteps.verifyServiceSelected(basicPartService.getServiceName());
         laborServiceData.stream()
                 .map(LaborServiceData::getServiceName)
+                .collect(Collectors.toList())
+                .forEach(SelectedServicesScreenSteps::verifyServiceSelected);
+        inspectionId = InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanAddLaborServiceAndAssignToPartService(String rowID,
+                                                             String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        LaborServiceData laborServiceData = workOrderData.getLaborServiceData();
+        List<PartServiceData> partServiceData = laborServiceData.getPartServiceDataList();
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        SearchSteps.textSearch(laborServiceData.getServiceName());
+        AvailableServicesScreenSteps.openServiceDetails(laborServiceData.getServiceName());
+        LaborServiceSteps.addPartService();
+        partServiceData
+                .forEach(service -> {
+                    SearchSteps.textSearch(service.getServiceName());
+                    PartServiceSteps.selectPartService(service);
+                    PartServiceSteps.acceptDetailsScreen();
+                });
+        WizardScreenSteps.saveAction();
+        PartServiceSteps.confirmPartInfo();
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.verifyServiceSelected(laborServiceData.getServiceName());
+        partServiceData.stream()
+                .map(PartServiceData::getServiceName)
                 .collect(Collectors.toList())
                 .forEach(SelectedServicesScreenSteps::verifyServiceSelected);
         inspectionId = InspectionSteps.saveInspection();
