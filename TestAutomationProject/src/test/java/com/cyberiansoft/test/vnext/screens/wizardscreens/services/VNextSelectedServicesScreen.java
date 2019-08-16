@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -139,7 +139,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     }
 
     public List<WebElement> getServicesListItems() {
-        return getSelectedServicesList().findElements(By.xpath(".//*[@action='edit-item']"));
+        return getSelectedServicesList().findElements(By.xpath(".//*[contains(@action,'edit')]"));
     }
 
     public WebElement getSelectedServicesList() {

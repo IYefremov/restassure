@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.interactions;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.LaborServiceScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.WebElement;
 
 public class LaborServiceScreenInteractions {
     public static void clickAddlaborService() {
@@ -22,7 +23,9 @@ public class LaborServiceScreenInteractions {
 
     public static void selectService(String serviceName) {
         LaborServiceScreen laborServiceScreen = new LaborServiceScreen();
-        WaitUtils.click(laborServiceScreen.getServiceList().stream().filter(service -> service.getText().contains(serviceName)).findFirst().orElseThrow(() -> new RuntimeException("Service not found in list")));
+        WebElement desiredService = WaitUtils.getGeneralFluentWait().until((driver) -> laborServiceScreen.getServiceList().stream().filter(service -> service.getText().contains(serviceName)).findFirst().orElseThrow(() -> new RuntimeException("Service not found in list")));
+        WaitUtils.click(desiredService);
+
     }
 
     public static void acceptDetailsScreen() {

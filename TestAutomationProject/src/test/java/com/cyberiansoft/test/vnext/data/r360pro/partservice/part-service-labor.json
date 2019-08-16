@@ -22,7 +22,7 @@
   "userCanAddLaborServiceAndAssignToPartService": [
     {
       "rowID": "userCanAddLaborServiceAndAssignToPartService.01",
-      "description": "TFS_ID: ",
+      "description": "TFS_ID: 89728",
       "laborService": {
         "serviceName": "rozstalnoy_enable_labor",
         "partServiceDataList": [
@@ -43,6 +43,72 @@
           }
         ]
       }
+    }
+  ],
+  "userCanRemoveOrLeftPartServiceRemovingLaborService": [
+    {
+      "rowID": "userCanAddLaborServiceAndAssignToPartService.01",
+      "description": "TFS_ID: 89730",
+      "laborServicesList": [
+        {
+          "serviceName": "rozstalnoy_enable_labor",
+          "partServiceDataList": [
+            {
+              "serviceName": "roz_part_full_cat",
+              "partPosition": "Main"
+            }
+          ]
+        },
+        {
+          "serviceName": "rozstalnoy_disable_labor",
+          "partServiceDataList": [
+            {
+              "serviceName": "rozstalnoy_enable_parts",
+              "category": "Brake",
+              "subCategory": "Control Cables",
+              "partName": {
+                "partNameList": [
+                  "Parking Brake Cable Lever"
+                ],
+                "isMultiSelect": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "userCanRemoveOrLeftLaborServiceRemovingPartService": [
+    {
+      "rowID": "userCanAddLaborServiceAndAssignToPartService.01",
+      "description": "TFS_ID: 89751",
+      "partServiceDataList": [
+        {
+          "serviceName": "roz_part_full_cat",
+          "partPosition": "Main",
+          "laborServiceDataList": [
+            {
+              "serviceName": "rozstalnoy_enable_labor"
+            }
+          ]
+        },
+        {
+          "serviceName": "rozstalnoy_enable_parts",
+          "category": "Brake",
+          "subCategory": "Control Cables",
+          "partName": {
+            "partNameList": [
+              "Parking Brake Cable Lever"
+            ],
+            "isMultiSelect": true
+          },
+          "laborServiceDataList": [
+            {
+              "serviceName": "roz_labor+part_service"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
