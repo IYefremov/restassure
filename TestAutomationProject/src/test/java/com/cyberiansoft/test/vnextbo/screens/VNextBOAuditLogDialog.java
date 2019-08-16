@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -35,6 +37,18 @@ public class VNextBOAuditLogDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='repairOrder_servicesLog' and contains(@class, 'active')]//tbody[contains(@data-bind, 'services')]//td[last()-1]")
     private WebElement servicesActivityTimeFirstRecord;
 
+    @FindBy(xpath = "//div[@id='repair-order-audit-log-modal' and @style]//ul[@id='logsTabs']/li/a[text()='ALL']")
+    private WebElement auditLogAllTab;
+
+    @FindBy(xpath = "//div[@id='repair-order-audit-log-modal' and @style]//ul[@id='logsTabs']/li/a[contains(text(), 'Phases')]")
+    private WebElement auditLogPhasesAndDepartmentsTab;
+
+    @FindBy(xpath = "//div[@id='repair-order-audit-log-modal' and @style]//ul[@id='logsTabs']/li/a[text()='Services']")
+    private WebElement auditLogServicesTab;
+
+    @FindBy(xpath = "//div[@id='repair-order-audit-log-modal' and @style]//ul[@id='logsTabs']/li/a[text()='Parts']")
+    private WebElement auditLogPartsTab;
+
     public VNextBOAuditLogDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -55,13 +69,31 @@ public class VNextBOAuditLogDialog extends VNextBOBaseWebPage {
         return auditLogsTabsList.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public VNextBOAuditLogDialog clickAuditLogsTab(String tab) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(auditLogsTabsList));
-        final WebElement element = driver.findElement(By
-                .xpath("//div[@id='repair-order-audit-log-modal' and @style]//ul[@id='logsTabs']/li/a[text()='" + tab + "']"));
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-        waitForLoading();
-        wait.until(ExpectedConditions.attributeToBe(element.findElement(By.xpath("./..")), "class", "active"));
+    private VNextBOAuditLogDialog clickAuditLogsTab(WebElement tab) {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(auditLogsTabsList);
+        Utils.clickElement(tab);
+        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForAttributeToBe(tab.findElement(By.xpath("./..")), "class", "active");
+        return this;
+    }
+
+    public VNextBOAuditLogDialog clickAuditLogsAllTab() {
+        clickAuditLogsTab(auditLogAllTab);
+        return this;
+    }
+
+    public VNextBOAuditLogDialog clickAuditLogsPhasesAndDepartmentsTab() {
+        clickAuditLogsTab(auditLogPhasesAndDepartmentsTab);
+        return this;
+    }
+
+    public VNextBOAuditLogDialog clickAuditLogsServicesTab() {
+        clickAuditLogsTab(auditLogServicesTab);
+        return this;
+    }
+
+    public VNextBOAuditLogDialog clickAuditLogsPartsTab() {
+        clickAuditLogsTab(auditLogPartsTab);
         return this;
     }
 

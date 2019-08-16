@@ -246,7 +246,7 @@ public abstract class BaseWebPage {
         } catch (Exception ignored) {}
     }
 
-    private Boolean waitForLoadingToStop() {
+    private boolean waitForLoadingToStop() {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(), 'Loading...')]")));
     }
 

@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -48,6 +49,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//*[@data-automation-id='users']")
     private WebElement usersMenu;
+
+    @FindBy(xpath = "//li[@data-automation-id='devices']")
+    private WebElement deviceManagementMenu;
 
     @FindBy(xpath = "//li[@data-automation-id='orders']")
     private WebElement repairOrdersMenu;
@@ -107,6 +111,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     public VNextBOClientsWebPage selectClientsMenu() {
         selectMenuItem(clientsMenu, MainMenuItems.SETTINGS.getMenu());
         return PageFactory.initElements(driver, VNextBOClientsWebPage.class);
+    }
+
+    public VNextBODeviceManagementWebPage selectDeviceManagementMenu() {
+        selectMenuItem(deviceManagementMenu, MainMenuItems.SETTINGS.getMenu());
+        return PageFactory.initElements(driver, VNextBODeviceManagementWebPage.class);
     }
 
     public boolean isUsersMenuItemExists() {

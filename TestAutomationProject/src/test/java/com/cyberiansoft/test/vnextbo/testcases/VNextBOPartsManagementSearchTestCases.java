@@ -570,13 +570,14 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final WebElement partActionsIcon = detailsPage.clickPartActionsIconForPart(data.getPart());
         final VNextBOOrderServiceNotesDialog notesDialog = detailsPage.openNotesDialogForPart(partActionsIcon);
 
-        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
+        Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 
-        final List<String> notesListValues = notesDialog.getNotesListValues();
+        final List<String> notesListValues = notesDialog.getRepairNotesListValues();
+        //todo fails here. Needs clarifications from V.Dubinenko or changing the steps of the test
         Assert.assertTrue(notesListValues.contains(data.getNotes()), "The Note hasn't been displayed");
 
-        notesDialog.clickNotesXbutton();
-        Assert.assertFalse(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been closed");
+        notesDialog.clickRepairNotesXbutton();
+        Assert.assertFalse(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been closed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

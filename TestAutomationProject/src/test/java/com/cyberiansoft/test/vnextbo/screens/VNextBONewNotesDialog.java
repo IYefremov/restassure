@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,9 @@ public class VNextBONewNotesDialog extends VNextBOBaseWebPage {
 
     @FindBy(id = "quick-notes-description")
     private WebElement quickNotesDescription;
+
+    @FindBy(xpath = "//label[@for='quick-notes-description']")
+    private WebElement quickNotesDescriptionLabel;
 
     @FindBy(xpath = "//button[@data-automation-id='quick-notes-add-btn' and contains(@data-bind, 'click: add')]")
     private WebElement quickNotesDialogAddButton;
@@ -34,9 +38,9 @@ public class VNextBONewNotesDialog extends VNextBOBaseWebPage {
     }
 
     public VNextBONewNotesDialog typeDescription(String description) {
-        waitShort.until(ExpectedConditions.elementToBeClickable(quickNotesDescription)).clear();
-        waitShort.until(ExpectedConditions.elementToBeClickable(quickNotesDescription)).sendKeys(description);
-        waitABit(2500);
+        Utils.clearAndType(quickNotesDescription, description);
+        waitABit(1000);
+        Utils.clickElement(quickNotesDescriptionLabel);
         return this;
     }
 
@@ -55,7 +59,7 @@ public class VNextBONewNotesDialog extends VNextBOBaseWebPage {
     }
 
     public VNextBOQuickNotesWebPage clickQuickNotesDialogCloseButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(quickNotesDialogCloseButton)).click();
+        Utils.clickElement(quickNotesDialogCloseButton);
         waitForLoading();
         return PageFactory.initElements(driver, VNextBOQuickNotesWebPage.class);
     }

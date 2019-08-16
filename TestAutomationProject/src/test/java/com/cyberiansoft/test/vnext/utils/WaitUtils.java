@@ -22,7 +22,7 @@ public class WaitUtils {
         WaitUtils.getGeneralFluentWait().until(driver -> list.size() > expectedSize);
     }
 
-    public static Boolean isElementPresent(By locator) {
+    public static boolean isElementPresent(By locator) {
         try {
             return getGeneralFluentWait()
                     .withTimeout(Duration.ofSeconds(2))
@@ -32,7 +32,7 @@ public class WaitUtils {
         }
     }
 
-    public static Boolean isElementPresent(WebElement webElement) {
+    public static boolean isElementPresent(WebElement webElement) {
         try {
             return webElement.isDisplayed();
         } catch (ElementNotFoundException | StaleElementReferenceException ex) {

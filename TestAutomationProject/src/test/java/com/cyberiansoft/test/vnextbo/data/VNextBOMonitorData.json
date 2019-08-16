@@ -487,9 +487,9 @@
         "Completed"
       ],
       "auditLogTabs": [
-        "Phases",
-        "Departments",
-        "Services Activity",
+        "ALL",
+        "Phases and Departments",
+        "Services",
         "Parts"
       ]
     }
@@ -509,9 +509,9 @@
         "Completed"
       ],
       "auditLogTabs": [
-        "Phases",
-        "Departments",
-        "Services Activity",
+        "ALL",
+        "Phases and Departments",
+        "Services",
         "Parts"
       ]
     }

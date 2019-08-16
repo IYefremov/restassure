@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -28,9 +29,13 @@ public class Utils {
     public static void clickElement(WebElement element) {
         try {
             waitForElementToBeClickable(element).click();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             clickWithJS(element);
         }
+    }
+
+    public static void clickElement(By by) {
+        clickElement(driver.findElement(by));
     }
 
     public static void clearAndType(WebElement textField, String name) {
@@ -172,6 +177,17 @@ public class Utils {
         }
     }
 
+    public static boolean isElementNotDisplayed(WebElement element, int timeoutSeconds) {
+        try {
+            WaitUtilsWebDriver.getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(timeoutSeconds))
+                    .ignoring(NoSuchElementException.class)
+                    .until(ExpectedConditions.invisibilityOf(element));
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
     public static boolean areElementsDisplayed(List<WebElement> elements) {
         try {
             WaitUtilsWebDriver.waitForVisibilityOfAllOptions(elements);
@@ -281,7 +297,7 @@ public class Utils {
     public static void sendKeysWithJS(WebElement element, String value) {
         ((JavascriptExecutor) driver).executeScript("arguments[1].value = arguments[0]; ", value, element);
         try {
-            wait.until(ExpectedConditions.textToBePresentInElement(element, value));
+            new WebDriverWait(driver, 3).until(ExpectedConditions.textToBePresentInElement(element, value));
         } catch (Exception ignored) {}
     }
 

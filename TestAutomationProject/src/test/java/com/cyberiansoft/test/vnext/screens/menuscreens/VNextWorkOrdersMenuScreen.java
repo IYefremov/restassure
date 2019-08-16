@@ -18,16 +18,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
 
-    @FindBy(xpath="//a[@data-name='changeCustomer']")
+    @FindBy(xpath = "//*[@data-name='changeCustomer']")
     private WebElement changecustomerbtn;
 
     @FindBy(xpath="//a[@handler='_deleteWorkOrder']")
     private WebElement deleteorderbtn;
 
-    @FindBy(xpath="//a[@data-name='edit']")
+    @FindBy(xpath = "//*[@data-name='edit']")
     private WebElement editinspectionbtn;
 
-    @FindBy(xpath="//a[@data-name='invoice']")
+    @FindBy(xpath = "//*[@data-name='invoice']")
     private WebElement createinvoicemenuitem;
 
     public VNextWorkOrdersMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
@@ -60,7 +60,7 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
     }
 
     public boolean isEditWorkOrderMenuButtonExists() {
-        return appiumdriver.findElement(By.xpath("//a[@data-name='edit']")).isDisplayed();
+        return appiumdriver.findElement(By.xpath("//*[@data-name='edit']")).isDisplayed();
     }
 
     public VNextWorkOrdersScreen clickCloseWorkOrdersMenuButton() {

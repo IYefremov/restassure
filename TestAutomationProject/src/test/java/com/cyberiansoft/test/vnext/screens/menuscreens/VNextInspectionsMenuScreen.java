@@ -20,34 +20,34 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 
-    @FindBy(xpath = "//a[@data-name='view']")
+    @FindBy(xpath = "//*[@data-name='view']")
     private WebElement viewinspectionbtn;
 
-    @FindBy(xpath = "//a[@data-name='edit']")
+    @FindBy(xpath = "//*[@data-name='edit']")
     private WebElement editinspectionbtn;
 
     @FindBy(xpath = "//a[@handler='_createOrder']")
     private WebElement createwoinspectionbtn;
 
-    @FindBy(xpath = "//a[@data-name='notes']")
+    @FindBy(xpath = "//*[@data-name='notes']")
     private WebElement notesinspectionbtn;
 
-    @FindBy(xpath = "//a[@data-name='refresh']")
+    @FindBy(xpath = "//*[@data-name='refresh']")
     private WebElement refreshpicturesinspectionbtn;
 
-    @FindBy(xpath = "//a[@data-name='email']")
+    @FindBy(xpath = "//*[@data-name='email']")
     private WebElement emailinspectionbtn;
 
-    @FindBy(xpath = "//a[@data-name='archive']")
+    @FindBy(xpath = "//*[@data-name='archive']")
     private WebElement archiveinspectionbtn;
 
-    @FindBy(xpath = "//a[@data-name='approve']")
+    @FindBy(xpath = "//*[@data-name='approve']")
     private WebElement approveinspectionbtn;
 
-    @FindBy(xpath = "//a[@data-name='addSupplement']")
+    @FindBy(xpath = "//*[@data-name='addSupplement']")
     private WebElement addsupplementbtn;
 
-    @FindBy(xpath = "//a[@data-name='changeCustomer']")
+    @FindBy(xpath = "//*[@data-name='changeCustomer']")
     private WebElement changecustomerbtn;
 
     @FindBy(xpath = "//div[@class='close-popup close-actions']")

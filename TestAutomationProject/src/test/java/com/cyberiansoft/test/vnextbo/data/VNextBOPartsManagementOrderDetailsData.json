@@ -90,8 +90,8 @@
         "Quote Received",
         "Ordered",
         "Re-Ordered",
-        "Received (final)",
-        "RTV Complete (final)",
+        "Received",
+        "RTV Complete",
         "Refused",
         "Audited"
       ]

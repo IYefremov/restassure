@@ -22,7 +22,7 @@
     {
       "rowID": "verifyUserCanAddNewParts.01",
       "description": "Test Case 83857:User can Add new parts",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "service": "_ multiple presets (required, no prefix)",
       "serviceDescription": "Test123",
@@ -39,7 +39,7 @@
     {
       "rowID": "verifyUserCanChangeStatusOfThePartToOrdered.01",
       "description": "Test Case 83968:User can change Status of the Part to \"Ordered\"",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "status": "Ordered"
     }
@@ -49,7 +49,7 @@
     {
       "rowID": "verifyUserCanDuplicateThePart.01",
       "description": "Test Case 84003:User can Duplicate the Part",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414"
     }
   ],
@@ -58,7 +58,7 @@
     {
       "rowID": "verifyUserCanDeleteThePart.01",
       "description": "Test Case 84007:User can Delete the Part",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "partItems": [
         "Catalog",
@@ -71,7 +71,7 @@
     {
       "rowID": "verifyUserCanAddAndDeleteLabor.01",
       "description": "Test Case 83937:User can Add labour. Test Case 83938:User can delete labour.",
-      "location": "Best Location",
+      "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "labor": "Labor AM"
     }
@@ -138,13 +138,13 @@
       "rowID": "verifyUserCanEditAddressFields.01",
       "description": "Test Case 84405: Verify user can open \"Settings → Clients\" with full set of elements. Test Case 84504:User can edit \"Address\" fields. Test Case 84535: User can edit detailes of \"Retail\" client. Test Case 84498: User can edit \"Client info\" of client. Test Case 84499: User can edit \"Account info\" fields. Test Case 84505: User can edit \"Email Options\" fields. Test Case 84506: User can edit \"Preferences\" fields",
       "search": "bentley",
-      "clientInfoData": {
+      "employee": {
         "clientType": "Retail",
         "companyName": "000 Bentley service",
-        "firstName": "Slaverto",
-        "lastName": "Big-Man",
-        "email": "bent@wkcj",
-        "phone": "3566567"
+        "employeeFirstName": "Slaverto",
+        "employeeLastName": "Big-Man",
+        "employeeEmail": "bent@wkcj",
+        "phoneNumber": "3566567"
       },
       "types": [
         "Bentley service",
@@ -178,6 +178,19 @@
       },
       "defaultArea": "Anastasia_Area",
       "notes": "Lorem trulala"
+    }
+  ],
+
+  "verifyUserCanDeleteLicenceOfDevice": [
+    {
+      "rowID": "verifyUserCanDeleteLicenceOfDevice.01",
+      "description": "Test Case 85465: Verify user can open \"Settings → Device Management\" with full set of elements. Test Case 85467: User can add New Device. Test Case 85706: User can Delete license of device.",
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov"
     }
   ]
 }
