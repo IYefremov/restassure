@@ -1,7 +1,10 @@
 package com.cyberiansoft.test.dataclasses;
 
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 public class LaborServiceData {
@@ -26,6 +29,11 @@ public class LaborServiceData {
 
     @JsonProperty("laborServicePriceVerify")
     String laborServicePriceVerify;
+
+    @JsonProperty("partServiceDataList")
+    List<PartServiceData> partServiceDataList;
+
+
 
     public String getLaborServicePrice() {
         return laborServiceRate + " x " + laborServiceTime;

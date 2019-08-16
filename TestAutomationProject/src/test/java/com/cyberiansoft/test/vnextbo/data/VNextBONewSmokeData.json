@@ -184,13 +184,21 @@
   "verifyUserCanDeleteLicenceOfDevice": [
     {
       "rowID": "verifyUserCanDeleteLicenceOfDevice.01",
-      "description": "Test Case 85465: Verify user can open \"Settings → Device Management\" with full set of elements. Test Case 85467: User can add New Device. Test Case 85706: User can Delete license of device.",
+      "description": "Test Case 85465: Verify user can open \"Settings → Device Management\" with full set of elements. Test Case 85467: User can add New Device. Test Case 85720: User can delete Device from the \"Pending Registrations\" list.",
       "minutes": "22",
       "hours": "1",
       "nickname": "Autotest",
       "team": "01_TimeRep_team",
       "timeZone": "(UTC-10:00) Hawaii",
       "technician": "Alex Maximov"
+    }
+  ],
+
+  "verifyUserCanUncoverHideNewRegistrationCode": [
+    {
+      "rowID": "verifyUserCanUncoverHideNewRegistrationCode.01",
+      "description": "Test Case 85694: User can uncover/hide new Registration Code.",
+      "deviceName": "jj"
     }
   ]
 }

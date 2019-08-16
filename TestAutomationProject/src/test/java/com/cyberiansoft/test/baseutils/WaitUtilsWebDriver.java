@@ -188,8 +188,12 @@ public class WaitUtilsWebDriver {
         }
     }
 
-    public static Boolean waitForAttributeToBe(WebElement element, String attribute, String value) {
+    public static boolean waitForAttributeToBe(WebElement element, String attribute, String value) {
         return wait.until(ExpectedConditions.attributeToBe(element, attribute, value));
+    }
+
+    public static boolean waitForAttributeToBe(WebElement element, String attribute, String value, int timeout) {
+        return new WebDriverWait(driver, timeout).until(ExpectedConditions.attributeToBe(element, attribute, value));
     }
 
     public static void waitForInputFieldValueIgnoringException(WebElement element, String value) {
