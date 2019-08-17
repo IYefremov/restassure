@@ -11,10 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VNextCustomersMenuScreen extends VNextBasicMenuScreen {
 
-    @FindBy(xpath="//a[@data-name='edit']")
+    @FindBy(xpath = "//*[@data-name='edit']")
     private WebElement editCustomerbtn;
 
-    @FindBy(xpath="//a[@data-name='presetCustomer']")
+    @FindBy(xpath = "//*[@data-name='presetCustomer']")
     private WebElement presetCustomerbtn;
 
     public VNextCustomersMenuScreen(AppiumDriver<MobileElement> appiumdriver) {

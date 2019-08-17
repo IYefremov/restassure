@@ -105,7 +105,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
 
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber));
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        Assert.assertFalse(inspectionsMenuScreen.isAddSupplementInspectionMenuItemPresent());
+        WaitUtils.elementShouldBeVisible(inspectionsMenuScreen.getAddsupplementbtn(), false);
         inspectionsMenuScreen.clickCloseInspectionMenuButton();
         inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsScreen.clickBackButton();

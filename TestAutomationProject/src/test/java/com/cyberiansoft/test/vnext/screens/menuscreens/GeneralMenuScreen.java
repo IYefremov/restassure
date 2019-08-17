@@ -11,10 +11,10 @@ import java.util.List;
 
 @Getter
 public class GeneralMenuScreen extends VNextBaseScreen {
-    @FindBy(xpath = "//a[contains(@class,'action-item')]")
+    @FindBy(xpath = "//*[contains(@class,'action-tile')]")
     private List<WebElement> menuItems;
 
-    @FindBy(xpath = "//div[contains(@class,'close-actions')]")
+    @FindBy(xpath = "//*[contains(@class,'actions-menu-close')]")
     private WebElement closeButton;
 
     public void selectMenuItem(MenuItems menuItem) {

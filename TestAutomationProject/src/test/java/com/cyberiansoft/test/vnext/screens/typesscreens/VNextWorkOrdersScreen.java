@@ -35,7 +35,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[@data-autotests-id='work orders-list']")
     private WebElement workorderslist;
 
-    @FindBy(xpath = "//a[@handler='_createInvoice']")
+    @FindBy(xpath = "//*[@data-name='invoice']")
     private WebElement createinvoicemenu;
 
     @FindBy(xpath = "//*[@action='multiselect-actions-create-invoice']")

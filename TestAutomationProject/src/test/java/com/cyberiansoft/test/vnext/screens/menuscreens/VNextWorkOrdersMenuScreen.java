@@ -21,7 +21,7 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
     @FindBy(xpath = "//*[@data-name='changeCustomer']")
     private WebElement changecustomerbtn;
 
-    @FindBy(xpath="//a[@handler='_deleteWorkOrder']")
+    @FindBy(xpath = "//*[@data-name='delete'")
     private WebElement deleteorderbtn;
 
     @FindBy(xpath = "//*[@data-name='edit']")
