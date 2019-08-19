@@ -26,7 +26,7 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
     @FindBy(xpath = "//*[@data-name='edit']")
     private WebElement editinspectionbtn;
 
-    @FindBy(xpath = "//a[@handler='_createOrder']")
+    @FindBy(xpath = "//*[@data-name='createOrder']")
     private WebElement createwoinspectionbtn;
 
     @FindBy(xpath = "//*[@data-name='notes']")

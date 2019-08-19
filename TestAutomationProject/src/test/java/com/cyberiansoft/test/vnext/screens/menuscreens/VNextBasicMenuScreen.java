@@ -35,6 +35,6 @@ public class VNextBasicMenuScreen extends VNextBaseScreen {
     }
 
     public void clickCloseMenuButton() {
-        tap(menuscreen.findElement(By.xpath(".//div[@class='close-popup close-actions']")));
+        tap(menuscreen.findElement(By.xpath("//*[@class='actions-menu-close']")));
     }
 }

@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -142,7 +143,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestCaseTeamEditionR
                 InspectionStatuses.NEW.getInspectionStatusValue());
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
-        Assert.assertFalse( inspectionsMenuScreen.isEditInspectionMenuButtonExists());
+        WaitUtils.elementShouldBeVisible(inspectionsMenuScreen.getEditinspectionbtn(), false);
         inspectionsMenuScreen.clickCloseInspectionMenuButton();
 
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspNumber),

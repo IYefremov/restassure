@@ -17,13 +17,13 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
     @FindBy(xpath="//div[@data-parent-action='payMulti']")
     private WebElement paymenuscreeen;
 
-    @FindBy(xpath="//a[@data-name='payCreditCard']")
+    @FindBy(xpath = "//*[@data-name='payCreditCard']")
     private WebElement paycreditcardbtn;
 
-    @FindBy(xpath="//a[@data-name='paycachCheck']")
+    @FindBy(xpath = "//*[@data-name='payCashCheck']")
     private WebElement paycheckbtn;
 
-    @FindBy(xpath="//a[@data-name='payPOROChildren']")
+    @FindBy(xpath = "//*[@data-name='payPOROChildren']")
     private WebElement invoicepayporomenubtn;
 
     public VNextPayMenu(AppiumDriver<MobileElement> appiumdriver) {

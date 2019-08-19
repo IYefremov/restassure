@@ -16,34 +16,34 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 
-	@FindBy(xpath="//a[@data-name='email']")
+	@FindBy(xpath = "//*[@data-name='email']")
 	private WebElement emailinvoicebtn;
 
-	@FindBy(xpath="//a[@data-name='edit']")
+	@FindBy(xpath = "//*[@data-name='edit']")
 	private WebElement editinvoicebtn;
-	
-	@FindBy(xpath="//a[@data-name='approve']")
+
+	@FindBy(xpath = "//*[@data-name='approve']")
 	private WebElement approveinvoicebtn;
-	
-	@FindBy(xpath="//a[@handler='_voidInvoice']")
+
+	@FindBy(xpath = "//*[@data-name='void']")
 	private WebElement voidinvoicebtn;
-	
-	@FindBy(xpath="//a[@handler='_changePO']")
+
+	@FindBy(xpath = "//*[@data-name='changePO']")
 	private WebElement invoicechangeponumbtn;
-	
-	@FindBy(xpath="//a[@handler='_notes']")
+
+	@FindBy(xpath = "//*[@data-name='notes']")
 	private WebElement invoicenotesbtn;
-	
-	@FindBy(xpath="//a[@handler='_refreshPictures']")
+
+	@FindBy(xpath = "//*[@data-name='refresh']")
 	private WebElement invoicerfreshpicturesbtn;
 
-	@FindBy(xpath="//a[@data-name='payMulti']")
+	@FindBy(xpath = "//*[@data-name='payMulti']")
 	private WebElement invoicepaymenubtn;
 
-	@FindBy(xpath="//a[@data-name='payPORO']")
+	@FindBy(xpath = "//*[@data-name='payPORO']")
 	private WebElement invoicepayporomenubtn;
 
-	@FindBy(xpath="//a[@data-name='cancel']")
+	@FindBy(xpath = "//*[@data-name='cancel']")
 	private WebElement invoicecancelmenubtn;
 
 	
@@ -68,7 +68,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 
 	public boolean isApproveInvoiceMenuItemExists() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@data-name='approve']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-name='approve']")));
 		return approveinvoicebtn.isDisplayed();
 	}
 	
