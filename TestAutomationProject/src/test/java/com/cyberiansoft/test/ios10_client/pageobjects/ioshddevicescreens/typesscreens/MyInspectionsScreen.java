@@ -266,6 +266,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void selectInspectionInTable(String inspectionnumber) {
+		waitInspectionsScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspectionnumber)));
 		wait = new WebDriverWait(appiumdriver, 10);
@@ -296,8 +297,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	public void clickActionButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")));
-		wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")));
+		//wait = new WebDriverWait(appiumdriver, 15);
+		//wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")));
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")).click();
 	}
 
@@ -308,6 +309,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickFilterButton() {
+		waitInspectionsScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("filter"))).click();
 	}
@@ -403,8 +405,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public boolean isApproveInspectionMenuActionExists() {
-		return WaitUtils.isElementPresent((WebElement) appiumdriver.findElementByAccessibilityId("Approve"));
-		//return appiumdriver.findElementsByAccessibilityId("Approve").size() > 0;
+		return appiumdriver.findElementsByAccessibilityId("Approve").size() > 0;
 	}
 	
 	public boolean isCreateWOInspectionMenuActionExists() {

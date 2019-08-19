@@ -173,6 +173,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public SelectedServiceBundleScreen openSelectBundleServiceDetails(String servicename) {
+		waitServicesScreenLoaded();
 		IOSElement tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("SelectedServicesView");
 		tablelist.findElement(MobileBy.AccessibilityId(servicename)).click();
 		return new SelectedServiceBundleScreen();
@@ -337,6 +338,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 	
 	public void clickTechnicianToolbarIcon() {
+		waitServicesScreenLoaded();
 		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("technician")).click();
 	}
 	

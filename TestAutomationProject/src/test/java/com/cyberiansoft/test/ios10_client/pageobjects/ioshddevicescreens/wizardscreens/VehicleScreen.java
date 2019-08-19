@@ -266,6 +266,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 
 	public void setTech(String _tech)  {
+		waitVehicleScreenLoaded();
 		clickTech();
 		appiumdriver.findElementByName(_tech).click();
 	}
@@ -305,6 +306,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 
 	public TechniciansPopup clickTech() {
+		waitVehicleScreenLoaded();
 		MobileElement vehicleTable = (MobileElement) appiumdriver.findElementByAccessibilityId("VehicleTable");
 		if (!vehicleTable.findElementByAccessibilityId("Tech").isDisplayed())
 			scrollToElement(vehicleTable.findElementByAccessibilityId("Tech"));
@@ -325,6 +327,7 @@ public class VehicleScreen extends BaseWizardScreen {
 	}
 	
 	public void setPO(String po)  {
+		waitVehicleScreenLoaded();
 		appiumdriver.findElementByAccessibilityId("PO#").click();
 		appiumdriver.findElementByAccessibilityId("PO#").sendKeys(po + "\n");
 	}

@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ApproveInspectionsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.OrderMonitorScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectEmployeePopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestdetailsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
@@ -65,6 +62,7 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickOnWO(String wonumber) {
+		waitTeamWorkOrdersScreenLoaded();
 		appiumdriver.findElementByAccessibilityId(wonumber).click();
 	}
 
@@ -92,8 +90,6 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
 		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("invoice new")).click();
-		//wait = new WebDriverWait(appiumdriver, 5);
-		//wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("invoice new"))).click();
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 
@@ -219,6 +215,15 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public <T extends IBaseWizardScreen>T selectInvoiceType(IInvoicesTypes invoiceType) {
 		clickInvoiceType(invoiceType);
 		return invoiceType.getFirstVizardScreen();
+	}
+
+	public void approveWorkOrderWithoutSignature(String workOrderNumber, String employee, String password) {
+		waitTeamWorkOrdersScreenLoaded();
+		selectWorkOrderForApprove(workOrderNumber);
+		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
+		selectEmployeePopup.selectEmployeeAndTypePassword(employee, password);
+		ApproveSummaryPopup approveSummaryPopup = new ApproveSummaryPopup();
+		approveSummaryPopup.clickApproveButton();
 	}
 
 }

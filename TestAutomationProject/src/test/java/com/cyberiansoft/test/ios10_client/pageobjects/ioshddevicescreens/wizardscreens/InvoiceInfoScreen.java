@@ -126,6 +126,26 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Done")));
 		return this;
 	}
+
+	public InvoiceInfoScreen addTeamWorkOrder(String wonumber) {
+		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByAccessibilityId("Insert").click();
+
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeSegmentedControl")));
+		appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Team")).click();
+
+
+		List<WebElement> tbls = appiumdriver.findElements(MobileBy.className("XCUIElementTypeTable"));
+		wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'TeamInvoiceOrdersView' and type = 'XCUIElementTypeTable'")));
+		IOSElement invoicesOrdersTable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'TeamInvoiceOrdersView' and type = 'XCUIElementTypeTable'"));
+		invoicesOrdersTable.findElementByAccessibilityId(wonumber).findElementByAccessibilityId("unselected").click();
+		appiumdriver.findElementByAccessibilityId("Done").click();
+
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Done")));
+		return this;
+	}
 	
 	public String getInvoiceNumber() {
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");

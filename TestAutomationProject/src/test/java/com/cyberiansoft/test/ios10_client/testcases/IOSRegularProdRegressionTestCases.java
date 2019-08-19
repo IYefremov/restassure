@@ -38,10 +38,10 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         mobilePlatform = MobilePlatform.IOS_REGULAR;
         initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
         DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,
-                ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "oksi opr",
+                ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "oks",
                 envType);
 
-        RegularMainScreenSteps.userLogin("Oksana Manager", iOSInternalProjectConstants.USER_PASSWORD);
+        RegularMainScreenSteps.userLogin("Test User", "1111");
         RegularHomeScreenSteps.navigateToSettingsScreen();
         RegularSettingsScreenSteps.setShowAvailableSelectedServicesOn();
         RegularNavigationSteps.navigateBackScreen();

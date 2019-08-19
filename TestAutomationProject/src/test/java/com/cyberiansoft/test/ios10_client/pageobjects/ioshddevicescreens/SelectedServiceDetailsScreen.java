@@ -72,7 +72,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	@iOSXCUITFindBy(accessibility = "ClarificationBox_VehiclePartSelector")
 	private IOSElement vehiclepartscell;
 
-	@iOSXCUITFindBy(accessibility = "Part")
+	@iOSXCUITFindBy(accessibility = "ClarificationBox_PartSelector")
 	private IOSElement servicepartscell;
 
 	@iOSXCUITFindBy(accessibility = "Vehicle Parts")
@@ -138,8 +138,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public String getServicePartValue() {
-		WebElement servicepartfld = ((IOSElement) appiumdriver.findElementByAccessibilityId("Part")).findElementsByClassName("XCUIElementTypeStaticText").get(1);
-		return servicepartfld.getAttribute("value");
+		return servicepartscell.getAttribute("label");
 	}
 
 	public void answerQuestion(String answer) {
