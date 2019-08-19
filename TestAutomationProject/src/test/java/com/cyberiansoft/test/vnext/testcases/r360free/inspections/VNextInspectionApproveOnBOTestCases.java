@@ -56,10 +56,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-		final VehicleInfoData vehicleInfoData = inspectionData.getVehicleInfo();
-
-		VehicleInfoScreenValidations.validateVehicleInfo(vehicleInfoData);
-		VehicleInfoScreenSteps.setVehicleInfo(vehicleInfoData);
+		VehicleInfoScreenValidations.validateVehicleInfo(inspectionData.getVehicleInfo());
 
 		final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
 		vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
@@ -132,9 +129,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-		final VehicleInfoData vehicleInfoData = inspectionData.getVehicleInfo();
-		VehicleInfoScreenValidations.validateVehicleInfo(vehicleInfoData);
-		VehicleInfoScreenSteps.setVehicleInfo(vehicleInfoData);
+		VehicleInfoScreenValidations.validateVehicleInfo(inspectionData.getVehicleInfo());
 
 		final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
 		vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
