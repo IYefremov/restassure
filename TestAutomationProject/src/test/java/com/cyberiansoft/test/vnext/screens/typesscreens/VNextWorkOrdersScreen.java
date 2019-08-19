@@ -107,7 +107,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public boolean isWorkOrderExists(String woNumber) {
-        clearSearchField();
+        //clearSearchField();
         return workorderslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + woNumber + "']")).size() > 0;
     }
 

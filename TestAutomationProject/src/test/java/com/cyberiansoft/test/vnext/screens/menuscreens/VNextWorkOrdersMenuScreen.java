@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,12 +17,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Getter
 public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
 
     @FindBy(xpath = "//*[@data-name='changeCustomer']")
     private WebElement changecustomerbtn;
 
-    @FindBy(xpath = "//*[@data-name='delete'")
+    @FindBy(xpath = "//*[@data-name='delete']")
     private WebElement deleteorderbtn;
 
     @FindBy(xpath = "//*[@data-name='edit']")

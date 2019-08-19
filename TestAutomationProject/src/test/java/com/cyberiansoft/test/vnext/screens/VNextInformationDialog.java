@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -157,7 +158,8 @@ public class VNextInformationDialog extends VNextBaseScreen {
     }
 
     public void clickFinalButton() {
-        tap(modaldlg.findElement(By.xpath(".//span[ text()='Final']")));
+        BaseUtils.waitABit(2000);
+        WaitUtils.click(modaldlg.findElement(By.xpath(".//span[text()='Final']")));
     }
 
     public void clickSingleInvoiceButton() {
