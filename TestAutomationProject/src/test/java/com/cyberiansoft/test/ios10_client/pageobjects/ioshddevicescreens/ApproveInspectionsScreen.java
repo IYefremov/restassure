@@ -137,6 +137,8 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	
 	public void approveInspectionApproveAllAndSignature(String inspnum) {
 		selectInspectionForApprove(inspnum);
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveAll")));
 		approveallbtn.click();
 		clickSaveButton();
 		drawSignatureAfterSelection();

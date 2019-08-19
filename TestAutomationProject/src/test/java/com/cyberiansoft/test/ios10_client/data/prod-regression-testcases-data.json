@@ -23,19 +23,7 @@
           "moneyServices": [
             {
               "serviceName": "Dye_Panel",
-              "servicePrice": "20",
-              "questionsData": [
-                {
-                  "questionName": "QuestionTypeLogical_Review Car",
-                  "logicalQuestion": true,
-                  "logicalQuestionValue": false
-                },
-                {
-                  "questionName": "QuestionTypeText_Question2",
-                  "questionAnswer": "12345",
-                  "textQuestion": true
-                }
-              ]
+              "servicePrice": "20"
             },
             {
               "serviceName": "Special Discount",

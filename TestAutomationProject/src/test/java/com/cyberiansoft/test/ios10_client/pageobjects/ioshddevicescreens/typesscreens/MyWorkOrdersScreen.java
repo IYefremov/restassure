@@ -213,8 +213,8 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		}
 	}
 	
-	public MyWorkOrdersScreen changeCustomerForWorkOrder(String wonumber, String customer) {
-		selectWorkOrder(wonumber);
+	public MyWorkOrdersScreen changeCustomerForWorkOrder(String workOrderNumber, String customer) {
+		selectWorkOrder(workOrderNumber);
 		clickChangeCustomerPopupMenu();
 		selectCustomer(customer);
 		return this;
@@ -278,43 +278,44 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		return elementExists(autosavedworkorder);
 	}
 	
-	public void selectWorkOrderForAction(String woNumber) {
-		appiumdriver.findElementByAccessibilityId(woNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+	public void selectWorkOrderForAction(String workOrderNumber) {
+		appiumdriver.findElementByAccessibilityId(workOrderNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 	
-	public SelectEmployeePopup clickWorkOrderForApproveButton(String woNumber) {
-		appiumdriver.findElementByAccessibilityId(woNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+	public SelectEmployeePopup clickWorkOrderForApproveButton(String workOrderNumber) {
+		appiumdriver.findElementByAccessibilityId(workOrderNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 		return new SelectEmployeePopup();
 	}
 	
-	public MyWorkOrdersScreen approveWorkOrderWithoutSignature(String wo, String employee, String pwd) {
-		SelectEmployeePopup selectemployeepopup = clickWorkOrderForApproveButton(wo);
-		selectemployeepopup.selectEmployeeAndTypePassword(employee, pwd);
+	public MyWorkOrdersScreen approveWorkOrderWithoutSignature(String workOrderNumber, String employee, String password) {
+		waitWorkOrdersScreenLoaded();
+		SelectEmployeePopup selectemployeepopup = clickWorkOrderForApproveButton(workOrderNumber);
+		selectemployeepopup.selectEmployeeAndTypePassword(employee, password);
 		ApproveSummaryPopup approvepopup = new ApproveSummaryPopup();
 		approvepopup.clickApproveButton();
 
 		return this;
 	}
 	
-	public void selectWorkOrder(String wonumber) {
+	public void selectWorkOrder(String workOrderNumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("label = '" +
-				wonumber + "' and type = 'XCUIElementTypeStaticText'")));
+				workOrderNumber + "' and type = 'XCUIElementTypeStaticText'")));
 		wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("label = '" +
-				wonumber + "' and type = 'XCUIElementTypeStaticText'")));
+				workOrderNumber + "' and type = 'XCUIElementTypeStaticText'")));
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("label = '" +
-				wonumber + "' and type = 'XCUIElementTypeStaticText'")).click();
+				workOrderNumber + "' and type = 'XCUIElementTypeStaticText'")).click();
 	}
 	
-	public void selectWorkOrderForEidt(String wonumber) {		
-		selectWorkOrder(wonumber);
+	public void selectWorkOrderForEidt(String workOrderNumber) {		
+		selectWorkOrder(workOrderNumber);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 	
-	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String wonumber) {
-		selectWorkOrder(wonumber);
+	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String workOrderNumber) {
+		selectWorkOrder(workOrderNumber);
 		if (!appiumdriver.findElementByAccessibilityId("Tech Revenue").isDisplayed()) {
 			swipeTableUp(appiumdriver.
 					findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Tech Revenue']/.."),
@@ -340,13 +341,13 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		return new TechniciansPopup();
 	}
 	
-	public void selectWorkOrderForCopyVehicle(String wonumber) {
-		selectWorkOrder(wonumber);
+	public void selectWorkOrderForCopyVehicle(String workOrderNumber) {
+		selectWorkOrder(workOrderNumber);
 		appiumdriver.findElementByAccessibilityId("Copy Vehicle").click();
 	}
 	
-	public void selectWorkOrderForAddingNotes(String wonumber) {
-		selectWorkOrder(wonumber);
+	public void selectWorkOrderForAddingNotes(String workOrderNumber) {
+		selectWorkOrder(workOrderNumber);
 		appiumdriver.findElementByAccessibilityId("Notes").click();
 	}
 	
@@ -376,12 +377,12 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId(workOrderId).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
 	}
 	
-	public String getPriceValueForWO(String wonumber) {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeStaticText[@name='labelOrderAmount']").getAttribute("value");
+	public String getPriceValueForWO(String workOrderNumber) {
+		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + workOrderNumber + "']/XCUIElementTypeStaticText[@name='labelOrderAmount']").getAttribute("value");
 	}
 
-	public boolean woExists(String wonumber) {
-		return elementExists(wonumber);
+	public boolean woExists(String workOrderNumber) {
+		return elementExists(workOrderNumber);
 	}
 
 	public void clickInvoiceIcon() {
@@ -428,16 +429,16 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		return elementExists(By.name(menuitem));
 	}
 	
-	public boolean isWorkOrderHasApproveIcon(String wonumber) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_37')]")).size() > 0;
+	public boolean isWorkOrderHasApproveIcon(String workOrderNumber) {
+		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + workOrderNumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_37')]")).size() > 0;
 	}
 	
-	public boolean isWorkOrderHasActionIcon(String wonumber) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_38')]")).size() > 0;
+	public boolean isWorkOrderHasActionIcon(String workOrderNumber) {
+		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + workOrderNumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_38')]")).size() > 0;
 	}
 	
-	public void selectWorkOrderForApprove(String wonumber) {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'EntityInfoButtonUnchecked')]")).click();
+	public void selectWorkOrderForApprove(String workOrderNumber) {
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + workOrderNumber + "']/XCUIElementTypeOther[contains(@name, 'EntityInfoButtonUnchecked')]")).click();
 	}
 	
 	public MyWorkOrdersScreen approveWorkOrder(String wo, String employee, String pwd) {
