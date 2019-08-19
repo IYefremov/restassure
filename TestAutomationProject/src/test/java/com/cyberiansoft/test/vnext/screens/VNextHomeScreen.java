@@ -24,8 +24,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Getter
 public class VNextHomeScreen extends VNextBaseScreen {
 
-    final String quemessagexpath = "//span[@class='letter-number']";
-
     @FindBy(xpath = "//div[@data-page='null']")
     private WebElement rootElement;
 
@@ -56,7 +54,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='show-status']")
     private WebElement statuslist;
 
-    @FindBy(xpath = quemessagexpath)
+    @FindBy(xpath = "//*[@action='messager-send']/span[@status='messager']")
     private WebElement queuemessage;
 
     @FindBy(xpath = "//*[@action='messager-send']")
@@ -131,6 +129,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
     }
 
     public String getQueueMessageValue() {
+        WaitUtils.elementShouldBeVisible(queuemessage, true);
         return queuemessage.getText();
     }
 
