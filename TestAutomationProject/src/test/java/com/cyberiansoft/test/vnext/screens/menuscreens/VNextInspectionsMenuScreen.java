@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -137,7 +138,7 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
     }
 
     public boolean isAddSupplementInspectionMenuItemPresent() {
-        return addsupplementbtn.isDisplayed();
+        return WaitUtils.isElementPresent(addsupplementbtn);
     }
 
     public boolean isChangeCustomerMenuPresent() {

@@ -277,7 +277,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestCaseTeamEditionRegist
         List<ServiceData> services = inspectionData.getServicesList();
         for (ServiceData service : services)
             availableServicesScree.selectService(service.getServiceName());
-        inspectionsScreen = availableServicesScree.saveInspectionViaMenu();
+        availableServicesScree.clickSaveInspectionMenuButton();
 
         Assert.assertEquals(InspectionStatuses.NEW.getInspectionStatusValue(), inspectionsScreen.getInspectionStatusValue(inspectionNumber));
         inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
