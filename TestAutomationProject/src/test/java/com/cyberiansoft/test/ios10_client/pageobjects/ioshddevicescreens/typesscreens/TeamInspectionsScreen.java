@@ -76,6 +76,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public boolean isInspectionApproved(String inspnumber) {
+		waitTeamInspectionsScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(inspnumber)));
 		return appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0;

@@ -980,7 +980,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		RegularInspectionsSteps.saveInspection();
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
-		vehicleScreen = new RegularVehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
 
 			RegularPriceMatrixScreen priceMatrixScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());

@@ -650,6 +650,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertEquals(errorDialog.clickOKButtonAndGetMessage(),
                 VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
         AppiumUtils.setAndroidNetworkOn();
+        GeneralSteps.closeErrorDialog();
         inspectionsScreen.switchToMyInspectionsView();
         inspectionsScreen.clickBackButton();
     }
@@ -722,7 +723,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        AppiumUtils.clickHardwareBackButton();
+        MenuSteps.closeMenu();
         new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
         inspectionsScreen.clickBackButton();
     }
@@ -767,7 +768,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertTrue(vehicleInfoScreen.isSaveButtonVisible());
         Assert.assertTrue(vehicleInfoScreen.isCancelButtonVisible());
         Assert.assertTrue(vehicleInfoScreen.isNotesButtonVisible());
-        AppiumUtils.clickHardwareBackButton();
+        MenuSteps.closeMenu();
         vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
@@ -782,7 +783,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertTrue(availableServicesScreen.isSaveButtonVisible());
         Assert.assertTrue(availableServicesScreen.isCancelButtonVisible());
         Assert.assertTrue(availableServicesScreen.isNotesButtonVisible());
-        AppiumUtils.clickHardwareBackButton();
+        MenuSteps.closeMenu();
         availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
         availableServicesScreen.saveInspectionViaMenu();
         inspectionsScreen.clickBackButton();
@@ -839,7 +840,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertTrue(vehicleInfoScreen.isSaveButtonVisible());
         Assert.assertTrue(vehicleInfoScreen.isCancelButtonVisible());
         Assert.assertTrue(vehicleInfoScreen.isNotesButtonVisible());
-        AppiumUtils.clickHardwareBackButton();
+        MenuSteps.closeMenu();
         vehicleInfoScreen.clickCancelMenuItem();
         VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         informationDialog.clickInformationDialogNoButton();
@@ -868,7 +869,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestCaseTeamEditionRegist
         Assert.assertTrue(availableServicesScreen.isSaveButtonVisible());
         Assert.assertTrue(availableServicesScreen.isCancelButtonVisible());
         Assert.assertTrue(availableServicesScreen.isNotesButtonVisible());
-        AppiumUtils.clickHardwareBackButton();
+        MenuSteps.closeMenu();
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(inspectionNote);
         ScreenNavigationSteps.pressBackButton();

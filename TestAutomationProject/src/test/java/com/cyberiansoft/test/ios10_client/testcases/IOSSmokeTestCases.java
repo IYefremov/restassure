@@ -453,8 +453,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		}
 		priceMatrixScreen.clickSaveButton();
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(matrixServiceData.getMatrixServiceName()));
-
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		for (ServiceData serviceData : workOrderData.getSelectedServices()) {
 			Assert.assertTrue(orderSummaryScreen.checkServiceIsSelected(serviceData.getServiceName()));
 		}
@@ -467,7 +467,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderDataCopiedServices.getVehicleInfoData().getVINNumber());
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.verifyServicesAreSelected(workOrderDataCopiedServices.getSelectedServices());
-		orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), workOrderDataCopiedServices.getWorkOrderPrice());
 		orderSummaryScreen.saveWizard();
 		myWorkOrdersScreen.clickHomeButton();
@@ -930,7 +930,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), workOrderData.getWorkOrderPrice());
 		String workOrderNumber1 = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.clickSave();
@@ -1193,8 +1194,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = myWorkOrdersScreen.copyVehicleForWorkOrder(workOrderNumber, iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER,
 				WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		vehicleScreen.waitVehicleScreenLoaded();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesScreen.cancelWizard();
+		vehicleScreen.cancelWizard();
 		myWorkOrdersScreen.clickBackToCarHystoryScreen();
 		carhistoryscreen.clickHomeButton();
 	}
@@ -2031,7 +2031,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen.clickSave();
 		alertText = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-		serviceRequestsScreen = new ServiceRequestsScreen();
+		serviceRequestsScreen.waitServiceRequestsScreenLoaded();
 		final String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestsScreen.selectAppointmentRequestAction();
@@ -2312,19 +2312,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.clickSearchSaveButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
 
-		OrderMonitorScreen ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
+		OrderMonitorScreen orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
 		OrderMonitorData orderMonitorData = workOrderData.getOrderMonitorData();
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		Assert.assertTrue(serviceDetailsPopup.isStartServiceButtonPresent());
 		serviceDetailsPopup.clickServiceStatusCell();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS);
 		serviceDetailsPopup.clickStartService();
-		serviceDetailsPopup = ordermonitorscreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
+		serviceDetailsPopup = orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		serviceDetailsPopup.setCompletedServiceStatus();
-		List<String> statuses = ordermonitorscreen.getPanelsStatuses(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
+		List<String> statuses = orderMonitorScreen.getPanelsStatuses(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		for (String status : statuses)
 			Assert.assertEquals(status, orderMonitorData.getMonitorServiceData().getMonitorServiceStatus());
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
 		teamWorkordersScreen.clickHomeButton();
 	}
 
@@ -2368,15 +2368,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.clickSearchSaveButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
 
-		OrderMonitorScreen ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
-		Assert.assertTrue(ordermonitorscreen.isRepairPhaseExists());
-		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
-		ordermonitorscreen.clicksRepairPhaseLine();
+		OrderMonitorScreen orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
+		Assert.assertTrue(orderMonitorScreen.isRepairPhaseExists());
+		Assert.assertTrue(orderMonitorScreen.isStartPhaseButtonPresent());
+		orderMonitorScreen.clicksRepairPhaseLine();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
-		ordermonitorscreen.clickStartPhase();
+		orderMonitorScreen.clickStartPhase();
 
 
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		Assert.assertFalse(serviceDetailsPopup.isStartPhaseButtonPresent());
 		Assert.assertTrue(serviceDetailsPopup.isServiceStartDateExists());
 
@@ -2384,11 +2384,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE);
 		serviceDetailsPopup.clickServiceDetailsDoneButton();
 
-		ordermonitorscreen.clicksRepairPhaseLine();
-		ordermonitorscreen.setCompletedPhaseStatus();
+		orderMonitorScreen.clicksRepairPhaseLine();
+		orderMonitorScreen.setCompletedPhaseStatus();
 		for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorData().getMonitorServicesData())
-			Assert.assertEquals(ordermonitorscreen.getPanelStatus(monitorServiceData.getMonitorService().getServiceName()), monitorServiceData.getMonitorServiceStatus());
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();
+			Assert.assertEquals(orderMonitorScreen.getPanelStatus(monitorServiceData.getMonitorService().getServiceName()), monitorServiceData.getMonitorServiceStatus());
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
 		teamWorkordersScreen.clickHomeButton();
 	}
 
@@ -2428,15 +2428,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.clickSearchSaveButton();
 
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
-		OrderMonitorScreen ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
+		OrderMonitorScreen orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
 		OrderMonitorData orderMonitorData = workOrderData.getOrderMonitorData();
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup =  ordermonitorscreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup =  orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		Assert.assertFalse(serviceDetailsPopup.isServiceStartDateExists());
 		serviceDetailsPopup.clickStartService();
-		ordermonitorscreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
+		orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		Assert.assertTrue(serviceDetailsPopup.isServiceStartDateExists());
 		serviceDetailsPopup.clickServiceDetailsDoneButton();
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();;
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();;
 		teamWorkordersScreen.clickHomeButton();
 	}
 
@@ -2497,39 +2497,39 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.selectSearchLocation("Test Location ZZZ");
 		teamWorkordersScreen.clickSearchSaveButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
-		OrderMonitorScreen ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
+		OrderMonitorScreen orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(serviceDetailsPopup.isStartServiceButtonPresent());
 		serviceDetailsPopup.clickStartService();
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
+		orderMonitorScreen.selectPanel(iOSInternalProjectConstants.WHEEL_SERVICE);
 		serviceDetailsPopup.setCompletedServiceStatus();
-		List<String> statuses = ordermonitorscreen.getPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE);
+		List<String> statuses = orderMonitorScreen.getPanelsStatuses(iOSInternalProjectConstants.WHEEL_SERVICE);
 		for (String status : statuses)
 			Assert.assertEquals(status, "Completed");
 
-		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
-		ordermonitorscreen.clickStartPhase();
+		Assert.assertTrue(orderMonitorScreen.isStartPhaseButtonPresent());
+		orderMonitorScreen.clickStartPhase();
 
-		serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
+		serviceDetailsPopup = orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		serviceDetailsPopup.clickServiceStatusCell();;
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alertText.contains("You cannot change the status of services for this phase. You can only change the status of the whole phase."));
 		serviceDetailsPopup.clickServiceDetailsDoneButton();
 
-		ordermonitorscreen.clicksRepairPhaseLine();
-		ordermonitorscreen.setCompletedPhaseStatus();
+		orderMonitorScreen.clicksRepairPhaseLine();
+		orderMonitorScreen.setCompletedPhaseStatus();
 
-		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE), "Completed");
-		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1), "Completed");
-		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
+		Assert.assertEquals(orderMonitorScreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE), "Completed");
+		Assert.assertEquals(orderMonitorScreen.getPanelStatus(iOSInternalProjectConstants.DISC_EX_SERVICE1), "Completed");
+		Assert.assertEquals(orderMonitorScreen.getPanelStatus(iOSInternalProjectConstants.DYE_SERVICE), "Completed");
 
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(), "Completed");
-		ordermonitorscreen.clickDoneIcon();
-		ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
-		Assert.assertEquals(ordermonitorscreen.getPanelStatusInPopup(), "Completed");
-		ordermonitorscreen.clickDoneIcon();
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();
+		orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
+		Assert.assertEquals(orderMonitorScreen.getPanelStatusInPopup(), "Completed");
+		orderMonitorScreen.clickDoneIcon();
+		orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		Assert.assertEquals(orderMonitorScreen.getPanelStatusInPopup(), "Completed");
+		orderMonitorScreen.clickDoneIcon();
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
 		teamWorkordersScreen.clickHomeButton();
 	}
 
@@ -4177,7 +4177,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesScreen.saveWizard();
 			myInspectionsScreen.selectInspectionForAction(inspectionNumber);
-			//myInspectionsScreen.clickApproveInspections();
 			SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 			selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 			ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
@@ -4690,36 +4689,36 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TeamWorkOrdersScreen teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
 
-		OrderMonitorScreen ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
-		ordermonitorscreen.checkMyWorkCheckbox();
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
-		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();
+		OrderMonitorScreen orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
+		orderMonitorScreen.checkMyWorkCheckbox();
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
+		Assert.assertFalse(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
 		homeScreen = teamWorkordersScreen.clickHomeButton();
 		MainScreen mainScreeneen = homeScreen.clickLogoutButton();
 
 		homeScreen = mainScreeneen.userLogin("Zayats", "1111");
 		teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
-		ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
-		ordermonitorscreen.checkMyWorkCheckbox();
-		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();
+		orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
+		orderMonitorScreen.checkMyWorkCheckbox();
+		Assert.assertFalse(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
 		homeScreen = teamWorkordersScreen.clickHomeButton();
 		mainScreeneen = homeScreen.clickLogoutButton();
 
 		homeScreen = mainScreeneen.userLogin("Inspector", "12345");
 		teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
-		ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
-		ordermonitorscreen.checkMyWorkCheckbox();
-		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
-		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
-		//Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();
+		orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
+		orderMonitorScreen.checkMyWorkCheckbox();
+		Assert.assertFalse(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
+		Assert.assertFalse(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
+		//Assert.assertFalse(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
 		homeScreen = teamWorkordersScreen.clickHomeButton();
 		mainScreeneen = homeScreen.clickLogoutButton();
 
@@ -4751,24 +4750,24 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
-		ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
+		orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
 
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
-		Assert.assertFalse(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
+		Assert.assertFalse(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
 		homeScreen = teamWorkordersScreen.clickHomeButton();
 		mainScreeneen = homeScreen.clickLogoutButton();
 
 		homeScreen = mainScreeneen.userLogin("Zayats", "1111");
 		teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
-		ordermonitorscreen = teamWorkordersScreen.selectWOMonitor();
-		ordermonitorscreen.waitOrderMonitorScreenLoaded();
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
-		Assert.assertTrue(ordermonitorscreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
-		teamWorkordersScreen = ordermonitorscreen.clickBackButton();
+		orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
+		orderMonitorScreen.waitOrderMonitorScreenLoaded();
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DISC_EX_SERVICE1));
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.WHEEL_SERVICE));
+		Assert.assertTrue(orderMonitorScreen.isServicePresent(iOSInternalProjectConstants.DYE_SERVICE));
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
 		homeScreen = teamWorkordersScreen.clickHomeButton();
 		mainScreeneen = homeScreen.clickLogoutButton();
 		homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -5102,13 +5101,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.clickSave();
-		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver()
-				.findElement(
-						MobileBy.name("Warning!")).isDisplayed());
-		DriverBuilder.getInstance().getAppiumDriver()
-				.findElement(
-						MobileBy.name("Yes"))
-				.click();
 		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectDefaultInvoiceType();
 		invoiceInfoScreen.setPO("23");
 		final String invoicenum = invoiceInfoScreen.getInvoiceNumber();
@@ -5646,7 +5638,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		Assert.assertFalse(orderSummaryScreen.isTotalSaleFieldPresent());
 		orderSummaryScreen.clickSave();
-		teamWorkordersScreen = new TeamWorkOrdersScreen();
+		teamWorkordersScreen.waitTeamWorkOrdersScreenLoaded();
 		homeScreen = teamWorkordersScreen.clickHomeButton();
 	}
 
@@ -5682,7 +5674,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		PriceMatrixScreenSteps.selectVehiclepartAdditionalService(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartAdditionalService());
 		PriceMatrixScreenSteps.savePriceMatrixData();
 
-		servicesScreen = new ServicesScreen();
+		servicesScreen.waitServicesScreenLoaded();
 		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
@@ -5749,7 +5741,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : workOrderData.getDamageData().getMoneyServices()) {
 			servicesScreen.selectService(workOrderData.getDamageData().getDamageGroupName());
@@ -6017,6 +6009,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestsScreen.selectEditServiceRequestAction();
 		VehicleScreen vehicleScreen = new VehicleScreen();
+
 		vehicleScreen.setTech(serviceRequestData.getVihicleInfo().getDefaultTechnician().getTechnicianFullName());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.saveWizard();
@@ -6436,7 +6429,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
-		servicesScreen = new ServicesScreen();
+		servicesScreen.waitServicesScreenLoaded();
 		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
@@ -6449,7 +6442,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(techniciansPopup.getTechnicianPercentage(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName()),
 				workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianPercentageValue());
 		techniciansPopup.cancelTechViewDetails();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartPrice()));
 
 		servicesScreen.cancelWizard();
@@ -6477,7 +6470,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.selectMatrixService(workOrderData.getMatrixServiceData());
@@ -6535,7 +6528,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.selectMatrixService(workOrderData.getMatrixServiceData());
@@ -6596,7 +6589,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
@@ -6645,7 +6638,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.selectMatrixService(workOrderData.getMatrixServiceData());
@@ -6666,7 +6659,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		priceMatrixScreen = new PriceMatrixScreen();
 		priceMatrixScreen.clickSaveButton();
 
-		servicesScreen = new ServicesScreen();
+		servicesScreen.waitServicesScreenLoaded();
 		servicesScreen.cancelWizard();
 		myWorkOrdersScreen.clickHomeButton();
 
@@ -6743,7 +6736,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				WorkOrdersTypes.WO_MONITOR_REQUIRED_SERVICES_ALL);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		BundleServiceData bundleServiceData = workOrderData.getBundleService();
 		SelectedServiceBundleScreen serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -6760,7 +6754,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechnociansViewWithAlert();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 
@@ -6787,7 +6781,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 
@@ -6826,7 +6820,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				WorkOrdersTypes.WO_BUNDLE_REQ_DEF_TECH);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		BundleServiceData bundleServiceData = workOrderData.getBundleService();
 		SelectedServiceBundleScreen serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -6844,7 +6839,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechnociansViewWithAlert();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
@@ -6871,7 +6866,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -6913,7 +6908,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				WorkOrdersTypes.WO_BUNDLE_REQ_DEF_TECH);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		BundleServiceData bundleServiceData = workOrderData.getBundleService();
 		SelectedServiceBundleScreen serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -6932,7 +6928,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechnociansViewWithAlert();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -6972,7 +6968,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
+		vehicleScreen.waitVehicleScreenLoaded();
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -7195,10 +7191,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		servicesScreen.waitServicesScreenLoaded();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
-		servicesScreen = new ServicesScreen();
+		servicesScreen.waitServicesScreenLoaded();
 		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
@@ -7211,31 +7208,31 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
 		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		OrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		OrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		serviceDetailsPopup.clickServiceStatusCell();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
 				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
 		serviceDetailsPopup.clickServiceDetailsCancelButton();
 
-		ordermonitorscreen.clickStartPhase();
-		serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		orderMonitorScreen.clickStartPhase();
+		serviceDetailsPopup = orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		serviceDetailsPopup.clickServiceStatusCell();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
 				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
 		serviceDetailsPopup.clickServiceDetailsCancelButton();
 
-		ordermonitorscreen.clickStartPhaseCheckOutButton();
-		serviceDetailsPopup = ordermonitorscreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
+		orderMonitorScreen.clickStartPhaseCheckOutButton();
+		serviceDetailsPopup = orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE);
 		serviceDetailsPopup.clickServiceStatusCell();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
 				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
 		serviceDetailsPopup.clickServiceDetailsCancelButton();
 
-		ordermonitorscreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
-		Assert.assertEquals(ordermonitorscreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE),
+		orderMonitorScreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
+		Assert.assertEquals(orderMonitorScreen.getPanelStatus(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE),
 				OrderMonitorPhases.COMPLETED.getrderMonitorPhaseName());
-		ordermonitorscreen.clickBackButton();
+		orderMonitorScreen.clickBackButton();
 		homeScreen = teamWorkOrdersScreen.clickHomeButton();
 	}
 
@@ -7265,7 +7262,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
-		servicesScreen= new ServicesScreen();
+		servicesScreen.waitServicesScreenLoaded();
 		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
@@ -7278,15 +7275,16 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
 		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		OrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService());
+		OrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService());
 		Assert.assertTrue(serviceDetailsPopup.isStartServiceButtonPresent());
 		serviceDetailsPopup.clickServiceDetailsDoneButton();
-
-		Assert.assertTrue(ordermonitorscreen.isStartPhaseButtonPresent());
-		ordermonitorscreen.clickStartPhase();
-		Assert.assertFalse(ordermonitorscreen.isStartPhaseButtonPresent());
-		ordermonitorscreen.clickBackButton();
+		orderMonitorScreen.waitOrderMonitorScreenLoaded();
+		Assert.assertTrue(orderMonitorScreen.isStartPhaseButtonPresent());
+		orderMonitorScreen.clickStartPhase();
+		orderMonitorScreen.waitOrderMonitorScreenLoaded();
+		Assert.assertFalse(orderMonitorScreen.isStartPhaseButtonPresent());
+		orderMonitorScreen.clickBackButton();
 		homeScreen = teamWorkOrdersScreen.clickHomeButton();
 	}
 
@@ -7340,13 +7338,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchSaveButton();
 		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
 
-		OrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
-		ordermonitorscreen.clickStartOrderButton();
+		OrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		orderMonitorScreen.clickStartOrderButton();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
 				AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
-		ordermonitorscreen = new OrderMonitorScreen();
+		orderMonitorScreen = new OrderMonitorScreen();
 
-		ordermonitorscreen.clickBackButton();
+		orderMonitorScreen.clickBackButton();
 		teamWorkOrdersScreen.clickHomeButton();
 
 	}
@@ -7403,25 +7401,25 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchSaveButton();
 		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
 
-		OrderMonitorScreen ordermonitorscreen = teamWorkOrdersScreen.selectWOMonitor();
+		OrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
 		for (ServiceData serviceData : workOrderData.getServicesList())
-			Assert.assertEquals(ordermonitorscreen.getPanelStatus(serviceData), OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
+			Assert.assertEquals(orderMonitorScreen.getPanelStatus(serviceData), OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
 
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup = ordermonitorscreen.selectPanel(workOrderData.getServicesList().get(workOrderData.getServicesList().size()-1));
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(workOrderData.getServicesList().get(workOrderData.getServicesList().size()-1));
 		serviceDetailsPopup.clickServiceStatusCell();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
 				AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
 		serviceDetailsPopup.clickServiceDetailsCancelButton();
 
-		ordermonitorscreen.clickOrderStartDateButton();
+		orderMonitorScreen.clickOrderStartDateButton();
 		LocalDate date = LocalDate.now();
-		ordermonitorscreen.setOrderStartYearValue(date.getYear()+1);
-		Assert.assertEquals(ordermonitorscreen.getOrderStartYearValue(), Integer.toString(date.getYear()));
-		ordermonitorscreen.setOrderStartYearValue(date.getYear()-1);
-		Assert.assertEquals(ordermonitorscreen.getOrderStartYearValue(), Integer.toString(date.getYear()-1));
-		ordermonitorscreen.closeSelectorderDatePicker();
+		orderMonitorScreen.setOrderStartYearValue(date.getYear()+1);
+		Assert.assertEquals(orderMonitorScreen.getOrderStartYearValue(), Integer.toString(date.getYear()));
+		orderMonitorScreen.setOrderStartYearValue(date.getYear()-1);
+		Assert.assertEquals(orderMonitorScreen.getOrderStartYearValue(), Integer.toString(date.getYear()-1));
+		orderMonitorScreen.closeSelectorderDatePicker();
 
-		ordermonitorscreen.clickBackButton();
+		orderMonitorScreen.clickBackButton();
 		teamWorkOrdersScreen.clickHomeButton();
 
 		homeScreen.clickLogoutButton();

@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -33,7 +34,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		String inspectionNumber = InspectionSteps.saveInspection();
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-		Assert.assertFalse(inspectionsMenuScreen.isCreateWorkOrderMenuPresent());
+		WaitUtils.elementShouldBeVisible(inspectionsMenuScreen.getCreatewoinspectionbtn(), false);
 		inspectionsMenuScreen.clickApproveInspectionMenuItem();
 		VNextApproveScreen approveScreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
 		approveScreen.drawSignature();
@@ -83,7 +84,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestCaseTeamEditio
 		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.APPROVED);
 		inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-		Assert.assertFalse(inspectionsMenuScreen.isApproveMenuPresent());
+		WaitUtils.elementShouldBeVisible(inspectionsMenuScreen.getApproveinspectionbtn(), false);
 		Assert.assertTrue(inspectionsMenuScreen.isCreateWorkOrderMenuPresent());
 		inspectionsMenuScreen.clickCloseInspectionMenuButton();
 		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());

@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApproveSummaryPopup extends iOSHDBaseScreen {
 	
-	@iOSXCUITFindBy(accessibility ="Approve")
+	@iOSXCUITFindBy(accessibility = "Approve")
     private IOSElement approvebtn;
 	
 	public ApproveSummaryPopup() {
@@ -21,6 +21,8 @@ public class ApproveSummaryPopup extends iOSHDBaseScreen {
 	}
 	
 	public void clickApproveButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Approve")));
 		approvebtn.click();
 	}
 

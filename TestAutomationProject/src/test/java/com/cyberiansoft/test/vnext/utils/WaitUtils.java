@@ -35,7 +35,7 @@ public class WaitUtils {
     public static boolean isElementPresent(WebElement webElement) {
         try {
             return webElement.isDisplayed();
-        } catch (ElementNotFoundException | StaleElementReferenceException ex) {
+        } catch (ElementNotFoundException | StaleElementReferenceException | NoSuchElementException ex) {
             return false;
         }
     }

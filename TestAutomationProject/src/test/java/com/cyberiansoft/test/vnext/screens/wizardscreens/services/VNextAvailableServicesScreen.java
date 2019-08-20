@@ -20,7 +20,7 @@ import java.util.List;
 
 public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
-    @FindBy(xpath = "//div[contains(@class,'services-list')]")
+    @FindBy(xpath = "//div[@data-page='services-list']")
     private WebElement servicesscreen;
 
     @FindBy(xpath = "//*[@action='add']")

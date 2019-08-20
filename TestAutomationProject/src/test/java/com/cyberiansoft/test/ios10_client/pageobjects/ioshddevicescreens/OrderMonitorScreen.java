@@ -180,6 +180,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public boolean isStartOrderButtonExists() {
+		waitOrderMonitorScreenLoaded();
 		return appiumdriver.findElementsByAccessibilityId("Start").size() > 0;
 	}
 
@@ -214,6 +215,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public String getMonitorServiceAmauntValue(ServiceData serviceData) {
+		waitOrderMonitorScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId("MonitorOrderServicesList")
 				.findElement(MobileBy.AccessibilityId(serviceData.getServiceName()))
 				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label");

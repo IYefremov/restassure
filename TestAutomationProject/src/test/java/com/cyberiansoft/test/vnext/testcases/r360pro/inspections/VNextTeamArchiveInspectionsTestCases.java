@@ -19,6 +19,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -90,7 +91,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestCaseTeamEditio
         VNextInspectionsMenuScreen inspmenulist = inspectionscreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspmenulist.isApproveMenuPresent();
 
-        Assert.assertFalse(inspmenulist.isArchivwMenuPresent());
+        WaitUtils.elementShouldBeVisible(inspmenulist.getArchiveinspectionbtn(), false);
         inspmenulist.clickCloseInspectionMenuButton();
         inspectionscreen.switchToMyInspectionsView();
         inspectionscreen.clickBackButton();
