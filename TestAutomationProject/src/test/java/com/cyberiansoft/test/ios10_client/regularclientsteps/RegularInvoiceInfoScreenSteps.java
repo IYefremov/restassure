@@ -13,4 +13,9 @@ public class RegularInvoiceInfoScreenSteps {
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
         invoiceInfoScreen.clickSaveAsFinal();
     }
+
+    public static String getInvoiceNumber() {
+        RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+        return  invoiceInfoScreen.getInvoiceNumber();
+    }
 }

@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 public class ServicesScreen extends BaseWizardScreen {
 
 	private final static String defaultServiceValue = "Test Tax";
-	private final static String servicesscreencapt = "Services";
 	
 	/*@iOSXCUITFindBy(accessibility  = "Save")
     private IOSElement savebtn;
@@ -212,6 +211,7 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public SelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
+		waitServicesScreenLoaded();
 		IOSElement grouplist = (IOSElement)  appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/.."));
 		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
 		grouplist.findElement(MobileBy.className("XCUIElementTypeSearchField")).sendKeys(servicename);

@@ -32,7 +32,8 @@
           ],
           "laborService": {
             "serviceName": "Labor_Vehilce_data_R&R",
-            "laborServiceRate": "2",
+            "laborServiceRate": "2.57",
+            "laborServiceTime": "2",
             "laborServicePriceVerify": "$5.14",
             "laborServicePanel": "Front Bumper",
             "laborServicePart": "Remove/Replace Front Bumper Cover"
@@ -127,19 +128,7 @@
           "moneyServices": [
             {
               "serviceName": "Dye_Panel",
-              "servicePrice": "20",
-              "questionsData": [
-                {
-                  "questionName": "QuestionTypeLogical_Review Car",
-                  "logicalQuestion": true,
-                  "logicalQuestionValue": false
-                },
-                {
-                  "questionName": "QuestionTypeText_Question2",
-                  "questionAnswer": "12345",
-                  "textQuestion": true
-                }
-              ]
+              "servicePrice": "20"
             },
             {
               "serviceName": "Special Discount",
@@ -148,7 +137,8 @@
           ],
           "laborService": {
             "serviceName": "Labor_Vehilce_data_R&R",
-            "laborServiceRate": "2",
+            "laborServiceRate": "2.57",
+            "laborServiceTime": "2",
             "laborServicePriceVerify": "$5.14",
             "laborServicePanel": "Front Bumper",
             "laborServicePart": "Remove/Replace Front Bumper Cover"
@@ -246,19 +236,7 @@
           "moneyServices": [
             {
               "serviceName": "Dye_Panel",
-              "servicePrice": "20",
-              "questionsData": [
-                {
-                  "questionName": "QuestionTypeLogical_Review Car",
-                  "logicalQuestion": true,
-                  "logicalQuestionValue": false
-                },
-                {
-                  "questionName": "QuestionTypeText_Question2",
-                  "questionAnswer": "12345",
-                  "textQuestion": true
-                }
-              ]
+              "servicePrice": "20"
             },
             {
               "serviceName": "Special Discount",
@@ -267,7 +245,8 @@
           ],
           "laborService": {
             "serviceName": "Labor_Vehilce_data_R&R",
-            "laborServiceRate": "2",
+            "laborServiceRate": "2.57",
+            "laborServiceTime": "2",
             "laborServicePriceVerify": "$5.14",
             "laborServicePanel": "Front Bumper",
             "laborServicePart": "Remove/Replace Front Bumper Cover"
@@ -347,7 +326,11 @@
       "description": "Test Case 27850: 5 - Create invoice based on 3 created WOs - verify presence of Invoice on BO",
       "invoiceData": {
         "poNumber": "123po",
-        "invoiceTotal": "$1,925.06"
+        "invoiceTotal": "$1,925.06",
+        "cashCheckPaymentData" : {
+          "cashCheckNumber" : "ASD-123",
+          "cashCheckAmount" : "235"
+        }
       }
     }
   ],
