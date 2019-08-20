@@ -4,6 +4,8 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -17,10 +19,10 @@ import java.util.concurrent.TimeUnit;
 public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	
 	/*@iOSXCUITFindBy(accessibility = "services")
-	private IOSElement tollbarservicesbtn;
+	private IOSElement tollbarservicesbtn;*/
 	
 	@iOSXCUITFindBy(accessibility = "Close")
-	private IOSElement tollbarcloseservicesbtn;*/
+	private IOSElement tollbarcloseservicesbtn;
 	
 	public RegularSelectedServiceBundleScreen() {
 		super();
@@ -49,7 +51,11 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	public RegularSelectedServiceDetailsScreen openBundleInfo(String bundle) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='custom detail button']").click();
+		if (!bundleview.findElementByAccessibilityId(bundle).isDisplayed())
+			swipeToElement(appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")).
+					findElement(MobileBy.AccessibilityId(bundle)));
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")).findElement(MobileBy.AccessibilityId(bundle))
+				.findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		return new RegularSelectedServiceDetailsScreen();
 	}
 	

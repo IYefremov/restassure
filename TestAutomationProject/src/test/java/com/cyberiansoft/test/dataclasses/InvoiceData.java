@@ -21,6 +21,9 @@ public class InvoiceData {
     @JsonProperty("creditCardData")
     CreditCardData creditCardData;
 
+    @JsonProperty("cashCheckPaymentData")
+    InvoiceCashCheckPaymentData cashCheckPaymentData;
+
     @JsonProperty("newPoNumber")
     String newPoNumber;
 }

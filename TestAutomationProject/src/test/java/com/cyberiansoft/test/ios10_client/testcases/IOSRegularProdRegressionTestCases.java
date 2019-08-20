@@ -13,6 +13,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
+import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
@@ -73,20 +74,20 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularVehiclePartsScreenValidations.verifyVehiclePartScreenSubTotalValue(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartTotalPrice());
         RegularVehiclePartsScreenSteps.saveVehiclePart();
         RegularWizardScreenValidations.verifyScreenSubTotalPrice(inspectionData.getPriceMatrixScreenData().getMatrixScreenPrice());
-       // RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getPriceMatrixScreenData().getMatrixScreenTotalPrice());
+        //RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getPriceMatrixScreenData().getMatrixScreenTotalPrice());
         RegularNavigationSteps.navigateToServicesScreen();
         RegularWizardScreenValidations.verifyScreenSubTotalPrice(inspectionData.getServicesScreen().getScreenPrice());
-       // RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getServicesScreen().getScreenTotalPrice());
+        RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getServicesScreen().getScreenTotalPrice());
         RegularInspectionsSteps.saveInspectionAsFinal();
-        //RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
+        RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
 
         RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionID);
         RegularApproveInspectionScreenActions.clickApproveAllServicessButton();
         RegularApproveInspectionScreenActions.saveApprovedServices();
         RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
 
-        //RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
-        //RegularMyInspectionsScreenValidations.verifyInspectionApprovedPrice(inspectionID, inspectionData.getInspectionTotalPrice());
+        RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
+        RegularMyInspectionsScreenValidations.verifyInspectionApprovedPrice(inspectionID, inspectionData.getInspectionTotalPrice());
         return inspectionID;
     }
 
@@ -113,13 +114,13 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartAdditionalService().getServiceName(), false);
 
         RegularWizardScreenValidations.verifyScreenSubTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenPrice());
-        RegularWizardScreenValidations.verifyScreenTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenTotalPrice());
+        //RegularWizardScreenValidations.verifyScreenTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenTotalPrice());
 
         RegularWizardScreensSteps.clickSaveButton();
         RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
-        RegularMyWorkOrdersScreenValidations.verifyWorkOrderTotalPrice(workOrderNumber, testCaseData.getWorkOrderData().getWorkOrderPrice());
+        //RegularMyWorkOrdersScreenValidations.verifyWorkOrderTotalPrice(workOrderNumber, testCaseData.getWorkOrderData().getWorkOrderPrice());
 
         RegularNavigationSteps.navigateBackScreen();
     }
@@ -177,7 +178,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartAdditionalService().getServiceName(), false);
 
         RegularWizardScreenValidations.verifyScreenSubTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenPrice());
-        RegularWizardScreenValidations.verifyScreenTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenTotalPrice());
+        //RegularWizardScreenValidations.verifyScreenTotalPrice(testCaseData.getWorkOrderData().getServicesScreen().getScreenTotalPrice());
         RegularWorkOrdersSteps.saveWorkOrder();
 
         RegularNavigationSteps.navigateBackScreen();
@@ -197,9 +198,32 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         for (String workOrderId : workOrdersForInvoice)
             RegularInvoiceInfoScreenValidations.verifyWorkOrderIsPresentForInvoice(workOrderId, true);
-        RegularInvoiceInfoScreenValidations.verifyInvoiceTotalValue(invoiceData.getInvoiceTotal());
+        //RegularInvoiceInfoScreenValidations.verifyInvoiceTotalValue(invoiceData.getInvoiceTotal());
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(invoiceData.getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
         RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenSteps.selectInvoiceForPayment(invoiceNumber);
+        RegularPaymentOptionsScreenSteps.closePaymentOptions();
+        RegularPaymentScreenSteps.sitchToCashCheckPayOption();
+
+        RegularPaymentScreenValidations.verifyCashCheckAmountValue("1883.06");
+        RegularPaymentScreenSteps.setInvoiceCashCheckPaymentValues(invoiceData.getCashCheckPaymentData());
+        RegularPaymentScreenSteps.payForInvoice();
+
+
+        RegularMyInvoicesScreenSteps.selectInvoiceForPayment(invoiceNumber);
+        RegularPaymentOptionsScreenSteps.closePaymentOptions();
+        RegularPaymentScreenSteps.sitchToCashCheckPayOption();
+        Double expectedAmount = Double.valueOf("1883.06") - Double.valueOf(invoiceData.getCashCheckPaymentData().getCashCheckAmount());
+        RegularPaymentScreenValidations.verifyCashCheckAmountValue(String.valueOf(expectedAmount));
+        RegularPaymentScreenSteps.setCashCheckNumberValue(invoiceData.getCashCheckPaymentData().getCashCheckNumber());
+        RegularPaymentScreenSteps.payForInvoice();
+        RegularMyInvoicesScreenSteps.selectInvoice(invoiceNumber);
+        RegularMenuValidations.menuShouldBePresent(ReconProMenuItems.PAY, false);
+        RegularMenuItemsScreenSteps.closeMenuScreen();
         RegularNavigationSteps.navigateBackScreen();
     }
 
