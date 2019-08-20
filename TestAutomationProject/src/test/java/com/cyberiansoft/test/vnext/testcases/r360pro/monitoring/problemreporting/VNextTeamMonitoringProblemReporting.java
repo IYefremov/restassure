@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
+package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -41,6 +41,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
+        workOrderId = "O-407-20306";
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -107,4 +108,5 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }
+
 }
