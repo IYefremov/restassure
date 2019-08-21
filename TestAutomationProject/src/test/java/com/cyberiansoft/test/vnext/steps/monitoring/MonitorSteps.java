@@ -67,7 +67,7 @@ public class MonitorSteps {
         HomeScreenSteps.openWorkQueue();
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openMenu(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        //MenuSteps.selectMenuItem(MenuItems.EDIT);
     }
 
     public static void verifyRepairOrderListIsEmpty() {

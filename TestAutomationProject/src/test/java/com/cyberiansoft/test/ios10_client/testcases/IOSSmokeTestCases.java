@@ -6964,7 +6964,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
 		techniciansPopup.saveTechViewDetails();
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		servicesScreen = new ServicesScreen();
+		servicesScreen.waitServicesScreenLoaded();
 		servicesScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
@@ -7025,10 +7025,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechnociansViewWithAlert();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
+			ServicesScreen servicesScreen = new ServicesScreen();
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.clickTechniciansIcon();
 			for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
@@ -7050,7 +7051,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		priceMatrixScreen.setTime(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartTime());
 		priceMatrixScreen.clickSaveButton();
-		servicesScreen = new ServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 
 		servicesScreen.openCustomServiceDetails(workOrderData.getBundleService().getBundleServiceName());
 		SelectedServiceBundleScreen serviceBundleScreen = new SelectedServiceBundleScreen();
@@ -7159,8 +7160,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianPriceValue());
 		techniciansPopup.cancelTechViewDetails();
 		ServiceDetailsScreenSteps.cancelServiceDetails();
-
-		servicesScreen = new ServicesScreen();
+		servicesScreen.waitServicesScreenLoaded();
 		servicesScreen.cancelWizard();
 
 		myWorkOrdersScreen.clickHomeButton();

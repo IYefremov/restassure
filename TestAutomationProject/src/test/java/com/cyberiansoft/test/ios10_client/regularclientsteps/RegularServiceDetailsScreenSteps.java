@@ -89,12 +89,17 @@ public class RegularServiceDetailsScreenSteps {
         if (laborServiceData.getLaborServiceRate() != null) {
             selectedServiceDetailsScreen.setServiceRateValue(laborServiceData.getLaborServiceRate());
         }
+
         if (laborServiceData.getLaborServicePanel() != null) {
             selectedServiceDetailsScreen.clickOperationCell();
             selectedServiceDetailsScreen.selectLaborServicePanel(laborServiceData.getLaborServicePanel());
             selectedServiceDetailsScreen.selectLaborServicePart(laborServiceData.getLaborServicePart());
             selectedServiceDetailsScreen.clickSelectedServiceDetailsDoneButton();
         }
+        if (laborServiceData.getLaborServiceTime() != null) {
+            selectedServiceDetailsScreen.setServiceTimeValue(laborServiceData.getLaborServiceTime());
+        }
+
     }
 
 }

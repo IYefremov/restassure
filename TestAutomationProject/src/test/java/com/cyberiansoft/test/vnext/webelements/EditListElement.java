@@ -9,11 +9,11 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class EditListElement implements IWebElement {
     private WebElement rootElement;
-    private String statusLocator = ".//div[@class=\"icon-item-status-title\"]";
-    private String nameLocator = ".//div[contains(@class,\"icon-item-content-title\")]";
-    private String expandElementLocator = ".//*[@action=\"open-phase-services\"]";
-    private String clockIconLocator = ".//div[contains(@class,\"icon-item-content-title\")][3]//span[@class='icon-item-arrow']";
-    private String startDateLocator = ".//div[contains(@class,\"icon-item-content-title\")][3]";
+    private String statusLocator = ".//div[@class='icon-item-status-title']";
+    private String nameLocator = ".//div[contains(@class,'icon-item-content-title') or contains(@class,'icon-item-phase-title')]";
+    private String expandElementLocator = ".//*[@action='open-phase-services']";
+    private String clockIconLocator = ".//div[contains(@class,'icon-item-content-title')][3]//span[@class='icon-item-arrow']";
+    private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')][3]";
 
 
     public EditListElement(WebElement rootElement) {
@@ -21,7 +21,9 @@ public class EditListElement implements IWebElement {
     }
 
     public String getName() {
-        return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElement(By.xpath(nameLocator)).getText());
+        return WaitUtils.getGeneralFluentWait().until(
+                driver -> rootElement.findElement(By.xpath(nameLocator)).getText()
+        );
 
     }
 

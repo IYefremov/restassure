@@ -153,8 +153,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
             if (appiumdriver.findElementsByClassName("XCUIElementTypeSearchField").size() > 0)
                 searchServiceByName(servicename);
         }
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(servicename)));
 		appiumdriver.findElementByAccessibilityId("AvailableServiceList").
 				findElement(MobileBy.AccessibilityId(servicename)).click();
 	}
