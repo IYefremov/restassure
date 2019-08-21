@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
@@ -88,8 +87,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
     public void userCanUsePriorityFilter(String rowID,
                                          String description, JSONObject testData) {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSteps.openMenu(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        MonitorSteps.openItem(workOrderId);
         EditOrderSteps.switchToInfo();
         EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
         ScreenNavigationSteps.pressBackButton();

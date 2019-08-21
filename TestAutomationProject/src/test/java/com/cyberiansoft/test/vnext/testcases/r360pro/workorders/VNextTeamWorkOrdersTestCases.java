@@ -28,6 +28,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.*;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
@@ -196,7 +197,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
 
         inspectionsScreen.switchToTeamInspectionsView();
         VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatus());
-        Assert.assertFalse(inspectionMenuScreen.isCreateWorkOrderMenuPresent());
+        WaitUtils.elementShouldBeVisible(inspectionMenuScreen.getCreatewoinspectionbtn(), false);
         inspectionMenuScreen.clickCloseInspectionMenuButton();
 
         inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatus());
@@ -337,6 +338,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestCaseTeamEditionRegistr
         Assert.assertEquals(errorDialog.clickOKButtonAndGetMessage(),
                 VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
         AppiumUtils.setAndroidNetworkOn();
+        GeneralSteps.closeErrorDialog();
         workOrdersScreen.switchToMyWorkordersView();
         workOrdersScreen.clickBackButton();
     }

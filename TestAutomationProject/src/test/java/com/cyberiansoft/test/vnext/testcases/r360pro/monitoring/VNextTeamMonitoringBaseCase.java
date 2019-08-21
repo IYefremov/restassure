@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
@@ -21,7 +20,6 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 
 public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistration {
     private String inspectionId = "";
@@ -45,23 +43,6 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCanAddNotesToRepairOrder(String rowID,
-                                             String description, JSONObject testData) {
-        String noteText = UUID.randomUUID().toString();
-        HomeScreenSteps.openWorkQueue();
-        MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSteps.openMenu(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.addRepairOrderNote();
-        NotesSteps.setRepairOrderNoteText(noteText);
-        ScreenNavigationSteps.pressBackButton();
-        NotesSteps.verifyNotePresentInList(noteText);
-        ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanViewOrderInfoViaEdit(String rowID,
                                             String description, JSONObject testData) {
 
@@ -71,8 +52,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         HomeScreenSteps.openWorkQueue();
         MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSteps.openMenu(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        MonitorSteps.openItem(workOrderId);
         EditOrderSteps.switchToInfo();
         expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         EditOrderSteps.verifyOrderInfo(expectedOrderInfo);

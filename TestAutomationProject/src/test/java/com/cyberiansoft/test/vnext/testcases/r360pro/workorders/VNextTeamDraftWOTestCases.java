@@ -27,6 +27,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -209,7 +210,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestCaseTeamEditionRegistrati
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        Assert.assertFalse(workOrdersMenuScreen.isEditWorkOrderMenuButtonExists());
+        WaitUtils.elementShouldBeVisible(workOrdersMenuScreen.getEditinspectionbtn(), false);
         workOrdersMenuScreen.clickCloseWorkOrdersMenuButton();
         Assert.assertEquals(workOrdersScreen.getWorkOrderStatusValue(woNumber),
                 WorkOrderStatuses.APPROVED.getWorkOrderStatusValue());

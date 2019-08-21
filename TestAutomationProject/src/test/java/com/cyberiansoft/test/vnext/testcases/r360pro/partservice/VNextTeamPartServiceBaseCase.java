@@ -80,7 +80,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         PartServiceSteps.acceptDetailsScreen();
         inspectionId = InspectionSteps.saveInspection();
         SearchSteps.searchByText(inspectionId);
-        MonitorSteps.openMenu(inspectionId);
+        MonitorSteps.openItem(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName().getPartNameList().get(0));

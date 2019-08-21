@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -22,8 +23,7 @@ public class VNextBasicMenuScreen extends VNextBaseScreen {
     public VNextBasicMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.visibilityOf(menuscreen));
+        WaitUtils.getGeneralFluentWait().until((driver) -> menuscreen.isDisplayed());
     }
 
     public VNextBasicMenuScreen(){}

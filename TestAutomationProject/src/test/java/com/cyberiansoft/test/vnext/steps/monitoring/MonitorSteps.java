@@ -41,7 +41,7 @@ public class MonitorSteps {
                 expectedRoValues);
     }
 
-    public static void openMenu(String workOrderId) {
+    public static void openItem(String workOrderId) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.getGeneralFluentWait().until((webdriver) -> repairOrderScreen.getRepairOrderListElements().size() > 0);
         RepairOrderListElement repairOrder = repairOrderScreen.getRepairOrderElement(workOrderId);
@@ -66,7 +66,7 @@ public class MonitorSteps {
     public static void editOrder(String workOrderId) {
         HomeScreenSteps.openWorkQueue();
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSteps.openMenu(workOrderId);
+        MonitorSteps.openItem(workOrderId);
         //MenuSteps.selectMenuItem(MenuItems.EDIT);
     }
 

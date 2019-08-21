@@ -56,7 +56,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         GeneralSteps.logIn(nonLocationManagerEmployee);
         MonitorSteps.editOrder(workOrderId);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
-        MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
+        MenuValidations.menuItemShouldBeEnabled(MenuItems.START, true);
         MenuSteps.closeMenu();
         HomeScreenSteps.logOut();
         GeneralSteps.logIn(employee);
