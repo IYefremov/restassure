@@ -47,9 +47,13 @@ public class MatrixServiceSteps {
     }
 
     public static void selectPartServiceInsideMatrixService(PartServiceData vehiclePartData) {
-        MatrixServiceDetailsScreenInteractions.selectService(vehiclePartData.getServiceName());
-        PartServiceSteps.selectpartServiceDetails(vehiclePartData);
+        MatrixServiceSteps.openPartServiceDetailsInsideMatrixService(vehiclePartData);
         PartServiceSteps.acceptDetailsScreen();
+    }
+
+    public static void openPartServiceDetailsInsideMatrixService(PartServiceData partServiceData) {
+        MatrixServiceDetailsScreenInteractions.selectService(partServiceData.getServiceName());
+        PartServiceSteps.selectpartServiceDetails(partServiceData);
     }
 
     public static void openPartServiceDetails(PartServiceData partService) {
@@ -62,5 +66,9 @@ public class MatrixServiceSteps {
 
     public static void acceptDetailsScreen() {
         ListSelectPageInteractions.saveListPage();
+    }
+
+    public static void openServiceDetailsInsideMatrixService(String serviceName) {
+        MatrixServiceDetailsScreenInteractions.selectService(serviceName);
     }
 }
