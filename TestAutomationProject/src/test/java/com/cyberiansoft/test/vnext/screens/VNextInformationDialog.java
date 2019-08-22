@@ -31,10 +31,8 @@ public class VNextInformationDialog extends VNextBaseScreen {
     public VNextInformationDialog() {
     }
 
-    public String getInformationDialogMessage() {
-        BaseUtils.waitABit(300);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='modal-text']")));
+    public String getInformationDialogMessage() { ;
+        WaitUtils.elementShouldBeVisible(modaldlgmsg, true);
         return modaldlgmsg.getText();
     }
 
@@ -158,7 +156,8 @@ public class VNextInformationDialog extends VNextBaseScreen {
     }
 
     public void clickFinalButton() {
-        BaseUtils.waitABit(2000);
+        //BaseUtils.waitABit(2000);
+        WaitUtils.elementShouldBeVisible(modaldlg, true);
         WaitUtils.click(modaldlg.findElement(By.xpath(".//span[text()='Final']")));
     }
 
