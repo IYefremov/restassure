@@ -343,37 +343,30 @@
           "companyName": "Amazimg Nissan"
         },
         "vihicleInfo": {
-          "vinNumber": "1D7HW48NX6S507810"
-        },
-        "questionScreenData": {
-          "screenName": "Question for order test",
-          "questionsData": [{
-            "questionAnswer": "Half",
-            "screenIndex": 0
-          },
-            {
-              "questionAnswer": "Yes",
-              "screenIndex": 1
-            },
-            {
-              "questionAnswer": "No",
-              "screenIndex": 2
-            },
-            {
-              "questionAnswer": "Yes",
-              "screenIndex": 3
-            },
-            {
-              "questionAnswer": "ASD",
-              "screenIndex": 4,
-              "textQuestion" : true
-            },
-            {
-              "questionAnswer": "Future Attention Needed",
-              "screenIndex": 5
-            }
-          ]
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor": "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123"
         }
+      },
+      "inspectionData": {
+        "vihicleInfo": {
+          "trim": "25th Anniversary"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
       }
     }
     ],

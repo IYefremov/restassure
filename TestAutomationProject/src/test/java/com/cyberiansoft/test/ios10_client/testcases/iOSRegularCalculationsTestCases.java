@@ -1184,7 +1184,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularServiceRequestSteps.saveServiceRequest();
 		serviceRequestsScreen.selectServiceRequest(srnumber);
 		serviceRequestsScreen.selectDetailsRequestAction();
-		serviceRequestsScreen.clickServiceRequestSummaryInspectionsButton();
+		RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
 		RegularTeamInspectionsScreen teamInspectionsScreen = new RegularTeamInspectionsScreen();
 		
 		teamInspectionsScreen.selectInspectionForApprove(inspectionNumber);
