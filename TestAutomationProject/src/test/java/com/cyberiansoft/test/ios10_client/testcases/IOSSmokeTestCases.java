@@ -33,8 +33,6 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequ
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import io.appium.java_client.MobileBy;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -43,8 +41,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -177,12 +173,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		CompanyWebPage companyWebPage = backofficeHeader.clickCompanyLink();
 		ClientsWebPage clientspage = companyWebPage.clickClientsLink();
 
@@ -328,12 +322,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		CompanyWebPage companyWebPage = backofficeHeader.clickCompanyLink();
 		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
 
@@ -590,11 +582,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
 
@@ -644,12 +634,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
 
@@ -739,12 +727,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
@@ -1380,12 +1366,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
@@ -3081,12 +3065,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_INSP_ONLY.getServiceRequestTypeName());
@@ -3129,12 +3111,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE.getServiceRequestTypeName());
@@ -3170,12 +3150,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		operationsWebPage = backofficeHeader.clickOperationsLink();
 		serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE.getServiceRequestTypeName());
@@ -4355,12 +4333,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
@@ -4467,12 +4443,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
@@ -4550,12 +4524,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
@@ -4620,12 +4592,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
@@ -4726,12 +4696,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		MonitorWebPage monitorpage = backofficeHeader.clickMonitorLink();
 		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
@@ -5111,12 +5079,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
@@ -5369,12 +5335,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
@@ -5426,12 +5390,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
-		loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		operationsWebPage = backofficeHeader.clickOperationsLink();
 		WorkOrdersWebPage workorderspage = operationsWebPage.clickWorkOrdersLink();
 
@@ -5855,12 +5817,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
@@ -5916,12 +5876,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
@@ -5972,12 +5930,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
@@ -6037,12 +5993,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginWebpage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backofficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
 
 		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();

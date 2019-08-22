@@ -196,4 +196,8 @@ public class BackOfficeUtils {
 	public static String getFormattedServicePriceValue(float servicePrice) {
 		return DataUtils.MONEY_SYMBOL.getData() + String.format("%,.2f", servicePrice);
 	}
+
+	public static String getFormattedServicePriceValue(String servicePrice) {
+		return DataUtils.MONEY_SYMBOL.getData() + String.format("%,.2f", getServicePriceValue(servicePrice));
+	}
 }

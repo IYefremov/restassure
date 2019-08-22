@@ -6,7 +6,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wi
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 
-public enum ServiceRequestTypes {
+public enum ServiceRequestTypes implements IServiceRequestTypes {
 
     SR_EST_WO_REQ_SRTYPE("SR_Est_WO_Req"),
     SR_ALL_PHASES("SR_all_phases"),
