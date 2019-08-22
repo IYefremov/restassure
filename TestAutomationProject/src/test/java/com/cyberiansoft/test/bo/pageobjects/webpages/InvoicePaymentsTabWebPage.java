@@ -19,7 +19,7 @@ import com.cyberiansoft.test.bo.webelements.WebTable;
 
 public class InvoicePaymentsTabWebPage extends BaseWebPage {
 	
-	@FindBy(id = "ctl00_Content_gvInvoice_ctl00__0")
+	@FindBy(id = "ctl00_Content_gvInvoice_ctl00")
 	private WebTable invoiceinfotable;
 	
 	@FindBy(id = "ctl00_Content_gv_ctl00")
@@ -122,5 +122,26 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 			Assert.assertTrue(false, "Can't find " + paymentstype + " payment type");	
 		}
 		return amount; 
+	}
+
+	public WebElement getInvoceTableRowWithInvoceNumber(String invoiceNumber) {
+		wait.until(ExpectedConditions.visibilityOf(invoiceinfotable.getWrappedElement()));
+		List<WebElement> rows = invoiceinfotable.getTableRows();
+		for (WebElement row : rows) {
+			if (row.findElement(By.xpath(".//td[" + invoiceinfotable.getTableColumnIndex("Invoice #") + "]")).getText().equals(invoiceNumber)) {
+				return row;
+			}
+		}
+		return null;
+	}
+
+	public String getInvoiceAmountValue(String invoiceNumber) {
+		WebElement invoiceRow = getInvoceTableRowWithInvoceNumber(invoiceNumber);
+		return invoiceRow.findElement(By.xpath("./td[" + invoiceinfotable.getTableColumnIndex("Amount") + "]")).getText();
+	}
+
+	public String getInvoicePaidValue(String invoiceNumber) {
+		WebElement invoiceRow = getInvoceTableRowWithInvoceNumber(invoiceNumber);
+		return invoiceRow.findElement(By.xpath("./td[" + invoiceinfotable.getTableColumnIndex("Paid") + "]")).getText();
 	}
 }

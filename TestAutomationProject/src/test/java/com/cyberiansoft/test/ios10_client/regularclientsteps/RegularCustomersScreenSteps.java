@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 
@@ -9,7 +10,7 @@ public class RegularCustomersScreenSteps {
 
     public static void selectCustomer(AppCustomer appCustomer) {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer(appCustomer.getCompany());
+        customersScreen.selectCustomer(appCustomer);
     }
 
     public static void switchToRetailMode() {

@@ -4,6 +4,7 @@ import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.IServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -118,7 +119,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 		RegularBaseWizardScreen.typeContext = SRCONTEXT;
 	}
 	
-	public <T extends IBaseWizardScreen> T selectServiceRequestType(ServiceRequestTypes serviceRequestType) {
+	public <T extends IBaseWizardScreen> T selectServiceRequestType(IServiceRequestTypes serviceRequestType) {
 		swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + serviceRequestType.getServiceRequestTypeName() + "']/..")));
 		appiumdriver.findElementByAccessibilityId(serviceRequestType.getServiceRequestTypeName()).click();

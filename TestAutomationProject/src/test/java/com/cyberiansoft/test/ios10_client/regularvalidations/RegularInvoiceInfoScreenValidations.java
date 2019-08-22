@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularInvoiceInfoScreen;
 import org.testng.Assert;
 
@@ -17,6 +18,6 @@ public class RegularInvoiceInfoScreenValidations {
 
     public static void verifyInvoiceTotalValue(String expectedTotalValue) {
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
-        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), expectedTotalValue);
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), BackOfficeUtils.getFormattedServicePriceValue(expectedTotalValue));
     }
 }
