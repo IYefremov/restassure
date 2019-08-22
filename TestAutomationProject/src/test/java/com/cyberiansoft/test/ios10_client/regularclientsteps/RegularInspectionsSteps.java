@@ -24,7 +24,6 @@ public class RegularInspectionsSteps {
     public static void saveInspectionAsFinal() {
         RegularWizardScreensSteps.clickSaveButton();
         RegularWizardScreensSteps.clickFinalButton();
-        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
     }
 
     public static void saveInspectionAsDraft() {

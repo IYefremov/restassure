@@ -12,6 +12,7 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
+import com.cyberiansoft.test.ios10_client.enums.ServiceRequestAppointmentStatuses;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
@@ -92,7 +93,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
 
         RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionID);
-        RegularApproveInspectionScreenActions.clickApproveAllServicessButton();
+        RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
         RegularApproveInspectionScreenActions.saveApprovedServices();
         RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
 
@@ -275,9 +276,74 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularHomeScreenSteps.navigateToServiceRequestScreenScreen();
         RegularServiceRequestSteps.startCreatingServicerequest(serviceRequestData.getWholesailCustomer(), UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(serviceRequestData.getVihicleInfo());
+        RegularServiceRequestSteps.saveServiceRequestWithAppointment();
+        RegularServiceRequestAppointmentScreenSteps.setDefaultServiceRequestAppointment();
+        final String serviceRequestNumber = RegularServiceRequestSteps.getFirstServiceRequestNumber();
 
+        RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber , UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoValidations.validateVehicleInfoData(serviceRequestData.getVihicleInfo());
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(testCaseData.getInspectionData().getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(testCaseData.getInspectionData().getInsuranceCompanyData());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularServiceRequestsScreenValidations.verifyInspectionIconPresentForServiceRequest(serviceRequestNumber, true);
+        RegularServiceRequestSteps.startCreatingWorkOrderFromServiceRequest(serviceRequestNumber, UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoValidations.validateVehicleInfoData(serviceRequestData.getVihicleInfo());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularWizardScreensSteps.clickSaveButton();
+        RegularServiceRequestsScreenValidations.verifyWorkOrderIconPresentForServiceRequest(serviceRequestNumber, true);
 
+        RegularNavigationSteps.navigateBackScreen();
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
 
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsDraft();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToServiceRequestScreenScreen();
+        RegularServiceRequestSteps.openServiceRequestDetails(serviceRequestNumber);
+        RegularServiceRequestDetalsScreenValidations.verifySRSummaryAppointmentsInformationExists(true);
+        RegularServiceRequestDetalsScreenValidations.verifySRSheduledAppointmentExists(true);
+
+        RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
+        RegularTeamInspectionsScreenValidations.verifyTeamInspectionExists(inspectionNumber, true);
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryOrdersButton();
+        RegularTeamWorkOrdersScreenValidations.verifyTeamInspectionExists(workOrderNumber, true);
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInvoicesButton();
+        RegularTeamInvoicesScreenValidations.verifyTeamInspectionExists(invoiceNumber, true);
+        RegularNavigationSteps.navigateBackScreen();
+        RegularServiceRequestDetalsScreenSteps.navigateBackToServiceRequestsScreen();
+
+        webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+        WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
+
+        BackOfficeLoginWebPage loginWebPage = new BackOfficeLoginWebPage(webdriver);
+        loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+                ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+        BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
+        OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
+        ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+        serviceRequestsListWebPage.makeSearchPanelVisible();
+
+        serviceRequestsListWebPage.setSearchFreeText(serviceRequestNumber);
+        serviceRequestsListWebPage.clickFindButton();
+        serviceRequestsListWebPage.selectFirstServiceRequestFromList();
+        Assert.assertEquals(serviceRequestsListWebPage.getServiceRequestInspectionNumber(), inspectionNumber);
+        Assert.assertEquals(serviceRequestsListWebPage.getServiceRequestWorkOrderNumber(), workOrderNumber);
+        Assert.assertEquals(serviceRequestsListWebPage.getServiceRequestInvoiceNumber(), invoiceNumber);
+        Assert.assertEquals(serviceRequestsListWebPage.getServiceRequestAppointmentStatus(), ServiceRequestAppointmentStatuses.SCHEDULED.getAppointmentStatus());
+        webdriver.quit();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -304,8 +370,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
                 BackOfficeHeaderPanel.class);
         CompanyWebPage companyWebPage = backOfficeHeaderPanel.clickCompanyLink();
         ClientsWebPage clientsWebPage = companyWebPage.clickClientsLink();
-
-        //clientsWebPage.deleteUserViaSearch(inspectionData.getInspectionRetailCustomer().getFullName());
+        clientsWebPage.isClientPresentInTable(inspectionData.getInspectionRetailCustomer().getFullName());
 
         DriverBuilder.getInstance().getDriver().quit();
     }
@@ -344,7 +409,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularInspectionsSteps.saveInspectionAsFinal();
 
         RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionID);
-        RegularApproveInspectionScreenActions.clickApproveAllServicessButton();
+        RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
         RegularApproveInspectionScreenActions.saveApprovedServices();
         RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
 
@@ -355,6 +420,8 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
         RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
         RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());

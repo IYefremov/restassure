@@ -37,4 +37,9 @@ public class RegularMyWorkOrdersSteps {
         myWorkOrdersScreen.clickInvoiceIcon();
         myWorkOrdersScreen.selectInvoiceType(invoiceType);
     }
+
+    public static void selectWorkOrderForApprove(String workOrderId) {
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.selectWorkOrderForApprove(workOrderId);
+    }
 }
