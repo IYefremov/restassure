@@ -150,7 +150,7 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(country)));
 		if (!appiumdriver.findElementByAccessibilityId(country).isDisplayed())
-			SwipeUtils.swipeToElement(appiumdriver.findElementByAccessibilityId(country));
+			SwipeUtils.swipeToElement(country);
 		appiumdriver.findElement(MobileBy.AccessibilityId(country)).click();
 	}
 

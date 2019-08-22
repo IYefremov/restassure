@@ -189,7 +189,7 @@
       "rowID": "partServiceShouldNotAffectROCompleteness.01",
       "description": "TFSID: 85378, 85738, 85752",
       "service": {
-        "serviceName": "Engine Engine Oil Filter"
+        "serviceName": "Engine Auxiliary Engine Oil Filter Hose Clamp"
       },
       "monitoring": {
         "repairOrderData": {

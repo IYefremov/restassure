@@ -20,10 +20,8 @@ public class VehicleInfoScreenSteps {
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         if (vehicleInfoDto.getVINNumber() != null)
             VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vehicleInfoDto.getVINNumber());
-        if (vehicleInfoDto.getVehicleMake() != null)
-            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.MAKE, vehicleInfoDto.getVehicleMake());
-        if (vehicleInfoDto.getVehicleModel() != null)
-            VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.MODEL, vehicleInfoDto.getVehicleModel());
+        if (vehicleInfoDto.getVehicleMake() != null && vehicleInfoDto.getVehicleModel() != null)
+            VehicleInfoScreenInteractions.selectMakeAndModel(vehicleInfoDto.getVehicleMake(), vehicleInfoDto.getVehicleModel());
         if (vehicleInfoDto.getVehicleYear() != null)
             VehicleInfoScreenInteractions.setYear(vehicleInfoDto.getVehicleYear());
         if (vehicleInfoDto.getMileage() != null)

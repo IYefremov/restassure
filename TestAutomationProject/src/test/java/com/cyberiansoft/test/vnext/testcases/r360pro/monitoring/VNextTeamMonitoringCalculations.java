@@ -71,8 +71,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
-        MonitorSteps.openMenu(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        MonitorSteps.openItem(workOrderId);
         EditOrderSteps.switchToParts();
         EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
@@ -92,8 +91,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         RepairOrderDto repairOrderDto = workOrderData.getMonitoring().getRepairOrderData();
         ServiceData serviceData = workOrderData.getServiceData();
 
-        MonitorSteps.openMenu(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        MonitorSteps.openItem(workOrderId);
         EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
@@ -112,8 +110,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         RepairOrderDto repairOrderDto = workOrderData.getMonitoring().getRepairOrderData();
         ServiceData serviceData = workOrderData.getServiceData();
 
-        MonitorSteps.openMenu(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        MonitorSteps.openItem(workOrderId);
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         EditOrderSteps.openElementMenu(serviceData.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);

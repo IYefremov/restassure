@@ -97,10 +97,10 @@
           "trim" : "No trims available"
         },
         "servicesScreen": {
-          "screenTotalPrice": "$962.53",
+          "screenTotalPrice": "$941.53",
           "screenPrice": "$1,046.14"
         },
-        "workOrderPrice": "$962.53"
+        "workOrderPrice": "$941.53"
       }
     }
   ],
@@ -205,10 +205,10 @@
           "trim" : "No trims available"
         },
         "servicesScreen": {
-          "screenTotalPrice": "$962.53",
+          "screenTotalPrice": "$941.53",
           "screenPrice": "$1,046.14"
         },
-        "workOrderPrice": "$962.53"
+        "workOrderPrice": "$941.53"
       }
     }
   ],
@@ -323,10 +323,10 @@
   "testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO": [
     {
       "rowID": "testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO.01",
-      "description": "Test Case 27850: 5 - Create invoice based on 3 created WOs - verify presence of Invoice on BO",
+      "description": "Test Case 27851: 5 - Create invoice based on 3 created WOs - verify presence of Invoice on BO, Test Case 27852: 6 - Do partial and full payment for invoice - verify them on BO",
       "invoiceData": {
         "poNumber": "123po",
-        "invoiceTotal": "$1,925.06",
+        "invoiceTotal": "1883.06",
         "cashCheckPaymentData" : {
           "cashCheckNumber" : "ASD-123",
           "cashCheckAmount" : "235"
@@ -334,6 +334,49 @@
       }
     }
   ],
+  "testCreateSRAddAppointmentCreateInspectionAndWOAndInvoiceAndVerifyDataOnBOISCorrectlyDisplayed": [
+    {
+      "rowID": "testCreateSRAddAppointmentCreateInspectionAndWOAndInvoiceAndVerifyDataOnBOISCorrectlyDisplayed.01",
+      "description": "Test Case 27853: 7 - Create SR -> add appointment -> create inspection -> WO -> invoice -> verify on BO that all data related to SR is correctly displayed",
+      "serviceRequestData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Question for order test",
+          "questionsData": [{
+            "questionAnswer": "Half",
+            "screenIndex": 0
+          },
+            {
+              "questionAnswer": "Yes",
+              "screenIndex": 1
+            },
+            {
+              "questionAnswer": "No",
+              "screenIndex": 2
+            },
+            {
+              "questionAnswer": "Yes",
+              "screenIndex": 3
+            },
+            {
+              "questionAnswer": "ASD",
+              "screenIndex": 4,
+              "textQuestion" : true
+            },
+            {
+              "questionAnswer": "Future Attention Needed",
+              "screenIndex": 5
+            }
+          ]
+        }
+      }
+    }
+    ],
   "testCreateRetailCustomer": [
     {
       "rowID": "testCreateRetailCustomer.01",
@@ -353,5 +396,47 @@
         }
       }
     }
+  ],
+  "testCreateInspectionWOInvoiceForCreatedRetailCustomer": [
+    {
+      "rowID": "testCreateInspectionWOInvoiceForCreatedRetailCustomer.01",
+      "description": "Test Case 27855: 9 - Create Inspection, WO, Invoice for created retail customer",
+      "inspectionData": {
+        "retailCustomer": {
+          "firstName": "TestRetailFirst",
+          "lastName": "TestRetailSecond"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim" : "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel",
+              "servicePrice": "20"
+            },
+            {
+              "serviceName": "Special Discount",
+              "servicePrice": "-10"
+            }
+          ]
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        }
+      },
+      "workOrderData" : {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+        }
+      }
   ]
 }

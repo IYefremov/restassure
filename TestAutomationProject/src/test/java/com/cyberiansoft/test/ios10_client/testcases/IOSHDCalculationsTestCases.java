@@ -29,7 +29,6 @@ import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import io.appium.java_client.MobileBy;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -254,12 +253,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
 		loginPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		WorkOrdersWebPage workorderspage = operationsWebPage.clickWorkOrdersLink();
 		workorderspage.makeSearchPanelVisible();
@@ -442,12 +439,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
 		loginPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		WorkOrdersWebPage workOrdersWebPage = operationsWebPage.clickWorkOrdersLink();
 		workOrdersWebPage.makeSearchPanelVisible();
@@ -622,12 +617,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
 		loginPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		WorkOrdersWebPage workOrdersWebPage = operationsWebPage.clickWorkOrdersLink();
 		workOrdersWebPage.makeSearchPanelVisible();
@@ -699,12 +692,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
 		loginPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
 		inspectionsWebPage.makeSearchPanelVisible();
@@ -777,12 +768,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
 		loginPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
 		inspectionsWebPage.makeSearchPanelVisible();
@@ -848,12 +837,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
 		loginPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
 		inspectionsWebPage.makeSearchPanelVisible();
@@ -1606,12 +1593,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
 		loginPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
@@ -1727,12 +1712,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
-				BackOfficeLoginWebPage.class);
+		BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
 		loginPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-		BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
 		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
