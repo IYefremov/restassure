@@ -4,7 +4,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 
 public class RegularApproveInspectionScreenActions {
 
-    public static void clickApproveAllServicesButton() {
+    public static void clickApproveAllServicessButton() {
         RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
         approveInspectionsScreen.clickApproveAllServicesButton();
     }

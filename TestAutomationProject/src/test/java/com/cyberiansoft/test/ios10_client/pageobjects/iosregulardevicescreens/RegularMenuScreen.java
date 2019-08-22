@@ -27,8 +27,4 @@ public class RegularMenuScreen extends BaseWizardScreen {
     public void closeMenuScreen() {
         cancelBtn.click();
     }
-
-    public void clickMenuItem(ReconProMenuItems menuItem) {
-        appiumdriver.findElementByAccessibilityId(menuItem.getMenuItemName()).click();
-    }
 }

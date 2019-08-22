@@ -63,19 +63,18 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 		RegularBaseWizardScreen.typeContext = TEAMINSPECTIONCONTEXT;
 	}
 	
-	public boolean isInspectionIsApproveButtonExists(String inspectionID) {
+	public boolean isInspectionIsApproveButtonExists(String inspnumber) {
 		return inspectiontable.findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_76")).size() > 0;
 	}
 	
-	public boolean isDraftIconPresentForInspection(String inspectionID) {
+	public boolean isDraftIconPresentForInspection(String inspnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspectionID)));
-		return inspectiontable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspectionID + "']/XCUIElementTypeImage[@name='ESTIMATION_DRAFT']")).size() > 0;
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber)));
+		return inspectiontable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeImage[@name='ESTIMATION_DRAFT']")).size() > 0;
 	}
 	
-	public boolean isInspectionExists(String inspectionID) {
-		waitTeamInspectionsScreenLoaded();
-		return inspectiontable.findElements(MobileBy.AccessibilityId(inspectionID)).size() > 0;
+	public boolean isInspectionExists(String inspection) {
+		return inspectiontable.findElements(MobileBy.AccessibilityId(inspection)).size() > 0;
 	}
 	
 	public void clickActionButton() {

@@ -60,17 +60,17 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersTable")));
 	}
 
-	public void clickCreateInvoiceForWO(String workOrderID) {
+	public void clickCreateInvoiceForWO(String wonumber) {
 		WebElement table = appiumdriver.findElementByAccessibilityId("TeamOrdersTable");
 		table.findElement(By.xpath("//XCUIElementTypeCell[@name='"
-						+ workOrderID + "']/XCUIElementTypeOther")).click();
+						+ wonumber + "']/XCUIElementTypeOther")).click();
 	}
 	
-	public void clickOnWO(String workOrderID) {
+	public void clickOnWO(String wonumber) {
 		waitTeamWorkOrdersScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(workOrderID)));
-		appiumdriver.findElementByAccessibilityId(workOrderID).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
+		appiumdriver.findElementByAccessibilityId(wonumber).click();
 	}
 	
 	public RegularOrderMonitorScreen selectWOMonitor() {
@@ -93,9 +93,9 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		return invoiceType.getFirstVizardScreen();
 	}
 	
-	public void verifyCreateInvoiceIsActivated(String workOrderID) {
+	public void verifyCreateInvoiceIsActivated(String wonumber) {
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
-				+ workOrderID + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
+				+ wonumber + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
 Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);	
 	}
 	
@@ -133,15 +133,15 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 		selectWorkOrderType(wotype);
 	}
 	
-	public void selectWorkOrderForApprove(String workOrderID) {
+	public void selectWorkOrderForApprove(String wonumber) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamOrdersTable")));
-		wotable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther")).click();
+		wotable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther")).click();
 		
 	}
 	
-	public void approveWorkOrder(String workOrderID, String employee, String pwd) {
-		selectWorkOrderForApprove(workOrderID);
+	public void approveWorkOrder(String wo, String employee, String pwd) {
+		selectWorkOrderForApprove(wo);
 		selectEmployeeAndTypePassword(employee, pwd);
 		approvebtn.click();
 	}
@@ -201,31 +201,31 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 		new RegularTeamWorkOrdersScreen();
 	}
 	
-	public boolean isWorkOrderExists(String workOrderID) {
-		return appiumdriver.findElements(MobileBy.AccessibilityId(workOrderID)).size() > 0;	
+	public boolean woExists(String wonumber) {
+		return appiumdriver.findElements(MobileBy.AccessibilityId(wonumber)).size() > 0;	
 	}
 	
-	public boolean isWorkOrderHasApproveIcon(String workOrderID) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_78')]")).size() > 0;
+	public boolean isWorkOrderHasApproveIcon(String wonumber) {
+		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_78')]")).size() > 0;
 	}
 	
-	public boolean isWorkOrderHasActionIcon(String workOrderID) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_79')]")).size() > 0;
+	public boolean isWorkOrderHasActionIcon(String wonumber) {
+		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_79')]")).size() > 0;
 	}
 	
 	public String getFirstWorkOrderNumberValue() {		
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelOrderNumber']")).getAttribute("label");
 	}
 	
-	public void selectWorkOrderForEidt(String workOrderID) {
-		selectWorkOrder(workOrderID);
+	public void selectWorkOrderForEidt(String wo) {
+		selectWorkOrder(wo);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 	
-	public void selectWorkOrder(String workOrderID) {
+	public void selectWorkOrder(String wonumber) {
 		new WebDriverWait(appiumdriver, 10)
-				  .until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(workOrderID))).click();
+				  .until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(wonumber))).click();
 
 	}
 

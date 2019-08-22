@@ -14,11 +14,6 @@ public class RegularInvoiceInfoScreenSteps {
         invoiceInfoScreen.clickSaveAsFinal();
     }
 
-    public static void saveInvoiceAsDraft() {
-        RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
-        invoiceInfoScreen.clickSaveAsDraft();
-    }
-
     public static String getInvoiceNumber() {
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
         return  invoiceInfoScreen.getInvoiceNumber();

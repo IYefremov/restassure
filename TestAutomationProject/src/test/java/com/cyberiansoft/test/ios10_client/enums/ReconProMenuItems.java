@@ -4,11 +4,7 @@ import lombok.Getter;
 
 public enum ReconProMenuItems {
 
-    PAY("Pay"),
-    CREATE_WORKORDER("Create\nWO"),
-    CREATE_INPECTION("Create\nInspection"),
-    DETAILS("Details"),
-    SUMMARY("Summary");
+    PAY("Pay");
 
     @Getter
     private String menuItemName;
