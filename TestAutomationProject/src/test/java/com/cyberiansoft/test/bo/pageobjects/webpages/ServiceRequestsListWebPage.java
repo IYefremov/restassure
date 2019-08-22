@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
@@ -39,14 +38,8 @@ import java.util.stream.Collectors;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
-//import com.cyberiansoft.test.bo.utils.WebElementExt;
-//import lombok.experimental.ExtensionMethod;
-//
-//@ExtensionMethod(WebElementExt.class)
-public class ServiceRequestsListWebPage extends BaseWebPage implements ClipboardOwner {
 
-    private String userName;
-    private String userPassword;
+public class ServiceRequestsListWebPage extends BaseWebPage implements ClipboardOwner {
 
 	@FindBy(xpath = "//span[@id='ctl00_ctl00_Content_Main_cpFilterer']/div")
 	private WebElement searchtab;
@@ -377,6 +370,18 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(id = "Card_rcbAppLocations_Arrow")
 	private WebElement arrow;
 
+	@FindBy(id = "Card_hrefSREstimate")
+	private WebElement serviceRequestInspection;
+
+	@FindBy(id = "Card_hrefSRWO")
+	private WebElement serviceRequestWorkOrder;
+
+	@FindBy(id = "Card_hrefSRInvoice")
+	private WebElement serviceRequestInvoice;
+
+	@FindBy(id = "addAppointmentLinkEdit")
+	private WebElement serviceRequestAppointmentFrame;
+
 	@FindBy(xpath = "//input[@id='Card_btnAddApp']")
 	private WebElement appointmentDialogAddButton;
 
@@ -390,9 +395,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		PageFactory.initElements(driver, WebPageWithPagination.class);
-
-        userName = BOConfigInfo.getInstance().getUserNadaName();
-        userPassword = BOConfigInfo.getInstance().getUserNadaPassword();
 	}
 
 	public boolean searchPanelIsExpanded() {
@@ -574,7 +576,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
         return element.getText();
 	}
 	
-	public WebElement getServiceRequestCellBySRNumber(String srNumber) {
+	private WebElement getServiceRequestCellBySRNumber(String srNumber) {
 		WebElement srcell = null;
 		List<WebElement> servicerequestscells = servicerequestslist.findElements(By.xpath("./div[contains(@class,'item')]"));
 		for (WebElement servicerequestcell : servicerequestscells)
@@ -2197,4 +2199,20 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
          driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateTo_dateInput")).clear();
          driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_calDateTo_dateInput")).sendKeys(date);
     }
+
+    public String getServiceRequestInspectionNumber() {
+    	return serviceRequestInspection.getText();
+	}
+
+	public String getServiceRequestInvoiceNumber() {
+		return serviceRequestInvoice.getText();
+	}
+
+	public String getServiceRequestWorkOrderNumber() {
+		return serviceRequestWorkOrder.getText();
+	}
+
+	public String getServiceRequestAppointmentStatus() {
+		return serviceRequestAppointmentFrame.findElement(By.xpath(".//span[@class='appointmentReason']")).getText().trim();
+	}
 }
