@@ -22,6 +22,7 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -295,10 +296,13 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickActionButton() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")));
-		//wait = new WebDriverWait(appiumdriver, 15);
-		//wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")));
+		waitInspectionsScreenLoaded();
+		try {
+			FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+			wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")));
+		} catch (TimeoutException e) {
+			appiumdriver.findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")).click();
+		}
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'Share'")).click();
 	}
 
