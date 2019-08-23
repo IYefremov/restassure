@@ -124,6 +124,10 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public void selectDiscaunt(String discaunt) {
+		MobileElement table = getMaqtrixPanel();
+		if (!table.findElementByAccessibilityId(discaunt).isDisplayed()) {
+			scrollToElement(table.findElementByAccessibilityId(discaunt));
+		}
 		getMaqtrixPanel().findElement(By.name(discaunt)).findElement(By.name("unselected")).click();
 	}
 
