@@ -97,6 +97,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         advancedSearchDialog
                 .setCustomer(data.getCustomer())
+                .setTimeFrame(data.getTimeFrame())
                 .typeEmployeeName(data.getEmployee());
 
         Assert.assertTrue(advancedSearchDialog.isEmployeeDisplayed(data.getEmployee()));
@@ -331,6 +332,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         Assert.assertTrue(advancedSearchDialog.isCustomerDisplayed(data.getCustomer()));
         advancedSearchDialog
                 .selectCustomerNameFromBoxList(data.getCustomer())
+                .setTimeFrame(data.getTimeFrame())
                 .clickSearchButton();
 
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
@@ -1071,7 +1073,10 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         repairOrdersPage.clickEditIconForSavedSearch();
         Assert.assertEquals(advancedSearchDialog.getFlagSelected(), data.getFlags()[1],
-                "The flag hasn't been selected"); //todo clear saved options after implementation of this option
+                "The flag hasn't been selected");
+        advancedSearchDialog
+                .clickDeleteButton()
+                .clickConfirmButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1152,6 +1157,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         System.out.println("Before clear");
         advancedSearchDialog.getAdvancedSearchDialogElements().forEach(System.out::println);
+        System.out.println("\nData before clear");
+        data.getAdvancedSearchDialogElements().forEach(System.out::println);
 
         Assert.assertTrue(advancedSearchDialog
                 .getAdvancedSearchDialogElements()
@@ -1160,6 +1167,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         advancedSearchDialog.clickClearButton();
         System.out.println("After clear");
         advancedSearchDialog.getAdvancedSearchDialogElements().forEach(System.out::println);
+        System.out.println("\nData after clear");
+        data.getAdvancedSearchDialogElements().forEach(System.out::println);
         Assert.assertTrue(advancedSearchDialog
                 .getAdvancedSearchDialogElements()
                 .containsAll(data.getAdvancedSearchDialogDefaultTextList()), "The data hasn't been cleared");

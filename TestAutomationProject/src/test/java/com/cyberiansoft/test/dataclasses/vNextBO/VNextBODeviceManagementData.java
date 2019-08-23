@@ -27,8 +27,4 @@ public class VNextBODeviceManagementData {
 
     @JsonProperty("deviceName")
     private String deviceName;
-
-    public String getNickname() {
-        return nickname + "-" + RandomStringUtils.randomAlphanumeric(5);
-    }
 }

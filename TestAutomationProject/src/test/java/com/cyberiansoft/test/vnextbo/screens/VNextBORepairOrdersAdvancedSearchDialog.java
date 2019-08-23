@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -398,6 +397,12 @@ public class VNextBORepairOrdersAdvancedSearchDialog extends VNextBOBaseWebPage 
         Utils.clickElement(clearButton);
         waitForLoading();
         return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+    }
+
+    public VNextBOConfirmationDialog clickDeleteButton() {
+        Utils.clickElement(deleteButton);
+        waitForLoading();
+        return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
     }
 
     private VNextBORepairOrdersAdvancedSearchDialog clickPhaseBox() {

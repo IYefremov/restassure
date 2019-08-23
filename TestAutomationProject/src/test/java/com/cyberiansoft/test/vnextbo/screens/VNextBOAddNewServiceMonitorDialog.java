@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
@@ -148,7 +150,7 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
     }
 
     private VNextBOAddNewServiceMonitorDialog selectCategory(String category) {
-        selectOptionInDropDown(categoryDropDown, categoryListBoxOptions, category);
+        selectOptionInDropDown(categoryDropDown, categoryListBoxOptions, category, true);
         return this;
     }
 
@@ -165,7 +167,7 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
 
     public boolean isPartDescriptionDisplayed(String description) {
         refreshPage();
-        wait.until(ExpectedConditions.visibilityOfAllElements(partDescriptions));
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(partDescriptions);
         return partDescriptions
                 .stream()
                 .anyMatch(e -> {
@@ -176,21 +178,26 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
     }
 
     public String selectRandomAddPartsOption() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(addPartsDropDown));
-        final List<WebElement> labels = addPartsDropDown.findElements(By.tagName("label"));
-        final int randomIndex = RandomUtils.nextInt(0, labels.size());
+        final List<WebElement> addPartsElements = getPartsOptions();
+        final int randomIndex = RandomUtils.nextInt(0, addPartsElements.size());
         final String selectedAddPartsNumber = getSelectedAddPartsNumber();
-        wait.until(ExpectedConditions.elementToBeClickable(labels.get(randomIndex))).click();
+        Utils.clickElement(addPartsElements.get(randomIndex));
         wait.until((ExpectedCondition<Boolean>) (num) -> !selectedAddPartsNumber.equals(getSelectedAddPartsNumber()));
-        return labels.get(randomIndex).getText();
+        return addPartsElements.get(randomIndex).getText();
     }
+
+    public List<WebElement> getPartsOptions() {
+        WaitUtilsWebDriver.waitForVisibility(addPartsDropDown);
+        return addPartsDropDown.findElements(By.xpath("//div[contains(@data-bind, 'onLaborPartSelectionChange')]"));
+    }
+
 
     public String getSelectedAddPartsNumber() {
         return wait.until(ExpectedConditions.visibilityOf(selectedAddPartsCounter)).getText();
     }
 
     private VNextBOAddNewServiceMonitorDialog clickSubcategoryBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(subcategoryListBox)).click();
+        Utils.clickElement(subcategoryListBox);
         return this;
     }
 
@@ -200,7 +207,7 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
     }
 
     private String selectSubcategory() {
-        return selectOptionInDropDown(subcategoryDropDown, subcategoryListBoxOptions);
+        return Utils.selectOptionInDropDown(subcategoryDropDown, subcategoryListBoxOptions);
     }
 
     public VNextBOAddNewServiceMonitorDialog setService(String service) {
@@ -215,7 +222,7 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
     }
 
     private VNextBOAddNewServiceMonitorDialog selectService(String service) {
-        selectOptionInDropDown(serviceDropDown, serviceListBoxOptions, service);
+        selectOptionInDropDown(serviceDropDown, serviceListBoxOptions, service, true);
         return this;
     }
 
@@ -232,16 +239,19 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
 
     public VNextBOAddNewServiceMonitorDialog setServicePrice(String price) {
         selectServiceOption(servicePrice, servicePriceInputField, price);
+        WaitUtilsWebDriver.waitABit(500);
         return this;
     }
 
     public VNextBOAddNewServiceMonitorDialog setServiceLaborRate(String laborRate) {
         selectServiceOption(serviceLaborRate, serviceLaborRateInputField, laborRate);
+        WaitUtilsWebDriver.waitABit(500);
         return this;
     }
 
     public VNextBOAddNewServiceMonitorDialog setServiceQuantity(String quantity) {
         selectServiceOption(serviceQuantity, serviceQuantityInputField, quantity);
+        WaitUtilsWebDriver.waitABit(500);
         return this;
     }
 
@@ -251,15 +261,15 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
     }
 
     private void selectServiceOption(WebElement serviceQuantity, WebElement serviceQuantityInputField, String quantity) {
-        wait.until(ExpectedConditions.elementToBeClickable(serviceQuantity)).click();
+        Utils.clickElement(serviceQuantity);
         wait.until(ExpectedConditions.elementToBeClickable(serviceQuantityInputField)).clear();
         wait.until(ExpectedConditions.elementToBeClickable(serviceQuantity)).sendKeys(quantity);
     }
 
     public VNextBORepairOrderDetailsPage clickSubmitButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
+        Utils.clickElement(submitButton);
         waitForLoading();
-        wait.until(ExpectedConditions.invisibilityOf(newServicePopup));
+        WaitUtilsWebDriver.waitForInvisibility(newServicePopup);
         return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
     }
 

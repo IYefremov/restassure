@@ -34,7 +34,7 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	private WebElement invoiceNoButton;
 
 	@FindBy(xpath = "//button[text()='Yes']")
-	private WebElement invoiceYesButton;
+	private WebElement confirmButton;
 
 	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCloseButton']")
 	private WebElement rejectButton;
@@ -63,9 +63,13 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	}
 
     public VNextBOInvoicesWebPage clickInvoiceYesButton() {
-	    clickModalDialogButton(invoiceYesButton);
-	    waitForLoading();
+	    clickConfirmButton();
 	    return PageFactory.initElements(driver, VNextBOInvoicesWebPage.class);
+	}
+
+    public void clickConfirmButton() {
+	    clickModalDialogButton(confirmButton);
+	    waitForLoading();
 	}
 
     public void clickInvoiceRejectButton() {
@@ -76,7 +80,7 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
     private void clickModalDialogButton(WebElement button) {
         Utils.clickElement(button);
         try {
-            wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("dialogModal"))));
+            WaitUtilsWebDriver.waitForInvisibility(driver.findElement(By.id("dialogModal")));
         } catch (TimeoutException e) {
             clickWithJS(button);
         }

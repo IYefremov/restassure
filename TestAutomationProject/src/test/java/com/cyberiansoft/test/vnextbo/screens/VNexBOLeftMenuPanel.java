@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
@@ -115,7 +116,10 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
     public VNextBODeviceManagementWebPage selectDeviceManagementMenu() {
         selectMenuItem(deviceManagementMenu, MainMenuItems.SETTINGS.getMenu());
-        return PageFactory.initElements(driver, VNextBODeviceManagementWebPage.class);
+        final VNextBODeviceManagementWebPage deviceManagementWebPage =
+                PageFactory.initElements(driver, VNextBODeviceManagementWebPage.class);
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(deviceManagementWebPage.getDeviceManagementBreadCrumb(), 5);
+        return deviceManagementWebPage;
     }
 
     public boolean isUsersMenuItemExists() {

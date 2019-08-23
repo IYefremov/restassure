@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.baseutils;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -19,11 +18,15 @@ import static com.cyberiansoft.test.baseutils.WaitUtilsWebDriver.waitForElementT
 
 public class Utils {
 
-    public final static WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getDriver(), 15);
-    public final static WebDriverWait waitShort = new WebDriverWait(DriverBuilder.getInstance().getDriver(), 5);
-    public final static WebDriverWait waitLong = new WebDriverWait(DriverBuilder.getInstance().getDriver(), 30);
-    public final static Actions actions = new Actions(DriverBuilder.getInstance().getDriver());
+    private static Actions actions = null;
 
+    public static Actions getActions() {
+        if (actions == null) {
+            return new Actions(DriverBuilder.getInstance().getDriver());
+        }
+        return actions;
+    }
+    
     public static void clickElement(WebElement element) {
         try {
             waitForElementToBeClickable(element).click();
@@ -63,11 +66,11 @@ public class Utils {
     }
 
     public static void reduceZoom() {
-        actions.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT)).perform();
+        getActions().sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT)).perform();
     }
 
     public static void increaseZoom() {
-        actions.sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD)).perform();
+        getActions().sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD)).perform();
     }
 
     public static void goToPreviousPage() {
@@ -79,7 +82,7 @@ public class Utils {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
         getMatchingOptionInListBox(listBox, selection)
-                .ifPresent((option) -> actions
+                .ifPresent((option) -> getActions()
                         .moveToElement(option)
                         .click()
                         .build()
@@ -106,7 +109,9 @@ public class Utils {
         return listBox
                 .stream()
                 .filter((option) -> {
-                    wait.ignoring(StaleElementReferenceException.class)
+                    WaitUtilsWebDriver
+                            .getWait()
+                            .ignoring(StaleElementReferenceException.class)
                             .until(ExpectedConditions.not(ExpectedConditions.stalenessOf(option)));
                     return option.getText().equals(selection);
                 })
@@ -138,12 +143,18 @@ public class Utils {
     }
 
     public static String selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox) {
+        final int minOptionNumber = 1;
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
-        final int random = RandomUtils.nextInt(0, listBox.size());
+        final int random = RandomUtils.nextInt(minOptionNumber, listBox.size());
         System.out.println(random);
-        final WebElement selectedValue = listBox.get(random);
-        actions.moveToElement(selectedValue).click().build().perform();
+        WebElement selectedValue = listBox.get(random);
+        if (selectedValue == null) {
+            selectedValue = listBox.get(minOptionNumber);
+            Utils.clickElement(selectedValue);
+        } else {
+            getActions().moveToElement(selectedValue).click().build().perform();
+        }
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
         return selectedValue.getText();
     }
@@ -220,7 +231,7 @@ public class Utils {
 
     public static boolean isElementClickable(WebElement element) {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(element));
             return true;
         } catch (Exception e) {
             return false;
@@ -246,6 +257,16 @@ public class Utils {
         }
     }
 
+    public static String getInputFieldValue(WebElement inputField, int timeOut) {
+        try {
+            WaitUtilsWebDriver.waitForVisibility(inputField, timeOut);
+            return inputField.getAttribute("value");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
     //todo change to clearAndType?
     public static void setData(WebElement inputField, String data) {
         clickElement(inputField);
@@ -257,7 +278,7 @@ public class Utils {
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
         for (WebElement selected : listBox) {
             if (selected.getText().equals(data)) {
-                actions.moveToElement(selected)
+                getActions().moveToElement(selected)
                         .click()
                         .build()
                         .perform();
@@ -291,7 +312,7 @@ public class Utils {
     public static void setAttributeWithJS(WebElement element, String attribute, String value) {
         ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
                 element, attribute, value);
-        wait.until(ExpectedConditions.attributeContains(element, attribute, value));
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.attributeContains(element, attribute, value));
     }
 
     public static void sendKeysWithJS(WebElement element, String value) {

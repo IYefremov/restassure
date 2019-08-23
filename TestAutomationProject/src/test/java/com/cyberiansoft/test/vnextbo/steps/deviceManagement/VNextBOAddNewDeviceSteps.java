@@ -2,16 +2,13 @@ package com.cyberiansoft.test.vnextbo.steps.deviceManagement;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBODeviceManagementData;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOAddNewDeviceDialogInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
 
 public class VNextBOAddNewDeviceSteps {
 
     private VNextBOAddNewDeviceDialogInteractions addNewDeviceDialogInteractions;
-    private VNextBODeviceManagementInteractions deviceManagementInteractions;
 
     public VNextBOAddNewDeviceSteps() {
         addNewDeviceDialogInteractions = new VNextBOAddNewDeviceDialogInteractions();
-        deviceManagementInteractions = new VNextBODeviceManagementInteractions();
     }
 
     public void setAddNewDeviceFields(VNextBODeviceManagementData deviceManagementData, String nickName) {

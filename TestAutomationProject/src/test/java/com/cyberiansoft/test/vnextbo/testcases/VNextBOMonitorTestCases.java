@@ -575,7 +575,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangeStatusOfRoToDraft(String rowID, String description, JSONObject testData) {
+    public void verifyUserCannotChangeStatusOfRoToDraft(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
@@ -592,7 +592,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
         detailsPage.setStatus(data.getStatus());
-        Assert.assertEquals(detailsPage.getRoStatus(), data.getStatus(), "The status hasn't been set");
+        Assert.assertNotEquals(detailsPage.getRoStatus(), data.getStatus(), "The status has been changed to 'Draft'");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -675,34 +675,6 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangePriorityOfRoToHigh(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
-        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
-
-        repairOrdersPage
-                .setRepairOrdersSearchText(data.getOrderNumber())
-                .clickSearchIcon();
-        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
-        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
-        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-
-        detailsPage
-                .setPriority(data.getPriority())
-                .clickRepairOrdersBackwardsLink()
-                .clickCancelSearchIcon();
-
-        if (repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber())) {
-            Assert.assertTrue(repairOrdersPage.isArrowUpDisplayed(data.getOrderNumber()),
-                    "The work order arrow down is not displayed");
-        }
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddNewService(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -735,19 +707,52 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
         detailsPage.expandServicesTable();
         final String serviceId = detailsPage.getServiceId(serviceDescription);
-        Assert.assertNotEquals(serviceId, "",
-                "The created service hasn't been displayed");
-        System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
-        Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
-                "The service description name is not equal to the inserted description value");
+        if (serviceId.isEmpty()) {
+            Assert.assertTrue(detailsPage.isToBeAddedLaterServiceNotificationDisplayed(),
+                    "The notification about the service to be added later hasn't been displayed");
+        } else {
+            Assert.assertNotEquals(serviceId, "",
+                    "The created service hasn't been displayed");
+            System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
+            Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
+                    "The service description name is not equal to the inserted description value");
 
-        System.out.println("quantity: " + detailsPage.getServiceQuantity(serviceId));
-        Assert.assertEquals(detailsPage.getServiceQuantity(serviceId), data.getServiceQuantity(),
-                "The service quantity is not equal to the inserted quantity value");
+            System.out.println("quantity: " + detailsPage.getServiceQuantity(serviceId));
+            Assert.assertEquals(detailsPage.getServiceQuantity(serviceId), data.getServiceQuantity(),
+                    "The service quantity is not equal to the inserted quantity value");
 
-        System.out.println("price: " + detailsPage.getServicePrice(serviceId));
-        Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServicePrice(),
-                "The service price is not equal to the inserted price value");
+            System.out.println("price: " + detailsPage.getServicePrice(serviceId));
+            Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServicePrice(),
+                    "The service price is not equal to the inserted price value");
+        }
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangePriorityOfRoToHigh(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
+        breadCrumbPanel.setLocation(data.getLocation());
+        Assert.assertTrue(breadCrumbPanel.isLocationSet(data.getLocation()), "The location hasn't been set");
+
+        repairOrdersPage
+                .setRepairOrdersSearchText(data.getOrderNumber())
+                .clickSearchIcon();
+        Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+                "The work order is not displayed after search by order number after clicking the 'Search' icon");
+
+        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+
+        detailsPage
+                .setPriority(data.getPriority())
+                .clickRepairOrdersBackwardsLink()
+                .clickCancelSearchIcon();
+
+        if (repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber())) {
+            Assert.assertTrue(repairOrdersPage.isArrowUpDisplayed(data.getOrderNumber()),
+                    "The work order arrow down is not displayed");
+        }
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -783,19 +788,23 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
         detailsPage.expandServicesTable();
         final String serviceId = detailsPage.getServiceId(serviceDescription);
-        Assert.assertNotEquals(serviceId, "",
-                "The created service hasn't been displayed");
-        System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
-        Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
-                "The service description name is not equal to the inserted description value");
+        if (serviceId.isEmpty()) {
+            Assert.assertTrue(detailsPage.isToBeAddedLaterServiceNotificationDisplayed(),
+                    "The notification about the service to be added later hasn't been displayed");
+        } else {
+            Assert.assertNotEquals(serviceId, "", "The created service hasn't been displayed");
+            System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
+            Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
+                    "The service description name is not equal to the inserted description value");
 
-        System.out.println("quantity: " + detailsPage.getServiceQuantity(serviceId));
-        Assert.assertEquals(detailsPage.getServiceQuantity(serviceId), data.getServiceQuantity(),
-                "The service quantity is not equal to the inserted quantity value");
+            System.out.println("quantity: " + detailsPage.getServiceQuantity(serviceId));
+            Assert.assertEquals(detailsPage.getServiceQuantity(serviceId), data.getServiceQuantity(),
+                    "The service quantity is not equal to the inserted quantity value");
 
-        System.out.println("price: " + detailsPage.getServicePrice(serviceId));
-        Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServicePrice(),
-                "The service price is not equal to the inserted price value");
+            System.out.println("price: " + detailsPage.getServicePrice(serviceId));
+            Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServicePrice(),
+                    "The service price is not equal to the inserted price value");
+        }
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -822,6 +831,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         newServiceMonitorDialog
                 .setPriceType(data.getPriceType())
                 .setService(data.getService())
+                .setServiceDetails(data.getServiceDetails())
                 .setServiceDescription(serviceDescription)
                 .setServiceLaborRate(data.getServiceLaborRate())
                 .setServiceLaborTime(data.getServiceLaborTime())
@@ -830,19 +840,22 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
         detailsPage.expandServicesTable();
         final String serviceId = detailsPage.getServiceId(serviceDescription);
-        Assert.assertNotEquals(serviceId, "",
-                "The created service hasn't been displayed");
-        System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
-        Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
-                "The service description name is not equal to the inserted description value");
+        if (serviceId.isEmpty()) {
+            Assert.assertTrue(detailsPage.isToBeAddedLaterServiceNotificationDisplayed(),
+                    "The notification about the service to be added later hasn't been displayed");
+        } else {
+            System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
+            Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
+                    "The service description name is not equal to the inserted description value");
 
-        System.out.println("quantity: " + detailsPage.getServiceLaborTime(serviceId));
-        Assert.assertEquals(detailsPage.getServiceLaborTime(serviceId), data.getServiceLaborTime(),
-                "The service labor time is not equal to the inserted labor time value");
+            System.out.println("quantity: " + detailsPage.getServiceLaborTime(serviceId));
+            Assert.assertEquals(detailsPage.getServiceLaborTime(serviceId), data.getServiceLaborTime(),
+                    "The service labor time is not equal to the inserted labor time value");
 
-        System.out.println("price: " + detailsPage.getServicePrice(serviceId));
-        Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServiceLaborRate(),
-                "The service labor rate is not equal to the inserted labor rate value");
+            System.out.println("price: " + detailsPage.getServicePrice(serviceId));
+            Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServiceLaborRate(),
+                    "The service labor rate is not equal to the inserted labor rate value");
+        }
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -876,20 +889,23 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         System.out.println(selectedCategory);
 
         final String selectedAddPartsNumberBefore = newServiceMonitorDialog.getSelectedAddPartsNumber();
-        newServiceMonitorDialog.selectRandomAddPartsOption();
+        if (!newServiceMonitorDialog.getPartsOptions().isEmpty()) {
+            newServiceMonitorDialog.selectRandomAddPartsOption();
 
-        final String selectedAddPartsNumberAfter = newServiceMonitorDialog.getSelectedAddPartsNumber();
-        Assert.assertNotEquals(selectedAddPartsNumberBefore, selectedAddPartsNumberAfter);
-        Assert.assertTrue(Integer.valueOf(selectedAddPartsNumberBefore) < Integer.valueOf(selectedAddPartsNumberAfter));
+            final String selectedAddPartsNumberAfter = newServiceMonitorDialog.getSelectedAddPartsNumber();
+            Assert.assertNotEquals(selectedAddPartsNumberBefore, selectedAddPartsNumberAfter);
+            Assert.assertTrue(Integer.valueOf(selectedAddPartsNumberBefore) < Integer.valueOf(selectedAddPartsNumberAfter));
 
-        newServiceMonitorDialog.clickSubmitButton();
-        if (!newServiceMonitorDialog.isPartDescriptionDisplayed(data.getServiceCategory() + " -> " + selectedCategory)) {
-            System.out.println("Refreshing the page...");
-            detailsPage.refreshPage();
+            newServiceMonitorDialog.clickSubmitButton();
+            if (!newServiceMonitorDialog.isPartDescriptionDisplayed(data.getServiceCategory() + " -> " + selectedCategory)) {
+                System.out.println("Refreshing the page...");
+                detailsPage.refreshPage();
+            }
+
+            Assert.assertTrue(newServiceMonitorDialog
+                            .isPartDescriptionDisplayed(data.getServiceCategory() + " -> " + selectedCategory),
+                    "The Part service description hasn't been displayed.");
         }
-        Assert.assertTrue(newServiceMonitorDialog
-                        .isPartDescriptionDisplayed(data.getServiceCategory() + " -> " + selectedCategory),
-                "The Part service description hasn't been displayed.");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1379,18 +1395,19 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
         final VNextBOOrderServiceNotesDialog notesDialog = detailsPage.openNotesDialog(serviceId);
-        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
-        final int notesNumber = notesDialog.getNotesListNumber();
+        Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+        final int notesNumber = notesDialog.getRepairNotesListNumber();
 
-        notesDialog.typeNotesMessage(data.getServiceNotesMessage())
-                .clickNotesAddButton()
-                .openNotesDialog(serviceId);
-        Assert.assertTrue(notesDialog.isNotesDialogDisplayed(), "The notes dialog hasn't been opened");
-        Assert.assertEquals(notesNumber + 1, notesDialog.getNotesListNumber(),
+        notesDialog
+                .openRepairNoteTextArea()
+                .typeRepairNotesMessage(data.getServiceNotesMessage())
+                .clickRepairNoteSaveButton();
+
+        Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+        Assert.assertEquals(notesNumber + 1, notesDialog.getRepairNotesListNumber(),
                 "The services notes list number is not updated");
     }
 
-    //todo change because of UI changes
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeTargetDateOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
@@ -1836,14 +1853,14 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .setStatus(data.getStatus())
                 .expandServicesTable();
         final String serviceId = detailsPage.getServiceId(data.getService());
-        String serviceQuantity = String.valueOf(RandomUtils.nextInt(10, 100));
+        String serviceQuantity = RandomStringUtils.randomNumeric(2);
         final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
         System.out.println("serviceTotalPrice: " + serviceTotalPrice);
         System.out.println("Random serviceQuantity: " + serviceQuantity);
         System.out.println("ServiceQuantity: " + detailsPage.getServiceQuantity(serviceId));
 
         if (serviceQuantity.equals(detailsPage.getServiceQuantity(serviceId))) {
-            serviceQuantity = String.valueOf(RandomUtils.nextInt(10, 100));
+            serviceQuantity = RandomStringUtils.randomNumeric(2);
             System.out.println("Random serviceQuantity 2: " + serviceQuantity);
         }
         detailsPage.setServiceQuantity(serviceId, data.getService(), serviceQuantity);
@@ -1888,7 +1905,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
         System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
         Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
-                    "The service total price hasn't been recalculated after setting the negative number for the service quantity");
+                "The service total price hasn't been recalculated after setting the negative number for the service quantity");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
