@@ -208,24 +208,37 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testEditRetailInspectionNotes(String rowID,
 											  String description, JSONObject testData) {
+		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final String _notes1 = "Test\nTest 2";
+		final String quickNote = "This is test Quick Notes";
 
 		homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
 
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.swtchToRetailMode();
+		customersScreen.clickHomeButton();
+
 		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
-		myInspectionsScreen.selectFirstInspection();
-		myInspectionsScreen.clickEditInspectionButton();
-		VehicleScreen vehicleScreen = new VehicleScreen();
+		VehicleScreen vehicleScreen = myInspectionsScreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER,
+				InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
+		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
+		vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
+		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
+		vehicleScreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
+		final String inspNumber = vehicleScreen.getInspectionNumber();
+		vehicleScreen.saveWizard();
+
+		myInspectionsScreen.selectInspectionForEdit(inspNumber);
 		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
 		notesscreen.setNotes(_notes1);
-		notesscreen.addQuickNotes();
+		notesscreen.addQuickNotes(quickNote);
 
 		notesscreen.clickSaveButton();
 		vehicleScreen.clickNotesButton();
-		Assert.assertEquals(notesscreen.getNotesValue(), _notes1 + "\n" + notesscreen.quicknotesvalue);
+		Assert.assertEquals(notesscreen.getNotesValue(), _notes1 + "\n" + quickNote);
 		notesscreen.clickSaveButton();
 		vehicleScreen.cancelOrder();
 		myInspectionsScreen.clickHomeButton();
@@ -265,7 +278,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickApproveAfterSelection();
 		approveInspectionsScreen.drawSignatureAfterSelection();
 		approveInspectionsScreen.clickDoneButton();
-		myInspectionsScreen.waitInspectionsScreenLoaded();
 		Assert.assertTrue(myInspectionsScreen.isInspectionApproved(inspNumber));
 		myInspectionsScreen.clickHomeButton();
 	}
