@@ -16,6 +16,7 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.PhaseDetailsSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.ProblemReportingSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import org.json.simple.JSONObject;
@@ -39,6 +40,7 @@ public class VNextTeamProblemEnforcement extends BaseTestCaseTeamEditionRegistra
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
+        AvailableServicesScreenSteps.selectService("Bent Wheel");
         workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -86,6 +88,35 @@ public class VNextTeamProblemEnforcement extends BaseTestCaseTeamEditionRegistra
         ProblemReportingSteps.resolveProblem();
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         phaseDto.setStatus(PhaseName.COMPLETED);
+        EditOrderSteps.verifyElementStatus(phaseDto);
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySystemEnforcesUserToResolveServiceProblemBeforeServiceOrPhaseCompletePhaseAndServiceLevel(String rowID,
+                                                                                                                String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
+        ServiceData serviceDto = workOrderData.getServiceData();
+
+        MonitorSteps.editOrder(workOrderId);
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
+        ProblemReportingSteps.setProblemReason(serviceDto.getProblemReason());
+        EditOrderSteps.openElementMenu(phaseDto);
+        MenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        GeneralSteps.confirmDialog();
+        PhaseDetailsSteps.selectProblem(serviceDto.getServiceName());
+        ProblemReportingSteps.resolveProblem();
+        ScreenNavigationSteps.pressBackButton();
+        MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
+        serviceDto.setServiceStatus(ServiceStatus.COMPLETED);
+        phaseDto.setStatus(PhaseName.COMPLETED);
+        EditOrderSteps.verifyElementStatus(serviceDto);
         EditOrderSteps.verifyElementStatus(phaseDto);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
