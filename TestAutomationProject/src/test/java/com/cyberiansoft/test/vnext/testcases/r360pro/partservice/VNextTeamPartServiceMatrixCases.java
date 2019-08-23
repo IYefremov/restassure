@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.partservice;
 
+import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
@@ -10,6 +12,7 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.validations.MatrixServiceDetailsValidations;
 import com.cyberiansoft.test.vnext.validations.PartInfoScreenValidations;
@@ -101,4 +104,63 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestCaseTeamEditionRegi
         inspectionId = InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanSelectAndLinkMultipleLaborServicesToPartService(String rowID,
+                                                                       String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
+        MatrixServiceData basicPartsServiceMatrixService = matrixServiceData.get(0);
+        PartServiceData partServiceInsideMatrix = basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().get(0);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
+        MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
+        MatrixServiceSteps.openPartServiceDetailsInsideMatrixService(partServiceInsideMatrix);
+        PartServiceSteps.addLaborService();
+        partServiceInsideMatrix.getLaborServiceDataList().stream().map(LaborServiceData::getServiceName).forEach(LaborServiceSteps::selectService);
+        WizardScreenSteps.saveAction();
+        PartServiceSteps.confirmPartInfo();
+        MatrixServiceSteps.switchToSelectedServices();
+        partServiceInsideMatrix.getLaborServiceDataList().stream().map(LaborServiceData::getServiceName).forEach(MatrixServiceDetailsValidations::validateServiceSelected);
+        MatrixServiceDetailsValidations.validateServiceSelected(partServiceInsideMatrix.getServiceName());
+        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
+        inspectionId = InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanSelectAndLinkMultiplePartsServicesToLaborService(String rowID,
+                                                                        String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
+        MatrixServiceData basicPartsServiceMatrixService = matrixServiceData.get(0);
+        LaborServiceData laborServiceInsideMatrix = basicPartsServiceMatrixService.getVehiclePartData().getLaborService();
+        List<PartServiceData> partsServicesInsideLaborService = laborServiceInsideMatrix.getPartServiceDataList();
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
+        MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
+        MatrixServiceSteps.openServiceDetailsInsideMatrixService(laborServiceInsideMatrix.getServiceName());
+        LaborServiceSteps.addPartService();
+        partsServicesInsideLaborService.forEach((service -> {
+            PartServiceSteps.selectPartService(service);
+            PartServiceSteps.acceptDetailsScreen();
+        }));
+        WizardScreenSteps.saveAction();
+        WizardScreenSteps.saveAction();
+        MatrixServiceSteps.switchToSelectedServices();
+        partsServicesInsideLaborService.stream().map(PartServiceData::getServiceName).forEach(MatrixServiceDetailsValidations::validateServiceSelected);
+        MatrixServiceDetailsValidations.validateServiceSelected(laborServiceInsideMatrix.getServiceName());
+        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
+        inspectionId = InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
 }
+

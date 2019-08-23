@@ -31,6 +31,5 @@ public class LaborServiceScreenInteractions {
     public static void acceptDetailsScreen() {
         LaborServiceScreen laborServiceScreen = new LaborServiceScreen();
         WaitUtils.click(laborServiceScreen.getSaveButton());
-
     }
 }

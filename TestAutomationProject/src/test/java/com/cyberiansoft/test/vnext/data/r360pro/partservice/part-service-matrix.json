@@ -75,5 +75,64 @@
         }
       ]
     }
+  ],
+  "userCanSelectAndLinkMultipleLaborServicesToPartService": [
+    {
+      "rowID": "userCanSelectAndLinkMultipleLaborServicesToPartService.01",
+      "description": "",
+      "matrixServiceDataList": [
+        {
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "QTR",
+            "vehiclePartSeverity": "HEAVY",
+            "partServicesList": [
+              {
+                "serviceName": "roz_part_brake",
+                "partPosition": "N/A",
+                "laborServiceDataList": [
+                  {
+                    "serviceName": "rozstalnoy_disable_labor"
+                  },
+                  {
+                    "serviceName": "rozstalnoy_enable_labor"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "userCanSelectAndLinkMultiplePartsServicesToLaborService": [
+    {
+      "rowID": ".01",
+      "description": "",
+      "matrixServiceDataList": [
+        {
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "QTR",
+            "vehiclePartSeverity": "HEAVY",
+            "laborService": {
+              "serviceName": "rozstalnoy_enable_labor",
+              "partServiceDataList": [
+                {
+                  "serviceName": "roz_part_brake",
+                  "partPosition": "N/A"
+                },
+                {
+                  "serviceName": "roz_part_full_cat",
+                  "partPosition": "Main"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
   ]
 }

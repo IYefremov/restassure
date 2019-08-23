@@ -9,4 +9,9 @@ public class RegularMenuItemsScreenSteps {
         RegularMenuScreen menuScreen = new RegularMenuScreen();
         menuScreen.closeMenuScreen();
     }
+
+    public static void clickMenuItem(ReconProMenuItems menuItem) {
+        RegularMenuScreen menuScreen = new RegularMenuScreen();
+        menuScreen.clickMenuItem(menuItem);
+    }
 }
