@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.ios10_client.pageobjects;
+package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularBaseTypeScreen;
 import io.appium.java_client.ios.IOSElement;

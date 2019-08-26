@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
+import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 
@@ -16,15 +17,13 @@ public class RegularMyWorkOrdersSteps {
     }
 
     public static void clickCopyVehicleMenu(String workOrderId) {
-        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-        myWorkOrdersScreen.selectWorkOrder(workOrderId);
-        myWorkOrdersScreen.clickrCopyVehicleMenu();
+        selectWorkOrder(workOrderId);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.COPY_VEHICLE);
     }
 
     public static void clickCopyServicesMenu(String workOrderId) {
-        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-        myWorkOrdersScreen.selectWorkOrder(workOrderId);
-        myWorkOrdersScreen.clickCopyServices();
+        selectWorkOrder(workOrderId);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.COPY_SERVICES);
     }
 
     public static void clickCreateInvoiceIconForWO(String workOrderId) {
@@ -41,5 +40,16 @@ public class RegularMyWorkOrdersSteps {
     public static void selectWorkOrderForApprove(String workOrderId) {
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
         myWorkOrdersScreen.selectWorkOrderForApprove(workOrderId);
+    }
+
+    public static void selectWorkOrder(String workOrderId) {
+        waitMyWorkOrdersLoaded();
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.selectWorkOrder(workOrderId);
+    }
+
+    public static void selectSendEmailMenuForWorkOrder(String workOrderId) {
+        selectWorkOrder(workOrderId);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
     }
 }
