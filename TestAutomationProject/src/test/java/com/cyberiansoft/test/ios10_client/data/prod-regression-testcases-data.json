@@ -431,5 +431,27 @@
         "poNumber": "123po"
         }
       }
+  ],
+  "testVerifyCheckInUndoCheckInForSR": [
+    {
+      "rowID": "testVerifyCheckInUndoCheckInForSR.01",
+      "description": "Test Case 83621: 17 - Verify check in/undo check in for SR",
+      "serviceRequestData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor": "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123"
+        }
+      }
+    }
   ]
 }

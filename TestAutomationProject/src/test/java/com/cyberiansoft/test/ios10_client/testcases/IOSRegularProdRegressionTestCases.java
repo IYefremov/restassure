@@ -9,6 +9,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
@@ -20,6 +21,7 @@ import com.cyberiansoft.test.ios10_client.types.inspectionstypes.UATInspectionTy
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.UATInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.UATServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderTypes;
+import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
@@ -27,10 +29,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.text.DecimalFormat;
+import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
@@ -377,7 +379,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testCreateInspectionWOInvoiceForCreatedRetailCustomer(String rowID,
-                                               String description, JSONObject testData) {
+                                               String description, JSONObject testData) throws Exception {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -397,7 +399,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularMyInspectionsSteps.startCreatingInspection(appCustomer, UATInspectionTypes.INSP_APPROVE_MULTISELECT);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
-        final String inspectionID = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
         RegularNavigationSteps.navigateToClaimScreen();
         RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
 
@@ -408,12 +410,32 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularServicesScreenSteps.waitServicesScreenLoad();
         RegularInspectionsSteps.saveInspectionAsFinal();
 
-        RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionID);
+        RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionNumber);
         RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
         RegularApproveInspectionScreenActions.saveApprovedServices();
         RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
 
-        RegularMyInspectionsSteps.createWorkOrderFromInspection(inspectionID, UATWorkOrderTypes.WO_FINAL_INVOICE);
+
+        RegularMyInspectionsSteps.selectSendEmailMenuForInspection(inspectionNumber);
+
+        NadaEMailService nada = new NadaEMailService();
+        RegularEmailScreenSteps.sendEmailToAddress(nada.getEmailId());
+
+        final String inspectionFileName = inspectionNumber + ".pdf";
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+                .withSubjectAndAttachmentFileName(inspectionNumber, inspectionFileName);
+        Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find inspection: " + inspectionNumber +
+                " in mail box " + nada.getEmailId() + ". At time " +
+                LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+        nada.deleteMessageWithSubject(inspectionNumber);
+
+        File pdfDoc = new File(inspectionFileName);
+        String pdfText = PDFReader.getPDFText(pdfDoc);
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            Assert.assertTrue(pdfText.contains(serviceData.getServiceName()));
+        }
+
+        RegularMyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber, UATWorkOrderTypes.WO_FINAL_INVOICE);
         final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
         RegularWizardScreensSteps.clickSaveButton();
         RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
@@ -422,6 +444,23 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
         RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.selectSendEmailMenuForWorkOrder(workOrderNumber);
+        RegularEmailScreenSteps.sendEmailToAddress(nada.getEmailId());
+
+        final String workOrderFileName = workOrderNumber + ".pdf";
+        searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+                .withSubjectAndAttachmentFileName(workOrderNumber, workOrderFileName);
+        Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find work order: " + workOrderNumber +
+                " in mail box " + nada.getEmailId() + ". At time " +
+                LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+        nada.deleteMessageWithSubject(workOrderNumber);
+
+        pdfDoc = new File(workOrderFileName);
+        pdfText = PDFReader.getPDFText(pdfDoc);
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            Assert.assertTrue(pdfText.contains(serviceData.getServiceName()));
+        }
+
         RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
         RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
@@ -431,8 +470,43 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
-        RegularMyInvoicesScreenValidations.verifyWorkOrderPresent(invoiceNumber, true);
+        RegularMyInvoicesScreenValidations.verifyInvoicePresent(invoiceNumber, true);
+        RegularMyInvoicesScreenSteps.selectSendEmailMenuForInvoice(invoiceNumber);
+        RegularEmailScreenSteps.sendEmailToAddress(nada.getEmailId());
+
+        final String invoiceFileName = invoiceNumber + ".pdf";
+        searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+                .withSubjectAndAttachmentFileName(invoiceNumber, invoiceFileName);
+        Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
+                " in mail box " + nada.getEmailId() + ". At time " +
+                LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+        nada.deleteMessageWithSubject(invoiceNumber);
+
+        pdfDoc = new File(invoiceFileName);
+        pdfText = PDFReader.getPDFText(pdfDoc);
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            Assert.assertTrue(pdfText.contains(serviceData.getServiceName()));
+        }
         RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyCheckInUndoCheckInForSR(String rowID,
+                                                                                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
+
+        RegularHomeScreenSteps.navigateToServiceRequestScreenScreen();
+        RegularServiceRequestSteps.startCreatingServicerequest(serviceRequestData.getWholesailCustomer(), UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(serviceRequestData.getVihicleInfo());
+        RegularServiceRequestSteps.saveServiceRequestWithAppointment();
+        RegularServiceRequestAppointmentScreenSteps.setDefaultServiceRequestAppointment();
+        final String serviceRequestNumber = RegularServiceRequestSteps.getFirstServiceRequestNumber();
+        RegularServiceRequestSteps.clickServiceRequestCheckInAction(serviceRequestNumber);
+        RegularServiceRequestSteps.clickServiceRequestUndoCheckInAction(serviceRequestNumber);
+        RegularNavigationSteps.navigateBackScreen();
+
 
     }
 }

@@ -8,6 +8,11 @@ public enum ReconProMenuItems {
     CREATE_WORKORDER("Create\nWO"),
     CREATE_INPECTION("Create\nInspection"),
     DETAILS("Details"),
+    COPY_VEHICLE("Copy\nVehicle"),
+    COPY_SERVICES("Copy\nServices"),
+    SEND_EMAIL("Send\nEmail"),
+    CHECK_IN("Check In"),
+    UNDO_CHECK_IN("Undo\nCheck In"),
     SUMMARY("Summary");
 
     @Getter

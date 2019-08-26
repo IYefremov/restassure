@@ -112,7 +112,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	public void waitInspectionsScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
-
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("InspectionsPageTableLeft")));
 	}
 
@@ -276,10 +275,11 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspectionnumber))).click();
 	}
 
-	public String getInspectionApprovedPriceValue(String inspectionNumber) {	
+	public String getInspectionApprovedPriceValue(String inspectionNumber) {
+		waitInspectionsScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy
-		        .xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspectionNumber + "']")));
+		        .AccessibilityId(inspectionNumber)));
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspectionNumber + "']").findElement(MobileBy.name("labelInspectionApprovedAmount")).getAttribute("value");
 	}
 

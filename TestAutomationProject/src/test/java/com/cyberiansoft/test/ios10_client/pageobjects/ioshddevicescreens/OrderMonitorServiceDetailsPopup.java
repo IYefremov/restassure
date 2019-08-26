@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.ios10_client.pageobjects;
+package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.OrderMonitorScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechniciansPopup;
