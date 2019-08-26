@@ -67,9 +67,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	}
 
 	public boolean isApproveInvoiceMenuItemExists() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-name='approve']")));
-		return approveinvoicebtn.isDisplayed();
+		return  WaitUtils.isElementPresent(approveinvoicebtn);
 	}
 	
 	public void clickVoidInvoiceMenuItem() {
@@ -105,7 +103,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	}
 
 	public boolean isPayInvoiceMenuItemExists() {
-		return invoicepaymenubtn.isDisplayed();
+		return  WaitUtils.isElementPresent(invoicepaymenubtn);
 	}
 
 	public VNextPayInvoicesScreen clickPayCreditCardMenuItem() {
@@ -124,11 +122,11 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	}
 
 	public boolean isInvoiceChangePONumberMenuItemExists() {
-		return invoicechangeponumbtn.isDisplayed();
+		return WaitUtils.isElementPresent(invoicechangeponumbtn);
 	}
 
 	public boolean isInvoiceEditMenuItemExists() {
-		return editinvoicebtn.isDisplayed();
+		return WaitUtils.isElementPresent(editinvoicebtn);
 	}
 	
 	public VNextInvoicesScreen clickCloseInvoiceMenuButton() {
@@ -142,6 +140,6 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	}
 
 	public boolean isInvoicePayPOROMenuItemExists() {
-		return invoicepayporomenubtn.isDisplayed();
+		return WaitUtils.isElementPresent(invoicepayporomenubtn);
 	}
 }
