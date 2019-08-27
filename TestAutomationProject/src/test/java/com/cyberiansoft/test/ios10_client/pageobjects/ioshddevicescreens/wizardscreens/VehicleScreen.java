@@ -11,10 +11,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -90,6 +88,9 @@ public class VehicleScreen extends BaseWizardScreen {
 	
 	//@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[4]")
     //private IOSElement wotypelabel;
+
+	@iOSXCUITFindBy(accessibility = "VIN#")
+	private IOSElement vinFld;
 	
 	public VehicleScreen() {
 		super();
@@ -116,32 +117,31 @@ public class VehicleScreen extends BaseWizardScreen {
 		waitVehicleScreenLoaded();
 		clickVINField();
 
-		appiumdriver.findElementByAccessibilityId("VIN#").sendKeys(vin);
+		vinFld.sendKeys(vin);
 		((IOSDriver) appiumdriver).hideKeyboard();
 	}
 	
 	public void clearVINCode() {
 		clickVINField();
-		BaseUtils.waitABit(1000);
+		WebElement deleteBtn  = appiumdriver.findElementByClassName("XCUIElementTypeKeyboard").findElement(MobileBy.AccessibilityId("delete"));
 		for (int i = 0; i < 17; i++)
-			((IOSDriver) appiumdriver).getKeyboard().sendKeys(Keys.DELETE);
-		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+			deleteBtn.click();
+		vinFld.sendKeys("\n");
 		
 	}
 	
 	public IOSElement getVINField() {
 		waitVehicleScreenLoaded();
 		return (IOSElement) appiumdriver.findElementByAccessibilityId("VIN#");
-		//return vinfld;
 	}
 	
 	public void clickVINField() {
-		getVINField().click();
+		vinFld.click();
 	}
 
 	public void setVINAndAndSearch(String vin) {
 
-		appiumdriver.findElementByAccessibilityId("VIN#").click();
+		vinFld.click();
 
 		((IOSDriver) appiumdriver).getKeyboard().pressKey(vin);
 		((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");

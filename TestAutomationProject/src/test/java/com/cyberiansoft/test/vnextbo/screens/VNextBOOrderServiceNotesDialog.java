@@ -52,6 +52,9 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='repairNotes']//button[@class='close']")
     private WebElement repairNoteDialogCloseButton;
 
+    @FindBy(xpath = "//button[contains(@data-bind, 'saveNote')]")
+    private WebElement repairNoteSaveButton;
+
     @FindBy(xpath = "//ul[@data-template='order-service-note-template']/li")
     private List<WebElement> notesTextList;
 
@@ -72,13 +75,6 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
         return Utils.isElementDisplayed(repairNotesBlock);
     }
 
-    public VNextBOOrderServiceNotesDialog typeNotesMessage(String message) {
-        wait.until(ExpectedConditions.elementToBeClickable(notesMessageField)).click();
-        notesMessageField.clear();
-        notesMessageField.sendKeys(message);
-        return this;
-    }
-
     public VNextBOOrderServiceNotesDialog typeRepairNotesMessage(String message) {
         Utils.clearAndType(repairNoteTextArea, message);
         clickRepairNoteServiceTitle();
@@ -89,6 +85,10 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
 
     public void clickAddNewNoteButton() {
         Utils.clickElement(addNewNoteButton);
+    }
+
+    public void clickRepairNoteSaveButton() {
+        Utils.clickElement(repairNoteSaveButton);
     }
 
     public VNextBOOrderServiceNotesDialog openRepairNoteTextArea() {
@@ -108,7 +108,7 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
 
     public void waitUntilRepairNoteTextContainsValue(String value) {
         try {
-            WaitUtilsWebDriver.waitShort.until(driver -> repairNoteTextArea.getText().equals(value));
+            WaitUtilsWebDriver.getShortWait().until(driver -> repairNoteTextArea.getText().equals(value));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,12 +120,6 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
 
     public VNextBORepairOrderDetailsPage clickNotesAddButton() {
         wait.until(ExpectedConditions.elementToBeClickable(notesAddButton)).click();
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
-    }
-
-    public VNextBORepairOrderDetailsPage clickNotesXbutton() {
-        wait.until(ExpectedConditions.elementToBeClickable(notesXbutton)).click();
         waitForLoading();
         return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
     }
@@ -157,15 +151,6 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
                     .size();
         } catch (Exception ignored) {
             return 0;
-        }
-    }
-
-    public List<String> getNotesListValues() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(notesTextList)).size();
-            return notesTextList.stream().map(WebElement::getText).collect(Collectors.toList());
-        } catch (Exception ignored) {
-            return null;
         }
     }
 

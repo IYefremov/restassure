@@ -12,7 +12,9 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOAccountInfoBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOClientsListViewInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOEmailOptionsBlockInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOActiveDevicesInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
@@ -20,7 +22,9 @@ import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsListViewSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOAddNewDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
+import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOEditDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -460,12 +464,13 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanDeleteLicenceOfDevice(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanDeleteDeviceFromPendingRegistrationsList(String rowID, String description, JSONObject testData) {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
 
         leftMenu.selectDeviceManagementMenu();
         new VNextBODeviceManagementInteractions().clickAddNewDeviceButton();
-        final String randomUser = data.getNickname();
+        final String randomUser = data.getNickname() + " " + RandomStringUtils.randomAlphanumeric(5);
+
         new VNextBOAddNewDeviceSteps().setNewDeviceValuesAndSubmit(data, randomUser);
         final VNextBOPendingRegistrationsInteractions pendingRegistrationsInteractions =
                 new VNextBOPendingRegistrationsInteractions();
@@ -482,7 +487,41 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
 
         leftMenu.selectDeviceManagementMenu();
+        new VNextBODeviceManagementInteractions().clickActiveDevicesTab();
+        deviceManagementSteps.searchByText(data.getDeviceName());
+        Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getDeviceName()),
+                "The device hasn't been displayed");
         deviceManagementSteps.verifyUserCanUncoverRegistrationCode(data.getDeviceName());
         deviceManagementSteps.verifyUserCanHideRegistrationCode(data.getDeviceName());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanEditDeviceSettings(String rowID, String description, JSONObject testData) {
+        VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
+        final VNextBOEditDeviceSteps editDeviceSteps = new VNextBOEditDeviceSteps();
+        final VNextBOEditDeviceDialogInteractions editDeviceDialogInteractions = new VNextBOEditDeviceDialogInteractions();
+
+        leftMenu.selectDeviceManagementMenu();
+
+        deviceManagementSteps.openEditDeviceDialog(data.getDeviceName());
+        editDeviceSteps.setAllValuesAndSubmit(data, data.getNickname());
+        deviceManagementSteps.searchByText(data.getNickname());
+        Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getNickname()),
+                "The device hasn't been displayed");
+
+        deviceManagementSteps.openEditDeviceDialog(data.getNickname());
+
+        System.out.println(editDeviceDialogInteractions.getNickNameValue());
+        System.out.println(editDeviceDialogInteractions.getTeamValue());
+        System.out.println(editDeviceDialogInteractions.getTimeZoneValue());
+
+        Assert.assertEquals(editDeviceDialogInteractions.getNickNameValue(), data.getNickname(),
+                "The nickName hasn't been changed");
+        Assert.assertEquals(editDeviceDialogInteractions.getTeamValue(), data.getTeam(),
+                "The team hasn't been changed");
+        Assert.assertEquals(editDeviceDialogInteractions.getTimeZoneValue(), data.getTimeZone(),
+                "The time zone hasn't been changed");
+
+        editDeviceSteps.setNickNameValueAndSubmit(data.getNickname());
     }
 }

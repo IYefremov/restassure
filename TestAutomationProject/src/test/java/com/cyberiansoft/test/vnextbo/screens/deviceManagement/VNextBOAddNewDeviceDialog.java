@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 @Getter
-public class VNextBOAddNewDeviceDialog extends VNextBODeviceManagementWebPage {
+public class VNextBOAddNewDeviceDialog extends VNextBODeviceDialog {
 
     @FindBy(id = "active-license-popup")
     private WebElement addNewDeviceDialog;

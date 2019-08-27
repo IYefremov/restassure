@@ -341,5 +341,21 @@
         }
       }
     }
+  ],
+  "verifySystemEnforcesUserToResolveServiceProblemBeforeServiceOrPhaseCompletePhaseAndServiceLevel": [
+    {
+      "rowID": "verifySystemEnforcesUserToResolveServiceProblemBeforeServiceOrPhaseCompletePhaseAndServiceLevel.01",
+      "description": "TFSID: 91041",
+      "service": {
+        "serviceName": "Bent Wheel",
+        "problemReason": "SOME_PROBLEM"
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationServiceAndPhasesLevel",
+          "problemReason": "PROBLEM REASON"
+        }
+      }
+    }
   ]
 }

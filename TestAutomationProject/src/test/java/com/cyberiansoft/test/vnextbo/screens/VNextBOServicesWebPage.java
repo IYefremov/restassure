@@ -72,6 +72,7 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
 
     public VNextBOAddNewServiceDialog clickAddNewServiceButton() {
         Utils.clickElement(addservicebtn);
+        WaitUtilsWebDriver.waitABit(1000);
         return PageFactory.initElements(
                 driver, VNextBOAddNewServiceDialog.class);
     }

@@ -13,8 +13,9 @@
       "rowID": "verifyUserCanSearchByEmployee.01",
       "description": "Test Case 82213:User can search by \"Employee\"",
       "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "employee": "Criss Lai"
+      "customer": "AAA1",
+      "employee": "Yurii Tolkunov",
+      "timeFrame": "Year To Date"
     }
   ],
 
@@ -119,10 +120,9 @@
     {
       "rowID": "verifyUserCanSearchByCustomer.01",
       "description": "Test Case 82279:Verify user can search by \"Customer\"",
-      "location": "Best Location Automation",
-      "customer": "Alex1 Zakaulov1",
-      "flag": "Red",
-      "searchName": "MySavedSearch"
+      "location": "Rozstalnoy_location",
+      "customer": "Bratan",
+      "timeFrame": "Year To Date"
     }
   ],
 
@@ -491,16 +491,16 @@
       "roNum": "RO#ForAuto",
       "stockNum": "StockForAuto",
       "vinNum": "asdfasd",
-      "timeFrame": "Last 3 weeks",
+      "timeFrame": "Last Month",
       "repairStatus": "In Progress - On Hold",
       "daysInProcess": "<",
       "daysInPhase": "<=",
-      "flag": "Red",
+      "flag": "Important",
       "searchName": "MySavedSearch",
       "phaseText": "All",
       "departmentText": "All",
       "woTypeText": "All",
-      "timeFrameText": "Any Date",
+      "timeFrameText": "Last 30 days",
       "repairStatusText": "In Progress - All",
       "daysInProcessText": "All",
       "daysInPhaseText": "All",

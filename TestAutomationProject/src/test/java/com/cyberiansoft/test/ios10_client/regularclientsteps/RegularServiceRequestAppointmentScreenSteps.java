@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.RegularServiceRequestAppointmentScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularServiceRequestAppointmentScreen;
 
 public class RegularServiceRequestAppointmentScreenSteps {
 

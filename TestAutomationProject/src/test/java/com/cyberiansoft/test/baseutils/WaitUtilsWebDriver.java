@@ -4,7 +4,6 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -19,12 +18,21 @@ import static org.awaitility.Awaitility.await;
 
 public class WaitUtilsWebDriver {
 
-    private static WebDriver driver = DriverBuilder.getInstance().getDriver();
+    private static WebDriverWait getWebDriverWait(WebDriver driver, int timeout) {
+        return new WebDriverWait(driver, timeout);
+    }
 
-    public final static WebDriverWait wait = new WebDriverWait(driver, 15);
-    public final static WebDriverWait waitShort = new WebDriverWait(driver, 5);
-    public final static WebDriverWait waitLong = new WebDriverWait(driver, 30);
-    public final static Actions actions = new Actions(driver);
+    public static WebDriverWait getWait() {
+        return getWebDriverWait(DriverBuilder.getInstance().getDriver(), 15);
+    }
+
+    public static WebDriverWait getShortWait() {
+        return getWebDriverWait(DriverBuilder.getInstance().getDriver(), 5);
+    }
+
+    public static WebDriverWait getLongWait() {
+        return getWebDriverWait(DriverBuilder.getInstance().getDriver(), 30);
+    }
 
     public static void waitABit(int milliSeconds) {
         if (milliSeconds > 0) {
@@ -39,7 +47,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static FluentWait<WebDriver> getFluentWait(Duration pollingMillis, Duration timeoutSeconds) {
-        return new FluentWait<>(driver)
+        return new FluentWait<>(DriverBuilder.getInstance().getDriver())
                 .pollingEvery(pollingMillis)
                 .withTimeout(timeoutSeconds)
                 .ignoring(WebDriverException.class);
@@ -64,44 +72,48 @@ public class WaitUtilsWebDriver {
     }
 
     public static WebElement waitForVisibility(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element));
+        return getWait().until(ExpectedConditions.visibilityOf(element));
     }
 
     public static WebElement waitForVisibility(WebElement element, int timeout) {
-        return new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOf(element));
+        return new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeout).until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static WebElement waitForVisibility(By xpath) {
+        return getWait().until(ExpectedConditions.visibilityOf(DriverBuilder.getInstance().getDriver().findElement(xpath)));
     }
 
     public static void waitForInvisibility(WebElement element) {
-        wait.until(ExpectedConditions.invisibilityOf(element));
+        getWait().until(ExpectedConditions.invisibilityOf(element));
     }
 
     public static void waitForInvisibility(WebElement element, int timeout) {
-        new WebDriverWait(driver, timeout).until(ExpectedConditions.invisibilityOf(element));
+        new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeout).until(ExpectedConditions.invisibilityOf(element));
     }
 
     public static void waitForInvisibilityIgnoringException(WebElement element) {
         try {
-            wait.until(ExpectedConditions.invisibilityOf(element));
+            getWait().until(ExpectedConditions.invisibilityOf(element));
         } catch (Exception ignored) {}
     }
 
     public static void waitForInvisibilityIgnoringException(WebElement element, int timeoutSeconds) {
         try {
-            new WebDriverWait(driver, timeoutSeconds).until(ExpectedConditions.invisibilityOf(element));
+            new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutSeconds).until(ExpectedConditions.invisibilityOf(element));
         } catch (Exception ignored) {}
     }
 
     public static WebElement waitForElementToBeClickable(WebElement element) {
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
+        return getWait().until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static WebElement waitForElementToBeClickable(WebElement element, int timeoutSeconds) {
-        return new WebDriverWait(driver, timeoutSeconds).until(ExpectedConditions.elementToBeClickable(element));
+        return new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutSeconds).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static void waitForNewTab() {
         try {
-            waitLong.until((ExpectedCondition<Boolean>) driver -> (
+            getLongWait().until((ExpectedCondition<Boolean>) driver -> (
                     Objects
                             .requireNonNull(driver)
                             .getWindowHandles()
@@ -116,17 +128,17 @@ public class WaitUtilsWebDriver {
             await().atMost(15, TimeUnit.SECONDS)
                     .ignoreExceptions()
                     .pollInterval(500, TimeUnit.MILLISECONDS)
-                    .until(driver::getCurrentUrl);
+                    .until(DriverBuilder.getInstance().getDriver()::getCurrentUrl);
         } catch (ConditionTimeoutException ignored) {}
     }
 
     public static List<WebElement> waitForVisibilityOfAllOptions(List<WebElement> listBox) {
-        waitShort.until(ExpectedConditions.visibilityOfAllElements(listBox));
+        getShortWait().until(ExpectedConditions.visibilityOfAllElements(listBox));
         return listBox;
     }
 
     public static List<WebElement> waitForVisibilityOfAllOptions(List<WebElement> listBox, int timeoutSeconds) {
-        new WebDriverWait(driver, timeoutSeconds).until(ExpectedConditions.visibilityOfAllElements(listBox));
+        new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutSeconds).until(ExpectedConditions.visibilityOfAllElements(listBox));
         return listBox;
     }
 
@@ -162,13 +174,13 @@ public class WaitUtilsWebDriver {
 
     public static void waitForDropDownToBeOpened(WebElement dropDown) {
         try {
-            wait.until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
+            getWait().until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
         } catch (Exception ignored) {}
     }
 
     public static void waitForDropDownToBeClosed(WebElement dropDown) {
         try {
-            waitShort.ignoring(StaleElementReferenceException.class)
+            getShortWait().ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
         } catch (Exception ignored) {
             waitABit(1000);
@@ -180,7 +192,7 @@ public class WaitUtilsWebDriver {
             waitForAttributeToBe(list, "aria-hidden", "true");
         } catch (Exception e) {
             try {
-                actions.moveToElement(list).sendKeys(Keys.ENTER).build().perform();
+                Utils.getActions().moveToElement(list).sendKeys(Keys.ENTER).build().perform();
                 waitForAttributeToBe(list, "aria-hidden", "true");
             } catch (Exception ignored) {
                 waitABit(1000);
@@ -189,16 +201,16 @@ public class WaitUtilsWebDriver {
     }
 
     public static boolean waitForAttributeToBe(WebElement element, String attribute, String value) {
-        return wait.until(ExpectedConditions.attributeToBe(element, attribute, value));
+        return getWait().until(ExpectedConditions.attributeToBe(element, attribute, value));
     }
 
     public static boolean waitForAttributeToBe(WebElement element, String attribute, String value, int timeout) {
-        return new WebDriverWait(driver, timeout).until(ExpectedConditions.attributeToBe(element, attribute, value));
+        return new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeout).until(ExpectedConditions.attributeToBe(element, attribute, value));
     }
 
     public static void waitForInputFieldValueIgnoringException(WebElement element, String value) {
         try {
-            new WebDriverWait(driver, 10)
+            new WebDriverWait(DriverBuilder.getInstance().getDriver(), 10)
                     .until(ExpectedConditions.attributeToBe(element, "value", value));
         } catch (Exception e) {}
     }

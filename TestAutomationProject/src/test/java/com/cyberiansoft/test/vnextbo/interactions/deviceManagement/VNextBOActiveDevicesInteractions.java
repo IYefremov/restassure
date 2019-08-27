@@ -60,4 +60,20 @@ public class VNextBOActiveDevicesInteractions {
         Utils.clickElement(activeDevicesWebPage.getRegistrationNumberClearButtonForDevice(deviceName));
         WaitUtilsWebDriver.waitABit(1500);
     }
+
+    public void clickActionsButtonForDevice(String deviceName) {
+        Utils.clickElement(activeDevicesWebPage.getActionsArrowByDeviceName(deviceName));
+    }
+
+    public boolean isActionsDropDownMenuDisplayedForDevice(String deviceName) {
+        return Utils.isElementDisplayed(activeDevicesWebPage.getActionsDropDownForDevice(deviceName));
+    }
+
+    public void clickActionsEditButtonForDevice(String deviceName) {
+        Utils.clickElement(activeDevicesWebPage.getActionsEditButtonByDeviceName(deviceName));
+    }
+
+    public boolean isDeviceDisplayed(String deviceName) {
+        return Utils.isElementDisplayed(activeDevicesWebPage.getDeviceByName(deviceName));
+    }
 }

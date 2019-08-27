@@ -17,7 +17,7 @@ import com.cyberiansoft.test.enums.ServiceRequestStatus;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.*;
-import com.cyberiansoft.test.ios10_client.pageobjects.OrderMonitorServiceDetailsPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.OrderMonitorServiceDetailsPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
@@ -34,7 +34,6 @@ import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -208,24 +207,37 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
 	public void testEditRetailInspectionNotes(String rowID,
 											  String description, JSONObject testData) {
+		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final String _notes1 = "Test\nTest 2";
+		final String quickNote = "This is test Quick Notes";
 
 		homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
 
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.swtchToRetailMode();
+		customersScreen.clickHomeButton();
+
 		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
-		myInspectionsScreen.selectFirstInspection();
-		myInspectionsScreen.clickEditInspectionButton();
-		VehicleScreen vehicleScreen = new VehicleScreen();
+		VehicleScreen vehicleScreen = myInspectionsScreen.addOInspectionWithSelectCustomer(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER,
+				InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
+		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
+		vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
+		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
+		vehicleScreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
+		final String inspNumber = vehicleScreen.getInspectionNumber();
+		vehicleScreen.saveWizard();
+
+		myInspectionsScreen.selectInspectionForEdit(inspNumber);
 		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
 		notesscreen.setNotes(_notes1);
-		notesscreen.addQuickNotes();
+		notesscreen.addQuickNotes(quickNote);
 
 		notesscreen.clickSaveButton();
 		vehicleScreen.clickNotesButton();
-		Assert.assertEquals(notesscreen.getNotesValue(), _notes1 + "\n" + notesscreen.quicknotesvalue);
+		Assert.assertEquals(notesscreen.getNotesValue(), _notes1 + "\n" + quickNote);
 		notesscreen.clickSaveButton();
 		vehicleScreen.cancelOrder();
 		myInspectionsScreen.clickHomeButton();
@@ -265,7 +277,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickApproveAfterSelection();
 		approveInspectionsScreen.drawSignatureAfterSelection();
 		approveInspectionsScreen.clickDoneButton();
-		myInspectionsScreen.waitInspectionsScreenLoaded();
 		Assert.assertTrue(myInspectionsScreen.isInspectionApproved(inspNumber));
 		myInspectionsScreen.clickHomeButton();
 	}
@@ -1729,8 +1740,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.clickSave();
 		orderSummaryScreen.waitForCustomWarningMessage("Duplicate services", "Edit");
-		servicesScreen.waitServicesScreenLoaded();
-		servicesScreen = orderSummaryScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		orderSummaryScreen.waitOrderSummaryScreenLoaded();
+		NavigationSteps.navigateToServicesScreen();
 		servicesScreen.removeSelectedServices(workOrderData.getServiceData().getServiceName());
 		Assert.assertFalse(servicesScreen.checkServiceIsSelected(workOrderData.getServiceData().getServiceName()));
 		orderSummaryScreen.saveWizard();
@@ -3167,7 +3178,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(), serviceRequestData.getVihicleInfo().getVehicleModel());
 		serviceRequestsListWebPage.clickDoneButton();
-		serviceRequestsListWebPage.addServicesToServiceRequest(serviceRequestData.getPercentageServices());
+		serviceRequestsListWebPage.addServicesToServiceRequest(serviceRequestData.getMoneyServices());
 		serviceRequestsListWebPage.saveNewServiceRequest();
 		serviceRequestNumber = serviceRequestsListWebPage.getFirstInTheListServiceRequestNumber();
 		serviceRequestsListWebPage.acceptFirstServiceRequestFromList();
@@ -3182,8 +3193,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertFalse(serviceRequestsScreen.isRejectActionExists());
 		serviceRequestsScreen.selectEditServiceRequestAction();
 		VehicleScreen vehicleScreen = new VehicleScreen();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesScreen.saveWizard();
+		vehicleScreen.waitVehicleScreenLoaded();
+		vehicleScreen.saveWizard();
 		serviceRequestsScreen.clickHomeButton();
 	}
 
@@ -4213,7 +4224,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.approveInspectionApproveAllAndSignature(inspections.get(0));
-		myInspectionsScreen.waitInspectionsScreenLoaded();
+
 		myInspectionsScreen.clickActionButton();
 		for (String inspectionID : inspections) {
 			myInspectionsScreen.selectInspectionForAction(inspectionID);
@@ -4580,7 +4591,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
-		BaseUtils.waitABit(5*1000);
+		BaseUtils.waitABit(25*1000);
 		TeamInvoicesScreen teaminvoicesscreen = homeScreen.clickTeamInvoices();
 		teaminvoicesscreen.selectInvoice(invoiceNumber);
 

@@ -5,7 +5,7 @@ import org.testng.Assert;
 
 public class RegularMyInvoicesScreenValidations {
 
-    public static void verifyWorkOrderPresent(String invoiceID, boolean isPresent) {
+    public static void verifyInvoicePresent(String invoiceID, boolean isPresent) {
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
         if (isPresent)
             Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoiceID));

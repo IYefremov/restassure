@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.google.common.base.CharMatcher;
 import org.openqa.selenium.*;
@@ -36,7 +37,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[contains(@class, 'location-name')]")
     private WebElement locationElement;
 
-    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']/span[@class='k-widget k-dropdown k-header']")
+    @FindBy(xpath = "//div[@id='reconmonitor-saved-search']/div[@class='dropdown']")
     private WebElement savedSearchContainer;
 
     @FindBy(xpath = "//div[@class='tab-pane active' and @id='departmentTabNoWideScreen1']")
@@ -198,8 +199,8 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(className = "//input[@title='PO #']")
     private WebElement poNumTitle;
 
-    @FindBy(xpath = "//div[contains(@data-bind, 'isMenuUp') and not(@id)]")
-    private WebElement otherDialog;
+    @FindBy(xpath = "//div[contains(@data-bind, 'menuVisible')]")
+    private WebElement otherDropDown;
 
     @FindBy(xpath = "//i[@class='icon-arrow-down']")
     private WebElement arrowDown;
@@ -289,16 +290,9 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBORepairOrdersAdvancedSearchDialog clickEditIconForSavedSearch() {
-        wait.until(ExpectedConditions.elementToBeClickable(savedSearchEditIcon)).click();
-        try {
-            System.err.println("IN TRY");
-            return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
-        } catch (Exception e) {
-            System.err.println("IN CATCH");
-            //todo bug - the edit icon is opened only after the second click
-            wait.until(ExpectedConditions.elementToBeClickable(savedSearchEditIcon)).click();
-            return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
-        }
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.clickElement(savedSearchEditIcon);
+        return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
     }
 
     public VNextBORepairOrdersWebPage clickNextButton() {
@@ -868,7 +862,8 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBORepairOrdersWebPage clickCancelSearchIcon() {
-        wait.until(ExpectedConditions.elementToBeClickable(cancelSearchIcon)).click();
+        WaitUtilsWebDriver.waitForLoading();
+        Utils.clickElement(cancelSearchIcon);
         waitForLoading();
         return this;
     }
@@ -960,7 +955,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         final WebElement icon = roTableRow
                 .findElement(By.xpath("//td[@class='grid__actions']//i[contains(@class, 'icon-arrow')]"));
         wait.until(ExpectedConditions.elementToBeClickable(icon)).click();
-        wait.until(ExpectedConditions.visibilityOf(otherDialog));
+        wait.until(ExpectedConditions.visibilityOf(otherDropDown));
         return PageFactory.initElements(driver, VNextBOOtherDialog.class);
     }
 

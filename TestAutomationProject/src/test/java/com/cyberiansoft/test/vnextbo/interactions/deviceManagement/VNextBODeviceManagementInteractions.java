@@ -31,7 +31,8 @@ public class VNextBODeviceManagementInteractions {
 
     public boolean isActiveDevicesTabOpened() {
         try {
-            WaitUtilsWebDriver.waitForAttributeToBe(deviceManagementPage.getActiveDevicesTab(), "aria-expanded", "true", 7);
+            WaitUtilsWebDriver.waitForAttributeToBe(deviceManagementPage.getActiveDevicesTab(),
+                    "aria-expanded", "true", 7);
             return true;
         } catch (Exception e) {
             return false;
@@ -40,10 +41,20 @@ public class VNextBODeviceManagementInteractions {
 
     public boolean isPendingRegistrationTabOpened() {
         try {
-            WaitUtilsWebDriver.waitForAttributeToBe(deviceManagementPage.getPendingRegistrationsTab(), "aria-expanded", "true", 7);
+            WaitUtilsWebDriver.waitForAttributeToBe(deviceManagementPage.getPendingRegistrationsTab(),
+                    "aria-expanded", "true", 7);
             return true;
         } catch (Exception ignored) {
             return false;
         }
+    }
+
+    public void setDeviceManagementSearchText(String searchText) {
+        Utils.clearAndType(deviceManagementPage.getSearchInputField(), searchText);
+    }
+
+    public void clickDeviceManagementSearchLoupeIcon() {
+        Utils.clickElement(deviceManagementPage.getSearchLoupeIcon());
+        WaitUtilsWebDriver.waitForLoading();
     }
 }

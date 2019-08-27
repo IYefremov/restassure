@@ -9,11 +9,12 @@ import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-public class VNextBOAddNewDeviceDialogInteractions {
+public class VNextBOAddNewDeviceDialogInteractions extends VNextBODeviceDialogInteractions {
 
     private VNextBOAddNewDeviceDialog addNewDeviceDialog;
 
     public VNextBOAddNewDeviceDialogInteractions() {
+        super();
         addNewDeviceDialog = PageFactory.initElements(
                 DriverBuilder.getInstance().getDriver(), VNextBOAddNewDeviceDialog.class);
     }
@@ -36,6 +37,7 @@ public class VNextBOAddNewDeviceDialogInteractions {
                 "The minutes value hasn't been set");
     }
 
+    @Override
     public void setNickName(String nickName) {
         Utils.clearAndType(addNewDeviceDialog.getNicknameInputField(), nickName);
     }
@@ -54,6 +56,7 @@ public class VNextBOAddNewDeviceDialogInteractions {
                 "The phone number hasn't been set");
     }
 
+    @Override
     public void setTeam(String team) {
         Utils.clickElement(addNewDeviceDialog.getTeamArrow());
         Utils.selectOptionInDropDown(addNewDeviceDialog.getTeamDropDown(),
@@ -74,6 +77,7 @@ public class VNextBOAddNewDeviceDialogInteractions {
                 addNewDeviceDialog.getLicenseListBoxOptions(), license, true);
     }
 
+    @Override
     public void setTimeZone(String timeZone) {
         Utils.clickElement(addNewDeviceDialog.getTimeZoneArrow());
         Utils.selectOptionInDropDown(addNewDeviceDialog.getTimeZoneDropDown(),
@@ -86,10 +90,12 @@ public class VNextBOAddNewDeviceDialogInteractions {
                 addNewDeviceDialog.getTechnicianListBoxOptions(), technician, true);
     }
 
+    @Override
     public void clickSubmitButton() {
         Utils.clickElement(addNewDeviceDialog.getSubmitButton());
     }
 
+    @Override
     public void clickCancelButton() {
         Utils.clickElement(addNewDeviceDialog.getCancelButton());
     }

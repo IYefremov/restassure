@@ -6,9 +6,10 @@
       "location": "Best Location Automation",
       "titles": [
         "Order / Type / Department",
-        "Customer / Vehicle / VIN#",
-        "Stock# / RO# / PO# / Invoice",
+        "Customer / Vehicle",
+        "VIN# / Stock# / RO# / PO# / Invoice",
         "Start Date / Target Date",
+        "Technicians",
         "Current Phase / Days in Phase",
         "Completed (%)",
         "Other"
@@ -264,9 +265,9 @@
     }
   ],
 
-  "verifyUserCanChangeStatusOfRoToDraft": [
+  "verifyUserCannotChangeStatusOfRoToDraft": [
     {
-      "rowID": "verifyUserCanChangeStatusOfRoToDraft.01",
+      "rowID": "verifyUserCannotChangeStatusOfRoToDraft.01",
       "description": "Test Case 82865:User can change Status of RO to \"Draft\"",
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
@@ -351,9 +352,10 @@
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priceType": "Labor",
-      "service": "Test service with questions",
+      "service": "Test service with questions (without prefix)",
       "serviceDescription": "testtt",
-      "serviceLaborRate": "110",
+      "serviceDetails": "details",
+      "serviceLaborRate": "$110.00",
       "serviceLaborTime": "2"
     }
   ],
@@ -769,10 +771,10 @@
       "rowID": "verifyUserCanChangeQuantityForService.01",
       "description": "Test Case 84990:Verify user can change quantity for service",
       "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
+      "orderNumber": "O-168-00242",
       "status": "Approved",
       "priceType": "All",
-      "service": "Air Filter Element",
+      "service": "b Body Shop (Test Part)",
       "serviceQuantity": "125"
     }
   ],
@@ -782,10 +784,10 @@
       "rowID": "verifyUserCanEnterNegativeNumberForServiceQuantity.01",
       "description": "Test Case 84992:Verify user can't enter a negative number for service quantity",
       "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
+      "orderNumber": "O-168-00242",
       "status": "Approved",
       "priceType": "All",
-      "service": "Air Filter Element"
+      "service": "b Body Shop (Test Part)"
     }
   ],
 
@@ -820,10 +822,10 @@
       "rowID": "verifyUserCanEnterNegativeNumberForServicePrice.01",
       "description": "Test Case 84995:Verify user can enter a negative number for service price",
       "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
+      "orderNumber": "O-000-152449",
       "status": "Approved",
       "priceType": "All",
-      "service": "Air Filter Element"
+      "service": "A brand new demo service"
     }
   ],
 

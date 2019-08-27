@@ -181,9 +181,9 @@
     }
   ],
 
-  "verifyUserCanDeleteLicenceOfDevice": [
+  "verifyUserCanDeleteDeviceFromPendingRegistrationsList": [
     {
-      "rowID": "verifyUserCanDeleteLicenceOfDevice.01",
+      "rowID": "verifyUserCanDeleteDeviceFromPendingRegistrationsList.01",
       "description": "Test Case 85465: Verify user can open \"Settings → Device Management\" with full set of elements. Test Case 85467: User can add New Device. Test Case 85720: User can delete Device from the \"Pending Registrations\" list.",
       "minutes": "22",
       "hours": "1",
@@ -198,7 +198,18 @@
     {
       "rowID": "verifyUserCanUncoverHideNewRegistrationCode.01",
       "description": "Test Case 85694: User can uncover/hide new Registration Code.",
-      "deviceName": "jj"
+      "deviceName": "jj automation do not change"
+    }
+  ],
+
+  "verifyUserCanEditDeviceSettings": [
+    {
+      "rowID": "verifyUserCanEditDeviceSettings.01",
+      "description": "Test Case 85699: User can edit \"Device Settings\".",
+      "deviceName": "Automation_test",
+      "nickname": "Automation_test 222",
+      "team": "ALM Recon Facility Team",
+      "timeZone": "(UTC-05:00) Eastern Time (US & Canada)"
     }
   ]
 }

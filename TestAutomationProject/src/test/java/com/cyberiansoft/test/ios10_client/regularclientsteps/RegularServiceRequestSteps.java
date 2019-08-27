@@ -80,4 +80,15 @@ public class RegularServiceRequestSteps {
         selectServiceRequest(serviceRequestNumber);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.DETAILS);
     }
+
+    public static void clickServiceRequestCheckInAction(String serviceRequestNumber) {
+        selectServiceRequest(serviceRequestNumber);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHECK_IN);
+        waitServiceRequestScreenLoaded();
+    }
+    public static void clickServiceRequestUndoCheckInAction(String serviceRequestNumber) {
+        selectServiceRequest(serviceRequestNumber);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.UNDO_CHECK_IN);
+        waitServiceRequestScreenLoaded();
+    }
 }

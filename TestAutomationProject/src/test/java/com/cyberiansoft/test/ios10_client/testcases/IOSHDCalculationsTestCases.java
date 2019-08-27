@@ -1161,7 +1161,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickSaveButton();
 		approveInspectionsScreen.drawSignatureAfterSelection();
 		approveInspectionsScreen.clickDoneStatusReasonButton();
-		teamInspectionsScreen = new TeamInspectionsScreen();
 		Assert.assertTrue(teamInspectionsScreen.isInspectionApproved(inspectionNumber));
 		Assert.assertEquals(teamInspectionsScreen.getFirstInspectionPriceValue(), serviceRequestData.getInspectionData().getInspectionPrice());
 		Assert.assertEquals(teamInspectionsScreen.getFirstInspectionTotalPriceValue(), serviceRequestData.getInspectionData().getInspectionTotalPrice());
@@ -1260,7 +1259,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesScreen.clickSaveAsDraft();
-		myInspectionsScreen.waitInspectionsScreenLoaded();
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 		NavigationSteps.navigateToServicesScreen();

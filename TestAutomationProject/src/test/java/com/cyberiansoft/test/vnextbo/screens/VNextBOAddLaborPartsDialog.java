@@ -62,10 +62,10 @@ public class VNextBOAddLaborPartsDialog extends VNextBOBaseWebPage {
         final int size = laborListBoxOptions.size();
         Utils.clickElement(clearIcon);
         try {
-            Utils.waitShort.until(e -> !laborArrowLoader.getAttribute("class").contains("loading"));
+            WaitUtilsWebDriver.getShortWait().until(e -> !laborArrowLoader.getAttribute("class").contains("loading"));
         } catch (Exception ignored) {}
         try {
-            Utils.waitShort.until(e -> size != laborListBoxOptions.size());
+            WaitUtilsWebDriver.getShortWait().until(e -> size != laborListBoxOptions.size());
         } catch (Exception ignored) {}
         return this;
     }

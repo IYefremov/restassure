@@ -41,13 +41,13 @@ public class VNextBOClientsDetailsViewInteractions {
 
     private void waitForTabToBeExpanded(WebElement tab) {
         try {
-            Utils.waitShort.until(driver -> tab.getAttribute("aria-expanded").equals("true"));
+            WaitUtilsWebDriver.getShortWait().until(driver -> tab.getAttribute("aria-expanded").equals("true"));
         } catch (Exception ignored) {}
     }
 
     private void waitForTabToBeCollapsed(WebElement tab) {
         try {
-            Utils.waitShort.until(driver -> tab.getAttribute("aria-expanded").equals("false"));
+            WaitUtilsWebDriver.getShortWait().until(driver -> tab.getAttribute("aria-expanded").equals("false"));
         } catch (NullPointerException ignored) {}
     }
 
