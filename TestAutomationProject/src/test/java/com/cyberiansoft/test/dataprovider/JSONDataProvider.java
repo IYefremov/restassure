@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.dataprovider;
 
+import com.cyberiansoft.test.baseutils.OsUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,78 +14,77 @@ import java.util.Arrays;
 import java.util.List;
 
 public class JSONDataProvider {
-    public static String dataFile = "";
-    public static String testCaseName = "NA";
+	public static String dataFile = "";
+	public static String testCaseName = "NA";
 
-    public JSONDataProvider() {
-    }
-    
-    @DataProvider(name = "fetchData_JSON")
-    public static Object[][] fetchData(Method method) throws Exception {
-        Object rowID, description;
-        Object[][] result;
-        testCaseName = method.getName();
-        List<JSONObject> testDataList = new ArrayList<>();
-        
-        JSONArray testData = (JSONArray) extractData_JSON(dataFile) .get(method.getName());
-        for ( int i = 0; i < testData.size(); i++ ) {
-            testDataList.add((JSONObject) testData.get(i));
-        }
+	public JSONDataProvider() {
+	}
 
-        // include Filter
-        if ( System.getProperty("includePattern") != null ) {
-            String include = System.getProperty("includePattern");
-            List<JSONObject> newList = new ArrayList<JSONObject>();
-            List<String> tests = Arrays.asList(include.split(",", -1));
-            for ( String getTest : tests ) {
-                for ( int i = 0; i < testDataList.size(); i++ ) {
-                    if ( testDataList.get(i).toString().contains(getTest) ) {
-                        newList.add(testDataList.get(i));
-                    }
-                }
-            }
+	@DataProvider(name = "fetchData_JSON")
+	public static Object[][] fetchData(Method method) throws Exception {
+		Object rowID, description;
+		Object[][] result;
+		testCaseName = method.getName();
+		List<JSONObject> testDataList = new ArrayList<>();
 
-            // reassign testRows after filtering tests
-            testDataList = newList;
-        }
+		JSONArray testData = (JSONArray) extractData_JSON(OsUtils.getOSSafePath(dataFile)).get(method.getName());
+		for (int i = 0; i < testData.size(); i++) {
+			testDataList.add((JSONObject) testData.get(i));
+		}
 
-        // exclude Filter
-        if ( System.getProperty("excludePattern") != null ) {
-            String exclude =System.getProperty("excludePattern");
-            List<String> tests = Arrays.asList(exclude.split(",", -1));
+		// include Filter
+		if (System.getProperty("includePattern") != null) {
+			String include = System.getProperty("includePattern");
+			List<JSONObject> newList = new ArrayList<JSONObject>();
+			List<String> tests = Arrays.asList(include.split(",", -1));
+			for (String getTest : tests) {
+				for (int i = 0; i < testDataList.size(); i++) {
+					if (testDataList.get(i).toString().contains(getTest)) {
+						newList.add(testDataList.get(i));
+					}
+				}
+			}
 
-            for ( String getTest : tests ) {
-                // start at end of list and work backwards so index stays in sync
-                for ( int i = testDataList.size() - 1 ; i >= 0; i-- ) {
-                    if ( testDataList.get(i).toString().contains(getTest) ) {
-                        testDataList.remove(testDataList.get(i));
-                    }
-                }
-            }
-        }
+			// reassign testRows after filtering tests
+			testDataList = newList;
+		}
 
-        // create object for dataprovider to return
-        try {
-            result = new Object[testDataList.size()][testDataList.get(0).size()];
+		// exclude Filter
+		if (System.getProperty("excludePattern") != null) {
+			String exclude = System.getProperty("excludePattern");
+			List<String> tests = Arrays.asList(exclude.split(",", -1));
 
-            for ( int i = 0; i < testDataList.size(); i++ ) {
-                rowID = testDataList.get(i).get("rowID");
-                description = testDataList.get(i).get("description");
-                result[i] = new Object[] { rowID, description, testDataList.get(i) };
-            }
-        }
-        catch(IndexOutOfBoundsException ie) {
-            result = new Object[0][0];
-        }
+			for (String getTest : tests) {
+				// start at end of list and work backwards so index stays in sync
+				for (int i = testDataList.size() - 1; i >= 0; i--) {
+					if (testDataList.get(i).toString().contains(getTest)) {
+						testDataList.remove(testDataList.get(i));
+					}
+				}
+			}
+		}
 
-        return result;
-    }
+		// create object for dataprovider to return
+		try {
+			result = new Object[testDataList.size()][testDataList.get(0).size()];
 
-    public static JSONObject extractData_JSON(String file) throws Exception {
-    	File filejson = new File(file);
-    	FileReader reader = new FileReader(filejson);
-        JSONParser jsonParser = new JSONParser();
+			for (int i = 0; i < testDataList.size(); i++) {
+				rowID = testDataList.get(i).get("rowID");
+				description = testDataList.get(i).get("description");
+				result[i] = new Object[]{rowID, description, testDataList.get(i)};
+			}
+		} catch (IndexOutOfBoundsException ie) {
+			result = new Object[0][0];
+		}
 
-        return (JSONObject) jsonParser.parse(reader);
-    }
+		return result;
+	}
+
+	public static JSONObject extractData_JSON(String file) throws Exception {
+		File filejson = new File(file);
+		FileReader reader = new FileReader(filejson);
+		JSONParser jsonParser = new JSONParser();
+
+		return (JSONObject) jsonParser.parse(reader);
+	}
 }

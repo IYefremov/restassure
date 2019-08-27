@@ -7,10 +7,12 @@ workspace.xml
 /Reports/
 /reportvnext/
 /target/
+/resources/target/
 /test-output/
 /out/
 /reprortR360/
 /allure-results/
+/resources/allure-results/
 /.idea/
 /TestAutomationProject/.idea/*
 /TestAutomationProject/.idea/workspace.xml
