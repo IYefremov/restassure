@@ -21,7 +21,7 @@ public class OsUtils {
 	//TODO test *nix systems
 	public static String getOSSafePath(final String originalPath) {
 		if (isMacOS())
-			return String.format("%s%s%s", System.getProperty("user.dir"), "/../", originalPath);
+			return String.format("%s%s%s", System.getProperty("user.dir"), "/", originalPath);
 		else
 			return originalPath;
 
