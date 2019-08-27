@@ -41,7 +41,6 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        workOrderId = "O-407-20306";
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
