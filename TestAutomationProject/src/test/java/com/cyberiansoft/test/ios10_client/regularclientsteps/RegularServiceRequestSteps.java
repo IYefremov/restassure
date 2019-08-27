@@ -37,7 +37,7 @@ public class RegularServiceRequestSteps {
         RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
         serviceRequestsScreen.clickAddButton();
         RegularCustomersScreenSteps.selectCustomer(appCustomer);
-        serviceRequestsScreen.selectServiceRequestType(UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularServiceRequestTypesSteps.selectServiceRequestType(UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
     }
 
     public static void saveServiceRequestWithAppointment() {

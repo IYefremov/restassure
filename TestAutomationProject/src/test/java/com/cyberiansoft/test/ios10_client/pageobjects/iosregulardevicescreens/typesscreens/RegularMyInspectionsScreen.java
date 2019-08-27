@@ -31,8 +31,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	@iOSXCUITFindBy(accessibility = "Create\nWO")
 	private IOSElement createwopopupmenu;
 	
-	/*@iOSXCUITFindBy(accessibility = "MyInspectionsTable")
-	private IOSElement inspectiontable;
+	/*
 	
 	@iOSXCUITFindBy(accessibility = "Edit")
     private IOSElement editpopupmenu;
@@ -83,6 +82,9 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	
 	@iOSXCUITFindBy(accessibility = "Search")
     private IOSElement searchbtn;*/
+
+	@iOSXCUITFindBy(accessibility = "InspectionsTable")
+	private IOSElement inspectionsTable;
 	
 	public RegularMyInspectionsScreen() {
 		super();
@@ -109,7 +111,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void clickOnInspection(String inspnumber) {
 		waitMyInspectionsScreenLoaded();
-		appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.AccessibilityId(inspnumber)).click();
+		inspectionsTable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
 	}
 	
 	public void selectInspectionForEdit(String inspnumber) {
@@ -136,8 +138,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	
 	public void selectInspectionForCopy(String inspnumber) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("InspectionsTable"))); 
+		waitMyInspectionsScreenLoaded();
 		clickOnInspection(inspnumber);
 		clickCopyInspection();
 	}
@@ -194,49 +195,26 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElement(MobileBy.AccessibilityId(inspectionType.getInspectionTypeName())).click();
 		return inspectionType.getFirstVizardScreen();
 	}
-
-	public String getFirstInspectionNumberValue() {
-        FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.elementToBeClickable(By.name("InspectionsTable")));
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionNumber']")).getAttribute("label");
-	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
+		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspectionnumber)).findElement(MobileBy.
 						AccessibilityId("labelInspectionAmount")).getAttribute("label");
 	}
 	
 	public String getInspectionApprovedPriceValue(String inspectionnumber) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
+		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspectionnumber)).findElement(MobileBy.
 						AccessibilityId("labelInspectionApprovedAmount")).getAttribute("label");
-		//return firstinspectionprice.getAttribute("label");
 	}
-	
-	public String getInspectionTypeValue(String inspectionnumber) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
-				AccessibilityId(inspectionnumber)).findElement(MobileBy.
-						AccessibilityId("labelInfo2")).getAttribute("label");
-		//return firstinspectionprice.getAttribute("label");
-	}
-	
-	//public String getFirstInspectionAprovedPriceValue() {
-	//	return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelInspectionApprovedAmount']")).getAttribute("label");
-	//}
 
 	public boolean checkInspectionDoesntExists(String inspection)  {
 		return appiumdriver.findElementsByName(inspection).size() < 1;
 	}
 
 	public boolean checkInspectionExists(String inspection) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElements(MobileBy.AccessibilityId(inspection)).size() > 0;
-	}
-	
-	public void selectInspectionToApprove(String inspection) {
-		appiumdriver.findElementByXPath("//UIAApplication[1]/UIAWindow[1]/UIATableView[1]/UIATableCell[contains(@name,\""
-						+ inspection
-						+ "\")]/UIAButton[@name=\"approve disabled\"]").click();
+		waitMyInspectionsScreenLoaded();
+		return inspectionsTable.findElements(MobileBy.AccessibilityId(inspection)).size() > 0;
 	}
 
 	public void clickActionButton() {
@@ -247,7 +225,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void clickFilterButton() {
 		appiumdriver.findElementByAccessibilityId("filter").click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeOther/XCUIElementTypeToolbar/XCUIElementTypeButton[contains(@name,'filter')]").click();
 	}
 
 	public boolean checkFilterIsApplied() {
@@ -261,9 +238,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void clickStatusFilter() {
-		//WebElement par = getParentNode("Status");
 		appiumdriver.findElementByAccessibilityId("Status").click();
-		//appiumdriver.findElementByXPath("//UIATableView[1]/UIATableCell[@visible=\"true\" and (contains(@name,\"Status\"))]").click();
 	}
 
 	public boolean checkFilterStatusIsSelected(String filterstatus) {
@@ -280,7 +255,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.AccessibilityId(inspection)))).click();
 		clickShowWorkOrdersButton();
-		//return new RegularVehicleScreen(appiumdriver);
 		
 	}
 	
@@ -308,12 +282,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		clickChangeCustomerpopupMenu();
 		selectCustomer(customer);
 		return this;
-	}
-	
-	public void customersPopupSwitchToWholesailMode() {
-		if (elementExists(MobileBy.AccessibilityId("btnRetail"))) {
-			appiumdriver.findElementByAccessibilityId("btnRetail").click();
-		}
 	}
 	
 	public void customersPopupSwitchToRetailMode() {
@@ -357,13 +325,8 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public boolean isInspectionIsApproved(String inspnumber) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
+		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspnumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
-	}
-	
-	public boolean isInspectionIsApproveButtonExists(String inspnumber) {
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
-				AccessibilityId(inspnumber)).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_76")).size() > 0;
 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspnumber) {
@@ -373,24 +336,14 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public boolean isDraftIconPresentForInspection(String inspnumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber)));
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
+		waitMyInspectionsScreenLoaded();
+		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspnumber)).findElements(MobileBy.AccessibilityId("ESTIMATION_DRAFT")).size() > 0;
 	}
 	
-	public boolean isWOIconPresentForInspection(String inspnumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber)));
-		return appiumdriver.findElementByAccessibilityId("InspectionsTable").findElement(MobileBy.
-				AccessibilityId(inspnumber)).findElements(MobileBy.AccessibilityId("ESTIMATION_WO_CREATED")).size() > 0;
-	}
-	
 	public RegularNotesScreen openInspectionNotesScreen(String inspnumber) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))).click();
+		waitMyInspectionsScreenLoaded();
 		appiumdriver.findElementByAccessibilityId("Notes").click();
-		//notespopupmenu.click();
 		return new RegularNotesScreen();
 	}
 	
@@ -421,10 +374,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public boolean isCopyInspectionMenuActionExists() {
 		return appiumdriver.findElementsByAccessibilityId("Copy").size() > 0;
-	}
-	
-	public int getNumberOfRowsInTeamInspectionsTable() {		
-		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable[@name='TeamInspectionsTable']/XCUIElementTypeCell")).size();
 	}
 	
 	public <T extends IBaseWizardScreen> T selectWorkOrderType(IWorkOrdersTypes workordertype) {

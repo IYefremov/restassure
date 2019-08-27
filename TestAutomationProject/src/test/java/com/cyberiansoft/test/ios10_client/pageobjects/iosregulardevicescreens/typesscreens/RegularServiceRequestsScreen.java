@@ -125,7 +125,6 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 		swipeToElement(appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + serviceRequestType.getServiceRequestTypeName() + "']/..")));
 		appiumdriver.findElementByAccessibilityId(serviceRequestType.getServiceRequestTypeName()).click();
-		appiumdriver.findElementByAccessibilityId(serviceRequestType.getServiceRequestTypeName()).click();
 		return serviceRequestType.getFirstVizardScreen();
 	}
 
