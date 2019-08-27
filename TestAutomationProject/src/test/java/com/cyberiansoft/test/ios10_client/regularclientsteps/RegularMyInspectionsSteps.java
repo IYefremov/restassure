@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
+import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.IServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 
 public class RegularMyInspectionsSteps {
@@ -36,6 +37,12 @@ public class RegularMyInspectionsSteps {
         RegularWorkOrderTypesSteps.selectWorkOrderType(workordertype);
     }
 
+    public static void createServiceRequestFromInspection(String inspectionID, IServiceRequestTypes serviceRequestType) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CREATE_SERVICE_REQUEST);
+        RegularServiceRequestTypesSteps.selectServiceRequestType(serviceRequestType);
+    }
+
     public static void selectInspection(String inspectionID) {
         waitMyInspectionsScreenLoaded();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
@@ -45,5 +52,10 @@ public class RegularMyInspectionsSteps {
     public static void selectSendEmailMenuForInspection(String inspectionID) {
         selectInspection(inspectionID);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
+    }
+
+    public static void switchToTeamView() {
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        myInspectionsScreen.switchToTeamView();
     }
 }

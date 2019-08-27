@@ -7,6 +7,7 @@ public enum ReconProMenuItems {
     PAY("Pay"),
     CREATE_WORKORDER("Create\nWO"),
     CREATE_INPECTION("Create\nInspection"),
+    CREATE_SERVICE_REQUEST("Create\nSR"),
     DETAILS("Details"),
     COPY_VEHICLE("Copy\nVehicle"),
     COPY_SERVICES("Copy\nServices"),
