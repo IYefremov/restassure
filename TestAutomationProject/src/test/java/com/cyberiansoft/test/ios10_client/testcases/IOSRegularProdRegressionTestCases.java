@@ -506,7 +506,41 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularServiceRequestSteps.clickServiceRequestCheckInAction(serviceRequestNumber);
         RegularServiceRequestSteps.clickServiceRequestUndoCheckInAction(serviceRequestNumber);
         RegularNavigationSteps.navigateBackScreen();
+    }
 
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyCreatingSRFromInspectionTeamInspection(String rowID,
+                                                                      String description, JSONObject testData) throws Exception {
 
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularInspectionsSteps.saveInspectionAsFinal();
+
+        RegularMyInspectionsSteps.createServiceRequestFromInspection(inspectionNumber, UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularVehicleInfoValidations.validateVehicleInfoData(testCaseData.getServiceRequestData().getVihicleInfo());
+        RegularServiceRequestSteps.saveServiceRequestWithAppointment();
+        RegularServiceRequestAppointmentScreenSteps.setDefaultServiceRequestAppointment();
+        RegularMyInspectionsSteps.switchToTeamView();
+
+        RegularMyInspectionsSteps.createServiceRequestFromInspection(inspectionNumber, UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularVehicleInfoValidations.validateVehicleInfoData(testCaseData.getServiceRequestData().getVihicleInfo());
+        RegularServiceRequestSteps.saveServiceRequestWithAppointment();
+        RegularServiceRequestAppointmentScreenSteps.setDefaultServiceRequestAppointment();
+        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

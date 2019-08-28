@@ -9,6 +9,11 @@ public class RegularHomeScreenSteps {
         homeScreen.clickMyInspectionsButton();
     }
 
+    public static void navigateToTeamInspectionsScreen() {
+        RegularHomeScreen homeScreen = new RegularHomeScreen();
+        homeScreen.clickTeamInspectionsButton();
+    }
+
     public static void navigateToMyWorkOrdersScreen() {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
         homeScreen.clickMyWorkOrdersButton();

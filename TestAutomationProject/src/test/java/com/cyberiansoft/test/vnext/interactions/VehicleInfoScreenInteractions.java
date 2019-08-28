@@ -27,7 +27,7 @@ public class VehicleInfoScreenInteractions {
                             .filter(element -> element.getAttribute("name").contains(dataField.getValue()))
                             .findFirst()
                             .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue())),
-                    value + Keys.TAB);
+                    value);
             return true;
         });
     }
@@ -51,7 +51,14 @@ public class VehicleInfoScreenInteractions {
     }
 
     public static void selectMakeAndModel(String vehicleMake, String vehicleModel) {
+
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        vehicleInfoScreen
+                .getDataFieldList()
+                .stream()
+                .filter(element -> element.getAttribute("name").contains(VehicleDataField.VIN.getValue()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.VIN.getValue())).sendKeys(Keys.TAB);
         WaitUtils.click(vehicleInfoScreen.getMakeSectionExpandButton());
         VNextVehiclemakesScreen vehiclemakesScreen = new VNextVehiclemakesScreen(DriverBuilder.getInstance().getAppiumDriver());
         VNextVehicleModelsScreen vehicleModelsScreen = vehiclemakesScreen.selectVehicleMake(vehicleMake);
