@@ -149,8 +149,6 @@ public class VNextBaseScreen {
 
     public void changeScreen(ScreenType screen) {
         clickScreenTitleCaption();
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.visibilityOf(changeScrenPopover));
         WaitUtils.click(changeScrenPopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
     }
 
@@ -159,7 +157,11 @@ public class VNextBaseScreen {
     }
 
     public void clickScreenTitleCaption() {
-        tap(showTopBarPopover);
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            WaitUtils.click(showTopBarPopover);
+            return changeScrenPopover.isDisplayed();
+        });
+
     }
 
     public boolean elementExists(String xpath) {
