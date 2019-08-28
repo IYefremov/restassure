@@ -22,10 +22,9 @@ public class RegularTeamInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
-	public void selectInvoice(String invoice) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(invoice)));
-		appiumdriver.findElement(MobileBy.AccessibilityId(invoice)).click();
+	public void selectInvoice(String invoiceNumber) {
+		WaitUtils.elementShouldBeVisible(invoicesTable, true);
+		invoicesTable.findElementByAccessibilityId(invoiceNumber).click();
 	}
 
 	public void clickChangePOPopup() {
@@ -40,14 +39,6 @@ public class RegularTeamInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElementByClassName("XCUIElementTypeCollectionView").findElement(By.className("XCUIElementTypeTextField")).clear();
 		appiumdriver.findElementByClassName("XCUIElementTypeCollectionView").findElement(By.className("XCUIElementTypeTextField")).sendKeys(newpo);
 		appiumdriver.switchTo().alert().accept();
-	}
-
-	public IOSElement getFirstInvoice() {
-		return (IOSElement) appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]"));
-	}
-
-	public String getFirstInvoiceValue() {
-		return getFirstInvoice().getAttribute("name");
 	}
 
 	public boolean isInvoiceExists(String invoiceID) {

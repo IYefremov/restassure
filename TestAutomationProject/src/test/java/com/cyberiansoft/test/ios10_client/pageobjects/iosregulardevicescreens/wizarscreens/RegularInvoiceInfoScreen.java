@@ -17,9 +17,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements ITypeScreen {
-
-	private final TypeScreenContext INVOICEINFOCONTEXT = TypeScreenContext.INVOICEINFO;
-	private static TypeScreenContext INVOICEINFOExCONTEXT = null;
 	
 	@iOSXCUITFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;
@@ -60,18 +57,16 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 		Helpers.acceptAlert();
 	}
 
-	public <T extends RegularBaseTypeScreen> T  clickSaveAsDraft() {
+	public void  clickSaveAsDraft() {
 		clickSave();
 		draftalertbtn.click();
 		savebtn.click();
-		return getTypeScreenFromContext();
 	}
 
-	public <T extends RegularBaseTypeScreen> T clickSaveAsFinal() {
+	public void clickSaveAsFinal() {
 		clickSave();
 		finalalertbtn.click();
 		savebtn.click();
-		return getTypeScreenFromContext();
 	}
 
 	public void setPO(String _po) {
@@ -102,16 +97,11 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	public void clickWO(String wonumber) {
 		WebElement par = getTableParentCell(wonumber);
 		par.findElement(By.xpath("//XCUIElementTypeStaticText[1]")).click();
-		INVOICEINFOExCONTEXT = RegularBaseWizardScreen.typeContext;
-		RegularBaseWizardScreen.typeContext = INVOICEINFOCONTEXT;
 	}
 
-	public <T extends RegularBaseTypeScreen> T cancelInvoice() {
-		if (INVOICEINFOExCONTEXT != null)
-			RegularBaseWizardScreen.typeContext = INVOICEINFOExCONTEXT;
+	public void cancelInvoice() {
 		clickCancelButton();
 		acceptAlert();
-		return getTypeScreenFromContext();
 	}
 
 	public String getOrderSumm() {

@@ -543,4 +543,44 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
         RegularNavigationSteps.navigateBackScreen();
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyAddNotesToInspection(String rowID,
+                                                                 String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        final String textNotes = "Inspection text notes";
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+
+        RegularWizardScreensSteps.clickNotesButton();
+        RegularNotesScreenSteps.setTextNotes(textNotes);
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenSteps.saveNotes();
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+        RegularMyInspectionsScreenValidations.verifyNotesIconPresentForInspection(inspectionNumber, true);
+
+        RegularMyInspectionsSteps.selectInspectionNotesMenu(inspectionNumber);
+        RegularNotesScreenValidations.verifyTextNotesPresent(textNotes);
+        RegularNotesScreenSteps.switchToPhotosView();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(1);
+        RegularNotesScreenSteps.saveNotes();
+        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+        RegularNavigationSteps.navigateBackScreen();
+    }
 }
