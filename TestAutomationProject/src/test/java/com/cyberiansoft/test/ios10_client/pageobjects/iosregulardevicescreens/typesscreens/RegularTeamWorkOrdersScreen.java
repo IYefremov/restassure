@@ -80,7 +80,6 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectEditWO() {
 		editmanu.click();
-		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 	
 	public <T extends IBaseWizardScreen>T selectWOInvoiceType(IInvoicesTypes invoiceType) {
@@ -89,7 +88,6 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(invoiceType.getInvoiceTypeName())));
 		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 		return invoiceType.getFirstVizardScreen();
 	}
 	
@@ -103,7 +101,6 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(invoicenewbtn));
 		invoicenewbtn.click();
-		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}	
 	
 	public void clickSearchButton() {
@@ -220,7 +217,6 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	public void selectWorkOrderForEidt(String workOrderID) {
 		selectWorkOrder(workOrderID);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 	
 	public void selectWorkOrder(String workOrderID) {
@@ -241,7 +237,6 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoiceType.getInvoiceTypeName() + "']/..")));
 		}
 		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		RegularBaseWizardScreen.typeContext = TEAMWOCONTEXT;
 		return invoiceType.getFirstVizardScreen();
 	}
 }

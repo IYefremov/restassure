@@ -32,9 +32,13 @@ public class RegularMyInspectionsSteps {
     }
 
     public static void createWorkOrderFromInspection(String inspectionID, IWorkOrdersTypes workordertype) {
+        selectInspectionForCreatingWO(inspectionID);
+        RegularWorkOrderTypesSteps.selectWorkOrderType(workordertype);
+    }
+
+    public static void selectInspectionForCreatingWO(String inspectionID) {
         selectInspection(inspectionID);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CREATE_WORKORDER);
-        RegularWorkOrderTypesSteps.selectWorkOrderType(workordertype);
     }
 
     public static void createServiceRequestFromInspection(String inspectionID, IServiceRequestTypes serviceRequestType) {
@@ -54,8 +58,45 @@ public class RegularMyInspectionsSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
     }
 
+    public static void selectInspectionNotesMenu(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.NOTES);
+    }
+
+    public static void selectInspectionForApprove(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.APPROVE);
+    }
+
+    public static void selectInspectionForEdit(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.EDIT);
+    }
+
+    public static void selectInspectionForCopy(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.COPY);
+    }
+
+    public static void selectInspectionForAssign(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.ASSIGN);
+    }
+
+    public static void selectShowWOsMenuForInspection(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SHOW_WOS);
+    }
+
     public static void switchToTeamView() {
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         myInspectionsScreen.switchToTeamView();
+    }
+
+    public static void changeCustomerForInspection(String inspectionID, AppCustomer customer) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHANGE_CUSTOMER);
+        RegularCustomersScreenSteps.selectCustomer(customer);
+        waitMyInspectionsScreenLoaded();
     }
 }

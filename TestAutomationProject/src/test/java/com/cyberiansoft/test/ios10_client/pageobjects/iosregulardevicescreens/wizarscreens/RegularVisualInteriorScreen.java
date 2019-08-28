@@ -53,10 +53,6 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 			appiumdriver.findElementByXPath("//XCUIElementTypeButton[@label=\"default services on\"]").click();
 
 	}
-	
-	public void clickServicesBackButton() {
-		appiumdriver.findElementByAccessibilityId("Back").click();
-	}
 
 	public void selectService(String serviceName) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -79,21 +75,9 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	public void saveCarServiceDetails() {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
 	}
-
-	public void tapInterior() {
-		Helpers.tapInterior(50, 50);
-	}
 	
 	public static void tapInteriorWithCoords(int x, int y) {
 		Helpers.tapInterior(x, y);
-	}
-
-	public static void tapExterior() {
-		Helpers.tapExterior(150, 150);
-	}
-	
-	public static void tapExteriorWithCoords(int x, int y) {
-		Helpers.tapExterior(x, y);
 	}
 	
 	public void clickServicesToolbarButton() {
@@ -110,15 +94,5 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 		return appiumdriver.findElement(MobileBy.AccessibilityId("SubtotalAmount")).getAttribute("value");
 	}
 
-
-	public boolean isInteriorServicePresent(String serviceName) {
-		return appiumdriver.findElement(MobileBy.AccessibilityId(serviceName)).isDisplayed();
-	}
-
-	public RegularNotesScreen clickNotesButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Compose"))).click();
-		return new RegularNotesScreen();
-	}
 
 }

@@ -15,8 +15,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBaseWizardScreen {
 
-    public static TypeScreenContext typeContext;
-
     public RegularBaseWizardScreen() {
         super();
     }
@@ -55,17 +53,13 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
         if (elementExists("WizardStepsButton"))
             appiumdriver.findElementByAccessibilityId("WizardStepsButton").click();
         else
-            //appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]").click();
+
             appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
     }
 
     public void clickCancelWizard() {
         clickChangeScreen();
         appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
-    }
-
-    public <T extends ITypeScreen> T getTypeScreenFromContext()  {
-        return (T) RegularTypesScreenFactory.getTypeScreen(typeContext);
     }
 
     public IOSElement getInspectionNumberLabel() {
@@ -81,5 +75,9 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(warningMessage)));
         appiumdriver.findElement(MobileBy.iOSNsPredicateString("name == '" + buttonToClick + "' AND visible == 1")).click();
+    }
+
+    public void clickNotesButton() {
+        appiumdriver.findElement(MobileBy.AccessibilityId("Compose")).click();
     }
 }

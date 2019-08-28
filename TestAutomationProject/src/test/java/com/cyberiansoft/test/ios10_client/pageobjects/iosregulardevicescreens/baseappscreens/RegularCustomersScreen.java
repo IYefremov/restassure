@@ -86,7 +86,6 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 		searchbtn.click();
-		BaseUtils.waitABit(1500);
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customerName);
 		appiumdriver.findElementByAccessibilityId(customerName).click();
 		WaitUtils.waitUntilElementInvisible(MobileBy.AccessibilityId("Customer changing..."));
@@ -95,12 +94,16 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	public void selectCustomer(AppCustomer appCustomer) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
-		searchbtn.click();
-		BaseUtils.waitABit(1500);
-		if (appCustomer instanceof WholesailCustomer)
+		if (appCustomer instanceof WholesailCustomer) {
+			swtchToWholesaleMode();
+			searchbtn.click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(appCustomer.getCompany());
-		else
+		}
+		else {
+			swtchToRetailMode();
+			searchbtn.click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(appCustomer.getLastName());
+		}
 		appiumdriver.findElementByAccessibilityId(appCustomer.getFullName()).click();
 		WaitUtils.waitUntilElementInvisible(MobileBy.AccessibilityId("Customer changing..."));
 	}

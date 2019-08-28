@@ -2821,21 +2821,32 @@
       }
     }
   ],
-  "testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices": [
+  "testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamAndMyInvoices": [
     {
       "rowID": "testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices.01",
-      "description": "Test Case 30509:Invoices: Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices",
+      "description": "Test Case 30509:Invoices: Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices, Test Case 30510:Invoices: Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartOption": "PDR",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              }
+            ]
+          }
+        },
+        "workOrderTotalSale": "3"
+      },
       "invoiceData": {
-        "poNumber": ""
-      }
-    }
-  ],
-  "testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices": [
-    {
-      "rowID": "testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices.01",
-      "description": "Test Case 30510:Invoices: Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices",
-      "invoiceData": {
-        "poNumber": ""
+        "poNumber": "123po",
+        "newPoNumber": ""
       }
     }
   ],

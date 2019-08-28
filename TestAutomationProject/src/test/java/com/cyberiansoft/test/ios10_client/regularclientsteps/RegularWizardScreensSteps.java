@@ -27,4 +27,9 @@ public class RegularWizardScreensSteps {
         Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
         alert.accept();
     }
+
+    public static void clickNotesButton() {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.clickNotesButton();
+    }
 }

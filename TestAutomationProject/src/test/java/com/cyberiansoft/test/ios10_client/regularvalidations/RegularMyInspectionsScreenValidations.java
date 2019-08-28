@@ -14,4 +14,12 @@ public class RegularMyInspectionsScreenValidations {
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         Assert.assertEquals(myInspectionsScreen.getInspectionApprovedPriceValue(inspectionID), expectedApprovedPrice);
     }
+
+    public static void verifyNotesIconPresentForInspection(String inspectionID, boolean isPresent) {
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        if (isPresent)
+            Assert.assertTrue(myInspectionsScreen.isNotesIconPresentForInspection(inspectionID));
+        else
+            Assert.assertFalse(myInspectionsScreen.isNotesIconPresentForInspection(inspectionID));
+    }
 }
