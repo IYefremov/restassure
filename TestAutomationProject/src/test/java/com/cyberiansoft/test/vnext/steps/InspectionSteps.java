@@ -85,6 +85,12 @@ public class InspectionSteps {
         return inspectionNumber;
     }
 
+    public static void trySaveInspection() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
+        baseWizardScreen.clickSaveInspectionMenuButton();
+    }
+
     public static void cancelInspection() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         baseWizardScreen.clickCancelMenuItem();

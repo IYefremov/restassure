@@ -31,6 +31,4 @@ public class VNextInspectionTypesList extends VNextBaseTypeSelectionList {
 		VNextBaseWizardScreen.inspectionType = inspectionType;
 		VNextBaseWizardScreen.typeScreenContext = VNextTypeScreenContext.INSPECTION;
 	}
-	
-
 }

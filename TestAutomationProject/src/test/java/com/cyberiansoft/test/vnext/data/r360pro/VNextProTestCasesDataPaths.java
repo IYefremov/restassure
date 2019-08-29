@@ -158,4 +158,8 @@ public class VNextProTestCasesDataPaths {
     public String getPartServiceBundleCaseDataPath() {
         return props.getProperty("part.service.bundle");
     }
+
+    public String getQuestionFormBasicCasesDataPath() {
+        return props.getProperty("question.form.basic");
+    }
 }
