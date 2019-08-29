@@ -1,0 +1,58 @@
+{
+  "verifyUserCanAnswerQuestionsSeparatley": [
+    {
+      "rowID": "verifyUserCanAnswerQuestionsSeparatley.01",
+      "description": "TFSID:90014",
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Non required question",
+            "questionAnswer": "Checked And OK'd"
+          },
+          {
+            "questionName": "Non required question",
+            "questionAnswer": "Future Attention Needed"
+          },
+          {
+            "questionName": "Non required question",
+            "questionAnswer": "Immediate Attention Required"
+          },
+          {
+            "questionName": "Non required question",
+            "questionAnswer": "Please select answer"
+          },
+          {
+            "questionName": "Required question2",
+            "questionAnswer": "No"
+          },
+          {
+            "questionName": "Required question2",
+            "questionAnswer": "Yes"
+          },
+          {
+            "questionName": "Required question2",
+            "questionAnswer": "Please select answer"
+          }
+        ]
+      }
+    }
+  ],
+  "verifyValidationOfRequiredQuestionsOnSaveInspection": [
+    {
+      "rowID": "verifyUserCanAnswerQuestionsSeparatley.01",
+      "description": "TFSID:90021",
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Required question",
+            "questionAnswer": "Checked And OK'd"
+          },
+          {
+            "questionName": "Required question2",
+            "questionAnswer": "No"
+          }
+        ]
+      }
+    }
+  ]
+}
