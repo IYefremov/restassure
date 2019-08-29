@@ -60,7 +60,6 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	
 	public void clickEditInspectionButton() {
 		editpopupmenu.click();
-		RegularBaseWizardScreen.typeContext = TEAMINSPECTIONCONTEXT;
 	}
 	
 	public boolean isInspectionIsApproveButtonExists(String inspectionID) {

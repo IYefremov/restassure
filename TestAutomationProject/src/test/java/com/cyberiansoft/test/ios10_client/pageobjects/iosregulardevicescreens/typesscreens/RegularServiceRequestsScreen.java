@@ -1,13 +1,13 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.IServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -21,9 +21,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 
@@ -104,9 +102,10 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
-	public void waitForServiceRequestScreenLoad() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable")));
+	public WebElement waitForServiceRequestScreenLoad() {
+		return WaitUtils.waitUntilElementIsClickable(serviceRequestsTable);
+		//FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		//wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable")));
 	}
 
 	public void clickRefreshButton()  {
@@ -116,9 +115,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	public void clickAddButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Add")));
-		appiumdriver.findElementByAccessibilityId("Add").click();
-		RegularBaseWizardScreen.typeContext = SRCONTEXT;
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Add"))).click();
 	}
 	
 	public <T extends IBaseWizardScreen> T selectServiceRequestType(IServiceRequestTypes serviceRequestType) {
@@ -149,7 +146,6 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	public void selectEditServiceRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		RegularBaseWizardScreen.typeContext = SRCONTEXT;
 	}
 	
 	public void selectCreateWorkOrderRequestAction() {
@@ -158,14 +154,6 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	public void selectAppointmentRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Appointments").click();
-	}
-	
-	public void selectCheckInAction() {
-		appiumdriver.findElementByAccessibilityId("Check In").click();
-	}
-	
-	public boolean isUndoCheckInActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Undo\nCheck In").size() > 0;
 	}
 	
 	public void selectRejectAction() {
@@ -256,19 +244,16 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 	
 	public String getServiceRequestStatus(String srnumber) {
-		waitForServiceRequestScreenLoad();
-		return serviceRequestsTable.findElementByAccessibilityId(srnumber).findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
+		;
+		return waitForServiceRequestScreenLoad().findElement(MobileBy.AccessibilityId(srnumber)).findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
 	}
 	
 	public String getFirstServiceRequestNumber() {
-		waitForServiceRequestScreenLoad();
-		List<MobileElement> ws = serviceRequestsTable.findElements (MobileBy.AccessibilityId("labelServiceRequestNumber"));
-		List<String> nmbr = new ArrayList();
- 		for (WebElement el : ws ) {
-			nmbr.add(el.getAttribute("value"));
- 		}
- 		Collections.sort(nmbr);
-		return nmbr.get(nmbr.size()-1);
+		WebElement srTable = waitForServiceRequestScreenLoad();
+		Optional<WebElement> ss =srTable
+				.findElements(MobileBy.AccessibilityId("labelServiceRequestNumber"))
+				.stream().max(Comparator.comparing(o -> o.getAttribute("value")));
+		return ss.get().getAttribute("value");
 	}
 	
 	//Appointmets

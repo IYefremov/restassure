@@ -33,8 +33,6 @@ public class RegularClaimScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId("Claim#").click();
 		WebElement par = getTableParentCell("Claim#");
 		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(claim + "\n");
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey(claim);
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 
 	}
 

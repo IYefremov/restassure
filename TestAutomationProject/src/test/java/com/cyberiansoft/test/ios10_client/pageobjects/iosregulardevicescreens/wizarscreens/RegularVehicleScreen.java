@@ -147,6 +147,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getWorkOrderNumber() {
+		waitVehicleScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name CONTAINS 'O-'")));
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
@@ -339,17 +340,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		waitVehicleScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		return wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("viewPrompt"))).getAttribute("value");
-	}
-
-	public RegularNotesScreen clickNotesButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Compose")));
-		appiumdriver.findElementByAccessibilityId("Compose").click();
-		return new RegularNotesScreen();
-	}
-
-	public String getWorkOrderTypeValue() {
-		return regularwotypelabel.getAttribute("value");
 	}
 
 	public void clickSaveAsFinal() {

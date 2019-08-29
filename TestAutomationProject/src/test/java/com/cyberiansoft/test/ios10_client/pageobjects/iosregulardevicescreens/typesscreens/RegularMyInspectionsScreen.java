@@ -101,27 +101,11 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		if (elementExists("Discard")) {
 			appiumdriver.findElementByAccessibilityId("Discard").click();
 		}
-		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 
-	public void clickEditInspectionButton() {
-		appiumdriver.findElementByAccessibilityId("Edit").click();
-		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
-	}
-
-	public void clickOnInspection(String inspnumber) {
+	public void clickOnInspection(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
-		inspectionsTable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
-	}
-	
-	public void selectInspectionForEdit(String inspnumber) {
-		clickOnInspection(inspnumber);
-		clickEditInspectionButton();
-	}
-
-	public void selectInspectionForApprove(String inspnumber) {
-		clickOnInspection(inspnumber);
-		clickApproveInspectionButton();
+		inspectionsTable.findElement(MobileBy.AccessibilityId(inspectionNumber)).click();
 	}
 	
 	public void selectEmployee(String employee) {
@@ -135,31 +119,9 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		((IOSElement) appiumdriver.findElementByAccessibilityId("Enter password here")).setValue(password);
 		Helpers.acceptAlert();
 	}
-
-	
-	public void selectInspectionForCopy(String inspnumber) {
-		waitMyInspectionsScreenLoaded();
-		clickOnInspection(inspnumber);
-		clickCopyInspection();
-	}
-	
-	public void selectInspectionForCreatingWO(String inspnumber) {
-		clickOnInspection(inspnumber);
-		clickCreateWOButton();
-	}
-	
-	protected void clickApproveInspectionButton() {
-		appiumdriver.findElementByAccessibilityId("Approve").click();
-	}
 	
 	public void clickCreateWOButton() {
 		createwopopupmenu.click();
-		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
-	}
-	
-	public void clickCopyInspection() {
-		appiumdriver.findElementByAccessibilityId("Copy").click();
-		RegularBaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 
 	public void clickArchiveInspectionButton() {
@@ -168,17 +130,15 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		acceptAlert();
 	}
 
-	public void archiveInspection(String inspnumber, String reason) {
-		clickOnInspection(inspnumber);
+	public void archiveInspection(String inspectionNumber, String reason) {
+		clickOnInspection(inspectionNumber);
 		clickArchiveInspectionButton();
 		selectReasonToArchive(reason);
 
 	}
 
 	public void selectReasonToArchive(String reason) {
-
 		selectUIAPickerValue(reason);
-		//statusreasonbtn.click();
 		if (appiumdriver.findElements(MobileBy.name("Done")).size() > 1)
 			((WebElement) appiumdriver.findElements(MobileBy.name("Done")).get(1)).click();
 		else
@@ -249,45 +209,9 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	public void clickFilterStatus(String filterstatus) {
 		appiumdriver.findElementByAccessibilityId(filterstatus).click();
 	}
-	
-	public void showWorkOrdersForInspection(String inspection) {
-		waitMyInspectionsScreenLoaded();
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.AccessibilityId(inspection)))).click();
-		clickShowWorkOrdersButton();
-		
-	}
-	
-	public void clickShowWorkOrdersButton() {
-		appiumdriver.findElementByAccessibilityId("Show\nWOs").click();
-	}
-
 
 	public void clickSaveFilterDialogButton() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-	}
-	
-	public void clickChangeCustomerpopupMenu() {
-		appiumdriver.findElementByAccessibilityId("Change\nCustomer").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
-	}
-	
-	public void selectCustomer(String customer) {
-		appiumdriver.findElementByAccessibilityId(customer).click();
-	}
-	
-	public RegularMyInspectionsScreen changeCustomerForInspection(String inspectionNumber, String customer) {
-		clickOnInspection(inspectionNumber);
-		clickChangeCustomerpopupMenu();
-		selectCustomer(customer);
-		return this;
-	}
-	
-	public void customersPopupSwitchToRetailMode() {
-		if (elementExists(MobileBy.AccessibilityId("btnWholesale"))) {
-			appiumdriver.findElementByAccessibilityId("btnWholesale").click();
-		}
 	}
 	
 	public int getNumberOfWorkOrdersForIspection() {
@@ -318,62 +242,27 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		clickArchiveInspectionButton();
 	}
 
-	public void selectInspectionForAction(String inspnumber) {
+	public void selectInspectionForAction(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber))).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspectionNumber))).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 
-	public boolean isInspectionIsApproved(String inspnumber) {
+	public boolean isInspectionIsApproved(String inspectionNumber) {
 		return inspectionsTable.findElement(MobileBy.
-				AccessibilityId(inspnumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
+				AccessibilityId(inspectionNumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}
 	
-	public boolean isNotesIconPresentForInspection(String inspnumber) {
+	public boolean isNotesIconPresentForInspection(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
-		WaitUtils.waitUntilElementIsClickable(appiumdriver.findElementByAccessibilityId(inspnumber));
-		return appiumdriver.findElementByAccessibilityId(inspnumber).findElements(MobileBy.AccessibilityId("ESTIMATION_NOTES")).size() > 0;
+		WaitUtils.waitUntilElementIsClickable(appiumdriver.findElementByAccessibilityId(inspectionNumber));
+		return appiumdriver.findElementByAccessibilityId(inspectionNumber).findElements(MobileBy.AccessibilityId("ESTIMATION_NOTES")).size() > 0;
 	}
 	
-	public boolean isDraftIconPresentForInspection(String inspnumber) {
+	public boolean isDraftIconPresentForInspection(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
 		return inspectionsTable.findElement(MobileBy.
-				AccessibilityId(inspnumber)).findElements(MobileBy.AccessibilityId("ESTIMATION_DRAFT")).size() > 0;
-	}
-	
-	public RegularNotesScreen openInspectionNotesScreen(String inspnumber) {
-		waitMyInspectionsScreenLoaded();
-		appiumdriver.findElementByAccessibilityId("Notes").click();
-		return new RegularNotesScreen();
-	}
-	
-	public void selectInspectionToAssign(String inspnumber) {
-		clickOnInspection(inspnumber);
-		appiumdriver.findElementByAccessibilityId("Assign").click();
-	}
-	
-	public boolean isAssignButtonExists() {
-		return appiumdriver.findElementsByAccessibilityId("Assign").size() > 0;
-	}
-	
-	public boolean isApproveInspectionMenuActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Approve").size() > 0;
-	}
-	
-	public boolean isSendEmailInspectionMenuActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Send\nEmail").size() > 0;
-	}
-	
-	public boolean isCreateWOInspectionMenuActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Create\nWO").size() > 0;
-	}
-
-	public boolean isCreateServiceRequestInspectionMenuActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Create\nService Request").size() > 0;
-	}
-	
-	public boolean isCopyInspectionMenuActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Copy").size() > 0;
+				AccessibilityId(inspectionNumber)).findElements(MobileBy.AccessibilityId("ESTIMATION_DRAFT")).size() > 0;
 	}
 	
 	public <T extends IBaseWizardScreen> T selectWorkOrderType(IWorkOrdersTypes workordertype) {

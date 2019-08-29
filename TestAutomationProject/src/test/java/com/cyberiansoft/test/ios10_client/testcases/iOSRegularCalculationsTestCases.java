@@ -92,7 +92,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		String inspnumber = vehicleScreen.getInspectionNumber();
 		RegularInspectionsSteps.saveInspection();
 
-		myInspectionsScreen.selectInspectionForApprove(inspnumber);
+		RegularMyInspectionsSteps.selectInspectionForApprove(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen =  new RegularApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspection(inspnumber);
@@ -132,8 +132,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
 		vehicleScreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
 		RegularInspectionsSteps.saveInspection();
-		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
-        vehicleScreen = new RegularVehicleScreen();
+		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 
         int tapXCoordInicial = 100;
 		int tapYCoordInicial = 100;
@@ -157,8 +156,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		RegularInspectionsSteps.saveInspection();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
-		vehicleScreen = new RegularVehicleScreen();
+		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 
 		tapXCoordInicial = 100;
 		tapYCoordInicial = 100;
@@ -840,8 +838,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		servicesScreen.waitServicesScreenLoaded();
 		RegularInspectionsSteps.saveInspection();
-		
-		myInspectionsScreen.selectInspectionForApprove(inspnumber32287);
+
+		RegularMyInspectionsSteps.selectInspectionForApprove(inspnumber32287);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen =  new RegularApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspection(inspnumber32287);
@@ -963,7 +961,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
 		RegularInspectionsSteps.saveInspection();
-		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
+		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
 
@@ -1252,15 +1250,14 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 		RegularInspectionsSteps.saveInspection();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-		myInspectionsScreen.selectInspectionForApprove(inspectionNumber);
+		RegularMyInspectionsSteps.selectInspectionForApprove(inspectionNumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen =  new RegularApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspection(inspectionNumber);
 		approveInspectionsScreen.approveInspectionApproveAllAndSignature();
 		myInspectionsScreen = new RegularMyInspectionsScreen();
-		myInspectionsScreen.selectInspectionForCreatingWO(inspectionNumber);
-		vehicleScreen = myInspectionsScreen.selectWorkOrderType(WorkOrdersTypes.WO_SMOKE_MONITOR);
-		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularMyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber, WorkOrdersTypes.WO_SMOKE_MONITOR);
+		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		Assert.assertEquals(servicesScreen.getTotalAmaunt(), inspectionData.getInspectionPrice());
 		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
@@ -1294,7 +1291,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 		RegularInspectionsSteps.saveInspectionAsDraft();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
-		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
+		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 		RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 
@@ -1364,10 +1361,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickSaveButton();
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
-		myInspectionsScreen = new RegularMyInspectionsScreen();
-		myInspectionsScreen.selectInspectionForCreatingWO(inspectionNumber);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-		vehicleScreen = myInspectionsScreen.selectWorkOrderType(WorkOrdersTypes.WO_WITH_PART_SERVICE);
+		RegularMyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber, WorkOrdersTypes.WO_WITH_PART_SERVICE);
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 		inspectionToolBar = new RegularInspectionToolBar();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
@@ -1807,9 +1802,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickCancelButton();
 
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
-		myInspectionsScreen.selectInspectionForEdit(inspnumber);
-        vehicleScreen = new RegularVehicleScreen();
-		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularMyInspectionsSteps.selectInspectionForEdit(inspnumber);
+        RegularNavigationSteps.navigateToServicesScreen();
 		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getServiceData().getServicePrice2());
@@ -2155,10 +2149,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
         RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		RegularInspectionsSteps.saveInspection();
-		
-		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
-		vehicleScreen = new RegularVehicleScreen();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+
+		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
+		RegularNavigationSteps.navigateToServicesScreen();
 
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
@@ -2364,9 +2357,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
 		BaseUtils.waitABit(10*1000);
-		myInspectionsScreen = new RegularMyInspectionsScreen();
-		myInspectionsScreen.selectInspectionForEdit(inspnumber);
-		visualInteriorScreen = new RegularVisualInteriorScreen();
+		RegularMyInspectionsSteps.selectInspectionForEdit(inspnumber);
 		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
 		servicesScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.SERVICES);
         RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();

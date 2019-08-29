@@ -8,6 +8,8 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularSmokeTestCases">
         <methods>
+
+
           <include name="testUpdateDatabase" />
           <include name="testUpdateVIN" />
           <!--<include name="testCreateRetailCustomer" />
@@ -103,8 +105,7 @@
           <include name="testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest" />
           <include name="testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval" />
           <include name="testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired" />
-          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices" />
-          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices" />
+          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamAndMyInvoices" />
           <include name="testWOVerifyThatTechSplitsIsSavedInPriceMatrices" />
           <include name="testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit" />
           <include name="testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied" />
