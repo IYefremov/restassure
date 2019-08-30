@@ -21,6 +21,7 @@ public class MenuSteps {
     public static void selectStatus(ServiceStatus serviceStatus) {
         StatusSelectScreen statusSelectScreen = new StatusSelectScreen();
         BaseUtils.waitABit(2000);
+        WaitUtils.elementShouldBeVisible(statusSelectScreen.getStatusItemByText(serviceStatus.getStatus()), true);
         WaitUtils.click(statusSelectScreen.getStatusItemByText(serviceStatus.getStatus()));
     }
 
