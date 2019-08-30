@@ -58,8 +58,6 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	public RegularHomeScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		//WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		//wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("Home")));
 	}
 
 	public void waitHomeScreenLoaded() {

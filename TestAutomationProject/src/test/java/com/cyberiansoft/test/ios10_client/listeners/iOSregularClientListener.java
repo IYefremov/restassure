@@ -105,9 +105,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
         DriverBuilder.getInstance().getAppiumDriver().launchApp();
         RegularMainScreen mainscr = new RegularMainScreen();
         TestUser testuser = ((BaseTestCase) result.getInstance()).getTestUser();
-        RegularHomeScreen homescreen = mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
-        homescreen.waitHomeScreenLoaded();
-
+        mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
     }
 
         @Override

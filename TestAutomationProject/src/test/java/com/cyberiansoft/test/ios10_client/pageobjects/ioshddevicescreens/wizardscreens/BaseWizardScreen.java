@@ -7,9 +7,13 @@ import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWiz
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScreen {
 
@@ -21,7 +25,7 @@ public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScre
 
     public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType) {
         IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
-        navbar.findElementByIosNsPredicate("name ENDSWITH 'WizardStepsButton'").click();
+        navbar.findElementByIosNsPredicate("label CONTAINS '/'").click();
         appiumdriver.findElementByAccessibilityId(wizardScreenType.getDefaultScreenTypeName()).click();
         return (T) WizardScreensFactory.getWizardScreenType(wizardScreenType);
     }

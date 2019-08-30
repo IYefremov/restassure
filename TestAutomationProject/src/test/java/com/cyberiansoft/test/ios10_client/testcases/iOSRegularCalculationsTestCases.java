@@ -36,8 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
-
-	private RegularHomeScreen homeScreen;
 	
 	@BeforeClass
 	public void setUpSuite() {
@@ -49,8 +47,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 				envType);
 
 		RegularMainScreen mainScreen = new RegularMainScreen();
-		homeScreen = mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		homeScreen.waitHomeScreenLoaded();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularSettingsScreen settingsScreen =  homeScreen.clickSettingsButton();
 		settingsScreen.setShowAvailableSelectedServicesOn();
 		homeScreen = settingsScreen.clickHomeButton();
@@ -62,7 +60,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 			
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
@@ -111,7 +109,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 			
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
@@ -183,7 +181,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 																																   String description, JSONObject testData) {
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -219,7 +217,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -281,7 +279,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -309,7 +307,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -345,7 +343,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -379,7 +377,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -415,7 +413,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -478,7 +476,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -521,7 +519,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -563,7 +561,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -607,7 +605,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -672,7 +670,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -743,7 +741,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -813,7 +811,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -880,7 +878,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -926,7 +924,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
@@ -980,7 +978,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1028,7 +1026,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		List<String> workOrders = new ArrayList<>();
 		final String locationValue = "All locations";
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1077,16 +1075,14 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickHomeButton();
 		homeScreen.clickMyWorkOrdersButton();
 		myWorkOrdersScreen.approveWorkOrder(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		myWorkOrdersScreen.selectWorkOrderForEidt(workOrders.get(1));
+		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrders.get(1));
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		RegularWorkOrdersSteps.saveWorkOrder();
 		myWorkOrdersScreen.clickHomeButton();
 		
 		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
-		myinvoicesscreen.selectInvoice(invoicenum);
-		myinvoicesscreen.clickEditPopup();
-		questionsScreen = new RegularQuestionsScreen();
+		RegularMyInvoicesScreenSteps.selectInvoiceForEdit(invoicenum);
 		questionsScreen.waitQuestionsScreenLoaded();
 		invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceInfoScreen.addWorkOrder(workOrders.get(1));
@@ -1105,7 +1101,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1142,7 +1138,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		ServiceRequestData serviceRequestData = JSonDataParser.getTestDataFromJson(testData, ServiceRequestData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1164,10 +1160,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(Helpers.getAlertTextAndCancel().contains(AlertsCaptions.ALERT_CREATE_APPOINTMENT));
 
 		serviceRequestsScreen = new RegularServiceRequestsScreen();
-		String srnumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		serviceRequestsScreen.selectServiceRequest(srnumber);
-		serviceRequestsScreen.selectCreateInspectionRequestAction();
-        RegularVisualInteriorScreen visualInteriorScreen =  serviceRequestsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+		String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
+		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+		RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
 		visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -1180,7 +1175,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		servicesScreen.waitServicesScreenLoaded();
 		RegularServiceRequestSteps.saveServiceRequest();
-		serviceRequestsScreen.selectServiceRequest(srnumber);
+		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestsScreen.selectDetailsRequestAction();
 		RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
 		RegularTeamInspectionsScreen teamInspectionsScreen = new RegularTeamInspectionsScreen();
@@ -1211,7 +1206,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1276,7 +1271,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1383,7 +1378,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		
-		homeScreen = new RegularHomeScreen();			
+		RegularHomeScreen homeScreen = new RegularHomeScreen();			
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1402,8 +1397,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-        vehicleScreen = new RegularVehicleScreen();
+		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
         RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
@@ -1464,7 +1458,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		InvoiceData invoiceData = testCaseData.getInvoiceData();
 		
-		homeScreen = new RegularHomeScreen();			
+		RegularHomeScreen homeScreen = new RegularHomeScreen();			
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1538,7 +1532,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		InvoiceData invoiceData = testCaseData.getInvoiceData();
 		
-		homeScreen = new RegularHomeScreen();			
+		RegularHomeScreen homeScreen = new RegularHomeScreen();			
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1662,7 +1656,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		InvoiceData invoiceData = testCaseData.getInvoiceData();
 		
-		homeScreen = new RegularHomeScreen();			
+		RegularHomeScreen homeScreen = new RegularHomeScreen();			
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -1776,7 +1770,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1828,7 +1822,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1897,7 +1891,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -1965,7 +1959,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		
-		homeScreen = new RegularHomeScreen();			
+		RegularHomeScreen homeScreen = new RegularHomeScreen();			
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2027,7 +2021,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String customer  = "Avalon";
 		
-		homeScreen = new RegularHomeScreen();			
+		RegularHomeScreen homeScreen = new RegularHomeScreen();			
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
@@ -2054,8 +2048,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new RegularVehicleScreen();
+		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
         servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 
 		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
@@ -2080,7 +2073,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		
-		homeScreen = new RegularHomeScreen();			
+		RegularHomeScreen homeScreen = new RegularHomeScreen();			
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -2098,9 +2091,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.waitWorkOrderSummaryScreenLoad();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
-		
-		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new RegularVehicleScreen();
+
+		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
         RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
@@ -2132,7 +2124,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -2179,11 +2171,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		List<String> workOrders = new ArrayList<>();
-		final String retailCustomer = "Avalon";
+		RetailCustomer retailCustomer = new RetailCustomer("Avalon", "");
+
 		final int workOrderIndexToEdit = 1;
 		final String workOrderNewPrice = "$35.00";
 		
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 			customersScreen.swtchToWholesaleMode();
@@ -2205,8 +2198,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 			RegularWorkOrdersSteps.saveWorkOrder();
 
-			myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-			vehicleScreen = new RegularVehicleScreen();
+			RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
 			RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			servicesScreen.selectService(workOrderData.getServiceData().getServiceName());
 			RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
@@ -2215,28 +2207,22 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			myWorkOrdersScreen.clickHomeButton();
 		}
 		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
-		myWorkOrdersScreen.selectWorkOrder(workOrders.get(workOrderIndexToEdit));
-		myWorkOrdersScreen.clickChangeCustomerPopupMenu();
-		RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-		customersScreen.swtchToRetailMode();
-		customersScreen.selectCustomer(retailCustomer);
-		myWorkOrdersScreen.waitMyWorkOrdersScreenLoaded();
+		RegularMyWorkOrdersSteps.changeCustomerForWorkOrder(workOrders.get(workOrderIndexToEdit), retailCustomer);
 		Assert.assertFalse(myWorkOrdersScreen.woExists(workOrders.get(workOrderIndexToEdit)), "Can't find work order: " + workOrders.get(workOrderIndexToEdit));
 		myWorkOrdersScreen.clickHomeButton();
 		
-		customersScreen = homeScreen.clickCustomersButton();
+		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
 		
 		myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
-		myWorkOrdersScreen.selectWorkOrderForEidt(workOrders.get(workOrderIndexToEdit));
-		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrders.get(workOrderIndexToEdit));
         RegularNavigationSteps.navigateToServicesScreen();
 
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), testCaseData.getWorkOrdersData().get(workOrderIndexToEdit).getWorkOrderPrice());
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		servicesScreen.selectSubService(testCaseData.getWorkOrdersData().get(workOrderIndexToEdit).getServiceData().getServiceName());
+		servicesScreen.selectService(testCaseData.getWorkOrdersData().get(workOrderIndexToEdit).getServiceData().getServiceName());
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderNewPrice);
 		RegularWorkOrdersSteps.saveWorkOrder();
 		myWorkOrdersScreen.clickHomeButton();
@@ -2249,7 +2235,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		
-		homeScreen = new RegularHomeScreen();			
+		RegularHomeScreen homeScreen = new RegularHomeScreen();			
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
@@ -2280,7 +2266,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
-		homeScreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();

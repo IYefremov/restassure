@@ -44,7 +44,7 @@ public class RegularServicesScreenSteps {
 
     public static void selectMatrixService(MatrixServiceData matrixServiceData) {
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectSubService(matrixServiceData.getMatrixServiceName());
+        servicesScreen.selectService(matrixServiceData.getMatrixServiceName());
         if (matrixServiceData.getHailMatrixName() != null) {
             RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen();
             priceMatricesScreen.selectPriceMatrice(matrixServiceData.getHailMatrixName());
