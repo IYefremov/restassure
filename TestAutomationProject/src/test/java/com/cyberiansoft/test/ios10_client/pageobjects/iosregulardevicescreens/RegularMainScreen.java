@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSteps;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -54,10 +55,10 @@ public class RegularMainScreen extends iOSBaseScreen {
 		Helpers.acceptAlert();
 	}
 
-	public RegularHomeScreen userLogin(String employeeName, String password)  {
+	public void userLogin(String employeeName, String password)  {
 		selectEmployee(employeeName);
 		enterEmployeePassword(password);
-		return new RegularHomeScreen();
+		RegularHomeScreenSteps.waitForHomeScreen();
 	}
 
 	public void selectEmployee(String employeeName) {

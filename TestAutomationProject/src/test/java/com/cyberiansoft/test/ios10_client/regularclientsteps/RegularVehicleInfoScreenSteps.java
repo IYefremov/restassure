@@ -11,6 +11,11 @@ public class RegularVehicleInfoScreenSteps {
         vehicleScreen.setVIN(VIN);
     }
 
+    public static void waitVehicleScreenLoaded() {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.waitVehicleScreenLoaded();
+    }
+
     public static void setMakeAndModel(String make, String model) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setMakeAndModel(make, model);

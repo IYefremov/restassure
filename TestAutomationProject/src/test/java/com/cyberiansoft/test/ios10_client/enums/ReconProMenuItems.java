@@ -15,6 +15,7 @@ public enum ReconProMenuItems {
     COPY_VEHICLE("Copy\nVehicle"),
     COPY_SERVICES("Copy\nServices"),
     SEND_EMAIL("Send\nEmail"),
+    NEW_INSPECTION("New\nInspection"),
     CHECK_IN("Check In"),
     UNDO_CHECK_IN("Undo\nCheck In"),
     NOTES("Notes"),

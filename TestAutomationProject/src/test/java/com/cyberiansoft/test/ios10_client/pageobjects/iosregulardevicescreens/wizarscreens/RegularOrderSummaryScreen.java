@@ -84,15 +84,9 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 		return new RegularInvoiceInfoScreen();
 	}
 
-	/*public void selectWorkOrderDetails(String workorderdetails) {
-
-		appiumdriver.findElementByAccessibilityId(workorderdetails).click();
-	}*/
-
 	public String getOrderSumm() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(wototalamaunt));
-		return wototalamaunt.getAttribute("value");
+		return  wait.until(ExpectedConditions.visibilityOf(wototalamaunt)).getAttribute("value");
 	}
 
 	public String getTotalSaleValue() {

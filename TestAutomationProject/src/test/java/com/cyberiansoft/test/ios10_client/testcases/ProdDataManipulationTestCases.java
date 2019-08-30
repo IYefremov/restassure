@@ -90,7 +90,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         LoginScreen loginscreen = selectenvscreen.selectEnvironment("Prod Environment");
         loginscreen.registeriOSDevice(regCode);
         RegularMainScreen mainscr = new RegularMainScreen();
-        homescreen = mainscr.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+        mainscr.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)

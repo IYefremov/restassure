@@ -15,6 +15,9 @@ public class RegularEmailScreen extends iOSRegularBaseScreen {
     @iOSXCUITFindBy(accessibility = "Send")
     private IOSElement sendbtn;
 
+    @iOSXCUITFindBy(accessibility = "Single Email")
+    private IOSElement singlemailbtn;
+
     public RegularEmailScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
@@ -34,5 +37,9 @@ public class RegularEmailScreen extends iOSRegularBaseScreen {
 
     public void clickSendButton() {
         sendbtn.click();
+    }
+
+    public void clickSingleMailButton() {
+        singlemailbtn.click();
     }
 }

@@ -59,12 +59,16 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
-        if (elementExists("Clear text"))
-            appiumdriver.findElementByAccessibilityId("XCUIElementTypeSearchField").clear();
-        if (!selectedservicestable.findElementByAccessibilityId(servicename).isDisplayed())
-            if (appiumdriver.findElementsByAccessibilityId("XCUIElementTypeSearchField").size() > 0)
-                searchServiceByName(servicename);
-        selectedservicestable.findElementByAccessibilityId(servicename).click();
+        WebElement searchFild = appiumdriver.findElementByClassName("XCUIElementTypeSearchField");
+        if (!(searchFild.getAttribute("value") == null))
+            searchFild.clear();
+
+        IOSElement servicecell = (IOSElement) selectedservicestable.
+                findElement(MobileBy.AccessibilityId(servicename));
+        if (!servicecell.isDisplayed()) {
+            searchFild.sendKeys(servicename + "\n");
+        }
+        selectedservicestable.findElement(MobileBy.AccessibilityId(servicename)).click();
 
         return new RegularSelectedServiceDetailsScreen();
     }
