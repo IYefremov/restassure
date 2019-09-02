@@ -8,10 +8,14 @@ import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWiz
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBaseWizardScreen {
 
@@ -50,11 +54,7 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void clickChangeScreen() {
-        if (elementExists("WizardStepsButton"))
-            appiumdriver.findElementByAccessibilityId("WizardStepsButton").click();
-        else
-
-            appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("name contains '/'")).click();
+        appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("label contains '/'")).click();
     }
 
     public void clickCancelWizard() {

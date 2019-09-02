@@ -39,13 +39,13 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	public boolean checkBundleIsNotSelected(String bundle) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
-		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='unselected']").size() > 0;
+		return bundleview.findElementByAccessibilityId(bundle).findElementsByAccessibilityId("unselected").size() > 0;
 	}
 
 	public void selectBundle(String bundle) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='unselected']").click();
+		bundleview.findElementByAccessibilityId(bundle).findElementByAccessibilityId("unselected").click();
 	}
 
 	public RegularSelectedServiceDetailsScreen openBundleInfo(String bundle) {

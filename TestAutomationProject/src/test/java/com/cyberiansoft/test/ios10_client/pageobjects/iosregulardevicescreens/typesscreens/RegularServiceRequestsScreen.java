@@ -137,12 +137,6 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 		}
 		serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber).click();
 	}
-
-	public void selectCreateInspectionRequestAction() {
-		appiumdriver.findElementByAccessibilityId("Create\nInspection").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Synchronizing with Back Office")));
-	}
 	
 	public void selectEditServiceRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Edit").click();

@@ -2,7 +2,10 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehiclePartScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -61,6 +64,9 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	
 	@iOSXCUITFindBy(accessibility = "Services")
     private IOSElement servicesbtn;*/
+
+	@iOSXCUITFindBy(accessibility = "PriceMatrixVehicleParts")
+	private IOSElement priceMatrixVehiclePartsTable;
 	
 	@iOSXCUITFindBy(accessibility = "Back")
     private IOSElement backbtn;
@@ -71,17 +77,16 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	}
 
 	public void waitPriceMatrixScreenLoad() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'PriceMatrixVehicleParts'")));
+		WaitUtils.elementShouldBeVisible(priceMatrixVehiclePartsTable, true);
 	}
 	
 	public RegularVehiclePartScreen selectPriceMatrix(String pricematrix) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(pricematrix)));
-		if (!appiumdriver.findElementByName(pricematrix).isDisplayed()) {
-			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + pricematrix + "']/..")));
+		MobileElement priceMatrixCell = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(pricematrix)));
+		if (!priceMatrixCell.isDisplayed()) {
+			SwipeUtils.swipeToElement(pricematrix);
 		}
-		appiumdriver.findElement(MobileBy.AccessibilityId(pricematrix)).click();
+		priceMatrixCell.findElement(MobileBy.AccessibilityId(pricematrix)).click();
 		return new RegularVehiclePartScreen();
 	}
 	

@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RegularVehicleScreen extends RegularBaseWizardScreen {
-		
-	final static String vehiclescreencapt = "Vehicle";	
+
 	
 	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeButton")
     private IOSElement makecustombtn;
@@ -66,6 +65,9 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	@iOSXCUITFindBy(accessibility = "PO#")
     private IOSElement pofld;*/
+
+	@iOSXCUITFindBy(accessibility = "VIN#")
+	private IOSElement vinfld;
 	
 	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[3]")
     private IOSElement inspnumberlabel;
@@ -106,9 +108,8 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void setVINValue(String vin)  {
-		clickVINField();
-		getVINField().sendKeys(vin);
-		getVINField().sendKeys("\n");
+		vinfld.click();
+		vinfld.sendKeys(vin + "\n");
 	}
 
 	public void setVIN(String vin)  {
@@ -116,7 +117,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void clearVINCode() {
-		appiumdriver.findElementByAccessibilityId("VIN#").click();
+		vinfld.click();
 		WebElement deleteBtn  = appiumdriver.findElementByClassName("XCUIElementTypeKeyboard").findElement(MobileBy.AccessibilityId("delete"));
 		for (int i = 0; i < 17; i++)
 			deleteBtn.click();
@@ -127,13 +128,13 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void clickVINField() {
-		getVINField().click();
+		vinfld.click();
 	}
 
 	public String setVINAndAndSearch(String vin) {
 
-		getVINField().click();
-		getVINField().sendKeys(vin + "\n");
+		vinfld.click();
+		vinfld.sendKeys(vin + "\n");
 		String alertText = appiumdriver.findElementByClassName("XCUIElementTypeTextView").getText();
 		appiumdriver.findElementByAccessibilityId("Close").click();
 		return alertText;
@@ -322,13 +323,11 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 
 	public void setRO(String ro) {
-		appiumdriver.findElementByAccessibilityId("RO#").click();
-		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'RO#' and type = 'XCUIElementTypeCell'")).sendKeys(ro + "\n");
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'RO#' and type = 'XCUIElementTypeCell'")).sendKeys(ro + "\n");
 	}
 	
 	public void setPO(String po) {
-		appiumdriver.findElementByAccessibilityId("PO#").click();
-		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'")).sendKeys(po + "\n");
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'")).sendKeys(po + "\n");
 	}
 	
 	public String getWorkOrderCustomer() {

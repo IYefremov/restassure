@@ -10,4 +10,10 @@ public class RegularEmailScreenSteps {
         emailScreen.enterEmailAddress(eMail);
         emailScreen.clickSendButton();
     }
+
+    public static void sendSingleEmailToAddress(String eMail) {
+        sendEmailToAddress(eMail);
+        RegularEmailScreen emailScreen = new RegularEmailScreen();
+        emailScreen.clickSingleMailButton();
+    }
 }

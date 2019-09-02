@@ -37,7 +37,7 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
         SearchSteps.textSearch(typeName);
         WaitUtils.getGeneralFluentWait().until(driver -> {
             typeList.stream()
-                    .filter((webElement) -> webElement.getText().equals(typeName))
+                    .filter((webElement) -> webElement.getText().split("\n")[0].contains(typeName))
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException("Type not found in list " + typeName))
                     .click();

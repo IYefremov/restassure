@@ -29,8 +29,8 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	@iOSXCUITFindBy(accessibility = "Edit")
     private IOSElement editpopupmenu;
 	
-	/*@iOSXCUITFindBy(accessibility = "Done")
-    private IOSElement toolbardonebtn;*/
+	@iOSXCUITFindBy(accessibility = "Done")
+    private IOSElement toolbardonebtn;
 	
 	public RegularTeamInspectionsScreen() {
 		super();
@@ -99,16 +99,8 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 		appiumdriver.findElementByAccessibilityId(employee).click();
 	}
 	
-	public boolean isApproveInspectionMenuActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Approve").size() > 0;
-	}
-	
-	public boolean isSendEmailInspectionMenuActionExists() {
-		return appiumdriver.findElementsByAccessibilityId("Send\nEmail").size() > 0;
-	}
-	
 	public void clickDoneButton() {
-		appiumdriver.findElementByAccessibilityId("Done").click();
+		toolbardonebtn.click();
 	}
 	
 	public void selectInspectionForApprove(String inspnumber) {
@@ -121,7 +113,7 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	}
 	
 	public boolean checkInspectionIsApproved(String inspnumber) {
-		return inspectiontable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + inspnumber + "']/XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
+		return inspectiontable.findElement(MobileBy.AccessibilityId(inspnumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}
 	
 	public String getFirstInspectionAprovedPriceValue() {

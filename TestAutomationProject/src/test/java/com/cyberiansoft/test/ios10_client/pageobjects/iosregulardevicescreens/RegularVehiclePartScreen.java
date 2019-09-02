@@ -36,15 +36,15 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     public void setSizeAndSeverity(String size, String severity) {
         appiumdriver.findElementByAccessibilityId("Size").click();
         WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(size)));
-        appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + size + "']")).click();
-        appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + severity + "']")).click();
+        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(size))).click();
+        appiumdriver.findElement(MobileBy.AccessibilityId(severity)).click();
         appiumdriver.findElementByAccessibilityId("Save").click();
         viewMode = "PdrView";
     }
 
     public boolean isNotesExists() {
-        return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='Notes']")).isDisplayed();
+        return appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode)
+                .findElements(MobileBy.AccessibilityId("Notes")).size() > 0;
     }
 
     public boolean isTechniciansExists() {
@@ -69,19 +69,17 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     }
 
     public void clickDiscaunt(String discaunt) {
-        MobileElement elDiscount = (MobileElement) appiumdriver.findElementByAccessibilityId(discaunt);
+        MobileElement table = (MobileElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode);
+        MobileElement elDiscount = (MobileElement) table.findElementByAccessibilityId(discaunt);
         if (!elDiscount.isDisplayed())
-            swipeToElement(appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode).findElement(MobileBy.AccessibilityId(discaunt)));
+            swipeToElement(table.findElement(MobileBy.AccessibilityId(discaunt)));
 
-        WebElement table = appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode);
-
-        if (!elDiscount.isDisplayed()) {
+        /*else {
             TouchAction swipe = new TouchAction(appiumdriver).press(element(table, table.getSize().width/2, table.getSize().height-30))
                     .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(element(table, table.getSize().width/2, 50)).release();
             swipe.perform();
-        }
-
-        appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode).findElement(MobileBy.AccessibilityId(discaunt)).click();
+        }*/
+        table.findElement(MobileBy.AccessibilityId(discaunt)).click();
     }
 
     public String getPrice() {

@@ -32,5 +32,4 @@ public class VNextWorkOrderTypesList extends VNextBaseTypeSelectionList {
 		VNextBaseWizardScreen.typeScreenContext = VNextTypeScreenContext.WORKORDER;
 		VNextBaseWizardScreen.workOrderType = workorderType;
 	}
-
 }

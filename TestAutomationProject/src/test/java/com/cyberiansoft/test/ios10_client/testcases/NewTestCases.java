@@ -9,6 +9,8 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
+import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
@@ -19,8 +21,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularServiceRequestSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularWorkOrdersSteps;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
@@ -35,7 +36,6 @@ import org.testng.annotations.Test;
 public class NewTestCases extends BaseTestCase {
 
 	private String regCode;
-	private RegularHomeScreen homescreen;
 	private String userLogin = "User";
 	private String userPassword = "1111";
 
@@ -73,7 +73,7 @@ public class NewTestCases extends BaseTestCase {
 		LoginScreen loginscreen = new LoginScreen();
 		loginscreen.registeriOSDevice(regCode);
 		RegularMainScreen mainscr = new RegularMainScreen();
-		homescreen = mainscr.userLogin(userLogin, userPassword);
+		mainscr.userLogin(userLogin, userPassword);
 	}
 
 	@Test(testName = "Test Case 59643:iOS: Invoices - Send Multiple Emails", description = "Invoices - Send Multiple Emails")
@@ -82,13 +82,14 @@ public class NewTestCases extends BaseTestCase {
 		final int numberInvoicesToSelect = 4;
 		final String mailaddress = "test@cyberiansoft.com";
 			
-		homescreen = new RegularHomeScreen();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
 			
-		RegularMyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoicesButton();
+		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
 		myinvoicesscreen.clickActionButton();
 		myinvoicesscreen.selectInvoices(numberInvoicesToSelect);
 		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.sendSingleEmail(mailaddress);
+		RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
+		RegularEmailScreenSteps.sendSingleEmailToAddress(UtilConstants.TEST_EMAIL);
 		myinvoicesscreen.clickDoneButton();
 		myinvoicesscreen.clickHomeButton();
 	}
@@ -110,13 +111,13 @@ public class NewTestCases extends BaseTestCase {
 		
 		final String poNomber = "23";
 		
-		homescreen = new RegularHomeScreen();
-		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
+		RegularCustomersScreen customersscreen = homeScreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
 		
 		//Create WO1
-		RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		RegularMyWorkOrdersScreen myworkordersscreen = homeScreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
@@ -147,8 +148,7 @@ public class NewTestCases extends BaseTestCase {
 		myworkordersscreen.clickApproveButton();
 		
 		//myworkordersscreen.searchWO(wonumber1);
-		myworkordersscreen.selectWorkOrder(wonumber1);
-		myworkordersscreen.selectCopyVehicle();
+		RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(wonumber1);
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehiclescreen.getMake(), _make);
@@ -196,13 +196,13 @@ public class NewTestCases extends BaseTestCase {
 		
 		final String teamname= "Default team";
 
-		homescreen = new RegularHomeScreen();
-		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
+		RegularCustomersScreen customersscreen = homeScreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
 		customersscreen.clickHomeButton();
 		
 		
-		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		RegularServiceRequestsScreen servicerequestsscreen = homeScreen.clickServiceRequestsButton();
 		
 		servicerequestsscreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -308,14 +308,13 @@ public class NewTestCases extends BaseTestCase {
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		DriverBuilder.getInstance().getDriver().quit();
 		
-		homescreen = new RegularHomeScreen();
-		RegularServiceRequestsScreen servicerequestsscreen = homescreen.clickServiceRequestsButton();
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
+		RegularServiceRequestsScreen servicerequestsscreen = homeScreen.clickServiceRequestsButton();
 		servicerequestsscreen.clickRefreshButton();
-		servicerequestsscreen.selectServiceRequest(srnumber);
-		servicerequestsscreen.selectCreateInspectionRequestAction();
-		RegularVehicleScreen vehiclescreen = servicerequestsscreen.selectInspectionType(InspectionsTypes.INSP_SMOKE_TEST);
-		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		RegularSelectedServicesScreen selectedServicesScreen = servicesscreen.switchToSelectedServicesTab();
+		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(srnumber, InspectionsTypes.INSP_SMOKE_TEST);
+		NavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
 		for (String serviceName : services)
 			Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
 					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));
@@ -327,8 +326,9 @@ public class NewTestCases extends BaseTestCase {
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "license.name" })
 	public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient(String backofficeurl, String userName, String userPassword, String licensename)
 	{
-		
-		RegularMainScreen mainscreen = homescreen.clickLogoutButton();
+
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
+		RegularMainScreen mainscreen = homeScreen.clickLogoutButton();
 		BaseUtils.waitABit(2000);
 		LicensesScreen licensesscreen = mainscreen.clickLicenses();
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
@@ -351,9 +351,9 @@ public class NewTestCases extends BaseTestCase {
 		loginscreen.registeriOSDevice(regCode);
 		BaseUtils.waitABit(2000);
 		RegularMainScreen mainscr = new RegularMainScreen();
-		homescreen = mainscr.userLogin(userLogin, userPassword);
+		mainscr.userLogin(userLogin, userPassword);
 		
-		RegularCustomersScreen customersscreen = homescreen.clickCustomersButton();
+		RegularCustomersScreen customersscreen = homeScreen.clickCustomersButton();
 		customersscreen.clickHomeButton();
 	}
 }

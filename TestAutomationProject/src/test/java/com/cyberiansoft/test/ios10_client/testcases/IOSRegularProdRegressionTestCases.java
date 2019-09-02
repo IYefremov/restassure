@@ -147,7 +147,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
-        RegularMyWorkOrdersSteps.clickCopyVehicleMenu(workOrdersForInvoice.get(0));
+        RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(workOrdersForInvoice.get(0));
         RegularCustomersScreenSteps.selectCustomer(testCaseData.getWorkOrderData().getWholesailCustomer());
         RegularWorkOrderTypesSteps.selectWorkOrderType(UATWorkOrderTypes.WO_FINAL_INVOICE);
         RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
@@ -174,7 +174,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
-        RegularMyWorkOrdersSteps.clickCopyServicesMenu(workOrdersForInvoice.get(0));
+        RegularMyWorkOrdersSteps.selectWorkOrderForCopyServices(workOrdersForInvoice.get(0));
         RegularCustomersScreenSteps.selectCustomer(testCaseData.getWorkOrderData().getWholesailCustomer());
         RegularWorkOrderTypesSteps.selectWorkOrderType(UATWorkOrderTypes.WO_FINAL_INVOICE);
         RegularVehicleInfoValidations.validateVehicleInfoData(testCaseData.getWorkOrderData().getVehicleInfoData());
