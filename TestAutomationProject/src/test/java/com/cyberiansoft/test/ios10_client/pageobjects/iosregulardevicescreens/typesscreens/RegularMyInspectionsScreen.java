@@ -249,6 +249,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public boolean isInspectionIsApproved(String inspectionNumber) {
+		waitMyInspectionsScreenLoaded();
 		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspectionNumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}

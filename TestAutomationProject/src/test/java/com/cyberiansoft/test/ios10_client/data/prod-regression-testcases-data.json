@@ -520,6 +520,37 @@
         }
       }
     }
+  ],
+  "testVerifyAddNotesForWorkOrder": [
+    {
+      "rowID": "testVerifyAddNotesToInspection.01",
+      "description": "Test Case 28091: 29 - Verify add notes for WO",
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "PPP_service"
+            }
+          ]
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        }
+      }
+    }
   ]
 
 }

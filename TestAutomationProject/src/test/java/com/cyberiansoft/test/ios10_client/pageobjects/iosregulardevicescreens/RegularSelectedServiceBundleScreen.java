@@ -18,9 +18,6 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	
-	/*@iOSXCUITFindBy(accessibility = "services")
-	private IOSElement tollbarservicesbtn;*/
-	
 	@iOSXCUITFindBy(accessibility = "Close")
 	private IOSElement tollbarcloseservicesbtn;
 	
@@ -33,7 +30,7 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
-		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='BundleItemsView']/XCUIElementTypeCell[@name='" + bundle + "']/XCUIElementTypeButton[@name='selected']").size() > 0;
+		return bundleview.findElementByAccessibilityId(bundle).findElementsByAccessibilityId("selected").size() > 0;
 	}
 
 	public boolean checkBundleIsNotSelected(String bundle) {
@@ -52,9 +49,9 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
 		if (!bundleview.findElementByAccessibilityId(bundle).isDisplayed())
-			swipeToElement(appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")).
+			swipeToElement(bundleview.
 					findElement(MobileBy.AccessibilityId(bundle)));
-		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")).findElement(MobileBy.AccessibilityId(bundle))
+		bundleview.findElement(MobileBy.AccessibilityId(bundle))
 				.findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		return new RegularSelectedServiceDetailsScreen();
 	}

@@ -8,6 +8,7 @@ import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -216,19 +217,13 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public <T extends IBaseWizardScreen> T selectWorkOrderType(IWorkOrdersTypes workordertype) {
-
-		if (Helpers.elementExists(discardbtnxpath)) {
-			appiumdriver.findElement(discardbtnxpath).click();
-		}
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrderTypeSelector")));
-		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
+		MobileElement woTypeTable = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'")));
 
-		if (!wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
-			swipeToElement(wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
-			//wostable.click();
+		if (!woTypeTable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
+			swipeToElement(woTypeTable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
 		}
-		wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
+		woTypeTable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
 		return workordertype.getFirstVizardScreen();
 	}
 
