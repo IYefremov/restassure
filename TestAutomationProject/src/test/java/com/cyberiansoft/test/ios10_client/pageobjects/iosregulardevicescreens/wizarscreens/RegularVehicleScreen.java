@@ -108,6 +108,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void setVINValue(String vin)  {
+		waitVehicleScreenLoaded();
 		vinfld.click();
 		vinfld.sendKeys(vin + "\n");
 	}
