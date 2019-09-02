@@ -54,5 +54,63 @@
         ]
       }
     }
+  ],
+  "verifyUserCanAnswerTextQuestionsSeparatley": [
+    {
+      "rowID": " .01",
+      "description": "TFSID: ",
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Multi question required",
+            "questionAnswers": [
+              "Answer 1",
+              "Answer 2"
+            ],
+            "questionAnswer": "Answer 1, Answer 2"
+          },
+          {
+            "questionName": "Single question required",
+            "questionAnswer": "Answer 1",
+            "questionAnswers": [
+              "Answer 1"
+            ]
+          },
+          {
+            "questionName": "Free question",
+            "questionAnswer": "SOME_ANSWER"
+          }
+        ]
+      }
+    }
+  ],
+  "verifyValidationOfRequiredTextQuestionsOnSaveInspection": [
+    {
+      "rowID": " .01",
+      "description": "TFSID: ",
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Multi question required",
+            "questionAnswers": [
+              "Answer 1",
+              "Answer 2"
+            ],
+            "questionAnswer": "Answer 1, Answer 2"
+          },
+          {
+            "questionName": "Single question required",
+            "questionAnswer": "Answer 1",
+            "questionAnswers": [
+              "Answer 1"
+            ]
+          },
+          {
+            "questionName": "Free question required",
+            "questionAnswer": "SOME_ANSWER"
+          }
+        ]
+      }
+    }
   ]
 }

@@ -8,7 +8,8 @@ public enum InspectionTypes {
     INSP_TYPE_APPROV_REQUIRED("Insp_type_approv_req"),
     O_KRAMAR_NO_SHARING("O_Kramar_No_Sharing"),
     AUTOMATION_MONITORING("automationMonitoring"),
-    ROZ_QUESTIONS_IT("Roz_questions_IT");
+    ROZ_QUESTIONS_IT("Roz_questions_IT"),
+    ROZ_TEXT_QUESTION("Roz_text_questions");
 
     private final String inspType;
 
