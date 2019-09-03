@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 public class ListSelectPageInteractions {
     public static WebElement getItemElementByText(String text) {
         ListSelectPage listPage = new ListSelectPage();
-        return listPage.getItemList().stream()
+        return WaitUtils.getGeneralFluentWait().until(driver -> listPage.getItemList().stream()
                 .filter(elem ->
                         elem.getText().contains(text)
                 )
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("List element not found " + text));
+                .orElseThrow(() -> new RuntimeException("List element not found " + text)));
     }
 
     public static void waitListPageReady(String listpageTitle) {

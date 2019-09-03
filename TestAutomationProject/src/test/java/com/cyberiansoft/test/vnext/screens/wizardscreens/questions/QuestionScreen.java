@@ -2,7 +2,8 @@ package com.cyberiansoft.test.vnext.screens.wizardscreens.questions;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
-import com.cyberiansoft.test.vnext.webelements.GeneralSlideQuestion;
+import com.cyberiansoft.test.vnext.webelements.GeneralQuestion;
+import com.cyberiansoft.test.vnext.webelements.TextQuestion;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -17,13 +18,20 @@ public class QuestionScreen extends VNextBaseWizardScreen {
     private WebElement rootElement;
 
     @FindBy(xpath = "//*[@class='question-item']")
-    private List<GeneralSlideQuestion> generalSlideQuestionList;
+    private List<GeneralQuestion> generalQuestionList;
+
+    @FindBy(xpath = "//*[@class='question-item']")
+    private List<TextQuestion> textQuestionList;
 
     public QuestionScreen() {
         PageFactory.initElements(new FiledDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);
     }
 
-    public GeneralSlideQuestion getGeneralQuestionByText(String questionText) {
-        return generalSlideQuestionList.stream().filter((question -> question.getQuestionName().equals(questionText))).findFirst().orElseThrow(() -> new RuntimeException("Question not found " + questionText));
+    public GeneralQuestion getGeneralQuestionByText(String questionText) {
+        return generalQuestionList.stream().filter((question -> question.getQuestionName().equals(questionText))).findFirst().orElseThrow(() -> new RuntimeException("Question not found " + questionText));
+    }
+
+    public TextQuestion getTextQuestionByText(String questionText) {
+        return textQuestionList.stream().filter((question -> question.getQuestionName().equals(questionText))).findFirst().orElseThrow(() -> new RuntimeException("Question not found " + questionText));
     }
 }

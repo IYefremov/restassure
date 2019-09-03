@@ -5,13 +5,13 @@ import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class GeneralSlideQuestion implements IWebElement {
-    private WebElement rootElement;
+public class GeneralQuestion implements IWebElement {
+    protected WebElement rootElement;
     private String questionNameLocator = ".//*[@class='question-answer-title']";
     private String answerLocator = ".//*[@class='question-answer-bar-title']";
     private String clearButtonLocator = ".//*[@action='clean-question']";
 
-    public GeneralSlideQuestion(WebElement rootElement) {
+    public GeneralQuestion(WebElement rootElement) {
         this.rootElement = rootElement;
     }
 
@@ -22,7 +22,7 @@ public class GeneralSlideQuestion implements IWebElement {
                 .getText();
     }
 
-    public WebElement getSelectedAnswer() {
+    public WebElement getAnswerElement() {
         return rootElement.findElements(By.xpath(answerLocator))
                 .stream().filter(WebElement::isDisplayed)
                 .findFirst()

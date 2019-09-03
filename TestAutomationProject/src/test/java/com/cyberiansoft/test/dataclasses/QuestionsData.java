@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class QuestionsData {
@@ -13,6 +15,8 @@ public class QuestionsData {
     private String questionSetionName;
     @JsonProperty("questionAnswer")
     private String questionAnswer;
+    @JsonProperty("questionAnswers")
+    private List<String> questionAnswers;
     @JsonProperty("questionAnswerIndex")
     private int questionAnswerIndex;
     @JsonProperty("screenIndex")

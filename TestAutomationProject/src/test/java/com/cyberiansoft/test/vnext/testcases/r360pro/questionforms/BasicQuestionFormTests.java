@@ -19,7 +19,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class BasicQuestionFormTests extends BaseTestCaseTeamEditionRegistration {
-    private String inspectionId = "";
 
     @BeforeClass(description = "Team Monitoring Basic Flow Test")
     public void beforeClass() {
@@ -46,25 +45,25 @@ public class BasicQuestionFormTests extends BaseTestCaseTeamEditionRegistration 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
 
         QuestionFormSteps.answerGeneralSlideQuestion(expectedTrafficLightQuestionValuesAfterFirstSwipe);
-        QuestionFormValidations.validateSlideQuestionAnswer(expectedTrafficLightQuestionValuesAfterFirstSwipe);
+        QuestionFormValidations.validateGeneralQuestionAnswer(expectedTrafficLightQuestionValuesAfterFirstSwipe);
 
         QuestionFormSteps.answerGeneralSlideQuestion(expectedTrafficLightQuestionValuesAfterSecondSwipe);
-        QuestionFormValidations.validateSlideQuestionAnswer(expectedTrafficLightQuestionValuesAfterSecondSwipe);
+        QuestionFormValidations.validateGeneralQuestionAnswer(expectedTrafficLightQuestionValuesAfterSecondSwipe);
 
         QuestionFormSteps.answerGeneralSlideQuestion(expectedTrafficLightQuestionValuesAfterThirdSwipe);
-        QuestionFormValidations.validateSlideQuestionAnswer(expectedTrafficLightQuestionValuesAfterThirdSwipe);
+        QuestionFormValidations.validateGeneralQuestionAnswer(expectedTrafficLightQuestionValuesAfterThirdSwipe);
 
         QuestionFormSteps.clearQuestion(expectedTrafficLightQuestionValuesAfterClear);
-        QuestionFormValidations.validateSlideQuestionAnswer(expectedTrafficLightQuestionValuesAfterClear);
+        QuestionFormValidations.validateGeneralQuestionAnswer(expectedTrafficLightQuestionValuesAfterClear);
 
         QuestionFormSteps.answerGeneralSlideQuestion(expectedLogicalQuestionValuesAfterFirstSwipe);
-        QuestionFormValidations.validateSlideQuestionAnswer(expectedLogicalQuestionValuesAfterFirstSwipe);
+        QuestionFormValidations.validateGeneralQuestionAnswer(expectedLogicalQuestionValuesAfterFirstSwipe);
 
         QuestionFormSteps.answerGeneralSlideQuestion(expectedLogicalQuestionValuesAfterSecondSwipe);
-        QuestionFormValidations.validateSlideQuestionAnswer(expectedLogicalQuestionValuesAfterSecondSwipe);
+        QuestionFormValidations.validateGeneralQuestionAnswer(expectedLogicalQuestionValuesAfterSecondSwipe);
 
         QuestionFormSteps.clearQuestion(expectedLogicalQuestionValuesAfterClear);
-        QuestionFormValidations.validateSlideQuestionAnswer(expectedLogicalQuestionValuesAfterClear);
+        QuestionFormValidations.validateGeneralQuestionAnswer(expectedLogicalQuestionValuesAfterClear);
 
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -88,16 +87,82 @@ public class BasicQuestionFormTests extends BaseTestCaseTeamEditionRegistration 
         GeneralSteps.closeErrorDialog();
 
         QuestionFormSteps.answerGeneralSlideQuestion(firstRequiredQuestion);
-        QuestionFormValidations.validateSlideQuestionAnswer(firstRequiredQuestion);
+        QuestionFormValidations.validateGeneralQuestionAnswer(firstRequiredQuestion);
         InspectionSteps.trySaveInspection();
         GeneralValidations.errorDialogShouldBePresent(true, "Please answer all necessary questions");
         GeneralSteps.closeErrorDialog();
 
         QuestionFormSteps.answerGeneralSlideQuestion(secondRequiredQuestion);
-        QuestionFormValidations.validateSlideQuestionAnswer(secondRequiredQuestion);
+        QuestionFormValidations.validateGeneralQuestionAnswer(secondRequiredQuestion);
+
+        InspectionSteps.trySaveInspection();
+        GeneralValidations.errorDialogShouldBePresent(false, "Please answer all necessary questions");
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanAnswerTextQuestionsSeparatley(String rowID,
+                                                           String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+
+        QuestionsData multiAnswerPredefinedQuestion = questionsDataList.get(0);
+        QuestionsData singleAnswerPredefinedQuestion = questionsDataList.get(1);
+        QuestionsData textQuestion = questionsDataList.get(2);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_TEXT_QUESTION);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+
+        QuestionFormSteps.answerGeneralPredefinedQuestion(multiAnswerPredefinedQuestion, true);
+        QuestionFormValidations.validateGeneralQuestionAnswer(multiAnswerPredefinedQuestion);
+
+
+        QuestionFormSteps.answerGeneralPredefinedQuestion(singleAnswerPredefinedQuestion, false);
+        QuestionFormValidations.validateGeneralQuestionAnswer(singleAnswerPredefinedQuestion);
+
+        QuestionFormSteps.answerGeneralTextQuestion(textQuestion);
+        QuestionFormValidations.validateTextQuestionAnswer(textQuestion);
+
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyValidationOfRequiredTextQuestionsOnSaveInspection(String rowID,
+                                                                        String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+
+        QuestionsData firstRequiredQuestion = questionsDataList.get(0);
+        QuestionsData secondRequiredQuestion = questionsDataList.get(1);
+        QuestionsData thirdRequiredQuestion = questionsDataList.get(2);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_TEXT_QUESTION);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+
+        InspectionSteps.trySaveInspection();
+        GeneralValidations.errorDialogShouldBePresent(true, "Please answer all necessary questions");
+        GeneralSteps.closeErrorDialog();
+
+        QuestionFormSteps.answerGeneralPredefinedQuestion(firstRequiredQuestion, true);
+
+        InspectionSteps.trySaveInspection();
+        GeneralValidations.errorDialogShouldBePresent(true, "Please answer all necessary questions");
+        GeneralSteps.closeErrorDialog();
+
+        QuestionFormSteps.answerGeneralPredefinedQuestion(secondRequiredQuestion, false);
+
+        InspectionSteps.trySaveInspection();
+        GeneralValidations.errorDialogShouldBePresent(true, "Please answer all necessary questions");
+        GeneralSteps.closeErrorDialog();
+
+        QuestionFormSteps.answerGeneralTextQuestion(thirdRequiredQuestion);
 
         InspectionSteps.trySaveInspection();
         GeneralValidations.errorDialogShouldBePresent(false, "Please answer all necessary questions");
         ScreenNavigationSteps.pressBackButton();
     }
 }
+
