@@ -16,10 +16,10 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	final static String visualinteriorcapt = "Interior";
 	final static String visualexteriorcapt = "Exterior";
 	
-	/*@iOSXCUITFindBy(accessibility = "Quantity")
+	@iOSXCUITFindBy(accessibility = "Quantity")
     private IOSElement quantityfld;
 	
-	@iOSXCUITFindBy(accessibility = "Price")
+	/*@iOSXCUITFindBy(accessibility = "Price")
     private IOSElement pricefld;
 	
 	@iOSXCUITFindBy(xpath = "//UIATableCell[@name=\"Quantity\"]/UIATextField[1]")
@@ -29,10 +29,10 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
     private IOSElement toolbarvisualpricevalue;
 	
 	@iOSXCUITFindBy(accessibility = "TotalAmount")
-    private IOSElement toolbarpricevalue;
+    private IOSElement toolbarpricevalue;*/
 	
 	@iOSXCUITFindBy(accessibility = "Save")
-    private IOSElement savebtn;*/
+    private IOSElement savebtn;
 
 	@iOSXCUITFindBy(accessibility = "services")
 	private IOSElement servicetoolbarrtn;
@@ -67,13 +67,12 @@ public class RegularVisualInteriorScreen extends RegularBaseWizardScreen {
 	}
 
 	public void setCarServiceQuantityValue(String _quantity) {
-		IOSElement quantityrow = (IOSElement) appiumdriver.findElementByAccessibilityId("Quantity");
-		quantityrow.findElementByClassName("XCUIElementTypeTextField").clear();
-		quantityrow.findElementByClassName("XCUIElementTypeTextField").sendKeys(_quantity);
+		quantityfld.findElementByClassName("XCUIElementTypeTextField").clear();
+		quantityfld.findElementByClassName("XCUIElementTypeTextField").sendKeys(_quantity);
 	}
 
 	public void saveCarServiceDetails() {
-		appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
+		savebtn.click();
 	}
 	
 	public static void tapInteriorWithCoords(int x, int y) {

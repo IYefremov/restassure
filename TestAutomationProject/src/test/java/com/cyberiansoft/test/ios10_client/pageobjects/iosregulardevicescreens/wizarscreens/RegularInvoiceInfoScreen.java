@@ -35,9 +35,6 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	
 	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
-	
-	@iOSXCUITFindBy(xpath = "//UIAKeyboard[1]/UIAButton[@name=\"Return\"]")
-    private IOSElement hidekeyboardbtn;
 
 	public RegularInvoiceInfoScreen() {
 		super();
@@ -69,34 +66,31 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 		savebtn.click();
 	}
 
-	public void setPO(String _po) {
-		setPOWithoutHidingkeyboard(_po);
-        WebElement par = getTableParentCell("PO#");
-        par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys("\n");
+	public void setPO(String poNumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		WebElement poFld = wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("txtPO")));
+		poFld.sendKeys(poNumber + "\n");
 	}
 	
-	public void setPOWithoutHidingkeyboard(String _po)  {
+	public void setPOWithoutHidingkeyboard(String poNumber)  {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("PO#")));
-		WebElement par = getTableParentCell("PO#");
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_po);
+		WebElement poFld = wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("txtPO")));
+		poFld.sendKeys(poNumber);
 	}
 	
 	public String  getInvoicePOValue()  {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("PO#")));
-		WebElement par = getTableParentCell("PO#");
-		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
+		WebElement poFld = wait.until(ExpectedConditions.presenceOfElementLocated (MobileBy.AccessibilityId("txtPO")));
+		return poFld.getAttribute("value");
 	}
 
 	public boolean isWOSelected(String workOrderId) {
-		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='"
-						+ workOrderId + "']").size() > 0;
+		return appiumdriver.findElements(MobileBy.iOSNsPredicateString("type='XCUIElementTypeCell' and name='" + workOrderId + "'")).size() > 0;
 	}
 	
-	public void clickWO(String wonumber) {
-		WebElement par = getTableParentCell(wonumber);
-		par.findElement(By.xpath("//XCUIElementTypeStaticText[1]")).click();
+	public void clickWO(String workOrderId) {
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("type='XCUIElementTypeCell' and name='" + workOrderId + "'"))
+				.findElement(MobileBy.className("XCUIElementTypeStaticText")).click();
 	}
 
 	public void cancelInvoice() {
@@ -109,14 +103,14 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 		return appiumdriver.findElementByAccessibilityId("TotalAmount").getAttribute("value");
 	}
 	
-	public void clickOnWO(String wonum) {
-		appiumdriver.findElementByAccessibilityId(wonum).click();
+	public void clickOnWO(String workOrderId) {
+		appiumdriver.findElementByAccessibilityId(workOrderId).click();
 	}
 	
-	public void addWorkOrder(String wonumber)  {
+	public void addWorkOrder(String workOrderId)  {
 		appiumdriver.findElementByAccessibilityId("Insert").click();
-		WebElement par = getTableParentCell(wonumber);
-		par.findElement(By.xpath("//XCUIElementTypeButton[@name=\"unselected\"]")).click();
+		appiumdriver.findElementByAccessibilityId("TeamInvoiceOrdersView").findElement(MobileBy.AccessibilityId(workOrderId))
+				.findElement(MobileBy.AccessibilityId("unselected")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
@@ -132,10 +126,6 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 
 	public void clickCancelButton() {
 		cancelbtn.click();
-	}
-	
-	public WebElement getTableParentCell(String cellname) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 
 	public void clickInvoicePayButton() {

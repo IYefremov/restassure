@@ -20,21 +20,23 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Final"))).click();
     }
 
+    public void waitScreenLoaded(String screenName) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'viewPrompt' and label = '" + screenName+ "'")));
+    }
+
     public  void clickDraftButton() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Draft"))).click();
     }
 
-    public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType) {
-        clickChangeScreen();
-        appiumdriver.findElementByAccessibilityId(wizardScreenType.getDefaultScreenTypeName()).click();
-        return (T) RegularWizardScreensFactory.getWizardScreenType(wizardScreenType);
+    public void selectNextScreen(WizardScreenTypes wizardScreenType) {
+        selectNextScreen(wizardScreenType.getDefaultScreenTypeName());
     }
 
-    public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType, String screenName) {
+    public void selectNextScreen(String screenName) {
         clickChangeScreen();
         appiumdriver.findElementByAccessibilityId(screenName).click();
-        return (T) RegularWizardScreensFactory.getWizardScreenType(wizardScreenType);
     }
 
     public void clickSave() {
@@ -47,7 +49,6 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
 
     public void clickChangeScreen() {
         WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(MobileBy.AccessibilityId("WizardStepsButton"))).click();
-        //appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElement(MobileBy.iOSNsPredicateString("label contains '/'")).click();
     }
 
     public void clickCancelWizard() {
