@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.b
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -18,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Getter
 public class RegularCustomersScreen extends RegularBaseAppScreen {
@@ -63,15 +65,15 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	}
 
 	public void swtchToRetailMode() {
-		if (elementExists("btnWholesale")) {
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (appiumdriver.findElements(MobileBy.AccessibilityId("btnWholesale")).size() > 0)
 			appiumdriver.findElement(MobileBy.AccessibilityId("btnWholesale")).click();
-		}
 	}
 
 	public void swtchToWholesaleMode() {
-		if (elementExists("btnRetail")) {
+		DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (appiumdriver.findElements(MobileBy.AccessibilityId("btnRetail")).size() > 0)
 			appiumdriver.findElement(MobileBy.AccessibilityId("btnRetail")).click();
-		}
 	}
 
 	public boolean isCustomerExists(String customer) {

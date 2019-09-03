@@ -2,11 +2,8 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularBaseAppScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularClaimScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
@@ -23,14 +20,42 @@ public class RegularNavigationSteps {
         servicesScreen.waitServicesScreenLoaded();
     }
 
+    public static void navigateToVehicleInfoScreen() {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+    }
+
     public static void navigateToClaimScreen() {
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
         baseWizardScreen.selectNextScreen(WizardScreenTypes.CLAIM);
     }
 
+    public static void navigateToOrderSummaryScreen() {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        RegularWorkOrderSummaryScreenSteps.waitWorkOrderSummaryScreenLoad();
+    }
+
+    public static void navigateToInvoiceInfoScreen() {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+    }
+
+    public static void navigateToVisualScreen(WizardScreenTypes wizardScreenType) {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.selectNextScreen(wizardScreenType);
+        RegularVisualScreenSteps.waitVisualScreenLoaded(wizardScreenType.getDefaultScreenTypeName());
+    }
+
+    public static void navigateToScreen(String screenName) {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.selectNextScreen(screenName);
+        baseWizardScreen.waitScreenLoaded(screenName);
+    }
+
     public static void navigateToPriceMatrixScreen(String screenName) {
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
-        baseWizardScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, screenName);
+        baseWizardScreen.selectNextScreen(screenName);
     }
 
     public static void navigateBackScreen() {

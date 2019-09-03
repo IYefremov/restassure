@@ -69,11 +69,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickAddInspectionButton();
 		customersScreen.selectCustomer(iOSInternalProjectConstants.RETAIL_CUSTOMER);
         RegularVehicleScreen vehicleScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
-        RegularClaimScreen claimScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.CLAIM);
-		claimScreen.waitClaimScreenLoad();
-        RegularVisualInteriorScreen visualInteriorScreen = claimScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
-		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
-        RegularServicesScreen servicesScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToVisualScreen(WizardScreenTypes.VISUAL_INTERIOR);
+		RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		servicesScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_VIN_REQUIRED);
@@ -135,7 +133,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         int tapXCoordInicial = 100;
 		int tapYCoordInicial = 100;
         for (VisualScreenData visualScreenData : inspectionData.getVisualScreensData()) {
-			RegularVisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, visualScreenData.getScreenName());
+			RegularNavigationSteps.navigateToScreen(visualScreenData.getScreenName());
+			RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
 			visualInteriorScreen.waitVisualScreenLoaded(visualScreenData.getScreenName());
 			for (DamageData damageData : visualScreenData.getDamagesData()) {
 				visualInteriorScreen.clickServicesToolbarButton();
@@ -159,7 +158,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		tapXCoordInicial = 100;
 		tapYCoordInicial = 100;
 		for (VisualScreenData visualScreenData : inspectionData.getVisualScreensData()) {
-			RegularVisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, visualScreenData.getScreenName());
+			RegularNavigationSteps.navigateToScreen(visualScreenData.getScreenName());
+			RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
 			visualInteriorScreen.waitVisualScreenLoaded(visualScreenData.getScreenName());
 			for (DamageData damageData : visualScreenData.getDamagesData()) {
 				RegularVisualInteriorScreen.tapInteriorWithCoords(tapXCoordInicial, tapYCoordInicial);
@@ -194,7 +194,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.verifyMakeModelyearValues(workOrderData.getVehicleInfoData().getVehicleMake(),
 				workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			servicedetailsscreen.setServicePriceValue(serviceData.getServicePrice());
@@ -231,11 +232,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.verifyMakeModelyearValues(workOrderData.getVehicleInfoData().getVehicleMake(),
 				workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
 		workOrderNumber28583 = vehicleScreen.getWorkOrderNumber();
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		servicedetailsscreen.saveSelectedServiceDetails();
         Assert.assertEquals(servicesScreen.getTotalAmaunt(), workOrderData.getServiceData().getServicePrice());
-        RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+        RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
 		myWorkOrdersScreen.clickHomeButton();
@@ -292,7 +295,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.verifyMakeModelyearValues(workOrderData.getVehicleInfoData().getVehicleMake(),
 				workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		servicedetailsscreen.saveSelectedServiceDetails();
         Assert.assertEquals(servicesScreen.getTotalAmaunt(),  workOrderData.getWorkOrderPrice());
@@ -320,7 +324,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.verifyMakeModelyearValues(workOrderData.getVehicleInfoData().getVehicleMake(),
 				workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
@@ -356,7 +361,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.verifyMakeModelyearValues(workOrderData.getVehicleInfoData().getVehicleMake(),
 				workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
@@ -390,7 +396,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.verifyMakeModelyearValues(workOrderData.getVehicleInfoData().getVehicleMake(),
 				workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
@@ -424,7 +431,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		workOrderNumber29398 = vehicleScreen.getWorkOrderNumber();
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		servicesScreen.selectService(workOrderData.getMatrixServiceData().getMatrixServiceName());
 		RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
 		RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartName());
@@ -488,7 +496,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedselectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedselectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
@@ -531,7 +540,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedselectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedselectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
@@ -573,7 +583,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedselectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedselectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
@@ -617,10 +628,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		workOrderNumber31498 = vehicleScreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			if (serviceData.getServicePrice() != null)
@@ -628,7 +641,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		}
         Assert.assertEquals(servicesScreen.getTotalAmaunt(), workOrderData.getWorkOrderPrice());
-        RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 
 		RegularWorkOrdersSteps.saveWorkOrder();
@@ -681,11 +695,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularQuestionsScreen questionsScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_SIMPLE);
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
-		
-		RegularVehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		inspectionNumber32226 = vehicleScreen.getInspectionNumber();
-        RegularPriceMatrixScreen priceMatrixScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, ScreenNamesConstants.DEFAULT);
+		RegularNavigationSteps.navigateToScreen(ScreenNamesConstants.DEFAULT);
+        RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
 		for(VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
 			RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
 			vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
@@ -752,10 +768,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularVehicleScreen vehicleScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		inspectionNumber32286 = vehicleScreen.getInspectionNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -821,11 +839,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularVehicleScreen vehicleScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		inspnumber32287 = vehicleScreen.getInspectionNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -886,11 +906,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		myInspectionsScreen.clickAddInspectionButton();
         RegularVisualInteriorScreen visualInteriorScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		RegularVehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -899,7 +921,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		}
         Assert.assertEquals(servicesScreen.getTotalAmaunt(), inspectionData.getInspectionPrice());
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 		RegularInspectionsSteps.saveInspection();
@@ -936,7 +959,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
-			RegularPriceMatrixScreen priceMatrixScreen =  vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+			RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
+			RegularPriceMatrixScreen priceMatrixScreen =  new RegularPriceMatrixScreen();
 			RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(priceMatrixScreenData.getVehiclePartData().getVehiclePartName());
 			vehiclePartScreen.setSizeAndSeverity(priceMatrixScreenData.getVehiclePartData().getVehiclePartSize(),
 					priceMatrixScreenData.getVehiclePartData().getVehiclePartSeverity());
@@ -950,7 +974,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), priceMatrixScreenData.getMatrixScreenTotalPrice());
 		}
 		vehicleScreen.swipeScreenLeft();
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		servicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		Assert.assertEquals(servicesScreen.getTotalAmaunt(), inspectionData.getInspectionPrice());
 		servicesScreen.clickSave();
@@ -962,8 +987,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
-
-			RegularPriceMatrixScreen priceMatrixScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+			RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
+			RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
 			priceMatrixScreen.waitPriceMatrixScreenLoad();
 			RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 			Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(),priceMatrixScreenData.getMatrixScreenPrice());
@@ -990,7 +1015,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_SMOKE_TEST);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedServiceDetailsScreen.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
 		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity());
@@ -1000,14 +1026,15 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
-        RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.clickSave();
 		
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE, workOrderData.getWorkOrderPrice()));
 		orderSummaryScreen.swipeScreenLeft();
-        servicesScreen = orderSummaryScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
 		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
 		selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity2());
@@ -1038,8 +1065,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			vehicleScreen.setVIN(testCaseData.getWorkOrderData().getVehicleInfoData().getVINNumber());
 			workOrders.add(vehicleScreen.getWorkOrderNumber());
 
-
-			RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+			RegularNavigationSteps.navigateToServicesScreen();
+			RegularServicesScreen servicesScreen = new RegularServicesScreen();
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 			selectedServiceDetailsScreen.setServicePriceValue(testCaseData.getWorkOrderData().getServiceData().getServicePrice());
 			selectedServiceDetailsScreen.setServiceQuantityValue(testCaseData.getWorkOrderData().getServiceData().getServiceQuantity());
@@ -1049,7 +1076,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
-			RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			RegularNavigationSteps.navigateToOrderSummaryScreen();
+			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.setTotalSale(testCaseData.getWorkOrderData().getWorkOrderTotalSale());
 			RegularWorkOrdersSteps.saveWorkOrder();
 		}
@@ -1068,7 +1096,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		teamWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
-		RegularInvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+		RegularNavigationSteps.navigateToInvoiceInfoScreen();
+		RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		String invoicenum = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
@@ -1084,7 +1113,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
 		RegularMyInvoicesScreenSteps.selectInvoiceForEdit(invoicenum);
 		questionsScreen.waitQuestionsScreenLoaded();
-		invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+		RegularNavigationSteps.navigateToInvoiceInfoScreen();
 		invoiceInfoScreen.addWorkOrder(workOrders.get(1));
 		invoiceInfoScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndAccept();
@@ -1111,7 +1140,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularVehicleScreen vehicleScreen =  myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_DRAFT_MODE);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getServiceData().getServicePrice());
 		selectedServiceDetailsScreen.setServiceQuantityValue(inspectionData.getServiceData().getServiceQuantity());
@@ -1150,10 +1180,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehicleScreen.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel(), serviceRequestData.getVihicleInfo().getVehicleYear());
 
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
-        servicesScreen = new RegularServicesScreen();
-        RegularQuestionsScreen questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, serviceRequestData.getQuestionScreenData().getScreenName());
+
+		RegularNavigationSteps.navigateToScreen(serviceRequestData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
 		questionsScreen.clickSave();
@@ -1167,7 +1199,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.waitVehicleScreenLoaded();
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
-		servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceRequestData.getInspectionData().getMoneyServiceData().getServiceName());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServiceDetailsScreen.selectVehiclePart(serviceRequestData.getInspectionData().getMoneyServiceData().getVehiclePart().getVehiclePartName());
@@ -1213,16 +1245,19 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		myInspectionsScreen.clickAddInspectionButton();
         RegularVisualInteriorScreen visualInteriorScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		RegularVehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
 
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
-			RegularPriceMatrixScreen priceMatrixScreen = questionsScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+			RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
+			RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
 			VehiclePartData vehiclePartData = priceMatrixScreenData.getVehiclePartData();
 			RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
 			if (vehiclePartData.getVehiclePartSize() != null)
@@ -1281,14 +1316,16 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularVehicleScreen vehicleScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_WITH_PART_SERVICES);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 		RegularInspectionsSteps.saveInspectionAsDraft();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
@@ -1306,7 +1343,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getMoneyServiceData().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
-        RegularVisualInteriorScreen visualInteriorScreen =vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, ScreenNamesConstants.FUTURE_AUDI_CAR);
+		RegularNavigationSteps.navigateToScreen(ScreenNamesConstants.FUTURE_AUDI_CAR);
+        RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_AUDI_CAR);
 		visualInteriorScreen.clickServicesToolbarButton();
 		visualInteriorScreen.switchToCustomTab();
@@ -1321,7 +1359,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
 		final PriceMatrixScreenData priceMatrixScreenData = inspectionData.getPriceMatrixScreenData();
-        RegularPriceMatrixScreen priceMatrixScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+		RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
+        RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
 		final VehiclePartData vehiclePartData = priceMatrixScreenData.getVehiclePartData();
         RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
 		vehiclePartScreen.switchOffOption(vehiclePartData.getVehiclePartOption());
@@ -1361,7 +1400,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 		inspectionToolBar = new RegularInspectionToolBar();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
-		RegularOrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWizardScreensSteps.clickSaveButton();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
@@ -1389,16 +1429,19 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_WITH_PART_SERVICE);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
-        RegularOrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		
 		RegularWorkOrdersSteps.saveWorkOrder();
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.clickServicePartCell();
@@ -1469,11 +1512,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
 		servicesScreen.selectService(matrixServiceData.getMatrixServiceName());
 		servicesScreen.selectPriceMatrices(matrixServiceData.getHailMatrixName());
@@ -1497,7 +1542,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();		
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 
-        RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		orderSummaryScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1543,11 +1589,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			if (serviceData.getServicePrice() != null) {
 				RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
@@ -1593,7 +1641,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehiclePartScreen.saveVehiclePart();
 		priceMatrixScreen.clickSave();
 
-        RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		orderSummaryScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1602,7 +1651,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(invoiceData.getQuestionScreenData().getQuestionData());
-		RegularInvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+		RegularNavigationSteps.navigateToInvoiceInfoScreen();
+		RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
 		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceNumber45224 = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
@@ -1667,11 +1717,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
 		servicesScreen.selectService(matrixServiceData.getMatrixServiceName());
 		servicesScreen.selectPriceMatrices(matrixServiceData.getHailMatrixName());
@@ -1719,7 +1771,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		servicesScreen.waitServicesScreenLoaded();
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();		
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
-        RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
 		
@@ -1780,11 +1833,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularVehicleScreen vehicleScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_WITH_0_PRICE);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspnumber = vehicleScreen.getInspectionNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularInspectionsSteps.saveInspection();
 
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
@@ -1802,7 +1857,6 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getServiceData().getServicePrice2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServicesScreen = new RegularSelectedServicesScreen();
 		RegularInspectionsSteps.saveInspection();
 
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
@@ -1830,14 +1884,17 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		myInspectionsScreen.clickAddInspectionButton();
         RegularVisualInteriorScreen visualInteriorScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		RegularVehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspnumber = vehicleScreen.getInspectionNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
@@ -1902,7 +1959,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_DRAFT_MODE);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			if(serviceData.getServicePrice() != null)
@@ -1969,11 +2027,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		BundleServiceData bundleServiceData = workOrderData.getBundleService();
 		servicesScreen.selectService(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -2007,7 +2067,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
         servicesScreen = new RegularServicesScreen();
-        RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
 		myWorkOrdersScreen.clickHomeButton();
@@ -2032,11 +2093,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (TaxServiceData taxServiceData : workOrderData.getTaxServicesData()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(taxServiceData.getTaxServiceName());
 			for (ServiceRateData serviceRateData : taxServiceData.getServiceRatesData()) {
@@ -2045,11 +2108,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		}
 
-        RegularOrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
-        servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
 
 		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getTaxServicesData().get(0).getTaxServiceName());
@@ -2083,17 +2147,20 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
-        RegularOrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.waitWorkOrderSummaryScreenLoad();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
 
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			if (serviceData.getServicePrice() != null)
@@ -2135,11 +2202,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
         RegularVehicleScreen vehicleScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_CALC);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularInspectionsSteps.saveInspection();
 
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
@@ -2189,17 +2258,20 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 			workOrders.add(workOrderNumber);
 			if (workOrderData.getQuestionScreenData() != null) {
-				RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+				RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+				RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 				questionsScreen.swipeScreenUp();
 				questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 			}
 
-			RegularOrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			RegularNavigationSteps.navigateToOrderSummaryScreen();
+			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 			RegularWorkOrdersSteps.saveWorkOrder();
 
 			RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
-			RegularServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+			RegularNavigationSteps.navigateToServicesScreen();
+			RegularServicesScreen servicesScreen = new RegularServicesScreen();
 			servicesScreen.selectService(workOrderData.getServiceData().getServiceName());
 			RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
@@ -2245,11 +2317,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = myWorkOrdersScreen.selectWorkOrderTypeWithJob(WorkOrdersTypes.WO_TYPE_WITH_JOB, workOrderData.getWorkOrderJob());
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, workOrderData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(workOrderData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			servicesScreen.selectService(serviceData.getServiceName());
 			RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
@@ -2275,15 +2349,18 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		myInspectionsScreen.clickAddInspectionButton();
         RegularVisualInteriorScreen visualInteriorScreen = myInspectionsScreen.selectInspectionType(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		RegularVehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspnumber = vehicleScreen.getInspectionNumber();
 
-        RegularQuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, inspectionData.getQuestionScreenData().getScreenName());
+		RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
-        RegularServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : inspectionData.getMoneyServicesList()) {
 			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.clickVehiclePartsCell();
@@ -2308,8 +2385,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 		selectedServiceBundleScreen.clickSaveButton();
 
-        visualInteriorScreen = servicesScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, "Future Sport Car");
-		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
+		RegularNavigationSteps.navigateToScreen("Future Sport Car");
+        visualInteriorScreen = new RegularVisualInteriorScreen();
 		visualInteriorScreen.clickServicesToolbarButton();
 		visualInteriorScreen.selectService(inspectionData.getServiceData().getServiceName());
 		RegularVisualInteriorScreen.tapInteriorWithCoords(150, 200);
@@ -2318,7 +2395,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVisualInteriorScreen.tapInteriorWithCoords(200, 350);
 
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
-			RegularPriceMatrixScreen priceMatrixScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+			RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
+			RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
 			RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(priceMatrixScreenData.getVehiclePartData().getVehiclePartName());
 			if (priceMatrixScreenData.getVehiclePartData().getVehiclePartSize()!= null)
 				vehiclePartScreen.setSizeAndSeverity(priceMatrixScreenData.getVehiclePartData().getVehiclePartSize(), priceMatrixScreenData.getVehiclePartData().getVehiclePartSeverity());
@@ -2345,7 +2423,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		BaseUtils.waitABit(10*1000);
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspnumber);
 		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
-		servicesScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		RegularNavigationSteps.navigateToServicesScreen();
         RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
 		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
 		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE));
