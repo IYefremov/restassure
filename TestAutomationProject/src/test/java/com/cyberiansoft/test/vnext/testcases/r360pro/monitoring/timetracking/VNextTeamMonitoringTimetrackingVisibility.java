@@ -43,7 +43,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void nonLocationManagerCannotStartWO(String rowID,
                                                 String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -64,7 +64,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         GeneralSteps.logIn(employee);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "nonLocationManagerCannotStartWO")
     public void anotherLocationManagerCanSeeStartOnStartedService(String rowID,
                                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -128,6 +128,8 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "anotherLocationManagerCanSeeStartOnStartedService")
@@ -152,7 +154,5 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.closeMenu();
-        ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
     }
 }

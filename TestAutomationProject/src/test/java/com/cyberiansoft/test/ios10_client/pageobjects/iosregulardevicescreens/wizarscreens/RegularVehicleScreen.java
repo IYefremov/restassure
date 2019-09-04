@@ -20,72 +20,12 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
-	
+
 	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeButton")
     private IOSElement makecustombtn;
-	
-	/*@iOSXCUITFindBy(accessibility = "Save")
-    private IOSElement savebtn;
-	
-	@iOSXCUITFindBy(accessibility = "Advisor")
-    private IOSElement advisorfld;
-	
-	@iOSXCUITFindBy(accessibility = "Color")
-    private IOSElement colorfld;
-	
-	@iOSXCUITFindBy(accessibility = "Mileage")
-    private IOSElement mileagefld;
-	
-	@iOSXCUITFindBy(accessibility = "Fuel Tank Level")
-    private IOSElement fueltanklevelfld;
-	
-	@iOSXCUITFindBy(accessibility = "License Plate")
-    private IOSElement licenseplatefld;
-	
-	@iOSXCUITFindBy(accessibility = "Tech")
-    private IOSElement techfld;
-	
-	@iOSXCUITFindBy(accessibility = "Location")
-    private IOSElement locationfld;
-	
-	@iOSXCUITFindBy(accessibility = "Type")
-    private IOSElement typefld;
-	
-	@iOSXCUITFindBy(accessibility = "Year")
-    private IOSElement yearfld;
-	
-	@iOSXCUITFindBy(accessibility = "Trim")
-    private IOSElement trimfld;
-	
-	@iOSXCUITFindBy(accessibility = "Stock#")
-    private IOSElement stockfld;
-	
-	@iOSXCUITFindBy(accessibility = "RO#")
-    private IOSElement rofld;
-	
-	@iOSXCUITFindBy(accessibility = "PO#")
-    private IOSElement pofld;*/
 
 	@iOSXCUITFindBy(accessibility = "VIN#")
 	private IOSElement vinfld;
-	
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[3]")
-    private IOSElement inspnumberlabel;
-	
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[2]")
-    private IOSElement regularinspnumberlabel;
-	
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeToolbar/XCUIElementTypeOther/XCUIElementTypeStaticText[1]")
-    private IOSElement regularwotypelabel;
-	
-	/*@iOSXCUITFindBy(accessibility = "Done")
-    private IOSElement toolbardonebtn;
-	
-	@iOSXCUITFindBy(accessibility = "Compose")
-    private IOSElement composebtn;
-	
-	@iOSXCUITFindBy(accessibility = "Cancel")
-    private IOSElement cancelbtn;*/
 
 	@iOSXCUITFindBy(accessibility = "VehicleInfoTable")
 	private IOSElement vehicleinfotbl;
@@ -93,8 +33,6 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public RegularVehicleScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		//FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
-		//wait.until(ExpectedConditions.presenceOfElementLocated(By.name("VehicleInfoTable")));
 	}
 
 	public void waitVehicleScreenLoaded() {
@@ -171,17 +109,15 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 
 	public void seletAdvisor(String advisor) {
-		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
-		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Advisor']")));
-		appiumdriver.findElementByAccessibilityId("Advisor").click();
+		swipeToElement(vehicleinfotbl.findElement(By.xpath("//XCUIElementTypeCell[@name='Advisor']")));
+		vehicleinfotbl.findElementByAccessibilityId("Advisor").click();
 		appiumdriver.findElementByAccessibilityId(advisor).click();
 	}
 	
 	
 	public String getMake() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		IOSElement table = (IOSElement)wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("VehicleInfoTable")));
-		return table.findElementByAccessibilityId("Make").findElementByClassName("XCUIElementTypeTextField").getText();
+		waitVehicleScreenLoaded();
+		return vehicleinfotbl.findElementByAccessibilityId("Make").findElementByClassName("XCUIElementTypeTextField").getText();
 	}
 
 	public String getModel() {
@@ -241,24 +177,24 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void setColor(String color) {
-		appiumdriver.findElementByAccessibilityId("Color").click();
+		vehicleinfotbl.findElementByAccessibilityId("Color").click();
 		appiumdriver.findElementByAccessibilityId(color).click();
 	}
 	
 	public void setMileage(String mileage) {
-		appiumdriver.findElementByAccessibilityId("Mileage").click();
-		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Mileage' and type = 'XCUIElementTypeCell'")).sendKeys(mileage);
+		vehicleinfotbl.findElementByAccessibilityId("Mileage").click();
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Mileage' and type = 'XCUIElementTypeCell'")).sendKeys(mileage);
 		//appiumdriver.getKeyboard().sendKeys(mileage);
 	}
 	
 	public void setFuelTankLevel(String fueltanklevel) {
-		appiumdriver.findElementByAccessibilityId("Fuel Tank Level").click();
-		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Fuel Tank Level' and type = 'XCUIElementTypeCell'")).sendKeys(fueltanklevel);
+		vehicleinfotbl.findElementByAccessibilityId("Fuel Tank Level").click();
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Fuel Tank Level' and type = 'XCUIElementTypeCell'")).sendKeys(fueltanklevel);
 	}
 	
 	public void setLicensePlate(String licplate) {
-		appiumdriver.findElementByAccessibilityId("License\nPlate").click();
-		appiumdriver.findElementByAccessibilityId("License\nPlate").sendKeys(licplate);
+		vehicleinfotbl.findElementByAccessibilityId("License\nPlate").click();
+		vehicleinfotbl.findElementByAccessibilityId("License\nPlate").sendKeys(licplate);
 	}
 
 	public void setTech(String _tech) {
@@ -269,36 +205,28 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void selectLocation(String _location) {
-		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
-		if (!table.findElement(MobileBy.AccessibilityId("Location")).isDisplayed()) {
-			swipeToElement(table.findElement(MobileBy.AccessibilityId("Location")));
+		if (!vehicleinfotbl.findElement(MobileBy.AccessibilityId("Location")).isDisplayed()) {
+			swipeToElement(vehicleinfotbl.findElement(MobileBy.AccessibilityId("Location")));
 		}
-		table.findElement(MobileBy.AccessibilityId("Location")).click();
-		//WebElement par = getVehicleInfoTableParentNode("Location");
-		//par.findElement(By.xpath(".//XCUIElementTypeTextField")).click();
+		vehicleinfotbl.findElement(MobileBy.AccessibilityId("Location")).click();
 		appiumdriver.findElementByAccessibilityId(_location).click();
 	}
 	
 	public void setType(String _type) {
-		appiumdriver.findElementByAccessibilityId("Type").click();
-		//selectUIAPickerValue(_type);
+		vehicleinfotbl.findElementByAccessibilityId("Type").click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void setYear(String year) {
-		appiumdriver.findElementByAccessibilityId("Year").click();
+		vehicleinfotbl.findElementByAccessibilityId("Year").click();
 		selectUIAPickerValue(year);
-		//((IOSElement) appiumdriver.findElementsByAccessibilityId("Year").get(1)).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
-		
-		//TouchAction perform = new TouchAction(appiumdriver).tap(tapOptions().withElement(element(appiumdriver.findElementByAccessibilityId("Done")))).perform();
 		
 	}
 	
 	public void setTrim(String trimvalue)  {
-		WebElement table = appiumdriver.findElementByAccessibilityId("VehicleInfoTable");
-		swipeToElement(table.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
-		appiumdriver.findElementByAccessibilityId("Trim").click();
+		swipeToElement(vehicleinfotbl.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
+		vehicleinfotbl.findElementByAccessibilityId("Trim").click();
 		selectUIAPickerValue(trimvalue);
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
@@ -309,17 +237,13 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
 		scrollObject1.put("direction", "up");
 		js1.executeScript("mobile: swipe", scrollObject1);
-
-		//if (!appiumdriver.findElementByAccessibilityId("Tech").isDisplayed())
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeCell[@name='Tech']")));
 		appiumdriver.findElementByAccessibilityId("Tech").click();
 	}
 
 	public void setStock(String stock) {
-		appiumdriver.findElementByAccessibilityId("Stock#").click();
-		appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Stock#' and type = 'XCUIElementTypeCell'")).sendKeys(stock + "\n");
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey(stock);
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
+		vehicleinfotbl.findElementByAccessibilityId("Stock#").click();
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Stock#' and type = 'XCUIElementTypeCell'")).sendKeys(stock + "\n");
 		
 	}
 

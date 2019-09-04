@@ -84,14 +84,14 @@ public class NewTestCases extends BaseTestCase {
 			
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
 			
-		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.selectInvoices(numberInvoicesToSelect);
-		myinvoicesscreen.clickActionButton();
+		RegularMyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoicesButton();
+		myInvoicesScreen.clickActionButton();
+		myInvoicesScreen.selectInvoices(numberInvoicesToSelect);
+		myInvoicesScreen.clickActionButton();
 		RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
 		RegularEmailScreenSteps.sendSingleEmailToAddress(UtilConstants.TEST_EMAIL);
-		myinvoicesscreen.clickDoneButton();
-		myinvoicesscreen.clickHomeButton();
+		myInvoicesScreen.clickDoneButton();
+		myInvoicesScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 59645:Create Invoice with two WOs and copy vehicle", description = "Create Invoice with two WOs and copy vehicle")
@@ -120,21 +120,22 @@ public class NewTestCases extends BaseTestCase {
 		RegularMyWorkOrdersScreen myworkordersscreen = homeScreen.clickMyWorkOrdersButton();
 		myworkordersscreen.clickAddOrderButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		RegularVehicleScreen vehiclescreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
-		vehiclescreen.setVIN(VIN);
+		RegularVehicleScreen vehicleScreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		vehicleScreen.setVIN(VIN);
 		
-		String wonumber1 = vehiclescreen.getInspectionNumber();
-		vehiclescreen.setMakeAndModel(_make, _model);
-		vehiclescreen.setColor(_color);
-		vehiclescreen.setYear(_year);
-		vehiclescreen.setMileage(mileage);
-		//vehiclescreen.setFuelTankLevel(fueltanklevel);
-		//vehiclescreen.setType(_type);
-		vehiclescreen.setStock(stock);
-		vehiclescreen.setRO(_ro);
+		String wonumber1 = vehicleScreen.getInspectionNumber();
+		vehicleScreen.setMakeAndModel(_make, _model);
+		vehicleScreen.setColor(_color);
+		vehicleScreen.setYear(_year);
+		vehicleScreen.setMileage(mileage);
+		//vehicleScreen.setFuelTankLevel(fueltanklevel);
+		//vehicleScreen.setType(_type);
+		vehicleScreen.setStock(stock);
+		vehicleScreen.setRO(_ro);
 
-		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("Dye_Panel");
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails("Dye_Panel");
 		selectedservicescreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
 			selectedservicescreen.selectVehiclePart(vehicleparts[i]);
@@ -142,7 +143,7 @@ public class NewTestCases extends BaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		RegularOrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularWorkOrdersSteps.saveWorkOrder();
 		myworkordersscreen.selectWorkOrderForApprove(wonumber1);
 		myworkordersscreen.clickApproveButton();
@@ -151,20 +152,21 @@ public class NewTestCases extends BaseTestCase {
 		RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(wonumber1);
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
-		Assert.assertEquals(vehiclescreen.getMake(), _make);
-		Assert.assertEquals(vehiclescreen.getModel(), _model);
-		Assert.assertEquals(vehiclescreen.getYear(), _year);
-		ordersummaryscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen = new RegularOrderSummaryScreen();
-		ordersummaryscreen.checkApproveAndCreateInvoice();
-		ordersummaryscreen.clickSave();
+		Assert.assertEquals(vehicleScreen.getMake(), _make);
+		Assert.assertEquals(vehicleScreen.getModel(), _model);
+		Assert.assertEquals(vehicleScreen.getYear(), _year);
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
+		orderSummaryScreen.checkApproveAndCreateInvoice();
+		orderSummaryScreen.clickSave();
 		
-		ordersummaryscreen.selectDefaultInvoiceType();
+		orderSummaryScreen.selectDefaultInvoiceType();
 		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
-		RegularInvoiceInfoScreen invoiceinfoscreen =questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
-		invoiceinfoscreen.setPO(poNomber);
-		invoiceinfoscreen.addWorkOrder(wonumber1);
-		invoiceinfoscreen.clickSave();
+		RegularNavigationSteps.navigateToInvoiceInfoScreen();
+		RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+		invoiceInfoScreen.setPO(poNomber);
+		invoiceInfoScreen.addWorkOrder(wonumber1);
+		invoiceInfoScreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Question 'Signature' in section 'Follow up Requested' should be answered."));
 		Helpers.drawRegularQuestionsSignature();
@@ -172,8 +174,8 @@ public class NewTestCases extends BaseTestCase {
 		alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Question 'Engine Condition' in section 'Test Section' should be answered."));
 		questionsscreen.selectAnswerForQuestion("Engine Condition", "Pretty Good");
-		invoiceinfoscreen = questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
-		invoiceinfoscreen.clickSaveAsDraft();
+		RegularNavigationSteps.navigateToInvoiceInfoScreen();
+		invoiceInfoScreen.clickSaveAsDraft();
 		myworkordersscreen.clickHomeButton();
 	}
 	
@@ -202,41 +204,41 @@ public class NewTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 		
 		
-		RegularServiceRequestsScreen servicerequestsscreen = homeScreen.clickServiceRequestsButton();
+		RegularServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
 		
-		servicerequestsscreen.clickAddButton();
+		serviceRequestsScreen.clickAddButton();
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 
-		RegularVehicleScreen vehiclescreen = servicerequestsscreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
-		vehiclescreen.setVIN(VIN);
-		vehiclescreen.setMakeAndModel(_make, _model);
-		vehiclescreen.setColor(_color);
-		vehiclescreen.setYear(_year);
-		vehiclescreen.setMileage(mileage);
-		//vehiclescreen.setFuelTankLevel(fueltanklevel);
-		//vehiclescreen.setType(_type);
-		vehiclescreen.setStock(stock);
-		vehiclescreen.setRO(_ro);
-		//vehiclescreen.setLicensePlate(licplate);
+		RegularVehicleScreen vehicleScreen = serviceRequestsScreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
+		vehicleScreen.setVIN(VIN);
+		vehicleScreen.setMakeAndModel(_make, _model);
+		vehicleScreen.setColor(_color);
+		vehicleScreen.setYear(_year);
+		vehicleScreen.setMileage(mileage);
+		//vehicleScreen.setFuelTankLevel(fueltanklevel);
+		//vehicleScreen.setType(_type);
+		vehicleScreen.setStock(stock);
+		vehicleScreen.setRO(_ro);
+		RegularNavigationSteps.navigateToServicesScreen();
 
-		RegularServicesScreen servicesscreen = vehiclescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		RegularSelectedServiceDetailsScreen servicedetailsscreen = servicesscreen.openCustomServiceDetails("3/4\" - Penny Size");
-		servicedetailsscreen.setServiceQuantityValue("3");
-		servicedetailsscreen.saveSelectedServiceDetails();
-		servicesscreen.selectService("SR_Money_Vehicle");
-		servicesscreen.selectService("SR_S4_Bundle");
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails("3/4\" - Penny Size");
+		selectedServiceDetailsScreen.setServiceQuantityValue("3");
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		servicesScreen.selectService("SR_Money_Vehicle");
+		servicesScreen.selectService("SR_S4_Bundle");
 		
-		servicesscreen.clickSave();
+		servicesScreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 
-		srtowo = servicerequestsscreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(servicerequestsscreen.getServiceRequestStatus(srtowo), "On Hold");
-		Assert.assertTrue(servicerequestsscreen.getServiceRequestClient(srtowo).contains(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER));
-		//Assert.assertTrue(servicerequestsscreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
-		Assert.assertTrue(servicerequestsscreen.getServiceRequestDetails(srtowo).contains("WERTYU123"));
-		srtowo = servicerequestsscreen.getFirstServiceRequestNumber();
-		servicerequestsscreen.clickHomeButton();
+		srtowo = serviceRequestsScreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(srtowo), "On Hold");
+		Assert.assertTrue(serviceRequestsScreen.getServiceRequestClient(srtowo).contains(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER));
+		//Assert.assertTrue(serviceRequestsScreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
+		Assert.assertTrue(serviceRequestsScreen.getServiceRequestDetails(srtowo).contains("WERTYU123"));
+		srtowo = serviceRequestsScreen.getFirstServiceRequestNumber();
+		serviceRequestsScreen.clickHomeButton();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
@@ -309,8 +311,8 @@ public class NewTestCases extends BaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 		
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
-		RegularServiceRequestsScreen servicerequestsscreen = homeScreen.clickServiceRequestsButton();
-		servicerequestsscreen.clickRefreshButton();
+		RegularServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
+		serviceRequestsScreen.clickRefreshButton();
 		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(srnumber, InspectionsTypes.INSP_SMOKE_TEST);
 		NavigationSteps.navigateToServicesScreen();
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
@@ -319,7 +321,7 @@ public class NewTestCases extends BaseTestCase {
 			Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
 					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));
 		RegularServiceRequestSteps.saveServiceRequest();
-		servicerequestsscreen.clickHomeButton();
+		serviceRequestsScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 8430:Create work order with type is assigned to a specific client", description = "Create work order with type is assigned to a specific client ")
