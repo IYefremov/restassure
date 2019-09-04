@@ -315,8 +315,8 @@ public class NewTestCases extends BaseTestCase {
 		serviceRequestsScreen.clickRefreshButton();
 		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(srnumber, InspectionsTypes.INSP_SMOKE_TEST);
 		NavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
+		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		for (String serviceName : services)
 			Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
 					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));
