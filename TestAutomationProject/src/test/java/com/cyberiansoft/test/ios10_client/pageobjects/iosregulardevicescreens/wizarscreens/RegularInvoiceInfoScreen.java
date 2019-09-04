@@ -109,6 +109,13 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	
 	public void addWorkOrder(String workOrderId)  {
 		appiumdriver.findElementByAccessibilityId("Insert").click();
+		appiumdriver.findElementByAccessibilityId("InvoiceOrdersView").findElement(MobileBy.AccessibilityId(workOrderId))
+				.findElement(MobileBy.AccessibilityId("unselected")).click();
+		appiumdriver.findElementByAccessibilityId("Done").click();
+	}
+
+	public void addTeamWorkOrder(String workOrderId)  {
+		appiumdriver.findElementByAccessibilityId("Insert").click();
 		appiumdriver.findElementByAccessibilityId("TeamInvoiceOrdersView").findElement(MobileBy.AccessibilityId(workOrderId))
 				.findElement(MobileBy.AccessibilityId("unselected")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();

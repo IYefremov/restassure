@@ -510,7 +510,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 
 			if (serviceData.getServicePrice2() != null) {
-				RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+				RegularServicesScreenSteps.switchToSelectedServices();
+				RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 				selectedselectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
 				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -554,7 +555,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 
 			if (serviceData.getServicePrice2() != null) {
-				RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+				RegularServicesScreenSteps.switchToSelectedServices();
+				RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 				selectedselectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
 				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -597,7 +599,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 
 			if (serviceData.getServicePrice2() != null) {
-				RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+				RegularServicesScreenSteps.switchToSelectedServices();
+				RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 				selectedselectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
 				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
 				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -1035,7 +1038,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE, workOrderData.getWorkOrderPrice()));
 		orderSummaryScreen.swipeScreenLeft();
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
+		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
 		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -1153,12 +1157,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INSPECTION_IS_HUGE, inspectionData.getInspectionPrice()));
 
-		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
+		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServiceQuantityValue(inspectionData.getServiceData().getServiceQuantity2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServicesScreen.clickSaveAsDraft();
-		myInspectionsScreen = new RegularMyInspectionsScreen();
+		RegularInspectionsSteps.saveInspectionAsDraft();
+		myInspectionsScreen.waitMyInspectionsScreenLoaded();
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -1290,7 +1295,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		Assert.assertEquals(servicesScreen.getTotalAmaunt(), inspectionData.getInspectionPrice());
-		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
+		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceData.getServiceName(),
 					serviceData.getServicePrice()));
@@ -1383,7 +1389,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();	
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), vehiclePartData.getVehiclePartTotalPrice());
 		Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(),  vehiclePartData.getVehiclePartSubTotalPrice());
-		servicesScreen.clickSaveAsFinal();
+		RegularInspectionsSteps.saveInspectionAsFinal();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), vehiclePartData.getVehiclePartTotalPrice());
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
@@ -1853,7 +1859,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspnumber);
         RegularNavigationSteps.navigateToServicesScreen();
-		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
+		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getServiceData().getServicePrice2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -1988,7 +1995,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		servicesScreen.clickSaveAsFinal();
+		RegularInspectionsSteps.saveInspectionAsFinal();
 		myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -2115,7 +2122,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
 		RegularNavigationSteps.navigateToServicesScreen();
 
-		RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
+		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getTaxServicesData().get(0).getTaxServiceName());
 		Assert.assertFalse(selectedServiceDetailsScreen.isServiceRateFieldEditable(workOrderData.getTaxServicesData().get(0).getServiceRatesData().get(0)));
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -2424,7 +2432,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspnumber);
 		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
 		RegularNavigationSteps.navigateToServicesScreen();
-        RegularSelectedServicesScreen selectedServicesScreen = servicesScreen.switchToSelectedServicesTab();
+        RegularServicesScreenSteps.switchToSelectedServices();
+		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
 		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE));
 		Assert.assertTrue(selectedServicesScreen.isServiceApproved(iOSInternalProjectConstants.SR_S1_MONEY_PANEL));
