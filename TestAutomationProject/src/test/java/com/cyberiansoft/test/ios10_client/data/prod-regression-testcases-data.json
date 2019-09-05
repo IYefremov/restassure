@@ -521,9 +521,9 @@
       }
     }
   ],
-  "testVerifyAddNotesForWorkOrder": [
+  "testVerifyDeleteWOFunctionality": [
     {
-      "rowID": "testVerifyAddNotesToInspection.01",
+      "rowID": "testVerifyAddNotesForWorkOrder.01",
       "description": "Test Case 28091: 29 - Verify add notes for WO",
       "workOrderData": {
         "wholesailCustomer": {
@@ -537,17 +537,29 @@
           "moneyServices": [
             {
               "serviceName": "Dye_Panel"
-            },
-            {
-              "serviceName": "PPP_service"
             }
           ]
+        }
+      }
+    }
+  ],
+  "testVerifyAddNotesForWorkOrder": [
+    {
+      "rowID": "testVerifyAddNotesForWorkOrder.01",
+      "description": "28093 31 - Verify delete WO functionality",
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
         },
-        "insuranceCompany": {
-          "insuranceCompanyName": "USG",
-          "claimNumber": "QWERTY",
-          "policyNumber": "pl-123",
-          "deductible": "34"
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
         }
       }
     }

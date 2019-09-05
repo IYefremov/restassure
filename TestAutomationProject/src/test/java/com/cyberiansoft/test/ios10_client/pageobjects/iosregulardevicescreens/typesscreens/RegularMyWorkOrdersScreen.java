@@ -273,4 +273,9 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		switchToTeamView();
 		return new RegularTeamWorkOrdersScreen();
 	}
+
+	public boolean isNotesIconPresentForWorkOrder(String workOrderId) {
+		waitMyWorkOrdersScreenLoaded();
+		return mywotable.findElementByAccessibilityId(workOrderId).findElementsByAccessibilityId("ORDER_NOTES").size() > 0;
+	}
 }

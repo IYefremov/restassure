@@ -4,8 +4,17 @@ import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularMyWorkOrdersSteps {
+
+    public static void startCreatingWorkOrder(AppCustomer appCustomer, IWorkOrdersTypes workOrdersType) {
+        waitMyWorkOrdersLoaded();
+        clickAddWorkOrderButton();
+        RegularCustomersScreenSteps.selectCustomer(appCustomer);
+        RegularWorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
+    }
 
     public static void clickAddWorkOrderButton() {
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
@@ -58,6 +67,16 @@ public class RegularMyWorkOrdersSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.EDIT);
     }
 
+    public static void selectWorkOrderNotesMenu(String workOrderId) {
+        selectWorkOrder(workOrderId);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.NOTES);
+    }
+
+    public static void selectWorkOrderDeleteMenu(String workOrderId) {
+        selectWorkOrder(workOrderId);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.DELETE);
+    }
+
     public static void selectWorkOrderForNewInspection(String workOrderId) {
         selectWorkOrder(workOrderId);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.NEW_INSPECTION);
@@ -73,5 +92,10 @@ public class RegularMyWorkOrdersSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHANGE_CUSTOMER);
         RegularCustomersScreenSteps.selectCustomer(customer);
         waitMyWorkOrdersLoaded();
+    }
+
+    public static void deleteWorkOrder(String workOrderID) {
+        selectWorkOrderDeleteMenu(workOrderID);
+        Helpers.getAlertTextAndAccept();
     }
 }
