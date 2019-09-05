@@ -8,7 +8,8 @@ public enum ScreenType {
     WORKORDER_SUMMARY("Summary"),
     VISUAL("Visual"),
     VEHICLE_INFO("Vehicle Info"),
-    QUESTIONS("Questions");
+    QUESTIONS("Questions"),
+    ;
 
     @Getter
     private String screenIdentificator;

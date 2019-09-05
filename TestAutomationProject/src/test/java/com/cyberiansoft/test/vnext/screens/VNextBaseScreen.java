@@ -23,7 +23,7 @@ public class VNextBaseScreen {
 
     protected AppiumDriver<MobileElement> appiumdriver;
 
-    @FindBy(xpath = "//*[@action='show_topbar_popover']/span")
+    @FindBy(xpath = "//*[@action='show_topbar_popover']")
     private WebElement showTopBarPopover;
 
     @FindBy(xpath = "//*[@data-autotests-id='change-screen-popover']")
@@ -150,6 +150,11 @@ public class VNextBaseScreen {
     public void changeScreen(ScreenType screen) {
         clickScreenTitleCaption();
         WaitUtils.click(changeScrenPopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
+    }
+
+    public void changeScreen(ScreenType screen, Integer index) {
+        clickScreenTitleCaption();
+        WaitUtils.click(changeScrenPopover.findElements(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")).get(index));
     }
 
     public boolean isScreenPresentInChangeScreenPopoverList(String screenName) {
