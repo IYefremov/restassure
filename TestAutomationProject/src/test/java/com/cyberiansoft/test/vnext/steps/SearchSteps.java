@@ -95,6 +95,6 @@ public class SearchSteps {
     public static void textSearch(String serviceName) {
         GeneralWizardInteractions.openSearchFilter();
         GeneralWizardInteractions.setSearchText(serviceName);
-        ScreenNavigationSteps.pressHardwareBackButton();
+        GeneralWizardInteractions.closeSearchFilter();
     }
 }
