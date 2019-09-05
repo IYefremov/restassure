@@ -28,4 +28,14 @@ public class ServiceDetailsInteractions {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         WaitUtils.click(serviceDetailsScreen.getPartServiceDetailButton());
     }
+
+    public static String getVehiclePartValue() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        return serviceDetailsScreen.getVehiclePartEditBox().getAttribute("value");
+    }
+
+    public static void openVehiclePartSelection() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        WaitUtils.click(serviceDetailsScreen.getVehiclePartEditBox());
+    }
 }

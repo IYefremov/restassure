@@ -162,4 +162,8 @@ public class VNextProTestCasesDataPaths {
     public String getQuestionFormBasicCasesDataPath() {
         return props.getProperty("question.form.basic");
     }
+
+    public String getVehiclePartsCasesDataPath() {
+        return props.getProperty("vehicle.parts.basic");
+    }
 }

@@ -33,5 +33,4 @@ public class BaseTestCaseTeamEditionRegistration extends VNextBaseTestCase {
                 "test-retail-customer.json"), RetailCustomer.class);
         testwholesailcustomer = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json"), WholesailCustomer.class);
     }
-
 }

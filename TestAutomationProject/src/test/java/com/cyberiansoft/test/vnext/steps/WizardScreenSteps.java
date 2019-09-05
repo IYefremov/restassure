@@ -20,6 +20,19 @@ public class WizardScreenSteps {
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
     }
 
+    public static void navigateToWizardScreen(ScreenType screenType, Integer index) {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.changeScreen(screenType, index);
+        WaitUtils.getGeneralFluentWait().until(webDriver -> {
+                    WaitUtils.elementShouldBeVisible(baseWizardScreen.getShowTopBarPopover(), true);
+                    return baseWizardScreen.getShowTopBarPopover().getText().contains(screenType.getScreenIdentificator());
+                }
+        );
+        WaitUtils.elementShouldBeVisible(baseWizardScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(baseWizardScreen.getRootElement());
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+    }
+
     public static void saveAction() {
         ListSelectPageInteractions.saveListPage();
     }

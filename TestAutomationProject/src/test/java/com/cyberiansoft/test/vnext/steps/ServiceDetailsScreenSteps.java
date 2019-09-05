@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
+import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.ServiceDetailsInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -38,5 +40,14 @@ public class ServiceDetailsScreenSteps {
     public static void openPartServiceDetails() {
         ServiceDetailsInteractions.waitPageReady();
         ServiceDetailsInteractions.openPartServiceDetails();
+    }
+
+    public static void selectVehiclePart(VehiclePartData vehiclePart) {
+        ServiceDetailsInteractions.openVehiclePartSelection();
+        ListSelectPageInteractions.selectItem(vehiclePart.getVehiclePartName());
+    }
+
+    public static void saveServiceDetails() {
+        ListSelectPageInteractions.saveListPage();
     }
 }

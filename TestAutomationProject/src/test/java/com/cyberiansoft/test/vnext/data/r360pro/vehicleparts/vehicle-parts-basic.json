@@ -1,0 +1,41 @@
+{
+  "userCanCreateWoWithSingleVehiclePartForSinglePartSelect": [
+    {
+      "rowID": "userCanCreateWoWithSingleVehiclePartForSinglePartSelect.01",
+      "description": "89563",
+      "service": {
+        "serviceName": "roz_dis_part_money",
+        "vehiclePart": {
+          "vehiclePartName": "Left Door Mirror"
+        }
+      }
+    }
+  ],
+  "userCanSelectSinglePartForQuestionAnswerWhenCreatingWo": [
+    {
+      "rowID": "userCanSelectSinglePartForQuestionAnswerWhenCreatingWo.01",
+      "description": "89566",
+      "services": [
+        {
+          "serviceName": "rozstalnoy_enable_money",
+          "vehiclePart": {
+            "vehiclePartName": "Test Part"
+          }
+        },
+        {
+          "serviceName": "rozstalnoy_disable_money",
+          "vehiclePart": {
+            "vehiclePartName": "Test Part"
+          }
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Generate \"Money\" services?"
+          }
+        ]
+      }
+    }
+  ]
+}
