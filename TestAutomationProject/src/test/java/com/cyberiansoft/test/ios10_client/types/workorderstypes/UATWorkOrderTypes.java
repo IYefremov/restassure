@@ -8,7 +8,7 @@ import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 
 public enum UATWorkOrderTypes implements IWorkOrdersTypes {
 
-    WO_FINAL_INVOICE("WO_Final_Invoice");
+    WO_FINAL_INVOICE("WO_Final_Invoice_AQA");
 
     private final String woType;
 

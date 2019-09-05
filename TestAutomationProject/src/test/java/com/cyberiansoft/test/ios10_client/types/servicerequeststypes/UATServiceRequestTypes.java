@@ -8,7 +8,7 @@ import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 
 public enum UATServiceRequestTypes implements IServiceRequestTypes {
 
-    SR_TYPE_ALL_PHASES("SR_type_all_phases");
+    SR_TYPE_ALL_PHASES("SR_type_all_phases_AQA");
 
     private final String srType;
 

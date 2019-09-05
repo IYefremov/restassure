@@ -12,6 +12,7 @@ public enum ReconProMenuItems {
     CREATE_SERVICE_REQUEST("Create\nSR"),
     CHANGE_PO("Change\nPO#"),
     DETAILS("Details"),
+    DELETE("Delete"),
     COPY_VEHICLE("Copy\nVehicle"),
     COPY_SERVICES("Copy\nServices"),
     SEND_EMAIL("Send\nEmail"),

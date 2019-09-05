@@ -178,6 +178,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void clickActionButton() {
+		waitMyInspectionsScreenLoaded();
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Share"))).click();
