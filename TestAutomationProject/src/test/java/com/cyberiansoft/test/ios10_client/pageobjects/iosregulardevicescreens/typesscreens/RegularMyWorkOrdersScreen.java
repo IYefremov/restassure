@@ -129,6 +129,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
+		WaitUtils.waitUntilElementIsClickable(mywotable);
 		WaitUtils.waitUntilElementIsClickable(mywotable.findElementByAccessibilityId(workOrderId)).click();
 	}
 	

@@ -869,7 +869,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickDoneStatusReasonButton();
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
-		myInspectionsScreen = new RegularMyInspectionsScreen();
+		myInspectionsScreen.waitMyInspectionsScreenLoaded();
 		myInspectionsScreen.clickHomeButton();
 	}
 	
@@ -1095,6 +1095,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.setFilterLocation(locationValue);
 		teamWorkOrdersScreen.setBilling("All");
 		teamWorkOrdersScreen.clickSaveFilter();
+
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrders.get(0));
 		myWorkOrdersScreen.clickInvoiceIcon();
 
@@ -2120,6 +2121,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
+
 		RegularNavigationSteps.navigateToServicesScreen();
 
 		RegularServicesScreenSteps.switchToSelectedServices();
@@ -2248,7 +2250,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		List<String> workOrders = new ArrayList<>();
-		RetailCustomer retailCustomer = new RetailCustomer("Avalon", "");
+		RetailCustomer retailCustomer = new RetailCustomer("Oksana", "Avalon");
 
 		final int workOrderIndexToEdit = 1;
 		final String workOrderNewPrice = "$35.00";

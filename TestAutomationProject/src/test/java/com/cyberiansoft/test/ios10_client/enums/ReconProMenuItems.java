@@ -24,6 +24,7 @@ public enum ReconProMenuItems {
     CHANGE_CUSTOMER("Change\nCustomer"),
     SHOW_WOS("Show\nWOs"),
     ASSIGN("Assign"),
+    ARCHIVE("Archive"),
     SUMMARY("Summary");
 
     @Getter
