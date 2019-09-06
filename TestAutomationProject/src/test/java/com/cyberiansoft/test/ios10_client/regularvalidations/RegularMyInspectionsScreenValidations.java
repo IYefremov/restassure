@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInspectionsSteps;
 import org.testng.Assert;
 
 public class RegularMyInspectionsScreenValidations {
@@ -21,5 +22,14 @@ public class RegularMyInspectionsScreenValidations {
             Assert.assertTrue(myInspectionsScreen.isNotesIconPresentForInspection(inspectionID));
         else
             Assert.assertFalse(myInspectionsScreen.isNotesIconPresentForInspection(inspectionID));
+    }
+
+    public static void verifyInspectionPresent(String inspectionID, boolean isPresent) {
+        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        if (isPresent)
+            Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspectionID));
+        else
+            Assert.assertFalse(myInspectionsScreen.checkInspectionExists(inspectionID));
     }
 }

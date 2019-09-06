@@ -563,6 +563,33 @@
         }
       }
     }
+  ],
+  "testVerifyArchiveFunctionalityForInspection": [
+    {
+      "rowID": "testVerifyArchiveFunctionalityForInspection.01",
+      "description": "Test Case 28088: 26 - Verify Archive functionality for inspection",
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        }
+      }
+    }
   ]
-
 }

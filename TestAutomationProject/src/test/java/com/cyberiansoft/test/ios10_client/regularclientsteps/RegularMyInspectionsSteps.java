@@ -6,6 +6,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.IServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularMyInspectionsSteps {
 
@@ -68,6 +69,11 @@ public class RegularMyInspectionsSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.APPROVE);
     }
 
+    public static void selectInspectionForArchive(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.ARCHIVE);
+    }
+
     public static void selectInspectionForEdit(String inspectionID) {
         selectInspection(inspectionID);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.EDIT);
@@ -98,5 +104,10 @@ public class RegularMyInspectionsSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHANGE_CUSTOMER);
         RegularCustomersScreenSteps.selectCustomer(customer);
         waitMyInspectionsScreenLoaded();
+    }
+
+    public static void archiveInspection(String inspectionID) {
+        selectInspectionForArchive(inspectionID);
+        Helpers.getAlertTextAndAccept();
     }
 }
