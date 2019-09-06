@@ -48,6 +48,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//*[@data-name='vehiclePart']")
     private WebElement vehiclePartEditBox;
+
+    @FindBy(xpath = "//*[@data-name='Amount']")
+    private WebElement serviceDetailsPrice;
 	
 	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);

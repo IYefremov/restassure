@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.vehicleparts;
 
+import com.cyberiansoft.test.dataclasses.DamageData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
@@ -71,6 +72,24 @@ public class BasicVehiclePartsTests extends BaseTestCaseTeamEditionRegistration 
         ServiceDetailsValidations.servicePartShouldBe(expectedServiceFromQuestion2.getVehiclePart());
         ScreenNavigationSteps.pressBackButton();
 
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanSelectSinglePartViaVisualFormWhenCreatingWo(String rowID,
+                                                                   String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        DamageData damageData = workOrderData.getDamageData();
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
+        VisualScreenSteps.addDamage(damageData);
+        VisualScreenSteps.openEditDamage();
+        ServiceDetailsScreenSteps.selectVehiclePart(damageData.getMoneyService().getVehiclePart());
+        ServiceDetailsValidations.servicePartShouldBe(damageData.getMoneyService().getVehiclePart());
+        ScreenNavigationSteps.pressBackButton();
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
     }

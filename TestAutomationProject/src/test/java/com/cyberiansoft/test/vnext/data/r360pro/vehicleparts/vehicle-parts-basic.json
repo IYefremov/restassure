@@ -37,5 +37,20 @@
         ]
       }
     }
+  ],
+  "userCanSelectSinglePartViaVisualFormWhenCreatingWo": [
+    {
+      "rowID": "userCanSelectSinglePartViaVisualFormWhenCreatingWo.01",
+      "description": "89565",
+      "damageData": {
+        "damageGroupName": "Autre",
+        "moneyService": {
+          "serviceName": "rozstalnoy_disable_labor",
+          "vehiclePart": {
+            "vehiclePartName": "Test Part"
+          }
+        }
+      }
+    }
   ]
 }
