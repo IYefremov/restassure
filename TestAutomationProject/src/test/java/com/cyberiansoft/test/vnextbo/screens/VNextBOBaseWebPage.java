@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import lombok.Getter;
 import org.apache.commons.lang3.RandomUtils;
 import org.awaitility.core.ConditionTimeoutException;
@@ -122,16 +123,13 @@ public class VNextBOBaseWebPage {
     }
 
     public void waitForLoading() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(loadingProcess));
-        } catch (Exception ignored) {
-        }
-        try {
-            wait.until(ExpectedConditions.invisibilityOf(loadingProcess));
-            waitABit(500);
-        } catch (Exception ignored) {
-            waitABit(2000);
-        }
+        waitForLoadingToStop(loadingProcess);
+    }
+
+    private void waitForLoadingToStop(WebElement loadingElement) {
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(loadingElement);
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(loadingElement);
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     public void executeJsForAddOnSettings() {

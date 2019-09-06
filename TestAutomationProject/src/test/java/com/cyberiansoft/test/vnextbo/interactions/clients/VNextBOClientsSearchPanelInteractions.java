@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.interactions;
+package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;

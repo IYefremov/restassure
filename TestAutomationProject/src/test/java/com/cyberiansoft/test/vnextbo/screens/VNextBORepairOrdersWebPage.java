@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.google.common.base.CharMatcher;
+import lombok.Getter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,13 +18,14 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+@Getter
 public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//*[@id='reconmonitor-orders']/table")
     private WebElement repairOrdersTable;
 
     @FindBy(xpath = "//*[@id='repairOrdersFreeTextSearch']")
-    private WebElement reapiroderssearchtextfld;
+    private WebElement repairOdersSearchTextField;
 
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
     private WebElement locationExpanded;
@@ -672,27 +674,21 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBORepairOrdersWebPage setRepairOrdersSearchText(String repairOrderText) {
-        wait.until(ExpectedConditions.visibilityOf(reapiroderssearchtextfld));
-        reapiroderssearchtextfld.clear();
-        reapiroderssearchtextfld.sendKeys(repairOrderText);
-        waitABit(500);
+        WaitUtilsWebDriver.waitForVisibility(repairOdersSearchTextField);
+        Utils.clearAndType(repairOdersSearchTextField, repairOrderText);
+        WaitUtilsWebDriver.waitABit(500);
         return this;
     }
 
     public VNextBORepairOrdersWebPage clickSearchIcon() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(searchIcon));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        actions.moveToElement(searchIcon).click().build().perform();
-        waitForLoading();
+        Utils.clickElement(searchIcon);
+        WaitUtilsWebDriver.waitForLoading();
         return this;
     }
 
     public void clickEnterToSearch() {
-        actions.sendKeys(searchInput, Keys.ENTER).build().perform();
-        waitForLoading();
+        Utils.getActions().sendKeys(searchInput, Keys.ENTER).build().perform();
+        WaitUtilsWebDriver.waitForLoading();
     }
 
     public boolean isWorkOrderDisplayedByVin(String vin) {
@@ -712,7 +708,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public String getTableTitleDisplayed(int titleHeaderNumber) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(tableHeader));
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(tableHeader);
         return tableHeader.get(titleHeaderNumber).getText();
     }
 
@@ -729,7 +725,6 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public boolean isNoteForWorkOrderDisplayed(String woNumber) {
-//        return isArrowDisplayed(woNumber, "']/../../..//div[@class='dark box']");//strong[text()='O-000-152073']/../../..
         return isArrowDisplayed(woNumber, "/../../..//div[@class='dark box']");//strong[text()='O-000-152073']/../../..
     }
 
@@ -985,5 +980,10 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         } catch (Exception ignored) {
             return false;
         }
+    }
+
+    public WebElement getTechniciansFieldForWO(String woNumber) {
+        return tableBody.findElement(By.xpath("//strong[text()=\"" + woNumber
+                + "\"]/../../../parent::tr//div[contains(@data-bind, \"changeTechnicians\")]"));
     }
 }

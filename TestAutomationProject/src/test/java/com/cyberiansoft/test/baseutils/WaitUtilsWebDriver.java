@@ -18,20 +18,20 @@ import static org.awaitility.Awaitility.await;
 
 public class WaitUtilsWebDriver {
 
-    private static WebDriverWait getWebDriverWait(WebDriver driver, int timeout) {
-        return new WebDriverWait(driver, timeout);
+    public static WebDriverWait getWebDriverWait(int timeout) {
+        return new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeout);
     }
 
     public static WebDriverWait getWait() {
-        return getWebDriverWait(DriverBuilder.getInstance().getDriver(), 15);
+        return getWebDriverWait(15);
     }
 
     public static WebDriverWait getShortWait() {
-        return getWebDriverWait(DriverBuilder.getInstance().getDriver(), 5);
+        return getWebDriverWait(5);
     }
 
     public static WebDriverWait getLongWait() {
-        return getWebDriverWait(DriverBuilder.getInstance().getDriver(), 30);
+        return getWebDriverWait(30);
     }
 
     public static void waitABit(int milliSeconds) {
@@ -205,7 +205,15 @@ public class WaitUtilsWebDriver {
     }
 
     public static boolean waitForAttributeToBe(WebElement element, String attribute, String value, int timeout) {
-        return new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeout).until(ExpectedConditions.attributeToBe(element, attribute, value));
+        return getWebDriverWait(timeout).until(ExpectedConditions.attributeToBe(element, attribute, value));
+    }
+
+    public static boolean waitForAttributeToContain(WebElement element, String attribute, String value) {
+        return getWait().until(ExpectedConditions.attributeContains(element, attribute, value));
+    }
+
+    public static boolean waitForAttributeToContain(WebElement element, String attribute, String value, int timeout) {
+        return getWebDriverWait(timeout).until(ExpectedConditions.attributeContains(element, attribute, value));
     }
 
     public static void waitForInputFieldValueIgnoringException(WebElement element, String value) {
@@ -213,5 +221,21 @@ public class WaitUtilsWebDriver {
             new WebDriverWait(DriverBuilder.getInstance().getDriver(), 10)
                     .until(ExpectedConditions.attributeToBe(element, "value", value));
         } catch (Exception e) {}
+    }
+
+    public static void waitForTextToBePresentInElement(WebElement element, String text) {
+        getWait().until(ExpectedConditions.textToBePresentInElement(element, text));
+    }
+
+    public static void waitForTextToBePresentInElement(WebElement element, String text, int timeOut) {
+        getWebDriverWait(timeOut).until(ExpectedConditions.textToBePresentInElement(element, text));
+    }
+
+    public static void waitForElementNotToBeStale(WebElement element) {
+        try {
+            getWait().until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
+        } catch (Exception ignored) {
+            waitABit(1500);
+        }
     }
 }

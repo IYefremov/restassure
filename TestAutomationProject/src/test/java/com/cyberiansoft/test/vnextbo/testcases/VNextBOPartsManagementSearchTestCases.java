@@ -2,13 +2,15 @@ package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersSimpleSearchSteps;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -26,11 +28,12 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOPartsManagementSearchData.json";
-    private VNexBOLeftMenuPanel leftMenu;
-    private VNextBOBreadCrumbPanel breadCrumbPanel;
+    private VNextBOLeftMenuInteractions leftMenuInteractions;
+    private VNextBOBreadCrumbInteractions breadCrumbInteractions;
     private VNextBOPartsManagementSearchPanel partsManagementSearch;
     private VNextBOPartsOrdersListPanel partsOrdersListPanel;
     private VNextBOPartsDetailsPanel partsDetailsPanel;
+    private VNextBORepairOrdersWebPage repairOrdersPage;
 
     @BeforeClass
     public void settingUp() {
@@ -54,11 +57,12 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
 
-        leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
-        breadCrumbPanel = PageFactory.initElements(webdriver, VNextBOBreadCrumbPanel.class);
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
         partsOrdersListPanel = PageFactory.initElements(webdriver, VNextBOPartsOrdersListPanel.class);
         partsDetailsPanel = PageFactory.initElements(webdriver, VNextBOPartsDetailsPanel.class);
+        repairOrdersPage = PageFactory.initElements(webdriver, VNextBORepairOrdersWebPage.class);
+        leftMenuInteractions = new VNextBOLeftMenuInteractions();
+        breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
     }
 
     @AfterMethod
@@ -76,8 +80,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROUsingSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getType())
@@ -100,8 +104,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanDeleteSearchOptions(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getType())
@@ -128,8 +132,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanUseAdvancedSearchForROSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -179,8 +183,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByCustomerUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -215,8 +219,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByPhaseUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -249,8 +253,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByWONumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -284,8 +288,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByWOTypeUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -312,10 +316,9 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final List<String> optionsWONums = partsOrdersListPanel.getWoNumsListOptions();
         final String firstWONum = optionsWONums.get(0);
 
-        final VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage
-                .setRepairOrdersSearchText(firstWONum)
-                .clickSearchIcon();
+        leftMenuInteractions.selectRepairOrdersMenu();
+        new VNextBORepairOrdersSimpleSearchSteps().searchByText(firstWONum);
+
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
@@ -326,8 +329,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByStockNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -363,8 +366,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByETAFromUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -407,8 +410,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByETAToUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -450,8 +453,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByVINNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -487,8 +490,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByOEMNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -524,8 +527,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByNotesUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -554,10 +557,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final List<String> optionsWONums = partsOrdersListPanel.getWoNumsListOptions();
         final String firstWONum = optionsWONums.get(0);
 
-        final VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage
-                .setRepairOrdersSearchText(firstWONum)
-                .clickSearchIcon();
+        leftMenuInteractions.selectRepairOrdersMenu();
+        new VNextBORepairOrdersSimpleSearchSteps().searchByText(firstWONum);
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
@@ -584,8 +585,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByOrderedFromUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -613,10 +614,9 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final List<String> optionsWONums = partsOrdersListPanel.getWoNumsListOptions();
         final String firstWONum = optionsWONums.get(0);
 
-        final VNextBORepairOrdersWebPage repairOrdersPage = leftMenu.selectRepairOrdersMenu();
-        repairOrdersPage
-                .setRepairOrdersSearchText(firstWONum)
-                .clickSearchIcon();
+        leftMenuInteractions.selectRepairOrdersMenu();
+        new VNextBORepairOrdersSimpleSearchSteps().searchByText(firstWONum);
+
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
@@ -631,8 +631,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByFromOptionUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -678,8 +678,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROByToOptionUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -725,8 +725,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanFillAllFieldsOfAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -779,8 +779,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyAdvancedSearchDataIsNotClearedAfterClosingByClickingXIconAndOutsideSearchWindow(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -845,8 +845,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         Assert.assertTrue(partsManagementSearch.isAdvancedSearchDisplayedInDropDown(),
@@ -888,8 +888,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSaveAllOptionsOfAdvancedSearchDialog(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchName());
@@ -936,8 +936,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROUsingOptionsOfAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchName());
@@ -981,8 +981,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchName());
@@ -1016,8 +1016,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanChangeValuesOfTheSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchName());
@@ -1107,8 +1107,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanClickSavedAdvancedSearchModalDialogDeleteButtons(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch.clickSearchCaret();
         partsManagementSearch.verifySearchOptionIsNotDisplayedInDropDown(data.getSearchName());

@@ -147,16 +147,10 @@ public class Utils {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
         final int random = RandomUtils.nextInt(minOptionNumber, listBox.size());
-        System.out.println(random);
-        WebElement selectedValue = listBox.get(random);
-        if (selectedValue == null) {
-            selectedValue = listBox.get(minOptionNumber);
-            Utils.clickElement(selectedValue);
-        } else {
-            getActions().moveToElement(selectedValue).click().build().perform();
-        }
-        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
-        return selectedValue.getText();
+        String selectedText = listBox.get(random).getText();
+        System.out.println("random value: " + random + "\n" + "selected option: " + selectedText);
+        selectOptionInDropDown(dropDown, listBox, selectedText, true);
+        return selectedText;
     }
 
     public static boolean isElementDisplayed(WebElement element) {
@@ -312,15 +306,24 @@ public class Utils {
     public static void setAttributeWithJS(WebElement element, String attribute, String value) {
         ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
                 element, attribute, value);
-        WaitUtilsWebDriver.getWait().until(ExpectedConditions.attributeContains(element, attribute, value));
+        WaitUtilsWebDriver.waitForAttributeToBe(element, attribute, value);
     }
 
     public static void sendKeysWithJS(WebElement element, String value) {
         final WebDriver driver = DriverBuilder.getInstance().getDriver();
         ((JavascriptExecutor) driver).executeScript("arguments[1].value = arguments[0]; ", value, element);
         try {
-            new WebDriverWait(driver, 3).until(ExpectedConditions.textToBePresentInElement(element, value));
+            WaitUtilsWebDriver.waitForTextToBePresentInElement(element, value, 3);
         } catch (Exception ignored) {}
+    }
+
+    public static boolean isTextDisplayed(WebElement element, String text) {
+        try {
+            WaitUtilsWebDriver.waitForTextToBePresentInElement(element, text);
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
     }
 
     public static void closeNewTab(String mainWindowHandle) {
@@ -338,5 +341,21 @@ public class Utils {
     public static String getUrl() {
         WaitUtilsWebDriver.waitForUrl();
         return DriverBuilder.getInstance().getDriver().getCurrentUrl();
+    }
+
+    public static boolean isElementWithAttributeContainingValueDisplayed(WebElement element, String attribute, String value, int timeout) {
+        try {
+            return WaitUtilsWebDriver.waitForAttributeToContain(element, attribute, value, timeout);
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public static String getText(WebElement element) {
+        try {
+            return WaitUtilsWebDriver.waitForVisibility(element).getText();
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

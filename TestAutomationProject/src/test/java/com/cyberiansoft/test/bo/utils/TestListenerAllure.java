@@ -33,7 +33,6 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         System.out.println("FAILED: " + result.getMethod().getMethodName());
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
-//        AllureUtils.attachVideo();
 
         DriverBuilder.getInstance().quitDriver();
     }
@@ -43,7 +42,6 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         System.out.println("SKIPPED: " + result.getMethod().getMethodName());
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
-//        AllureUtils.attachVideo();
 
         DriverBuilder.getInstance().quitDriver();
     }

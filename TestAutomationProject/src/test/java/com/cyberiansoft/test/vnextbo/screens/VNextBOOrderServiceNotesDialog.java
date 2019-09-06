@@ -89,6 +89,7 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
 
     public void clickRepairNoteSaveButton() {
         Utils.clickElement(repairNoteSaveButton);
+        WaitUtilsWebDriver.waitForInvisibility(repairNoteSaveButton);
     }
 
     public VNextBOOrderServiceNotesDialog openRepairNoteTextArea() {

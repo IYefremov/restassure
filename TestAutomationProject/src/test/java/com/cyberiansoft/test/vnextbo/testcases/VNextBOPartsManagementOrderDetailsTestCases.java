@@ -2,12 +2,12 @@ package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementOrderDetailsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
@@ -24,8 +24,8 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOPartsManagementOrderDetailsData.json";
-    private VNexBOLeftMenuPanel leftMenu;
-    private VNextBOBreadCrumbPanel breadCrumbPanel;
+    private VNexBOLeftMenuPanel leftMenuInteractions;
+    private VNextBOBreadCrumbInteractions breadCrumbInteractions;
     private VNextBOPartsManagementSearchPanel partsManagementSearch;
     private VNextBOPartsOrdersListPanel partsOrdersListPanel;
     private VNextBOPartsDetailsPanel partsDetailsPanel;
@@ -52,11 +52,11 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
 
-        leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
-        breadCrumbPanel = PageFactory.initElements(webdriver, VNextBOBreadCrumbPanel.class);
+        leftMenuInteractions = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
         partsOrdersListPanel = PageFactory.initElements(webdriver, VNextBOPartsOrdersListPanel.class);
         partsDetailsPanel = PageFactory.initElements(webdriver, VNextBOPartsDetailsPanel.class);
+        breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
     }
 
     @AfterMethod
@@ -76,8 +76,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
@@ -108,8 +108,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
@@ -179,8 +179,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
@@ -222,8 +222,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
@@ -264,8 +264,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
@@ -289,8 +289,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
@@ -311,8 +311,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
@@ -344,8 +344,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
@@ -368,8 +368,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser
                 .getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
 
-        leftMenu.selectPartsManagementMenu();
-        breadCrumbPanel.setLocation(data.getLocation());
+        leftMenuInteractions.selectPartsManagementMenu();
+        breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())

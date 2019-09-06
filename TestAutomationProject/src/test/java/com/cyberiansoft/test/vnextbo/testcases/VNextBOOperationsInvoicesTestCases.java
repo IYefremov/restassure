@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -28,7 +29,8 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-    private VNexBOLeftMenuPanel leftMenu;
+    private VNextBOLeftMenuInteractions leftMenuInteractions;
+    private VNextBOInvoicesWebPage invoicesPage;
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -48,7 +50,8 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         loginPage
                 .userLogin(userName, userPassword);
 //                .executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
-        leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
+        invoicesPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInvoicesWebPage.class);
+        leftMenuInteractions = new VNextBOLeftMenuInteractions();
     }
 
     @AfterMethod
@@ -66,7 +69,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCanVoidInvoice(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+        leftMenuInteractions.selectInvoicesMenu();
         final String firstInvoiceNumber = invoicesPage.getFirstInvoiceName();
         invoicesPage
                 .clickFirstInvoice()
@@ -81,8 +84,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCannotVoidInvoiceAfterClickingNo(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
-
+        leftMenuInteractions.selectInvoicesMenu();
         final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
 
         Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
@@ -111,7 +113,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCannotVoidInvoiceAfterClickingReject(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+        leftMenuInteractions.selectInvoicesMenu();
 
         final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
 
@@ -141,7 +143,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCanVoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+        leftMenuInteractions.selectInvoicesMenu();
 
         final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
 
@@ -181,7 +183,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCanUnvoidInvoice(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+        leftMenuInteractions.selectInvoicesMenu();
         final String invoiceNumber = invoicesPage.getFirstInvoiceName();
         invoicesPage
                 .clickFirstInvoice()
@@ -200,7 +202,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCanUnvoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        VNextBOInvoicesWebPage invoicesPage = leftMenu.selectInvoicesMenu();
+        leftMenuInteractions.selectInvoicesMenu();
 
         final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
 

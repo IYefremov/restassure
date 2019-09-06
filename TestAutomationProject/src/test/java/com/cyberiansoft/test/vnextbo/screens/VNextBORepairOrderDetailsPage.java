@@ -8,6 +8,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServicesWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+@Getter
 public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//*[@data-bind='click: startRO']")
@@ -221,14 +223,13 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
     public VNextBORepairOrderDetailsPage selectFlagColor(String color) {
         final WebElement flagColorElement =
-                driver.findElement(By.xpath("//div[@class='drop flags']//span[contains(@data-bind, '" + color + "')]"));
+                driver.findElement(By.xpath("//div[@class='drop flags']//span[contains(@title, '" + color + "')]"));
         try {
-            wait.until(ExpectedConditions
-                    .elementToBeClickable(flagColorElement)).click();
-            wait.until(ExpectedConditions.attributeToBe(flagColorElement, "class", "active"));
-            wait.until(ExpectedConditions.invisibilityOf(flagsDropDown));
+            Utils.clickElement(flagColorElement);
+            WaitUtilsWebDriver.waitForAttributeToBe(flagColorElement, "class", "active");
+            WaitUtilsWebDriver.waitForInvisibility(flagsDropDown);
         } catch (Exception e) {
-            Assert.fail(e.toString());
+            Assert.fail("The flag " + color + " hasn't been selected", e);
         }
         return this;
     }
@@ -318,7 +319,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
         return this;
     }
 
-    public boolean isToBeAddedLaterServiceNotificationDisplayed() {
+    public boolean isServiceNotificationToBeAddedLaterDisplayed() {
         return Utils.isElementDisplayed(toBeAddedLaterServiceNotification, 10);
     }
 
@@ -412,6 +413,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     public VNextBORepairOrderDetailsPage expandServicesTable() {
         Utils.clickElement(servicesExpandArrow);
         WaitUtilsWebDriver.waitForInvisibility(servicesExpandArrow);
+        WaitUtilsWebDriver.waitForLoading();
         return this;
     }
 
@@ -509,33 +511,29 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
     private String getTextValue(String serviceId, String xpath) {
         final WebElement element = getElementInServicesTable(serviceId, xpath);
-        setAttributeWithJS(element, "style", "display: block;");
-        final String text = wait.until(ExpectedConditions.visibilityOf(element)).getText();
-        setAttributeWithJS(element, "style", "display: none;");
+        Utils.setAttributeWithJS(element, "style", "display: block;");
+        final String text = WaitUtilsWebDriver.waitForVisibility(element).getText();
+        Utils.setAttributeWithJS(element, "style", "display: none;");
         return text;
     }
 
     private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
         final WebElement element = getElementInServicesTable(serviceId, xpath);
         scrollToElement(element);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        actions
-                .clickAndHold(element)
-                .sendKeys(Keys.DELETE)
-                .sendKeys(newValue)
-                .build()
-                .perform();
+        WaitUtilsWebDriver.waitForElementToBeClickable(element);
+        Utils.sendKeysWithJS(element, newValue);
+        WaitUtilsWebDriver.waitForLoading();
         clickServiceDescriptionName(serviceDescription);
-        waitABit(500);
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     private void clickServiceDescriptionName(String serviceDescription) {
-        Objects.requireNonNull(wait.until(ExpectedConditions
-                .elementToBeClickable(getServiceByName(serviceDescription))))
+        Objects.requireNonNull(WaitUtilsWebDriver
+                .waitForElementToBeClickable(getServiceByName(serviceDescription)))
                 .click();
     }
 
-    private WebElement getElementInServicesTable(String serviceId, String xpath) {
+    public WebElement getElementInServicesTable(String serviceId, String xpath) {
         return driver.findElement(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
                     + serviceId + "']" + xpath));
     }
@@ -617,7 +615,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     }
 
     public List<String> getServicesTableHeaderValues() {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(servicesTableColumns, 10);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(servicesTableColumns);
         final List<String> stringCollection = servicesTableColumns
                 .stream()
                 .map(WebElement::getText)
@@ -725,7 +723,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
     }
 
     public VNextBOChangeTechnicianDialog clickPhaseVendorTechnicianLink() {
-        wait.until(ExpectedConditions.elementToBeClickable(phaseVendorTechnician)).click();
+        Utils.clickElement(phaseVendorTechnician);
         return PageFactory.initElements(driver, VNextBOChangeTechnicianDialog.class);
     }
 
@@ -826,14 +824,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
             waitForTotalPriceToBeUpdated(totalPrice);
             return true;
         } catch (Exception ignored) {
-            refreshPage();
-            try {
-                waitForTotalPriceToBeUpdated(totalPrice);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-            return true;
+            return false;
         }
     }
 

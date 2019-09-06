@@ -1,15 +1,9 @@
-package com.cyberiansoft.test.vnextbo.interactions;
+package com.cyberiansoft.test.vnextbo.interactions.clients;
 
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOAddressBlock;
-import com.cyberiansoft.test.baseutils.Utils;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
 
 public class VNextBOAddressBlockInteractions {
 
@@ -81,23 +75,5 @@ public class VNextBOAddressBlockInteractions {
 
     public void setZipBillTo(String zipBillTo) {
         Utils.clearAndType(addressBlock.getZipBillToInputField(), zipBillTo);
-    }
-
-    public void verifyAddressBlockIsExpanded() {
-        final List<WebElement> addressBlockElements = Arrays.asList(
-                addressBlock.getAddress1ShipToInputField(),
-                addressBlock.getAddress2ShipToInputField(),
-                addressBlock.getCityShipToInputField(),
-                addressBlock.getCountryShipToInputField(),
-                addressBlock.getStateProvinceShipToInputField(),
-                addressBlock.getZipShipToInputField());
-        try {
-            WaitUtilsWebDriver.getFluentWait(Duration.ofMillis(200), Duration.ofSeconds(5))
-                    .until(driver -> addressBlockElements
-                            .stream()
-                            .anyMatch(WebElement::isDisplayed));
-        } catch (Exception ignored) {
-            new VNextBOClientsDetailsViewInteractions().clickAddressTab();
-        }
     }
 }
