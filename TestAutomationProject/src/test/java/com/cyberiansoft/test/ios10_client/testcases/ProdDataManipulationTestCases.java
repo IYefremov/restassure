@@ -38,102 +38,104 @@ import java.io.IOException;
 
 public class ProdDataManipulationTestCases extends BaseTestCase {
 
-    private String regCode;
-    private RegularHomeScreen homescreen;
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/ios10_client/data/data-manipulation-testcases-data.json";
-    Employee employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/ios10_client/data/data-manipulation-device-employee-data.json"), Employee.class);
+	private String regCode;
+	private RegularHomeScreen homescreen;
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/ios10_client/data/data-manipulation-testcases-data.json";
+	Employee employee = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/ios10_client/data/data-manipulation-device-employee-data.json"), Employee.class);
 
-    public ProdDataManipulationTestCases() throws IOException {
-    }
+	public ProdDataManipulationTestCases() throws IOException {
+	}
 
-    @BeforeClass
-    public void setUpSuite() {
-        JSONDataProvider.dataFile = DATA_FILE;
-        mobilePlatform = MobilePlatform.IOS_REGULAR;
-        initTestUser(employee.getEmployeeName(), employee.getEmployeePassword());
-        testGetDeviceRegistrationCode(ManipulationDataProdInfo.getInstance().getBackOfficeURL(),
-                ManipulationDataProdInfo.getInstance().getUserName(), ManipulationDataProdInfo.getInstance().getUserPassword());
-        testRegisterationiOSDdevice();
-    }
+	@BeforeClass
+	public void setUpSuite() {
+		JSONDataProvider.dataFile = DATA_FILE;
+		mobilePlatform = MobilePlatform.IOS_REGULAR;
+		initTestUser(employee.getEmployeeName(), employee.getEmployeePassword());
+		testGetDeviceRegistrationCode(ManipulationDataProdInfo.getInstance().getBackOfficeURL(),
+				ManipulationDataProdInfo.getInstance().getUserName(), ManipulationDataProdInfo.getInstance().getUserPassword());
+		testRegisterationiOSDdevice();
+	}
 
-    @AfterClass()
-    public void settingDown() {
-    }
+	@AfterClass()
+	public void settingDown() {
+	}
 
-    public void testGetDeviceRegistrationCode(String backofficeurl,
-                                              String userName, String userPassword) {
+	public void testGetDeviceRegistrationCode(String backofficeurl,
+											  String userName, String userPassword) {
 
-        webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-        WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
-        BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-                BackOfficeLoginWebPage.class);
-        loginpage.userLogin(userName, userPassword);
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.userLogin(userName, userPassword);
 
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-                BackOfficeHeaderPanel.class);
-        CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		backofficeheader.clickCompanyLink();
 
-        ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
+		ActiveDevicesWebPage devicespage = new ActiveDevicesWebPage(webdriver);
+		companyWebPage.clickManageDevicesLink();
 
-        devicespage.setSearchCriteriaByName(ManipulationDataProdInfo.getInstance().getLicenseName());
-        regCode = devicespage.getFirstRegCodeInTable();
+		devicespage.setSearchCriteriaByName(ManipulationDataProdInfo.getInstance().getLicenseName());
+		regCode = devicespage.getFirstRegCodeInTable();
 
-        DriverBuilder.getInstance().getDriver().quit();
-    }
+		DriverBuilder.getInstance().getDriver().quit();
+	}
 
-    public void testRegisterationiOSDdevice() {
-        AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-        DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
-        DriverBuilder.getInstance().getAppiumDriver().quit();
-        AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
-        RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
-        LoginScreen loginscreen = selectenvscreen.selectEnvironment("Prod Environment");
-        loginscreen.registeriOSDevice(regCode);
-        RegularMainScreen mainscr = new RegularMainScreen();
-        mainscr.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
-    }
+	public void testRegisterationiOSDdevice() {
+		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		DriverBuilder.getInstance().getAppiumDriver().removeApp(IOSRegularDeviceInfo.getInstance().getDeviceBundleId());
+		DriverBuilder.getInstance().getAppiumDriver().quit();
+		AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_REGULAR);
+		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
+		LoginScreen loginscreen = selectenvscreen.selectEnvironment("Prod Environment");
+		loginscreen.registeriOSDevice(regCode);
+		RegularMainScreen mainscr = new RegularMainScreen();
+		mainscr.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
+	}
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testMyInspectionInspectionTypeMatrixInspection(String rowID,
-                                                               String description, JSONObject testData)  {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMyInspectionInspectionTypeMatrixInspection(String rowID,
+															   String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+		InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("R & Q Autobody");
-        RegularVisualInteriorScreen visualInteriorScreen =  myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
-        RegularNavigationSteps.navigateToVehicleInfoScreen();
-        RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
-        vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
-        vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
-        vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
-        vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
-        final String inspNumber = vehiclescreen.getInspectionNumber();
-        RegularNavigationSteps.navigateToClaimScreen();
-        RegularClaimScreen claimscreen = new RegularClaimScreen();
-        claimscreen.selectInsuranceCompany(inspdata.getInsuranceCompanyData().getInsuranceCompanyName());
-        claimscreen.setClaim(inspdata.getInsuranceCompanyData().getClaimNumber());
-        claimscreen.setPolicy(inspdata.getInsuranceCompanyData().getPolicyNumber());
-        claimscreen.setDeductible(inspdata.getInsuranceCompanyData().getDeductible());
-        claimscreen.setAccidentDate();
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		RegularCustomersScreen customersScreen = new RegularCustomersScreen();
+		customersScreen.selectCustomer("R & Q Autobody");
+		RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
+		vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
+		vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
+		vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
+		vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
+		final String inspNumber = vehiclescreen.getInspectionNumber();
+		RegularNavigationSteps.navigateToClaimScreen();
+		RegularClaimScreen claimscreen = new RegularClaimScreen();
+		claimscreen.selectInsuranceCompany(inspdata.getInsuranceCompanyData().getInsuranceCompanyName());
+		claimscreen.setClaim(inspdata.getInsuranceCompanyData().getClaimNumber());
+		claimscreen.setPolicy(inspdata.getInsuranceCompanyData().getPolicyNumber());
+		claimscreen.setDeductible(inspdata.getInsuranceCompanyData().getDeductible());
+		claimscreen.setAccidentDate();
 
-        RegularNavigationSteps.navigateToScreen("State Farm");
-        RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
-        for (VehiclePartData vehiclePartData : inspdata.getMatrixServiceData().getVehiclePartsData()) {
-            RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
-            vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
-            for (ServiceData service : vehiclePartData.getVehiclePartAdditionalServices())
-                vehiclePartScreen.selectDiscaunt(service.getServiceName());
-            vehiclePartScreen.clickSave();
-            pricematrix = new RegularPriceMatrixScreen();
-        }
-        RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
-    }
+		RegularNavigationSteps.navigateToScreen("State Farm");
+		RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
+		for (VehiclePartData vehiclePartData : inspdata.getMatrixServiceData().getVehiclePartsData()) {
+			RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+			vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
+			for (ServiceData service : vehiclePartData.getVehiclePartAdditionalServices())
+				vehiclePartScreen.selectDiscaunt(service.getServiceName());
+			vehiclePartScreen.clickSave();
+			pricematrix = new RegularPriceMatrixScreen();
+		}
+		RegularInspectionsSteps.saveInspection();
+		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
+		myinspectionsscreen.clickHomeButton();
+	}
 
     /*@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testTeemInspectionInspectionTypeMatrixInspection(String rowID,
@@ -174,175 +176,175 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         myinspectionsscreen.clickHomeButton();
     }*/
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testMyInspectionInspectionTypePaintInspection(String rowID,
-                                                               String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMyInspectionInspectionTypePaintInspection(String rowID,
+															  String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+		InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("Pitt Paint & Body");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.PAINT_INSPECTION);
-        RegularNavigationSteps.navigateToVehicleInfoScreen();
-        RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
-        vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
-        vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
-        vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
-        vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
-        final String inspNumber = vehiclescreen.getInspectionNumber();
-        RegularNavigationSteps.navigateToClaimScreen();
-        RegularClaimScreen claimscreen = new RegularClaimScreen();
-        claimscreen.selectInsuranceCompany(inspdata.getInsuranceCompanyData().getInsuranceCompanyName());
-        claimscreen.setClaim(inspdata.getInsuranceCompanyData().getClaimNumber());
-        claimscreen.setPolicy(inspdata.getInsuranceCompanyData().getPolicyNumber());
-        claimscreen.setDeductible(inspdata.getInsuranceCompanyData().getDeductible());
-        claimscreen.setAccidentDate();
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		RegularCustomersScreen customersScreen = new RegularCustomersScreen();
+		customersScreen.selectCustomer("Pitt Paint & Body");
+		RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.PAINT_INSPECTION);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
+		vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
+		vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
+		vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
+		vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
+		final String inspNumber = vehiclescreen.getInspectionNumber();
+		RegularNavigationSteps.navigateToClaimScreen();
+		RegularClaimScreen claimscreen = new RegularClaimScreen();
+		claimscreen.selectInsuranceCompany(inspdata.getInsuranceCompanyData().getInsuranceCompanyName());
+		claimscreen.setClaim(inspdata.getInsuranceCompanyData().getClaimNumber());
+		claimscreen.setPolicy(inspdata.getInsuranceCompanyData().getPolicyNumber());
+		claimscreen.setDeductible(inspdata.getInsuranceCompanyData().getDeductible());
+		claimscreen.setAccidentDate();
 
-        RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        }
-        RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
-    }
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+		for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
+			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
+			selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
+			if (moneyService.getServiceQuantity() != null)
+				selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		}
+		RegularInspectionsSteps.saveInspection();
+		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
+		myinspectionsscreen.clickHomeButton();
+	}
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testMyInspectionInspectionTypeInteriorInspection(String rowID,
-                                                              String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMyInspectionInspectionTypeInteriorInspection(String rowID,
+																 String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+		InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("Plaza Kia");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.INTERIOR_INSPECTION);
-        RegularNavigationSteps.navigateToVehicleInfoScreen();
-        RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
-        vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
-        vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
-        vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
-        vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
-        final String inspNumber = vehiclescreen.getInspectionNumber();
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		RegularCustomersScreen customersScreen = new RegularCustomersScreen();
+		customersScreen.selectCustomer("Plaza Kia");
+		RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.INTERIOR_INSPECTION);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
+		vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
+		vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
+		vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
+		vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 
-        RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        }
-        RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
-    }
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+		for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
+			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
+			selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
+			if (moneyService.getServiceQuantity() != null)
+				selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		}
+		RegularInspectionsSteps.saveInspection();
+		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
+		myinspectionsscreen.clickHomeButton();
+	}
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testMyInspectionInspectionTypeWheelInspection(String rowID,
-                                                                 String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMyInspectionInspectionTypeWheelInspection(String rowID,
+															  String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+		InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("R & Q Autobody");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.WHEEL_INSPECTION);
-        RegularNavigationSteps.navigateToVehicleInfoScreen();
-        RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
-        vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
-        vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
-        vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
-        vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
-        final String inspNumber = vehiclescreen.getInspectionNumber();
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		RegularCustomersScreen customersScreen = new RegularCustomersScreen();
+		customersScreen.selectCustomer("R & Q Autobody");
+		RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.WHEEL_INSPECTION);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
+		vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
+		vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
+		vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
+		vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 
-        RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        }
-        RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
-    }
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+		for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
+			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
+			selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
+			if (moneyService.getServiceQuantity() != null)
+				selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		}
+		RegularInspectionsSteps.saveInspection();
+		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
+		myinspectionsscreen.clickHomeButton();
+	}
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testMyInspectionInspectionTypeInteriorDetail(String rowID,
-                                                              String description, JSONObject testData)  {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMyInspectionInspectionTypeInteriorDetail(String rowID,
+															 String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+		InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("R & Q Autobody");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.INTERIOR_DETAIL);
-        RegularNavigationSteps.navigateToVehicleInfoScreen();
-        RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
-        vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
-        vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
-        vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
-        vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
-        final String inspNumber = vehiclescreen.getInspectionNumber();
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		RegularCustomersScreen customersScreen = new RegularCustomersScreen();
+		customersScreen.selectCustomer("R & Q Autobody");
+		RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.INTERIOR_DETAIL);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
+		vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
+		vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
+		vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
+		vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 
-        RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        }
-        RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
-    }
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+		for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
+			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
+			selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
+			if (moneyService.getServiceQuantity() != null)
+				selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		}
+		RegularInspectionsSteps.saveInspection();
+		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
+		myinspectionsscreen.clickHomeButton();
+	}
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testMyInspectionInspectionTypeExteriorDetail(String rowID,
-                                                             String description, JSONObject testData)  {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMyInspectionInspectionTypeExteriorDetail(String rowID,
+															 String description, JSONObject testData) {
 
-        InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+		InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("Torrington Detail");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.EXTERIOR_DETAIL);
-        RegularNavigationSteps.navigateToVehicleInfoScreen();
-        RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
-        vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
-        vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
-        vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
-        vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
-        final String inspNumber = vehiclescreen.getInspectionNumber();
+		RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen.clickAddInspectionButton();
+		RegularCustomersScreen customersScreen = new RegularCustomersScreen();
+		customersScreen.selectCustomer("Torrington Detail");
+		RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.EXTERIOR_DETAIL);
+		RegularNavigationSteps.navigateToVehicleInfoScreen();
+		RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
+		vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
+		vehiclescreen.setStock(inspdata.getVehicleInfo().getStockNumber());
+		vehiclescreen.setRO(inspdata.getVehicleInfo().getRoNumber());
+		vehiclescreen.setMileage(inspdata.getVehicleInfo().getMileage());
+		final String inspNumber = vehiclescreen.getInspectionNumber();
 
-        RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        }
-        RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
-    }
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+		for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
+			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
+			selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
+			if (moneyService.getServiceQuantity() != null)
+				selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		}
+		RegularInspectionsSteps.saveInspection();
+		Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
+		myinspectionsscreen.clickHomeButton();
+	}
 }

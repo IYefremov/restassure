@@ -569,7 +569,8 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertNotEquals(partId, "", "The service hasn't been displayed");
 
         final WebElement partActionsIcon = detailsPage.clickPartActionsIconForPart(data.getPart());
-        final VNextBOOrderServiceNotesDialog notesDialog = detailsPage.openNotesDialogForPart(partActionsIcon);
+        final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog(webdriver);
+                detailsPage.openNotesDialogForPart(partActionsIcon);
 
         Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 

@@ -95,25 +95,25 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	private WebElement cancelbtn;
 
 	@FindBy(className = "ModalDialog")
-    private WebElement modalDialog;
+	private WebElement modalDialog;
 
 	@FindBy(xpath = "//span[text()='Other']")
-    private WebElement otherTab;
+	private WebElement otherTab;
 
 	@FindBy(xpath = "//input[contains(@id, 'cbUseSingleWOType')]")
-    private WebElement singleWOtypeCheckbox;
+	private WebElement singleWOtypeCheckbox;
 
-    @FindBy(xpath = "//div[contains(@id, 'Card_pnlOrderType')]")
-    private WebElement singleWOtype;
+	@FindBy(xpath = "//div[contains(@id, 'Card_pnlOrderType')]")
+	private WebElement singleWOtype;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboOrderType")
-    private ComboBox singleWOtypeCombobox;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboOrderType")
+	private ComboBox singleWOtypeCombobox;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboOrderType_DropDown")
-    private DropDown singleWOtypeDropDown;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboOrderType_DropDown")
+	private DropDown singleWOtypeDropDown;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboOrderType_Input")
-    private WebElement singleWOtypeInput;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboOrderType_Input")
+	private WebElement singleWOtypeInput;
 
 	public NewClientDialogWebPage(WebDriver driver) {
 		super(driver);
@@ -133,9 +133,8 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		clickOKButton();
 	}
 
-	public NewClientDialogWebPage switchToRetailCustomer() {
+	public void switchToRetailCustomer() {
 		checkboxSelect("Retail");
-		return this;
 	}
 
 	public boolean isCompanyRetail() {
@@ -144,18 +143,16 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		return isCheckboxChecked(driver.findElement(By.xpath("//label[text()='Retail']")));
 	}
 
-	public NewClientDialogWebPage switchToWholesaleCustomer() {
+	public void switchToWholesaleCustomer() {
 		checkboxSelect("Wholesale");
-		return this;
 	}
 
 	public boolean isCompanyWholesale() {
 		return isCheckboxChecked(driver.findElement(By.xpath("//label[text()='Wholesale']")));
 	}
 
-	public NewClientDialogWebPage setCompanyName(String companyname) {
+	public void setCompanyName(String companyname) {
 		clearAndType(companynamefld, companyname);
-		return this;
 	}
 
 	public String getCompanyName() {
@@ -213,10 +210,10 @@ public class NewClientDialogWebPage extends BaseWebPage {
 	public boolean isWorkHoursStartVisible() {
 //		Thread.sleep(5000);
 //		return workhourstart.isDisplayed();
-		try{
+		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Card_rtpWorkDayStart_dateInput")));
 			return true;
-		}catch(TimeoutException e){
+		} catch (TimeoutException e) {
 			return false;
 		}
 	}
@@ -231,10 +228,10 @@ public class NewClientDialogWebPage extends BaseWebPage {
 
 	public boolean isWorkHoursFinishtVisible() {
 //		return workhourfinish.isDisplayed();
-		try{
+		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Card_rtpWorkDayFinish_dateInput")));
 			return true;
-		}catch(TimeoutException e){
+		} catch (TimeoutException e) {
 			return false;
 		}
 	}
@@ -302,7 +299,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 
 	public void clickCopyToBillToButton() {
 		clickAndWait(copytobilltobtn);
-    }
+	}
 
 	public void selectBillToAddress() {
 		click(driver.findElement(By.xpath("//span[@class='rtsTxt' and text()='Bill To']")));
@@ -336,59 +333,54 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		return isCheckboxChecked(driver.findElement(By.xpath("//label[text()='" + optionname + "']")));
 	}
 
-	public ClientsWebPage clickOKButton() {
-	    try {
-            wait.until(ExpectedConditions.elementToBeClickable(OKbtn)).click();
-        } catch (Exception e) {
-	        Assert.fail("The New Client Dialog 'OK' button has not been clicked");
-        }
-	    waitForLoading();
-        return PageFactory.initElements(driver, ClientsWebPage.class);
+	public void clickOKButton() {
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(OKbtn)).click();
+		} catch (Exception e) {
+			Assert.fail("The New Client Dialog 'OK' button has not been clicked");
+		}
+		waitForLoading();
 	}
 
-	public ClientsWebPage clickCancelButton() {
+	public void clickCancelButton() {
 		click(cancelbtn);
 		wait.until(ExpectedConditions.titleContains("Customers"));
-        return PageFactory.initElements(driver, ClientsWebPage.class);
 	}
 
 	public void clickToLinkInClientsEdit(String name) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText(name))).click();
 	}
 
-	public NewClientDialogWebPage clickOtherTab() {
-	    try {
-            wait.ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.elementToBeClickable(otherTab))
-                    .click();
-            wait.until(ExpectedConditions.visibilityOf(singleWOtypeCheckbox));
-        } catch (Exception e) {
-            Assert.fail("The 'Other' tab has not been clicked", e);
-        }
-        return this;
-    }
+	public void clickOtherTab() {
+		try {
+			wait.ignoring(StaleElementReferenceException.class)
+					.until(ExpectedConditions.elementToBeClickable(otherTab))
+					.click();
+			wait.until(ExpectedConditions.visibilityOf(singleWOtypeCheckbox));
+		} catch (Exception e) {
+			Assert.fail("The 'Other' tab has not been clicked", e);
+		}
+	}
 
-	public NewClientDialogWebPage clickSingleWOtypeCheckbox() {
-	    try {
-            wait.until(ExpectedConditions.elementToBeClickable(singleWOtypeCheckbox)).click();
-            wait.until(ExpectedConditions.attributeContains(singleWOtype, "display", "block"));
-        } catch (Exception e) {
-            Assert.fail("The 'Single WO type checkbox' has not been checked", e);
-        }
-        return this;
-    }
+	public void clickSingleWOtypeCheckbox() {
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(singleWOtypeCheckbox)).click();
+			wait.until(ExpectedConditions.attributeContains(singleWOtype, "display", "block"));
+		} catch (Exception e) {
+			Assert.fail("The 'Single WO type checkbox' has not been checked", e);
+		}
+	}
 
-    public NewClientDialogWebPage selectRandomSingleWOtype() {
-        selectRandomComboboxValue(singleWOtypeCombobox, singleWOtypeDropDown);
-        return this;
-    }
+	public void selectRandomSingleWOtype() {
+		selectRandomComboboxValue(singleWOtypeCombobox, singleWOtypeDropDown);
+	}
 
-    public String getSingleWOtype() {
-        return wait.until(ExpectedConditions.visibilityOf(singleWOtypeInput)).getAttribute("value");
-    }
+	public String getSingleWOtype() {
+		return wait.until(ExpectedConditions.visibilityOf(singleWOtypeInput)).getAttribute("value");
+	}
 
 	public boolean isSundayStartTimeVisible() {
-		try {															
+		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl05_ctl01_Card_rtpSundayStart_dateInput")));
 			return true;
 		} catch (TimeoutException e) {

@@ -16,21 +16,23 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class BackOfficeTimesheetsTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOTimesheetsData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOTimesheetsData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void checkMondaySundaySwitch(String rowID, String description, JSONObject testData) {
 
-        BOTimesheetsData data = JSonDataParser.getTestDataFromJson(testData, BOTimesheetsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOTimesheetsData data = JSonDataParser.getTestDataFromJson(testData, BOTimesheetsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        TimesheetsWebPage timesheetspage = backOfficeHeader.clickTimesheetsLink();
-		TimesheetsSectionWebPage timesheetsSectionPage = timesheetspage.clickTimesheets();
+		TimesheetsWebPage timesheetspage = new TimesheetsWebPage(webdriver);
+		backOfficeHeader.clickTimesheetsLink();
+		TimesheetsSectionWebPage timesheetsSectionPage = new TimesheetsSectionWebPage(webdriver);
+		timesheetspage.clickTimesheets();
 		timesheetsSectionPage.setFromDate(data.getFromDate());
 		timesheetsSectionPage.setToDate(data.getToDate());
 		timesheetsSectionPage.setTeam(data.getTeam());

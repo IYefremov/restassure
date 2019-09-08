@@ -78,11 +78,11 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 
 	@FindBy(xpath = "//img[@src='/Reserved.ReportViewerWebControl.axd?OpType=Resource&Version=10.0.40219.329&Name=Microsoft.ReportingServices.Rendering.HtmlRenderer.RendererResources.sortAsc.gif']")
 	private WebElement ascFilterBTN;
-	
-	@FindBy(id="VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")
+
+	@FindBy(id = "VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")
 	private WebElement contentTable;
-	
-	@FindBy(id="ctl00_ctl00_Content_Main_ctl01_filterer_dpDateFrom_dateInput")
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_dpDateFrom_dateInput")
 	private WebElement fromDateField;
 
 	public TechnicianCommissionsWebPage(WebDriver driver) {
@@ -138,7 +138,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='" + technician + "']")));
 		driver.findElement(By.xpath("//li[text()='" + technician + "']")).click();
 	}
-	
+
 	public void selectSearchTimeFrame(WebConstants.TimeFrameValues timeframe) {
 		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe.getName());
 	}
@@ -167,17 +167,15 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
 
-    public WebPageWithFilter setSearchFromDate(String date) {
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")))).clear();
-        driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys(date);
-        return PageFactory.initElements(driver, WebPageWithFilter.class);
-    }
+	public void setSearchFromDate(String date) {
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")))).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys(date);
+	}
 
-    public WebPageWithFilter setSearchToDate(String date) {
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")))).clear();
-        driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys(date);
-        return PageFactory.initElements(driver, WebPageWithFilter.class);
-    }
+	public void setSearchToDate(String date) {
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")))).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys(date);
+	}
 
 	public void verifySearchResults(String ordernumber) {
 		wait.until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement()
@@ -211,7 +209,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Net']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Tech. $']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Comm']")));
-		} catch(Exception e){
+		} catch (Exception e) {
 			return false;
 		}
 		return true;
@@ -221,19 +219,19 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions
 				.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
 		List<WebElement> allNames = new ArrayList<>();
-		
+
 		int counter = 4;
-		while(true){
-			try{
-				allNames.add(driver.findElement(By.xpath("//a[@tabindex='"+counter+"']")));
-				counter +=2;
-			}catch(Exception e){
+		while (true) {
+			try {
+				allNames.add(driver.findElement(By.xpath("//a[@tabindex='" + counter + "']")));
+				counter += 2;
+			} catch (Exception e) {
 				break;
 			}
 		}
 
 		List<String> results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
-		if(results.size() == 0){
+		if (results.size() == 0) {
 			return true;
 		}
 		String firstResultBeforeSort = results.get(0);
@@ -244,16 +242,16 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 
 		if (!firstResultBeforeSort.equals(lastResultBeforeSort)) {
 			originalFilterBTN.get(0).click();
-            waitForLoading();
+			waitForLoading();
 
 			allNames = new ArrayList<>();
-			
+
 			counter = 4;
-			while(true){
-				try{
-					allNames.add(driver.findElement(By.xpath("//a[@tabindex='"+counter+"']")));
-					counter +=2;
-				}catch(Exception e){
+			while (true) {
+				try {
+					allNames.add(driver.findElement(By.xpath("//a[@tabindex='" + counter + "']")));
+					counter += 2;
+				} catch (Exception e) {
 					break;
 				}
 			}
@@ -265,15 +263,15 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 			if (!firstResultBeforeSort.equals(lastResultAfterSort)
 					&& !lastResultBeforeSort.equals(firstResultAfterSort)) {
 				ascFilterBTN.click();
-                waitForLoading();
+				waitForLoading();
 				allNames.clear();
-				
+
 				counter = 4;
-				while(true){
-					try{
-						allNames.add(driver.findElement(By.xpath("//a[@tabindex='"+counter+"']")));
-						counter +=2;
-					}catch(Exception e){
+				while (true) {
+					try {
+						allNames.add(driver.findElement(By.xpath("//a[@tabindex='" + counter + "']")));
+						counter += 2;
+					} catch (Exception e) {
 						break;
 					}
 				}

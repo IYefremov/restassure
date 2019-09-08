@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.automation.remarks.testng.VideoListener;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.dataclasses.bo.BOCompanyData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -9,7 +8,6 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -17,22 +15,23 @@ import java.util.List;
 //@Listeners(VideoListener.class)
 public class BackOfficeCompanyTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyUsersSearch(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyUsersSearch(String rowID, String description, JSONObject testData) {
 
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        UsersWebPage usersPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickUsersLink();
+		UsersWebPage usersPage = new UsersWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickUsersLink();
 
 		usersPage.verifyTabsAreVisible();
 		usersPage.verifyUsersTableColumnsAreVisible();
@@ -82,16 +81,17 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		usersPage.isUserActive(data.getUserFirstName(), data.getUserLastName());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyEmployeesSearch(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyEmployeesSearch(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        EmployeesWebPage employeesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickEmployeesLink();
-        
-        employeesPage.verifyTabsAreVisible();
+		EmployeesWebPage employeesPage = new EmployeesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickEmployeesLink();
+
+		employeesPage.verifyTabsAreVisible();
 		employeesPage.verifyEmployeesTableColumnsAreVisible();
 
 		Assert.assertEquals(data.getPage1(), employeesPage.getCurrentlySelectedPageNumber());
@@ -138,16 +138,17 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 	}
 
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyServicesSearch(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyServicesSearch(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        ServicesWebPage servicesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickServicesLink();
+		ServicesWebPage servicesPage = new ServicesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickServicesLink();
 
-        servicesPage.verifyServicesTableColumnsAreVisible();
+		servicesPage.verifyServicesTableColumnsAreVisible();
 
 		Assert.assertEquals(data.getPage1(), servicesPage.getCurrentlySelectedPageNumber());
 		Assert.assertEquals(data.getPage1(), servicesPage.getGoToPageFieldValue());
@@ -180,14 +181,15 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		servicesPage.activeServiceExists(data.getServiceName());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyTeamsSearch(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyTeamsSearch(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        TeamsWebPage teamsPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickTeamsLink();
+		TeamsWebPage teamsPage = new TeamsWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickTeamsLink();
 
 		teamsPage.verifyTeamsTableColumnsAreVisible();
 
@@ -228,16 +230,17 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		teamsPage.verifySearchResultsByTeamLocation(data.getTeamLocation());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyJobsSearch(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyJobsSearch(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        JobsWebPage jobsPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickJobsLink();
+		JobsWebPage jobsPage = new JobsWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickJobsLink();
 
-        jobsPage.verifyJobsTableColumnsAreVisible();
+		jobsPage.verifyJobsTableColumnsAreVisible();
 
 		Assert.assertEquals(data.getPage1(), jobsPage.getCurrentlySelectedPageNumber());
 		Assert.assertEquals(data.getPage1(), jobsPage.getGoToPageFieldValue());
@@ -274,28 +277,31 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		jobsPage.isJobPresent(data.getJob());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyJobsInsuranceCompanies(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyJobsInsuranceCompanies(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        InsuranceCompaniesWePpage insuranceCompaniesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickInsuranceCompaniesLink();
+		InsuranceCompaniesWebPage insuranceCompaniesPage = new InsuranceCompaniesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickInsuranceCompaniesLink();
 
-        insuranceCompaniesPage.verifyInsuranceCompaniesTableColumnsAreVisible();
+		insuranceCompaniesPage.verifyInsuranceCompaniesTableColumnsAreVisible();
 		Assert.assertTrue(insuranceCompaniesPage.addInsuranceCompanyButtonExists());
 
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyServiceAdvisors(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyServiceAdvisors(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        ServiceAdvisorsWebPage serviceadvisorspage = backOfficeHeader
-                .clickCompanyLink()
-                .clickServiceAdvisorsLink();
+		ServiceAdvisorsWebPage serviceadvisorspage = new ServiceAdvisorsWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickServiceAdvisorsLink();
+
 
 		serviceadvisorspage.verifyServiceAdvisorsTableColumnsAreVisible();
 
@@ -331,42 +337,44 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		serviceadvisorspage.serviceAdvisorExists(data.getUserFirstName(), data.getUserLastName());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyQuestionForms(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyQuestionForms(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        QuestionsFormsWebPage questionsRormsPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickQuestionsFormsLink();
-        
-		questionsRormsPage.verifyQuestionFormsTableColumnsAreVisible();
-		questionsRormsPage.verifyQuestionSectionsTableColumnsAreVisible();
-		questionsRormsPage.verifyPrintTemplatesTableColumnsAreVisible();
-		questionsRormsPage.createQuestionSection(data.getQuestionSectionName());
-		questionsRormsPage.addQuestionForQuestionSection(data.getQuestionSectionName(), data.getQuestionName());
+		QuestionsFormsWebPage questionsFormsWebPage = new QuestionsFormsWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickQuestionsFormsLink();
 
-		while (questionsRormsPage.isQuestionFormExists(data.getQuestionFormName())) {
-			questionsRormsPage.deleteQuestionForm(data.getQuestionFormName());
+		questionsFormsWebPage.verifyQuestionFormsTableColumnsAreVisible();
+		questionsFormsWebPage.verifyQuestionSectionsTableColumnsAreVisible();
+		questionsFormsWebPage.verifyPrintTemplatesTableColumnsAreVisible();
+		questionsFormsWebPage.createQuestionSection(data.getQuestionSectionName());
+		questionsFormsWebPage.addQuestionForQuestionSection(data.getQuestionSectionName(), data.getQuestionName());
+
+		while (questionsFormsWebPage.isQuestionFormExists(data.getQuestionFormName())) {
+			questionsFormsWebPage.deleteQuestionForm(data.getQuestionFormName());
 		}
-		questionsRormsPage.createQuestionForm(data.getQuestionFormName());
-		questionsRormsPage.editAndAssignSectionToQuestionForm(data.getQuestionFormName(), data.getQuestionSectionName());
-		questionsRormsPage.verifyQuestionIsAssignedToQuestionFormViaPreview(data.getQuestionFormName(), data.getQuestionName());
+		questionsFormsWebPage.createQuestionForm(data.getQuestionFormName());
+		questionsFormsWebPage.editAndAssignSectionToQuestionForm(data.getQuestionFormName(), data.getQuestionSectionName());
+		questionsFormsWebPage.verifyQuestionIsAssignedToQuestionFormViaPreview(data.getQuestionFormName(), data.getQuestionName());
 
-		questionsRormsPage.deleteQuestionForm(data.getQuestionFormName());
-		Assert.assertFalse(questionsRormsPage.isQuestionFormExists(data.getQuestionFormName()));
-		questionsRormsPage.deleteQuestionSections(data.getQuestionSectionName());
-		Assert.assertFalse(questionsRormsPage.isQuestionSectionExists(data.getQuestionSectionName()));
+		questionsFormsWebPage.deleteQuestionForm(data.getQuestionFormName());
+		Assert.assertFalse(questionsFormsWebPage.isQuestionFormExists(data.getQuestionFormName()));
+		questionsFormsWebPage.deleteQuestionSections(data.getQuestionSectionName());
+		Assert.assertFalse(questionsFormsWebPage.isQuestionSectionExists(data.getQuestionSectionName()));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanySupplies(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanySupplies(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        SuppliesWebPage suppliesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickSuppliesLink();
+		SuppliesWebPage suppliesPage = new SuppliesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickSuppliesLink();
 
 		suppliesPage.verifySuppliesTableColumnsAreVisible();
 		suppliesPage.createNewSupply(data.getSupplyName());
@@ -375,14 +383,15 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertFalse(suppliesPage.isSupplyExists(data.getSupplyNameEdited()));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyExpensesTypes(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyExpensesTypes(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        ExpensesTypesWebPage expensesTypesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickExpensesTypesLink();
+		ExpensesTypesWebPage expensesTypesPage = new ExpensesTypesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickExpensesTypesLink();
 
 		expensesTypesPage.verifyExpensesTypesColumnsAreVisible();
 		expensesTypesPage.createNewExpenseType(data.getExpenseType());
@@ -395,14 +404,15 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		}
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyVehicleParts(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyVehicleParts(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        VehiclePartsWebPage vehiclePartsPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickVehiclePartsLink();
+		VehiclePartsWebPage vehiclePartsPage = new VehiclePartsWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickVehiclePartsLink();
 
 		vehiclePartsPage.verifyVehiclePartsColumnsAreVisible();
 		vehiclePartsPage.createNewVehicleParWithAllServicesSelected(data.getVehiclePart());
@@ -411,20 +421,21 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		Assert.assertFalse(vehiclePartsPage.isVehiclePartExists(data.getNewVehiclePartName()));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyEmployeesArchive(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyEmployeesArchive(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        EmployeesWebPage employeesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickEmployeesLink();
+		EmployeesWebPage employeesPage = new EmployeesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickEmployeesLink();
 
 		employeesPage.makeSearchPanelVisible();
 		employeesPage.setSearchUserParameter(data.getEmployeeFirstName().substring(0, 5));
 		employeesPage.clickFindButton();
-        employeesPage.verifyEmployeeIsActive(data.getEmployeeName());
-        for (int i = 0; i < 3; i++) {
+		employeesPage.verifyEmployeeIsActive(data.getEmployeeName());
+		for (int i = 0; i < 3; i++) {
 			employeesPage.archiveEmployee(data.getEmployeeName());
 			employeesPage.clickArchivedTab();
 
@@ -440,15 +451,16 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		}
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyServicesArchive(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyServicesArchive(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        ServicesWebPage servicesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickServicesLink();
-        
+		ServicesWebPage servicesPage = new ServicesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickServicesLink();
+
 //		servicesPage.makeSearchPanelVisible();
 		servicesPage.setServiceSearchCriteria(data.getServiceName());
 		servicesPage.clickFindButton();
@@ -464,14 +476,15 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		}
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyUsersArchive(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyUsersArchive(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        UsersWebPage usersPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickUsersLink();
+		UsersWebPage usersPage = new UsersWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickUsersLink();
 
 		usersPage.makeSearchPanelVisible();
 		usersPage.setSearchUserParameter(data.getUserLastName());
@@ -492,14 +505,15 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		}
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testDependencyBetweenVisibleAndRequiredOptions(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testDependencyBetweenVisibleAndRequiredOptions(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        InvoiceTypesWebPage invoicestypespage = backOfficeHeader
-                .clickCompanyLink()
-                .clickInvoiceTypesLink();
+		InvoiceTypesWebPage invoicestypespage = new InvoiceTypesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickInvoiceTypesLink();
 
 		NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
 		Assert.assertFalse(newinvoicetypedialog.isRequiredCheckBoxVisible());
@@ -510,201 +524,217 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		newinvoicetypedialog.clickCancelAddInvoiceTypeButton();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testAdminCanSeeOnlyServicesSelectedOnVehicleParts(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testAdminCanSeeOnlyServicesSelectedOnVehicleParts(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
-        VehiclePartsWebPage vehiclePartsPage = companyPage.clickVehiclePartsLink();
-        
+		VehiclePartsWebPage vehiclePartsPage = new VehiclePartsWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickVehiclePartsLink();
+
 		vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
 		Assert.assertEquals(data.getVehiclePart(), vehiclePartsPage.getVehiclePartNameField().getAttribute("value"));
 
-        vehiclePartsPage.verifyThatAssignedServicesListIsEmpty();
-		companyPage = backOfficeHeader.clickCompanyLink();
-		PriceMatricesWebPage pricematriceswebpage = companyPage.clickPriceMatricesLink();
+		vehiclePartsPage.verifyThatAssignedServicesListIsEmpty();
+		companyWebPage = new CompanyWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		PriceMatricesWebPage pricematriceswebpage = new PriceMatricesWebPage(webdriver);
+		companyWebPage.clickPriceMatricesLink();
 		pricematriceswebpage.clickPricesForPriceMatrix(data.getPriceMatrix());
 		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(data.getVehiclePart());
 		Assert.assertEquals(0, vehiclePartsPage.getAssignedServicesList().size());
 		vehiclePartsPage.cancelNewVehiclePart();
 
-		companyPage = backOfficeHeader.clickCompanyLink();
-		vehiclePartsPage = companyPage.clickVehiclePartsLink();
+		companyWebPage = new CompanyWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		vehiclePartsPage = new VehiclePartsWebPage(webdriver);
+		companyWebPage.clickVehiclePartsLink();
 		vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
-        data.getServiceNames().forEach(vehiclePartsPage::assignServiceForVehiclePart);
-        vehiclePartsPage.saveNewVehiclePart();
+		data.getServiceNames().forEach(vehiclePartsPage::assignServiceForVehiclePart);
+		vehiclePartsPage.saveNewVehiclePart();
 
-		companyPage = backOfficeHeader.clickCompanyLink();
-		pricematriceswebpage = companyPage.clickPriceMatricesLink();
+		companyWebPage = new CompanyWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		pricematriceswebpage = new PriceMatricesWebPage(webdriver);
+		companyWebPage.clickPriceMatricesLink();
 		pricematriceswebpage.clickPricesForPriceMatrix(data.getPriceMatrix());
 		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(data.getVehiclePart());
 		Assert.assertEquals(2, vehiclePartsPage.getAvailableServicesList().size());
 		data.getServiceNames().forEach(vehiclePartsPage::selectAvailableServiceForVehiclePart);
 		vehiclePartsPage.cancelNewVehiclePart();
 
-		companyPage = backOfficeHeader.clickCompanyLink();
-		vehiclePartsPage = companyPage.clickVehiclePartsLink();
+		companyWebPage = new CompanyWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		vehiclePartsPage = new VehiclePartsWebPage(webdriver);
+		companyWebPage.clickVehiclePartsLink();
 		vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
-        data.getServiceNames().forEach(vehiclePartsPage::unassignServiceForVehiclePart);
+		data.getServiceNames().forEach(vehiclePartsPage::unassignServiceForVehiclePart);
 		vehiclePartsPage.saveNewVehiclePart();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyAllSelectedServicesOnVehiclePartWillBeAssignedToMatrixPanel(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
-        VehiclePartsWebPage vehiclePartsPage = companyPage.clickVehiclePartsLink();
+		VehiclePartsWebPage vehiclePartsPage = new VehiclePartsWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickVehiclePartsLink();
 
-        vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
+		vehiclePartsPage.clickEditButtonForVehiclePart(data.getVehiclePart());
 		Assert.assertEquals(data.getVehiclePart(), vehiclePartsPage.getVehiclePartNameField().getAttribute("value"));
 		data.getServiceNames().forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
 		vehiclePartsPage.saveNewVehiclePart();
 
-		companyPage = backOfficeHeader.clickCompanyLink();
-		PriceMatricesWebPage pricematriceswebpage = companyPage.clickPriceMatricesLink();
+		companyWebPage = new CompanyWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		PriceMatricesWebPage pricematriceswebpage = new PriceMatricesWebPage(webdriver);
+		companyWebPage.clickPriceMatricesLink();
 		pricematriceswebpage.clickAddPriceMarixButton();
 		pricematriceswebpage.setPriceMarixName(data.getPriceMatrix());
 		pricematriceswebpage.selectPriceMatrixService(data.getPriceMatrixService());
 		data.getDamageSeverities().forEach(pricematriceswebpage::assignPriceMatrixDamageSeverity);
-        data.getDamageSizes().forEach(pricematriceswebpage::assignPriceMatrixDamageSize);
+		data.getDamageSizes().forEach(pricematriceswebpage::assignPriceMatrixDamageSize);
 		pricematriceswebpage.assignPriceMatrixVehiclePart(data.getPriceMatrixVehiclePart());
 		pricematriceswebpage.saveNewPriceMatrix();
 
 		pricematriceswebpage.clickPricesForPriceMatrix(data.getPriceMatrix());
 		vehiclePartsPage = pricematriceswebpage.clickPricesVehiclePartLink(data.getVehiclePart());
-        data.getServiceNames().forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
+		data.getServiceNames().forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
 
-        data.getServiceNames().forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
-        vehiclePartsPage.verifyThatAvailableServicesListIsEmpty();
+		data.getServiceNames().forEach(vehiclePartsPage::selectAssignedServiceForVehiclePart);
+		vehiclePartsPage.verifyThatAvailableServicesListIsEmpty();
 
-		companyPage = backOfficeHeader.clickCompanyLink();
-		pricematriceswebpage = companyPage.clickPriceMatricesLink();
+		companyWebPage = new CompanyWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		pricematriceswebpage = new PriceMatricesWebPage(webdriver);
+		companyWebPage.clickPriceMatricesLink();
 		pricematriceswebpage.deletePriceMatrix(data.getPriceMatrix());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testReassignEmployeeForTeam(String rowID, String description, JSONObject testData) {
+	public void testReassignEmployeeForTeam(String rowID, String description, JSONObject testData) {
 
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        EmployeesWebPage employeesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickEmployeesLink()
-                .makeSearchPanelVisible()
-                .setSearchUserParameter(data.getEmployeeName())
-                .clickFindButton()
-                .verifyEmployeesTableColumnsAreVisible()
-                .verifyEmployeeIsActive(data.getEmployeeName());
+		EmployeesWebPage employeesPage = new EmployeesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickEmployeesLink();
+		employeesPage.makeSearchPanelVisible();
+		employeesPage.setSearchUserParameter(data.getEmployeeName());
+		employeesPage.clickFindButton();
+		employeesPage.verifyEmployeesTableColumnsAreVisible();
+		employeesPage.verifyEmployeeIsActive(data.getEmployeeName());
 
-        NewEmployeeDialogWebPage newEmployeeDialog = employeesPage
-                .clickEditEmployeeFromTeam(data.getEmployeeName(), data.getTeamName());
-        InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
-        Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
-                "The Info Content Dialog has not been opened");
-        infoContentDialog
-                .chooseEmployeeToReassign(data.getEmployeeName2())
-                .reassignEmployee();
-        newEmployeeDialog
-                .selectNewEmployeeTeam(data.getTeamName2())
-                .clickOKButton();
+		NewEmployeeDialogWebPage newEmployeeDialog = new NewEmployeeDialogWebPage(webdriver);
+		employeesPage.clickEditEmployeeFromTeam(data.getEmployeeName(), data.getTeamName());
+		InfoContentDialogWebPage infoContentDialog = new InfoContentDialogWebPage(webdriver);
+		newEmployeeDialog.clickInfoBubble();
+		Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
+				"The Info Content Dialog has not been opened");
+		infoContentDialog.chooseEmployeeToReassign(data.getEmployeeName2());
+		infoContentDialog.reassignEmployee();
+		newEmployeeDialog.selectNewEmployeeTeam(data.getTeamName2());
+		newEmployeeDialog.clickOKButton();
 
-        employeesPage
-                .clickEditEmployee(data.getEmployeeName())
-                .clickInfoBubble();
-        Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
-                "The Info Content Dialog has not been opened for the rollback of employee's data");
-        infoContentDialog
-                .chooseEmployeeToReassign(data.getEmployeeName())
-                .reassignEmployee();
-        newEmployeeDialog
-                .selectNewEmployeeTeam(data.getTeamName())
-                .clickOKButton();
-    }
+		employeesPage.clickEditEmployee(data.getEmployeeName());
+		newEmployeeDialog.clickInfoBubble();
+		Assert.assertTrue(infoContentDialog.verifyInfoContentDialogIsDisplayed(),
+				"The Info Content Dialog has not been opened for the rollback of employee's data");
+		infoContentDialog.chooseEmployeeToReassign(data.getEmployeeName());
+		infoContentDialog.reassignEmployee();
+		newEmployeeDialog.selectNewEmployeeTeam(data.getTeamName());
+		newEmployeeDialog.clickOKButton();
+	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testReassignEmployeeForSingleUserInTeamDisabled(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	public void testReassignEmployeeForSingleUserInTeamDisabled(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        EmployeesWebPage employeesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickEmployeesLink()
-                .makeSearchPanelVisible()
-                .selectSearchTeam(data.getTeamName())
-                .setSearchUserParameter(data.getSearchEmployee())
-                .clickFindButton()
-                .verifyEmployeesTableColumnsAreVisible()
-                .verifyEmployeeIsActive(data.getEmployeeFullName())
-                .archiveEmployee(data.getEmployeeFullName())
-                .setSearchUserParameter(data.getEmployeeName())
-                .clickFindButton();
+		EmployeesWebPage employeesPage = new EmployeesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickEmployeesLink();
+		employeesPage.makeSearchPanelVisible();
+		employeesPage.selectSearchTeam(data.getTeamName());
+		employeesPage.setSearchUserParameter(data.getSearchEmployee());
+		employeesPage.clickFindButton();
+		employeesPage.verifyEmployeesTableColumnsAreVisible();
+		employeesPage.verifyEmployeeIsActive(data.getEmployeeFullName());
+		employeesPage.archiveEmployee(data.getEmployeeFullName());
+		employeesPage.setSearchUserParameter(data.getEmployeeName());
+		employeesPage.clickFindButton();
 
-        NewEmployeeDialogWebPage newEmployeeDialog = employeesPage.clickEditEmployee(data.getEmployeeName());
-        InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
-        Assert.assertTrue(infoContentDialog.isEmployeeListDisabled(), "The employees list is not disabled");
-        Assert.assertTrue(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is not disabled");
-        newEmployeeDialog.clickCancelButton();
-        employeesPage
-                .setSearchUserParameter(data.getSearchEmployee())
-                .clickFindButton()
-                .clickArchivedTab()
-                .unarchiveEmployee(data.getEmployeeFullName());
-    }
+		NewEmployeeDialogWebPage newEmployeeDialog = new NewEmployeeDialogWebPage(webdriver);
+		employeesPage.clickEditEmployee(data.getEmployeeName());
+		InfoContentDialogWebPage infoContentDialog = new InfoContentDialogWebPage(webdriver);
+		newEmployeeDialog.clickInfoBubble();
+		Assert.assertTrue(infoContentDialog.isEmployeeListDisabled(), "The employees list is not disabled");
+		Assert.assertTrue(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is not disabled");
+		newEmployeeDialog.clickCancelButton();
+		employeesPage.setSearchUserParameter(data.getSearchEmployee());
+		employeesPage.clickFindButton();
+		employeesPage.clickArchivedTab();
+		employeesPage.unarchiveEmployee(data.getEmployeeFullName());
+	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testReassignEmployeeVerifyText(String rowID, String description, JSONObject testData) {
-        BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	public void testReassignEmployeeVerifyText(String rowID, String description, JSONObject testData) {
+		BOCompanyData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        EmployeesWebPage employeesPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickEmployeesLink()
-                .makeSearchPanelVisible()
-                .selectSearchTeam(data.getTeamName())
-                .setSearchUserParameter(data.getSearchEmployee())
-                .clickFindButton()
-                .verifyEmployeesTableColumnsAreVisible()
-                .verifyEmployeeIsActive(data.getEmployeeFullName());
+		EmployeesWebPage employeesPage = new EmployeesWebPage(webdriver);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickEmployeesLink();
+		employeesPage.makeSearchPanelVisible();
+		employeesPage.selectSearchTeam(data.getTeamName());
+		employeesPage.setSearchUserParameter(data.getSearchEmployee());
+		employeesPage.clickFindButton();
+		employeesPage.verifyEmployeesTableColumnsAreVisible();
+		employeesPage.verifyEmployeeIsActive(data.getEmployeeFullName());
 
-        NewEmployeeDialogWebPage newEmployeeDialog = employeesPage.clickEditEmployee(data.getEmployeeFullName());
-        InfoContentDialogWebPage infoContentDialog = newEmployeeDialog.clickInfoBubble();
-        Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayedWithReassign(data.getTopBubbleInfoWithReassign()),
-                "The notification is not displayed at the top of the popup window with reassign");
-        newEmployeeDialog.clickCancelButton();
+		NewEmployeeDialogWebPage newEmployeeDialog = new NewEmployeeDialogWebPage(webdriver);
+		employeesPage.clickEditEmployee(data.getEmployeeFullName());
+		InfoContentDialogWebPage infoContentDialog = new InfoContentDialogWebPage(webdriver);
+		newEmployeeDialog.clickInfoBubble();
+		Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayedWithReassign(data.getTopBubbleInfoWithReassign()),
+				"The notification is not displayed at the top of the popup window with reassign");
+		newEmployeeDialog.clickCancelButton();
 
-        employeesPage
-                .archiveEmployee(data.getEmployeeFullName())
-                .selectSearchTeam(data.getTeamName())
-                .setSearchUserParameter(data.getEmployeeName())
-                .clickFindButton()
-                .clickEditEmployee(data.getEmployeeName())
-                .clickInfoBubble();
-        Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayed(data.getTopBubbleInfo()),
-                "The notification is not displayed at the top of the popup window");
-        Assert.assertTrue(infoContentDialog.isEmployeeListDisabled(), "The employees list is not disabled");
-        Assert.assertTrue(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is not disabled");
-        newEmployeeDialog.clickCancelButton();
+		employeesPage.archiveEmployee(data.getEmployeeFullName());
+		employeesPage.selectSearchTeam(data.getTeamName());
+		employeesPage.setSearchUserParameter(data.getEmployeeName());
+		employeesPage.clickFindButton();
+		employeesPage.clickEditEmployee(data.getEmployeeName());
+		newEmployeeDialog.clickInfoBubble();
+		Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayed(data.getTopBubbleInfo()),
+				"The notification is not displayed at the top of the popup window");
+		Assert.assertTrue(infoContentDialog.isEmployeeListDisabled(), "The employees list is not disabled");
+		Assert.assertTrue(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is not disabled");
+		newEmployeeDialog.clickCancelButton();
 
-        employeesPage
-                .selectSearchTeam(data.getTeamName())
-                .setSearchUserParameter(data.getSearchEmployee())
-                .clickFindButton()
-                .clickArchivedTab()
-                .unarchiveEmployee(data.getEmployeeFullName())
-                .selectSearchTeam(data.getTeamName())
-                .setSearchUserParameter(data.getEmployeeName())
-                .clickFindButton()
-                .clickActiveTab()
-                .clickEditEmployee(data.getEmployeeName())
-                .clickInfoBubble();
-        Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayedWithReassign(data.getTopBubbleInfoWithReassign()),
-                "The notification is not displayed at the top of the popup window with reassign");
-        Assert.assertFalse(infoContentDialog.isEmployeeListDisabled(), "The employees list is disabled");
-        Assert.assertFalse(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is disabled");
-        newEmployeeDialog.clickCancelButton();
-    }
+		employeesPage.selectSearchTeam(data.getTeamName());
+		employeesPage.setSearchUserParameter(data.getSearchEmployee());
+		employeesPage.clickFindButton();
+		employeesPage.clickArchivedTab();
+		employeesPage.unarchiveEmployee(data.getEmployeeFullName());
+		employeesPage.selectSearchTeam(data.getTeamName());
+		employeesPage.setSearchUserParameter(data.getEmployeeName());
+		employeesPage.clickFindButton();
+		employeesPage.clickActiveTab();
+		employeesPage.clickEditEmployee(data.getEmployeeName());
+		newEmployeeDialog.clickInfoBubble();
+		Assert.assertTrue(infoContentDialog.isTopBubbleInfoDisplayedWithReassign(data.getTopBubbleInfoWithReassign()),
+				"The notification is not displayed at the top of the popup window with reassign");
+		Assert.assertFalse(infoContentDialog.isEmployeeListDisabled(), "The employees list is disabled");
+		Assert.assertFalse(infoContentDialog.isReassignButtonDisabled(), "The \"Reassign\" button is disabled");
+		newEmployeeDialog.clickCancelButton();
+	}
 }

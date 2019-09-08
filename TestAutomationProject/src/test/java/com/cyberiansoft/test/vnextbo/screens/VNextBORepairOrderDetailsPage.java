@@ -4,9 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServicesWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
@@ -27,10 +25,10 @@ import java.util.stream.Collectors;
 
 @Getter
 public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
-	
+
 	@FindBy(xpath = "//*[@data-bind='click: startRO']")
 	private WebElement startorderbtn;
-	
+
 	@FindBy(xpath = "//div[@class='order-info-details']/div")
 	private WebElement orderDetails;
 
@@ -40,257 +38,257 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	@FindBy(id = "orderServices")
 	private WebElement orderservicestable;
 
-    @FindBy(id = "reconmonitordetails-view")
-    private WebElement roDetailsSection;
+	@FindBy(id = "reconmonitordetails-view")
+	private WebElement roDetailsSection;
 
-    @FindBy(xpath = "//div[@class='status']//span[@class='k-widget k-dropdown k-header']//span[@class='k-input']")
-    private WebElement roStatus;
+	@FindBy(xpath = "//div[@class='status']//span[@class='k-widget k-dropdown k-header']//span[@class='k-input']")
+	private WebElement roStatus;
 
-    @FindBy(xpath = "//div[@class='order-info-details']/div[contains(@class, 'on-hold')]")
-    private WebElement onHoldValue;
+	@FindBy(xpath = "//div[@class='order-info-details']/div[contains(@class, 'on-hold')]")
+	private WebElement onHoldValue;
 
-    @FindBy(xpath = "//input[contains(@data-bind, 'data.stockNo')]")
-    private WebElement stockNumInputField;
+	@FindBy(xpath = "//input[contains(@data-bind, 'data.stockNo')]")
+	private WebElement stockNumInputField;
 
-    @FindBy(xpath = "//input[contains(@data-bind, 'data.roNo')]")
-    private WebElement roNumInputField;
+	@FindBy(xpath = "//input[contains(@data-bind, 'data.roNo')]")
+	private WebElement roNumInputField;
 
-    @FindBy(xpath = "//span[text()='Phase']")
-    private WebElement phaseTextElement;
+	@FindBy(xpath = "//span[text()='Phase']")
+	private WebElement phaseTextElement;
 
-    @FindBy(className = "breadcrumbs")
-    private WebElement mainBreadCrumbsLink;
+	@FindBy(className = "breadcrumbs")
+	private WebElement mainBreadCrumbsLink;
 
-    @FindBy(xpath = "//strong[contains(@data-bind, 'breadcrumb.last')]")
-    private WebElement lastBreadCrumb;
+	@FindBy(xpath = "//strong[contains(@data-bind, 'breadcrumb.last')]")
+	private WebElement lastBreadCrumb;
 
-    @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
-    private WebElement locationExpanded;
+	@FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
+	private WebElement locationExpanded;
 
-    @FindBy(xpath = "//div[@class='k-animation-container']")
-    private WebElement dropDownContainer;
+	@FindBy(xpath = "//div[@class='k-animation-container']")
+	private WebElement dropDownContainer;
 
-    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']")
-    private WebElement statusDropDown;
+	@FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']")
+	private WebElement statusDropDown;
 
-    @FindBy(xpath = "//input[@data-automation-id='reconmonitor-details-status']/../span")
-    private WebElement statusListBox;
+	@FindBy(xpath = "//input[@data-automation-id='reconmonitor-details-status']/../span")
+	private WebElement statusListBox;
 
-    @FindBy(xpath = "//div[contains(@class, 'priority')]//span[@title]")
-    private WebElement priorityListBox;
+	@FindBy(xpath = "//div[contains(@class, 'priority')]//span[@title]")
+	private WebElement priorityListBox;
 
-    @FindBy(id = "reconmonitordetails-view-add-order-button")
-    private WebElement addNewServiceButton;
+	@FindBy(id = "reconmonitordetails-view-add-order-button")
+	private WebElement addNewServiceButton;
 
-    @FindBy(xpath = "//i[@class='switchTable icon-arrow-down5']")
-    private WebElement servicesExpandArrow;
+	@FindBy(xpath = "//i[@class='switchTable icon-arrow-down5']")
+	private WebElement servicesExpandArrow;
 
-    @FindBy(xpath = "//div[@id='order']//i[contains(@class, 'icon-flag')]")
-    private WebElement flagIcon;
+	@FindBy(xpath = "//div[@id='order']//i[contains(@class, 'icon-flag')]")
+	private WebElement flagIcon;
 
-    @FindBy(xpath = "//div[@id='order']//div[@class='drop flags']")
-    private WebElement flagsDropDown;
+	@FindBy(xpath = "//div[@id='order']//div[@class='drop flags']")
+	private WebElement flagsDropDown;
 
-    @FindBy(xpath = "//button[@title='Log Info']")
-    private WebElement logInfoButton;
+	@FindBy(xpath = "//button[@title='Log Info']")
+	private WebElement logInfoButton;
 
-    @FindBy(xpath = "//div[@class='order-info-details']//span[text()='More information']")
-    private WebElement moreInformationLink;
+	@FindBy(xpath = "//div[@class='order-info-details']//span[text()='More information']")
+	private WebElement moreInformationLink;
 
-    @FindBy(xpath = "//div[@class='order-info-details']//span[text()='Less information']")
-    private WebElement lessInformationLink;
+	@FindBy(xpath = "//div[@class='order-info-details']//span[text()='Less information']")
+	private WebElement lessInformationLink;
 
-    @FindBy(xpath = "//div[@class='orderInfoWrapper secondLine clearfix']")
-    private WebElement moreInformationBlock;
+	@FindBy(xpath = "//div[@class='orderInfoWrapper secondLine clearfix']")
+	private WebElement moreInformationBlock;
 
-    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_2']")
-    private WebElement phaseName;
+	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_2']")
+	private WebElement phaseName;
 
-    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_3_1']/span")
-    private WebElement phaseVendorPrice;
+	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_3_1']/span")
+	private WebElement phaseVendorPrice;
 
-    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_4']/div")
-    private WebElement phaseVendorTechnician;
+	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_4']/div")
+	private WebElement phaseVendorTechnician;
 
-    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_5']//div[contains(@data-bind, 'statusText')]")
-    private WebElement phaseStatus;
+	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_5']//div[contains(@data-bind, 'statusText')]")
+	private WebElement phaseStatus;
 
-    @FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]")
-    private WebElement phaseActionsTrigger;
+	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]")
+	private WebElement phaseActionsTrigger;
 
-    @FindBy(xpath = "//span[contains(@class, 'location-name')]")
-    private WebElement locationElement;
+	@FindBy(xpath = "//span[contains(@class, 'location-name')]")
+	private WebElement locationElement;
 
-    @FindBy(xpath = "//div[@data-template='order-service-item-template']//div[@class='clmn_5']//span[@title]")
-    private List<WebElement> servicesStatusWidgetList;
+	@FindBy(xpath = "//div[@data-template='order-service-item-template']//div[@class='clmn_5']//span[@title]")
+	private List<WebElement> servicesStatusWidgetList;
 
-    @FindBy(xpath = "//div[@class='serviceRow theader clearfix']/div")
-    private List<WebElement> servicesTableColumns;
+	@FindBy(xpath = "//div[@class='serviceRow theader clearfix']/div")
+	private List<WebElement> servicesTableColumns;
 
-    @FindBy(xpath = "//div[@class='row order-info-content']//p/span[text()]")
-    private List<WebElement> moreInformationFields;
+	@FindBy(xpath = "//div[@class='row order-info-content']//p/span[text()]")
+	private List<WebElement> moreInformationFields;
 
-    @FindBy(xpath = "//strong[contains(@data-bind, 'amountField.totalAmountF')]")
-    private WebElement totalServicePrice;
+	@FindBy(xpath = "//strong[contains(@data-bind, 'amountField.totalAmountF')]")
+	private WebElement totalServicePrice;
 
-    @FindBy(xpath = "//div[contains(@data-bind, 'cachedServices')]")
-    private WebElement toBeAddedLaterServiceNotification;
+	@FindBy(xpath = "//div[contains(@data-bind, 'cachedServices')]")
+	private WebElement toBeAddedLaterServiceNotification;
 
-    @FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/span")
-    private List<WebElement> vendorPricesList;
+	@FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/span")
+	private List<WebElement> vendorPricesList;
 
-    @FindBy(xpath = "//tbody[contains(@data-template, 'part-list') and not (contains(@data-bind, 'Cached'))]/tr")
-    private List<WebElement> partsList;
+	@FindBy(xpath = "//tbody[contains(@data-template, 'part-list') and not (contains(@data-bind, 'Cached'))]/tr")
+	private List<WebElement> partsList;
 
-    @FindBy(xpath = "//div[contains(@data-bind, 'partActionsVisible')]")
-    private List<WebElement> partsActions;
+	@FindBy(xpath = "//div[contains(@data-bind, 'partActionsVisible')]")
+	private List<WebElement> partsActions;
 
-    @FindBy(xpath = "//div[@id='reconmonitordetails-parts']//b")
-    private List<WebElement> partsNames;
+	@FindBy(xpath = "//div[@id='reconmonitordetails-parts']//b")
+	private List<WebElement> partsNames;
 
-    @FindBy(xpath = "//div[@id='reconmonitordetails-parts']//td[@class='grid__centered'][4]/div")
-    private List<WebElement> partsOrderedFromTableValues;
+	@FindBy(xpath = "//div[@id='reconmonitordetails-parts']//td[@class='grid__centered'][4]/div")
+	private List<WebElement> partsOrderedFromTableValues;
 
-    @FindBy(xpath = "//ul[@class='k-list k-reset' and @aria-hidden='false']/li")
-    private List<WebElement> listBoxOptions;
+	@FindBy(xpath = "//ul[@class='k-list k-reset' and @aria-hidden='false']/li")
+	private List<WebElement> listBoxOptions;
 
-    final VNextBORepairOrdersWebPage repairOrdersPage;
+	final VNextBORepairOrdersWebPage repairOrdersPage;
 
-    public VNextBORepairOrderDetailsPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        repairOrdersPage = new VNextBORepairOrdersWebPage(driver);
-    }
+	public VNextBORepairOrderDetailsPage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		repairOrdersPage = new VNextBORepairOrdersWebPage(driver);
+	}
 
-    public List<String> getVendorPricesValuesList() {
-        waitABit(1000);
-        for (WebElement vendorPrice : vendorPricesList) {
-            setAttributeWithJS(vendorPrice, "style", "display: block");
-        }
-        wait.until(ExpectedConditions.visibilityOfAllElements(vendorPricesList));
-        final List<String> vendorPricesValuesList = vendorPricesList.stream()
-                .map(WebElement::getText)
-                .peek(System.out::println)
-                .collect(Collectors.toList());
+	public List<String> getVendorPricesValuesList() {
+		waitABit(1000);
+		for (WebElement vendorPrice : vendorPricesList) {
+			setAttributeWithJS(vendorPrice, "style", "display: block");
+		}
+		wait.until(ExpectedConditions.visibilityOfAllElements(vendorPricesList));
+		final List<String> vendorPricesValuesList = vendorPricesList.stream()
+				.map(WebElement::getText)
+				.peek(System.out::println)
+				.collect(Collectors.toList());
 
-        for (WebElement vendorPrice : vendorPricesList) {
-            setAttributeWithJS(vendorPrice, "style", "display: none");
-        }
-        return vendorPricesValuesList;
-    }
+		for (WebElement vendorPrice : vendorPricesList) {
+			setAttributeWithJS(vendorPrice, "style", "display: none");
+		}
+		return vendorPricesValuesList;
+	}
 
-    public boolean isRoDetailsSectionDisplayed() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(roDetailsSection));
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
+	public boolean isRoDetailsSectionDisplayed() {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(roDetailsSection));
+			return true;
+		} catch (Exception ignored) {
+			return false;
+		}
+	}
 
-    public String getRoStatus() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(roStatus)).getText();
-        } catch (Exception ignored) {
-            return "";
-        }
-    }
+	public String getRoStatus() {
+		try {
+			return wait.until(ExpectedConditions.visibilityOf(roStatus)).getText();
+		} catch (Exception ignored) {
+			return "";
+		}
+	}
 
-    public boolean isImageOnHoldStatusDisplayed() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(onHoldValue));
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
+	public boolean isImageOnHoldStatusDisplayed() {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(onHoldValue));
+			return true;
+		} catch (Exception ignored) {
+			return false;
+		}
+	}
 
-    public VNextBORepairOrderDetailsPage clickFlagIcon() {
-        waitForLoading();
-        wait.until(ExpectedConditions.elementToBeClickable(flagIcon)).click();
-        return this;
-    }
+	public VNextBORepairOrderDetailsPage clickFlagIcon() {
+		waitForLoading();
+		wait.until(ExpectedConditions.elementToBeClickable(flagIcon)).click();
+		return this;
+	}
 
-    public boolean isFlagsDropDownOpened() {
-        try {
-            waitShort.until(ExpectedConditions.visibilityOf(flagsDropDown));
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
+	public boolean isFlagsDropDownOpened() {
+		try {
+			waitShort.until(ExpectedConditions.visibilityOf(flagsDropDown));
+			return true;
+		} catch (Exception ignored) {
+			return false;
+		}
+	}
 
-    public VNextBORepairOrderDetailsPage selectFlagColor(String color) {
-        final WebElement flagColorElement =
-                driver.findElement(By.xpath("//div[@class='drop flags']//span[contains(@title, '" + color + "')]"));
-        try {
-            Utils.clickElement(flagColorElement);
-            WaitUtilsWebDriver.waitForAttributeToBe(flagColorElement, "class", "active");
-            WaitUtilsWebDriver.waitForInvisibility(flagsDropDown);
-        } catch (Exception e) {
-            Assert.fail("The flag " + color + " hasn't been selected", e);
-        }
-        return this;
-    }
-	
+	public VNextBORepairOrderDetailsPage selectFlagColor(String color) {
+		final WebElement flagColorElement =
+				driver.findElement(By.xpath("//div[@class='drop flags']//span[contains(@title, '" + color + "')]"));
+		try {
+			Utils.clickElement(flagColorElement);
+			WaitUtilsWebDriver.waitForAttributeToBe(flagColorElement, "class", "active");
+			WaitUtilsWebDriver.waitForInvisibility(flagsDropDown);
+		} catch (Exception e) {
+			Assert.fail("The flag " + color + " hasn't been selected", e);
+		}
+		return this;
+	}
+
 	public String getRepairOrderActivePhaseStatus() {
 		return wait.until(ExpectedConditions.visibilityOf(orderDetails.findElement(By.id("serviceName")))).getText().trim();
 	}
-	
+
 	public String getRepairOrderCompletedValue() {
 		return wait.until(ExpectedConditions.visibilityOf(orderDetails.findElement(By.id("progressBarText")))).getText().trim();
 	}
-	
+
 	public void expandRepairOrderServiceDetailsTable() {
 		if (orderservicestable.findElement(By.xpath(".//i[@class='switchTable icon-arrow-down5']")).isDisplayed()) {
 			orderservicestable.findElement(By.xpath(".//i[@class='switchTable icon-arrow-down5']")).click();
 			waitLong.until(ExpectedConditions.visibilityOf(orderservicestable
-                    .findElement(By.xpath(".//i[@class='switchTable icon-arrow-up5']"))));
+					.findElement(By.xpath(".//i[@class='switchTable icon-arrow-up5']"))));
 		}
 	}
-	
+
 	public void clickStartOrderButton() {
 		startorderbtn.click();
 		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.invisibilityOf(startorderbtn));
+				.until(ExpectedConditions.invisibilityOf(startorderbtn));
 		waitABit(1000);
 	}
-	
+
 	public boolean isStartOrderButtonVisible() {
 		return startorderbtn.isDisplayed();
 	}
-	
+
 	public String getRepairOrderServicesPhaseStatus() {
 		return orderservicestable.findElement(By.xpath(".//div[@class='clmn_5']/div/div")).getText().trim();
 	}
-	
+
 	public String getRepairOrderServicesStatus(String serviceName) {
 		WebElement servicerow = getRepairOrderServiceColumn(serviceName);
 		return servicerow.findElement(By.xpath(".//div[@class='clmn_5']/div")).getText().trim();
 	}
-	
+
 	public void changeStatusForrepairorderService(String serviceName, String newStatus) {
 		waitABit(2000);
 		WebElement servicerow = getRepairOrderServiceColumn(serviceName);
 		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(servicerow.findElement(By.xpath(".//div[@class='clmn_5']/div/span/span")))).click();
+				.until(ExpectedConditions.visibilityOf(servicerow.findElement(By.xpath(".//div[@class='clmn_5']/div/span/span")))).click();
 		servicerow = getRepairOrderServiceColumn(serviceName);
 		new WebDriverWait(driver, 10)
-		  .until(ExpectedConditions.visibilityOf(servicerow.findElement(By.xpath(".//div[@class='clmn_5']/div/span/span")))).click();
+				.until(ExpectedConditions.visibilityOf(servicerow.findElement(By.xpath(".//div[@class='clmn_5']/div/span/span")))).click();
 		waitABit(2000);
 		List<WebElement> popups = driver.findElements(By.xpath("//div[@class='k-list-scroller']/ul[@data-role='staticlist']"));
 		for (WebElement pp : popups)
 			if (pp.isDisplayed()) {
-				pp.findElement(By.xpath("./li[text()='" +  newStatus + "']")).click();
-				
+				pp.findElement(By.xpath("./li[text()='" + newStatus + "']")).click();
+
 			}
 		WebDriverWait wait = new WebDriverWait(driver, 15, 1);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("//div[@class='k-loading-mask']")));
 		waitABit(1000);
 	}
-	
+
 	public WebElement getRepairOrderServiceColumn(String serviceName) {
 		WebElement servicerow = null;
 		List<WebElement> servicesrows = orderservicestable.findElement(By.xpath(".//div[@class='innerTable']"))
@@ -303,274 +301,261 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 		return servicerow;
 	}
 
-	public VNextBORepairOrdersWebPage clickRepairOrdersBackwardsLink() {
-        wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink)).click();
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
-    }
+	public void clickRepairOrdersBackwardsLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink)).click();
+		waitForLoading();
+	}
 
-	public VNextBORepairOrderDetailsPage typeStockNumber(String stockNumber) {
-        clearAndTypeOrderNumber(stockNumInputField, stockNumber);
-        return this;
-    }
+	public void typeStockNumber(String stockNumber) {
+		clearAndTypeOrderNumber(stockNumInputField, stockNumber);
+	}
 
-	public VNextBORepairOrderDetailsPage typeRoNumber(String roNumber) {
-        clearAndTypeOrderNumber(roNumInputField, roNumber);
-        return this;
-    }
+	public void typeRoNumber(String roNumber) {
+		clearAndTypeOrderNumber(roNumInputField, roNumber);
+	}
 
-    public boolean isServiceNotificationToBeAddedLaterDisplayed() {
-        return Utils.isElementDisplayed(toBeAddedLaterServiceNotification, 10);
-    }
+	public boolean isToBeAddedLaterServiceNotificationDisplayed() {
+		return Utils.isElementDisplayed(toBeAddedLaterServiceNotification, 10);
+	}
 
-    private void clearAndTypeOrderNumber(WebElement inputField, String roNumber) {
-        clearAndType(inputField, roNumber);
-        wait.until(ExpectedConditions.elementToBeClickable(phaseTextElement)).click();
-    }
+	public boolean isServiceNotificationToBeAddedLaterDisplayed() {
+		return Utils.isElementDisplayed(toBeAddedLaterServiceNotification, 10);
+	}
 
-    public WebElement getDropDownContainer() {
-        return WaitUtilsWebDriver.waitForVisibility(dropDownContainer, 7);
-    }
+	private void clearAndTypeOrderNumber(WebElement inputField, String roNumber) {
+		clearAndType(inputField, roNumber);
+		wait.until(ExpectedConditions.elementToBeClickable(phaseTextElement)).click();
+	}
 
-    public VNextBORepairOrderDetailsPage setStatus(String status) {
-        clickStatusBox();
-        selectStatus(status);
-        return this;
-    }
+	public WebElement getDropDownContainer() {
+		return WaitUtilsWebDriver.waitForVisibility(dropDownContainer, 7);
+	}
 
-    private VNextBORepairOrderDetailsPage clickStatusBox() {
-        waitForLoading();
-        Utils.clickElement(statusListBox);
-        return this;
-    }
+	public VNextBORepairOrderDetailsPage setStatus(String status) {
+		clickStatusBox();
+		selectStatus(status);
+		return this;
+	}
 
-    private VNextBORepairOrderDetailsPage selectStatus(String status) {
-        final List<WebElement> statusListBoxOptions = getDropDownContainer()
-                .findElements(By.xpath("//ul[@data-role='staticlist']/li"));
-        selectOptionInDropDown(statusListBoxOptions.get(0), statusListBoxOptions, status);
-        return this;
-    }
+	private void clickStatusBox() {
+		waitForLoading();
+		Utils.clickElement(statusListBox);
+	}
 
-    public VNextBORepairOrderDetailsPage setVendor(String serviceId, String vendor) {
-        clickVendorBox(serviceId);
-        selectVendor(vendor);
-        return this;
-    }
+	private void selectStatus(String status) {
+		final List<WebElement> statusListBoxOptions = getDropDownContainer()
+				.findElements(By.xpath("//ul[@data-role='staticlist']/li"));
+		selectOptionInDropDown(statusListBoxOptions.get(0), statusListBoxOptions, status);
+	}
 
-    private VNextBORepairOrderDetailsPage clickVendorBox(String serviceId) {
-        waitForLoading();
-        WebElement element = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
-                + "']//span[contains(@class, 'team-dropdown')]"));
-        actions.moveToElement(element).build().perform();
-        Utils.clickElement(element);
-        return this;
-    }
+	public void setVendor(String serviceId, String vendor) {
+		clickVendorBox(serviceId);
+		selectVendor(vendor);
+	}
 
-    private VNextBORepairOrderDetailsPage selectVendor(String vendor) {
-        selectOptionInDropDown(listBoxOptions.get(0), listBoxOptions, vendor);
-        return this;
-    }
+	private void clickVendorBox(String serviceId) {
+		waitForLoading();
+		WebElement element = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+				+ "']//span[contains(@class, 'team-dropdown')]"));
+		actions.moveToElement(element).build().perform();
+		Utils.clickElement(element);
+	}
 
-    public VNextBORepairOrderDetailsPage setTechnician(String serviceId, String technician) {
-        clickTechnicianBox(serviceId);
-        selectTechnician(technician);
-        return this;
-    }
+	private void selectVendor(String vendor) {
+		selectOptionInDropDown(listBoxOptions.get(0), listBoxOptions, vendor);
+	}
 
-    private VNextBORepairOrderDetailsPage clickTechnicianBox(String serviceId) {
-        waitForLoading();
-        WebElement element = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
-                + "']//span[contains(@class, 'technician-dropdown')]"));
-        actions.moveToElement(element).build().perform();
-        Utils.clickElement(element);
-        return this;
-    }
+	public void setTechnician(String serviceId, String technician) {
+		clickTechnicianBox(serviceId);
+		selectTechnician(technician);
+	}
 
-    private VNextBORepairOrderDetailsPage selectTechnician(String technician) {
-        selectOptionInDropDown(listBoxOptions.get(0), listBoxOptions, technician);
-        return this;
-    }
+	private void clickTechnicianBox(String serviceId) {
+		waitForLoading();
+		WebElement element = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+				+ "']//span[contains(@class, 'technician-dropdown')]"));
+		actions.moveToElement(element).build().perform();
+		Utils.clickElement(element);
+	}
 
-    public VNextBORepairOrderDetailsPage setPriority(String priority) {
-        clickPriorityBox();
-        selectPriority(priority);
-        return this;
-    }
+	private void selectTechnician(String technician) {
+		selectOptionInDropDown(listBoxOptions.get(0), listBoxOptions, technician);
+	}
 
-    private VNextBORepairOrderDetailsPage clickPriorityBox() {
-        waitForLoading();
-        wait.until(ExpectedConditions.elementToBeClickable(priorityListBox)).click();
-        return this;
-    }
+	public void setPriority(String priority) {
+		clickPriorityBox();
+		selectPriority(priority);
+	}
 
-    private VNextBORepairOrderDetailsPage selectPriority(String priority) {
-        final List<WebElement> priorityListBoxOptions = getDropDownContainer()
-                .findElements(By.xpath("//ul[@data-role='staticlist']/li"));
-        selectOptionInDropDown(priorityListBoxOptions.get(0), priorityListBoxOptions, priority);
-        return this;
-    }
+	private void clickPriorityBox() {
+		waitForLoading();
+		wait.until(ExpectedConditions.elementToBeClickable(priorityListBox)).click();
+	}
 
-    public VNextBORepairOrderDetailsPage expandServicesTable() {
-        Utils.clickElement(servicesExpandArrow);
-        WaitUtilsWebDriver.waitForInvisibility(servicesExpandArrow);
-        WaitUtilsWebDriver.waitForLoading();
-        return this;
-    }
+	private void selectPriority(String priority) {
+		final List<WebElement> priorityListBoxOptions = getDropDownContainer()
+				.findElements(By.xpath("//ul[@data-role='staticlist']/li"));
+		selectOptionInDropDown(priorityListBoxOptions.get(0), priorityListBoxOptions, priority);
+	}
 
-    public int getNumberOfVendorTechnicianOptionsByName(String name) {
-        try {
-            return wait
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@data-template='" +
-                    "order-service-item-template']//div[@class='clmn_4']//span[@class='k-input' and text()='" +
-                    name + "']"))).size();
-        } catch (Exception ignored) {
-            return 0;
-        }
-    }
+	public void expandServicesTable() {
+		Utils.clickElement(servicesExpandArrow);
+		WaitUtilsWebDriver.waitForInvisibility(servicesExpandArrow);
+		WaitUtilsWebDriver.waitForLoading();
+	}
 
-    public String getServiceDescription(String serviceId) {
-        return wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
-                        + serviceId + "']/div[@class='clmn_2']/div[@title]")))
-                .getText();
-    }
+	public int getNumberOfVendorTechnicianOptionsByName(String name) {
+		try {
+			return wait
+					.ignoring(StaleElementReferenceException.class)
+					.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@data-template='" +
+							"order-service-item-template']//div[@class='clmn_4']//span[@class='k-input' and text()='" +
+							name + "']"))).size();
+		} catch (Exception ignored) {
+			return 0;
+		}
+	}
 
-    public String getServiceQuantity(String serviceId) {
-        System.out.println(serviceId);
-        return getTextValue(serviceId, "/div[@class='clmn_2_1 grid__number']/span", ".000");
-    }
+	public String getServiceDescription(String serviceId) {
+		return wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
+						+ serviceId + "']/div[@class='clmn_2']/div[@title]")))
+				.getText();
+	}
 
-    public String getServiceLaborTime(String serviceId) {
-        return getTextValue(serviceId, "/div[@class='clmn_2_1 grid__number']/span", ".00 hr");
-    }
+	public String getServiceQuantity(String serviceId) {
+		System.out.println(serviceId);
+		return getTextValue(serviceId, "/div[@class='clmn_2_1 grid__number']/span", ".000");
+	}
 
-    public String getServicePrice(String serviceId) {
-        String result = getTextValue(serviceId, "/div[@class='clmn_3 grid__number']/span");
-        return StringUtils.substringBefore(result, ",");
-    }
+	public String getServiceLaborTime(String serviceId) {
+		return getTextValue(serviceId, "/div[@class='clmn_2_1 grid__number']/span", ".00 hr");
+	}
 
-    public String getServiceVendorPrice(String serviceId) {
-        return getTextValue(serviceId, "/div[@class='clmn_3_1']/span", ".00")
-                .replace("$", "");
-    }
+	public String getServicePrice(String serviceId) {
+		String result = getTextValue(serviceId, "/div[@class='clmn_3 grid__number']/span");
+		return StringUtils.substringBefore(result, ",");
+	}
 
-    public VNextBORepairOrderDetailsPage setServiceVendorPrice(String serviceId, String serviceDescription, String newValue) {
-        setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
-        return this;
-    }
+	public String getServiceVendorPrice(String serviceId) {
+		return getTextValue(serviceId, "/div[@class='clmn_3_1']/span", ".00")
+				.replace("$", "");
+	}
 
-    public VNextBORepairOrderDetailsPage setServiceVendor(String serviceId, String serviceDescription, String newValue) { //todo!!!
-        setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
-        return this;
-    }
+	public void setServiceVendorPrice(String serviceId, String serviceDescription, String newValue) {
+		setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
+	}
 
-    public VNextBORepairOrderDetailsPage setServiceQuantity(String serviceId, String serviceDescription, String newValue) {
-        try {
-            setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
-        } catch (TimeoutException e) {
-            ((JavascriptExecutor) driver).executeScript("window.open('about:blank','_blank');");
+	public void setServiceVendor(String serviceId, String serviceDescription, String newValue) { //todo!!!
+		setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
+	}
 
-            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-            driver.switchTo().window(tabs.get(1));
+	public void setServiceQuantity(String serviceId, String serviceDescription, String newValue) {
+		try {
+			setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
+		} catch (TimeoutException e) {
+			((JavascriptExecutor) driver).executeScript("window.open('about:blank','_blank');");
 
-            WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURLMain());
-            BackOfficeLoginWebPage loginPage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
-            BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(driver, BackOfficeHeaderPanel.class);
-            loginPage.userLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
+			List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(1));
 
-            ServicesWebPage servicesPage = backOfficeHeader
-                    .clickCompanyLink()
-                    .clickServicesLink();
+			WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURLMain());
+			BackOfficeLoginWebPage loginPage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
+			BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(driver, BackOfficeHeaderPanel.class);
+			loginPage.userLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
 
-		    servicesPage.setServiceSearchCriteria(serviceDescription)
-                    .clickFindButton()
-                    .clickEditService(serviceDescription)
-                    .clickMultipleCheckbox()
-                    .clickOKButton()
-                    .closeNewTab(tabs.get(0));
-		    refreshPage();
-            expandServicesTable().setTextValue(
-                    serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
-        }
-        return this;
-    }
+			ServicesWebPage servicesPage = new ServicesWebPage(this.driver);
+			backOfficeHeader.clickCompanyLink();
+			CompanyWebPage companyWebPage = new CompanyWebPage(this.driver);
+			companyWebPage.clickServicesLink();
 
-    public VNextBORepairOrderDetailsPage setServicePrice(String serviceId, String serviceDescription, String newValue) {
-        setTextValue(serviceId, serviceDescription, "//div[@class='clmn_3 grid__number']/input", newValue);
-        return this;
-    }
+			servicesPage.setServiceSearchCriteria(serviceDescription);
+			servicesPage.clickFindButton();
+			servicesPage.clickEditService(serviceDescription);
+			NewServiceDialogWebPage newServiceDialogWebPage = new NewServiceDialogWebPage(this.driver);
+			newServiceDialogWebPage.clickMultipleCheckbox();
+			newServiceDialogWebPage.clickOKButton();
+			newServiceDialogWebPage.closeNewTab(tabs.get(0));
+			refreshPage();
+			expandServicesTable();
+			setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
+		}
+	}
 
-    private String getTextValue(String serviceId, String xpath, String replacement) {
-        final WebElement element = getElementInServicesTable(serviceId, xpath);
-        Utils.setAttributeWithJS(element, "style", "display: block;");
-        final String text = WaitUtilsWebDriver.waitForVisibility(element).getText().replace(replacement, "");
-        Utils.setAttributeWithJS(element, "style", "display: none;");
-        return text;
-    }
+	public void setServicePrice(String serviceId, String serviceDescription, String newValue) {
+		setTextValue(serviceId, serviceDescription, "//div[@class='clmn_3 grid__number']/input", newValue);
+	}
 
-    private String getTextValue(String serviceId, String xpath) {
-        final WebElement element = getElementInServicesTable(serviceId, xpath);
-        Utils.setAttributeWithJS(element, "style", "display: block;");
-        final String text = WaitUtilsWebDriver.waitForVisibility(element).getText();
-        Utils.setAttributeWithJS(element, "style", "display: none;");
-        return text;
-    }
+	private String getTextValue(String serviceId, String xpath, String replacement) {
+		final WebElement element = getElementInServicesTable(serviceId, xpath);
+		Utils.setAttributeWithJS(element, "style", "display: block;");
+		final String text = WaitUtilsWebDriver.waitForVisibility(element).getText().replace(replacement, "");
+		Utils.setAttributeWithJS(element, "style", "display: none;");
+		return text;
+	}
 
-    private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
-        final WebElement element = getElementInServicesTable(serviceId, xpath);
-        scrollToElement(element);
-        WaitUtilsWebDriver.waitForElementToBeClickable(element);
-        Utils.sendKeysWithJS(element, newValue);
-        WaitUtilsWebDriver.waitForLoading();
-        clickServiceDescriptionName(serviceDescription);
-        WaitUtilsWebDriver.waitABit(500);
-    }
+	private String getTextValue(String serviceId, String xpath) {
+		final WebElement element = getElementInServicesTable(serviceId, xpath);
+		Utils.setAttributeWithJS(element, "style", "display: block;");
+		final String text = WaitUtilsWebDriver.waitForVisibility(element).getText();
+		Utils.setAttributeWithJS(element, "style", "display: none;");
+		return text;
+	}
 
-    private void clickServiceDescriptionName(String serviceDescription) {
-        Objects.requireNonNull(WaitUtilsWebDriver
-                .waitForElementToBeClickable(getServiceByName(serviceDescription)))
-                .click();
-    }
+	private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
+		final WebElement element = getElementInServicesTable(serviceId, xpath);
+		scrollToElement(element);
+		WaitUtilsWebDriver.waitForElementToBeClickable(element);
+		Utils.sendKeysWithJS(element, newValue);
+		WaitUtilsWebDriver.waitForLoading();
+		clickServiceDescriptionName(serviceDescription);
+		WaitUtilsWebDriver.waitABit(500);
+	}
 
-    public WebElement getElementInServicesTable(String serviceId, String xpath) {
-        return driver.findElement(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
-                    + serviceId + "']" + xpath));
-    }
+	private void clickServiceDescriptionName(String serviceDescription) {
+		Objects.requireNonNull(WaitUtilsWebDriver
+				.waitForElementToBeClickable(getServiceByName(serviceDescription)))
+				.click();
+	}
 
-    public String getServiceId(String description) {
-        final WebElement serviceElement = getServiceByName(description);
-        if (serviceElement != null) {
-            final String id = wait
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.visibilityOf(serviceElement))
-                    .findElement(By.xpath(".//../..")).getAttribute("data-order-service-id");
-            System.out.println(id);
-            return id;
-        }
-            return "";
-    }
+	public WebElement getElementInServicesTable(String serviceId, String xpath) {
+		return driver.findElement(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
+				+ serviceId + "']" + xpath));
+	}
 
-    @Nullable
-    private WebElement getServiceByName(String service) {
-        try {
-            return wait.until(ExpectedConditions
-                    .visibilityOf(driver.findElement(By.xpath("//div[text()='" + service + "']"))));
-        } catch (NoSuchElementException ignored) {
-            try {
-                final WebElement element = driver.findElement(By.xpath("//div[contains(text(), '" + service + "')]"));
-                wait.until(ExpectedConditions.visibilityOf(element));
-                return element.getText().trim().equals(service) ? element : null;
-            } catch (NoSuchElementException ignore) {}
-            return null;
-        }
-    }
+	public String getServiceId(String description) {
+		final WebElement serviceElement = getServiceByName(description);
+		if (serviceElement != null) {
+			final String id = wait
+					.ignoring(StaleElementReferenceException.class)
+					.until(ExpectedConditions.visibilityOf(serviceElement))
+					.findElement(By.xpath(".//../..")).getAttribute("data-order-service-id");
+			System.out.println(id);
+			return id;
+		}
+		return "";
+	}
 
-    public VNextBOAddNewServiceMonitorDialog clickAddNewServiceButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(addNewServiceButton)).click();
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBOAddNewServiceMonitorDialog.class);
-    }
+	@Nullable
+	private WebElement getServiceByName(String service) {
+		try {
+			return wait.until(ExpectedConditions
+					.visibilityOf(driver.findElement(By.xpath("//div[text()='" + service + "']"))));
+		} catch (NoSuchElementException ignored) {
+			try {
+				final WebElement element = driver.findElement(By.xpath("//div[contains(text(), '" + service + "')]"));
+				wait.until(ExpectedConditions.visibilityOf(element));
+				return element.getText().trim().equals(service) ? element : null;
+			} catch (NoSuchElementException ignore) {
+			}
+			return null;
+		}
+	}
+
+	public void clickAddNewServiceButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(addNewServiceButton)).click();
+		waitForLoading();
+	}
 
 //    public VNextBOAddNewServiceMonitorDialog selectServiceStatusForFirstService() {
 //        wait.until(ExpectedConditions.visibilityOfAllElements(servicesStatusWidgetList));
@@ -579,309 +564,295 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 //        wait.until(ExpectedConditions.attributeContains(serviceStatus, "aria-expanded", "true"));
 //    }
 
-    public VNextBORepairOrderDetailsPage setServiceStatusForService(String serviceId, String status) {
-        clickServiceStatusBox(serviceId);
-        selectServiceStatus(status);
-        return this;
-    }
+	public void setServiceStatusForService(String serviceId, String status) {
+		clickServiceStatusBox(serviceId);
+		selectServiceStatus(status);
+	}
 
-    public VNextBORepairOrderDetailsPage setServiceStatusForService(int order, String status) {
-        clickServiceStatusBox(order);
-        selectServiceStatus(status);
-        return this;
-    }
+	public void setServiceStatusForService(int order, String status) {
+		clickServiceStatusBox(order);
+		selectServiceStatus(status);
+	}
 
-    private VNextBORepairOrderDetailsPage clickServiceStatusBox(int order) {
-        waitForLoading();
-        final WebElement serviceStatus = servicesStatusWidgetList.get(order);
-        wait.until(ExpectedConditions.elementToBeClickable(serviceStatus)).click();
-        return this;
-    }
+	private void clickServiceStatusBox(int order) {
+		waitForLoading();
+		final WebElement serviceStatus = servicesStatusWidgetList.get(order);
+		wait.until(ExpectedConditions.elementToBeClickable(serviceStatus)).click();
+	}
 
-    private VNextBORepairOrderDetailsPage clickServiceStatusBox(String serviceId) {
-        waitForLoading();
-        final WebElement service = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
-                + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
-        actions.moveToElement(service).build().perform();
-        Utils.clickElement(service);
-        return this;
-    }
+	private void clickServiceStatusBox(String serviceId) {
+		waitForLoading();
+		final WebElement service = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+				+ "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
+		actions.moveToElement(service).build().perform();
+		Utils.clickElement(service);
+	}
 
-    private VNextBORepairOrderDetailsPage selectServiceStatus(String status) {
-        final List<WebElement> serviceStatusListBoxOptions = driver
-                .findElements(By.xpath("//div[@aria-hidden='false']//ul[@class='k-list k-reset']/li"));
-        selectOptionInDropDown(serviceStatusListBoxOptions.get(0), serviceStatusListBoxOptions, status, true);
-        return this;
-    }
+	private void selectServiceStatus(String status) {
+		final List<WebElement> serviceStatusListBoxOptions = driver
+				.findElements(By.xpath("//div[@aria-hidden='false']//ul[@class='k-list k-reset']/li"));
+		selectOptionInDropDown(serviceStatusListBoxOptions.get(0), serviceStatusListBoxOptions, status, true);
+	}
 
-    public List<String> getServicesTableHeaderValues() {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(servicesTableColumns);
-        final List<String> stringCollection = servicesTableColumns
-                .stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
-        return stringCollection.subList(1, stringCollection.size());
-    }
+	public List<String> getServicesTableHeaderValues() {
+		WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(servicesTableColumns);
+		final List<String> stringCollection = servicesTableColumns
+				.stream()
+				.map(WebElement::getText)
+				.collect(Collectors.toList());
+		return stringCollection.subList(1, stringCollection.size());
+	}
 
-    public String getServiceStatusValue(String serviceId) {
-        final WebElement serviceStatusValue = driver.findElement(By.xpath(
-                "//div[@data-order-service-id='" + serviceId + "']//div[contains(@data-bind, 'orderServiceStatusName')]"));
-        setAttributeWithJS(serviceStatusValue, "style", "display: block;");
-        final String value = serviceStatusValue.getText();
-        setAttributeWithJS(serviceStatusValue, "style", "display: none;");
-        return value;
-    }
+	public String getServiceStatusValue(String serviceId) {
+		final WebElement serviceStatusValue = driver.findElement(By.xpath(
+				"//div[@data-order-service-id='" + serviceId + "']//div[contains(@data-bind, 'orderServiceStatusName')]"));
+		setAttributeWithJS(serviceStatusValue, "style", "display: block;");
+		final String value = serviceStatusValue.getText();
+		setAttributeWithJS(serviceStatusValue, "style", "display: none;");
+		return value;
+	}
 
-    public VNextBOAuditLogDialog clickLogInfoButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(logInfoButton)).click();
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBOAuditLogDialog.class);
-    }
+	public void clickLogInfoButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(logInfoButton)).click();
+		waitForLoading();
+	}
 
-    private WebElement clickActionsIcon(String serviceId) {
-        final WebElement actionsIcon = driver.findElement(By
-                .xpath("//div[@class='serviceRow' and @data-order-service-id='" +
-                        serviceId + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]"));
-        actions.moveToElement(actionsIcon);
-        Utils.clickElement(actionsIcon);
-        WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
-        return actionsIcon;
-    }
+	private WebElement clickActionsIcon(String serviceId) {
+		final WebElement actionsIcon = driver.findElement(By
+				.xpath("//div[@class='serviceRow' and @data-order-service-id='" +
+						serviceId + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]"));
+		actions.moveToElement(actionsIcon);
+		Utils.clickElement(actionsIcon);
+		WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
+		return actionsIcon;
+	}
 
-    public VNextBOOrderServiceNotesDialog openNotesDialog(String serviceId) {
-        clickActionsIcon(serviceId);
-        Utils.clickElement(By
-                .xpath("//div[@class='serviceRow' and @data-order-service-id='" + serviceId
-                        + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]//label[text()='Notes']"));
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBOOrderServiceNotesDialog.class);
-    }
+	public void openNotesDialog(String serviceId) {
+		clickActionsIcon(serviceId);
+		Utils.clickElement(By
+				.xpath("//div[@class='serviceRow' and @data-order-service-id='" + serviceId
+						+ "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]//label[text()='Notes']"));
+		waitForLoading();
+	}
 
-    public VNextBORepairOrderDetailsPage openMoreInformation() {
-        clickMoreInformationLink();
-        wait.until(ExpectedConditions.visibilityOf(moreInformationBlock));
-        return this;
-    }
+	public void openMoreInformation() {
+		clickMoreInformationLink();
+		wait.until(ExpectedConditions.visibilityOf(moreInformationBlock));
+	}
 
-    public VNextBORepairOrderDetailsPage closeMoreInformation() {
-        clickLessInformationLink();
-        wait.until(ExpectedConditions.invisibilityOf(moreInformationBlock));
-        return this;
-    }
+	public void closeMoreInformation() {
+		clickLessInformationLink();
+		wait.until(ExpectedConditions.invisibilityOf(moreInformationBlock));
+	}
 
-    private VNextBORepairOrderDetailsPage clickMoreInformationLink() {
-        wait.until(ExpectedConditions.elementToBeClickable(moreInformationLink)).click();
-        return this;
-    }
+	private void clickMoreInformationLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(moreInformationLink)).click();
+	}
 
-    private VNextBORepairOrderDetailsPage clickLessInformationLink() {
-        wait.until(ExpectedConditions.elementToBeClickable(lessInformationLink)).click();
-        return this;
-    }
+	private void clickLessInformationLink() {
+		wait.until(ExpectedConditions.elementToBeClickable(lessInformationLink)).click();
+	}
 
-    public List<String> getMoreInformationFieldsText() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(moreInformationFields));
-        return moreInformationFields
-                .stream()
-                .map(WebElement::getText)
-                .peek(System.out::println)
-                .collect(Collectors.toList());
-    }
+	public List<String> getMoreInformationFieldsText() {
+		wait.until(ExpectedConditions.visibilityOfAllElements(moreInformationFields));
+		return moreInformationFields
+				.stream()
+				.map(WebElement::getText)
+				.peek(System.out::println)
+				.collect(Collectors.toList());
+	}
 
-    public String getServiceStartedDate(String serviceId) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
-                    + "']//div[@class='clmn_6']//span[text()][1]"))).getText();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public String getServiceStartedDate(String serviceId) {
+		try {
+			return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
+					+ "']//div[@class='clmn_6']//span[text()][1]"))).getText();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
-    public String getServiceCompletedDate(String serviceId) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
-                    + "']//div[@class='clmn_6']//span[text()][2]"))).getText();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public String getServiceCompletedDate(String serviceId) {
+		try {
+			return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
+					+ "']//div[@class='clmn_6']//span[text()][2]"))).getText();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
-    public VNextBORepairOrderDetailsPage hoverOverServiceHelperIcon(String serviceId) {
-        try {
+	public void hoverOverServiceHelperIcon(String serviceId) {
+		try {
 //            final WebElement helpInfo = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
 //                    + "']//span[@class='helpInfo']/.."));
-            final WebElement helpInfo = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
-                    + "']//i[@class='help']"));
-            wait.until(ExpectedConditions.visibilityOf(helpInfo));
-            actions.moveToElement(helpInfo).build().perform();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
+			final WebElement helpInfo = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+					+ "']//i[@class='help']"));
+			wait.until(ExpectedConditions.visibilityOf(helpInfo));
+			actions.moveToElement(helpInfo).build().perform();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    public VNextBOChangeTechnicianDialog clickPhaseVendorTechnicianLink() {
-        Utils.clickElement(phaseVendorTechnician);
-        return PageFactory.initElements(driver, VNextBOChangeTechnicianDialog.class);
-    }
+	public void clickPhaseVendorTechnicianLink() {
+		Utils.clickElement(phaseVendorTechnician);
+	}
 
-    public boolean isHelpInfoDialogDisplayed(String serviceId, String status) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(driver.findElement(By
-                    .xpath("//div[@data-order-service-id='" + serviceId
-                            + "']//i[@class='help']/span[text()='" + status + "']"))))
-                    .isDisplayed();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+	public boolean isHelpInfoDialogDisplayed(String serviceId, String status) {
+		try {
+			return wait.until(ExpectedConditions.visibilityOf(driver.findElement(By
+					.xpath("//div[@data-order-service-id='" + serviceId
+							+ "']//i[@class='help']/span[text()='" + status + "']"))))
+					.isDisplayed();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-    public String getPhaseNameValue() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(phaseName)).getText().trim();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public String getPhaseNameValue() {
+		try {
+			return wait.until(ExpectedConditions.visibilityOf(phaseName)).getText().trim();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
-    public String getPhaseVendorPriceValue() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(phaseVendorPrice)).getText();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public String getPhaseVendorPriceValue() {
+		try {
+			return wait.until(ExpectedConditions.visibilityOf(phaseVendorPrice)).getText();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
-    public String getPhaseVendorTechnicianValue() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(phaseVendorTechnician)).getText();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public String getPhaseVendorTechnicianValue() {
+		try {
+			return wait.until(ExpectedConditions.visibilityOf(phaseVendorTechnician)).getText();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
-    public String getPhaseStatusValue() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(phaseStatus)).getText();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public String getPhaseStatusValue() {
+		try {
+			return wait.until(ExpectedConditions.visibilityOf(phaseStatus)).getText();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
-    public boolean isPhaseActionsTriggerDisplayed() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(phaseActionsTrigger)).isDisplayed();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+	public boolean isPhaseActionsTriggerDisplayed() {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(phaseActionsTrigger)).isDisplayed();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-    public boolean isServiceCompletedDateDisplayed(String serviceId) {
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
-                    + "']//div[@class='clmn_6']//span[text()][2]"))).getText();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+	public boolean isServiceCompletedDateDisplayed(String serviceId) {
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-order-service-id='" + serviceId
+					+ "']//div[@class='clmn_6']//span[text()][2]"))).getText();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
-    public String getOrderCurrentPhase() {
-        try {
-            actions
-                    .moveToElement(WaitUtilsWebDriver.waitForVisibility(orderDetailsPhaseName))
-                    .build()
-                    .perform();
-            return orderDetailsPhaseName.getText();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public String getOrderCurrentPhase() {
+		try {
+			actions
+					.moveToElement(WaitUtilsWebDriver.waitForVisibility(orderDetailsPhaseName))
+					.build()
+					.perform();
+			return orderDetailsPhaseName.getText();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
-    public String getTotalServicesPrice() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
-            actions.moveToElement(totalServicePrice).build().perform();
-            return totalServicePrice.getText();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+	public String getTotalServicesPrice() {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
+			actions.moveToElement(totalServicePrice).build().perform();
+			return totalServicePrice.getText();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
-    public boolean updateTotalServicePrice(String totalPrice) {
-        try {
-            waitForTotalPriceToBeUpdated(totalPrice);
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
+	public boolean updateTotalServicePrice(String totalPrice) {
+		try {
+			waitForTotalPriceToBeUpdated(totalPrice);
+			return true;
+		} catch (Exception ignored) {
+			return false;
+		}
+	}
 
-    private void waitForTotalPriceToBeUpdated(String totalPrice) {
-        WaitUtilsWebDriver.waitForVisibility(totalServicePrice);
-        actions.moveToElement(totalServicePrice).build().perform();
-        new WebDriverWait(driver, 20)
-                .until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
-    }
+	private void waitForTotalPriceToBeUpdated(String totalPrice) {
+		WaitUtilsWebDriver.waitForVisibility(totalServicePrice);
+		actions.moveToElement(totalServicePrice).build().perform();
+		new WebDriverWait(driver, 20)
+				.until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
+	}
 
-    public String getFirstPartIdFromPartsList() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(partsList));
-        return partsList.get(0).getAttribute("data-order-service-id");
-    }
+	public String getFirstPartIdFromPartsList() {
+		wait.until(ExpectedConditions.visibilityOfAllElements(partsList));
+		return partsList.get(0).getAttribute("data-order-service-id");
+	}
 
-    private WebElement getPartActionElement(int index) {
-        try {
-            final WebElement partAction = partsActions.get(index);
-            System.out.println("element");
-            System.out.println(partsActions.get(index));
-            Utils.clickElement(partAction);
-            return WaitUtilsWebDriver.waitForVisibility(partAction.findElement(By.xpath("./div[@class='drop checkout']")));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+	private WebElement getPartActionElement(int index) {
+		try {
+			final WebElement partAction = partsActions.get(index);
+			System.out.println("element");
+			System.out.println(partsActions.get(index));
+			Utils.clickElement(partAction);
+			return WaitUtilsWebDriver.waitForVisibility(partAction.findElement(By.xpath("./div[@class='drop checkout']")));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
-    public WebElement clickPartActionsIconForPart(String part) {
-        try {
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(partsNames, 10);
-        } catch (Exception e) {
-            Assert.fail("The Parts section is empty", e);
-        }
-        try {
-            final List<String> partsList = partsNames
-                    .stream()
-                    .map(WebElement::getText)
-                    .collect(Collectors.toList());
-            return getPartActionElement(partsList.indexOf(part));
-        } catch (Exception e) {
-            Assert.fail("The Part hasn't been displayed");
-        }
-        return null;
-    }
+	public WebElement clickPartActionsIconForPart(String part) {
+		try {
+			WaitUtilsWebDriver.waitForVisibilityOfAllOptions(partsNames, 10);
+		} catch (Exception e) {
+			Assert.fail("The Parts section is empty", e);
+		}
+		try {
+			final List<String> partsList = partsNames
+					.stream()
+					.map(WebElement::getText)
+					.collect(Collectors.toList());
+			return getPartActionElement(partsList.indexOf(part));
+		} catch (Exception e) {
+			Assert.fail("The Part hasn't been displayed");
+		}
+		return null;
+	}
 
-    public VNextBOOrderServiceNotesDialog openNotesDialogForPart(WebElement partsAction) {
-        Utils.clickElement(partsAction.findElement(By.xpath(".//label[text()='Notes']")));
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBOOrderServiceNotesDialog.class);
-    }
+	public void openNotesDialogForPart(WebElement partsAction) {
+		Utils.clickElement(partsAction.findElement(By.xpath(".//label[text()='Notes']")));
+		waitForLoading();
+	}
 
-    public List<String> getPartsOrderedFromTableValues() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(partsOrderedFromTableValues));
-        return partsOrderedFromTableValues
-                .stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
-    }
+	public List<String> getPartsOrderedFromTableValues() {
+		wait.until(ExpectedConditions.visibilityOfAllElements(partsOrderedFromTableValues));
+		return partsOrderedFromTableValues
+				.stream()
+				.map(WebElement::getText)
+				.collect(Collectors.toList());
+	}
 }

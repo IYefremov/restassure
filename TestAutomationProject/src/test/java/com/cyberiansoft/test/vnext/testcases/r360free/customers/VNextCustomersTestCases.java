@@ -33,7 +33,7 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 
 	private static String settingsbofficeurl;
 
-	@BeforeClass(description="R360 Customers Test Cases")
+	@BeforeClass(description = "R360 Customers Test Cases")
 	public void beforeClass() {
 
 		if (envType.equals(EnvironmentType.DEVELOPMENT))
@@ -43,7 +43,7 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		JSONDataProvider.dataFile = VNextFreeTestCasesDataPaths.getInstance().getCustomersTestCasesDataPath();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateNewCustomerWithEmptyFirstNameAndLastName(String rowID,
 																   String description, JSONObject testData) {
 
@@ -70,8 +70,8 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 		BaseUtils.waitABit(45000);
-WebDriver
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriver
+				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(settingsbofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -79,8 +79,10 @@ WebDriver
 				VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
+		CompanyWebPage companypage = new CompanyWebPage(webdriver);
+		backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = new ClientsWebPage(webdriver);
+		companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(testcustomer.getCompany());
 		clientspage.waitABit(1000);
@@ -89,7 +91,7 @@ WebDriver
 		webdriver.quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyCustomerCreatedInOfflineModeIsAvailableAfterDBUpdate(String rowID,
 																			   String description, JSONObject testData) {
 
@@ -124,14 +126,14 @@ WebDriver
 		customersscreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyNewCustomerIsAvailableAfterDBUpdate(String rowID,
 															  String description, JSONObject testData) {
 
 		final RetailCustomer testcustomer = JSonDataParser.getTestDataFromJson(testData, RetailCustomer.class);
 
 		deleteCustomerOnBackOffice(testcustomer.getFirstName(), testcustomer.getLastName());
-		
+
 		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
@@ -156,17 +158,17 @@ WebDriver
 		customersscreen = newcustomerscreen.clickBackButton();
 		customersscreen.clickBackButton();
 	}
-	
+
 	private void deleteCustomerOnBackOffice(String firstName, String lastName) {
-		
+
 		String customerDelete = "";
-		
+
 		if (lastName.length() > 2)
 			customerDelete = firstName + " " + lastName;
 		else
 			customerDelete = firstName;
 		WebDriver
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(settingsbofficeurl);
 		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
@@ -174,8 +176,10 @@ WebDriver
 				VNextFreeRegistrationInfo.getInstance().getUserVnextDevUserPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
+		CompanyWebPage companypage = new CompanyWebPage(webdriver);
+		backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = new ClientsWebPage(webdriver);
+		companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(customerDelete);
 		clientspage.waitABit(1000);

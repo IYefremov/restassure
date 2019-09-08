@@ -14,22 +14,24 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class BackOfficeMonitorTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOMonitorData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOMonitorData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorRepairOrderSearch(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorRepairOrderSearch(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
 
-		RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
+		RepairOrdersWebPage repairorderspage = new RepairOrdersWebPage(webdriver);
+		monitorPage.clickRepairOrdersLink();
 		repairorderspage.repairOrdersTableIsVisible();
 		repairorderspage.verifyRepairOrdersTableColumnsAreVisible();
 
@@ -71,18 +73,19 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.verifyTableCustomerAndVinColumnValuesAreVisible(data.getCompany(), data.getVIN());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorVendorOrdersSearch(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorVendorOrdersSearch(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-
-        VendorOrdersWebPage vendororderspage = monitorPage.clickVendorOrdersLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		VendorOrdersWebPage vendororderspage = new VendorOrdersWebPage(webdriver);
+		monitorPage.clickVendorOrdersLink();
 		vendororderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        vendororderspage.setSearchFromDate(data.getFromDate());
-        vendororderspage.setSearchToDate(data.getToDate());
+		vendororderspage.setSearchFromDate(data.getFromDate());
+		vendororderspage.setSearchToDate(data.getToDate());
 		vendororderspage.selectSearchServiceStatus(data.getServiceStatus());
 		vendororderspage.clickFindButton();
 		vendororderspage.repairOrdersTableIsVisible();
@@ -108,30 +111,31 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 
 		vendororderspage.setPageSize(data.getPage999());
 		Assert.assertEquals(50, vendororderspage.getRepairOrdersTableRowCount());
-		
+
 		vendororderspage.selectSearchLocation(data.getSearchLocation());
 		vendororderspage.selectSearchVendor(data.getVendor());
-		vendororderspage.setSearchVIN(data.getVIN()); 
+		vendororderspage.setSearchVIN(data.getVIN());
 		vendororderspage.selectSearchCustomer(data.getCompany());
 		vendororderspage.setSearchWorkorderNumber(data.getWoNumber());
 
-        vendororderspage.clickFindButton();
+		vendororderspage.clickFindButton();
 		Assert.assertEquals(1, vendororderspage.getRepairOrdersTableRowCount());
 		Assert.assertEquals(data.getVendor(), vendororderspage.getTeamVendorForVendorOrder(data.getWoNumber()));
 		Assert.assertEquals(data.getCompany(), vendororderspage.getCustomerForVendorOrder(data.getWoNumber()));
-		
+
 		vendororderspage.vendorOrderExists(data.getWoNumber());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorReportsAverageRepairTimeReport(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorReportsAverageRepairTimeReport(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-
-        AverageRepairTimeReportWebPage averagerepairtimereportpage = monitorPage.clickRepairCycleTimeLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		AverageRepairTimeReportWebPage averagerepairtimereportpage = new AverageRepairTimeReportWebPage(webdriver);
+		monitorPage.clickRepairCycleTimeLink();
 		averagerepairtimereportpage.makeSearchPanelVisible();
 		Assert.assertTrue(averagerepairtimereportpage.searchPanelIsExpanded());
 		averagerepairtimereportpage.selectSearchLocation(data.getSearchLocation());
@@ -142,17 +146,18 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		averagerepairtimereportpage.verifySearchResults(data.getSearchLocation(), data.getSearchWoType());
 	}
 
-// The section Vehicle Time Tracking has been removed
+	// The section Vehicle Time Tracking has been removed
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorReportsRepairLocationTimeTracking(String rowID, String description, JSONObject testData) {
+	public void testMonitorReportsRepairLocationTimeTracking(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = new RepairLocationTimeTrackingWebPage(webdriver);
+		monitorPage.clickVehicleTimeTrackingLink();
 
-        RepairLocationTimeTrackingWebPage repairlocationtimetrackingpage = monitorPage.clickVehicleTimeTrackingLink();
-		
 		repairlocationtimetrackingpage.makeSearchPanelVisible();
 		Assert.assertTrue(repairlocationtimetrackingpage.searchPanelIsExpanded());
 		repairlocationtimetrackingpage.selectSearchLocation(data.getSearchLocation());
@@ -163,37 +168,39 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(repairlocationtimetrackingpage.isTableIsDisplayed(), "The table is not displayed.");
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorReportsTrendingReport(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorReportsTrendingReport(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		TrendingReportWebPage trendingreportpage = new TrendingReportWebPage(webdriver);
+		monitorPage.clickCycleTimeTrendingLink();
 
-        TrendingReportWebPage trendingreportpage = monitorPage.clickCycleTimeTrendingLink();
-		
 		Assert.assertTrue(trendingreportpage.searchPanelIsExpanded());
 		trendingreportpage.selectSearchLocation(data.getSearchLocation());
 		trendingreportpage.selectSearchWOType(data.getSearchWoType());
 		trendingreportpage.setSearchFromDate(data.getFromMonth(), data.getFromYear());
 		trendingreportpage.setSearchToDate(data.getToMonth(), data.getToYear());
-		
+
 		trendingreportpage.clickFindButton();
 		Assert.assertTrue(trendingreportpage.areSearchResultsDisplayed(data.getSearchLocation(), data.getSearchWoType()),
-                "The search results are not displayed.");
+				"The search results are not displayed.");
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorRepairOrderFullDisplayVersion(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorRepairOrderFullDisplayVersion(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		RepairOrdersWebPage repairorderspage = new RepairOrdersWebPage(webdriver);
+		monitorPage.clickRepairOrdersLink();
 
-        RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
-		
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.searchPanelIsExpanded();
 		repairorderspage.searchPanelIsVisible();
@@ -203,158 +210,173 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		repairorderspage.openFullDisplayWOMonitorAndVerifyContent();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorVerifyOnHoldReasonAtRO(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorVerifyOnHoldReasonAtRO(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		MonitorSettingsWebPage monitorsettingspage = new MonitorSettingsWebPage(webdriver);
+		monitorPage.clickMonitorSettingsLink();
 
-        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+		monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
+		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
 
-        monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
-        monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
-		
-		monitorPage = backOfficeHeader.clickMonitorLink();
-		RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
+		monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		RepairOrdersWebPage repairorderspage = new RepairOrdersWebPage(webdriver);
+		monitorPage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation(data.getSearchLocation());
 		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
-        repairorderspage.setSearchFromDate(data.getFromDate());
-        repairorderspage.setSearchToDate(data.getToDate());
+		repairorderspage.setSearchFromDate(data.getFromDate());
+		repairorderspage.setSearchToDate(data.getToDate());
 		repairorderspage.setSearchWoNumber(data.getRepairOrderNumber());
 		repairorderspage.clickFindButton();
-		
-		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(data.getRepairOrderNumber());
+
+		VendorOrderServicesWebPage vendororderservicespage = new VendorOrderServicesWebPage(webdriver);
+		repairorderspage.clickOnWorkOrderLinkInTable(data.getRepairOrderNumber());
 		vendororderservicespage.selectRepairOrderStatus(data.getOrderStatus());
 		vendororderservicespage.selectRepairOrderReason(data.getOrderStatusReason());
 		vendororderservicespage.clickBackToROLink();
-		
+
 		backOfficeHeader.clickMonitorLink();
-		monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+		monitorsettingspage = new MonitorSettingsWebPage(webdriver);
+		monitorPage.clickMonitorSettingsLink();
 		monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorVerifyClosedReasonAtRO(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorVerifyClosedReasonAtRO(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		MonitorSettingsWebPage monitorsettingspage = new MonitorSettingsWebPage(webdriver);
+		monitorPage.clickMonitorSettingsLink();
+		monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
+		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
 
-        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
-        monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
-        monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
-		
-		monitorPage = backOfficeHeader.clickMonitorLink();
-		RepairOrdersWebPage repairorderspage = monitorPage.clickRepairOrdersLink();
+		monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		RepairOrdersWebPage repairorderspage = new RepairOrdersWebPage(webdriver);
+		monitorPage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation(data.getSearchLocation());
-        repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
-        repairorderspage.setSearchFromDate(data.getFromDate());
-        repairorderspage.setSearchToDate(data.getToDate());
-        repairorderspage.setSearchWoNumber(data.getRepairOrderNumber());
+		repairorderspage.selectSearchTimeframe(data.getSearchTimeFrame());
+		repairorderspage.setSearchFromDate(data.getFromDate());
+		repairorderspage.setSearchToDate(data.getToDate());
+		repairorderspage.setSearchWoNumber(data.getRepairOrderNumber());
 		repairorderspage.clickFindButton();
-		
-		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(data.getRepairOrderNumber());
+
+		VendorOrderServicesWebPage vendororderservicespage = new VendorOrderServicesWebPage(webdriver);
+		repairorderspage.clickOnWorkOrderLinkInTable(data.getRepairOrderNumber());
 		vendororderservicespage.selectRepairOrderStatus(data.getOrderStatus());
 		vendororderservicespage.selectRepairOrderReason(data.getOrderStatusReason());
 		vendororderservicespage.clickBackToROLink();
-		
+
 		backOfficeHeader.clickMonitorLink();
-		monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+		monitorsettingspage = new MonitorSettingsWebPage(webdriver);
+		monitorPage.clickMonitorSettingsLink();
 		monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReason());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorSettingsCRUD(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorSettingsCRUD(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-        
-        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
-        monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		MonitorSettingsWebPage monitorsettingspage = new MonitorSettingsWebPage(webdriver);
+		monitorPage.clickMonitorSettingsLink();
+		monitorsettingspage.verifyOrderStatusReasonIsNotPresent(data.getOrderStatusReason());
 		monitorsettingspage.createNewOrderStatusReason(data.getOrderStatus(), data.getOrderStatusReason());
 		monitorsettingspage.clickEditOrderStatusReason(data.getOrderStatusReason());
 		Assert.assertEquals(data.getOrderStatus(), monitorsettingspage.getNewOrderStatus());
-		
+
 		monitorsettingspage.setNewOrderStatusReason(data.getOrderStatusReasonEdited());
 		monitorsettingspage.selectNewOrderStatus(data.getOrderStatusEdited());
 		monitorsettingspage.clickNewOrderStatusReasonCancelButton();
-		
+
 		monitorsettingspage.clickEditOrderStatusReason(data.getOrderStatusReason());
 		Assert.assertEquals(data.getOrderStatus(), monitorsettingspage.getNewOrderStatus());
-		
+
 		monitorsettingspage.setNewOrderStatusReason(data.getOrderStatusReasonEdited());
 		monitorsettingspage.selectNewOrderStatus(data.getOrderStatusEdited());
 		monitorsettingspage.clickNewOrderStatusReasonOKButton();
-		
+
 		monitorsettingspage.clickEditOrderStatusReason(data.getOrderStatusReasonEdited());
 		Assert.assertEquals(data.getOrderStatusEdited(), monitorsettingspage.getNewOrderStatus());
 		monitorsettingspage.clickNewOrderStatusReasonCancelButton();
-		
+
 		monitorsettingspage.deleteOrderStatusReason(data.getOrderStatusReasonEdited());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testMonitorSettingsEmployeeRoleSettings(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testMonitorSettingsEmployeeRoleSettings(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-
-        MonitorSettingsWebPage monitorsettingspage = monitorPage.clickMonitorSettingsLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		MonitorSettingsWebPage monitorsettingspage = new MonitorSettingsWebPage(webdriver);
+		monitorPage.clickMonitorSettingsLink();
 		Assert.assertTrue(monitorsettingspage.checkPresenceOfTabs());
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridColumnsAndRows());
 		Assert.assertTrue(monitorsettingspage.checkEmployeeRoleSettingsGridOnOfFieldsAbility());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkMonitorWhiteBoardAutoRefresh(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkMonitorWhiteBoardAutoRefresh(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-
-        WhiteBoardWebPage whiteBoardPage = monitorPage.clickWhiteBoardLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		WhiteBoardWebPage whiteBoardPage = new WhiteBoardWebPage(webdriver);
+		monitorPage.clickWhiteBoardLink();
 		whiteBoardPage.setSearchLocation(data.getSearchLocation());
 		whiteBoardPage.clickSearchButton();
 		Assert.assertTrue(whiteBoardPage.checkSearhResultColumns());
 		Assert.assertFalse(whiteBoardPage.checkIntervalFieldLessThan(5));
 		Assert.assertFalse(whiteBoardPage.checkIntervalFieldOverThan(720));
-        Assert.assertFalse(whiteBoardPage.checkIntervalFieldInputSymbol("a"));
+		Assert.assertFalse(whiteBoardPage.checkIntervalFieldInputSymbol("a"));
 		Assert.assertTrue(whiteBoardPage.checkIntervalField(6));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkMonitorReportsServiceCount(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkMonitorReportsServiceCount(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-
-        ServiceCountWebPage serviceCountPage = monitorPage.clickWipSummaryLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		ServiceCountWebPage serviceCountPage = new ServiceCountWebPage(webdriver);
+		monitorPage.clickWipSummaryLink();
 //		Assert.assertTrue(serviceCountPage.verifySearchFields()); todo the fields are no more displayed
 		serviceCountPage.clickSearchButton();
 //		Assert.assertTrue(serviceCountPage.verifySearchResultGrid()); todo the fields are no more displayed
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkMonitorReportsActiveVehiclesByPhaseGeneral(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkMonitorReportsActiveVehiclesByPhaseGeneral(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-
-        ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorPage.clickServiceCountLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = new ActiveVechicleByPhaseWebPage(webdriver);
+		monitorPage.clickServiceCountLink();
 //		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
 		activeVechicleByPhasePage.clickFindButton();
 //        Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
@@ -368,21 +390,22 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(data.getSearchLocation()));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkMonitorReportsActiveVehiclesByPhaseLocationAndPhases(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkMonitorReportsActiveVehiclesByPhaseLocationAndPhases(String rowID, String description, JSONObject testData) {
 
-        BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-
-        ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorPage.clickServiceCountLink();
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = new ActiveVechicleByPhaseWebPage(webdriver);
+		monitorPage.clickServiceCountLink();
 //		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
 		activeVechicleByPhasePage.clickFindButton();
 //		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
-        activeVechicleByPhasePage.setLocationFilter(data.getSearchLocation());
-        activeVechicleByPhasePage.setSearchFromDate(data.getFromDate());
-        activeVechicleByPhasePage.setSearchToDate(data.getToDate());
+		activeVechicleByPhasePage.setLocationFilter(data.getSearchLocation());
+		activeVechicleByPhasePage.setSearchFromDate(data.getFromDate());
+		activeVechicleByPhasePage.setSearchToDate(data.getToDate());
 //		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
 		activeVechicleByPhasePage.clickFindButton();
 //        Assert.assertEquals(1, activeVechicleByPhasePage.countLocationsInResultTable());
@@ -390,46 +413,48 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(data.getSearchLocation()));
 //		Assert.assertTrue(activeVechicleByPhasePage.checkGrid());
 
-        // no more displayed
+		// no more displayed
 //		activeVechicleByPhasePage.setPhase1(data.getPhase1());
 //		activeVechicleByPhasePage.setStatuses1(data.getStatus1());
 //		activeVechicleByPhasePage.setPhase2(data.getPhase2());
 //		activeVechicleByPhasePage.setStatuses2(data.getStatuses2());
 //		activeVechicleByPhasePage.clickFindButton();
 	}
-	
-    //test skipped cause of no test data
-    //@Test(testName = "Test Case 65435:Monitor: Reports - Active Vehicles by Phase Subscriptions")
-    public void checkMonitorReportsActiveVechiclesByPhaseSubscriptions() throws InterruptedException{
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
-                BackOfficeHeaderPanel.class);
-        MonitorWebPage monitorPage = backOfficeHeader.clickMonitorLink();
-        ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = monitorPage.clickServiceCountLink();
-        Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
-        activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
-        Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameField("180"));
-        Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
-        activeVechicleByPhasePage.clickFindButton();
-        Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
 
-        activeVechicleByPhasePage.setPhase1("PDR Station");
-        activeVechicleByPhasePage.setPhase2("PDI");
-        activeVechicleByPhasePage.setStatuses1("Active");
-        activeVechicleByPhasePage.setStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
-        activeVechicleByPhasePage.clickPhasesInRow();
-        activeVechicleByPhasePage.clickFindButton();
-        Assert.assertTrue(activeVechicleByPhasePage.checkThatAllPhasesAreInStatus("PDR Station","Active"));
-        SubscriptionsWebPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
-        Assert.assertTrue(subscriptionsPege.checkGrid());
-        subscriptionsPege.clickAddButton();
-        Assert.assertTrue(subscriptionsPege.checkAddPopUpContent());
-        subscriptionsPege.setSubscriptionPopUpLocation("ALM - Recon Facility");
-        subscriptionsPege.setSubscriptionPopUpPhase1("PDR Station");
-        subscriptionsPege.setSubscriptionPopUpStatuses1("Active");
-        subscriptionsPege.setSubscriptionPopUpPhase2("PDI");
-        subscriptionsPege.setSubscriptionPopUpStatuses2("Queued","Active","Completed","Audited","Refused","Rework","Skipped");
-        subscriptionsPege.setSubscriptionPopUpDescription("test");
-        subscriptionsPege.setSubscriptionPopUpStartTime("12:00 AM");
-        subscriptionsPege.clickOkAddPopUpButton();
-    }
+	//test skipped cause of no test data
+	//@Test(testName = "Test Case 65435:Monitor: Reports - Active Vehicles by Phase Subscriptions")
+	public void checkMonitorReportsActiveVechiclesByPhaseSubscriptions() throws InterruptedException {
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		backOfficeHeader.clickMonitorLink();
+		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = new ActiveVechicleByPhaseWebPage(webdriver);
+		monitorPage.clickServiceCountLink();
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
+		activeVechicleByPhasePage.setLocationFilter("ALM - Recon Facility");
+		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameField("180"));
+		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
+		activeVechicleByPhasePage.clickFindButton();
+		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults("ALM - Recon Facility"));
+
+		activeVechicleByPhasePage.setPhase1("PDR Station");
+		activeVechicleByPhasePage.setPhase2("PDI");
+		activeVechicleByPhasePage.setStatuses1("Active");
+		activeVechicleByPhasePage.setStatuses2("Queued", "Active", "Completed", "Audited", "Refused", "Rework", "Skipped");
+		activeVechicleByPhasePage.clickPhasesInRow();
+		activeVechicleByPhasePage.clickFindButton();
+		Assert.assertTrue(activeVechicleByPhasePage.checkThatAllPhasesAreInStatus("PDR Station", "Active"));
+		SubscriptionsWebPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
+		Assert.assertTrue(subscriptionsPege.checkGrid());
+		subscriptionsPege.clickAddButton();
+		Assert.assertTrue(subscriptionsPege.checkAddPopUpContent());
+		subscriptionsPege.setSubscriptionPopUpLocation("ALM - Recon Facility");
+		subscriptionsPege.setSubscriptionPopUpPhase1("PDR Station");
+		subscriptionsPege.setSubscriptionPopUpStatuses1("Active");
+		subscriptionsPege.setSubscriptionPopUpPhase2("PDI");
+		subscriptionsPege.setSubscriptionPopUpStatuses2("Queued", "Active", "Completed", "Audited", "Refused", "Rework", "Skipped");
+		subscriptionsPege.setSubscriptionPopUpDescription("test");
+		subscriptionsPege.setSubscriptionPopUpStartTime("12:00 AM");
+		subscriptionsPege.clickOkAddPopUpButton();
+	}
 }

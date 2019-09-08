@@ -16,248 +16,259 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class BackOfficeOperationsTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationTechnicianCommissionSearch(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationTechnicianCommissionSearch(String rowID, String description, JSONObject testData) {
 
-        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        TechnicianCommissionsWebPage techCommissionPage = operationsPage.clickTechnicianCommissionsLink();
-        techCommissionPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        techCommissionPage.setSearchFromDate(data.getFromTime());
-        techCommissionPage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
+		TechnicianCommissionsWebPage techCommissionPage = new TechnicianCommissionsWebPage(webdriver);
+		operationsPage.clickTechnicianCommissionsLink();
+		techCommissionPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		techCommissionPage.setSearchFromDate(data.getFromTime());
+		techCommissionPage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
 
-        techCommissionPage.clickFindButton();
-        techCommissionPage.verifyInvoicesTableColumnsAreVisible();
+		techCommissionPage.clickFindButton();
+		techCommissionPage.verifyInvoicesTableColumnsAreVisible();
 
-        Assert.assertEquals(data.getPage1(), techCommissionPage.getCurrentlySelectedPageNumber(),
-                "The current first page is not opened!");
-        Assert.assertEquals(data.getPage1(), techCommissionPage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), techCommissionPage.getCurrentlySelectedPageNumber(),
+				"The current first page is not opened!");
+		Assert.assertEquals(data.getPage1(), techCommissionPage.getGoToPageFieldValue());
 
-        techCommissionPage.setPageSize(data.getPage1());
-        Assert.assertEquals(data.getTableRowCount1(), techCommissionPage.getTechnicianCommissionsTableRowCount());
+		techCommissionPage.setPageSize(data.getPage1());
+		Assert.assertEquals(data.getTableRowCount1(), techCommissionPage.getTechnicianCommissionsTableRowCount());
 
-        String lastPageNumber = techCommissionPage.getLastPageNumber();
-        techCommissionPage.clickGoToLastPage(browserType.getBrowserTypeString());
-        Assert.assertEquals(lastPageNumber, techCommissionPage.getPageFieldValue());
+		String lastPageNumber = techCommissionPage.getLastPageNumber();
+		techCommissionPage.clickGoToLastPage(browserType.getBrowserTypeString());
+		Assert.assertEquals(lastPageNumber, techCommissionPage.getPageFieldValue());
 
-        techCommissionPage.clickGoToFirstPage();
-        Assert.assertEquals(data.getPage1(), techCommissionPage.getGoToPageFieldValue());
+		techCommissionPage.clickGoToFirstPage();
+		Assert.assertEquals(data.getPage1(), techCommissionPage.getGoToPageFieldValue());
 
-        techCommissionPage.clickGoToNextPage();
-        Assert.assertEquals(data.getPage2(), techCommissionPage.getGoToPageFieldValue());
+		techCommissionPage.clickGoToNextPage();
+		Assert.assertEquals(data.getPage2(), techCommissionPage.getGoToPageFieldValue());
 
-        techCommissionPage.clickGoToPreviousPage();
-        Assert.assertEquals(data.getPage1(), techCommissionPage.getGoToPageFieldValue());
+		techCommissionPage.clickGoToPreviousPage();
+		Assert.assertEquals(data.getPage1(), techCommissionPage.getGoToPageFieldValue());
 
-        techCommissionPage.setPageSize(data.getPage999());
-        Assert.assertEquals(techCommissionPage.MAX_TABLE_ROW_COUNT_VALUE,
-                techCommissionPage.getTechnicianCommissionsTableRowCount());
+		techCommissionPage.setPageSize(data.getPage999());
+		Assert.assertEquals(techCommissionPage.MAX_TABLE_ROW_COUNT_VALUE,
+				techCommissionPage.getTechnicianCommissionsTableRowCount());
 
-        techCommissionPage.verifySearchFieldsAreVisible();
+		techCommissionPage.verifySearchFieldsAreVisible();
 
-        techCommissionPage.setPageSize(data.getPage20());
-        techCommissionPage.selectSearchStatus(data.getStatus());
-        techCommissionPage.selectSearchTechnician(data.getTech());
-        techCommissionPage.setSearchInvoice(data.getInvoiceNumber());
-        techCommissionPage.clickFindButton();
+		techCommissionPage.setPageSize(data.getPage20());
+		techCommissionPage.selectSearchStatus(data.getStatus());
+		techCommissionPage.selectSearchTechnician(data.getTech());
+		techCommissionPage.setSearchInvoice(data.getInvoiceNumber());
+		techCommissionPage.clickFindButton();
 
-        Assert.assertEquals(data.getTableRowCount1(), techCommissionPage.getTechnicianCommissionsTableRowCount());
-        techCommissionPage.verifySearchResults(data.getInvoiceNumber());
-    }
+		Assert.assertEquals(data.getTableRowCount1(), techCommissionPage.getTechnicianCommissionsTableRowCount());
+		techCommissionPage.verifySearchResults(data.getInvoiceNumber());
+	}
 
-    //todo edge
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationWorkOrdersSearch(String rowID, String description, JSONObject testData) {
+	//todo edge
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationWorkOrdersSearch(String rowID, String description, JSONObject testData) {
 
-        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        WorkOrdersWebPage wopage = operationsPage.clickWorkOrdersLink();
-        wopage.clickFindButton();
-        wopage.makeSearchPanelVisible();
-        wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        wopage.setSearchFromDate(data.getFromTime());
-        wopage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
-        wopage.clickFindButton();
-        wopage.verifyWorkOrdersTableColumnsAreVisible();
+		WorkOrdersWebPage wopage = new WorkOrdersWebPage(webdriver);
+		operationsPage.clickWorkOrdersLink();
+		wopage.clickFindButton();
+		wopage.makeSearchPanelVisible();
+		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		wopage.setSearchFromDate(data.getFromTime());
+		wopage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
+		wopage.clickFindButton();
+		wopage.verifyWorkOrdersTableColumnsAreVisible();
 
-        Assert.assertEquals(data.getPage1(), wopage.getCurrentlySelectedPageNumber());
-        Assert.assertEquals(data.getPage1(), wopage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), wopage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), wopage.getGoToPageFieldValue());
 
-        wopage.setPageSize(data.getPage1());
-        Assert.assertEquals(data.getTableRowCount1(), wopage.getWorkOrdersTableRowCount());
+		wopage.setPageSize(data.getPage1());
+		Assert.assertEquals(data.getTableRowCount1(), wopage.getWorkOrdersTableRowCount());
 
-        String lastPageNumber = wopage.getLastPageNumber();
-        wopage.clickGoToLastPage(browserType.getBrowserTypeString());
-        Assert.assertEquals(lastPageNumber, wopage.getPageFieldValue());
+		String lastPageNumber = wopage.getLastPageNumber();
+		wopage.clickGoToLastPage(browserType.getBrowserTypeString());
+		Assert.assertEquals(lastPageNumber, wopage.getPageFieldValue());
 
-        wopage.clickGoToFirstPage();
-        Assert.assertEquals(data.getPage1(), wopage.getGoToPageFieldValue());
+		wopage.clickGoToFirstPage();
+		Assert.assertEquals(data.getPage1(), wopage.getGoToPageFieldValue());
 
-        wopage.clickGoToNextPage();
-        Assert.assertEquals(data.getPage2(), wopage.getGoToPageFieldValue());
+		wopage.clickGoToNextPage();
+		Assert.assertEquals(data.getPage2(), wopage.getGoToPageFieldValue());
 
-        wopage.clickGoToPreviousPage();
-        Assert.assertEquals(data.getPage1(), wopage.getGoToPageFieldValue());
+		wopage.clickGoToPreviousPage();
+		Assert.assertEquals(data.getPage1(), wopage.getGoToPageFieldValue());
 
-        wopage.setPageSize(data.getPage999());
+		wopage.setPageSize(data.getPage999());
 //        Assert.assertEquals(data.getTableRowCount189(), wopage.getWorkOrdersTableRowCount());
 
-        wopage.makeSearchPanelVisible();
-        wopage.verifySearchFieldsAreVisible();
-        wopage.setPageSize(data.getPage20());
+		wopage.makeSearchPanelVisible();
+		wopage.verifySearchFieldsAreVisible();
+		wopage.setPageSize(data.getPage20());
 
-        wopage.selectSearchPackage(data.getSearchPackage());
-        wopage.selectSearchStatus(data.getStatus());
-        wopage.setSearchOrderNumber(data.getWOnum());
-        wopage.unselectInvoiceFromDeviceCheckbox();
-        wopage.clickFindButton();
-        Assert.assertEquals(data.getTableRowCount1(), wopage.getWorkOrdersTableRowCount());
-        wopage.workOrderExists(data.getWOnum());
-    }
+		wopage.selectSearchPackage(data.getSearchPackage());
+		wopage.selectSearchStatus(data.getStatus());
+		wopage.setSearchOrderNumber(data.getWOnum());
+		wopage.unselectInvoiceFromDeviceCheckbox();
+		wopage.clickFindButton();
+		Assert.assertEquals(data.getTableRowCount1(), wopage.getWorkOrdersTableRowCount());
+		wopage.workOrderExists(data.getWOnum());
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationServiceContract(String rowID, String description, JSONObject testData) throws Exception {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationServiceContract(String rowID, String description, JSONObject testData) throws Exception {
 
-        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        ServiceContractsWebPage serviceContractsPage = operationsPage.clickServiceContactsLink();
-        Thread.sleep(2000);
-        serviceContractsPage.verifyServiceContactsTableColumnsAreVisible();
+		ServiceContractsWebPage serviceContractsPage = new ServiceContractsWebPage(webdriver);
+		operationsPage.clickServiceContactsLink();
+		Thread.sleep(2000);
+		serviceContractsPage.verifyServiceContactsTableColumnsAreVisible();
 
-        serviceContractsPage.makeSearchPanelVisible();
-        serviceContractsPage.verifySearchFieldsAreVisible();
-        ServiceContractTypesWebPage serviceContractTypesPage = serviceContractsPage.clickContractTypesButton();
-        serviceContractTypesPage.waitServiceContractTypesPageIsLoaded();
-        webdriver.navigate().back();
-        Thread.sleep(1000);
-        serviceContractsPage.clickContractDataButton();
-        serviceContractsPage.verifyDropDownMenuIsOpened(browserType.getBrowserTypeString());
+		serviceContractsPage.makeSearchPanelVisible();
+		serviceContractsPage.verifySearchFieldsAreVisible();
+		ServiceContractTypesWebPage serviceContractTypesPage = serviceContractsPage.clickContractTypesButton();
+		serviceContractTypesPage.waitServiceContractTypesPageIsLoaded();
+		webdriver.navigate().back();
+		Thread.sleep(1000);
+		serviceContractsPage.clickContractDataButton();
+		serviceContractsPage.verifyDropDownMenuIsOpened(browserType.getBrowserTypeString());
 
-        serviceContractsPage.clickClaimDataButton();
-        serviceContractsPage.verifyDropDownMenuIsOpened(browserType.getBrowserTypeString());
+		serviceContractsPage.clickClaimDataButton();
+		serviceContractsPage.verifyDropDownMenuIsOpened(browserType.getBrowserTypeString());
 
-        serviceContractsPage.clickPortfolioButton();
-        Thread.sleep(2000);
-        serviceContractsPage.verifyPortfolioOptionsAreOpened();
-    }
+		serviceContractsPage.clickPortfolioButton();
+		Thread.sleep(2000);
+		serviceContractsPage.verifyPortfolioOptionsAreOpened();
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationVendorBill(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationVendorBill(String rowID, String description, JSONObject testData) {
 
-        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        VendorBillsWebPage vendorBillsPage = operationsPage.clickVendorBillsLink();
-        vendorBillsPage.verifyVendorBillsTableColumnsAreVisible();
+		VendorBillsWebPage vendorBillsPage = new VendorBillsWebPage(webdriver);
+		operationsPage.clickVendorBillsLink();
+		vendorBillsPage.verifyVendorBillsTableColumnsAreVisible();
 
-        vendorBillsPage.makeSearchPanelVisible();
-        vendorBillsPage.verifySearchFieldsAreVisible();
-    }
+		vendorBillsPage.makeSearchPanelVisible();
+		vendorBillsPage.verifySearchFieldsAreVisible();
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationNewServiceRequest(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationNewServiceRequest(String rowID, String description, JSONObject testData) {
 
-        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        ServiceRequestsListWebPage serviceRequestsListPage = operationsPage.clickNewServiceRequestList();
+		ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
+		operationsPage.clickNewServiceRequestList();
 
-        serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceType());
-        serviceRequestsListPage.clickAddServiceRequestButton();
+		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceType());
+		serviceRequestsListPage.clickAddServiceRequestButton();
 
-        serviceRequestsListPage
-                .clickGeneralInfoEditButton()
-                .setServiceRequestGeneralInfo(data.getTeamName(), data.getServiceRequestGeneralInfo())
-                .clickDoneButton()
-                .clickCustomerEditButton()
-                .selectServiceRequestCustomer(data.getNewServiceRequest())
-                .clickDoneButton()
-                .saveNewServiceRequest();
 
-        serviceRequestsListPage.makeSearchPanelVisible();
+		serviceRequestsListPage.clickGeneralInfoEditButton();
+		serviceRequestsListPage.setServiceRequestGeneralInfo(data.getTeamName(), data.getServiceRequestGeneralInfo());
+		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListPage.clickCustomerEditButton();
+		serviceRequestsListPage.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListPage.saveNewServiceRequest();
 
-        serviceRequestsListPage.verifySearchFieldsAreVisible();
+		serviceRequestsListPage.makeSearchPanelVisible();
 
-        serviceRequestsListPage.selectSearchTeam(data.getTeamName());
-        serviceRequestsListPage.setSearchFreeText(data.getTextSearchParameter());
-        serviceRequestsListPage.setServiceRequestType(data.getServiceType());
-        serviceRequestsListPage.clickFindButton();
-        serviceRequestsListPage.verifySearchResultsByServiceName(data.getTextSearchParameter());
+		serviceRequestsListPage.verifySearchFieldsAreVisible();
 
-        serviceRequestsListPage
-                .selectAddServiceRequestsComboboxValue(data.getServiceTypeVit())
-                .clickAddServiceRequestButton()
-                .clickGeneralInfoEditButton()
-                .setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPOnum(), data.getROnum())
-                .clickDoneButton();
+		serviceRequestsListPage.selectSearchTeam(data.getTeamName());
+		serviceRequestsListPage.setSearchFreeText(data.getTextSearchParameter());
+		serviceRequestsListPage.setServiceRequestType(data.getServiceType());
+		serviceRequestsListPage.clickFindButton();
+		serviceRequestsListPage.verifySearchResultsByServiceName(data.getTextSearchParameter());
 
-        serviceRequestsListPage.clickCustomerEditButton();
-        serviceRequestsListPage.selectServiceRequestCustomer(data.getNewServiceRequest());
-        serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceTypeVit());
+		serviceRequestsListPage.clickAddServiceRequestButton();
+		serviceRequestsListPage.clickGeneralInfoEditButton();
+		serviceRequestsListPage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPOnum(), data.getROnum());
+		serviceRequestsListPage.clickDoneButton();
 
-        serviceRequestsListPage.clickVehicleInforEditButton();
-        serviceRequestsListPage.setServiceRequestVIN(data.getVIN());
-        serviceRequestsListPage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-        serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListPage.clickCustomerEditButton();
+		serviceRequestsListPage.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListPage.clickDoneButton();
 
-        serviceRequestsListPage.clickClaimInfoEditButton();
-        serviceRequestsListPage.selectServiceRequestInsurance(data.getInsurance());
-        serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListPage.clickVehicleInforEditButton();
+		serviceRequestsListPage.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListPage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListPage.clickDoneButton();
 
-        serviceRequestsListPage.setServiceRequestLabel(data.getLabel());
-        serviceRequestsListPage.setServiceRequestDescription(data.getLabel());
+		serviceRequestsListPage.clickClaimInfoEditButton();
+		serviceRequestsListPage.selectServiceRequestInsurance(data.getInsurance());
+		serviceRequestsListPage.clickDoneButton();
 
-        serviceRequestsListPage.saveNewServiceRequest();
+		serviceRequestsListPage.setServiceRequestLabel(data.getLabel());
+		serviceRequestsListPage.setServiceRequestDescription(data.getLabel());
 
-        serviceRequestsListPage.makeSearchPanelVisible();
-        serviceRequestsListPage.setSearchFreeText(data.getNewServiceRequest());
-        serviceRequestsListPage.setServiceRequestType(data.getServiceTypeVit());
-        serviceRequestsListPage.clickFindButton();
-        Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByServiceName(data.getNewServiceRequest()));
-        Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
+		serviceRequestsListPage.saveNewServiceRequest();
 
-        serviceRequestsListPage.acceptFirstServiceRequestFromList();
-        serviceRequestsListPage.closeFirstServiceRequestFromTheList();
+		serviceRequestsListPage.makeSearchPanelVisible();
+		serviceRequestsListPage.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListPage.setServiceRequestType(data.getServiceTypeVit());
+		serviceRequestsListPage.clickFindButton();
+		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByServiceName(data.getNewServiceRequest()));
+		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
 
-        serviceRequestsListPage.makeSearchPanelVisible();
-        serviceRequestsListPage.setSearchFreeText(data.getNewServiceRequest());
-        serviceRequestsListPage.clickFindButton();
-        Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
-        Assert.assertEquals(serviceRequestsListPage.getFirstServiceRequestStatus(), data.getStatus());
-    }
+		serviceRequestsListPage.acceptFirstServiceRequestFromList();
+		serviceRequestsListPage.closeFirstServiceRequestFromTheList();
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testWorkOrderSearchOperation(String rowID, String description, JSONObject testData) {
+		serviceRequestsListPage.makeSearchPanelVisible();
+		serviceRequestsListPage.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListPage.clickFindButton();
+		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
+		Assert.assertEquals(serviceRequestsListPage.getFirstServiceRequestStatus(), data.getStatus());
+	}
 
-        BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testWorkOrderSearchOperation(String rowID, String description, JSONObject testData) {
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-        WorkOrdersWebPage workOrderPage = operationsPage.clickWorkOrdersLink();
+		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        Assert.assertTrue(workOrderPage.checkWorkOrdersInfo());
-        Assert.assertTrue(workOrderPage.checkWorkOrdersPagination());
-        Assert.assertTrue(workOrderPage.checkWorkOrdersSearchFields());
-        Assert.assertTrue(workOrderPage.checkWorkOrdersSearchResults(data.getWOnum()));
-    }
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+		WorkOrdersWebPage workOrderPage = new WorkOrdersWebPage(webdriver);
+		operationsPage.clickWorkOrdersLink();
+
+		Assert.assertTrue(workOrderPage.checkWorkOrdersInfo());
+		Assert.assertTrue(workOrderPage.checkWorkOrdersPagination());
+		Assert.assertTrue(workOrderPage.checkWorkOrdersSearchFields());
+		Assert.assertTrue(workOrderPage.checkWorkOrdersSearchResults(data.getWOnum()));
+	}
 }

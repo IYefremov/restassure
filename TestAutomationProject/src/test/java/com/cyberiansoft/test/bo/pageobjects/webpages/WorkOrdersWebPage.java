@@ -99,7 +99,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00")
 	private WebElement workOrdersTable;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_btCreateInvoice")
 	private WebElement createInvoiceToWorkORderButton;
 
@@ -204,8 +204,8 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 	}
 
 	public boolean workOrderExists(String wordernumber) {
-        return wotable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + wordernumber + "']"))
-                .size() > 0;
+		return wotable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + wordernumber + "']"))
+				.size() > 0;
 	}
 
 	public boolean verifySearchResultsByVIN(String vin) {
@@ -215,7 +215,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 
 	public String getTableRowWorkOrderNumber(WebElement row) {
 		waitABit(2000);
-		
+
 		return row.findElement(By.xpath(".//td[" + wotable.getTableColumnIndex("Order#") + "]"))
 				.findElements(By.tagName("a")).get(0).getText();
 	}
@@ -292,9 +292,9 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 			waitABit(2000);
 			// + wotable.getTableColumnIndex("Invoice#") +
 			invoicenum = wait
-                    .until(ExpectedConditions.visibilityOfAllElements(row.findElements(By.className("entity-link"))))
-                    .get(1)
-                    .getText();
+					.until(ExpectedConditions.visibilityOfAllElements(row.findElements(By.className("entity-link"))))
+					.get(1)
+					.getText();
 
 		} else {
 			Assert.assertTrue(false, "Can't find " + wonumber + " work order");
@@ -309,7 +309,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 				.click();
 		waitForLoading();
 
-		try{
+		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Order#')]"))));
 			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Invoice#')]"))));
 			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'Stock#')]"))));
@@ -324,8 +324,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th/a[contains(text(), 'PO#')]"))));
 			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Notes')]"))));
 			wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath("//th[contains(text(), 'Media')]"))));
-		}
-		catch(TimeoutException e) {
+		} catch (TimeoutException e) {
 			return false;
 		}
 
@@ -333,18 +332,18 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 	}
 
 	public boolean checkWorkOrdersPagination() {
-		try{
+		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgArrPart1")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgNumPart")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rgArrPart2")));
-		}catch(TimeoutException e){
+		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
 	}
 
 	public boolean checkWorkOrdersSearchFields() {
-		try{
+		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboArea_Input")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_Input")));
@@ -361,7 +360,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbOrderNum")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbAmountFrom")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_tbAmountTo")));
-		}catch(TimeoutException e){
+		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
@@ -370,22 +369,22 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 	public boolean checkWorkOrdersSearchResults(String wo) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input"))).sendKeys("004 - Test Company");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboServiceGroups_Input"))).click();
-        selectComboboxValue(searchpackagecmb, searchpackagedd, "Dent Repear Package");
+		selectComboboxValue(searchpackagecmb, searchpackagedd, "Dent Repear Package");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_Input"))).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-		.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom")).findFirst()
-		.get().click();
+				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom")).findFirst()
+				.get().click();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys("9/18/2015");
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys("9/18/2015");
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")))
-		.click();
+				.click();
 		waitForLoading();
-		try{
+		try {
 //			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'O-000-02008'")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), '" + wo + "')]")));
-		}catch(TimeoutException e){
+		} catch (TimeoutException e) {
 			return false;
 		}
 		return true;
@@ -394,25 +393,23 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 	public void checkFirstWorkOrderCheckBox() {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_gv_ctl00_ctl04_cbAction")).click();
 	}
-	
-	public void addInvoiceDescription(String text){
+
+	public void addInvoiceDescription(String text) {
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_txtInvoiceDescription")).sendKeys(text);
 	}
-	
+
 	public void clickCreateInvoiceButton() {
 		createInvoiceToWorkORderButton.click();
 		waitForLoading();
 	}
 
-	public WebPageWithFilter setSearchFromDate(String date) {
+	public void setSearchFromDate(String date) {
 		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")))).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys(date);
-        return PageFactory.initElements(driver, WebPageWithFilter.class);
 	}
 
-	public WebPageWithFilter setSearchToDate(String date) {
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")))).clear();
+	public void setSearchToDate(String date) {
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")))).clear();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys(date);
-	    return PageFactory.initElements(driver, WebPageWithFilter.class);
 	}
 }

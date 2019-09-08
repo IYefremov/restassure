@@ -247,10 +247,11 @@ public class NewTestCases extends BaseTestCase {
 				BackOfficeLoginWebPage.class);
 		loginpage.userLogin(userName, userPassword);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		
 		servicerequestslistpage.verifySearchFieldsAreVisible();
@@ -287,9 +288,11 @@ public class NewTestCases extends BaseTestCase {
 				BackOfficeLoginWebPage.class);
 		loginpage.userLogin(userName, userPassword);
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);		
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
+				BackOfficeHeaderPanel.class);
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeheader.clickOperationsLink();
+		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		servicerequestslistpage.makeSearchPanelVisible();
 		servicerequestslistpage.selectAddServiceRequestsComboboxValue("SR_Smoke_Test");
 		servicerequestslistpage.clickAddServiceRequestButton();
