@@ -9,6 +9,14 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularCalculationsTestCases">
         <methods>
 
+            <include name="testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation" />
+            <include name="testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData" />
+            <include name="testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale" />
+            <include name="testInvoicesVerifyRoundingMoneyAmountValues_1" />
+
+
+
+
         <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
         <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 

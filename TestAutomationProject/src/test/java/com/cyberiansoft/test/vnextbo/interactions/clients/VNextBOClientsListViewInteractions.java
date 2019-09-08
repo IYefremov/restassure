@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.interactions;
+package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -30,9 +30,7 @@ public class VNextBOClientsListViewInteractions {
     }
 
     void waitForSpinnerToDisappear() {
-        try {
-            WaitUtilsWebDriver.waitForInvisibility(clientsListView.getProgressSpinner());
-        } catch (Exception ignored) {}
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(clientsListView.getProgressSpinner());
     }
 
     public VNextBOClientsDetailsViewAccordion clickArchiveDropMenuButton() {

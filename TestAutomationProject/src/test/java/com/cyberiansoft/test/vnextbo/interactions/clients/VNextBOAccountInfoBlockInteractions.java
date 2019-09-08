@@ -1,16 +1,11 @@
-package com.cyberiansoft.test.vnextbo.interactions;
+package com.cyberiansoft.test.vnextbo.interactions.clients;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOAccountInfoBlock;
-import com.cyberiansoft.test.baseutils.Utils;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
 
 public class VNextBOAccountInfoBlockInteractions {
 
@@ -71,23 +66,6 @@ public class VNextBOAccountInfoBlockInteractions {
             return true;
         } catch (Exception ignored) {
             return false;
-        }
-    }
-
-    public void verifyAccountInfoBlockIsExpanded() {
-        final List<WebElement> infoBlockElements = Arrays.asList(
-                accountInfoBlock.getAccountingId(),
-                accountInfoBlock.getAccountingId2(),
-                accountInfoBlock.getExportAsArrow(),
-                accountInfoBlock.getClassArrow(),
-                accountInfoBlock.getQbAccountArrow());
-        try {
-            WaitUtilsWebDriver.getFluentWait(Duration.ofMillis(200), Duration.ofSeconds(5))
-                    .until(driver -> infoBlockElements
-                            .stream()
-                            .anyMatch(WebElement::isDisplayed));
-        } catch (Exception ignored) {
-            new VNextBOClientsDetailsViewInteractions().clickAccountInfoTab();
         }
     }
 }

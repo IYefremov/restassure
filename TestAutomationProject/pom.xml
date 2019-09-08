@@ -24,6 +24,10 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <browser>${browser}</browser>
+                        <url>${azure.url}</url>
+                    </systemPropertyVariables>
 					<properties>
 						<!-- Setting ReportNG listeners -->
 						<property>

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.NonNull;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
@@ -222,11 +223,8 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOPartsDetailsPanel clickPartsArrow(int index) {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(partsArrowsDown.get(index))).click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Utils.clickElement(partsArrowsDown.get(index));
+        WaitUtilsWebDriver.waitForLoading();
         return this;
     }
 
@@ -258,6 +256,7 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
 
     public void clickConfirmDeletingButton() {
         Utils.clickElement(confirmButton);
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(confirmButton, 5);
         WaitUtilsWebDriver.waitForLoading();
     }
 
@@ -445,9 +444,11 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOPartsDetailsPanel clickConfirmationPartButton() {
-        clickElement(confirmButton);
-        waitForLoading();
-        refreshPage();
+        Utils.clickElement(confirmButton);
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(confirmButton, 5);
+        WaitUtilsWebDriver.waitForLoading();
+        Utils.refreshPage();
+        WaitUtilsWebDriver.waitABit(1000);
         return this;
     }
 

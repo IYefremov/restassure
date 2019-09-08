@@ -129,6 +129,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
+		WaitUtils.waitUntilElementIsClickable(mywotable);
 		WaitUtils.waitUntilElementIsClickable(mywotable.findElementByAccessibilityId(workOrderId)).click();
 	}
 	
@@ -272,5 +273,10 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	public RegularTeamWorkOrdersScreen switchToTeamWorkOrders() {
 		switchToTeamView();
 		return new RegularTeamWorkOrdersScreen();
+	}
+
+	public boolean isNotesIconPresentForWorkOrder(String workOrderId) {
+		waitMyWorkOrdersScreenLoaded();
+		return mywotable.findElementByAccessibilityId(workOrderId).findElementsByAccessibilityId("ORDER_NOTES").size() > 0;
 	}
 }

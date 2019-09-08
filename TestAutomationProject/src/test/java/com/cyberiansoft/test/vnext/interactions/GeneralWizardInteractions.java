@@ -25,4 +25,9 @@ public class GeneralWizardInteractions {
         baseWizardScreen.getSearchInput().clear();
         baseWizardScreen.getSearchInput().sendKeys(searchText);
     }
+
+    public static void closeSearchFilter() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        WaitUtils.click(baseWizardScreen.getCancelSearchBtn());
+    }
 }

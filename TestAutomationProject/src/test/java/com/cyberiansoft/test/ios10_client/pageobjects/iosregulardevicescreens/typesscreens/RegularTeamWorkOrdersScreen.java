@@ -49,6 +49,9 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	@iOSXCUITFindBy(accessibility = "Approve")
     private IOSElement approvebtn;
+
+	@iOSXCUITFindBy(accessibility = "TeamOrdersTable")
+	private IOSElement teamOrdersTable;
 	
 	public RegularTeamWorkOrdersScreen() {
 		super();
@@ -61,9 +64,9 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void clickCreateInvoiceForWO(String workOrderID) {
-		WebElement table = appiumdriver.findElementByAccessibilityId("TeamOrdersTable");
-		table.findElement(By.xpath("//XCUIElementTypeCell[@name='"
-						+ workOrderID + "']/XCUIElementTypeOther")).click();
+		waitTeamWorkOrdersScreenLoaded();
+		teamOrdersTable.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(workOrderID))
+				.findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 	
 	public void clickOnWO(String workOrderID) {
@@ -94,7 +97,7 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	public void verifyCreateInvoiceIsActivated(String workOrderID) {
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
 				+ workOrderID + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
-Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);	
+		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);
 	}
 	
 	public void clickiCreateInvoiceButton()  {
@@ -131,9 +134,8 @@ Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@nam
 	}
 	
 	public void selectWorkOrderForApprove(String workOrderID) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("TeamOrdersTable")));
-		wotable.findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther")).click();
+
+		teamOrdersTable.findElementByAccessibilityId(workOrderID).findElementByClassName("XCUIElementTypeOther").click();
 		
 	}
 	

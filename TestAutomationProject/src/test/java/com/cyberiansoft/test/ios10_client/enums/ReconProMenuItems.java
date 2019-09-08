@@ -12,6 +12,7 @@ public enum ReconProMenuItems {
     CREATE_SERVICE_REQUEST("Create\nSR"),
     CHANGE_PO("Change\nPO#"),
     DETAILS("Details"),
+    DELETE("Delete"),
     COPY_VEHICLE("Copy\nVehicle"),
     COPY_SERVICES("Copy\nServices"),
     SEND_EMAIL("Send\nEmail"),
@@ -23,6 +24,7 @@ public enum ReconProMenuItems {
     CHANGE_CUSTOMER("Change\nCustomer"),
     SHOW_WOS("Show\nWOs"),
     ASSIGN("Assign"),
+    ARCHIVE("Archive"),
     SUMMARY("Summary");
 
     @Getter

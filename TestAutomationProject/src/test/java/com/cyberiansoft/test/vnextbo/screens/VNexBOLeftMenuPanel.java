@@ -2,8 +2,10 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,7 @@ import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+@Getter
 public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//ul[@id='mainMenu']")
@@ -63,8 +66,8 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[text()='SKIP']")
     private WebElement tutorialSkipButton;
 
-    public VNexBOLeftMenuPanel(WebDriver driver) {
-        super(driver);
+    public VNexBOLeftMenuPanel() {
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }

@@ -796,10 +796,10 @@
       "rowID": "verifyUserCannotEnterTextForServiceQuantity.01",
       "description": "Test Case 84993:Verify user can't enter text for service quantity",
       "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
+      "orderNumber": "O-168-00242",
       "status": "Approved",
       "priceType": "All",
-      "service": "Air Filter Element",
+      "service": "PREF: 123",
       "serviceQuantity": "d"
     }
   ],
@@ -970,6 +970,29 @@
       "service": "Air Filter Element",
       "vendor": "Default team",
       "technician": "Andy Maclean"
+    }
+  ],
+
+  "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase": [
+    {
+      "rowID": "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase.01",
+      "description": "Test Case 91010:User can see and change Technicians of the current phase",
+      "location": "Rozstalnoy_location",
+      "orderNumber": "O-000-152649",
+      "status": "Approved",
+      "vendor": "Test Team",
+      "serviceTabs": [
+        "Rozstalnoy",
+        "Rozstalnoy2"
+      ],
+      "serviceStatuses": [
+        "Completed",
+        "Active"
+      ],
+      "services": [
+        "rozstalnoy_enable_money",
+        "roz_dis_part_money"
+      ]
     }
   ]
 }

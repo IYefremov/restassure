@@ -572,7 +572,6 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNotesScreenSteps.saveNotes();
         RegularServicesScreenSteps.waitServicesScreenLoad();
         RegularInspectionsSteps.saveInspectionAsFinal();
-        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
         RegularMyInspectionsScreenValidations.verifyNotesIconPresentForInspection(inspectionNumber, true);
 
         RegularMyInspectionsSteps.selectInspectionNotesMenu(inspectionNumber);
@@ -582,5 +581,95 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNotesScreenSteps.saveNotes();
         RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
         RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyAddNotesForWorkOrder(String rowID,
+                                               String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        final String textNotes = "Inspection text notes";
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+
+        RegularWizardScreensSteps.clickNotesButton();
+        RegularNotesScreenSteps.setTextNotes(textNotes);
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenSteps.saveNotes();
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersScreenValidations.verifyNotesIconPresentForInspection(workOrderNumber, true);
+
+        RegularMyWorkOrdersSteps.selectWorkOrderNotesMenu(workOrderNumber);
+        RegularNotesScreenValidations.verifyTextNotesPresent(textNotes);
+        RegularNotesScreenSteps.switchToPhotosView();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(1);
+        RegularNotesScreenSteps.saveNotes();
+        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyDeleteWOFunctionality(String rowID,
+                                               String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.deleteWorkOrder(workOrderNumber);
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, false);
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyArchiveFunctionalityForInspection(String rowID,
+                                               String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        final String textNotes = "Inspection text notes";
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularMyInspectionsSteps.archiveInspection(inspectionNumber);
+        RegularMyInspectionsScreenValidations.verifyInspectionPresent(inspectionNumber, false);
+
+        RegularNavigationSteps.navigateBackScreen();
+
     }
 }

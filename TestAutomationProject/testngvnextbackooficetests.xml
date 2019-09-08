@@ -5,7 +5,7 @@
     </listeners>
 
   <test name="Back Office Test Cases" preserve-order="true">
-    <parameter name="selenium.browser" value="chrome" />
+    <parameter name="default.browser" value="firefox" />
     <classes>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases">
             <methods>
@@ -29,13 +29,6 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementSearchTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementOrderDetailsTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBONewSmokeTestCases"/>
-        <!--<class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOSmokeTestCases">-->
-            <!--<methods>-->
-                <!--<include name="testCheckValidationErrorsOnTheCreateNewUserDialog"/>-->
-                <!--<include name="testCreateUserWithExistingEmailAddress"/>-->
-                <!--<include name="testCreateUserWithoutWebAccess"/>-->
-            <!--</methods>-->
-        <!--</class>-->
     </classes>
   </test>
 </suite>

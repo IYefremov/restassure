@@ -1,15 +1,9 @@
-package com.cyberiansoft.test.vnextbo.interactions;
+package com.cyberiansoft.test.vnextbo.interactions.clients;
 
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOEmailOptionsBlock;
-import com.cyberiansoft.test.baseutils.Utils;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
 
 public class VNextBOEmailOptionsBlockInteractions {
 
@@ -54,23 +48,5 @@ public class VNextBOEmailOptionsBlockInteractions {
 
     public boolean isIncludeInspectionCheckboxClickable() {
         return Utils.isElementClickable(emailOptionsBlock.getIncludeInspectionCheckbox());
-    }
-
-    public void verifyEmailOptionsBlockIsExpanded() {
-        final List<WebElement> emailOptionBlockElements = Arrays.asList(
-                emailOptionsBlock.getDefaultRecipientInputField(),
-                emailOptionsBlock.getCcInputField(),
-                emailOptionsBlock.getBccInputField(),
-                emailOptionsBlock.getInvoicesCheckbox(),
-                emailOptionsBlock.getInspectionsCheckbox(),
-                emailOptionsBlock.getIncludeInspectionCheckbox());
-        try {
-            WaitUtilsWebDriver.getFluentWait(Duration.ofMillis(200), Duration.ofSeconds(5))
-                    .until(driver -> emailOptionBlockElements
-                            .stream()
-                            .anyMatch(WebElement::isDisplayed));
-        } catch (Exception ignored) {
-            new VNextBOClientsDetailsViewInteractions().clickEmailOptionsTab();
-        }
     }
 }

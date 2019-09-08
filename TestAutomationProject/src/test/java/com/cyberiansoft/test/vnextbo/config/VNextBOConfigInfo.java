@@ -66,11 +66,24 @@ public class VNextBOConfigInfo {
         return properties.getProperty("vnextr360.password");
     }
 
-    public String getDefaultBrowser() {
-        return properties.getProperty("default.browser");
-    }
-
     public String getBOoldURL() {
         return properties.getProperty("backofficeold.url");
+    }
+
+    public String getDefaultBrowser() {
+        return checkForSystemProperty("browser");
+    }
+
+    public String getAzureURL() {
+        return checkForSystemProperty("azure.url");
+    }
+
+    private String checkForSystemProperty(String property) {
+        try {
+            if (!System.getProperty(property).isEmpty()) {
+                properties.setProperty(property, System.getProperty(property));
+            }
+        } catch (NullPointerException ignored) {}
+        return properties.getProperty(property);
     }
 }

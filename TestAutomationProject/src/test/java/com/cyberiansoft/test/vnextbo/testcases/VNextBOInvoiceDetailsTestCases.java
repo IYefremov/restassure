@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
@@ -57,17 +58,17 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 
         VNextBOInvoiceDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInvoiceDetailsData.class);
         
-		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
+		VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-		loginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
-		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
-				VNexBOLeftMenuPanel.class);
-		VNexBOUsersWebPage userswabpage = leftmenu.selectUsersMenu();
+        VNexBOUsersWebPage usersWebPage = PageFactory.initElements(webdriver, VNexBOUsersWebPage.class);
+        loginPage.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
+		VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
+		leftMenuInteractions.selectUsersMenu();
 		final String usermail = data.getUserMailPrefix() + RandomUtils.nextInt(100000, 1000000) + data.getUserMailPostbox();
         System.out.println(usermail);
-		VNexBOAddNewUserDialog adduserdialog = userswabpage.clickAddUserButton();
+		VNexBOAddNewUserDialog adduserdialog = usersWebPage.clickAddUserButton();
 		adduserdialog.createNewUser(data.getTechFirstName(), data.getTechLastName(), usermail, data.getTechUserPhone(), false);
-		Assert.assertTrue(userswabpage.findUserInTableByUserEmail(usermail));
+		Assert.assertTrue(usersWebPage.findUserInTableByUserEmail(usermail));
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();

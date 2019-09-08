@@ -10,7 +10,7 @@ import lombok.Getter;
 
 public enum UATInspectionTypes implements IInspectionsTypes {
 
-    INSP_APPROVE_MULTISELECT("Insp_approve_multiselect");
+    INSP_APPROVE_MULTISELECT("Insp_approve_multiselect_AQA");
 
     @Getter
     private final String inspType;

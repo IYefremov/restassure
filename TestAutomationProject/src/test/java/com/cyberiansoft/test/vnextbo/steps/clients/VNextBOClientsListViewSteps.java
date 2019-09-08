@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.clients;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOClientsListViewInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOClientsListViewInteractions;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOClientsDetailsViewAccordion;
 import org.openqa.selenium.support.PageFactory;
 

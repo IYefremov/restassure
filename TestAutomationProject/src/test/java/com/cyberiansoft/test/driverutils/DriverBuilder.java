@@ -2,6 +2,7 @@ package com.cyberiansoft.test.driverutils;
 
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -116,8 +117,9 @@ public class DriverBuilder {
 
                 capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
                 webcap = capabilities;
+                System.out.println(System.getProperty("azure.url"));
                 RemoteWebDriver driver = new RemoteWebDriver(
-                        URI.create("http://localhost:4444/wd/hub").toURL(),
+                        URI.create(VNextBOConfigInfo.getInstance().getAzureURL()).toURL(),
                         capabilities
                 );
                 driver.setFileDetector(new LocalFileDetector());

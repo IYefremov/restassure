@@ -218,6 +218,12 @@ public class VNextBOMonitorData  {
     @JsonProperty("servicePhase")
     private String servicePhase;
 
+    @JsonProperty("services")
+    private String[] services;
+
+    @JsonProperty("serviceTabs")
+    private String[] serviceTabs;
+
     @JsonProperty("servicesTableFields")
     private String[] servicesTableFields;
 

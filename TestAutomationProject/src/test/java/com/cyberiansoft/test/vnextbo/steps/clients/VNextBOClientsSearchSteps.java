@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.clients;
 
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOClientsSearchPanelInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOClientsSearchPanelInteractions;
 
 public class VNextBOClientsSearchSteps {
 

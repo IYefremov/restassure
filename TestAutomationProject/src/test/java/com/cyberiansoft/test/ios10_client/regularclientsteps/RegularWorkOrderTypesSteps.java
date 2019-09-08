@@ -12,7 +12,8 @@ public class RegularWorkOrderTypesSteps {
 
     public static void selectWorkOrderType(IWorkOrdersTypes workordertype) {
         WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 10);
-        IOSElement woTypeTable = (IOSElement)  wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrderTypeSelector")));
+        IOSElement woTypeTable = (IOSElement)  wait.until(ExpectedConditions.
+                presenceOfElementLocated(MobileBy.iOSNsPredicateString("type='XCUIElementTypeTable' and name='OrderTypeSelector'")));
         if (!woTypeTable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
             SwipeUtils.swipeToElement(woTypeTable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
         }

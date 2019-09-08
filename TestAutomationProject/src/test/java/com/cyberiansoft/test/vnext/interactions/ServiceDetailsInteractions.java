@@ -38,4 +38,9 @@ public class ServiceDetailsInteractions {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         WaitUtils.click(serviceDetailsScreen.getVehiclePartEditBox());
     }
+
+    public static String getPrice() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        return serviceDetailsScreen.getServiceDetailsPrice().getAttribute("value");
+    }
 }

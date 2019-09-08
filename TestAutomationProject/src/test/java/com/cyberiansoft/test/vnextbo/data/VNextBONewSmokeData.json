@@ -211,5 +211,21 @@
       "team": "ALM Recon Facility Team",
       "timeZone": "(UTC-05:00) Eastern Time (US & Canada)"
     }
+  ],
+
+  "verifyUserCanSeeAndCreateNotes": [
+    {
+      "rowID": "verifyUserCanSeeAndCreateNotes.01",
+      "description": "Test Case 82657: User can select location. Test Case 82955: User can see Services of RO. Test Case 82967: User can change Vendor Price of RO. Test Case 82659: User can search WO using search filter. Test Case 82951: User can see and create notes",
+      "location": "1111 Automation",
+      "orderNumber": "O-168-00242",
+      "status": "Approved",
+      "phase": "Started",
+      "service": "b Body Shop (Test Part)",
+      "serviceVendorPrices": [
+        "1",
+        "100"
+      ]
+    }
   ]
 }
