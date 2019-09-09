@@ -245,12 +245,12 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void selectInspectionForAction(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspectionNumber))).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+		inspectionsTable.findElementByAccessibilityId(inspectionNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 
 	public boolean isInspectionIsApproved(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
+		WaitUtils.waitUntilElementIsClickable(appiumdriver.findElementByAccessibilityId(inspectionNumber));
 		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspectionNumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}

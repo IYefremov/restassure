@@ -1,8 +1,11 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyWorkOrdersSteps;
 import org.testng.Assert;
+
+import java.util.concurrent.TimeUnit;
 
 public class RegularMyWorkOrdersScreenValidations {
 
@@ -26,5 +29,23 @@ public class RegularMyWorkOrdersScreenValidations {
             Assert.assertTrue(myWorkOrdersScreen.isNotesIconPresentForWorkOrder(workOrderID));
         else
             Assert.assertFalse(myWorkOrdersScreen.isNotesIconPresentForWorkOrder(workOrderID));
+    }
+
+    public static void verifyWorkOrderHasApproveIcon(String workOrderID, boolean isPresent) {
+        DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        if (isPresent)
+            Assert.assertTrue(myWorkOrdersScreen.isApproveIconPresentForWorkOrder(workOrderID));
+        else
+            Assert.assertFalse(myWorkOrdersScreen.isApproveIconPresentForWorkOrder(workOrderID));
+    }
+
+    public static void verifyWorkOrderHasInvoiceIcon(String workOrderID, boolean isPresent) {
+        DriverBuilder.getInstance().getAppiumDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        if (isPresent)
+            Assert.assertTrue(myWorkOrdersScreen.isInvoiceIconPresentForWorkOrder(workOrderID));
+        else
+            Assert.assertFalse(myWorkOrdersScreen.isInvoiceIconPresentForWorkOrder(workOrderID));
     }
 }

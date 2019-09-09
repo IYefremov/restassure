@@ -25,8 +25,6 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 public abstract class iOSBaseScreen {
 	
 	protected AppiumDriver appiumdriver;
-	//final String uipickerxpath = ".popover().pickers()[0]";
-	//final String uipickerxpath = "//XCUIElementTypePicker";
 	
 	public iOSBaseScreen() {
 		appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
