@@ -523,8 +523,8 @@
   ],
   "testVerifyDeleteWOFunctionality": [
     {
-      "rowID": "testVerifyAddNotesForWorkOrder.01",
-      "description": "Test Case 28091: 29 - Verify add notes for WO",
+      "rowID": "testVerifyDeleteWOFunctionality.01",
+      "description": "Test Case 28091: 31 - Verify delete WO functionality",
       "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -546,7 +546,7 @@
   "testVerifyAddNotesForWorkOrder": [
     {
       "rowID": "testVerifyAddNotesForWorkOrder.01",
-      "description": "28093 31 - Verify delete WO functionality",
+      "description": "28093 29 - Verify add notes for WO",
       "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -588,6 +588,89 @@
           "claimNumber": "QWERTY",
           "policyNumber": "pl-123",
           "deductible": "34"
+        }
+      }
+    }
+  ],
+  "testVerifyApprovingInspectionUnderMyInspectionTeamInspection": [
+    {
+      "rowID": "testVerifyApprovingInspectionUnderMyInspectionTeamInspection.01",
+      "description": "Test Case 28089: 27 - Verify approving inspection under My inspection/Team Inspection",
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        }
+      }
+    }
+  ],
+  "testVerifyCreatingInspectionFromWO": [
+    {
+      "rowID": "testVerifyCreatingInspectionFromWO.01",
+      "description": "28090 28 - Verify creating inspection from WO",
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor" : "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      },
+      "inspectionData": {
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        }
+      }
+    }
+  ],
+  "testVerifyChangeStatusForWO": [
+    {
+      "rowID": "testVerifyChangeStatusForWO.01",
+      "description": "28092 30 - Verify change status for WO",
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
         }
       }
     }

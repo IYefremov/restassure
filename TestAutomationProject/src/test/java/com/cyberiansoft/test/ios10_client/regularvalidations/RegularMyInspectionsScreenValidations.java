@@ -24,6 +24,14 @@ public class RegularMyInspectionsScreenValidations {
             Assert.assertFalse(myInspectionsScreen.isNotesIconPresentForInspection(inspectionID));
     }
 
+    public static void verifyApproveIconPresentForInspection(String inspectionID, boolean isPresent) {
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        if (isPresent)
+            Assert.assertFalse(myInspectionsScreen.isInspectionIsApproved(inspectionID));
+        else
+            Assert.assertTrue(myInspectionsScreen.isInspectionIsApproved(inspectionID));
+    }
+
     public static void verifyInspectionPresent(String inspectionID, boolean isPresent) {
         RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();

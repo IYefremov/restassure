@@ -9,9 +9,21 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
           <include name="testCreateInspectionVerifyOnBO" />
-          <include name="testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO" />
           <include name="testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO" />
+          <include name="testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO" />
           <include name="testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO" />
+          <include name="testCreateSRAddAppointmentCreateInspectionAndWOAndInvoiceAndVerifyDataOnBOISCorrectlyDisplayed" />
+          <!--<include name="testCreateRetailCustomer" />
+          <include name="testCreateInspectionWOInvoiceForCreatedRetailCustomer" />-->
+          <include name="testVerifyCheckInUndoCheckInForSR" />
+          <include name="testVerifyCreatingSRFromInspectionTeamInspection" />
+          <include name="testVerifyAddNotesToInspection" />
+          <include name="testVerifyAddNotesForWorkOrder" />
+          <include name="testVerifyDeleteWOFunctionality" />
+          <include name="testVerifyArchiveFunctionalityForInspection" />
+          <include name="testVerifyApprovingInspectionUnderMyInspectionTeamInspection" />
+          <include name="testVerifyCreatingInspectionFromWO" />
+          <include name="testVerifyChangeStatusForWO" />
         </methods>
       </class>
     </classes>
