@@ -18,9 +18,7 @@ public class TimesheetsWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
-	public TimesheetsSectionWebPage clickTimesheets() {
+	public void clickTimesheets() {
 		wait.until(ExpectedConditions.elementToBeClickable(timesheetsBTN)).click();
-		return PageFactory.initElements(
-				driver, TimesheetsSectionWebPage.class);
 	}
 }

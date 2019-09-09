@@ -18,8 +18,7 @@ public class MiscellaneousWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
-	public EventsWebPage clickEventsLink() {
+	public void clickEventsLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(eventstab)).click();
-		return PageFactory.initElements(driver, EventsWebPage.class);
 	}
 }

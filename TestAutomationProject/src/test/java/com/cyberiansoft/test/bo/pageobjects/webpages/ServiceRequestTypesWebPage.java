@@ -70,24 +70,24 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 
 	public void selectNewServiceRequestTypeTeam(String srtypeteam) {
 		waitABit(1000);
-        try {
-            wait.until(ExpectedConditions.visibilityOf(invoicetypeteamcmb));
-        } catch (Exception e) {
-            waitABit(1000);
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.elementToBeClickable(invoicetypeteamcmb)).click();
+		try {
+			wait.until(ExpectedConditions.visibilityOf(invoicetypeteamcmb));
+		} catch (Exception e) {
+			waitABit(1000);
+			e.printStackTrace();
+		}
+		wait.until(ExpectedConditions.elementToBeClickable(invoicetypeteamcmb)).click();
 		invoicetypeteamcmb.clear();
 		invoicetypeteamcmb.sendKeys(srtypeteam);
 		waitABit(300);
-        try {
-            wait
-                    .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/em[text()='" + srtypeteam + "']")))
-                    .click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        waitABit(1000);
+		try {
+			wait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/em[text()='" + srtypeteam + "']")))
+					.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		waitABit(1000);
 	}
 
 	public void selectNewServiceRequestTypePackage(String srtypepackage) {
@@ -98,7 +98,7 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		invoicetypepackagecmb.sendKeys(srtypepackage);
 		waitABit(300);
 		wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.xpath("//li/em[text()='" + srtypepackage + "']")))
+				.visibilityOfElementLocated(By.xpath("//li/em[text()='" + srtypepackage + "']")))
 				.click();
 		waitABit(1000);
 
@@ -136,11 +136,11 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithServiceRequestType(srType);
 		if (row != null) {
 			srtypedesc = row.findElement(By.xpath(".//td[6]"))
-                    .getText()
-                    .replaceAll("\\u00A0", "")
-                    .trim();
+					.getText()
+					.replaceAll("\\u00A0", "")
+					.trim();
 		} else
-            Assert.fail("Can't find " + srType + " service request type");
+			Assert.fail("Can't find " + srType + " service request type");
 		return srtypedesc;
 	}
 
@@ -177,17 +177,17 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void openGeneralSettingsTab() {
-	    waitABit(1000);
-	    wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("General Settings"))).click();
-        waitABit(1000);
-        try {
-            wait.until(ExpectedConditions.visibilityOf(generalSettingsPage));
-        } catch (Exception e) {
-            e.printStackTrace();
-            wait.until(ExpectedConditions.elementToBeClickable(generalSettingsTab)).click();
-            waitABit(1000);
-            wait.until(ExpectedConditions.visibilityOf(generalSettingsPage));
-        }
+		waitABit(1000);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("General Settings"))).click();
+		waitABit(1000);
+		try {
+			wait.until(ExpectedConditions.visibilityOf(generalSettingsPage));
+		} catch (Exception e) {
+			e.printStackTrace();
+			wait.until(ExpectedConditions.elementToBeClickable(generalSettingsTab)).click();
+			waitABit(1000);
+			wait.until(ExpectedConditions.visibilityOf(generalSettingsPage));
+		}
 	}
 
 	public void clickErrorWithBLockingRadioButton() {
@@ -203,7 +203,7 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void selectStockRoVinOptions() {
-    /** verifying the checkbox (checked or unchecked) isn't available any more */
+		/** verifying the checkbox (checked or unchecked) isn't available any more */
 //		if (driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).getAttribute("class")
 //				.equals(" rfdCheckboxUnchecked")) {
 //			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")).click();
@@ -217,24 +217,22 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 //			driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")).click();
 //		}
 		wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")))).click();
+				.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbVIN")))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(driver
+				.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbStock")))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(driver
+				.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_chbRO")))).click();
 	}
 
-	public ServiceRequestTypesVehicleInfoSettingsPage clickSettingsVehicleInfo(String srtype) {
+	public void clickSettingsVehicleInfo(String srtype) {
 		// String mainWindow = driver.getWindowHandle();
 		List<WebElement> rows = getServiceRequestTypesTableRows();
 		for (WebElement row : rows) {
 			if (row.findElement(By.xpath(".//td[5]")).getText().equals(srtype)) {
 				row.findElement(By.linkText("Settings")).click();
-                waitABit(3000);
-				return PageFactory.initElements(driver, ServiceRequestTypesVehicleInfoSettingsPage.class);
+				waitABit(3000);
 			}
 		}
-		return null;
 	}
 
 	public void switchToWindow(String window) {
@@ -254,13 +252,13 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void clickNoneRadioButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_0")))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(driver
+				.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_0")))).click();
 	}
 
 	public void clickWarningOnlyRadioButton() {
 		wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_1")))).click();
+				.findElement(By.id("ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblCheckDuplicate_1")))).click();
 	}
 
 	public void selectOption(String optionName) {
@@ -279,15 +277,15 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 
 	public boolean isAllowUndoRejectChecked() {
 		System.out.println(allowUndoCheckBox.getAttribute("checked"));
-        return Boolean.parseBoolean(allowUndoCheckBox.getAttribute("checked"));
-    }
+		return Boolean.parseBoolean(allowUndoCheckBox.getAttribute("checked"));
+	}
 
-    public void verifyServiceRequestsTypesDoNotExist(String srtype, String srtypeedited) {
-        while (isServiceRequestTypeExists(srtype)) {
-            deleteServiceRequestType(srtype);
-        }
-        while (isServiceRequestTypeExists(srtypeedited)) {
-            deleteServiceRequestType(srtypeedited);
-        }
-    }
+	public void verifyServiceRequestsTypesDoNotExist(String srtype, String srtypeedited) {
+		while (isServiceRequestTypeExists(srtype)) {
+			deleteServiceRequestType(srtype);
+		}
+		while (isServiceRequestTypeExists(srtypeedited)) {
+			deleteServiceRequestType(srtypeedited);
+		}
+	}
 }

@@ -25,78 +25,80 @@ import java.util.Map;
 
 public class DeviceRegistrator {
 
-    private static DeviceRegistrator instance = null;
+	private static DeviceRegistrator instance = null;
 
-    private DeviceRegistrator() {
-    }
+	private DeviceRegistrator() {
+	}
 
-    public static DeviceRegistrator getInstance() {
-        if ( instance == null ) {
-            instance = new DeviceRegistrator();
-        }
-        return instance;
-    }
+	public static DeviceRegistrator getInstance() {
+		if (instance == null) {
+			instance = new DeviceRegistrator();
+		}
+		return instance;
+	}
 
-    public void installAndRegisterDevice(BrowserType browsertype, MobilePlatform platformType, String backofficeurl,
-                                         String userName, String userPassword, String licensename, IOSReconproEnvironmentType environmentType) {
-        registerationiOSDdevice(browsertype, platformType, backofficeurl,
-                userName, userPassword, licensename, environmentType);
+	public void installAndRegisterDevice(BrowserType browsertype, MobilePlatform platformType, String backofficeurl,
+										 String userName, String userPassword, String licensename, IOSReconproEnvironmentType environmentType) {
+		registerationiOSDdevice(browsertype, platformType, backofficeurl,
+				userName, userPassword, licensename, environmentType);
 
-    }
+	}
 
-    public String getDeviceRegistrationCode(BrowserType browsertype, String backofficeurl,
-                                              String userName, String userPassword, String licensename) {
+	public String getDeviceRegistrationCode(BrowserType browsertype, String backofficeurl,
+											String userName, String userPassword, String licensename) {
 
-        WebDriver webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-        WebDriverUtils.webdriverGotoWebPage(backofficeurl);
+		WebDriver webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
-        BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-                BackOfficeLoginWebPage.class);
-        loginpage.userLogin(userName, userPassword);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-                BackOfficeHeaderPanel.class);
-        CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
+		BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
+				BackOfficeLoginWebPage.class);
+		loginpage.userLogin(userName, userPassword);
+		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
+				BackOfficeHeaderPanel.class);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		backofficeheader.clickCompanyLink();
 
-        ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
+		ActiveDevicesWebPage devicespage = new ActiveDevicesWebPage(webdriver);
+		companyWebPage.clickManageDevicesLink();
 
-        devicespage.setSearchCriteriaByName(licensename);
-        String regCode = devicespage.getFirstRegCodeInTable();
-        DriverBuilder.getInstance().getDriver().quit();
-        return regCode;
-    }
+		devicespage.setSearchCriteriaByName(licensename);
+		String regCode = devicespage.getFirstRegCodeInTable();
+		DriverBuilder.getInstance().getDriver().quit();
+		return regCode;
+	}
 
-    public void registerationiOSDdevice(BrowserType browsertype, MobilePlatform platformType, String backofficeurl,
-                                        String userName, String userPassword, String licensename, IOSReconproEnvironmentType environmentType) {
+	public void registerationiOSDdevice(BrowserType browsertype, MobilePlatform platformType, String backofficeurl,
+										String userName, String userPassword, String licensename, IOSReconproEnvironmentType environmentType) {
 
-        String deviceBundleId = null;
-        if (platformType.equals(MobilePlatform.IOS_REGULAR))
-            deviceBundleId = IOSRegularDeviceInfo.getInstance().getDeviceBundleId();
-        else
-            deviceBundleId = IOSHDDeviceInfo.getInstance().getDeviceBundleId();
-
-
-        AppiumInicializator.getInstance().initAppium(platformType);
+		String deviceBundleId = null;
+		if (platformType.equals(MobilePlatform.IOS_REGULAR))
+			deviceBundleId = IOSRegularDeviceInfo.getInstance().getDeviceBundleId();
+		else
+			deviceBundleId = IOSHDDeviceInfo.getInstance().getDeviceBundleId();
 
 
-        if (ReconProIOSStageInfo.getInstance().installNewBuild()) {
-            if (DriverBuilder.getInstance().getAppiumDriver().isAppInstalled(deviceBundleId)) {
-                Map<String, Object> params = new HashMap<>();
-                params.put("bundleId", deviceBundleId);
-                DriverBuilder.getInstance().getAppiumDriver().executeScript("mobile: removeApp", params);
-                DriverBuilder.getInstance().getAppiumDriver().quit();
-                AppiumInicializator.getInstance().initAppium(platformType);
-            }
-            if (platformType.equals(MobilePlatform.IOS_REGULAR)) {
-                RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
-                LoginScreen loginscreen = selectenvscreen.selectEnvironment(environmentType.getEnvironmentTypeName());
-                String regCode = getDeviceRegistrationCode(browsertype, backofficeurl, userName, userPassword, licensename);
-                loginscreen.registeriOSDevice(regCode);
-            } else {
-                SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
-                LoginScreen loginscreen = selectenvscreen.selectEnvironment(environmentType.getEnvironmentTypeName());
-                String regCode = getDeviceRegistrationCode(browsertype, backofficeurl, userName, userPassword, licensename);
-                loginscreen.registeriOSDevice(regCode);
-            }
-        }
-    }
+		AppiumInicializator.getInstance().initAppium(platformType);
+
+
+		if (ReconProIOSStageInfo.getInstance().installNewBuild()) {
+			if (DriverBuilder.getInstance().getAppiumDriver().isAppInstalled(deviceBundleId)) {
+				Map<String, Object> params = new HashMap<>();
+				params.put("bundleId", deviceBundleId);
+				DriverBuilder.getInstance().getAppiumDriver().executeScript("mobile: removeApp", params);
+				DriverBuilder.getInstance().getAppiumDriver().quit();
+				AppiumInicializator.getInstance().initAppium(platformType);
+			}
+			if (platformType.equals(MobilePlatform.IOS_REGULAR)) {
+				RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
+				LoginScreen loginscreen = selectenvscreen.selectEnvironment(environmentType.getEnvironmentTypeName());
+				String regCode = getDeviceRegistrationCode(browsertype, backofficeurl, userName, userPassword, licensename);
+				loginscreen.registeriOSDevice(regCode);
+			} else {
+				SelectEnvironmentPopup selectenvscreen = new SelectEnvironmentPopup();
+				LoginScreen loginscreen = selectenvscreen.selectEnvironment(environmentType.getEnvironmentTypeName());
+				String regCode = getDeviceRegistrationCode(browsertype, backofficeurl, userName, userPassword, licensename);
+				loginscreen.registeriOSDevice(regCode);
+			}
+		}
+	}
 }

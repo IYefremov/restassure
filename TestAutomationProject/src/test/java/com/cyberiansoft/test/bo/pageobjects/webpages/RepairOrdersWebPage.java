@@ -14,132 +14,132 @@ import java.util.Set;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class RepairOrdersWebPage extends WebPageWithPagination {
-	
+
 	@FindBy(xpath = "//span[@id='ctl00_ctl00_Content_Main_cpFilterer']/div")
 	private WebElement searchtab;
 
 	@FindBy(xpath = "//a[text()='Search']")
 	private WebElement searchbtn;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_linkFullDisplayVersion")
 	private WebElement fulldisplaylink;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_gv_ctl00")
 	private WebTable repairorderstable;
-	
-	
+
+
 	//Search Panel
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_tbVIN")
 	private TextField searchvinfld;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_comboLocations_Input")
 	private ComboBox searchlocationcmb;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_comboLocations_DropDown")
 	private DropDown searchlocationdd;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input")
 	private TextField searchcustomercmb;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_DropDown")
 	private DropDown searchcustomerdd;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_Input")
 	private ComboBox searchtimeframecmb;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_DropDown")
 	private DropDown searchtimeframedd;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_tbStockNo")
 	private TextField searchstocknofld;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_tbRONo")
 	private TextField searchronofld;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_comboRepairStatus_Input")
 	private WebElement searchrepairstatuscmb;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_comboOrderType_Input")
 	private ComboBox searchwotypecmb;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_comboOrderType_DropDown")
 	private DropDown searchwotypedd;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_tbWO")
 	private TextField searchwonofld;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_popupButton")
 	private WebElement searchfrompopupbtn;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_popupButton")
 	private WebElement searchtopopupbtn;
-	
+
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")
 	private WebElement findbtn;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")
-    private TextField fromDateField;
+	private TextField fromDateField;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")
-    private TextField toDateField;
+	private TextField toDateField;
 
 
 	public RepairOrdersWebPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
-	
+
 	public void makeSearchPanelVisible() {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
 	}
-	
+
 	public boolean searchPanelIsExpanded() {
 		return searchtab.getAttribute("class").contains("open");
 	}
-	
+
 	public boolean searchPanelIsVisible() {
 		return searchvinfld.isDisplayed();
 	}
-	
+
 	public void clickFullDisplayLink() {
 		click(fulldisplaylink);
 	}
-	
+
 	public boolean repairOrdersTableIsVisible() {
 		wait.until(ExpectedConditions.visibilityOf(repairorderstable.getWrappedElement()));
 		return repairorderstable.isDisplayed();
 	}
-	
+
 	public int getRepairOrdersTableRowCount() {
 		waitABit(4000);
 		return repairorderstable.getTableRowCount();
 	}
-	
+
 	public List<WebElement> getRepairOrdersTableRows() {
 		return repairorderstable.getTableRows();
 	}
-	
-	public void selectSearchLocation(String location) { 
+
+	public void selectSearchLocation(String location) {
 		selectComboboxValue(searchlocationcmb, searchlocationdd, location);
 	}
-	
-	public void selectSearchCustomer(String customer)  { 
+
+	public void selectSearchCustomer(String customer) {
 		selectComboboxValueWithTyping(searchcustomercmb, searchcustomerdd, customer);
 	}
-	
-	public void setSearchVIN(String vin) { 
+
+	public void setSearchVIN(String vin) {
 		clearAndType(searchvinfld, vin);
 	}
-	
-	public void selectSearchTimeframe(String timeframe) { 
+
+	public void selectSearchTimeframe(String timeframe) {
 		selectComboboxValue(searchtimeframecmb, searchtimeframedd, timeframe);
 	}
-	
+
 	public void setSearchFromDate(String date) {
-	    clearAndType(fromDateField, date);
+		clearAndType(fromDateField, date);
 //		wait.until(ExpectedConditions.elementToBeClickable(searchfrompopupbtn)).click();
 //		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_calendar_Title")).click();
 //		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
@@ -149,9 +149,9 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 //                .elementToBeClickable(driver.findElement(By.xpath("//tr/td/a[text()='" + date + "']"))))
 //                .click();
 	}
-	
+
 	public void setSearchToDate(String date) {
-	    clearAndType(toDateField, date);
+		clearAndType(toDateField, date);
 //		searchtopopupbtn.click();
 //		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_calendar_Title")).click();
 //		driver.findElement(By.xpath("//tr/td/a[text()='" + month + "']")).click();
@@ -160,24 +160,24 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 //		waitABit(1000);
 //		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr/td/a[text()='" + date + "']"))).click();
 	}
-	
-	public void selectSearchWOType(String wotype)  { 
+
+	public void selectSearchWOType(String wotype) {
 		selectComboboxValue(searchwotypecmb, searchwotypedd, wotype);
 	}
-	
-	public void setSearchWoNumber(String wo) { 
+
+	public void setSearchWoNumber(String wo) {
 		clearAndType(searchwonofld, wo);
 	}
-	
-	public void setSearchStockNumber(String stocknum) { 
+
+	public void setSearchStockNumber(String stocknum) {
 		clearAndType(searchstocknofld, stocknum);
 	}
-	
-	public void clickFindButton() { 
+
+	public void clickFindButton() {
 		clickAndWait(findbtn);
 		waitABit(3000);
 	}
-	
+
 	public void verifyRepairOrdersTableColumnsAreVisible() {
 		Assert.assertTrue(repairorderstable.tableColumnExists("!"));
 		Assert.assertTrue(repairorderstable.tableColumnExists("Flag"));
@@ -194,27 +194,27 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[11]")).isDisplayed());
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[12]")).isDisplayed());
 	}
-	
+
 	public WebElement getTableRowWithRepairOrder(String wo) {
-		List<WebElement> rows = getRepairOrdersTableRows();		
+		List<WebElement> rows = getRepairOrdersTableRows();
 		for (WebElement row : rows) {
-		    try {
+			try {
 //                if (row.findElement(By.xpath(".//td[3]/a")).getText().equals(wo)) {
-                if (row.findElement(By.xpath(".//td[" + repairorderstable
-                        .getTableColumnIndex("Order /\nType") + "]/a"))
-                        .getText()
-                        .equals(wo)) {
-                    return row;
-                }
-            } catch (NoSuchElementException | StaleElementReferenceException e) {
-		        Assert.fail("The table row with given repair order doesn't exist!");
-            }
-        }
+				if (row.findElement(By.xpath(".//td[" + repairorderstable
+						.getTableColumnIndex("Order /\nType") + "]/a"))
+						.getText()
+						.equals(wo)) {
+					return row;
+				}
+			} catch (NoSuchElementException | StaleElementReferenceException e) {
+				Assert.fail("The table row with given repair order doesn't exist!");
+			}
+		}
 		return null;
 	}
-	
+
 	public boolean isRepairOrderPresentInTable(String wo) {
-	    waitForLoading();
+		waitForLoading();
 		boolean present = false;
 		WebElement row = getTableRowWithRepairOrder(wo);
 		if (row != null) {
@@ -222,27 +222,25 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		}
 		return present;
 	}
-	
-	public VendorOrderServicesWebPage clickOnWorkOrderLinkInTable(String wo) {
+
+	public void clickOnWorkOrderLinkInTable(String wo) {
 		WebElement row = getTableRowWithRepairOrder(wo);
 		if (row != null) {
 			row.findElement(By.xpath(".//td[" + repairorderstable
-                    .getTableColumnIndex("Order /\nType") + "]/a[contains(text(), '" + wo + "')]"))
-                    .click();
+					.getTableColumnIndex("Order /\nType") + "]/a[contains(text(), '" + wo + "')]"))
+					.click();
 		} else {
-            Assert.fail("Can't find " + wo + " repair order");
+			Assert.fail("Can't find " + wo + " repair order");
 		}
-		return PageFactory.initElements(
-				driver, VendorOrderServicesWebPage.class); 
 	}
-	
+
 	public void verifyTableCustomerAndVinColumnValuesAreVisible(String customer, String vin) {
 		Assert.assertTrue(repairorderstable.getWrappedElement()
-                .findElement(By.xpath(".//tbody/tr/td/div/span[contains(text(), '" + customer + "')]")).isDisplayed());
+				.findElement(By.xpath(".//tbody/tr/td/div/span[contains(text(), '" + customer + "')]")).isDisplayed());
 		Assert.assertTrue(repairorderstable.getWrappedElement()
-                .findElement(By.xpath(".//tbody/tr/td/div/div[contains(text(), '" + vin + "')]")).isDisplayed());
+				.findElement(By.xpath(".//tbody/tr/td/div/div[contains(text(), '" + vin + "')]")).isDisplayed());
 	}
-	
+
 	public void openFullDisplayWOMonitorAndVerifyContent() {
 		clickFullDisplayLink();
 		waitForNewTab();
@@ -252,9 +250,9 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		while (it.hasNext()) {
 			String parent = it.next();
 			String newwin = it.next();
-            waitABit(1000);
-            driver.switchTo().window(newwin);
-            waitForLoading();
+			waitABit(1000);
+			driver.switchTo().window(newwin);
+			waitForLoading();
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='fullGrid']")));
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='VIN']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='StockNo']")).isDisplayed());
@@ -265,7 +263,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='Completed']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//tr/th[@data-field='OrderDescription']")).isDisplayed());
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("fullGrid"))
-                    .findElement(By.xpath("./table/tbody/tr[2]"))));
+					.findElement(By.xpath("./table/tbody/tr[2]"))));
 			// perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);

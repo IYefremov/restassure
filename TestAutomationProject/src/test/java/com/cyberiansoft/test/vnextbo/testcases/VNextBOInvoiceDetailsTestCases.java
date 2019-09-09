@@ -23,71 +23,74 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInvoiceDetailsData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInvoiceDetailsData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
-    @BeforeMethod
-    public void BackOfficeLogin() {
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
-    }
+	@BeforeMethod
+	public void BackOfficeLogin() {
+		browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
+		try {
+			DriverBuilder.getInstance().setDriver(browserType);
+		} catch (WebDriverException e) {
+			e.printStackTrace();
+		}
+		webdriver = DriverBuilder.getInstance().getDriver();
+		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+	}
 
-    @AfterMethod
-    public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-                VNextBOHeaderPanel.class);
-        if (headerpanel.logOutLinkExists())
-            headerpanel.userLogout();
+	@AfterMethod
+	public void BackOfficeLogout() {
+		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
+				VNextBOHeaderPanel.class);
+		if (headerpanel.logOutLinkExists())
+			headerpanel.userLogout();
 
-        if (DriverBuilder.getInstance().getDriver() != null)
-            DriverBuilder.getInstance().quitDriver();
-    }
+		if (DriverBuilder.getInstance().getDriver() != null)
+			DriverBuilder.getInstance().quitDriver();
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testSetupConfigurationToRunInvoiceListSuite(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testSetupConfigurationToRunInvoiceListSuite(String rowID, String description, JSONObject testData) {
 
-        VNextBOInvoiceDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInvoiceDetailsData.class);
-        
+		VNextBOInvoiceDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInvoiceDetailsData.class);
+
 		VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
-        VNexBOUsersWebPage usersWebPage = PageFactory.initElements(webdriver, VNexBOUsersWebPage.class);
-        loginPage.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
+		VNexBOUsersWebPage usersWebPage = PageFactory.initElements(webdriver, VNexBOUsersWebPage.class);
+		loginPage.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
 		leftMenuInteractions.selectUsersMenu();
 		final String usermail = data.getUserMailPrefix() + RandomUtils.nextInt(100000, 1000000) + data.getUserMailPostbox();
-        System.out.println(usermail);
+		System.out.println(usermail);
 		VNexBOAddNewUserDialog adduserdialog = usersWebPage.clickAddUserButton();
 		adduserdialog.createNewUser(data.getTechFirstName(), data.getTechLastName(), usermail, data.getTechUserPhone(), false);
 		Assert.assertTrue(usersWebPage.findUserInTableByUserEmail(usermail));
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();
-		
+
 		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
 		BackOfficeLoginWebPage oldloginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		oldloginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(),
-                VNextBOConfigInfo.getInstance().getVNextBOPassword());
+				VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
 				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backofficeheader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
+		CompanyWebPage companypage = new CompanyWebPage(webdriver);
+		backofficeheader.clickCompanyLink();
+		ClientsWebPage clientspage = new ClientsWebPage(webdriver);
+		companypage.clickClientsLink();
 		clientspage.makeSearchPanelVisible();
 		final String fullcustomer = data.getFirstName() + " " + data.getLastName();
 		clientspage.searchClientByName(fullcustomer);
-		
+
 		if (!clientspage.isClientPresentInTable(fullcustomer)) {
-			NewClientDialogWebPage newclientpage = clientspage.clickAddClientButton();
+			NewClientDialogWebPage newclientpage = new NewClientDialogWebPage(webdriver);
+			clientspage.clickAddClientButton();
 			newclientpage.setCompanyName(data.getCompanyName());
 			newclientpage.setClientFirstName(data.getFirstName());
 			newclientpage.setClientLastName(data.getLastName());

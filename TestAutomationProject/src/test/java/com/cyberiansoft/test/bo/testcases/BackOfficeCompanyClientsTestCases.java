@@ -14,247 +14,263 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsSearch(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
-                BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
 
-        ClientsWebPage clientspage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink()
-                .verifyEmployeesTableColumnsAreVisible();
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.verifyEmployeesTableColumnsAreVisible();
 
-        Assert.assertEquals("1", clientspage.getCurrentlySelectedPageNumber());
-        Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
+		Assert.assertEquals("1", clientsPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals("1", clientsPage.getGoToPageFieldValue());
 
-        clientspage.setPageSize("1");
-        Assert.assertEquals(1, clientspage.getClientsTableRowsCount());
+		clientsPage.setPageSize("1");
+		Assert.assertEquals(1, clientsPage.getClientsTableRowsCount());
 
-        String lastpagenumber = clientspage.getLastPageNumber();
-        clientspage.clickGoToLastPage();
-        Assert.assertEquals(lastpagenumber, clientspage.getGoToPageFieldValue().replace(",", ""));
+		String lastPageNumber = clientsPage.getLastPageNumber();
+		clientsPage.clickGoToLastPage();
+		Assert.assertEquals(lastPageNumber, clientsPage.getGoToPageFieldValue().replace(",", ""));
 
-        clientspage.clickGoToFirstPage();
-        Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
+		clientsPage.clickGoToFirstPage();
+		Assert.assertEquals("1", clientsPage.getGoToPageFieldValue());
 
-        clientspage.clickGoToNextPage();
-        Assert.assertEquals("2", clientspage.getGoToPageFieldValue());
+		clientsPage.clickGoToNextPage();
+		Assert.assertEquals("2", clientsPage.getGoToPageFieldValue());
 
-        clientspage.clickGoToPreviousPage();
-        Assert.assertEquals("1", clientspage.getGoToPageFieldValue());
+		clientsPage.clickGoToPreviousPage();
+		Assert.assertEquals("1", clientsPage.getGoToPageFieldValue());
 
-        clientspage.verifyEmployeesTableColumnsAreVisible();
+		clientsPage.verifyEmployeesTableColumnsAreVisible();
 
-        clientspage.setPageSize("999");
-        Assert.assertEquals(clientspage.getClientsTableRowsCount(), clientspage.MAX_TABLE_ROW_COUNT_VALUE);
+		clientsPage.setPageSize("999");
+		Assert.assertEquals(clientsPage.getClientsTableRowsCount(), clientsPage.MAX_TABLE_ROW_COUNT_VALUE);
 
-        clientspage.makeSearchPanelVisible();
-        clientspage.selectSearchType(data.getClientType());
-        clientspage.setClientSearchCriteria(data.getClientName().substring(0, 4).toLowerCase());
-        clientspage.clickFindButton();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.selectSearchType(data.getClientType());
+		clientsPage.setClientSearchCriteria(data.getClientName().substring(0, 4).toLowerCase());
+		clientsPage.clickFindButton();
 
-        clientspage.isClientPresentInTable(data.getClientName());
-    }
+		clientsPage.isClientPresentInTable(data.getClientName());
+	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void
-    testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForNewClient(
-            String rowID, String description, JSONObject testData) {
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+	testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForNewClient(
+			String rowID, String description, JSONObject testData) {
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
 
-		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		NewClientDialogWebPage newClientDialogWebPage = new NewClientDialogWebPage(webdriver);
 
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.makeSearchPanelVisible();
-		clientspage.searchClientByName(data.getCompanyName());
-		if (clientspage.isClientPresentInTable(data.getCompanyName())) {
-			clientspage.deleteClient(data.getCompanyName());
+		backOfficeHeader.clickCompanyLink();
+
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.searchClientByName(data.getCompanyName());
+		if (clientsPage.isClientPresentInTable(data.getCompanyName())) {
+			clientsPage.deleteClient(data.getCompanyName());
 		}
 
-		NewClientDialogWebPage newclientdlg = clientspage.clickAddClientButton();
-		newclientdlg.setCompanyName(data.getCompanyName());
-		newclientdlg.setCompanyNotes(data.getCompanyNote());
-		newclientdlg.clickOKButton();
+		clientsPage.clickAddClientButton();
+		newClientDialogWebPage.setCompanyName(data.getCompanyName());
+		newClientDialogWebPage.setCompanyNotes(data.getCompanyNote());
+		newClientDialogWebPage.clickOKButton();
 
-		clientspage.searchClientByName(data.getCompanyName());
+		clientsPage.searchClientByName(data.getCompanyName());
 
-		newclientdlg = clientspage.clickEditClient(data.getCompanyName());
-		Assert.assertEquals(data.getCompanyName(), newclientdlg.getCompanyName());
-		Assert.assertEquals(data.getCompanyNote(), newclientdlg.getCompanyNotes());
-		newclientdlg.clickCancelButton();
-		clientspage.deleteClient(data.getCompanyName());
-		clientspage.searchClientByName(data.getCompanyName());
-		Assert.assertFalse(clientspage.isClientPresentInTable(data.getCompanyName()));
+		clientsPage.clickEditClient(data.getCompanyName());
+		Assert.assertEquals(data.getCompanyName(), newClientDialogWebPage.getCompanyName());
+		Assert.assertEquals(data.getCompanyNote(), newClientDialogWebPage.getCompanyNotes());
+		newClientDialogWebPage.clickCancelButton();
+		clientsPage.deleteClient(data.getCompanyName());
+		clientsPage.searchClientByName(data.getCompanyName());
+		Assert.assertFalse(clientsPage.isClientPresentInTable(data.getCompanyName()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsVerifyThatNotesAreAddedOnClientDetailsScreenAndSavedCorrectlyForExistingClient(
-            String rowID, String description, JSONObject testData) {
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+			String rowID, String description, JSONObject testData) {
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
 
-		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		NewClientDialogWebPage newClientDialogWebPage = new NewClientDialogWebPage(webdriver);
 
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.makeSearchPanelVisible();
-		clientspage.searchClientByName(data.getCompanyName());
-		while (clientspage.isClientPresentInTable(data.getCompanyName())) {
-			clientspage.deleteClient(data.getCompanyName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.searchClientByName(data.getCompanyName());
+		while (clientsPage.isClientPresentInTable(data.getCompanyName())) {
+			clientsPage.deleteClient(data.getCompanyName());
 		}
 
-		NewClientDialogWebPage newclientdlg = clientspage.clickAddClientButton();
-		newclientdlg.setCompanyName(data.getCompanyName());
-		newclientdlg.clickOKButton();
+		clientsPage.clickAddClientButton();
+		newClientDialogWebPage.setCompanyName(data.getCompanyName());
+		newClientDialogWebPage.clickOKButton();
 
-		clientspage.searchClientByName(data.getCompanyName());
+		clientsPage.searchClientByName(data.getCompanyName());
 
-		newclientdlg = clientspage.clickEditClient(data.getCompanyName());
-		Assert.assertEquals(data.getCompanyName(), newclientdlg.getCompanyName());
-		newclientdlg.setCompanyNotes(data.getCompanyNote());
-		newclientdlg.clickOKButton();
-		newclientdlg = clientspage.clickEditClient(data.getCompanyName());
-		Assert.assertEquals(data.getCompanyName(), newclientdlg.getCompanyName());
-		Assert.assertEquals(data.getCompanyNote(), newclientdlg.getCompanyNotes());
-		newclientdlg.clickCancelButton();
+		clientsPage.clickEditClient(data.getCompanyName());
+		Assert.assertEquals(data.getCompanyName(), newClientDialogWebPage.getCompanyName());
+		newClientDialogWebPage.setCompanyNotes(data.getCompanyNote());
+		newClientDialogWebPage.clickOKButton();
+		clientsPage.clickEditClient(data.getCompanyName());
+		Assert.assertEquals(data.getCompanyName(), newClientDialogWebPage.getCompanyName());
+		Assert.assertEquals(data.getCompanyNote(), newClientDialogWebPage.getCompanyNotes());
+		newClientDialogWebPage.clickCancelButton();
 
-		clientspage.deleteClient(data.getCompanyName());
-		clientspage.searchClientByName(data.getCompanyName());
-		Assert.assertFalse(clientspage.isClientPresentInTable(data.getCompanyName()));
+		clientsPage.deleteClient(data.getCompanyName());
+		clientsPage.searchClientByName(data.getCompanyName());
+		Assert.assertFalse(clientsPage.isClientPresentInTable(data.getCompanyName()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsVerifyThatAddedNotesOnClientDetailsScreenAreVisibleAsAPopupOnClientsGrid(
-            String rowID, String description, JSONObject testData) {
+			String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
-				BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		NewClientDialogWebPage newClientDialogWebPage = new NewClientDialogWebPage(webdriver);
 
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.makeSearchPanelVisible();
-		clientspage.searchClientByName(data.getCompanyName());
-		if (clientspage.isClientPresentInTable(data.getCompanyName())) {
-			clientspage.deleteClient(data.getCompanyName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.searchClientByName(data.getCompanyName());
+		if (clientsPage.isClientPresentInTable(data.getCompanyName())) {
+			clientsPage.deleteClient(data.getCompanyName());
 		}
 
-		NewClientDialogWebPage newclientdlg = clientspage.clickAddClientButton();
-		newclientdlg.setCompanyName(data.getCompanyName());
-		newclientdlg.setCompanyNotes(data.getCompanyNote());
-		newclientdlg.clickOKButton();
+		clientsPage.clickAddClientButton();
+		newClientDialogWebPage.setCompanyName(data.getCompanyName());
+		newClientDialogWebPage.setCompanyNotes(data.getCompanyNote());
+		newClientDialogWebPage.clickOKButton();
 
-		clientspage.searchClientByName(data.getCompanyName());
-		String notext = clientspage.moveToClientNotesGridAndGetNoteContent(data.getCompanyName());
+		clientsPage.searchClientByName(data.getCompanyName());
+		String notext = clientsPage.moveToClientNotesGridAndGetNoteContent(data.getCompanyName());
 		Assert.assertEquals(data.getCompanyNote(), notext);
 
-		clientspage.deleteClient(data.getCompanyName());
-		clientspage.searchClientByName(data.getCompanyName());
-		Assert.assertFalse(clientspage.isClientPresentInTable(data.getCompanyName()));
+		clientsPage.deleteClient(data.getCompanyName());
+		clientsPage.searchClientByName(data.getCompanyName());
+		Assert.assertFalse(clientsPage.isClientPresentInTable(data.getCompanyName()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsVerifyThatClientNotesAreImportedFromCSVFile(
-	        String rowID, String description, JSONObject testData) {
+			String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
 
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.makeSearchPanelVisible();
-		clientspage.searchClientByName(data.getCompanyName());
-		if (clientspage.isClientPresentInTable(data.getCompanyName())) {
-			clientspage.deleteClient(data.getCompanyName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.searchClientByName(data.getCompanyName());
+		if (clientsPage.isClientPresentInTable(data.getCompanyName())) {
+			clientsPage.deleteClient(data.getCompanyName());
 		}
-		clientspage.importClients(data.getImportFile());
-		clientspage.searchClientByName(data.getCompanyName());
-		String notetxt = clientspage.moveToClientNotesGridAndGetNoteContent(data.getCompanyName());
+		clientsPage.importClients(data.getImportFile());
+		clientsPage.searchClientByName(data.getCompanyName());
+		String notetxt = clientsPage.moveToClientNotesGridAndGetNoteContent(data.getCompanyName());
 		Assert.assertEquals(data.getCompanyNote(), notetxt);
 
-		clientspage.deleteClient(data.getCompanyName());
-		clientspage.searchClientByName(data.getCompanyName());
-		Assert.assertFalse(clientspage.isClientPresentInTable(data.getCompanyName()));
+		clientsPage.deleteClient(data.getCompanyName());
+		clientsPage.searchClientByName(data.getCompanyName());
+		Assert.assertFalse(clientsPage.isClientPresentInTable(data.getCompanyName()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsArchive(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
 
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.makeSearchPanelVisible();
-		clientspage.searchClientByName(data.getCompanyName());
-		clientspage.verifyClientIsPresentInActiveTab(data.getCompanyName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.searchClientByName(data.getCompanyName());
+		clientsPage.verifyClientIsPresentInActiveTab(data.getCompanyName());
 		for (int i = 0; i < 3; i++) {
-			clientspage.deleteClient(data.getCompanyName());
-			clientspage.searchClientByName(data.getCompanyName());
-			Assert.assertFalse(clientspage.isClientPresentInTable(data.getCompanyName()));
+			clientsPage.deleteClient(data.getCompanyName());
+			clientsPage.searchClientByName(data.getCompanyName());
+			Assert.assertFalse(clientsPage.isClientPresentInTable(data.getCompanyName()));
 
-			clientspage.clickArchivedTab();
-			clientspage.searchClientByName(data.getCompanyName());
-			Assert.assertTrue(clientspage.clientExistsInArchivedTable(data.getCompanyName()));
-			clientspage.restoreClient(data.getCompanyName());
-			Assert.assertFalse(clientspage.clientExistsInArchivedTable(data.getCompanyName()));
-			clientspage.clickActiveTab();
+			clientsPage.clickArchivedTab();
+			clientsPage.searchClientByName(data.getCompanyName());
+			Assert.assertTrue(clientsPage.clientExistsInArchivedTable(data.getCompanyName()));
+			clientsPage.restoreClient(data.getCompanyName());
+			Assert.assertFalse(clientsPage.clientExistsInArchivedTable(data.getCompanyName()));
+			clientsPage.clickActiveTab();
 
-			clientspage.searchClientByName(data.getCompanyName());
-			Assert.assertTrue(clientspage.isClientPresentInTable(data.getCompanyName()));
+			clientsPage.searchClientByName(data.getCompanyName());
+			Assert.assertTrue(clientsPage.isClientPresentInTable(data.getCompanyName()));
 		}
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsClientUsersUpdate(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		ClientUsersWebPage clientUsersWebPage = new ClientUsersWebPage(webdriver);
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = new AddEditClientUsersDialogWebPage(webdriver);
 
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.verifyEmployeesTableColumnsAreVisible();
-		clientspage.searchClientByName(data.getClientName());
-		Assert.assertTrue(clientspage.isClientPresentInTable(data.getClientName()));
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.verifyEmployeesTableColumnsAreVisible();
+		clientsPage.searchClientByName(data.getClientName());
+		Assert.assertTrue(clientsPage.isClientPresentInTable(data.getClientName()));
 
-		ClientUsersWebPage  clientUsersWebPage = clientspage.
-				clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
+		clientsPage.clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
 
-		if (clientUsersWebPage.isClientUserPresentInTable(data.getUserFirstName(), data.getUserLastName())){
+		if (clientUsersWebPage.isClientUserPresentInTable(data.getUserFirstName(), data.getUserLastName())) {
 			clientUsersWebPage.clickDeleteClientUser(data.getUserFirstName());
 		}
 
-		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = clientUsersWebPage.clickAddUserBtn();
-		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.createUserWithRequiredFields(
-		        data.getUserEmail(), data.getUserFirstName(), data.getUserLastName());
+		clientUsersWebPage.clickAddUserBtn();
+		ClientUsersWebPage clientUsersWebPage1 = new ClientUsersWebPage(webdriver);
+		addclientUsersDialogWebPage.createUserWithRequiredFields(
+				data.getUserEmail(), data.getUserFirstName(), data.getUserLastName());
 		Assert.assertTrue(clientUsersWebPage1.
-                isClientUserPresentInTable(data.getUserFirstName(), data.getUserLastName()));
-		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage1 =
-				clientUsersWebPage1.clickEditClientUser(data.getUserFirstName());
+				isClientUserPresentInTable(data.getUserFirstName(), data.getUserLastName()));
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage1 = new AddEditClientUsersDialogWebPage(webdriver);
+		clientUsersWebPage1.clickEditClientUser(data.getUserFirstName());
 
 		Assert.assertEquals(data.getUserEmail(), addclientUsersDialogWebPage1.getUserEmail());
 		Assert.assertEquals(data.getUserFirstName(), addclientUsersDialogWebPage1.getUserFirstName());
 		Assert.assertEquals(data.getUserLastName(), addclientUsersDialogWebPage1.getUserLastName());
 		Assert.assertTrue(addclientUsersDialogWebPage1.isClientChkboxChecked());
 
-		ClientUsersWebPage  clientUsersWebPage2 = addclientUsersDialogWebPage1.
+		ClientUsersWebPage clientUsersWebPage2 = new ClientUsersWebPage(webdriver);
+		addclientUsersDialogWebPage1.
 				editUserWithAlldFields(data.getUserFirstName(), data.getUserLastName(),
-                        data.getUserCompany(), data.getUserAddress(), data.getUserCity(), data.getUserCountry(),
+						data.getUserCompany(), data.getUserAddress(), data.getUserCity(), data.getUserCountry(),
 						data.getUserStateProvince(), data.getUserZipPostCode(), data.getUserPhone(), data.getUserAccountId());
 
-		AddEditClientUsersDialogWebPage addClientUsersDialogWebPage2 =
-				clientUsersWebPage2.clickEditClientUser(data.getUserFirstName());
+		AddEditClientUsersDialogWebPage addClientUsersDialogWebPage2 = new AddEditClientUsersDialogWebPage(webdriver);
+		clientUsersWebPage2.clickEditClientUser(data.getUserFirstName());
 
 		Assert.assertEquals(data.getUserEmail(), addClientUsersDialogWebPage2.getUserEmail());
 		Assert.assertEquals(data.getUserFirstName(), addClientUsersDialogWebPage2.getUserFirstName());
@@ -275,30 +291,33 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertTrue(addclientUsersDialogWebPage1.isSalesPersonChkboxChecked());
 		Assert.assertTrue(addclientUsersDialogWebPage1.isSalesPersonMonManagChkboxChecked());
 
-		ClientUsersWebPage clientUsersWebPage3 = addClientUsersDialogWebPage2.closeUsersDialogWebPageWithoutEdit();
-				clientUsersWebPage3.clickDeleteClientUser(data.getUserFirstName());
+		ClientUsersWebPage clientUsersWebPage3 = new ClientUsersWebPage(webdriver);
+		addClientUsersDialogWebPage2.closeUsersDialogWebPageWithoutEdit();
+		clientUsersWebPage3.clickDeleteClientUser(data.getUserFirstName());
 		Assert.assertFalse(clientUsersWebPage3.isClientUserPresentInTable(data.getUserFirstName(), data.getUserLastName()));
 		clientUsersWebPage3.closePage();
 	}
 
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCompanyClientsHoursOfOperationAddWholesale(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCompanyClientsHoursOfOperationAddWholesale(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		NewClientDialogWebPage newClientDialogWebPage = new NewClientDialogWebPage(webdriver);
 
-        ClientsWebPage clientspage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink();
-		clientspage.verifyEmployeesTableColumnsAreVisible();
-		clientspage.searchClientByName(data.getTimeFrame());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.verifyEmployeesTableColumnsAreVisible();
+		clientsPage.searchClientByName(data.getTimeFrame());
 
-		if (clientspage.isClientPresentInTable(data.getTimeFrame())) {
-			clientspage.deleteClient(data.getTimeFrame());
+		if (clientsPage.isClientPresentInTable(data.getTimeFrame())) {
+			clientsPage.deleteClient(data.getTimeFrame());
 		}
 
-		NewClientDialogWebPage newClientDialogWebPage = clientspage.clickAddClientButton();
+		clientsPage.clickAddClientButton();
 		Assert.assertTrue(newClientDialogWebPage.isCompanyWholesale());
 
 		newClientDialogWebPage.setCompanyName(data.getTimeFrame());
@@ -308,22 +327,25 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		newClientDialogWebPage.setWorkHoursFinish(data.getWorkHoursFinish());
 
 		newClientDialogWebPage.clickOKButton();
-		clientspage.searchClientByName(data.getTimeFrame());
-//		Assert.assertEquals(data.getTimeFrame(), clientspage.moveToClientNotesGridAndGetNoteContent(data.getTimeFrame())); todo uncomment, if timeframe appears
-		clientspage.deleteClient(data.getTimeFrame());
-		Assert.assertFalse(clientspage.isClientPresentInTable(data.getTimeFrame()));
+		clientsPage.searchClientByName(data.getTimeFrame());
+//		Assert.assertEquals(data.getTimeFrame(), clientsPage.moveToClientNotesGridAndGetNoteContent(data.getTimeFrame())); todo uncomment, if timeframe appears
+		clientsPage.deleteClient(data.getTimeFrame());
+		Assert.assertFalse(clientsPage.isClientPresentInTable(data.getTimeFrame()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsHoursOfOperationAddRetail(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		NewClientDialogWebPage newClientDialogWebPage = new NewClientDialogWebPage(webdriver);
 
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.verifyEmployeesTableColumnsAreVisible();
-        NewClientDialogWebPage newClientDialogWebPage = clientspage.clickAddClientButton();
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.verifyEmployeesTableColumnsAreVisible();
+		clientsPage.clickAddClientButton();
 		Assert.assertTrue(newClientDialogWebPage.isCompanyWholesale());
 		newClientDialogWebPage.setCompanyName(data.getCompanyName());
 		newClientDialogWebPage.switchToRetailCustomer();
@@ -336,71 +358,78 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyClientsContactsVerificationDisable (String rowID, String description, JSONObject testData) {
+	public void testCompanyClientsContactsVerificationDisable(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		ClientContactsWebPage clientContactsWebPage = new ClientContactsWebPage(webdriver);
+		AddEditClientUsersContactsDialogWebPage addEditClientUsersContactsDialogWebPage =
+				new AddEditClientUsersContactsDialogWebPage(webdriver);
 
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.verifyEmployeesTableColumnsAreVisible();
-		clientspage.searchClientByName(data.getClientName());
-		Assert.assertTrue(clientspage.isClientPresentInTable(data.getClientName()));
-		clientspage.unclickContactVerifDisableChkbox();
-		String mainwindow =  webdriver.getWindowHandle();
-		ClientContactsWebPage  clientContactsWebPage = clientspage.clickContactsLinkForClientOpenDialogWindow(data.getClientName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.verifyEmployeesTableColumnsAreVisible();
+		clientsPage.searchClientByName(data.getClientName());
+		Assert.assertTrue(clientsPage.isClientPresentInTable(data.getClientName()));
+		clientsPage.unclickContactVerifDisableChkbox();
+		String mainwindow = webdriver.getWindowHandle();
+		clientsPage.clickContactsLinkForClientOpenDialogWindow(data.getClientName());
 
 		//delete contact1 if such exists
-		if (clientContactsWebPage.isClientContactPresentInTable(data.getContactFirstName(), data.getContactLastName())){
+		if (clientContactsWebPage.isClientContactPresentInTable(data.getContactFirstName(), data.getContactLastName())) {
 			clientContactsWebPage.clickDeleteClientContact(data.getContactFirstName());
 		}
 
-		AddEditClientUsersContactsDialogWebPage addEditClientUsersContactsDialogWebPage =
-				clientContactsWebPage.clickAddUserBtn();
+
+		clientContactsWebPage.clickAddUserBtn();
 		Assert.assertTrue(addEditClientUsersContactsDialogWebPage.isNotificationVisible());
-		Assert.assertEquals(data.getNotification(),  addEditClientUsersContactsDialogWebPage.getNotification());
-		ClientContactsWebPage  clientContactsWebPage1 =
-				addEditClientUsersContactsDialogWebPage.createContactWithRequiredField(data.getContactFirstName(),
-						data.getContactLastName(), data.getContactEmail());
+		Assert.assertEquals(data.getNotification(), addEditClientUsersContactsDialogWebPage.getNotification());
+		ClientContactsWebPage clientContactsWebPage1 = new ClientContactsWebPage(webdriver);
+		addEditClientUsersContactsDialogWebPage.createContactWithRequiredField(data.getContactFirstName(),
+				data.getContactLastName(), data.getContactEmail());
 
 		Assert.assertEquals(data.getPendingSendEmailMess(),
-                clientContactsWebPage1.getClientStatusText(data.getContactFirstName()));
+				clientContactsWebPage1.getClientStatusText(data.getContactFirstName()));
 
 		clientContactsWebPage1.waitForMessageChange(data.getContactFirstName(), data.getNotVerifiedMess());
 
 		// verify message text and color for contact1
 		Assert.assertEquals(data.getNotVerifiedMess(),
-                clientContactsWebPage1.getClientStatusText(data.getContactFirstName()));
-        if (browserType.getBrowserTypeString().equalsIgnoreCase("edge")) {
-            Assert.assertEquals(data.getColorRed(), clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
-        } else {
-            Assert.assertEquals(data.getRed(), clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
-        }
+				clientContactsWebPage1.getClientStatusText(data.getContactFirstName()));
+		if (browserType.getBrowserTypeString().equalsIgnoreCase("edge")) {
+			Assert.assertEquals(data.getColorRed(), clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
+		} else {
+			Assert.assertEquals(data.getRed(), clientContactsWebPage1.getClientStatusTextColor(data.getContactFirstName()));
+		}
 
-        clientContactsWebPage1.closeNewTab(mainwindow);
+		clientContactsWebPage1.closeNewTab(mainwindow);
 
 		//Click on Contact Verification Disable and create contact 2 for client
-		clientspage.clickContactVerifDisableChkbox();
-		ClientContactsWebPage  clientContactsWebPage2 = clientspage.
-				clickContactsLinkForClientOpenDialogWindow(data.getClientName());
+		clientsPage.clickContactVerifDisableChkbox();
+		ClientContactsWebPage clientContactsWebPage2 = new ClientContactsWebPage(webdriver);
+		clientsPage.clickContactsLinkForClientOpenDialogWindow(data.getClientName());
 
 		//delete contact2 if such exists
 		if (clientContactsWebPage2.isClientContactPresentInTable(data.getContactFirstName2(), data.getContactLastName2())) {
 			clientContactsWebPage2.clickDeleteClientContact(data.getContactFirstName2());
 		}
 
-		AddEditClientUsersContactsDialogWebPage dialogWebPage = clientContactsWebPage2.clickAddUserBtn();
+		AddEditClientUsersContactsDialogWebPage dialogWebPage = new AddEditClientUsersContactsDialogWebPage(webdriver);
+		clientContactsWebPage2.clickAddUserBtn();
 		Assert.assertFalse(dialogWebPage.isNotificationVisible());
-		ClientContactsWebPage  clientContactsWebPage3 = dialogWebPage.createContactWithRequiredField(
-		        data.getContactFirstName2(), data.getContactLastName2(), data.getContactEmail2());
+		ClientContactsWebPage clientContactsWebPage3 = new ClientContactsWebPage(webdriver);
+		dialogWebPage.createContactWithRequiredField(
+				data.getContactFirstName2(), data.getContactLastName2(), data.getContactEmail2());
 
 		// verify message text and color for contact2
 		Assert.assertEquals(data.getVerifiedMess(), clientContactsWebPage3.getClientStatusText(data.getContactFirstName2()));
-        if (browserType.getBrowserTypeString().equalsIgnoreCase("edge")) {
-            Assert.assertEquals(data.getColorGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
-        } else {
-            Assert.assertEquals(data.getGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
-        }
+		if (browserType.getBrowserTypeString().equalsIgnoreCase("edge")) {
+			Assert.assertEquals(data.getColorGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
+		} else {
+			Assert.assertEquals(data.getGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
+		}
 //        Assert.assertEquals(data.getColorGreen(), clientContactsWebPage3.getClientStatusTextColor(data.getContactFirstName2()));
 
 		//delete all created contacts
@@ -410,96 +439,108 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertFalse(clientContactsWebPage3.isClientContactPresentInTable(data.getContactFirstName(), data.getContactLastName()));
 		Assert.assertFalse(clientContactsWebPage3.isClientContactPresentInTable(data.getContactFirstName2(), data.getContactLastName2()));
 		clientContactsWebPage3.closeNewTab(mainwindow);
-		clientspage.unclickContactVerifDisableChkbox();
+		clientsPage.unclickContactVerifDisableChkbox();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyClientsContactsUpdate(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
 
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ClientsWebPage clientspage = companypage.clickClientsLink();
-		clientspage.verifyEmployeesTableColumnsAreVisible();
-		clientspage.searchClientByName(data.getClientName());
-		Assert.assertTrue(clientspage.isClientPresentInTable(data.getClientName()));
-		clientspage.unclickContactVerifDisableChkbox();
-		ClientContactsWebPage  clientContactsWebPage = clientspage.
-				clickContactsLinkForClientOpenDialogWindow(data.getClientName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.verifyEmployeesTableColumnsAreVisible();
+		clientsPage.searchClientByName(data.getClientName());
+		Assert.assertTrue(clientsPage.isClientPresentInTable(data.getClientName()));
+		clientsPage.unclickContactVerifDisableChkbox();
+		ClientContactsWebPage clientContactsWebPage = new ClientContactsWebPage(webdriver);
+		clientsPage.clickContactsLinkForClientOpenDialogWindow(data.getClientName());
 
 
-		if (clientContactsWebPage.isClientContactPresentInTable(data.getUserFirstName(), data.getUserLastName())){
+		if (clientContactsWebPage.isClientContactPresentInTable(data.getUserFirstName(), data.getUserLastName())) {
 			clientContactsWebPage.clickDeleteClientContact(data.getUserFirstName());
 		}
 
 		AddEditClientUsersContactsDialogWebPage addEditClientUsersContactsDialogWebPage =
-				clientContactsWebPage.clickAddUserBtn();
+				new AddEditClientUsersContactsDialogWebPage(webdriver);
+		clientContactsWebPage.clickAddUserBtn();
 
-		ClientContactsWebPage  clientContactsWebPage1 = addEditClientUsersContactsDialogWebPage.
-		         createContactWithRequiredFieldAndSkipValidation(data.getUserFirstName(), data.getUserLastName(), data.getContactEmail());
+		ClientContactsWebPage clientContactsWebPage1 = new ClientContactsWebPage(webdriver);
+		addEditClientUsersContactsDialogWebPage.
+				createContactWithRequiredFieldAndSkipValidation(data.getUserFirstName(), data.getUserLastName(), data.getContactEmail());
 
 		AddEditClientUsersContactsDialogWebPage addEditClientUsersContactsDialogWebPage1 =
-				clientContactsWebPage1.clickEditContactUser(data.getUserFirstName());
+				new AddEditClientUsersContactsDialogWebPage(webdriver);
+		clientContactsWebPage1.clickEditContactUser(data.getUserFirstName());
 
-		Assert.assertEquals(data.getUserFirstName(),  addEditClientUsersContactsDialogWebPage1.getContactFirstName());
-		Assert.assertEquals(data.getUserLastName(),  addEditClientUsersContactsDialogWebPage1.getContactLastName());
-		Assert.assertEquals(data.getContactEmail(),  addEditClientUsersContactsDialogWebPage1.getContactEmail());
+		Assert.assertEquals(data.getUserFirstName(), addEditClientUsersContactsDialogWebPage1.getContactFirstName());
+		Assert.assertEquals(data.getUserLastName(), addEditClientUsersContactsDialogWebPage1.getContactLastName());
+		Assert.assertEquals(data.getContactEmail(), addEditClientUsersContactsDialogWebPage1.getContactEmail());
 
-		ClientContactsWebPage  clientContactsWebPage2 = addEditClientUsersContactsDialogWebPage1.
-		         createContactWithAllFields(data.getUserFirstName(), data.getUserLastName(), data.getContactEmail(),
-		        		 data.getCompanyName(), data.getContactPhone(), data.getUserAddress(), data.getUserAddress2(),
-		        		 data.getUserCity(), data.getUserCountry(), data.getUserStateProvince(), data.getUserZipPostCode());
+		ClientContactsWebPage clientContactsWebPage2 = new ClientContactsWebPage(webdriver);
+		addEditClientUsersContactsDialogWebPage1.
+				createContactWithAllFields(data.getUserFirstName(), data.getUserLastName(), data.getContactEmail(),
+						data.getCompanyName(), data.getContactPhone(), data.getUserAddress(), data.getUserAddress2(),
+						data.getUserCity(), data.getUserCountry(), data.getUserStateProvince(), data.getUserZipPostCode());
 
 
 		AddEditClientUsersContactsDialogWebPage addEditClientUsersContactsDialogWebPage2 =
-				clientContactsWebPage2.clickEditContactUser(data.getUserFirstName());
+				new AddEditClientUsersContactsDialogWebPage(webdriver);
+		clientContactsWebPage2.clickEditContactUser(data.getUserFirstName());
 
-		Assert.assertEquals(data.getUserFirstName(),  addEditClientUsersContactsDialogWebPage2.getContactFirstName());
-		Assert.assertEquals(data.getUserLastName(),  addEditClientUsersContactsDialogWebPage2.getContactLastName());
-		Assert.assertEquals(data.getContactEmail(),  addEditClientUsersContactsDialogWebPage2.getContactEmail());
-		Assert.assertEquals(data.getCompanyName(),  addEditClientUsersContactsDialogWebPage2.getContactCompany());
-		Assert.assertEquals(data.getContactPhone(),  addEditClientUsersContactsDialogWebPage2.getContactPhone());
-		Assert.assertEquals(data.getUserAddress(),  addEditClientUsersContactsDialogWebPage2.getContactAdress());
-		Assert.assertEquals(data.getUserAddress2(),  addEditClientUsersContactsDialogWebPage2.getContactAdress2());
-		Assert.assertEquals(data.getUserCity(),  addEditClientUsersContactsDialogWebPage2.getContactCity());
-		Assert.assertEquals(data.getUserCountry(),  addEditClientUsersContactsDialogWebPage2.getCountry());
-		Assert.assertEquals(data.getUserStateProvince(),  addEditClientUsersContactsDialogWebPage2.getStateProvince());
-		Assert.assertEquals(data.getUserZipPostCode(),  addEditClientUsersContactsDialogWebPage2.getContactZipPostCode());
+		Assert.assertEquals(data.getUserFirstName(), addEditClientUsersContactsDialogWebPage2.getContactFirstName());
+		Assert.assertEquals(data.getUserLastName(), addEditClientUsersContactsDialogWebPage2.getContactLastName());
+		Assert.assertEquals(data.getContactEmail(), addEditClientUsersContactsDialogWebPage2.getContactEmail());
+		Assert.assertEquals(data.getCompanyName(), addEditClientUsersContactsDialogWebPage2.getContactCompany());
+		Assert.assertEquals(data.getContactPhone(), addEditClientUsersContactsDialogWebPage2.getContactPhone());
+		Assert.assertEquals(data.getUserAddress(), addEditClientUsersContactsDialogWebPage2.getContactAdress());
+		Assert.assertEquals(data.getUserAddress2(), addEditClientUsersContactsDialogWebPage2.getContactAdress2());
+		Assert.assertEquals(data.getUserCity(), addEditClientUsersContactsDialogWebPage2.getContactCity());
+		Assert.assertEquals(data.getUserCountry(), addEditClientUsersContactsDialogWebPage2.getCountry());
+		Assert.assertEquals(data.getUserStateProvince(), addEditClientUsersContactsDialogWebPage2.getStateProvince());
+		Assert.assertEquals(data.getUserZipPostCode(), addEditClientUsersContactsDialogWebPage2.getContactZipPostCode());
 
-		ClientContactsWebPage  clientContactsWebPage3 = addEditClientUsersContactsDialogWebPage2.closeContactsDialogWebPageWithoutEdit();
+		ClientContactsWebPage clientContactsWebPage3 = new ClientContactsWebPage(webdriver);
+		addEditClientUsersContactsDialogWebPage2.closeContactsDialogWebPageWithoutEdit();
 		clientContactsWebPage3.clickDeleteClientContact(data.getUserFirstName());
 		Assert.assertFalse(clientContactsWebPage3.isClientContactPresentInTable(data.getUserFirstName(), data.getUserLastName()));
 
 		clientContactsWebPage3.closePage();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testClientUserAddClient(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testClientUserAddClient(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		ClientUsersWebPage clientUsersWebPage = new ClientUsersWebPage(webdriver);
 
-        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink()
-                .makeSearchPanelVisible()
-                .setClientSearchCriteria(data.getClientName())
-                .clickFindButton()
-                .scrollDownToText(data.getClientName())
-                .clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.setClientSearchCriteria(data.getClientName());
+		clientsPage.clickFindButton();
+		clientsPage.scrollDownToText(data.getClientName());
+		clientsPage.clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
 
-        while (clientUsersWebPage.isClientUserPresentInTable(data.getUserFirstName(), data.getUserFirstName())){
+		while (clientUsersWebPage.isClientUserPresentInTable(data.getUserFirstName(), data.getUserFirstName())) {
 			clientUsersWebPage.clickDeleteClientUser(data.getUserFirstName());
 		}
-		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = clientUsersWebPage.clickAddUserBtn();
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = new AddEditClientUsersDialogWebPage(webdriver);
+		clientUsersWebPage.clickAddUserBtn();
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickClientMonManagReadOnlyChkbox();
 		Assert.assertFalse(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
-		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+		ClientUsersWebPage clientUsersWebPage1 = new ClientUsersWebPage(webdriver);
+		addclientUsersDialogWebPage.
 				createUserWithRequiredFields(data.getUserEmail(), data.getUserName(), data.getUserFirstName());
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName()));
 		clientUsersWebPage1.clickResendButton();
@@ -510,60 +551,68 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testClientUserSalesPersonMonitorManager(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		ClientUsersWebPage clientUsersWebPage = new ClientUsersWebPage(webdriver);
 
-        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink()
-                .makeSearchPanelVisible()
-                .setClientSearchCriteria(data.getClientName())
-                .clickFindButton()
-                .scrollDownToText(data.getClientName())
-                .clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.setClientSearchCriteria(data.getClientName());
+		clientsPage.clickFindButton();
+		clientsPage.scrollDownToText(data.getClientName());
+		clientsPage.clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
 
-        while (clientUsersWebPage.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName())) {
+		while (clientUsersWebPage.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName())) {
 			clientUsersWebPage.clickDeleteClientUser(data.getUserName());
 		}
-		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = new AddEditClientUsersDialogWebPage(webdriver);
+		clientUsersWebPage.clickAddUserBtn();
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickSalesPersonMonManagChkbox();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
-		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
-				createUserWithRequiredFields(data.getUserEmail(), data.getUserName(), data.getUserFirstName());
+		ClientUsersWebPage clientUsersWebPage1 = new ClientUsersWebPage(webdriver);
+		addclientUsersDialogWebPage.createUserWithRequiredFields
+				(data.getUserEmail(), data.getUserName(), data.getUserFirstName());
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName()));
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser(data.getUserName());
 		clientUsersWebPage1.closePage();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testClientUserSalesPerson(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testClientUserSalesPerson(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		ClientUsersWebPage clientUsersWebPage = new ClientUsersWebPage(webdriver);
 
-        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink()
-                .makeSearchPanelVisible()
-                .setClientSearchCriteria(data.getClientName())
-                .clickFindButton()
-                .scrollDownToText(data.getClientName())
-                .clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.setClientSearchCriteria(data.getClientName());
+		clientsPage.clickFindButton();
+		clientsPage.scrollDownToText(data.getClientName());
+		clientsPage.clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
 
-        clientUsersWebPage.verifyClientUserDoesNotExist(data.getUserName(), data.getUserFirstName());
-        AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		clientUsersWebPage.verifyClientUserDoesNotExist(data.getUserName(), data.getUserFirstName());
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = new AddEditClientUsersDialogWebPage(webdriver);
+		clientUsersWebPage.clickAddUserBtn();
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickSalesPersonChkbox();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
-		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+		ClientUsersWebPage clientUsersWebPage1 = new ClientUsersWebPage(webdriver);
+		addclientUsersDialogWebPage.
 				createUserWithRequiredFields(data.getUserEmail(), data.getUserName(), data.getUserFirstName());
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName()));
 		clientUsersWebPage1.clickResendButton();
@@ -571,30 +620,35 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.closePage();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testClientUserClientInspector(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testClientUserClientInspector(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		ClientUsersWebPage clientUsersWebPage = new ClientUsersWebPage(webdriver);
 
-        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink()
-                .makeSearchPanelVisible()
-                .setSearchUserParameter(data.getClientName())
-                .clickFindButton()
-                .scrollDownToText(data.getClientName())
-                .clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.setClientSearchCriteria(data.getClientName());
+		clientsPage.clickFindButton();
+		clientsPage.scrollDownToText(data.getClientName());
+		clientsPage.clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
 
-        clientUsersWebPage.verifyClientUserDoesNotExist(data.getUserName(), data.getUserFirstName());
-        AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+
+		clientUsersWebPage.verifyClientUserDoesNotExist(data.getUserName(), data.getUserFirstName());
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = new AddEditClientUsersDialogWebPage(webdriver);
+		clientUsersWebPage.clickAddUserBtn();
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
 		addclientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
 		addclientUsersDialogWebPage.clickClientInspectChkbox();
 		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
-		ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
+		ClientUsersWebPage clientUsersWebPage1 = new ClientUsersWebPage(webdriver);
+		addclientUsersDialogWebPage.
 				createUserWithRequiredFields(data.getUserEmail(), data.getUserName(), data.getUserFirstName());
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName()));
 		clientUsersWebPage1.clickResendButton();
@@ -602,165 +656,182 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		clientUsersWebPage1.closePage();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testClientUserClientMonitorManager(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testClientUserClientMonitorManager(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		ClientUsersWebPage clientUsersWebPage = new ClientUsersWebPage(webdriver);
 
-        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink()
-                .makeSearchPanelVisible()
-                .setSearchUserParameter(data.getClientName())
-                .clickFindButton()
-                .scrollDownToText(data.getClientName())
-                .clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.setClientSearchCriteria(data.getClientName());
+		clientsPage.clickFindButton();
+		clientsPage.scrollDownToText(data.getClientName());
+		clientsPage.clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
 
-        clientUsersWebPage.verifyClientUserDoesNotExist(data.getUserName(), data.getUserFirstName());
-        AddEditClientUsersDialogWebPage addclientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
-        addclientUsersDialogWebPage.clickButtonOk();
-        Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
-        addclientUsersDialogWebPage.clickButtonOk();
-        Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
-        addclientUsersDialogWebPage.clickClientMonManagChkbox();
-        Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
-        ClientUsersWebPage  clientUsersWebPage1 = addclientUsersDialogWebPage.
-                createUserWithRequiredFields(data.getUserEmail(), data.getUserName(), data.getUserFirstName());
-        Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName()));
-        clientUsersWebPage1.clickResendButton();
-        clientUsersWebPage1.clickDeleteClientUser(data.getUserName());
-        clientUsersWebPage1.closePage();
-    }
+		clientUsersWebPage.verifyClientUserDoesNotExist(data.getUserName(), data.getUserFirstName());
+		AddEditClientUsersDialogWebPage addclientUsersDialogWebPage = new AddEditClientUsersDialogWebPage(webdriver);
+		clientUsersWebPage.clickAddUserBtn();
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAddUserPopUp());
+		addclientUsersDialogWebPage.clickButtonOk();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkAllPossibleValidators());
+		addclientUsersDialogWebPage.clickClientMonManagChkbox();
+		Assert.assertTrue(addclientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
+		ClientUsersWebPage clientUsersWebPage1 = new ClientUsersWebPage(webdriver);
+		addclientUsersDialogWebPage.
+				createUserWithRequiredFields(data.getUserEmail(), data.getUserName(), data.getUserFirstName());
+		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName()));
+		clientUsersWebPage1.clickResendButton();
+		clientUsersWebPage1.clickDeleteClientUser(data.getUserName());
+		clientUsersWebPage1.closePage();
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testClientUserClientAccountant(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		ClientUsersWebPage clientUsersWebPage = new ClientUsersWebPage(webdriver);
 
-        ClientUsersWebPage  clientUsersWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink()
-                .makeSearchPanelVisible()
-                .setSearchUserParameter(data.getClientName())
-                .clickFindButton()
-                .scrollDownToText(data.getClientName())
-                .clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.setClientSearchCriteria(data.getClientName());
+		clientsPage.clickFindButton();
+		clientsPage.scrollDownToText(data.getClientName());
+		clientsPage.clickClientUsersLinkForClientOpenDialogWindow(data.getClientName());
 
-        clientUsersWebPage.verifyClientUserDoesNotExist(data.getUserName(), data.getUserFirstName());
-        AddEditClientUsersDialogWebPage editClientUsersDialogWebPage =  clientUsersWebPage.clickAddUserBtn();
+		clientUsersWebPage.verifyClientUserDoesNotExist(data.getUserName(), data.getUserFirstName());
+		AddEditClientUsersDialogWebPage editClientUsersDialogWebPage = new AddEditClientUsersDialogWebPage(webdriver);
+		clientUsersWebPage.clickAddUserBtn();
 		editClientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(editClientUsersDialogWebPage.checkAddUserPopUp());
 		editClientUsersDialogWebPage.clickButtonOk();
 		Assert.assertTrue(editClientUsersDialogWebPage.checkAllPossibleValidators());
 		editClientUsersDialogWebPage.clickClientAccountChkbox();
 		Assert.assertTrue(editClientUsersDialogWebPage.checkIfOtherCheckBoxesRolesAvailable());
-		ClientUsersWebPage  clientUsersWebPage1 = editClientUsersDialogWebPage.
+		ClientUsersWebPage clientUsersWebPage1 = new ClientUsersWebPage(webdriver);
+		editClientUsersDialogWebPage.
 				createUserWithRequiredFields(data.getUserEmail(), data.getUserName(), data.getUserFirstName());
 		Assert.assertTrue(clientUsersWebPage1.isClientUserPresentInTable(data.getUserName(), data.getUserFirstName()),
-                "The client user is not displayed in the table!");
+				"The client user is not displayed in the table!");
 		clientUsersWebPage1.clickResendButton();
 		clientUsersWebPage1.clickDeleteClientUser(data.getUserName());
 		clientUsersWebPage1.closePage();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyWorkOrderCanBeAssignedToWholesaleClients(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		String randomClientName = data.getRandomName();
 
-        String randomClientName = data.getRandomName();
-        ClientsWebPage clientsWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink();
-        clientsWebPage
-                .clickAddClientButton()
-                .switchToWholesaleCustomer()
-                .setCompanyName(randomClientName)
-                .clickOtherTab()
-                .clickSingleWOtypeCheckbox()
-                .selectRandomSingleWOtype()
-                .clickOKButton()
-                .makeSearchPanelVisible()
-                .selectSearchType(data.getClientType())
-                .setClientSearchCriteria(randomClientName)
-                .clickFindButton();
-        Assert.assertTrue(clientsWebPage.isClientPresentInTable(randomClientName), "The client has not been found");
-        clientsWebPage.verifyOneClientIsFound();
-        Assert.assertTrue(clientsWebPage.isFirstWholeSaleCheckboxChecked(),
-                "The Wholesale checkbox is not checked for the created company");
-        Assert.assertTrue(clientsWebPage.isFirstSingleWOtypeCheckboxChecked(),
-                "The single WO type checkbox is not checked for the created company");
-        clientsWebPage.archiveFirstClient();
-    }
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		NewClientDialogWebPage newClientDialogWebPage = new NewClientDialogWebPage(webdriver);
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.clickAddClientButton();
+		newClientDialogWebPage.switchToWholesaleCustomer();
+		newClientDialogWebPage.setCompanyName(randomClientName);
+		newClientDialogWebPage.clickOtherTab();
+		newClientDialogWebPage.clickSingleWOtypeCheckbox();
+		newClientDialogWebPage.selectRandomSingleWOtype();
+		newClientDialogWebPage.clickOKButton();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.selectSearchType(data.getClientType());
+		clientsPage.setClientSearchCriteria(randomClientName);
+		clientsPage.clickFindButton();
+
+		Assert.assertTrue(clientsPage.isClientPresentInTable(randomClientName), "The client has not been found");
+		clientsPage.verifyOneClientIsFound();
+		Assert.assertTrue(clientsPage.isFirstWholeSaleCheckboxChecked(),
+				"The Wholesale checkbox is not checked for the created company");
+		Assert.assertTrue(clientsPage.isFirstSingleWOtypeCheckboxChecked(),
+				"The single WO type checkbox is not checked for the created company");
+		clientsPage.archiveFirstClient();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyWorkOrderTypeIsNotChangedAfterClickingTheCancelButton(String rowID, String description, JSONObject testData) {
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
 
-        String randomClientName = data.getRandomName();
-        ClientsWebPage clientsWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink();
-        clientsWebPage
-                .clickAddClientButton()
-                .switchToWholesaleCustomer()
-                .setCompanyName(randomClientName)
-                .clickOtherTab()
-                .clickSingleWOtypeCheckbox()
-                .selectRandomSingleWOtype()
-                .clickOKButton()
-                .makeSearchPanelVisible()
-                .selectSearchType(data.getClientType())
-                .setClientSearchCriteria(randomClientName)
-                .clickFindButton();
-        Assert.assertTrue(clientsWebPage.isClientPresentInTable(randomClientName), "The client has not been found");
-        NewClientDialogWebPage newClientDialogPage = clientsWebPage
-                .verifyOneClientIsFound()
-                .clickEditClient(randomClientName)
-                .clickOtherTab();
-        String singleWOtypeBefore = newClientDialogPage.getSingleWOtype();
-        newClientDialogPage
-                .selectRandomSingleWOtype()
-                .clickCancelButton()
-                .clickEditClient(randomClientName)
-                .clickOtherTab();
-        Assert.assertEquals(singleWOtypeBefore, newClientDialogPage.getSingleWOtype(),
-                "The single WO type has been changed after clicking the 'Cancel' button");
-        newClientDialogPage.clickCancelButton();
-        clientsWebPage.archiveFirstClient();
-    }
+		String randomClientName = data.getRandomName();
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyWOtypesOptionIsNotShownForTheSingleWOTypeClient(String rowID, String description, JSONObject testData) {
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		NewClientDialogWebPage newClientDialogWebPage = new NewClientDialogWebPage(webdriver);
 
-        BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.clickAddClientButton();
+		newClientDialogWebPage.switchToWholesaleCustomer();
+		newClientDialogWebPage.setCompanyName(randomClientName);
+		newClientDialogWebPage.clickOtherTab();
+		newClientDialogWebPage.clickSingleWOtypeCheckbox();
+		newClientDialogWebPage.selectRandomSingleWOtype();
+		newClientDialogWebPage.clickOKButton();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.selectSearchType(data.getClientType());
+		clientsPage.setClientSearchCriteria(randomClientName);
+		clientsPage.clickFindButton();
 
-        String randomClientName = data.getRandomName();
-        ClientsWebPage clientsWebPage = backOfficeHeader
-                .clickCompanyLink()
-                .clickClientsLink();
-        clientsWebPage
-                .clickAddClientButton()
-                .switchToWholesaleCustomer()
-                .setCompanyName(randomClientName)
-                .clickOtherTab()
-                .clickSingleWOtypeCheckbox()
-                .selectRandomSingleWOtype()
-                .clickOKButton()
-                .makeSearchPanelVisible()
-                .selectSearchType(data.getClientType())
-                .setClientSearchCriteria(randomClientName)
-                .clickFindButton();
-        Assert.assertTrue(clientsWebPage.isClientPresentInTable(randomClientName), "The client has not been found");
-        clientsWebPage.verifyOneClientIsFound();
-        Assert.assertFalse(clientsWebPage.isWOtypeForFirstClientDisplayed(),
-                "WO Types option is displayed for the single WO type Wholesale client");
-        clientsWebPage.archiveFirstClient();
-    }
+		Assert.assertTrue(clientsPage.isClientPresentInTable(randomClientName), "The client has not been found");
+		NewClientDialogWebPage newClientDialogPage = new NewClientDialogWebPage(webdriver);
+		clientsPage.verifyOneClientIsFound();
+		clientsPage.clickEditClient(randomClientName);
+		newClientDialogPage.clickOtherTab();
+		String singleWOtypeBefore = newClientDialogPage.getSingleWOtype();
+		newClientDialogPage.selectRandomSingleWOtype();
+		newClientDialogPage.clickCancelButton();
+		clientsPage.clickEditClient(randomClientName);
+		newClientDialogPage.clickOtherTab();
+		Assert.assertEquals(singleWOtypeBefore, newClientDialogPage.getSingleWOtype(),
+				"The single WO type has been changed after clicking the 'Cancel' button");
+		newClientDialogPage.clickCancelButton();
+		clientsPage.archiveFirstClient();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyWOtypesOptionIsNotShownForTheSingleWOTypeClient(String rowID, String description, JSONObject testData) {
+
+		BOCompanyClientsData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyClientsData.class);
+		String randomClientName = data.getRandomName();
+
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		ClientsWebPage clientsPage = new ClientsWebPage(webdriver);
+		NewClientDialogWebPage newClientDialogWebPage = new NewClientDialogWebPage(webdriver);
+
+		backOfficeHeader.clickCompanyLink();
+		companyWebPage.clickClientsLink();
+		clientsPage.clickAddClientButton();
+		newClientDialogWebPage.switchToWholesaleCustomer();
+		newClientDialogWebPage.setCompanyName(randomClientName);
+		newClientDialogWebPage.clickOtherTab();
+		newClientDialogWebPage.clickSingleWOtypeCheckbox();
+		newClientDialogWebPage.selectRandomSingleWOtype();
+		newClientDialogWebPage.clickOKButton();
+		clientsPage.makeSearchPanelVisible();
+		clientsPage.selectSearchType(data.getClientType());
+		clientsPage.setClientSearchCriteria(randomClientName);
+		clientsPage.clickFindButton();
+
+		Assert.assertTrue(clientsPage.isClientPresentInTable(randomClientName), "The client has not been found");
+		clientsPage.verifyOneClientIsFound();
+		Assert.assertFalse(clientsPage.isWOtypeForFirstClientDisplayed(),
+				"WO Types option is displayed for the single WO type Wholesale client");
+		clientsPage.archiveFirstClient();
+	}
 }

@@ -15,275 +15,255 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class RepairLocationsWebPage extends WebPageWithPagination {
 
-    @FindBy(xpath = "//span[@id='ctl00_ctl00_Content_Main_cpFilterer']/div")
-    private WebElement searchtab;
+	@FindBy(xpath = "//span[@id='ctl00_ctl00_Content_Main_cpFilterer']/div")
+	private WebElement searchtab;
 
-    @FindBy(xpath = "//a[text()='Search']")
-    private WebElement searchbtn;
+	@FindBy(xpath = "//a[text()='Search']")
+	private WebElement searchbtn;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_gvLocations_ctl00")
-    private WebTable repairlocationstable;
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvLocations_ctl00")
+	private WebTable repairlocationstable;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_gvLocations_ctl00_ctl02_ctl00_lbInsert")
-    private WebElement addrepairlocationbtn;
+	@FindBy(id = "ctl00_ctl00_Content_Main_gvLocations_ctl00_ctl02_ctl00_lbInsert")
+	private WebElement addrepairlocationbtn;
 
-    //Search Panel
+	//Search Panel
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbSearch")
-    private TextField searchlocationfld;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbSearch")
+	private TextField searchlocationfld;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_Input")
-    private ComboBox searchstatuscmb;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_Input")
+	private ComboBox searchstatuscmb;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_DropDown")
-    private DropDown searchstatusdd;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_DropDown")
+	private DropDown searchstatusdd;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")
-    private WebElement findbtn;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_BtnFind")
+	private WebElement findbtn;
 
-    public RepairLocationsWebPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        wait.until(ExpectedConditions.visibilityOf(repairlocationstable.getWrappedElement()));
-    }
+	public RepairLocationsWebPage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+		wait.until(ExpectedConditions.visibilityOf(repairlocationstable.getWrappedElement()));
+	}
 
-    public boolean searchPanelIsExpanded() {
-        return searchtab.getAttribute("class").contains("open");
-    }
+	public boolean searchPanelIsExpanded() {
+		return searchtab.getAttribute("class").contains("open");
+	}
 
-    public RepairLocationsWebPage makeSearchPanelVisible() {
-        if (!searchPanelIsExpanded()) {
-            click(searchbtn);
-        }
-        return this;
-    }
+	public void makeSearchPanelVisible() {
+		if (!searchPanelIsExpanded()) {
+			click(searchbtn);
+		}
+	}
 
-    public RepairLocationsWebPage setSearchLocation(String typelocation) {
-        clearAndType(searchlocationfld, typelocation);
-        return this;
-    }
+	public void setSearchLocation(String typelocation) {
+		clearAndType(searchlocationfld, typelocation);
+	}
 
-    public RepairLocationsWebPage selectSearchStatus(String status) {
-        selectComboboxValue(searchstatuscmb, searchstatusdd, status);
-        return this;
-    }
+	public void selectSearchStatus(String status) {
+		selectComboboxValue(searchstatuscmb, searchstatusdd, status);
+	}
 
-    public RepairLocationsWebPage clickFindButton() {
-        clickAndWait(findbtn);
-        waitABit(3000);
-        return this;
-    }
+	public void clickFindButton() {
+		clickAndWait(findbtn);
+		waitABit(3000);
+	}
 
-    public NewRepairLocationDialogWebPage clickAddRepairLocationButton() {
-        clickAndWait(addrepairlocationbtn);
-        return PageFactory.initElements(
-                driver, NewRepairLocationDialogWebPage.class);
-    }
+	public void clickAddRepairLocationButton() {
+		clickAndWait(addrepairlocationbtn);
+	}
 
-    public RepairLocationsWebPage addNewRepairLocation(String repairlocationname, String approxrepairtime, String workingday, String starttime, String finishtime, boolean phaseenforcement) {
-        NewRepairLocationDialogWebPage newrepairlocdialog = clickAddRepairLocationButton();
-        newrepairlocdialog.setNewRepairLocationName(repairlocationname);
-        newrepairlocdialog.setNewRepairLocationApproxRepairTime(approxrepairtime);
-        newrepairlocdialog.setNewRepairLocationWorkingHours(workingday, starttime, finishtime);
-        if (phaseenforcement)
-            newrepairlocdialog.selectPhaseEnforcementOption();
-        newrepairlocdialog.clickOKButton();
-        return this;
-    }
+	public void addNewRepairLocation(String repairlocationname, String approxrepairtime, String workingday, String starttime, String finishtime, boolean phaseenforcement) {
+		NewRepairLocationDialogWebPage newrepairlocdialog = new NewRepairLocationDialogWebPage(this.driver);
+		clickAddRepairLocationButton();
+		newrepairlocdialog.setNewRepairLocationName(repairlocationname);
+		newrepairlocdialog.setNewRepairLocationApproxRepairTime(approxrepairtime);
+		newrepairlocdialog.setNewRepairLocationWorkingHours(workingday, starttime, finishtime);
+		if (phaseenforcement)
+			newrepairlocdialog.selectPhaseEnforcementOption();
+		newrepairlocdialog.clickOKButton();
+	}
 
-    public RepairLocationsWebPage addPhaseForRepairLocation(String repairlocationname, String phasename, String phasetype, String transitiontime, String repairtime, boolean trackindividualstatuses) {
-        final String mainWindowHandle = driver.getWindowHandle();
-        RepairLocationPhasesTabWebPage repairlocationphasestab = clickRepairLocationPhasesLink(repairlocationname);
-        repairlocationphasestab.clickAddPhasesButton();
-        repairlocationphasestab.setNewRepairLocationPhaseName(phasename);
-        repairlocationphasestab.selectNewRepairLocationPhaseType(phasetype);
-        repairlocationphasestab.setNewRepairLocationPhaseApproxTransitionTime(transitiontime);
-        repairlocationphasestab.setNewRepairLocationPhaseApproxRepairTime(repairtime);
+	public void addPhaseForRepairLocation(String repairlocationname, String phasename, String phasetype, String transitiontime, String repairtime, boolean trackindividualstatuses) {
+		final String mainWindowHandle = driver.getWindowHandle();
+		RepairLocationPhasesTabWebPage repairlocationphasestab = new RepairLocationPhasesTabWebPage(this.driver);
+		clickRepairLocationPhasesLink(repairlocationname);
+		repairlocationphasestab.clickAddPhasesButton();
+		repairlocationphasestab.setNewRepairLocationPhaseName(phasename);
+		repairlocationphasestab.selectNewRepairLocationPhaseType(phasetype);
+		repairlocationphasestab.setNewRepairLocationPhaseApproxTransitionTime(transitiontime);
+		repairlocationphasestab.setNewRepairLocationPhaseApproxRepairTime(repairtime);
 
-        if (trackindividualstatuses)
-            repairlocationphasestab.selectDoNotTrackIndividualServiceStatuses();
-        repairlocationphasestab.clickNewRepairLocationPhaseOKButton();
-        closeNewTab(mainWindowHandle);
-        return this;
-    }
+		if (trackindividualstatuses)
+			repairlocationphasestab.selectDoNotTrackIndividualServiceStatuses();
+		repairlocationphasestab.clickNewRepairLocationPhaseOKButton();
+		closeNewTab(mainWindowHandle);
+	}
 
-    public RepairLocationsWebPage assignServiceForRepairLocation(String repairlocationname, String WOType, String servicename, String phase) {
-        final String mainWindowHandle = driver.getWindowHandle();
-        RepairLocationPhaseServicesTabWebPage repairlocationphaseservicestab = clickRepairLocationServicesLink(repairlocationname);
+	public void assignServiceForRepairLocation(String repairlocationname, String WOType, String servicename, String phase) {
+		final String mainWindowHandle = driver.getWindowHandle();
+		RepairLocationPhaseServicesTabWebPage repairlocationphaseservicestab = new RepairLocationPhaseServicesTabWebPage(this.driver);
+		clickRepairLocationServicesLink(repairlocationname);
 //        repairlocationphaseservicestab.selectLocation(repairlocationname);
-        repairlocationphaseservicestab.selectWOType(WOType);
-        repairlocationphaseservicestab.selectPhase(phase);
-        //todo here fails
-        repairlocationphaseservicestab.selectPhaseServiceInTable(servicename);
-        repairlocationphaseservicestab.clickAssignToSelectedservicesButton();
-        closeNewTab(mainWindowHandle);
-        return this;
-    }
+		repairlocationphaseservicestab.selectWOType(WOType);
+		repairlocationphaseservicestab.selectPhase(phase);
+		//todo here fails
+		repairlocationphaseservicestab.selectPhaseServiceInTable(servicename);
+		repairlocationphaseservicestab.clickAssignToSelectedservicesButton();
+		closeNewTab(mainWindowHandle);
+	}
 
-    public RepairLocationPhasesTabWebPage clickRepairLocationPhasesLink(String repairlocationname) {
-        WebElement row = getTableRowWithRepairLocation(repairlocationname);
-        if (row != null) {
-            click(row.findElement(By.xpath(".//a[text()='Phases']")));
-            waitForNewTab();
-            String mainWindowHandle = driver.getWindowHandle();
-            for (String activeHandle : driver.getWindowHandles()) {
-                if (!activeHandle.equals(mainWindowHandle)) {
-                    driver.switchTo().window(activeHandle);
-                }
-            }
-        }
-        return PageFactory.initElements(
-                driver, RepairLocationPhasesTabWebPage.class);
-    }
+	public void clickRepairLocationPhasesLink(String repairlocationname) {
+		WebElement row = getTableRowWithRepairLocation(repairlocationname);
+		if (row != null) {
+			click(row.findElement(By.xpath(".//a[text()='Phases']")));
+			waitForNewTab();
+			String mainWindowHandle = driver.getWindowHandle();
+			for (String activeHandle : driver.getWindowHandles()) {
+				if (!activeHandle.equals(mainWindowHandle)) {
+					driver.switchTo().window(activeHandle);
+				}
+			}
+		}
+	}
 
-    public RepairLocationPhaseServicesTabWebPage clickRepairLocationServicesLink(String repairlocationname) {
-        WebElement row = getTableRowWithRepairLocation(repairlocationname);
-        if (row != null) {
-            click(row.findElement(By.xpath(".//a[text()='Services']")));
-            waitForNewTab();
-            String mainWindowHandle = driver.getWindowHandle();
-            for (String activeHandle : driver.getWindowHandles()) {
-                if (!activeHandle.equals(mainWindowHandle)) {
-                    driver.switchTo().window(activeHandle);
-                }
-            }
-        }
-        return PageFactory.initElements(
-                driver, RepairLocationPhaseServicesTabWebPage.class);
-    }
+	public void clickRepairLocationServicesLink(String repairlocationname) {
+		WebElement row = getTableRowWithRepairLocation(repairlocationname);
+		if (row != null) {
+			click(row.findElement(By.xpath(".//a[text()='Services']")));
+			waitForNewTab();
+			String mainWindowHandle = driver.getWindowHandle();
+			for (String activeHandle : driver.getWindowHandles()) {
+				if (!activeHandle.equals(mainWindowHandle)) {
+					driver.switchTo().window(activeHandle);
+				}
+			}
+		}
+	}
 
-    public RepairLocationDepartmentsTabWebPage clickRepairLocationDepartmentsLink(String repairlocationname) {
-        WebElement row = getTableRowWithRepairLocation(repairlocationname);
-        if (row != null) {
-            click(row.findElement(By.xpath(".//a[text()='Departments']")));
-            waitForNewTab();
-            String mainWindowHandle = driver.getWindowHandle();
-            for (String activeHandle : driver.getWindowHandles()) {
-                if (!activeHandle.equals(mainWindowHandle)) {
-                    driver.switchTo().window(activeHandle);
-                }
-            }
-        }
-        return PageFactory.initElements(
-                driver, RepairLocationDepartmentsTabWebPage.class);
-    }
+	public void clickRepairLocationDepartmentsLink(String repairlocationname) {
+		WebElement row = getTableRowWithRepairLocation(repairlocationname);
+		if (row != null) {
+			click(row.findElement(By.xpath(".//a[text()='Departments']")));
+			waitForNewTab();
+			String mainWindowHandle = driver.getWindowHandle();
+			for (String activeHandle : driver.getWindowHandles()) {
+				if (!activeHandle.equals(mainWindowHandle)) {
+					driver.switchTo().window(activeHandle);
+				}
+			}
+		}
+	}
 
-    public RepairLocationClientsTabWebPage clickRepairLocationClientsLink(String repairlocationname) {
-        WebElement row = getTableRowWithRepairLocation(repairlocationname);
-        if (row != null) {
-            click(row.findElement(By.xpath(".//a[text()='Clients']")));
-            waitForNewTab();
-            String mainWindowHandle = driver.getWindowHandle();
-            for (String activeHandle : driver.getWindowHandles()) {
-                if (!activeHandle.equals(mainWindowHandle)) {
-                    driver.switchTo().window(activeHandle);
-                }
-            }
-        }
-        return PageFactory.initElements(
-                driver, RepairLocationClientsTabWebPage.class);
-    }
+	public void clickRepairLocationClientsLink(String repairlocationname) {
+		WebElement row = getTableRowWithRepairLocation(repairlocationname);
+		if (row != null) {
+			click(row.findElement(By.xpath(".//a[text()='Clients']")));
+			waitForNewTab();
+			String mainWindowHandle = driver.getWindowHandle();
+			for (String activeHandle : driver.getWindowHandles()) {
+				if (!activeHandle.equals(mainWindowHandle)) {
+					driver.switchTo().window(activeHandle);
+				}
+			}
+		}
+	}
 
-    public RepairLocationManagersTabWebPage clickRepairLocationManagersLink(String repairlocationname) {
-        WebElement row = getTableRowWithRepairLocation(repairlocationname);
-        if (row != null) {
-            click(row.findElement(By.xpath(".//a[text()='Managers']")));
-            waitForNewTab();
-            String mainWindowHandle = driver.getWindowHandle();
-            for (String activeHandle : driver.getWindowHandles()) {
-                if (!activeHandle.equals(mainWindowHandle)) {
-                    driver.switchTo().window(activeHandle);
-                }
-            }
-        }
-        return PageFactory.initElements(
-                driver, RepairLocationManagersTabWebPage.class);
-    }
+	public void clickRepairLocationManagersLink(String repairlocationname) {
+		WebElement row = getTableRowWithRepairLocation(repairlocationname);
+		if (row != null) {
+			click(row.findElement(By.xpath(".//a[text()='Managers']")));
+			waitForNewTab();
+			String mainWindowHandle = driver.getWindowHandle();
+			for (String activeHandle : driver.getWindowHandles()) {
+				if (!activeHandle.equals(mainWindowHandle)) {
+					driver.switchTo().window(activeHandle);
+				}
+			}
+		}
+	}
 
-    public RepairLocationUserSettingsTabWebPage clickRepairLocationUserSettingsLink(String repairlocationname) {
-        WebElement row = getTableRowWithRepairLocation(repairlocationname);
-        if (row != null) {
-            click(row.findElement(By.xpath(".//a[text()='User Settings']")));
-            waitForNewTab();
-            String mainWindowHandle = driver.getWindowHandle();
-            for (String activeHandle : driver.getWindowHandles()) {
-                if (!activeHandle.equals(mainWindowHandle)) {
-                    driver.switchTo().window(activeHandle);
-                }
-            }
-        }
-        return PageFactory.initElements(
-                driver, RepairLocationUserSettingsTabWebPage.class);
-    }
+	public void clickRepairLocationUserSettingsLink(String repairlocationname) {
+		WebElement row = getTableRowWithRepairLocation(repairlocationname);
+		if (row != null) {
+			click(row.findElement(By.xpath(".//a[text()='User Settings']")));
+			waitForNewTab();
+			String mainWindowHandle = driver.getWindowHandle();
+			for (String activeHandle : driver.getWindowHandles()) {
+				if (!activeHandle.equals(mainWindowHandle)) {
+					driver.switchTo().window(activeHandle);
+				}
+			}
+		}
+	}
 
-    public NewRepairLocationDialogWebPage clickEditRepairLocation(String repairlocation) {
-        WebElement row = getTableRowWithRepairLocation(repairlocation);
-        if (row != null) {
-            clickEditTableRow(row);
-        } else {
-            Assert.assertTrue(false, "Can't find " + repairlocation + " repair location");
-        }
-        return PageFactory.initElements(
-                driver, NewRepairLocationDialogWebPage.class);
-    }
+	public void clickEditRepairLocation(String repairlocation) {
+		WebElement row = getTableRowWithRepairLocation(repairlocation);
+		if (row != null) {
+			clickEditTableRow(row);
+		} else {
+			Assert.assertTrue(false, "Can't find " + repairlocation + " repair location");
+		}
+	}
 
-    public void deleteRepairLocation(String repairlocation) {
-        WebElement row = getTableRowWithRepairLocation(repairlocation);
-        if (row != null) {
-            deleteTableRow(row);
-        } else {
-            Assert.assertTrue(false, "Can't find " + repairlocation + " repair location");
-        }
-    }
+	public void deleteRepairLocation(String repairlocation) {
+		WebElement row = getTableRowWithRepairLocation(repairlocation);
+		if (row != null) {
+			deleteTableRow(row);
+		} else {
+			Assert.assertTrue(false, "Can't find " + repairlocation + " repair location");
+		}
+	}
 
-    public void deleteRepairLocationIfExists(String repairlocation) {
-        if (repairLocationExists(repairlocation)) {
-            deleteRepairLocation(repairlocation);
-        }
-    }
+	public void deleteRepairLocationIfExists(String repairlocation) {
+		if (repairLocationExists(repairlocation)) {
+			deleteRepairLocation(repairlocation);
+		}
+	}
 
-    public void deleteRepairLocationAndCancelDeleting(String repairlocation) {
-        WebElement row = getTableRowWithRepairLocation(repairlocation);
-        if (row != null) {
-            cancelDeletingTableRow(row);
-        } else {
-            Assert.fail("Can't find " + repairlocation + " repair location");
-        }
-    }
+	public void deleteRepairLocationAndCancelDeleting(String repairlocation) {
+		WebElement row = getTableRowWithRepairLocation(repairlocation);
+		if (row != null) {
+			cancelDeletingTableRow(row);
+		} else {
+			Assert.fail("Can't find " + repairlocation + " repair location");
+		}
+	}
 
-    public int getRepairLocationsTableRowCount() {
-        return repairlocationstable.getTableRowCount();
-    }
+	public int getRepairLocationsTableRowCount() {
+		return repairlocationstable.getTableRowCount();
+	}
 
-    public List<WebElement> getRepairLocationsTableRows() {
-        return repairlocationstable.getTableRows();
-    }
+	public List<WebElement> getRepairLocationsTableRows() {
+		return repairlocationstable.getTableRows();
+	}
 
-    public WebElement getTableRowWithRepairLocation(String repairlocation) {
-        List<WebElement> rows = getRepairLocationsTableRows();
-        for (WebElement row : rows) {
-            if (row.findElement(By.xpath(".//td[9]")).getText().equals(repairlocation)) {
-                return row;
-            }
-        }
-        return null;
-    }
+	public WebElement getTableRowWithRepairLocation(String repairlocation) {
+		List<WebElement> rows = getRepairLocationsTableRows();
+		for (WebElement row : rows) {
+			if (row.findElement(By.xpath(".//td[9]")).getText().equals(repairlocation)) {
+				return row;
+			}
+		}
+		return null;
+	}
 
-    public void verifyRepairLocationsTableColumnsAreVisible() {
-        Assert.assertTrue(repairlocationstable.tableColumnExists("Phases"));
-        Assert.assertTrue(repairlocationstable.tableColumnExists("Services"));
-        Assert.assertTrue(repairlocationstable.tableColumnExists("Managers"));
-        Assert.assertTrue(repairlocationstable.tableColumnExists("User Settings"));
-        Assert.assertTrue(repairlocationstable.tableColumnExists("Location"));
-        Assert.assertTrue(repairlocationstable.tableColumnExists("Status"));
-    }
+	public void verifyRepairLocationsTableColumnsAreVisible() {
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Phases"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Services"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Managers"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("User Settings"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Location"));
+		Assert.assertTrue(repairlocationstable.tableColumnExists("Status"));
+	}
 
-    public boolean repairLocationExists(String repairlocation) {
-        try {
-            return repairlocationstable.getWrappedElement()
-                    .findElements(By.xpath(".//tr/td[text()='" + repairlocation + "']")).size() > 0;
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
+	public boolean repairLocationExists(String repairlocation) {
+		try {
+			return repairlocationstable.getWrappedElement()
+					.findElements(By.xpath(".//tr/td[text()='" + repairlocation + "']")).size() > 0;
+		} catch (Exception ignored) {
+			return false;
+		}
+	}
 }

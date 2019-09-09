@@ -97,32 +97,32 @@ public class ClientsWebPage extends WebPageWithPagination {
 
 	@FindBy(xpath = "//label[text()='Contact Verification Disabled']")
 	private WebElement contverifdisablechkbox;
-	
+
 	@FindBy(className = "updateProcess")
 	private WebElement updateProcess;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbSearch")
-    private WebElement searchEmployeeFld;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_tbSearch")
+	private WebElement searchEmployeeFld;
 
-    @FindBy(xpath = "(//td/span/input[contains(@id, 'ctl00_ctl00_Content_Main_gv')])[1]")
-    private WebElement wholesaleCheckbox;
+	@FindBy(xpath = "(//td/span/input[contains(@id, 'ctl00_ctl00_Content_Main_gv')])[1]")
+	private WebElement wholesaleCheckbox;
 
-    @FindBy(xpath = "(//td/span/input[contains(@id, 'ctl00_ctl00_Content_Main_gv')])[2]")
-    private WebElement singleWOtypeCheckbox;
+	@FindBy(xpath = "(//td/span/input[contains(@id, 'ctl00_ctl00_Content_Main_gv')])[2]")
+	private WebElement singleWOtypeCheckbox;
 
-    @FindBy(linkText = "Select")
-    private WebElement selectButton;
+	@FindBy(linkText = "Select")
+	private WebElement selectButton;
 
-    @FindBy(xpath = "//div[@class='rmSlide' and contains(@style, 'block')]")
-    private WebElement slideDisplayed;
+	@FindBy(xpath = "//div[@class='rmSlide' and contains(@style, 'block')]")
+	private WebElement slideDisplayed;
 
-    @FindBy(className = "rmBottomArrow")
-    private WebElement bottomArrow;
+	@FindBy(className = "rmBottomArrow")
+	private WebElement bottomArrow;
 
-    @FindBy(xpath = "//span[text()='WO Types']")
-    private WebElement woTypesOption;
+	@FindBy(xpath = "//span[text()='WO Types']")
+	private WebElement woTypesOption;
 
-    public ClientsWebPage(WebDriver driver) {
+	public ClientsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		wait.until(ExpectedConditions.visibilityOf(clientstable.getWrappedElement()));
@@ -133,23 +133,21 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return searchtab.getAttribute("class").contains("open");
 	}
 
-	public ClientsWebPage makeSearchPanelVisible() {
+	public void makeSearchPanelVisible() {
 		if (!searchPanelIsExpanded()) {
 			click(searchbtn);
 		}
-        return this;
 	}
 
 	public boolean isFirstWholeSaleCheckboxChecked() {
-        return isCheckboxChecked(wholesaleCheckbox);
-    }
+		return isCheckboxChecked(wholesaleCheckbox);
+	}
 
 	public boolean isFirstSingleWOtypeCheckboxChecked() {
-        return isCheckboxChecked(singleWOtypeCheckbox);
-    }
+		return isCheckboxChecked(singleWOtypeCheckbox);
+	}
 
-	public ClientsWebPage verifyEmployeesTableColumnsAreVisible() {
-
+	public void verifyEmployeesTableColumnsAreVisible() {
 		Assert.assertTrue(clientstable.tableColumnExists("Client"));
 		Assert.assertTrue(clientstable.tableColumnExists("Address"));
 		Assert.assertTrue(clientstable.tableColumnExists("Email"));
@@ -159,7 +157,6 @@ public class ClientsWebPage extends WebPageWithPagination {
 		Assert.assertTrue(clientstable.tableColumnExists("PO# req."));
 		Assert.assertTrue(clientstable.tableColumnExists("Commission"));
 		Assert.assertTrue(clientstable.tableColumnExists("Action"));
-		return this;
 	}
 
 	public void clickArchivedTab() {
@@ -170,34 +167,32 @@ public class ClientsWebPage extends WebPageWithPagination {
 		clickAndWait(activetab);
 	}
 
-	public ClientsWebPage clickFindButton() {
+	public void clickFindButton() {
 		clickAndWait(wait.until(ExpectedConditions.elementToBeClickable(findbtn)));
-        waitForLoading();
-		return this;
+		waitForLoading();
 	}
 
-    public void verifyEmployeeIsActive(String clientName) {
-        List<WebElement> activeClients = clientstable.getWrappedElement()
-                .findElements(By.xpath(".//tr/td[text()='" + clientName + "']"));
-        try {
-            if (activeClients.isEmpty()) {
-                clickArchivedTab();
-                unarchiveClient(clientName);
-                clickActiveTab();
-            }
-        } catch (Exception e) {
-            System.err.println("The client is not found: " + e);
-        }
-    }
+	public void verifyEmployeeIsActive(String clientName) {
+		List<WebElement> activeClients = clientstable.getWrappedElement()
+				.findElements(By.xpath(".//tr/td[text()='" + clientName + "']"));
+		try {
+			if (activeClients.isEmpty()) {
+				clickArchivedTab();
+				unarchiveClient(clientName);
+				clickActiveTab();
+			}
+		} catch (Exception e) {
+			System.err.println("The client is not found: " + e);
+		}
+	}
 
-    private void unarchiveClient(String clientName) {
-        WebElement row = getTableRowWithArchivedClient(clientName);
-        if (row != null) {
-            restoreTableRow(row);
-        }
-        else
-            Assert.fail("Can't find " + clientName + " employee");
-    }
+	private void unarchiveClient(String clientName) {
+		WebElement row = getTableRowWithArchivedClient(clientName);
+		if (row != null) {
+			restoreTableRow(row);
+		} else
+			Assert.fail("Can't find " + clientName + " employee");
+	}
 
 	public boolean isContactVerifDisableChkboxChecked() {
 		return isCheckboxChecked(contverifdisablechkbox);
@@ -228,16 +223,14 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return clientsarchivedtable.getTableRows();
 	}
 
-	public ClientsWebPage setClientSearchCriteria(String name) {
+	public void setClientSearchCriteria(String name) {
 		clearAndType(searchclientfld, name);
-        return this;
-    }
+	}
 
-	public ClientsWebPage searchClientByName(String companyname) {
+	public void searchClientByName(String companyname) {
 		makeSearchPanelVisible();
 		setClientSearchCriteria(companyname);
 		clickFindButton();
-		return this;
 	}
 
 	public void deleteUserViaSearch(String clientname) {
@@ -245,35 +238,32 @@ public class ClientsWebPage extends WebPageWithPagination {
 		setClientSearchCriteria(clientname);
 		clickFindButton();
 		waitForLoading();
-        archiveFirstClient();
+		archiveFirstClient();
 	}
 
-    public ClientsWebPage archiveFirstClient() {
-        wait.until(ExpectedConditions.elementToBeClickable(archiveButton)).click();
-        wait.until(ExpectedConditions.alertIsPresent());
-        Alert alert = driver.switchTo().alert();
-        Assert.assertEquals(alert.getText(), "Are you sure you want archive client?");
-        alert.accept();
-        waitForLoading();
-        return this;
-    }
+	public void archiveFirstClient() {
+		wait.until(ExpectedConditions.elementToBeClickable(archiveButton)).click();
+		wait.until(ExpectedConditions.alertIsPresent());
+		Alert alert = driver.switchTo().alert();
+		Assert.assertEquals(alert.getText(), "Are you sure you want archive client?");
+		alert.accept();
+		waitForLoading();
+	}
 
-    public NewClientDialogWebPage clickAddClientButton() {
+	public void clickAddClientButton() {
 		click(addclientbtn);
-		return PageFactory.initElements(driver, NewClientDialogWebPage.class);
 	}
 
-	public ClientsWebPage selectSearchType(String _type) {
+	public void selectSearchType(String _type) {
 		selectComboboxValue(searchtypecbx, searchtypedd, _type);
-		return this;
 	}
 
 	public void deleteClient(String clientname) {
-        driver.findElement(By.xpath("//td[text()='"+clientname+"']")).findElement(By.xpath(".."))
-                .findElements(By.tagName("td")).get(1).findElement(By.tagName("input")).click();
+		driver.findElement(By.xpath("//td[text()='" + clientname + "']")).findElement(By.xpath(".."))
+				.findElements(By.tagName("td")).get(1).findElement(By.tagName("input")).click();
 
-        driver.switchTo().alert().accept();
-        waitForLoading();
+		driver.switchTo().alert().accept();
+		waitForLoading();
 	}
 
 	public void restoreClient(String clientname) {
@@ -283,9 +273,9 @@ public class ClientsWebPage extends WebPageWithPagination {
 			wait.until(ExpectedConditions.alertIsPresent());
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
-            waitForLoading();
-        } else {
-            Assert.fail("Can't find client: " + clientname);
+			waitForLoading();
+		} else {
+			Assert.fail("Can't find client: " + clientname);
 		}
 	}
 
@@ -303,62 +293,62 @@ public class ClientsWebPage extends WebPageWithPagination {
 			for (WebElement note : notes) {
 				if (note.isDisplayed()) {
 					notetxt = note
-                            .getText()
-                            .replaceAll("\\u00A0", "")
-                            .trim();
+							.getText()
+							.replaceAll("\\u00A0", "")
+							.trim();
 					break;
 				}
 			}
 			action.release().build().perform();
 		} else {
-            Assert.fail("Can't find client: " + clientname);
+			Assert.fail("Can't find client: " + clientname);
 		}
 		return notetxt;
 	}
 
 	private WebElement getTableRowWithClient(String clientname) {
 		List<WebElement> clientsTableRows = getClientsTableRows();
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[text()='Client']")));
-        try {
-            return clientsTableRows
-                    .stream()
-                    .filter(e -> e.findElement(By
-                            .xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
-                            .getText()
-                            .equals(clientname))
-                    .findFirst()
-                    .get();
-        } catch (NoSuchElementException ignored) {}
-	    return null;
-    }
-
-	private WebElement getTableRowWithArchivedClient(String clientname) {
-        try {
-            List<WebElement> archivedclientstablerows = getArchivedClientsTableRows();
-            for (WebElement archivedclientstablerow : archivedclientstablerows) {
-                if (archivedclientstablerow.findElement(By.xpath(".//td[2]")).getText().equals(clientname)) {
-                    return archivedclientstablerow;
-                }
-            }
-        } catch (NoSuchElementException e) {
-            System.err.println("The archived client is not displayed in the table!\n" + e);
-        }
-        return null;
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("td")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[text()='Client']")));
+		try {
+			return clientsTableRows
+					.stream()
+					.filter(e -> e.findElement(By
+							.xpath(".//td[" + clientstable.getTableColumnIndex("Client") + "]"))
+							.getText()
+							.equals(clientname))
+					.findFirst()
+					.get();
+		} catch (NoSuchElementException ignored) {
+		}
+		return null;
 	}
 
-	public NewClientDialogWebPage clickEditClient(String clientname) {
+	private WebElement getTableRowWithArchivedClient(String clientname) {
+		try {
+			List<WebElement> archivedclientstablerows = getArchivedClientsTableRows();
+			for (WebElement archivedclientstablerow : archivedclientstablerows) {
+				if (archivedclientstablerow.findElement(By.xpath(".//td[2]")).getText().equals(clientname)) {
+					return archivedclientstablerow;
+				}
+			}
+		} catch (NoSuchElementException e) {
+			System.err.println("The archived client is not displayed in the table!\n" + e);
+		}
+		return null;
+	}
+
+	public void clickEditClient(String clientname) {
 		WebElement clientstablerow = getTableRowWithClient(clientname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();
 		} else {
-            Assert.fail("Can't find client: " + clientname);
+			Assert.fail("Can't find client: " + clientname);
 		}
-		return PageFactory.initElements(driver, NewClientDialogWebPage.class);
 	}
 
 	// method for click on client users link and open new dialog window
-	public ClientUsersWebPage clickClientUsersLinkForClientOpenDialogWindow(String clientname) {
+	public void clickClientUsersLinkForClientOpenDialogWindow(String clientname) {
 		clickInspectionSelectExpandableMenu(clientname, "Client Users");
 		waitForNewTab();
 		String mainWindowHandle = driver.getWindowHandle();
@@ -367,10 +357,9 @@ public class ClientsWebPage extends WebPageWithPagination {
 				driver.switchTo().window(activeHandle);
 			}
 		}
-		return PageFactory.initElements(driver, ClientUsersWebPage.class);
 	}
-	
-	
+
+
 	private WebElement clickSelectButtonForClient(String clientname) {
 		WebElement row = getTableRowWithClient(clientname);
 		if (row != null) {
@@ -382,48 +371,48 @@ public class ClientsWebPage extends WebPageWithPagination {
 		return row;
 	}
 
-    public boolean isWOtypeForFirstClientDisplayed() {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(selectButton).click().build().perform();
+	public boolean isWOtypeForFirstClientDisplayed() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(selectButton).click().build().perform();
 
-        try {
-            wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
-            if (woTypesOption.isDisplayed()) {
-                return true;
-            }
-        } catch (Exception e) {
-            try {
-                actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
-                wait.until(ExpectedConditions.visibilityOf(woTypesOption));
-                return true;
-            } catch (Exception ex) {
-                return false;
-            }
-        }
-        return false;
-    }
+		try {
+			wait.until(ExpectedConditions.visibilityOf(slideDisplayed));
+			if (woTypesOption.isDisplayed()) {
+				return true;
+			}
+		} catch (Exception e) {
+			try {
+				actions.moveToElement(selectButton).moveToElement(bottomArrow).pause(Duration.ofMillis(1000)).build().perform();
+				wait.until(ExpectedConditions.visibilityOf(woTypesOption));
+				return true;
+			} catch (Exception ex) {
+				return false;
+			}
+		}
+		return false;
+	}
 
 	public void clickInspectionSelectExpandableMenu(String clientName, String menuItem) {
 		WebElement row = clickSelectButtonForClient(clientName);
 		if (row != null) {
-		    try {
-                wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
+			try {
+				wait.until(ExpectedConditions.visibilityOf(row.findElement(By.xpath(".//div[@class='rmSlide']"))));
 
-                Actions act = new Actions(driver);
-                WebElement element = getTableRowWithClient(clientName)
-                        .findElement(By.xpath(".//span[text()='" + menuItem + "']"));
-                wait.until(ExpectedConditions.elementToBeClickable(element));
-                act.click(element).perform();
-            } catch (TimeoutException e) {
+				Actions act = new Actions(driver);
+				WebElement element = getTableRowWithClient(clientName)
+						.findElement(By.xpath(".//span[text()='" + menuItem + "']"));
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				act.click(element).perform();
+			} catch (TimeoutException e) {
 
-            }
+			}
 		} else {
-            Assert.fail("Can't find " + clientName + " client");
+			Assert.fail("Can't find " + clientName + " client");
 		}
 	}
 
 	// method for click on contacts link and open new dialog window
-	public ClientContactsWebPage clickContactsLinkForClientOpenDialogWindow(String clientname) {
+	public void clickContactsLinkForClientOpenDialogWindow(String clientname) {
 
 		clickInspectionSelectExpandableMenu(clientname, "Contacts");
 		waitForNewTab();
@@ -433,22 +422,21 @@ public class ClientsWebPage extends WebPageWithPagination {
 				driver.switchTo().window(activeHandle);
 			}
 		}
-		return PageFactory.initElements(driver, ClientContactsWebPage.class);
 	}
 
 	public boolean isClientPresentInTable(String clientname) {
-        List<WebElement> elements = null;
+		List<WebElement> elements = null;
 		try {
-            elements = clientstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + clientname + "']"));
-            if (!elements.isEmpty()) {
-                return true;
-            }
-        } catch (StaleElementReferenceException e) {
-		    waitABit(3000);
-            if (elements != null && !elements.isEmpty()) {
-                return true;
-            }
-        }
+			elements = clientstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + clientname + "']"));
+			if (!elements.isEmpty()) {
+				return true;
+			}
+		} catch (StaleElementReferenceException e) {
+			waitABit(3000);
+			if (elements != null && !elements.isEmpty()) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -477,7 +465,7 @@ public class ClientsWebPage extends WebPageWithPagination {
 		waitABit(300);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[text()='IsWholeSaler']"))).click();
 		click(importclientsbtn);
-	    waitABit(1000);
+		waitABit(1000);
 		wait.until(ExpectedConditions
 				.visibilityOf(driver.findElement(By.xpath("//span[text()='Imported: 1 Not imported: 0']"))));
 		click(toclientsbtn);
@@ -540,44 +528,40 @@ public class ClientsWebPage extends WebPageWithPagination {
 		driver.switchTo().window(mainWindowHandle);
 	}
 
-	public ClientsWebPage scrollDownToText(String text) {
-		WebElement element = driver.findElement(By.xpath("//td[text()='"+text+"']"));
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView();", element);
+	public void scrollDownToText(String text) {
+		WebElement element = driver.findElement(By.xpath("//td[text()='" + text + "']"));
+		((JavascriptExecutor) driver).executeScript(
+				"arguments[0].scrollIntoView();", element);
 		waitABit(500);
-        return PageFactory.initElements(
-                driver, ClientsWebPage.class);
 	}
 
-    public void verifyClientIsPresentInActiveTab(String companyname) {
-        if (!isClientPresentInTable(companyname)) {
-            clickArchivedTab();
-            searchClientByName(companyname);
-            Assert.assertTrue(clientExistsInArchivedTable(companyname));
-            restoreClient(companyname);
-            clickActiveTab();
-        }
-    }
+	public void verifyClientIsPresentInActiveTab(String companyname) {
+		if (!isClientPresentInTable(companyname)) {
+			clickArchivedTab();
+			searchClientByName(companyname);
+			Assert.assertTrue(clientExistsInArchivedTable(companyname));
+			restoreClient(companyname);
+			clickActiveTab();
+		}
+	}
 
-    public ClientsWebPage verifyOneClientIsFound() {
-        Assert.assertEquals(1, getClientsTableRowsCount(), "The client is not unique");
-        return this;
-    }
+	public void verifyOneClientIsFound() {
+		Assert.assertEquals(1, getClientsTableRowsCount(), "The client is not unique");
+	}
 
-    public void verifyClientIsNotPresentInActiveTab(String retailcompanyname, String retailcompanynameed) {
-        while (isClientPresentInTable(retailcompanyname)) {
-            deleteClient(retailcompanyname);
-        }
+	public void verifyClientIsNotPresentInActiveTab(String retailcompanyname, String retailcompanynameed) {
+		while (isClientPresentInTable(retailcompanyname)) {
+			deleteClient(retailcompanyname);
+		}
 
-        while (isClientPresentInTable(retailcompanynameed)) {
-            deleteClient(retailcompanynameed);
-        }
-    }
+		while (isClientPresentInTable(retailcompanynameed)) {
+			deleteClient(retailcompanynameed);
+		}
+	}
 
-    public ClientsWebPage setSearchUserParameter(String clientName) {
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch"))));
-        driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch")).clear();
-        driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch")).sendKeys(clientName);
-        return this;
-    }
+	public void setSearchUserParameter(String clientName) {
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch"))));
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch")).clear();
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl08_filterer_tbSearch")).sendKeys(clientName);
+	}
 }

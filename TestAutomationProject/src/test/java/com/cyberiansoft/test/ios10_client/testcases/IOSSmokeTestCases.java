@@ -87,7 +87,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			webdriver.quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testUpdateDatabase(String rowID,
 								   String description, JSONObject testData) {
 		homeScreen = new HomeScreen();
@@ -100,7 +100,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testUpdateVIN(String rowID,
 							  String description, JSONObject testData) {
 		homeScreen = new HomeScreen();
@@ -114,7 +114,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	//Test Case 8441:Add Retail Customer in regular build
 	@Test(testName = "Test Case 8441:Add Retail Customer in regular build", description = "Create retail customer")
-	public void testCreateRetailCustomer()  {
+	public void testCreateRetailCustomer() {
 
 		//resrtartApplication();
 		//MainScreen mainScreeneen = new MainScreen();
@@ -136,7 +136,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	//Test Case 8439:Edit Customer
 	@Test(testName = "Test Case 8439:Edit Customer ", description = "Edit retail customer")
-	public void testEditRetailCustomer()  {
+	public void testEditRetailCustomer() {
 		final String lastname = "superedited";
 		final String companyname = "supercompanyedited";
 		final String street = "Second streer";
@@ -176,8 +176,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		CompanyWebPage companyWebPage = backofficeHeader.clickCompanyLink();
-		ClientsWebPage clientspage = companyWebPage.clickClientsLink();
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		backofficeHeader.clickCompanyLink();
+		ClientsWebPage clientspage = new ClientsWebPage(webdriver);
+		companyWebPage.clickClientsLink();
 
 		clientspage.deleteUserViaSearch(firstnamenew);
 
@@ -204,7 +206,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		settingsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testEditRetailInspectionNotes(String rowID,
 											  String description, JSONObject testData) {
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
@@ -244,7 +246,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testApproveInspectionOnDevice(String rowID,
 											  String description, JSONObject testData) {
 
@@ -272,7 +274,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForApprove(inspNumber);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
+		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspectionForApprove(inspNumber);
 		approveInspectionsScreen.clickApproveAfterSelection();
 		approveInspectionsScreen.drawSignatureAfterSelection();
@@ -281,7 +283,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testArchiveAndUnArchiveTheInspection(String rowID,
 													 String description, JSONObject testData) {
 
@@ -312,7 +314,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		myInspectionsScreen.archiveInspection(myinspetoarchive,
 				archiveReason);
-		Assert.assertFalse(myInspectionsScreen.isInspectionExists (myinspetoarchive));
+		Assert.assertFalse(myInspectionsScreen.isInspectionExists(myinspetoarchive));
 		myInspectionsScreen.clickHomeButton();
 
 	}
@@ -337,8 +339,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		CompanyWebPage companyWebPage = backofficeHeader.clickCompanyLink();
-		ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+		backofficeHeader.clickCompanyLink();
+
+		ActiveDevicesWebPage devicespage = new ActiveDevicesWebPage(webdriver);
+		companyWebPage.clickManageDevicesLink();
 
 		devicespage.setSearchCriteriaByName(license);
 		String regCode = devicespage.getFirstRegCodeInTable();
@@ -374,7 +379,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(alerttxt.contains("VIN# is required"));
 		vehicleScreen.setVIN(VIN);
 
-		orderSummaryScreen =vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 		orderSummaryScreen.clickSave();
 		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectDefaultInvoiceType();
 		invoiceInfoScreen.clickSaveEmptyPO();
@@ -383,7 +388,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateWorkOrderWithTeamSharingOption(String rowID,
 														 String description, JSONObject testData) {
 
@@ -477,7 +482,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testApproveInspectionsOnDeviceViaAction(String rowID,
 														String description, JSONObject testData) {
 
@@ -526,7 +531,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testArchiveInspectionsOnDeviceViaAction(String rowID,
 														String description, JSONObject testData) {
 
@@ -559,7 +564,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testApproveInspectionOnBackOfficeFullInspectionApproval(String rowID,
 																		String description, JSONObject testData) {
 
@@ -588,7 +593,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 		MainScreen mainScreeneen = homeScreen.clickLogoutButton();
 		mainScreeneen.updateDatabase();
-		Helpers.waitABit(60*1000);
+		Helpers.waitABit(60 * 1000);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -596,8 +601,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
+		operationsWebPage.clickInspectionsLink();
 
 		inspectionsWebPage.approveInspectionByNumber(inpectionnumber);
 
@@ -612,7 +619,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testApproveInspectionOnBackOfficeLinebylineApproval(String rowID,
 																	String description, JSONObject testData) {
 
@@ -641,7 +648,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 		MainScreen mainScreeneen = homeScreen.clickLogoutButton();
 		mainScreeneen.updateDatabase();
-		Helpers.waitABit(10*1000);
+		Helpers.waitABit(10 * 1000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
@@ -649,8 +656,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
+		operationsWebPage.clickInspectionsLink();
 
 		inspectionsWebPage.approveInspectionLinebylineApprovalByNumber(
 				inpectionnumber, iOSInternalProjectConstants.DISC_EX_SERVICE1, iOSInternalProjectConstants.DYE_SERVICE);
@@ -665,15 +674,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice(String rowID,
 																						 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-		final String teamName= "Default team";
-		final String serviceName= "Test Company (Universal Client)";
+		final String teamName = "Default team";
+		final String serviceName = "Test Company (Universal Client)";
 
 		homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
@@ -715,8 +724,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		claimScreen.selectInsuranceCompany(serviceRequestData.getInsuranceCompany().getInsuranceCompanyName());
 		servicesScreen.clickSave();
 		Helpers.waitForAlert();
-			String alertText = Helpers.getAlertTextAndAccept();
-			Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+		String alertText = Helpers.getAlertTextAndAccept();
+		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		QuestionsScreen questionsScreen = new QuestionsScreen();
 		questionsScreen.drawSignature();
 		questionsScreen.clickSave();
@@ -742,9 +751,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-
-		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.makeSearchPanelVisible();
 
 		serviceRequestsListWebPage.verifySearchFieldsAreVisible();
@@ -767,7 +777,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateInspectionFromServiceRequest(String rowID,
 													   String description, JSONObject testData) {
 
@@ -792,7 +802,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : inspectionData.getMoneyServicesList()) {
 			Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(serviceData.getServiceName(), serviceData.getServicePrice2()));
-			if (serviceData.getQuestionData()!= null) {
+			if (serviceData.getQuestionData() != null) {
 				SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
 				selectedServiceDetailsScreen.answerQuestion(serviceData.getQuestionData());
 				selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -845,7 +855,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateWOFromServiceRequest(String rowID,
 											   String description, JSONObject testData) {
 
@@ -866,7 +876,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		boolean createWOExists = false;
 		final int timaoutMinules = 15;
 		int iterator = 0;
-		while((iterator < timaoutMinules) | (!createWOExists)) {
+		while ((iterator < timaoutMinules) | (!createWOExists)) {
 
 			serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
 			serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
@@ -874,10 +884,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			if (!createWOExists) {
 				serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
 				serviceRequestsScreen.clickHomeButton();
-				Helpers.waitABit(1000*30);
+				Helpers.waitABit(1000 * 30);
 			} else {
 				serviceRequestsScreen.selectCreateWorkOrderRequestAction();
-				WorkOrderTypesPopup workOrderTypesPopup= new WorkOrderTypesPopup();
+				WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 				workOrderTypesPopup.selectWorkOrderType(WorkOrdersTypes.WO_FOR_SR.getWorkOrderTypeName());
 				break;
 			}
@@ -908,7 +918,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateInspectionFromInvoiceWithTwoWOs(String rowID, String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -952,7 +962,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateInvoiceFromWOInMyWOsList(String rowID,
 												   String description, JSONObject testData) {
 		final String employee = "Employee Simple 20%";
@@ -1017,7 +1027,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber1);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceInfoScreen =  myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
 		invoiceInfoScreen.clickSave();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_PO_IS_REQUIRED_REGULAR);
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
@@ -1029,7 +1039,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode(String rowID,
 																						 String description, JSONObject testData) {
 
@@ -1048,7 +1058,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			workOrderIDs.add(vehicleScreen.getInspectionNumber());
 			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 			for (ServiceData serviceData : workOrderData.getServicesList())
-			servicesScreen.selectService(serviceData.getServiceName());
+				servicesScreen.selectService(serviceData.getServiceName());
 			OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 			orderSummaryScreen.clickSave();
 		}
@@ -1073,13 +1083,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testDontAlowToChangeBilledOrders(String rowID,
 												 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-		final String[] menuItemsToVerify = { "Edit" , "Notes", "Change\nstatus", "Delete", "Create\nInvoices" };
+		final String[] menuItemsToVerify = {"Edit", "Notes", "Change\nstatus", "Delete", "Create\nInvoices"};
 		final String billingFilterValue = "All";
 
 		homeScreen = new HomeScreen();
@@ -1120,7 +1130,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testChangeCustomerForInvoice(String rowID,
 											 String description, JSONObject testData) {
 
@@ -1173,7 +1183,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testBugWithCrashOnCopyVehicle(String rowID,
 											  String description, JSONObject testData) {
 
@@ -1196,7 +1206,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		carhistoryscreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCopyInspections(String rowID,
 									String description, JSONObject testData) {
 
@@ -1278,7 +1288,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
 		ServicesScreenSteps.verifyServicesAreSelected(inspectionData.getSelectedServices());
 
-		servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS,ScreenNamesConstants.FOLLOW_UP_REQUESTED);
+		servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.FOLLOW_UP_REQUESTED);
 		QuestionsScreen questionScreen = new QuestionsScreen();
 		questionScreen.waitQuestionsScreenLoaded();
 		SinglePageInspectionScreen singlePageInspectionScreen = new SinglePageInspectionScreen();
@@ -1293,7 +1303,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateInspectionFromWO(String rowID,
 										   String description, JSONObject testData) {
 
@@ -1328,7 +1338,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCreateInvoiceWithTwoWOsAndCopyVehicle(String rowID,
 														  String description, JSONObject testData) {
 
@@ -1372,7 +1382,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String invoicenum = invoiceInfoScreen.getInvoiceNumber();
 		myWorkOrdersScreen = invoiceInfoScreen.clickSaveAsDraft();
 		myWorkOrdersScreen.clickHomeButton();
-		Helpers.waitABit(10*1000);
+		Helpers.waitABit(10 * 1000);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -1381,8 +1391,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
+		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
@@ -1393,7 +1405,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testChangeCustomerOptionForInspection(String rowID,
 													  String description, JSONObject testData) {
 
@@ -1424,7 +1436,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		vehicleScreen.saveWizard();
 		myInspectionsScreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		BaseUtils.waitABit(90*1000);
+		BaseUtils.waitABit(90 * 1000);
 		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
@@ -1435,7 +1447,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa(String rowID,
 																						   String description, JSONObject testData) {
 
@@ -1472,18 +1484,18 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
-		BaseUtils.waitABit(60*1000);
+		BaseUtils.waitABit(60 * 1000);
 		myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
-		vehicleScreen =visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		Assert.assertTrue(vehicleScreen.getInspectionCustomer().contains(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER));
 		vehicleScreen.saveWizard();
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies(String rowID,
 																						  String description, JSONObject testData) {
 
@@ -1510,7 +1522,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		claimScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
 		claimScreen.saveWizard();
 		myInspectionsScreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		BaseUtils.waitABit(30*1000);
+		BaseUtils.waitABit(30 * 1000);
 		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
@@ -1520,7 +1532,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testChangeCustomerOptionForWorkOrder(String rowID,
 													 String description, JSONObject testData) {
 
@@ -1555,7 +1567,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies(String rowID,
 																				 String description, JSONObject testData) {
 
@@ -1594,7 +1606,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa(String rowID,
 																				   String description, JSONObject testData) {
 
@@ -1635,13 +1647,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		myWorkOrdersScreen.openWorkOrderDetails(workOrderNumber);
-		vehicleScreen =  new VehicleScreen();
+		vehicleScreen = new VehicleScreen();
 		Assert.assertTrue(vehicleScreen.getWorkOrderCustomer().contains(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER));
 		servicesScreen.clickCancelButton();
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN(String rowID,
 																						   String description, JSONObject testData) {
 
@@ -1675,7 +1687,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService(String rowID,
 																										 String description, JSONObject testData) {
 
@@ -1709,7 +1721,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testEditOptionOfDuplicateServicesMessageForWO(String rowID,
 															  String description, JSONObject testData) {
 
@@ -1748,7 +1760,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOverrideOptionOfDuplicateServicesMessageForWO(String rowID,
 																  String description, JSONObject testData) {
 
@@ -1788,7 +1800,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCancelOptionOfDuplicateServicesMessageForWO(String rowID,
 																String description, JSONObject testData) {
 
@@ -1824,7 +1836,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSavingInspectionsWithThreeMatrix(String rowID,
 													 String description, JSONObject testData) {
 
@@ -1878,7 +1890,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		visualInteriorScreen.selectService(inspectionData.getVisualScreenData().getDamageData().getDamageGroupName());
 		visualInteriorScreen.tapCarImage();
 		Assert.assertEquals(visualInteriorScreen.getTotalAmaunt(), inspectionData.getVisualScreenData().getScreenTotalPrice());
-		Assert.assertEquals(visualInteriorScreen.getSubTotalAmaunt(),  inspectionData.getVisualScreenData().getScreenPrice());
+		Assert.assertEquals(visualInteriorScreen.getSubTotalAmaunt(), inspectionData.getVisualScreenData().getScreenPrice());
 		visualInteriorScreen.saveWizard();
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -1899,7 +1911,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR(String rowID,
 																		   String description, JSONObject testData) {
 
@@ -1945,7 +1957,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testThatAutoSavedWOIsCreatedCorrectly(String rowID,
 													  String description, JSONObject testData) {
 
@@ -1967,7 +1979,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				workOrderData.getVehicleInfoData().getVehicleModel(), workOrderData.getVehicleInfoData().getVehicleYear());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		Helpers.waitABit(40*1000);
+		Helpers.waitABit(40 * 1000);
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		MainScreen mainScreeneen = new MainScreen();
@@ -1975,7 +1987,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		Assert.assertTrue(myWorkOrdersScreen.isAutosavedWorkOrderExists());
 		myWorkOrdersScreen.selectContinueWorkOrder();
-		BaseUtils.waitABit(30*1000);
+		BaseUtils.waitABit(30 * 1000);
 		Assert.assertEquals(vehicleScreen.getInspectionNumber(), workOrderNumber);
 
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
@@ -1989,7 +2001,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSRAddAppointmentToServiceRequest(String rowID,
 													 String description, JSONObject testData) {
 
@@ -2041,7 +2053,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.selectCloseAction();
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		String newserviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(newserviceRequestNumber),  ServiceRequestStatus.SCHEDULED.getValue());
+		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(newserviceRequestNumber), ServiceRequestStatus.SCHEDULED.getValue());
 		serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
 		serviceRequestsScreen.selectRejectAction();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
@@ -2049,7 +2061,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSRVerifySummaryActionForAppointmentOnSRsCalendar(String rowID,
 																	 String description, JSONObject testData) {
 
@@ -2078,7 +2090,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		QuestionsScreen questionsScreen = new QuestionsScreen();
 		questionsScreen.drawSignature();
 		servicesScreen.clickSave();
-		alertText =  Helpers.getAlertTextAndAccept();
+		alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
 
 		QuestionsScreenSteps.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
@@ -2114,7 +2126,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices(String rowID,
 																								 String description, JSONObject testData) {
 
@@ -2144,7 +2156,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices(String rowID,
 																										  String description, JSONObject testData) {
 
@@ -2172,10 +2184,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(testName="Test Case 25421:WO HD: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services", description = "WO HD: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services")
+	@Test(testName = "Test Case 25421:WO HD: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services", description = "WO HD: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services")
 	public void testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices() {
 
-		final String VIN  = "2C3CDXBG2EH174681";
+		final String VIN = "2C3CDXBG2EH174681";
 
 		homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -2232,10 +2244,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.clickHomeButton();
 	}
 
-	@Test(testName="Test Case 26054:WO Monitor: Create WO for monitor", description = "WO Monitor: Create WO for monitor")
+	@Test(testName = "Test Case 26054:WO Monitor: Create WO for monitor", description = "WO Monitor: Create WO for monitor")
 	public void testWOMonitorCreateWOForMonitor() {
 
-		final String VIN  = "1D3HV13T19S825733";
+		final String VIN = "1D3HV13T19S825733";
 
 		homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -2270,7 +2282,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService(String rowID,
 																							  String description, JSONObject testData) {
 
@@ -2323,7 +2335,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase(String rowID,
 																						  String description, JSONObject testData) {
 
@@ -2387,7 +2399,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOMonitorVerifyThatStartDateIsSetWhenStartService(String rowID,
 																	  String description, JSONObject testData) {
 
@@ -2425,21 +2437,22 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
 		OrderMonitorScreen orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
 		OrderMonitorData orderMonitorData = workOrderData.getOrderMonitorData();
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup =  orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		Assert.assertFalse(serviceDetailsPopup.isServiceStartDateExists());
 		serviceDetailsPopup.clickStartService();
 		orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		Assert.assertTrue(serviceDetailsPopup.isServiceStartDateExists());
 		serviceDetailsPopup.clickServiceDetailsDoneButton();
-		teamWorkordersScreen = orderMonitorScreen.clickBackButton();;
+		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
+		;
 		teamWorkordersScreen.clickHomeButton();
 	}
 
-	@Test(testName="Test Case 26013:WO Monitor: HD - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase",
+	@Test(testName = "Test Case 26013:WO Monitor: HD - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase",
 			description = "WO Monitor: HD - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase")
 	public void testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase() {
 
-		final String VIN  = "1D3HV13T19S825733";
+		final String VIN = "1D3HV13T19S825733";
 		final String _priceMatrixScreen = "HOOD";
 		final String _size = "NKL";
 		final String _severity = "VERY LIGHT";
@@ -2506,7 +2519,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderMonitorScreen.clickStartPhase();
 
 		serviceDetailsPopup = orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
-		serviceDetailsPopup.clickServiceStatusCell();;
+		serviceDetailsPopup.clickServiceStatusCell();
+		;
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alertText.contains("You cannot change the status of services for this phase. You can only change the status of the whole phase."));
 		serviceDetailsPopup.clickServiceDetailsDoneButton();
@@ -2528,9 +2542,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSRVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo(String rowID,
-																	  String description, JSONObject testData) {
+																				 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
@@ -2558,9 +2572,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSRVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON(String rowID,
-																				 String description, JSONObject testData) {
+																								   String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
@@ -2590,9 +2604,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSRVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa(String rowID,
-																								   String description, JSONObject testData) {
+																								 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
@@ -2625,9 +2639,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSRVerifyThatFilterNotCheckedInIsWorkingCorrectly(String rowID,
-																								 String description, JSONObject testData) {
+																	 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
@@ -2663,9 +2677,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenCustomerApprovalRequiredIsSetToONAutoEmailIsNotSentWhenApprovalDoesNotExist(String rowID,
-																	 String description, JSONObject testData) throws Exception {
+																											  String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2704,7 +2718,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 
-		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
+		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.drawApprovalSignature();
 		approveInspectionsScreen.clickApproveButton();
 		myInvoicesScreen.clickHomeButton();
@@ -2728,9 +2742,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			Assert.assertTrue(pdftext.contains(serviceData.getServiceName()));
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenCustomerApprovalRequiredIsSetToOffAutoEmailIsSentWhenInvoiceAsAutoApproved(String rowID,
-																											  String description, JSONObject testData) throws Exception {
+																											 String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2785,9 +2799,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			Assert.assertTrue(pdftext.contains(serviceData.getServiceName()));
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices(String rowID,
-																											 String description, JSONObject testData) throws Exception {
+																					  String description, JSONObject testData) throws Exception {
 
 
 		final String printServerName = "TA_Print_Server";
@@ -2807,7 +2821,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.clickHomeButton();
 	}
 
-	@Test(testName="Test Case 26691:Invoices: HD - Verify that print icon is shown next to invoice when it was printed (Team Invoices)",
+	@Test(testName = "Test Case 26691:Invoices: HD - Verify that print icon is shown next to invoice when it was printed (Team Invoices)",
 			description = "Invoices: HD - Verify that print icon is shown next to invoice when it was printed (Team Invoices)")
 	public void testHDVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices() {
 
@@ -2823,7 +2837,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teaminvoicesscreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature(String rowID,
 																							  String description, JSONObject testData) {
 
@@ -2864,9 +2878,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature(String rowID,
-																									  String description, JSONObject testData) {
+																								String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2905,7 +2919,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists(String rowID,
 																			 String description, JSONObject testData) {
 
@@ -2945,7 +2959,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			myInvoicesScreen.selectInvoiceForApprove(invoiceNumberapproveon);
 
 			selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-			ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
+			ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 			approveInspectionsScreen.drawApprovalSignature();
 			approveInspectionsScreen.clickApproveButton();
 			myInvoicesScreen = new MyInvoicesScreen();
@@ -2957,7 +2971,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		}
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech(String rowID,
 																									String description, JSONObject testData) {
 
@@ -2993,7 +3007,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech(String rowID,
 																								 String description, JSONObject testData) {
 
@@ -3050,11 +3064,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		serviceRequestsScreen.clickHomeButton();
 		boolean onhold = false;
-		for (int i= 0; i < 7; i++) {
+		for (int i = 0; i < 7; i++) {
 			serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
 			if (!serviceRequestsScreen.getServiceRequestStatus(serviceRequestNumber).equals(ServiceRequestStatus.ON_HOLD.getValue())) {
 				serviceRequestsScreen.clickHomeButton();
-				BaseUtils.waitABit(30*1000);
+				BaseUtils.waitABit(30 * 1000);
 			} else {
 
 				onhold = true;
@@ -3066,7 +3080,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech(String rowID,
 																									   String description, JSONObject testData) {
 
@@ -3080,8 +3094,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_INSP_ONLY.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
 
@@ -3112,7 +3128,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech(String rowID,
 																										  String description, JSONObject testData) {
 
@@ -3126,8 +3142,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
 
@@ -3165,8 +3183,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		operationsWebPage = backofficeHeader.clickOperationsLink();
-		serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+		backofficeHeader.clickOperationsLink();
+		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
 
@@ -3198,7 +3216,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting(String rowID,
 																						 String description, JSONObject testData) {
 
@@ -3222,13 +3240,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 			Assert.assertEquals(Helpers.getAlertTextAndAccept(), String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
-			Assert.assertEquals(servicesScreen.getNumberOfServiceSelectedItems( serviceData.getServiceName()), 1);
+			Assert.assertEquals(servicesScreen.getNumberOfServiceSelectedItems(serviceData.getServiceName()), 1);
 		}
 		servicesScreen.cancelWizard();
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection(String rowID,
 																					 String description, JSONObject testData) {
 
@@ -3249,7 +3267,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				InspectionsTypes.INSP_FOR_CALC);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
-		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());;
+		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
+		;
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 
@@ -3283,7 +3302,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold(String rowID,
 																														String description, JSONObject testData) {
 
@@ -3314,7 +3333,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold(String rowID,
 																															String description, JSONObject testData) {
 
@@ -3346,7 +3365,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose(String rowID,
 																									  String description, JSONObject testData) {
 
@@ -3368,7 +3387,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen.saveWizard();
 
 		String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(serviceRequestNumber),  ServiceRequestStatus.SCHEDULED.getValue());
+		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.SCHEDULED.getValue());
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		Assert.assertTrue(serviceRequestsScreen.isCloseActionExists());
 		serviceRequestsScreen.selectCloseAction();
@@ -3377,7 +3396,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown(String rowID,
 																											  String description, JSONObject testData) {
 
@@ -3409,7 +3428,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO(String rowID,
 																											 String description, JSONObject testData) {
 
@@ -3449,7 +3468,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO(String rowID,
 																												   String description, JSONObject testData) {
 
@@ -3483,7 +3502,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices(String rowID,
 																												String description, JSONObject testData) {
 
@@ -3521,7 +3540,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		for (int i = 0; i < serviceRequestData.getMoneyServices().size(); i++) {
 			alertText = Helpers.getAlertTextAndAccept();
-			String servicedetails = alertText.substring(alertText.indexOf("'")+1, alertText.indexOf("' require"));
+			String servicedetails = alertText.substring(alertText.indexOf("'") + 1, alertText.indexOf("' require"));
 			for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
 				if (serviceData.getServiceName().equals(servicedetails)) {
 					SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(servicedetails);
@@ -3544,7 +3563,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices(String rowID,
 																														String description, JSONObject testData) {
 
@@ -3581,7 +3600,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		for (int i = 0; i < serviceRequestData.getMoneyServices().size(); i++) {
 			alertText = Helpers.getAlertTextAndAccept();
-			String servicedetails = alertText.substring(alertText.indexOf("'")+1, alertText.indexOf("' require"));
+			String servicedetails = alertText.substring(alertText.indexOf("'") + 1, alertText.indexOf("' require"));
 			for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
 				if (serviceData.getServiceName().equals(servicedetails)) {
 					SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(servicedetails);
@@ -3605,7 +3624,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown(String rowID,
 																						String description, JSONObject testData) {
 
@@ -3658,17 +3677,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(approveInspectionsScreen.getInspectionServicePrice(inspectionData.getServicesToApprovesList().get(0).getServiceName()), inspectionData.getServicesToApprovesList().get(0).getServicePrice());
 		Assert.assertFalse(approveInspectionsScreen.isInspectionServiceExistsForApprove(inspectionData.getServicesToApprovesList().get(1).getServiceName()));
 		approveInspectionsScreen.clickCancelButton();
-		approveInspectionsScreen.clickCancelButton();;
+		approveInspectionsScreen.clickCancelButton();
+		;
 		myInspectionsScreen.clickHomeButton();
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired(String rowID,
 																									   String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-		InspectionData inspectionData = testCaseData.getInspectionData();;
+		InspectionData inspectionData = testCaseData.getInspectionData();
+		;
 
 		homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
@@ -3701,7 +3722,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen(String rowID,
 																											   String description, JSONObject testData) {
 		final String newLineSymbol = "\n";
@@ -3725,7 +3746,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent(String rowID,
 																						  String description, JSONObject testData) {
 
@@ -3765,7 +3786,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR(String rowID,
 																			String description, JSONObject testData) {
 
@@ -3814,7 +3835,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped(String rowID,
 																													String description, JSONObject testData) {
 
@@ -3853,7 +3874,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 
-		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
+		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		for (ServiceData serviceData : inspectionData.getServicesToApprovesList())
 			if (serviceData.isSelected())
@@ -3876,7 +3897,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction(String rowID,
 																				  String description, JSONObject testData) {
 
@@ -3915,7 +3936,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect(String rowID,
 																				 String description, JSONObject testData) {
 
@@ -3975,7 +3996,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard(String rowID,
 																							   String description, JSONObject testData) {
 
@@ -4018,7 +4039,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO(String rowID,
 																				  String description, JSONObject testData) {
 
@@ -4048,7 +4069,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
+		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.approveInspectionApproveAllAndSignature(inspectionNumber);
 
 		myInspectionsScreen.createWOFromInspection(inspectionNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
@@ -4063,7 +4084,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType(String rowID,
 																													String description, JSONObject testData) {
 
@@ -4093,7 +4114,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly(String rowID,
 																					String description, JSONObject testData) {
 
@@ -4140,7 +4161,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode(String rowID,
 																							  String description, JSONObject testData) {
 
@@ -4194,7 +4215,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected(String rowID,
 																													String description, JSONObject testData) {
 
@@ -4247,7 +4268,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal(String rowID,
 																														   String description, JSONObject testData) {
 
@@ -4293,7 +4314,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			description = "Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount")
 	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount() {
 
-		final String VIN  = "1D7HW48NX6S507810";
+		final String VIN = "1D7HW48NX6S507810";
 
 		homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -4332,7 +4353,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
+		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		approveInspectionsScreen.clickDeclineAllServicesButton();
 		approveInspectionsScreen.selectInspectionServiceToApprove(iOSInternalProjectConstants.SR_S1_MONEY + " (Grill)");
@@ -4340,7 +4361,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.drawSignatureAfterSelection();
 		approveInspectionsScreen.clickDoneButton();
 		myInspectionsScreen.clickHomeButton();
-		Helpers.waitABit(10*1000);
+		Helpers.waitABit(10 * 1000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
@@ -4349,8 +4370,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InspectionsWebPage inspectionsWebPage = operationsWebPage.clickInspectionsLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
+		operationsWebPage.clickInspectionsLink();
 		inspectionsWebPage.makeSearchPanelVisible();
 		inspectionsWebPage.selectSearchStatus("All active");
 		inspectionsWebPage.selectSearchTimeframe("Custom");
@@ -4363,7 +4386,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO(String rowID,
 																	 String description, JSONObject testData) {
 
@@ -4399,7 +4422,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkordersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice(String rowID,
 																					   String description, JSONObject testData) {
 
@@ -4458,8 +4481,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
+		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
@@ -4469,7 +4494,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(invoicesWebPage.getInvoicePONumber(invoiceNumber), invoiceData.getPoNumber());
 		Assert.assertEquals(invoicesWebPage.getInvoicePOPaidValue(invoiceNumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		String mainWindowHandle = webdriver.getWindowHandle();
-		InvoicePaymentsTabWebPage invoicePaymentsTabWebPage = invoicesWebPage.clickInvoicePayments(invoiceNumber);
+		InvoicePaymentsTabWebPage invoicePaymentsTabWebPage = new InvoicePaymentsTabWebPage(webdriver);
+		invoicesWebPage.clickInvoicePayments(invoiceNumber);
 		Assert.assertEquals(invoicePaymentsTabWebPage.getPaymentsTypeAmountValue("Cash/Check"), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		Assert.assertEquals(invoicePaymentsTabWebPage.getPaymentsTypeCreatedByValue("Cash/Check"), "Employee Simple 20%");
 
@@ -4480,7 +4506,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	}
 
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice(String rowID,
 																						   String description, JSONObject testData) {
 
@@ -4539,8 +4565,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
+		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
@@ -4551,14 +4579,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(invoicesWebPage.getInvoicePONumber(invoiceNumber), invoiceData.getNewPoNumber());
 		Assert.assertEquals(invoicesWebPage.getInvoicePOPaidValue(invoiceNumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		String mainWindowHandle = webdriver.getWindowHandle();
-		InvoicePaymentsTabWebPage invoicePaymentsTabWebPage = invoicesWebPage.clickInvoicePayments(invoiceNumber);
+		InvoicePaymentsTabWebPage invoicePaymentsTabWebPage = new InvoicePaymentsTabWebPage(webdriver);
+		invoicesWebPage.clickInvoicePayments(invoiceNumber);
 
 		Assert.assertEquals(invoicePaymentsTabWebPage.getPaymentDescriptionTypeAmountValue("PO #: " + invoiceData.getNewPoNumber()), expectedPrice);
 		invoicePaymentsTabWebPage.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice(String rowID,
 																							 String description, JSONObject testData) {
 
@@ -4591,7 +4620,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
-		BaseUtils.waitABit(25*1000);
+		BaseUtils.waitABit(25 * 1000);
 		TeamInvoicesScreen teaminvoicesscreen = homeScreen.clickTeamInvoices();
 		teaminvoicesscreen.selectInvoice(invoiceNumber);
 
@@ -4607,8 +4636,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
+		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		invoicesWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
@@ -4619,20 +4650,21 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(invoicesWebPage.getInvoicePONumber(invoiceNumber), invoiceData.getNewPoNumber());
 		//Assert.assertEquals(invoicesWebPage.getInvoicePOPaidValue(invoiceNumber), PricesCalculations.getPriceRepresentation(cashcheckamount));
 		String mainWindowHandle = webdriver.getWindowHandle();
-		InvoicePaymentsTabWebPage invoicePaymentsTabWebPage = invoicesWebPage.clickInvoicePayments(invoiceNumber);
+		InvoicePaymentsTabWebPage invoicePaymentsTabWebPage = new InvoicePaymentsTabWebPage(webdriver);
+		invoicesWebPage.clickInvoicePayments(invoiceNumber);
 
 		Assert.assertEquals(invoicePaymentsTabWebPage.getPaymentDescriptionTypeAmountValue("PO #: " + invoiceData.getNewPoNumber()), expectedPrice);
 		invoicePaymentsTabWebPage.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	@Test(testName="Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in,"
+	@Test(testName = "Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in,"
 			+ "Test Case 40034:WO Monitor: Verify that employee with Manager role may see and change all services of repair order",
 			description = "WO: HD - Verify filter for Team WO that returns only work assigned to tech who is logged in,"
 					+ "WO Monitor: Verify that employee with Manager role may see and change all services of repair order")
 	public void testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn() {
 
-		final String VIN  = "WDZPE7CD9E5889222";
+		final String VIN = "WDZPE7CD9E5889222";
 
 		homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -4665,7 +4697,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale("5");
 		orderSummaryScreen.saveWizard();
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
-		BaseUtils.waitABit(1000*20);
+		BaseUtils.waitABit(1000 * 20);
 
 		TeamWorkOrdersScreen teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
 		teamWorkordersScreen.clickOnWO(workOrderNumber);
@@ -4711,8 +4743,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		MonitorWebPage monitorpage = backofficeHeader.clickMonitorLink();
-		RepairOrdersWebPage repairorderspage = monitorpage.clickRepairOrdersLink();
+		MonitorWebPage monitorpage = new MonitorWebPage(webdriver);
+		backofficeHeader.clickMonitorLink();
+		RepairOrdersWebPage repairorderspage = new RepairOrdersWebPage(webdriver);
+		monitorpage.clickRepairOrdersLink();
 		repairorderspage.makeSearchPanelVisible();
 		repairorderspage.selectSearchLocation("Default Location");
 		repairorderspage.selectSearchTimeframe("Custom");
@@ -4721,7 +4755,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		repairorderspage.setSearchWoNumber(workOrderNumber);
 		repairorderspage.clickFindButton();
 
-		VendorOrderServicesWebPage vendororderservicespage = repairorderspage.clickOnWorkOrderLinkInTable(workOrderNumber);
+		VendorOrderServicesWebPage vendororderservicespage = new VendorOrderServicesWebPage(webdriver);
+		repairorderspage.clickOnWorkOrderLinkInTable(workOrderNumber);
 		vendororderservicespage.changeRepairOrderServiceVendor(iOSInternalProjectConstants.DYE_SERVICE, "Device Team");
 		vendororderservicespage.waitABit(3000);
 		Assert.assertEquals(vendororderservicespage.getRepairOrderServiceTechnician(iOSInternalProjectConstants.DYE_SERVICE), "Oksi User");
@@ -4752,7 +4787,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest(String rowID,
 																							  String description, JSONObject testData) {
 
@@ -4774,7 +4809,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		final String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
 		for (InspectionData inspectionData : testCaseData.getInspectionsData()) {
-			serviceRequestsScreen.createInspectionFromServiceReques(serviceRequestNumber,InspectionsTypes.valueOf(inspectionData.getInspectionType()));
+			serviceRequestsScreen.createInspectionFromServiceReques(serviceRequestNumber, InspectionsTypes.valueOf(inspectionData.getInspectionType()));
 			inspectionNumbers.add(vehicleScreen.getInspectionNumber());
 			if (inspectionData.isDraft()) {
 				ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -4818,8 +4853,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			description = "Verify that Single-page inspection is saved without crush")
 	public void testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush() {
 
-		final String VIN  = "1D7HW48NX6S507810";
-		final String _price  = "100";
+		final String VIN = "1D7HW48NX6S507810";
+		final String _price = "100";
 
 		homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -4877,7 +4912,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		settingsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval(String rowID,
 																													  String description, JSONObject testData) {
 
@@ -4901,7 +4936,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		VisualInteriorScreen visualInteriorScreen = myInspectionsScreen.addInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_SPORT_CAR);
-		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);;
+		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		;
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
@@ -4942,7 +4978,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		ApproveInspectionsScreen approveInspectionsScreen =  new ApproveInspectionsScreen();
+		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspectionForApprove(inspectionNumber);
 		approveInspectionsScreen.clickApproveAllServicesButton();
 		approveInspectionsScreen.clickSaveButton();
@@ -4955,7 +4991,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = teamWorkOrdersScreen.clickHomeButton();
 
 		for (int i = 0; i < timetowaitwo; i++) {
-			Helpers.waitABit(60*1000);
+			Helpers.waitABit(60 * 1000);
 			teamWorkOrdersScreen = homeScreen.clickTeamWorkordersButton();
 			homeScreen = teamWorkOrdersScreen.clickHomeButton();
 		}
@@ -4986,7 +5022,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired(String rowID,
 																												String description, JSONObject testData) {
 
@@ -5024,7 +5060,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	public void testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer() {
 
 		final String VIN = "1D7HW48NX6S507810";
-		final String retailcustomer  = "19319";
+		final String retailcustomer = "19319";
 		final String _make = "Dodge";
 		final String _model = "Dakota";
 		final String _year = "2012";
@@ -5034,7 +5070,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String _type = "Used";
 		final String stock = "Stock1";
 		final String _ro = "123";
-		final String[] vehicleparts = { "Cowl, Other", "Hood" };
+		final String[] vehicleparts = {"Cowl, Other", "Hood"};
 
 		homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -5086,7 +5122,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.addWorkOrder(workOrderNumber1);
 		invoiceInfoScreen.clickSaveAsDraft();
 		myWorkOrdersScreen.clickHomeButton();
-		Helpers.waitABit(30*1000);
+		Helpers.waitABit(30 * 1000);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -5094,8 +5130,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
+		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
@@ -5107,7 +5145,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	}
 
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices(String rowID,
 																								 String description, JSONObject testData) {
 
@@ -5129,7 +5167,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teaminvoicesscreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices(String rowID,
 																							   String description, JSONObject testData) {
 
@@ -5155,7 +5193,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			description = "Verify that 'Create invoice' check mark is not shown for WO that is selected for billing")
 	public void testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling() {
 
-		final String VIN  = "1D7HW48NX6S507810";
+		final String VIN = "1D7HW48NX6S507810";
 
 		homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -5183,7 +5221,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatTechSplitsIsSavedInPriceMatrices(String rowID,
 																 String description, JSONObject testData) {
 
@@ -5196,7 +5234,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
-		VehicleScreen vehicleScreen = myWorkOrdersScreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);;
+		VehicleScreen vehicleScreen = myWorkOrdersScreen.addWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		;
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -5225,7 +5264,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit(String rowID,
 																					  String description, JSONObject testData) {
 
@@ -5269,7 +5308,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied(String rowID,
 																								String description, JSONObject testData) {
 
@@ -5309,7 +5348,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatWONumberIsNotDuplicated(String rowID,
 														String description, JSONObject testData) {
 
@@ -5350,8 +5389,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
+		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
 		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
@@ -5405,8 +5446,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		operationsWebPage = backofficeHeader.clickOperationsLink();
-		WorkOrdersWebPage workorderspage = operationsWebPage.clickWorkOrdersLink();
+		backofficeHeader.clickOperationsLink();
+		WorkOrdersWebPage workorderspage = new WorkOrdersWebPage(webdriver);
+		operationsWebPage.clickWorkOrdersLink();
 
 		workorderspage.makeSearchPanelVisible();
 		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
@@ -5420,13 +5462,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		webdriver.quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne(String rowID,
 																							 String description, JSONObject testData) {
 
-		final String[] VINs  = { "2A8GP54L87R279721", "1FMDU32X0PUB50142", "GFFGG"} ;
-		final String makes[]  = { "Chrysler", "Ford", null } ;
-		final String models[]  = { "Town and Country", "Explorer",  null };
+		final String[] VINs = {"2A8GP54L87R279721", "1FMDU32X0PUB50142", "GFFGG"};
+		final String makes[] = {"Chrysler", "Ford", null};
+		final String models[] = {"Town and Country", "Explorer", null};
 
 		homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -5446,7 +5488,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone(String rowID,
 																										String description, JSONObject testData) {
 
@@ -5475,7 +5517,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen(String rowID,
 																												 String description, JSONObject testData) {
 
@@ -5499,7 +5541,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO(String rowID,
 																								  String description, JSONObject testData) {
 
@@ -5551,10 +5593,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		}
 		vehicleScreen.cancelWizard();
-		homeScreen =  myWorkOrdersScreen.clickHomeButton();
+		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatValidationIsPresentForVehicleTrimField(String rowID,
 																	   String description, JSONObject testData) {
 
@@ -5576,11 +5618,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(vehicleScreen.getTrim(), trimvalue);
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
 		vehicleScreen.saveWizard();
-		homeScreen =  myWorkOrdersScreen.clickHomeButton();
+		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF(String rowID,
 																							   String description, JSONObject testData) {
 
@@ -5615,7 +5657,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = teamWorkordersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians(String rowID,
 																				   String description, JSONObject testData) {
 
@@ -5665,7 +5707,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown(String rowID,
 																													 String description, JSONObject testData) {
 
@@ -5681,7 +5723,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
-		 vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (DamageData damageData : inspectionData.getDamagesData()) {
 			servicesScreen.selectGroupServiceItem(damageData.getDamageGroupName());
 			for (ServiceData serviceData : damageData.getMoneyServices())
@@ -5692,7 +5734,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit(String rowID,
 																									   String description, JSONObject testData) {
 
@@ -5726,7 +5768,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet(String rowID,
 																						String description, JSONObject testData) {
 
@@ -5757,7 +5799,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatSearchBarIsPresentForServicePackScreen(String rowID,
 																	   String description, JSONObject testData) {
 
@@ -5785,7 +5827,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatCancelMessageIsShownForNewOrExistingWO(String rowID,
 																	   String description, JSONObject testData) {
 
@@ -5818,7 +5860,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed(String rowID,
 																																 String description, JSONObject testData) {
 
@@ -5832,9 +5874,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-
-		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
 		serviceRequestsListWebPage.clickCustomerEditButton();
@@ -5877,7 +5920,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected(String rowID,
 																		   String description, JSONObject testData) {
 
@@ -5891,9 +5934,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-
-		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
 		serviceRequestsListWebPage.clickCustomerEditButton();
@@ -5931,7 +5975,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt(String rowID,
 																		  String description, JSONObject testData) {
 
@@ -5945,9 +5989,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-
-		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
 		serviceRequestsListWebPage.clickCustomerEditButton();
@@ -5989,7 +6034,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON(String rowID,
 																													  String description, JSONObject testData) {
 
@@ -6008,9 +6053,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = backofficeHeader.clickOperationsLink();
-
-		ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+		backofficeHeader.clickOperationsLink();
+		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
 
@@ -6046,7 +6092,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatDefaultTechIsNotChangedWhenResetOrderSplit(String rowID,
 																		   String description, JSONObject testData) {
 
@@ -6104,7 +6150,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyAssignTechToServiceTypeInsteadOfIndividualServices(String rowID,
 																			   String description, JSONObject testData) {
 
@@ -6115,7 +6161,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 
-		VehicleScreen vehiclescren =  myWorkOrdersScreen.addOrderWithSelectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER,
+		VehicleScreen vehiclescren = myWorkOrdersScreen.addOrderWithSelectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER,
 				WorkOrdersTypes.WO_GROUP_SERVICE_TYPE);
 		vehiclescren.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
@@ -6204,7 +6250,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatItIsPossibleToAssignTechWhenWOIsNotStarted(String rowID,
 																		   String description, JSONObject testData) {
 
@@ -6279,7 +6325,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold(String rowID,
 																		  String description, JSONObject testData) {
 
@@ -6331,7 +6377,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatTechSplitAssignedFormVehicleScreenIsSetToServicesUnderList(String rowID,
 																						   String description, JSONObject testData) {
 
@@ -6378,7 +6424,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount(String rowID,
 																																 String description, JSONObject testData) {
 
@@ -6415,7 +6461,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount(String rowID,
 																															  String description, JSONObject testData) {
 
@@ -6473,7 +6519,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage(String rowID,
 																																						   String description, JSONObject testData) {
 
@@ -6528,14 +6574,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		priceMatrixScreen.clickSave();
 		servicesScreen = new ServicesScreen();
-		Assert.assertEquals(servicesScreen.getTotalAmaunt(),  workOrderData.getWorkOrderPrice());
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), workOrderData.getWorkOrderPrice());
 
 		servicesScreen.cancelWizard();
 		myWorkOrdersScreen.clickHomeButton();
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyIfServiceHasDefaultTechnicianAndItsAmountIs0ThenDefaultTechnicianShouldBeAssignedToTheService_NotTechnicianSplitAtWorkOrderLevel(String rowID,
 																																							 String description, JSONObject testData) {
 
@@ -6582,7 +6628,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0(String rowID,
 																								String description, JSONObject testData) {
 
@@ -6630,7 +6676,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatTechSplitAmountIsShownCorrectUnderMonitorForServiceWithAdjustments(String rowID,
 																								   String description, JSONObject testData) {
 
@@ -6685,7 +6731,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatRequiredServicesHasCorrectTech(String rowID,
 															 String description, JSONObject testData) {
 
@@ -6725,7 +6771,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
-			String techString =  "";
+			String techString = "";
 			for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 				techString = techString + ", " + serviceTechnician.getTechnicianFullName();
 			techString = techString.replaceFirst(",", "").trim();
@@ -6752,7 +6798,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
-			String techString =  "";
+			String techString = "";
 			for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 				techString = techString + ", " + serviceTechnician.getTechnicianFullName();
 			techString = techString.replaceFirst(",", "").trim();
@@ -6769,7 +6815,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatRequiredBundleItemsHasCorrectDefTech(String rowID,
 																   String description, JSONObject testData) {
 
@@ -6809,7 +6855,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
 			if (serviceData.getServiceNewTechnicians() != null) {
-				String techString =  "";
+				String techString = "";
 				for (ServiceTechnician serviceTechnician : serviceData.getServiceNewTechnicians())
 					techString = techString + ", " + serviceTechnician.getTechnicianFullName();
 				techString = techString.replaceFirst(",", "").trim();
@@ -6857,7 +6903,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatRequiredBundleItemsAndServiceWithExpensesAnd0PriceHasCorrectDefTechAfterEditWO(String rowID,
 																											 String description, JSONObject testData) {
 
@@ -6899,7 +6945,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
 			if (serviceData.getServiceNewTechnicians() != null) {
-				String techString =  "";
+				String techString = "";
 				for (ServiceTechnician serviceTechnician : serviceData.getServiceNewTechnicians())
 					techString = techString + ", " + serviceTechnician.getTechnicianFullName();
 				techString = techString.replaceFirst(",", "").trim();
@@ -6968,7 +7014,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatSelectedServicesHaveCorrectTechSplitWhenChangeIsDuringCreatingWO(String rowID,
 																							   String description, JSONObject testData) {
 
@@ -7020,7 +7066,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		servicesScreen.openCustomServiceDetails(workOrderData.getBundleService().getBundleServiceName());
 		SelectedServiceBundleScreen serviceBundleScreen = new SelectedServiceBundleScreen();
-		techniciansPopup =serviceBundleScreen.clickTechniciansIcon();
+		techniciansPopup = serviceBundleScreen.clickTechniciansIcon();
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
 		techniciansPopup.clickCancelButton();
@@ -7050,7 +7096,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			description = "Verify If service price is 0 and has def tech assign to service def tech")
 	public void testVerifyIfServicePriceIs0AndHasDefTechAssignToServiceDefTech() {
 
-		final String VIN = "1D7HW48NX6S507810";;
+		final String VIN = "1D7HW48NX6S507810";
+		;
 		final String defaulttech = "Oksana Zayats";
 
 		final String tech1 = "Vladimir Avsievich";
@@ -7093,7 +7140,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyIfServicePriceIs0AndHasDefTechAssignToServiceDefTech(String rowID,
 																			   String description, JSONObject testData) {
 
@@ -7133,7 +7180,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired(String rowID,
 																								 String description, JSONObject testData) {
 
@@ -7201,7 +7248,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = teamWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase(String rowID,
 																																String description, JSONObject testData) {
 
@@ -7253,7 +7300,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		homeScreen = teamWorkOrdersScreen.clickHomeButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder(String rowID,
 																				 String description, JSONObject testData) {
 
@@ -7314,7 +7361,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted(String rowID,
 																								 String description, JSONObject testData) {
 
@@ -7370,7 +7417,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			Assert.assertEquals(orderMonitorScreen.getPanelStatus(serviceData), OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
 
-		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(workOrderData.getServicesList().get(workOrderData.getServicesList().size()-1));
+		OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(workOrderData.getServicesList().get(workOrderData.getServicesList().size() - 1));
 		serviceDetailsPopup.clickServiceStatusCell();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
 				AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
@@ -7378,10 +7425,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		orderMonitorScreen.clickOrderStartDateButton();
 		LocalDate date = LocalDate.now();
-		orderMonitorScreen.setOrderStartYearValue(date.getYear()+1);
+		orderMonitorScreen.setOrderStartYearValue(date.getYear() + 1);
 		Assert.assertEquals(orderMonitorScreen.getOrderStartYearValue(), Integer.toString(date.getYear()));
-		orderMonitorScreen.setOrderStartYearValue(date.getYear()-1);
-		Assert.assertEquals(orderMonitorScreen.getOrderStartYearValue(), Integer.toString(date.getYear()-1));
+		orderMonitorScreen.setOrderStartYearValue(date.getYear() - 1);
+		Assert.assertEquals(orderMonitorScreen.getOrderStartYearValue(), Integer.toString(date.getYear() - 1));
 		orderMonitorScreen.closeSelectorderDatePicker();
 
 		orderMonitorScreen.clickBackButton();
