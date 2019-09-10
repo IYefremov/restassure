@@ -112,5 +112,49 @@
         ]
       }
     }
+  ],
+  "verifyQuestionsHasDefaultAnswers": [
+    {
+      "rowID": " verifyQuestionsHasDefaultAnswers.01",
+      "description": "TFSID: 87011",
+      "service": {
+        "serviceName": "Test service zayats"
+      },
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Test",
+            "questionAnswer": "Future Attention Needed"
+          },
+          {
+            "questionName": "No need to setup",
+            "questionAnswer": "Please select answer",
+            "questionAnswers": [
+              "Answer 1"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "verifyQFShownForServiceAndEntityLevels": [
+    {
+      "rowID": " verifyQFShownForServiceAndEntityLevels.01",
+      "description": "TFSID: 87014",
+      "service": {
+        "serviceName": "Test service zayats"
+      },
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "question2",
+            "questionAnswers": [
+              "answer2"
+            ],
+            "questionAnswer": "answer2"
+          }
+        ]
+      }
+    }
   ]
 }

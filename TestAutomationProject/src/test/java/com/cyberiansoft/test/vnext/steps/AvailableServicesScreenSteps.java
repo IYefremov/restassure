@@ -33,8 +33,12 @@ public class AvailableServicesScreenSteps {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         servicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
         if (matrixServiceData.getHailMatrixName() != null) {
-            VNextPriceMatrixesScreen priceMatrixesScreen = new VNextPriceMatrixesScreen() ;
+            VNextPriceMatrixesScreen priceMatrixesScreen = new VNextPriceMatrixesScreen();
             priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
         }
+    }
+
+    public static void openServiceDetails(ServiceData serviceData) {
+        AvailableServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
     }
 }
