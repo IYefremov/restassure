@@ -43,4 +43,12 @@ public class ServiceDetailsInteractions {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         return serviceDetailsScreen.getServiceDetailsPrice().getAttribute("value");
     }
+
+    public static void openQuestionForm(String questionFormFieldName) {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        serviceDetailsScreen.getQuestionSections()
+                .stream().filter(elem -> elem.getAttribute("value").contains(questionFormFieldName))
+                .findFirst().orElseThrow(() -> new RuntimeException("Question section not found " + questionFormFieldName))
+                .click();
+    }
 }
