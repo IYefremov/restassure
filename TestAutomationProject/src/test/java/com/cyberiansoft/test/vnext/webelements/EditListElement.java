@@ -46,6 +46,6 @@ public class EditListElement implements IWebElement {
     }
 
     public Boolean isStartDatePresent() {
-        return !rootElement.findElement(By.xpath(startDateLocator)).getText().equals("");
+        return WaitUtils.isElementPresent(rootElement.findElement(By.xpath(startDateLocator)));
     }
 }

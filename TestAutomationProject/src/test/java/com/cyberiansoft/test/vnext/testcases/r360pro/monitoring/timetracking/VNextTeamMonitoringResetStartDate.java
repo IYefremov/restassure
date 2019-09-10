@@ -72,16 +72,16 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestCaseTeamEditionRe
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderScreenValidations.elementShouldHaveStartDate(phaseDto.getPhaseName(), false);
+        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), false);
         EditOrderSteps.openElementMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderScreenValidations.elementShouldHaveStartDate(phaseDto.getPhaseName(), true);
+        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), true);
         EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.STARTED);
         EditOrderSteps.openElementMenu(phaseDto.getPhaseName());
         MenuSteps.selectMenuItem(MenuItems.RESET_START_DATE);
         GeneralSteps.confirmDialog();
-        EditOrderScreenValidations.elementShouldHaveStartDate(phaseDto.getPhaseName(), false);
+        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), false);
         EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.ACTIVE);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();

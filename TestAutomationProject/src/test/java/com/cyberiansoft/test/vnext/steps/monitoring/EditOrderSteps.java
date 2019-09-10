@@ -40,9 +40,10 @@ public class EditOrderSteps {
         OrderInfoDto actualOrderInfo = new OrderInfoDto();
         WaitUtils.elementShouldBeVisible(infoScreen.getVinField(), true);
         actualOrderInfo.setVin(infoScreen.getVinField().getAttribute("value"));
-        WaitUtils.elementShouldBeVisible(infoScreen.getStartedDate(), true);
         actualOrderInfo.setStartDate(infoScreen.getStartedDate().getAttribute("value"));
-        Assert.assertEquals(actualOrderInfo, expectedOrderInfo);
+        WaitUtils.elementShouldBeVisible(infoScreen.getStartedDate(), true);
+        Assert.assertEquals(actualOrderInfo.getVin(), expectedOrderInfo.getVin());
+        Assert.assertNotNull(actualOrderInfo.getStartDate());
     }
 
     public static void expandPhase(OrderPhaseDto phaseDto) {
