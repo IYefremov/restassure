@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.monitorlite.testcases;
 
+import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -7,10 +8,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
@@ -66,9 +63,11 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		final String woDaysInProgress = "Days in progress 0";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
+		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.clickAddServiceRequestButton();
 
 		servicerequestslistpage.clickCustomerEditButton();
@@ -126,9 +125,11 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		final String woCompletedPhaseStatus = "Completed";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
+		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.clickAddServiceRequestButton();
 
 		servicerequestslistpage.clickCustomerEditButton();
@@ -192,9 +193,11 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		final String serviceActiveStatus = "Active";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
+		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.clickAddServiceRequestButton();
 
 		servicerequestslistpage.clickCustomerEditButton();
@@ -265,9 +268,11 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		final String woCompletedPhaseStatus = "Completed";
 
 		BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationspage = backofficeheader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = operationspage.clickNewServiceRequestList();
+		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		operationspage.clickNewServiceRequestList();
 		servicerequestslistpage.clickAddServiceRequestButton();
 
 		servicerequestslistpage.clickCustomerEditButton();

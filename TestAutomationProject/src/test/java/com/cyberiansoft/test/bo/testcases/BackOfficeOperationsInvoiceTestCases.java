@@ -17,22 +17,24 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInvoiceData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInvoiceData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationInvoiceSearch(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationInvoiceSearch(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
@@ -48,7 +50,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		int numberofrows = Integer.valueOf(invoicespage.getLastPageNumber());
 
 		String lastpagenumber = invoicespage.getLastPageNumber();
-        invoicespage.clickGoToLastPage(browserType.getBrowserTypeString());
+		invoicespage.clickGoToLastPage(browserType.getBrowserTypeString());
 		Assert.assertEquals(lastpagenumber, invoicespage.getGoToPageFieldValue().replaceAll(",", ""));
 
 		invoicespage.clickGoToFirstPage();
@@ -75,15 +77,17 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 //		Assert.assertEquals(invoicespage.getInvoicesTableRowCount(), 24);
 	}
 
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationInvoiceEditorVerifyAddPOIsPresentAndPaymentIsAdded(String rowID, String description, JSONObject testData) {
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationInvoiceEditorVerifyAddPOIsPresentAndPaymentIsAdded(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
@@ -97,7 +101,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		String mainWindowHandle = webdriver.getWindowHandle();
 		// TODO when webdriver renewed
-		InvoiceEditTabWebPage invoiceedittab = invoicespage.clickEditInvoice(data.getInvoiceNumber());
+		InvoiceEditTabWebPage invoiceedittab = new InvoiceEditTabWebPage(webdriver);
+		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		invoiceedittab.clcikAddPO();
 		invoiceedittab.clickAddPOPayButton();
 		Assert.assertTrue(invoiceedittab.getPONumberField().getAttribute("style").contains("solid red"));
@@ -108,7 +113,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceedittab.closeNewTab(mainWindowHandle);
 		mainWindowHandle = webdriver.getWindowHandle();
 		invoiceedittab.waitABit(1000);
-		InvoicePaymentsTabWebPage invoicepaymentstab = invoicespage.clickInvoicePayments(data.getInvoiceNumber());
+		InvoicePaymentsTabWebPage invoicepaymentstab = new InvoicePaymentsTabWebPage(webdriver);
+		invoicespage.clickInvoicePayments(data.getInvoiceNumber());
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowPaidColumnValue()
 				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowDescriptionColumnValue().contains(data.getPo()));
@@ -118,15 +124,17 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeNewTab(mainWindowHandle);
 	}
 
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved(String rowID, String description, JSONObject testData) {
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationInvoiceEditorVerifyThatApproveInvoiceAfterPaymentCheckboxIsDisabledAfterCheckedItAndInvoiceIsApproved(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
@@ -138,7 +146,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 			invoicespage.changeInvoiceStatus(data.getInvoiceNumber(), WebConstants.InvoiceStatuses.INVOICESTATUS_NEW.getName());
 		}
 		final String mainWindowHandle = webdriver.getWindowHandle();
-		InvoiceEditTabWebPage invoiceEditTab = invoicespage.clickEditInvoice(data.getInvoiceNumber());
+		InvoiceEditTabWebPage invoiceEditTab = new InvoiceEditTabWebPage(webdriver);
+		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		invoiceEditTab.clcikAddPO();
 		invoiceEditTab.clickAddPOPayButton();
 		Assert.assertTrue(invoiceEditTab.getPONumberField().getAttribute("style").contains("solid red"));
@@ -166,35 +175,40 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.changeInvoiceStatus(data.getInvoiceNumber(), WebConstants.InvoiceStatuses.INVOICESTATUS_NEW.getName());
 	}
 
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationInvoiceEditTechnician(String rowID, String description, JSONObject testData) {
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationInvoiceEditTechnician(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
 		invoicespage.clickFindButton();
 
 		Assert.assertTrue(invoicespage.invoicesTableIsVisible());
 		final String mainWindowHandle = webdriver.getWindowHandle();
-		InvoiceEditTabWebPage invoiceEditTab = invoicespage.clickEditInvoice(data.getInvoiceNumber());
+		InvoiceEditTabWebPage invoiceEditTab = new InvoiceEditTabWebPage(webdriver);
+		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		invoiceEditTab.clickTechniciansLink();
 		invoiceEditTab.unselectAllTechnicians();
 	}
 
-    //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationInvoiceEditClickHereToEditNotes(String rowID, String description, JSONObject testData) {
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationInvoiceEditClickHereToEditNotes(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
@@ -209,34 +223,39 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		// final String invoiceNumber =
 		// invoicespage.getFirstInvoiceNumberInTable();
 		final String mainWindowHandle = webdriver.getWindowHandle();
-        invoicespage.selectEditOption();
-		InvoiceEditTabWebPage invoiceedittab = invoicespage.clickEditInvoice(data.getInvoiceNumber());
+		invoicespage.selectEditOption();
+		InvoiceEditTabWebPage invoiceedittab = new InvoiceEditTabWebPage(webdriver);
+		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		final String oldivoicenotesvalue = invoiceedittab.getInvoiceNotesValue();
 		// TODO when webdriver version will be updated
 		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateFormatted());
 		invoiceedittab.closeNewTab(mainWindowHandle);
 
-		invoiceedittab = invoicespage.clickEditInvoice(data.getInvoiceNumber());
+		invoiceedittab = new InvoiceEditTabWebPage(webdriver);
+		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		Assert.assertEquals(oldivoicenotesvalue, invoiceedittab.getInvoiceNotesValue());
 		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateFormatted());
 		invoiceedittab.clickSaveInvoiceButton();
 		invoiceedittab.closeNewTab(mainWindowHandle);
 
-		invoiceedittab = invoicespage.clickEditInvoice(data.getInvoiceNumber());
+		invoiceedittab = new InvoiceEditTabWebPage(webdriver);
+		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		Assert.assertEquals(CustomDateProvider.getCurrentDateFormatted(), invoiceedittab.getInvoiceNotesValue());
 		invoiceedittab.closeNewTab(mainWindowHandle);
 	}
 
 	//todo fails. To be fixed
-    //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationInvoiceSentMailInMailActivity(String rowID, String description, JSONObject testData) {
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationInvoiceSentMailInMailActivity(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 		invoicespage.clickFindButton();
@@ -245,7 +264,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.invoicesTableIsVisible());
 		final String mainWindowHandle = webdriver.getWindowHandle();
 		Assert.assertTrue(invoicespage.isInvoiceEmailSent(invoicenumber, data.getUserMail()));
-		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = invoicespage.clickEmailActivity(data.getInvoiceNumber());
+		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = new InvoiceEmailActivityTabWebPage(webdriver);
+		invoicespage.clickEmailActivity(data.getInvoiceNumber());
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowRecipientsValue().contains(data.getUserMail()));
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue()
 				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
@@ -253,15 +273,17 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
 
-    //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationInvoiceSentCustomMailInMailActivity(String rowID, String description, JSONObject testData) {
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationInvoiceSentCustomMailInMailActivity(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_NEW);
 		invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
@@ -269,7 +291,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.invoicesTableIsVisible());
 		final String mainWindowHandle = webdriver.getWindowHandle();
 
-		SendInvoiceCustomEmailTabWebPage sendinvoicecustomemailtab = invoicespage.clickSendCustomEmail(data.getInvoiceNumber());
+		SendInvoiceCustomEmailTabWebPage sendinvoicecustomemailtab = new SendInvoiceCustomEmailTabWebPage(webdriver);
+		invoicespage.clickSendCustomEmail(data.getInvoiceNumber());
 		sendinvoicecustomemailtab.setEmailSubjectValue(data.getInvoiceNumber());
 		sendinvoicecustomemailtab.setEmailToValue(data.getUserMail());
 		sendinvoicecustomemailtab.setEmailMessageValue(data.getMessage());
@@ -279,7 +302,8 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		sendinvoicecustomemailtab.closeNewTab(mainWindowHandle);
 
 		invoicespage.clickFindButton();
-		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = invoicespage.clickEmailActivity(data.getInvoiceNumber());
+		InvoiceEmailActivityTabWebPage invoiceemailactivitytab = new InvoiceEmailActivityTabWebPage(webdriver);
+		invoicespage.clickEmailActivity(data.getInvoiceNumber());
 		Assert.assertEquals(data.getUserMail(), invoiceemailactivitytab.getFirstRowRecipientsValue());
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue()
 				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
@@ -287,306 +311,334 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceStatusApproved(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceStatusApproved(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
-        invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
 
-        String invoiceNumber = "";
-        try {
-            invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
-        } catch (Exception ignored) {}
+		String invoiceNumber = "";
+		try {
+			invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
+		} catch (Exception ignored) {
+		}
 
-        if (invoiceNumber.isEmpty()) {
-            invoicesPage.selectSearchStatus(data.getAllStatus());
-            invoicesPage.clickFindButton();
-            invoiceNumber = invoicesPage.getFirstInvoiceName();
-            invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
-            invoicesPage.refreshPage();
+		if (invoiceNumber.isEmpty()) {
+			invoicesPage.selectSearchStatus(data.getAllStatus());
+			invoicesPage.clickFindButton();
+			invoiceNumber = invoicesPage.getFirstInvoiceName();
+			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+			invoicesPage.refreshPage();
 
-            invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
-        }
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getApprovedStatus());
-        invoicesPage.refreshPage();
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		}
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getApprovedStatus());
+		invoicesPage.refreshPage();
 
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.selectSearchStatus(data.getApprovedStatus());
-        invoicesPage.setSearchInvoiceNumber(invoiceNumber);
-        invoicesPage.clickFindButton();
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
-        Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getApprovedStatus());
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchStatus(data.getApprovedStatus());
+		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
+		invoicesPage.clickFindButton();
+		Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
+		Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getApprovedStatus());
 
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceStatusExported(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceStatusExported(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
-        invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
 
-        String invoiceNumber = "";
-        try {
-            invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
-        } catch (Exception ignored) {}
+		String invoiceNumber = "";
+		try {
+			invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
+		} catch (Exception ignored) {
+		}
 
-        if (invoiceNumber.isEmpty()) {
-            invoicesPage.selectSearchStatus(data.getAllStatus());
-            invoicesPage.clickFindButton();
-            invoiceNumber = invoicesPage.getFirstInvoiceName();
-            invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
-            invoicesPage.refreshPage();
+		if (invoiceNumber.isEmpty()) {
+			invoicesPage.selectSearchStatus(data.getAllStatus());
+			invoicesPage.clickFindButton();
+			invoiceNumber = invoicesPage.getFirstInvoiceName();
+			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+			invoicesPage.refreshPage();
 
-            invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
-        }
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getExportedStatus());
-        invoicesPage.refreshPage();
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		}
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getExportedStatus());
+		invoicesPage.refreshPage();
 
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.selectSearchStatus(InvoiceStatuses.INVOICESTATUS_EXPORTED);
-        invoicesPage.setSearchInvoiceNumber(invoiceNumber);
-        invoicesPage.clickFindButton();
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
-        Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getExportedStatus());
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchStatus(InvoiceStatuses.INVOICESTATUS_EXPORTED);
+		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
+		invoicesPage.clickFindButton();
+		Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
+		Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getExportedStatus());
 
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceStatusVoid(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceStatusVoid(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
-        invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
 
-        String invoiceNumber = "";
-        try {
-            invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
-        } catch (Exception ignored) {}
+		String invoiceNumber = "";
+		try {
+			invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
+		} catch (Exception ignored) {
+		}
 
-        if (invoiceNumber.isEmpty()) {
-            invoicesPage.selectSearchStatus(data.getAllStatus());
-            invoicesPage.clickFindButton();
-            invoiceNumber = invoicesPage.getFirstInvoiceName();
-            invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
-            invoicesPage.refreshPage();
+		if (invoiceNumber.isEmpty()) {
+			invoicesPage.selectSearchStatus(data.getAllStatus());
+			invoicesPage.clickFindButton();
+			invoiceNumber = invoicesPage.getFirstInvoiceName();
+			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+			invoicesPage.refreshPage();
 
-            invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
-        }
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getVoidStatus());
-        invoicesPage.refreshPage();
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		}
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getVoidStatus());
+		invoicesPage.refreshPage();
 
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.selectSearchStatus(data.getVoidStatus());
-        invoicesPage.setSearchInvoiceNumber(invoiceNumber);
-        invoicesPage.clickFindButton();
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
-        Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getVoidStatus());
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchStatus(data.getVoidStatus());
+		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
+		invoicesPage.clickFindButton();
+		Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
+		Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getVoidStatus());
 
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceStatusDraft(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceStatusDraft(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
-        invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
 
-        String invoiceNumber = "";
-        try {
-            invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
-        } catch (Exception ignored) {}
+		String invoiceNumber = "";
+		try {
+			invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
+		} catch (Exception ignored) {
+		}
 
-        if (invoiceNumber.isEmpty()) {
-            invoicesPage.selectSearchStatus(data.getAllStatus());
-            invoicesPage.clickFindButton();
-            invoiceNumber = invoicesPage.getFirstInvoiceName();
-            invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
-            invoicesPage.refreshPage();
+		if (invoiceNumber.isEmpty()) {
+			invoicesPage.selectSearchStatus(data.getAllStatus());
+			invoicesPage.clickFindButton();
+			invoiceNumber = invoicesPage.getFirstInvoiceName();
+			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+			invoicesPage.refreshPage();
 
-            invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
-        }
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getDraftStatus());
-        invoicesPage.refreshPage();
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		}
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getDraftStatus());
+		invoicesPage.refreshPage();
 
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.selectSearchStatus(data.getDraftStatus());
-        invoicesPage.setSearchInvoiceNumber(invoiceNumber);
-        invoicesPage.clickFindButton();
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
-        Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getDraftStatus());
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchStatus(data.getDraftStatus());
+		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
+		invoicesPage.clickFindButton();
+		Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
+		Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getDraftStatus());
 
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceStatusExportFailed(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceStatusExportFailed(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
-        invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
 
-        String invoiceNumber = "";
-        try {
-            invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
-        } catch (Exception ignored) {}
+		String invoiceNumber = "";
+		try {
+			invoiceNumber = invoicesPage.getFirstInvoiceNameIfDisplayed();
+		} catch (Exception ignored) {
+		}
 
-        if (invoiceNumber.isEmpty()) {
-            invoicesPage.selectSearchStatus(data.getAllStatus());
-            invoicesPage.clickFindButton();
-            invoiceNumber = invoicesPage.getFirstInvoiceName();
-            invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
-            invoicesPage.refreshPage();
+		if (invoiceNumber.isEmpty()) {
+			invoicesPage.selectSearchStatus(data.getAllStatus());
+			invoicesPage.clickFindButton();
+			invoiceNumber = invoicesPage.getFirstInvoiceName();
+			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+			invoicesPage.refreshPage();
 
-            invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
-        }
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getExportFailedStatus());
-        invoicesPage.refreshPage();
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		}
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getExportFailedStatus());
+		invoicesPage.refreshPage();
 
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.selectSearchStatus(data.getExportFailedStatus());
-        invoicesPage.setSearchInvoiceNumber(invoiceNumber);
-        invoicesPage.clickFindButton();
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
-        Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getExportFailedStatus());
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchStatus(data.getExportFailedStatus());
+		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
+		invoicesPage.clickFindButton();
+		Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
+		Assert.assertEquals(invoicesPage.getInvoiceStatus(invoiceNumber), data.getExportFailedStatus());
 
-        invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
+		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 	}
 
 	//todo fails with batch run ???
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditMarkAsPaid(String rowID, String description, JSONObject testData) {
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditMarkAsPaid(String rowID, String description, JSONObject testData) {
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-        InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.clickFindButton();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        String invoiceNumber = invoicesPage.getFirstInvoiceName();
-        invoicesPage.refreshPage();
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.clickFindButton();
 
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.setSearchInvoiceNumber(invoiceNumber);
-        invoicesPage.clickFindButton();
-
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
-        if (invoicesPage.isFirstInvoiceMarkedAsPaid()) {
-            invoicesPage.selectMarkAsUnpaidOption();
-        }
-        invoicesPage.selectMarkAsPaidOption();
-        invoicesPage.handlePaymentNote();
-
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.setSearchInvoiceNumber(invoiceNumber);
-        invoicesPage.clickFindButton();
-        Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid(), "The invoice isn't marked as Paid");
-    }
-
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditVehicleInfo(String rowID, String description, JSONObject testData) {
-
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-
-		OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-        InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.clickFindButton();
-
-        String invoiceNumber = invoicesPage.getFirstInvoiceName();
-        invoicesPage.refreshPage();
+		String invoiceNumber = invoicesPage.getFirstInvoiceName();
+		invoicesPage.refreshPage();
 
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
 
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
-        if (invoicesPage.isFirstInvoiceMarkedAsPaid()) {
-            invoicesPage.selectMarkAsUnpaidOption();
-        }
-        invoicesPage.selectMarkAsPaidOption();
-        invoicesPage.handlePaymentNote();
+		Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
+		if (invoicesPage.isFirstInvoiceMarkedAsPaid()) {
+			invoicesPage.selectMarkAsUnpaidOption();
+		}
+		invoicesPage.selectMarkAsPaidOption();
+		invoicesPage.handlePaymentNote();
 
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.setSearchInvoiceNumber(invoiceNumber);
-        invoicesPage.clickFindButton();
-        Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid(), "The invoice isn't marked as Paid");
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
+		invoicesPage.clickFindButton();
+		Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid(), "The invoice isn't marked as Paid");
+	}
+
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditVehicleInfo(String rowID, String description, JSONObject testData) {
+
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.clickFindButton();
+
+		String invoiceNumber = invoicesPage.getFirstInvoiceName();
+		invoicesPage.refreshPage();
+
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
+		invoicesPage.clickFindButton();
+
+		Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber), "The invoice is not displayed");
+		if (invoicesPage.isFirstInvoiceMarkedAsPaid()) {
+			invoicesPage.selectMarkAsUnpaidOption();
+		}
+		invoicesPage.selectMarkAsPaidOption();
+		invoicesPage.handlePaymentNote();
+
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
+		invoicesPage.clickFindButton();
+		Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid(), "The invoice isn't marked as Paid");
 //        InvoiceEditTabWebPage invoiceeditpage = invoicesPage.clickEditFirstInvoice();
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditChangeInvoice(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditChangeInvoice(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        InvoicesWebPage invoicesPage = backOfficeHeader
-                .clickOperationsLink()
-                .clickInvoicesLink();
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.clickFindButton();
-        String firstInvoiceNameBefore = invoicesPage.getFirstInvoiceName();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.clickFindButton();
+		String firstInvoiceNameBefore = invoicesPage.getFirstInvoiceName();
 
 		invoicesPage.selectChangeInvoiceOption();
 		Assert.assertTrue(invoicesPage.checkInvoiceFrameOpened());
 		Assert.assertTrue(invoicesPage.isCloseButtonClicked());
 		Assert.assertEquals(firstInvoiceNameBefore, invoicesPage.getFirstInvoiceName(),
-                "The invoice name has been changed although the 'Close' button was clicked!");
+				"The invoice name has been changed although the 'Close' button was clicked!");
 
-        invoicesPage.selectChangeInvoiceOption();
-        Assert.assertTrue(invoicesPage.checkInvoiceFrameOpened());
-        Assert.assertTrue(invoicesPage.isChangeButtonClicked());
+		invoicesPage.selectChangeInvoiceOption();
+		Assert.assertTrue(invoicesPage.checkInvoiceFrameOpened());
+		Assert.assertTrue(invoicesPage.isChangeButtonClicked());
 	}
 
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceDownloadJSON(String rowID, String description, JSONObject testData) {
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceDownloadJSON(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        InvoicesWebPage invoicesPage = backOfficeHeader
-                .clickOperationsLink()
-                .clickInvoicesLink();
-        invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicesPage.clickFindButton();
-        invoicesPage.selectDownloadJsonOption();
-        invoicesPage.handleAlertForEdgeBrowser();
-    }
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditTechInfo(String rowID, String description, JSONObject testData) {
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.clickFindButton();
+		invoicesPage.selectDownloadJsonOption();
+		invoicesPage.handleAlertForEdgeBrowser();
+	}
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditTechInfo(String rowID, String description, JSONObject testData) {
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicesPage.clickFindButton();
 		String newTab = invoicesPage.selectTechInfoOption();
@@ -594,14 +646,17 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.closeTab(newTab);
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditRecalcTechSplit(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditRecalcTechSplit(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
 		invoicespage.clickFindButton();
@@ -609,55 +664,64 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.recalcTechSplitProceed());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceSentMailInMailActivity(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceSentMailInMailActivity(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		invoicespage.selectSendEmailOption();
 		Assert.assertTrue(invoicespage.isSendEmailBoxOpened());
-        String email = data.getEmail();
-        invoicespage.setEmailAndSend(email);
+		String email = data.getEmail();
+		invoicespage.setEmailAndSend(email);
 		invoicespage.refreshPage();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		String emailWindow = invoicespage.selectEmailActivityOption();
-        Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
+		Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceSentCustomMailInMailActivity(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceSentCustomMailInMailActivity(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-        InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
-        invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicespage.clickFindButton();
-        String email = data.getEmail();
-        String emailWindow = invoicespage.selectSendCustomEmailOption();
-        invoicespage.setCustomEmailAndSend(email, emailWindow);
-        invoicespage.refreshPage();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
-        emailWindow = invoicespage.selectEmailActivityOption();
-        Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
+		String email = data.getEmail();
+		String emailWindow = invoicespage.selectSendCustomEmailOption();
+		invoicespage.setCustomEmailAndSend(email, emailWindow);
+		invoicespage.refreshPage();
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.clickFindButton();
+		emailWindow = invoicespage.selectEmailActivityOption();
+		Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditInternalTechInfo(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditInternalTechInfo(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
 		invoicespage.clickFindButton();
@@ -667,30 +731,33 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 	}
 
 	//todo TC is not ready!!! TODO
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceArchive(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceArchive(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        backOfficeHeader.clickOperationsLink();
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.clickFindButton();
-        System.out.println();
+		System.out.println();
 	}
 
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceYearMakeModelSearch(String rowID, String description, JSONObject testData) {
+	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceYearMakeModelSearch(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
 		// TODO bug
-		operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.selectSearchStatus("All");
 		invoicespage.setSearchByYear("2007");
@@ -711,15 +778,17 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertTrue(invoicespage.checkSearchResult());
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditPrintPreview(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditPrintPreview(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		// invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
 		invoicespage.clickFindButton();
@@ -729,67 +798,79 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.closeTab(newTab);
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditPay(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditPay(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
-        invoicespage.clickFindButton();
-        invoicespage.chooseMarkAsUnpaidOptionIfPresent();
-        invoicespage.selectPayOption();
+		invoicespage.clickFindButton();
+		invoicespage.chooseMarkAsUnpaidOptionIfPresent();
+		invoicespage.selectPayOption();
 		invoicespage.checkPayBoxContent();
 		invoicespage.clickFindButton();
-        invoicespage.chooseMarkAsUnpaidOptionIfPresent();
-    }
+		invoicespage.chooseMarkAsUnpaidOptionIfPresent();
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceEditAuditLog(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceEditAuditLog(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage;
-		operationsPage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationsPage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
 		invoicespage.clickFindButton();
 		String auditLogWindow = invoicespage.selectPaymentsOption();
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationInvoiceSearchOperation(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationInvoiceSearchOperation(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationspage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicespage = operationspage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		Assert.assertTrue(invoicespage.checkInvoiceTableInfo());
 		Assert.assertTrue(invoicespage.checkInvoiceTablePagination());
 		Assert.assertTrue(invoicespage.checkInvoicesSearchFields());
 		Assert.assertTrue(invoicespage.isInvoiceFound(
-		        data.getInvoiceNumber(), data.getCustomer(), data.getDateFrom(), data.getDateTo()));
+				data.getInvoiceNumber(), data.getCustomer(), data.getDateFrom(), data.getDateTo()));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void checkOperationsInvoiceExport(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void checkOperationsInvoiceExport(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-		InvoicesWebPage invoicesPage = operationsPage.clickInvoicesLink();
+		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		operationspage.clickInvoicesLink();
 		invoicesPage.selectSearchStatus(data.getNewStatus());
 		invoicesPage.clickFindButton();
 		invoicesPage.selectIvoicesFromTop(3);
 		String mainWindow = invoicesPage.getMainWindow();
 		invoicesPage.clickExportButton();
-		ExportInvoicesWebPage exportInvoicesPage = invoicesPage.switchToExportInvoicesWindow(mainWindow);
+		ExportInvoicesWebPage exportInvoicesPage = new ExportInvoicesWebPage(webdriver);
+		invoicesPage.switchToExportInvoicesWindow(mainWindow);
 		Assert.assertTrue(exportInvoicesPage.allInvoicesAreAbleToExport());
 	}
 }

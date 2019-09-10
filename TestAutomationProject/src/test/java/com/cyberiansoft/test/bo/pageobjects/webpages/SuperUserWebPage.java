@@ -29,22 +29,16 @@ public class SuperUserWebPage  extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public ApplicationsWebPage clickApplicationsLink() {
+	public void clickApplicationsLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(applicationslink)));
-		return PageFactory.initElements(
-				driver, ApplicationsWebPage.class);
 	}
 	
-	public AllUsersWebPage clickAllUsersLink() {
+	public void clickAllUsersLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(alluserslink)));
-		return PageFactory.initElements(
-				driver, AllUsersWebPage.class);
 	}
 	
-	public AllEmployeesWebPage clickAllEmployeesLink() {
+	public void clickAllEmployeesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(allemployeeslink)));
-		return PageFactory.initElements(
-				driver, AllEmployeesWebPage.class);
 	}
 
 }

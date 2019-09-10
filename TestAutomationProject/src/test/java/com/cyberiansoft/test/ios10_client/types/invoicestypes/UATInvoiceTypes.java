@@ -9,7 +9,7 @@ import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 
 public enum UATInvoiceTypes implements IInvoicesTypes {
 
-    INVOICE_TEST_CUSTOM1_NEW("Invoice_test_custom1_new");
+    INVOICE_TEST_CUSTOM1_NEW("Invoice_test_custom1_new_AQA");
 
     private final String ivoiceType;
 

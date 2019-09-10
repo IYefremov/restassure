@@ -10,6 +10,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
+import com.cyberiansoft.test.enums.WorkOrderStatuses;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
@@ -22,7 +23,6 @@ import com.cyberiansoft.test.ios10_client.types.invoicestypes.UATInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.UATServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderTypes;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
-import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -42,7 +42,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
     public void setUpSuite() {
         JSONDataProvider.dataFile = IOSReconProTestCasesDataPaths.getInstance().getProdRegressionSuiteTestCasesDataPath();
         mobilePlatform = MobilePlatform.IOS_REGULAR;
-        initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        initTestUser("Test User", "1111");
         DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,
                 ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "oks",
                 envType);
@@ -233,12 +233,15 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
                 ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
         BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
-        OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
-        InvoicesWebPage invoicesWebPage = operationsWebPage.clickInvoicesLink();
+        backOfficeHeaderPanel.clickOperationsLink();
+        OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+         operationsWebPage.clickInvoicesLink();
+        InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();
         String mainWindowHandle = webdriver.getWindowHandle();
-        InvoicePaymentsTabWebPage invoicePaymentsTabWebPage = invoicesWebPage.clickInvoicePayments(invoiceNumber);
+        invoicesWebPage.clickInvoicePayments(invoiceNumber);
+        InvoicePaymentsTabWebPage invoicePaymentsTabWebPage = new InvoicePaymentsTabWebPage(webdriver);
         Assert.assertEquals(invoicePaymentsTabWebPage.getInvoicePaidValue(invoiceNumber),
                 BackOfficeUtils.getFormattedServicePriceValue(invoiceData.getCashCheckPaymentData().getCashCheckAmount()));
         Assert.assertEquals(invoicePaymentsTabWebPage.getInvoiceAmountValue(invoiceNumber),
@@ -260,7 +263,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();
         mainWindowHandle = webdriver.getWindowHandle();
-        invoicePaymentsTabWebPage = invoicesWebPage.clickInvoicePayments(invoiceNumber);
+        invoicesWebPage.clickInvoicePayments(invoiceNumber);
         Assert.assertEquals(invoicePaymentsTabWebPage.getInvoicePaidValue(invoiceNumber),
                 BackOfficeUtils.getFormattedServicePriceValue(invoiceData.getInvoiceTotal()));
         Assert.assertEquals(invoicePaymentsTabWebPage.getInvoiceAmountValue(invoiceNumber),
@@ -334,8 +337,10 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
                 ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
         BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
-        OperationsWebPage operationsWebPage = backOfficeHeaderPanel.clickOperationsLink();
-        ServiceRequestsListWebPage serviceRequestsListWebPage = operationsWebPage.clickNewServiceRequestList();
+        backOfficeHeaderPanel.clickOperationsLink();
+        OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
+        operationsWebPage.clickNewServiceRequestList();
+        ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
         serviceRequestsListWebPage.makeSearchPanelVisible();
 
         serviceRequestsListWebPage.setSearchFreeText(serviceRequestNumber);
@@ -370,8 +375,10 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
                 ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
         BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
                 BackOfficeHeaderPanel.class);
-        CompanyWebPage companyWebPage = backOfficeHeaderPanel.clickCompanyLink();
-        ClientsWebPage clientsWebPage = companyWebPage.clickClientsLink();
+        backOfficeHeaderPanel.clickCompanyLink();
+        CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+        companyWebPage.clickClientsLink();
+        ClientsWebPage clientsWebPage = new ClientsWebPage(webdriver);
         clientsWebPage.isClientPresentInTable(inspectionData.getInspectionRetailCustomer().getFullName());
 
         DriverBuilder.getInstance().getDriver().quit();
@@ -649,8 +656,6 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        final String textNotes = "Inspection text notes";
-
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 
         RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
@@ -671,5 +676,115 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularNavigationSteps.navigateBackScreen();
 
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyApprovingInspectionUnderMyInspectionTeamInspection(String rowID,
+                                                            String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        List<String> inspectionsIDs = new ArrayList<>();
+        final int inspectionsToCreate = 2;
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        for (int i =0; i < inspectionsToCreate; i++) {
+            RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+            RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+            inspectionsIDs.add(RegularVehicleInfoScreenSteps.getInspectionNumber());
+            RegularNavigationSteps.navigateToClaimScreen();
+            RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+            RegularNavigationSteps.navigateToServicesScreen();
+            for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+                RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+            }
+
+            RegularServicesScreenSteps.waitServicesScreenLoad();
+            RegularInspectionsSteps.saveInspectionAsFinal();
+        }
+        RegularMyInspectionsScreenValidations.verifyApproveIconPresentForInspection(inspectionsIDs.get(0), true);
+        RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionsIDs.get(0));
+        RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
+        RegularApproveInspectionScreenActions.saveApprovedServices();
+        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+        RegularMyInspectionsScreenValidations.verifyApproveIconPresentForInspection(inspectionsIDs.get(0), false);
+
+        RegularMyInspectionsSteps.switchToTeamView();
+        RegularMyInspectionsScreenValidations.verifyApproveIconPresentForInspection(inspectionsIDs.get(1), true);
+        RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionsIDs.get(1));
+        RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
+        RegularApproveInspectionScreenActions.saveApprovedServices();
+        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+        RegularMyInspectionsScreenValidations.verifyApproveIconPresentForInspection(inspectionsIDs.get(1), false);
+
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyCreatingInspectionFromWO(String rowID,
+                                               String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        final String trimValue = "25th Anniversary";
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.startCreatingNewInspectionfromWorkOrder(workOrderNumber, UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularVehicleInfoScreenSteps.setTrim(trimValue);
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(testCaseData.getInspectionData().getInsuranceCompanyData());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsScreenValidations.verifyInspectionPresent(inspectionNumber, true);
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyChangeStatusForWO(String rowID,
+                                                   String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.changeStatusForWorkOrder(workOrderNumber, WorkOrderStatuses.ON_HOLD);
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderHasApproveIcon(workOrderNumber, false);
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderHasInvoiceIcon(workOrderNumber, false);
+        RegularMyWorkOrdersSteps.changeStatusForWorkOrder(workOrderNumber, WorkOrderStatuses.APPROVED);
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderHasApproveIcon(workOrderNumber, false);
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderHasInvoiceIcon(workOrderNumber, true);
+        RegularMyWorkOrdersSteps.changeStatusForWorkOrder(workOrderNumber, WorkOrderStatuses.NEW);
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderHasApproveIcon(workOrderNumber, true);
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderHasInvoiceIcon(workOrderNumber, false);
+
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

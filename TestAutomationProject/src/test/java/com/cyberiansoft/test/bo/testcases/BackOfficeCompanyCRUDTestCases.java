@@ -15,23 +15,25 @@ import org.testng.annotations.Test;
 //@Listeners(VideoListener.class)
 public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyCRUDData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyCRUDData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyInsuranceCompanyCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
+		backOfficeHeader.clickCompanyLink();
 
-		InsuranceCompaniesWePpage insurancecompaniespage = companypage.clickInsuranceCompaniesLink();
-        insurancecompaniespage.verifyInsuranceCompaniesDoNotExist(data.getInsuranceCompany(), data.getInsuranceCompanyEdited());
+		InsuranceCompaniesWebPage insurancecompaniespage = new InsuranceCompaniesWebPage(webdriver);
+		companyWebPage.clickInsuranceCompaniesLink();
+		insurancecompaniespage.verifyInsuranceCompaniesDoNotExist(data.getInsuranceCompany(), data.getInsuranceCompanyEdited());
 
 		insurancecompaniespage.clickAddInsuranceCompanyButton();
 		insurancecompaniespage.createNewInsuranceCompany(data.getInsuranceCompany());
@@ -61,53 +63,57 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		insurancecompaniespage.clickAddInsuranceCompanyOKButton();
 
 		Assert.assertEquals(data.getInsuranceCompanyAddress(),
-                insurancecompaniespage.getTableInsuranceCompanyAddress(data.getInsuranceCompanyEdited()));
+				insurancecompaniespage.getTableInsuranceCompanyAddress(data.getInsuranceCompanyEdited()));
 		Assert.assertEquals(data.getInsuranceCompanyEmail(),
-                insurancecompaniespage.getTableInsuranceCompanyEmail(data.getInsuranceCompanyEdited()));
+				insurancecompaniespage.getTableInsuranceCompanyEmail(data.getInsuranceCompanyEdited()));
 		Assert.assertEquals(data.getInsuranceCompanyPhone(),
-                insurancecompaniespage.getTableInsuranceCompanyPhone(data.getInsuranceCompanyEdited()));
+				insurancecompaniespage.getTableInsuranceCompanyPhone(data.getInsuranceCompanyEdited()));
 
 		insurancecompaniespage.deleteInsuranceCompanyAndCancelDeleting(data.getInsuranceCompanyEdited());
 		insurancecompaniespage.deleteInsuranceCompany(data.getInsuranceCompanyEdited());
 		Assert.assertFalse(insurancecompaniespage.insuranceCompanyExists(data.getInsuranceCompanyEdited()));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyTeamsCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-		CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
+		backOfficeHeader.clickCompanyLink();
 
-		TeamsWebPage teamspage = companypage.clickTeamsLink();
-		teamspage.makeSearchPanelVisible().setTeamLocationSearchCriteria(data.getTeam()).clickFindButton();
+		TeamsWebPage teamspage = new TeamsWebPage(webdriver);
+		companyWebPage.clickTeamsLink();
+		teamspage.makeSearchPanelVisible();
+		teamspage.setTeamLocationSearchCriteria(data.getTeam()).clickFindButton();
 		teamspage.verifyTeamsDoNotExist(data.getTeam(), data.getTeamEdited());
 
-		teamspage.createNewTeam(data.getTeam() , "Default area");
+		teamspage.createNewTeam(data.getTeam(), "Default area");
 		teamspage.setTeamLocationSearchCriteria(data.getTeam()).clickFindButton();
 
-		NewTeamsDialogWebPage newteamsdialog = teamspage.clickEditTeam(data.getTeam());
+		NewTeamsDialogWebPage newteamsdialog = new NewTeamsDialogWebPage(webdriver);
+		teamspage.clickEditTeam(data.getTeam());
 		Assert.assertEquals(data.getTeam(), newteamsdialog.getNewTeamName());
 
-		newteamsdialog.setNewTeamName(data.getTeamEdited())
-                .selectTeamTimezone(data.getTeamTimeZone())
-                .setNewTeamDescription(data.getTeamDesc())
-                .setNewTeamAccountingID(data.getTeamId())
-                .selectTeamArea(data.getTeamArea())
-                .selectTeamTimesheetType(data.getTeamTimeSheetType())
-                .selectTeamDefaultRepairLocation(data.getTeamDefaultLocation())
-                .selectTeamAdditionalRepairLocation(data.getTeamAdditionalLocation())
-                .selectTeamType(data.getTeamType())
-                .setNewTeamCompany(data.getTeamCompany())
-                .setNewTeamAddress(data.getTeamAddress())
-                .setNewTeamCity(data.getTeamCity())
-                .selectTeamCountry(data.getTeamCountry())
-                .selectTeamState(data.getTeamState())
-                .setNewTeamZip(data.getTeamZip())
-                .setNewTeamEmail(data.getTeamEmail())
-                .setNewTeamPhone(data.getTeamPhone())
-                .clickAddTeamCancelButton();
+		newteamsdialog.setNewTeamName(data.getTeamEdited());
+		newteamsdialog.selectTeamTimezone(data.getTeamTimeZone());
+		newteamsdialog.setNewTeamDescription(data.getTeamDesc());
+		newteamsdialog.setNewTeamAccountingID(data.getTeamId());
+		newteamsdialog.selectTeamArea(data.getTeamArea());
+		newteamsdialog.selectTeamTimesheetType(data.getTeamTimeSheetType());
+		newteamsdialog.selectTeamDefaultRepairLocation(data.getTeamDefaultLocation());
+		newteamsdialog.selectTeamAdditionalRepairLocation(data.getTeamAdditionalLocation());
+		newteamsdialog.selectTeamType(data.getTeamType());
+		newteamsdialog.setNewTeamCompany(data.getTeamCompany());
+		newteamsdialog.setNewTeamAddress(data.getTeamAddress());
+		newteamsdialog.setNewTeamCity(data.getTeamCity());
+		newteamsdialog.selectTeamCountry(data.getTeamCountry());
+		newteamsdialog.selectTeamState(data.getTeamState());
+		newteamsdialog.setNewTeamZip(data.getTeamZip());
+		newteamsdialog.setNewTeamEmail(data.getTeamEmail());
+		newteamsdialog.setNewTeamPhone(data.getTeamPhone());
+		newteamsdialog.clickAddTeamCancelButton();
 
 		Assert.assertEquals("Internal", teamspage.getTableTeamType(data.getTeam()).trim());
 		Assert.assertEquals("", teamspage.getTableTeamLocation(data.getTeam()).trim());
@@ -116,18 +122,26 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		Assert.assertEquals("(UTC-08:00) Pacific Time (US & Canada)", teamspage.getTableTeamTimeZone(data.getTeam()).trim());
 		Assert.assertEquals("", teamspage.getTableTeamDescription(data.getTeam()).trim());
 
-		newteamsdialog = teamspage.clickEditTeam(data.getTeam());
-		newteamsdialog.setNewTeamName(data.getTeamEdited())
-                .selectTeamTimezone(data.getTeamTimeZone()).setNewTeamDescription(data.getTeamDesc())
-                .setNewTeamAccountingID(data.getTeamId())
-			    .selectTeamArea(data.getTeamArea()).selectTeamTimesheetType(data.getTeamTimeSheetType())
-                .selectTeamDefaultRepairLocation(data.getTeamDefaultLocation())
-			    .selectTeamAdditionalRepairLocation(data.getTeamAdditionalLocation())
-                .selectTeamType(data.getTeamType()).setNewTeamCompany(data.getTeamCompany())
-			    .setNewTeamAddress(data.getTeamAddress()).setNewTeamCity(data.getTeamCity())
-                .selectTeamCountry(data.getTeamCountry()).selectTeamState(data.getTeamState())
-			    .setNewTeamZip(data.getTeamZip()).setNewTeamEmail(data.getTeamEmail())
-                .setNewTeamPhone(data.getTeamPhone()).clickAddTeamOKButton();
+		newteamsdialog = new NewTeamsDialogWebPage(webdriver);
+		teamspage.clickEditTeam(data.getTeam());
+		newteamsdialog.setNewTeamName(data.getTeamEdited());
+		newteamsdialog.selectTeamTimezone(data.getTeamTimeZone());
+		newteamsdialog.setNewTeamDescription(data.getTeamDesc());
+		newteamsdialog.setNewTeamAccountingID(data.getTeamId());
+		newteamsdialog.selectTeamArea(data.getTeamArea());
+		newteamsdialog.selectTeamTimesheetType(data.getTeamTimeSheetType());
+		newteamsdialog.selectTeamDefaultRepairLocation(data.getTeamDefaultLocation());
+		newteamsdialog.selectTeamAdditionalRepairLocation(data.getTeamAdditionalLocation());
+		newteamsdialog.selectTeamType(data.getTeamType());
+		newteamsdialog.setNewTeamCompany(data.getTeamCompany());
+		newteamsdialog.setNewTeamAddress(data.getTeamAddress());
+		newteamsdialog.setNewTeamCity(data.getTeamCity());
+		newteamsdialog.selectTeamCountry(data.getTeamCountry());
+		newteamsdialog.selectTeamState(data.getTeamState());
+		newteamsdialog.setNewTeamZip(data.getTeamZip());
+		newteamsdialog.setNewTeamEmail(data.getTeamEmail());
+		newteamsdialog.setNewTeamPhone(data.getTeamPhone());
+		newteamsdialog.clickAddTeamOKButton();
 
 		Assert.assertEquals(data.getTeamType(), teamspage.getTableTeamType(data.getTeamEdited()).trim());
 		Assert.assertEquals(data.getTeamDefaultLocation(), teamspage.getTableTeamLocation(data.getTeamEdited()).trim());
@@ -145,19 +159,21 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyJobsCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companyPage = backOfficeHeader.clickCompanyLink();
+		backOfficeHeader.clickCompanyLink();
 
-        JobsWebPage jobsPage = companyPage.clickJobsLink();
-        if (jobsPage.isJobPresent(data.getJob())) {
-            jobsPage.deleteJob(data.getJob());
-        }
+		companyWebPage.clickJobsLink();
+		JobsWebPage jobsPage = new JobsWebPage(webdriver);
+		if (jobsPage.isJobPresent(data.getJob())) {
+			jobsPage.deleteJob(data.getJob());
+		}
 
-        jobsPage.createNewJob(data.getJob());
-        jobsPage.clickEditJob(data.getJob());
-        Assert.assertEquals(data.getJob(), jobsPage.getNewJobName());
+		jobsPage.createNewJob(data.getJob());
+		jobsPage.clickEditJob(data.getJob());
+		Assert.assertEquals(data.getJob(), jobsPage.getNewJobName());
 		jobsPage.setNewJobName(data.getJobEdited());
 		jobsPage.setNewJobDescription(data.getJobDesc());
 		jobsPage.selectJobClient(data.getCustomer());
@@ -202,11 +218,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyServiceAdvisorsCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ServiceAdvisorsWebPage serviceadvisorspage = companypage.clickServiceAdvisorsLink();
+		backOfficeHeader.clickCompanyLink();
+		ServiceAdvisorsWebPage serviceadvisorspage = new ServiceAdvisorsWebPage(webdriver);
+		companyWebPage.clickServiceAdvisorsLink();
 		serviceadvisorspage.makeSearchPanelVisible();
 		serviceadvisorspage.setUserSearchCriteria(data.getFirstName() + " " + data.getLastName());
 		serviceadvisorspage.clickFindButton();
@@ -263,11 +281,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyServiceContractTypesCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ServiceContractTypesWebPage servicecontracttypespage = companypage.clickServiceContractTypesLink();
+		backOfficeHeader.clickCompanyLink();
+		ServiceContractTypesWebPage servicecontracttypespage = new ServiceContractTypesWebPage(webdriver);
+		companyWebPage.clickServiceContractTypesLink();
 		servicecontracttypespage.verifyServiceContractTypesDoNotExist(data.getContractType(), data.getContractTypeEdited());
 
 		servicecontracttypespage.clickAddServiceContractTypeButton();
@@ -297,15 +317,15 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		servicecontracttypespage.clickNewServiceContractTypeOKButton();
 
 		Assert.assertEquals(data.getContractTypeDesc(),
-                servicecontracttypespage.getTableServiceContractTypeDescription(data.getContractTypeEdited()).trim());
+				servicecontracttypespage.getTableServiceContractTypeDescription(data.getContractTypeEdited()).trim());
 		Assert.assertEquals(BackOfficeUtils.getFullPriceRepresentation(data.getContractTypePrice()),
-                servicecontracttypespage.getTableServiceContractTypePrice(data.getContractTypeEdited()).trim());
+				servicecontracttypespage.getTableServiceContractTypePrice(data.getContractTypeEdited()).trim());
 		Assert.assertEquals(BackOfficeUtils.getFullPriceRepresentation(data.getContractTypeSalesPrice()),
-                servicecontracttypespage.getTableServiceContractTypeSalesPrice(data.getContractTypeEdited()).trim());
+				servicecontracttypespage.getTableServiceContractTypeSalesPrice(data.getContractTypeEdited()).trim());
 		Assert.assertEquals(data.getContractTypeAccId(),
-                servicecontracttypespage.getTableServiceContractTypeAccID(data.getContractTypeEdited()).trim());
+				servicecontracttypespage.getTableServiceContractTypeAccID(data.getContractTypeEdited()).trim());
 		Assert.assertEquals(data.getContractTypeAccId2(),
-                servicecontracttypespage.getTableServiceContractTypeAccID2(data.getContractTypeEdited()).trim());
+				servicecontracttypespage.getTableServiceContractTypeAccID2(data.getContractTypeEdited()).trim());
 
 		servicecontracttypespage.deleteServiceContractTypeAndCancelDeleting(data.getContractTypeEdited());
 		servicecontracttypespage.deleteServiceContractType(data.getContractTypeEdited());
@@ -315,11 +335,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyPriceMatrixCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		PriceMatricesWebPage pricematricespage = companypage.clickPriceMatricesLink();
+		backOfficeHeader.clickCompanyLink();
+		PriceMatricesWebPage pricematricespage = new PriceMatricesWebPage(webdriver);
+		companyWebPage.clickPriceMatricesLink();
 		pricematricespage.verifyPriceMatricesDoNotExist(data.getPriceMatrixName(), data.getPriceMatrixNameEdited());
 
 		pricematricespage.clickAddPriceMarixButton();
@@ -340,9 +362,9 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		pricematricespage.selectPriceMarixType(data.getPriceMatrixType());
 		pricematricespage.saveNewPriceMatrix();
 		Assert.assertEquals(data.getPriceMatrixService(),
-                pricematricespage.getTablePriceMatrixService(data.getPriceMatrixNameEdited()));
+				pricematricespage.getTablePriceMatrixService(data.getPriceMatrixNameEdited()));
 		Assert.assertEquals(data.getPriceMatrixType(),
-                pricematricespage.getTablePriceMatrixType(data.getPriceMatrixNameEdited()));
+				pricematricespage.getTablePriceMatrixType(data.getPriceMatrixNameEdited()));
 
 		pricematricespage.deletePriceMatrixAndCancelDeleting(data.getPriceMatrixNameEdited());
 		pricematricespage.deletePriceMatrix(data.getPriceMatrixNameEdited());
@@ -352,15 +374,17 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyInvoiceTypeCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		InvoiceTypesWebPage invoicestypespage = companypage.clickInvoiceTypesLink();
+		backOfficeHeader.clickCompanyLink();
+		InvoiceTypesWebPage invoicestypespage = new InvoiceTypesWebPage(webdriver);
+		companyWebPage.clickInvoiceTypesLink();
 
 		invoicestypespage.verifyInvoiceTypesDoNotExist(data.getInvoiceType(), data.getInvoiceTypeEdited());
 
-        NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
+		NewInvoiceTypeDialogWebPage newinvoicetypedialog = invoicestypespage.clickAddInvoiceTypeButton();
 		newinvoicetypedialog.createInvoiceType(data.getInvoiceType());
 		newinvoicetypedialog = invoicestypespage.clickEditInvoiceType(data.getInvoiceType());
 		newinvoicetypedialog.setInvoiceTypeName(data.getInvoiceTypeEdited());
@@ -373,7 +397,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		newinvoicetypedialog.setInvoiceTypeDescription(data.getInvoiceTypeDesc());
 		newinvoicetypedialog.clickOKAddInvoiceTypeButton();
 		Assert.assertEquals(data.getInvoiceTypeDesc(),
-                invoicestypespage.getTableInvoiceTypeDescription(data.getInvoiceTypeEdited()));
+				invoicestypespage.getTableInvoiceTypeDescription(data.getInvoiceTypeEdited()));
 
 		invoicestypespage.deleteInvoiceTypeAndCancelDeleting(data.getInvoiceTypeEdited());
 		invoicestypespage.deleteInvoiceType(data.getInvoiceTypeEdited());
@@ -383,11 +407,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyServiceRequestTypeCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ServiceRequestTypesWebPage servicerequesttypespage= companypage.clickServiceRequestTypesLink();
+		backOfficeHeader.clickCompanyLink();
+		ServiceRequestTypesWebPage servicerequesttypespage = new ServiceRequestTypesWebPage(webdriver);
+		companyWebPage.clickServiceRequestTypesLink();
 		servicerequesttypespage.verifyServiceRequestsTypesDoNotExist(data.getServiceType(), data.getServiceTypeEdited());
 		servicerequesttypespage.clickAddServiceRequestTypeButton();
 		servicerequesttypespage.createNewServiceRequestType(data.getServiceType());
@@ -405,7 +431,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		servicerequesttypespage.selectNewServiceRequestTypeTeam(data.getServiceTypeTeam());
 		servicerequesttypespage.clickNewServiceRequestTypeOKButton();
 		Assert.assertEquals(data.getServiceTypeDesc(),
-                servicerequesttypespage.getTableServiceRequestTypeDescription(data.getServiceTypeEdited()));
+				servicerequesttypespage.getTableServiceRequestTypeDescription(data.getServiceTypeEdited()));
 
 		servicerequesttypespage.deleteServiceRequestTypeAndCancelDeleting(data.getServiceTypeEdited());
 		servicerequesttypespage.deleteServiceRequestType(data.getServiceTypeEdited());
@@ -415,11 +441,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyEmailTemplatesCRUD(String rowID, String description, JSONObject testData) throws Exception {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		EmailTemplatesWebPage emailtemplatespage = companypage.clickEmailTemplatesLink();
+		backOfficeHeader.clickCompanyLink();
+		EmailTemplatesWebPage emailtemplatespage = new EmailTemplatesWebPage(webdriver);
+		companyWebPage.clickEmailTemplatesLink();
 		emailtemplatespage.verifyEmailTemplatesDoNoExist(data.getTemplateName(), data.getTemplateNameEdited());
 
 		emailtemplatespage.clickAddMailTemplateButton();
@@ -430,13 +458,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		emailtemplatespage.setNewEmailTemplateBody(data.getTemplateBody());
 		emailtemplatespage.clickNewEmailTemplateCancelButton();
 		Assert.assertEquals(data.getTemplateSubject(),
-                emailtemplatespage.getTableEmailTemplateSubject(data.getTemplateName()).trim());
+				emailtemplatespage.getTableEmailTemplateSubject(data.getTemplateName()).trim());
 
 		emailtemplatespage.clickEditEmailTemplate(data.getTemplateName());
 		emailtemplatespage.createNewEmailTemplate(data.getTemplateNameEdited(),
-                data.getTemplateSubjectEdited(), data.getTemplateBody());
+				data.getTemplateSubjectEdited(), data.getTemplateBody());
 		Assert.assertEquals(data.getTemplateSubjectEdited(),
-                emailtemplatespage.getTableEmailTemplateSubject(data.getTemplateNameEdited()).trim());
+				emailtemplatespage.getTableEmailTemplateSubject(data.getTemplateNameEdited()).trim());
 
 		emailtemplatespage.deleteEmailTemplateAndCancelDeleting(data.getTemplateNameEdited());
 		emailtemplatespage.deleteEmailTemplate(data.getTemplateNameEdited());
@@ -446,11 +474,13 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyPrintServerCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		PrintServersWebPage printserverspage = companypage.clickPrintServersLink();
+		backOfficeHeader.clickCompanyLink();
+		PrintServersWebPage printserverspage = new PrintServersWebPage(webdriver);
+		companyWebPage.clickPrintServersLink();
 		printserverspage.verifyPrintServersDoNotExist(data.getPrintServerName(), data.getPrintServerNameEdited());
 
 		printserverspage.clickAddPrintServerButton();
@@ -465,21 +495,23 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		printserverspage.clickEditPrintServer(data.getPrintServerName());
 		printserverspage.addNewPrintServer(data.getPrintServerNameEdited(), data.getPrintServerDesc());
 		Assert.assertEquals(data.getPrintServerDesc(),
-                printserverspage.getTablePrintServerDescription(data.getPrintServerNameEdited()).trim());
+				printserverspage.getTablePrintServerDescription(data.getPrintServerNameEdited()).trim());
 
 		printserverspage.deletePrintServerAndCancelDeleting(data.getPrintServerNameEdited());
 		printserverspage.deletePrintServer(data.getPrintServerNameEdited());
 		Assert.assertFalse(printserverspage.printServerExists(data.getPrintServerNameEdited()));
 	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyLicenceCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ManageLicencesWebPage managelicencespage = companypage.clickManageLicencesLink();
+		backOfficeHeader.clickCompanyLink();
+		ManageLicencesWebPage managelicencespage = new ManageLicencesWebPage(webdriver);
+		companyWebPage.clickManageLicencesLink();
 		managelicencespage.makeSearchPanelVisible();
 		managelicencespage.selectLicenceSearchApplicationParameter(data.getLicenceApp());
 		managelicencespage.clickFindButton();
@@ -511,12 +543,14 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyTimesheetTypesCRUD(String rowID, String description, JSONObject testData) throws Exception {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		TimesheetTypesWebPage timesheettypespage = companypage.clickTimesheetTypesLink();
-        timesheettypespage.verifyTimeSheetsTypeDoNoExist(data.getTimeSheetType(), data.getTimeSheetTypeEdited());
+		backOfficeHeader.clickCompanyLink();
+		TimesheetTypesWebPage timesheettypespage = new TimesheetTypesWebPage(webdriver);
+		companyWebPage.clickTimesheetTypesLink();
+		timesheettypespage.verifyTimeSheetsTypeDoNoExist(data.getTimeSheetType(), data.getTimeSheetTypeEdited());
 
 		timesheettypespage.clickAddTimesheetTypeButton();
 		String tsdefaultentrytype = timesheettypespage.createNewTimesheetType(data.getTimeSheetType());
@@ -526,8 +560,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		timesheettypespage.setNewTimesheetTypeDescription(data.getTimeSheetTypeDesc());
 		timesheettypespage.selectNewTimesheetTypeEntryType(data.getTimeSheetTypeEntryType());
 		timesheettypespage.clickNewTimesheetTypeCancelButton();
-		Assert.assertEquals("",  timesheettypespage.getTableTimesheetTypeDescription(data.getTimeSheetType()).trim());
-		Assert.assertEquals(tsdefaultentrytype,  timesheettypespage.getTableTimesheetTypeEntryType(data.getTimeSheetType()).trim());
+		Assert.assertEquals("", timesheettypespage.getTableTimesheetTypeDescription(data.getTimeSheetType()).trim());
+		Assert.assertEquals(tsdefaultentrytype, timesheettypespage.getTableTimesheetTypeEntryType(data.getTimeSheetType()).trim());
 
 		timesheettypespage.clickEditTimesheetType(data.getTimeSheetType());
 		timesheettypespage.setNewTimesheetTypeName(data.getTimeSheetTypeEdited());
@@ -535,7 +569,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		timesheettypespage.selectNewTimesheetTypeEntryType(data.getTimeSheetTypeEntryType());
 		timesheettypespage.clickNewTimesheetTypeOKButton();
 		Assert.assertEquals(data.getTimeSheetTypeDesc(),
-                timesheettypespage.getTableTimesheetTypeDescription(data.getTimeSheetTypeEdited()).trim());
+				timesheettypespage.getTableTimesheetTypeDescription(data.getTimeSheetTypeEdited()).trim());
 		//Assert.assertEquals(data.getTimeSheetTypeEntryType(),  timesheettypespage.getTableTimesheetTypeEntryType(data.getTimeSheetTypeEdited()).trim());
 
 		timesheettypespage.deleteTimesheetTypeAndCancelDeleting(data.getTimeSheetTypeEdited());
@@ -546,12 +580,14 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testCompanyServicePackagesCRUD(String rowID, String description, JSONObject testData) {
 
-        BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-		ServicePackagesWebPage servicepackagespage = companypage.clickServicePackagesLink();
-        servicepackagespage.verifyServicePackagesDoNotExist(data.getServicePackageName(), data.getServicePackageNameEdited());
+		backOfficeHeader.clickCompanyLink();
+		ServicePackagesWebPage servicepackagespage = new ServicePackagesWebPage(webdriver);
+		companyWebPage.clickServicePackagesLink();
+		servicepackagespage.verifyServicePackagesDoNotExist(data.getServicePackageName(), data.getServicePackageNameEdited());
 
 		NewServicePackageDialogWebPage newservicepackagedialog = servicepackagespage.clickAddServicePackageButton();
 		newservicepackagedialog.setNewServicePackageName(data.getServicePackageName());
@@ -562,93 +598,95 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		newservicepackagedialog.clickOKButton();
 
 		Assert.assertEquals(servicepackagespage.getTableServicePackageType(data.getServicePackageName()),
-                data.getServicePackageType());
+				data.getServicePackageType());
 		Assert.assertEquals(servicepackagespage.getTableServicePackageFormType(data.getServicePackageName()),
-                data.getServicePackageFormType());
+				data.getServicePackageFormType());
 		servicepackagespage.clickEditServicePackage(data.getServicePackageName());
 
 		newservicepackagedialog.setNewServicePackageName(data.getServicePackageNameEdited());
 		newservicepackagedialog.clickCancelButton();
 
 		Assert.assertEquals(servicepackagespage.getTableServicePackageType(data.getServicePackageName()),
-                data.getServicePackageType());
+				data.getServicePackageType());
 		Assert.assertEquals(servicepackagespage.getTableServicePackageFormType(data.getServicePackageName()),
-                data.getServicePackageFormType());
+				data.getServicePackageFormType());
 		servicepackagespage.clickEditServicePackage(data.getServicePackageName());
 		Assert.assertEquals(newservicepackagedialog.getNewServicePackageName(), data.getServicePackageName());
 
 		newservicepackagedialog.setNewServicePackageName(data.getServicePackageNameEdited());
 		newservicepackagedialog.clickOKButton();
 		Assert.assertEquals(servicepackagespage.getTableServicePackageType(data.getServicePackageNameEdited()),
-                data.getServicePackageType());
+				data.getServicePackageType());
 		Assert.assertEquals(servicepackagespage.getTableServicePackageFormType(data.getServicePackageNameEdited()),
-                data.getServicePackageFormType());
+				data.getServicePackageFormType());
 
 		servicepackagespage.deleteServicePackageAndCancelDeleting(data.getServicePackageNameEdited());
 		servicepackagespage.deleteServicePackage(data.getServicePackageNameEdited());
 	}
 
-    //@Test(testName = "Test Case 28992:Company- Work Order Types: CRUD", description = "Company- Work Order Types: CRUD")
-    public void testCompanyWorkOrderTypesCRUD() throws Exception {
+	//@Test(testName = "Test Case 28992:Company- Work Order Types: CRUD", description = "Company- Work Order Types: CRUD")
+	public void testCompanyWorkOrderTypesCRUD() throws Exception {
 
 
-        final String wotype = "test wotype";
-        final String wotypeservicepkg = "Internal";
-        final String wotypedesc = "wotype description";
-        final String wotypealiasname = "xxxx";
-        final String newwotypeservicepkg = "Used Car";
-        final String wotypegroupby = "Panels";
-        final String wotypepriceaccess = "Hidden";
-        final String wotypesharingtype = "data.getTeam() Sharing";
-        final String[] wotypeoptions = {"Approval Required", "Allow Delete", "Block Identical VIN", "Block Identical Services",
-                "Vehicle History Enforced", "Total Sale Field Required", "Status Reason Required"};
+		final String wotype = "test wotype";
+		final String wotypeservicepkg = "Internal";
+		final String wotypedesc = "wotype description";
+		final String wotypealiasname = "xxxx";
+		final String newwotypeservicepkg = "Used Car";
+		final String wotypegroupby = "Panels";
+		final String wotypepriceaccess = "Hidden";
+		final String wotypesharingtype = "data.getTeam() Sharing";
+		final String[] wotypeoptions = {"Approval Required", "Allow Delete", "Block Identical VIN", "Block Identical Services",
+				"Vehicle History Enforced", "Total Sale Field Required", "Status Reason Required"};
 
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver,
-                BackOfficeHeaderPanel.class);
-        CompanyWebPage companypage = backOfficeHeader.clickCompanyLink();
-        WorkOrderTypesWebPage workordertypespage = companypage.clickWorkOrderTypesLink();
-        if (workordertypespage.isWorkOrderTypeExists(wotype)) {
-            workordertypespage.deleteWorkOrderType(wotype);
-        }
-        workordertypespage.clickAddWorkOrderTypeButton();
-        final String defaultwotypepriceaccess = workordertypespage.createNewWorkOrderType(wotype, wotypeservicepkg);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-        workordertypespage.clickEditWorkOrderType(wotype);
-        workordertypespage.setNewWorkOrderTypeDescription(wotypedesc);
-        workordertypespage.setNewWorkOrderTypeAliasName(wotypealiasname);
-        workordertypespage.selectNewWorkOrderyTypeServicePackage(newwotypeservicepkg);
-        workordertypespage.selectNewWorkOrderyTypeGroupServicesBy(wotypegroupby);
-        workordertypespage.selectNewWorkOrderyTypePriceAccess(wotypepriceaccess);
-        workordertypespage.selectNewWorkOrderyTypeSharing(wotypesharingtype);
-        for (int i = 0; i < wotypeoptions.length; i++) {
-            workordertypespage.chechWOTypeOption(wotypeoptions[i]);
-        }
-        workordertypespage.setNewWorkOrderTypeMonitorRepairingInformation(true, true, "10");
-        workordertypespage.clickNewWorkOrderTypeCancelButton();
+		backOfficeHeader.clickCompanyLink();
+		WorkOrderTypesWebPage workordertypespage = new WorkOrderTypesWebPage(webdriver);
+		companyWebPage.clickWorkOrderTypesLink();
+		if (workordertypespage.isWorkOrderTypeExists(wotype)) {
+			workordertypespage.deleteWorkOrderType(wotype);
+		}
+		workordertypespage.clickAddWorkOrderTypeButton();
+		final String defaultwotypepriceaccess = workordertypespage.createNewWorkOrderType(wotype, wotypeservicepkg);
 
-        Assert.assertEquals("", workordertypespage.getTableWorkOrderTypeDescription(wotype).trim());
-        Assert.assertEquals(wotypeservicepkg, workordertypespage.getTableWorkOrderTypeServicePackage(wotype).trim());
-        Assert.assertEquals(defaultwotypepriceaccess, workordertypespage.getTableWorkOrderTypePriceAccess(wotype));
+		workordertypespage.clickEditWorkOrderType(wotype);
+		workordertypespage.setNewWorkOrderTypeDescription(wotypedesc);
+		workordertypespage.setNewWorkOrderTypeAliasName(wotypealiasname);
+		workordertypespage.selectNewWorkOrderyTypeServicePackage(newwotypeservicepkg);
+		workordertypespage.selectNewWorkOrderyTypeGroupServicesBy(wotypegroupby);
+		workordertypespage.selectNewWorkOrderyTypePriceAccess(wotypepriceaccess);
+		workordertypespage.selectNewWorkOrderyTypeSharing(wotypesharingtype);
+		for (int i = 0; i < wotypeoptions.length; i++) {
+			workordertypespage.chechWOTypeOption(wotypeoptions[i]);
+		}
+		workordertypespage.setNewWorkOrderTypeMonitorRepairingInformation(true, true, "10");
+		workordertypespage.clickNewWorkOrderTypeCancelButton();
 
-        workordertypespage.clickEditWorkOrderType(wotype);
-        workordertypespage.setNewWorkOrderTypeDescription(wotypedesc);
-        workordertypespage.setNewWorkOrderTypeAliasName(wotypealiasname);
-        workordertypespage.selectNewWorkOrderyTypeServicePackage(newwotypeservicepkg);
-        workordertypespage.selectNewWorkOrderyTypeGroupServicesBy(wotypegroupby);
-        workordertypespage.selectNewWorkOrderyTypePriceAccess(wotypepriceaccess);
-        workordertypespage.selectNewWorkOrderyTypeSharing(wotypesharingtype);
-        for (int i = 0; i < wotypeoptions.length; i++) {
-            workordertypespage.chechWOTypeOption(wotypeoptions[i]);
-        }
-        workordertypespage.setNewWorkOrderTypeMonitorRepairingInformation(true, true, "10");
-        workordertypespage.clickNewWorkOrderTypeOKButton();
+		Assert.assertEquals("", workordertypespage.getTableWorkOrderTypeDescription(wotype).trim());
+		Assert.assertEquals(wotypeservicepkg, workordertypespage.getTableWorkOrderTypeServicePackage(wotype).trim());
+		Assert.assertEquals(defaultwotypepriceaccess, workordertypespage.getTableWorkOrderTypePriceAccess(wotype));
 
-        Assert.assertEquals(wotypedesc, workordertypespage.getTableWorkOrderTypeDescription(wotype).trim());
-        Assert.assertEquals(newwotypeservicepkg, workordertypespage.getTableWorkOrderTypeServicePackage(wotype).trim());
-        Assert.assertEquals(wotypepriceaccess, workordertypespage.getTableWorkOrderTypePriceAccess(wotype));
+		workordertypespage.clickEditWorkOrderType(wotype);
+		workordertypespage.setNewWorkOrderTypeDescription(wotypedesc);
+		workordertypespage.setNewWorkOrderTypeAliasName(wotypealiasname);
+		workordertypespage.selectNewWorkOrderyTypeServicePackage(newwotypeservicepkg);
+		workordertypespage.selectNewWorkOrderyTypeGroupServicesBy(wotypegroupby);
+		workordertypespage.selectNewWorkOrderyTypePriceAccess(wotypepriceaccess);
+		workordertypespage.selectNewWorkOrderyTypeSharing(wotypesharingtype);
+		for (int i = 0; i < wotypeoptions.length; i++) {
+			workordertypespage.chechWOTypeOption(wotypeoptions[i]);
+		}
+		workordertypespage.setNewWorkOrderTypeMonitorRepairingInformation(true, true, "10");
+		workordertypespage.clickNewWorkOrderTypeOKButton();
 
-        workordertypespage.deleteWorkOrderTypeAndCancelDeleting(wotype);
-        workordertypespage.deleteWorkOrderType(wotype);
-        Assert.assertFalse(workordertypespage.isWorkOrderTypeExists(wotype));
-    }
+		Assert.assertEquals(wotypedesc, workordertypespage.getTableWorkOrderTypeDescription(wotype).trim());
+		Assert.assertEquals(newwotypeservicepkg, workordertypespage.getTableWorkOrderTypeServicePackage(wotype).trim());
+		Assert.assertEquals(wotypepriceaccess, workordertypespage.getTableWorkOrderTypePriceAccess(wotype));
+
+		workordertypespage.deleteWorkOrderTypeAndCancelDeleting(wotype);
+		workordertypespage.deleteWorkOrderType(wotype);
+		Assert.assertFalse(workordertypespage.isWorkOrderTypeExists(wotype));
+	}
 }

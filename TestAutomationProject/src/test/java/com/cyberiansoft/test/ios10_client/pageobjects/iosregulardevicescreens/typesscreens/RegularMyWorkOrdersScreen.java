@@ -186,14 +186,6 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		WaitUtils.waitUntilElementIsClickable(mywotable);
 		return appiumdriver.findElements(MobileBy.AccessibilityId(workOrderNumber)).size() > 0;	
 	}
-	
-	public boolean isWorkOrderHasApproveIcon(String workOrderNumber) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderNumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_78')]")).size() > 0;
-	}
-	
-	public boolean isWorkOrderHasActionIcon(String workOrderNumber) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderNumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_79')]")).size() > 0;
-	}
 
 	public void clickInvoiceIcon() {
 		appiumdriver.findElementByAccessibilityId("invoice new").click();
@@ -278,5 +270,15 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	public boolean isNotesIconPresentForWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
 		return mywotable.findElementByAccessibilityId(workOrderId).findElementsByAccessibilityId("ORDER_NOTES").size() > 0;
+	}
+
+	public boolean isApproveIconPresentForWorkOrder(String workOrderId) {
+		waitMyWorkOrdersScreenLoaded();
+		return mywotable.findElementByAccessibilityId(workOrderId).findElementsByAccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_7").size() > 0;
+	}
+
+	public boolean isInvoiceIconPresentForWorkOrder(String workOrderId) {
+		waitMyWorkOrdersScreenLoaded();
+		return mywotable.findElementByAccessibilityId(workOrderId).findElementsByAccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_8").size() > 0;
 	}
 }

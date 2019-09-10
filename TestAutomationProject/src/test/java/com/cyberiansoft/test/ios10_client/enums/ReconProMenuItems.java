@@ -18,6 +18,7 @@ public enum ReconProMenuItems {
     SEND_EMAIL("Send\nEmail"),
     NEW_INSPECTION("New\nInspection"),
     CHECK_IN("Check In"),
+    CHANGE_STATUS("Change\nStatus"),
     UNDO_CHECK_IN("Undo\nCheck In"),
     NOTES("Notes"),
     APPROVE("Approve"),

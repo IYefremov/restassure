@@ -10,262 +10,206 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
 
 public class CompanyWebPage extends BaseWebPage {
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Clients']")
 	private WebElement clientslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Service Packages']")
 	private WebElement servicepackageslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Users']")
 	private WebElement userslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Employees']")
-	private WebElement employeeslink;	
-	
+	private WebElement employeeslink;
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Services']")
 	private WebElement serviceslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Teams']")
 	private WebElement teamslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Jobs']")
 	private WebElement jobslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Areas']")
 	private WebElement areaslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Email Templates']")
 	private WebElement emailtemplateslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Print Servers']")
 	private WebElement printserverslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Print Templates Configurations']")
 	private WebElement printtemplatesconfiglink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Insurance Companies']")
 	private WebElement insurancecompanieslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Service Advisors']")
 	private WebElement serviceadvisorslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Question Forms']")
 	private WebElement questionsformslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Inspection Types']")
 	private WebElement inspectiontypeslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Supplies']")
 	private WebElement supplieslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Invoice Types']")
 	private WebElement invoicetypeslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Work Order Types']")
 	private WebElement workordertypeslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Service Expense Types']")
 	private WebElement expensestypeslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Service Request Types']")
 	private WebElement servicerequesttypeslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Price Matrices']")
 	private WebElement pricematriceslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Service Contract Types']")
 	private WebElement servicecontracttypeslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Vehicle Parts']")
 	private WebElement vehiclepartslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Manage Devices']")
 	private WebElement managedeviceslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Manage Licences']")
 	private WebElement managelicenceslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Timesheet Types']")
 	private WebElement timesheetypesslink;
-	
+
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Inter Application Exchange']")
 	private WebElement interApplicationExchangeLink;
 
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Client Users']")
 	private WebElement clientUsersLink;
-	
+
 	public CompanyWebPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
-	
-	public ClientsWebPage clickClientsLink() {
+
+	public void clickClientsLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(clientslink)).click();
-		return PageFactory.initElements(
-				driver, ClientsWebPage.class);
 	}
 
-	public ClientUsersWebPage clickClientUsersLink() {
+	public void clickClientUsersLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(clientUsersLink)).click();
-		return PageFactory.initElements(
-				driver, ClientUsersWebPage.class);
 	}
 
-	public ServicePackagesWebPage clickServicePackagesLink() {
+	public void clickServicePackagesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(servicepackageslink)));
-		return PageFactory.initElements(
-				driver, ServicePackagesWebPage.class);
 	}
-	
-	public UsersWebPage clickUsersLink() {
+
+	public void clickUsersLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(userslink)));
-		return PageFactory.initElements(
-				driver, UsersWebPage.class);
 	}
-	
-	public EmployeesWebPage clickEmployeesLink() {
+
+	public void clickEmployeesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(employeeslink)));
-		return PageFactory.initElements(
-				driver, EmployeesWebPage.class);
 	}
-	
-	public ServicesWebPage clickServicesLink() {
+
+	public void clickServicesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(serviceslink)));
 		wait.until(ExpectedConditions.titleContains("Services"));
-		return PageFactory.initElements(
-				driver, ServicesWebPage.class);
-	}
-	
-	public TeamsWebPage clickTeamsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(teamslink)));
-		return PageFactory.initElements(
-				driver, TeamsWebPage.class);
-	}
-	
-	public JobsWebPage clickJobsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(jobslink)));
-		return PageFactory.initElements(
-				driver, JobsWebPage.class);
-	}
-	
-	public AreasWebPage clickAreasLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(areaslink)));
-		return PageFactory.initElements(
-				driver, AreasWebPage.class);
-	}
-	
-	public EmailTemplatesWebPage clickEmailTemplatesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(emailtemplateslink)));
-		return PageFactory.initElements(
-				driver, EmailTemplatesWebPage.class);
-	}
-	
-	public PrintServersWebPage clickPrintServersLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(printserverslink)));
-		return PageFactory.initElements(
-				driver, PrintServersWebPage.class);
-	}
-	
-	public PrintTemplatesWebPage clickPrintTemplatesConfigurationsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(printtemplatesconfiglink)));
-		return PageFactory.initElements(
-				driver, PrintTemplatesWebPage.class);
-	}
-	
-	public InsuranceCompaniesWePpage clickInsuranceCompaniesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(insurancecompanieslink)));
-		return PageFactory.initElements(
-				driver, InsuranceCompaniesWePpage.class);
-	}
-	
-	public ServiceAdvisorsWebPage clickServiceAdvisorsLink() {
-		click(wait .until(ExpectedConditions.elementToBeClickable(serviceadvisorslink)));
-		return PageFactory.initElements(
-				driver, ServiceAdvisorsWebPage.class);
-	}
-	
-	public QuestionsFormsWebPage clickQuestionsFormsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(questionsformslink)));
-		return PageFactory.initElements(
-				driver, QuestionsFormsWebPage.class);
-	}
-	
-	public InspectionTypesWebPage clickInspectionTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(inspectiontypeslink)));
-		return PageFactory.initElements(
-				driver, InspectionTypesWebPage.class);
-	}
-	
-	public SuppliesWebPage clickSuppliesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(supplieslink)));
-		return PageFactory.initElements(
-				driver, SuppliesWebPage.class);
 	}
 
-	public ExpensesTypesWebPage clickExpensesTypesLink() {
+	public void clickTeamsLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(teamslink)));
+	}
+
+	public void clickJobsLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(jobslink)));
+	}
+
+	public void clickAreasLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(areaslink)));
+	}
+
+	public void clickEmailTemplatesLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(emailtemplateslink)));
+	}
+
+	public void clickPrintServersLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(printserverslink)));
+	}
+
+	public void clickPrintTemplatesConfigurationsLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(printtemplatesconfiglink)));
+	}
+
+	public void clickInsuranceCompaniesLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(insurancecompanieslink)));
+	}
+
+	public void clickServiceAdvisorsLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(serviceadvisorslink)));
+	}
+
+	public void clickQuestionsFormsLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(questionsformslink)));
+	}
+
+	public void clickInspectionTypesLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(inspectiontypeslink)));
+	}
+
+	public void clickSuppliesLink() {
+		click(wait.until(ExpectedConditions.elementToBeClickable(supplieslink)));
+	}
+
+	public void clickExpensesTypesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(expensestypeslink)));
-		return PageFactory.initElements(
-				driver, ExpensesTypesWebPage.class);
 	}
-	
-	public InvoiceTypesWebPage clickInvoiceTypesLink() {
+
+	public void clickInvoiceTypesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(invoicetypeslink)));
-		return PageFactory.initElements(
-				driver, InvoiceTypesWebPage.class);
 	}
-	
-	public WorkOrderTypesWebPage clickWorkOrderTypesLink() {
+
+	public void clickWorkOrderTypesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(workordertypeslink)));
-		return PageFactory.initElements(
-				driver, WorkOrderTypesWebPage.class);
 	}
-	
-	public PriceMatricesWebPage clickPriceMatricesLink() {
+
+	public void clickPriceMatricesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(pricematriceslink)));
-		return PageFactory.initElements(
-				driver, PriceMatricesWebPage.class);
 	}
-	
-	public ServiceContractTypesWebPage clickServiceContractTypesLink() {
+
+	public void clickServiceContractTypesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(servicecontracttypeslink)));
-		return PageFactory.initElements(
-				driver, ServiceContractTypesWebPage.class);
 	}
-	
-	public ServiceRequestTypesWebPage clickServiceRequestTypesLink() {
+
+	public void clickServiceRequestTypesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(servicerequesttypeslink)));
-		return PageFactory.initElements(
-				driver, ServiceRequestTypesWebPage.class);
 	}
-	
-	public VehiclePartsWebPage clickVehiclePartsLink() {
+
+	public void clickVehiclePartsLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(vehiclepartslink)));
-		return PageFactory.initElements(
-				driver, VehiclePartsWebPage.class);
 	}
-	
-	public TimesheetTypesWebPage clickTimesheetTypesLink() {
+
+	public void clickTimesheetTypesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(timesheetypesslink)));
-		return PageFactory.initElements(
-				driver, TimesheetTypesWebPage.class);
 	}
-	
-	public ManageLicencesWebPage clickManageLicencesLink() {
+
+	public void clickManageLicencesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(managelicenceslink)));
-		return PageFactory.initElements(
-				driver, ManageLicencesWebPage.class);
 	}
-	
-	public ActiveDevicesWebPage clickManageDevicesLink() {
+
+	public void clickManageDevicesLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(managedeviceslink)));
-		return PageFactory.initElements(
-				driver, ActiveDevicesWebPage.class);
 	}
-	
-	public InterApplicationExchangeWebPage clickInterApplicationExchangeLink() {
+
+	public void clickInterApplicationExchangeLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(interApplicationExchangeLink)).click();
-		return PageFactory.initElements(
-				driver, InterApplicationExchangeWebPage.class);
 	}
 }

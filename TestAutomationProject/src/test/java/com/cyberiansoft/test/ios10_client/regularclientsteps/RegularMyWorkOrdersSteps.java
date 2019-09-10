@@ -1,8 +1,12 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.enums.WorkOrderStatuses;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularBaseAppScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -87,6 +91,11 @@ public class RegularMyWorkOrdersSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.DETAILS);
     }
 
+    public static void selectWorkOrderChangeStatusMenu(String workOrderId) {
+        selectWorkOrder(workOrderId);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHANGE_STATUS);
+    }
+
     public static void changeCustomerForWorkOrder(String workOrderId, AppCustomer customer) {
         selectWorkOrder(workOrderId);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHANGE_CUSTOMER);
@@ -97,5 +106,17 @@ public class RegularMyWorkOrdersSteps {
     public static void deleteWorkOrder(String workOrderID) {
         selectWorkOrderDeleteMenu(workOrderID);
         Helpers.getAlertTextAndAccept();
+    }
+
+    public static void startCreatingNewInspectionfromWorkOrder(String workOrderId, IInspectionsTypes inspectionsType) {
+        selectWorkOrderForNewInspection(workOrderId);
+        RegularInspectionTypesSteps.selectInspectionType(inspectionsType);
+    }
+
+    public static void changeStatusForWorkOrder(String workOrderId, WorkOrderStatuses workOrderStatuse) {
+        selectWorkOrderChangeStatusMenu(workOrderId);
+        RegularBaseAppScreen baseAppScreen = new RegularBaseAppScreen();
+        baseAppScreen.selectUIAPickerValue(workOrderStatuse.getValue());
+        baseAppScreen.clickPickerWheelDoneButton();
     }
 }

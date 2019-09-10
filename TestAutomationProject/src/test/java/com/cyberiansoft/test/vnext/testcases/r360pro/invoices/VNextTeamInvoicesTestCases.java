@@ -52,7 +52,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	private final RetailCustomer testCustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
 	private final RetailCustomer testCustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
-	@BeforeClass(description="Team Invoices Test Cases")
+	@BeforeClass(description = "Team Invoices Test Cases")
 	public void beforeClass() {
 		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInvoicesTestCasesDataPath();
 
@@ -78,7 +78,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		customersScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanCreateInvoiceInStatusNew(String rowID,
 														  String description, JSONObject testData) {
 
@@ -107,7 +107,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
 		invoicesScreen.clickBackButton();
 		WebDriver
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
 
 		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
@@ -115,9 +115,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		loginPage.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
 				VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
 		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicesWebPage = operationsPage.clickInvoicesLink();
+		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
+		operationsPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		invoicesWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
@@ -127,9 +129,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanVoidInvoice(String rowID,
-														  String description, JSONObject testData) {
+											 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -171,7 +173,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		Assert.assertFalse(invoicesScreen.isInvoiceExists(invoiceNumber));
 		invoicesScreen.clickBackButton();
 		WebDriver
-		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
 
 		BackOfficeLoginWebPage loginPage = PageFactory.initElements(webdriver,
@@ -179,9 +181,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		loginPage.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
 				VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
 		BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
-		OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-		InvoicesWebPage invoicesWebPage = operationsPage.clickInvoicesLink();
+		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
+		operationsPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		invoicesWebPage.setSearchFromDate(CustomDateProvider.getPreviousLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
@@ -195,9 +199,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifySavedPODisplaysOnCChangePONumberPopup(String rowID,
-											 String description, JSONObject testData) {
+																String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -235,13 +239,13 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 		changeInvoicePONumberDialog = invoiceMenuScreen.clickInvoiceChangePONumberMenuItem();
 		invoicesScreen = changeInvoicePONumberDialog.changeInvoicePONumber(longponumber);
-		Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), longponumber.substring(0, 50) );
+		Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), longponumber.substring(0, 50));
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyWeHidePopupAndKeyboardIfUserClickHardwareBackButton(String rowID,
-																String description, JSONObject testData) {
+																			  String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -269,9 +273,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyOnActionChangePONumberUserCantErasePONumber(String rowID,
-																			  String description, JSONObject testData) {
+																	  String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		final String newponumber = "abcd123";
@@ -311,9 +315,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyChangePOIsNotAvailableIfOptionPOVisibleEqualsNOOnInvoiceType(String rowID,
-																	  String description, JSONObject testData) {
+																					   String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -338,9 +342,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanRefreshDeletedPicturesFromMyInvoiceList(String rowID,
-																					   String description, JSONObject testData) {
+																		 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -387,9 +391,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyDeletedPicturesDoesntDisplaysAfterUpdatingApplicationDB_MyInvoiceList(String rowID,
-																		 String description, JSONObject testData) {
+																								String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		final int picturesToAdd = 4;
@@ -421,7 +425,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
 
 		NotesSteps.deletePictures(picturesToDelete);
-		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd-picturesToDelete);
+		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd - picturesToDelete);
 		notesScreen.clickScreenBackButton();
 
 		invoicesScreen.waitInvoicesScreenLoad();
@@ -433,16 +437,16 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 		notesScreen = invoiceMenuScreen.clickInvoiceNotesMenuItem();
-		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd-picturesToDelete);
+		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd - picturesToDelete);
 		notesScreen.clickScreenBackButton();
 
 		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanRefreshDeletedPicturesAfterApprovingInvoice(String rowID,
-																								String description, JSONObject testData) {
+																			 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -497,9 +501,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanAddNotesForTeamInvoice(String rowID,
-																			 String description, JSONObject testData) {
+														String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -538,9 +542,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserDoesntSeeInvoiceWithTeamSharingEqualsNO(String rowID,
-														String description, JSONObject testData) {
+																	  String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -566,9 +570,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyEmailInvoiceForMultipleItemsWithTheSameCustomer(String rowID,
-																	  String description, JSONObject testData) throws Exception {
+																		  String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -576,7 +580,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, testCaseData);
 
 			VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -609,16 +613,16 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		for (String invoiceNumber : invoices) {
 			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
-				.withSubjectAndAttachmentFileName("Invoice " + invoiceNumber, invoiceNumber + ".pdf");
-		Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
-				" in mail box " + nada.getEmailId() + ". At time " +
-				LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+					.withSubjectAndAttachmentFileName("Invoice " + invoiceNumber, invoiceNumber + ".pdf");
+			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
+					" in mail box " + nada.getEmailId() + ". At time " +
+					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
 		}
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyCancelEmailInvoice(String rowID,
-																		  String description, JSONObject testData) {
+											 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -626,7 +630,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, testCaseData);
 
 			VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -654,9 +658,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyEmailInvoiceWithDifferentCustomer(String rowID,
-											 String description, JSONObject testData) throws Exception {
+															String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -665,7 +669,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-		for (int i = 0; i < invoices.length; i ++) {
+		for (int i = 0; i < invoices.length; i++) {
 			VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
 			workOrdersScreen.switchToTeamWorkordersView();
 			VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
@@ -679,7 +683,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 			wotypeslist.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-            HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+			HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 			vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
 			VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -718,9 +722,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		}
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyEmailMyInvoiceWithPopulatedCCAddress(String rowID,
-															String description, JSONObject testData) throws Exception {
+															   String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -728,7 +732,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, testCaseData);
 
 			VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -767,9 +771,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		}
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyToFieldIsRequiredToEmailMyInvoice(String rowID,
-															   String description, JSONObject testData) {
+															String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -777,7 +781,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, testCaseData);
 
 			VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -801,11 +805,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextEmailScreen emailScreen = new VNextEmailScreen(DriverBuilder.getInstance().getAppiumDriver());
 		emailScreen.clickToEmailAddressRemoveButton();
 		emailScreen.sentToCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
-		String msg= emailScreen.sendEmail();
+		String msg = emailScreen.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 
 		emailScreen.sentToBCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
-		msg= emailScreen.sendEmail();
+		msg = emailScreen.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 		emailScreen.clickScreenBackButton();
 		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -813,9 +817,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyEmailAddressIsValidatedOnEmailMyInvoiceList(String rowID,
-															String description, JSONObject testData) {
+																	  String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -824,7 +828,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, testCaseData);
 
 			VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -850,7 +854,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		final String wrongMail = VNextFreeRegistrationInfo.getInstance().getR360UserMail().
 				substring(0, VNextFreeRegistrationInfo.getInstance().getR360UserMail().indexOf(mailsymbol));
 		emailScreen.sentToEmailAddress(wrongMail);
-		String msg= emailScreen.sendEmail();
+		String msg = emailScreen.sendEmail();
 		Assert.assertEquals(msg, String.format(VNextAlertMessages.THE_EMAIL_ADDRESS_IS_NOT_VALID, wrongMail));
 
 		emailScreen.clickScreenBackButton();
@@ -859,9 +863,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyEmailTeamInvoiceForMultipleItemsWithTheSameCustomer(String rowID,
-																	  String description, JSONObject testData) throws Exception {
+																			  String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -869,7 +873,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
 			workOrdersScreen.switchToTeamWorkordersView();
 			VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
@@ -879,7 +883,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 			workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-            HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+			HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 			vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
 			VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -914,13 +918,14 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 					.withSubjectAndAttachmentFileName("Invoice " + invoiceNumber, invoiceNumber + ".pdf");
 			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
 					" in mail box " + nada.getEmailId() + ". At time " +
-					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());;
+					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+			;
 		}
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyCancelEmailTeamInvoice(String rowID,
-																			  String description, JSONObject testData) throws Exception {
+												 String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -928,7 +933,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			invoices.add(createSimpleInvoice(testCaseData));
 		}
 		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -946,9 +951,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyToFieldIsRequiredToEmailTeamInvoice(String rowID,
-												 String description, JSONObject testData)  {
+															  String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -956,7 +961,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, testCaseData);
 
 			VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -981,11 +986,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextEmailScreen emailScreen = new VNextEmailScreen(DriverBuilder.getInstance().getAppiumDriver());
 		emailScreen.clickToEmailAddressRemoveButton();
 		emailScreen.sentToCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
-		String msg= emailScreen.sendEmail();
+		String msg = emailScreen.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 
 		emailScreen.sentToBCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
-		msg= emailScreen.sendEmail();
+		msg = emailScreen.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 		emailScreen.clickScreenBackButton();
 		invoicesScreen = new VNextInvoicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -994,9 +999,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyEmailAddressIsValidatedOnEmailTeamInvoiceList(String rowID,
-															  String description, JSONObject testData)  {
+																		String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		final String mailSymbol = "@";
@@ -1005,7 +1010,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		ArrayList<String> invoices = new ArrayList<>();
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i < invoicesToCreate; i ++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR, testCaseData);
 
 			VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -1032,7 +1037,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		final String wrongMail = VNextFreeRegistrationInfo.getInstance().getR360UserMail().
 				substring(0, VNextFreeRegistrationInfo.getInstance().getR360UserMail().indexOf(mailSymbol));
 		emailScreen.sentToEmailAddress(wrongMail);
-		String msg= emailScreen.sendEmail();
+		String msg = emailScreen.sendEmail();
 		Assert.assertEquals(msg, String.format(VNextAlertMessages.THE_EMAIL_ADDRESS_IS_NOT_VALID, wrongMail));
 
 		emailScreen.clickScreenBackButton();
@@ -1042,9 +1047,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyEmailTeamInvoiceWithDifferentCustomer(String rowID,
-																		String description, JSONObject testData) throws Exception {
+																String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -1053,7 +1058,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 
-		for (int i = 0; i < invoices.length; i ++) {
+		for (int i = 0; i < invoices.length; i++) {
 			VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
 			workOrdersScreen.switchToTeamWorkordersView();
 			VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
@@ -1067,7 +1072,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 			VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 			wotypeslist.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-            HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+			HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 			vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
 			VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -1104,13 +1109,14 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 					.withSubjectAndAttachmentFileName("Invoice " + invoices[i], invoices[i] + ".pdf");
 			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoices[i] +
 					" in mail box " + nada.getEmailId() + ". At time " +
-					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());;
+					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+			;
 		}
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyApproveIconDoesntDisplaysAfterApproveInvoice(String rowID,
-																String description, JSONObject testData) {
+																	   String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -1122,7 +1128,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrderTypesList wotypeslist = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		wotypeslist.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
@@ -1155,9 +1161,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanCreateSeparateInvoicesFromOneWO(String rowID,
-																	   String description, JSONObject testData) {
+																 String description, JSONObject testData) {
 
 		final int invoiceStringLenght = 6;
 
@@ -1180,13 +1186,13 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
-		Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNumber+1);
+		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + 1);
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanCreateSeparateInvoicesFromSeveralWOs(String rowID,
-																 String description, JSONObject testData) {
+																	  String description, JSONObject testData) {
 
 		final int invoiceStringLenght = 6;
 		final int numberInvoicesToCreate = 3;
@@ -1195,7 +1201,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i = 0; i< numberInvoicesToCreate; i++)
+		for (int i = 0; i < numberInvoicesToCreate; i++)
 			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData));
 
 		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -1212,49 +1218,49 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
-		Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNumber+numberInvoicesToCreate);
+		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + numberInvoicesToCreate);
 		invoicesScreen.clickBackButton();
 	}
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testVerifyUserCanCreateSingleInvoicesFromOneWO(String rowID,
-                                                                 String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testVerifyUserCanCreateSingleInvoicesFromOneWO(String rowID,
+															   String description, JSONObject testData) {
 
-        final int invoiceStringLenght = 6;
-        final String poNumber = "123po";
+		final int invoiceStringLenght = 6;
+		final String poNumber = "123po";
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData);
+		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData);
 
-        VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		invoicesScreen.switchToMyInvoicesView();
-        final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-        final int lastInvoiceNumber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
+		final int lastInvoiceNumber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
 
-        invoicesScreen.clickBackButton();
+		invoicesScreen.clickBackButton();
 
-        VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-        workOrdersScreen.selectWorkOrder(workOrderNumber);
-        workOrdersScreen.clickCreateInvoiceIcon();
+		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+		workOrdersScreen.selectWorkOrder(workOrderNumber);
+		workOrdersScreen.clickCreateInvoiceIcon();
 
-        VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-        informationDialog.clickSingleInvoiceButton();
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertTrue(invoiceInfoScreen.isWorkOrderSelectedForInvoice(workOrderNumber));
-        invoiceInfoScreen.setInvoicePONumber(poNumber);
-        final String newInvoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
-        final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
-        Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNumber+1);
-        invoicesScreen.clickBackButton();
-    }
+		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+		informationDialog.clickSingleInvoiceButton();
+		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+		Assert.assertTrue(invoiceInfoScreen.isWorkOrderSelectedForInvoice(workOrderNumber));
+		invoiceInfoScreen.setInvoicePONumber(poNumber);
+		final String newInvoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
+		Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
+		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + 1);
+		invoicesScreen.clickBackButton();
+	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanCreateSingleInvoicesFromSeveralWOs(String rowID,
-															   String description, JSONObject testData) {
+																	String description, JSONObject testData) {
 
 		final int invoiceStringLenght = 6;
 		final String ponumber = "123po";
@@ -1264,7 +1270,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		for (int i= 0; i < numberInvoicesToCreate; i++)
+		for (int i = 0; i < numberInvoicesToCreate; i++)
 			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData));
 
 		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
@@ -1289,13 +1295,13 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
 		Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
 		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
-		Assert.assertEquals( newLastInvoiceNuber, lastInvoiceNumber+1);
+		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + 1);
 		invoicesScreen.clickBackButton();
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton(String rowID,
-															   String description, JSONObject testData) {
+																			  String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -1313,9 +1319,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 
 	}
 
-	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO(String rowID,
-															   String description, JSONObject testData) {
+																					  String description, JSONObject testData) {
 
 		final String NO_AVAILABLE_WO_MESSAGE = "No available work orders";
 
@@ -1341,7 +1347,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		workOrdersScreen.clickBackButton();
 		homeScreen.clickInvoicesMenuItem();
 		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-		Assert.assertEquals( newInvoiceNumber, invoiceNumber);
+		Assert.assertEquals(newInvoiceNumber, invoiceNumber);
 		invoicesScreen.clickBackButton();
 	}
 
@@ -1353,7 +1359,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
 		workOrderTypesList.selectWorkOrderType(wotype);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
 		final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
 		workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();

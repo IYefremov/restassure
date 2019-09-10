@@ -31,7 +31,7 @@ public class DeviceRegistrator {
     }
 
     public static DeviceRegistrator getInstance() {
-        if ( instance == null ) {
+        if (instance == null) {
             instance = new DeviceRegistrator();
         }
         return instance;
@@ -45,7 +45,7 @@ public class DeviceRegistrator {
     }
 
     public String getDeviceRegistrationCode(BrowserType browsertype, String backofficeurl,
-                                              String userName, String userPassword, String licensename) {
+                                            String userName, String userPassword, String licensename) {
 
         WebDriver webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(backofficeurl);
@@ -55,10 +55,10 @@ public class DeviceRegistrator {
         loginpage.userLogin(userName, userPassword);
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
                 BackOfficeHeaderPanel.class);
-        CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
-
-        ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
-
+        backofficeheader.clickCompanyLink();
+        CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+        companyWebPage.clickManageDevicesLink();
+        ActiveDevicesWebPage devicespage = new ActiveDevicesWebPage(webdriver);
         devicespage.setSearchCriteriaByName(licensename);
         String regCode = devicespage.getFirstRegCodeInTable();
         DriverBuilder.getInstance().getDriver().quit();

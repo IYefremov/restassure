@@ -72,9 +72,10 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
                 BackOfficeHeaderPanel.class);
-        CompanyWebPage companyWebPage = backofficeheader.clickCompanyLink();
-
-        ActiveDevicesWebPage devicespage = companyWebPage.clickManageDevicesLink();
+        backofficeheader.clickCompanyLink();
+        CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+        companyWebPage.clickManageDevicesLink();
+        ActiveDevicesWebPage devicespage = new ActiveDevicesWebPage(webdriver);
 
         devicespage.setSearchCriteriaByName(ManipulationDataProdInfo.getInstance().getLicenseName());
         regCode = devicespage.getFirstRegCodeInTable();
@@ -94,9 +95,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         mainscr.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testMyInspectionInspectionTypeMatrixInspection(String rowID,
-                                                               String description, JSONObject testData)  {
+                                                               String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -104,7 +105,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         myinspectionsscreen.clickAddInspectionButton();
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
-        RegularVisualInteriorScreen visualInteriorScreen =  myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
+        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
@@ -174,9 +175,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         myinspectionsscreen.clickHomeButton();
     }*/
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testMyInspectionInspectionTypePaintInspection(String rowID,
-                                                               String description, JSONObject testData) {
+                                                              String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -214,9 +215,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         myinspectionsscreen.clickHomeButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testMyInspectionInspectionTypeInteriorInspection(String rowID,
-                                                              String description, JSONObject testData) {
+                                                                 String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -247,9 +248,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         myinspectionsscreen.clickHomeButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testMyInspectionInspectionTypeWheelInspection(String rowID,
-                                                                 String description, JSONObject testData) {
+                                                              String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -280,9 +281,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         myinspectionsscreen.clickHomeButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testMyInspectionInspectionTypeInteriorDetail(String rowID,
-                                                              String description, JSONObject testData)  {
+                                                             String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -313,9 +314,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         myinspectionsscreen.clickHomeButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testMyInspectionInspectionTypeExteriorDetail(String rowID,
-                                                             String description, JSONObject testData)  {
+                                                             String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 

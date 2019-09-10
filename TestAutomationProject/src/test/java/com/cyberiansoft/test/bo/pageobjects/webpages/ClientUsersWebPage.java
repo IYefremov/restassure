@@ -32,14 +32,13 @@ public class ClientUsersWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.visibilityOf(adduserbtn));
 	}
 
-	public AddEditClientUsersDialogWebPage clickAddUserBtn() {
+	public void clickAddUserBtn() {
 		clickAndWait(adduserbtn);
-		return PageFactory.initElements(driver, AddEditClientUsersDialogWebPage.class);
 	}
 
 	public boolean isClientUserPresentInTable(String clientUsername, String userFirstName) {
-        return clientuserstable.getWrappedElement()
-                .findElements(By.xpath(".//td/b[text()='" + clientUsername + " " + userFirstName + "']")).size() > 0;
+		return clientuserstable.getWrappedElement()
+				.findElements(By.xpath(".//td/b[text()='" + clientUsername + " " + userFirstName + "']")).size() > 0;
 	}
 
 	public List<WebElement> getClientUsersTableRows() {
@@ -59,18 +58,17 @@ public class ClientUsersWebPage extends BaseWebPage {
 		return null;
 	}
 
-	public AddEditClientUsersDialogWebPage clickEditClientUser(String userfstname) {
+	public void clickEditClientUser(String userfstname) {
 		WebElement clientstablerow = getTableRowWithUser(userfstname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();
 		} else {
 			Assert.assertTrue(false, "Can't find client: " + userfstname);
 		}
-		return PageFactory.initElements(driver, AddEditClientUsersDialogWebPage.class);
 	}
 
 	public void clickDeleteClientUser(String userfstname) {
-	    waitABit(1500);
+		waitABit(1500);
 		WebElement clientstablerow = getTableRowWithUser(userfstname);
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();
@@ -90,23 +88,24 @@ public class ClientUsersWebPage extends BaseWebPage {
 				mainWindow = window;
 		}
 		try {
-            driver.switchTo().window(thisWindow).close();
-            driver.switchTo().window(mainWindow);
-            driver.switchTo().defaultContent();
-        } catch (NoSuchWindowException ignored) {}
+			driver.switchTo().window(thisWindow).close();
+			driver.switchTo().window(mainWindow);
+			driver.switchTo().defaultContent();
+		} catch (NoSuchWindowException ignored) {
+		}
 	}
 
 	public void clickResendButton() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_Content_gv_ctl00_ctl04_lbMsg")));
-        wait.until(ExpectedConditions.elementToBeClickable(resendButton)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(resendButton)).click();
 		driver.switchTo().alert().accept();
 		waitForLoading();
 		waitABit(1000);
 	}
 
-    public void verifyClientUserDoesNotExist(String clientUserName, String userFirstName) {
-        if (isClientUserPresentInTable( clientUserName, userFirstName)){
-            clickDeleteClientUser( clientUserName);
-        }
-    }
+	public void verifyClientUserDoesNotExist(String clientUserName, String userFirstName) {
+		if (isClientUserPresentInTable(clientUserName, userFirstName)) {
+			clickDeleteClientUser(clientUserName);
+		}
+	}
 }

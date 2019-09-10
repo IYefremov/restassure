@@ -13,57 +13,53 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValueW
 
 public class ProductionDashboardWebPage extends BaseWebPage {
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_comboLocations")
-    private ComboBox locationCombobox;
+	@FindBy(id = "ctl00_ctl00_Content_Main_comboLocations")
+	private ComboBox locationCombobox;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_comboLocations_DropDown")
-    private DropDown locationDropDown;
+	@FindBy(id = "ctl00_ctl00_Content_Main_comboLocations_DropDown")
+	private DropDown locationDropDown;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_comboCustomer_Input")
-    private TextField customerCombobox;
+	@FindBy(id = "ctl00_ctl00_Content_Main_comboCustomer_Input")
+	private TextField customerCombobox;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_comboCustomer_DropDown")
-    private DropDown customerDropDown;
+	@FindBy(id = "ctl00_ctl00_Content_Main_comboCustomer_DropDown")
+	private DropDown customerDropDown;
 
-    @FindBy(id = "ctl00_ctl00_Content_Main_BtnFind")
-    private WebElement applyButton;
+	@FindBy(id = "ctl00_ctl00_Content_Main_BtnFind")
+	private WebElement applyButton;
 
-    @FindBy(className = "dashboard-table")
-    private WebTable dashboardTable;
+	@FindBy(className = "dashboard-table")
+	private WebTable dashboardTable;
 
-    public ProductionDashboardWebPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-    }
+	public ProductionDashboardWebPage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+	}
 
-    public ProductionDashboardWebPage selectLocation(String location) {
-        selectComboboxValue(locationCombobox, locationDropDown, location);
-        return this;
-    }
+	public void selectLocation(String location) {
+		selectComboboxValue(locationCombobox, locationDropDown, location);
+	}
 
-    public ProductionDashboardWebPage selectCustomer(String customer) {
-        selectComboboxValueWithTyping(customerCombobox, customerDropDown, customer);
-        return this;
-    }
+	public void selectCustomer(String customer) {
+		selectComboboxValueWithTyping(customerCombobox, customerDropDown, customer);
+	}
 
-    public ProductionDashboardWebPage clickApplyButton() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(applyButton)).click();
-        } catch (Exception e) {
-            Assert.fail("The Apply button has not been clicked", e);
-        }
-        waitForLoading();
-        return this;
-    }
+	public void clickApplyButton() {
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(applyButton)).click();
+		} catch (Exception e) {
+			Assert.fail("The Apply button has not been clicked", e);
+		}
+		waitForLoading();
+	}
 
-    public ProductionDashboardWebPage verifyDashboardTableColumnsAreVisible() {
-        wait.until(ExpectedConditions.visibilityOf(dashboardTable.getWrappedElement()));
-        Assert.assertTrue(dashboardTable.tableColumnExists("Phases"));
-        Assert.assertTrue(dashboardTable.tableColumnExists("Active"));
-        Assert.assertTrue(dashboardTable.tableColumnExists("Started"));
-        Assert.assertTrue(dashboardTable.tableColumnExists("Pending"));
-        Assert.assertTrue(dashboardTable.tableColumnExists("Past Due"));
-        Assert.assertTrue(dashboardTable.tableColumnExists("Estimated Work"));
-        return this;
-    }
+	public void verifyDashboardTableColumnsAreVisible() {
+		wait.until(ExpectedConditions.visibilityOf(dashboardTable.getWrappedElement()));
+		Assert.assertTrue(dashboardTable.tableColumnExists("Phases"));
+		Assert.assertTrue(dashboardTable.tableColumnExists("Active"));
+		Assert.assertTrue(dashboardTable.tableColumnExists("Started"));
+		Assert.assertTrue(dashboardTable.tableColumnExists("Pending"));
+		Assert.assertTrue(dashboardTable.tableColumnExists("Past Due"));
+		Assert.assertTrue(dashboardTable.tableColumnExists("Estimated Work"));
+	}
 }

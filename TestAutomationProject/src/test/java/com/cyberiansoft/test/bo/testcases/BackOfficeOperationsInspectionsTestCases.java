@@ -13,248 +13,267 @@ import org.testng.annotations.Test;
 
 public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInspectionsData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsInspectionsData.json";
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
-    }
+	@BeforeClass
+	public void settingUp() {
+		JSONDataProvider.dataFile = DATA_FILE;
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyOpeningInspectionEditorForNewStatus(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyOpeningInspectionEditorForNewStatus(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InspectionsWebPage inspectionsPage = operationsPage
-                .clickInspectionsLink()
-                .makeSearchPanelVisible()
-                .selectSearchStatus(data.getStatus())
-                .clickFindButton()
-                .verifyInspectionsTableColumnsAreVisible();
-        String firstInspection = inspectionsPage.getFirstInspectionNumber();
-        InspectionEditorWebPage inspectionEditorPage = inspectionsPage.clickEditInspection(firstInspection);
-        Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
-                "The Inspection Editor has not been opened for inspection with New status");
-    }
+		InspectionsWebPage inspectionsPage = new InspectionsWebPage(webdriver);
+		operationsPage.clickInspectionsLink();
+		inspectionsPage.makeSearchPanelVisible();
+		inspectionsPage.selectSearchStatus(data.getStatus());
+		inspectionsPage.clickFindButton();
+		inspectionsPage.verifyInspectionsTableColumnsAreVisible();
+		String firstInspection = inspectionsPage.getFirstInspectionNumber();
+		InspectionEditorWebPage inspectionEditorPage = new InspectionEditorWebPage(webdriver);
+		inspectionsPage.clickEditInspection(firstInspection);
+		Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
+				"The Inspection Editor has not been opened for inspection with New status");
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyOpeningInspectionEditorForDraftStatus(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyOpeningInspectionEditorForDraftStatus(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InspectionsWebPage inspectionsPage = operationsPage
-                .clickInspectionsLink()
-                .makeSearchPanelVisible()
-                .selectSearchStatus(data.getStatus())
-                .clickFindButton()
-                .verifyInspectionsTableColumnsAreVisible();
-        String firstInspection = inspectionsPage.getFirstInspectionNumber();
-        InspectionEditorWebPage inspectionEditorPage = inspectionsPage.clickEditInspection(firstInspection);
-        Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
-                "The Inspection Editor has not been opened for inspection with Draft status");
-    }
+		InspectionsWebPage inspectionsPage = new InspectionsWebPage(webdriver);
+		operationsPage.clickInspectionsLink();
+		inspectionsPage.makeSearchPanelVisible();
+		inspectionsPage.selectSearchStatus(data.getStatus());
+		inspectionsPage.clickFindButton();
+		inspectionsPage.verifyInspectionsTableColumnsAreVisible();
+		String firstInspection = inspectionsPage.getFirstInspectionNumber();
+		InspectionEditorWebPage inspectionEditorPage = new InspectionEditorWebPage(webdriver);
+		inspectionsPage.clickEditInspection(firstInspection);
+		Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
+				"The Inspection Editor has not been opened for inspection with Draft status");
+	}
 
-    //todo uncomment after bug fix #75725
+	//todo uncomment after bug fix #75725
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void editEstimationDetailsForInspectionWithNewStatus(String rowID, String description, JSONObject testData) {
+	public void editEstimationDetailsForInspectionWithNewStatus(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InspectionsWebPage inspectionsPage = operationsPage
-                .clickInspectionsLink()
-                .makeSearchPanelVisible()
-                .selectSearchStatus(data.getStatus())
-                .clickFindButton()
-                .verifyInspectionsTableColumnsAreVisible();
-        String firstInspection = inspectionsPage.getFirstInspectionNumber();
-        String windowHandle = inspectionsPage.getInspectionsWindowHandle();
-        String changedInspectionDate = inspectionsPage.getChangedInspectionDate(data.getDay());
+		InspectionsWebPage inspectionsPage = new InspectionsWebPage(webdriver);
+		operationsPage.clickInspectionsLink();
+		inspectionsPage.makeSearchPanelVisible();
+		inspectionsPage.selectSearchStatus(data.getStatus());
+		inspectionsPage.clickFindButton();
+		inspectionsPage.verifyInspectionsTableColumnsAreVisible();
+		String firstInspection = inspectionsPage.getFirstInspectionNumber();
+		String windowHandle = inspectionsPage.getInspectionsWindowHandle();
+		String changedInspectionDate = inspectionsPage.getChangedInspectionDate(data.getDay());
 
-        InspectionEditorWebPage inspectionEditorPage = inspectionsPage.clickEditInspection(firstInspection);
-        Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
-                "The Inspection Editor has not been opened for inspection with New status");
-        inspectionEditorPage
-                .clickDateInput()
-                .clickPreviousMonthButton();
-        Assert.assertTrue(inspectionEditorPage.isNextMonthButtonEnabled(),
-                "The Next month button has not been enabled after clicking the Previous month button");
-        inspectionEditorPage
-                .selectDay(data.getDay())
-                .clickSaveInspectionButton()
-                .closeNewTab(windowHandle);
-        inspectionsPage.makeSearchPanelVisible()
-                .selectSearchStatus(data.getStatus())
-                .setInspectionNumberSearchCriteria(firstInspection)
-                .clickFindButton();
-        Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
-        Assert.assertEquals(inspectionsPage.getFirstInspectionDate(), changedInspectionDate);
-    }
-    //todo uncomment after bug fix #75725
+		InspectionEditorWebPage inspectionEditorPage = new InspectionEditorWebPage(webdriver);
+		inspectionsPage.clickEditInspection(firstInspection);
+		Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
+				"The Inspection Editor has not been opened for inspection with New status");
+		inspectionEditorPage.clickDateInput();
+		inspectionEditorPage.clickPreviousMonthButton();
+		Assert.assertTrue(inspectionEditorPage.isNextMonthButtonEnabled(),
+				"The Next month button has not been enabled after clicking the Previous month button");
+		inspectionEditorPage.selectDay(data.getDay());
+		inspectionEditorPage.clickSaveInspectionButton();
+		inspectionEditorPage.closeNewTab(windowHandle);
+		inspectionsPage.makeSearchPanelVisible();
+		inspectionsPage.selectSearchStatus(data.getStatus());
+		inspectionsPage.setInspectionNumberSearchCriteria(firstInspection);
+		inspectionsPage.clickFindButton();
+		Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
+		Assert.assertEquals(inspectionsPage.getFirstInspectionDate(), changedInspectionDate);
+	}
+
+	//todo uncomment after bug fix #75725
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void editEstimationDetailsForInspectionWithDraftStatus(String rowID, String description, JSONObject testData) {
+	public void editEstimationDetailsForInspectionWithDraftStatus(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InspectionsWebPage inspectionsPage = operationsPage
-                .clickInspectionsLink()
-                .makeSearchPanelVisible()
-                .selectSearchStatus(data.getStatus())
-                .clickFindButton()
-                .verifyInspectionsTableColumnsAreVisible();
-        String firstInspection = inspectionsPage.getFirstInspectionNumber();
-        String windowHandle = inspectionsPage.getInspectionsWindowHandle();
-        String changedInspectionDate = inspectionsPage.getChangedInspectionDate(data.getDay());
+		InspectionsWebPage inspectionsPage = new InspectionsWebPage(webdriver);
+		operationsPage.clickInspectionsLink();
+		inspectionsPage.makeSearchPanelVisible();
+		inspectionsPage.selectSearchStatus(data.getStatus());
+		inspectionsPage.clickFindButton();
+		inspectionsPage.verifyInspectionsTableColumnsAreVisible();
+		String firstInspection = inspectionsPage.getFirstInspectionNumber();
+		String windowHandle = inspectionsPage.getInspectionsWindowHandle();
+		String changedInspectionDate = inspectionsPage.getChangedInspectionDate(data.getDay());
 
-        InspectionEditorWebPage inspectionEditorPage = inspectionsPage.clickEditInspection(firstInspection);
-        Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
-                "The Inspection Editor has not been opened for inspection with New status");
-        if (inspectionEditorPage.isDateInputDisplayed()) {
-            inspectionEditorPage
-                    .clickDateInput()
-                    .clickPreviousMonthButton();
-            Assert.assertTrue(inspectionEditorPage.isNextMonthButtonEnabled(),
-                    "The Next month button has not been enabled after clicking the Previous month button");
-            inspectionEditorPage
-                    .selectDay(data.getDay())
-                    .clickSaveInspectionButton()
-                    .closeNewTab(windowHandle);
-            inspectionsPage.makeSearchPanelVisible()
-                    .selectSearchStatus(data.getStatus())
-                    .setInspectionNumberSearchCriteria(firstInspection)
-                    .clickFindButton();
-            Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
-            Assert.assertEquals(changedInspectionDate, inspectionsPage.getFirstInspectionDate());
-        }
-    }
+		InspectionEditorWebPage inspectionEditorPage = new InspectionEditorWebPage(webdriver);
+		inspectionsPage.clickEditInspection(firstInspection);
+		Assert.assertTrue(inspectionEditorPage.isInspectionEditorOpened(firstInspection),
+				"The Inspection Editor has not been opened for inspection with New status");
+		if (inspectionEditorPage.isDateInputDisplayed()) {
+			inspectionEditorPage.clickDateInput();
+			inspectionEditorPage.clickPreviousMonthButton();
+			Assert.assertTrue(inspectionEditorPage.isNextMonthButtonEnabled(),
+					"The Next month button has not been enabled after clicking the Previous month button");
+			inspectionEditorPage.selectDay(data.getDay());
+			inspectionEditorPage.clickSaveInspectionButton();
+			inspectionEditorPage.closeNewTab(windowHandle);
+			inspectionsPage.makeSearchPanelVisible();
+			inspectionsPage.selectSearchStatus(data.getStatus());
+			inspectionsPage.setInspectionNumberSearchCriteria(firstInspection);
+			inspectionsPage.clickFindButton();
+			Assert.assertTrue(inspectionsPage.inspectionExists(firstInspection), "The inspection is not displayed");
+			Assert.assertEquals(changedInspectionDate, inspectionsPage.getFirstInspectionDate());
+		}
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testOperationInspection(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testOperationInspection(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-        InspectionsWebPage inpectionsPage = operationsPage.clickInspectionsLink();
-        inpectionsPage.makeSearchPanelVisible();
-        inpectionsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        inpectionsPage.setTimeFrame(data.getFromTime(), data.getToTime());
-        inpectionsPage.clickFindButton();
-        inpectionsPage.verifyInspectionsTableColumnsAreVisible();
+		InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
+		operationsPage.clickInspectionsLink();
+		inspectionsWebPage.makeSearchPanelVisible();
+		inspectionsWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		inspectionsWebPage.setTimeFrame(data.getFromTime(), data.getToTime());
+		inspectionsWebPage.clickFindButton();
+		inspectionsWebPage.verifyInspectionsTableColumnsAreVisible();
 
-        Assert.assertEquals(data.getPage1(), inpectionsPage.getCurrentlySelectedPageNumber());
-        Assert.assertEquals(data.getPage1(), inpectionsPage.getGoToPageFieldValue());
+		Assert.assertEquals(data.getPage1(), inspectionsWebPage.getCurrentlySelectedPageNumber());
+		Assert.assertEquals(data.getPage1(), inspectionsWebPage.getGoToPageFieldValue());
 
-        inpectionsPage.setPageSize(data.getPage1());
-        Assert.assertEquals(data.getTableRowCount1(), inpectionsPage.getInspectionsTableRowCount());
+		inspectionsWebPage.setPageSize(data.getPage1());
+		Assert.assertEquals(data.getTableRowCount1(), inspectionsWebPage.getInspectionsTableRowCount());
 
-        String lastpagenumber = inpectionsPage.getLastPageNumber();
-        inpectionsPage.clickGoToLastPage(browserType.getBrowserTypeString());
+		String lastpagenumber = inspectionsWebPage.getLastPageNumber();
+		inspectionsWebPage.clickGoToLastPage(browserType.getBrowserTypeString());
 
-        inpectionsPage.clickGoToFirstPage();
-        Assert.assertEquals(data.getPage1(), inpectionsPage.getGoToPageFieldValue());
+		inspectionsWebPage.clickGoToFirstPage();
+		Assert.assertEquals(data.getPage1(), inspectionsWebPage.getGoToPageFieldValue());
 
-        inpectionsPage.clickGoToNextPage();
-        Assert.assertEquals(data.getPage2(), inpectionsPage.getGoToPageFieldValue());
+		inspectionsWebPage.clickGoToNextPage();
+		Assert.assertEquals(data.getPage2(), inspectionsWebPage.getGoToPageFieldValue());
 
-        inpectionsPage.clickGoToPreviousPage();
-        Assert.assertEquals(data.getPage1(), inpectionsPage.getGoToPageFieldValue());
+		inspectionsWebPage.clickGoToPreviousPage();
+		Assert.assertEquals(data.getPage1(), inspectionsWebPage.getGoToPageFieldValue());
 
-        inpectionsPage.setPageSize(String.valueOf(data.getPageInt50()));
-        Integer lastPageNumberInteger = Integer.valueOf(lastpagenumber);
-        if (lastPageNumberInteger < data.getPageInt50()) {
-            Assert.assertEquals(lastPageNumberInteger, Integer.valueOf(inpectionsPage.getInspectionsTableRowCount()));
-        } else {
-            Assert.assertEquals(data.getPageInt50(), inpectionsPage.getInspectionsTableRowCount());
-        }
+		inspectionsWebPage.setPageSize(String.valueOf(data.getPageInt50()));
+		Integer lastPageNumberInteger = Integer.valueOf(lastpagenumber);
+		if (lastPageNumberInteger < data.getPageInt50()) {
+			Assert.assertEquals(lastPageNumberInteger, Integer.valueOf(inspectionsWebPage.getInspectionsTableRowCount()));
+		} else {
+			Assert.assertEquals(data.getPageInt50(), inspectionsWebPage.getInspectionsTableRowCount());
+		}
 
-        inpectionsPage.makeSearchPanelVisible();
-        inpectionsPage.verifySearchFieldsAreVisible();
+		inspectionsWebPage.makeSearchPanelVisible();
+		inspectionsWebPage.verifySearchFieldsAreVisible();
 
-        inpectionsPage.selectSearchCustomer(data.getCustomer());
-        inpectionsPage.selectSearchTechnician(data.getTechnician(), data.getTechnicianFull());
-        inpectionsPage.selectSearchStatus(data.getStatus());
-        inpectionsPage.setInspectionNumberSearchCriteria(data.getInspNum());
-        inpectionsPage.clickFindButton();
-        Assert.assertEquals(data.getTableRowCount1(), inpectionsPage.getInspectionsTableRowCount());
-        inpectionsPage.inspectionExists(data.getInspNum());
-    }
+		inspectionsWebPage.selectSearchCustomer(data.getCustomer());
+		inspectionsWebPage.selectSearchTechnician(data.getTechnician(), data.getTechnicianFull());
+		inspectionsWebPage.selectSearchStatus(data.getStatus());
+		inspectionsWebPage.setInspectionNumberSearchCriteria(data.getInspNum());
+		inspectionsWebPage.clickFindButton();
+		Assert.assertEquals(data.getTableRowCount1(), inspectionsWebPage.getInspectionsTableRowCount());
+		inspectionsWebPage.inspectionExists(data.getInspNum());
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testEditDuplicateByRO(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testEditDuplicateByRO(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-        InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
-        inspectionsWebPage.makeSearchPanelVisible()
-                .selectSearchTimeframe(data.getTimeFrame())
-                .setTimeFrame(data.getFromTime(), data.getToTime())
-                .searchInspectionByNumber(data.getInspectionNum1());
-        Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
-        DuplicateInspectionsWebPage duplicateInspectionsWebPage = inspectionsWebPage.clickDuplicateByROLink();
-        duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
-        Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum1(), data.getROnum()),
-                "The duplicate by RO inspection #1 has not been displayed");
-        Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum2(), data.getROnum()),
-                "The duplicate by RO inspection #2 has not been displayed");//todo change the locator after the inspection will be displayed only for RO
-    }
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testEditDuplicateByVIN(String rowID, String description, JSONObject testData) {
+		InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
+		operationsPage.clickInspectionsLink();
+		inspectionsWebPage.makeSearchPanelVisible();
+		inspectionsWebPage.selectSearchTimeframe(data.getTimeFrame());
+		inspectionsWebPage.setTimeFrame(data.getFromTime(), data.getToTime());
+		inspectionsWebPage.searchInspectionByNumber(data.getInspectionNum1());
+		Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
+		DuplicateInspectionsWebPage duplicateInspectionsWebPage = new DuplicateInspectionsWebPage(webdriver);
+		inspectionsWebPage.clickDuplicateByROLink();
+		duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
+		Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum1(), data.getROnum()),
+				"The duplicate by RO inspection #1 has not been displayed");
+		Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum2(), data.getROnum()),
+				"The duplicate by RO inspection #2 has not been displayed");//todo change the locator after the inspection will be displayed only for RO
+	}
 
-        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testEditDuplicateByVIN(String rowID, String description, JSONObject testData) {
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-        InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
-        inspectionsWebPage.makeSearchPanelVisible()
-                .selectSearchTimeframe(data.getTimeFrame())
-                .setTimeFrame(data.getFromTime(), data.getToTime())
-                .searchInspectionByNumber(data.getInspectionNum1());
-        Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
-        DuplicateInspectionsWebPage duplicateInspectionsWebPage = inspectionsWebPage.clickDuplicateByVINLink();
-        duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
-        Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayed(data.getVIN()), "The VIN has not been displayed");
-        //todo uncomment after the inspectiontypes with unique VIN numbers will be created
+		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
+
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
+		operationsPage.clickInspectionsLink();
+		inspectionsWebPage.makeSearchPanelVisible();
+		inspectionsWebPage.selectSearchTimeframe(data.getTimeFrame());
+		inspectionsWebPage.setTimeFrame(data.getFromTime(), data.getToTime());
+		inspectionsWebPage.searchInspectionByNumber(data.getInspectionNum1());
+		Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
+		DuplicateInspectionsWebPage duplicateInspectionsWebPage = new DuplicateInspectionsWebPage(webdriver);
+		inspectionsWebPage.clickDuplicateByVINLink();
+		duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
+		Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayed(data.getVIN()), "The VIN has not been displayed");
+		//todo uncomment after the inspectiontypes with unique VIN numbers will be created
 //        Assert.assertTrue(duplicateInspectionsWebPage.isInspectionDisplayed(data.getInspectionNum1()),
 //                "The inspection #1 has not been displayed for duplicate by VIN");
 //        Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayedForInspection(data.getInspectionNum2(), data.getVIN()),
 //                "The inspection #2 has not been displayed for duplicate by VIN");
-    }
+	}
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testEditDuplicateByVINandRO(String rowID, String description, JSONObject testData) {
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testEditDuplicateByVINandRO(String rowID, String description, JSONObject testData) {
 
-        BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
-        BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
+		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
+		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-        OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-        InspectionsWebPage inspectionsWebPage = operationsPage.clickInspectionsLink();
-        inspectionsWebPage.makeSearchPanelVisible()
-                .selectSearchTimeframe(data.getTimeFrame())
-                .setTimeFrame(data.getFromTime(), data.getToTime())
-                .searchInspectionByNumber(data.getInspectionNum1());
-        Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
-        DuplicateInspectionsWebPage duplicateInspectionsWebPage = inspectionsWebPage.clickDuplicateByVINandROLink();
-        duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
-        Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayed(data.getVIN()), "The VIN has not been displayed");
-        Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum1(), data.getROnum()),
-                "The duplicate by VIN and RO inspection #1 has not been displayed");
-        Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum2(), data.getROnum()),
-                "The duplicate by VIN and RO inspection #2 has not been displayed");
-    }
+		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+		backOfficeHeader.clickOperationsLink();
+
+		InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
+		operationsPage.clickInspectionsLink();
+		inspectionsWebPage.makeSearchPanelVisible();
+		inspectionsWebPage.selectSearchTimeframe(data.getTimeFrame());
+		inspectionsWebPage.setTimeFrame(data.getFromTime(), data.getToTime());
+		inspectionsWebPage.searchInspectionByNumber(data.getInspectionNum1());
+		Assert.assertTrue(inspectionsWebPage.inspectionExists(data.getInspectionNum1()));
+		DuplicateInspectionsWebPage duplicateInspectionsWebPage = new DuplicateInspectionsWebPage(webdriver);
+		inspectionsWebPage.clickDuplicateByVINandROLink();
+		duplicateInspectionsWebPage.switchToDuplicateInspectionPage();
+		Assert.assertTrue(duplicateInspectionsWebPage.isVINdisplayed(data.getVIN()), "The VIN has not been displayed");
+		Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum1(), data.getROnum()),
+				"The duplicate by VIN and RO inspection #1 has not been displayed");
+		Assert.assertTrue(duplicateInspectionsWebPage.isROdisplayedForInspection(data.getInspectionNum2(), data.getROnum()),
+				"The duplicate by VIN and RO inspection #2 has not been displayed");
+	}
 }
