@@ -54,7 +54,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  Parking Brake Cable Lever");
+        SelectedServicesScreenSteps.openServiceDetails("PREF: Engine Oil Filter Kit");
         ServiceDetailsValidations.verifyServicePrice(editedPartService.getServicePrice());
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartInfoScreenValidations.validatePartInfo(editedPartService);

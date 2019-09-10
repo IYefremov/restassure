@@ -123,7 +123,6 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
-        MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);

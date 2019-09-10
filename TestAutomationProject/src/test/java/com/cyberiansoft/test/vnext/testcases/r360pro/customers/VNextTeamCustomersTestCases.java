@@ -70,8 +70,8 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
 		BackOfficeHeaderPanel backofficeheader = new BackOfficeHeaderPanel(webdriver);
 		CompanyWebPage companypage = new CompanyWebPage(webdriver);
 		backofficeheader.clickCompanyLink();
-		ClientsWebPage clientspage = new ClientsWebPage(webdriver);
 		companypage.clickClientsLink();
+		ClientsWebPage clientspage = new ClientsWebPage(webdriver);
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(testcustomer.getCompany());
 		clientspage.waitABit(1000);
@@ -165,8 +165,8 @@ public class VNextTeamCustomersTestCases extends BaseTestCaseTeamEditionRegistra
 		BackOfficeHeaderPanel backofficeheader = new BackOfficeHeaderPanel(webdriver);
 		CompanyWebPage companypage = new CompanyWebPage(webdriver);
 		backofficeheader.clickCompanyLink();
-		ClientsWebPage clientspage = new ClientsWebPage(webdriver);
 		companypage.clickClientsLink();
+		ClientsWebPage clientspage = new ClientsWebPage(webdriver);
 		clientspage.makeSearchPanelVisible();
 		clientspage.searchClientByName(customerDelete);
 		clientspage.waitABit(1000);
