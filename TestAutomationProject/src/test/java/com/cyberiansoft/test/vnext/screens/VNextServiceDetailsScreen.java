@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.List;
+
 @Getter
 public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
@@ -51,6 +53,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//*[@data-name='Amount']")
     private WebElement serviceDetailsPrice;
+
+	@FindBy(xpath = "//input[@name='question-section']")
+	private List<WebElement> questionSections;
 	
 	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
 		super(appiumdriver);

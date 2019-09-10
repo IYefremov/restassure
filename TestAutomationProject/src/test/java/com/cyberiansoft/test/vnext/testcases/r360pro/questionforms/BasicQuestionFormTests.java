@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.questionforms;
 
 import com.cyberiansoft.test.dataclasses.QuestionsData;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -164,5 +165,50 @@ public class BasicQuestionFormTests extends BaseTestCaseTeamEditionRegistration 
         GeneralValidations.errorDialogShouldBePresent(false, "Please answer all necessary questions");
         ScreenNavigationSteps.pressBackButton();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyQuestionsHasDefaultAnswers(String rowID,
+                                                 String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+
+        QuestionsData questionWithPredefinedAnswer = questionsDataList.get(0);
+        QuestionsData notAnsweredQuestion = questionsDataList.get(1);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_NOT_REQUIRED);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+
+        QuestionFormValidations.validateGeneralQuestionAnswer(questionWithPredefinedAnswer);
+        QuestionFormValidations.validateGeneralQuestionAnswer(notAnsweredQuestion);
+
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyQFShownForServiceAndEntityLevels(String rowID,
+                                                       String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+
+        QuestionsData questionWithPredefinedAnswer = questionsDataList.get(0);
+        ServiceData serviceData = workOrderData.getServiceData();
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_NOT_REQUIRED);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.openServiceDetails(serviceData);
+        ServiceDetailsScreenSteps.openQuestionForm("zayats section1");
+
+        QuestionFormSteps.answerGeneralPredefinedQuestion(questionWithPredefinedAnswer, false);
+        QuestionFormValidations.validateGeneralQuestionAnswer(questionWithPredefinedAnswer);
+
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
 }
+
 

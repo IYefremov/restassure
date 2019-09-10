@@ -50,4 +50,8 @@ public class ServiceDetailsScreenSteps {
     public static void saveServiceDetails() {
         ListSelectPageInteractions.saveListPage();
     }
+
+    public static void openQuestionForm(String questionFormFieldName) {
+        ServiceDetailsInteractions.openQuestionForm(questionFormFieldName);
+    }
 }
