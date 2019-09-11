@@ -26,8 +26,8 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@action='notes']/span")
 	private WebElement notesbutton;
-	
-	@FindBy(xpath="//div[@data-page='details']")
+
+	@FindBy(xpath = "//div[contains(@data-page,'details')]")
 	private WebElement rootElement;
 
 	@FindBy(xpath = "//input[@name='technicians']")

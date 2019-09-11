@@ -27,19 +27,19 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//div[@data-page='null']")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//*[@action='show-customers']")
+    @FindBy(xpath = "//*[@action='navigate-to-customers']")
     private WebElement customerslist;
 
     @FindBy(xpath = "//span[@class='client-mode']")
     private WebElement clientmode;
 
-    @FindBy(xpath = "//*[@action='show-inspections']")
+    @FindBy(xpath = "//*[@action='navigate-to-inspections']")
     private WebElement inspectionslist;
 
-    @FindBy(xpath = "//*[@action='show-orders']")
+    @FindBy(xpath = "//*[@action='navigate-to-orders']")
     private WebElement workorderslist;
 
-    @FindBy(xpath = "//*[@action='show-invoices']")
+    @FindBy(xpath = "//*[@action='navigate-to-invoices']")
     private WebElement invoiceslist;
 
     @FindBy(xpath = "//*[@action='work-queue']")
@@ -48,10 +48,10 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//a[@class='tile-link tile-item more-tile']")
     private WebElement morelist;
 
-    @FindBy(xpath = "//*[@action='show-settings']")
+    @FindBy(xpath = "//*[@action='navigate-to-settings']")
     private WebElement settingslist;
 
-    @FindBy(xpath = "//*[@action='show-status']")
+    @FindBy(xpath = "//*[@action='navigate-to-status']")
     private WebElement statuslist;
 
     @FindBy(xpath = "//*[@action='messager-send']/span[@status='messager']")
@@ -60,7 +60,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='messager-send']")
     private WebElement queuemessageicon;
 
-    @FindBy(xpath = "//*[@action='logout']/i")
+    @FindBy(xpath = "//*[@action='logout']")
     private WebElement logoutbtn;
 
     @FindBy(xpath = "//div[@class='speed-dial']/a[@class='floating-button color-red']")
