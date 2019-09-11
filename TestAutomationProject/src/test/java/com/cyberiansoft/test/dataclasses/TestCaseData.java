@@ -34,4 +34,7 @@ public class TestCaseData {
     @JsonProperty("archiveReason")
     String archiveReason;
 
+    @JsonProperty("targetProcessTestCaseData")
+    List<TargetProcessTestCaseData> targetProcessTestCaseData;
+
 }

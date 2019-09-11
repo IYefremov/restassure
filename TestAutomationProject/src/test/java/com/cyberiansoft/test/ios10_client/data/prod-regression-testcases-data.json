@@ -2,7 +2,17 @@
   "testCreateInspectionVerifyOnBO": [
     {
       "rowID": "testCreateInspectionVerifyOnBO.01",
-      "description": "Test Case 27847: 1 - Create inspection - verify on BO, Test Case 27848 2 - Create WO from inspection - verify WO with all data on BO ",
+      "description": "Test Case 27847: 1 - Create inspection - verify on BO, Test Case 27848 2 - Create WO from inspection - verify WO with all data on BO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83605",
+          "testCaseTitle": "Test Case 27847: 1 - Create inspection - verify on BO"
+        },
+        {
+          "testCaseID": "83606",
+          "testCaseTitle": "Test Case 27848 2 - Create WO from inspection - verify WO with all data on BO"
+        }
+      ],
       "inspectionData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -11,13 +21,13 @@
           "vinNumber": "1D7HW48NX6S507810",
           "vehicleMake": "Honda",
           "vehicleModel": "Accord",
-          "vehicleColor" : "Black",
+          "vehicleColor": "Black",
           "vehicleYear": "2011",
           "mileage": "77777",
           "licPlate": "12345",
           "stockNumber": "Stock1",
           "roNumber": "123",
-          "trim" : "25th Anniversary"
+          "trim": "25th Anniversary"
         },
         "servicesScreen": {
           "moneyServices": [
@@ -65,11 +75,10 @@
             "vehiclePartName": "Hood",
             "vehiclePartSize": "1 \"",
             "vehiclePartSeverity": "LIGHT",
-            "vehiclePartAdditionalService":
-              {
-                "serviceName": "SR_S5_Mt_Money",
-                "servicePrice": "50"
-              },
+            "vehiclePartAdditionalService": {
+              "serviceName": "SR_S5_Mt_Money",
+              "servicePrice": "50"
+            },
             "vehiclePartTotalPrice": "$72.00"
           },
           "screenTotalPrice": "$1,013.53",
@@ -81,20 +90,20 @@
           "policyNumber": "pl-123",
           "deductible": "34"
         },
-        "inspectionTotalPrice" : "$1,013.53"
+        "inspectionTotalPrice": "$1,013.53"
       },
-      "workOrderData" : {
+      "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "",
           "vehicleMake": "",
           "vehicleModel": "",
-          "vehicleColor" : "",
+          "vehicleColor": "",
           "vehicleYear": "",
           "mileage": "",
           "licPlate": "",
           "stockNumber": "",
           "roNumber": "",
-          "trim" : "No trims available"
+          "trim": "No trims available"
         },
         "servicesScreen": {
           "screenTotalPrice": "$941.53",
@@ -108,6 +117,12 @@
     {
       "rowID": "testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO.01",
       "description": "Test Case 27850: 4 - Create new WO using 'Copy services' action - verify new WO on BO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83608",
+          "testCaseTitle": "Test Case 27850: 4 - Create new WO using 'Copy services' action - verify new WO on BO"
+        }
+      ],
       "inspectionData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -116,13 +131,13 @@
           "vinNumber": "1D7HW48NX6S507810",
           "vehicleMake": "Honda",
           "vehicleModel": "Accord",
-          "vehicleColor" : "Black",
+          "vehicleColor": "Black",
           "vehicleYear": "2011",
           "mileage": "77777",
           "licPlate": "12345",
           "stockNumber": "Stock1",
           "roNumber": "123",
-          "trim" : "25th Anniversary"
+          "trim": "25th Anniversary"
         },
         "servicesScreen": {
           "moneyServices": [
@@ -170,8 +185,7 @@
             "vehiclePartName": "Hood",
             "vehiclePartSize": "1 \"",
             "vehiclePartSeverity": "LIGHT",
-            "vehiclePartAdditionalService":
-            {
+            "vehiclePartAdditionalService": {
               "serviceName": "SR_S5_Mt_Money",
               "servicePrice": "50"
             },
@@ -186,9 +200,9 @@
           "policyNumber": "pl-123",
           "deductible": "34"
         },
-        "inspectionTotalPrice" : "$1,013.53"
+        "inspectionTotalPrice": "$1,013.53"
       },
-      "workOrderData" : {
+      "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
         },
@@ -196,13 +210,13 @@
           "vinNumber": "",
           "vehicleMake": "",
           "vehicleModel": "",
-          "vehicleColor" : "",
+          "vehicleColor": "",
           "vehicleYear": "",
           "mileage": "",
           "licPlate": "",
           "stockNumber": "",
           "roNumber": "",
-          "trim" : "No trims available"
+          "trim": "No trims available"
         },
         "servicesScreen": {
           "screenTotalPrice": "$941.53",
@@ -216,6 +230,12 @@
     {
       "rowID": "testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO.01",
       "description": "Test Case 27849: 3 - Create new WO using 'Copy vehicle info' action - verify new WO on BO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83607",
+          "testCaseTitle": "Test Case 27849: 3 - Create new WO using 'Copy vehicle info' action - verify new WO on BO"
+        }
+      ],
       "inspectionData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -224,13 +244,13 @@
           "vinNumber": "1D7HW48NX6S507810",
           "vehicleMake": "Honda",
           "vehicleModel": "Accord",
-          "vehicleColor" : "Black",
+          "vehicleColor": "Black",
           "vehicleYear": "2011",
           "mileage": "77777",
           "licPlate": "12345",
           "stockNumber": "Stock1",
           "roNumber": "123",
-          "trim" : "25th Anniversary"
+          "trim": "25th Anniversary"
         },
         "servicesScreen": {
           "moneyServices": [
@@ -278,8 +298,7 @@
             "vehiclePartName": "Hood",
             "vehiclePartSize": "1 \"",
             "vehiclePartSeverity": "LIGHT",
-            "vehiclePartAdditionalService":
-            {
+            "vehiclePartAdditionalService": {
               "serviceName": "SR_S5_Mt_Money",
               "servicePrice": "50"
             },
@@ -294,9 +313,9 @@
           "policyNumber": "pl-123",
           "deductible": "34"
         },
-        "inspectionTotalPrice" : "$1,013.53"
+        "inspectionTotalPrice": "$1,013.53"
       },
-      "workOrderData" : {
+      "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
         },
@@ -304,13 +323,13 @@
           "vinNumber": "",
           "vehicleMake": "",
           "vehicleModel": "",
-          "vehicleColor" : "",
+          "vehicleColor": "",
           "vehicleYear": "",
           "mileage": "",
           "licPlate": "",
           "stockNumber": "",
           "roNumber": "",
-          "trim" : "No trims available"
+          "trim": "No trims available"
         },
         "servicesScreen": {
           "screenTotalPrice": "$962.53",
@@ -324,12 +343,22 @@
     {
       "rowID": "testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO.01",
       "description": "Test Case 27851: 5 - Create invoice based on 3 created WOs - verify presence of Invoice on BO, Test Case 27852: 6 - Do partial and full payment for invoice - verify them on BO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83609",
+          "testCaseTitle": "Test Case 27851: 5 - Create invoice based on 3 created WOs - verify presence of Invoice on BO"
+        },
+        {
+          "testCaseID": "83610",
+          "testCaseTitle": "Test Case 27852: 6 - Do partial and full payment for invoice - verify them on BO"
+        }
+      ],
       "invoiceData": {
         "poNumber": "123po",
         "invoiceTotal": "1883.06",
-        "cashCheckPaymentData" : {
-          "cashCheckNumber" : "ASD-123",
-          "cashCheckAmount" : "235"
+        "cashCheckPaymentData": {
+          "cashCheckNumber": "ASD-123",
+          "cashCheckAmount": "235"
         }
       }
     }
@@ -338,6 +367,12 @@
     {
       "rowID": "testCreateSRAddAppointmentCreateInspectionAndWOAndInvoiceAndVerifyDataOnBOISCorrectlyDisplayed.01",
       "description": "Test Case 27853: 7 - Create SR -> add appointment -> create inspection -> WO -> invoice -> verify on BO that all data related to SR is correctly displayed",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83611",
+          "testCaseTitle": "Test Case 27853: 7 - Create SR -> add appointment -> create inspection -> WO -> invoice -> verify on BO that all data related to SR is correctly displayed"
+        }
+      ],
       "serviceRequestData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -369,11 +404,17 @@
         "poNumber": "123po"
       }
     }
-    ],
+  ],
   "testCreateRetailCustomer": [
     {
       "rowID": "testCreateRetailCustomer.01",
-      "description": "Test Case 27854: 1 - 8 - Create retail customer",
+      "description": "Test Case 27854: 8 - Create retail customer",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83612",
+          "testCaseTitle": "Test Case 27854: 8 - Create retail customer"
+        }
+      ],
       "inspectionData": {
         "retailCustomer": {
           "firstName": "TestRetailFirst",
@@ -394,6 +435,12 @@
     {
       "rowID": "testCreateInspectionWOInvoiceForCreatedRetailCustomer.01",
       "description": "Test Case 27855: 9 - Create Inspection, WO, Invoice for created retail customer",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83613",
+          "testCaseTitle": "Test Case 27855: 9 - Create Inspection, WO, Invoice for created retail customer"
+        }
+      ],
       "inspectionData": {
         "retailCustomer": {
           "firstName": "TestRetailFirst",
@@ -401,7 +448,7 @@
         },
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
-          "trim" : "25th Anniversary"
+          "trim": "25th Anniversary"
         },
         "servicesScreen": {
           "moneyServices": [
@@ -422,20 +469,26 @@
           "deductible": "34"
         }
       },
-      "workOrderData" : {
+      "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
         }
       },
       "invoiceData": {
         "poNumber": "123po"
-        }
       }
+    }
   ],
   "testVerifyCheckInUndoCheckInForSR": [
     {
       "rowID": "testVerifyCheckInUndoCheckInForSR.01",
       "description": "Test Case 83621: 17 - Verify check in/undo check in for SR",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83621",
+          "testCaseTitle": "Test Case 83621: 17 - Verify check in/undo check in for SR"
+        }
+      ],
       "serviceRequestData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -458,6 +511,12 @@
     {
       "rowID": "testVerifyCreatingSRFromInspectionTeamInspection.01",
       "description": "Test Case 28008: 23 - Verify creating SR from Inspection/team inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83625",
+          "testCaseTitle": "Test Case 28008: 23 - Verify creating SR from Inspection/team inspection"
+        }
+      ],
       "inspectionData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -494,6 +553,12 @@
     {
       "rowID": "testVerifyAddNotesToInspection.01",
       "description": "Test Case 28087: 25 - Verify add notes to inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83629",
+          "testCaseTitle": "Test Case 28087: 25 - Verify add notes to inspection"
+        }
+      ],
       "inspectionData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -525,6 +590,12 @@
     {
       "rowID": "testVerifyDeleteWOFunctionality.01",
       "description": "Test Case 28091: 31 - Verify delete WO functionality",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83635",
+          "testCaseTitle": "Test Case 28091: 31 - Verify delete WO functionality"
+        }
+      ],
       "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -547,6 +618,12 @@
     {
       "rowID": "testVerifyAddNotesForWorkOrder.01",
       "description": "28093 29 - Verify add notes for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83633",
+          "testCaseTitle": "28093 29 - Verify add notes for WO"
+        }
+      ],
       "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -568,6 +645,12 @@
     {
       "rowID": "testVerifyArchiveFunctionalityForInspection.01",
       "description": "Test Case 28088: 26 - Verify Archive functionality for inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83630",
+          "testCaseTitle": "Test Case 28088: 26 - Verify Archive functionality for inspection"
+        }
+      ],
       "inspectionData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -596,6 +679,12 @@
     {
       "rowID": "testVerifyApprovingInspectionUnderMyInspectionTeamInspection.01",
       "description": "Test Case 28089: 27 - Verify approving inspection under My inspection/Team Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83631",
+          "testCaseTitle": "Test Case 28089: 27 - Verify approving inspection under My inspection/Team Inspection"
+        }
+      ],
       "inspectionData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -623,7 +712,13 @@
   "testVerifyCreatingInspectionFromWO": [
     {
       "rowID": "testVerifyCreatingInspectionFromWO.01",
-      "description": "28090 28 - Verify creating inspection from WO",
+      "description": "Test Case 28090 28 - Verify creating inspection from WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83632",
+          "testCaseTitle": "Test Case 28090 28 - Verify creating inspection from WO"
+        }
+      ],
       "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -632,7 +727,7 @@
           "vinNumber": "1D7HW48NX6S507810",
           "vehicleMake": "Honda",
           "vehicleModel": "Accord",
-          "vehicleColor" : "Black",
+          "vehicleColor": "Black",
           "vehicleYear": "2011",
           "mileage": "77777",
           "licPlate": "12345",
@@ -657,7 +752,13 @@
   "testVerifyChangeStatusForWO": [
     {
       "rowID": "testVerifyChangeStatusForWO.01",
-      "description": "28092 30 - Verify change status for WO",
+      "description": "Test Case 28092 30 - Verify change status for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83634",
+          "testCaseTitle": "Test Case 28092 30 - Verify change status for WO"
+        }
+      ],
       "workOrderData": {
         "wholesailCustomer": {
           "companyName": "Amazimg Nissan"
@@ -671,6 +772,81 @@
               "serviceName": "Dye_Panel"
             }
           ]
+        }
+      }
+    }
+  ],
+  "testVerifyDeleteInvoiceFunctionality": [
+    {
+      "rowID": "testVerifyDeleteInvoiceFunctionality.01",
+      "description": "Test Case 28100: 33 - Verify delete invoice functionality",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83637",
+          "testCaseTitle": "Test Case 28100: 33 - Verify delete invoice functionality"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testVerifyCreatingInspectionsFromInvoiceTeamInvoice": [
+    {
+      "rowID": "testVerifyCreatingInspectionsFromInvoiceTeamInvoice.01",
+      "description": "Test Case 28099: 32 - Verify creating inspections from Invoice/team invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83636",
+          "testCaseTitle": "Test Case 28099: 32 - Verify creating inspections from Invoice/team invoice"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor": "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      },
+      "inspectionData": {
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
         }
       }
     }

@@ -3,6 +3,8 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularMyInvoicesScreenSteps {
 
@@ -42,9 +44,20 @@ public class RegularMyInvoicesScreenSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.EDIT);
     }
 
+    public static void selectVoidInvoiceMenu(String invoiceID) {
+        selectInvoice(invoiceID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.VOID);
+    }
+
     public static void selectInvoiceNotesMenu(String invoiceID) {
         selectInvoice(invoiceID);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.NOTES);
+    }
+
+    public static void startCreatingNewInspectionFromInvoice(String invoiceID, IInspectionsTypes inspectionsType) {
+        selectInvoice(invoiceID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.NEW_INSPECTION);
+        RegularInspectionTypesSteps.selectInspectionType(inspectionsType);
     }
 
     public static void changeCustomerForInvoice(String invoiceID, AppCustomer customer) {
@@ -52,5 +65,15 @@ public class RegularMyInvoicesScreenSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHANGE_CUSTOMER);
         RegularCustomersScreenSteps.selectCustomer(customer);
         waitInvoicesScreenLoaded();
+    }
+
+    public static void voidInvoice(String invoiceID) {
+        selectVoidInvoiceMenu(invoiceID);
+        Helpers.getAlertTextAndAccept();
+    }
+
+    public static void switchToTeamView() {
+        RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
+        myInvoicesScreen.switchToTeamView();
     }
 }
