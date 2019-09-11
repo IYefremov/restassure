@@ -33,7 +33,7 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public boolean myInvoiceExists(String invoiceNumber) {
-		return appiumdriver.findElements(MobileBy.AccessibilityId(invoiceNumber)).size() > 0;
+		return invoicesTable.findElements(MobileBy.AccessibilityId(invoiceNumber)).size() > 0;
 	}
 	
 	public String getWOsForInvoice(String invoiceNumber) {

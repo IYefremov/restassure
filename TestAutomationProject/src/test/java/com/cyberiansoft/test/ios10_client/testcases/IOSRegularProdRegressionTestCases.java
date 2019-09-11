@@ -15,6 +15,7 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.enums.ServiceRequestAppointmentStatuses;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
@@ -205,6 +206,11 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         InvoiceData invoiceData = testCaseData.getInvoiceData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        for (String workOrderId : workOrdersForInvoice) {
+            RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderId);
+            RegularSummaryApproveScreenSteps.approveWorkOrder();
+        }
+
         for (String workOrderId : workOrdersForInvoice)
             RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderId);
         RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
@@ -785,6 +791,94 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyWorkOrdersScreenValidations.verifyWorkOrderHasApproveIcon(workOrderNumber, true);
         RegularMyWorkOrdersScreenValidations.verifyWorkOrderHasInvoiceIcon(workOrderNumber, false);
 
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyDeleteInvoiceFunctionality(String rowID,
+                                                String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenSteps.voidInvoice(invoiceNumber);
+        RegularMyInvoicesScreenValidations.verifyInvoicePresent(invoiceNumber, false);
+
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyCreatingInspectionsFromInvoiceTeamInvoice(String rowID,
+                                                     String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenSteps.startCreatingNewInspectionFromInvoice(invoiceNumber, UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String myInspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(testCaseData.getInspectionData().getInsuranceCompanyData());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+
+        RegularMyInvoicesScreenSteps.switchToTeamView();
+        RegularMyInvoicesScreenSteps.startCreatingNewInspectionFromInvoice(invoiceNumber, UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String teamInspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(testCaseData.getInspectionData().getInsuranceCompanyData());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsScreenValidations.verifyInspectionPresent(myInspectionNumber, true);
+        RegularMyInvoicesScreenSteps.switchToTeamView();
+        RegularMyInspectionsScreenValidations.verifyInspectionPresent(teamInspectionNumber, true);
         RegularNavigationSteps.navigateBackScreen();
     }
 }

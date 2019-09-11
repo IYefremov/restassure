@@ -105,7 +105,7 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	}
 
 	public RegularMyInvoicesScreen clickMyInvoicesButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
 		return new RegularMyInvoicesScreen();

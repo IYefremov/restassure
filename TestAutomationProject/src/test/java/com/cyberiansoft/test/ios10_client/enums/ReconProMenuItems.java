@@ -26,6 +26,7 @@ public enum ReconProMenuItems {
     SHOW_WOS("Show\nWOs"),
     ASSIGN("Assign"),
     ARCHIVE("Archive"),
+    VOID("Void"),
     SUMMARY("Summary");
 
     @Getter
