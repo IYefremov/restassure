@@ -48,7 +48,6 @@ public class EventsWebPage extends BaseWebPage {
 	public EventsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(eventstable.getWrappedElement()));
 	}
 
 	public void verifyEventsTableColumnsAreVisible() {
