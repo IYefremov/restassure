@@ -125,7 +125,6 @@ public class ClientsWebPage extends WebPageWithPagination {
 	public ClientsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(clientstable.getWrappedElement()));
 	}
 
 	public boolean searchPanelIsExpanded() {
