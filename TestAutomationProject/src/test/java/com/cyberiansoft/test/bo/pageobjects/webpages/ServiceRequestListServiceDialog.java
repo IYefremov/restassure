@@ -42,11 +42,6 @@ public class ServiceRequestListServiceDialog extends BaseWebPage {
 	public ServiceRequestListServiceDialog(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		try {
-			wait.until(ExpectedConditions.attributeContains(servicesBlock, "display", "block"));
-		} catch (Exception e) {
-			Assert.fail("The services edit block has not been opened", e);
-		}
 	}
 
 	public void openServicesDropDown() {
