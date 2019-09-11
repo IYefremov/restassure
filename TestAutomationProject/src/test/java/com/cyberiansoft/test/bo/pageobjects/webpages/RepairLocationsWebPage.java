@@ -44,7 +44,6 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 	public RepairLocationsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(repairlocationstable.getWrappedElement()));
 	}
 
 	public boolean searchPanelIsExpanded() {

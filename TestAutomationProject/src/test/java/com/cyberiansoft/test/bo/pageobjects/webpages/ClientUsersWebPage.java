@@ -29,7 +29,6 @@ public class ClientUsersWebPage extends BaseWebPage {
 	public ClientUsersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(adduserbtn));
 	}
 
 	public void clickAddUserBtn() {
