@@ -105,7 +105,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		if (!appiumdriver.findElementByAccessibilityId(model).isDisplayed())
 			SwipeUtils.swipeToElement(model);
 		appiumdriver.findElementByAccessibilityId(model).click();
-		clickSave();
+		appiumdriver.findElementByAccessibilityId("Save").click();
 	}
 
 	public void seletAdvisor(String advisor) {

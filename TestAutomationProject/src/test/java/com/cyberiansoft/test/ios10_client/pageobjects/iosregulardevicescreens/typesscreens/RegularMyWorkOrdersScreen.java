@@ -129,7 +129,6 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
-		WaitUtils.waitUntilElementIsClickable(mywotable);
 		WaitUtils.waitUntilElementIsClickable(mywotable.findElementByAccessibilityId(workOrderId)).click();
 	}
 	
@@ -165,9 +164,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void clickCreateInvoiceIconForWO(String workOrderNumber)  {
-		new WebDriverWait(appiumdriver, 20)
-		  .until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId(workOrderNumber)));
-		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(workOrderNumber))
+		mywotable.findElement(MobileBy.AccessibilityId(workOrderNumber))
 				.findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
 	
@@ -183,30 +180,12 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public boolean woExists(String workOrderNumber) {
-		WaitUtils.waitUntilElementIsClickable(mywotable);
+		waitMyWorkOrdersScreenLoaded();
 		return appiumdriver.findElements(MobileBy.AccessibilityId(workOrderNumber)).size() > 0;	
 	}
 
 	public void clickInvoiceIcon() {
 		appiumdriver.findElementByAccessibilityId("invoice new").click();
-	}
-
-	public <T extends IBaseWizardScreen> T selectInvoiceType(IInvoicesTypes invoiceType) {
-		if (!appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).isDisplayed()) {
-		swipeToElement(appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoiceType.getInvoiceTypeName() + "']/..")));
-		}
-		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		return invoiceType.getFirstVizardScreen();
-	}
-
-	public String selectInvoiceTypeAndAcceptAlert(IInvoicesTypes invoiceType) {
-		if (!appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).isDisplayed()) {
-			swipeToElement(appiumdriver.
-					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoiceType.getInvoiceTypeName() + "']/..")));
-		}
-		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		return Helpers.getAlertTextAndAccept();
 	}
 
 	public <T extends IBaseWizardScreen> T selectWorkOrderType(IWorkOrdersTypes workordertype) {

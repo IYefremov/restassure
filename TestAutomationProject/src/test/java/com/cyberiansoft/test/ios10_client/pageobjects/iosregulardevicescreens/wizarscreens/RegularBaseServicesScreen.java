@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularBaseTypeScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;

@@ -850,5 +850,67 @@
         }
       }
     }
+  ],
+  "testVerifyChangePOActionForInvoicesTeamInvoice": [
+    {
+      "rowID": "testVerifyChangePOActionForInvoicesTeamInvoice.01",
+      "description": "Test Case 28101: 34 - Verify change PO# action for invoices/team invoices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83638",
+          "testCaseTitle": "Test Case 28101: 34 - Verify change PO# action for invoices/team invoices"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testVerifyApprovingInvoiceFromTeamInvoice": [
+    {
+      "rowID": "testVerifyApprovingInvoiceFromTeamInvoice.01",
+      "description": "Test Case 28103: 36 - Verify approving invoice from team invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83640",
+          "testCaseTitle": "Test Case 28103: 36 - Verify approving invoice from team invoice"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
   ]
 }

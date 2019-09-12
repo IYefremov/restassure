@@ -20,6 +20,7 @@ import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.InvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
@@ -298,7 +299,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] wos = {wo1, wo2};
 			myworkordersscreen.clickCreateInvoiceIconForWOs(wos);
 			myworkordersscreen.clickInvoiceIcon();
-			RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
             Assert.assertTrue(invoiceinfoscreen.isWOSelected(wo1));
 			Assert.assertTrue(invoiceinfoscreen.isWOSelected(wo2));
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
@@ -380,8 +382,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			myworkordersscreen.clickCreateInvoiceIconForWOs(wos);
 			
 			myworkordersscreen.clickInvoiceIcon();
-			String alerttext = myworkordersscreen
-					.selectInvoiceTypeAndAcceptAlert(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			String alerttext = Helpers.getAlertTextAndAccept();
 			Assert.assertEquals(
 					alerttext,
 					"Invoice type " + DentWizardInvoiceTypes.NO_ORDER_TYPE.getInvoiceTypeName() + " doesn't support multiple Work Order types.");
@@ -3289,7 +3291,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularMyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
 			myworkordersscreen.clickCreateInvoiceIconForWO(workOrderNumber);
 			myworkordersscreen.clickInvoiceIcon();
-			RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
 			invoiceinfoscreen.clickSaveAsFinal();
 			myworkordersscreen.clickHomeButton();
 		}
@@ -3663,7 +3666,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			myworkordersscreen.clickCreateInvoiceIconForWO(wo);
 			myworkordersscreen.clickInvoiceIcon();
-			RegularInvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(DentWizardInvoiceTypes.AUCTION_NO_DISCOUNT_INVOICE);
+			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.AUCTION_NO_DISCOUNT_INVOICE);
+			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
 			final  String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 			invoiceinfoscreen.clickSaveAsFinal();
 			myworkordersscreen.clickHomeButton();

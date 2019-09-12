@@ -12,4 +12,17 @@ public class RegularMyInvoicesScreenValidations {
         else
             Assert.assertFalse(myInvoicesScreen.myInvoiceExists(invoiceID));
     }
+
+    public static void verifyInvoicePONumber(String invoiceID, String expectedPO) {
+        RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
+        Assert.assertEquals(myInvoicesScreen.getInvoicePONumber(invoiceID), expectedPO);
+    }
+
+    public static void verifyInvoiceHasApproveIcon(String invoiceID, boolean isPresent) {
+        RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
+        if (isPresent)
+            Assert.assertTrue(myInvoicesScreen.isInvoiceHasApproveIcon(invoiceID));
+        else
+            Assert.assertFalse(myInvoicesScreen.isInvoiceHasApproveIcon(invoiceID));
+    }
 }
