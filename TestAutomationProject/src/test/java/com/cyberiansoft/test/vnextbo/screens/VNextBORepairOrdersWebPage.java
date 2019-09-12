@@ -700,7 +700,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
             return wait
                     .ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions.visibilityOf(tableBody
-                            .findElement(By.xpath(".//strong[text()=\"" + text + "\"]"))))
+                            .findElement(By.xpath(".//strong[contains(text(), \"" + text + "\")]"))))
                     .isDisplayed();
         } catch (Exception e) {
             return false;

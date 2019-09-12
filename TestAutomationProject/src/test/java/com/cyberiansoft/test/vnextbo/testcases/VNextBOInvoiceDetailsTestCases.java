@@ -25,6 +25,11 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInvoiceDetailsData.json";
 
+	private String userName;
+	private String userPassword;
+	private VNextBOLoginScreenWebPage loginPage;
+	private VNextBORepairOrdersWebPage repairOrdersPage;
+
 	@BeforeClass
 	public void settingUp() {
 		JSONDataProvider.dataFile = DATA_FILE;
@@ -39,7 +44,13 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 			e.printStackTrace();
 		}
 		webdriver = DriverBuilder.getInstance().getDriver();
-		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
+
+		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+		userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+		userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+
+		loginPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOLoginScreenWebPage.class);
+		loginPage.userLogin(userName, userPassword);
 	}
 
 	@AfterMethod
@@ -53,15 +64,13 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 			DriverBuilder.getInstance().quitDriver();
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	//TODO test disabled, TC 45496 should be updated or test should be completely re-implemented
+	@Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testSetupConfigurationToRunInvoiceListSuite(String rowID, String description, JSONObject testData) {
 
 		VNextBOInvoiceDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInvoiceDetailsData.class);
 
-		VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
-				VNextBOLoginScreenWebPage.class);
 		VNexBOUsersWebPage usersWebPage = PageFactory.initElements(webdriver, VNexBOUsersWebPage.class);
-		loginPage.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(), VNextBOConfigInfo.getInstance().getVNextBOPassword());
 		VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
 		leftMenuInteractions.selectUsersMenu();
 		final String usermail = data.getUserMailPrefix() + RandomUtils.nextInt(100000, 1000000) + data.getUserMailPostbox();
