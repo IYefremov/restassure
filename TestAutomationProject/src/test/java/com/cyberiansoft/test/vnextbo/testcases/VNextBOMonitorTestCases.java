@@ -1752,6 +1752,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				.expandServicesTable();
 		final String serviceId = detailsPage.getServiceId(data.getService());
 		final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
+		System.out.println("ServiceID: " + serviceId);
 		System.out.println("serviceTotalPrice: " + serviceTotalPrice);
 		System.out.println("ServiceQuantity: " + data.getServiceQuantity());
 		System.out.println("ServiceQuantity: " + detailsPage.getServiceQuantity(serviceId));

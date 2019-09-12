@@ -421,7 +421,7 @@
       "description": "Test Case 82910:User can change a Flag of RO to red",
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
-      "flag": "Red"
+      "flag": "Important"
     }
   ],
 
@@ -431,7 +431,7 @@
       "description": "Test Case 82912:User can change a Flag of RO to orange",
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
-      "flag": "Orange"
+      "flag": "Low priority"
     }
   ],
 
@@ -471,7 +471,7 @@
       "description": "Test Case 82920:User can change a Flag of RO to purple",
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
-      "flag": "Purple"
+      "flag": "Test"
     }
   ],
 

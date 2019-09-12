@@ -24,7 +24,7 @@ public class VNextBORepairOrdersPageInteractions {
                     .getWait()
                     .ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions.visibilityOf(repairOrdersPage.getTableBody()
-                            .findElement(By.xpath(".//strong[text()=\"" + text + "\"]"))))
+                            .findElement(By.xpath(".//strong[contains(text(), \"" + text + "\")]"))))
                     .isDisplayed();
         } catch (Exception e) {
             return false;
