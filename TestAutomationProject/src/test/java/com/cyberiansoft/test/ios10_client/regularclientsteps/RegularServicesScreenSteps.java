@@ -106,6 +106,7 @@ public class RegularServicesScreenSteps {
     }
 
     public static void switchToSelectedServices() {
+        waitServicesScreenLoad();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         servicesScreen.switchToSelectedServicesTab();
         RegularSelectedServicesSteps.waitSelectedServicesScreenLoaded();

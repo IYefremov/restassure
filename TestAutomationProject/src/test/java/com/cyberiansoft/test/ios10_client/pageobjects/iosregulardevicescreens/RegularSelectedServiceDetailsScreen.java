@@ -69,6 +69,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setServicePriceValue(String _price) {
+		BaseUtils.waitABit(2000);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		WebElement priceFld = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Price")));
 		priceFld.findElement(MobileBy.className("XCUIElementTypeTextField")).clear();
@@ -173,14 +174,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		WebElement priceFld = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Quantity")));
 		priceFld.findElement(MobileBy.className("XCUIElementTypeTextField")).clear();
 		priceFld.findElement(MobileBy.className("XCUIElementTypeTextField")).sendKeys(_quantity + "\n");
-		/*
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Quantity")));
-		WebElement par = getTableParentCell("Quantity");
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_quantity + "\n");
-		Helpers.waitABit(300);*/
 	}
 	
 	public void setServiceTimeValue(String _timevalue) {

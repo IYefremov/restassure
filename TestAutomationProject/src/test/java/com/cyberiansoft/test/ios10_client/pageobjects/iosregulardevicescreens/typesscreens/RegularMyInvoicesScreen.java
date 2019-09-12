@@ -9,6 +9,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -42,7 +43,6 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectInvoice(String invoiceNumber) {
-		waitInvoicesScreenLoaded();
 		invoicesTable.findElement(MobileBy.AccessibilityId(invoiceNumber)).click();
 	}
 	
@@ -54,24 +54,22 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 		return invoicesTable.findElement(MobileBy.AccessibilityId(invoiceNumber)).findElement(MobileBy.AccessibilityId("INVOICE_SHARED")).isDisplayed();
 	}
 	
-	public void selectCustomer(String customer) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(customer)));
-		appiumdriver.findElementByName(customer).click();
-	}
-	
 	public String getInvoicePrice(String invoiceNumber) {
 		return invoicesTable.findElementByAccessibilityId(invoiceNumber).findElementByAccessibilityId("labelInvoiceAmount").getAttribute("label");
 	}
 	
 	public void changePO(String newpo) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeCollectionView")));
-		appiumdriver.findElementByClassName("XCUIElementTypeCollectionView").findElement(By.className("XCUIElementTypeTextField")).clear();
-		appiumdriver.findElementByClassName("XCUIElementTypeCollectionView").findElement(By.className("XCUIElementTypeTextField")).sendKeys(newpo);
+		WebElement changePOPopup = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeCollectionView")));
+		changePOPopup.findElement(By.className("XCUIElementTypeTextField")).clear();
+		changePOPopup.findElement(By.className("XCUIElementTypeTextField")).sendKeys(newpo);
 		appiumdriver.switchTo().alert().accept();
+	}
+
+	public String getInvoicePONumber(String invoiceID) {
+		final String poSubstring = "PO#: ";
+		String invoiceInfoLabel = invoicesTable.findElementByAccessibilityId(invoiceID).findElementByAccessibilityId("labelInfo2").getAttribute("value");
+		return invoiceInfoLabel.substring(invoiceInfoLabel.indexOf(poSubstring) + poSubstring.length(), invoiceInfoLabel.length());
 	}
 	
 	public boolean myInvoicesIsDisplayed() {
@@ -94,7 +92,7 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectEmployeeAndTypePassword(String employee, String password) {
 		selectEmployee( employee);
-		((IOSElement) appiumdriver.findElementByXPath("//UIASecureTextField[@value=\"Enter password here\"]")).setValue(password);
+		((IOSElement) appiumdriver.findElementByAccessibilityId("Enter password here")).setValue(password);
 		Helpers.acceptAlert();
 	}
 	
@@ -131,6 +129,15 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
 		wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Back"))).click();
+	}
+
+	public void clickInvoiceApproveIcon(String invoiceNumber) {
+		invoicesTable.findElementByAccessibilityId(invoiceNumber).findElementByAccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_65").click();
+	}
+
+	public boolean isInvoiceHasApproveIcon(String invoiceNumber) {
+		return invoicesTable.findElementByAccessibilityId(invoiceNumber).findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'EntityInfoButtonUnchecked'")).
+				getAttribute("name").equals("EntityInfoButtonUnchecked, ButtonImageId_65");
 	}
 
 }

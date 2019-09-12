@@ -56,8 +56,7 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	public void clickApproveButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Approve")));
-		wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Approve"))).click();
+		approvebtn.click();
 	}
 	
 	public void clickApproveAllServicesButton() {
@@ -72,7 +71,6 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	
 	public void clickSkipAllServicesButton() {
 		skipallbtn.click();
-		//skipallbtn.click();
 	}
 
 	public void clickCancelButton() {
@@ -85,6 +83,8 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	
 	public void clickSignButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Sign")));
+		wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Sign"))).click();
 	}
 	
@@ -112,11 +112,6 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 				moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
 		clickDoneButton();
 
-	}
-
-	public void clickInspectionInfoAlertCloseButton() {
-		Helpers.waitForAlert();
-		appiumdriver.findElementByAccessibilityId("Close").click();
 	}
 	
 	public void approveInspectionApproveAllAndSignature() {

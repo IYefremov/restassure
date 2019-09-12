@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
@@ -505,7 +506,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCheckInUndoCheckInForSR(String rowID,
-                                                                                                               String description, JSONObject testData) {
+                                                  String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
@@ -523,7 +524,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCreatingSRFromInspectionTeamInspection(String rowID,
-                                                                      String description, JSONObject testData) throws Exception {
+                                                                      String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -559,7 +560,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyAddNotesToInspection(String rowID,
-                                                                 String description, JSONObject testData) throws Exception {
+                                                                 String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -598,7 +599,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyAddNotesForWorkOrder(String rowID,
-                                               String description, JSONObject testData) throws Exception {
+                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -634,7 +635,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyDeleteWOFunctionality(String rowID,
-                                               String description, JSONObject testData) throws Exception {
+                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -657,7 +658,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyArchiveFunctionalityForInspection(String rowID,
-                                               String description, JSONObject testData) throws Exception {
+                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -686,7 +687,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyApprovingInspectionUnderMyInspectionTeamInspection(String rowID,
-                                                            String description, JSONObject testData) throws Exception {
+                                                            String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -731,7 +732,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCreatingInspectionFromWO(String rowID,
-                                               String description, JSONObject testData) throws Exception {
+                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -765,7 +766,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyChangeStatusForWO(String rowID,
-                                                   String description, JSONObject testData) throws Exception {
+                                                   String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -796,7 +797,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyDeleteInvoiceFunctionality(String rowID,
-                                                String description, JSONObject testData) throws Exception {
+                                                String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -831,7 +832,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyCreatingInspectionsFromInvoiceTeamInvoice(String rowID,
-                                                     String description, JSONObject testData) throws Exception {
+                                                     String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -879,6 +880,81 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyInspectionsScreenValidations.verifyInspectionPresent(myInspectionNumber, true);
         RegularMyInvoicesScreenSteps.switchToTeamView();
         RegularMyInspectionsScreenValidations.verifyInspectionPresent(teamInspectionNumber, true);
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyChangePOActionForInvoicesTeamInvoice(String rowID,
+                                                                    String description, JSONObject testData) {
+
+        final String myInvoicePO = "myPO12345";
+        final String teamInvoicePO = "teamPO12345";
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenSteps.changeInvoicePONumber(invoiceNumber, myInvoicePO);
+        RegularMyInvoicesScreenValidations.verifyInvoicePONumber(invoiceNumber, myInvoicePO);
+        RegularMyInvoicesScreenSteps.switchToTeamView();
+        RegularMyInvoicesScreenSteps.changeInvoicePONumber(invoiceNumber, teamInvoicePO);
+        RegularMyInvoicesScreenValidations.verifyInvoicePONumber(invoiceNumber, teamInvoicePO);
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyApprovingInvoiceFromTeamInvoice(String rowID,
+                                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+        BaseUtils.waitABit(15000);
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenSteps.switchToTeamView();
+        RegularMyInvoicesScreenSteps.approveInvoice(invoiceNumber);
+        RegularMyInvoicesScreenValidations.verifyInvoiceHasApproveIcon(invoiceNumber, false);
         RegularNavigationSteps.navigateBackScreen();
     }
 }

@@ -22,6 +22,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wi
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.InvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
@@ -1803,7 +1804,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickApproveButton();
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		RegularInvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		RegularInvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
 		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceNumber42803 = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();

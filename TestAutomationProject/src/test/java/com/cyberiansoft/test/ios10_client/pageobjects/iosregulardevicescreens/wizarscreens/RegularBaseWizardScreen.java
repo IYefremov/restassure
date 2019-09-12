@@ -6,8 +6,11 @@ import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBaseWizardScreen {
 
@@ -40,6 +43,13 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void clickSave() {
+        /*WaitUtils.elementShouldBeVisible(appiumdriver.findElementByAccessibilityId("viewTitle"), true);
+        List<WebElement> btns = appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElements(MobileBy.className("XCUIElementTypeButton"));
+        for (WebElement bt : btns)
+            System.out.println("========" + bt.getAttribute("value"));
+        if (!btns.get(1).getAttribute("label").equals("Save"))
+            btns.get(1).click();*/
+
         if (!elementExists("Save"))
             clickChangeScreen();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

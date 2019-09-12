@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularApproveInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -75,5 +76,25 @@ public class RegularMyInvoicesScreenSteps {
     public static void switchToTeamView() {
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
         myInvoicesScreen.switchToTeamView();
+    }
+
+    public static void changeInvoicePONumber(String invoiceID, String newPO) {
+        selectInvoiceForChangePO(invoiceID);
+        RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
+        myInvoicesScreen.changePO(newPO);
+    }
+
+    public static void clickInvoiceApproveIcon(String invoiceID) {
+        RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
+        myInvoicesScreen.clickInvoiceApproveIcon(invoiceID);
+    }
+
+    public static void approveInvoice(String invoiceID) {
+        clickInvoiceApproveIcon(invoiceID);
+        RegularApproveInvoicesScreen approveInvoicesScreen = new RegularApproveInvoicesScreen();
+        approveInvoicesScreen.selectInvoice(invoiceID);
+        approveInvoicesScreen.clickAgreeApproveDisclimer();
+        approveInvoicesScreen.clickApproveButton();
+        approveInvoicesScreen.drawApprovalSignature();
     }
 }
