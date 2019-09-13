@@ -89,7 +89,6 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularVehiclePartsScreenValidations.verifyVehiclePartScreenSubTotalValue(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartTotalPrice());
         RegularVehiclePartsScreenSteps.saveVehiclePart();
         RegularWizardScreenValidations.verifyScreenSubTotalPrice(inspectionData.getPriceMatrixScreenData().getMatrixScreenPrice());
-        //RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getPriceMatrixScreenData().getMatrixScreenTotalPrice());
         RegularNavigationSteps.navigateToServicesScreen();
         RegularWizardScreenValidations.verifyScreenSubTotalPrice(inspectionData.getServicesScreen().getScreenPrice());
         RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getServicesScreen().getScreenTotalPrice());
@@ -286,7 +285,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-        RegularHomeScreenSteps.navigateToServiceRequestScreenScreen();
+        RegularHomeScreenSteps.navigateToServiceRequestScreen();
         RegularServiceRequestSteps.startCreatingServicerequest(serviceRequestData.getWholesailCustomer(), UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(serviceRequestData.getVihicleInfo());
         RegularServiceRequestSteps.saveServiceRequestWithAppointment();
@@ -319,7 +318,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularInvoiceInfoScreenSteps.saveInvoiceAsDraft();
         RegularNavigationSteps.navigateBackScreen();
 
-        RegularHomeScreenSteps.navigateToServiceRequestScreenScreen();
+        RegularHomeScreenSteps.navigateToServiceRequestScreen();
         RegularServiceRequestSteps.openServiceRequestDetails(serviceRequestNumber);
         RegularServiceRequestDetalsScreenValidations.verifySRSummaryAppointmentsInformationExists(true);
         RegularServiceRequestDetalsScreenValidations.verifySRSheduledAppointmentExists(true);
@@ -367,6 +366,26 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
+
+        webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+        WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
+
+        BackOfficeLoginWebPage loginWebPage = new BackOfficeLoginWebPage(webdriver);
+        loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+                ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+        BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
+        backOfficeHeaderPanel.clickCompanyLink();
+        CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+        companyWebPage.clickClientsLink();
+        ClientsWebPage clientsWebPage = new ClientsWebPage(webdriver);
+        clientsWebPage.searchClientByName(inspectionData.getInspectionRetailCustomer().getFullName());
+        if (clientsWebPage.isClientPresentInTable(inspectionData.getInspectionRetailCustomer().getFullName()))
+            clientsWebPage.deleteClient(inspectionData.getInspectionRetailCustomer().getFullName());
+        DriverBuilder.getInstance().getDriver().quit();
+
+        RegularHomeScreenSteps.navigateToStatusScreen();
+        RegularStatusScreenSteps.updateMainDataBase(testuser);
+
         RegularHomeScreenSteps.navigateToCustomersScreen();
         RegularCustomersScreenSteps.switchToRetailMode();
         RegularCustomersScreenSteps.addNewRetailCustomer(inspectionData.getInspectionRetailCustomer());
@@ -376,16 +395,14 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-        BackOfficeLoginWebPage loginWebPage = PageFactory.initElements(webdriver,
-                BackOfficeLoginWebPage.class);
+        loginWebPage = new BackOfficeLoginWebPage(webdriver);
         loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
                 ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-        BackOfficeHeaderPanel backOfficeHeaderPanel = PageFactory.initElements(webdriver,
-                BackOfficeHeaderPanel.class);
+        backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
         backOfficeHeaderPanel.clickCompanyLink();
-        CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+        companyWebPage = new CompanyWebPage(webdriver);
         companyWebPage.clickClientsLink();
-        ClientsWebPage clientsWebPage = new ClientsWebPage(webdriver);
+        clientsWebPage = new ClientsWebPage(webdriver);
         clientsWebPage.isClientPresentInTable(inspectionData.getInspectionRetailCustomer().getFullName());
 
         DriverBuilder.getInstance().getDriver().quit();
@@ -511,7 +528,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-        RegularHomeScreenSteps.navigateToServiceRequestScreenScreen();
+        RegularHomeScreenSteps.navigateToServiceRequestScreen();
         RegularServiceRequestSteps.startCreatingServicerequest(serviceRequestData.getWholesailCustomer(), UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(serviceRequestData.getVihicleInfo());
         RegularServiceRequestSteps.saveServiceRequestWithAppointment();
@@ -956,5 +973,35 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyInvoicesScreenSteps.approveInvoice(invoiceNumber);
         RegularMyInvoicesScreenValidations.verifyInvoiceHasApproveIcon(invoiceNumber, false);
         RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testCreateInspectionFromCopy(String rowID,
+                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        final String inspectionID = createInspectionForWorkOrders(inspectionData);
+        RegularMyInspectionsSteps.selectInspectionForCopy(inspectionID);
+        RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
+        final String copyInspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToPriceMatrixScreen();
+        RegularVehiclePartsScreenValidations.verifyVehiclePartScreenSubTotalValue(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartTotalPrice());
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.switchToSelectedServices();
+
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularSelectedServicesScreenValidations.verifyServiceIsSelected(serviceData.getServiceName(), true);
+        }
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getBundleService().getBundleServiceName(), true);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getLaborService().getServiceName(), true);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartAdditionalService().getServiceName(), false);
+
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(copyInspectionNumber, inspectionData.getInspectionTotalPrice());
+        RegularNavigationSteps.navigateBackScreen();
+
+
     }
 }

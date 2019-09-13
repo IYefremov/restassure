@@ -41,6 +41,11 @@ public class RegularNavigationSteps {
         baseWizardScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
     }
 
+    public static void navigateToPriceMatrixScreen() {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX);
+    }
+
     public static void navigateToVisualScreen(WizardScreenTypes wizardScreenType) {
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
         baseWizardScreen.selectNextScreen(wizardScreenType);

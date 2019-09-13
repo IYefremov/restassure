@@ -20,4 +20,7 @@ public class ListSelectPage extends MonitorScreen {
 
     @FindBy(xpath = "//*[@action='save']")
     private WebElement saveButton;
+
+    @FindBy(xpath = "//*[@action='save']")
+    private WebElement SelectedViewButton;
 }

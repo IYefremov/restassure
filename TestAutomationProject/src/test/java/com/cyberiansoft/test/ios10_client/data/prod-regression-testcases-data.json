@@ -866,7 +866,7 @@
           "companyName": "Amazimg Nissan"
         },
         "vihicleInfo": {
-          "vinNumber": "1D7HW48NX6S507810"
+          "vinNumber": "1D7HW48NX6S507810",
           "trim": "25th Anniversary"
         },
         "servicesScreen": {
@@ -897,7 +897,7 @@
           "companyName": "Amazimg Nissan"
         },
         "vihicleInfo": {
-          "vinNumber": "1D7HW48NX6S507810"
+          "vinNumber": "1D7HW48NX6S507810",
           "trim": "25th Anniversary"
         },
         "servicesScreen": {
@@ -910,6 +910,97 @@
       },
       "invoiceData": {
         "poNumber": "123po"
+      }
+    }
+  ],
+  "testCreateInspectionFromCopy": [
+    {
+      "rowID": "testCreateInspectionFromCopy.01",
+      "description": "Test Case 28086 24 - Verify create inspection from Copy",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83628",
+          "testCaseTitle": "Test Case 28086 24 - Verify create inspection from Copy"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor": "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel",
+              "servicePrice": "20"
+            },
+            {
+              "serviceName": "Special Discount",
+              "servicePrice": "-10"
+            }
+          ],
+          "laborService": {
+            "serviceName": "Labor_Vehilce_data_R&R",
+            "laborServiceRate": "2.57",
+            "laborServiceTime": "2",
+            "laborServicePriceVerify": "$5.14",
+            "laborServicePanel": "Front Bumper",
+            "laborServicePart": "Remove/Replace Front Bumper Cover"
+          },
+          "bundleService": {
+            "bundleServiceName": "Bundle for PP",
+            "bundleServiceAmount": "1021",
+            "services": [
+              {
+                "serviceName": "Service_PP_Vehicle",
+                "vehiclePart": {
+                  "vehiclePartName": "Front Bumper"
+                }
+              },
+              {
+                "serviceName": "SR_S1_Money",
+                "vehiclePart": {
+                  "vehiclePartName": "Decklid"
+                }
+              }
+            ]
+          },
+          "screenTotalPrice": "$1,013.53",
+          "screenPrice": "$1,046.14"
+        },
+        "priceMatrixScreenData": {
+          "screenName": "Simple Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "1 \"",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartAdditionalService": {
+              "serviceName": "SR_S5_Mt_Money",
+              "servicePrice": "50"
+            },
+            "vehiclePartTotalPrice": "$72.00"
+          },
+          "screenTotalPrice": "$1,013.53",
+          "screenPrice": "$72.00"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        },
+        "inspectionTotalPrice": "$1,013.53"
       }
     }
   ]
