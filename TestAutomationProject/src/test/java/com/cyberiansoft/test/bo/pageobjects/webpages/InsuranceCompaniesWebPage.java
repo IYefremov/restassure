@@ -52,7 +52,6 @@ public class InsuranceCompaniesWebPage extends BaseWebPage {
 	public InsuranceCompaniesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(insurancecompaniestable.getWrappedElement()));
 	}
 
 	public void clickAddInsuranceCompanyButton() {

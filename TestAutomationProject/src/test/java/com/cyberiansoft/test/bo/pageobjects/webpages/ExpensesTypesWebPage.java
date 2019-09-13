@@ -32,8 +32,7 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 
 	public ExpensesTypesWebPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(expensestypestable.getWrappedElement()));
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 	
 	public void verifyExpensesTypesColumnsAreVisible() {
