@@ -34,9 +34,14 @@ public class RegularHomeScreenSteps {
         homeScreen.clickCustomersButton();
     }
 
-    public static void navigateToServiceRequestScreenScreen() {
+    public static void navigateToServiceRequestScreen() {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
         homeScreen.clickServiceRequestsButton();
+    }
+
+    public static void navigateToStatusScreen() {
+        RegularHomeScreen homeScreen = new RegularHomeScreen();
+        homeScreen.clickStatusButton();
     }
 
     public static void waitForHomeScreen() {
