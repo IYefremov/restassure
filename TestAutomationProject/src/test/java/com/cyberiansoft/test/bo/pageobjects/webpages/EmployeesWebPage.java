@@ -58,7 +58,6 @@ public class EmployeesWebPage extends WebPageWithPagination {
 	public EmployeesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(employeestable.getWrappedElement()));
 	}
 
 	public void verifyEmployeeIsActive(String employeefirstname, String employeelastname) {
