@@ -2,10 +2,12 @@ package com.cyberiansoft.test.vnext.webelements;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class GeneralQuestion implements IWebElement {
+    @Getter
     protected WebElement rootElement;
     private String questionNameLocator = ".//*[@class='question-answer-title']";
     private String answerLocator = ".//*[@class='question-answer-bar-title']";

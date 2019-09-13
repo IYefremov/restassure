@@ -156,5 +156,72 @@
         ]
       }
     }
+  ],
+  "verifyPartServiceIsAddedAndLinkedWithLaborAfterQuestionIsAnswered": [
+    {
+      "rowID": " verifyPartServiceIsAddedWithLaborAfterQuestionIsAnswered.01",
+      "description": "TFSID: 87012",
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "do you the service?",
+            "questionAnswer": "Checked And OK'd"
+          }
+        ]
+      },
+      "services": [
+        {
+          "serviceName": "Oksi Part service"
+        },
+        {
+          "serviceName": "Labor_base_vehicle_data_all"
+        },
+        {
+          "serviceName": "Bumper"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "partPosition": "Front"
+        }
+      ]
+    }
+  ],
+  "verifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered": [
+    {
+      "rowID": " verifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered.01",
+      "description": "TFSID: 87013",
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "do you the service?",
+            "questionAnswer": "Immediate Attention Required"
+          }
+        ]
+      },
+      "services": [
+        {
+          "serviceName": "Oksi Part service"
+        },
+        {
+          "serviceName": "Oksi_Part_Service"
+        },
+        {
+          "serviceName": "Labor with vehicle data"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Rear"
+        }
+      ]
+    }
   ]
 }

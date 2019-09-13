@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.wizardscreens.questions;
 
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.GeneralQuestion;
 import com.cyberiansoft.test.vnext.webelements.TextQuestion;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
@@ -28,7 +29,8 @@ public class QuestionScreen extends VNextBaseWizardScreen {
     }
 
     public GeneralQuestion getGeneralQuestionByText(String questionText) {
-        return generalQuestionList.stream().filter((question -> question.getQuestionName().equals(questionText))).findFirst().orElseThrow(() -> new RuntimeException("Question not found " + questionText));
+        return WaitUtils.getGeneralFluentWait()
+                .until(driver -> generalQuestionList.stream().filter((question -> question.getQuestionName().equals(questionText))).findFirst().orElseThrow(() -> new RuntimeException("Question not found " + questionText)));
     }
 
     public TextQuestion getTextQuestionByText(String questionText) {

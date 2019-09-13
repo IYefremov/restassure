@@ -54,6 +54,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@data-name='Amount']")
     private WebElement serviceDetailsPrice;
 
+    @FindBy(xpath = "//div[@class='services-part-info-title']")
+    private WebElement partServiceInfoTitle;
+
 	@FindBy(xpath = "//input[@name='question-section']")
 	private List<WebElement> questionSections;
 	

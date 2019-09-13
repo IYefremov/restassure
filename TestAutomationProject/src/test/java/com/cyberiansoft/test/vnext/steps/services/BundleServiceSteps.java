@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.steps.services;
 
-import com.cyberiansoft.test.vnext.interactions.BundleServiceScreenInteractrions;
+import com.cyberiansoft.test.vnext.interactions.services.BundleServiceScreenInteractrions;
 
 public class BundleServiceSteps {
     public static void openServiceDetails(String serviceName) {

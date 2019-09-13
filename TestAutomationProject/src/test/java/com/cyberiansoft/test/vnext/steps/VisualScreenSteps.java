@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import org.testng.Assert;
 
 public class VisualScreenSteps {

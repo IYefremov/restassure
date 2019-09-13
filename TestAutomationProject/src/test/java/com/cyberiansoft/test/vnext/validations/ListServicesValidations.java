@@ -26,4 +26,9 @@ public class ListServicesValidations {
         Assert.assertFalse(selectedServicesScreen.isServiceSelected(serviceName));
 
     }
+
+    public static void verifyNoServicesSelected() {
+        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
+        Assert.assertTrue(selectedServicesScreen.getServicesListItems().isEmpty());
+    }
 }

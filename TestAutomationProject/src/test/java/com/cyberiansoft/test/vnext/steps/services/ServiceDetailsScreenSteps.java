@@ -1,8 +1,8 @@
-package com.cyberiansoft.test.vnext.steps;
+package com.cyberiansoft.test.vnext.steps.services;
 
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
-import com.cyberiansoft.test.vnext.interactions.ServiceDetailsInteractions;
+import com.cyberiansoft.test.vnext.interactions.services.ServiceDetailsInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 

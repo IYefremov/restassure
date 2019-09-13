@@ -1,10 +1,11 @@
-package com.cyberiansoft.test.vnext.steps;
+package com.cyberiansoft.test.vnext.steps.services;
 
 import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.vnext.interactions.AvailableServiceScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.services.AvailableServiceScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
 
 import java.util.List;
 import java.util.stream.Collectors;

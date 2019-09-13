@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnext.steps.questionform;
 
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
-import com.cyberiansoft.test.vnext.interactions.QuestionScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.services.QuestionScreenInteractions;
 
 public class QuestionFormSteps {
     public static void answerGeneralSlideQuestion(String questionName) {

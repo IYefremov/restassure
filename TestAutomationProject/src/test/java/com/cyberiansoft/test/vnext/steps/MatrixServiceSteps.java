@@ -5,8 +5,9 @@ import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.vnext.enums.partservice.PartServiceWizardScreen;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
-import com.cyberiansoft.test.vnext.interactions.MatrixServiceDetailsScreenInteractions;
-import com.cyberiansoft.test.vnext.interactions.MatrixServicePdrScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.services.MatrixServiceDetailsScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.services.MatrixServicePdrScreenInteractions;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 
 public class MatrixServiceSteps {
     public static void selectMatrixService(MatrixServiceData matrixServiceData) {

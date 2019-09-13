@@ -48,7 +48,7 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
         wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='all-services' and @data-view-mode='selected']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-view-mode='selected']")));
         return new VNextSelectedServicesScreen(appiumdriver);
     }
 }

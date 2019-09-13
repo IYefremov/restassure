@@ -27,4 +27,9 @@ public class ListSelectPageInteractions {
     public static void saveListPage() {
         WaitUtils.click(new ListSelectPage().getSaveButton());
     }
+
+    public static void switchToSelectedView() {
+        ListSelectPage listPage = new ListSelectPage();
+        WaitUtils.click(listPage.getSelectedViewButton());
+    }
 }

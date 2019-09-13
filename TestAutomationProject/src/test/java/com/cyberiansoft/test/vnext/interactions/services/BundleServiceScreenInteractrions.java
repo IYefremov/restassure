@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.interactions;
+package com.cyberiansoft.test.vnext.interactions.services;
 
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.BundleServiceScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
