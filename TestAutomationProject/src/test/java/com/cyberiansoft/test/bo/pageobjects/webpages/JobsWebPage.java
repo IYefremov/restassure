@@ -88,8 +88,7 @@ public class JobsWebPage extends WebPageWithPagination {
 
 	public JobsWebPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(jobstable.getWrappedElement()));
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 	
 	

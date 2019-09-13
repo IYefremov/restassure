@@ -62,7 +62,6 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	public QuestionsFormsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(questionformstable.getWrappedElement()));
 	}
 
 	public void verifyQuestionSectionsTableColumnsAreVisible() {

@@ -101,8 +101,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 
 	public ServiceAdvisorsWebPage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(serviceadvisorstable.getWrappedElement()));
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 	
 	
