@@ -139,7 +139,6 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public IOSElement getFirstInvoice() {
 		return (IOSElement) appiumdriver.findElementByAccessibilityId("InvoicesPageTableLeft").findElement(MobileBy.xpath("//XCUIElementTypeCell[1]"));
-		//return (IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]");
 	}
 	
 	public String getFirstInvoiceValue() {

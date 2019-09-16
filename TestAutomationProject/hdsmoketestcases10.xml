@@ -112,8 +112,7 @@
           <include name="testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval" />
           <include name="testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired" />
           <include name="testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer" />
-          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices" />
-          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices" />
+          <include name="testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamAndMyInvoices" />
           <include name="testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling" />
           <include name="testWOVerifyThatTechSplitsIsSavedInPriceMatrices" />
           <include name="testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit" />

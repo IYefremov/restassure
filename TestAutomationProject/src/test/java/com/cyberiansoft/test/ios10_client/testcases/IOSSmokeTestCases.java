@@ -246,14 +246,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.saveWizard();
 
 		myInspectionsScreen.selectInspectionForEdit(inspNumber);
-		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
-		notesscreen.setNotes(_notes1);
-		notesscreen.addQuickNotes(quickNote);
+		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		notesScreen.setNotes(_notes1);
+		notesScreen.addQuickNotes(quickNote);
 
-		notesscreen.clickSaveButton();
+		notesScreen.clickSaveButton();
 		vehicleScreen.clickNotesButton();
-		Assert.assertEquals(notesscreen.getNotesValue(), _notes1 + "\n" + quickNote);
-		notesscreen.clickSaveButton();
+		Assert.assertEquals(notesScreen.getNotesValue(), _notes1 + "\n" + quickNote);
+		notesScreen.clickSaveButton();
 		vehicleScreen.cancelOrder();
 		myInspectionsScreen.clickHomeButton();
 
@@ -3172,9 +3172,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
-		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backofficeHeader.clickOperationsLink();
 		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
@@ -3214,7 +3214,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		backofficeHeader.clickOperationsLink();
+		operationsWebPage = new OperationsWebPage(webdriver);
 		operationsWebPage.clickNewServiceRequestList();
+		serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
 		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE.getServiceRequestTypeName());
 		serviceRequestsListWebPage.clickAddServiceRequestButton();
 
@@ -3954,20 +3956,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = myInspectionsScreen.selectDefaultInspectionType();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
-		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
-		notesscreen.setNotes(notesText);
-		notesscreen.clickSaveButton();
+		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		notesScreen.setNotes(notesText);
+		notesScreen.clickSaveButton();
 		vehicleScreen.saveWizard();
 		myInspectionsScreen.selectInspectionForCopy(inspectionNumber);
-
-		vehicleScreen = new VehicleScreen();
-		String copiedinspectionNumber = vehicleScreen.getInspectionNumber();
+		
+		String copiedInspectionNumber = vehicleScreen.getInspectionNumber();
 		vehicleScreen.saveWizard();
 
-		Assert.assertTrue(myInspectionsScreen.isNotesIconPresentForInspection(copiedinspectionNumber));
-		notesscreen = myInspectionsScreen.openInspectionNotesScreen(copiedinspectionNumber);
-		Assert.assertTrue(notesscreen.isNotesPresent(notesText));
-		notesscreen.clickSaveButton();
+		Assert.assertTrue(myInspectionsScreen.isNotesIconPresentForInspection(copiedInspectionNumber));
+		notesScreen = myInspectionsScreen.openInspectionNotesScreen(copiedInspectionNumber);
+		Assert.assertEquals(notesScreen.getAddedNotesText(), notesText);
+		notesScreen.clickSaveButton();
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -5005,16 +5006,16 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_SPORT_CAR);
 		vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
-		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
-		notesscreen.setNotes(inspectionNotes);
-		notesscreen.clickSaveButton();
+		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		notesScreen.setNotes(inspectionNotes);
+		notesScreen.clickSaveButton();
 
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			SelectedServiceDetailsScreen servicedetailsscreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
-			notesscreen = servicedetailsscreen.clickNotesCell();
-			notesscreen.setNotes(serviceNotes);
-			notesscreen.clickSaveButton();
+			notesScreen = servicedetailsscreen.clickNotesCell();
+			notesScreen.setNotes(serviceNotes);
+			notesScreen.clickSaveButton();
 			servicedetailsscreen.saveSelectedServiceDetails();
 		}
 		for (ServiceData serviceData : inspectionData.getServicesList())
@@ -5056,16 +5057,16 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String workOrderNumber = teamWorkOrdersScreen.getFirstWorkOrderNumberValue();
 		teamWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		notesscreen = vehicleScreen.clickNotesButton();
-		Assert.assertEquals(notesscreen.getNotesValue(), inspectionNotes);
-		notesscreen.clickSaveButton();
+		notesScreen = vehicleScreen.clickNotesButton();
+		Assert.assertEquals(notesScreen.getNotesValue(), inspectionNotes);
+		notesScreen.clickSaveButton();
 		Assert.assertEquals(vehicleScreen.getEst(), inspectionNumber);
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			SelectedServiceDetailsScreen servicedetailsscreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
-			notesscreen = servicedetailsscreen.clickNotesCell();
-			Assert.assertEquals(notesscreen.getNotesValue(), serviceNotes);
-			notesscreen.clickSaveButton();
+			notesScreen = servicedetailsscreen.clickNotesCell();
+			Assert.assertEquals(notesScreen.getNotesValue(), serviceNotes);
+			notesScreen.clickSaveButton();
 			servicedetailsscreen.saveSelectedServiceDetails();
 			Assert.assertTrue(servicesScreen.isNotesIconPresentForSelectedWorkOrderService(serviceData.getServiceName()));
 		}
@@ -5159,7 +5160,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber1), "$19.00");
-		myWorkOrdersScreen.copyVehicleForWorkOrder(workOrderNumber1, retailcustomer.getFullName(), WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		myWorkOrdersScreen.copyVehicleForWorkOrder(workOrderNumber1, retailcustomer.getFullName().trim(), WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), _make);
 		Assert.assertEquals(vehicleScreen.getModel(), _model);
 		//Assert.assertEquals(vehicleScreen.getYear(), _year);
@@ -5196,48 +5197,59 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
-
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamInvoices(String rowID,
-																								 String description, JSONObject testData) {
-
-		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-		InvoiceData invoiceData = testCaseData.getInvoiceData();
-
-		homeScreen = new HomeScreen();
-		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
-		customersScreen.swtchToWholesaleMode();
-		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-
-		TeamInvoicesScreen teaminvoicesscreen = homeScreen.clickTeamInvoices();
-		final String invoicenum = teaminvoicesscreen.getFirstInvoiceValue();
-		teaminvoicesscreen.selectInvoice(invoicenum);
-		teaminvoicesscreen.clickChangePOPopup();
-		teaminvoicesscreen.changePO(invoiceData.getPoNumber());
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
-		teaminvoicesscreen.clickCancelButton();
-		teaminvoicesscreen.clickHomeButton();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForMyInvoices(String rowID,
+	public void testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamAndMyInvoices(String rowID,
 																							   String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-		InvoiceData invoiceData = testCaseData.getInvoiceData();
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
-		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
+
+		homeScreen.clickMyWorkOrdersButton();
+		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
+		VehicleScreen vehicleScreen = new VehicleScreen();
+		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
+		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		//PriceMatrixScreenSteps.savePriceMatrixData();
+		servicesScreen.waitServicesScreenLoaded();
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
+		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
+		orderSummaryScreen.checkApproveAndCreateInvoice();
+		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
+		selectEmployeePopup.selectEmployeeAndTypePassword("Zayats", "1111");
+		orderSummaryScreen.clickSave();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALON_INVOICETYPE);
+		InvoiceData invoiceData = testCaseData.getInvoiceData();
+		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
+		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+		invoiceInfoScreen.clickSaveAsDraft();
+
+		NavigationSteps.navigateBackScreen();
+
 		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
-		final String invoicenum = myInvoicesScreen.getFirstInvoiceValue();
-		myInvoicesScreen.selectInvoice(invoicenum);
+		myInvoicesScreen.selectInvoice(invoiceNumber);
 		myInvoicesScreen.clickChangePOPopup();
-		myInvoicesScreen.changePO(invoiceData.getPoNumber());
+		myInvoicesScreen.changePO(invoiceData.getNewPoNumber());
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
 		myInvoicesScreen.clickCancelButton();
+
+		myInvoicesScreen.switchToTeamView();
+		TeamInvoicesScreen teaminvoicesscreen = new TeamInvoicesScreen();
+		teaminvoicesscreen.selectInvoice(invoiceNumber);
+		teaminvoicesscreen.clickChangePOPopup();
+		teaminvoicesscreen.changePO(invoiceData.getNewPoNumber());
+		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
+		teaminvoicesscreen.clickCancelButton();
+
 		myInvoicesScreen.clickHomeButton();
 	}
 
@@ -5504,9 +5516,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
 		backofficeHeader = new BackOfficeHeaderPanel(webdriver);
 		backofficeHeader.clickOperationsLink();
-		WorkOrdersWebPage workorderspage = new WorkOrdersWebPage(webdriver);
+		operationsWebPage = new OperationsWebPage(webdriver);
 		operationsWebPage.clickWorkOrdersLink();
-
+		WorkOrdersWebPage workorderspage = new WorkOrdersWebPage(webdriver);
 		workorderspage.makeSearchPanelVisible();
 		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		workorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
@@ -6138,6 +6150,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsListWebPage.clickDoneButton();
 
 		serviceRequestsListWebPage.clickVehicleInforEditButton();
+		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel());
 		serviceRequestsListWebPage.clickDoneButton();

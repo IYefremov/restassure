@@ -1,6 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Cyberiansoft iOS Regular Calculations test cases" verbose="10" configfailurepolicy="continue">
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
+    <parameter name="tpsuite.id" value="83604"  />
+    <parameter name="tp.integration" value="false"  />
   <listeners>
       <listener class-name="com.cyberiansoft.test.ios10_client.listeners.iOSregularClientListener"/>
   </listeners>
@@ -8,13 +10,6 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularCalculationsTestCases">
         <methods>
-
-            <include name="testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation" />
-            <include name="testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData" />
-            <include name="testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale" />
-            <include name="testInvoicesVerifyRoundingMoneyAmountValues_1" />
-
-
 
 
         <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
