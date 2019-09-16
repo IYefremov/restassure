@@ -5,6 +5,7 @@ import com.cyberiansoft.test.enums.WorkOrderStatuses;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularBaseAppScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
@@ -130,5 +131,27 @@ public class RegularMyWorkOrdersSteps {
         RegularBaseAppScreen baseAppScreen = new RegularBaseAppScreen();
         baseAppScreen.selectUIAPickerValue(workOrderStatuse.getValue());
         baseAppScreen.clickPickerWheelDoneButton();
+    }
+
+    public static void startCopyingServicesForWorkOrder(String workOrderID, IWorkOrdersTypes workOrdersType) {
+        selectWorkOrderForCopyServices(workOrderID);
+        RegularWorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
+    }
+
+    public static void startCopyingServicesForWorkOrder(String workOrderID, AppCustomer appCustomer, IWorkOrdersTypes workOrdersType) {
+        selectWorkOrderForCopyServices(workOrderID);
+        RegularCustomersScreenSteps.selectCustomer(appCustomer);
+        RegularWorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
+    }
+
+    public static void startCopyingVehicleForWorkOrder(String workOrderID, IWorkOrdersTypes workOrdersType) {
+        selectWorkOrderForCopyVehicle(workOrderID);
+        RegularWorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
+    }
+
+    public static void startCopyingVehicleForWorkOrder(String workOrderID, AppCustomer appCustomer, IWorkOrdersTypes workOrdersType) {
+        selectWorkOrderForCopyVehicle(workOrderID);
+        RegularCustomersScreenSteps.selectCustomer(appCustomer);
+        RegularWorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
     }
 }

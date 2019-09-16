@@ -39,26 +39,4 @@ public enum ServiceRequestTypes implements IServiceRequestTypes {
 
         throw new IllegalArgumentException(srType + " is not a valid ServiceRequestTypes");
     }
-
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen() {
-        ServiceRequestTypes type = getServiceRequestType();
-        switch (type) {
-            case SR_EST_WO_REQ_SRTYPE:
-            case SR_TYPE_CHECKIN_ON:
-            case SR_ALL_PHASES:
-            case MULTIPLE_INSPECTION_SERVICE_TYPE_ALM:
-            case SR_ONLY_ACC_ESTIMATE:
-            case SR_TYPE_WO_AUTO_CREATE:
-            case SR_TYPE_DONOT_ALLOW_CLOSE_SR:
-            case SR_TYPE_ALLOW_CLOSE_SR:
-            case SR_WO_ONLY:
-            case SR_INSP_ONLY:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new VehicleScreen();
-                else
-                    return (T) new RegularVehicleScreen();
-
-        }
-        return null;
-    }
 }

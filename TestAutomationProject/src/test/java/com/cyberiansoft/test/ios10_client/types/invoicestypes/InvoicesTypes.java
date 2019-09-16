@@ -36,25 +36,4 @@ public enum InvoicesTypes implements IInvoicesTypes {
 
         throw new IllegalArgumentException(ivoiceType + " is not a valid Invoice Type");
     }
-
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen() {
-        InvoicesTypes type = getInvoiceType();
-        switch (type) {
-            case DEFAULT_INVOICETYPE:
-            case CUSTOMER_APPROVALON_INVOICETYPE:
-            case CUSTOMER_APPROVALOFF_INVOICETYPE:
-            case INVOICE_DEFAULT_TEMPLATE:
-                 if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new InvoiceInfoScreen();
-                else
-                    return (T) new RegularInvoiceInfoScreen();
-            case INVOICE_CUSTOM1:
-            case INVOICE_AUTOWORKLISTNET:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new QuestionsScreen();
-                else
-                    return (T) new RegularQuestionsScreen();
-        }
-        return null;
-    }
 }

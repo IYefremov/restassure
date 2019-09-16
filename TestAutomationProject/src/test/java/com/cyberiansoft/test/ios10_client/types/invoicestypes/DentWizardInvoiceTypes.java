@@ -33,20 +33,4 @@ public enum DentWizardInvoiceTypes implements IInvoicesTypes {
 
         throw new IllegalArgumentException(ivoiceType + " is not a valid DentWizardInvoiceTypes");
     }
-
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen() {
-        DentWizardInvoiceTypes type = getInvoiceType();
-        switch (type) {
-            case NO_ORDER_TYPE:
-            case AUCTION_NO_DISCOUNT_INVOICE:
-            case HAIL:
-            case HAIL_NO_DISCOUNT_INVOICE:
-            case DING_SHIELD:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new InvoiceInfoScreen();
-                else
-                    return (T) new RegularInvoiceInfoScreen();
-        }
-        return null;
-    }
 }

@@ -87,9 +87,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
     @iOSXCUITFindBy(accessibility  = "Change Customer")
     private IOSElement changecustomermenu;
 
-    @iOSXCUITFindBy(accessibility  = "Copy Vehicle")
-    private IOSElement copyvehiclemenu;
-
     @iOSXCUITFindBy(accessibility  = "Details")
     private IOSElement detailsmenu;
 
@@ -123,53 +120,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public String getMyWorkOrdersSelectedCustomerValue() {
 		return appiumdriver.findElementByAccessibilityId("Toolbar").
 				findElements(MobileBy.className("XCUIElementTypeButton")).get(2).getAttribute("label");
-	}
-
-	private void selectCustomerAndWorkOrderType(String customerName, IWorkOrdersTypes workOrderType) {
-		CustomersScreen customersscreen = new CustomersScreen();
-		customersscreen.selectCustomer(customerName);
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-	}
-
-	public void selectCopyServices() {
-		appiumdriver.findElementByAccessibilityId("Copy Services").click();
-	}
-
-	public <T extends IBaseWizardScreen> T copyServicesForWorkOrder(String workOrderNumber, String customerName, IWorkOrdersTypes workOrderType) {
-		selectWorkOrder(workOrderNumber);
-		selectCopyServices();
-		selectCustomerAndWorkOrderType(customerName, workOrderType);
-		return workOrderType.getFirstVizardScreen();
-	}
-
-	public <T extends IBaseWizardScreen> T copyServicesForWorkOrder(String workOrderNumber, IWorkOrdersTypes workOrderType) {
-		selectWorkOrder(workOrderNumber);
-		selectCopyServices();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-		return workOrderType.getFirstVizardScreen();
-	}
-
-	public <T extends IBaseWizardScreen> T copyVehicleForWorkOrder(String workOrderNumber, String customerName, IWorkOrdersTypes workOrderType) {
-		selectWorkOrder(workOrderNumber);
-		selectCopyVehicle();
-		selectCustomerAndWorkOrderType(customerName, workOrderType);
-		BaseWizardScreen.typeContext = WOCONTEXT;
-		return workOrderType.getFirstVizardScreen();
-	}
-
-	public <T extends IBaseWizardScreen> T copyVehicleForWorkOrder(String workOrderNumber, IWorkOrdersTypes workOrderType) {
-		selectWorkOrder(workOrderNumber);
-		selectCopyVehicle();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-		BaseWizardScreen.typeContext = WOCONTEXT;
-		return workOrderType.getFirstVizardScreen();
-	}
-	
-	public void selectCopyVehicle() {
-        copyvehiclemenu.click();
 	}
 	
 	public void clickChangeCustomerPopupMenu() {
@@ -368,21 +318,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("invoice new"))).click();
 		BaseWizardScreen.typeContext = WOCONTEXT;
-	}
-
-	public void clickInvoiceType(IInvoicesTypes invoiceType) {
-		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		BaseWizardScreen.typeContext = WOCONTEXT;
-	}
-
-	public <T extends IBaseWizardScreen>T selectInvoiceType(IInvoicesTypes invoiceType) {
-		clickInvoiceType(invoiceType);
-		return invoiceType.getFirstVizardScreen();
-	}
-
-	public String selectInvoiceTypeAndAcceptAlert(IInvoicesTypes invoiceType) {
-		clickInvoiceType(invoiceType);
-		return Helpers.getAlertTextAndAccept();
 	}
 
 	public  void selectWorkOrderJob(String jobName) {

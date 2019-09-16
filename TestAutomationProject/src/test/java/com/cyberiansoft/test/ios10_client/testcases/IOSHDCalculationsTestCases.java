@@ -13,10 +13,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.MyInspectionsSteps;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.MyWorkOrdersSteps;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.ServicePartSteps;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
@@ -41,7 +38,6 @@ import java.util.List;
 
 public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
-	private HomeScreen homescreen;
 	private RetailCustomer johnRetailCustomer = new RetailCustomer("John", "");
 	private WholesailCustomer Test_Company_Customer = new WholesailCustomer();
 
@@ -58,8 +54,9 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Vit_Iph",
 				envType);
 		MainScreen mainScreen = new MainScreen();
-		homescreen = mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.setInsvoicesCustomLayoutOff();
 		settingsScreen.clickHomeButton();
@@ -72,15 +69,15 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(johnRetailCustomer, InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		final String inspNumber = vehicleScreen.getInspectionNumber();
@@ -124,15 +121,15 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(johnRetailCustomer, InspectionsTypes.DEFAULT_INSPECTION_TYPE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		final String inspNumber = vehicleScreen.getInspectionNumber();
@@ -195,12 +192,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -229,12 +226,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_FEE_ITEM_IN_2_PACKS);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -289,12 +286,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FEE_PRICE_OVERRIDE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -315,12 +312,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -349,12 +346,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -381,12 +378,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -415,12 +412,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -479,12 +476,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -518,12 +515,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -557,12 +554,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -598,12 +595,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -663,15 +660,15 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_SIMPLE);
 		QuestionsScreen questionsScreen = new QuestionsScreen();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
@@ -737,15 +734,15 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -815,12 +812,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -885,12 +882,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
@@ -932,16 +929,16 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.clickHomeButton();
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(Test_Company_Customer, InspectionsTypes.INSP_TYPE_FOR_PRICE_MATRIX);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -989,12 +986,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_SMOKE_TEST);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -1033,12 +1030,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		final int workOrdersToCreate = 2;
 		List<String> workOrders = new ArrayList<>();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		for (int i = 0; i < workOrdersToCreate; i++) {
 			MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 			VehicleScreen vehicleScreen = new VehicleScreen();
@@ -1066,7 +1063,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TeamWorkOrdersScreen teamWorkOrdersScreen = myWorkOrdersScreen.switchToTeamWorkOrdersView();
 		teamWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrders.get(0));
 		teamWorkOrdersScreen.clickInvoiceIcon();
-		QuestionsScreen questionsScreen = teamWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
+		QuestionsScreen questionsScreen = new QuestionsScreen();
 		questionsScreen.waitQuestionsScreenLoaded();
 		InvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
@@ -1081,7 +1079,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.waitTeamWorkOrdersScreenLoaded();
 		teamWorkOrdersScreen.clickHomeButton();
 
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		MyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoices();
 		myinvoicesscreen.selectInvoice(invoiceNumber);
 
 		myinvoicesscreen.clickEditPopup();
@@ -1103,12 +1101,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_DRAFT_MODE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -1138,17 +1136,18 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		ServiceRequestData serviceRequestData = JSonDataParser.getTestDataFromJson(testData, ServiceRequestData.class);
 
-		homescreen = new HomeScreen();
-		SettingsScreen settingscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingscreen = homeScreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		ServiceRequestsScreen serviceRequestsScreen = homescreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
+		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ALL_PHASES);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel(), serviceRequestData.getVihicleInfo().getVehicleYear());
@@ -1164,7 +1163,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 				.click();
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		String srnumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		VisualInteriorScreen visualInteriorScreen = serviceRequestsScreen.createInspectionFromServiceReques(srnumber, InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(srnumber, InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
+		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 
@@ -1205,16 +1205,16 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homescreen = new HomeScreen();
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
@@ -1255,7 +1255,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.approveInspectionApproveAllAndSignature(inspectionNumber);
-		myInspectionsScreen.createWOFromInspection(inspectionNumber,
+		MyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber,
 				WorkOrdersTypes.WO_SMOKE_MONITOR);
 		vehicleScreen.waitVehicleScreenLoaded();
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -1276,11 +1276,11 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_WITH_PART_SERVICES);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -1360,7 +1360,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickDoneStatusReasonButton();
 
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-		vehicleScreen = myInspectionsScreen.createWOFromInspection(inspectionNumber,
+		MyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber,
 				WorkOrdersTypes.WO_WITH_PART_SERVICE);
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
@@ -1368,8 +1368,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 
 		orderSummaryScreen.saveWizard();
-		homescreen = myInspectionsScreen.clickHomeButton();
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		homeScreen = myInspectionsScreen.clickHomeButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
 		myWorkOrdersScreen.clickHomeButton();
 
@@ -1382,12 +1382,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_WITH_PART_SERVICE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -1461,15 +1461,16 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		InvoiceData invoiceData = testCaseData.getInvoiceData();
 
-		SettingsScreen settingsScreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInsvoicesCustomLayoutOff();
 		settingsScreen.clickHomeButton();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -1508,7 +1509,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 
 		orderSummaryScreen.clickSave();
-		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSave();
@@ -1520,8 +1522,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickSaveFilter();
 
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
-		homescreen = myWorkOrdersScreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		homeScreen = myWorkOrdersScreen.clickHomeButton();
+		MyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoices();
 		Assert.assertEquals(myinvoicesscreen.getPriceForInvoice(invoiceNumber), invoiceData.getInvoiceTotal());
 		myinvoicesscreen.clickHomeButton();
 	}
@@ -1537,12 +1539,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		InvoiceData invoiceData = testCaseData.getInvoiceData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -1605,7 +1607,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 
 		orderSummaryScreen.clickSave();
-		myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_AUTOWORKLISTNET);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.INVOICE_AUTOWORKLISTNET);
 		questionsScreen.selectAnswerForQuestion(invoiceData.getQuestionScreenData().getQuestionData());
 		InvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
@@ -1617,7 +1619,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickSaveFilter();
 
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
-		homescreen = myWorkOrdersScreen.clickHomeButton();
+		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 45224:WO: HD - Verify calculation with price matrix Labor type",
@@ -1661,12 +1663,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		InvoiceData invoiceData = testCaseData.getInvoiceData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -1735,7 +1737,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceNumber42803 = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceInfoScreen.clickSaveAsFinal();
@@ -1777,12 +1780,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
@@ -1848,16 +1851,16 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homescreen = new HomeScreen();
-		SettingsScreen settingscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingscreen = homeScreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_DRAFT_MODE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -1925,12 +1928,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_WITH_0_PRICE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -1977,12 +1980,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2035,12 +2038,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final RetailCustomer retailCustomer = new RetailCustomer("Avalon", "");
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(retailCustomer, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2090,12 +2093,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2141,13 +2144,13 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
-		homescreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -2192,13 +2195,13 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		final int workOrderIndexToEdit = 1;
 		final String workOrderNewPrice = "$35.00";
 
-		homescreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
-			CustomersScreen customersScreen = homescreen.clickCustomersButton();
+			CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 			customersScreen.swtchToWholesaleMode();
 			customersScreen.selectCustomerWithoutEditing(workOrderData.getWholesailCustomer().getCompany());
 
-			MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 			MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.valueOf(workOrderData.getWorkOrderType()));
 			VehicleScreen vehicleScreen = new VehicleScreen();
 			vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2221,7 +2224,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 
 			myWorkOrdersScreen.clickHomeButton();
 		}
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		myWorkOrdersScreen.selectWorkOrder(workOrders.get(workOrderIndexToEdit));
 		myWorkOrdersScreen.clickChangeCustomerPopupMenu();
 		CustomersScreen customersScreen = new CustomersScreen();
@@ -2231,11 +2234,11 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertFalse(myWorkOrdersScreen.woExists(workOrders.get(workOrderIndexToEdit)));
 		myWorkOrdersScreen.clickHomeButton();
 
-		customersScreen = homescreen.clickCustomersButton();
+		customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
 
-		myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrders.get(workOrderIndexToEdit));
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -2256,12 +2259,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(WorkOrdersTypes.WO_TYPE_WITH_JOB, workOrderData.getWorkOrderJob());
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2287,13 +2290,13 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homescreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
-		CustomersScreen customersScreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		MyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualinteriorScreen = new VisualInteriorScreen();
 		VehicleScreen vehicleScreen = visualinteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
@@ -2373,7 +2376,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 		//DriverBuilder.getInstance().getAppiumDriver().launchApp();
 		//MainScreen mainScreen = new MainScreen();
-		//homescreen = mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		//homeScreen = mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
 	@AfterMethod

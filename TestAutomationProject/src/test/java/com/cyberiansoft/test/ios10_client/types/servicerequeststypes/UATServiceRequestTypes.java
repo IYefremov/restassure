@@ -29,17 +29,4 @@ public enum UATServiceRequestTypes implements IServiceRequestTypes {
 
         throw new IllegalArgumentException(srType + " is not a valid ServiceRequestTypes");
     }
-
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen() {
-        UATServiceRequestTypes type = getServiceRequestType();
-        switch (type) {
-            case SR_TYPE_ALL_PHASES:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new VehicleScreen();
-                else
-                    return (T) new RegularVehicleScreen();
-
-        }
-        return null;
-    }
 }

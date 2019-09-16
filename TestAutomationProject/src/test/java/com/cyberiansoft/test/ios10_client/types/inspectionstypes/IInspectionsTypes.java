@@ -5,5 +5,4 @@ import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWiz
 public interface IInspectionsTypes {
 
         public String getInspectionTypeName();
-        public <T extends IBaseWizardScreen>T getFirstVizardScreen();
 }

@@ -22,6 +22,9 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 
 	@iOSXCUITFindBy(accessibility = "InvoicesTable")
 	private IOSElement invoicesTable;
+
+	@iOSXCUITFindBy(accessibility = "Search")
+	private IOSElement searchBtn;
 	
 	public RegularMyInvoicesScreen() {
 		super();
@@ -138,6 +141,11 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	public boolean isInvoiceHasApproveIcon(String invoiceNumber) {
 		return invoicesTable.findElementByAccessibilityId(invoiceNumber).findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'EntityInfoButtonUnchecked'")).
 				getAttribute("name").equals("EntityInfoButtonUnchecked, ButtonImageId_65");
+	}
+
+	public void clickInvoicesSearchButton() {
+		waitInvoicesScreenLoaded();
+		searchBtn.click();
 	}
 
 }

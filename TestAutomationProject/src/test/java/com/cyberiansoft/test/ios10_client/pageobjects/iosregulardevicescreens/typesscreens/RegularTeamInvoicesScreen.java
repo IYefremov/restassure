@@ -44,7 +44,6 @@ public class RegularTeamInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	public boolean isInvoiceExists(String invoiceID) {
 		WaitUtils.elementShouldBeVisible(invoicesTable, true);
 		return invoicesTable.findElementsByAccessibilityId(invoiceID).size() > 0;
-
 	}
 
 }

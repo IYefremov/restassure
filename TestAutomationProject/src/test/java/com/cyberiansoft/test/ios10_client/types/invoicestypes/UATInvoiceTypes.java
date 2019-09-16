@@ -30,16 +30,4 @@ public enum UATInvoiceTypes implements IInvoicesTypes {
 
         throw new IllegalArgumentException(ivoiceType + " is not a valid Invoice Type");
     }
-
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen() {
-        UATInvoiceTypes type = getInvoiceType();
-        switch (type) {
-            case INVOICE_TEST_CUSTOM1_NEW:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new InvoiceInfoScreen();
-                else
-                    return (T) new RegularInvoiceInfoScreen();
-        }
-        return null;
-    }
 }

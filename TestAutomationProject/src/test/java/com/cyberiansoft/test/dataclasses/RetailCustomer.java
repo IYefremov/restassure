@@ -82,7 +82,8 @@ public class RetailCustomer implements AppCustomer {
 	
 	@Override
 	public String getFullName() {
-		return firstName + " " + lastName;
+		String fullName  = firstName + " " + lastName;
+		return fullName.trim();
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.testcases;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.InvoiceTypesSteps;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.MyInspectionsSteps;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.MyWorkOrdersSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
@@ -27,7 +28,6 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 
 	private final String customer = "Abc Rental Center";
-	public HomeScreen homescreen;
 	
 	@BeforeClass
 	public void setUpSuite() throws Exception {
@@ -40,8 +40,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
                 ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(),
                 "Mac mini_olkr", envType);
 		MainScreen mainscr = new MainScreen();
-		homescreen = mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		mainscr.userLogin(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.setInsvoicesCustomLayoutOff();
 		settingsscreen.clickHomeButton();
@@ -54,32 +55,33 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String tcname = "testValidVINCheck";
 		final int tcrow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(tcrow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(tcrow), ExcelUtils.getModel(tcrow), ExcelUtils.getYear(tcrow));
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 10451:Test Top Customers Setting", description = "Test Top Customers Setting")
 	public void testTopCustomersSetting() {
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setShowTopCustomersOn();
 		settingsscreen.clickHomeButton();
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-        Assert.assertTrue(customersscreen.isTopCustomersExists());
-        Assert.assertTrue(customersscreen.isCustomerExists(UtilConstants.TEST_CUSTOMER_FOR_TRAINING));
-		customersscreen.clickHomeButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+        Assert.assertTrue(customersScreen.isTopCustomersExists());
+        Assert.assertTrue(customersScreen.isCustomerExists(UtilConstants.TEST_CUSTOMER_FOR_TRAINING));
+		customersScreen.clickHomeButton();
 		
-		settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setShowTopCustomersOff();
 		settingsscreen.clickHomeButton();
 	}
@@ -90,14 +92,15 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String tcname = "testVINDuplicateCheck";
 		final int tcrow = ExcelUtils.getTestCaseRow(tcname);
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setCheckDuplicatesOn();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(customer);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(customer);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
@@ -105,8 +108,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		vehicleScreen.setVIN(ExcelUtils.getVIN(tcrow).substring(11, 17));
 		vehicleScreen.verifyExistingWorkOrdersDialogAppears();		
 		vehicleScreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
-		settingsscreen = homescreen.clickSettingsButton();
+		myWorkOrdersScreen.clickHomeButton();
+		settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setCheckDuplicatesOff();
 		settingsscreen.clickHomeButton();
 	}
@@ -115,42 +118,43 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 	public void testVehiclePartRequirement() {
 		final String tcname = "testVehiclePartRequirement";
 		final int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setCheckDuplicatesOn();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(customer);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(customer);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		//Assert.assertEquals(searchresult, "Search Complete No vehicle invoice history found");
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		Assert.assertTrue(servicesscreen
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		Assert.assertTrue(servicesScreen
 				.isServiceTypeExists(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE));
-		Assert.assertTrue(servicesscreen
+		Assert.assertTrue(servicesScreen
 				.isServiceTypeExists(UtilConstants.PDRPANEL_SUBSERVICE));
-		Assert.assertTrue(servicesscreen
+		Assert.assertTrue(servicesScreen
 				.isServiceTypeExists(UtilConstants.PDRVEHICLE_SUBSERVICE));
-		Assert.assertTrue(servicesscreen
+		Assert.assertTrue(servicesScreen
 				.isServiceTypeExists(UtilConstants.PDRPANEL_HAIL_SUBSERVICE));
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertTrue(selectedservicescreen.vehiclePartsIsDisplayed());
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.cancelSelectedServiceDetails();
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 
-		settingsscreen = homescreen.clickSettingsButton();
+		settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setCheckDuplicatesOff();
 		settingsscreen.clickHomeButton();
 
@@ -166,24 +170,25 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehiclepartswheels = { "Left Front Wheel",
 				"Right Front Wheel" };
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInsvoicesCustomLayoutOff();
 		settingsscreen.clickHomeButton();
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(customer);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(customer);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String wo1 = vehicleScreen.getInspectionNumber();
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		//ServicesScreen servicesscreen = new ServicesScreen();
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		//ServicesScreen servicesScreen = new ServicesScreen();
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -195,9 +200,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		servicesscreen.clickServiceTypesButton();
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
+		servicesScreen.clickServiceTypesButton();
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -208,10 +213,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.saveWizard();
+		servicesScreen.clickServiceTypesButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		orderSummaryScreen.saveWizard();
 
 		// ==================Create second WO=============
 		tcname = "testTurningMultipleWorkOrdersIntoASingleInvoice2";
@@ -226,8 +231,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
 		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -249,9 +254,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				techniciansPopup.getTechnicianPrice(UtilConstants.technicianC), "$41.67");
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.selectService(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
+		servicesScreen.clickServiceTypesButton();
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.selectService(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -276,25 +281,26 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				"$50.00");
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickCreateInvoiceIconForWO(wo1);
-		myworkordersscreen.clickCreateInvoiceIconForWO(wo2);
-		myworkordersscreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        Assert.assertTrue(invoiceinfoscreen.isWOSelected(wo1));
-        Assert.assertTrue(invoiceinfoscreen.isWOSelected(wo2));
-		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveAsFinal();
-        myworkordersscreen = new MyWorkOrdersScreen();
-		Assert.assertFalse(myworkordersscreen.woExists(wo1));
-		Assert.assertFalse(myworkordersscreen.woExists(wo2));
-		myworkordersscreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
+		servicesScreen.clickServiceTypesButton();
+		servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo1);
+		myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo2);
+		myWorkOrdersScreen.clickInvoiceIcon();
+		InvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
+        Assert.assertTrue(invoiceInfoScreen.isWOSelected(wo1));
+        Assert.assertTrue(invoiceInfoScreen.isWOSelected(wo2));
+		final String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
+		invoiceInfoScreen.clickSaveAsFinal();
+        myWorkOrdersScreen = new MyWorkOrdersScreen();
+		Assert.assertFalse(myWorkOrdersScreen.woExists(wo1));
+		Assert.assertFalse(myWorkOrdersScreen.woExists(wo2));
+		myWorkOrdersScreen.clickHomeButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
 		final String wosubstring = wo1 + ", " + wo2;
-		Assert.assertEquals(myinvoicesscreen.getInvoiceInfoLabel(invoicenumber), wosubstring);
-		myinvoicesscreen.clickHomeButton();
+		Assert.assertEquals(myInvoicesScreen.getInvoiceInfoLabel(invoicenumber), wosubstring);
+		myInvoicesScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10651:Test same Order Type required for turning multiple Work Orders into a single Invoice", description = "Test same Order Type required for turning multiple Work Orders into a single Invoice")
@@ -303,20 +309,21 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		final String[] vehicleparts = { "Roof" };
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routecanadaworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String wo1 = vehicleScreen.getInspectionNumber();
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -328,9 +335,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		for (int i = 0; i <= vehicleparts.length; i++) {
 			selectedservicescreen.saveSelectedServiceDetails();
 		}
-		servicesscreen = new ServicesScreen();
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
+		servicesScreen = new ServicesScreen();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
 
 		// ==================Create second WO=============
 		tcname = "testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice2";
@@ -344,8 +351,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
 		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -357,18 +364,17 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-        servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickCreateInvoiceIconForWO(wo1);
-		myworkordersscreen.clickCreateInvoiceIconForWO(wo2);
-		myworkordersscreen.clickInvoiceIcon();
-		String alerttext = myworkordersscreen
-				.selectInvoiceTypeAndAcceptAlert(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+        servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo1);
+		myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo2);
+		myWorkOrdersScreen.clickInvoiceIcon();
+		InvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(
 				alerttext,
 				"Invoice type " + DentWizardInvoiceTypes.NO_ORDER_TYPE.getInvoiceTypeName() + " doesn't support multiple Work Order types.");
-		myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 
 	}
 
@@ -379,23 +385,24 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Left Fender", "Left Front Door",
 				"Left Quarter Panel" };
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.wizprotrackerrouteunspectiontype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		final String inspNumber = vehicleScreen.getInspectionNumber();
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -405,7 +412,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 		myinspectionsscreen = new MyInspectionsScreen();
 		myinspectionsscreen.approveInspectionWithSignature(inspNumber);
         Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inspNumber));
@@ -421,23 +428,24 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				"Right Rear Door" };
 
 		final String[] vehicleparts2 = { "Left Mirror", "Right Mirror" };
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.wizprotrackerrouteunspectiontype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		final String inspNumber = vehicleScreen.getInspectionNumber();
-        ServicesScreen servicesscreen =vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen =vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -447,11 +455,11 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		servicesScreen.clickServiceTypesButton();
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.selectService(UtilConstants.PAINTMIRROR_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.selectService(UtilConstants.PAINTMIRROR_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -460,27 +468,27 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.selectVehicleParts(vehicleparts2);
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), "$930.00");
+		servicesScreen.clickServiceTypesButton();
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), "$930.00");
 
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 		myinspectionsscreen = new MyInspectionsScreen();
 		myinspectionsscreen.approveInspectionWithSignature(inspNumber);
         Assert.assertTrue(myinspectionsscreen.isInspectionApproved(inspNumber));
 		myinspectionsscreen.selectInspectionInTable(inspNumber);
 		myinspectionsscreen.clickCreateWOButton();
 		vehicleScreen = new VehicleScreen();
-        servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		String wonumber = ordersummaryscreen.getWorkOrderNumber();
+        servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		String wonumber = orderSummaryScreen.getWorkOrderNumber();
 		Assert.assertEquals(wonumber.substring(0, 1), "O");
-        Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-		ordersummaryscreen.saveWizard();
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+		orderSummaryScreen.saveWizard();
 
 		myinspectionsscreen.clickHomeButton();
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.woExists(wonumber);
-		myworkordersscreen.clickHomeButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		myWorkOrdersScreen.woExists(wonumber);
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10654:Test 'Vehicle' Service does not multiply price entered when selecting multiple panels", description = "Test 'Vehicle' Service does not multiply price entered when selecting multiple panels")
@@ -489,19 +497,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
 		final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(customer);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(customer);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -512,13 +521,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen = new ServicesScreen();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		servicesScreen = new ServicesScreen();
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setCheckDuplicatesOff();
 		settingsscreen.clickHomeButton();
 	}
@@ -530,19 +539,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		
 		final String[] vehicleparts = { "Left Fender", "Left Front Door",
 				"Left Rear Door" };
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(customer);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(customer);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen =  vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen =  vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -553,12 +563,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen = new ServicesScreen();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen = new ServicesScreen();
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setCheckDuplicatesOff();
 		settingsscreen.clickHomeButton();
 	}
@@ -567,11 +577,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 	public void testCarmaxVehicleInformationRequirements() {
 		String tcname = "testCarmaxVehicleInformationRequirements";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -581,11 +592,11 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
 		Assert.assertTrue(vehicleScreen.clickSaveWithAlert().contains("RO# is required"));
 		vehicleScreen.setRO(ExcelUtils.getRO(testcaserow));
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setCheckDuplicatesOff();
 		settingsscreen.clickHomeButton();
 	}
@@ -594,11 +605,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 	public void testServiceDriveRequiresAdvisor() {
 		String tcname = "testServiceDriveRequiresAdvisor";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -606,21 +618,22 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		Assert.assertTrue(vehicleScreen.clickSaveWithAlert().contains("Advisor is required"));
 		vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName= "Test Case 10658:Test Inspection requirments inforced", description = "Test Inspection requirements inforced")
 	public void testInspectionRequirementsInforced() {
 		String tcname = "testInspectionRequirementsInforced";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-	
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
 
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.wizardprotrackerrouteinspectiondertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		String alerttext = vehicleScreen.clickSaveWithAlert();
@@ -640,53 +653,54 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 	public void testInspectionsCanConvertToMultipleWorkOrders() {
 		String tcname = "testInspectionsCanConvertToMultipleWorkOrders";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routecanadainspectiontype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		final String inspNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
-		servicesscreen.selectService(UtilConstants.INTERIORBURNS_SUBSERVICE);
-		Assert.assertTrue(servicesscreen.checkServiceIsSelected(UtilConstants.INTERIORBURNS_SUBSERVICE));
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openServiceDetails(UtilConstants.INTERIORBURNS_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
+		servicesScreen.selectService(UtilConstants.INTERIORBURNS_SUBSERVICE);
+		Assert.assertTrue(servicesScreen.checkServiceIsSelected(UtilConstants.INTERIORBURNS_SUBSERVICE));
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openServiceDetails(UtilConstants.INTERIORBURNS_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 		myinspectionsscreen.selectInspectionInTable(inspNumber);
 		myinspectionsscreen.clickCreateWOButton();
 		vehicleScreen = new VehicleScreen();
-        servicesscreen = servicesscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		String wonumber = ordersummaryscreen.getWorkOrderNumber();
+        servicesScreen = servicesScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		String wonumber = orderSummaryScreen.getWorkOrderNumber();
 		Assert.assertEquals(wonumber.substring(0, 1), "O");
-        Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		ordersummaryscreen.saveWizard();
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		orderSummaryScreen.saveWizard();
 		myinspectionsscreen.showWorkOrdersForInspection(inspNumber);
 		vehicleScreen = new VehicleScreen();
 		Assert.assertEquals(vehicleScreen.getInspectionNumber(), wonumber);
-		servicesscreen.clickCancelButton();
+		servicesScreen.clickCancelButton();
 		
 		myinspectionsscreen.selectInspectionInTable(inspNumber);
 		myinspectionsscreen.clickCreateWOButton();
 		vehicleScreen = new VehicleScreen();
-        servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+        orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 
-		String wonumber2 = ordersummaryscreen.getWorkOrderNumber();
+		String wonumber2 = orderSummaryScreen.getWorkOrderNumber();
 		Assert.assertEquals(wonumber2.substring(0, 1), "O");
-        Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		ordersummaryscreen.saveWizard();
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		orderSummaryScreen.saveWizard();
 		myinspectionsscreen.showWorkOrdersForInspection(inspNumber);
 		BaseUtils.waitABit(10000);
 		Assert.assertTrue(myinspectionsscreen.isWorkOrderForInspectionExists(wonumber));
@@ -694,41 +708,42 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		Assert.assertTrue(myinspectionsscreen.isWorkOrderForInspectionExists(wonumber2));
 		myinspectionsscreen.clickHomeButton();
 
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.woExists(wonumber);
-		myworkordersscreen.woExists(wonumber2);
-		myworkordersscreen.clickHomeButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		myWorkOrdersScreen.woExists(wonumber);
+		myWorkOrdersScreen.woExists(wonumber2);
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10665:Test Archive feature for Inspections", description = "Test Archive feature for Inspections")
 	public void testArchiveFeatureForInspections() {
 		String tcname = "testArchiveFeatureForInspections";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routeinspectiontype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		final String inspNumber = vehicleScreen.getInspectionNumber();
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.OTHER_SERVICE);
-		servicesscreen.selectService(UtilConstants.WINDOWTINT_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.OTHER_SERVICE);
+		servicesScreen.selectService(UtilConstants.WINDOWTINT_SUBSERVICE);
 
-		Assert.assertTrue(servicesscreen.checkServiceIsSelected(UtilConstants.WINDOWTINT_SUBSERVICE));
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
+		Assert.assertTrue(servicesScreen.checkServiceIsSelected(UtilConstants.WINDOWTINT_SUBSERVICE));
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 		myinspectionsscreen.selectInspectionInTable(inspNumber);
 
 		myinspectionsscreen.clickArchiveInspectionButton();
@@ -758,10 +773,11 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehicleparts = { "Left A Pillar", "Left Fender",
 				"Left Rear Door", "Roof" };
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -776,10 +792,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		Assert.assertEquals(
 				alerttext,
 				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
-		QuestionsScreen questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
-		questionsscreen.waitQuestionsScreenLoaded();
-        ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsScreen.waitQuestionsScreenLoaded();
+        ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 
 		selectedservicescreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
@@ -787,22 +803,22 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertTrue(servicesscreen.checkServiceIsSelected(UtilConstants.FIXPRICE_SERVICE));
+		Assert.assertTrue(servicesScreen.checkServiceIsSelected(UtilConstants.FIXPRICE_SERVICE));
 
-		servicesscreen.openServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+		servicesScreen.openServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		Assert.assertEquals(selectedservicescreen.getVehiclePartValue(),
 				vehicleparts[0]);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
 		for (int i = 1; i < vehicleparts.length; i++) {
-			Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
+			Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
 					, "$0.00 x 1.00"));
 		}
 
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
 				, "$105.00 x 1.00"));
 
-		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 1);
+		servicesScreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 1);
 		Assert.assertEquals(selectedservicescreen.getVehiclePartValue(),
 				vehicleparts[1]);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
@@ -822,15 +838,15 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		for (int i = 2; i < vehicleparts.length; i++) {
-			Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
+			Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
 					, "$0.00 x 1.00"));
 		}
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
 				, "$105.00 x 1.00"));
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
 				, "$140.00 x 1.00"));
 
-		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 2);
+		servicesScreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 2);
 		Assert.assertEquals(selectedservicescreen.getVehiclePartValue(),
 				vehicleparts[2]);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
@@ -853,38 +869,38 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		for (int i = 3; i < vehicleparts.length; i++) {
-			Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
+			Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[i]
 					, "$0.00 x 1.00"));
 		}
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
 				, "$105.00 x 1.00"));
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
 				, "$140.00 x 1.00"));
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[2]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[2]
 				, "$60.00 x 1.00"));
 
-		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 3);
+		servicesScreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 3);
 		Assert.assertEquals(selectedservicescreen.getVehiclePartValue(),
 				vehicleparts[3]);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice4(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen = new ServicesScreen();
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[3]
+		servicesScreen = new ServicesScreen();
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[3]
 				, "$275.00 x 1.00"));
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[0]
 				, "$105.00 x 1.00"));
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[1]
 				, "$140.00 x 1.00"));
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[2]
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.FIXPRICE_SERVICE , vehicleparts[2]
 				, "$60.00 x 1.00"));
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-		invoiceinfoscreen.clickSaveAsFinal();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+		//orderSummaryScreen.clickSaveButton();
+		invoiceInfoScreen.clickSaveAsFinal();
 
-		myworkordersscreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 
 	}
 
@@ -896,19 +912,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehicleparts = { "Hood", "Right Quarter Panel",
 				"Sunroof" };
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
-		QuestionsScreen questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
-		questionsscreen.waitQuestionsScreenLoaded();
-        ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsScreen.waitQuestionsScreenLoaded();
+        ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
@@ -925,7 +942,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_TOTAL_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.RANDI_TOTAL_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(UtilConstants.technicianA));
@@ -938,14 +955,14 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				"$175.00");
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen = new ServicesScreen();
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		InvoiceInfoScreen invoiceinfoscreen =  ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-		invoiceinfoscreen.clickSaveAsFinal();
+		servicesScreen = new ServicesScreen();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		InvoiceInfoScreen invoiceInfoScreen =  orderSummaryScreen.checkCreateInvoice();
+		//orderSummaryScreen.clickSaveButton();
+		invoiceInfoScreen.clickSaveAsFinal();
 
-		myworkordersscreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 	} 
 	
 	@Test(testName = "Test Case 11733:Test Custom WO level tech split for wholesale Hail", description = "Test Custom WO level tech split for wholesale Hail")
@@ -955,15 +972,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Cowl, Other", "Left Fender",
 				"Trunk Lid" };
-		 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		
-		//IOSStartScreenRecordingOptions stratrec = IOSStartScreenRecordingOptions.startScreenRecordingOptions();
-		//stratrec.withVideoQuality(IOSStartScreenRecordingOptions.VideoQuality.HIGH).withVideoType(IOSStartScreenRecordingOptions.VideoType.H264).build();
-		//MobileCommand.startRecordingScreenCommand(stratrec);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -991,10 +1005,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				alerttext,
 				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
-		QuestionsScreen questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
-		questionsscreen.waitQuestionsScreenLoaded();
-        ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsScreen.waitQuestionsScreenLoaded();
+        ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 
 		selectedservicescreen.clickVehiclePartsCell();
@@ -1004,7 +1018,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_ND_SERVICE);
+		servicesScreen.openCustomServiceDetails(UtilConstants.RANDI_ND_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
 		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), "$93.50");
@@ -1019,13 +1033,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-		invoiceinfoscreen.clickSaveAsFinal();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+		//orderSummaryScreen.clickSaveButton();
+		invoiceInfoScreen.clickSaveAsFinal();
 
-		myworkordersscreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 11734:Test Custom service level tech split for wholesale Hail", description = "Test Custom service level tech split for wholesale Hail")
@@ -1035,11 +1049,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Left Fender", "Left Quarter Panel", "Right Rear Door",
 				"Trunk Lid" };
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -1048,8 +1063,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
 		questionsScreen.waitQuestionsScreenLoaded();
-        ServicesScreen servicesscreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+        ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 
 		selectedservicescreen.clickVehiclePartsCell();
@@ -1059,7 +1074,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
-		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 0);
+		servicesScreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 0);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		TechniciansPopup techniciansPopup = selectedservicescreen.clickTechniciansIcon();
 		techniciansPopup.selectTechniciansCustomView();
@@ -1075,7 +1090,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
-		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 1);
+		servicesScreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 1);
 		techniciansPopup= selectedservicescreen.clickTechniciansIcon();
 		techniciansPopup.selectTechniciansCustomView();
 		Assert.assertEquals(techniciansPopup.getTechnicianPrice(UtilConstants.technicianA), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -1087,7 +1102,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
-		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 2);
+		servicesScreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 2);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		techniciansPopup= selectedservicescreen.clickTechniciansIcon();
 		techniciansPopup.selectTechniciansCustomView();
@@ -1100,7 +1115,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
-		servicesscreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 3);
+		servicesScreen.openServiceDetailsByIndex(UtilConstants.FIXPRICE_SERVICE, 3);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
 		techniciansPopup.selectTechniciansCustomView();
@@ -1113,12 +1128,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen.clickHomeButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+		//orderSummaryScreen.clickSaveButton();
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 11735:Test Customer Discount on Wholesale Hail", description = "Test Customer Discount on Wholesale Hail")
@@ -1127,11 +1142,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
 		final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -1139,8 +1155,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
 		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
 		questionsScreen.waitQuestionsScreenLoaded();
-        ServicesScreen servicesscreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+        ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
@@ -1148,52 +1164,53 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Customer Discount");
+		selectedservicescreen = servicesScreen.openCustomServiceDetails("Customer Discount");
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen.clickHomeButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+		//orderSummaryScreen.clickSaveButton();
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10668:Test Quick Quote option for Retail Hail", description = "Test Quick Quote option for Retail Hail")
 	public void testQuickQuoteOptionForRetailHail() {
 		String tcname = "testQuickQuoteOptionForRetailHail";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
+
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        questionsscreen  = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-		String alerttext = questionsscreen.clickSaveWithAlert();
+        questionsScreen  = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+		String alerttext = questionsScreen.clickSaveWithAlert();
 		Assert.assertTrue(
 				alerttext.contains("Question 'Estimate Conditions' in section 'Hail Info' should be answered."));
-		questionsscreen = new QuestionsScreen();
-		questionsscreen.selectOutsideQuestions();
+		questionsScreen = new QuestionsScreen();
+		questionsScreen.selectOutsideQuestions();
 
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
-		Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
-		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Quick Quote");
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
+		Assert.assertTrue(servicesScreen.priceMatricesPopupIsDisplayed());
+		PriceMatrixScreen pricematrix = servicesScreen.selectPriceMatrices("Quick Quote");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.QUICK_QUOTE_SIZE, PriceMatrixScreen.QUICK_QUOTE_SEVERITY);
 		Assert.assertTrue(pricematrix.isNotesExists());
@@ -1213,13 +1230,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix = new PriceMatrixScreen();
 		pricematrix.clickSaveButton();
-		servicesscreen = new ServicesScreen();
-        questionsscreen  = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-        OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen = new ServicesScreen();
+        questionsScreen  = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+        OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10733:Test Customer self-pay option for Retail Hail", description = "Test Customer self-pay option for Retail Hail")
@@ -1227,48 +1244,49 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testCustomerSelfPayOptionForRetailHail";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectOutsideQuestions();
+        questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectOutsideQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompany(ExcelUtils.getInsuranceCompany(retailhaildatarow));
 		String alerttext = claimscreen.clickSaveWithAlert();
 		Assert.assertTrue(alerttext.contains("Claim# is required."));
 		claimscreen.setClaim(ExcelUtils.getClaim(retailhaildatarow));
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.HAIL_PDR_NON_CUSTOMARY_SERVICE);
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.HAIL_PDR_NON_CUSTOMARY_SERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.answerQuestion("DEALER");
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_HAIL_SERVICE);
+		servicesScreen.openCustomServiceDetails(UtilConstants.RANDI_HAIL_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
 
-        questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-        questionsscreen.waitQuestionsScreenLoaded();
-        OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+        questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+        questionsScreen.waitQuestionsScreenLoaded();
+        OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10734:Test Even WO level tech split for Retail Hail", description = "Test Even WO level tech split for Retail Hail")
@@ -1276,15 +1294,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testEvenWOLevelTechSplitForRetailHail";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
@@ -1307,20 +1326,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				alerttext,
 				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
-        questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectOtherQuestions();
+        questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectOtherQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
-		Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
-		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
+		Assert.assertTrue(servicesScreen.priceMatricesPopupIsDisplayed());
+		PriceMatrixScreen pricematrix = servicesScreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.HEAVY_SEVERITY);
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
@@ -1367,13 +1386,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 
 		pricematrix.clickSaveButton();
-		servicesscreen = new ServicesScreen();
-		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-        OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen = new ServicesScreen();
+		questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+        OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10735:Test even service level tech split for Retail Hail", description = "Test even service level tech split for Retail Hail")
@@ -1381,32 +1400,33 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testEvenServiceLevelTechSplitForRetailHail";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectOtherQuestions();
+        questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectOtherQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
-		Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
-		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
+		Assert.assertTrue(servicesScreen.priceMatricesPopupIsDisplayed());
+		PriceMatrixScreen pricematrix = servicesScreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MEDIUM_SEVERITY);
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -1445,13 +1465,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		pricematrix = new PriceMatrixScreen();
 		pricematrix.clickSaveButton();
-		servicesscreen = new ServicesScreen();
-        questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-        OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen = new ServicesScreen();
+        questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+        OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10736:Test deductible feature for Retail Hail", description = "Test deductible feature for Retail Hail")
@@ -1459,36 +1479,37 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testDeductibleFeatureForRetailHail";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectOtherQuestions();
+        questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectOtherQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 		claimscreen.setDeductible("50");
 		Assert.assertEquals(
 				claimscreen
 						.getDeductibleValue(), "50.00");
 
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
-		Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
-		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
+		Assert.assertTrue(servicesScreen.priceMatricesPopupIsDisplayed());
+		PriceMatrixScreen pricematrix = servicesScreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
@@ -1497,16 +1518,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		Assert.assertTrue(pricematrix.getTechniciansValue().contains(
 				UtilConstants.technicianA));
 		pricematrix.clickSaveButton();
-		servicesscreen = new ServicesScreen();
-		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-        OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.HAIL);
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen = new ServicesScreen();
+		questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+        OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		//orderSummaryScreen.clickSaveButton();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.HAIL);
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 10737:Test Zip Code validator for Retail Hail", description = "Test Zip Code validator for Retail Hail")
@@ -1515,32 +1536,33 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		final String validzip = "83707";
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        questionsscreen =vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectOutsideQuestions();
+        questionsScreen =vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectOutsideQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext
 				.contains("Your answer doesn't match the validator 'US Zip Codes'."));
-		questionsscreen.clearZip();
-		questionsscreen.setOwnerZip(validzip);
-        ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		questionsScreen.clearZip();
+		questionsScreen.setOwnerZip(validzip);
+        ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 11727:Test Custom WO level tech split for Retail Hail", description = "Test Custom WO level tech split for Retail Hail")
@@ -1548,15 +1570,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testCustomWOLevelTechSplitForRetailHail";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		TechniciansPopup techniciansPopup= vehicleScreen.clickTech();
@@ -1580,20 +1603,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				alerttext,
 				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
-        questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectProperQuestions();
+        questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectProperQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
-		Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
-		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
+		Assert.assertTrue(servicesScreen.priceMatricesPopupIsDisplayed());
+		PriceMatrixScreen pricematrix = servicesScreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.VERYLIGHT_SEVERITY);
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -1639,13 +1662,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
 		techniciansPopup.saveTechViewDetails();
 		pricematrix.clickSaveButton();
-		servicesscreen = new ServicesScreen();
-		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen = new ServicesScreen();
+		questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+		OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 
 	}
 
@@ -1654,32 +1677,33 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testCustomServiceLevelTechSplitForRetailHail";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        questionsscreen =vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectOtherQuestions();
+        questionsScreen =vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectOtherQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
-		Assert.assertTrue(servicesscreen.priceMatricesPopupIsDisplayed());
-		PriceMatrixScreen pricematrix = servicesscreen.selectPriceMatrices("Hail Estimating");
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.PDRHAILUS_SERVICE);
+		Assert.assertTrue(servicesScreen.priceMatricesPopupIsDisplayed());
+		PriceMatrixScreen pricematrix = servicesScreen.selectPriceMatrices("Hail Estimating");
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.QTR_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
 		Assert.assertEquals(pricematrix.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -1749,13 +1773,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.setTechnicianCustomPriceValue(UtilConstants.technicianB, "121.25");
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen = new ServicesScreen();
-		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen = new ServicesScreen();
+		questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+		OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 
 	}
 	
@@ -1764,45 +1788,46 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testCustomerDiscountOnRetailHail";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen = questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        questionsscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectOutsideQuestions();
+        questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectOutsideQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.openServiceDetails("Customer Discount");
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.openServiceDetails("Customer Discount");
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
 		
-		servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+		servicesScreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
 
-        questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+        questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+		OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 
 	}
 	
@@ -1814,23 +1839,24 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehicleparts = { "Left Roof Rail", "Right Roof Rail",
 				"Roof" };
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -1841,21 +1867,21 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.searchAvailableService(UtilConstants.PAINTROCKERPANELS_SUBSERVICE);
-		servicesscreen.openCustomServiceDetails(UtilConstants.PAINTROCKERPANELS_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.searchAvailableService(UtilConstants.PAINTROCKERPANELS_SUBSERVICE);
+		servicesScreen.openCustomServiceDetails(UtilConstants.PAINTROCKERPANELS_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.cancelSearchAvailableService();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.cancelSearchAvailableService();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.searchAvailableService(UtilConstants.WHEEL_SUBSERVICE);
-		servicesscreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.searchAvailableService(UtilConstants.WHEEL_SUBSERVICE);
+		servicesScreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
@@ -1868,13 +1894,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		String wonumber = ordersummaryscreen.getWorkOrderNumber();
-		ordersummaryscreen.clickSave();
-		myworkordersscreen = new MyWorkOrdersScreen();
-		homescreen = myworkordersscreen.clickHomeButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		String wonumber = orderSummaryScreen.getWorkOrderNumber();
+		orderSummaryScreen.clickSave();
+		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		homeScreen = myWorkOrdersScreen.clickHomeButton();
 		
-		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		TeamWorkOrdersScreen teamworkordersscreen = homeScreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
 		teamworkordersscreen.clickiCreateInvoiceButton();
 		String alerttext = Helpers.getAlertTextAndAccept();
@@ -1891,24 +1917,25 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehicleparts = { "Left Fender", "Left Front Door",
 				"Left Quarter Panel" };
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String inspection = vehicleScreen.getInspectionNumber();
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -1919,18 +1946,18 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.selectService(UtilConstants.WHEEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.selectService(UtilConstants.WHEEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
@@ -1942,11 +1969,11 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-        OrderSummaryScreen ordersummaryscreen =servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+        OrderSummaryScreen orderSummaryScreen =servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 		
-		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		TeamWorkOrdersScreen teamworkordersscreen = homeScreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
@@ -1978,9 +2005,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		
 		Assert.assertTrue(teamworkordersscreen.isCreateInvoiceActivated(inspection));
 		teamworkordersscreen.clickiCreateInvoiceButton();
-        InvoiceInfoScreen invoiceinfoscreen = teamworkordersscreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-		Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		invoiceinfoscreen.clickSaveAsFinal();
+        InvoiceInfoScreen invoiceInfoScreen = teamworkordersscreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+		Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		invoiceInfoScreen.clickSaveAsFinal();
 		teamworkordersscreen.clickHomeButton();
 		
 	}
@@ -1995,24 +2022,25 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 		final String[] vehiclepartspaint = { "Front Bumper"};
 		final String[] vehiclepartstoadd = { "Hood"};
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String inspection = vehicleScreen.getInspectionNumber();
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2022,11 +2050,11 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.selectService(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.selectService(UtilConstants.WHEELSTRAIGHTENING_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -2037,10 +2065,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
@@ -2051,14 +2079,14 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 		
-		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		TeamWorkOrdersScreen teamworkordersscreen = homeScreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
@@ -2072,8 +2100,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 			Assert.assertEquals(status, "Active");
 		
 		ordermonitorscreen.clickServicesButton();
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice4(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice4(testcaserow)));
@@ -2084,8 +2112,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen = new ServicesScreen();
-		servicesscreen.clickSave();
+		servicesScreen = new ServicesScreen();
+		servicesScreen.clickSave();
 		ordermonitorscreen = new OrderMonitorScreen();
 		statuses = ordermonitorscreen.getPanelsStatuses(UtilConstants.PAINTFULLBAMPER_SUBSERVICE);
 		for (String status : statuses)
@@ -2121,9 +2149,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		teamworkordersscreen = ordermonitorscreen.clickBackButton();
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection);
 		teamworkordersscreen.clickiCreateInvoiceButton();
-        InvoiceInfoScreen invoiceinfoscreen = teamworkordersscreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		invoiceinfoscreen.clickSaveAsFinal();
+        InvoiceInfoScreen invoiceInfoScreen = teamworkordersscreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		invoiceInfoScreen.clickSaveAsFinal();
 		teamworkordersscreen = new TeamWorkOrdersScreen();
 		teamworkordersscreen.clickHomeButton();
 		
@@ -2138,18 +2166,19 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehiclepartspaint = { "Hood", "Grill", "Left Fender" };
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.setServiceQuantityValue("4");
@@ -2160,10 +2189,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.selectService(UtilConstants.PAINTPANEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.selectService(UtilConstants.PAINTPANEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.setServiceQuantityValue("5");
@@ -2173,10 +2202,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.selectVehicleParts(vehiclepartspaint);
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.selectService(UtilConstants.WHEEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.selectService(UtilConstants.WHEEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2185,16 +2214,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.selectVehicleParts(vehiclepartswheel);
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		invoiceinfoscreen.clickSaveAsFinal();
-        myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();		
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		//orderSummaryScreen.clickSaveButton();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		invoiceInfoScreen.clickSaveAsFinal();
+        myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.clickHomeButton();		
 	}
 	
 	@Test(testName = "Test Case 12632:Test Delete Work Order function", description = "Test Delete Work Order function")
@@ -2203,20 +2232,21 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 		final String[] vehicleparts = { "Roof" };
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routecanadaworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2226,12 +2256,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.deleteWorkOrderViaAction(workOrderNumber);
-		Assert.assertFalse(myworkordersscreen.woExists(workOrderNumber));
-		myworkordersscreen.clickDoneButton();
-		myworkordersscreen.clickHomeButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.deleteWorkOrderViaAction(workOrderNumber);
+		Assert.assertFalse(myWorkOrdersScreen.woExists(workOrderNumber));
+		myWorkOrdersScreen.clickDoneButton();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(testName = "Test Case 12637:Test changing customer on Inspection", description = "Test changing customer on Inspection")
@@ -2241,30 +2271,31 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Left Front Wheel", "Left Rear Wheel" };
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routeinspectiontype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		final String inspNumber = vehicleScreen.getInspectionNumber();
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.DETAIL_SERVICE);
-		servicesscreen.selectService(UtilConstants.WASH_N_VAC_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openServiceDetails(UtilConstants.WASH_N_VAC_SERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.DETAIL_SERVICE);
+		servicesScreen.selectService(UtilConstants.WASH_N_VAC_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openServiceDetails(UtilConstants.WASH_N_VAC_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.openCustomServiceDetails(UtilConstants.CHROMEWHEELREPAIR_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.openCustomServiceDetails(UtilConstants.CHROMEWHEELREPAIR_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -2276,22 +2307,21 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 		myinspectionsscreen.changeCustomerForInspection(inspNumber, customer);
 		myinspectionsscreen.clickHomeButton();
 		
-		customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(customer);
+		customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(customer);
 		
-		myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen = homeScreen.clickMyInspectionsButton();
         Assert.assertTrue(myinspectionsscreen.isInspectionExists(inspNumber));
 		myinspectionsscreen.clickHomeButton();
 		
-		customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		homescreen = new HomeScreen();
-		myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		myinspectionsscreen = homeScreen.clickMyInspectionsButton();
         Assert.assertFalse(myinspectionsscreen.isInspectionExists(inspNumber));
 		myinspectionsscreen.clickHomeButton();
 	}
@@ -2305,50 +2335,51 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String servicequantity2 = "4.5";
 		final String totalsumm = "$3,738.00";
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen.acceptForReminderNoDrilling();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen.acceptForReminderNoDrilling();
 
-        VehicleScreen vehicleScreen =  questionsscreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen =  questionsScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        questionsscreen =vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectOutsideQuestions();
+        questionsScreen =vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectOutsideQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.UNATED_STATES, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-        ClaimScreen claimscreen = questionsscreen.selectNextScreen(WizardScreenTypes.CLAIM);
+        ClaimScreen claimscreen = questionsScreen.selectNextScreen(WizardScreenTypes.CLAIM);
 		claimscreen.selectInsuranceCompanyAndSetClaim(ExcelUtils.getInsuranceCompany(retailhaildatarow), ExcelUtils.getClaim(retailhaildatarow));
 
-        ServicesScreen servicesscreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
+        ServicesScreen servicesScreen = claimscreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.FIXPRICE_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.setServiceQuantityValue(servicequantity);	
 		selectedservicescreen.saveSelectedServiceDetails();
 		
-		servicesscreen.openCustomServiceDetails(UtilConstants.RANDI_HAIL_SERVICE);
+		servicesScreen.openCustomServiceDetails(UtilConstants.RANDI_HAIL_SERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.setServiceQuantityValue(servicequantity2);	
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen = new ServicesScreen();
-		questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
-		questionsscreen.waitQuestionsScreenLoaded();
-        OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-        Assert.assertEquals(ordersummaryscreen.getOrderSumm(), totalsumm);
-        ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.HAIL_NO_DISCOUNT_INVOICE);
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), totalsumm);
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen = new ServicesScreen();
+		questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PAIMENT_INFO_SCREEN_CAPTION);
+		questionsScreen.waitQuestionsScreenLoaded();
+        OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), totalsumm);
+        orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		//orderSummaryScreen.clickSaveButton();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.HAIL_NO_DISCOUNT_INVOICE);
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), totalsumm);
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 12641:Test custom WO level split for Route package", description = "Test custom WO level split for Route package")
@@ -2359,10 +2390,11 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehicleparts = { "Right Mirror", "Left Mirror" };
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2381,16 +2413,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				alerttext,
 				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen =  servicesscreen.openCustomServiceDetails(UtilConstants.DUELEATHER_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen =  servicesScreen.openCustomServiceDetails(UtilConstants.DUELEATHER_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTMIRROR_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTMIRROR_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.clickVehiclePartsCell();
@@ -2411,10 +2443,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 	
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 		selectedservicescreen.clickVehiclePartsCell();
@@ -2436,15 +2468,15 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 		
-		servicesscreen.clickServiceTypesButton();
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen.clickServiceTypesButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		//orderSummaryScreen.clickSaveButton();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 12642:Test even WO level split for Route package", description = "Test even WO level split for Route package")
@@ -2454,9 +2486,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		
 		final String[] vehicleparts = { "Left Fender", "Left Front Door", "Left Quarter Panel", "Left Rear Door", "Left Roof Rail" };
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2473,16 +2506,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 				alerttext,
 				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.DETAIL_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.FRONTLINEREADY_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.DETAIL_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.FRONTLINEREADY_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.OTHER_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.OTHER_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		techniciansPopup = selectedservicescreen.clickTechniciansIcon();
@@ -2492,10 +2525,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianC), "%50.00");
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
 
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 		selectedservicescreen.clickVehiclePartsCell();
@@ -2509,16 +2542,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		Assert.assertEquals(techniciansPopup.getCustomTechnicianPercentage(UtilConstants.technicianC), "%33.33");
 		techniciansPopup.saveTechViewDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		//orderSummaryScreen.clickSaveButton();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 12644:Test adding notes to a Work Order", description = "Test adding notes to a Work Order")
@@ -2529,44 +2562,45 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehicleparts = {  "Hood", "Left Rear Door", "Right Fender" };
 		final String[] vehiclepartspaint = {  "Dashboard", "Deck Lid" };
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routecanadaworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
-		notesscreen.setNotes("Blue fender");
-		//notesscreen.clickDoneButton();
-		notesscreen.clickSaveButton();
+		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		notesScreen.setNotes("Blue fender");
+		//notesScreen.clickDoneButton();
+		notesScreen.clickSaveButton();
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.clickNotesCell();
-		notesscreen.setNotes("Declined right door");
-		notesscreen.clickSaveButton();
+		notesScreen.setNotes("Declined right door");
+		notesScreen.clickSaveButton();
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertTrue(selectedservicescreen.vehiclePartsIsDisplayed());
 		selectedservicescreen.selectVehicleParts(vehicleparts);
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.selectService(UtilConstants.PAINTPANEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.selectService(UtilConstants.PAINTPANEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.clickNotesCell();
-		notesscreen.setNotes("Declined hood");
-		notesscreen.clickSaveButton();
+		notesScreen.setNotes("Declined hood");
+		notesScreen.clickSaveButton();
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.saveSelectedServiceDetails();
 		Assert.assertTrue(selectedservicescreen.vehiclePartsIsDisplayed());
@@ -2575,21 +2609,21 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveAsFinal();
-        myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		Assert.assertTrue(myinvoicesscreen.myInvoiceExists(invoicenum));
-		myinvoicesscreen.selectInvoice(invoicenum);
-		notesscreen = myinvoicesscreen.clickNotesPopup();
-		notesscreen.setNotes("Declined wheel work");
-		notesscreen.clickSaveButton();
-		myinvoicesscreen.clickHomeButton();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+		//orderSummaryScreen.clickSaveButton();
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		String invoicenum = invoiceInfoScreen.getInvoiceNumber();
+		invoiceInfoScreen.clickSaveAsFinal();
+        myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.clickHomeButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoicenum));
+		myInvoicesScreen.selectInvoice(invoicenum);
+		notesScreen = myInvoicesScreen.clickNotesPopup();
+		notesScreen.setNotes("Declined wheel work");
+		notesScreen.clickSaveButton();
+		myInvoicesScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 12645:Test changing the PO# on an invoice", description = "Test changing the PO# on an invoice")
@@ -2597,37 +2631,38 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testChangingThePOOnAnInvoice";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTHOOD_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTHOOD_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("1");
-        InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-		invoiceinfoscreen.setPO("832145");
-		String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveAsFinal();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.setTotalSale("1");
+        InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+		//orderSummaryScreen.clickSaveButton();
+		invoiceInfoScreen.setPO("832145");
+		String invoicenum = invoiceInfoScreen.getInvoiceNumber();
+		invoiceInfoScreen.clickSaveAsFinal();
 
-		myworkordersscreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		Assert.assertTrue(myinvoicesscreen.myInvoiceExists(invoicenum));
-		myinvoicesscreen.selectInvoice(invoicenum);
-		myinvoicesscreen.clickChangePOPopup();
-		myinvoicesscreen.changePO("832710");
-		myinvoicesscreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoicenum));
+		myInvoicesScreen.selectInvoice(invoicenum);
+		myInvoicesScreen.clickChangePOPopup();
+		myInvoicesScreen.changePO("832710");
+		myInvoicesScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 12646:Test editing an Inspection", description = "Test editing an Inspection")
@@ -2637,22 +2672,23 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Left Front Door", "Left Rear Door", "Right Front Door", "Right Rear Door" };
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routeinspectiontype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		final String inspNumber = vehicleScreen.getInspectionNumber();
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -2664,17 +2700,17 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 		myinspectionsscreen.selectInspectionInTable(inspNumber);
 		myinspectionsscreen.clickEditInspectionButton();
 		vehicleScreen = new VehicleScreen();
-        servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
+        servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 		myinspectionsscreen.clickHomeButton();
 	}
 	
@@ -2683,10 +2719,11 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testEditingWorkOrder";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2694,33 +2731,33 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String wo = vehicleScreen.getInspectionNumber();
 		vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
 		vehicleScreen.setRO(ExcelUtils.getRO(testcaserow));
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_FABRIC_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.HB_13_BRNS_1_SECT_FBRC_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_FABRIC_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.HB_13_BRNS_1_SECT_FBRC_SUBSERVICE);
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.HB_13_BRNS_1_SECT_FBRC_SUBSERVICE, "$36.97 x 1.00"));
-		servicesscreen.clickServiceTypesButton();
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_VINIL_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE);
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.HB_13_BRNS_1_SECT_FBRC_SUBSERVICE, "$36.97 x 1.00"));
+		servicesScreen.clickServiceTypesButton();
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_VINIL_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE);
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.67 x 1.00"));
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.67 x 1.00"));
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.selectWorkOrderForEidt(wo);
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.selectWorkOrderForEidt(wo);
 		vehicleScreen = new VehicleScreen();
-        servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+        servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WHEELCOVER2_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.WHEELCOVER2_SUBSERVICE);
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.HB_13_BRNS_1_SECT_FBRC_SUBSERVICE, "$36.97 x 1.00"));
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.67 x 1.00"));
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.WHEELCOVER2_SUBSERVICE, "$45.00 x 1.00"));
-        ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.HB_13_BRNS_1_SECT_FBRC_SUBSERVICE, "$36.97 x 1.00"));
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.CRT_3_RPR_VNYL_SUBSERVICE, "$89.67 x 1.00"));
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.WHEELCOVER2_SUBSERVICE, "$45.00 x 1.00"));
+        orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
 
-		myworkordersscreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 19514:Test editing an Invoice in Draft", description = "Test Editing an Invoice in Draft")
@@ -2732,24 +2769,25 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehiclepartspaint = { "Left Mirror" };
 		final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails (UtilConstants.CARPETREPAIR_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails (UtilConstants.CARPETREPAIR_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2760,10 +2798,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.selectService(UtilConstants.PAINTMIRROR_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.selectService(UtilConstants.PAINTMIRROR_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2774,28 +2812,28 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 
-        OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		final String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveAsDraft();
-        myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectInvoice(invoicenumber);
-		myinvoicesscreen.clickEditPopup();
-		invoiceinfoscreen = new InvoiceInfoScreen();
-		invoiceinfoscreen.clickFirstWO();
+        OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		//orderSummaryScreen.clickSaveButton();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		final String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
+		invoiceInfoScreen.clickSaveAsDraft();
+        myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.clickHomeButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		myInvoicesScreen.selectInvoice(invoicenumber);
+		myInvoicesScreen.clickEditPopup();
+		invoiceInfoScreen = new InvoiceInfoScreen();
+		invoiceInfoScreen.clickFirstWO();
 		vehicleScreen = new VehicleScreen();
-        servicesscreen =  vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-        selectedservicescreen = servicesscreen.openServiceDetails(UtilConstants.PAINTMIRROR_SUBSERVICE);
+        servicesScreen =  vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+        selectedservicescreen = servicesScreen.openServiceDetails(UtilConstants.PAINTMIRROR_SUBSERVICE);
 		selectedservicescreen.removeService();
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.selectService(UtilConstants.PAINTMIRROR_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.selectService(UtilConstants.PAINTMIRROR_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
 
@@ -2803,10 +2841,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.selectVehiclePart("Right Mirror");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.selectService(UtilConstants.CHROMEWHEELREPAIR_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.selectService(UtilConstants.CHROMEWHEELREPAIR_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice4(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -2817,27 +2855,28 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 
-		servicesscreen.clickSave();
-		invoiceinfoscreen = new InvoiceInfoScreen();
-		invoiceinfoscreen.clickSaveAsFinal();
-		homescreen = myinvoicesscreen.clickHomeButton();
+		servicesScreen.clickSave();
+		invoiceInfoScreen = new InvoiceInfoScreen();
+		invoiceInfoScreen.clickSaveAsFinal();
+		homeScreen = myInvoicesScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 19548:Test adding a PO# to an invoice", description = "Test adding a PO# to an invoice")
 	public void testAddingAPOToAnInvoice() {
 		String tcname = "testAddingAPOToAnInvoice";
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackeravisworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2845,20 +2884,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_FABRIC_SERVICE);
-		servicesscreen.selectService("Tear/Burn >2\" (Fabric)");                                         
-		servicesscreen.clickServiceTypesButton();
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_FABRIC_SERVICE);
+		servicesScreen.selectService("Tear/Burn >2\" (Fabric)");                                         
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDR6PANEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDR6PANEL_SUBSERVICE);
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertTrue(servicesscreen.checkServiceIsSelected(UtilConstants.PDR6PANEL_SUBSERVICE));
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		servicesscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		Assert.assertTrue(servicesScreen.checkServiceIsSelected(UtilConstants.PDR6PANEL_SUBSERVICE));
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		servicesScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 		
-		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		TeamWorkOrdersScreen teamworkordersscreen = homeScreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(workOrderNumber);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
@@ -2886,24 +2925,24 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		Assert.assertTrue(teamworkordersscreen.isCreateInvoiceActivated(workOrderNumber));
 		teamworkordersscreen.clickiCreateInvoiceButton();
 		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
-		QuestionsScreen questionsscreen = invoiceInfoScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
-		questionsscreen.waitQuestionsScreenLoaded();
-		questionsscreen.chooseAVISCode("Rental-921");
-		questionsscreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+		QuestionsScreen questionsScreen = invoiceInfoScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
+		questionsScreen.waitQuestionsScreenLoaded();
+		questionsScreen.chooseAVISCode("Rental-921");
+		questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 
 		final String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
 		teamworkordersscreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectInvoice(invoicenumber);
-		myinvoicesscreen.clickChangePOPopup();
-		myinvoicesscreen.changePO("170116");
-		myinvoicesscreen.clickHomeButton();
-		myinvoicesscreen = homescreen.clickMyInvoices();
-		Assert.assertTrue(myinvoicesscreen.isInvoiceHasInvoiceNumberIcon(invoicenumber));
-		Assert.assertTrue(myinvoicesscreen.isInvoiceHasInvoiceSharedIcon(invoicenumber));
-		Assert.assertEquals(myinvoicesscreen.getInvoicePrice(invoicenumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		myinvoicesscreen.clickHomeButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		myInvoicesScreen.selectInvoice(invoicenumber);
+		myInvoicesScreen.clickChangePOPopup();
+		myInvoicesScreen.changePO("170116");
+		myInvoicesScreen.clickHomeButton();
+		myInvoicesScreen = homeScreen.clickMyInvoices();
+		Assert.assertTrue(myInvoicesScreen.isInvoiceHasInvoiceNumberIcon(invoicenumber));
+		Assert.assertTrue(myInvoicesScreen.isInvoiceHasInvoiceSharedIcon(invoicenumber));
+		Assert.assertEquals(myInvoicesScreen.getInvoicePrice(invoicenumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		myInvoicesScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 19670:Test adding a PO# to an invoice containing multiple Work Orders", description = "Test adding a PO# to an invoice containing multiple Work Orders")
@@ -2917,24 +2956,25 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		int testcaserow3 = ExcelUtils.getTestCaseRow(tcname3);
 		
 		final String[] vehicleparts = { "Left Rear Door", "Right Rear Door" };
-		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow1));
 		String inspection1 = vehicleScreen.getInspectionNumber();
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow1), ExcelUtils.getModel(testcaserow1), ExcelUtils.getYear(testcaserow1));
 
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow1));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow1)));
@@ -2945,8 +2985,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		servicesscreen.saveWizard();
+		servicesScreen.clickServiceTypesButton();
+		servicesScreen.saveWizard();
 		
 		//Create second WO
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
@@ -2954,14 +2994,14 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String inspection2 = vehicleScreen.getInspectionNumber();
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
 
-        servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.LEATHERREPAIR_SUBSERVICE);
+        servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.LEATHERREPAIR_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow2));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow2)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		servicesscreen.saveWizard();
+		servicesScreen.clickServiceTypesButton();
+		servicesScreen.saveWizard();
 		
 		
 		//Create third WO
@@ -2970,17 +3010,17 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String inspection3 = vehicleScreen.getInspectionNumber();
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow3), ExcelUtils.getModel(testcaserow3), ExcelUtils.getYear(testcaserow3));
 
-        servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
+        servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow3));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow3)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		servicesscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen.clickServiceTypesButton();
+		servicesScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 		
-		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		TeamWorkOrdersScreen teamworkordersscreen = homeScreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(inspection1);
 		OrderMonitorScreen ordermonitorscreen = teamworkordersscreen.selectWOMonitor();
 		ordermonitorscreen.selectMainPanel(UtilConstants.PDR_SERVICE);
@@ -3014,15 +3054,15 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		teamworkordersscreen.clickCreateInvoiceIconForWO(inspection3);
 		
 		teamworkordersscreen.clickiCreateInvoiceButton();
-		InvoiceInfoScreen invoiceinfoscreen = teamworkordersscreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-		invoiceinfoscreen.clickSaveAsFinal();
+		InvoiceInfoScreen invoiceInfoScreen = teamworkordersscreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+		invoiceInfoScreen.clickSaveAsFinal();
 		teamworkordersscreen.clickHomeButton();
 		
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.getFirstInvoice().click();
-		myinvoicesscreen.clickChangePOPopup();
-		myinvoicesscreen.changePO("957884");
-		myinvoicesscreen.clickHomeButton();	
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		myInvoicesScreen.getFirstInvoice().click();
+		myInvoicesScreen.clickChangePOPopup();
+		myInvoicesScreen.changePO("957884");
+		myInvoicesScreen.clickHomeButton();	
 	}
 	
 	@Test(testName = "Test Case 19671:Test Copy Vehicle feature", description = "Test Copy Vehicle feature")
@@ -3030,60 +3070,62 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testCopyVehicleFeature";		
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-		String wo = vehicleScreen.getInspectionNumber();
-        ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.OTHER_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
+		String workOrderNumber = vehicleScreen.getInspectionNumber();
+        ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.OTHER_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.saveWizard();
-		myworkordersscreen.copyVehicleForWorkOrder(wo, DentWizardWorkOrdersTypes.carmaxworkordertype);
+		servicesScreen.saveWizard();
+		MyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber, DentWizardWorkOrdersTypes.carmaxworkordertype);
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 19672:Test Copy Services feature", description = "Test Copy Services feature")
 	public void testCopyServicesFeature() {
 		String tcname1 = "testCopyServicesFeature1";
 		String tcname2 = "testCopyServicesFeature2";
-		
+
+		HomeScreen homeScreen = new HomeScreen();
 		int testcaserow1 = ExcelUtils.getTestCaseRow(tcname1);
 		int testcaserow2 = ExcelUtils.getTestCaseRow(tcname2);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow1));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow1), ExcelUtils.getModel(testcaserow1), ExcelUtils.getYear(testcaserow1));
-		String wo = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
+		String workOrderNumber = vehicleScreen.getInspectionNumber();
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow1));
 		
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.saveWizard();
-		myworkordersscreen.copyServicesForWorkOrder(wo, DentWizardWorkOrdersTypes.routeusworkordertype);
+		servicesScreen.saveWizard();
+		MyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, DentWizardWorkOrdersTypes.routeusworkordertype);
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow2));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
-		servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.BLACKOUT_SUBSERVICE,
+		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.BLACKOUT_SUBSERVICE,
 				PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow1)) + " x 1.00"));
-		servicesscreen.cancelWizard();
-		myworkordersscreen.clickHomeButton();
+		servicesScreen.cancelWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 24164:Test Pre-Existing Damage option", description = "Test Pre-Existing Damage option")
@@ -3093,23 +3135,24 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Left A Pillar", "Left Front Door", "Metal Sunroof", "Right Roof Rail" };
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.servicedriveinspectiondertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
 		final String inspNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -3121,46 +3164,46 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.searchAvailableService("Scratch (Exterior)");
-		selectedservicescreen = servicesscreen.openCustomServiceDetails("Scratch (Exterior)");
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.searchAvailableService("Scratch (Exterior)");
+		selectedservicescreen = servicesScreen.openCustomServiceDetails("Scratch (Exterior)");
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.checkPreexistingDamage();
 		selectedservicescreen.saveSelectedServiceDetails();	
-		servicesscreen.cancelSearchAvailableService();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		servicesscreen.saveWizard();
+		servicesScreen.cancelSearchAvailableService();
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		servicesScreen.saveWizard();
 
 		myinspectionsscreen.selectInspectionInTable(inspNumber);
 		myinspectionsscreen.clickCreateWOButton();
         vehicleScreen = new VehicleScreen();
 		String wonumber = vehicleScreen.getInspectionNumber();
-		servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
+		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("1");
-		ordersummaryscreen.saveWizard();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.setTotalSale("1");
+		orderSummaryScreen.saveWizard();
 
 		myinspectionsscreen.showWorkOrdersForInspection(inspNumber);
 		vehicleScreen = new VehicleScreen();
 		Assert.assertEquals(vehicleScreen.getInspectionNumber(), wonumber);
-		servicesscreen.clickCancelButton();
+		servicesScreen.clickCancelButton();
 
 		myinspectionsscreen.clickHomeButton();
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
-        myworkordersscreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceinfoscreen = new InvoiceInfoScreen();
-				invoiceinfoscreen.clickSaveAsFinal();
-		homescreen = myworkordersscreen.clickHomeButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		myWorkOrdersScreen.clickCreateInvoiceIconForWO(wonumber);
+        myWorkOrdersScreen.clickInvoiceIcon();
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
+				invoiceInfoScreen.clickSaveAsFinal();
+		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 19673:Test Car History feature", description = "Test Car History feature")
@@ -3168,36 +3211,36 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testCarHistoryFeature";		
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
 		vehicleScreen.setRO(ExcelUtils.getRO(testcaserow));
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIORPLASTIC_SERVICE);
-		servicesscreen.selectService(UtilConstants.SCRTCH_1_SECTPLSTC_SERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIORPLASTIC_SERVICE);
+		servicesScreen.selectService(UtilConstants.SCRTCH_1_SECTPLSTC_SERVICE);
 
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-		//ordersummaryscreen.clickSaveButton();
-		String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen.clickHomeButton();
-		CarHistoryScreen carhistoryscreen = homescreen.clickCarHistoryButton();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+		//orderSummaryScreen.clickSaveButton();
+		String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen.clickHomeButton();
+		CarHistoryScreen carhistoryscreen = homeScreen.clickCarHistoryButton();
 		carhistoryscreen.searchCar("887340");
 		String strtocompare = ExcelUtils.getYear(testcaserow) + ", " + ExcelUtils.getMake(testcaserow) + ", " + ExcelUtils.getModel(testcaserow);
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryDetailsInTable(), strtocompare);
 		carhistoryscreen.clickFirstCarHistoryInTable();
-		MyInvoicesScreen myinvoicesscreen = carhistoryscreen.clickCarHistoryInvoices();
-		Assert.assertTrue(myinvoicesscreen.myInvoicesIsDisplayed());
-		myinvoicesscreen.clickBackButton();
+		MyInvoicesScreen myInvoicesScreen = carhistoryscreen.clickCarHistoryInvoices();
+		Assert.assertTrue(myInvoicesScreen.myInvoicesIsDisplayed());
+		myInvoicesScreen.clickBackButton();
 
 		carhistoryscreen.clickSwitchToWeb();
 		Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
@@ -3219,29 +3262,30 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehicleparts = { "Hood", "Left Fender" };
 		final String totalsale = "675";
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackerservicedriveworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -3252,13 +3296,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.clickSave();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.clickSave();
 		String alerttext = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alerttext.contains("Total Sale is required."));
-		ordersummaryscreen.setTotalSale(totalsale);		
-		ordersummaryscreen.clickSave();
-		myworkordersscreen.clickHomeButton();
+		orderSummaryScreen.setTotalSale(totalsale);		
+		orderSummaryScreen.clickSave();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 19678:Test package pricing for read only items", description = "Test package pricing for read only items")
@@ -3268,27 +3312,28 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Left Fender", "Left Roof Rail", "Right Fender" };
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
 		vehicleScreen.setRO(ExcelUtils.getRO(testcaserow));
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.INTERIOR_LEATHER_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.CRT_2_RPR_LTHR_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.INTERIOR_LEATHER_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.CRT_2_RPR_LTHR_SUBSERVICE);
 		Assert.assertEquals(selectedservicescreen.getAdjustmentsValue(), "-$14.48");
 		selectedservicescreen.setServiceQuantityValue("3.00");
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		Assert.assertEquals(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)), servicesscreen.getTotalAmaunt());
+		servicesScreen.clickServiceTypesButton();
+		Assert.assertEquals(PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)), servicesScreen.getTotalAmaunt());
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.CUST2PNL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.CUST2PNL_SUBSERVICE);
 		Assert.assertEquals(selectedservicescreen.getAdjustmentsValue(), "-$6.55");
 		selectedservicescreen.clickVehiclePartsCell();
 		Assert.assertTrue(selectedservicescreen.vehiclePartsIsDisplayed());
@@ -3298,13 +3343,13 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		servicesscreen.clickServiceTypesButton();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+		servicesScreen.clickServiceTypesButton();
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen.clickHomeButton();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 19681:Test price policy for service items from Inspection through Invoice creation", description = "Test price policy for service items from Inspection through Invoice creation")
@@ -3315,22 +3360,23 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String[] vehicleparts = { "Left Front Door", "Left Rear Door", "Right Fender" };
 		final String[] vehiclepartspaint = { "Hood", "Left Fender" };
 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routeinspectiontype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		final String inspNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -3341,10 +3387,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 			
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.selectService(UtilConstants.PAINTPANEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.selectService(UtilConstants.PAINTPANEL_SUBSERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -3355,59 +3401,61 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();	
-		servicesscreen.saveWizard();;
+		servicesScreen.clickServiceTypesButton();	
+		servicesScreen.saveWizard();;
 
 		Assert.assertEquals(myinspectionsscreen.getInspectionPriceValue(inspNumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		myinspectionsscreen.selectInspectionInTable(inspNumber);
 		myinspectionsscreen.clickCreateWOButton();
 		vehicleScreen = new VehicleScreen();
 		String wonumber = vehicleScreen.getInspectionNumber();
-		servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (int i = 0; i < vehicleparts.length; i++) {
-			Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE , vehicleparts[i]
+			Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE , vehicleparts[i]
 					, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)) + " x 1.00"));
 		}
 		for (int i = 0; i < vehiclepartspaint.length; i++) {
-			Assert.assertTrue(servicesscreen.checkServiceIsSelectedWithServiceValues(UtilConstants.PAINTPANEL_SUBSERVICE , vehiclepartspaint[i]
+			Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(UtilConstants.PAINTPANEL_SUBSERVICE , vehiclepartspaint[i]
 					, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)) + " x 1.00"));
 		}
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 
 		myinspectionsscreen.showWorkOrdersForInspection(inspNumber);
 		vehicleScreen = new VehicleScreen();
 		Assert.assertEquals(vehicleScreen.getInspectionNumber(), wonumber);
-		servicesscreen.clickCancelButton();
+		servicesScreen.clickCancelButton();
 
 		myinspectionsscreen.clickHomeButton();
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
-		myworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
-		myworkordersscreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen.clickHomeButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		myWorkOrdersScreen.clickCreateInvoiceIconForWO(wonumber);
+		myWorkOrdersScreen.clickInvoiceIcon();
+		InvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 10263:Send Multiple Emails", description = "Send Multiple Emails")
 	public void testSendMultipleEmails() {
-		 
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+
+		HomeScreen homeScreen = new HomeScreen();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.clickActionButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		myInvoicesScreen.clickActionButton();
 		for (int i = 0; i< 4; i++) {
-			myinvoicesscreen.selectInvoiceForActionByIndex(i+1);
+			myInvoicesScreen.selectInvoiceForActionByIndex(i+1);
 		}
-		myinvoicesscreen.clickActionButton();
-		//myinvoicesscreen.sendEmail();
-		myinvoicesscreen.sendSingleEmail(UtilConstants.TEST_EMAIL);
-		myinvoicesscreen.clickDoneButton();
-		myinvoicesscreen.clickHomeButton();
+		myInvoicesScreen.clickActionButton();
+		//myInvoicesScreen.sendEmail();
+		myInvoicesScreen.sendSingleEmail(UtilConstants.TEST_EMAIL);
+		myInvoicesScreen.clickDoneButton();
+		myInvoicesScreen.clickHomeButton();
 		
 	}
 	
@@ -3419,18 +3467,19 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String  _customer   = "Bel Air Auto Auction Inc";
 		final String[] vehicleparts = { "Left Fender", "Right Fender"};
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(_customer);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(_customer);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServiceAdjustmentsValue(), "-$28.50");
 		selectedservicescreen.clickVehiclePartsCell();
@@ -3441,10 +3490,10 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.selectService(UtilConstants.WSANDBPANEL_SERVICE);
+		servicesScreen.clickServiceTypesButton();
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.selectService(UtilConstants.WSANDBPANEL_SERVICE);
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
@@ -3453,16 +3502,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedservicescreen.selectVehiclePart("Hood");
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-		invoiceinfoscreen.clickSaveAsFinal();
-		myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		//orderSummaryScreen.clickSaveButton();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+		invoiceInfoScreen.clickSaveAsFinal();
+		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 19685:Test completed RO only requirement for invoicing", description = "Test Completed RO only requirement for invoicing")
@@ -3472,19 +3521,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Left Quarter Panel", "Right Roof Rail", "Trunk Lid" };
 		final String[] vehiclepartswheel = { "Right Front Wheel", "Right Rear Wheel" };
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.BMW_ROCKVILLE_CUSTOMER);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
@@ -3495,20 +3545,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		servicesscreen.searchAvailableService(UtilConstants.PAINTTOWHOOKCOVER_SUBSERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTTOWHOOKCOVER_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		servicesScreen.searchAvailableService(UtilConstants.PAINTTOWHOOKCOVER_SUBSERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTTOWHOOKCOVER_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.cancelSearchAvailableService();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.cancelSearchAvailableService();
+		servicesScreen.clickServiceTypesButton();
 				
-		servicesscreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.searchAvailableService(UtilConstants.WHEEL_SUBSERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
+		servicesScreen.selectGroupServiceItem(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.searchAvailableService(UtilConstants.WHEEL_SUBSERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -3517,20 +3567,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		String wonumber = ordersummaryscreen.getWorkOrderNumber();
-		ordersummaryscreen.clickSave();
-		myworkordersscreen.clickHomeButton();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		String wonumber = orderSummaryScreen.getWorkOrderNumber();
+		orderSummaryScreen.clickSave();
+		myWorkOrdersScreen.clickHomeButton();
 		
-		TeamWorkOrdersScreen teamworkordersscreen = homescreen.clickTeamWorkordersButton();
+		TeamWorkOrdersScreen teamworkordersscreen = homeScreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickOnWO(wonumber);
 		teamworkordersscreen.selectEditWO();
 		vehicleScreen = new VehicleScreen();
-		ordersummaryscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertFalse(ordersummaryscreen.isApproveAndCreateInvoiceExists());
-		ordersummaryscreen.saveWizard();
+		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertFalse(orderSummaryScreen.isApproveAndCreateInvoiceExists());
+		orderSummaryScreen.saveWizard();
 
 		teamworkordersscreen.clickCreateInvoiceIconForWO(wonumber);
 
@@ -3545,10 +3595,11 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testEnterprizeWorkOrderQuestionFormsInforced";		
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.enterpriseworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3563,9 +3614,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		Assert.assertTrue(alerttext.contains("Question 'License Plate' in section 'Enterprise Before Damage' should be answered."));
 		enterprisebeforedamagescreen.setLicensePlateCapture();
 
-		ServicesScreen servicesscreen = enterprisebeforedamagescreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		ServicesScreen servicesScreen = enterprisebeforedamagescreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 12633:Test successful email of pictures using Notes feature", description = "Test successful email of pictures using Notes feature")
@@ -3573,67 +3624,68 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testSuccessfulEmailOfPicturesUsingNotesFeature";		
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.avisworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
 		String wo = vehicleScreen.getInspectionNumber();
-		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
-		notesscreen.clickSaveButton();
+		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
+		notesScreen.clickSaveButton();
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.clickNotesButton();
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 2);
-		notesscreen.clickSaveButton();
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.clickNotesButton();
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 2);
+		notesScreen.clickSaveButton();
 		
-		servicesscreen.selectService(UtilConstants.PDR_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PDR2PANEL_SUBSERVICE);
+		servicesScreen.selectService(UtilConstants.PDR_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDR2PANEL_SUBSERVICE);
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		selectedservicescreen.clickNotesCell();
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
-		notesscreen.clickSaveButton();
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
+		notesScreen.clickSaveButton();
 		selectedservicescreen.saveSelectedServiceDetails();
-		EnterpriseBeforeDamageScreen enterprisebeforedamagescreen = servicesscreen.selectNextScreen(WizardScreenTypes.ENTERPRISE_BEFORE_DAMAGE);
+		EnterpriseBeforeDamageScreen enterprisebeforedamagescreen = servicesScreen.selectNextScreen(WizardScreenTypes.ENTERPRISE_BEFORE_DAMAGE);
 		enterprisebeforedamagescreen.setVINCapture();
 		enterprisebeforedamagescreen.setLicensePlateCapture();
 
-		OrderSummaryScreen ordersummaryscreen = enterprisebeforedamagescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.selectWorkOrderForAddingNotes(wo);
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 3);
-		notesscreen.clickSaveButton();
+		OrderSummaryScreen orderSummaryScreen = enterprisebeforedamagescreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.selectWorkOrderForAddingNotes(wo);
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 3);
+		notesScreen.clickSaveButton();
 		
-		myworkordersscreen.clickCreateInvoiceIconForWO(wo);
-		myworkordersscreen.clickInvoiceIcon();
-		QuestionsScreen questionsscreen = new QuestionsScreen();
-		questionsscreen = questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
-        questionsscreen.chooseAVISCode("Other-920");
-        final String invoiceNumber = questionsscreen.getInvoiceNumber();
-		questionsscreen.clickSaveAsFinal();
+		myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo);
+		myWorkOrdersScreen.clickInvoiceIcon();
+		QuestionsScreen questionsScreen = new QuestionsScreen();
+		questionsScreen = questionsScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "AVIS Questions");
+        questionsScreen.chooseAVISCode("Other-920");
+        final String invoiceNumber = questionsScreen.getInvoiceNumber();
+		questionsScreen.clickSaveAsFinal();
 		
-		myworkordersscreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectInvoice(invoiceNumber);
-		notesscreen =  myinvoicesscreen.clickNotesPopup();
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
-		notesscreen.clickSaveButton();
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.selectInvoiceForActionByIndex(1);
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.sendEmail(UtilConstants.TEST_EMAIL);
-		myinvoicesscreen.clickDoneButton();
-		myinvoicesscreen.clickHomeButton();	
+		myWorkOrdersScreen.clickHomeButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		myInvoicesScreen.selectInvoice(invoiceNumber);
+		notesScreen =  myInvoicesScreen.clickNotesPopup();
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
+		notesScreen.clickSaveButton();
+		myInvoicesScreen.clickActionButton();
+		myInvoicesScreen.selectInvoiceForActionByIndex(1);
+		myInvoicesScreen.clickActionButton();
+		myInvoicesScreen.sendEmail(UtilConstants.TEST_EMAIL);
+		myInvoicesScreen.clickDoneButton();
+		myInvoicesScreen.clickHomeButton();	
 	}
 	
 	@Test(testName = "Test Case 12634:Test emailing photos in Economical Inspection", description = "Test emailing photos in Economical Inspection")
@@ -3641,66 +3693,66 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		String tcname = "testEmailingPhotosInEconomicalInspection";		
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		
-		homescreen = new HomeScreen();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		SettingsScreen settingsscreen = homescreen.clickSettingsButton();
+		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setInspectionToNonSinglePageInspection();
 		settingsscreen.clickHomeButton();
 		
-		MyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+		MyInspectionsScreen myinspectionsscreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.economicalinspectiondertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		final String inspNumber = vehicleScreen.getInspectionNumber();
-		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
-		notesscreen.clickSaveButton();
+		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
+		notesScreen.clickSaveButton();
 	
 		ClaimScreen claimscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.CLAIM);
-		QuestionsScreen questionsscreen =  claimscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PHOTOS_SCREEN_CAPTION);
-		questionsscreen.makeCaptureForQuestion("VIN");
-		questionsscreen.makeCaptureForQuestion("Odometer");
-		questionsscreen.swipeScreenRight();
-		questionsscreen = new QuestionsScreen();
-		questionsscreen.makeCaptureForQuestion("License Plate Number");
-		questionsscreen.makeCaptureForQuestion("Left Front of Vehicle");
-		questionsscreen.swipeScreenRight();
-		questionsscreen = new QuestionsScreen();
-		questionsscreen.makeCaptureForQuestion("Right Front of Vehicle");
-		questionsscreen.makeCaptureForQuestion("Right Rear of Vehicle");
-		questionsscreen.swipeScreenRight();
-		questionsscreen = new QuestionsScreen();
-		questionsscreen.makeCaptureForQuestion("Left Rear of Vehicle");
-		questionsscreen = questionsscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-		questionsscreen.selectProperQuestions();
+		QuestionsScreen questionsScreen =  claimscreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_PHOTOS_SCREEN_CAPTION);
+		questionsScreen.makeCaptureForQuestion("VIN");
+		questionsScreen.makeCaptureForQuestion("Odometer");
+		questionsScreen.swipeScreenRight();
+		questionsScreen = new QuestionsScreen();
+		questionsScreen.makeCaptureForQuestion("License Plate Number");
+		questionsScreen.makeCaptureForQuestion("Left Front of Vehicle");
+		questionsScreen.swipeScreenRight();
+		questionsScreen = new QuestionsScreen();
+		questionsScreen.makeCaptureForQuestion("Right Front of Vehicle");
+		questionsScreen.makeCaptureForQuestion("Right Rear of Vehicle");
+		questionsScreen.swipeScreenRight();
+		questionsScreen = new QuestionsScreen();
+		questionsScreen.makeCaptureForQuestion("Left Rear of Vehicle");
+		questionsScreen = questionsScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, UtilConstants.HAIL_INFO_SCREEN_CAPTION);
+		questionsScreen.selectProperQuestions();
 		
 		int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-		questionsscreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
+		questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow), 
 				ExcelUtils.getownerState(retailhaildatarow), UtilConstants.CANADA, ExcelUtils.getOwnerZip(retailhaildatarow));
 
-		PriceMatrixScreen pricematrix = questionsscreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, UtilConstants.PRICE_MATRIX_SCREEN_CAPTION);
+		PriceMatrixScreen pricematrix = questionsScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, UtilConstants.PRICE_MATRIX_SCREEN_CAPTION);
 		pricematrix.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
 		pricematrix.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
 		pricematrix.clickNotesButton();
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 2);
-		notesscreen.clickSaveButton();
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 2);
+		notesScreen.clickSaveButton();
 
-		ServicesScreen servicesscreen = questionsscreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails("E-Coat");
+		ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails("E-Coat");
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.clickNotesCell();
-		notesscreen.addNotesCapture();
-		notesscreen.clickSaveButton();
+		notesScreen.addNotesCapture();
+		notesScreen.clickSaveButton();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.saveWizard();
+		servicesScreen.saveWizard();
 		myinspectionsscreen.selectInspectionInTable(inspNumber);
-		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen();
-		myinvoicesscreen.sendEmail(UtilConstants.TEST_EMAIL);
+		MyInvoicesScreen myInvoicesScreen = new MyInvoicesScreen();
+		myInvoicesScreen.sendEmail(UtilConstants.TEST_EMAIL);
         myinspectionsscreen = new MyInspectionsScreen();
 		myinspectionsscreen.clickHomeButton();
 		
@@ -3715,26 +3767,26 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String firstnote = "Refused paint";
 		final String secondnote = "Just 4 panels";
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.auctionworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
 		String wo = vehicleScreen.getInspectionNumber();
-		NotesScreen notesscreen = vehicleScreen.clickNotesButton();
-		notesscreen.setNotes(firstnote);
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
-		notesscreen.clickSaveButton();
+		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		notesScreen.setNotes(firstnote);
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
+		notesScreen.clickSaveButton();
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.clickVehiclePartsCell();
@@ -3745,38 +3797,39 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.clickNotesCell();
-		notesscreen.setNotes(secondnote);
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
-		notesscreen.clickSaveButton();
+		notesScreen.setNotes(secondnote);
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
+		notesScreen.clickSaveButton();
 		selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.saveSelectedServiceDetails();
 		//selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 
-		QuestionsScreen questionsscreen = servicesscreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
-		questionsscreen.chooseConsignor("Unknown Consignor/One Off-718");
+		QuestionsScreen questionsScreen = servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+		questionsScreen.chooseConsignor("Unknown Consignor/One Off-718");
 
-		OrderSummaryScreen ordersummaryscreen = questionsscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.selectWorkOrderForAddingNotes(wo);
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 2);
-		notesscreen.clickSaveButton();
+		OrderSummaryScreen orderSummaryScreen = questionsScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.selectWorkOrderForAddingNotes(wo);
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 2);
+		notesScreen.clickSaveButton();
 		
-		myworkordersscreen.clickCreateInvoiceIconForWO(wo);
-		myworkordersscreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceinfoscreen = myworkordersscreen.selectInvoiceType(DentWizardInvoiceTypes.AUCTION_NO_DISCOUNT_INVOICE);
-		invoiceinfoscreen.clickSaveAsFinal();
+		myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo);
+		myWorkOrdersScreen.clickInvoiceIcon();
+		InvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.AUCTION_NO_DISCOUNT_INVOICE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
+		invoiceInfoScreen.clickSaveAsFinal();
 		
-		myworkordersscreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.selectInvoiceForActionByIndex(1);
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.sendEmail(UtilConstants.TEST_EMAIL);
-		myinvoicesscreen.clickDoneButton();
-		myinvoicesscreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		myInvoicesScreen.clickActionButton();
+		myInvoicesScreen.selectInvoiceForActionByIndex(1);
+		myInvoicesScreen.clickActionButton();
+		myInvoicesScreen.sendEmail(UtilConstants.TEST_EMAIL);
+		myInvoicesScreen.clickDoneButton();
+		myInvoicesScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 12636:Test emailing photos in Service Drive package", description = "Test emailing photos in Service Drive package")
@@ -3786,20 +3839,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String[] vehicleparts = { "Decklid", "Left A Pillar" };
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.PDR_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.PDR_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.clickVehiclePartsCell();
@@ -3808,37 +3861,37 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		servicesscreen.clickServiceTypesButton();
+		servicesScreen.clickServiceTypesButton();
 		
 		
-		servicesscreen.selectService(UtilConstants.INTERIOR_SERVICE);
-		selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.STAIN_SUBSERVICE);
+		servicesScreen.selectService(UtilConstants.INTERIOR_SERVICE);
+		selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.STAIN_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
 
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale("1");
-        InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.checkCreateInvoice();
-        Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-		final String invoiceNumber = invoiceinfoscreen.getInvoiceNumber();
-		invoiceinfoscreen.clickSaveAsFinal();
-        myworkordersscreen = new MyWorkOrdersScreen();
-		myworkordersscreen.clickHomeButton();
-		MyInvoicesScreen myinvoicesscreen = homescreen.clickMyInvoices();
-		myinvoicesscreen.selectInvoice(invoiceNumber);
-		NotesScreen notesscreen = myinvoicesscreen.clickNotesPopup();
-		notesscreen.setNotes("Refused paint");
-		notesscreen.addNotesCapture();
-		Assert.assertEquals(notesscreen.getNumberOfAddedPhotos(), 1);
-		notesscreen.clickSaveButton();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.setTotalSale("1");
+        InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.checkCreateInvoice();
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+		invoiceInfoScreen.clickSaveAsFinal();
+        myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.clickHomeButton();
+		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
+		myInvoicesScreen.selectInvoice(invoiceNumber);
+		NotesScreen notesScreen = myInvoicesScreen.clickNotesPopup();
+		notesScreen.setNotes("Refused paint");
+		notesScreen.addNotesCapture();
+		Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
+		notesScreen.clickSaveButton();
 		
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.selectInvoiceForActionByIndex(1);
-		myinvoicesscreen.clickActionButton();
-		myinvoicesscreen.sendEmail(UtilConstants.TEST_EMAIL);
-		myinvoicesscreen.clickDoneButton();
-		myinvoicesscreen.clickHomeButton();
+		myInvoicesScreen.clickActionButton();
+		myInvoicesScreen.selectInvoiceForActionByIndex(1);
+		myInvoicesScreen.clickActionButton();
+		myInvoicesScreen.sendEmail(UtilConstants.TEST_EMAIL);
+		myInvoicesScreen.clickDoneButton();
+		myInvoicesScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 24131:Test PO# saves with active keyboard on WO summary screen", description = "Test PO# saves with active keyboard on WO summary screen")
@@ -3849,19 +3902,19 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String _po = "998601";
 		final String[] vehicleparts = { "Hood", "Left Quarter Panel", "Right Roof Rail" };
 		
-		homescreen = new HomeScreen();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(customer);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(customer);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		servicesscreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
+		servicesScreen.selectService(UtilConstants.PDRVEHICLE_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -3872,16 +3925,16 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		//ordersummaryscreen.clickSaveButton();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-		invoiceinfoscreen.setPO(_po);
-		invoiceinfoscreen.clickSaveAsFinal();			
-		myworkordersscreen.clickHomeButton();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		//orderSummaryScreen.clickSaveButton();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+		invoiceInfoScreen.setPO(_po);
+		invoiceInfoScreen.clickSaveAsFinal();			
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 24132:Test Total Sale saves with active keyboard on WO summary screen", description = "Test Total Sale saves with active keyboard on WO summary screen")
@@ -3890,27 +3943,27 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 		final String totalsale = "675";
 
-		homescreen = new HomeScreen();
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 		vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
-		SelectedServiceDetailsScreen selectedservicescreen = servicesscreen.openCustomServiceDetails(UtilConstants.PAINTHOOD_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectGroupServiceItem(UtilConstants.PAINT_SERVICE);
+		SelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTHOOD_SUBSERVICE);
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
         Assert.assertEquals(selectedservicescreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 		selectedservicescreen.saveSelectedServiceDetails();
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		ordersummaryscreen.setTotalSale(totalsale);
-		ordersummaryscreen.saveWizard();
-		myworkordersscreen.clickHomeButton();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		orderSummaryScreen.setTotalSale(totalsale);
+		orderSummaryScreen.saveWizard();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	@Test(testName = "", description = "Test Invoice Question Answers save with active keyboard on Questions summary screen")
@@ -3920,19 +3973,20 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		final String _po = "998601";
 		final String[] vehicleparts = { "Left Front Wheel", "Left Rear Wheel" };
+
+		HomeScreen homeScreen = new HomeScreen();
+		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.selectCustomerWithoutEditing(customer);
 		
-		CustomersScreen customersscreen = homescreen.clickCustomersButton();
-		customersscreen.selectCustomerWithoutEditing(customer);
-		
-		MyWorkOrdersScreen myworkordersscreen = homescreen.clickMyWorkOrdersButton();
+		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
-		ServicesScreen servicesscreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-		servicesscreen.selectService(UtilConstants.WHEELS_SERVICE);
-		servicesscreen.selectService(UtilConstants.WHEEL_SUBSERVICE);
+		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		servicesScreen.selectService(UtilConstants.WHEELS_SERVICE);
+		servicesScreen.selectService(UtilConstants.WHEEL_SUBSERVICE);
 		SelectedServiceDetailsScreen selectedservicescreen = new SelectedServiceDetailsScreen();
 		selectedservicescreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));		
 		selectedservicescreen.saveSelectedServiceDetails();
@@ -3943,14 +3997,14 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		}
 		selectedservicescreen.saveSelectedServiceDetails();
 		selectedservicescreen.saveSelectedServiceDetails();
-		Assert.assertEquals(servicesscreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 
-		OrderSummaryScreen ordersummaryscreen = servicesscreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-		Assert.assertEquals(ordersummaryscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-		ordersummaryscreen.checkApproveAndSaveWorkOrder();
-		InvoiceInfoScreen invoiceinfoscreen = ordersummaryscreen.selectInvoiceType(DentWizardInvoiceTypes.DING_SHIELD);
-		invoiceinfoscreen.setPO(_po);
-		invoiceinfoscreen.clickSaveAsFinal();		
-		myworkordersscreen.clickHomeButton();
+		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+		orderSummaryScreen.checkApproveAndSaveWorkOrder();
+		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.DING_SHIELD);
+		invoiceInfoScreen.setPO(_po);
+		invoiceInfoScreen.clickSaveAsFinal();		
+		myWorkOrdersScreen.clickHomeButton();
 	}
 }

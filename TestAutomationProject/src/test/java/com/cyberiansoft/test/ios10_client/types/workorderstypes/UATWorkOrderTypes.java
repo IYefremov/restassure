@@ -29,16 +29,4 @@ public enum UATWorkOrderTypes implements IWorkOrdersTypes {
 
         throw new IllegalArgumentException(woType + " is not a valid WorkOrdersTypes");
     }
-
-    public <T extends IBaseWizardScreen> T getFirstVizardScreen() {
-        UATWorkOrderTypes type = getWorkOrderType();
-        switch (type) {
-            case WO_FINAL_INVOICE:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new VehicleScreen();
-                else
-                    return (T) new RegularVehicleScreen();
-        }
-        return null;
-    }
 }
