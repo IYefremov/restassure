@@ -5,7 +5,6 @@
     </listeners>
 
   <test name="Back Office Test Cases" preserve-order="true">
-    <parameter name="default.browser" value="firefox" />
     <classes>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases">
             <methods>

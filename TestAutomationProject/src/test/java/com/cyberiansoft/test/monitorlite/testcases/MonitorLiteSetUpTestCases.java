@@ -12,8 +12,8 @@ import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBORepairOrderDetailsPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBORepairOrdersWebPage;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 
 public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	
@@ -98,7 +98,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		
-		VNextBORepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
+		VNextBOROWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
 		repairorderspage.searchRepairOrderByNumber(srWONumber);
 		
 		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(srWONumber));
@@ -160,7 +160,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		
-		VNextBORepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
+		VNextBOROWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
 		repairorderspage.searchRepairOrderByNumber(srWONumber);
 		
 		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(srWONumber));
@@ -228,10 +228,10 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		
-		VNextBORepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
+		VNextBOROWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
 		repairorderspage.searchRepairOrderByNumber(srWONumber);
 		
-		VNextBORepairOrderDetailsPage rodetailspage = repairorderspage.openWorkOrderDetailsPage(srWONumber);
+		VNextBORODetailsPage rodetailspage = repairorderspage.openWorkOrderDetailsPage(srWONumber);
 		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);		
 		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
 		rodetailspage.expandRepairOrderServiceDetailsTable();
@@ -303,10 +303,10 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		
-		VNextBORepairOrdersWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
+		VNextBOROWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
 		repairorderspage.searchRepairOrderByNumber(srWONumber);
 		
-		VNextBORepairOrderDetailsPage rodetailspage = repairorderspage.openWorkOrderDetailsPage(srWONumber);
+		VNextBORODetailsPage rodetailspage = repairorderspage.openWorkOrderDetailsPage(srWONumber);
 		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);		
 		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
 		rodetailspage.expandRepairOrderServiceDetailsTable();

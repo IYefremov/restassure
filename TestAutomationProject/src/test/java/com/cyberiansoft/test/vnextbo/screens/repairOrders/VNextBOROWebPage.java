@@ -1,8 +1,10 @@
-package com.cyberiansoft.test.vnextbo.screens;
+package com.cyberiansoft.test.vnextbo.screens.repairOrders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.screens.*;
 import com.google.common.base.CharMatcher;
 import lombok.Getter;
 import org.openqa.selenium.*;
@@ -19,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Getter
-public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
+public class VNextBOROWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//*[@id='reconmonitor-orders']/table")
     private WebElement repairOrdersTable;
@@ -213,17 +215,20 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     @FindBy(className = "breadcrumbs")
     private WebElement mainBreadCrumbsLink;
 
+    @FindBy(xpath = "//a[@class='order-no']")
+    private List<WebElement> woNumbersList;
+
     @FindBy(xpath = "//ul[@data-template='repairOrders-filterInfoList-item']/li")
     private List<WebElement> searchOptions;
 
 
-    public VNextBORepairOrdersWebPage(WebDriver driver) {
-        super(driver);
+    public VNextBOROWebPage() {
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    public VNextBORepairOrdersWebPage movePointerToSearchResultsField() {
+    public VNextBOROWebPage movePointerToSearchResultsField() {
         wait.until(ExpectedConditions.visibilityOf(searchResults));
         actions.moveToElement(searchResults).build().perform();
         return this;
@@ -255,7 +260,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return extracted.containsAll(titles) && Arrays.asList(strings).containsAll(repeaterTitles);
     }
 
-    public VNextBORepairOrdersWebPage clickLocationInDropDown(String location) {
+    public VNextBOROWebPage clickLocationInDropDown(String location) {
         locationLabels.stream().filter(loc -> loc.getText().contains(location)).findFirst().ifPresent(WebElement::click);
         waitForLoading();
         return this;
@@ -285,25 +290,25 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         waitForLoading();
     }
 
-    public VNextBORepairOrdersWebPage setSavedSearchOption(String option) {
+    public VNextBOROWebPage setSavedSearchOption(String option) {
         clickSavedSearchArrow();
         selectSavedSearchDropDownOption(option);
         return this;
     }
 
-    public VNextBORepairOrdersAdvancedSearchDialog clickEditIconForSavedSearch() {
+    public VNextBOROAdvancedSearchDialog clickEditIconForSavedSearch() {
         WaitUtilsWebDriver.waitABit(1000);
         Utils.clickElement(savedSearchEditIcon);
-        return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
+        return PageFactory.initElements(driver, VNextBOROAdvancedSearchDialog.class);
     }
 
-    public VNextBORepairOrdersWebPage clickNextButton() {
+    public VNextBOROWebPage clickNextButton() {
         wait.until(ExpectedConditions.elementToBeClickable(nextButton)).click();
         waitForLoading();
         return this;
     }
 
-    public VNextBORepairOrdersWebPage clickPrevButton() {
+    public VNextBOROWebPage clickPrevButton() {
         wait.until(ExpectedConditions.elementToBeClickable(prevButton)).click();
         waitForLoading();
         return this;
@@ -436,22 +441,22 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         }
     }
 
-    public VNextBORepairOrdersWebPage clickDepartmentForWideScreen(String department) {
+    public VNextBOROWebPage clickDepartmentForWideScreen(String department) {
         clickTabForWideScreen(department, departmentsOptionsForWideScreen);
         return this;
     }
 
-    public VNextBORepairOrdersWebPage clickDepartmentForNarrowScreen(String department) {
+    public VNextBOROWebPage clickDepartmentForNarrowScreen(String department) {
         clickOptionForNarrowScreen(department, departmentsTabPane, departmentsNarrowScreenDropDownOptions);
         return this;
     }
 
-    public VNextBORepairOrdersWebPage clickPhaseForWideScreen(String phase) {
+    public VNextBOROWebPage clickPhaseForWideScreen(String phase) {
         clickTabForWideScreen(phase, phasesOptionsForWideScreen);
         return this;
     }
 
-    public VNextBORepairOrdersWebPage clickPhaseForNarrowScreen(String phase) {
+    public VNextBOROWebPage clickPhaseForNarrowScreen(String phase) {
         clickOptionForNarrowScreen(phase, phasesTabPane, phasesNarrowScreenDropDownOptions);
         return this;
     }
@@ -564,16 +569,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         }
     }
 
-//    public boolean isIntercomLauncherDisplayed() {
-//        try {
-//            wait.until(ExpectedConditions.elementToBeClickable(closeIntercomButton));
-//            return true;
-//        } catch (Exception e) {
-//            return false;
-//        }
-//    }
-
-    public VNextBORepairOrdersWebPage openIntercom() {
+    public VNextBOROWebPage openIntercom() {
         wait.until(ExpectedConditions.visibilityOf(intercomFrame));
         driver.switchTo().frame(intercomFrame);
         wait.until(ExpectedConditions.elementToBeClickable(intercom)).click();
@@ -581,7 +577,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return this;
     }
 
-    public VNextBORepairOrdersWebPage closeIntercom() {
+    public VNextBOROWebPage closeIntercom() {
         wait.until(ExpectedConditions.elementToBeClickable(closeIntercomButton)).click();
         wait.until(ExpectedConditions.visibilityOf(intercom));
         driver.switchTo().window(driver.getWindowHandle());
@@ -649,7 +645,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         }
     }
 
-    public VNextBORepairOrdersWebPage clickPhasesWide() {
+    public VNextBOROWebPage clickPhasesWide() {
         waitShort.until(ExpectedConditions.elementToBeClickable(phasesWideTab)).click();
         return this;
     }
@@ -658,14 +654,9 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return wait.until(ExpectedConditions.visibilityOf(advancedSearchCaret)).isDisplayed();
     }
 
-    public VNextBORepairOrdersAdvancedSearchDialog clickAdvancedSearchCaret() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCaret)).click();
-        } catch (TimeoutException ignored) {
-            waitABit(1000);
-            wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCaret)).click();
-        }
-        return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
+    public VNextBOROAdvancedSearchDialog clickAdvancedSearchCaret() {
+        Utils.clickElement(advancedSearchCaret);
+        return PageFactory.initElements(driver, VNextBOROAdvancedSearchDialog.class);
     }
 
     public void searchRepairOrderByNumber(String roNumber) {
@@ -673,14 +664,14 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         clickSearchIcon();
     }
 
-    public VNextBORepairOrdersWebPage setRepairOrdersSearchText(String repairOrderText) {
+    public VNextBOROWebPage setRepairOrdersSearchText(String repairOrderText) {
         WaitUtilsWebDriver.waitForVisibility(repairOdersSearchTextField);
         Utils.clearAndType(repairOdersSearchTextField, repairOrderText);
         WaitUtilsWebDriver.waitABit(500);
         return this;
     }
 
-    public VNextBORepairOrdersWebPage clickSearchIcon() {
+    public VNextBOROWebPage clickSearchIcon() {
         Utils.clickElement(searchIcon);
         WaitUtilsWebDriver.waitForLoading();
         return this;
@@ -728,7 +719,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return isArrowDisplayed(woNumber, "/../../..//div[@class='dark box']");//strong[text()='O-000-152073']/../../..
     }
 
-    public VNextBORepairOrdersWebPage closeNoteForWorkOrder(String woNumber) {
+    public VNextBOROWebPage closeNoteForWorkOrder(String woNumber) {
         if (isNoteForWorkOrderDisplayed(woNumber)) {
             System.out.println("Yes, displayed");
             waitForLoading();
@@ -740,14 +731,14 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return this;
     }
 
-    public VNextBORepairOrdersWebPage openNoteForWorkOrder(String woNumber) {
+    public VNextBOROWebPage openNoteForWorkOrder(String woNumber) {
         if (!isNoteForWorkOrderDisplayed(woNumber)) {
             clickNoteForWo(woNumber);
         }
         return this;
     }
 
-    public VNextBORepairOrdersWebPage clickXIconToCloseNoteForWorkOrder(String woNumber) {
+    public VNextBOROWebPage clickXIconToCloseNoteForWorkOrder(String woNumber) {
         if (isNoteForWorkOrderDisplayed(woNumber)) {
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//strong[text()='" + woNumber
                     + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']//a[@class='x']")))
@@ -765,17 +756,15 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
                 .click();
     }
 
-    public VNextBORepairOrderDetailsPage clickWoLink(String woNumber) {
-        waitForLoading();
-        wait.until(ExpectedConditions.elementToBeClickable(By
-                .xpath("//a[@class='order-no']/strong[text()='" + woNumber + "']/..")))
-                .click();
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
+    public VNextBORODetailsPage clickWoLink(String woNumber) {
+        WaitUtilsWebDriver.waitForLoading();
+        Utils.clickElement(By.xpath("//a[@class='order-no']/strong[text()='" + woNumber + "']/.."));
+        WaitUtilsWebDriver.waitForLoading();
+        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 
     public boolean isWoTypeDisplayed(String woType) {
-        wait.until(ExpectedConditions.visibilityOf(tableBody));
+        WaitUtilsWebDriver.waitForVisibility(tableBody);
         return tableBody.findElements(By.xpath(".//div"))
                 .stream()
                 .anyMatch(e -> e
@@ -856,7 +845,7 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
         return isWorkOrderDisplayed(name);
     }
 
-    public VNextBORepairOrdersWebPage clickCancelSearchIcon() {
+    public VNextBOROWebPage clickCancelSearchIcon() {
         WaitUtilsWebDriver.waitForLoading();
         Utils.clickElement(cancelSearchIcon);
         waitForLoading();
@@ -924,16 +913,6 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
                 By.xpath("./td[8]/span")).getText();
     }
 
-    public VNextBORepairOrderDetailsPage clickRepairOrderInTable(String repairOrder) {
-        WebElement roTableRow = getTableRowWithWorkOrder(repairOrder);
-        System.out.println(roTableRow);
-        waitShort.until(ExpectedConditions.elementToBeClickable(roTableRow
-                .findElement(By.xpath("//a[contains(@href, '" + repairOrder + "')]"))))
-                .click();
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
-    }
-
     public VNextBOInvoicesDescriptionWindow clickInvoiceNumberInTable(String ro, String invoice) {
         WebElement roTableRow = getTableRowWithWorkOrder(ro);
         System.out.println(roTableRow);
@@ -959,13 +938,13 @@ public class VNextBORepairOrdersWebPage extends VNextBOBaseWebPage {
     }
 
     public WebElement getRepairOrdersTableBody() {
-        return wait.until(ExpectedConditions.visibilityOf(tableBody));
+        return WaitUtilsWebDriver.waitForVisibility(tableBody);
     }
 
-    public VNextBORepairOrderDetailsPage openWorkOrderDetailsPage(String orderNumber) {
+    public VNextBORODetailsPage openWorkOrderDetailsPage(String orderNumber) {
         WebElement wotablerow = getTableRowWithWorkOrder(orderNumber);
         wotablerow.findElement(By.xpath(".//a/strong[text()='" + orderNumber + "']")).click();
-        return new VNextBORepairOrderDetailsPage(driver);
+        return new VNextBORODetailsPage(driver);
     }
 
     public void clickSearchTextToCloseLocationDropDown() {

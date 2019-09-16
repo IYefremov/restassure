@@ -275,13 +275,16 @@
     }
   ],
 
-  "verifyUserCanChangeStatusOfRoToClosed": [
+  "verifyUserCanChangeStatusOfRoToClosedWithNoneReason": [
     {
-      "rowID": "verifyUserCanChangeStatusOfRoToClosed.01",
+      "rowID": "verifyUserCanChangeStatusOfRoToClosedWithNoneReason.01",
       "description": "Test Case 85902:User can change Status of RO to \"Closed\"",
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Closed"
+      "location": "Best Location Automation",
+      "timeFrame": "Last Year",
+      "status": "Closed",
+      "reason": "(None)",
+      "phase": "PDR Station",
+      "phaseStatus": "Active"
     }
   ],
 
@@ -799,7 +802,7 @@
       "orderNumber": "O-168-00242",
       "status": "Approved",
       "priceType": "All",
-      "service": "PREF: 123",
+      "service": "b Body Shop (Test Part)",
       "serviceQuantity": "d"
     }
   ],

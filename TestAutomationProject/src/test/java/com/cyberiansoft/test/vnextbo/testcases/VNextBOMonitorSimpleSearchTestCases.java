@@ -6,10 +6,10 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -29,7 +29,7 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-    private VNextBORepairOrdersWebPage repairOrdersPage;
+    private VNextBOROWebPage repairOrdersPage;
     private HomePageSteps homePageSteps;
 
     @BeforeMethod
@@ -49,7 +49,7 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
 
-        repairOrdersPage = PageFactory.initElements(webdriver, VNextBORepairOrdersWebPage.class);
+        repairOrdersPage = PageFactory.initElements(webdriver, VNextBOROWebPage.class);
         homePageSteps = new HomePageSteps();
     }
 
@@ -69,11 +69,11 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getVinNum());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getVinNum());
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVinNum()),
                 "The work order is not displayed after search by VIN after clicking the 'Search' icon");
         repairOrdersPage.clickCancelSearchIcon();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByTextWithEnter(data.getVinNum());
+        new VNextBOROSimpleSearchSteps().searchByTextWithEnter(data.getVinNum());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVinNum()),
                 "The work order is not displayed after search by VIN after clicking the 'Enter' key");
@@ -84,11 +84,11 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getOrderNumber());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getOrderNumber());
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         repairOrdersPage.clickCancelSearchIcon();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByTextWithEnter(data.getOrderNumber());
+        new VNextBOROSimpleSearchSteps().searchByTextWithEnter(data.getOrderNumber());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
                 "The work order is not displayed after search by order number after clicking the 'Enter' key");
@@ -99,11 +99,11 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getRoNumber());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getRoNumber());
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByRoNumber(data.getRoNumber()),
                 "The work order is not displayed after search by RO number after clicking the 'Search' icon");
         repairOrdersPage.clickCancelSearchIcon();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByTextWithEnter(data.getRoNumber());
+        new VNextBOROSimpleSearchSteps().searchByTextWithEnter(data.getRoNumber());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByRoNumber(data.getRoNumber()),
                 "The work order is not displayed after search by RO number after clicking the 'Enter' key");
@@ -114,12 +114,12 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getFirstName());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getFirstName());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByFirstName(data.getFirstName()),
                 "The work order is not displayed after search by first name after clicking the 'Search' icon");
         repairOrdersPage.clickCancelSearchIcon();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByTextWithEnter(data.getFirstName());
+        new VNextBOROSimpleSearchSteps().searchByTextWithEnter(data.getFirstName());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByFirstName(data.getFirstName()),
                 "The work order is not displayed after search by first name after clicking the 'Enter' key");
@@ -130,12 +130,12 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getLastName());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getLastName());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByLastName(data.getLastName()),
                 "The work order is not displayed after search by last name after clicking the 'Search' icon");
         repairOrdersPage.clickCancelSearchIcon();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByTextWithEnter(data.getLastName());
+        new VNextBOROSimpleSearchSteps().searchByTextWithEnter(data.getLastName());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByLastName(data.getLastName()),
                 "The work order is not displayed after search by last name after clicking the 'Enter' key");
@@ -147,13 +147,13 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getEmail());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getEmail());
 
         Assert.assertTrue(repairOrdersPage
                         .isWorkOrderDisplayedAfterSearchByEmail(data.getFirstName() + " " + data.getLastName()),
                 "The work order is not displayed after search by email after clicking the 'Search' icon");
         repairOrdersPage.clickCancelSearchIcon();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByTextWithEnter(data.getEmail());
+        new VNextBOROSimpleSearchSteps().searchByTextWithEnter(data.getEmail());
 
         Assert.assertTrue(repairOrdersPage
                         .isWorkOrderDisplayedAfterSearchByEmail(data.getFirstName() + " " + data.getLastName()),
@@ -166,13 +166,13 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getCompany());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getCompany());
 
         Assert.assertTrue(repairOrdersPage
                         .isWorkOrderDisplayedAfterSearchByCompanyName(data.getFirstName() + " " + data.getLastName()),
                 "The work order is not displayed after search by company name after clicking the 'Search' icon");
         repairOrdersPage.clickCancelSearchIcon();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getCompany());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getCompany());
 
         Assert.assertTrue(repairOrdersPage
                         .isWorkOrderDisplayedAfterSearchByCompanyName(data.getFirstName() + " " + data.getLastName()),

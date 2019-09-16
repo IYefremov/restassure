@@ -10,7 +10,9 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
-import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -33,7 +35,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     private VNextBOPartsManagementSearchPanel partsManagementSearch;
     private VNextBOPartsOrdersListPanel partsOrdersListPanel;
     private VNextBOPartsDetailsPanel partsDetailsPanel;
-    private VNextBORepairOrdersWebPage repairOrdersPage;
+    private VNextBOROWebPage repairOrdersPage;
 
     @BeforeClass
     public void settingUp() {
@@ -60,7 +62,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
         partsOrdersListPanel = PageFactory.initElements(webdriver, VNextBOPartsOrdersListPanel.class);
         partsDetailsPanel = PageFactory.initElements(webdriver, VNextBOPartsDetailsPanel.class);
-        repairOrdersPage = PageFactory.initElements(webdriver, VNextBORepairOrdersWebPage.class);
+        repairOrdersPage = PageFactory.initElements(webdriver, VNextBOROWebPage.class);
         leftMenuInteractions = new VNextBOLeftMenuInteractions();
         breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
     }
@@ -317,7 +319,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final String firstWONum = optionsWONums.get(0);
 
         leftMenuInteractions.selectRepairOrdersMenu();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(firstWONum);
+        new VNextBOROSimpleSearchSteps().searchByText(firstWONum);
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
@@ -558,13 +560,13 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final String firstWONum = optionsWONums.get(0);
 
         leftMenuInteractions.selectRepairOrdersMenu();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(firstWONum);
+        new VNextBOROSimpleSearchSteps().searchByText(firstWONum);
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
                 "The work order type is not displayed after search by order number");
 
-        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(firstWONum);
+        final VNextBORODetailsPage detailsPage = repairOrdersPage.clickWoLink(firstWONum);
         final String partId = detailsPage.getFirstPartIdFromPartsList();
         Assert.assertNotEquals(partId, "", "The service hasn't been displayed");
 
@@ -616,14 +618,14 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final String firstWONum = optionsWONums.get(0);
 
         leftMenuInteractions.selectRepairOrdersMenu();
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(firstWONum);
+        new VNextBOROSimpleSearchSteps().searchByText(firstWONum);
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
                 "The work order type is not displayed after search by order number");
 
-        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(firstWONum);
+        final VNextBORODetailsPage detailsPage = repairOrdersPage.clickWoLink(firstWONum);
         Assert.assertEquals(detailsPage.getPartsOrderedFromTableValues().get(0), data.getOrderedFrom(),
                 "The Parts 'Ordered From' value is not the same as it has been set for order");
     }

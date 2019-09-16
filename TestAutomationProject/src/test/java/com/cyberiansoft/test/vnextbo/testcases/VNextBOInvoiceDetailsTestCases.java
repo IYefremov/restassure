@@ -9,6 +9,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -28,7 +29,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 	private String userName;
 	private String userPassword;
 	private VNextBOLoginScreenWebPage loginPage;
-	private VNextBORepairOrdersWebPage repairOrdersPage;
+	private VNextBOROWebPage repairOrdersPage;
 
 	@BeforeClass
 	public void settingUp() {

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -111,22 +112,22 @@ public class VNextBOChangeTechnicianDialog extends VNextBOBaseWebPage {
         }
     }
 
-    public VNextBORepairOrderDetailsPage clickOkButton() {
+    public VNextBORODetailsPage clickOkButton() {
         return clickChangeTechnicianButton(changeOrderServiceTechnicianOkButton);
     }
 
-    public VNextBORepairOrderDetailsPage clickCancelButton() {
+    public VNextBORODetailsPage clickCancelButton() {
         return clickChangeTechnicianButton(changeOrderServiceTechnicianCancelButton);
     }
 
-    public VNextBORepairOrderDetailsPage clickXButton() {
+    public VNextBORODetailsPage clickXButton() {
         return clickChangeTechnicianButton(changeOrderServiceTechnicianXButton);
     }
 
-    private VNextBORepairOrderDetailsPage clickChangeTechnicianButton(WebElement button) {
+    private VNextBORODetailsPage clickChangeTechnicianButton(WebElement button) {
         Utils.clickElement(button);
         WaitUtilsWebDriver.waitForLoading();
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
+        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 
     public boolean isChangeTechnicianDialogDisplayed() {

@@ -1,14 +1,14 @@
 package com.cyberiansoft.test.vnextbo.verifications;
 
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORepairOrdersDetailsPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
 import org.testng.Assert;
 
-public class VNextBORepairOrdersDetailsPageVerifications {
+public class VNextBORODetailsPageVerifications {
 
-    private VNextBORepairOrdersDetailsPageInteractions repairOrdersDetailsPageInteractions;
+    private VNextBORODetailsPageInteractions repairOrdersDetailsPageInteractions;
 
-    public VNextBORepairOrdersDetailsPageVerifications() {
-        repairOrdersDetailsPageInteractions = new VNextBORepairOrdersDetailsPageInteractions();
+    public VNextBORODetailsPageVerifications() {
+        repairOrdersDetailsPageInteractions = new VNextBORODetailsPageInteractions();
     }
 
     public String verifyServiceIsDisplayedForCollapsedPhase(String service, String phase) {
@@ -29,6 +29,7 @@ public class VNextBORepairOrdersDetailsPageVerifications {
 
     public void verifyServiceVendorPriceIsSet(String serviceId, String service, String vendorPrice) {
         System.out.println("Vendor price: " + repairOrdersDetailsPageInteractions.getServiceVendorPrice(serviceId));
+        System.out.println("vendor price to be inserted: " + vendorPrice);
         repairOrdersDetailsPageInteractions.setServiceVendorPrice(serviceId, service, vendorPrice);
         Assert.assertEquals(repairOrdersDetailsPageInteractions.getServiceVendorPrice(serviceId), vendorPrice,
                 "The Vendor Price hasn't been changed");

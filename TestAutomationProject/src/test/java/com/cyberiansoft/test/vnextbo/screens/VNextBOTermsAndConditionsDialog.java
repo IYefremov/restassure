@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -35,15 +36,15 @@ public class VNextBOTermsAndConditionsDialog extends VNextBOBaseWebPage {
         return this;
     }
 
-    public VNextBORepairOrdersWebPage rejectTermsAndConditions() {
+    public VNextBOROWebPage rejectTermsAndConditions() {
         return clickTermsAndConditionsButton(rejectButton);
     }
 
-    public VNextBORepairOrdersWebPage acceptTermsAndConditions() {
+    public VNextBOROWebPage acceptTermsAndConditions() {
         return clickTermsAndConditionsButton(okButton);
     }
 
-    public VNextBORepairOrdersWebPage clickTermsAndConditionsButton(WebElement element) {
+    public VNextBOROWebPage clickTermsAndConditionsButton(WebElement element) {
         try {
             wait
                     .ignoring(WebDriverException.class)
@@ -61,6 +62,6 @@ public class VNextBOTermsAndConditionsDialog extends VNextBOBaseWebPage {
             Assert.assertTrue(wait.until(ExpectedConditions.invisibilityOf(termsAndConditionsDialog)),
                     "The Terms and Conditions dialog hasn't been closed");
         }
-        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+        return PageFactory.initElements(driver, VNextBOROWebPage.class);
     }
 }

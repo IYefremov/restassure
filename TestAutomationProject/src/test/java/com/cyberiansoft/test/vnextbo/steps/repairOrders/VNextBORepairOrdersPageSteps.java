@@ -1,18 +1,20 @@
 package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOChangeTechniciansDialogInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORepairOrdersDetailsPageInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORepairOrdersPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
 import org.testng.Assert;
 
 public class VNextBORepairOrdersPageSteps {
 
-    private VNextBORepairOrdersPageInteractions repairOrdersPageInteractions;
+    private VNextBOROPageInteractions repairOrdersPageInteractions;
     private VNextBOChangeTechniciansDialogInteractions changeTechniciansDialogInteractions;
+    private VNextBORODetailsPageInteractions roDetailsPageInteractions;
 
     public VNextBORepairOrdersPageSteps() {
-        repairOrdersPageInteractions = new VNextBORepairOrdersPageInteractions();
+        repairOrdersPageInteractions = new VNextBOROPageInteractions();
         changeTechniciansDialogInteractions = new VNextBOChangeTechniciansDialogInteractions();
+        roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
     }
 
     public String setTechnicianAndVendorByWoNumber(String woNumber, String vendor) {
@@ -29,7 +31,13 @@ public class VNextBORepairOrdersPageSteps {
 
     public void openRODetailsPage(String woNumber) {
         repairOrdersPageInteractions.clickWoLink(woNumber);
-        Assert.assertTrue(new VNextBORepairOrdersDetailsPageInteractions().isRODetailsSectionDisplayed(),
+        Assert.assertTrue(roDetailsPageInteractions.isRODetailsSectionDisplayed(),
+                "The RO Details page hasn't been opened");
+    }
+
+    public void openRODetailsPage() {
+        repairOrdersPageInteractions.clickWoLink();
+        Assert.assertTrue(roDetailsPageInteractions.isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 }

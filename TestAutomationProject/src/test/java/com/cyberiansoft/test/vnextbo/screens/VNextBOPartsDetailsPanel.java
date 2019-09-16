@@ -245,12 +245,8 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     public VNextBOPartsDetailsPanel clickDeleteLaborButton(int index) {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(deleteLaborButtons.get(index))).click();
-            wait.until(ExpectedConditions.visibilityOf(modalDialog));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Utils.clickElement(deleteLaborButtons.get(index));
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(modalDialog);
         return this;
     }
 
@@ -261,8 +257,8 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     }
 
     public void clickCancelDeletingButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
-        wait.until(ExpectedConditions.invisibilityOf(cancelButton));
+        Utils.clickElement(cancelButton);
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(cancelButton);
     }
 
     public void clickXIconForDeletingLabor() {

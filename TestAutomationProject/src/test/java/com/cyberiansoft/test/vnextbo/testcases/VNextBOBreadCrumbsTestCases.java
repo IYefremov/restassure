@@ -8,8 +8,10 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -32,7 +34,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
 
     private VNextBOBreadCrumbInteractions breadCrumbInteractions;
     private HomePageSteps homePageSteps;
-    private VNextBORepairOrdersWebPage repairOrdersPage;
+    private VNextBOROWebPage repairOrdersPage;
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -52,7 +54,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
                 VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
 
-        repairOrdersPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBORepairOrdersWebPage.class);
+        repairOrdersPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOROWebPage.class);
         breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
         homePageSteps = new HomePageSteps();
     }
@@ -86,12 +88,12 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getOrderNumber());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getOrderNumber());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
-        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        final VNextBORODetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
@@ -109,12 +111,12 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getOrderNumber());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getOrderNumber());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
-        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        final VNextBORODetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
@@ -136,12 +138,12 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        new VNextBORepairOrdersSimpleSearchSteps().searchByText(data.getOrderNumber());
+        new VNextBOROSimpleSearchSteps().searchByText(data.getOrderNumber());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
-        final VNextBORepairOrderDetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
+        final VNextBORODetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");

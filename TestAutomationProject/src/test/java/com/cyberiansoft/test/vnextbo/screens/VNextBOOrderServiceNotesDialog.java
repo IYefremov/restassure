@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -119,16 +120,16 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
         return Utils.isElementDisplayed(repairNoteTextArea, 5);
     }
 
-    public VNextBORepairOrderDetailsPage clickNotesAddButton() {
+    public VNextBORODetailsPage clickNotesAddButton() {
         wait.until(ExpectedConditions.elementToBeClickable(notesAddButton)).click();
         waitForLoading();
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
+        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 
-    public VNextBORepairOrderDetailsPage clickRepairNotesXbutton() {
+    public VNextBORODetailsPage clickRepairNotesXbutton() {
         Utils.clickElement(repairNotesXbutton);
         waitForLoading();
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
+        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 
     public int getNotesListNumber() {
@@ -139,9 +140,9 @@ public class VNextBOOrderServiceNotesDialog extends VNextBOBaseWebPage {
         }
     }
 
-    public VNextBORepairOrderDetailsPage closeRepairNoteDialog() {
+    public VNextBORODetailsPage closeRepairNoteDialog() {
         Utils.clickElement(repairNoteDialogCloseButton);
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
+        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 
     public int getRepairNotesListNumber() {

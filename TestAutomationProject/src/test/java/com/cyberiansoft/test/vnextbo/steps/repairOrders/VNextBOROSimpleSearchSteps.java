@@ -1,17 +1,17 @@
 package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORepairOrdersPageInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORepairOrdersSimpleSearchInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROSimpleSearchInteractions;
 import org.testng.Assert;
 
-public class VNextBORepairOrdersSimpleSearchSteps {
+public class VNextBOROSimpleSearchSteps {
 
-    private VNextBORepairOrdersSimpleSearchInteractions repairOrdersSimpleSearchInteractions;
-    private VNextBORepairOrdersPageInteractions repairOrdersPageInteractions;
+    private VNextBOROSimpleSearchInteractions repairOrdersSimpleSearchInteractions;
+    private VNextBOROPageInteractions repairOrdersPageInteractions;
 
-    public VNextBORepairOrdersSimpleSearchSteps() {
-        repairOrdersSimpleSearchInteractions = new VNextBORepairOrdersSimpleSearchInteractions();
-        repairOrdersPageInteractions = new VNextBORepairOrdersPageInteractions();
+    public VNextBOROSimpleSearchSteps() {
+        repairOrdersSimpleSearchInteractions = new VNextBOROSimpleSearchInteractions();
+        repairOrdersPageInteractions = new VNextBOROPageInteractions();
     }
 
     public void searchByText(String searchText) {

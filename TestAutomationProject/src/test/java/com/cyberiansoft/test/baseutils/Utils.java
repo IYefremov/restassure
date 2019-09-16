@@ -39,13 +39,28 @@ public class Utils {
         clickElement(DriverBuilder.getInstance().getDriver().findElement(by));
     }
 
-    public static void clearAndType(WebElement textField, String name) {
+    public static void clearAndType(WebElement element, String name) {
+        scrollToElement(element);
         try {
-            waitForElementToBeClickable(textField).clear();
+            waitForElementToBeClickable(element).clear();
         } catch (Exception e) {
             Assert.fail("The text field has not been displayed", e);
         }
-        waitForElementToBeClickable(textField).sendKeys(name);
+        Utils.getActions().sendKeys(element, name).build().perform();
+        WaitUtilsWebDriver.waitABit(500);
+    }
+
+    public static void clearAndTypeUsingKeyboard(WebElement element, String name) {
+        scrollToElement(element);
+        Utils.clickElement(element);
+        Utils.getActions()
+                .sendKeys(element, Keys.HOME)
+                .sendKeys(element, Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END))
+                .sendKeys(element, Keys.DELETE)
+                .sendKeys(element, name)
+                .build()
+                .perform();
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void clickWithJS(WebElement element) {
@@ -58,6 +73,11 @@ public class Utils {
 
     public static void setZoom(int zoomPercentage) {
         ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("document.body.style.zoom='" + zoomPercentage + "%'", "");
+    }
+
+    public static WebElement moveToElement(WebElement element) {
+        getActions().moveToElement(element).build().perform();
+        return element;
     }
 
     public static void refreshPage() {

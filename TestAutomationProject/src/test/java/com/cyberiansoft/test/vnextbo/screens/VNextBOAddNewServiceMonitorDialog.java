@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -266,22 +267,22 @@ public class VNextBOAddNewServiceMonitorDialog extends VNextBOBaseWebPage {
         wait.until(ExpectedConditions.elementToBeClickable(serviceQuantity)).sendKeys(quantity);
     }
 
-    public VNextBORepairOrderDetailsPage clickSubmitButton() {
+    public VNextBORODetailsPage clickSubmitButton() {
         Utils.clickElement(submitButton);
         waitForLoading();
         WaitUtilsWebDriver.waitForInvisibility(newServicePopup);
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
+        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 
-    public VNextBORepairOrderDetailsPage clickXButton() {
+    public VNextBORODetailsPage clickXButton() {
         wait.until(ExpectedConditions.elementToBeClickable(xButton)).click();
         wait.until(ExpectedConditions.invisibilityOf(newServicePopup));
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
+        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 
-    public VNextBORepairOrderDetailsPage clickCancelButton() {
+    public VNextBORODetailsPage clickCancelButton() {
         wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
         wait.until(ExpectedConditions.invisibilityOf(newServicePopup));
-        return PageFactory.initElements(driver, VNextBORepairOrderDetailsPage.class);
+        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 }

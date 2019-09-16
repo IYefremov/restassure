@@ -1,11 +1,9 @@
-package com.cyberiansoft.test.vnextbo.screens;
+package com.cyberiansoft.test.vnextbo.screens.repairOrders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
-import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
@@ -17,14 +15,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Getter
-public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
+public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//*[@data-bind='click: startRO']")
 	private WebElement startorderbtn;
@@ -42,7 +38,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	private WebElement roDetailsSection;
 
 	@FindBy(xpath = "//div[@class='status']//span[@class='k-widget k-dropdown k-header']//span[@class='k-input']")
-	private WebElement roStatus;
+	private WebElement roStatusElement;
 
 	@FindBy(xpath = "//div[@class='order-info-details']/div[contains(@class, 'on-hold')]")
 	private WebElement onHoldValue;
@@ -67,6 +63,9 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//div[@class='k-animation-container']")
 	private WebElement dropDownContainer;
+
+	@FindBy(id = "reconmonitor-details-status-list")
+	private WebElement statusDropDownContainer;
 
 	@FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']")
 	private WebElement statusDropDown;
@@ -152,13 +151,10 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//ul[@class='k-list k-reset' and @aria-hidden='false']/li")
 	private List<WebElement> listBoxOptions;
 
-	final VNextBORepairOrdersWebPage repairOrdersPage;
 
-	public VNextBORepairOrderDetailsPage(WebDriver driver) {
+	public VNextBORODetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		repairOrdersPage = new VNextBORepairOrdersWebPage(driver);
 	}
 
 	public List<String> getVendorPricesValuesList() {
@@ -189,7 +185,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
 	public String getRoStatus() {
 		try {
-			return wait.until(ExpectedConditions.visibilityOf(roStatus)).getText();
+			return wait.until(ExpectedConditions.visibilityOf(roStatusElement)).getText();
 		} catch (Exception ignored) {
 			return "";
 		}
@@ -204,7 +200,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 		}
 	}
 
-	public VNextBORepairOrderDetailsPage clickFlagIcon() {
+	public VNextBORODetailsPage clickFlagIcon() {
 		waitForLoading();
 		wait.until(ExpectedConditions.elementToBeClickable(flagIcon)).click();
 		return this;
@@ -219,7 +215,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 		}
 	}
 
-	public VNextBORepairOrderDetailsPage selectFlagColor(String color) {
+	public VNextBORODetailsPage selectFlagColor(String color) {
 		final WebElement flagColorElement =
 				driver.findElement(By.xpath("//div[@class='drop flags']//span[contains(@title, '" + color + "')]"));
 		try {
@@ -331,7 +327,11 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 		return WaitUtilsWebDriver.waitForVisibility(dropDownContainer, 7);
 	}
 
-	public VNextBORepairOrderDetailsPage setStatus(String status) {
+	public WebElement getStatusDropDownContainer() {
+		return WaitUtilsWebDriver.waitForVisibility(statusDropDownContainer, 7);
+	}
+
+	public VNextBORODetailsPage setStatus(String status) {
 		clickStatusBox();
 		selectStatus(status);
 		return this;
@@ -451,35 +451,35 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 	}
 
 	public void setServiceQuantity(String serviceId, String serviceDescription, String newValue) {
-		try {
+//		try { toto delete?
 			setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
-		} catch (TimeoutException e) {
-			((JavascriptExecutor) driver).executeScript("window.open('about:blank','_blank');");
-
-			List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-			driver.switchTo().window(tabs.get(1));
-
-			WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURLMain());
-			BackOfficeLoginWebPage loginPage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
-			BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(driver, BackOfficeHeaderPanel.class);
-			loginPage.userLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
-
-			ServicesWebPage servicesPage = new ServicesWebPage(this.driver);
-			backOfficeHeader.clickCompanyLink();
-			CompanyWebPage companyWebPage = new CompanyWebPage(this.driver);
-			companyWebPage.clickServicesLink();
-
-			servicesPage.setServiceSearchCriteria(serviceDescription);
-			servicesPage.clickFindButton();
-			servicesPage.clickEditService(serviceDescription);
-			NewServiceDialogWebPage newServiceDialogWebPage = new NewServiceDialogWebPage(this.driver);
-			newServiceDialogWebPage.clickMultipleCheckbox();
-			newServiceDialogWebPage.clickOKButton();
-			newServiceDialogWebPage.closeNewTab(tabs.get(0));
-			refreshPage();
-			expandServicesTable();
-			setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
-		}
+//		} catch (TimeoutException e) {
+//			((JavascriptExecutor) driver).executeScript("window.open('about:blank','_blank');");
+//
+//			List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+//			driver.switchTo().window(tabs.get(1));
+//
+//			WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURLMain());
+//			BackOfficeLoginWebPage loginPage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
+//			BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(driver, BackOfficeHeaderPanel.class);
+//			loginPage.userLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
+//
+//			ServicesWebPage servicesPage = new ServicesWebPage(this.driver);
+//			backOfficeHeader.clickCompanyLink();
+//			CompanyWebPage companyWebPage = new CompanyWebPage(this.driver);
+//			companyWebPage.clickServicesLink();
+//
+//			servicesPage.setServiceSearchCriteria(serviceDescription);
+//			servicesPage.clickFindButton();
+//			servicesPage.clickEditService(serviceDescription);
+//			NewServiceDialogWebPage newServiceDialogWebPage = new NewServiceDialogWebPage(this.driver);
+//			newServiceDialogWebPage.clickMultipleCheckbox();
+//			newServiceDialogWebPage.clickOKButton();
+//			newServiceDialogWebPage.closeNewTab(tabs.get(0));
+//			refreshPage();
+//			expandServicesTable();
+//			setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
+//		}
 	}
 
 	public void setServicePrice(String serviceId, String serviceDescription, String newValue) {
@@ -504,10 +504,7 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
 	private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
 		final WebElement element = getElementInServicesTable(serviceId, xpath);
-		scrollToElement(element);
-		WaitUtilsWebDriver.waitForElementToBeClickable(element);
-		Utils.sendKeysWithJS(element, newValue);
-		WaitUtilsWebDriver.waitForLoading();
+		Utils.clearAndType(element, newValue);
 		clickServiceDescriptionName(serviceDescription);
 		WaitUtilsWebDriver.waitABit(500);
 	}
@@ -782,29 +779,21 @@ public class VNextBORepairOrderDetailsPage extends VNextBOBaseWebPage {
 
 	public String getTotalServicesPrice() {
 		try {
-			wait.until(ExpectedConditions.visibilityOf(totalServicePrice));
-			actions.moveToElement(totalServicePrice).build().perform();
-			return totalServicePrice.getText();
+		    WaitUtilsWebDriver.waitForVisibility(totalServicePrice);
+		    return Utils.moveToElement(totalServicePrice).getText();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
 		}
 	}
 
-	public boolean updateTotalServicePrice(String totalPrice) {
+	public void updateTotalServicePrice(String totalPrice) {
 		try {
-			waitForTotalPriceToBeUpdated(totalPrice);
-			return true;
-		} catch (Exception ignored) {
-			return false;
-		}
-	}
-
-	private void waitForTotalPriceToBeUpdated(String totalPrice) {
-		WaitUtilsWebDriver.waitForVisibility(totalServicePrice);
-		actions.moveToElement(totalServicePrice).build().perform();
-		new WebDriverWait(driver, 20)
-				.until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
+            WaitUtilsWebDriver.waitForVisibility(totalServicePrice);
+            Utils.moveToElement(totalServicePrice);
+            WaitUtilsWebDriver.getWebDriverWait(20)
+                    .until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
+		} catch (Exception ignored) {}
 	}
 
 	public String getFirstPartIdFromPartsList() {

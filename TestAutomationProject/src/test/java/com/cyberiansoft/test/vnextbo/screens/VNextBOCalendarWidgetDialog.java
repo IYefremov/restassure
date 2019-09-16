@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROAdvancedSearchDialog;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +35,7 @@ public class VNextBOCalendarWidgetDialog extends VNextBOBaseWebPage {
         }
     }
 
-    public VNextBORepairOrdersAdvancedSearchDialog selectFromDate(String date, VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog) {
+    public VNextBOROAdvancedSearchDialog selectFromDate(String date, VNextBOROAdvancedSearchDialog advancedSearchDialog) {
         if (isCalendarOpened(fromDateCalendarWidget)) {
             WebElement fromDate = driver.findElements(By.xpath("//a[@data-value='" + date + "']")).get(0);
             wait.until(ExpectedConditions.elementToBeClickable(fromDate)).click();
@@ -46,10 +47,10 @@ public class VNextBOCalendarWidgetDialog extends VNextBOBaseWebPage {
             advancedSearchDialog.clickFromDateButton();
             selectFromDate(date, advancedSearchDialog);
         }
-        return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
+        return PageFactory.initElements(driver, VNextBOROAdvancedSearchDialog.class);
     }
 
-    public VNextBORepairOrdersAdvancedSearchDialog selectToDate(String date, VNextBORepairOrdersAdvancedSearchDialog advancedSearchDialog) {
+    public VNextBOROAdvancedSearchDialog selectToDate(String date, VNextBOROAdvancedSearchDialog advancedSearchDialog) {
         if (isCalendarOpened(toDateCalendarWidget)) {
             WebElement toDate = driver.findElements(By.xpath("//a[@data-value='" + date + "']")).get(1);
                 wait.until(ExpectedConditions.elementToBeClickable(toDate)).click();
@@ -61,7 +62,7 @@ public class VNextBOCalendarWidgetDialog extends VNextBOBaseWebPage {
             advancedSearchDialog.clickToDateButton();
             selectToDate(date, advancedSearchDialog);
         }
-        return PageFactory.initElements(driver, VNextBORepairOrdersAdvancedSearchDialog.class);
+        return PageFactory.initElements(driver, VNextBOROAdvancedSearchDialog.class);
     }
 
     public String getMonthReplace(int monthValue, int prevMonthValue, LocalDateTime before) {

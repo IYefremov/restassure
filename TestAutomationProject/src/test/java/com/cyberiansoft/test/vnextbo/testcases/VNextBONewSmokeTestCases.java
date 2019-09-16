@@ -24,10 +24,11 @@ import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOAddNewDeviceS
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOEditDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersDetailsPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersSimpleSearchSteps;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBORepairOrdersDetailsPageVerifications;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBORODetailsPageVerifications;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -59,9 +60,10 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBODeviceManagementSteps deviceManagementSteps;
     private VNextBOQuickNotesWebPage quickNotesPage;
     private HomePageSteps homePageSteps;
-    private VNextBORepairOrdersSimpleSearchSteps simpleSearchSteps;
+    private VNextBOROSimpleSearchSteps simpleSearchSteps;
     private VNextBORepairOrdersPageSteps repairOrdersPageSteps;
-    private VNextBORepairOrdersDetailsPageSteps repairOrdersDetailsPageSteps;
+    private VNextBORODetailsPageSteps repairOrdersDetailsPageSteps;
+    private VNextBOPendingRegistrationsValidations pendingRegistrationsValidations;
 
     @BeforeClass
     public void settingUp() {
@@ -99,9 +101,10 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
         deviceManagementSteps = new VNextBODeviceManagementSteps();
         homePageSteps = new HomePageSteps();
-        simpleSearchSteps = new VNextBORepairOrdersSimpleSearchSteps();
+        simpleSearchSteps = new VNextBOROSimpleSearchSteps();
         repairOrdersPageSteps = new VNextBORepairOrdersPageSteps();
-        repairOrdersDetailsPageSteps = new VNextBORepairOrdersDetailsPageSteps();
+        repairOrdersDetailsPageSteps = new VNextBORODetailsPageSteps();
+        pendingRegistrationsValidations = new VNextBOPendingRegistrationsValidations();
     }
 
     @AfterMethod
@@ -489,10 +492,10 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         final VNextBOPendingRegistrationsInteractions pendingRegistrationsInteractions =
                 new VNextBOPendingRegistrationsInteractions();
 
-        Assert.assertTrue(pendingRegistrationsInteractions.isUserDisplayedInPendingRegistrationTable(randomUser),
+        Assert.assertTrue(pendingRegistrationsValidations.isUserDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't been displayed in the pending registration table");
         deviceManagementSteps.deletePendingRegistrationDeviceByUser(randomUser);
-        Assert.assertTrue(pendingRegistrationsInteractions.isUserNotDisplayedInPendingRegistrationTable(randomUser),
+        Assert.assertTrue(pendingRegistrationsValidations.isUserNotDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't disappeared from the pending registration table");
     }
 
@@ -539,11 +542,12 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         editDeviceSteps.setNickNameValueAndSubmit(data.getNickname());
     }
 
+    //todo bug 87314 change the serviceVendorPrice test data from 5 to 1 to test the boundary values after the bug fix
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSeeAndCreateNotes(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-        final VNextBORepairOrdersDetailsPageVerifications repairOrdersDetailsPageVerifications =
-                new VNextBORepairOrdersDetailsPageVerifications();
+        final VNextBORODetailsPageVerifications repairOrdersDetailsPageVerifications =
+                new VNextBORODetailsPageVerifications();
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 

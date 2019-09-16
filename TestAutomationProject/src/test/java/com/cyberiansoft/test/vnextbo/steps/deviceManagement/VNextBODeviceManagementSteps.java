@@ -7,7 +7,7 @@ import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDe
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOActiveDevicesWebPage;
-import org.openqa.selenium.WebElement;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -29,7 +29,7 @@ public class VNextBODeviceManagementSteps {
     }
 
     public void deletePendingRegistrationDeviceByUser(String user) {
-        pendingRegistrationsInteractions.verifyPendingRegistrationTabIsOpened();
+        new VNextBOPendingRegistrationsValidations().verifyPendingRegistrationTabIsOpened();
         pendingRegistrationsInteractions.clickDeleteDeviceButtonForUser(user);
         confirmationDialog.clickYesButton();
     }

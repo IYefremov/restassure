@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.interactions.repairOrders;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.VNextBORepairOrderDetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -16,15 +16,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static com.cyberiansoft.test.baseutils.Utils.scrollToElement;
+public class VNextBORODetailsPageInteractions {
 
-public class VNextBORepairOrdersDetailsPageInteractions {
+    private VNextBORODetailsPage repairOrderDetailsPage;
 
-    private VNextBORepairOrderDetailsPage repairOrderDetailsPage;
-
-    public VNextBORepairOrdersDetailsPageInteractions() {
+    public VNextBORODetailsPageInteractions() {
         repairOrderDetailsPage = PageFactory.initElements(
-                DriverBuilder.getInstance().getDriver(), VNextBORepairOrderDetailsPage.class);
+                DriverBuilder.getInstance().getDriver(), VNextBORODetailsPage.class);
     }
 
     public boolean isRODetailsSectionDisplayed() {
@@ -39,12 +37,21 @@ public class VNextBORepairOrdersDetailsPageInteractions {
     private void clickStatusBox() {
         WaitUtilsWebDriver.waitForLoading();
         Utils.clickElement(repairOrderDetailsPage.getStatusListBox());
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     private void selectStatus(String status) {
-        final List<WebElement> statusListBoxOptions = repairOrderDetailsPage.getDropDownContainer()
+        final List<WebElement> statusListBoxOptions = repairOrderDetailsPage.getStatusDropDownContainer()
                 .findElements(By.xpath("//ul[@data-role='staticlist']/li"));
         Utils.selectOptionInDropDown(statusListBoxOptions.get(0), statusListBoxOptions, status);
+    }
+
+    public String getRoStatusValue() {
+        try {
+            return WaitUtilsWebDriver.waitForVisibility(repairOrderDetailsPage.getRoStatusElement()).getText();
+        } catch (Exception ignored) {
+            return "";
+        }
     }
 
     @Nullable
@@ -188,6 +195,7 @@ public class VNextBORepairOrdersDetailsPageInteractions {
     private String getTextValue(String serviceId, String xpath, String replacement) {
         final WebElement element = repairOrderDetailsPage.getElementInServicesTable(serviceId, xpath);
         Utils.setAttributeWithJS(element, "style", "display: block;");
+        WaitUtilsWebDriver.waitABit(1000);
         final String text = WaitUtilsWebDriver.waitForVisibility(element).getText().replace(replacement, "");
         Utils.setAttributeWithJS(element, "style", "display: none;");
         return text;
@@ -203,10 +211,7 @@ public class VNextBORepairOrdersDetailsPageInteractions {
 
     private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
         final WebElement element = repairOrderDetailsPage.getElementInServicesTable(serviceId, xpath);
-        scrollToElement(element);
-        WaitUtilsWebDriver.waitForElementToBeClickable(element);
-        Utils.sendKeysWithJS(element, newValue);
-        WaitUtilsWebDriver.waitForLoading();
+        Utils.clearAndType(element, newValue);
         clickServiceDescriptionName(serviceDescription);
         WaitUtilsWebDriver.waitABit(1000);
     }

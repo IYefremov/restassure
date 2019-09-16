@@ -5,10 +5,10 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -92,9 +92,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         return PageFactory.initElements(driver, VNexBOUsersWebPage.class);
     }
 
-    public VNextBORepairOrdersWebPage selectRepairOrdersMenu() {
+    public VNextBOROWebPage selectRepairOrdersMenu() {
         selectMenuItem(repairOrdersMenu, MainMenuItems.MONITOR.getMenu());
-        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+        return PageFactory.initElements(driver, VNextBOROWebPage.class);
     }
 
     public VNextBOServicesWebPage selectServicesMenu() {

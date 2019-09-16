@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,15 +35,15 @@ public class VNextBOPrivacyPolicyDialog extends VNextBOBaseWebPage {
         return this;
     }
 
-    public VNextBORepairOrdersWebPage rejectPrivacyPolicy() {
+    public VNextBOROWebPage rejectPrivacyPolicy() {
         return clickPrivacyPolicyButton(rejectButton);
     }
 
-    public VNextBORepairOrdersWebPage acceptPrivacyPolicy() {
+    public VNextBOROWebPage acceptPrivacyPolicy() {
         return clickPrivacyPolicyButton(okButton);
     }
 
-    public VNextBORepairOrdersWebPage clickPrivacyPolicyButton(WebElement element) {
+    public VNextBOROWebPage clickPrivacyPolicyButton(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
         try {
             wait.until(ExpectedConditions.invisibilityOf(privacyPolicyDialog));
@@ -52,6 +53,6 @@ public class VNextBOPrivacyPolicyDialog extends VNextBOBaseWebPage {
             Assert.assertTrue(wait.until(ExpectedConditions.invisibilityOf(privacyPolicyDialog)),
                     "The Privacy Policy dialog hasn't been closed");
         }
-        return PageFactory.initElements(driver, VNextBORepairOrdersWebPage.class);
+        return PageFactory.initElements(driver, VNextBOROWebPage.class);
     }
 }
