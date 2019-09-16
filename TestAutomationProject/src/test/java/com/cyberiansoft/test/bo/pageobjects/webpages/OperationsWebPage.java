@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,10 +55,6 @@ public class OperationsWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(techniciancommissionslink)).click();
 	}
 
-	public void clickServiceRequestsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(servicerequestslink)).click();
-	}
-
 	public void clickServiceContactsLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(servicecontactslink)).click();
 	}
@@ -71,11 +68,6 @@ public class OperationsWebPage extends BaseWebPage {
 	}
 
 	public void clickNewServiceRequestList() {
-		try {
-			waitABit(3000);
-			wait.until(ExpectedConditions.elementToBeClickable(newservicerequestlink)).click();
-		} catch (Exception e) {
-			Assert.fail("The Service Requests List link has not been displayed");
-		}
+		WaitUtilsWebDriver.waitForVisibility(newservicerequestlink).click();
 	}
 }

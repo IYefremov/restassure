@@ -1,7 +1,7 @@
 <suite name="Cyberiansoft iOS Regular client tests" verbose="10" configfailurepolicy="continue">
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <parameter name="tpsuite.id" value="83604"  />
-  <parameter name="tp.integration" value="true"  />
+  <parameter name="tp.integration" value="false"  />
 
   <listeners>
     <listener class-name="com.cyberiansoft.test.ios10_client.listeners.iOSregularClientListener"/>
@@ -10,13 +10,14 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
+
           <include name="testCreateInspectionVerifyOnBO" />
           <include name="testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO" />
           <include name="testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO" />
           <include name="testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO" />
           <include name="testCreateSRAddAppointmentCreateInspectionAndWOAndInvoiceAndVerifyDataOnBOISCorrectlyDisplayed" />
-          <!--<include name="testCreateRetailCustomer" />
-          <include name="testCreateInspectionWOInvoiceForCreatedRetailCustomer" />-->
+          <include name="testCreateRetailCustomer" />
+          <include name="testCreateInspectionWOInvoiceForCreatedRetailCustomer" />
           <include name="testVerifyCheckInUndoCheckInForSR" />
           <include name="testVerifyCreatingSRFromInspectionTeamInspection" />
           <include name="testVerifyAddNotesToInspection" />
@@ -28,6 +29,9 @@
           <include name="testVerifyChangeStatusForWO" />
           <include name="testVerifyDeleteInvoiceFunctionality" />
           <include name="testVerifyCreatingInspectionsFromInvoiceTeamInvoice" />
+              <include name="testVerifyChangePOActionForInvoicesTeamInvoice" />
+              <include name="testVerifyApprovingInvoiceFromTeamInvoice" />
+          <include name="testCreateInspectionFromCopy" />
         </methods>
       </class>
     </classes>

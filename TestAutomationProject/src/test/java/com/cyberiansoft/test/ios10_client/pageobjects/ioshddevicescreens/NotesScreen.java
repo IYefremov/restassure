@@ -20,6 +20,9 @@ public class NotesScreen extends iOSHDBaseScreen {
 
 	@iOSXCUITFindBy(accessibility = "txtNotes")
 	private IOSElement testNotesFld;
+
+	@iOSXCUITFindBy(accessibility = "table")
+	private IOSElement quickNotesTable;
 	
 	@iOSXCUITFindBy(accessibility  = "ImageSelectorCameraButton")
     private IOSElement camerabtn;
@@ -40,8 +43,7 @@ public class NotesScreen extends iOSHDBaseScreen {
 	}
 
 	public void addQuickNotes(String quickNote) {
-		appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@value='"
-				+ quickNote + "']").click();
+		quickNotesTable.findElementByAccessibilityId(quickNote).click();
 	}
 	
 	public String getNotesValue() {
@@ -51,9 +53,10 @@ public class NotesScreen extends iOSHDBaseScreen {
 						.getAttribute("value");
 	}
 	
-	public boolean isNotesPresent(String quickNote) {
-		return appiumdriver.findElementsByXPath("//XCUIElementTypeStaticText[@value='"
-				+ quickNote + "']").size() > 0;
+	public String getAddedNotesText() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("txtNotes")));
+		return testNotesFld.getAttribute("value");
 	}
 
 	public void clickDoneButton() {
