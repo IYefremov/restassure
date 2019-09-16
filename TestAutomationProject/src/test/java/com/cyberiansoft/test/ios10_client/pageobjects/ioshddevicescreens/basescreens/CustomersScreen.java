@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens;
 
+import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.AddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import io.appium.java_client.MobileBy;
@@ -97,6 +99,10 @@ public class CustomersScreen extends BaseAppScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 3);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Select")));
 		appiumdriver.findElementByAccessibilityId("Select").click();
+	}
+
+	public void selectCustomer(AppCustomer appCustomer) {
+		selectCustomer(appCustomer.getFullName().trim());
 	}
 	
 	public HomeScreen selectCustomerWithoutEditing(String customer) {

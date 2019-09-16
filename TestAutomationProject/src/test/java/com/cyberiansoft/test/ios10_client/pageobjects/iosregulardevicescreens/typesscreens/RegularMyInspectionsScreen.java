@@ -144,17 +144,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		else
 			appiumdriver.findElement(MobileBy.name("Done")).click();
 	}
-
-	public <T extends IBaseWizardScreen> T selectInspectionType(IInspectionsTypes inspectionType) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InspectionTypeSelector")));
-		IOSElement insptypetable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'InspectionTypeSelector' and type = 'XCUIElementTypeTable'"));
-		if (!insptypetable.findElementByAccessibilityId(inspectionType.getInspectionTypeName()).isDisplayed()) {
-			swipeToElement(insptypetable.findElementByAccessibilityId(inspectionType.getInspectionTypeName()));
-		}
-		appiumdriver.findElement(MobileBy.AccessibilityId(inspectionType.getInspectionTypeName())).click();
-		return inspectionType.getFirstVizardScreen();
-	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
 		return inspectionsTable.findElement(MobileBy.
@@ -250,7 +239,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public boolean isInspectionIsApproved(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
-		WaitUtils.waitUntilElementIsClickable(appiumdriver.findElementByAccessibilityId(inspectionNumber));
 		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspectionNumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}
@@ -265,18 +253,6 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		waitMyInspectionsScreenLoaded();
 		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspectionNumber)).findElements(MobileBy.AccessibilityId("ESTIMATION_DRAFT")).size() > 0;
-	}
-	
-	public <T extends IBaseWizardScreen> T selectWorkOrderType(IWorkOrdersTypes workordertype) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrderTypeSelector")));
-		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
-
-		if (!wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
-			swipeToElement(wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
-		}
-		wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
-		return workordertype.getFirstVizardScreen();
 	}
 
 	public void clickBackButton()  {

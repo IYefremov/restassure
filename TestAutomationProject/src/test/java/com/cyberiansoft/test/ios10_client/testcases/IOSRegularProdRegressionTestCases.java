@@ -528,6 +528,11 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
+
+        RegularHomeScreenSteps.navigateToCustomersScreen();
+        RegularCustomersScreenSteps.switchToWholesaleMode();
+        RegularNavigationSteps.navigateBackScreen();
+
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
         RegularServiceRequestSteps.startCreatingServicerequest(serviceRequestData.getWholesailCustomer(), UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(serviceRequestData.getVihicleInfo());

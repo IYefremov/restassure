@@ -117,18 +117,6 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Add"))).click();
 	}
-	
-	public <T extends IBaseWizardScreen> T selectServiceRequestType(IServiceRequestTypes serviceRequestType) {
-		swipeToElement(appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + serviceRequestType.getServiceRequestTypeName() + "']/..")));
-		appiumdriver.findElementByAccessibilityId(serviceRequestType.getServiceRequestTypeName()).click();
-		return serviceRequestType.getFirstVizardScreen();
-	}
-
-	public <T extends IBaseWizardScreen> T addServiceRequest(ServiceRequestTypes serviceRequestType) {
-		clickAddButton();
-		return selectServiceRequestType(serviceRequestType);
-	}
 
 	public void selectServiceRequest(String serviceRequestNumber) {
 		waitForServiceRequestScreenLoad();
@@ -198,33 +186,6 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 		appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 
-	public <T extends IBaseWizardScreen> T selectInspectionType(IInspectionsTypes inspectionType) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspectionType.getInspectionTypeName())));
-		if (!appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspectionType.getInspectionTypeName() + "']")).isDisplayed()) {
-			swipeToElement(appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspectionType.getInspectionTypeName() + "']/..")));
-			appiumdriver.findElementByAccessibilityId(inspectionType.getInspectionTypeName()).click();
-		}
-		if (elementExists(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + inspectionType.getInspectionTypeName() + "']")))
-			appiumdriver.findElementByAccessibilityId(inspectionType.getInspectionTypeName()).click();
-		return inspectionType.getFirstVizardScreen();
-	}
-
-	public <T extends IBaseWizardScreen> T selectWorkOrderType(IWorkOrdersTypes workOrderType) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(workOrderType.getWorkOrderTypeName())));
-		if (!appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workOrderType.getWorkOrderTypeName() + "']")).isDisplayed()) {
-			swipeToElement(appiumdriver.
-					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workOrderType.getWorkOrderTypeName() + "']/..")));
-			appiumdriver.findElementByAccessibilityId(workOrderType.getWorkOrderTypeName()).click();
-		}
-		if (elementExists(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workOrderType.getWorkOrderTypeName() + "']")))
-			appiumdriver.findElementByAccessibilityId(workOrderType.getWorkOrderTypeName()).click();
-		return workOrderType.getFirstVizardScreen();
-	}
 	
 	public String getServiceRequestClient(String srnumber) {
 		return appiumdriver.

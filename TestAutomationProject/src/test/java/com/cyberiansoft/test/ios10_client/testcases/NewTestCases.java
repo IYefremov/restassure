@@ -6,6 +6,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
@@ -38,10 +39,12 @@ public class NewTestCases extends BaseTestCase {
 	private String regCode;
 	private String userLogin = "User";
 	private String userPassword = "1111";
+	private WholesailCustomer ZAZ_Motors = new WholesailCustomer();
 
 	@BeforeClass
 	@Parameters({ "backoffice.url", "user.name", "user.psw", "license.name" })
 	public void setUpSuite(String backofficeurl, String userName, String userPassword, String licensename) {
+		ZAZ_Motors.setCompanyName("Zaz Motors");
 		mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(userLogin, userPassword);
 		testGetDeviceRegistrationCode(backofficeurl, userName, userPassword, licensename);
@@ -118,9 +121,8 @@ public class NewTestCases extends BaseTestCase {
 		
 		//Create WO1
 		RegularMyWorkOrdersScreen myworkordersscreen = homeScreen.clickMyWorkOrdersButton();
-		myworkordersscreen.clickAddOrderButton();
-		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		RegularVehicleScreen vehicleScreen = myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		RegularMyWorkOrdersSteps.startCreatingWorkOrder(ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(VIN);
 		
 		String wonumber1 = vehicleScreen.getInspectionNumber();
@@ -151,7 +153,7 @@ public class NewTestCases extends BaseTestCase {
 		//myworkordersscreen.searchWO(wonumber1);
 		RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(wonumber1);
 		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		myworkordersscreen.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		RegularWorkOrderTypesSteps.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), _make);
 		Assert.assertEquals(vehicleScreen.getModel(), _model);
 		Assert.assertEquals(vehicleScreen.getYear(), _year);
@@ -205,11 +207,9 @@ public class NewTestCases extends BaseTestCase {
 		
 		
 		RegularServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		
-		serviceRequestsScreen.clickAddButton();
-		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 
-		RegularVehicleScreen vehicleScreen = serviceRequestsScreen.selectServiceRequestType(ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
+		RegularServiceRequestSteps.startCreatingServicerequest(ZAZ_Motors, ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(VIN);
 		vehicleScreen.setMakeAndModel(_make, _model);
 		vehicleScreen.setColor(_color);
