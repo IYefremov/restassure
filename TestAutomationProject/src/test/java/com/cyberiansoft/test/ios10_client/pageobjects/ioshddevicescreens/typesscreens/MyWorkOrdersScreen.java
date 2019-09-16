@@ -120,17 +120,9 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 
-	public <T extends IBaseWizardScreen> T addOrderWithSelectCustomer(String customerName, IWorkOrdersTypes workOrderType) {
-		final String customerValue = appiumdriver.findElementByAccessibilityId("Toolbar").
+	public String getMyWorkOrdersSelectedCustomerValue() {
+		return appiumdriver.findElementByAccessibilityId("Toolbar").
 				findElements(MobileBy.className("XCUIElementTypeButton")).get(2).getAttribute("label");
-		clickAddOrderButton();
-		if (customerValue.equals("Wholesale Mode") | customerValue.equals("Retail Mode"))
-			selectCustomerAndWorkOrderType(customerName, workOrderType);
-		else {
-			WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-			workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-		}
-		return workOrderType.getFirstVizardScreen();
 	}
 
 	private void selectCustomerAndWorkOrderType(String customerName, IWorkOrdersTypes workOrderType) {
@@ -138,21 +130,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		customersscreen.selectCustomer(customerName);
 		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
 		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-	}
-
-	public <T extends IBaseWizardScreen> T addWorkOrder(IWorkOrdersTypes workOrderType) {
-		clickAddOrderButton();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-		return workOrderType.getFirstVizardScreen();
-	}
-
-	public <T extends IBaseWizardScreen> T addWorkWithJobOrder(IWorkOrdersTypes workOrderType, String jobName) {
-		clickAddOrderButton();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-		selectWorkOrderJob(jobName);
-		return workOrderType.getFirstVizardScreen();
 	}
 
 	public void selectCopyServices() {
@@ -448,10 +425,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		ApproveInspectionsScreen approveinspscreen =  new ApproveInspectionsScreen();
 		approveinspscreen.clickApproveButton();
 		return this;
-	}
-	
-	public void selectJob(String workorderjob) {
-		appiumdriver.findElementByName(workorderjob).click();
 	}
 	
 	public String getFirstWorkOrderNumberValue() {		

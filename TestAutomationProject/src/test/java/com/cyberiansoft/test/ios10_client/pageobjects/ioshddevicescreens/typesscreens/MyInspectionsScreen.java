@@ -127,22 +127,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		BaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 
-	public <T extends IBaseWizardScreen> T addInspection(IInspectionsTypes inspType) {
-		clickAddInspectionButton();
-		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
-		inspectionTypesPopup.selectInspectionType(inspType);
-		return inspType.getFirstVizardScreen();
-	}
-
-	public <T extends IBaseWizardScreen> T addOInspectionWithSelectCustomer(String customerName, IInspectionsTypes inspType) {
-		clickAddInspectionButton();
-		CustomersScreen customersscreen = new CustomersScreen();
-		customersscreen.selectCustomer(customerName);
-		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
-		inspectionTypesPopup.selectInspectionType(inspType);
-		return inspType.getFirstVizardScreen();
-	}
-
 	public void clickEditInspectionButton() {
 		editpopupmenu.click();
 		BaseWizardScreen.typeContext = INSPECTIONCONTEXT;

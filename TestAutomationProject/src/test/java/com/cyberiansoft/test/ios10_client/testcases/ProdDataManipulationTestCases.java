@@ -7,10 +7,7 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.dataclasses.Employee;
-import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.VehiclePartData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
@@ -23,6 +20,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ba
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularInspectionsSteps;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInspectionsSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularNavigationSteps;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.ProdInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
@@ -100,12 +98,11 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                                                                String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("R & Q Autobody");
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("R & Q Autobody");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
+        RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.MATRIX_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
@@ -180,12 +177,11 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                                                               String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("Pitt Paint & Body");
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("Pitt Paint & Body");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.PAINT_INSPECTION);
+        RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.PAINT_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
@@ -221,11 +217,11 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("Plaza Kia");
+
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("Plaza Kia");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.INTERIOR_INSPECTION);
+        RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.INTERIOR_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
@@ -254,11 +250,11 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("R & Q Autobody");
+
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("R & Q Autobody");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.WHEEL_INSPECTION);
+        RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.WHEEL_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
@@ -286,12 +282,11 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
                                                              String description, JSONObject testData) {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("R & Q Autobody");
 
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("R & Q Autobody");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.INTERIOR_DETAIL);
+        RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.INTERIOR_DETAIL);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
@@ -320,11 +315,11 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
 
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("Torrington Detail");
+
         RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
-        myinspectionsscreen.clickAddInspectionButton();
-        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
-        customersScreen.selectCustomer("Torrington Detail");
-        RegularVisualInteriorScreen visualInteriorScreen = myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.EXTERIOR_DETAIL);
+        RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.EXTERIOR_DETAIL);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());

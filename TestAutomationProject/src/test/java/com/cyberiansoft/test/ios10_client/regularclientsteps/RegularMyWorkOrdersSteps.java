@@ -13,10 +13,22 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularMyWorkOrdersSteps {
 
+    public static void startCreatingWorkOrderWithJob(IWorkOrdersTypes workOrdersType, String jobName) {
+        startCreatingWorkOrder(workOrdersType);
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.selectJob(jobName);
+    }
+
     public static void startCreatingWorkOrder(AppCustomer appCustomer, IWorkOrdersTypes workOrdersType) {
         waitMyWorkOrdersLoaded();
         clickAddWorkOrderButton();
         RegularCustomersScreenSteps.selectCustomer(appCustomer);
+        RegularWorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
+    }
+
+    public static void startCreatingWorkOrder(IWorkOrdersTypes workOrdersType) {
+        waitMyWorkOrdersLoaded();
+        clickAddWorkOrderButton();
         RegularWorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
     }
 

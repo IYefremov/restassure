@@ -24,8 +24,6 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
-	private By discardbtnxpath = By.name("Discard");
-	
 	private By autosavedworkorder = By.xpath("//XCUIElementTypeTable[@name='MyWorkOrdersTable']/XCUIElementTypeCell/XCUIElementTypeOther[@name='EntityInfoButtonUnchecked, AutoSaved']");
 
 	@iOSXCUITFindBy(accessibility = "Done")
@@ -129,7 +127,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
-		WaitUtils.waitUntilElementIsClickable(mywotable.findElementByAccessibilityId(workOrderId)).click();
+		mywotable.findElementByAccessibilityId(workOrderId).click();
 	}
 	
 	public void selectWorkOrderForAddingNotes(String workOrderId)  {
@@ -188,31 +186,8 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("invoice new").click();
 	}
 
-	public <T extends IBaseWizardScreen> T selectWorkOrderType(IWorkOrdersTypes workordertype) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		MobileElement woTypeTable = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'")));
-
-		if (!woTypeTable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
-			swipeToElement(woTypeTable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
-		}
-		woTypeTable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
-		return workordertype.getFirstVizardScreen();
-	}
-
-	public  <T extends IBaseWizardScreen> T selectWorkOrderTypeWithJob(IWorkOrdersTypes workordertype, String job) {
-		if (Helpers.elementExists(discardbtnxpath)) {
-			appiumdriver.findElement(discardbtnxpath).click();
-		}
-		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrderTypeSelector")));
-		IOSElement wostable = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'OrderTypeSelector' and type = 'XCUIElementTypeTable'"));
-
-		if (!wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).isDisplayed()) {
-			swipeToElement(wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()));
-		}
-		wostable.findElementByAccessibilityId(workordertype.getWorkOrderTypeName()).click();
-		appiumdriver.findElementByName(job).click();
-		return workordertype.getFirstVizardScreen();
+	public void selectJob(String jobName) {
+		appiumdriver.findElementByName(jobName).click();
 	}
 	
 	public void setFilterBilling(String billing)  {

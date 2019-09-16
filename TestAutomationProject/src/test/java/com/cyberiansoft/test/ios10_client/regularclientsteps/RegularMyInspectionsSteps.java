@@ -17,6 +17,12 @@ public class RegularMyInspectionsSteps {
         RegularInspectionTypesSteps.selectInspectionType(inspectionType);
     }
 
+    public static void startCreatingInspection(IInspectionsTypes inspectionType) {
+        waitMyInspectionsScreenLoaded();
+        clickAddInspectionButton();
+        RegularInspectionTypesSteps.selectInspectionType(inspectionType);
+    }
+
     public static void clickAddInspectionButton() {
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         myInspectionsScreen.clickAddInspectionButton();

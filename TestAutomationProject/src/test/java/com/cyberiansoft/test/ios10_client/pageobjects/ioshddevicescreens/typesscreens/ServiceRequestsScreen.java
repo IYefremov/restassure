@@ -131,10 +131,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")));
 	}
 
-	public void clickRefreshButton() {
-		appiumdriver.findElementByAccessibilityId("Refresh").click();
-	}
-	
 	public void clickAddButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Add")));
@@ -247,12 +243,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		appiumdriver.findElementByAccessibilityId("Undo Check In").click();
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsPageTableLeft")));
-		/*FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 25);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));
-		if (appiumdriver.findElementsByAccessibilityId("Loading service requests").size() > 0) {
-			wait = new WebDriverWait(appiumdriver, 25);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));
-		}*/
 		return this;
 	}
 
@@ -359,7 +349,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	public void clickAddAppointmentButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Appointments")));
-		System.out.println("+++" +  appiumdriver.findElementsByAccessibilityId("Add").size());
 		List<WebElement> addds = appiumdriver.findElementsByAccessibilityId("Add");
 		for(WebElement add : addds)
 			if (add.isDisplayed()) {
@@ -372,7 +361,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	public void selectTodayFromAppointmet() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("From"))).click();
-		//appiumdriver.findElementByAccessibilityId("From").click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	

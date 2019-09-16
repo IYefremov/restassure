@@ -40,6 +40,13 @@ public class RegularServiceRequestSteps {
         RegularServiceRequestTypesSteps.selectServiceRequestType(UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
     }
 
+    public static void startCreatingServicerequest(IServiceRequestTypes serviceRequestTypes) {
+        waitServiceRequestScreenLoaded();
+        RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
+        serviceRequestsScreen.clickAddButton();
+        RegularServiceRequestTypesSteps.selectServiceRequestType(UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+    }
+
     public static void saveServiceRequestWithAppointment() {
         RegularWizardScreensSteps.clickSaveButton();
         FluentWait<WebDriver> wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 10);
