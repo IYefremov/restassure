@@ -32,18 +32,4 @@ public enum UATInspectionTypes implements IInspectionsTypes {
 
         throw new IllegalArgumentException(inspType + " is not a valid InspectionsTypes");
     }
-
-    public <T extends IBaseWizardScreen> T getFirstVizardScreen() {
-        UATInspectionTypes type = getInspectionType();
-        switch (type) {
-            case INSP_APPROVE_MULTISELECT:
-                if (BaseTestCase.inspSinglePageMode)
-                    return (T) new SinglePageInspectionScreen();
-                else if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new VehicleScreen();
-                else
-                    return (T) new RegularVehicleScreen();
-        }
-        return null;
-    }
 }

@@ -59,46 +59,4 @@ public enum WorkOrdersTypes implements  IWorkOrdersTypes {
         throw new IllegalArgumentException(woType + " is not a valid WorkOrdersTypes");
     }
 
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen() {
-        WorkOrdersTypes type = getWorkOrderType();
-        switch (type) {
-            case WO_FORR_MONITOR_WOTYPE:
-            case WO_TYPE_FOR_TEST_FEE:
-            case WO_FOR_FEE_ITEM_IN_2_PACKS:
-            case WO_FEE_PRICE_OVERRIDE:
-            case SPECIFIC_CLIENT_TEST_WO1:
-            case WO_CLIENT_CHANGING_ON:
-            case WOTYPE_BLOCK_VIN_ON:
-            case WOTYPE_BLOCK_FOR_THE_SAME_SERVICES_ON:
-            case WO_WITH_PRESELECTED_CLIENTS:
-            case WO_TYPE_FOR_PRICE_MATRIX:
-            case WO_FOR_INV_PRINT:
-            case WO_MONITOR_DEVICE:
-            case WO_FOR_SR:
-            case WO_TYPE_FOR_MONITOR:
-            case WO_TYPE_FOR_CALC:
-            case WO_TOTAL_SALE_NOT_REQUIRED:
-            case WO_SMOKE_MONITOR:
-            case WO_SMOKE_TEST:
-            case WO_FOR_INVOICE_PRINT:
-            case WO_DELAY_START:
-            case WO_VIN_ONLY:
-            case WO_VEHICLE_TRIM_VALIDATION:
-            case WO_PANEL_GROUP:
-            case WO_WITH_PART_SERVICE:
-            case WO_GROUP_SERVICE_TYPE:
-            case WO_TYPE_WITH_JOB:
-            case WO_MONITOR_REQUIRED_START:
-            case WO_BUNDLE_REQ_DEF_TECH:
-            case WO_ALL_SERVICES:
-            case WO_MONITOR_REQUIRED_SERVICES_ALL:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new VehicleScreen();
-                else
-                    return (T) new RegularVehicleScreen();
-
-        }
-        return null;
-    }
-
 }

@@ -31,19 +31,4 @@ public enum ProdInspectionsTypes implements IInspectionsTypes {
 
         throw new IllegalArgumentException(inspType + " is not a valid InspectionsTypes");
     }
-
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen() {
-        ProdInspectionsTypes type = getInspectionType();
-        switch (type) {
-            case MATRIX_INSPECTION:
-            case PAINT_INSPECTION:
-            case INTERIOR_INSPECTION:
-            case WHEEL_INSPECTION:
-            case INTERIOR_DETAIL:
-            case EXTERIOR_DETAIL:
-                return (T) new RegularVisualInteriorScreen();
-
-        }
-        return null;
-    }
 }

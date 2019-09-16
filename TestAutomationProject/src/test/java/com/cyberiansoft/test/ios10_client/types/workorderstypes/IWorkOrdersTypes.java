@@ -5,5 +5,4 @@ import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWiz
 public interface IWorkOrdersTypes {
 
     public String getWorkOrderTypeName();
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen();
 }

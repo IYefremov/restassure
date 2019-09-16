@@ -1925,7 +1925,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
 			teamWorkOrdersScreen.verifyCreateInvoiceIsActivated(workOrderNumber);
 			teamWorkOrdersScreen.clickiCreateInvoiceButton();
-            RegularInvoiceInfoScreen invoiceinfoscreen = teamWorkOrdersScreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+            RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
 			Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			invoiceinfoscreen.clickSaveAsFinal();
 			teamWorkOrdersScreen.clickHomeButton();			
@@ -2047,7 +2048,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
 			teamWorkOrdersScreen.clickiCreateInvoiceButton();
-            RegularInvoiceInfoScreen invoiceinfoscreen = teamWorkOrdersScreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
             Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			invoiceinfoscreen.clickSaveAsFinal();
 			teamWorkOrdersScreen.clickHomeButton();			
@@ -2948,7 +2950,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber3);
 
 			teamWorkOrdersScreen.clickiCreateInvoiceButton();
-            RegularInvoiceInfoScreen invoiceinfoscreen = teamWorkOrdersScreen.selectWOInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
 			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
 			invoiceinfoscreen.clickSaveAsFinal();
 			teamWorkOrdersScreen.clickHomeButton();
@@ -2979,8 +2982,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(workOrderNumber);
-			RegularWorkOrderTypesSteps.selectWorkOrderType(DentWizardWorkOrdersTypes.carmaxworkordertype);
+			RegularMyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber, DentWizardWorkOrdersTypes.carmaxworkordertype);
 			vehicleScreen.waitVehicleScreenLoaded();
 			vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			RegularWorkOrdersSteps.saveWorkOrder();
@@ -3000,7 +3002,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow1));
 			vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow1), ExcelUtils.getModel(testcaserow1), ExcelUtils.getYear(testcaserow1));
-			String wo = vehicleScreen.getWorkOrderNumber();
+			String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 			RegularNavigationSteps.navigateToServicesScreen();
 			RegularServicesScreen servicesScreen = new RegularServicesScreen();
 			servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
@@ -3010,8 +3012,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			RegularMyWorkOrdersSteps.selectWorkOrderForCopyServices(wo);
-			RegularWorkOrderTypesSteps.selectWorkOrderType(DentWizardWorkOrdersTypes.routeusworkordertype);
+			RegularMyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, DentWizardWorkOrdersTypes.routeusworkordertype);
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow2));
 			vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
 			RegularNavigationSteps.navigateToServicesScreen();

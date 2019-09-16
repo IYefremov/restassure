@@ -132,27 +132,9 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	}
 
 	public void clickAddButton() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Add")));
-		wait = new WebDriverWait(appiumdriver, 20);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Add"))).click();
 		BaseWizardScreen.typeContext =  SRCONTEXT;
-	}
-
-	public <T extends IBaseWizardScreen> T addServiceRequestWithSelectCustomer(String customerName, ServiceRequestTypes serviceRequestType) {
-		clickAddButton();
-		CustomersScreen customersscreen = new CustomersScreen();
-		customersscreen.selectCustomer(customerName);
-		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup();
-		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType.getServiceRequestTypeName());
-		return serviceRequestType.getFirstVizardScreen();
-	}
-
-	public <T extends IBaseWizardScreen> T addServiceRequest(ServiceRequestTypes serviceRequestType) {
-		clickAddButton();
-		ServiceRequestTypesPopup serviceRequestTypesPopup = new ServiceRequestTypesPopup();
-		serviceRequestTypesPopup.selectServiceRequestType(serviceRequestType.getServiceRequestTypeName());
-		return serviceRequestType.getFirstVizardScreen();
 	}
 	
 	public void clickSearchButton() {
@@ -189,27 +171,10 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(MobileBy.AccessibilityId("labelServiceRequestNumber"), 1));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicerequest + "']").click();
-		//Helpers.text(servicerequest).click();
-	}
-
-	public <T extends IBaseWizardScreen> T createInspectionFromServiceReques(String serviceRequestNumber, InspectionsTypes inspType) {
-		selectServiceRequest(serviceRequestNumber);
-		createinspectionmenu.click();
-		InspectionTypesPopup inspectionTypesPopup = new InspectionTypesPopup();
-		inspectionTypesPopup.selectInspectionType(inspType);
-		return inspType.getFirstVizardScreen();
 	}
 	
 	public void selectCreateWorkOrderRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Create Work Order").click();
-	}
-
-	public <T extends IBaseWizardScreen> T createWorkOrderFromServiceRequest(String serviceRequestNumber, WorkOrdersTypes workOrderType) {
-		selectServiceRequest(serviceRequestNumber);
-		selectCreateWorkOrderRequestAction();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-		return workOrderType.getFirstVizardScreen();
 	}
 
 	public boolean isCreateWorkOrderActionExists() {
@@ -456,10 +421,10 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	}
 	
 	public void waitServiceRequestsScreenLoaded() {
-		if (appiumdriver.findElementsByAccessibilityId("Loading service requests").size() > 0) {
-			WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));
-		}
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("ServiceRequestsPageTableLeft")));
+		wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")));
 	}
 	
 	public boolean isServiceRequestProposed(String srnumber) {

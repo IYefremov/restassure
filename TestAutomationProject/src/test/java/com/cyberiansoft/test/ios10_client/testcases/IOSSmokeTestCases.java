@@ -33,6 +33,7 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequ
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -49,7 +50,7 @@ import java.util.List;
 
 public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
-	public HomeScreen homeScreen;
+	//public HomeScreen homeScreen;
 	private WholesailCustomer Specific_Client = new WholesailCustomer();
 	private WholesailCustomer ZAZ_Motors = new WholesailCustomer();
 	private WholesailCustomer _002_Test_Customer = new WholesailCustomer();
@@ -87,7 +88,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "Ios_automation",
 				envType);
 		MainScreen mainScreen = new MainScreen();
-		homeScreen = mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.setInsvoicesCustomLayoutOff();
@@ -103,10 +105,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testUpdateDatabase(String rowID,
 								   String description, JSONObject testData) {
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.updateDatabase();
-		HomeScreen homeScreen = mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		homeScreen.clickStatusButton();
 		homeScreen.updateDatabase();
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -116,7 +118,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testUpdateVIN(String rowID,
 							  String description, JSONObject testData) {
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.updateVIN();
 		homeScreen = mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
@@ -132,7 +134,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		//resrtartApplication();
 		//MainScreen mainScreeneen = new MainScreen();
 		//HomeScreen homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USER_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		AddCustomerScreen addCustomerScreen = customersScreen.clickAddCustomersButton();
@@ -161,7 +163,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		//resrtartApplication();
 		//MainScreen mainScreeneen = new MainScreen();
 		//HomeScreen homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USER_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 
@@ -213,7 +215,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	@Test(testName = "Test Case 8685:Set Inspection to non Single page (HD) ", description = "Set Inspection To Non Single Page Inspection Type")
 	public void testSetInspectionToNonSinglePage() {
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -226,7 +228,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String _notes1 = "Test\nTest 2";
 		final String quickNote = "This is test Quick Notes";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -265,7 +267,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -303,7 +305,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final String archiveReason = "Reason 2";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -340,7 +342,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String license = "Iphone_Test_Spec_Client";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreeneen = homeScreen.clickLogoutButton();
 		LicensesScreen licensesscreen = mainScreeneen.clickLicenses();
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
@@ -408,7 +410,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrdersData().get(0);
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.clickHomeButton();
@@ -483,10 +485,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.saveWizard();
 
 		WorkOrderData workOrderDataCopiedServices = testCaseData.getWorkOrdersData().get(1);
-		vehicleScreen = myWorkOrdersScreen.copyServicesForWorkOrder(workOrderNumber, iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER,
+		MyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, Specific_Client,
 				WorkOrdersTypes.SPECIFIC_CLIENT_TEST_WO1);
 		vehicleScreen.setVIN(workOrderDataCopiedServices.getVehicleInfoData().getVINNumber());
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.verifyServicesAreSelected(workOrderDataCopiedServices.getSelectedServices());
 		NavigationSteps.navigateToOrderSummaryScreen();
 		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), workOrderDataCopiedServices.getWorkOrderPrice());
@@ -502,7 +504,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		List<String> inspectionsID = new ArrayList<>();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
@@ -551,7 +553,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		List<String> inspectionsID = new ArrayList<>();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
@@ -584,7 +586,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -639,7 +641,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -697,7 +699,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String teamName = "Default team";
 		final String serviceName = "Test Company (Universal Client)";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -707,8 +709,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
 
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
+		ServiceRequestSteps.startCreatingServicerequest(Test_Company_Customer,
 				ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		final VehicleInfoData vehicleInfoData = serviceRequestData.getVihicleInfo();
 		vehicleScreen.setVIN(vehicleInfoData.getVINNumber());
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.THE_VIN_IS_INCORRECT);
@@ -799,14 +802,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String questionValue = "Test Answer 1";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToSinglePageInspection();
 		settingsScreen.clickHomeButton();
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
 		String newserviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		serviceRequestsScreen.createInspectionFromServiceReques(newserviceRequestNumber, InspectionsTypes.INSP_FOR_SR_INSPTYPE);
+		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(newserviceRequestNumber, InspectionsTypes.INSP_FOR_SR_INSPTYPE);
 
 		SinglePageInspectionScreen singlePageInspectionScreen = new SinglePageInspectionScreen();
 		String inspectionNumber = singlePageInspectionScreen.getInspectionNumber();
@@ -875,6 +878,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		homeScreen = settingsScreen.clickHomeButton();
@@ -937,7 +941,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -957,8 +961,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.clickSave();
 
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		myWorkOrdersScreen.copyVehicleForWorkOrder(workOrderNumber1, iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER,
-				WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		MyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber1, ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), workOrderData.getVehicleInfoData().getVehicleMake());
 		Assert.assertEquals(vehicleScreen.getModel(), workOrderData.getVehicleInfoData().getVehicleModel());
 		Assert.assertEquals(vehicleScreen.getYear(), workOrderData.getVehicleInfoData().getVehicleYear());
@@ -982,7 +985,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -1040,7 +1043,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber1);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceInfoScreen.clickSave();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_PO_IS_REQUIRED_REGULAR);
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
@@ -1059,7 +1063,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		List<String> workOrderIDs = new ArrayList<>();
 		final String billingFilterValue = "All";
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -1082,7 +1086,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderIDs.get(0));
 		myWorkOrdersScreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		invoiceInfoScreen.clickSaveAsDraft();
 		for (String workOrderID : workOrderIDs) {
@@ -1106,7 +1111,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String[] menuItemsToVerify = {"Edit", "Notes", "Change\nstatus", "Delete", "Create\nInvoices"};
 		final String billingFilterValue = "All";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -1127,7 +1132,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber1);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		invoiceInfoScreen.clickSaveAsDraft();
 
@@ -1151,7 +1157,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1176,7 +1182,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber1);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
@@ -1207,14 +1214,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String vehicleinfo = vehicleInfoData.getVehicleColor() + ", " +
 				vehicleInfoData.getVehicleMake() + ", " + vehicleInfoData.getVehicleModel();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CarHistoryScreen carhistoryscreen = homeScreen.clickCarHistoryButton();
 		carhistoryscreen.clickFirstCarHistoryInTable();
 		carhistoryscreen.clickCarHistoryMyWorkOrders();
 		MyWorkOrdersScreen myWorkOrdersScreen = new MyWorkOrdersScreen();
 		String workOrderNumber = myWorkOrdersScreen.getFirstWorkOrderNumberValue();
-		VehicleScreen vehicleScreen = myWorkOrdersScreen.copyVehicleForWorkOrder(workOrderNumber, iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER,
-				WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		MyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber, ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();
 		vehicleScreen.cancelWizard();
 		myWorkOrdersScreen.clickBackToCarHystoryScreen();
@@ -1228,6 +1235,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
@@ -1325,7 +1333,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1361,7 +1369,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1383,8 +1391,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.clickSave();
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber1), workOrderData.getWorkOrderPrice());
-		myWorkOrdersScreen.copyVehicleForWorkOrder(workOrderNumber1, iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER,
-				WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		MyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber1, ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), workOrderData.getVehicleInfoData().getVehicleMake());
 		Assert.assertEquals(vehicleScreen.getModel(), workOrderData.getVehicleInfoData().getVehicleModel());
 		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
@@ -1428,9 +1435,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreeneen = homeScreen.clickLogoutButton();
-		HomeScreen homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
@@ -1470,7 +1477,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1518,7 +1525,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1555,7 +1562,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1590,7 +1597,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1629,7 +1636,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1676,7 +1683,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1710,7 +1717,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1744,7 +1751,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1783,7 +1790,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1823,7 +1830,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -1858,7 +1865,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -1933,11 +1940,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER,
+		ServiceRequestSteps.startCreatingServicerequest(_003_Test_Customer,
 				ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel(), serviceRequestData.getVihicleInfo().getVehicleYear());
@@ -1956,7 +1964,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		String newserviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		serviceRequestsScreen.createInspectionFromServiceReques(newserviceRequestNumber, InspectionsTypes.INSPTYPE_FOR_SR_INSPTYPE);
+		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(newserviceRequestNumber, InspectionsTypes.INSPTYPE_FOR_SR_INSPTYPE);
 		vehicleScreen.waitVehicleScreenLoaded();
 		String inspectnumber = vehicleScreen.getInspectionNumber();
 		NavigationSteps.navigateToServicesScreen();
@@ -1980,7 +1988,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
@@ -2029,7 +2037,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String appointmentAddress = "Maidan";
 		final String appointmentCity = "Kiev";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -2037,8 +2045,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.clickHomeButton();
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
+		ServiceRequestSteps.startCreatingServicerequest(Test_Company_Customer,
 				ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVINFieldValue(serviceRequestData.getVihicleInfo().getVINNumber());
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -2088,16 +2097,16 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String appointmentAddress = "Maidan";
 		final String appointmentCity = "Kiev";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.clickHomeButton();
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
 
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequestWithSelectCustomer(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER,
+		ServiceRequestSteps.startCreatingServicerequest(Test_Company_Customer,
 				ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
-
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVINFieldValue(serviceRequestData.getVihicleInfo().getVINNumber());
 
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -2150,7 +2159,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
@@ -2181,7 +2190,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
@@ -2208,7 +2217,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String VIN = "2C3CDXBG2EH174681";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
@@ -2249,7 +2258,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.selectWorkOrderForAction(workOrderNumber);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceInfoScreen.setPO("12345");
 		final String invoicenum = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
@@ -2269,7 +2279,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String VIN = "1D3HV13T19S825733";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2310,7 +2320,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2364,7 +2374,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2429,7 +2439,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2483,7 +2493,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String _price = "$100.00";
 		final String _discaunt_us = "Discount 10-20$";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2575,13 +2585,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 		final String owner = "Avalon";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.selectOwnerT(owner);
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
@@ -2605,13 +2616,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 		final String owner = "Avalon";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.selectOwnerT(owner);
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
@@ -2637,13 +2649,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 		final String owner = "Avalon";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.selectOwnerT(owner);
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
@@ -2672,13 +2685,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 		final String owner = "Avalon";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_CHECKIN_ON);
+		VehicleScreen vehicleScreen= new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.selectOwnerT(owner);
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
@@ -2709,7 +2723,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2775,6 +2789,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2833,7 +2848,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String printServerName = "TA_Print_Server";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2853,7 +2868,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 	public void testHDVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices() {
 
 		final String printServerName = "TA_Print_Server";
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		TeamInvoicesScreen teaminvoicesscreen = homeScreen.clickTeamInvoices();
 		final String invoicenum = teaminvoicesscreen.getFirstInvoiceValue();
 		teaminvoicesscreen.printInvoice(invoicenum, printServerName);
@@ -2870,7 +2885,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2912,6 +2927,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -2954,7 +2971,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -3007,7 +3024,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -3015,7 +3032,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		//Create first SR
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
@@ -3026,7 +3044,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		String serviceRequestNumber1 = serviceRequestsScreen.getFirstServiceRequestNumber();
 		serviceRequestsScreen.rejectServiceRequest(serviceRequestNumber1);
-		vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE);
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		servicesScreen.saveWizard();
 		String serviceRequestNumber2 = serviceRequestsScreen.getFirstServiceRequestNumber();
@@ -3044,7 +3062,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingscreen = homeScreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
@@ -3055,7 +3073,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ALL_PHASES);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		ServicesScreenSteps.selectService(serviceRequestData.getMoneyService().getServiceName());
@@ -3069,7 +3088,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		Assert.assertTrue(serviceRequestsScreen.isRejectActionExists());
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
-		serviceRequestsScreen.createInspectionFromServiceReques(serviceRequestNumber, InspectionsTypes.INSP_DRAFT_MODE);
+		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_DRAFT_MODE);
 		String inspectnumber = vehicleScreen.getInspectionNumber();
 		servicesScreen = servicesScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesScreen.clickSaveAsFinal();
@@ -3255,7 +3274,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -3285,7 +3304,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -3314,7 +3333,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myInspectionsScreen.approveInspectionAllServices(inspectionNumber,
 				iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		myInspectionsScreen.createWOFromInspection(inspectionNumber,
+		MyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber,
 				WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesScreen.openServiceDetails(inspectionData.getBundleService().getBundleServiceName());
@@ -3341,14 +3360,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3372,14 +3392,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_DONOT_ALLOW_CLOSE_SR);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_DONOT_ALLOW_CLOSE_SR);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3404,14 +3425,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3435,14 +3457,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3470,13 +3493,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String answerReason = "All work is done. Answer questions";
 		final String answerQuestion = "A3";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3508,14 +3532,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 		final String answerReason = "All work is done. No Questions";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_ALLOW_CLOSE_SR);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3542,14 +3567,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 		final String totalSale = "3";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_WO_ONLY);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_WO_ONLY);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -3560,7 +3586,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		serviceRequestsScreen.createWorkOrderFromServiceRequest(serviceRequestNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		ServiceRequestSteps.startCreatingWorkOrderFromServiceRequest(serviceRequestNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleInfoScreenSteps.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo());
 		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
@@ -3602,7 +3628,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -3611,7 +3637,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_INSP_ONLY);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_INSP_ONLY);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
@@ -3621,7 +3648,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		serviceRequestsScreen.createInspectionFromServiceReques(serviceRequestNumber, InspectionsTypes.INSP_FOR_CALC);
+		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_FOR_CALC);
 		VehicleInfoScreenSteps.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
@@ -3663,7 +3690,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -3724,7 +3751,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InspectionData inspectionData = testCaseData.getInspectionData();
 		;
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -3761,7 +3788,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 																											   String description, JSONObject testData) {
 		final String newLineSymbol = "\n";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -3788,7 +3815,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -3828,7 +3855,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingscreen = homeScreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
@@ -3838,7 +3865,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ALL_PHASES);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
@@ -3849,7 +3877,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-		serviceRequestsScreen.createInspectionFromServiceReques(serviceRequestNumber, InspectionsTypes.INSP_DRAFT_MODE);
+		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_DRAFT_MODE);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
 		String inspectionnumber = vehicleScreen.getInspectionNumber();
@@ -3878,7 +3906,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingscreen = homeScreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
@@ -3943,7 +3971,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String notesText = "Test for copy";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingscreen = homeScreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
@@ -3979,7 +4007,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		List<String> inpectionsIDs = new ArrayList<>();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingscreen = homeScreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
@@ -4040,7 +4068,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingscreen = homeScreen.clickSettingsButton();
 		settingscreen.setInspectionToNonSinglePageInspection();
 		settingscreen.clickHomeButton();
@@ -4084,7 +4112,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -4111,8 +4139,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
 		approveInspectionsScreen.approveInspectionApproveAllAndSignature(inspectionNumber);
 
-		myInspectionsScreen.createWOFromInspection(inspectionNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
-		vehicleScreen = new VehicleScreen();
+		MyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
 		for (ServiceData serviceData : inspectionData.getServicesList())
 			if (serviceData.isSelected())
@@ -4130,7 +4157,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -4161,7 +4188,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -4209,7 +4236,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> inspections = new ArrayList<>();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -4264,7 +4291,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> inspections = new ArrayList<>();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -4318,7 +4345,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
 		settingsScreen.setInspectionToNonSinglePageInspection();
 		settingsScreen.clickHomeButton();
@@ -4360,7 +4387,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String VIN = "1D7HW48NX6S507810";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4439,7 +4466,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String locationFilterValue = "All locations";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
@@ -4477,7 +4504,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String cashcheckamount = "100";
 		final String expectedPrice = "$0.00";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
@@ -4562,7 +4589,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String cashcheckamount = "100";
 		final String expectedPrice = "$0.00";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
@@ -4643,7 +4670,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String expectedPrice = "$0.00";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
@@ -4715,7 +4742,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String VIN = "WDZPE7CD9E5889222";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
@@ -4845,13 +4872,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		List<String> inspectionNumbers = new ArrayList<>();
 		List<String> workOrderNumbers = new ArrayList<>();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
 		ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
-		VehicleScreen vehicleScreen = serviceRequestsScreen.addServiceRequest(ServiceRequestTypes.SR_ALL_PHASES);
+		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ALL_PHASES);
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.clickSave();
@@ -4859,7 +4887,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		final String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
 		for (InspectionData inspectionData : testCaseData.getInspectionsData()) {
-			serviceRequestsScreen.createInspectionFromServiceReques(serviceRequestNumber, InspectionsTypes.valueOf(inspectionData.getInspectionType()));
+			ServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.valueOf(inspectionData.getInspectionType()));
 			inspectionNumbers.add(vehicleScreen.getInspectionNumber());
 			if (inspectionData.isDraft()) {
 				ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
@@ -4881,7 +4909,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamInspectionsScreen.clickBackServiceRequest();
 		serviceRequestdetailsScreen.clickBackButton();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
-			serviceRequestsScreen.createWorkOrderFromServiceRequest(serviceRequestNumber, WorkOrdersTypes.valueOf(workOrderData.getWorkOrderType()));
+			ServiceRequestSteps.startCreatingWorkOrderFromServiceRequest(serviceRequestNumber, WorkOrdersTypes.valueOf(workOrderData.getWorkOrderType()));
 			workOrderNumbers.add(vehicleScreen.getInspectionNumber());
 			OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
 			orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
@@ -4906,7 +4934,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String VIN = "1D7HW48NX6S507810";
 		final String _price = "100";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -4976,7 +5004,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String locationFilterValue = "All locations";
 		final String searchStatus = "New";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5081,7 +5109,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5125,7 +5153,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String _ro = "123";
 		final String[] vehicleparts = {"Cowl, Other", "Hood"};
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
@@ -5160,7 +5188,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber1), "$19.00");
-		myWorkOrdersScreen.copyVehicleForWorkOrder(workOrderNumber1, retailcustomer.getFullName().trim(), WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		MyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber1, retailcustomer, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), _make);
 		Assert.assertEquals(vehicleScreen.getModel(), _model);
 		//Assert.assertEquals(vehicleScreen.getYear(), _year);
@@ -5259,7 +5287,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String VIN = "1D7HW48NX6S507810";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5293,7 +5321,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5337,7 +5365,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5383,7 +5411,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5406,7 +5434,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
-		myWorkOrdersScreen.copyServicesForWorkOrder(workOrderNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		MyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		vehicleScreen.waitVehicleScreenLoaded();
 		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
@@ -5423,7 +5451,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
@@ -5444,7 +5472,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber1);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		InvoiceInfoScreen invoiceInfoScreen = myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
+		InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(testCaseData.getInvoiceData().getQuestionScreenData());
@@ -5485,7 +5514,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber2);
 		myWorkOrdersScreen.clickInvoiceIcon();
-		myWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
+		InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.INVOICE_DEFAULT_TEMPLATE);
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(testCaseData.getInvoiceData().getQuestionScreenData());
 		invoiceInfoScreen.clickSaveAsFinal();
@@ -5539,7 +5568,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String makes[] = {"Chrysler", "Ford", null};
 		final String models[] = {"Town and Country", "Explorer", null};
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
@@ -5565,7 +5594,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5595,7 +5624,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.clickHomeButton();
@@ -5621,7 +5650,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String zeroPrice = "0";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5677,7 +5706,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String trimvalue = "Sport Plus";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5703,7 +5732,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5739,7 +5768,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5790,7 +5819,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
@@ -5818,7 +5847,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
@@ -5858,7 +5887,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
@@ -5885,7 +5914,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
@@ -5914,7 +5943,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -5976,7 +6005,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -6036,7 +6065,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -6091,7 +6120,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -6161,7 +6190,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(serviceRequestsListWebPage.addAppointmentFromSRlist(startDate, endDate, technicianValue));
 		DriverBuilder.getInstance().getDriver().quit();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
 
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
@@ -6181,7 +6210,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
@@ -6240,7 +6269,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_GROUP_SERVICE_TYPE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
@@ -6339,7 +6368,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String defaultLocationValue = "Test Location ZZZ";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -6415,7 +6444,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String workOrderMonitorStatus = "On Hold";
 		final String statusReason = "On Hold new reason";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -6463,7 +6492,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
@@ -6509,7 +6538,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_SMOKE_TEST);
 		VehicleScreen vehicleScreen = new VehicleScreen();
@@ -6546,7 +6575,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_SMOKE_TEST);
 		VehicleScreen vehicleScreen = new VehicleScreen();
@@ -6604,7 +6633,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_SMOKE_TEST);
 		VehicleScreen vehicleScreen = new VehicleScreen();
@@ -6666,7 +6695,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 		VehicleScreen vehicleScreen = new VehicleScreen();
@@ -6714,7 +6743,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String serviceZeroPrice = "0";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 		VehicleScreen vehicleScreen = new VehicleScreen();
@@ -6761,7 +6790,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -6816,7 +6845,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -6900,7 +6929,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -6988,7 +7017,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -7099,7 +7128,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -7182,7 +7211,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String techDefSelected = "Employee Simple 20%";
 		final String serviceZaroPrice = "0";
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -7225,7 +7254,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 
@@ -7265,7 +7294,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -7334,7 +7363,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
@@ -7387,7 +7416,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -7449,7 +7478,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		homeScreen = new HomeScreen();
+		HomeScreen homeScreen = new HomeScreen();
 		MainScreen mainScreen = homeScreen.clickLogoutButton();
 		mainScreen.userLogin("Zayats", "1111");
 

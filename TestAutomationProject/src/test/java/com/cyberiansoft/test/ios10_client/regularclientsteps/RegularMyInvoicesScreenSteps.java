@@ -97,4 +97,9 @@ public class RegularMyInvoicesScreenSteps {
         approveInvoicesScreen.clickApproveButton();
         approveInvoicesScreen.drawApprovalSignature();
     }
+
+    public static void clickInvoicesSearchButton() {
+        RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
+        myInvoicesScreen.clickInvoicesSearchButton();
+    }
 }

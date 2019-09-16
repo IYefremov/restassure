@@ -148,9 +148,8 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
-        RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(workOrdersForInvoice.get(0));
-        RegularCustomersScreenSteps.selectCustomer(testCaseData.getWorkOrderData().getWholesailCustomer());
-        RegularWorkOrderTypesSteps.selectWorkOrderType(UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularMyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrdersForInvoice.get(0),
+                testCaseData.getWorkOrderData().getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
         RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
         workOrdersForInvoice.add(RegularVehicleInfoScreenSteps.getWorkOrderNumber());
         RegularNavigationSteps.navigateToServicesScreen();
@@ -175,9 +174,8 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
-        RegularMyWorkOrdersSteps.selectWorkOrderForCopyServices(workOrdersForInvoice.get(0));
-        RegularCustomersScreenSteps.selectCustomer(testCaseData.getWorkOrderData().getWholesailCustomer());
-        RegularWorkOrderTypesSteps.selectWorkOrderType(UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularMyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrdersForInvoice.get(0),
+                testCaseData.getWorkOrderData().getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
         RegularVehicleInfoValidations.validateVehicleInfoData(testCaseData.getWorkOrderData().getVehicleInfoData());
         RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
         workOrdersForInvoice.add(RegularVehicleInfoScreenSteps.getWorkOrderNumber());
@@ -1006,7 +1004,46 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularInspectionsSteps.saveInspectionAsFinal();
         RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(copyInspectionNumber, inspectionData.getInspectionTotalPrice());
         RegularNavigationSteps.navigateBackScreen();
+    }
 
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifySearchFunctionalityUnderTeamInvoices(String rowID,
+                                                          String description, JSONObject testData) {
 
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenSteps.switchToTeamView();
+
+        RegularMyInvoicesScreenSteps.clickInvoicesSearchButton();
+        RegularSearchScreenSteps.searchStatus("All");
+        RegularSearchScreenSteps.searchCustomer(workOrderData.getWholesailCustomer());
+        RegularSearchScreenSteps.searchInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+        RegularSearchScreenSteps.setSearchText(invoiceNumber);
+        RegularSearchScreenSteps.saveSearchDialog();
+
+        RegularMyInvoicesScreenValidations.verifyInvoicePresent(invoiceNumber, true);
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

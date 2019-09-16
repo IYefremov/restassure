@@ -32,19 +32,19 @@ public class RegularServiceRequestSteps {
         serviceRequestsScreen.waitForServiceRequestScreenLoad();
     }
 
-    public static void startCreatingServicerequest(AppCustomer appCustomer, IServiceRequestTypes serviceRequestTypes) {
+    public static void startCreatingServicerequest(AppCustomer appCustomer, IServiceRequestTypes serviceRequestType) {
         waitServiceRequestScreenLoaded();
         RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
         serviceRequestsScreen.clickAddButton();
         RegularCustomersScreenSteps.selectCustomer(appCustomer);
-        RegularServiceRequestTypesSteps.selectServiceRequestType(UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularServiceRequestTypesSteps.selectServiceRequestType(serviceRequestType);
     }
 
-    public static void startCreatingServicerequest(IServiceRequestTypes serviceRequestTypes) {
+    public static void startCreatingServicerequest(IServiceRequestTypes serviceRequestType) {
         waitServiceRequestScreenLoaded();
         RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
         serviceRequestsScreen.clickAddButton();
-        RegularServiceRequestTypesSteps.selectServiceRequestType(UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularServiceRequestTypesSteps.selectServiceRequestType(serviceRequestType);
     }
 
     public static void saveServiceRequestWithAppointment() {

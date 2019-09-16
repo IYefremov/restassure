@@ -136,14 +136,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		selectInspectionInTable(inspectionNumber);
 		clickEditInspectionButton();
 	}
-	
-	public <T extends IBaseWizardScreen> T createWOFromInspection(String inspNumber, WorkOrdersTypes workOrderType) {
-		selectInspectionInTable(inspNumber);
-		clickCreateWOButton();
-		WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-		workOrderTypesPopup.selectWorkOrderType(workOrderType.getWorkOrderTypeName());
-		return workOrderType.getFirstVizardScreen();
-	}
 
 	public void selectInspectionForApprove(String inspNumber) {
 		selectInspectionInTable(inspNumber);

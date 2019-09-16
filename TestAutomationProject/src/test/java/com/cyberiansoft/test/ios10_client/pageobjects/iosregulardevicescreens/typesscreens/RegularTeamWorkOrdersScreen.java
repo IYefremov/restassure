@@ -85,15 +85,6 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		editmanu.click();
 	}
 	
-	public <T extends IBaseWizardScreen>T selectWOInvoiceType(IInvoicesTypes invoiceType) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(invoiceType.getInvoiceTypeName())));
-		wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(invoiceType.getInvoiceTypeName())));
-		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		return invoiceType.getFirstVizardScreen();
-	}
-	
 	public void verifyCreateInvoiceIsActivated(String workOrderID) {
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
 				+ workOrderID + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
@@ -231,14 +222,5 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
-	}
-
-	public <T extends IBaseWizardScreen> T selectInvoiceType(IInvoicesTypes invoiceType) {
-		if (!appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).isDisplayed()) {
-			swipeToElement(appiumdriver.
-					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + invoiceType.getInvoiceTypeName() + "']/..")));
-		}
-		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		return invoiceType.getFirstVizardScreen();
 	}
 }

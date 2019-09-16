@@ -212,11 +212,6 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 
-	public <T extends IBaseWizardScreen>T selectInvoiceType(IInvoicesTypes invoiceType) {
-		clickInvoiceType(invoiceType);
-		return invoiceType.getFirstVizardScreen();
-	}
-
 	public void approveWorkOrderWithoutSignature(String workOrderNumber, String employee, String password) {
 		waitTeamWorkOrdersScreenLoaded();
 		selectWorkOrderForApprove(workOrderNumber);

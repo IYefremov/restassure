@@ -450,9 +450,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularWorkOrdersSteps.saveWorkOrder();
 
 		WorkOrderData workOrderDataCopiedServices = testCaseData.getWorkOrdersData().get(1);
-		RegularMyWorkOrdersSteps.selectWorkOrderForCopyServices(workOrderNumber);
-		customersScreen.selectCustomer(iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
-		RegularWorkOrderTypesSteps.selectWorkOrderType(WorkOrdersTypes.SPECIFIC_CLIENT_TEST_WO1);
+		RegularMyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, Specific_Client, WorkOrdersTypes.SPECIFIC_CLIENT_TEST_WO1);
 		vehicleScreen.setVIN(workOrderDataCopiedServices.getVehicleInfoData().getVINNumber());
 		RegularNavigationSteps.navigateToServicesScreen();
 		servicesScreen.switchToSelectedServicesTab();
@@ -890,9 +888,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.approveWorkOrder(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 
-		RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(workOrderNumber1);
-		customersScreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		RegularWorkOrderTypesSteps.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		RegularMyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber1, ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), workOrderData.getVehicleInfoData().getVehicleMake());
 		Assert.assertEquals(vehicleScreen.getModel(), workOrderData.getVehicleInfoData().getVehicleModel());
 		Assert.assertEquals(vehicleScreen.getYear(), workOrderData.getVehicleInfoData().getVehicleYear());
@@ -1338,9 +1334,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularWorkOrdersSteps.saveWorkOrder();
 		myWorkOrdersScreen.approveWorkOrder(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 
-		RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(workOrderNumber1);
-		customersScreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		RegularWorkOrderTypesSteps.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		RegularMyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber1, ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), workOrderData.getVehicleInfoData().getVehicleMake());
 		Assert.assertEquals(vehicleScreen.getModel(), workOrderData.getVehicleInfoData().getVehicleModel());
 
@@ -4779,8 +4773,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
 
-		RegularMyWorkOrdersSteps.selectWorkOrderForCopyServices(workOrderNumber);
-		RegularWorkOrderTypesSteps.selectWorkOrderType(WorkOrdersTypes.WO_TYPE_FOR_CALC);
+		RegularMyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
 		for (ServiceData serviceData : workOrderData.getServicesList())

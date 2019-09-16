@@ -1003,5 +1003,36 @@
         "inspectionTotalPrice": "$1,013.53"
       }
     }
+  ],
+  "testVerifySearchFunctionalityUnderTeamInvoices": [
+    {
+      "rowID": "testVerifyApprovingInvoiceFromTeamInvoice.01",
+      "description": "Test Case 28104: 37 - Verify search functionality under team invoices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83641",
+          "testCaseTitle": "Test Case 28104: 37 - Verify search functionality under team invoices"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
   ]
 }

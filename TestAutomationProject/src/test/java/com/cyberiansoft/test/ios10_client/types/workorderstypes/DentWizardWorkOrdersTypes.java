@@ -42,33 +42,4 @@ public enum DentWizardWorkOrdersTypes implements  IWorkOrdersTypes {
 
         throw new IllegalArgumentException(woType + " is not a valid WorkOrdersTypes");
     }
-
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen() {
-        DentWizardWorkOrdersTypes type = getWorkOrderType();
-        switch (type) {
-            case wizprotrackerrouteworkordertype:
-            case routeusworkordertype:
-            case servicedriveworkordertype:
-            case routecanadaworkordertype:
-            case wholesailhailworkordertype:
-            case carmaxworkordertype:
-            case enterpriseworkordertype:
-            case avisworkordertype:
-            case auctionworkordertype:
-            case wizardprotrackeravisworkordertype:
-            case wizardprotrackerservicedriveworkordertype:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new VehicleScreen();
-                else
-                    return (T) new RegularVehicleScreen();
-            case retailhailworkordertype:
-                if (BaseTestCase.mobilePlatform.equals(MobilePlatform.IOS_HD))
-                    return (T) new QuestionsScreen();
-                else
-                    return (T) new RegularQuestionsScreen();
-
-
-        }
-        return null;
-    }
 }

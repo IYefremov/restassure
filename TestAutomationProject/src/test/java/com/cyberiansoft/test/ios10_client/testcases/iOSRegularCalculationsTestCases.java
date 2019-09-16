@@ -1111,7 +1111,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrders.get(0));
 		myWorkOrdersScreen.clickInvoiceIcon();
 
-		teamWorkOrdersScreen.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
+		RegularInvoiceTypesSteps.selectInvoiceType(InvoicesTypes.INVOICE_CUSTOM1);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		RegularNavigationSteps.navigateToInvoiceInfoScreen();
 		RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();

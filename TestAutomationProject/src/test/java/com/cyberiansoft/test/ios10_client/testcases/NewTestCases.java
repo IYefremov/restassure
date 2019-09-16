@@ -151,9 +151,7 @@ public class NewTestCases extends BaseTestCase {
 		myworkordersscreen.clickApproveButton();
 		
 		//myworkordersscreen.searchWO(wonumber1);
-		RegularMyWorkOrdersSteps.selectWorkOrderForCopyVehicle(wonumber1);
-		customersscreen.selectCustomer(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		RegularWorkOrderTypesSteps.selectWorkOrderType(WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+		RegularMyWorkOrdersSteps.startCopyingVehicleForWorkOrder(wonumber1, ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), _make);
 		Assert.assertEquals(vehicleScreen.getModel(), _model);
 		Assert.assertEquals(vehicleScreen.getYear(), _year);

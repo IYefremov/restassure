@@ -5,5 +5,4 @@ import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWiz
 public interface IInvoicesTypes {
 
     public String getInvoiceTypeName();
-    public <T extends IBaseWizardScreen>T getFirstVizardScreen();
 }
