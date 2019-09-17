@@ -13,7 +13,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
-	
+
+	@FindBy(xpath = "//strong[text()='Enter your Email address']")
+	private WebElement enterEmailLabel;
+
 	@FindBy(id = "confirmEmail")
 	private TextField confirmmailfld;
 	
@@ -22,6 +25,9 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//button[@class='btn btn-autofocus' and text()='OK']")
 	private WebElement alertOKbtn;
+
+	@FindBy(id = "loginLogin")
+	private WebElement loginLink;
 	
 	public VNextBOForgotPasswordWebPage(WebDriver driver) {
 		super(driver);
@@ -51,9 +57,23 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	public boolean isConfirmationMailFieldDisplayed() {
 		return confirmmailfld.isDisplayed();
 	}
+
+	public boolean isLoginLinkDisplayed() {
+		return loginLink.isDisplayed();
+	}
+
+	public boolean isEnterEmailLLabelDisplayed()  { return enterEmailLabel.isDisplayed(); }
+
+	public boolean isSubmitButtonDisplayed()  { return submitbtn.isDisplayed(); }
 	
 	public void clickSubmitButton() {
 		submitbtn.click();
+	}
+
+	public VNextBOLoginScreenWebPage clickLoginLink() {
+		loginLink.click();
+		return PageFactory.initElements(
+				driver, VNextBOLoginScreenWebPage.class);
 	}
 	
 	public String getErrorMessageValue() {
