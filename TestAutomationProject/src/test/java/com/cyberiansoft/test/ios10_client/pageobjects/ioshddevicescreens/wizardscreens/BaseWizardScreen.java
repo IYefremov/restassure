@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizard
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSHDBaseScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,17 +15,21 @@ public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScre
         super();
     }
 
-    public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType) {
+    public void selectNextScreen(WizardScreenTypes wizardScreenType) {
         IOSElement navbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar");
         navbar.findElementByIosNsPredicate("label CONTAINS '/'").click();
         appiumdriver.findElementByAccessibilityId(wizardScreenType.getDefaultScreenTypeName()).click();
-        return (T) WizardScreensFactory.getWizardScreenType(wizardScreenType);
     }
 
-    public <T extends IBaseWizardScreen> T selectNextScreen(WizardScreenTypes wizardScreenType, String screenName) {
-        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(MobileBy.AccessibilityId("WizardStepsButton"))).click();
+    public void selectNextScreen(String screenName) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("WizardStepsButton"))).click();
         appiumdriver.findElementByAccessibilityId(screenName).click();
-        return (T) WizardScreensFactory.getWizardScreenType(wizardScreenType);
+    }
+
+    public void waitScreenLoaded(String screenName) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'viewPrompt' and label = '" + screenName+ "'")));
     }
 
     public void clickSave() {

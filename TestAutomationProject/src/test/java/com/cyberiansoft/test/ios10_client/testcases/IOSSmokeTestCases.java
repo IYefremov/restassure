@@ -377,11 +377,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(Specific_Client, WorkOrdersTypes.SPECIFIC_CLIENT_TEST_WO1);
 		VehicleScreen vehicleScreen = new VehicleScreen();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		Assert.assertTrue(servicesScreen.checkDefaultServiceIsSelected());
 		servicesScreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.WHEEL_SERVICE));
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		Assert.assertTrue(orderSummaryScreen.checkDefaultServiceIsSelected());
 		Assert.assertTrue(orderSummaryScreen.checkServiceIsSelected(iOSInternalProjectConstants.WHEEL_SERVICE));
 		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(summ));
@@ -394,7 +396,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(alertText.contains("VIN# is required"));
 		vehicleScreen.setVIN(VIN);
 
-		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 		orderSummaryScreen.clickSave();
 		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectDefaultInvoiceType();
 		invoiceInfoScreen.clickSaveEmptyPO();
@@ -420,7 +422,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 
 		servicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getMoneyServiceData().getServiceName()));
@@ -488,7 +491,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, Specific_Client,
 				WorkOrdersTypes.SPECIFIC_CLIENT_TEST_WO1);
 		vehicleScreen.setVIN(workOrderDataCopiedServices.getVehicleInfoData().getVINNumber());
-		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		ServicesScreenSteps.verifyServicesAreSelected(workOrderDataCopiedServices.getSelectedServices());
 		NavigationSteps.navigateToOrderSummaryScreen();
 		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), workOrderDataCopiedServices.getWorkOrderPrice());
@@ -722,7 +725,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setStock(vehicleInfoData.getVehicleStock());
 		vehicleScreen.setRO(vehicleInfoData.getRoNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
 			if (serviceData.getServiceQuantity() != null) {
 				servicesScreen.selectService(serviceData.getServiceName());
@@ -733,7 +737,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				servicesScreen.selectService(serviceData.getServiceName());
 		}
 
-		ClaimScreen claimScreen = servicesScreen.selectNextScreen(WizardScreenTypes.CLAIM);
+		NavigationSteps.navigateToClaimScreen();
+		ClaimScreen claimScreen = new ClaimScreen();
 		claimScreen.selectInsuranceCompany(serviceRequestData.getInsuranceCompany().getInsuranceCompanyName());
 		servicesScreen.clickSave();
 		Helpers.waitForAlert();
@@ -949,7 +954,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
 		NavigationSteps.navigateToOrderSummaryScreen();
 		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
@@ -962,7 +968,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(vehicleScreen.getMake(), workOrderData.getVehicleInfoData().getVehicleMake());
 		Assert.assertEquals(vehicleScreen.getModel(), workOrderData.getVehicleInfoData().getVehicleModel());
 		Assert.assertEquals(vehicleScreen.getYear(), workOrderData.getVehicleInfoData().getVehicleYear());
-		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -993,7 +999,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
 		servicesScreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		servicesScreen = new ServicesScreen();
@@ -1071,10 +1078,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			VehicleScreen vehicleScreen = new VehicleScreen();
 			vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 			workOrderIDs.add(vehicleScreen.getInspectionNumber());
-			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+			NavigationSteps.navigateToServicesScreen();
+			ServicesScreen servicesScreen = new ServicesScreen();
 			for (ServiceData serviceData : workOrderData.getServicesList())
 				servicesScreen.selectService(serviceData.getServiceName());
-			OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			NavigationSteps.navigateToOrderSummaryScreen();
+			OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 			orderSummaryScreen.clickSave();
 		}
 
@@ -1118,11 +1127,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
 
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		String workOrderNumber1 = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.saveWizard();
 
@@ -1168,11 +1179,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
 
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		String workOrderNumber1 = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.saveWizard();
 
@@ -1242,8 +1255,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String inspNumber = vehicleScreen.getInspectionNumber();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		for (VisualScreenData visualScreenData : inspectionData.getVisualScreensData()) {
-			VisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, visualScreenData.getScreenName());
-			visualInteriorScreen.waitVisualScreenLoaded(visualScreenData.getScreenName());
+			NavigationSteps.navigateToScreen(visualScreenData.getScreenName());
+			VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 			visualInteriorScreen.selectService(visualScreenData.getDamageData().getDamageGroupName());
 			visualInteriorScreen.tapInterior();
 			if (visualScreenData.getScreenTotalPrice() != null)
@@ -1252,7 +1265,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (QuestionScreenData questionScreenData : inspectionData.getQuestionScreensData())
 			QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(questionScreenData);
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(inspectionData.getMoneyServiceData().getServiceName()));
 		SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
@@ -1301,14 +1315,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(vehicleScreen.getModel(), inspectionData.getVehicleInfo().getVehicleModel());
 
 		for (VisualScreenData visualScreenData : inspectionData.getVisualScreensData()) {
-			VisualInteriorScreen visualInteriorScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, visualScreenData.getScreenName());
+			NavigationSteps.navigateToScreen( visualScreenData.getScreenName());
+			VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 			visualInteriorScreen.waitVisualScreenLoaded(visualScreenData.getScreenName());
 		}
 
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
 		ServicesScreenSteps.verifyServicesAreSelected(inspectionData.getSelectedServices());
 
-		servicesScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.FOLLOW_UP_REQUESTED);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.FOLLOW_UP_REQUESTED);
 		QuestionsScreen questionScreen = new QuestionsScreen();
 		questionScreen.waitQuestionsScreenLoaded();
 		SinglePageInspectionScreen singlePageInspectionScreen = new SinglePageInspectionScreen();
@@ -1342,7 +1357,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(testCaseData.getWorkOrderData().getVehicleInfoData().getVINNumber());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		String workOrderNumber1 = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.saveWizard();
 
@@ -1379,10 +1395,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
 
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		String workOrderNumber1 = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.clickSave();
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber1, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1390,7 +1408,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber1, ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), workOrderData.getVehicleInfoData().getVehicleMake());
 		Assert.assertEquals(vehicleScreen.getModel(), workOrderData.getVehicleInfoData().getVehicleModel());
-		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1446,11 +1464,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyInspectionsSteps.startCreatingInspection(_002_Test_Customer, InspectionsTypes.INSP_CHANGE_INSPTYPE);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
-		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionnumber = vehicleScreen.getInspectionNumber();
 
-		ClaimScreen claimScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.CLAIM);
+		NavigationSteps.navigateToClaimScreen();
+		ClaimScreen claimScreen = new ClaimScreen();
 		claimScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 
@@ -1460,7 +1480,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
-		vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		Assert.assertEquals(vehicleScreen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		vehicleScreen.saveWizard();
 
@@ -1487,11 +1507,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyInspectionsSteps.startCreatingInspection(_002_Test_Customer, InspectionsTypes.INSP_CHANGE_INSPTYPE);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
-		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionnumber = vehicleScreen.getInspectionNumber();
 
-		ClaimScreen claimScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.CLAIM);
+		NavigationSteps.navigateToClaimScreen();
+		ClaimScreen claimScreen = new ClaimScreen();
 		claimScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 		vehicleScreen.saveWizard();
@@ -1510,7 +1532,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
-		vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		Assert.assertTrue(vehicleScreen.getInspectionCustomer().contains(iOSInternalProjectConstants.JOHN_RETAIL_CUSTOMER));
 		vehicleScreen.saveWizard();
 		myInspectionsScreen.clickHomeButton();
@@ -1536,11 +1558,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyInspectionsSteps.startCreatingInspection(_002_Test_Customer, InspectionsTypes.TYPEWITHPRESELECTEDCOMPANIES_INSPTYPE);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
-		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionnumber = vehicleScreen.getInspectionNumber();
 
-		ClaimScreen claimScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.CLAIM);
+		NavigationSteps.navigateToClaimScreen();
+		ClaimScreen claimScreen = new ClaimScreen();
 		claimScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
 		claimScreen.saveWizard();
 		myInspectionsScreen.changeCustomerForInspection(inspectionnumber, iOSInternalProjectConstants.O03TEST__CUSTOMER);
@@ -1548,7 +1572,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(VisualInteriorScreen.getVisualExteriorCaption());
-		vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		Assert.assertEquals(vehicleScreen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		vehicleScreen.saveWizard();
 		myInspectionsScreen.clickHomeButton();
@@ -1573,11 +1597,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(_002_Test_Customer, WorkOrdersTypes.WO_CLIENT_CHANGING_ON);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		String workOrderNumber = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.saveWizard();
@@ -1610,11 +1636,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		String workOrderNumber = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.saveWizard();
@@ -1649,11 +1677,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		String workOrderNumber = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.saveWizard();
@@ -1698,7 +1728,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.clickSave();
 		orderSummaryScreen.waitForCustomWarningMessage(String.format(AlertsCaptions.ALERT_YOU_CANT_CREATE_WORK_ORDER_BECAUSE_VIN_EXISTS,
@@ -1731,12 +1762,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.clickSave();
 		orderSummaryScreen.waitForCustomWarningMessage("Duplicate services", "Cancel");
@@ -1765,12 +1798,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 		servicesScreen.selectService(workOrderData.getServiceData().getServiceName());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.clickSave();
 		orderSummaryScreen.waitForCustomWarningMessage("Duplicate services", "Edit");
@@ -1804,12 +1839,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		String workOrderNumber = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.clickSave();
@@ -1843,12 +1880,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		String workOrderNumber = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.clickSave();
@@ -1878,13 +1917,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setType(inspectionData.getVehicleInfo().getVehicleType());
 		vehicleScreen.setPO(inspectionData.getVehicleInfo().getPoNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
-		ClaimScreen claimScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.CLAIM);
+		NavigationSteps.navigateToClaimScreen();
+		ClaimScreen claimScreen = new ClaimScreen();
 		claimScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
 		claimScreen.setClaim(inspectionData.getInsuranceCompanyData().getClaimNumber());
 		claimScreen.setAccidentDate();
 
 		for (VisualScreenData visualScreenData : inspectionData.getVisualScreensData()) {
-			VisualInteriorScreen visualInteriorScreen = claimScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, visualScreenData.getScreenName());
+			NavigationSteps.navigateToScreen(visualScreenData.getScreenName());
+			VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 			visualInteriorScreen.waitVisualScreenLoaded(visualScreenData.getScreenName());
 			if (visualScreenData.getDamagesData() != null) {
 				visualInteriorScreen.selectService(visualScreenData.getDamagesData().get(0).getDamageGroupName());
@@ -1902,13 +1943,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			PriceMatrixScreenSteps.goTopriceMatrixScreenAndSelectPriceMatrixData(priceMatrixScreenData);
 		}
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ALL_SERVICES);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ALL_SERVICES);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		}
 		servicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 
-		VisualInteriorScreen visualInteriorScreen = servicesScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR, inspectionData.getVisualScreenData().getScreenName());
+		NavigationSteps.navigateToScreen(inspectionData.getVisualScreenData().getScreenName());
+		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.selectService(inspectionData.getVisualScreenData().getDamageData().getDamageGroupName());
 		visualInteriorScreen.tapCarImage();
 		Assert.assertEquals(visualInteriorScreen.getTotalAmaunt(), inspectionData.getVisualScreenData().getScreenTotalPrice());
@@ -1918,7 +1961,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.waitVehicleScreenLoaded();
 
 		for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
-			vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+			NavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
 			for (VehiclePartData vehiclePartData : priceMatrixScreenData.getVehiclePartsData()) {
 				PriceMatrixScreenSteps.verifyIfVehiclePartContainsPriceValue(vehiclePartData);
 			}
@@ -1948,7 +1991,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel(), serviceRequestData.getVihicleInfo().getVehicleYear());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
@@ -2049,7 +2093,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVINFieldValue(serviceRequestData.getVihicleInfo().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
@@ -2108,7 +2153,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVINFieldValue(serviceRequestData.getVihicleInfo().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
@@ -2171,10 +2217,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		VehicleInfoScreenSteps.verifyMakeModelyearValues(workOrderData.getVehicleInfoData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
-		final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
-		servicesScreen = new ServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getMatrixServiceData().getMatrixServiceName()));
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
 		vehicleScreen.cancelWizard();
@@ -2230,7 +2275,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(VIN);
 		vehicleScreen.verifyMakeModelyearValues("Dodge", "Charger", "2014");
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		servicesScreen.selectServicePriceMatrices("Price Matrix Zayats");
 		PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
@@ -2250,7 +2296,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		priceMatrixScreen.clickSaveButton();
 		servicesScreen = new ServicesScreen();
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX));
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale("5");
 		orderSummaryScreen.saveWizard();
 		myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -2295,14 +2342,16 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
 		vehicleScreen.selectLocation("Test Location ZZZ");
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
 		servicesScreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		servicesScreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
 		servicesScreen.selectService(iOSInternalProjectConstants.TEST_TAX_SERVICE);
 		servicesScreen.selectService(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE);
 		servicesScreen.selectService(iOSInternalProjectConstants.VPS1_SERVICE);
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale("5");
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -2331,17 +2380,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleInfoScreenSteps.verifyMakeModelyearValues(workOrderData.getVehicleInfoData());
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
 		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
-		homeScreen = myWorkOrdersScreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 
 		HomeScreenSteps.navigateToTeamWorkOrdersScreen();
 		TeamWorkOrdersScreen teamWorkordersScreen = new TeamWorkOrdersScreen();
@@ -2388,17 +2439,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
 		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
-		homeScreen = myWorkOrdersScreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 
 		HomeScreenSteps.navigateToTeamWorkOrdersScreen();
 		TeamWorkOrdersScreen teamWorkordersScreen = new TeamWorkOrdersScreen();
@@ -2449,18 +2502,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen= new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
 		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
-
-		homeScreen = myWorkOrdersScreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 
 		TeamWorkOrdersScreen teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
 		teamWorkordersScreen.clickSearchButton();
@@ -2504,7 +2558,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.verifyMakeModelyearValues("Dodge", "Ram Pickup 1500", "2009");
 		vehicleScreen.selectLocation("Test Location ZZZ");
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
 		servicesScreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 		servicesScreen.selectService(iOSInternalProjectConstants.WHEEL_SERVICE);
@@ -2524,7 +2579,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		priceMatrixScreen.clickSaveButton();
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(iOSInternalProjectConstants.DENT_REMOVAL_SERVICE));
 
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale("5");
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -2554,7 +2610,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		serviceDetailsPopup = orderMonitorScreen.selectPanel(iOSInternalProjectConstants.DYE_SERVICE);
 		serviceDetailsPopup.clickServiceStatusCell();
-		;
 		String alertText = Helpers.getAlertTextAndAccept();
 		Assert.assertTrue(alertText.contains("You cannot change the status of services for this phase. You can only change the status of the whole phase."));
 		serviceDetailsPopup.clickServiceDetailsDoneButton();
@@ -2594,7 +2649,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.selectOwnerT(owner);
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 
 		servicesScreen.clickSave();
@@ -2625,7 +2681,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.selectOwnerT(owner);
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen( ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 
 		servicesScreen.clickSave();
@@ -2658,7 +2715,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.selectOwnerT(owner);
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		servicesScreen.clickSave();
 		String alertText = Helpers.getAlertTextAndCancel();
@@ -2694,7 +2752,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen= new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		vehicleScreen.selectOwnerT(owner);
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 
 		servicesScreen.clickSave();
@@ -2735,10 +2794,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -2802,10 +2863,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			servicesScreen.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -2898,10 +2961,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -2941,10 +3005,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		Assert.assertEquals(orderSummaryScreen.getTotalSaleValue(), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderTotalSale()));
 		orderSummaryScreen.checkApproveAndCreateInvoice();
@@ -2981,10 +3046,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
 			VehicleScreen vehicleScreen = new VehicleScreen();
 			vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
+			NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
 			for (ServiceData serviceData : workOrderData.getServicesList())
 				ServicesScreenSteps.selectService(serviceData.getServiceName());
-			OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			NavigationSteps.navigateToOrderSummaryScreen();
+			OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 			orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -3034,7 +3100,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.clickSave();
@@ -3075,7 +3142,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ALL_PHASES);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectService(serviceRequestData.getMoneyService().getServiceName());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.clickSave();
@@ -3086,7 +3154,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.rejectServiceRequest(serviceRequestNumber);
 		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_DRAFT_MODE);
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
-		servicesScreen = servicesScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		servicesScreen.clickSaveAsFinal();
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		ServiceRequestdetailsScreen serviceRequestdetailsScreen = serviceRequestsScreen.selectDetailsRequestAction();
@@ -3282,7 +3350,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WOTYPE_BLOCK_FOR_THE_SAME_SERVICES_ON);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 			Assert.assertEquals(Helpers.getAlertTextAndAccept(), String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
@@ -3314,9 +3383,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
-		;
-
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 
 		servicesScreen.openCustomServiceDetails(inspectionData.getBundleService().getBundleServiceName());
 		SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
@@ -3330,7 +3398,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 				iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		MyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber,
 				WorkOrdersTypes.WO_TYPE_FOR_CALC);
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		servicesScreen.openServiceDetails(inspectionData.getBundleService().getBundleServiceName());
 		SelectedServiceBundleScreen selectedservicebundlescreen = new SelectedServiceBundleScreen();
 		for (ServiceData serviceData : inspectionData.getBundleService().getServices()) {
@@ -3366,7 +3434,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		servicesScreen.saveWizard();
 
@@ -3398,7 +3467,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		servicesScreen.saveWizard();
 
@@ -3431,7 +3501,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		servicesScreen.saveWizard();
 
@@ -3463,7 +3534,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		servicesScreen.saveWizard();
 
@@ -3498,7 +3570,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		servicesScreen.saveWizard();
 
@@ -3538,7 +3611,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		servicesScreen.saveWizard();
 
@@ -3573,7 +3647,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		servicesScreen.clickSave();
@@ -3586,7 +3661,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			Assert.assertTrue(servicesScreen.checkServiceIsSelected(serviceData.getServiceName()));
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(totalSale);
 		String workOrderNumber = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.clickSave();
@@ -3635,7 +3711,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_INSP_ONLY);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		servicesScreen.clickSave();
@@ -3716,7 +3793,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForEdit(inspectionnumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 		PriceMatrixScreenData priceMatrixScreenData = inspectionData.getPriceMatrixScreensData().get(0);
-		PriceMatrixScreen priceMatrixScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+		NavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
+		PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
 		priceMatrixScreen.selectPriceMatrix(priceMatrixScreenData.getVehiclePartData().getVehiclePartName());
 		Assert.assertEquals(priceMatrixScreen.clearVehicleData(), AlertsCaptions.ALERT_ALL_VEHICLE_PART_DATA_WILL_BE_ERASED);
 		InspectionToolBar inspectionToolBar = new InspectionToolBar();
@@ -3758,7 +3836,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
 		ServiceDetailsScreenSteps.slectServiceVehicleParts(inspectionData.getServiceData().getVehicleParts());
 		SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
@@ -3824,7 +3903,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		String inspectionnumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectServiceWithServiceData(inspectionData.getServiceData());
 		servicesScreen.saveWizard();
 
@@ -3862,7 +3942,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ALL_PHASES);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.clickSave();
@@ -3875,7 +3956,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InspectionData inspectionData = testCaseData.getInspectionData();
 
 		String inspectionnumber = vehicleScreen.getInspectionNumber();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		ServicesScreenSteps.selectServiceWithServiceData(inspectionData.getServiceData());
 		servicesScreen.clickSaveAsDraft();
 		serviceRequestsScreen = new ServiceRequestsScreen();
@@ -3913,7 +3994,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		}
@@ -3947,7 +4029,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.waitInspectionsScreenLoaded();
 		myInspectionsScreen.selectInspectionForCopy(inspectionNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.TEST_PACK_FOR_CALC);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.TEST_PACK_FOR_CALC);
 		for (ServiceData serviceData : inspectionData.getServicesToApprovesList())
 			if (serviceData.isSelected())
 				Assert.assertTrue(servicesScreen.checkServiceIsSelected(serviceData.getServiceName()));
@@ -4015,7 +4097,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			VehicleScreen vehicleScreen = new VehicleScreen();
 			vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 			inpectionsIDs.add(vehicleScreen.getInspectionNumber());
-			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+			NavigationSteps.navigateToServicesScreen();
+			ServicesScreen servicesScreen = new ServicesScreen();
 			servicesScreen.selectService(inspectionData.getBundleService().getBundleServiceName());
 			SelectedServiceDetailsScreen servicedetailsscreen = new SelectedServiceDetailsScreen();
 			servicedetailsscreen.changeAmountOfBundleService(inspectionData.getBundleService().getBundleServiceAmount());
@@ -4075,11 +4158,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreensData().get(0));
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.ZAYATS_TEST_PACK);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectService(inspectionData.getServiceData().getServiceName());
 		for (ServicesScreenData servicesScreenData : inspectionData.getServicesScreens()) {
-			servicesScreen.selectNextScreen(WizardScreenTypes.SERVICES, servicesScreenData.getScreenName());
-			servicesScreen.waitServicesScreenLoaded();
+			NavigationSteps.navigateToScreen(servicesScreenData.getScreenName());
 			servicesScreen.selectGroupServiceItem(servicesScreenData.getDamageData().getDamageGroupName());
 			ServicesScreenSteps.selectServiceWithServiceData(servicesScreenData.getDamageData().getMoneyService());
 		}
@@ -4120,7 +4203,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		}
@@ -4133,7 +4217,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.approveInspectionApproveAllAndSignature(inspectionNumber);
 
 		MyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList())
 			if (serviceData.isSelected())
 				Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(serviceData));
@@ -4165,7 +4249,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.clickSaveAsFinal();
 		myInspectionsScreen.selectInspectionToAssign(inspectionNumber);
 		DevicesPopupScreen devicesscreen = new DevicesPopupScreen();
@@ -4197,7 +4282,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList())
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		servicesScreen.saveWizard();
@@ -4246,7 +4332,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			final String inspectionNumber = vehicleScreen.getInspectionNumber();
 			inspections.add(inspectionNumber);
 			QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
-			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+			NavigationSteps.navigateToServicesScreen();
+			ServicesScreen servicesScreen = new ServicesScreen();
 			servicesScreen.saveWizard();
 			myInspectionsScreen.selectInspectionForAction(inspectionNumber);
 			SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -4300,7 +4387,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 			inspections.add(vehicleScreen.getInspectionNumber());
 			QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
-			ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+			NavigationSteps.navigateToServicesScreen();
+			ServicesScreen servicesScreen = new ServicesScreen();
 			servicesScreen.saveWizard();
 		}
 		myInspectionsScreen.selectInspectionForAction(inspections.get(0));
@@ -4352,7 +4440,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList())
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		servicesScreen.clickSaveAsDraft();
@@ -4392,9 +4481,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(VIN);
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
-		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, ScreenNamesConstants.ZAYATS_SECTION1);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_SECTION1);
+		QuestionsScreen questionsScreen = new QuestionsScreen();
 		questionsScreen.selectAnswerForQuestion("Question 2", "A1");
-		ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY_PANEL);
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServiceDetailsScreen.selectVehiclePart("Hood");
@@ -4469,9 +4560,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectService(workOrderData.getServiceData().getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -4508,13 +4601,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
 
 		servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -4589,12 +4684,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
 		servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -4670,13 +4767,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
 
 		servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -4743,7 +4842,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(VIN);
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.selectService(iOSInternalProjectConstants.DISC_EX_SERVICE1);
 		servicesScreen.selectService(iOSInternalProjectConstants.DYE_SERVICE);
 
@@ -4762,7 +4862,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
 		servicesScreen.selectService(iOSInternalProjectConstants.VPS1_SERVICE);
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale("5");
 		orderSummaryScreen.saveWizard();
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
@@ -4882,8 +4983,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			ServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.valueOf(inspectionData.getInspectionType()));
 			inspectionNumbers.add(vehicleScreen.getInspectionNumber());
 			if (inspectionData.isDraft()) {
-				ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
-				servicesScreen = new ServicesScreen();
+				NavigationSteps.navigateToServicesScreen();
+				ServicesScreen servicesScreen = new ServicesScreen();
 				servicesScreen.clickSaveAsDraft();
 			} else
 				vehicleScreen.saveWizard();
@@ -4903,7 +5004,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			ServiceRequestSteps.startCreatingWorkOrderFromServiceRequest(serviceRequestNumber, WorkOrdersTypes.valueOf(workOrderData.getWorkOrderType()));
 			workOrderNumbers.add(vehicleScreen.getInspectionNumber());
-			OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+			NavigationSteps.navigateToOrderSummaryScreen();
+			OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 			orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 			orderSummaryScreen.saveWizard();
 		}
@@ -5008,12 +5110,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_SPORT_CAR);
-		VehicleScreen vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
-		;
+		NavigationSteps.navigateToVehicleInfoScreen();
+		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			if (serviceData.getServicePrice() != null)
 				ServicesScreenSteps.selectServiceWithServiceData(serviceData);
@@ -5025,12 +5128,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.selectInspectionForEdit(inspectionNumber);
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_SPORT_CAR);
-		vehicleScreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
 		notesScreen.setNotes(inspectionNotes);
 		notesScreen.clickSaveButton();
 
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			SelectedServiceDetailsScreen servicedetailsscreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
 			notesScreen = servicedetailsscreen.clickNotesCell();
@@ -5081,7 +5184,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(notesScreen.getNotesValue(), inspectionNotes);
 		notesScreen.clickSaveButton();
 		Assert.assertEquals(vehicleScreen.getEst(), inspectionNumber);
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
 			SelectedServiceDetailsScreen servicedetailsscreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
 			notesScreen = servicedetailsscreen.clickNotesCell();
@@ -5110,7 +5213,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectServiceWithServiceData(inspectionData.getServiceData());
 
 		servicesScreen.openServiceDetailsByIndex(iOSInternalProjectConstants.OKSI_SERVICE_PP_VEHICLE, 0);
@@ -5163,7 +5267,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setType(_type);
 		vehicleScreen.setStock(stock);
 		vehicleScreen.setRO(_ro);
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.DYE_SERVICE);
 		selectedServiceDetailsScreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
@@ -5174,7 +5279,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(selectedServiceDetailsScreen.getVehiclePartValue(), "Cowl, Other Hood");
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		Assert.assertEquals(servicesScreen.getNumberOfServiceSelectedItems(iOSInternalProjectConstants.DYE_SERVICE), 2);
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		String workOrderNumber1 = orderSummaryScreen.getWorkOrderNumber();
 		orderSummaryScreen.saveWizard();
 
@@ -5183,8 +5289,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber1, retailcustomer, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), _make);
 		Assert.assertEquals(vehicleScreen.getModel(), _model);
-		//Assert.assertEquals(vehicleScreen.getYear(), _year);
-		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -5289,7 +5394,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(VIN);
 
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.checkApproveAndCreateInvoice();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -5297,7 +5403,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectDefaultInvoiceType();
 		invoiceInfoScreen.clickFirstWO();
 		vehicleScreen.waitVehicleScreenLoaded();
-		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 		Assert.assertFalse(orderSummaryScreen.isApproveAndCreateInvoiceExists());
 		orderSummaryScreen.clickCancelButton();
 		Helpers.acceptAlert();
@@ -5324,7 +5430,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		;
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectMatrixService(workOrderData.getMatrixServiceData());
 		PriceMatrixScreenSteps.selectVehiclePart(workOrderData.getMatrixServiceData().getVehiclePartData());
 		PriceMatrixScreenSteps.setVehiclePartPrice(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartPrice());
@@ -5339,7 +5446,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		servicesScreen.waitServicesScreenLoaded();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -5367,7 +5475,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectService(workOrderData.getServiceData().getServiceName());
 		ServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
 		SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
@@ -5387,7 +5496,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.clickCancelSelectedServiceDetails();
 		servicesScreen = new ServicesScreen();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
@@ -5413,7 +5523,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 
@@ -5422,7 +5533,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		Assert.assertEquals(servicesScreen.getSubTotalAmaunt(), workOrderData.getWorkOrderPrice());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -5456,8 +5568,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
 		final String workOrderNumber1 = vehicleScreen.getInspectionNumber();
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
-
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -5498,7 +5610,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		final String workOrderNumber2 = vehicleScreen.getInspectionNumber();
 		NavigationSteps.navigateToServicesScreen();
-		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -5523,7 +5635,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
 		final String workOrderNumber3 = vehicleScreen.getInspectionNumber();
-		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
@@ -5595,7 +5707,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		ServiceDetailsScreenSteps.slectServiceVehicleParts(workOrderData.getServiceData().getVehicleParts());
 
@@ -5653,7 +5766,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
@@ -5737,20 +5851,21 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreenSteps.selectService(workOrderData.getServiceData().getServiceName());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		Assert.assertFalse(orderSummaryScreen.isTotalSaleFieldPresent());
 		orderSummaryScreen.clickSave();
 		myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
-		homeScreen = myWorkOrdersScreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 
 		TeamWorkOrdersScreen teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
 		teamWorkordersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
 		Assert.assertFalse(orderSummaryScreen.isTotalSaleFieldPresent());
 		orderSummaryScreen.clickSave();
 		teamWorkordersScreen.waitTeamWorkOrdersScreenLoaded();
-		homeScreen = teamWorkordersScreen.clickHomeButton();
+		teamWorkordersScreen.clickHomeButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -5771,7 +5886,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 
@@ -5787,7 +5903,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		PriceMatrixScreenSteps.savePriceMatrixData();
 
 		servicesScreen.waitServicesScreenLoaded();
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 		TechniciansPopup techniciansPopup = myWorkOrdersScreen.selectWorkOrderTechniciansMenuItem(workOrderNumber);
@@ -5821,7 +5938,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
-		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		for (DamageData damageData : inspectionData.getDamagesData()) {
 			servicesScreen.selectGroupServiceItem(damageData.getDamageGroupName());
 			for (ServiceData serviceData : damageData.getMoneyServices())
@@ -5850,13 +5967,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getDamageData().getMoneyServices()) {
 			servicesScreen.selectService(workOrderData.getDamageData().getDamageGroupName());
 			servicesScreen.selectServiceSubSrvice(workOrderData.getDamageData().getDamageGroupName(), serviceData.getServiceName());
@@ -5890,13 +6009,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
 
-		QuestionsScreen questionsScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, "Zayats Section2");
+		NavigationSteps.navigateToScreen("Zayats Section2");
+		QuestionsScreen questionsScreen = new QuestionsScreen();
 		questionsScreen.selectAnswerForQuestionWithAdditionalConditions(questionName, questionAswer, questionAswerSecond, questionVehiclePart);
-		ServicesScreen servicesScreen = questionsScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getServiceData().getServiceName()));
 
 		servicesScreen.cancelWizard();
-		homeScreen = myWorkOrdersScreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -5915,7 +6036,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			if (serviceData.getVehiclePart() != null)
 				ServicesScreenSteps.selectServiceWithServiceData(serviceData);
@@ -6212,7 +6334,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 
 		for (ServiceData serviceData : workOrderData.getMoneyServices()) {
 			ServicesScreenSteps.openCustomServiceDetails(serviceData.getServiceName());
@@ -6227,14 +6350,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			ServiceDetailsScreenSteps.saveServiceDetails();
 		}
 
-		vehicleScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
 		techniciansPopup.selecTechnician(workOrderData.getVehicleInfoData().getNewTechnician().getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechViewDetails();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 		vehicleScreen = new VehicleScreen();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : workOrderData.getMoneyServices()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
 			if (serviceData.getServicePrice2() != null)
@@ -6270,7 +6393,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.clickTechnicianToolbarIcon();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.NO_SELECTED_SERVICES);
 		for (DamageData damageData : workOrderData.getDamagesData()) {
@@ -6348,7 +6472,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
 
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -6374,12 +6499,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.selectLocation(defaultLocationValue);
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getMoneyServices())
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 
-		servicesScreen = new ServicesScreen();
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 		myWorkOrdersScreen.clickHomeButton();
@@ -6450,12 +6576,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.selectLocation(defaultLocationValue);
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getMoneyServices())
 			ServicesScreenSteps.selectServiceWithServiceData(serviceData);
 
-		servicesScreen = new ServicesScreen();
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 		myWorkOrdersScreen.clickHomeButton();
@@ -6494,12 +6621,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		}
-
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
@@ -6510,7 +6638,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		techniciansPopup.saveTechViewDetails();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
 
-		vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
 			techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
@@ -6540,10 +6668,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
 		servicesScreen.waitServicesScreenLoaded();
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -6577,7 +6707,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -6585,7 +6716,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectMatrixService(workOrderData.getMatrixServiceData());
 		VehiclePartData vehiclePartData = workOrderData.getMatrixServiceData().getVehiclePartData();
 		PriceMatrixScreenSteps.selectVehiclePart(vehiclePartData);
@@ -6635,7 +6767,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -6643,7 +6776,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectMatrixService(workOrderData.getMatrixServiceData());
 		VehiclePartData vehiclePartData = workOrderData.getMatrixServiceData().getVehiclePartData();
 		PriceMatrixScreenSteps.selectVehiclePart(vehiclePartData);
@@ -6697,25 +6831,27 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		ServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
 		ServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
 		ServiceDetailsScreenSteps.saveServiceDetails();
 
-		vehicleScreen = servicesScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
 		techniciansPopup.selecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechnociansViewWithAlert();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 
 		SelectedServiceDetailsScreen serviceDetailsScreen = servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
 		techniciansPopup = serviceDetailsScreen.clickTechniciansIcon();
@@ -6745,7 +6881,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		OrderSummaryScreen orderSummaryScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -6753,7 +6890,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.selectMatrixService(workOrderData.getMatrixServiceData());
 		VehiclePartData vehiclePartData = workOrderData.getMatrixServiceData().getVehiclePartData();
 		PriceMatrixScreenSteps.selectVehiclePart(vehiclePartData);
@@ -6794,14 +6932,16 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		ServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
 		ServiceDetailsScreenSteps.selectServiceAdjustment(workOrderData.getServiceData().getServiceAdjustment());
 		ServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
 		ServiceDetailsScreenSteps.saveServiceDetails();
 
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -6860,8 +7000,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			serviceBundleScreen.waitUntilBundlePopupOpened();
 		}
 		serviceBundleScreen.clickCancelBundlePopupButton();
-		servicesScreen = new ServicesScreen();
-		vehicleScreen = servicesScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
@@ -6895,7 +7034,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -6945,8 +7084,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		}
 		serviceBundleScreen.clickCancelBundlePopupButton();
 
-		servicesScreen = new ServicesScreen();
-		vehicleScreen = servicesScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
@@ -6980,7 +7118,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
@@ -7034,8 +7172,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		serviceBundleScreen.clickCancelBundlePopupButton();
 
-		servicesScreen = new ServicesScreen();
-		vehicleScreen = servicesScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+		NavigationSteps.navigateToVehicleInfoScreen();
 		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
@@ -7082,7 +7219,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
 		serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
@@ -7219,7 +7356,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		techniciansPopup.unselecTechnician(defaulttech);
 		techniciansPopup.saveTechnociansViewWithAlert();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SERVICE_WITH_DEFAUT_TECH);
 
 		selectedServiceDetailsScreen.clickVehiclePartsCell();
@@ -7262,7 +7400,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechnociansViewWithAlert();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		ServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		ServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
 		ServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
@@ -7305,13 +7444,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.waitServicesScreenLoaded();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
 		servicesScreen.waitServicesScreenLoaded();
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -7374,12 +7515,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES, ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		NavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
 		servicesScreen.waitServicesScreenLoaded();
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
@@ -7429,7 +7572,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			ServicesScreenSteps.openCustomServiceDetails(serviceData.getServiceName());
 			if (serviceData.getServicePrice() != null)
@@ -7443,8 +7587,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			techniciansPopup.saveTechViewDetails();
 			ServiceDetailsScreenSteps.saveServiceDetails();
 		}
-
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
@@ -7493,7 +7637,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getInspectionNumber();
 
-		ServicesScreen servicesScreen = vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
+		NavigationSteps.navigateToServicesScreen();
+		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			ServicesScreenSteps.openCustomServiceDetails(serviceData.getServiceName());
 			if (serviceData.getServicePrice() != null)
@@ -7507,8 +7652,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			ServiceDetailsScreenSteps.saveServiceDetails();
 			ServiceDetailsScreenSteps.saveServiceDetails();
 		}
-
-		OrderSummaryScreen orderSummaryScreen = servicesScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+		NavigationSteps.navigateToOrderSummaryScreen();
+		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
 
