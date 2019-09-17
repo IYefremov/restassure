@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSHDBaseScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
@@ -12,11 +9,8 @@ import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
 
 public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScreen {
-
-    public static TypeScreenContext typeContext;
 
     public BaseWizardScreen() {
         super();
@@ -47,26 +41,18 @@ public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScre
         appiumdriver.findElementByAccessibilityId("Final").click();
     }
 
-    public <T extends BaseTypeScreen> T clickSaveAsFinal() {
+    public void clickSaveAsFinal() {
         clickSave();
         clickFinalPopup();
-//        clickSave();
-        return getTypeScreenFromContext();
     }
 
-    public <T extends ITypeScreen> T saveWizard() {
+    public void saveWizard() {
         clickSave();
-        return getTypeScreenFromContext();
     }
 
-    public <T extends ITypeScreen> T cancelWizard() {
+    public void cancelWizard() {
         clickCancelButton();
         acceptAlert();
-        return getTypeScreenFromContext();
-    }
-
-    public <T extends ITypeScreen> T getTypeScreenFromContext() {
-        return (T) TypesScreenFactory.getTypeScreen(typeContext);
     }
 
     public void waitForCustomWarningMessage(String warningMessage, String buttonToClick) {

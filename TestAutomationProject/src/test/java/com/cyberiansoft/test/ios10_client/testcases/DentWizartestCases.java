@@ -2820,15 +2820,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
         Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 		final String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
-		invoiceInfoScreen.clickSaveAsDraft();
-        myWorkOrdersScreen = new MyWorkOrdersScreen();
+		invoiceInfoScreen.clickSaveInvoiceAsDraft();
 		myWorkOrdersScreen.clickHomeButton();
 		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
 		myInvoicesScreen.selectInvoice(invoicenumber);
 		myInvoicesScreen.clickEditPopup();
-		invoiceInfoScreen = new InvoiceInfoScreen();
 		invoiceInfoScreen.clickFirstWO();
-		vehicleScreen = new VehicleScreen();
         servicesScreen =  vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
         selectedservicescreen = servicesScreen.openServiceDetails(UtilConstants.PAINTMIRROR_SUBSERVICE);
 		selectedservicescreen.removeService();

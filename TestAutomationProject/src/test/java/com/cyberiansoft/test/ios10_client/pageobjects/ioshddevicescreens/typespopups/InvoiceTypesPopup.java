@@ -14,11 +14,11 @@ public class InvoiceTypesPopup extends BaseTypePopup {
     public InvoiceTypesPopup() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(typeIdentificatorString)));
     }
 
     public void selectInvoiceType(IInvoicesTypes iInvoicesType) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(typeIdentificatorString)));
         selectType(typeIdentificatorString, iInvoicesType.getInvoiceTypeName());
     }
 }

@@ -169,6 +169,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public boolean isServicePresent(String servicename) {
+		waitOrderMonitorScreenLoaded();
 		return monitorservicestable.findElementsByAccessibilityId (servicename ).size() > 0;
 	}
 

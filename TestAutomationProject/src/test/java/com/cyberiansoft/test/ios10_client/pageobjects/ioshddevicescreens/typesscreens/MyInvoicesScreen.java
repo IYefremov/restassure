@@ -1,11 +1,9 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.PrintSelectorPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SummaryScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -21,8 +19,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
-
-	private final TypeScreenContext INVOICECONTEXT = TypeScreenContext.INVOICE;
 
 	/*@iOSXCUITFindBy(accessibility  = "My Invoices")
     private IOSElement myinvoicesmenu;
@@ -77,9 +73,7 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void waitMyInvoicesScreenLoaded() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Invoices")));
-		wait = new WebDriverWait(appiumdriver, 20);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InvoicesPageTableLeft")));
 		wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("InvoicesPageTableLeft")));
@@ -164,7 +158,6 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Edit")));
 		editmenu.click();
-		BaseWizardScreen.typeContext = INVOICECONTEXT;
 	}
 	
 	public void clickChangeCustomerPopup() {

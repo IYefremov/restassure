@@ -42,6 +42,9 @@ public class CustomersScreen extends BaseAppScreen {
 	public CustomersScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+	}
+
+	public void waitCustomersScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 	}

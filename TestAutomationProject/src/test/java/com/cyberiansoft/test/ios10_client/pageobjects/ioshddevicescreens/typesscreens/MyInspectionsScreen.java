@@ -1,21 +1,11 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ApproveInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectEmployeePopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.InspectionTypesPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
-import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -24,19 +14,13 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
-
-	private final TypeScreenContext INSPECTIONCONTEXT = TypeScreenContext.INSPECTION;
 	
 	final String firstinspxpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]";
 	private By discardbtnxpath = By.name("Discard");
@@ -107,7 +91,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	public MyInspectionsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		waitInspectionsScreenLoaded();
 	}
 
 	public void waitInspectionsScreenLoaded() {
@@ -124,12 +107,10 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		if (appiumdriver.findElementsByAccessibilityId("Discard").size() > 0) {
 			appiumdriver.findElementByAccessibilityId("Discard").click();
 		}
-		BaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 
 	public void clickEditInspectionButton() {
 		editpopupmenu.click();
-		BaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 	
 	public void selectInspectionForEdit(String inspectionNumber)  {
@@ -180,7 +161,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	public void clickCreateWOButton() {
 		appiumdriver.findElementByAccessibilityId("Create Work Order").click();
-		BaseWizardScreen.typeContext = INSPECTIONCONTEXT;
 	}
 	
 	public EmailScreen clickSendEmail() {
@@ -415,7 +395,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspectionNumber)));
 		return appiumdriver.findElementByAccessibilityId(inspectionNumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0;
-	}
+ 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspectionNumber) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
@@ -426,6 +406,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public boolean isDraftIconPresentForInspection(String inspectionNumber) {
+		waitInspectionsScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId(inspectionNumber).findElements(MobileBy.AccessibilityId("ESTIMATION_DRAFT"))
 				.size() > 0;
 	}
@@ -450,7 +431,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + inspectionnumber + "']/XCUIElementTypeStaticText[@name='labelInspectionAmount']")).getAttribute("label");
+		waitInspectionsScreenLoaded();
+		return inspectionsTable.findElementByAccessibilityId(inspectionnumber).findElementByAccessibilityId( "labelInspectionAmount").getAttribute("label");
 	}
 
     public void clickBackButton() {

@@ -32,7 +32,7 @@ public class ServiceRequestSteps {
 
     public static void startCreatingWorkOrderFromServiceRequest(String serviceRequestNumber, IWorkOrdersTypes workOrdersType) {
         selectServiceRequest(serviceRequestNumber);
-        MenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CREATE_WORKORDER);
+        MenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CREATE_WORKORDER_HD);
         WorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
     }
 

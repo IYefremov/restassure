@@ -74,17 +74,18 @@ public class HomeScreen extends iOSHDBaseScreen {
 		//TouchAction action = new TouchAction(appiumdriver);
 		//action.press(myinspectionsbtn).waitAction(300).release().perform();
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
-		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen();
-		inspectionsscreen.switchToMyView();
-		return inspectionsscreen;
+		MyInspectionsScreen myInspectionsScreen = new MyInspectionsScreen();
+		myInspectionsScreen.switchToMyView();
+		return myInspectionsScreen;
 	}
 	
 	public TeamInspectionsScreen clickTeamInspectionsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
-		MyInspectionsScreen inspectionsscreen = new MyInspectionsScreen();
-		inspectionsscreen.switchToTeamView();
+		MyInspectionsScreen myInspectionsScreen = new MyInspectionsScreen();
+		myInspectionsScreen.waitInspectionsScreenLoaded();
+		myInspectionsScreen.switchToTeamView();
 		if (appiumdriver.findElementsByAccessibilityId("Connecting to Back Office").size() > 0) {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Connecting to Back Office")));

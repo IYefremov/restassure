@@ -15,11 +15,12 @@ public class ServiceRequestTypesPopup extends BaseTypePopup {
     public ServiceRequestTypesPopup() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.name(typeIdentificatorString)));
+
     }
 
     public void selectServiceRequestType(String serviceRequestType) {
+        FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.name(typeIdentificatorString)));
         selectType(typeIdentificatorString, serviceRequestType);
     }
 }

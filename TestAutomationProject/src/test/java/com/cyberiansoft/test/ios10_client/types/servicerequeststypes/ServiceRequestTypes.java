@@ -1,11 +1,5 @@
 package com.cyberiansoft.test.ios10_client.types.servicerequeststypes;
 
-import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
-
 public enum ServiceRequestTypes implements IServiceRequestTypes {
 
     SR_EST_WO_REQ_SRTYPE("SR_Est_WO_Req"),
