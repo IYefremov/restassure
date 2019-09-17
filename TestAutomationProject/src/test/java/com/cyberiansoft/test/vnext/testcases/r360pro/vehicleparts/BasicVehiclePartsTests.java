@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.vehicleparts;
 
-import com.cyberiansoft.test.dataclasses.DamageData;
-import com.cyberiansoft.test.dataclasses.QuestionsData;
-import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
@@ -15,10 +12,13 @@ import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import com.cyberiansoft.test.vnext.validations.ServiceDetailsValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class BasicVehiclePartsTests extends BaseTestCaseTeamEditionRegistration {
     @BeforeClass(description = "Team Monitoring Basic Flow Test")
@@ -94,6 +94,30 @@ public class BasicVehiclePartsTests extends BaseTestCaseTeamEditionRegistration 
         ServiceDetailsValidations.servicePartShouldBe(damageData.getMoneyService().getVehiclePart());
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanSelectMultipleVehiclePartsForService(String rowID,
+                                                            String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        ServiceData serviceData = workOrderData.getServiceData();
+        List<VehiclePartData> vehiclePartData = serviceData.getVehicleParts();
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
+        ServiceDetailsScreenSteps.selectVehicleParts(vehiclePartData);
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        SelectedServicesScreenSteps.switchToSelectedService();
+        vehiclePartData.forEach(vehiclePart -> ListServicesValidations.verifyServiceWithDescriptionSelected(serviceData.getServiceName(), vehiclePart.getVehiclePartName()));
+        SelectedServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
+        ServiceDetailsScreenSteps.selectVehiclePart(serviceData.getVehiclePart());
+        ServiceDetailsValidations.verifyUserIsOnDetailsPage();
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        ListServicesValidations.verifyServiceWithDescriptionSelected(serviceData.getServiceName(), serviceData.getVehiclePart().getVehiclePartName());
+        InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }
 }

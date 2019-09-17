@@ -1,12 +1,16 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.ServiceListItem;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +24,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+@Getter
 public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
 
     @FindBy(xpath = "//div[@data-page='services-list']")
@@ -28,12 +33,16 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     @FindBy(xpath = "//div[@data-page='services-add']")
     private WebElement selectservicesscreen;
 
+    @FindBy(xpath = "//div[@class='checkbox-item-content-main']")
+    private List<ServiceListItem> serviceList;
+
     public VNextSelectedServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
     public VNextSelectedServicesScreen() {
+        PageFactory.initElements(new FiledDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);
     }
 
     public void setServiceAmountValue(String serviceName, String serviceAmount) {

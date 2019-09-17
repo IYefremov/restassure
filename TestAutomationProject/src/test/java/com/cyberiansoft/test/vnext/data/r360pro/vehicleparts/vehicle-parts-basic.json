@@ -52,5 +52,28 @@
         }
       }
     }
+  ],
+  "userCanSelectMultipleVehiclePartsForService": [
+    {
+      "rowID": "userCanSelectMultipleVehiclePartsForService.01",
+      "description": "89555 89590 89560",
+      "service": {
+        "serviceName": "roz_en_part_money",
+        "vehicleParts": [
+          {
+            "vehiclePartName": "Grill"
+          },
+          {
+            "vehiclePartName": "Left Front Door"
+          },
+          {
+            "vehiclePartName": "Right Front Door"
+          }
+        ],
+        "vehiclePart": {
+          "vehiclePartName": "Hood"
+        }
+      }
+    }
   ]
 }

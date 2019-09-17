@@ -6,6 +6,9 @@ import com.cyberiansoft.test.vnext.interactions.services.ServiceDetailsInteracti
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ServiceDetailsScreenSteps {
 
     public static void changeServicePrice(String newServicePrice) {
@@ -45,6 +48,14 @@ public class ServiceDetailsScreenSteps {
     public static void selectVehiclePart(VehiclePartData vehiclePart) {
         ServiceDetailsInteractions.openVehiclePartSelection();
         ListSelectPageInteractions.selectItem(vehiclePart.getVehiclePartName());
+    }
+
+    public static void selectVehicleParts(List<VehiclePartData> vehiclePart) {
+        ServiceDetailsInteractions.openVehiclePartSelection();
+        vehiclePart.stream()
+                .map(VehiclePartData::getVehiclePartName).collect(Collectors.toList())
+                .forEach(ListSelectPageInteractions::selectItem);
+        ListSelectPageInteractions.saveListPage();
     }
 
     public static void saveServiceDetails() {

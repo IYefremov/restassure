@@ -31,4 +31,15 @@ public class ListServicesValidations {
         VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
         Assert.assertTrue(selectedServicesScreen.getServicesListItems().isEmpty());
     }
+
+    public static void verifyServiceWithDescriptionSelected(String expectedServiceName, String expectedDescription) {
+        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
+        selectedServicesScreen.switchToSelectedServicesView();
+        Assert.assertTrue(
+                selectedServicesScreen.getServiceList()
+                        .stream()
+                        .anyMatch(
+                                service -> service.getServiceName().equals(expectedServiceName)
+                                        && service.getServiceDescription().equals(expectedDescription)));
+    }
 }
