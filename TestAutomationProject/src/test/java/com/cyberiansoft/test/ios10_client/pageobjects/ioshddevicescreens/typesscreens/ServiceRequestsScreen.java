@@ -1,16 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
-
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.ServiceRequestdetailsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.InspectionTypesPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.ServiceRequestTypesPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
-import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
-import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -31,8 +20,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class ServiceRequestsScreen extends BaseTypeScreen {
-
-	private final TypeScreenContext SRCONTEXT = TypeScreenContext.SERVICEREQUEST;
 	
 	/*@iOSXCUITFindBy(accessibility  = "Add")
     private IOSElement addbtn;
@@ -125,6 +112,10 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	public ServiceRequestsScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver, Duration.ofSeconds(10)), this);
+
+	}
+
+	public void waitServiceRequestScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("ServiceRequestsPageTableLeft")));
 		wait = new WebDriverWait(appiumdriver, 30);
@@ -134,7 +125,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	public void clickAddButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Add"))).click();
-		BaseWizardScreen.typeContext =  SRCONTEXT;
 	}
 	
 	public void clickSearchButton() {
@@ -168,8 +158,7 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	}
 
 	public void selectServiceRequest(String servicerequest) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(MobileBy.AccessibilityId("labelServiceRequestNumber"), 1));
+		waitServiceRequestsScreenLoaded();
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicerequest + "']").click();
 	}
 	
@@ -214,12 +203,13 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	public ServiceRequestsScreen rejectServiceRequest(String srNumber) {
 		selectServiceRequest(srNumber);
 		selectRejectAction();
-		Helpers.acceptAlert();
+
 		return this;
 	}
 	
 	public void selectRejectAction() {
 		appiumdriver.findElementByAccessibilityId("Reject").click();
+		Helpers.acceptAlert();
 	}
 	
 	public void selectAcceptAction() {
@@ -260,7 +250,6 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	
 	public void selectEditServiceRequestAction() {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		BaseWizardScreen.typeContext = SRCONTEXT;
 	}
 	
 	public void selectCancelAction() {
@@ -294,12 +283,13 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	}
 	
 	public String getServiceRequestStatus(String srnumber) {
+		waitServiceRequestsScreenLoaded();
 		return ((MobileElement) appiumdriver.findElementByName(srnumber)).findElementByAccessibilityId("labelServiceRequestPhaseStatus")
 				.getAttribute("value");
 	}
 	
 	public String getFirstServiceRequestNumber() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ServiceRequestsPageTableLeft")));
 		List<WebElement> ws = appiumdriver.findElementsByAccessibilityId("labelServiceRequestNumber");
 		List<String> nmbr = new ArrayList();
@@ -428,11 +418,13 @@ public class ServiceRequestsScreen extends BaseTypeScreen {
 	}
 	
 	public boolean isServiceRequestProposed(String srnumber) {
+		waitServiceRequestsScreenLoaded();
 		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + srnumber 
 				+ "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_75')]")).size() > 0;
 	}
 	
 	public boolean isServiceRequestOnHold(String srnumber) {
+		waitServiceRequestsScreenLoaded();
 		return appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + srnumber 
 				+ "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_46')]")).size() > 0;
 	}

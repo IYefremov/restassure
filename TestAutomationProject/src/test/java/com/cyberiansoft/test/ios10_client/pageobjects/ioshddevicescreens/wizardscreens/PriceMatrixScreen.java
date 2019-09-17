@@ -73,7 +73,6 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	public PriceMatrixScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		//viewMode = "PdrView";
 	}
 
 	public void selectPriceMatrix(String pricematrix) {

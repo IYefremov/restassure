@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.MobileBy;
@@ -19,8 +17,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
-
-	private final TypeScreenContext TEAMWOCONTEXT = TypeScreenContext.TEAMWORKORDER;
 
 	/*@iOSXCUITFindBy(accessibility  = "Monitor")
     private IOSElement womonitor;
@@ -54,13 +50,6 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersPageTableLeft")));
 	}
 
-	public void clickAddOrderButton() {
-		addorderbtn.click();
-		if (elementExists("Discard"))
-			appiumdriver.findElementByAccessibilityId("Discard").click();
-		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
-	}
-
 	public void clickOnWO(String wonumber) {
 		waitTeamWorkOrdersScreenLoaded();
 		appiumdriver.findElementByAccessibilityId(wonumber).click();
@@ -73,12 +62,10 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
 	public void selectEditWO() {
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 
 	public InvoiceInfoScreen selectWOInvoiceType(IInvoicesTypes invoiceType) {
 		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 		return new InvoiceInfoScreen();
 	}
 
@@ -90,7 +77,6 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
 		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("invoice new")).click();
-		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 
 	public String getFirstWorkOrderNumberValue() {
@@ -108,7 +94,6 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		waitTeamWorkOrdersScreenLoaded();
 		selectWorkOrder(wonumber);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 
 	public void clickSearchButton() {
@@ -155,7 +140,6 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
 		appiumdriver.findElementByAccessibilityId(wonumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
-		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 
 	public void selectWorkOrderForApprove(String wonumber) {
@@ -209,7 +193,6 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
 	public void clickInvoiceType(IInvoicesTypes invoiceType) {
 		appiumdriver.findElementByAccessibilityId(invoiceType.getInvoiceTypeName()).click();
-		BaseWizardScreen.typeContext = TEAMWOCONTEXT;
 	}
 
 	public void approveWorkOrderWithoutSignature(String workOrderNumber, String employee, String password) {

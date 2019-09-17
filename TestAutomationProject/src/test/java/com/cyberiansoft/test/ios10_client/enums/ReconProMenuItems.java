@@ -8,6 +8,7 @@ public enum ReconProMenuItems {
     COPY("Copy"),
     EDIT("Edit"),
     CREATE_WORKORDER("Create\nWO"),
+    CREATE_WORKORDER_HD("Create Work Order"),
     CREATE_INPECTION("Create\nInspection"),
     CREATE_SERVICE_REQUEST("Create\nSR"),
     CHANGE_PO("Change\nPO#"),

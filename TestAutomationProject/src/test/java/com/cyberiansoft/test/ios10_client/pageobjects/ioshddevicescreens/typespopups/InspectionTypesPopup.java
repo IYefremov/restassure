@@ -14,11 +14,11 @@ public class InspectionTypesPopup extends BaseTypePopup {
     public InspectionTypesPopup() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(typeIdentificatorString)));
     }
 
     public void selectInspectionType(IInspectionsTypes inspType) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(typeIdentificatorString)));
         selectType(typeIdentificatorString, inspType.getInspectionTypeName());
     }
 }

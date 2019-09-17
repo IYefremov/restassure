@@ -1,13 +1,5 @@
 package com.cyberiansoft.test.ios10_client.types.invoicestypes;
 
-import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.QuestionsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularInvoiceInfoScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularQuestionsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
-
 public enum InvoicesTypes implements IInvoicesTypes {
 
     DEFAULT_INVOICETYPE("Default"),

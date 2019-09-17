@@ -1069,7 +1069,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		InvoiceInfoScreen invoiceInfoScreen = questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-		invoiceInfoScreen.clickSaveAsDraft();
+		invoiceInfoScreen.clickSaveInvoiceAsDraft();
 
 		teamWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		teamWorkOrdersScreen.selectWorkOrderForEidt(workOrders.get(1));

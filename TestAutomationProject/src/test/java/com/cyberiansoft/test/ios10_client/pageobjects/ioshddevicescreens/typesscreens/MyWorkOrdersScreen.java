@@ -1,14 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens;
 
-import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
-import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import io.appium.java_client.MobileBy;
@@ -24,7 +17,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
-	private final TypeScreenContext WOCONTEXT = TypeScreenContext.WORKORDER;
 	private By autosavedworkorder = By.name("EntityInfoButtonUnchecked, AutoSaved");
 	
 	private By btnwholesale = By.name("btnWholesale");
@@ -96,10 +88,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public MyWorkOrdersScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 40);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("OrdersPageTableLeft")));
-		wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("OrdersPageTableLeft")));
 	}
 
 	public void waitWorkOrdersScreenLoaded() {
@@ -113,7 +101,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		addorderbtn.click();
 		if (elementExists("Discard"))
 			appiumdriver.findElementByAccessibilityId("Discard").click();
-		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 
 
@@ -180,6 +167,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void clickFilterButton() {
+		waitWorkOrdersScreenLoaded();
 		if (appiumdriver.findElementsByAccessibilityId("filter").size() < 1)
 			appiumdriver.findElementByAccessibilityId("filter pressed").click();
 		else
@@ -238,7 +226,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	public void selectWorkOrderForEidt(String workOrderNumber) {		
 		selectWorkOrder(workOrderNumber);
 		appiumdriver.findElementByAccessibilityId("Edit").click();
-		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 	
 	public TechRevenueScreen selectWorkOrderTechRevenueMenuItem(String workOrderNumber) {
@@ -317,7 +304,6 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("invoice new"))).click();
-		BaseWizardScreen.typeContext = WOCONTEXT;
 	}
 
 	public  void selectWorkOrderJob(String jobName) {

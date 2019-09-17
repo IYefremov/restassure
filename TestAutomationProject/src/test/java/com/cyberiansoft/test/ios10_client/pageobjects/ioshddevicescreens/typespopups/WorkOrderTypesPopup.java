@@ -13,11 +13,12 @@ public class WorkOrderTypesPopup extends BaseTypePopup {
     public WorkOrderTypesPopup() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(typeIdentificatorString)));
+
     }
 
     public void selectWorkOrderType(String workOrderType) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(typeIdentificatorString)));
         selectType(typeIdentificatorString, workOrderType);
     }
 }

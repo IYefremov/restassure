@@ -47,8 +47,6 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 	public VisualInteriorScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Visual")));
 	}
 
 	public void waitVisualScreenLoaded(String screenName) {
