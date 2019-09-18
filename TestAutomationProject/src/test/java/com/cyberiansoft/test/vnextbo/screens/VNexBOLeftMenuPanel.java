@@ -66,6 +66,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[text()='SKIP']")
     private WebElement tutorialSkipButton;
 
+    @FindBy(xpath = "//ul[@id='mainMenu']/li[contains(., 'Settings')]")
+    private WebElement settingsMenuTab;
+
     public VNexBOLeftMenuPanel() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

@@ -8,4 +8,10 @@ public class VNextBOHomePageData {
 
     @JsonProperty("url")
     private String url;
+
+    @JsonProperty("login")
+    private String login;
+
+    @JsonProperty("password")
+    private String password;
 }
