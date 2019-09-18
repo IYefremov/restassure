@@ -14,9 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 
-	@FindBy(xpath = "//strong[text()='Enter your Email address']")
-	private WebElement enterEmailLabel;
-
 	@FindBy(id = "confirmEmail")
 	private TextField confirmmailfld;
 	
@@ -61,8 +58,6 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	public boolean isLoginLinkDisplayed() {
 		return loginLink.isDisplayed();
 	}
-
-	public boolean isEnterEmailLLabelDisplayed()  { return enterEmailLabel.isDisplayed(); }
 
 	public boolean isSubmitButtonDisplayed()  { return submitbtn.isDisplayed(); }
 	

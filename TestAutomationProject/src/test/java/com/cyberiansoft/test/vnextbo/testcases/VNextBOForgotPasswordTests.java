@@ -49,6 +49,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
         loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
+        forgotPasswordPage = loginPage.clickForgotPasswordLink();
     }
 
     @AfterMethod
@@ -69,9 +70,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     public void checkUserIsRedirectedToForgotPasswordPage(String rowID, String description, JSONObject testData) {
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
 
-        forgotPasswordPage = loginPage.clickForgotPasswordLink();
-
-        Assert.assertTrue(forgotPasswordPage.isEnterEmailLLabelDisplayed(), "Enter your Email address label hasn't been displayed");
         Assert.assertTrue(forgotPasswordPage.isConfirmationMailFieldDisplayed(), "Email field hasn't been displayed");
         Assert.assertTrue(forgotPasswordPage.isLoginLinkDisplayed(), "Login link hasn't been displayed");
         Assert.assertTrue(forgotPasswordPage.isSubmitButtonDisplayed(), "Submit button hasn't been displayed");
@@ -81,7 +79,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     public void checkUserIsReturnedToLoginPage(String rowID, String description, JSONObject testData) {
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
 
-        forgotPasswordPage = loginPage.clickForgotPasswordLink();
         loginPage = forgotPasswordPage.clickLoginLink();
 
         Assert.assertTrue(loginPage.isLoginFormDisplayed(), "Login form hasn't been displayed");
@@ -89,5 +86,15 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         Assert.assertTrue(loginPage.isPasswordFieldDisplayed(), "Passford field hasn't been displayed");
         Assert.assertTrue(loginPage.isForgotPasswordLinkDisplayed(), "Forgot password link hasn't been displayed");
         Assert.assertTrue(loginPage.isLoginButtonDisplayed(), "Login button hasn't been displayed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void checkErrorWithEmptyEmailField(String rowID, String description, JSONObject testData) {
+        VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
+
+        forgotPasswordPage.clickSubmitButton();
+
+        Assert.assertEquals(forgotPasswordPage.getErrorMessageValue(), "Email is not valid!",
+                "Error message hasb't been correct or not displayed");
     }
 }
