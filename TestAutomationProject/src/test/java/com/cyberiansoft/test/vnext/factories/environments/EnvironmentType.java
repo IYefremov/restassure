@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 public enum EnvironmentType {
     INTEGRATION("Integration"),
+    AUTOTESTS("AutoTests"),
     DEVELOPMENT("Development"),
     QC1("QC1");
 
