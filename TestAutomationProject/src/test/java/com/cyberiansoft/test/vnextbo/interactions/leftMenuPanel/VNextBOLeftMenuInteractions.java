@@ -114,4 +114,12 @@ public class VNextBOLeftMenuInteractions {
     public boolean isMenuButtonDisplayed() {
         return Utils.isElementDisplayed(leftMenuPanel.getMenuButton(), 10);
     }
+
+    public boolean isSettingsMenuTabDisplayed() {
+        return Utils.isElementDisplayed(leftMenuPanel.getSettingsMenuTab(), 10);
+    }
+
+    public boolean isSettingsMenuTabAbsent() {
+        return Utils.isElementNotDisplayed(leftMenuPanel.getSettingsMenuTab(), 5);
+    }
 }
