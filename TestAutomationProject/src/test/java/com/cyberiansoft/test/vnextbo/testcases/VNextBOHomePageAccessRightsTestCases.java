@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOHomePageData.json";
+	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOUserLoginData.json";
 
 	@BeforeClass
 	public void settingUp() {
@@ -40,13 +40,13 @@ public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
 		}
 		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-		loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
+		loginPage = new VNextBOLoginScreenWebPage(webdriver);
 	}
 
 	@AfterMethod
 	public void BackOfficeLogout() {
 		try {
-			VNextBOHeaderPanel vNextBOHeaderPanel = PageFactory.initElements(webdriver, VNextBOHeaderPanel.class);
+			VNextBOHeaderPanel vNextBOHeaderPanel = new VNextBOHeaderPanel(webdriver);
 			if (vNextBOHeaderPanel.logOutLinkExists()) {
 				vNextBOHeaderPanel.userLogout();
 			}
