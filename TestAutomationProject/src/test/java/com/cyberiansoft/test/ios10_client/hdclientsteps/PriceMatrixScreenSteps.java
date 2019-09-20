@@ -15,8 +15,7 @@ import java.util.List;
 
 public class PriceMatrixScreenSteps {
     public static void goTopriceMatrixScreenAndSelectPriceMatrixData(PriceMatrixScreenData priceMatrixScreenData) {
-        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
-        baseWizardScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, priceMatrixScreenData.getMatrixScreenName());
+        NavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
 
 
         if (priceMatrixScreenData.getVehiclePartsData() != null) {

@@ -3,6 +3,8 @@ package com.cyberiansoft.test.ios10_client.hdclientsteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.BaseAppScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ServicesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VisualInteriorScreen;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 
 public class NavigationSteps {
@@ -19,15 +21,52 @@ public class NavigationSteps {
         baseWizardScreen.selectNextScreen(WizardScreenTypes.CLAIM);
     }
 
-    public static void navigateToPriceMatrixScreen(String screenName) {
+    public static void navigateToPriceMatrixScreen() {
         BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
-        baseWizardScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX, screenName);
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.PRICE_MATRIX);
     }
 
     public static void navigateToOrderSummaryScreen() {
         BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
         baseWizardScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
         OrderSummaryScreenSteps.waitOrderSummaryScreenLoaded();
+    }
+
+    public static void navigateToVehicleInfoScreen() {
+        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
+        VehicleScreen vehicleScreen = new VehicleScreen();
+        vehicleScreen.waitVehicleScreenLoaded();
+    }
+
+    public static void navigateToVisualInteriorScreen() {
+        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.VISUAL_INTERIOR);
+        VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
+        visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_INTERIOR.getDefaultScreenTypeName());
+    }
+
+    public static void navigateToVisualExteriorScreen() {
+        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.VISUAL_EXTERIOR);
+        VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
+        visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
+    }
+
+    public static void navigateToInvoiceInfoScreen() {
+        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
+    }
+
+    public static void navigateToQuestionsScreen() {
+        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
+        baseWizardScreen.selectNextScreen(WizardScreenTypes.QUESTIONS);
+    }
+
+    public static void navigateToScreen(String screenName) {
+        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
+        baseWizardScreen.selectNextScreen(screenName);
+        baseWizardScreen.waitScreenLoaded(screenName);
     }
 
     public static void navigateBackScreen() {

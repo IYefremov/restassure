@@ -11,15 +11,15 @@ public class BOConfigInfo {
 
 	private static BOConfigInfo _instance = null;
 
-	private Properties props;
+	private Properties properties;
 
 	private BOConfigInfo() {
-		props = new Properties();
+		properties = new Properties();
 		File file =
 				new File(OsUtils.getOSSafePath("src/test/java/com/cyberiansoft/test/bo/config/backofice.properties"));
 		try {
 			FileInputStream fileInput = new FileInputStream(file);
-			props.load(fileInput);
+			properties.load(fileInput);
 			fileInput.close();
 		} catch (IOException e) {
 			System.out.println("Can't load BO environment properties");
@@ -34,58 +34,71 @@ public class BOConfigInfo {
 	}
 
 	public String getBackOfficeURL() {
-		return props.getProperty("backoffice.url");
+		return properties.getProperty("backoffice.url");
 	}
 
 	public String getBackOfficeURLMain() {
-		return props.getProperty("backoffice.url.main");
+		return properties.getProperty("backoffice.url.main");
 	}
 
 	public String getBackOfficeDemoURL() {
-		return props.getProperty("backofficedemo.url");
+		return properties.getProperty("backofficedemo.url");
 	}
 
 	public String getUserName() {
-		return props.getProperty("user.name");
+		return properties.getProperty("user.name");
 	}
 
 	public String getUserNadaName() {
-		return props.getProperty("user.nada.name");
+		return properties.getProperty("user.nada.name");
 	}
 
 	public String getAlternativeUserName() {
-		return props.getProperty("alternative.user.name");
+		return properties.getProperty("alternative.user.name");
 	}
 
 	public String getUserDemoName() {
-		return props.getProperty("userdemo.name");
+		return properties.getProperty("userdemo.name");
 	}
 
 	public String getUserPassword() {
-		return props.getProperty("user.password");
+		return properties.getProperty("user.password");
 	}
 
 	public String getUserNadaPassword() {
-		return props.getProperty("user.nada.password");
+		return properties.getProperty("user.nada.password");
 	}
 
 	public String getAlternativeUserPassword() {
-		return props.getProperty("alternative.user.password");
+		return properties.getProperty("alternative.user.password");
 	}
 
 	public String getUserDemoPassword() {
-		return props.getProperty("userdemo.psw");
+		return properties.getProperty("userdemo.psw");
 	}
+
+    public String getAzureURL() {
+        return checkForSystemProperty("azure.url");
+    }
 
 	public String getDefaultBrowser() {
-		return props.getProperty("default.browser");
+		return checkForSystemProperty("browser");
 	}
 
+    private String checkForSystemProperty(String property) {
+        try {
+            if (!System.getProperty(property).isEmpty()) {
+                properties.setProperty(property, System.getProperty(property));
+            }
+        } catch (NullPointerException ignored) {}
+        return properties.getProperty(property);
+    }
+
 	public String getOutlookMail() {
-		return props.getProperty("outlook.mail");
+		return properties.getProperty("outlook.mail");
 	}
 
 	public String getOutlookPassword() {
-		return props.getProperty("outlook.password");
+		return properties.getProperty("outlook.password");
 	}
 }

@@ -11,8 +11,7 @@ import java.util.List;
 public class QuestionsScreenSteps {
 
     public static void goToQuestionsScreenAndAnswerQuestions(QuestionScreenData questionScreenData) {
-        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
-        baseWizardScreen.selectNextScreen(WizardScreenTypes.QUESTIONS, questionScreenData.getScreenName());
+      NavigationSteps.navigateToScreen(questionScreenData.getScreenName());
         if (questionScreenData.getQuestionsData() != null)
             answerQuestions(questionScreenData.getQuestionsData());
         if (questionScreenData.getQuestionData() != null)
