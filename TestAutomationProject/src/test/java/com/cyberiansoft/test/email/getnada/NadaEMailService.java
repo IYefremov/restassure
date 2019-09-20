@@ -275,12 +275,14 @@ public class NadaEMailService {
     }
 
     public List<String> getUrlsFromMessage(String message, String linkText) {
-        return getUrlsFromMessage(message, linkText, "http", "\">");
+        return getUrlsFromMessage(message, linkText, "http", "\'>");
     }
 
     public List<String> getUrlsFromMessage(String message, String linkText, String start, String end) {
         List<String> allMatches = new ArrayList<String>();
-        Matcher matcher = Pattern.compile("(<a [^>]+>)" + linkText + "<.a>").matcher(message);
+
+        Matcher matcher = Pattern.compile("(<a [^>]+>)" + linkText).matcher(message);
+
         while (matcher.find()) {
             String aTag = matcher.group(1);
             allMatches.add(aTag.substring(aTag.indexOf(start), aTag.indexOf(end)));

@@ -70,4 +70,6 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
     public boolean isForgotPasswordLinkDisplayed() {
         return isElementDisplayed(forgotPasswordLink);
     }
+
+    public String getValueFromEmailField() { return emailField.getValue(); }
 }
