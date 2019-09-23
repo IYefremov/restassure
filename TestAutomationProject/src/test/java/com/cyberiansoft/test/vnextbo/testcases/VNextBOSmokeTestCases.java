@@ -147,7 +147,7 @@
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject("ReconPro vNext Dev: PASSWORD RESET");
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        String linkText = "reset your password";
 //
 //        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText, "https", "'>");
@@ -375,7 +375,7 @@
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject("ReconPro vNext Dev: REGISTRATION");
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        String linkText = "Click here";
 //        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
 //        String newbourl =  allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
@@ -387,7 +387,7 @@
 //        // Click the resend letter button and cancel
 //		userswebpage.clickUserResendButtonAndDisagree(emailId);
 //        try {
-//            mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//            mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        } catch (NullPointerException ignored) {}
 //        int updatedNumOfMessages = mailmessage.length();
 //        System.out.println(updatedNumOfMessages);
@@ -395,7 +395,7 @@
 //
 //        // Verify email is sent after clicking the Resend button
 //        userswebpage.clickUserResendButtonAndAgree(emailId);
-//        mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //
 //        allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
 //        newbourl =  allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
@@ -463,7 +463,7 @@
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject("ReconPro vNext Dev: REGISTRATION");
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        String linkText = "Click here";
 //        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText, "https", "\" style");
 //        String confirmationUrl =  allMatches.get(0);

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOForgotPasswordData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -10,7 +11,6 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -21,14 +21,12 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 public class VNextBOForgotPasswordTests extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOForgotPasswordPageData.json";
-    private String registeredUserEmail = "test.mail.cyberiansoft@getnada.com";
-    private String notRegisteredUserEmail = "cyberiansoft.test22@nada.ltd";
+    private static final String REGISTERED_USER_EMAIL = "test.mail.cyberiansoft@getnada.com";
+    private static final String NOT_REGISTERED_USER_EMAIL = "cyberiansoft.test22@nada.ltd";
     private String userName;
     private String userPassword;
     private VNextBOLoginScreenWebPage loginPage;
-    private VNextBOHomeWebPage homePage;
-    private VNexBOLeftMenuPanel leftMenu;
-    VNextBOForgotPasswordWebPage forgotPasswordPage;
+    private VNextBOForgotPasswordWebPage forgotPasswordPage;
 
     @BeforeClass
     public void settingUp() {
@@ -49,16 +47,17 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
-        forgotPasswordPage = loginPage.clickForgotPasswordLink();
+        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage.clickForgotPasswordLink();
+        forgotPasswordPage = new VNextBOForgotPasswordWebPage(webdriver);
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
         try {
-            VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver, VNextBOHeaderPanel.class);
-            if (headerpanel.logOutLinkExists()) {
-                headerpanel.userLogout();
+            VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
+            if (headerPanel.logOutLinkExists()) {
+                headerPanel.userLogout();
             }
         } catch (RuntimeException ignored) {}
 
@@ -78,7 +77,8 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserIsReturnedToLoginPage(String rowID, String description, JSONObject testData) {
 
-        loginPage = forgotPasswordPage.clickLoginLink();
+        forgotPasswordPage.clickLoginLink();
+        loginPage = new VNextBOLoginScreenWebPage(webdriver);
 
         Assert.assertTrue(loginPage.isLoginFormDisplayed(), "Login form hasn't been displayed");
         Assert.assertTrue(loginPage.isEmailFieldDisplayed(), "Email field hasn't been displayed");
@@ -93,17 +93,16 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage.clickSubmitButton();
 
         Assert.assertEquals(forgotPasswordPage.getErrorMessageValue(), "Email is not valid!",
-                "Error message hasb't been correct or not displayed");
+                "Error message hasn't been correct or not displayed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyEmailIsNotSentToNotRegisteredUser(String rowID, String description, JSONObject testData) throws Exception {
 
-        forgotPasswordPage.setConfirmationMailFieldValue(notRegisteredUserEmail);
+        forgotPasswordPage.setConfirmationMailFieldValue(NOT_REGISTERED_USER_EMAIL);
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialog vNextBOWarningModalDialog =
-                PageFactory.initElements(webdriver, VNextBOModalDialog.class);
+        VNextBOModalDialog vNextBOWarningModalDialog = new VNextBOModalDialog(webdriver);
 
         Assert.assertTrue(vNextBOWarningModalDialog.isDialogDisplayed(), "Warning dialog hasn't been displayed");
         Assert.assertTrue(vNextBOWarningModalDialog.isOkButtonDisplayed(), "OK button hasn't been displayed");
@@ -117,14 +116,13 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     public void verifyUserCanResetPassword(String rowID, String description, JSONObject testData) throws Exception {
 
         NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(registeredUserEmail);
+        nada.setEmailId(REGISTERED_USER_EMAIL);
         nada.deleteMessageWithSubject("PASSWORD RESET");
 
-        forgotPasswordPage.setConfirmationMailFieldValue(registeredUserEmail);
+        forgotPasswordPage.setConfirmationMailFieldValue(REGISTERED_USER_EMAIL);
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialog vNextBOInformationModalDialog =
-                PageFactory.initElements(webdriver, VNextBOModalDialog.class);
+        VNextBOModalDialog vNextBOInformationModalDialog = new VNextBOModalDialog(webdriver);
 
         Assert.assertTrue(vNextBOInformationModalDialog.isDialogDisplayed(), "Information dialog hasn't been displayed");
         Assert.assertTrue(vNextBOInformationModalDialog.isOkButtonDisplayed(), "OK button hasn't been displayed");
@@ -133,24 +131,25 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         Assert.assertEquals(vNextBOInformationModalDialog.getDialogInformationMessage(),
                 "Please check your mailbox. You will receive an email with a link for resetting password within a few minutes.",
                 "Dialog message hasn't been correct");
-        loginPage = vNextBOInformationModalDialog.clickOkButton();
+        vNextBOInformationModalDialog.clickOkButton();
+        loginPage = new VNextBOLoginScreenWebPage(webdriver);
 
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("PASSWORD RESET");
-        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
-        String resetPasswordUrl = nada.getUrlsFromMessage(mailmessage, "reset your password").get(0);
+        String mailMessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
+        String resetPasswordUrl = nada.getUrlsFromMessage(mailMessage, "reset your password").get(0);
 
         webdriverGotoWebPage(resetPasswordUrl);
-        webdriver.navigate().refresh();
+        Utils.refreshPage();
 
-        VNextBOResetPasswordPage vNextBOResetPasswordPage =
-                PageFactory.initElements(webdriver, VNextBOResetPasswordPage.class);
-        Assert.assertEquals(vNextBOResetPasswordPage.getUserEmail(), registeredUserEmail,
+        VNextBOResetPasswordPage vNextBOResetPasswordPage = new VNextBOResetPasswordPage(webdriver);
+        Assert.assertEquals(vNextBOResetPasswordPage.getUserEmail(), REGISTERED_USER_EMAIL,
                 "User's email hasn't been correct");
 
-        loginPage = vNextBOResetPasswordPage.setNewPassword("ZZzz11!!");
-        Assert.assertEquals(loginPage.getValueFromEmailField(), registeredUserEmail,
+        vNextBOResetPasswordPage.setNewPassword(userPassword);
+        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        Assert.assertEquals(loginPage.getValueFromEmailField(), REGISTERED_USER_EMAIL,
                 "Email field hasn't been correct");
     }
 
@@ -158,28 +157,27 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     public void verifyUserCantResetPasswordAfterLogin(String rowID, String description, JSONObject testData) throws Exception {
 
         NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(registeredUserEmail);
+        nada.setEmailId(REGISTERED_USER_EMAIL);
         nada.deleteMessageWithSubject("PASSWORD RESET");
 
-        forgotPasswordPage.setConfirmationMailFieldValue(registeredUserEmail);
+        forgotPasswordPage.setConfirmationMailFieldValue(REGISTERED_USER_EMAIL);
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialog vNextBOInformationModalDialog =
-                PageFactory.initElements(webdriver, VNextBOModalDialog.class);
-        loginPage = vNextBOInformationModalDialog.clickOkButton();
+        VNextBOModalDialog vNextBOInformationModalDialog = new VNextBOModalDialog(webdriver);
+        vNextBOInformationModalDialog.clickOkButton();
+        loginPage = new VNextBOLoginScreenWebPage(webdriver);
         loginPage.userLogin(userName, userPassword);
 
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("PASSWORD RESET");
-        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
-        String resetPasswordUrl = nada.getUrlsFromMessage(mailmessage, "reset your password").get(0);
+        String mailMessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
+        String resetPasswordUrl = nada.getUrlsFromMessage(mailMessage, "reset your password").get(0);
 
         webdriverGotoWebPage(resetPasswordUrl);
-        webdriver.navigate().refresh();
+        Utils.refreshPage();
 
-        VNextBOHomeWebPage vNextBOHomeWebPage =
-                PageFactory.initElements(webdriver, VNextBOHomeWebPage.class);
+        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage(webdriver);
         Assert.assertTrue(vNextBOHomeWebPage.isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
     }
 
@@ -189,22 +187,21 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         VNextBOForgotPasswordData data = JSonDataParser.getTestDataFromJson(testData, VNextBOForgotPasswordData.class);
 
         NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(registeredUserEmail);
+        nada.setEmailId(REGISTERED_USER_EMAIL);
         nada.deleteMessageWithSubject("PASSWORD RESET");
 
         forgotPasswordPage.setConfirmationMailFieldValue(data.getEmail());
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialog vNextBOInformationModalDialog =
-                PageFactory.initElements(webdriver, VNextBOModalDialog.class);
+        VNextBOModalDialog vNextBOInformationModalDialog = new VNextBOModalDialog(webdriver);
 
         vNextBOInformationModalDialog.clickOkButton();
 
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("PASSWORD RESET");
-        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
-        String resetPasswordUrl = nada.getUrlsFromMessage(mailmessage, "reset your password").get(0);
+        String mailMessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
+        String resetPasswordUrl = nada.getUrlsFromMessage(mailMessage, "reset your password").get(0);
 
         Assert.assertTrue(resetPasswordUrl.contains("resetPassword"), "User hasn't got link for a password reset");
     }

@@ -220,7 +220,7 @@ public class NadaEMailService {
         return  present;
     }
 
-    public String getMailMessageBySybjectKeywords(NadaEMailService.MailSearchParametersBuilder mailSearchParameters) throws Exception {
+    public String getMailMessageBySubjectKeywords(NadaEMailService.MailSearchParametersBuilder mailSearchParameters) throws Exception {
         EmailMessage message = null;
         if (waitForMessage(mailSearchParameters)) {
             message = getMessageWithSubject(mailSearchParameters.getSubjectKeyword());

@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +19,12 @@ public class VNextBOModalDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@data-automation-id='modalConfirmButton']")
     private WebElement confirmOKButton;
 
+    @FindBy(xpath = "//div[@class='modal-body__content']/div")
+    private WebElement dialogMessage;
+
+    @FindBy(className = "modal-title")
+    private WebElement dialogTitle;
+
     public boolean isDialogDisplayed()  { return modalDialog.isDisplayed(); }
 
     public boolean isOkButtonDisplayed()  { return confirmOKButton.isDisplayed(); }
@@ -32,20 +38,14 @@ public class VNextBOModalDialog extends VNextBOBaseWebPage {
     }
 
     public String getDialogHeader() {
-        new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOf(driver.findElement(By.className("modal-title"))));
-        return driver.findElement(By.className("modal-title")).getText();
+        return Utils.getText(dialogTitle);
     }
 
     public String getDialogInformationMessage() {
-        new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[@class='modal-body__content']/div"))));
-        return driver.findElement(By.xpath("//div[@class='modal-body__content']/div")).getText();
+        return Utils.getText(dialogMessage);
     }
 
-    public VNextBOLoginScreenWebPage clickOkButton() {
+    public void clickOkButton() {
         confirmOKButton.click();
-        return PageFactory.initElements(
-                driver, VNextBOLoginScreenWebPage.class);
     }
 }

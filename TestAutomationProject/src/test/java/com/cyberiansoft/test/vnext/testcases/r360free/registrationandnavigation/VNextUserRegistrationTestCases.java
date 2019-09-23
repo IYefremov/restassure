@@ -146,7 +146,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("Repair360 Free: REGISTRATION");
-        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
         nada.deleteMessageWithSubject("Repair360 Free: REGISTRATION");
         String linkText = "Click here";
         List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
@@ -256,7 +256,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("PDR: REGISTRATION");
-        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 
         String linkText = "Click here";
         List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
@@ -356,7 +356,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("Phone Number Reminder");
-        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
         //nada.deleteMessageWithSubject("Phone Number Reminder");
 
         String userphone = "";
@@ -572,7 +572,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("Repair360 Free: REGISTRATION");
-        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
         String linkText = "Click here";
         List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
 
@@ -595,7 +595,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("Welcome to Client Portal");
-        mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 
 
         String ibsurl = mailmessage.substring(mailmessage.indexOf(ibsStartSearchPhrase) + ibsStartSearchPhrase.length() + 1, mailmessage.indexOf(ibsEndSearchPhrase) - 1);
@@ -1041,7 +1041,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("Repair360 Free: REGISTRATION");
-        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
         nada.deleteMessageWithSubject("Repair360 Free: REGISTRATION");
         String linkText = "Click here";
         List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
