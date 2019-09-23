@@ -19,6 +19,9 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     @FindBy(xpath = "//div[contains(@data-page,'list')]")
     private WebElement servicesscreen;
 
+    @FindBy(xpath = "//div[@class='notifier']")
+    private WebElement notificationPopup;
+
 
     public VnextBaseServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);

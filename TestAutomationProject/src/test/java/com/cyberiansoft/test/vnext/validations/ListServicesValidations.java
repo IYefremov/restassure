@@ -1,7 +1,11 @@
 package com.cyberiansoft.test.vnext.validations;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VnextBaseServicesScreen;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.testng.Assert;
 
 import java.util.List;
@@ -41,5 +45,21 @@ public class ListServicesValidations {
                         .anyMatch(
                                 service -> service.getServiceName().equals(expectedServiceName)
                                         && service.getServiceDescription().equals(expectedDescription)));
+    }
+
+    public static void validateMessagePresent(Boolean shouldBePresent, String messageText) {
+        VnextBaseServicesScreen servicesScreen = new VnextBaseServicesScreen();
+        WaitUtils.elementShouldBeVisible(servicesScreen.getNotificationPopup(), shouldBePresent);
+        Assert.assertEquals(servicesScreen.getNotificationPopup().getText(), messageText);
+    }
+
+    public static void validateAvailableServiceCount(String serviceName, Integer expectedCount) {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.switchToAvalableServicesView();
+        SearchSteps.textSearch(serviceName);
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Assert.assertEquals(servicesScreen.getServiceAmountSelectedValue(serviceName), (int) expectedCount);
+            return true;
+        });
     }
 }

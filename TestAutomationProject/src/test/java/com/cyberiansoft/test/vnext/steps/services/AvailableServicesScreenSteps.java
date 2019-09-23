@@ -22,7 +22,11 @@ public class AvailableServicesScreenSteps {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         servicesScreen.switchToAvalableServicesView();
         SearchSteps.textSearch(serviceName);
-        servicesScreen.selectService(serviceName);
+        servicesScreen.selectSingleService(serviceName);
+    }
+
+    public static void selectService(ServiceData serviceData) {
+        AvailableServicesScreenSteps.selectService(serviceData.getServiceName());
     }
 
     public static void openServiceDetails(String serviceName) {
@@ -42,4 +46,6 @@ public class AvailableServicesScreenSteps {
     public static void openServiceDetails(ServiceData serviceData) {
         AvailableServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
     }
+
+
 }

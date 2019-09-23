@@ -9,4 +9,5 @@ public class GeneralValidations {
         if (shouldBePresent && errorMessage != null)
             WaitUtils.assertEquals(ErrorDialogInteractions.getErrorDialogText(), errorMessage);
     }
+
 }

@@ -166,4 +166,8 @@ public class VNextProTestCasesDataPaths {
     public String getVehiclePartsCasesDataPath() {
         return props.getProperty("vehicle.parts.basic");
     }
+
+    public String getServiceMultipleOptionDataPath() {
+        return props.getProperty("service.multiple.option");
+    }
 }

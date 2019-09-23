@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -37,6 +38,10 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
     @FindBy(xpath = "//*[@data-autotests-id='all-services']")
     private WebElement allserviceslist;
+
+    @Getter
+    @FindBy(xpath = "//div[contains(@class,'service-item')]")
+    private List<WebElement> servicesListItems;
 
 
     public VNextAvailableServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
@@ -75,7 +80,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
             try {
                 servicePrice = servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
                 tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//*[@action='select-item']"))));
-                WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
+                //WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
             } catch (WebDriverException e) {
                 WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
                 WaitUtils.click(servicerow.findElement(By.xpath(".//*[@action='select-item']")));
@@ -83,11 +88,25 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
             WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
             if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
-                VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(appiumdriver);
+                VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
                 serviceDetailsScreen.clickServiceDetailsDoneButton();
             }
             new VNextAvailableServicesScreen(appiumdriver);
 
+        } else
+            Assert.assertTrue(false, "Can't find service: " + serviceName);
+    }
+
+    public void selectSingleService(String serviceName) {
+        WebElement servicerow = getServiceListItem(serviceName);
+        if (servicerow != null) {
+            try {
+                tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//*[@action='select-item']"))));
+                //WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
+            } catch (WebDriverException e) {
+                WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
+                WaitUtils.click(servicerow.findElement(By.xpath(".//*[@action='select-item']")));
+            }
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
@@ -143,23 +162,15 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         return servicesscreen.findElement(By.xpath(".//span[@id='total']")).getText().trim();
     }
 
-    public List<WebElement> getServicesListItems() {
-        return allserviceslist.findElements(By.xpath(".//div[@class='checkbox-item']"));
-    }
-
     public String getServiceListItemName(WebElement srvlistitem) {
         return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
     }
 
     public WebElement getServiceListItem(String servicename) {
-        WebElement serviceListItem = null;
-        List<WebElement> services = getServicesListItems();
-        for (WebElement srv : services)
-            if (getServiceListItemName(srv).equals(servicename)) {
-                serviceListItem = srv;
-                break;
-            }
-        return serviceListItem;
+        return WaitUtils.getGeneralFluentWait().until(driver -> getServicesListItems().stream()
+                .filter(element -> element.getText().contains(servicename))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Service not found " + servicename)));
     }
 
     public void openMatrixServiceDetails(String matrixservicename) {

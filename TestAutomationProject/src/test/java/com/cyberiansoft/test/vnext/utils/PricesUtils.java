@@ -9,7 +9,7 @@ public class PricesUtils {
     }
 
     public static boolean isServicePriceEqualsZero(String servicePriceValue) {
-        if (servicePriceValue.contains("x"))
+        if (servicePriceValue.contains("x") || servicePriceValue.contains("Select Price Matrices"))
             return false;
         Double price = getServicePriceValue(servicePriceValue);
         return price.equals(Double.valueOf(0));

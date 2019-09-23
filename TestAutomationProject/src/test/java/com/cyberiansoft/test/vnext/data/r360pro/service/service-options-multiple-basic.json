@@ -1,0 +1,74 @@
+{
+  "userCantAddSingleServiceMultipleTimesCreatingWO": [
+    {
+      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWO.01",
+      "description": "89495",
+      "services": [
+        {
+          "serviceName": "rozstalnoy_disable_money"
+        },
+        {
+          "serviceName": "rozstalnoy_disable_labor"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "serviceName": "rozstalnoy_disable_parts",
+          "category": "Body",
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": true
+          },
+          "partPosition": "Front"
+        }
+      ],
+      "matrixService": {
+        "matrixServiceName": "Hail Repair",
+        "vehiclePartData": {
+          "vehiclePartName": "01Part",
+          "vehiclePartSize": "DIME",
+          "vehiclePartSeverity": "201 - 250"
+        }
+      }
+    }
+  ],
+  "userCantAddSingleServiceMultipleTimesEditingWO": [
+    {
+      "rowID": "userCantAddSingleServiceMultipleTimesEditingWO.01",
+      "description": "89527",
+      "services": [
+        {
+          "serviceName": "rozstalnoy_disable_money"
+        },
+        {
+          "serviceName": "rozstalnoy_disable_labor"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "serviceName": "rozstalnoy_disable_parts",
+          "category": "Body",
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": true
+          },
+          "partPosition": "Front"
+        }
+      ],
+      "matrixService": {
+        "matrixServiceName": "Hail Repair",
+        "vehiclePartData": {
+          "vehiclePartName": "01Part",
+          "vehiclePartSize": "DIME",
+          "vehiclePartSeverity": "201 - 250"
+        }
+      }
+    }
+  ]
+}
