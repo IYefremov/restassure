@@ -45,10 +45,8 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 				driver, VNextBOHeaderPanel.class); 
 	}
 	
-	public VNextBOForgotPasswordWebPage clickForgotPasswordLink() {
+	public void clickForgotPasswordLink() {
 		forgotPasswordLink.click();
-		return PageFactory.initElements(
-				driver, VNextBOForgotPasswordWebPage.class);
 	}
 
     public boolean isLoginFormDisplayed() {
@@ -70,4 +68,6 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
     public boolean isForgotPasswordLinkDisplayed() {
         return isElementDisplayed(forgotPasswordLink);
     }
+
+    public String getValueFromEmailField() { return emailField.getValue(); }
 }

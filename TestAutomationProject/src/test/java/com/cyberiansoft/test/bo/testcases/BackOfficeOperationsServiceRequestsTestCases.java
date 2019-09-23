@@ -1153,7 +1153,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1207,7 +1207,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 		//        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1267,7 +1267,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1323,7 +1323,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1377,7 +1377,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //        Assert.assertTrue(emailUtils.waitForMessageWithSubjectInFolder(mailSearchParameters),
@@ -1430,7 +1430,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //		Assert.assertTrue(
@@ -1487,7 +1487,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //		Assert.assertTrue(mailChecker.checkTestEmails()
@@ -1544,7 +1544,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()));
@@ -1599,7 +1599,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordRemainder()) || mailChecker.checkTestEmails());
@@ -1655,7 +1655,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()));
@@ -1710,7 +1710,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()) || mailChecker.checkTestEmails());
@@ -1768,7 +1768,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
 //                        .withSubject(data.getEmailKeyWordWasCreated());
-//        String mailmessage = nada.getMailMessageBySybjectKeywords(searchParametersBuilder);
+//        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
 //        System.out.println("MESSAGE:\n"+ mailmessage);
 
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
