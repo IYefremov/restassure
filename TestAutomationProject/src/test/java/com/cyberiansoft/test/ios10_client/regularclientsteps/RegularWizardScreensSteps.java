@@ -24,8 +24,6 @@ public class RegularWizardScreensSteps {
     public static void cancelWizard() {
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
         baseWizardScreen.clickCancelWizard();
-        Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
-        alert.accept();
     }
 
     public static void clickNotesButton() {

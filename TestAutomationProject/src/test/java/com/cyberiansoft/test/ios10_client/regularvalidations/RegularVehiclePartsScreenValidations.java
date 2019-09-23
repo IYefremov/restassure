@@ -5,8 +5,7 @@ import org.testng.Assert;
 
 public class RegularVehiclePartsScreenValidations {
 
-    public static void
-    verifyVehiclePartScreenSubTotalValue(String expectedPrice) {
+    public static void verifyVehiclePartScreenSubTotalValue(String expectedPrice) {
         RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         Assert.assertEquals(vehiclePartScreen.getPriceMatrixVehiclePartSubTotalPrice(), expectedPrice);
     }

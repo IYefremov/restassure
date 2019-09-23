@@ -990,7 +990,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
         final String copyInspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
         RegularNavigationSteps.navigateToPriceMatrixScreen();
-        RegularVehiclePartsScreenValidations.verifyVehiclePartScreenSubTotalValue(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartTotalPrice());
+        RegularPriceMatrixScreenValidations.verifyPriceMatrixScreenSubTotalValue(inspectionData.getPriceMatrixScreenData().getVehiclePartData().getVehiclePartTotalPrice());
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
 
@@ -1044,6 +1044,37 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularSearchScreenSteps.saveSearchDialog();
 
         RegularMyInvoicesScreenValidations.verifyInvoicePresent(invoiceNumber, true);
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyChangeCustomerForWO(String rowID,
+                                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("Test");
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.changeCustomerForWorkOrder(workOrderNumber, wholesailCustomer);
+
+        RegularMyWorkOrdersSteps.openWorkOrderDetails(workOrderNumber);
+        RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(wholesailCustomer);
+        RegularWizardScreensSteps.cancelWizard();
+
         RegularNavigationSteps.navigateBackScreen();
     }
 }

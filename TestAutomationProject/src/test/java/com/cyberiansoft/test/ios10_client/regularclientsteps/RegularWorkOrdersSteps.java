@@ -17,11 +17,8 @@ public class RegularWorkOrdersSteps {
 
     public static void cancelCreatingWorkOrder() {
         RegularWizardScreensSteps.cancelWizard();
-        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
-    }
-
-    public static void cancelWorkOrder() {
-        RegularWizardScreensSteps.cancelWizard();
+        Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
+        alert.accept();
         RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
 

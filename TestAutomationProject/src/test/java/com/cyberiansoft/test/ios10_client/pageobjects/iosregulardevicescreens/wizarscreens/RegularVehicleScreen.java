@@ -255,12 +255,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'")).sendKeys(po + "\n");
 	}
 	
-	public String getWorkOrderCustomer() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		return wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("viewPrompt"))).getAttribute("value");
-	}
-	
-	public String getInspectionCustomer() {
+	public String getCustomerValue() {
 		waitVehicleScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		return wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("viewPrompt"))).getAttribute("value");
