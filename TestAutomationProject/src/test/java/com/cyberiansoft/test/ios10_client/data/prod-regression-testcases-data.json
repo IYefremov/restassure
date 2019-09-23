@@ -1034,5 +1034,33 @@
         "poNumber": "123po"
       }
     }
+  ],
+  "testVerifyChangeCustomerForWO": [
+    {
+      "rowID": "testVerifyChangeCustomerForWO.01",
+      "description": "Test Case 28363: 46 - Verify change customer for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83650",
+          "testCaseTitle": "Test Case 28363: 46 - Verify change customer for WO"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      }
+    }
   ]
 }

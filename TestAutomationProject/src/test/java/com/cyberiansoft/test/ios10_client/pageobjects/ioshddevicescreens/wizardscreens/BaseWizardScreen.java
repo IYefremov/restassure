@@ -44,9 +44,16 @@ public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScre
         appiumdriver.findElementByAccessibilityId("Final").click();
     }
 
+    public void clickDraftPopup() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Draft")));
+        appiumdriver.findElementByAccessibilityId("Draft").click();
+    }
+
     public void clickSaveAsFinal() {
         clickSave();
         clickFinalPopup();
+        clickSave();
     }
 
     public void saveWizard() {

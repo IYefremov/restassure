@@ -360,6 +360,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
     }
 
     public TeamWorkOrdersScreen switchToTeamWorkOrdersView() {
+		waitWorkOrdersScreenLoaded();
 		switchToTeamView();
 		return new TeamWorkOrdersScreen();
 	}

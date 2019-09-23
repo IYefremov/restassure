@@ -259,8 +259,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public boolean isInspectionExists(String inspection) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.elementToBeClickable(inspectionsTable));
+		waitInspectionsScreenLoaded();
 		return elementExists(inspection);
 	}
 

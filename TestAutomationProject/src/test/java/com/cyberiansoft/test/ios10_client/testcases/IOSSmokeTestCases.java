@@ -861,7 +861,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myInspectionsScreen.clickActionButton();
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
-
 		myInspectionsScreen.clickApproveInspections();
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -870,6 +869,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickApproveButton();
 		approveInspectionsScreen.drawSignatureAfterSelection();
 		approveInspectionsScreen.clickDoneButton();
+		myInspectionsScreen.waitInspectionsScreenLoaded();
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -2126,7 +2126,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(newserviceRequestNumber), ServiceRequestStatus.SCHEDULED.getValue());
 		serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
 		serviceRequestsScreen.selectRejectAction();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		serviceRequestsScreen = new ServiceRequestsScreen();
 		serviceRequestsScreen.clickHomeButton();
 	}
@@ -2192,8 +2191,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestdetailsScreen.clickBackButton();
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestsScreen.selectRejectAction();
-		alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		serviceRequestsScreen.clickHomeButton();
 	}
 
@@ -2531,7 +2528,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(serviceDetailsPopup.isServiceStartDateExists());
 		serviceDetailsPopup.clickServiceDetailsDoneButton();
 		teamWorkordersScreen = orderMonitorScreen.clickBackButton();
-		;
 		teamWorkordersScreen.clickHomeButton();
 	}
 
@@ -2810,10 +2806,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
-		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
 		myWorkOrdersScreen.clickHomeButton();
 		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
-		myInvoicesScreen.myInvoiceExists(invoiceNumber);
+		Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoiceNumber));
 		myInvoicesScreen.clickInvoiceApproveButton(invoiceNumber);
 
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -2879,10 +2875,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
-		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
 		myWorkOrdersScreen.clickHomeButton();
 		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
-		myInvoicesScreen.myInvoiceExists(invoiceNumber);
+		Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoiceNumber));
 		myInvoicesScreen.clickHomeButton();
 
 
@@ -2920,7 +2916,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.printInvoice(invoicenum, printServerName);
 		myInvoicesScreen.clickHomeButton();
 		Helpers.waitABit(20000);
-		myInvoicesScreen = homeScreen.clickMyInvoices();
+		myInvoicesScreen.waitMyInvoicesScreenLoaded();
 		Assert.assertTrue(myInvoicesScreen.isInvoicePrintButtonExists(invoicenum));
 		myInvoicesScreen.clickHomeButton();
 	}
@@ -2976,7 +2972,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
-		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
 		myWorkOrdersScreen.clickHomeButton();
 		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
 		myInvoicesScreen.myInvoiceExists(invoiceNumber);
@@ -3021,7 +3017,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
-		myWorkOrdersScreen = new MyWorkOrdersScreen();
+		myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
 		myWorkOrdersScreen.clickHomeButton();
 		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
 		myInvoicesScreen.myInvoiceExists(invoiceNumber);
@@ -3061,7 +3057,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			invoiceInfoScreen.setPO(workOrderData.getInvoiceData().getPoNumber());
 			final String invoiceNumberapproveon = invoiceInfoScreen.getInvoiceNumber();
 			invoiceInfoScreen.clickSaveAsFinal();
-			myWorkOrdersScreen = new MyWorkOrdersScreen();
+			myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
 			myWorkOrdersScreen.clickHomeButton();
 			MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
 			myInvoicesScreen.myInvoiceExists(invoiceNumberapproveon);
@@ -3117,7 +3113,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(serviceRequestNumber2), ServiceRequestStatus.SCHEDULED.getValue());
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber2);
 		serviceRequestsScreen.selectRejectAction();
-		Helpers.acceptAlert();
+		serviceRequestsScreen.waitServiceRequestsScreenLoaded();
 		serviceRequestsScreen.clickHomeButton();
 	}
 
@@ -3477,8 +3473,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		Assert.assertFalse(serviceRequestsScreen.isCloseActionExists());
 		serviceRequestsScreen.selectRejectAction();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		serviceRequestsScreen.waitServiceRequestsScreenLoaded();
 		serviceRequestsScreen.clickHomeButton();
 	}
@@ -4033,8 +4027,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : inspectionData.getServicesToApprovesList())
 			if (serviceData.isSelected())
 				Assert.assertTrue(servicesScreen.checkServiceIsSelected(serviceData.getServiceName()));
-		servicesScreen.clickSaveAsFinal();
-		myInspectionsScreen = new MyInspectionsScreen();
+		InspectionsSteps.saveInspectionAsFinal();
+		myInspectionsScreen.waitInspectionsScreenLoaded();
 		myInspectionsScreen.clickHomeButton();
 	}
 
@@ -4251,7 +4245,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
-		servicesScreen.clickSaveAsFinal();
+		InspectionsSteps.saveInspectionAsFinal();
 		myInspectionsScreen.selectInspectionToAssign(inspectionNumber);
 		DevicesPopupScreen devicesscreen = new DevicesPopupScreen();
 		Assert.assertTrue(devicesscreen.isAssignButtonDisplayed());
@@ -7458,7 +7452,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
-
 		TeamWorkOrdersScreen teamWorkOrdersScreen = myWorkOrdersScreen.switchToTeamWorkOrdersView();
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());

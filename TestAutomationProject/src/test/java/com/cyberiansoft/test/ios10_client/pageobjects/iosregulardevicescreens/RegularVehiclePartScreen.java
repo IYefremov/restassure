@@ -90,6 +90,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     }
 
     public String getPriceMatrixVehiclePartSubTotalPrice() {
+        waitVehiclePartScreenLoaded();
         return appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
     }
 

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
 import org.testng.Assert;
@@ -35,5 +36,10 @@ public class RegularVehicleInfoValidations {
         if (vehicleInfoData.getTrim() != null) {
             Assert.assertEquals(vehicleScreen.getTrim(), vehicleInfoData.getTrim());
         }
+    }
+
+    public static void verifyVehicleInfoScreenCustomerValue(AppCustomer expectedCustomer) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        Assert.assertEquals(vehicleScreen.getCustomerValue(), expectedCustomer.getFullName().trim());
     }
 }

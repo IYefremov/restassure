@@ -1125,8 +1125,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularMyInvoicesScreenSteps.selectInvoiceForEdit(invoiceNumber);
 		Assert.assertEquals(invoiceInfoScreen.getInvoiceCustomer(), iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
 		invoiceInfoScreen.clickWO(workOrderNumber1);
-		vehicleScreen.waitVehicleScreenLoaded();
-		Assert.assertEquals(vehicleScreen.getWorkOrderCustomer(), iOSInternalProjectConstants.SPECIFIC_CLIENT_CUSTOMER);
+		RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(Specific_Client);
 		RegularWizardScreensSteps.cancelWizard();
 		invoiceInfoScreen.waitInvoiceInfoScreenLoaded();
 		invoiceInfoScreen.cancelInvoice();
@@ -1408,7 +1407,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularVisualInteriorScreen visualscreen = new RegularVisualInteriorScreen();
 		visualscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		RegularNavigationSteps.navigateToVehicleInfoScreen();
-		Assert.assertEquals(vehicleScreen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(_003_Test_Customer);
 		RegularInspectionsSteps.saveInspection();
 
 		myInspectionsScreen.clickHomeButton();
@@ -1453,7 +1452,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularVisualInteriorScreen visualscreen = new RegularVisualInteriorScreen();
 		visualscreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		RegularNavigationSteps.navigateToVehicleInfoScreen();
-		Assert.assertTrue(vehicleScreen.getInspectionCustomer().contains(iOSInternalProjectConstants.RETAIL_CUSTOMER));
+		RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(testRetailCustomer);
 		RegularInspectionsSteps.saveInspection();
 
 		myInspectionsScreen.clickHomeButton();
@@ -1492,7 +1491,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		visualInteriorScreen.waitVisualScreenLoaded(WizardScreenTypes.VISUAL_EXTERIOR.getDefaultScreenTypeName());
 		RegularNavigationSteps.navigateToVehicleInfoScreen();
-		Assert.assertEquals(vehicleScreen.getInspectionCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(_003_Test_Customer);
 		RegularInspectionsSteps.saveInspection();
 		myInspectionsScreen.clickHomeButton();
 	}
@@ -1528,8 +1527,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularWorkOrdersSteps.saveWorkOrder();
 		RegularMyWorkOrdersSteps.changeCustomerForWorkOrder(workOrderNumber, wholesailCustomer);
 		RegularMyWorkOrdersSteps.openWorkOrderDetails(workOrderNumber);
-		vehicleScreen = new RegularVehicleScreen();
-		Assert.assertEquals(vehicleScreen.getWorkOrderCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(testRetailCustomer);
 		servicesScreen.clickCancel();
 		myWorkOrdersScreen.clickHomeButton();
 	}
@@ -1567,8 +1565,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Helpers.waitABit(45 * 1000);
 		RegularMyWorkOrdersSteps.changeCustomerForWorkOrder(workOrderNumber, wholesailCustomer);
 		RegularMyWorkOrdersSteps.openWorkOrderDetails(workOrderNumber);
-		vehicleScreen = new RegularVehicleScreen();
-		Assert.assertEquals(vehicleScreen.getWorkOrderCustomer(), iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(testRetailCustomer);
 		servicesScreen.clickCancel();
 		myWorkOrdersScreen.clickHomeButton();
 	}
@@ -1608,8 +1605,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		RegularMyWorkOrdersSteps.openWorkOrderDetails(workOrderNumber);
-		vehicleScreen.waitVehicleScreenLoaded();
-		Assert.assertTrue(vehicleScreen.getWorkOrderCustomer().contains(iOSInternalProjectConstants.RETAIL_CUSTOMER));
+		RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(testRetailCustomer);
 		servicesScreen.clickCancel();
 		myWorkOrdersScreen.clickHomeButton();
 	}
@@ -6687,7 +6683,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
 
 		servicesScreen.waitServicesScreenLoaded();
-		RegularWorkOrdersSteps.cancelWorkOrder();
+		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
 
 		myWorkOrdersScreen.clickHomeButton();
 		homeScreen.clickLogoutButton();

@@ -146,6 +146,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
+		waitMyInspectionsScreenLoaded();
 		return inspectionsTable.findElement(MobileBy.
 				AccessibilityId(inspectionnumber)).findElement(MobileBy.
 						AccessibilityId("labelInspectionAmount")).getAttribute("label");
