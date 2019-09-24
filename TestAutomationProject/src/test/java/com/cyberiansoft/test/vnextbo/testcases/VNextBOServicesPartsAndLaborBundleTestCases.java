@@ -46,7 +46,7 @@ public class VNextBOServicesPartsAndLaborBundleTestCases extends BaseTestCase {
 		userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
 		userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
+        loginPage = new VNextBOLoginScreenWebPage(webdriver);
         loginPage.userLogin(userName, userPassword);
         VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
         headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
@@ -149,7 +149,7 @@ public class VNextBOServicesPartsAndLaborBundleTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName(String rowID, String description, JSONObject testData) {
         VNextBOServicesPartsAndLaborBundleData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesPartsAndLaborBundleData.class);
-        VNextBOAddNewServiceDialog addNewServiceDialog = PageFactory.initElements(webdriver, VNextBOAddNewServiceDialog.class);
+        VNextBOAddNewServiceDialog addNewServiceDialog = new VNextBOAddNewServiceDialog(webdriver);
 
         VNextBOServicesWebPage servicesPage = leftMenu
                 .selectServicesMenu()

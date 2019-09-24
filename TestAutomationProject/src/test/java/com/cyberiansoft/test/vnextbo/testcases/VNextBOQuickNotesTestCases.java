@@ -46,7 +46,7 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
+        loginPage = new VNextBOLoginScreenWebPage(webdriver);
         loginPage.userLogin(userName, userPassword);
         VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
         headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
