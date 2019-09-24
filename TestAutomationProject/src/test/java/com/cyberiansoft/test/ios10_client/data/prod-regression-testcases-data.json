@@ -1062,5 +1062,73 @@
         }
       }
     }
+  ],
+  "testVerifyChangeCustomerForInspection": [
+    {
+      "rowID": "testVerifyChangeCustomerForInspection.01",
+      "description": "Test Case 28364: 47 - Verify change customer for inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83651",
+          "testCaseTitle": "Test Case 28364: 47 - Verify change customer for inspection"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        }
+      }
+    }
+  ],
+  "testVerifyDecodingOfVINNumber": [
+    {
+      "rowID": "testVerifyDecodingOfVINNumber.01",
+      "description": "Test Case 28366: 49 - Verify decoding of VIN number",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83654",
+          "testCaseTitle": "Test Case 28366: 49 - Verify decoding of VIN number"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        }
+      },
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        }
+      }
+    }
   ]
 }

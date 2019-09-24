@@ -118,6 +118,7 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	}
 
 	public InvoiceInfoScreen addTeamWorkOrder(String wonumber) {
+		waitInvoiceInfoScreenLoaded();
 		((IOSElement) appiumdriver.findElementByAccessibilityId("InvoiceOrdersTable")).findElementByAccessibilityId("Insert").click();
 
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
@@ -138,19 +139,15 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	}
 	
 	public String getInvoiceNumber() {
+		waitInvoiceInfoScreenLoaded();
 		IOSElement toolbar = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeToolbar");
 		return toolbar.findElementByIosNsPredicate("name contains 'I-00'").getAttribute("value");
-		//return appiumdriver.findElementByXPath("//XCUIElementTypeToolbar[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"I-00\")]").getAttribute("value");
 	}
 	
 	public String getInvoiceCustomer() {
 		waitInvoiceInfoScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId("viewPrompt").getAttribute("value");
 	}
-
-	//public void clickSaveButton() {
-	//	savebtn.click();
-	//}
 
 	public void clickCancelButton() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

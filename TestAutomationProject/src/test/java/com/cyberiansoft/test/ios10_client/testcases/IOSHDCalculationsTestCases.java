@@ -910,6 +910,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
+		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
 		NavigationSteps.navigateToVehicleInfoScreen();
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -1199,6 +1200,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		String srnumber = serviceRequestsScreen.getFirstServiceRequestNumber();
 		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(srnumber, InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
+		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
 		NavigationSteps.navigateToVehicleInfoScreen();
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 
@@ -1251,6 +1253,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
+		visualInteriorScreen.waitVisualScreenLoaded("Future Sport Car");
 		NavigationSteps.navigateToVehicleInfoScreen();
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();
@@ -2305,7 +2308,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		CustomersScreen customersScreen = new CustomersScreen();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickOnCustomer(retailCustomer);
-		myWorkOrdersScreen = new MyWorkOrdersScreen();
+
 		Assert.assertFalse(myWorkOrdersScreen.woExists(workOrders.get(workOrderIndexToEdit)));
 		myWorkOrdersScreen.clickHomeButton();
 
@@ -2377,6 +2380,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
 		MyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualinteriorScreen = new VisualInteriorScreen();
+		visualinteriorScreen.waitVisualScreenLoaded("Future Sport Car");
 		NavigationSteps.navigateToVehicleInfoScreen();
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.waitVehicleScreenLoaded();

@@ -56,6 +56,8 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 	}
 	
 	public void switchToCustomTab() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Custom")));
 		appiumdriver.findElementByAccessibilityId("Custom").click();
 	}
 

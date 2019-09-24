@@ -2916,7 +2916,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.printInvoice(invoicenum, printServerName);
 		myInvoicesScreen.clickHomeButton();
 		Helpers.waitABit(20000);
-		myInvoicesScreen.waitMyInvoicesScreenLoaded();
+		homeScreen.clickMyInvoices();
 		Assert.assertTrue(myInvoicesScreen.isInvoicePrintButtonExists(invoicenum));
 		myInvoicesScreen.clickHomeButton();
 	}
@@ -5795,7 +5795,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		}
 		vehicleScreen.cancelWizard();
-		homeScreen = myWorkOrdersScreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
