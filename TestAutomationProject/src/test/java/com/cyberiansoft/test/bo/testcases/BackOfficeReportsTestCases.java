@@ -29,10 +29,10 @@ public class BackOfficeReportsTestCases extends BaseTestCase {
 		BOReportsData data = JSonDataParser.getTestDataFromJson(testData, BOReportsData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		ReportsWebPage reportsPage = new ReportsWebPage(webdriver);
-		backOfficeHeader.clickReportsLink();
-		TechnicianCommissionsWebPage technicianCommissionsPage = new TechnicianCommissionsWebPage(webdriver);
-		reportsPage.clickTechnicianCommissionsLink();
+        backOfficeHeader.clickReportsLink();
+        ReportsWebPage reportsPage = new ReportsWebPage(webdriver);
+        reportsPage.clickTechnicianCommissionsLink();
+        TechnicianCommissionsWebPage technicianCommissionsPage = new TechnicianCommissionsWebPage(webdriver);
 		technicianCommissionsPage.setSearchFromDate();
 		technicianCommissionsPage.clickSearchBTN();
 		Assert.assertTrue(technicianCommissionsPage.checkSortAbility());
@@ -46,11 +46,11 @@ public class BackOfficeReportsTestCases extends BaseTestCase {
 		BOReportsData data = JSonDataParser.getTestDataFromJson(testData, BOReportsData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		APADStatementWebPage apadStatementPage = new APADStatementWebPage(webdriver);
+        backOfficeHeader.clickReportsLink();
+        ReportsWebPage reportsWebPage = new ReportsWebPage(webdriver);
+        reportsWebPage.clickAPADStatementLink();
+        APADStatementWebPage apadStatementPage = new APADStatementWebPage(webdriver);
 
-		backOfficeHeader.clickReportsLink();
-		ReportsWebPage reportsWebPage = new ReportsWebPage(webdriver);
-		reportsWebPage.clickAPADStatementLink();
 		apadStatementPage.clickSearchButton();
 		Assert.assertTrue(apadStatementPage.isReportGenerated(), "The report has not been generated");
 		Assert.assertTrue(apadStatementPage.areDefaultReportValuesDisplayed(data.getAreaParameter(), data.getTeamParameter(),
@@ -67,11 +67,11 @@ public class BackOfficeReportsTestCases extends BaseTestCase {
 		BOReportsData data = JSonDataParser.getTestDataFromJson(testData, BOReportsData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		APADStatementWebPage apadStatementPage = new APADStatementWebPage(webdriver);
+        backOfficeHeader.clickReportsLink();
+        ReportsWebPage reportsWebPage = new ReportsWebPage(webdriver);
+        reportsWebPage.clickAPADStatementLink();
+        APADStatementWebPage apadStatementPage = new APADStatementWebPage(webdriver);
 
-		backOfficeHeader.clickReportsLink();
-		ReportsWebPage reportsWebPage = new ReportsWebPage(webdriver);
-		reportsWebPage.clickAPADStatementLink();
 		apadStatementPage.selectArea(data.getArea());
 		apadStatementPage.selectTeam(data.getTeam());
 		apadStatementPage.selectEmployee(data.getEmployee());

@@ -2,13 +2,11 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.bo.BOOperationsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -29,11 +27,11 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 
-		TechnicianCommissionsWebPage techCommissionPage = new TechnicianCommissionsWebPage(webdriver);
-		operationsPage.clickTechnicianCommissionsLink();
+        operationsPage.clickTechnicianCommissionsLink();
+        TechnicianCommissionsWebPage techCommissionPage = new TechnicianCommissionsWebPage(webdriver);
 		techCommissionPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		techCommissionPage.setSearchFromDate(data.getFromTime());
 		techCommissionPage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
@@ -138,12 +136,11 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 
-		ServiceContractsWebPage serviceContractsPage = new ServiceContractsWebPage(webdriver);
-		operationsPage.clickServiceContactsLink();
-		Thread.sleep(2000);
+        operationsPage.clickServiceContactsLink();
+        ServiceContractsWebPage serviceContractsPage = new ServiceContractsWebPage(webdriver);
 		serviceContractsPage.verifyServiceContactsTableColumnsAreVisible();
 
 		serviceContractsPage.makeSearchPanelVisible();
@@ -261,14 +258,14 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		BOOperationsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		WorkOrdersWebPage workOrderPage = new WorkOrdersWebPage(webdriver);
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		operationsPage.clickWorkOrdersLink();
+        WorkOrdersWebPage workOrderPage = new WorkOrdersWebPage(webdriver);
 
 		Assert.assertTrue(workOrderPage.checkWorkOrdersInfo());
 		Assert.assertTrue(workOrderPage.checkWorkOrdersPagination());
 		Assert.assertTrue(workOrderPage.checkWorkOrdersSearchFields());
-		Assert.assertTrue(workOrderPage.checkWorkOrdersSearchResults(data.getWOnum()));
+		Assert.assertTrue(workOrderPage.checkWorkOrdersSearchResults(data.getWOnum(), data.getSearchData()));
 	}
 }

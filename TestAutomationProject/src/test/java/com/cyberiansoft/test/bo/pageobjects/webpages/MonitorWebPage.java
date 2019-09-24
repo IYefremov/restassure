@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +46,9 @@ public class MonitorWebPage extends BaseWebPage {
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl13_Label1")
 	private WebElement serviceCountLink;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl01_ctl00_childNodes_ctl12_Label1")
+	private WebElement activeVehiclesByPhaseLink;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_NavigationItem1_rLinks_ctl00_ctl00_childNodes_ctl08_Label1")
 	private WebElement productionDashboardLink;
@@ -110,4 +114,7 @@ public class MonitorWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(serviceCountLink)).click();
 	}
 
+	public void clickActiveVehiclesByPhaseLink() {
+        Utils.clickElement(activeVehiclesByPhaseLink);
+	}
 }

@@ -6,7 +6,6 @@ import com.cyberiansoft.test.dataclasses.bo.BOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -339,13 +338,13 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
-		backOfficeHeader.clickMonitorLink();
-		WhiteBoardWebPage whiteBoardPage = new WhiteBoardWebPage(webdriver);
-		monitorPage.clickWhiteBoardLink();
+        backOfficeHeader.clickMonitorLink();
+        MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+        monitorPage.clickWhiteBoardLink();
+        WhiteBoardWebPage whiteBoardPage = new WhiteBoardWebPage(webdriver);
 		whiteBoardPage.setSearchLocation(data.getSearchLocation());
 		whiteBoardPage.clickSearchButton();
-		Assert.assertTrue(whiteBoardPage.checkSearhResultColumns());
+		Assert.assertTrue(whiteBoardPage.checkSearchResultColumns());
 		Assert.assertFalse(whiteBoardPage.checkIntervalFieldLessThan(5));
 		Assert.assertFalse(whiteBoardPage.checkIntervalFieldOverThan(720));
 		Assert.assertFalse(whiteBoardPage.checkIntervalFieldInputSymbol("a"));
@@ -373,21 +372,18 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
-		backOfficeHeader.clickMonitorLink();
-		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = new ActiveVechicleByPhaseWebPage(webdriver);
-		monitorPage.clickServiceCountLink();
-//		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
-		activeVechicleByPhasePage.clickFindButton();
-//        Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
-		activeVechicleByPhasePage.setLocationFilter(data.getSearchLocation());
-		activeVechicleByPhasePage.setSearchFromDate(data.getFromDate());
-		activeVechicleByPhasePage.setSearchToDate(data.getToDate());
-//		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
-		activeVechicleByPhasePage.clickFindButton();
-//        Assert.assertEquals(1, activeVechicleByPhasePage.countLocationsInResultTable());
-//		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
-		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(data.getSearchLocation()));
+        backOfficeHeader.clickMonitorLink();
+        MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+		monitorPage.clickActiveVehiclesByPhaseLink();
+        ActiveVechicleByPhaseWebPage activeVehicleByPhasePage = new ActiveVechicleByPhaseWebPage(webdriver);
+		Assert.assertTrue(activeVehicleByPhasePage.checkSearchFields());
+		activeVehicleByPhasePage.clickFindButton();
+        Assert.assertTrue(activeVehicleByPhasePage.countLocationsInResultTable() > 0);
+		activeVehicleByPhasePage.setLocationFilter(data.getSearchLocation());
+		Assert.assertTrue(activeVehicleByPhasePage.checkTimeFrameFilter());
+		activeVehicleByPhasePage.clickFindButton();
+        Assert.assertEquals(1, activeVehicleByPhasePage.countLocationsInResultTable());
+		Assert.assertTrue(activeVehicleByPhasePage.checkPhasesInRowCheckBox());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -396,29 +392,22 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		BOMonitorData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
 		backOfficeHeader.clickMonitorLink();
-		ActiveVechicleByPhaseWebPage activeVechicleByPhasePage = new ActiveVechicleByPhaseWebPage(webdriver);
-		monitorPage.clickServiceCountLink();
-//		Assert.assertTrue(activeVechicleByPhasePage.checkSearchFields());
-		activeVechicleByPhasePage.clickFindButton();
-//		Assert.assertTrue(activeVechicleByPhasePage.countLocationsInResultTable() > 0);
-		activeVechicleByPhasePage.setLocationFilter(data.getSearchLocation());
-		activeVechicleByPhasePage.setSearchFromDate(data.getFromDate());
-		activeVechicleByPhasePage.setSearchToDate(data.getToDate());
-//		Assert.assertTrue(activeVechicleByPhasePage.checkTimeFrameFilter());
-		activeVechicleByPhasePage.clickFindButton();
-//        Assert.assertEquals(1, activeVechicleByPhasePage.countLocationsInResultTable());
-//		Assert.assertTrue(activeVechicleByPhasePage.checkPhasesInRowCheckBox());
-		Assert.assertTrue(activeVechicleByPhasePage.checkSearchResults(data.getSearchLocation()));
-//		Assert.assertTrue(activeVechicleByPhasePage.checkGrid());
-
-		// no more displayed
-//		activeVechicleByPhasePage.setPhase1(data.getPhase1());
-//		activeVechicleByPhasePage.setStatuses1(data.getStatus1());
-//		activeVechicleByPhasePage.setPhase2(data.getPhase2());
-//		activeVechicleByPhasePage.setStatuses2(data.getStatuses2());
-//		activeVechicleByPhasePage.clickFindButton();
+        MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
+        monitorPage.clickServiceCountLink();
+        ActiveVechicleByPhaseWebPage activeVehicleByPhasePage = new ActiveVechicleByPhaseWebPage(webdriver);
+//		Assert.assertTrue(activeVehicleByPhasePage.checkSearchFields());
+		activeVehicleByPhasePage.clickFindButton();
+//		Assert.assertTrue(activeVehicleByPhasePage.countLocationsInResultTable() > 0);
+		activeVehicleByPhasePage.setLocationFilter(data.getSearchLocation());
+		activeVehicleByPhasePage.setSearchFromDate(data.getFromDate());
+		activeVehicleByPhasePage.setSearchToDate(data.getToDate());
+//		Assert.assertTrue(activeVehicleByPhasePage.checkTimeFrameFilter());
+		activeVehicleByPhasePage.clickFindButton();
+//        Assert.assertEquals(1, activeVehicleByPhasePage.countLocationsInResultTable());
+//		Assert.assertTrue(activeVehicleByPhasePage.checkPhasesInRowCheckBox());
+		Assert.assertTrue(activeVehicleByPhasePage.checkSearchResults(data.getSearchLocation()));
+//		Assert.assertTrue(activeVehicleByPhasePage.checkGrid());
 	}
 
 	//test skipped cause of no test data

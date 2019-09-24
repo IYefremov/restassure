@@ -215,7 +215,7 @@
       "endTime": "8:40 AM",
       "clientName": "Alex SASHAZ",
       "technicianFieldValue": "All",
-      "customer": "004 - Test Company"
+      "customer": "007 - Test Company"
     }
   ],
 
@@ -231,7 +231,7 @@
       "endTime": "8:40 AM",
       "clientName": "Alex SASHAZ",
       "technicianFieldValue": "All",
-      "customer": "004 - Test Company",
+      "customer": "007 - Test Company",
       "checkInButton": "Check-In",
       "undoCheckInButton": "Undo Check-In"
     }
@@ -304,7 +304,7 @@
       "description": "Test Case 56832:Operation - Service Request - Appointment - Add Multi Tech in SR",
       "clientName": "Alex SASHAZ",
       "status": "Scheduled",
-      "customer": "004 - Test Company",
+      "customer": "007 - Test Company",
       "serviceRequestType": "Zak_Request_Type"
     }
   ],
@@ -366,7 +366,7 @@
       "description": "Test Case 56841:Operation - Service Request - Appointment - Scheduler - Multi Technicians Reset",
       "clientName": "Alex SASHAZ",
       "status": "Scheduled",
-      "customer": "004 - Test Company",
+      "customer": "007 - Test Company",
       "serviceRequestType": "Zak_Request_Type"
     }
   ],

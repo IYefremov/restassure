@@ -252,16 +252,16 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testEditDuplicateByVINandRO(String rowID, String description, JSONObject testData) {
+	public void testEditDuplicateByVINAndRO(String rowID, String description, JSONObject testData) {
 
 		BOOperationsInspectionsData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInspectionsData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
-		backOfficeHeader.clickOperationsLink();
+        backOfficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 
-		InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
-		operationsPage.clickInspectionsLink();
+        operationsPage.clickInspectionsLink();
+        InspectionsWebPage inspectionsWebPage = new InspectionsWebPage(webdriver);
 		inspectionsWebPage.makeSearchPanelVisible();
 		inspectionsWebPage.selectSearchTimeframe(data.getTimeFrame());
 		inspectionsWebPage.setTimeFrame(data.getFromTime(), data.getToTime());

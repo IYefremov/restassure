@@ -177,11 +177,11 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		BOMonitorVendorTeamsData data = JSonDataParser.getTestDataFromJson(testData, BOMonitorVendorTeamsData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		MonitorWebPage monitorpage = new MonitorWebPage(webdriver);
+		MonitorWebPage monitorPage = new MonitorWebPage(webdriver);
 		backOfficeHeader.clickMonitorLink();
 
 		VendorsTeamsWebPage vendorsTeamsPage = new VendorsTeamsWebPage(webdriver);
-		monitorpage.clickVendorsTeamsLink();
+		monitorPage.clickVendorsTeamsLink();
 		vendorsTeamsPage.makeSearchPanelVisible();
 		vendorsTeamsPage.setSearchTeamLocation(data.getVendorTeam());
 		vendorsTeamsPage.clickFindButton();

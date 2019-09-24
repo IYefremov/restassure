@@ -82,7 +82,14 @@
     {
       "rowID": "testWorkOrderSearchOperation.01",
       "description": "Test Case 60616:Operations - Work Orders: Search operation",
-      "WOnum": "O-000-02008"
+      "searchData": {
+          "packageValue": "All services 2",
+          "customer": "004 - Test Company",
+          "timeFrame": "Custom",
+          "dateFrom": "1/28/2019",
+          "dateTo": "1/28/2019"
+        },
+      "WOnum": "O-163-00192"
     }
   ]
 }

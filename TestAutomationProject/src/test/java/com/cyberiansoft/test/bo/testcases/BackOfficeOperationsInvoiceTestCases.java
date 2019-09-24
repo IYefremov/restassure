@@ -859,18 +859,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
-		backOfficeHeader.clickOperationsLink();
+        backOfficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 
-		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
-		operationspage.clickInvoicesLink();
+        operationsPage.clickInvoicesLink();
+        InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		invoicesPage.selectSearchStatus(data.getNewStatus());
 		invoicesPage.clickFindButton();
 		invoicesPage.selectIvoicesFromTop(3);
 		String mainWindow = invoicesPage.getMainWindow();
 		invoicesPage.clickExportButton();
-		ExportInvoicesWebPage exportInvoicesPage = new ExportInvoicesWebPage(webdriver);
-		invoicesPage.switchToExportInvoicesWindow(mainWindow);
+        invoicesPage.switchToExportInvoicesWindow(mainWindow);
+        ExportInvoicesWebPage exportInvoicesPage = new ExportInvoicesWebPage(webdriver);
 		Assert.assertTrue(exportInvoicesPage.allInvoicesAreAbleToExport());
 	}
 }

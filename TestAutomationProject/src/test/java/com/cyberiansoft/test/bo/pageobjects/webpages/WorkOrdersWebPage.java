@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.dataclasses.bo.BOSearchData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -366,25 +367,25 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		return true;
 	}
 
-	public boolean checkWorkOrdersSearchResults(String wo) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input"))).sendKeys("004 - Test Company");
+	public boolean checkWorkOrdersSearchResults(String wo, BOSearchData searchData) {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboCustomer_Input"))).sendKeys(searchData.getCustomer());
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_comboServiceGroups_Input"))).click();
-		selectComboboxValue(searchpackagecmb, searchpackagedd, "Dent Repear Package");
+		selectComboboxValue(searchpackagecmb, searchpackagedd, searchData.getPackageValue());
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_ddlTimeframe_Input"))).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("rcbList")))
-				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals("Custom")).findFirst()
+				.findElements(By.className("rcbItem")).stream().filter(e -> e.getText().equals(searchData.getTimeFrame())).findFirst()
 				.get().click();
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys("9/18/2015");
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpFrom_dateInput")).sendKeys(searchData.getDateFrom());
 		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).clear();
-		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys("9/18/2015");
+		driver.findElement(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_dpTo_dateInput")).sendKeys(searchData.getDateTo());
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("ctl00_ctl00_Content_Main_ctl02_filterer_BtnFind")))
 				.click();
 		waitForLoading();
 		try {
-//			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'O-000-02008'")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), '" + wo + "')]")));
 		} catch (TimeoutException e) {
+		    e.printStackTrace();
 			return false;
 		}
 		return true;

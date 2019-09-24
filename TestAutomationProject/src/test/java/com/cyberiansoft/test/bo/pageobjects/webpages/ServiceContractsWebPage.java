@@ -1,13 +1,11 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.bo.utils.RequestMethod;
+import com.cyberiansoft.test.bo.utils.URLStatusChecker;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,11 +14,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.utils.RequestMethod;
-import com.cyberiansoft.test.bo.utils.URLStatusChecker;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
 
 public class ServiceContractsWebPage extends WebPageWithPagination {
 	
@@ -89,7 +89,8 @@ public class ServiceContractsWebPage extends WebPageWithPagination {
 		}
 	}
 	
-	public void verifyServiceContactsTableColumnsAreVisible() {	
+	public void verifyServiceContactsTableColumnsAreVisible() {
+	    WaitUtilsWebDriver.waitABit(2000);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllItems")));
 		Assert.assertTrue(repairlocationstable.tableColumnExists("Invoice #"));
 		Assert.assertEquals(repairlocationstable.getWrappedElement().findElement(By.xpath(".//tr/th[4]")).getText(), "ID /\nContract#");

@@ -39,14 +39,13 @@ public class WhiteBoardWebPage extends BaseWebPage {
 		waitForLoading();
 	}
 
-	public boolean checkSearhResultColumns() {
+	public boolean checkSearchResultColumns() {
 		try {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Completed']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Not Started']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='In Progress']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Start Phase']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Phase Rework']")));
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Finished']")));
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Do not track']")));
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='QC']")));
 		} catch (TimeoutException e) {
 			return false;

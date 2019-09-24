@@ -43,7 +43,6 @@ public class AllEmployeesWebPage extends WebPageWithPagination {
 	public AllEmployeesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		wait.until(ExpectedConditions.visibilityOf(employeestable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {

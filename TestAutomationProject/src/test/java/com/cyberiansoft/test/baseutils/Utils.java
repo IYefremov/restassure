@@ -39,6 +39,18 @@ public class Utils {
         clickElement(DriverBuilder.getInstance().getDriver().findElement(by));
     }
 
+    public static void clickWithActions(WebElement element) {
+        try {
+            getActions()
+                    .moveToElement(element)
+                    .click()
+                    .build()
+                    .perform();
+        } catch (Exception ignored) {
+            clickWithJS(element);
+        }
+    }
+
     public static void clearAndType(WebElement element, String name) {
         scrollToElement(element);
         try {

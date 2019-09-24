@@ -79,7 +79,6 @@ public class AllUsersWebPage extends WebPageWithPagination {
 	public AllUsersWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-	wait.until(ExpectedConditions.visibilityOf(alluserstable.getWrappedElement()));
 	}
 	
 	public boolean searchPanelIsExpanded() {
