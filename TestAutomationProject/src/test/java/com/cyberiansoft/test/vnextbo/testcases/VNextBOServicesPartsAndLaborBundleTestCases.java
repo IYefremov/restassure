@@ -50,15 +50,14 @@ public class VNextBOServicesPartsAndLaborBundleTestCases extends BaseTestCase {
         loginPage.userLogin(userName, userPassword);
         VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
         headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
-        leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
+        leftMenu = new VNexBOLeftMenuPanel();
     }
 	
 	@AfterMethod
 	public void BackOfficeLogout() {
-		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-				VNextBOHeaderPanel.class);
-		if (headerpanel.logOutLinkExists())
-			headerpanel.userLogout();
+		VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
+		if (headerPanel.logOutLinkExists())
+			headerPanel.userLogout();
 
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();
