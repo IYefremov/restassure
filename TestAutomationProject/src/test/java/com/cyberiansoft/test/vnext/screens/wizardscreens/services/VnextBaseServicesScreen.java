@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -22,12 +23,19 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     @FindBy(xpath = "//div[@class='notifier']")
     private WebElement notificationPopup;
 
+    @FindBy(xpath = "//*[@action='selected']")
+    private WebElement selectedButton;
+
+    @FindBy(xpath = "//*[@data-view-mode='selected']")
+    private WebElement selectedView;
+
+
+
 
     public VnextBaseServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@data-page,'list')]")));
+        WaitUtils.elementShouldBeVisible(servicesscreen, true);
         BaseUtils.waitABit(2000);
         if (checkHelpPopupPresence())
             if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
@@ -47,7 +55,7 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     }
 
     public VNextSelectedServicesScreen switchToSelectedServicesView() {
-        tap(servicesscreen.findElement(By.xpath(".//*[@action='selected']")));
+        WaitUtils.click(selectedButton);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
         wait = new WebDriverWait(appiumdriver, 5);

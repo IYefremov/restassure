@@ -19,6 +19,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
@@ -779,15 +780,11 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestCaseTeamE
 			VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 			inspectionData.setInspectionNumber(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+			AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 
-			List<ServiceData> services = inspectionData.getServicesList();
-			for (ServiceData service : services) {
-				availableServicesScreen.selectService(service.getServiceName());
-			}
-
-			VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-			for (ServiceData service : services)
+			SelectedServicesScreenSteps.switchToSelectedService();
+			VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
+			for (ServiceData service : inspectionData.getServicesList())
 				if (service.getServicePrice() != null)
 					selectedServicesScreen.setServiceAmountValue(service.getServiceName(), service.getServicePrice());
 			inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();

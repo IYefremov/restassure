@@ -17,7 +17,8 @@ public class ProblemReportingSteps {
         ProblemReasonPage problemReasonPage = new ProblemReasonPage();
 
         WaitUtils.elementShouldBeVisible(problemReasonPage.getRootElement(), true);
-        WaitUtils.waitUntilElementIsClickable(problemReasonPage.getCompleteButton());
-        problemReasonPage.getCompleteButton().click();
+        WaitUtils.elementShouldBeVisible(problemReasonPage.getCompleteButton(), true);
+        WaitUtils.elementShouldBeVisible(problemReasonPage.getProblemEditBox(), true);
+        WaitUtils.click(problemReasonPage.getCompleteButton());
     }
 }

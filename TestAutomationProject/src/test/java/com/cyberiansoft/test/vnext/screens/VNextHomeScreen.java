@@ -54,7 +54,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='navigate-to-status']")
     private WebElement statuslist;
 
-    @FindBy(xpath = "//*[@action='messager-send']/span[@status='messager']")
+    @FindBy(xpath = "//*[@action='messager-send']/span[@class='messager-counter']")
     private WebElement queuemessage;
 
     @FindBy(xpath = "//*[@action='messager-send']")

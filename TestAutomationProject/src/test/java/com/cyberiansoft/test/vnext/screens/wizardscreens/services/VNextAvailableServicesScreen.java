@@ -168,7 +168,8 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
     public WebElement getServiceListItem(String servicename) {
         return WaitUtils.getGeneralFluentWait().until(driver -> getServicesListItems().stream()
-                .filter(element -> element.getText().contains(servicename))
+                .filter(element ->
+                        element.getText().split("\n")[0].equals(servicename))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Service not found " + servicename)));
     }
