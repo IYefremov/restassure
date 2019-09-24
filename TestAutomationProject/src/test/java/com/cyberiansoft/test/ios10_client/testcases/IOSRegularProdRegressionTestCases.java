@@ -1077,4 +1077,63 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularNavigationSteps.navigateBackScreen();
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyChangeCustomerForInspection(String rowID,
+                                                            String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("Test");
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularInspectionsSteps.saveInspectionAsFinal();
+
+        RegularMyInspectionsSteps.changeCustomerForInspection(inspectionNumber, wholesailCustomer);
+        BaseUtils.waitABit(10*1000);
+        RegularMyInspectionsSteps.openInspectionDetails(inspectionNumber);
+
+        RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(wholesailCustomer);
+        RegularWizardScreensSteps.cancelWizard();
+
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyDecodingOfVINNumber(String rowID,
+                                                      String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        VehicleInfoData vehicleInfoData = new VehicleInfoData();
+        vehicleInfoData.setVinNumber("JA4LS31H8YP047397");
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(testCaseData.getInspectionData().getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(vehicleInfoData);
+        RegularVehicleInfoValidations.validateVehicleInfoData(testCaseData.getInspectionData().getVehicleInfo());
+        RegularInspectionsSteps.cancelCreatingInspection();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(testCaseData.getWorkOrderData().getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(vehicleInfoData);
+        RegularVehicleInfoValidations.validateVehicleInfoData(testCaseData.getWorkOrderData().getVehicleInfoData());
+        RegularMyWorkOrdersSteps.cancelCreatingWorkOrder();
+        RegularNavigationSteps.navigateBackScreen();
+    }
 }

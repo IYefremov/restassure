@@ -44,6 +44,6 @@ public class MyInspectionsSteps {
 
     public static void selectInspectionForCreatingWO(String inspectionID) {
         selectInspection(inspectionID);
-        MenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CREATE_WORKORDER);
+        MenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CREATE_WORKORDER_HD);
     }
 }

@@ -116,4 +116,9 @@ public class RegularMyInspectionsSteps {
         selectInspectionForArchive(inspectionID);
         Helpers.getAlertTextAndAccept();
     }
+
+    public static void openInspectionDetails(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.DETAILS);
+    }
 }

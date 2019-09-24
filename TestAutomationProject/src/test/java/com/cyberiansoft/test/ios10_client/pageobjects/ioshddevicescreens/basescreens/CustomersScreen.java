@@ -91,6 +91,8 @@ public class CustomersScreen extends BaseAppScreen {
 	}
 	
 	public void clickOnCustomer(String customer) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 3);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(customer)));
 		appiumdriver.findElementByAccessibilityId(customer).click();
 	}
 

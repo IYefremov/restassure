@@ -1,16 +1,19 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.WorkOrderStatuses;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularBaseAppScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import org.openqa.selenium.Alert;
 
 public class RegularMyWorkOrdersSteps {
 
@@ -153,5 +156,13 @@ public class RegularMyWorkOrdersSteps {
         selectWorkOrderForCopyVehicle(workOrderID);
         RegularCustomersScreenSteps.selectCustomer(appCustomer);
         RegularWorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
+    }
+
+    public static void cancelCreatingWorkOrder() {
+        RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
+        baseWizardScreen.clickCancelWizard();
+        Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
+        alert.accept();
+        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
 }

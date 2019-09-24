@@ -99,7 +99,8 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 		if (appCustomer instanceof WholesailCustomer) {
 			swtchToWholesaleMode();
 			searchbtn.click();
-			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(appCustomer.getCompany());
+			wait = new WebDriverWait(appiumdriver, 5);
+			wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeSearchField"))).sendKeys(appCustomer.getCompany());
 		}
 		else {
 			swtchToRetailMode();

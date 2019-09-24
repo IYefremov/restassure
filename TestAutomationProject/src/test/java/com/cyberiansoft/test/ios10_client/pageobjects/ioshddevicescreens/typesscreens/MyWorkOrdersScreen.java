@@ -292,10 +292,12 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public String getPriceValueForWO(String workOrderNumber) {
+		waitWorkOrdersScreenLoaded();
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + workOrderNumber + "']/XCUIElementTypeStaticText[@name='labelOrderAmount']").getAttribute("value");
 	}
 
 	public boolean woExists(String workOrderNumber) {
+		waitWorkOrdersScreenLoaded();
 		return elementExists(workOrderNumber);
 	}
 
