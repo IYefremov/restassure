@@ -28,6 +28,15 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//a[text()='Forgot password?']")
 	private WebElement forgotPasswordLink;
+
+	@FindBy(xpath = "//a[text()='Terms and Conditions']")
+	private WebElement termsAndConditionsLink;
+
+	@FindBy(xpath = "//span[@data-bind='text: email.errorText']")
+	private WebElement emailErrorText;
+
+	@FindBy(xpath = "//span[@data-bind='text: password.errorText']")
+	private WebElement passwordErrorText;
 	
 	public VNextBOLoginScreenWebPage(WebDriver driver) {
 		super(driver);
@@ -36,13 +45,11 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 		waitLong.until(ExpectedConditions.visibilityOf(loginForm));
 	}
 	
-	public VNextBOHeaderPanel userLogin(String username, String userpsw) {
-		clearAndType(emailField.getWrappedElement(), username);
-		clearAndType(passwordField.getWrappedElement(), userpsw);
+	public void userLogin(String username, String userPsw) {
+		setEmailField(username);
+		setPasswordField(userPsw);
 		click(loginButton);
 		waitABit(2000);
-		return PageFactory.initElements(
-				driver, VNextBOHeaderPanel.class); 
 	}
 	
 	public void clickForgotPasswordLink() {
@@ -70,4 +77,18 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
     }
 
     public String getValueFromEmailField() { return emailField.getValue(); }
+
+	public String getValueFromPasswordField() { return passwordField.getValue(); }
+
+	public void clickTermsAndConditionsLink() {
+		termsAndConditionsLink.click();
+	}
+
+	public String getEmailErrorMessage() { return emailErrorText.getText(); }
+
+	public String getPasswordErrorMessage() { return passwordErrorText.getText(); }
+
+	public void setEmailField(String username) { clearAndType(emailField.getWrappedElement(), username); }
+
+	public void setPasswordField(String userPsw) { clearAndType(passwordField.getWrappedElement(), userPsw); }
 }

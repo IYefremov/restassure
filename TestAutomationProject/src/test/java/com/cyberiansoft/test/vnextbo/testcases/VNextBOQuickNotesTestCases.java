@@ -46,19 +46,18 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
-        loginPage
-                .userLogin(userName, userPassword)
-                .executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
-        leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
+        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage.userLogin(userName, userPassword);
+        VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
+        headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
+        leftMenu = new VNexBOLeftMenuPanel(webdriver);
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-                VNextBOHeaderPanel.class);
-        if (headerpanel.logOutLinkExists())
-            headerpanel.userLogout();
+        VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
+        if (headerPanel.logOutLinkExists())
+            headerPanel.userLogout();
 
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();
