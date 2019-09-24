@@ -21,7 +21,6 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 public class VNextBOForgotPasswordTests extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOForgotPasswordPageData.json";
-    private static final String REGISTERED_USER_EMAIL = "test.mail.cyberiansoft@getnada.com";
     private static final String NOT_REGISTERED_USER_EMAIL = "cyberiansoft.test22@nada.ltd";
     private String userName;
     private String userPassword;
@@ -44,7 +43,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         webdriver = DriverBuilder.getInstance().getDriver();
 
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-        userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+        userName = VNextBOConfigInfo.getInstance().getVNextBONadaTestMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
         loginPage = new VNextBOLoginScreenWebPage(webdriver);
@@ -116,10 +115,10 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     public void verifyUserCanResetPassword(String rowID, String description, JSONObject testData) throws Exception {
 
         NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(REGISTERED_USER_EMAIL);
+        nada.setEmailId(userName);
         nada.deleteMessageWithSubject("PASSWORD RESET");
 
-        forgotPasswordPage.setConfirmationMailFieldValue(REGISTERED_USER_EMAIL);
+        forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
         VNextBOModalDialog vNextBOInformationModalDialog = new VNextBOModalDialog(webdriver);
@@ -144,12 +143,12 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         Utils.refreshPage();
 
         VNextBOResetPasswordPage vNextBOResetPasswordPage = new VNextBOResetPasswordPage(webdriver);
-        Assert.assertEquals(vNextBOResetPasswordPage.getUserEmail(), REGISTERED_USER_EMAIL,
+        Assert.assertEquals(vNextBOResetPasswordPage.getUserEmail(), userName,
                 "User's email hasn't been correct");
 
         vNextBOResetPasswordPage.setNewPassword(userPassword);
         loginPage = new VNextBOLoginScreenWebPage(webdriver);
-        Assert.assertEquals(loginPage.getValueFromEmailField(), REGISTERED_USER_EMAIL,
+        Assert.assertEquals(loginPage.getValueFromEmailField(), userName,
                 "Email field hasn't been correct");
     }
 
@@ -157,10 +156,10 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     public void verifyUserCantResetPasswordAfterLogin(String rowID, String description, JSONObject testData) throws Exception {
 
         NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(REGISTERED_USER_EMAIL);
+        nada.setEmailId(userName);
         nada.deleteMessageWithSubject("PASSWORD RESET");
 
-        forgotPasswordPage.setConfirmationMailFieldValue(REGISTERED_USER_EMAIL);
+        forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
         VNextBOModalDialog vNextBOInformationModalDialog = new VNextBOModalDialog(webdriver);
@@ -187,7 +186,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         VNextBOForgotPasswordData data = JSonDataParser.getTestDataFromJson(testData, VNextBOForgotPasswordData.class);
 
         NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(REGISTERED_USER_EMAIL);
+        nada.setEmailId(userName);
         nada.deleteMessageWithSubject("PASSWORD RESET");
 
         forgotPasswordPage.setConfirmationMailFieldValue(data.getEmail());

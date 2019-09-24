@@ -50,6 +50,10 @@ public class VNextBOConfigInfo {
         return properties.getProperty("vnextbo.nada.mail");
     }
 
+    public String getVNextBONadaTestMail() {
+        return properties.getProperty("vnextbo.nada.test.mail");
+    }
+
     public String getVNextBOPassword() {
         return properties.getProperty("vnextbo.password");
     }
