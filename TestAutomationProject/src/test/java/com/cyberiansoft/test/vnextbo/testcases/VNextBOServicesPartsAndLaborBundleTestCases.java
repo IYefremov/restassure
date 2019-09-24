@@ -47,9 +47,9 @@ public class VNextBOServicesPartsAndLaborBundleTestCases extends BaseTestCase {
 		userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
         loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
-        loginPage
-                .userLogin(userName, userPassword)
-                .executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
+        loginPage.userLogin(userName, userPassword);
+        VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
+        headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
         leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
     }
 	
