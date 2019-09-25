@@ -28,6 +28,7 @@ public enum ReconProMenuItems {
     ASSIGN("Assign"),
     ARCHIVE("Archive"),
     VOID("Void"),
+    MONITOR("Monitor"),
     SUMMARY("Summary");
 
     @Getter

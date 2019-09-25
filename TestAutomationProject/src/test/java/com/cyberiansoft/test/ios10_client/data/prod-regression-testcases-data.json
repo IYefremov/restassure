@@ -106,10 +106,10 @@
           "trim": "No trims available"
         },
         "servicesScreen": {
-          "screenTotalPrice": "$941.53",
+          "screenTotalPrice": "$962.53",
           "screenPrice": "$1,046.14"
         },
-        "workOrderPrice": "$941.53"
+        "workOrderPrice": "$962.53"
       }
     }
   ],
@@ -219,10 +219,10 @@
           "trim": "No trims available"
         },
         "servicesScreen": {
-          "screenTotalPrice": "$941.53",
+          "screenTotalPrice": "$962.53",
           "screenPrice": "$1,046.14"
         },
-        "workOrderPrice": "$941.53"
+        "workOrderPrice": "$962.53"
       }
     }
   ],
@@ -1128,6 +1128,76 @@
           "vehicleModel": "Montero Sport",
           "vehicleYear": "2000"
         }
+      }
+    }
+  ],
+  "testVerifyThatPhaseIsCompletedCorrect": [
+    {
+      "rowID": "testVerifyThatPhaseIsCompletedCorrect.01",
+      "description": "Test Case 27865: 19 - Verify that phase is Completed correct",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83623",
+          "testCaseTitle": "Test Case 27865: 19 - Verify that phase is Completed correct"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "PPP_service"
+            },
+            {
+              "serviceName": "PPV_service"
+            },
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "Service_PP_Vehicle",
+              "vehiclePart": {
+                "vehiclePartName": "Front Bumper"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyThatDisclaimerIsShownWhenApproveInvoice": [
+    {
+      "rowID": "testVerifyThatDisclaimerIsShownWhenApproveInvoice.01",
+      "description": "Test Case 54304: 52 - Invoices: Verify that disclaimer is shown when approve Invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83657",
+          "testCaseTitle": "Test Case 54304: 52 - Invoices: Verify that disclaimer is shown when approve Invoice"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
       }
     }
   ]

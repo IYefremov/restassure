@@ -19,5 +19,7 @@ public class RegularBaseTypeScreenWithTabs extends RegularBaseTypeScreen  {
     public void switchToTeamView() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Team"))).click();
+        if (appiumdriver.findElements(MobileBy.AccessibilityId("Close")).size() > 0)
+            appiumdriver.findElement(MobileBy.AccessibilityId("Close")).click();
     }
 }

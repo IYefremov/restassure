@@ -2,7 +2,8 @@ package com.cyberiansoft.test.ios10_client.types.workorderstypes;
 
 public enum UATWorkOrderTypes implements IWorkOrdersTypes {
 
-    WO_FINAL_INVOICE("WO_Final_Invoice_AQA");
+    WO_FINAL_INVOICE("WO_Final_Invoice_AQA"),
+    WO_MONITOR("WO_Monitor_AQA");
 
     private final String woType;
 

@@ -3960,8 +3960,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		teamInspectionsScreen.selectInspectionForEdit(inspectionnumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 		NavigationSteps.navigateToServicesScreen();
-		servicesScreen.clickSaveAsFinal();
-		teamInspectionsScreen.waitTeamInspectionsScreenLoaded();
+		InspectionsSteps.saveInspectionAsFinal();
 		Assert.assertTrue(teamInspectionsScreen.isInspectionApproveButtonExists(inspectionnumber));
 		teamInspectionsScreen.clickBackServiceRequest();
 		serviceRequestdetailsScreen.clickBackButton();
@@ -5789,6 +5788,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			techniciansPopup.searchTechnician(serviceData.getServiceNewTechnician().getTechnicianFirstName());
 			techniciansPopup.selecTechnician(serviceData.getServiceNewTechnician().getTechnicianFullName());
 			techniciansPopup.clearSerchTechnician();
+			DriverBuilder.getInstance().getAppiumDriver().hideKeyboard();
 			Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
 			Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
 			techniciansPopup.saveTechViewDetails();

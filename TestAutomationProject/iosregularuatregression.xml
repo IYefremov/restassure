@@ -1,7 +1,7 @@
 <suite name="Cyberiansoft iOS Regular client tests" verbose="10" configfailurepolicy="continue">
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
   <parameter name="tpsuite.id" value="83604"  />
-  <parameter name="tp.integration" value="false"  />
+  <parameter name="tp.integration" value="true"  />
 
   <listeners>
     <listener class-name="com.cyberiansoft.test.ios10_client.listeners.iOSregularClientListener"/>
@@ -29,13 +29,15 @@
           <include name="testVerifyChangeStatusForWO" />
           <include name="testVerifyDeleteInvoiceFunctionality" />
           <include name="testVerifyCreatingInspectionsFromInvoiceTeamInvoice" />
-              <include name="testVerifyChangePOActionForInvoicesTeamInvoice" />
-              <include name="testVerifyApprovingInvoiceFromTeamInvoice" />
+          <include name="testVerifyChangePOActionForInvoicesTeamInvoice" />
+          <include name="testVerifyApprovingInvoiceFromTeamInvoice" />
           <include name="testCreateInspectionFromCopy" />
           <include name="testVerifySearchFunctionalityUnderTeamInvoices" />
           <include name="testVerifyChangeCustomerForWO" />
           <include name="testVerifyChangeCustomerForInspection" />
           <include name="testVerifyDecodingOfVINNumber" />
+          <include name="testVerifyThatDisclaimerIsShownWhenApproveInvoice" />
+          <include name="testVerifyThatPhaseIsCompletedCorrect" />
         </methods>
       </class>
     </classes>
