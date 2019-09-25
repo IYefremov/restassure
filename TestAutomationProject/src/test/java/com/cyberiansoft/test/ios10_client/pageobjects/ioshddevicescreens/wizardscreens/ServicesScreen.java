@@ -184,6 +184,8 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 	
 	public void selectGroupServiceItem(String servicename) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("AvailableGroupItemList")));
 		IOSElement availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableGroupItemList");
 		availableservices.findElementByClassName("XCUIElementTypeTable") .findElementByAccessibilityId(servicename).click();
 	}

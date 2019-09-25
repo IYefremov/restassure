@@ -112,6 +112,7 @@ public class TeamInspectionsScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public boolean isInspectionApproveButtonExists(String inspectionNumber) {
+		waitTeamInspectionsScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId(inspectionNumber).findElements(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).size() > 0;
 	}
 

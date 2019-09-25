@@ -91,7 +91,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		}
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
 		swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']").click();
 	}
@@ -112,7 +112,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	public String getPanelStatus(String panelname) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		WebElement wotable = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
 		return monitorserviceslist.findElementByAccessibilityId(panelname).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}
 
@@ -124,7 +124,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		}
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		WebElement wotable = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
 		return monitorserviceslist.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}
 

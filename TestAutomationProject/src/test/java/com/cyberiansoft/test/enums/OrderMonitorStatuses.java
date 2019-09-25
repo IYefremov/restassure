@@ -6,6 +6,9 @@ import lombok.Getter;
 public enum OrderMonitorStatuses {
 
     COMPLETED("Completed"),
+    ACTIVE("Active"),
+    QUEUED("Queued"),
+    SKIPPED("Skipped"),
     RUNNING("Running");
 
     private String value;

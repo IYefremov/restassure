@@ -213,12 +213,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void selectWorkOrder(String workOrderNumber) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("label = '" +
-				workOrderNumber + "' and type = 'XCUIElementTypeStaticText'")));
-		wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("label = '" +
-				workOrderNumber + "' and type = 'XCUIElementTypeStaticText'")));
+		waitWorkOrdersScreenLoaded();
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("label = '" +
 				workOrderNumber + "' and type = 'XCUIElementTypeStaticText'")).click();
 	}
