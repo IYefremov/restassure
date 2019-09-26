@@ -1,0 +1,38 @@
+{
+  "verifyInspectionPageCanBeOpened": [
+    {
+      "rowID": "verifyInspectionPageCanBeOpened.01",
+      "description": "Test Case 84584: Verify user can open \"Operations → Inspections\" with full set of elements (Automated)"
+    }
+  ],
+  "verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn": [
+    {
+      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn.01",
+      "description": "Test Case 85028: Verify user can open and close \"Terms&Conditions\" (OK)"
+    }
+  ],
+  "verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn": [
+    {
+      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn.01",
+      "description": "Test Case 85029: Verify user can open and close \"Terms&Conditions\" (X-icon)"
+    }
+  ],
+  "verifyPrivacyPolicyCanBeOpenedAndClosedOkBtn": [
+    {
+      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn.01",
+      "description": "Test Case 85030: Verify user can open and close \"Privacy Policy\" (OK)"
+    }
+  ],
+  "verifyPrivacyPolicyCanBeOpenedAndClosedCloseBtn": [
+    {
+      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn.01",
+      "description": "Test Case 85031: Verify user can open and close \"Privacy Policy\" (X-icon)"
+    }
+  ],
+  "verifyIntercomMessengerCanBeOpenedClosed": [
+    {
+      "rowID": "verifyIntercomMessengerCanBeOpenedClosed.01",
+      "description": "Test Case 85027: User can open and close \"Intercom\""
+    }
+  ]
+}

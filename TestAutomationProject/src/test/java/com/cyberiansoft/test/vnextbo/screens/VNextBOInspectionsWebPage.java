@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -19,59 +19,133 @@ import java.util.concurrent.TimeUnit;
 public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//ul[@data-automation-id='inspectionsList']")
-	private WebElement inspectionslist;
+	private WebElement inspectionsList;
 	
-	@FindBy(xpath = "//div[@class='entity-details__content']")
-	private WebElement inspectiondetailspanel;
+	@FindBy(xpath = "//div[@class='entity-details__content' and @data-bind='visible: isDetailsVisible']")
+	private WebElement inspectionDetailsPanel;
 	
 	@FindBy(xpath = "//table[@data-automation-id='inspectionsDetailsServicesList']")
-	private WebElement inspectionserviceslist;
+	private WebElement inspectionServicesList;
 	
 	@FindBy(xpath = "//ul[@data-automation-id='inspectionsDetailsDamagesList']")
-	private WebElement imagelegend;
+	private WebElement imageLegend;
 	
 	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsPrintButton']")
-	private WebElement printinspectionicon;
+	private WebElement printInspectionIcon;
 	
 	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsApproveButton']")
 	private WebElement approveInspectionIcon;
 	
 	@FindBy(id = "inspectiontypes-search")
-	private WebElement searchinspectionspanel;
+	private WebElement searchInspectionsPanel;
 	
 	@FindBy(id = "advSearchEstimation-freeText")
-	private WebElement searchfld;
+	private WebElement searchFld;
 	
 	@FindBy(xpath = "//*[@data-bind='text: filterInfoString']")
-	private WebElement filterinfotext;
+	private WebElement filterInfoText;
 	
 	@FindBy(id = "advSearchEstimation-search")
-	private WebElement searchfilterbtn;
+	private WebElement searchFilterBtn;
 	
 	@FindBy(xpath = "//i[contains(@data-bind, 'click: clear,')]")
-	private WebElement clearfilterbtn;
+	private WebElement clearFilterBtn;
 
 	@FindBy(xpath = "//button[contains(text(), 'Approve and Complete')]")
 	private WebElement approveAndCompleteButton;
 
 	@FindBy(xpath = "//div[contains(@class, 'status__label')]")
 	private List<WebElement> inspectionStatusLabels;
-	
-	public VNextBOInspectionsWebPage() {
-		super(DriverBuilder.getInstance().getDriver());
+
+	@FindBy(xpath = "//a[@data-bind='click: showTermsAndConditions']")
+	private WebElement termsAndConditionsLink;
+
+	@FindBy(xpath = "//a[@data-bind='click: showPrivacyPolicy']")
+	private WebElement privacyPolicyLink;
+
+	@FindBy(xpath = "//iframe[@name='intercom-messenger-frame']")
+	private WebElement intercomMessengerFrame;
+
+	@FindBy(xpath = "//div[contains(@class,'intercom-messenger-new-conversation')]")
+	private WebElement intercomNewConversionSpace;
+
+	@FindBy(xpath = "//iframe[@name='intercom-launcher-frame']")
+	private WebElement intercomLauncherFrame;
+
+	@FindBy(xpath = "//div[contains(@class, 'intercom-launcher')]")
+	private WebElement openCloseIntercomButton;
+
+	public VNextBOInspectionsWebPage(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		new WebDriverWait(driver, 30)
+				.until(ExpectedConditions.visibilityOf(inspectionsList));
 	}
-	
+
+	public boolean isInspectionsListDisplayed() {
+		return isElementDisplayed(inspectionsList);
+	}
+
+	public boolean isInspectionDetailsPanelDisplayed() {
+		return isElementDisplayed(inspectionDetailsPanel);
+	}
+
+	public boolean isSearchFieldDisplayed() {
+		return isElementDisplayed(searchFld);
+	}
+
+	public boolean isTermsAndConditionsLinkDisplayed() {
+		return isElementDisplayed(termsAndConditionsLink);
+	}
+
+	public boolean isPrivacyPolicyLinkDisplayed() {
+		return isElementDisplayed(privacyPolicyLink);
+	}
+
+	public boolean isIntercomButtonDisplayed() {
+		driver.switchTo().frame(intercomLauncherFrame);
+		boolean isIntercomButtonDisplayed = isElementDisplayed(openCloseIntercomButton);
+		driver.switchTo().defaultContent();
+		return isIntercomButtonDisplayed;
+	}
+
+	public void clickTermsAndConditionsLink() {
+		termsAndConditionsLink.click();;
+	}
+
+	public void clickPrivacyPolicyLink() {
+		privacyPolicyLink.click();;
+	}
+
+	public void openIntercomMessenger() {
+		driver.switchTo().frame(intercomLauncherFrame);
+		openCloseIntercomButton.click();
+		driver.switchTo().defaultContent();
+	}
+
+	public boolean isIntercomMessengerOpened() {
+		driver.switchTo().frame(intercomMessengerFrame);
+		boolean isMessengerOpened =  isElementDisplayed(intercomNewConversionSpace);
+		driver.switchTo().defaultContent();
+		return isMessengerOpened;
+	}
+
+	public void closeIntercom() {
+		driver.switchTo().frame(intercomLauncherFrame);
+		openCloseIntercomButton.click();
+		driver.switchTo().defaultContent();
+	}
+
 	public void selectInspectionInTheList(String inspnumber) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']"))).click();
-		//inspectionslist.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']")).click();
+		//inspectionsList.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']")).click();
 		waitABit(4000);
 	}
 	
 	private WebElement getInspectionCell(String inspnumber) {
 		WebElement inspcell = null;
-		List<WebElement> inspcells = inspectionslist.findElements(By.xpath("./li[@role='option']"));
+		List<WebElement> inspcells = inspectionsList.findElements(By.xpath("./li[@role='option']"));
 		for (WebElement cell : inspcells)
 			if (cell.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b")).getText().trim().equals(inspnumber)) {
 				inspcell = cell;
@@ -91,21 +165,21 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 		
 	public boolean isServicePresentForSelectedInspection(String servicename) {
-		return inspectionserviceslist.findElements(By.xpath("./tbody/tr/td[text()='" + servicename + "']")).size() > 0;
+		return inspectionServicesList.findElements(By.xpath("./tbody/tr/td[text()='" + servicename + "']")).size() > 0;
 	}
 	
 	public boolean isServiceNotesIconDisplayed(String servicename) {
-		WebElement sepviserow = inspectionserviceslist.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
+		WebElement sepviserow = inspectionServicesList.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
 		return sepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).isDisplayed();
 	}
 	
 	public boolean isMatrixServiceExists(String matrixservicename) {
-		WebElement matrixsepviserow = inspectionserviceslist.findElement(By.xpath(".//tr[@class='entity-details__matrix']"));
+		WebElement matrixsepviserow = inspectionServicesList.findElement(By.xpath(".//tr[@class='entity-details__matrix']"));
 		return matrixsepviserow.findElement(By.xpath("./td[contains(text(), '" +  matrixservicename + "')]")).isDisplayed();
 	}
 
 	public List<WebElement> getAllMatrixServicesRows(String matrixservicename) {
-		return inspectionserviceslist.findElements(By.xpath(".//tr[@class='entity-details__matrix']"));
+		return inspectionServicesList.findElements(By.xpath(".//tr[@class='entity-details__matrix']"));
 	}
 
 	
@@ -122,7 +196,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public void clickServiceNotesIcon(String servicename) {
-		WebElement sepviserow = inspectionserviceslist.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
+		WebElement sepviserow = inspectionServicesList.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
 		sepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).click();
 	}
 	
@@ -222,20 +296,20 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public boolean isImageLegendContainsBreakageIcon(String brackageicontype) {
-		return imagelegend.findElements(By.xpath("./li[contains(text(), '" + brackageicontype + "')]")).size() > 0;
+		return imageLegend.findElements(By.xpath("./li[contains(text(), '" + brackageicontype + "')]")).size() > 0;
 	}
 	
 	public String getSelectedInspectionCustomerName() {
-		return inspectiondetailspanel.findElement(By.xpath(".//span[@data-bind='text:clientName']")).getText();
+		return inspectionDetailsPanel.findElement(By.xpath(".//span[@data-bind='text:clientName']")).getText();
 	}
 	
 	public String getSelectedInspectionTotalAmauntValue() {
-		return inspectiondetailspanel.findElement(By.xpath(".//th[@data-bind='text: amount']")).getText();
+		return inspectionDetailsPanel.findElement(By.xpath(".//th[@data-bind='text: amount']")).getText();
 	}
 	
 	public VNextBOInspectionInfoWebPage clickSelectedInspectionPrintIcon() {
 		String mainWindowHandle = driver.getWindowHandle();
-		printinspectionicon.click();
+		printInspectionIcon.click();
 		waitForNewTab();
 		driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 		for (String activeHandle : driver.getWindowHandles()) {
@@ -268,7 +342,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public String getCustomSearchInfoTextValue() {
-		return filterinfotext.getText();
+		return filterInfoText.getText();
 	}
 	
 	public void deleteSavedAdvancedSearchFilter(String filterName) {		
@@ -293,7 +367,6 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		advancedserchdialog.selectAdvancedSearchByCustomer(customername);
 		advancedserchdialog.clickSearchButton();
 	}
-	
 	
 	
 	public void advancedSearchInspectionByStatusAndInspectionNumber(String inspNumber, String statussearch) {
@@ -338,22 +411,22 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public String getSearchFieldValue() {
-		return searchfld.getAttribute("value");
+		return searchFld.getAttribute("value");
 	}
 	
 	public void setSearchFieldValue(String searchtext) {
-		searchfld.clear();
-		searchfld.sendKeys(searchtext);
+		searchFld.clear();
+		searchFld.sendKeys(searchtext);
 	}
 	
 	public void clickSearchFilterButton() {
-		searchfilterbtn.click();
-		wait.until(ExpectedConditions.visibilityOf(clearfilterbtn));
+		searchFilterBtn.click();
+		wait.until(ExpectedConditions.visibilityOf(clearFilterBtn));
 	}
 	
 	public void clickClearFilterIcon() {
-		clearfilterbtn.click();
-		wait.until(ExpectedConditions.invisibilityOf(clearfilterbtn));
+		clearFilterBtn.click();
+		wait.until(ExpectedConditions.invisibilityOf(clearFilterBtn));
 	}
 
 	public String getFirstInspectionStatus() {

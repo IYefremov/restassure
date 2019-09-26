@@ -28,6 +28,10 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementSearchTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementOrderDetailsTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBONewSmokeTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOHomePageAccessRightsTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOLoginTests"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOForgotPasswordTests"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInspectionsGeneralTests"/>
     </classes>
   </test>
 </suite>
