@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -78,7 +79,6 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public VNextBOInspectionsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		new WebDriverWait(driver, 30)
 				.until(ExpectedConditions.visibilityOf(inspectionsList));
 	}
@@ -415,8 +415,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 	
 	public void setSearchFieldValue(String searchtext) {
-		searchFld.clear();
-		searchFld.sendKeys(searchtext);
+		Utils.setData(searchFld, searchtext);
 	}
 	
 	public void clickSearchFilterButton() {
