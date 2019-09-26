@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,19 +14,17 @@ import java.util.concurrent.TimeUnit;
 
 public class VNextBOModalDialog extends VNextBOBaseWebPage {
 
-    @FindBy(className = "modal-content")
-    private WebElement modalDialog;
+    private WebElement dialogContent;
 
-    @FindBy(xpath = "//button[@data-automation-id='modalConfirmButton']")
+    @FindBy(xpath = "//button[@data-automation-id='modalConfirmButton' and text()='OK']")
     private WebElement confirmOKButton;
 
-    @FindBy(xpath = "//div[@class='modal-body__content']/div")
-    private WebElement dialogMessage;
+    @FindBy(xpath = "//div[@class='modal-content']//button[@data-automation-id='modalCloseButton']")
+    private WebElement closeButton;
 
-    @FindBy(className = "modal-title")
-    private WebElement dialogTitle;
+    public boolean isDialogDisplayed()  { return  Utils.isElementDisplayed(getDialogContent()); }
 
-    public boolean isDialogDisplayed()  { return modalDialog.isDisplayed(); }
+    public boolean isDialogClosed()  { return  Utils.isElementNotDisplayed(getDialogContent()); }
 
     public boolean isOkButtonDisplayed()  { return confirmOKButton.isDisplayed(); }
 
@@ -37,15 +36,25 @@ public class VNextBOModalDialog extends VNextBOBaseWebPage {
                 .until(ExpectedConditions.visibilityOf(confirmOKButton));
     }
 
+    private WebElement getDialogContent() {
+
+        dialogContent = driver.findElement(By.xpath("//div[@class='modal-content']//button[@data-automation-id='modalCloseButton']//ancestor::div[@class='modal-content']"));
+        return dialogContent;
+    }
+
     public String getDialogHeader() {
-        return Utils.getText(dialogTitle);
+        return Utils.getText(getDialogContent().findElement(By.className("modal-title")));
     }
 
     public String getDialogInformationMessage() {
-        return Utils.getText(dialogMessage);
+        return Utils.getText(getDialogContent().findElement(By.className("modal-body__content")));
     }
 
     public void clickOkButton() {
         confirmOKButton.click();
+    }
+
+    public void clickCloseButton() {
+        closeButton.click();
     }
 }
