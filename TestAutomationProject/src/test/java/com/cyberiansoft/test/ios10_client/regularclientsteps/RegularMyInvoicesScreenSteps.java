@@ -55,6 +55,17 @@ public class RegularMyInvoicesScreenSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.NOTES);
     }
 
+    public static void refreshPicturesForInvoice(String invoiceID) {
+        selectInvoice(invoiceID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.REFRESH_PICTURES);
+        waitInvoicesScreenLoaded();
+    }
+
+    public static void showPicturesForInvoice(String invoiceID) {
+        selectInvoice(invoiceID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SHOW_PICTURES);
+    }
+
     public static void startCreatingNewInspectionFromInvoice(String invoiceID, IInspectionsTypes inspectionsType) {
         selectInvoice(invoiceID);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.NEW_INSPECTION);

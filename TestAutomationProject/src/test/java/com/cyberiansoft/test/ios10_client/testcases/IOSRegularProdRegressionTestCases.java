@@ -17,6 +17,7 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.enums.ServiceRequestAppointmentStatuses;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
@@ -333,6 +334,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularTeamInvoicesScreenValidations.verifyTeamInspectionExists(invoiceNumber, true);
         RegularNavigationSteps.navigateBackScreen();
         RegularServiceRequestDetalsScreenSteps.navigateBackToServiceRequestsScreen();
+        RegularNavigationSteps.navigateBackScreen();
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -443,7 +445,6 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
         RegularApproveInspectionScreenActions.saveApprovedServices();
         RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
-
 
         RegularMyInspectionsSteps.selectSendEmailMenuForInspection(inspectionNumber);
 
@@ -1202,5 +1203,116 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             RegularOrderMonitorScreenValidations.verifyServiceStatus(serviceData, OrderMonitorStatuses.COMPLETED);
 
         RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyRefreshPicturesActionForInvoices(String rowID,
+                                                     String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        final int imagesToAdd = 4;
+        final int imagesToRemove = 2;
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoiceNumber);
+        RegularNotesScreenSteps.addImageNotes(imagesToAdd);
+        RegularNotesScreenSteps.saveNotes();
+        RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoiceNumber);
+        RegularNotesScreenSteps.switchToPhotosView();
+        RegularNotesScreenSteps.deleteImageNotes(imagesToRemove);
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(imagesToRemove);
+        RegularNotesScreenSteps.saveNotes();
+        RegularMyInvoicesScreenSteps.refreshPicturesForInvoice(invoiceNumber);
+        RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoiceNumber);
+        RegularNotesScreenSteps.switchToPhotosView();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(imagesToRemove);
+        RegularNotesScreenSteps.saveNotes();
+        RegularMyInvoicesScreenSteps.showPicturesForInvoice(invoiceNumber);
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(imagesToRemove);
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyCalculationForServiceBundleServiceFeeBundleDiscount(String rowID,
+                                                           String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        final String feeServiceName = "Fee Service Oksi";
+        final String feeServicePrice = "$55.00";
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        for (BundleServiceData bundleServiceData : workOrderData.getBundleServices()) {
+            RegularServicesScreenSteps.selectBundleService(bundleServiceData);
+        }
+
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWizardScreenValidations.verifyScreenSubTotalPrice(workOrderData.getServicesScreen().getScreenPrice());
+        RegularWizardScreenValidations.verifyScreenTotalPrice(workOrderData.getServicesScreen().getScreenTotalPrice());
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenValidations.verifyInvoicePrice(invoiceNumber, testCaseData.getInvoiceData().getInvoiceTotal());
+        RegularMyInvoicesScreenSteps.selectSendEmailMenuForInvoice(invoiceNumber);
+        NadaEMailService nada = new NadaEMailService();
+        RegularEmailScreenSteps.sendEmailToAddress(nada.getEmailId());
+
+        final String invpoicereportfilenname = invoiceNumber + ".pdf";
+
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+                .withSubjectAndAttachmentFileName(invoiceNumber, invpoicereportfilenname);
+        Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
+                " in mail box " + nada.getEmailId() + ". At time " +
+                LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+        nada.deleteMessageWithSubject(invoiceNumber);
+
+        File pdfdoc = new File(invpoicereportfilenname);
+        String pdftext = PDFReader.getPDFText(pdfdoc);
+        Assert.assertTrue(pdftext.contains(feeServiceName));
+        Assert.assertTrue(pdftext.contains(feeServicePrice));
     }
 }

@@ -86,6 +86,10 @@ public class WorkOrderData {
     BundleServiceData bundleService;
 
     @Getter
+    @JsonProperty("bundleServices")
+    List<BundleServiceData> bundleServices;
+
+    @Getter
     @JsonProperty("workOrderTotalSale")
     String workOrderTotalSale;
 

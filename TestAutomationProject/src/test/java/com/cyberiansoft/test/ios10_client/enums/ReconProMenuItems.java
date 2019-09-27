@@ -22,6 +22,8 @@ public enum ReconProMenuItems {
     CHANGE_STATUS("Change\nStatus"),
     UNDO_CHECK_IN("Undo\nCheck In"),
     NOTES("Notes"),
+    REFRESH_PICTURES("Refresh\nPictures"),
+    SHOW_PICTURES("Show\nPictures"),
     APPROVE("Approve"),
     CHANGE_CUSTOMER("Change\nCustomer"),
     SHOW_WOS("Show\nWOs"),

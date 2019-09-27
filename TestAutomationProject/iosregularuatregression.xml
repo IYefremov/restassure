@@ -38,6 +38,8 @@
           <include name="testVerifyDecodingOfVINNumber" />
           <include name="testVerifyThatDisclaimerIsShownWhenApproveInvoice" />
           <include name="testVerifyThatPhaseIsCompletedCorrect" />
+          <include name="testVerifyRefreshPicturesActionForInvoices" />
+          <include name="testVerifyCalculationForServiceBundleServiceFeeBundleDiscount" />
         </methods>
       </class>
     </classes>
