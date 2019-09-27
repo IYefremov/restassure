@@ -355,7 +355,7 @@
       ],
       "invoiceData": {
         "poNumber": "123po",
-        "invoiceTotal": "1883.06",
+        "invoiceTotal": "1925.06",
         "cashCheckPaymentData": {
           "cashCheckNumber": "ASD-123",
           "cashCheckAmount": "235"
@@ -1198,6 +1198,111 @@
       },
       "invoiceData": {
         "poNumber": "123po"
+      }
+    }
+  ],
+  "testVerifyRefreshPicturesActionForInvoices": [
+    {
+      "rowID": "testVerifyRefreshPicturesActionForInvoices.01",
+      "description": "Test Case 28102: 35 - Verify Refresh Pictures action for invoices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83639",
+          "testCaseTitle": "Test Case 28102: 35 - Verify Refresh Pictures action for invoices"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            }
+          ]
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testVerifyCalculationForServiceBundleServiceFeeBundleDiscount": [
+    {
+      "rowID": "testVerifyCalculationForServiceBundleServiceFeeBundleDiscount.01",
+      "description": "Test Case 28360: 43 - Verify calculation for service , bundle service, fee bundle , discount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83647",
+          "testCaseTitle": "Test Case 28360: 43 - Verify calculation for service , bundle service, fee bundle , discount"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "Service_PP_Service2",
+              "servicePrice": "12",
+              "vehiclePart": {
+                "vehiclePartName": "Dashboard"
+              }
+            },
+            {
+              "serviceName": "Facility Fee %"
+            },
+            {
+              "serviceName": "Discount"
+            },
+            {
+              "serviceName": "Service_PP_Panel"
+            }
+          ],
+          "screenTotalPrice": "$613.72",
+          "screenPrice": "$445.00"
+        },
+        "bundleServices": [
+          {
+            "bundleServiceName": "SR_S4_Bundle",
+            "services": [
+              {
+                "serviceName": "Test_Discount_Service",
+                "servicePrice": "350"
+              }
+            ]
+          },
+          {
+            "bundleServiceName": "Bundle for PP",
+            "services": [
+              {
+                "serviceName": "SR_S1_Money",
+                "servicePrice": "60",
+                "vehiclePart": {
+                  "vehiclePartName": "Dashboard"
+                }
+              }
+            ],
+            "bundleServiceAmount": "60"
+          }
+        ]
+      },
+      "invoiceData": {
+        "poNumber" : "123po",
+        "invoiceTotal" : "$613.72"
       }
     }
   ]

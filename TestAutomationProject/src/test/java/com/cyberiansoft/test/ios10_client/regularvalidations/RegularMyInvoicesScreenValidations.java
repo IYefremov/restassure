@@ -25,4 +25,9 @@ public class RegularMyInvoicesScreenValidations {
         else
             Assert.assertFalse(myInvoicesScreen.isInvoiceHasApproveIcon(invoiceID));
     }
+
+    public static void verifyInvoicePrice(String invoiceID, String expectedPrice) {
+        RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
+        Assert.assertEquals(myInvoicesScreen.getInvoicePrice(invoiceID), expectedPrice);
+    }
 }

@@ -46,6 +46,8 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectInvoice(String invoiceNumber) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(invoiceNumber)));
 		invoicesTable.findElement(MobileBy.AccessibilityId(invoiceNumber)).click();
 	}
 	

@@ -13,9 +13,33 @@ public class RegularNotesScreenSteps {
         RegularNotesScreen notesScreen = new RegularNotesScreen();
         switchToPhotosView();
         notesScreen.clickLibraryButton();
-        notesScreen.clickMommentsLibrary();
-        notesScreen.selectPhotoFromLibrary();
+        addPhotoFromMomentsLibrary();
         notesScreen.clickCancel();
+    }
+
+    public static void addImageNotes(int numberOfImages) {
+        RegularNotesScreen notesScreen = new RegularNotesScreen();
+        switchToPhotosView();
+        notesScreen.clickLibraryButton();
+        for (int i =0; i < numberOfImages; i++) {
+            addPhotoFromMomentsLibrary();
+        }
+        notesScreen.clickCancel();
+    }
+
+    public static void deleteImageNotes(int numberOfImages) {
+        RegularNotesScreen notesScreen = new RegularNotesScreen();
+        switchToPhotosView();
+        for (int i =0; i < numberOfImages; i++) {
+            notesScreen.clickOnImage();
+            notesScreen.clickDeleteImageButton();
+        }
+    }
+
+    private static void addPhotoFromMomentsLibrary() {
+        RegularNotesScreen notesScreen = new RegularNotesScreen();
+        notesScreen.clickMomentsLibrary();
+        notesScreen.selectPhotoFromLibrary();
     }
 
     public static void switchToPhotosView() {
