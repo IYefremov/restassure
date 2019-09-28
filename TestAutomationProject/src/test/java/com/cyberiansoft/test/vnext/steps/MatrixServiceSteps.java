@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.vnext.enums.partservice.PartServiceWizardScreen;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
+import com.cyberiansoft.test.vnext.interactions.PriceMatrixScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.MatrixServiceDetailsScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.MatrixServicePdrScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
@@ -17,12 +18,18 @@ public class MatrixServiceSteps {
 
     public static void selectServiceDetails(MatrixServiceData matrixServiceData) {
         VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        if (matrixServiceData.getHailMatrixName() != null)
+            MatrixServiceSteps.selectPriceMatrix(matrixServiceData.getHailMatrixName());
         if (vehiclePartData.getVehiclePartName() != null)
             MatrixServiceSteps.selectVehicle(matrixServiceData);
         if (vehiclePartData.getVehiclePartSize() != null)
             MatrixServiceSteps.selectSize(matrixServiceData);
         if (vehiclePartData.getVehiclePartSeverity() != null)
             MatrixServiceSteps.selectSeverity(matrixServiceData);
+    }
+
+    private static void selectPriceMatrix(String matrixName) {
+        PriceMatrixScreenInteractions.selectItem(matrixName);
     }
 
     public static void selectVehicle(MatrixServiceData matrixServiceData) {

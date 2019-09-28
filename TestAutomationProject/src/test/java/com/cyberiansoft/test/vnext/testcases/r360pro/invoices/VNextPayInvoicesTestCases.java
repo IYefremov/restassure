@@ -42,8 +42,8 @@ public class VNextPayInvoicesTestCases extends BaseTestCaseTeamEditionRegistrati
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayTeamInvoice(String rowID,
-                                                                                                               String description, JSONObject testData) {
+    public void testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayTeamInvoice(String rowID, String description, JSONObject testData) {
+
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
