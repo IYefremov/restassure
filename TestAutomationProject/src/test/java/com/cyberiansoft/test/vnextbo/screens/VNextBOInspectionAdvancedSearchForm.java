@@ -124,10 +124,9 @@ public class VNextBOInspectionAdvancedSearchForm extends VNextBOBaseWebPage {
 	{
 		WebElement fieldWithAutocomplete = advancedSearchForm.findElement(
 				By.xpath("//label[text()='" + fldName + "']/following-sibling::div//input[contains(@id,'advSearchEstimation')]"));
-		Utils.clickElement(fieldWithAutocomplete);
+		Utils.clearAndType(fieldWithAutocomplete, value);
 		WebElement foundOption =
 				advancedSearchForm.findElement(By.xpath("//li[text()='" + value + "']"));
-		WaitUtils.waitUntilElementIsClickable(foundOption);
 		Utils.clickWithJS(foundOption);
 	}
 }
