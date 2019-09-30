@@ -2,17 +2,14 @@ package com.cyberiansoft.test.vnextbo.interactions.repairOrders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROAdvancedSearchDialog;
-import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOROAdvancedSearchDialogInteractions {
 
     private VNextBOROAdvancedSearchDialog advancedSearchDialog;
 
     public VNextBOROAdvancedSearchDialogInteractions() {
-        advancedSearchDialog = PageFactory.initElements(
-                DriverBuilder.getInstance().getDriver(), VNextBOROAdvancedSearchDialog.class);
+        advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
     }
 
     public boolean isAdvancedSearchDialogDisplayed() {

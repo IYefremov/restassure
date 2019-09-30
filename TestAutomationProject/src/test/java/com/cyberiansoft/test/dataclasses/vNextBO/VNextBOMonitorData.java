@@ -209,8 +209,8 @@ public class VNextBOMonitorData  {
     @JsonProperty("technician1")
     private String technician1;
 
-    @JsonProperty("serviceNotesMessage")
-    private String serviceNotesMessage;
+    @JsonProperty("notesMessage")
+    private String notesMessage;
 
     @JsonProperty("serviceStartedDate")
     private String serviceStartedDate;

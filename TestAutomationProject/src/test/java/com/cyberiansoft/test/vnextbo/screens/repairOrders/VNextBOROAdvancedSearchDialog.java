@@ -3,11 +3,11 @@ package com.cyberiansoft.test.vnextbo.screens.repairOrders;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOCalendarWidgetDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import lombok.Getter;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Getter
 public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
@@ -210,10 +209,9 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']//span[@class='k-input']")
     private WebElement flagSelection;
 
-    public VNextBOROAdvancedSearchDialog(WebDriver driver) {
-        super(driver);
+    public VNextBOROAdvancedSearchDialog() {
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public boolean isAdvancedSearchDialogDisplayed() {

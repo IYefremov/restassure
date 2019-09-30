@@ -80,7 +80,7 @@
   "verifyUserCanChangeCompanyInfoAndSaveIt": [
     {
       "rowID": "verifyUserCanChangeCompanyInfoAndSaveIt.01",
-      "description": "Test Case 84561:User can change \"Company Info\" and save it",
+      "description": "Test Case 84558: Verify user can open \"Settings → Company Info\" with full set of elements. Test Case 84561: User can change \"Company Info\" and save it. Test Case 84563: User can type \"Country\" and select it from the list. Test Case 84582: User can type and select \"Phone\"",
       "company": [
         "SpainCo",
         "AMT"
@@ -213,19 +213,40 @@
     }
   ],
 
-  "verifyUserCanSeeAndCreateNotes": [
+  "verifyUserCanChangeVendorPrice": [
     {
-      "rowID": "verifyUserCanSeeAndCreateNotes.01",
-      "description": "Test Case 82657: User can select location. Test Case 82955: User can see Services of RO. Test Case 82967: User can change Vendor Price of RO. Test Case 82659: User can search WO using search filter. Test Case 82951: User can see and create notes",
+      "rowID": "verifyUserCanChangeVendorPrice.01",
+      "description": "Test Case 82657: User can select location. Test Case 82955: User can see Services of RO. Test Case 82967: User can change Vendor Price of RO.",
       "location": "1111 Automation",
       "orderNumber": "O-168-00242",
       "status": "Approved",
       "phase": "Started",
+      "phaseStatus": "Active",
+      "timeFrame": "Last Year",
       "service": "b Body Shop (Test Part)",
       "serviceVendorPrices": [
         "5",
         "100"
       ]
+    }
+  ],
+
+  "verifyUserCanSeeAndCreateNotes": [
+    {
+      "rowID": "verifyUserCanSeeAndCreateNotes.01",
+      "description": "Test Case 82659: User can search WO using search filter. Test Case 82951: User can see and create notes",
+      "location": "1111 Automation",
+      "orderNumber": "O-000-152073",
+      "notesMessage": "Autotest"
+    }
+  ],
+
+  "verifyUserCanCheckInRO": [
+    {
+      "rowID": "verifyUserCanCheckInRO.01",
+      "description": "Test Case 83643: User can see Parts of RO. Test Case 83743: User can Chek - In RO",
+      "location": "New_zayats_location",
+      "orderNumber": "O-000-152460"
     }
   ]
 }

@@ -9,10 +9,12 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORONotesPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -528,6 +530,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByNotesUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+        final VNextBONotesPageVerifications notesPageVerifications = new VNextBONotesPageVerifications();
 
         leftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
@@ -571,17 +574,17 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         Assert.assertNotEquals(partId, "", "The service hasn't been displayed");
 
         final WebElement partActionsIcon = detailsPage.clickPartActionsIconForPart(data.getPart());
-        final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog(webdriver);
+        final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog();
                 detailsPage.openNotesDialogForPart(partActionsIcon);
 
-        Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+        Assert.assertTrue(notesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 
-        final List<String> notesListValues = notesDialog.getRepairNotesListValues();
+        final List<String> notesListValues = new VNextBORONotesPageInteractions().getRepairNotesListValues();
         //todo fails here. Needs clarifications from V.Dubinenko or changing the steps of the test
         Assert.assertTrue(notesListValues.contains(data.getNotes()), "The Note hasn't been displayed");
 
-        notesDialog.clickRepairNotesXbutton();
-        Assert.assertFalse(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been closed");
+        new VNextBORONotesPageInteractions().clickRepairNotesXButton();
+        Assert.assertFalse(notesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been closed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

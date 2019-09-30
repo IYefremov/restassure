@@ -9,13 +9,16 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORONotesPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.*;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBORODetailsPageVerifications;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBORepairOrdersPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBOROPageVerifications;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
@@ -54,8 +57,14 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	private VNextBOChangeTechniciansDialogSteps changeTechniciansDialogSteps;
 	private VNextBORODetailsPageSteps detailsPageSteps;
 	private VNextBOCloseRODialogSteps closeRODialogSteps;
+	private VNextBORODetailsPageVerifications roDetailsPageVerifications;
+	private VNextBONotesPageVerifications roNotesPageVerifications;
+	private VNextBORONotesPageInteractions notesPageInteractions;
+	private VNextBOROPageInteractions roPageInteractions;
+	private VNextBORONotesPageSteps notesPageSteps;
+    private VNextBOROPageVerifications roPageVerifications;
 
-	@BeforeMethod
+    @BeforeMethod
 	public void BackOfficeLogin() {
 		browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
 		try {
@@ -81,7 +90,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		changeTechniciansDialogSteps = new VNextBOChangeTechniciansDialogSteps();
 		detailsPageSteps = new VNextBORODetailsPageSteps();
 		closeRODialogSteps = new VNextBOCloseRODialogSteps();
-	}
+        roDetailsPageVerifications = new VNextBORODetailsPageVerifications();
+        roNotesPageVerifications = new VNextBONotesPageVerifications();
+        notesPageInteractions = new VNextBORONotesPageInteractions();
+        roPageInteractions = new VNextBOROPageInteractions();
+        notesPageSteps = new VNextBORONotesPageSteps();
+        roPageVerifications = new VNextBOROPageVerifications();
+    }
 
 	@AfterMethod
 	public void BackOfficeLogout() {
@@ -355,13 +370,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The RO details section hasn't been displayed");
 		repairOrderDetailsPage.goToPreviousPage();
 
-		repairOrdersPage.closeNoteForWorkOrder(vinNum);
+        roPageInteractions.hideNoteForWorkOrder(vinNum);
 		Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(data.getWoType()));
 
 		final List<String> departments = data.getDepartments();
 		for (String department : departments) {
 			System.out.println(department);
-			repairOrdersPage.setWoDepartment(vinNum, department);
+			roPageInteractions.setWoDepartment(vinNum, department);
 			Assert.assertEquals(repairOrdersPage.getWoDepartment(vinNum), department,
 					"The WO department hasn't been set");
 		}
@@ -412,12 +427,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		simpleSearchSteps.searchByText(data.getOrderNumber());
-		repairOrdersPage
-				.openNoteForWorkOrder(data.getOrderNumber())
-				.closeNoteForWorkOrder(data.getOrderNumber())
-				.openNoteForWorkOrder(data.getOrderNumber())
-				.clickXIconToCloseNoteForWorkOrder(data.getOrderNumber());
-		Assert.assertFalse(repairOrdersPage.isNoteForWorkOrderDisplayed(data.getOrderNumber()),
+        roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
+        roPageInteractions.hideNoteForWorkOrder(data.getOrderNumber());
+        roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
+        roPageInteractions.clickXIconToCloseNoteForWorkOrder(data.getOrderNumber());
+		Assert.assertFalse(roPageVerifications.isNoteForWorkOrderDisplayed(data.getOrderNumber()),
 				"The note for work order has not been closed after clicking the 'X' icon");
 	}
 
@@ -428,8 +442,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		simpleSearchSteps.searchByText(data.getOrderNumber());
-		repairOrdersPage.openNoteForWorkOrder(data.getOrderNumber());
-		//todo bug fix #78127
+        roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
+        //todo bug fix #78127
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -439,7 +453,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		simpleSearchSteps.searchByText(data.getOrderNumber());
-		repairOrdersPage.openNoteForWorkOrder(data.getOrderNumber());
+        roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
 		//todo bug fix #78127
 	}
 
@@ -564,10 +578,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanChangeStatusOfRoToClosedWithNoneReason(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-        final VNextBORepairOrdersPageVerifications roPageVerifications = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBORepairOrdersPageVerifications.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        roPageVerifications.verifyAdvancedSearchDialogIsDisplayed();
+        roPageInteractions.openAdvancedSearchDialog();
 
         new VNextBOROAdvancedSearchDialogSteps()
                 .searchByActivePhase(data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
@@ -1271,18 +1284,16 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = detailsPage.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog(webdriver);
+		final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog();
 		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
-		final int notesNumber = notesDialog.getRepairNotesListNumber();
+		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
 
-		notesDialog
-				.openRepairNoteTextArea()
-				.typeRepairNotesMessage(data.getServiceNotesMessage())
-				.clickRepairNoteSaveButton();
+		notesPageSteps.setRONoteMessage(data.getNotesMessage());
+		notesPageInteractions.clickRONoteSaveButton();
 
-		Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
-		Assert.assertEquals(notesNumber + 1, notesDialog.getRepairNotesListNumber(),
+		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		Assert.assertEquals(notesNumber + 1, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number is not updated");
 	}
 
@@ -1360,30 +1371,28 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = detailsPage.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog(webdriver);
+		final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog();
 		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes block hasn't been displayed");
-		final int notesNumber = notesDialog.getRepairNotesListNumber();
+		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes block hasn't been displayed");
+		final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
 
-		notesDialog
-				.openRepairNoteTextArea()
-				.typeRepairNotesMessage(data.getServiceNotesMessage())
-				.clickRepairNotesXbutton();
-		Assert.assertEquals(notesDialog.getRepairNoteTextAreaValue(), "");
-		notesDialog.closeRepairNoteDialog();
+        notesPageSteps.setRONoteMessage(data.getNotesMessage());
+        notesPageInteractions.clickRepairNotesXButton();
 
-		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
-		Assert.assertEquals(notesNumber, notesDialog.getRepairNotesListNumber(),
+		Assert.assertEquals(notesPageInteractions.getRONoteTextAreaValue(), "");
+        notesPageInteractions.closeRONoteDialog();
+
+        detailsPage.openNotesDialog(serviceId);
+		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number has been updated, although the 'X' button was clicked");
 
-		notesDialog.openRepairNoteTextArea().typeRepairNotesMessage(data.getServiceNotesMessage());
-//        Assert.assertEquals(notesDialog.getRepairNoteTextAreaValue(), data.getServiceNotesMessage());
-		notesDialog.closeRepairNoteDialog();
+        notesPageSteps.setRONoteMessage(data.getNotesMessage());
+        notesPageInteractions.closeRONoteDialog();
 
 		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(notesDialog.isRepairNotesBlockDisplayed(), "The notes dialog hasn't been opened");
-		Assert.assertEquals(notesNumber, notesDialog.getRepairNotesListNumber(),
+		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number has been updated, although the 'X' button was clicked");
 	}
 
@@ -1895,7 +1904,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		System.out.println("Phase vendor price: " + detailsPage.getPhaseVendorPriceValue());
 		System.out.println("Phase vendor technician: " + detailsPage.getPhaseVendorTechnicianValue());
 		System.out.println("Phase status: " + detailsPage.getPhaseStatusValue());
-		System.out.println("Phase actions trigger: " + detailsPage.isPhaseActionsTriggerDisplayed());
+		System.out.println("Phase actions trigger: " + roDetailsPageVerifications.isPhaseActionsTriggerDisplayed());
 
 		Assert.assertEquals(detailsPage.getPhaseNameValue(), data.getServicePhaseHeaders()[0],
 				"The phase name value hasn't been displayed properly");
@@ -1905,7 +1914,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The phase vendor technician value hasn't been displayed properly");
 		Assert.assertEquals(detailsPage.getPhaseStatusValue(), data.getServicePhaseHeaders()[2],
 				"The phase status hasn't been displayed properly");
-		Assert.assertTrue(detailsPage.isPhaseActionsTriggerDisplayed(),
+		Assert.assertTrue(roDetailsPageVerifications.isPhaseActionsTriggerDisplayed(),
 				"The phase actions trigger hasn't been displayed");
 	}
 
@@ -2121,8 +2130,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		ordersDetailsPageVerifications.verifyVendorTechnicianNameIsSet(selectedRandomTechnician);
 
 		breadCrumbInteractions.clickFirstBreadCrumbLink();
-		new VNextBORepairOrdersPageVerifications()
-				.verifyTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
+		roPageVerifications.verifyTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
 		repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
 		ordersDetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
 		detailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
