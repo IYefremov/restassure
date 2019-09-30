@@ -8,9 +8,7 @@ public class ListSelectPageInteractions {
     public static WebElement getItemElementByText(String text) {
         ListSelectPage listPage = new ListSelectPage();
         return WaitUtils.getGeneralFluentWait().until(driver -> listPage.getItemList().stream()
-                .filter(elem ->
-                        elem.getText().contains(text)
-                )
+                .filter(elem -> elem.getText().contains(text))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("List element not found " + text)));
     }

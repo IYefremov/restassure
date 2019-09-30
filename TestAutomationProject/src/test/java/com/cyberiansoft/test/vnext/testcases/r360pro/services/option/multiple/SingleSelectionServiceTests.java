@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.services.option.multiple;
 
+import com.cyberiansoft.test.dataclasses.DamageData;
 import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
@@ -101,5 +102,122 @@ public class SingleSelectionServiceTests extends BaseTestCaseTeamEditionRegistra
 
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCANAddSingleServiceMultipleTimesCreatingWO(String rowID,
+                                                               String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        ServiceData moneyService = workOrderData.getServicesList().get(0);
+        ServiceData laborService = workOrderData.getServicesList().get(1);
+        PartServiceData partService = workOrderData.getPartServiceDataList().get(0);
+        MatrixServiceData matrixService = workOrderData.getMatrixServiceData();
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_WITHOUT_QUESTIONS);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+
+        AvailableServicesScreenSteps.selectService(moneyService);
+        AvailableServicesScreenSteps.selectService(moneyService);
+        ListServicesValidations.validateAvailableServiceCount(moneyService.getServiceName(), 2);
+
+        AvailableServicesScreenSteps.selectService(laborService);
+        AvailableServicesScreenSteps.selectService(laborService);
+        ListServicesValidations.validateAvailableServiceCount(laborService.getServiceName(), 2);
+
+        SearchSteps.textSearch(partService.getServiceName());
+        PartServiceSteps.selectPartService(partService);
+        PartServiceSteps.confirmPartInfo();
+        PartServiceSteps.selectPartService(partService);
+        PartServiceSteps.confirmPartInfo();
+        ListServicesValidations.validateAvailableServiceCount(partService.getServiceName(), 2);
+
+        SearchSteps.textSearch(matrixService.getMatrixServiceName());
+        MatrixServiceSteps.selectMatrixService(matrixService);
+        ScreenNavigationSteps.pressBackButton();
+        MatrixServiceSteps.acceptDetailsScreen();
+        MatrixServiceSteps.selectMatrixService(matrixService);
+        ScreenNavigationSteps.pressBackButton();
+        MatrixServiceSteps.acceptDetailsScreen();
+        ListServicesValidations.validateAvailableServiceCount(matrixService.getMatrixServiceName(), 2);
+
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCANAddSingleServiceMultipleTimesEditingWO(String rowID,
+                                                              String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        ServiceData moneyService = workOrderData.getServicesList().get(0);
+        ServiceData laborService = workOrderData.getServicesList().get(1);
+        PartServiceData partService = workOrderData.getPartServiceDataList().get(0);
+        MatrixServiceData matrixService = workOrderData.getMatrixServiceData();
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_WITHOUT_QUESTIONS);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectService(moneyService);
+        AvailableServicesScreenSteps.selectService(laborService);
+        SearchSteps.textSearch(partService.getServiceName());
+        PartServiceSteps.selectPartService(partService);
+        PartServiceSteps.confirmPartInfo();
+        SearchSteps.textSearch(matrixService.getMatrixServiceName());
+        MatrixServiceSteps.selectMatrixService(matrixService);
+        ScreenNavigationSteps.pressBackButton();
+        MatrixServiceSteps.acceptDetailsScreen();
+        String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionToEdit(inspectionId);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+
+        AvailableServicesScreenSteps.selectService(moneyService);
+        ListServicesValidations.validateAvailableServiceCount(moneyService.getServiceName(), 2);
+
+        AvailableServicesScreenSteps.selectService(laborService);
+        ListServicesValidations.validateAvailableServiceCount(laborService.getServiceName(), 2);
+
+        SearchSteps.textSearch(partService.getServiceName());
+        PartServiceSteps.selectPartService(partService);
+        PartServiceSteps.confirmPartInfo();
+        ListServicesValidations.validateAvailableServiceCount(partService.getServiceName(), 2);
+
+        SearchSteps.textSearch(matrixService.getMatrixServiceName());
+        MatrixServiceSteps.selectMatrixService(matrixService);
+        ScreenNavigationSteps.pressBackButton();
+        MatrixServiceSteps.acceptDetailsScreen();
+        ListServicesValidations.validateAvailableServiceCount(matrixService.getMatrixServiceName(), 2);
+
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm(String rowID,
+                                                                              String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        DamageData moneyServiceDamageData = workOrderData.getDamagesData().get(0);
+        DamageData laborServiceDamageDate = workOrderData.getDamagesData().get(1);
+        DamageData partServiceDamageDate = workOrderData.getDamagesData().get(2);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
+        VisualScreenSteps.selectMoneyServiceDamage(moneyServiceDamageData);
+        VisualScreenSteps.addServiceToPicture();
+        VisualScreenSteps.addServiceToPicture();
+        ListServicesValidations.validateMessagePresent(true, "Service can be added once");
+
+        VisualScreenSteps.selectMoneyServiceDamage(laborServiceDamageDate);
+        VisualScreenSteps.addServiceToPicture();
+        VisualScreenSteps.addServiceToPicture();
+        ListServicesValidations.validateMessagePresent(true, "Service can be added once");
+
+        VisualScreenSteps.selectPartServiceDamage(partServiceDamageDate);
+        VisualScreenSteps.addServiceToPicture();
+        PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
+        PartServiceSteps.confirmPartInfo();
+        VisualScreenSteps.addServiceToPicture();
+        ListServicesValidations.validateMessagePresent(true, "Service can be added once");
+
     }
 }

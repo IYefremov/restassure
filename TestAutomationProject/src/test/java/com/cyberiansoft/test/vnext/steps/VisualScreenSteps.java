@@ -16,12 +16,36 @@ public class VisualScreenSteps {
         VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
         if (damageData.getMoneyService() == null) {
             selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
-        }
-        else {
+        } else {
             selectDamagesScreen.selectAllDamagesTab();
             VNextVisualServicesScreen visualServicesScreen = selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
             visualServicesScreen.selectCustomService(damageData.getMoneyService().getServiceName());
         }
+        visualScreen.clickCarImage();
+    }
+
+    public static void selectMoneyServiceDamage(DamageData damageData) {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
+        VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
+        if (damageData.getMoneyService() == null) {
+            selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
+        } else {
+            selectDamagesScreen.selectAllDamagesTab();
+            VNextVisualServicesScreen visualServicesScreen = selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
+            visualServicesScreen.selectCustomService(damageData.getMoneyService().getServiceName());
+        }
+    }
+
+    public static void selectPartServiceDamage(DamageData damageData) {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
+        VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
+        selectDamagesScreen.selectAllDamagesTab();
+        VNextVisualServicesScreen visualServicesScreen = selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
+        visualServicesScreen.selectCustomService(damageData.getPartServiceData().getServiceName());
+    }
+
+    public static void addServiceToPicture() {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
         visualScreen.clickCarImage();
     }
 
