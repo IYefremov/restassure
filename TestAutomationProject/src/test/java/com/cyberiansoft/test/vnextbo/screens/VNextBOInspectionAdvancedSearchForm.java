@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -116,7 +117,17 @@ public class VNextBOInspectionAdvancedSearchForm extends VNextBOBaseWebPage {
 		Utils.clickElement(fieldWithDropdown);
 		WebElement dropDownOption =
 				advancedSearchForm.findElement(By.xpath("//li[text()='" + value + "']"));
-		waitABit(5000);
 		Utils.clickWithJS(dropDownOption);
+	}
+
+	public void setAdvSearchAutocompleteField(String fldName, String value)
+	{
+		WebElement fieldWithAutocomplete = advancedSearchForm.findElement(
+				By.xpath("//label[text()='" + fldName + "']/following-sibling::div//input[contains(@id,'advSearchEstimation')]"));
+		Utils.clickElement(fieldWithAutocomplete);
+		WebElement foundOption =
+				advancedSearchForm.findElement(By.xpath("//li[text()='" + value + "']"));
+		WaitUtils.waitUntilElementIsClickable(foundOption);
+		Utils.clickWithJS(foundOption);
 	}
 }

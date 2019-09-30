@@ -420,7 +420,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void advancedSearchInspectionByCustomer(String customerName) {
 		openAdvancedSearchForm();
 		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
-		advancedSearchDialog.setAdvSearchTextField("Customer", customerName);
+		advancedSearchDialog.setAdvSearchAutocompleteField("Customer", customerName);
 		advancedSearchDialog.clickSearchButton();
 	}
 
